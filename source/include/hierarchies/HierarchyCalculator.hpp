@@ -20,7 +20,7 @@ namespace h3m{
       double B4, D3, DN, OepS2, S2, T1ep;
       bool isHierarchySuitable(const unsigned int tag, const bool isBottom);						// checks if the hierarchy is suitable to the spectrum
       double shiftMst1ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);	// shifts Mst1 according to the hierarchy to the MDRbar scheme
-      double shiftMst2toMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);	// shifts Mst2 according to the hierarchy to the MDRbar scheme
+      double shiftMst2ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);	// shifts Mst2 according to the hierarchy to the MDRbar scheme
       std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d> es);				// sorts the eigenvalus of a 2x2 matrix. The lower index is the lower eigenvalue
       Eigen::Matrix2d getMt41L(const bool isBottom);
       Eigen::Matrix2d getMt42L(const int tag, const bool isBottom);

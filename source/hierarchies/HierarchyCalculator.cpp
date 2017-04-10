@@ -51,7 +51,7 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    this -> p = p;
    // init constants
    // imaginary unit
-   std::complex<double> I(0., 1.);
+   const std::complex<double> I(0., 1.);
    
    // Riemann-Zeta
    z2 = pow(Pi,2)/6.;
@@ -77,7 +77,7 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    // beta
    const double beta = atan(p.vu / p.vd);
    
-   //sw 
+   //sw2
    const double sw2 = 1 - pow(p.MW / p.MZ,2);
    
    // Al4p
@@ -109,6 +109,7 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
 int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
    double error = -1.;
    int suitableHierarchy = -1;
+   // sine of 2 times beta
    const double s2b = sin(2*atan(p.vu/p.vd));
    const double tbeta = p.vu/p.vd;
    // tree level Higgs mass matrix
@@ -118,7 +119,7 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
    treelvl (0,1) = treelvl (1,0);
    treelvl (1,1) = s2b/2.*(pow(p.MZ,2) * tbeta + pow(p.MA,2) / tbeta);
    
-   // calculate the exact 1-loop result (only alpha_t)
+   // calculate the exact 1-loop result (only alpha_t/b)
    Eigen::Matrix2d Mt41L = getMt41L(isBottom);
    
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
@@ -127,6 +128,7 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
       if(isHierarchySuitable(hierarchy, isBottom)){
 	 // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
 	 Eigen::Matrix2d Mt42L = getMt42L(hierarchyMap.at(hierarchy), isBottom);
+	 
 	 // check for spurious poles. If this is the case slightly change Mst2
 	 if(std::isnan(Mt42L(0,0)) || std::isnan(Mt42L(1,0)) || std::isnan(Mt42L(1,1))){
 	    deltaDSZ = 1.0E-6;
@@ -143,14 +145,13 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
 	 // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
 	 double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
 	 double currError = fabs((Mh2l - Mh2LExpanded));
-	 //std::cout << "hier " << hierarchy << " " << isBottom << " " << currError << " " << Mh2LExpanded << " " << Mh2l << std::endl;
 	 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
 	 }
-	 // compare the current error with the last error and choose the hierarchy with fits best (lowest error)
+	 // compare the current error with the last error and choose the hierarchy wich fits best (lowest error)
 	 else if(currError < error){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
@@ -175,12 +176,12 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
    if (!isBottom) {
       At = p.At;
       Mt = p.Mt;
-      s2t = sin(2 * asin(p.Zt(0, 0)));
+      s2t = p.s2t;
    }
    else {
       At = p.Ab;
       Mt = p.Mb;
-      s2t = sin(2 * asin(p.Zb(0, 0)));
+      s2t = p.s2b;
    }
    const double Tbeta = p.vu / p.vd;
    const double Cbeta = cos(atan(Tbeta));
@@ -221,11 +222,11 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 	    case h3:
 	       if(threeLoopFlag == 0){
 		  Mst1 = shiftMst1ToMDR(h3, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2toMDR(h3, isBottom, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(h3, isBottom, twoLoopFlag, 0);
 	       }
 	       else{
 		  Mst1 = shiftMst1ToMDR(h3, isBottom, 1, 1);
-		  Mst2 = shiftMst2toMDR(h3, isBottom, 1, 1);
+		  Mst2 = shiftMst2ToMDR(h3, isBottom, 1, 1);
 	       }
 	       Dmglst1 = Mgl - Mst1;
 	       Dmsqst1 = pow(Msq, 2) - pow(Mst1, 2);
@@ -271,11 +272,11 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 	    case h4:
 	       if(threeLoopFlag == 0){
 		  Mst1 = shiftMst1ToMDR(h4, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2toMDR(h4, isBottom, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(h4, isBottom, twoLoopFlag, 0);
 	       }
 	       else{
 		  Mst1 = shiftMst1ToMDR(h4, isBottom, 1, 1);
-		  Mst2 = shiftMst2toMDR(h4, isBottom, 1, 1);
+		  Mst2 = shiftMst2ToMDR(h4, isBottom, 1, 1);
 	       }
 	       Msusy = (Mst1 + Mst2 + Mgl) / 3.;
 	       lmMsusy = log(pow(scale, 2) / pow(Msusy, 2));
@@ -292,11 +293,11 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 	    case h5:
 	       if(threeLoopFlag == 0){
 		  Mst1 = shiftMst1ToMDR(h5, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2toMDR(h5, isBottom, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(h5, isBottom, twoLoopFlag, 0);
 	       }
 	       else{
 		  Mst1 = shiftMst1ToMDR(h5, isBottom, 1, 1);
-		  Mst2 = shiftMst2toMDR(h5, isBottom, 1, 1);
+		  Mst2 = shiftMst2ToMDR(h5, isBottom, 1, 1);
 	       }
 	       Dmglst1 = Mgl - Mst1;
 	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
@@ -329,11 +330,11 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 	    case h6:
 	       if(threeLoopFlag == 0){
 		  Mst1 = shiftMst1ToMDR(h6, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2toMDR(h6, isBottom, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(h6, isBottom, twoLoopFlag, 0);
 	       }
 	       else{
 		  Mst1 = shiftMst1ToMDR(h6, isBottom, 1, 1);
-		  Mst2 = shiftMst2toMDR(h6, isBottom, 1, 1);
+		  Mst2 = shiftMst2ToMDR(h6, isBottom, 1, 1);
 	       }
 	       Dmglst2 = Mgl - Mst2;
 	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
@@ -367,11 +368,11 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 	    case h6b:
 	       if(threeLoopFlag == 0){
 		  Mst1 = shiftMst1ToMDR(h6b, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2toMDR(h6b, isBottom, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(h6b, isBottom, twoLoopFlag, 0);
 	       }
 	       else{
 		  Mst1 = shiftMst1ToMDR(h6b, isBottom, 1, 1);
-		  Mst2 = shiftMst2toMDR(h6b, isBottom, 1, 1);
+		  Mst2 = shiftMst2ToMDR(h6b, isBottom, 1, 1);
 	       }
 	       Dmglst2 = Mgl - Mst2;
 	       Dmsqst2 = Msq - Mst2;
@@ -428,11 +429,11 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 	    case h9:
 	       if(threeLoopFlag == 0){
 		  Mst1 = shiftMst1ToMDR(h9, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2toMDR(h9, isBottom, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(h9, isBottom, twoLoopFlag, 0);
 	       }
 	       else{
 		  Mst1 = shiftMst1ToMDR(h9, isBottom, 1, 1);
-		  Mst2 = shiftMst2toMDR(h9, isBottom, 1, 1);
+		  Mst2 = shiftMst2ToMDR(h9, isBottom, 1, 1);
 	       }
 	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
 	       Dmst12 = pow(Mst1, 2) - pow(Mst2, 2);
@@ -572,7 +573,7 @@ double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bo
 /*
  * 	shifts Mst2/Msb2 according to the hierarchy to the MDRbar scheme, checked
  */
-double h3m::HierarchyCalculator::shiftMst2toMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag) {
+double h3m::HierarchyCalculator::shiftMst2ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag) {
    double Mst2mod;
    double Mst1;
    double Mst2;
@@ -641,13 +642,13 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(const bool isBottom){
    if(!isBottom){
       Mst1 = p.MSt(0, 0);
       Mst2 = p.MSt(1, 0);
-      th2 = 2 * asin(p.Zt(0, 0));
+      th2 = asin(p.s2t);
       Mt = p.Mt;
    }
    else{
       Mst1 = p.MSb(0, 0);
       Mst2 = p.MSb(1, 0);
-      th2 = 2 * asin(p.Zb(0, 0));
+      th2 = asin(p.s2b);
       Mt = p.Mb;
    }
    Mt41L (0,0) = (-3*GF*pow(Mt,2)*pow(p.mu,2)*pow(1/sin(beta),2)*
@@ -709,18 +710,20 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(const int tag, const bool isB
    double st;
    double ct;
    if(!isBottom){
+      const double theta = asin(p.s2t)/2.;
       Mt2 = pow(p.Mt,2);
       Mst12 = pow(shiftMst1ToMDR(tag, false, 1, 0), 2);
-      Mst22 = pow(shiftMst2toMDR(tag, false, 1, 0) + deltaDSZ, 2);
-      st = sin(asin(p.Zt(0, 0)));
-      ct = cos(asin(p.Zt(0, 0)));
+      Mst22 = pow(shiftMst2ToMDR(tag, false, 1, 0) + deltaDSZ, 2);
+      st = sin(theta);
+      ct = cos(theta);
    }
    else{
+      const double theta = asin(p.s2b)/2.;
       Mt2 = pow(p.Mb,2);
       Mst12 = pow(shiftMst1ToMDR(tag, true, 1, 0), 2);
-      Mst22 = pow(shiftMst2toMDR(tag, true, 1, 0) + deltaDSZ, 2);
-      st = sin(asin(p.Zb(0, 0)));
-      ct = cos(asin(p.Zb(0, 0)));
+      Mst22 = pow(shiftMst2ToMDR(tag, true, 1, 0) + deltaDSZ, 2);
+      st = sin(theta);
+      ct = cos(theta);
    }
    double scale2 = pow(p.scale,2);
    // note the sign difference in mu

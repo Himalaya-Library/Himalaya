@@ -33,13 +33,10 @@ struct Parameters {
    V2 MSt{V2::Zero()};     ///< stops
    V2 MSb{V2::Zero()};     ///< sbottoms
 
-   // DR-bar mixing matrices
-   RM22 Zt{RM22::Zero()};  ///< stop mixing matrix
-   RM22 Zb{RM22::Zero()};  ///< sbottom mixing matrix
+   // DR-bar mixing angles
+   double s2t{};	   ///< sine of 2 times the stop mixing angle
+   double s2b{};	   ///< sine of 2 times the sbot mixing angle
 };
-
-/// returns 3-loop corrections to CP-even Higgs pole masses in the MSSM
-RM22 calculate_DMh_3L(const Parameters& p);
 
 }	//	h3m
 
