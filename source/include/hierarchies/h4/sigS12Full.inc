@@ -1,0 +1,15 @@
+(4*Al4p*At*(1+lmMsusy+lmMt)*pow(Mt,4)*Sbeta*twoLoopFlag)/(3.*Cbeta*Msusy)+(pow(Al4p,2)*At*pow(Mt,4)*Sbeta*threeLoopFlag*(Msusy*(240*pow(Msq,6)*pow(Msusy,2)*(-9+3*pow(lmMsq,2)+lmMsq*(4-3*lmMsusy-3*lmMt)+
+lmMsusy*(-4+3*lmMt)+6*z2)+
+120*pow(Msq,2)*pow(Msusy,6)*(-17+6*pow(lmMsq,2)+2*lmMsusy*(-7+3*lmMt)-
+2*lmMsq*(-7+3*lmMsusy+3*lmMt)+12*z2)+
+60*pow(Msq,4)*pow(Msusy,4)*(-33+12*pow(lmMsq,2)+2*lmMsusy*(-11+6*lmMt)-
+2*lmMsq*(-11+6*lmMsusy+6*lmMt)+24*z2)+
+5*pow(Msusy,8)*(-419+144*pow(lmMsq,2)+
+36*lmMsusy*(-11+4*lmMt)-
+36*lmMsq*(-11+4*lmMsusy+4*lmMt)+288*z2)+
+4*pow(Msq,8)*(208+270*pow(lmMsq,2)+456*pow(lmMsusy,2)+
+168*lmMt+216*pow(lmMt,2)-
+60*lmMsq*(5+6*lmMsusy+3*lmMt)+lmMsusy*(314+48*lmMt)+
+540*z2-477*z3))+
+6*At*pow(Msq,8)*(-349+56*lmMsusy+32*pow(lmMsusy,2)-
+24*lmMt+282*z3)))/(81.*Cbeta*pow(Msq,8)*pow(Msusy,2))
