@@ -5,7 +5,6 @@
 #include <iostream>
 #include <H3m_interface.hpp>
 #include <vector>
-#include <math.h>
 
 h3m::Parameters setup_SPS1a()
 {

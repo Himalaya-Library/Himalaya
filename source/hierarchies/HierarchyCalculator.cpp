@@ -1,11 +1,9 @@
 #define Pi M_PI
 
 #include <HierarchyCalculator.hpp>
-#include <math.h>
 #include <iostream>
 #include <stdexcept>
 #include <type_traits>
-#include <cmath>
 
 // some templates to perform operations between int's and complex<double>
 template< typename T, typename SCALAR > inline
@@ -40,6 +38,15 @@ template< typename T, typename SCALAR > inline
 typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
 operator- ( SCALAR n, const std::complex<T>& c ) { return T(n) - c ; }
 
+template <typename T> T pow2(T x)  { return x*x; }
+template <typename T> T pow3(T x)  { return x*x*x; }
+template <typename T> T pow4(T x)  { return x*x*x*x; }
+template <typename T> T pow5(T x)  { return x*x*x*x*x; }
+template <typename T> T pow6(T x)  { return x*x*x*x*x*x; }
+template <typename T> T pow7(T x)  { return x*x*x*x*x*x*x; }
+template <typename T> T pow8(T x)  { return x*x*x*x*x*x*x*x; }
+template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
+template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
 
 extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
@@ -54,9 +61,9 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    const std::complex<double> I(0., 1.);
    
    // Riemann-Zeta
-   z2 = pow(Pi,2)/6.;
+   z2 = pow2(Pi)/6.;
    z3 = 1.202056903159594;
-   z4 = pow(Pi,4)/90.;
+   z4 = pow4(Pi)/90.;
    
    // polylogs
    double pl412 = 0.51747906167389934317668576113647; // PolyLog[4,1/2]
@@ -64,24 +71,24 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    std::complex<double> pl3expPi6sqrt3 (0.51928806536375962552715984277228, - 0.33358157526196370641686908633664); // PolyLog[3, Exp[- I Pi / 6] / Sqrt[3]]
    
    // polylog functions, checked
-   B4 = (-4 * z2 * pow(log(2), 2) + 2 / 3.* pow(log(2), 4) - 13 / 2. * z4 + 16. * pl412);
-   D3 = 6 * z3 - 15 / 4. * z4 - 6. * pow(std::imag(pl2expPi3), 2);
-   DN = 6 * z3 - 4 * z2 * pow(log(2), 2) + 2 / 3. * pow(log(2), 4) - 21 / 2. * z4 + 16. * pl412;
-   OepS2 = - 763 / 32. - (9 * Pi * sqrt(3) * pow(log(3), 2)) / 16. - (35 * pow(Pi, 3) * sqrt(3)) / 48.
+   B4 = (-4 * z2 * pow2(log(2)) + 2 / 3.* pow4(log(2)) - 13 / 2. * z4 + 16. * pl412);
+   D3 = 6 * z3 - 15 / 4. * z4 - 6. * pow2(std::imag(pl2expPi3));
+   DN = 6 * z3 - 4 * z2 * pow2(log(2)) + 2 / 3. * pow4(log(2)) - 21 / 2. * z4 + 16. * pl412;
+   OepS2 = - 763 / 32. - (9 * Pi * sqrt(3) * pow2(log(3))) / 16. - (35 * pow3(Pi) * sqrt(3)) / 48.
       + 195 / 16. * z2 - 15 / 4. * z3 + 57 / 16. * z4 + 45 * sqrt(3) / 2. * std::imag(pl2expPi3)
       - 27 * sqrt(3) * std::imag(pl3expPi6sqrt3);
    S2 = 4 * std::imag(pl2expPi3) / (9. * sqrt(3));
-   T1ep = - 45 / 2. - (Pi * sqrt(3) * pow(log(3), 2)) / 8. - (35 * pow(Pi, 3) * sqrt(3)) / 216. - 9 / 2. * z2 + z3 
+   T1ep = - 45 / 2. - (Pi * sqrt(3) * pow2(log(3))) / 8. - (35 * pow3(Pi) * sqrt(3)) / 216. - 9 / 2. * z2 + z3 
       + 6. * sqrt(3) * std::imag(pl2expPi3) - 6. * sqrt(3) * std::imag(pl3expPi6sqrt3);
    
    // beta
    const double beta = atan(p.vu / p.vd);
    
    //sw2
-   const double sw2 = 1 - pow(p.MW / p.MZ,2);
+   const double sw2 = 1 - pow2(p.MW / p.MZ);
    
    // Al4p
-   Al4p = pow(p.g3, 2) / pow(4 * Pi, 2);
+   Al4p = pow2(p.g3 / (4 * Pi));
    
    // MGl
    Mgl = p.MG;
@@ -90,17 +97,17 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    Msq = (2 * sqrt(p.mq2(0, 0)) + sqrt(p.mu2(0, 0)) + sqrt(p.md2(0, 0))	// sup and sdown
       + 2 * sqrt(p.mq2(1, 1)) + sqrt(p.mu2(1, 1)) + sqrt(p.md2(1, 1))	// scharm and sstrange
       // sbottom
-      + sqrt(p.mq2(2, 2) + pow(p.Mb, 2) - (1 / 2. - 1 / 3. * sw2) * pow(p.MZ,2) * cos(2 * beta))
-      + sqrt(p.md2(2, 2) + pow(p.Mb, 2) - 1 / 3. * sw2 * pow(p.MZ,2) * cos(2 * beta))) / 10.;
+      + sqrt(p.mq2(2, 2) + pow2(p.Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(p.MZ) * cos(2 * beta))
+      + sqrt(p.md2(2, 2) + pow2(p.Mb) - 1 / 3. * sw2 * pow2(p.MZ) * cos(2 * beta))) / 10.;
 
    // lmMsq, checked
-   lmMsq = log(pow(p.scale, 2) / pow(Msq, 2));
+   lmMsq = log(pow2(p.scale / Msq));
    
    // lmMgl, checked
-   lmMgl = log(pow(p.scale, 2) / pow(Mgl, 2));
+   lmMgl = log(pow2(p.scale / Mgl));
    
    // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here GF is calculated in the DRbar scheme, checked)
-   prefac = (3. / (sqrt(2) * (pow(p.vu,2) + pow(p.vd,2)) * sqrt(2) * pow(Pi,2) * pow(sin(beta), 2)));
+   prefac = (3. / (sqrt(2) * (pow2(p.vu) + pow2(p.vd)) * sqrt(2) * pow2(Pi) * pow2(sin(beta))));
 }
 
 /*
@@ -114,14 +121,14 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
    const double tbeta = p.vu/p.vd;
    // tree level Higgs mass matrix
    Eigen::Matrix2d treelvl;
-   treelvl (0,0) = s2b/2.*(pow(p.MZ,2) / tbeta + pow(p.MA,2) * tbeta);
-   treelvl (1,0) = s2b/2.*(-pow(p.MZ,2) - pow(p.MA,2));
+   treelvl (0,0) = s2b/2.*(pow2(p.MZ) / tbeta + pow2(p.MA) * tbeta);
+   treelvl (1,0) = s2b/2.*(-pow2(p.MZ) - pow2(p.MA));
    treelvl (0,1) = treelvl (1,0);
-   treelvl (1,1) = s2b/2.*(pow(p.MZ,2) * tbeta + pow(p.MA,2) / tbeta);
+   treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tbeta + pow2(p.MA) / tbeta);
    
    // calculate the exact 1-loop result (only alpha_t/b)
    Eigen::Matrix2d Mt41L = getMt41L(isBottom);
-   
+
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
    for(unsigned int hierarchy = h3; hierarchy <= h9q2; hierarchy ++){
       // first, check if the hierarchy is suitable to the mass spectrum
@@ -145,13 +152,13 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
 	 // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
 	 double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
 	 double currError = fabs((Mh2l - Mh2LExpanded));
-	 
+
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
 	 }
-	 // compare the current error with the last error and choose the hierarchy wich fits best (lowest error)
+	 // compare the current error with the last error and choose the hierarchy which fits best (lowest error)
 	 else if(currError < error){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
@@ -187,16 +194,16 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
    const double Cbeta = cos(atan(Tbeta));
    const double Sbeta = sin(atan(Tbeta));
    const double scale = p.scale;
-   const double lmMt = log(pow(scale, 2) / pow(Mt, 2));
+   const double lmMt = log(pow2(scale / Mt));
    const double MuSUSY = p.mu;
 
    // these shifts are needed to eliminate huge corrections (cf. arXiv:1005.5709 [hep-ph] eq. (46) - (49))
    int shiftst1 = 1, shiftst2 = 1, shiftst3 = 1;
-
    // specific variables for hierarchies
    double Dmglst1, Dmglst2, Dmsqst1, Dmsqst2, Dmst12, lmMst1, lmMst2, Msusy, lmMsusy;
    int xDR2DRMOD;
-   
+   Mst1 = p.MSt(0, 0);
+   Mst2 = p.MSt(1, 0);
    // this loop is needed to calculate the suitable mass shift order by order
    for(int currentLoopOrder = 1; currentLoopOrder < 4; currentLoopOrder ++){
       bool runThisOrder;
@@ -229,10 +236,10 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 		  Mst2 = shiftMst2ToMDR(h3, isBottom, 1, 1);
 	       }
 	       Dmglst1 = Mgl - Mst1;
-	       Dmsqst1 = pow(Msq, 2) - pow(Mst1, 2);
-	       Dmst12 = pow(Mst1, 2) - pow(Mst2, 2);
-	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
-	       lmMsusy = log(pow(scale, 2) / pow((Mst1 + Mst2 + Mgl + 10*Msq) / 13., 2));
+	       Dmsqst1 = pow2(Msq) - pow2(Mst1);
+	       Dmst12 = pow2(Mst1) - pow2(Mst2);
+	       lmMst1 = log(pow2(scale / Mst1));
+	       lmMsusy = log(pow2(scale / ((Mst1 + Mst2 + Mgl + 10*Msq) / 13.)));
 	       switch(tag){
 		  case h3:
 		     curSig1 = 
@@ -279,7 +286,7 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 		  Mst2 = shiftMst2ToMDR(h4, isBottom, 1, 1);
 	       }
 	       Msusy = (Mst1 + Mst2 + Mgl) / 3.;
-	       lmMsusy = log(pow(scale, 2) / pow(Msusy, 2));
+	       lmMsusy = log(pow2(scale / Msusy));
 	       curSig1 = 
 	       #include "../hierarchies/h4/sigS1Full.inc"
 	       ;
@@ -300,8 +307,8 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 		  Mst2 = shiftMst2ToMDR(h5, isBottom, 1, 1);
 	       }
 	       Dmglst1 = Mgl - Mst1;
-	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
-	       lmMst2 = log(pow(scale, 2) / pow(Mst2, 2));
+	       lmMst1 = log(pow2(scale / Mst1));
+	       lmMst2 = log(pow2(scale / Mst2));
 	       switch(tag){
 		  case h5:
 		     curSig1 = 
@@ -337,8 +344,8 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 		  Mst2 = shiftMst2ToMDR(h6, isBottom, 1, 1);
 	       }
 	       Dmglst2 = Mgl - Mst2;
-	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
-	       lmMst2 = log(pow(scale, 2) / pow(Mst2, 2));
+	       lmMst1 = log(pow2(scale / Mst1));
+	       lmMst2 = log(pow2(scale / Mst2));
 	       xDR2DRMOD = 1;
 	       switch(tag){
 		  case h6:
@@ -376,8 +383,8 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 	       }
 	       Dmglst2 = Mgl - Mst2;
 	       Dmsqst2 = Msq - Mst2;
-	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
-	       lmMst2 = log(pow(scale, 2) / pow(Mst2, 2));
+	       lmMst1 = log(pow2(scale / Mst1));
+	       lmMst2 = log(pow2(scale / Mst2));
 	       xDR2DRMOD = 1;
 	       switch(tag){
 		  case h6b:
@@ -435,9 +442,9 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
 		  Mst1 = shiftMst1ToMDR(h9, isBottom, 1, 1);
 		  Mst2 = shiftMst2ToMDR(h9, isBottom, 1, 1);
 	       }
-	       lmMst1 = log(pow(scale, 2) / pow(Mst1, 2));
-	       Dmst12 = pow(Mst1, 2) - pow(Mst2, 2);
-	       Dmsqst1 = pow(Msq, 2) - pow(Mst1, 2);
+	       lmMst1 = log(pow2(scale / Mst1));
+	       Dmst12 = pow2(Mst1) - pow2(Mst2);
+	       Dmsqst1 = pow2(Msq) - pow2(Mst1);
 	       switch(tag){
 		  case h9:
 		     curSig1 = 
@@ -538,9 +545,9 @@ double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bo
       Mst1 = p.MSb(0, 0);
       Mst2 = p.MSb(1, 0);
    }
-   double lmMst2 = log(pow(p.scale, 2) / pow(Mst2, 2));
+   double lmMst2 = log(pow2(p.scale) / pow2(Mst2));
    double Dmglst2 = Mgl - Mst2;
-   double mdr2mst1ka = (-8. * threeLoopFlag * pow(Al4p, 2) * (10 * pow(Msq, 2) * (-1 + 2 * lmMsq + 2 * z2) + pow(Mst2, 2) * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow(Mst1, 2));
+   double mdr2mst1ka = (-8. * threeLoopFlag * pow2(Al4p) * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2) * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
    switch (tag) {
    case h3:
       Mst1mod = (1 + mdr2mst1ka);
@@ -552,16 +559,16 @@ double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bo
       Mst1mod = (1 + mdr2mst1ka);
       break;
    case h6:
-      Mst1mod = (144 * twoLoopFlag * Al4p * (1 + lmMgl) * pow(Mgl, 2) * pow(Msq, 4) + 27 * (1 + mdr2mst1ka) * pow(Msq, 4) * pow(Mst1, 2) +
-         threeLoopFlag * pow(Al4p, 2) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow(Mgl, 5) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow(Mgl, 3) * pow(Msq, 2) +
-            288 * Dmglst2 * pow(Msq, 4) * (1 - 2 * z2) + 12 * Mgl * pow(Msq, 4) * (79 + 144 * pow(lmMgl, 2) - 150 * lmMsq +
-               90 * pow(lmMsq, 2) - 90 * lmMgl * (-3 + 2 * lmMsq) + 208 * z2))) / (27. * pow(Msq, 4) * pow(Mst1, 2));
+      Mst1mod = (144 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) * pow4(Msq) + 27 * (1 + mdr2mst1ka) * pow4(Msq) * pow2(Mst1) +
+         threeLoopFlag * pow2(Al4p) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow5(Mgl) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow3(Mgl) * pow2(Msq) +
+            288 * Dmglst2 * pow4(Msq) * (1 - 2 * z2) + 12 * Mgl * pow4(Msq) * (79 + 144 * pow2(lmMgl) - 150 * lmMsq +
+               90 * pow2(lmMsq) - 90 * lmMgl * (-3 + 2 * lmMsq) + 208 * z2))) / (27. * pow4(Msq) * pow2(Mst1));
       break;
    case h6b:
-      Mst1mod = (48 * twoLoopFlag * Al4p * (1 + lmMgl) * pow(Mgl, 2) + 9 * (1 + mdr2mst1ka) * pow(Mst1, 2) +
-         8 * threeLoopFlag * pow(Al4p, 2) * (-135 * pow(Msq, 2) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
-            pow(Mgl, 2) * (77 + 135 * lmMgl + 72 * pow(lmMgl, 2) - 75 * lmMsq -
-               90 * lmMgl * lmMsq + 45 * pow(lmMsq, 2) + 104 * z2))) / (9. * pow(Mst1, 2));
+      Mst1mod = (48 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) + 9 * (1 + mdr2mst1ka) * pow2(Mst1) +
+         8 * threeLoopFlag * pow2(Al4p) * (-135 * pow2(Msq) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
+            pow2(Mgl) * (77 + 135 * lmMgl + 72 * pow2(lmMgl) - 75 * lmMsq -
+               90 * lmMgl * lmMsq + 45 * pow2(lmMsq) + 104 * z2))) / (9. * pow2(Mst1));
       break;
    case h9:
       Mst1mod = (1 + mdr2mst1ka);
@@ -586,7 +593,7 @@ double h3m::HierarchyCalculator::shiftMst2ToMDR(const unsigned int tag, const bo
       Mst2 = p.MSb(1, 0);
    }
    double Dmglst2 = Mgl - Mst2;
-   double mdr2mst2ka = (-80. * threeLoopFlag * pow(Al4p, 2) * pow(Msq, 2) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow(Mst2, 2));
+   double mdr2mst2ka = (-80. * threeLoopFlag * pow2(Al4p) * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
    switch (tag) {
    case h3:
       Mst2mod = (1 + mdr2mst2ka);
@@ -598,16 +605,16 @@ double h3m::HierarchyCalculator::shiftMst2ToMDR(const unsigned int tag, const bo
       Mst2mod = (1 + mdr2mst2ka);
       break;
    case h6:
-      Mst2mod = (144 * twoLoopFlag * Al4p * (1 + lmMgl) * pow(Mgl, 2) * pow(Msq, 4) + 27 * (1 + mdr2mst2ka) * pow(Msq, 4) * pow(Mst2, 2) +
-         threeLoopFlag * pow(Al4p, 2) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow(Mgl, 5) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow(Mgl, 3) * pow(Msq, 2) +
-            288 * Dmglst2 * pow(Msq, 4) * (1 - 2 * z2) + 12 * Mgl * pow(Msq, 4) * (79 + 144 * pow(lmMgl, 2) - 150 * lmMsq +
-               90 * pow(lmMsq, 2) - 90 * lmMgl * (-3 + 2 * lmMsq) + 208 * z2))) / (27. * pow(Msq, 4) * pow(Mst2, 2));
+      Mst2mod = (144 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) * pow4(Msq) + 27 * (1 + mdr2mst2ka) * pow4(Msq) * pow2(Mst2) +
+         threeLoopFlag * pow2(Al4p) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow5(Mgl) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow3(Mgl) * pow2(Msq) +
+            288 * Dmglst2 * pow4(Msq) * (1 - 2 * z2) + 12 * Mgl * pow4(Msq) * (79 + 144 * pow2(lmMgl) - 150 * lmMsq +
+               90 * pow2(lmMsq) - 90 * lmMgl * (-3 + 2 * lmMsq) + 208 * z2))) / (27. * pow4(Msq) * pow2(Mst2));
       break;
    case h6b:
-      Mst2mod = (48 * twoLoopFlag * Al4p * (1 + lmMgl) * pow(Mgl, 2) + 9 * (1 + mdr2mst2ka) * pow(Mst2, 2) +
-         8 * threeLoopFlag * pow(Al4p, 2) * (-135 * pow(Msq, 2) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
-            pow(Mgl, 2) * (77 + 135 * lmMgl + 72 * pow(lmMgl, 2) - 75 * lmMsq -
-               90 * lmMgl * lmMsq + 45 * pow(lmMsq, 2) + 104 * z2))) / (9. * pow(Mst2, 2));
+      Mst2mod = (48 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) + 9 * (1 + mdr2mst2ka) * pow2(Mst2) +
+         8 * threeLoopFlag * pow2(Al4p) * (-135 * pow2(Msq) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
+            pow2(Mgl) * (77 + 135 * lmMgl + 72 * pow2(lmMgl) - 75 * lmMsq -
+               90 * lmMgl * lmMsq + 45 * pow2(lmMsq) + 104 * z2))) / (9. * pow2(Mst2));
       break;
    case h9:
       Mst2mod = (1 + mdr2mst2ka);
@@ -633,67 +640,67 @@ std::vector<double> h3m::HierarchyCalculator::sortEigenvalues(const Eigen::Eigen
  */
 Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(const bool isBottom){
    Eigen::Matrix2d Mt41L;
-   double GF = 1/(sqrt(2) * (pow(p.vu,2) + pow(p.vd,2)));
+   double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
    double Mst1;
    double Mst2;
-   double th2;
    double Mt;
+   double s2t;
    const double beta = atan(p.vu/p.vd);
    if(!isBottom){
       Mst1 = p.MSt(0, 0);
       Mst2 = p.MSt(1, 0);
-      th2 = asin(p.s2t);
+      s2t = p.s2t;
       Mt = p.Mt;
    }
    else{
       Mst1 = p.MSb(0, 0);
       Mst2 = p.MSb(1, 0);
-      th2 = asin(p.s2b);
+      s2t = p.s2b;
       Mt = p.Mb;
    }
-   Mt41L (0,0) = (-3*GF*pow(Mt,2)*pow(p.mu,2)*pow(1/sin(beta),2)*
-      (-pow(Mst1,2) + pow(Mst2,2) + pow(Mst1,2)*log(Mst1) + 
-        pow(Mst2,2)*log(Mst1) - pow(Mst1,2)*log(Mst2) - 
-        pow(Mst2,2)*log(Mst2))*pow(sin(th2),2))/
-    (4.*sqrt(2)*(pow(Mst1,2) - pow(Mst2,2))*pow(Pi,2));
-   Mt41L (0,1) = (3*GF*pow(1/sin(beta),2)*
-      (-(pow(Mt,3)*p.mu*(log(Mst1) - log(Mst2))*sin(th2))/2. + 
-        (pow(Mt,2)*pow(p.mu,2)*1/tan(beta)*
-           (-pow(Mst1,2) + pow(Mst2,2) + pow(Mst1,2)*log(Mst1) + 
-             pow(Mst2,2)*log(Mst1) - pow(Mst1,2)*log(Mst2) - 
-             pow(Mst2,2)*log(Mst2))*pow(sin(th2),2))/
-         (4.*(pow(Mst1,2) - pow(Mst2,2))) + 
-        (Mt*p.mu*(-pow(Mst1,2) + pow(Mst2,2) + pow(Mst1,2)*log(Mst1) + 
-             pow(Mst2,2)*log(Mst1) - pow(Mst1,2)*log(Mst2) - 
-             pow(Mst2,2)*log(Mst2))*pow(sin(th2),3))/8.))/
-    (sqrt(2)*pow(Pi,2));
+   Mt41L (0,0) = (-3*GF*pow2(Mt)*pow2(p.mu)*pow2(1/sin(beta))*
+      (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+        pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+        pow2(Mst2)*log(Mst2))*pow2(s2t))/
+    (4.*sqrt(2)*(pow2(Mst1) - pow2(Mst2))*pow2(Pi));
+   Mt41L (0,1) = (3*GF*pow2(1/sin(beta))*
+      (-(pow3(Mt)*p.mu*(log(Mst1) - log(Mst2))*s2t)/2. + 
+        (pow2(Mt)*pow2(p.mu)*1/tan(beta)*
+           (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+             pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+             pow2(Mst2)*log(Mst2))*pow2(s2t))/
+         (4.*(pow2(Mst1) - pow2(Mst2))) + 
+        (Mt*p.mu*(-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+             pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+             pow2(Mst2)*log(Mst2))*pow3(s2t))/8.))/
+    (sqrt(2)*pow2(Pi));
    Mt41L (1,0) = Mt41L(0,1);
-   Mt41L (1,1) =  (3*GF*pow(1/sin(beta),2)*
-      (pow(Mt,4)*(log(Mst1) + log(Mst2) - 2*log(Mt)) + 
-        pow(Mt,3)*p.mu*1/tan(beta)*(log(Mst1) - log(Mst2))*sin(th2) + 
-        (pow(Mt,2)*pow(1/sin(beta),2)*
-           (pow(Mst1,2)*pow(p.mu,2)*pow(cos(beta),2) - 
-             pow(Mst2,2)*pow(p.mu,2)*pow(cos(beta),2) - 
-             pow(Mst1,2)*pow(p.mu,2)*pow(cos(beta),2)*log(Mst1) - 
-             pow(Mst2,2)*pow(p.mu,2)*pow(cos(beta),2)*log(Mst1) + 
-             pow(Mst1,2)*pow(p.mu,2)*pow(cos(beta),2)*log(Mst2) + 
-             pow(Mst2,2)*pow(p.mu,2)*pow(cos(beta),2)*log(Mst2) + 
-             2*pow(Mst1,4)*log(Mst1)*pow(sin(beta),2) - 
-             4*pow(Mst1,2)*pow(Mst2,2)*log(Mst1)*pow(sin(beta),2) + 
-             2*pow(Mst2,4)*log(Mst1)*pow(sin(beta),2) - 
-             2*pow(Mst1,4)*log(Mst2)*pow(sin(beta),2) + 
-             4*pow(Mst1,2)*pow(Mst2,2)*log(Mst2)*pow(sin(beta),2) - 
-             2*pow(Mst2,4)*log(Mst2)*pow(sin(beta),2))*pow(sin(th2),2))/
-         (4.*(pow(Mst1,2) - pow(Mst2,2))) - 
-        (Mt*p.mu*1/tan(beta)*(-pow(Mst1,2) + pow(Mst2,2) + 
-             pow(Mst1,2)*log(Mst1) + pow(Mst2,2)*log(Mst1) - 
-             pow(Mst1,2)*log(Mst2) - pow(Mst2,2)*log(Mst2))*
-           pow(sin(th2),3))/4. - 
-        ((pow(Mst1,2) - pow(Mst2,2))*
-           (-pow(Mst1,2) + pow(Mst2,2) + pow(Mst1,2)*log(Mst1) + 
-             pow(Mst2,2)*log(Mst1) - pow(Mst1,2)*log(Mst2) - 
-             pow(Mst2,2)*log(Mst2))*pow(sin(th2),4))/16.))/
-    (sqrt(2)*pow(Pi,2));
+   Mt41L (1,1) =  (3*GF*pow2(1/sin(beta))*
+      (pow4(Mt)*(log(Mst1) + log(Mst2) - 2*log(Mt)) + 
+        pow3(Mt)*p.mu*1/tan(beta)*(log(Mst1) - log(Mst2))*s2t + 
+        (pow2(Mt)*pow2(1/sin(beta))*
+           (pow2(Mst1)*pow2(p.mu)*pow2(cos(beta)) - 
+             pow2(Mst2)*pow2(p.mu)*pow2(cos(beta)) - 
+             pow2(Mst1)*pow2(p.mu)*pow2(cos(beta))*log(Mst1) - 
+             pow2(Mst2)*pow2(p.mu)*pow2(cos(beta))*log(Mst1) + 
+             pow2(Mst1)*pow2(p.mu)*pow2(cos(beta))*log(Mst2) + 
+             pow2(Mst2)*pow2(p.mu)*pow2(cos(beta))*log(Mst2) + 
+             2*pow4(Mst1)*log(Mst1)*pow2(sin(beta)) - 
+             4*pow2(Mst1)*pow2(Mst2)*log(Mst1)*pow2(sin(beta)) + 
+             2*pow4(Mst2)*log(Mst1)*pow2(sin(beta)) - 
+             2*pow4(Mst1)*log(Mst2)*pow2(sin(beta)) + 
+             4*pow2(Mst1)*pow2(Mst2)*log(Mst2)*pow2(sin(beta)) - 
+             2*pow4(Mst2)*log(Mst2)*pow2(sin(beta)))*pow2(s2t))/
+         (4.*(pow2(Mst1) - pow2(Mst2))) - 
+        (Mt*p.mu*1/tan(beta)*(-pow2(Mst1) + pow2(Mst2) + 
+             pow2(Mst1)*log(Mst1) + pow2(Mst2)*log(Mst1) - 
+             pow2(Mst1)*log(Mst2) - pow2(Mst2)*log(Mst2))*
+           pow3(s2t))/4. - 
+        ((pow2(Mst1) - pow2(Mst2))*
+           (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+             pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+             pow2(Mst2)*log(Mst2))*pow4(s2t))/16.))/
+    (sqrt(2)*pow2(Pi));
     return Mt41L;
 }
 
@@ -711,25 +718,25 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(const int tag, const bool isB
    double ct;
    if(!isBottom){
       const double theta = asin(p.s2t)/2.;
-      Mt2 = pow(p.Mt,2);
-      Mst12 = pow(shiftMst1ToMDR(tag, false, 1, 0), 2);
-      Mst22 = pow(shiftMst2ToMDR(tag, false, 1, 0) + deltaDSZ, 2);
+      Mt2 = pow2(p.Mt);
+      Mst12 = pow2(shiftMst1ToMDR(tag, false, 1, 0));
+      Mst22 = pow2(shiftMst2ToMDR(tag, false, 1, 0) + deltaDSZ);
       st = sin(theta);
       ct = cos(theta);
    }
    else{
       const double theta = asin(p.s2b)/2.;
-      Mt2 = pow(p.Mb,2);
-      Mst12 = pow(shiftMst1ToMDR(tag, true, 1, 0), 2);
-      Mst22 = pow(shiftMst2ToMDR(tag, true, 1, 0) + deltaDSZ, 2);
+      Mt2 = pow2(p.Mb);
+      Mst12 = pow2(shiftMst1ToMDR(tag, true, 1, 0));
+      Mst22 = pow2(shiftMst2ToMDR(tag, true, 1, 0) + deltaDSZ);
       st = sin(theta);
       ct = cos(theta);
    }
-   double scale2 = pow(p.scale,2);
+   double scale2 = pow2(p.scale);
    // note the sign difference in mu
    double mu = - p.mu;
    double tanb = p.vu/p.vd;
-   double v2 = pow(p.vu,2) + pow(p.vd,2);
+   double v2 = pow2(p.vu) + pow2(p.vd);
    double gs = p.g3;
    int os = 0;
    DSZHiggs_(&Mt2, &MG, &Mst12, &Mst22, &st, &ct, &scale2, &mu, &tanb, &v2, &gs, &os, &S11, &S22, &S12);

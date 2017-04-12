@@ -1,2 +1,4 @@
-(-2*pow(Al4p,2)*pow(At,2)*pow(Mt,4)*pow(Sbeta,2)*(pow(Sbeta,10)+pow(Cbeta,2)*(1+pow(Sbeta,2)+pow(Sbeta,4)+pow(Sbeta,6)+
-pow(Sbeta,8)))*threeLoopFlag*(-349+56*lmMsusy+32*pow(lmMsusy,2)-24*lmMt+282*z3))/(27.*pow(Cbeta,2)*pow(Msusy,2))
+(-2*threeLoopFlag*pow2(Al4p)*pow2(At)*
+(-349 + 56*lmMsusy - 24*lmMt + 282*z3 + 32*pow2(lmMsusy))*pow2(Sbeta)*pow4(Mt)*
+(power10(Sbeta) + pow2(Cbeta)*(1 + pow2(Sbeta) + pow4(Sbeta) + pow6(Sbeta) + pow8(Sbeta))))
+/(27.*pow2(Cbeta)*pow2(Msusy))
