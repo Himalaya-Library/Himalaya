@@ -47,6 +47,9 @@ template <typename T> T pow7(T x)  { return x*x*x*x*x*x*x; }
 template <typename T> T pow8(T x)  { return x*x*x*x*x*x*x*x; }
 template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
 template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
+template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x;}
+template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x;}
+template <typename T> T upcut(T x, bool cut) { if(cut){return 0;} else{return x;}}
 
 extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
@@ -108,12 +111,14 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    
    // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here GF is calculated in the DRbar scheme, checked)
    prefac = (3. / (sqrt(2) * (pow2(p.vu) + pow2(p.vd)) * sqrt(2) * pow2(Pi) * pow2(sin(beta))));
+   //prefac = 2.53386E-6;
 }
 
 /*
  * 	compares deviation of all hierarchies with the exact 2-loop result and returns the hierarchy which minimizes the error
  */
 int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
+   isComparingHierarchies = true;
    double error = -1.;
    int suitableHierarchy = -1;
    // sine of 2 times beta
@@ -142,17 +147,22 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
 	    Mt42L = getMt42L(hierarchyMap.at(hierarchy), isBottom);
 	 }
 	 
-	 //calculate the exact higgs mass at 2-loop (only up to alpha_s alpha_t/b)
-	 Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
-	 double Mh2l = sortEigenvalues(es2L).at(0);
+	 // calc 1-loop shift for DRbar -> MDRbar
+	 Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isBottom);
 	 
+	 //calculate the exact higgs mass at 2-loop (only up to alpha_s alpha_t/b)
+	 Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + shift + Mt42L);
+	 double Mh2l = sortEigenvalues(es2L).at(0);
+
 	 // calculate the expanded 2-loop expression with the specific hierarchy
 	 Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L + calculateHierarchy(hierarchy, isBottom, 0,1,0));
 	 
 	 // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
 	 double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
-	 double currError = fabs((Mh2l - Mh2LExpanded));
 
+	 // estimate the error
+	 double currError = fabs((Mh2l - Mh2LExpanded));
+	 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
 	    error = currError;
@@ -165,6 +175,7 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
 	 }
       }
    }
+   isComparingHierarchies = false;
    return suitableHierarchy;
 }
 
@@ -204,6 +215,17 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
    int xDR2DRMOD;
    Mst1 = p.MSt(0, 0);
    Mst2 = p.MSt(1, 0);
+   
+   // bool to truncate the expansion while comparing at 2-loop level or to estimate the expansion error
+   bool cut = false;
+   // bool to truncate the expansion while comparing at 2-loop level or to estimate the expansion error (when estimating the error
+   //	this variable should always be false!!
+   bool cutErr = false;
+   // if isComparingHierarchies == true, than truncate the two-terms like in H3m
+   if(isComparingHierarchies){
+      cut = true;
+      cutErr = true;
+   }
    // this loop is needed to calculate the suitable mass shift order by order
    for(int currentLoopOrder = 1; currentLoopOrder < 4; currentLoopOrder ++){
       bool runThisOrder;
@@ -703,6 +725,94 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(const bool isBottom){
     (sqrt(2)*pow2(Pi));
     return Mt41L;
 }
+
+/*
+ * 	calculates the DRbar -> MDRbar shift for the one loop contribution
+ */
+Eigen::Matrix2d h3m::HierarchyCalculator::getShift(const int tag, const bool isBottom){
+   Eigen::Matrix2d shift;
+   double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
+   double Mst1;
+   double Mst2;
+   double Mt;
+   double s2t;
+   const double beta = atan(p.vu/p.vd);
+   double deltamst1, deltamst2;
+   if(!isBottom){
+      Mst1 = p.MSt(0, 0);
+      Mst2 = p.MSt(1, 0);
+      s2t = p.s2t;
+      Mt = p.Mt;
+      deltamst1 = -(Mst1 - shiftMst1ToMDR(tag, false, 1, 0));
+      deltamst2 = -(Mst2 - shiftMst2ToMDR(tag, false, 1, 0));
+   }
+   else{
+      Mst1 = p.MSb(0, 0);
+      Mst2 = p.MSb(1, 0);
+      s2t = p.s2b;
+      Mt = p.Mb;
+      deltamst1 = -(Mst1 - shiftMst1ToMDR(tag, true, 1, 0));
+      deltamst2 = -(Mst2 - shiftMst2ToMDR(tag, true, 1, 0));
+   }
+   shift(0, 0) = (3 * GF * (deltamst2 * Mst1 - deltamst1 * Mst2) * pow2(Mt) * pow2(p.mu) * pow2(1 / Pi) *
+      pow2(1/sin(beta)) * pow2(1 / (pow2(Mst1) - pow2(Mst2))) * pow2(s2t) *
+      (4 * (log(Mst1) - log(Mst2)) * pow2(Mst1) * pow2(Mst2) - pow4(Mst1) +
+	 pow4(Mst2))) / (4. * sqrt(2) * Mst1 * Mst2);
+   shift(0, 1) = (-3 * GF * Mt * p.mu * pow2(1 / Pi) * pow2(1/sin(beta)) *
+      pow2(1 / (pow2(Mst1) - pow2(Mst2))) * s2t *
+      (-(pow2(pow2(Mst1) - pow2(Mst2)) *
+	    (4 * (-(deltamst2 * Mst1) + deltamst1 * Mst2) * pow2(Mt) +
+	       (-2 * Mst1 * Mst2 * (deltamst1 * Mst1 + deltamst2 * Mst2) *
+		  (log(Mst1) - log(Mst2)) +
+		  (deltamst2 * Mst1 + deltamst1 * Mst2) * pow2(Mst1) -
+		  (deltamst2 * Mst1 + deltamst1 * Mst2) * pow2(Mst2)) * pow2(s2t))) + 2 * (deltamst2 * Mst1 - deltamst1 * Mst2) * Mt * p.mu * 1/tan(beta) *
+	 (4 * (log(Mst1) - log(Mst2)) * pow2(Mst1) * pow2(Mst2) - pow4(Mst1) +
+	    pow4(Mst2)) * s2t)) / (8. * sqrt(2) * Mst1 * Mst2);
+   shift(1, 0) = shift(0, 1);
+   shift(1, 1) = (3 * GF * pow2(1 / Pi) * pow2(1/sin(beta)) *
+      ((Mt * p.mu * 1/tan(beta) * (-(deltamst1 * Mst1) + deltamst2 * Mst2 +
+	       2 * deltamst1 * Mst1 * log(Mst1) + 2 * deltamst2 * Mst2 * log(Mst1) -
+	       2 * deltamst1 * Mst1 * log(Mst2) - 2 * deltamst2 * Mst2 * log(Mst2) -
+	       (deltamst2 * pow2(Mst1)) / Mst2 + (deltamst1 * pow2(Mst2)) / Mst1) *
+	    pow3(s2t)) / 4. + (pow2(Mt) * pow2(1 / (pow2(Mst1) - pow2(Mst2))) *
+	    pow2(s2t) * (2 * deltamst2 * pow7(Mst1) -
+	       2 * deltamst1 * pow6(Mst1) * Mst2 -
+	       2 * deltamst2 * Mst1 * pow6(Mst2) + 2 * deltamst1 * pow7(Mst2) -
+	       4 * deltamst1 * pow6(Mst1) * Mst2 * log(Mst1) +
+	       4 * deltamst2 * Mst1 * pow6(Mst2) * log(Mst1) +
+	       4 * deltamst1 * pow6(Mst1) * Mst2 * log(Mst2) -
+	       4 * deltamst2 * Mst1 * pow6(Mst2) * log(Mst2) -
+	       deltamst2 * pow5(Mst1) * pow2(p.mu) * pow2(1/tan(beta)) -
+	       deltamst1 * pow5(Mst2) * pow2(p.mu) * pow2(1/tan(beta)) +
+	       2 * deltamst2 * pow2(Mst2) *
+	       (pow5(Mst1) * (-3 + 2 * log(Mst1) - 2 * log(Mst2)) +
+		  2 * (log(Mst1) - log(Mst2)) * pow2(p.mu) * pow2(1/tan(beta)) *
+		  pow3(Mst1)) - 2 * deltamst1 * pow2(Mst1) *
+	       (pow5(Mst2) * (3 + 2 * log(Mst1) - 2 * log(Mst2)) +
+		  2 * (log(Mst1) - log(Mst2)) * pow2(p.mu) * pow2(1/tan(beta)) *
+		  pow3(Mst2)) + deltamst1 * Mst2 * pow2(p.mu) * pow2(1/tan(beta)) *
+	       pow4(Mst1) + 6 * deltamst1 * pow3(Mst2) * pow4(Mst1) +
+	       8 * deltamst1 * log(Mst1) * pow3(Mst2) * pow4(Mst1) -
+	       8 * deltamst1 * log(Mst2) * pow3(Mst2) * pow4(Mst1) +
+	       deltamst2 * Mst1 * pow2(p.mu) * pow2(1/tan(beta)) * pow4(Mst2) +
+	       6 * deltamst2 * pow3(Mst1) * pow4(Mst2) -
+	       8 * deltamst2 * log(Mst1) * pow3(Mst1) * pow4(Mst2) +
+	       8 * deltamst2 * log(Mst2) * pow3(Mst1) * pow4(Mst2))) / (4. * Mst1 * Mst2) -
+	 ((deltamst2 * Mst1 + deltamst1 * Mst2) * pow4(Mt)) / (Mst1 * Mst2) -
+	 ((deltamst2 * pow5(Mst1) + deltamst1 * pow5(Mst2) -
+	    4 * deltamst2 * pow2(Mst2) * pow3(Mst1) -
+	    4 * deltamst1 * pow2(Mst1) * pow3(Mst2) +
+	    3 * deltamst1 * Mst2 * pow4(Mst1) -
+	    4 * deltamst1 * Mst2 * log(Mst1) * pow4(Mst1) +
+	    4 * deltamst1 * Mst2 * log(Mst2) * pow4(Mst1) +
+	    3 * deltamst2 * Mst1 * pow4(Mst2) +
+	    4 * deltamst2 * Mst1 * log(Mst1) * pow4(Mst2) -
+	    4 * deltamst2 * Mst1 * log(Mst2) * pow4(Mst2)) * pow4(s2t)) /
+	 (16. * Mst1 * Mst2) + (-(deltamst1 / Mst1) + deltamst2 / Mst2) * p.mu *
+	 1/tan(beta) * pow3(Mt) * s2t)) / sqrt(2);
+   return shift;
+}
+
 
 /*
  * 	calculates the 2-loop higgs mass matrix according to Pietro Slavich

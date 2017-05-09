@@ -1,0 +1,1 @@
+1/(a*pow4(Mst1))+1/pow4(Mst1)

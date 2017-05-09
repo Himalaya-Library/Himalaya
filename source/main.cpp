@@ -181,6 +181,181 @@ h3m::Parameters checkH3m()
    return pars;
 }
 
+h3m::Parameters checkH3m2(){
+
+   h3m::Parameters pars;
+
+   pars.scale = 1056.26;
+   pars.mu = 134.903;
+   pars.g3 = 1.07022;
+   pars.vd = 25.01481631;
+   pars.vu = 241.4436584;
+   pars.mq2 << pow(1468.7,2), 0, 0,
+               0, pow(1468.7,2), 0,
+               0, 0, pow(1214.45,2);
+   pars.md2 << pow(1470.63,2), 0, 0,
+               0, pow(1470.62,2), 0,
+               0, 0, pow(1458.97,2);
+   pars.mu2 << pow(1470.37,2), 0, 0,
+               0, pow(1470.36,2), 0,
+               0, 0, pow(903.144,2);
+   pars.Ab = -528.861551;
+   pars.At = -361.862050;
+
+   pars.MA = 1437.52;
+   pars.MG = 450.708;
+   pars.MW = 78.3505;
+   pars.MZ = 89.8558;
+   pars.Mt = 145.353;
+   pars.Mb = 4.25;
+   pars.MSt << 911.608, 1223.86;
+   pars.MSb << 1216.13, 1459.28;
+   pars.s2t = 0.163855;
+   pars.s2b = 0.127886;
+
+   return pars;
+}
+
+h3m::Parameters Xt29(){
+
+   h3m::Parameters pars;
+
+   pars.scale = 1981.84;
+   pars.mu = 1999.88;
+   pars.g3 = 1.02887;
+   pars.vd = 49.723;
+   pars.vu = 237.098;
+   pars.mq2 <<  4.00295e+06, 0, 0,
+               0, 4.00295e+06, 0,
+               0, 0, 3.99948e+06;
+   pars.md2 << 4.00249e+06, 0, 0,
+               0, 4.00249e+06, 0,
+               0, 0, 4.00239e+06;
+   pars.mu2 << 4.00251e+06, 0, 0,
+               0, 4.00251e+06 , 0,
+               0, 0, 3.99551e+06;
+   pars.Ab = 9997.88;
+   pars.At = 6195.23;
+
+   pars.MA = 1995.22;
+   pars.MG = 2000.66;
+   pars.MW = 77.0967;
+   pars.MZ = 88.7893;
+   pars.Mt = 145.817;
+   pars.Mb = 2.2495;
+   pars.MSt << 1781.78, 2204.35;
+   pars.MSb << 2000.42, 2000.95;
+   pars.s2t = -0.999999;
+   pars.s2b = -0.973654;
+
+   return pars;
+}
+
+h3m::Parameters Xt3(){
+
+   h3m::Parameters pars;
+
+   pars.scale = 1979.99;
+   pars.mu = 1999.87;
+   pars.g3 = 1.02891;
+   pars.vd = 49.6913;
+   pars.vu = 236.886;
+   pars.mq2 << 4.00326e+06 , 0, 0,
+               0, 4.00326e+06, 0,
+               0, 0, 3.99918e+06;
+   pars.md2 << 4.00275e+06, 0, 0,
+               0, 4.00275e+06, 0,
+               0, 0, 4.00263e+06;
+   pars.mu2 << 4.00277e+06, 0, 0,
+               0,4.00277e+06, 0,
+               0, 0, 3.99455e+06;
+   pars.Ab = 9997.64;
+   pars.At = 6394.6;
+
+   pars.MA = 1994.56;
+   pars.MG = 2000.73;
+   pars.MW = 77.0275;
+   pars.MZ = 88.7096;
+   pars.Mt = 146.148;
+   pars.Mb = 2.24524;
+   pars.MSt << 1772.9, 2211.26;
+   pars.MSb << 2000.39, 2000.97;
+   pars.s2t = -0.999998;
+   pars.s2b = -0.895782;
+
+   return pars;
+}
+
+h3m::Parameters Xt31(){
+
+   h3m::Parameters pars;
+
+   pars.scale = 1978.03;
+   pars.mu = 1999.86;
+   pars.g3 =  1.02896;
+   pars.vd = 49.6565;
+   pars.vu = 236.653;
+   pars.mq2 <<  4.00358e+06 , 0, 0,
+               0, 4.00358e+06, 0,
+               0, 0, 3.99882e+06;
+   pars.md2 << 4.00302e+06, 0, 0,
+               0, 4.00302e+06, 0,
+               0, 0, 4.00289e+06;
+   pars.mu2 << 4.00304e+06 , 0, 0,
+               0, 4.00304e+06, 0,
+               0, 0, 3.99344e+06;
+   pars.Ab = 9997.39;
+   pars.At = 6593.92;
+
+   pars.MA = 1993.83;
+   pars.MG = 2000.8;
+   pars.MW = 76.9519;
+   pars.MZ = 88.6226;
+   pars.Mt = 146.502;
+   pars.Mb = 2.24085;
+   pars.MSt << 1763.87 , 2218.18;
+   pars.MSb <<  2000.33, 2001;
+   pars.s2t = -0.999997;
+   pars.s2b =-0.783043;
+
+   return pars;
+}
+
+h3m::Parameters Xt33(){
+
+   h3m::Parameters pars;
+
+   pars.scale = 1973.75;
+   pars.mu = 1999.82;
+   pars.g3 =  1.02907;
+   pars.vd = 49.5751;
+   pars.vu = 236.115;
+   pars.mq2 <<  4.00428e+06 , 0, 0,
+               0, 4.00428e+06, 0,
+               0, 0, 3.99786e+06;
+   pars.md2 << 4.00361e+06, 0, 0,
+               0, 4.00361e+06, 0,
+               0, 0, 4.00346e+06;
+   pars.mu2 << 4.00363e+06 , 0, 0,
+               0, 4.00363e+06, 0,
+               0, 0, 3.99067e+06;
+   pars.Ab = 9996.81;
+   pars.At = 6992.34;
+
+   pars.MA = 1992.14;
+   pars.MG = 2000.96;
+   pars.MW = 76.7777;
+   pars.MZ = 88.4219;
+   pars.Mt = 147.295;
+   pars.Mb = 2.23149;
+   pars.MSt << 1745.3 , 2232.1;
+   pars.MSb <<  2000.14, 2001.09;
+   pars.s2t = -0.999995;
+   pars.s2b =-0.550527;
+
+   return pars;
+}
+
 int main(int argc, char **argv) {
    try{
       const std::vector<h3m::Parameters> points = {
@@ -188,7 +363,12 @@ int main(int argc, char **argv) {
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
 	 setup_HSSUSY_minmix(),
-	 checkH3m()
+	 checkH3m(),
+	 checkH3m2(),
+	 Xt29(),
+	 Xt3(),
+	 Xt31(),
+	 Xt33()
       }; 
       for (const auto point: points) {
 	 std::cout << "----------------------------------" << std::endl;
@@ -198,11 +378,17 @@ int main(int argc, char **argv) {
 	 const int suitableHierarchyTop = hierarchyCalculator.compareHierarchies(false);
 	 const int suitableHierarchyBot = hierarchyCalculator.compareHierarchies(true);
 	 // calculate the 3-loop corrections with the suiatble hierarchy
-	 Eigen::Matrix2d DMh3L = hierarchyCalculator.calculateHierarchy(suitableHierarchyTop, false, 0, 0, 1);
-	 Eigen::Matrix2d DMh3Lb = hierarchyCalculator.calculateHierarchy(suitableHierarchyBot, true, 0, 0, 1);
+	 
+	 /*for(int i = 0; i <= 13; i++){
+	    hierarchyCalculator.calculateHierarchy(i, false, 1,0,0);
+	    hierarchyCalculator.calculateHierarchy(i, false, 0,1,0);
+	    hierarchyCalculator.calculateHierarchy(i, false, 0,0,1);
+	 }*/
+	 //Eigen::Matrix2d DMh3L = hierarchyCalculator.calculateHierarchy(suitableHierarchyTop, false, 0, 0, 1);
+	 //Eigen::Matrix2d DMh3Lb = hierarchyCalculator.calculateHierarchy(suitableHierarchyBot, true, 0, 0, 1);
 	 std::cout << "hierarchy top: " << suitableHierarchyTop << ", hierarchy bot: " << suitableHierarchyBot << std::endl;
-	 std::cout << "DMh3L = " << DMh3L.row(0) << ' ' << DMh3L.row(1) << std::endl;
-	 std::cout << "DMh3Lb = " << DMh3Lb.row(0) << ' ' << DMh3Lb.row(1) << std::endl;
+	 //std::cout << "DMh3L = " << DMh3L.row(0) << ' ' << DMh3L.row(1) << std::endl;
+	 //std::cout << "DMh3Lb = " << DMh3Lb.row(0) << ' ' << DMh3Lb.row(1) << std::endl;
       }
    }
    catch (std::exception& e){
