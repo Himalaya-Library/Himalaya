@@ -16,18 +16,19 @@ namespace h3m{
 			      const unsigned int threeLoopFlagIn);							// calculates the hierarchy contributions for a specific hierarchy (tag) and a specific loop order
       double shiftMst1ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);	// shifts Mst1 according to the hierarchy to the MDRbar scheme
       double shiftMst2ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);	// shifts Mst2 according to the hierarchy to the MDRbar scheme
+      double getExpansionError(const unsigned int tag, const bool isBottom, const Eigen::Matrix2d& twoLoopMassMatrix);
       const std::map<unsigned int, unsigned int> hierarchyMap = {{h3, h3}, {h32q2g, h3}, {h3q22g, h3}, {h4, h4}, {h5, h5}, {h5g1, h5},
 	 {h6, h6}, {h6g2, h6}, {h6b, h6b}, {h6b2qg2, h6b}, {h6bq22g, h6b}, {h6bq2g2, h6b}, {h9, h9}, {h9q2, h9}};
    private:
       Parameters p;
       double Al4p,lmMgl, lmMsq, Mgl, Msq, prefac, z2, z3, z4, deltaDSZ = 0.;
       double B4, D3, DN, OepS2, S2, T1ep;
-      bool isComparingHierarchies;
       bool isHierarchySuitable(const unsigned int tag, const bool isBottom);						// checks if the hierarchy is suitable to the spectrum
       std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d> es);				// sorts the eigenvalus of a 2x2 matrix. The lower index is the lower eigenvalue
       Eigen::Matrix2d getMt41L(const bool isBottom);									// calculates the one loop higgs mass matrix of the order alpha_t/b
       Eigen::Matrix2d getMt42L(const int tag, const bool isBottom);							// calculates the two loop higgs mass matrix of the order alpha_s * alpha_t
       Eigen::Matrix2d getShift(const int tag, const bool isBottom);							// shifts the 1-loop terms to the MDRbar scheme to compare top level with different hierarchies
+      std::map<unsigned int, unsigned int> flagMap;
       //hierarchy keys
       static const unsigned int h3 		= 0;
       static const unsigned int h32q2g 		= 1;
@@ -43,6 +44,19 @@ namespace h3m{
       static const unsigned int h6g2		= 11;
       static const unsigned int h9 		= 12;
       static const unsigned int h9q2		= 13;
+      // expansion depth flags
+      const unsigned int xx			= 14;
+      const unsigned int xxMst			= 15;
+      const unsigned int xxDmglst1		= 16;
+      const unsigned int xxDmsqst1		= 17;
+      const unsigned int xxDmst12		= 18;
+      const unsigned int xxAt			= 19;
+      const unsigned int xxlmMsusy		= 20;
+      const unsigned int xxMsq			= 21;
+      const unsigned int xxMsusy		= 22;
+      const unsigned int xxDmglst2		= 23;
+      const unsigned int xxDmsqst2		= 24;
+      const unsigned int xxMgl			= 25;
   };
 }	// h3m
 #endif	// HierarchyCalculator_HPP

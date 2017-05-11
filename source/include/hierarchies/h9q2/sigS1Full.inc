@@ -1,153 +1,227 @@
-(pow2(Mt)*pow2(MuSUSY)*(405*oneLoopFlag*pow2(Dmst12)*(Dmst12-pow2(Mst2))*pow2(s2t)-threeLoopFlag*pow2(Al4p)*(2*Dmst12*pow2(s2t)*(-108*shiftst3*((58-36*(lmMst1+z2))*pow2(Dmst12)-
-5*Dmst12*(7-6*(lmMst1+z2))*pow2(Mst2)+
-10*(1-2*(lmMst1+z2))*pow4(Mst2))+
-((5*pow2(Dmst12)*(2*(41653-48*lmMgl*(313-180*lmMst1)+
-11784*lmMst1-12636*pow2(lmMgl)+
-540*pow2(lmMst1))*pow4(Mgl)*pow6(Msq)+
-9*pow4(Mst1)*(15*((43-16*lmMst1)*pow2(Dmsqst1)*pow2(Msq)+(85-16*lmMst1)*pow3(Dmsqst1)+
-Dmsqst1*(1-16*lmMst1)*pow4(Msq))+
-2*(121-176*lmMst1-164*pow2(lmMst1))*pow6(Msq))+
-36*pow2(Mgl)*pow2(Mst1)*(1440*(pow2(Dmsqst1)*pow2(Msq)+
-pow3(Dmsqst1)+Dmsqst1*pow4(Msq))-
-(425-18*lmMgl-83*lmMst1-91*pow2(lmMst1))*pow6(Msq)))-
-5*Dmst12*pow2(Mst2)*((41653-48*lmMgl*(313-180*lmMst1)+
-11784*lmMst1-12636*pow2(lmMgl)+
-540*pow2(lmMst1))*pow4(Mgl)*pow6(Msq)+
-9*pow4(Mst1)*(15*(33-32*lmMst1)*pow2(Dmsqst1)*pow2(Msq)+
-30*(27-16*lmMst1)*pow3(Dmsqst1)+
-60*Dmsqst1*(3-8*lmMst1)*pow4(Msq)-
-8*(16+115*lmMst1+41*pow2(lmMst1))*pow6(Msq))+72*pow2(Mgl)*pow2(Mst1)*(360*(pow2(Dmsqst1)*pow2(Msq)+pow3(Dmsqst1)+
-Dmsqst1*pow4(Msq))+
-(200+18*lmMgl+265*lmMst1+91*pow2(lmMst1))*pow6(Msq))))/pow4(Mst1)+
-z2*(2160*((3*shiftst1+2*shiftst2)*pow2(Dmst12)-
-5*Dmst12*(shiftst1+shiftst2)*pow2(Mst2)+
-10*(shiftst1-shiftst2)*pow4(Mst2))*(pow2(Dmsqst1)*pow2(Msq)+pow3(Dmsqst1)+
-Dmsqst1*pow4(Msq)+pow6(Msq))+
-(360*Dmst12*(2*Dmst12*(-(pow2(Mgl)*pow2(Mst1)*(90*(pow2(Dmsqst1)*pow2(Msq)+pow3(Dmsqst1)+
-Dmsqst1*pow4(Msq))-91*pow6(Msq)))-
-pow4(Mst1)*(45*pow2(Dmsqst1)*pow2(Msq)+
-90*pow3(Dmsqst1)-2*pow6(Msq))+
-12*(49-17*lmMgl+17*lmMst1)*pow4(Mgl)*pow6(Msq))-
-pow2(Mst2)*(-2*pow2(Mgl)*pow2(Mst1)*(45*(pow2(Dmsqst1)*pow2(Msq)+
-pow3(Dmsqst1)+Dmsqst1*pow4(Msq))-
-137*pow6(Msq))+
-12*(49-17*lmMgl+17*lmMst1)*pow4(Mgl)*pow6(Msq)-
-pow4(Mst1)*(135*pow2(Dmsqst1)*pow2(Msq)+
-180*pow3(Dmsqst1)+90*Dmsqst1*pow4(Msq)+
-41*pow6(Msq)))))/pow4(Mst1))-
-360*(shiftst2*(6*pow2(Dmsqst1)*pow2(Msq)*((13-2*lmMst1)*pow2(Dmst12)+
-(2-lmMst1)*(-5*Dmst12*pow2(Mst2)-10*pow4(Mst2)))+
-pow3(Dmsqst1)*(4*(37-3*lmMst1)*pow2(Dmst12)-
-5*Dmst12*(17-6*lmMst1)*pow2(Mst2)-
-20*(7-3*lmMst1)*pow4(Mst2))+
-3*(2*pow2(Dmst12)-5*Dmst12*pow2(Mst2)-
-10*pow4(Mst2))*(Dmsqst1*(3-2*lmMst1)*pow4(Msq)+
-(1-2*lmMst1)*pow6(Msq)))+
-shiftst1*(pow3(Dmsqst1)*((17-18*lmMst1)*pow2(Dmst12)-
-5*Dmst12*(13-6*lmMst1)*pow2(Mst2)+
-20*(7-3*lmMst1)*pow4(Mst2))+
-3*(pow2(Dmsqst1)*pow2(Msq)*((9-6*lmMst1)*pow2(Dmst12)+
-(2-lmMst1)*(-10*Dmst12*pow2(Mst2)+20*pow4(Mst2)))+
-(3*pow2(Dmst12)-5*Dmst12*pow2(Mst2)+
-10*pow4(Mst2))*(Dmsqst1*(3-2*lmMst1)*pow4(Msq)+
-(1-2*lmMst1)*pow6(Msq))))))/pow6(Msq))+
-(Mgl*Mt*((-96*Dmst12*s2t*(-30*Dmst12*pow2(Mst2)*(30*(pow2(Dmsqst1)*pow2(Msq)*(4*(3-lmMgl+lmMst1)*pow2(Mgl)-
-3*pow2(Mst1))+
-(4*(3-lmMgl+lmMst1)*pow2(Mgl)+
-pow2(Mst1))*pow3(Dmsqst1)+
-Dmsqst1*(4*(3-lmMgl+lmMst1)*pow2(Mgl)-
-7*pow2(Mst1))*pow4(Msq))-
-(2*(249-164*lmMgl+
-(176+20*lmMgl)*lmMst1-27*pow2(lmMgl)-
-pow2(lmMst1))*pow2(Mgl)+
-(149+41*lmMst1)*pow2(Mst1))*pow6(Msq))+
-pow2(Dmst12)*(3600*(pow2(Dmsqst1)*pow2(Msq)*((3-lmMgl+lmMst1)*pow2(Mgl)-
-4*pow2(Mst1))+
-((3-lmMgl+lmMst1)*pow2(Mgl)-
-3*pow2(Mst1))*pow3(Dmsqst1)+
-Dmsqst1*((3-lmMgl+lmMst1)*pow2(Mgl)-
-5*pow2(Mst1))*pow4(Msq))-
-(240*(130-159*lmMgl+
-(162+20*lmMgl)*lmMst1-27*pow2(lmMgl)-
-pow2(lmMst1))*pow2(Mgl)-
-(365-1049*lmMst1-123*pow2(lmMst1))*pow2(Mst1))*pow6(Msq))+
-30*pow4(Mst2)*(60*(pow2(Dmsqst1)*pow2(Msq)*(2*(3-lmMgl+lmMst1)*pow2(Mgl)+
-5*pow2(Mst1))+
-(2*(3-lmMgl+lmMst1)*pow2(Mgl)+
-7*pow2(Mst1))*pow3(Dmsqst1)+
-Dmsqst1*(2*(3-lmMgl+lmMst1)*pow2(Mgl)+
-3*pow2(Mst1))*pow4(Msq))+
-(4*(11-154*lmMgl+(148+20*lmMgl)*lmMst1-
-27*pow2(lmMgl)-pow2(lmMst1))*pow2(Mgl)+
-(215+118*lmMst1+41*pow2(lmMst1))*pow2(Mst1))*pow6(Msq))))/pow4(Mst1)+(576*z2*(pow3(Dmst12)*(Mt*(-498*Mgl*pow2(Mst1)+
-360*(17-4*lmMgl+4*lmMst1)*pow3(Mgl))*pow6(Msq)+
-s2t*(-3*pow4(Mst1)*(350*pow2(Dmsqst1)*pow2(Msq)+
-200*pow3(Dmsqst1)+500*Dmsqst1*pow4(Msq)-
-79*pow6(Msq))+
-40*pow2(Mgl)*pow2(Mst1)*(15*(pow2(Dmsqst1)*pow2(Msq)+pow3(Dmsqst1)+
-Dmsqst1*pow4(Msq))-
-(94-45*lmMgl+45*lmMst1)*pow6(Msq))))+
-10*Dmst12*pow4(Mst2)*(Mt*(52*Mgl*pow2(Mst1)+
-36*(17-4*lmMgl+4*lmMst1)*pow3(Mgl))*pow6(Msq)+
-s2t*(pow4(Mst1)*(75*pow2(Dmsqst1)*pow2(Msq)+
-120*pow3(Dmsqst1)+30*Dmsqst1*pow4(Msq)-
-17*pow6(Msq))+
-pow2(Mgl)*pow2(Mst1)*(60*(pow2(Dmsqst1)*pow2(Msq)+pow3(Dmsqst1)+
-Dmsqst1*pow4(Msq))+
-(113-90*lmMgl+90*lmMst1)*pow6(Msq))))-
-pow2(Dmst12)*pow2(Mst2)*(Mt*(11*Mgl*pow2(Mst1)+
-360*(17-4*lmMgl+4*lmMst1)*pow3(Mgl))*pow6(Msq)+
-s2t*(150*pow4(Mst1)*(-(pow2(Dmsqst1)*pow2(Msq))+
-2*pow3(Dmsqst1)-4*Dmsqst1*pow4(Msq)-
-pow6(Msq))+
-5*pow2(Mgl)*pow2(Mst1)*(120*(pow2(Dmsqst1)*pow2(Msq)+pow3(Dmsqst1)+
-Dmsqst1*pow4(Msq))-
-(263-90*lmMgl+90*lmMst1)*pow6(Msq))))+
-40*Mgl*Mt*((94-24*lmMgl+24*lmMst1)*pow2(Mgl)+
-13*pow2(Mst1))*pow6(Msq)*pow6(Mst2)))/pow6(Mst1)))/pow6(Msq)+(576*pow2(Mgl)*pow2(Mt)*(-(pow2(Dmst12)*(10*(262+335*lmMst1-
-lmMgl*(199+120*lmMst1-72*lmMt)+
-(-96-72*lmMst1)*lmMt+120*pow2(lmMst1))*pow2(Mgl)-
-(163+15*lmMgl-27*lmMst1+20*lmMt-
-8*pow2(lmMst1))*pow2(Mst1))*pow2(Mst2))+
-2*(5*(262+335*lmMst1-
-lmMgl*(199+120*lmMst1-72*lmMt)+
-(-96-72*lmMst1)*lmMt+120*pow2(lmMst1))*pow2(Mgl)-
-(323-75*lmMgl+383*lmMst1-100*lmMt+
-32*pow2(lmMst1))*pow2(Mst1))*pow3(Dmst12)+
-10*(Dmst12*((262+335*lmMst1-
-lmMgl*(199+120*lmMst1-72*lmMt)+
-(-96-72*lmMst1)*lmMt+120*pow2(lmMst1))*pow2(Mgl)+
-2*(16-9*lmMgl+41*lmMst1-12*lmMt+
-4*pow2(lmMst1))*pow2(Mst1))*pow4(Mst2)+
-(2*(59+85*lmMst1-
-lmMgl*(53+40*lmMst1-24*lmMt)-
-24*(lmMt+lmMst1*lmMt)+40*pow2(lmMst1))*pow2(Mgl)-
-(5+18*lmMgl-74*lmMst1+24*lmMt-
-8*pow2(lmMst1))*pow2(Mst1))*pow6(Mst2)))-
-(27*z3*(-3*pow3(Dmst12)*((-40*pow2(Mgl)*pow2(Mst1)*(14*pow2(Mt)+15*pow2(Mst1)*pow2(s2t))-
-80*(484*pow2(Mt)+259*pow2(Mst1)*pow2(s2t))*pow4(Mgl)+
-Mt*s2t*(34560*pow2(Mst1)*pow3(Mgl)-
-32*Mgl*pow4(Mst1)))*pow6(Msq)+
-5*pow2(s2t)*(175*pow2(Dmsqst1)*pow2(Msq)+385*pow3(Dmsqst1)-
-35*Dmsqst1*pow4(Msq)-22*pow6(Msq))*pow6(Mst1))+
-5*pow2(Dmst12)*pow2(Mst2)*((pow2(Mst1)*(8*pow2(Mgl)*(7*pow2(Mt)-90*pow2(Mst1)*pow2(s2t))+
-5184*Mt*s2t*pow3(Mgl))-
-24*(968*pow2(Mt)+259*pow2(Mst1)*pow2(s2t))*pow4(Mgl))*pow6(Msq)+
-3*pow2(s2t)*(245*pow2(Dmsqst1)*pow2(Msq)+350*pow3(Dmsqst1)+
-140*Dmsqst1*pow4(Msq)+48*pow6(Msq))*pow6(Mst1))
-+320*pow6(Msq)*(Dmst12*Mgl*Mt*(Mt*(-7*Mgl*pow2(Mst1)+363*pow3(Mgl))+
-s2t*(162*pow2(Mgl)*pow2(Mst1)-7*pow4(Mst1)))*pow4(Mst2)+
-pow2(Mgl)*(242*pow2(Mgl)-7*pow2(Mst1))*pow2(Mt)*pow6(Mst2))))/pow6(Msq))/pow6(Mst1))+
-(216*Al4p*Dmst12*s2t*twoLoopFlag*(pow2(Mst1)*(-(pow2(Dmst12)*(Mt*(2*(9+2*lmMst1)*Mgl*pow2(Mst1)+
-160*(1-lmMgl+lmMst1)*pow3(Mgl))+
-s2t*(5*(1+2*lmMst1)*pow2(Mgl)*pow2(Mst1)+
-20*(1-3*lmMgl+3*lmMst1)*pow4(Mgl)-
-20*lmMst1*pow4(Mst1))))+
-10*Dmst12*pow2(Mst2)*(2*Mt*(Mgl*pow2(Mst1)+
-(3-2*lmMgl+2*lmMst1)*pow3(Mgl))+
-s2t*((3+2*lmMst1)*pow2(Mgl)*pow2(Mst1)+
-(1-3*lmMgl+3*lmMst1)*pow4(Mgl)-
-(1+2*lmMst1)*pow4(Mst1)))+
-40*Mgl*Mt*((1-2*lmMgl+2*lmMst1)*pow2(Mgl)+
-(2+lmMst1)*pow2(Mst1))*pow4(Mst2))+
-40*(1-3*lmMgl+3*lmMst1)*Mt*(pow2(Dmst12)-Dmst12*pow2(Mst2)+pow4(Mst2))*upcut(pow5(Mgl),cut)))/pow6(Mst1)))/(19440.*pow6(Mst2))
+-(pow2(Mt)*pow2(MuSUSY)*(-3*xDmst12*pow3(Dmst12)*
+        (135*oneLoopFlag*pow2(s2t) - 
+          (2*threeLoopFlag*pow2(Al4p)*
+             (pow2(Msq)*(3*pow2(Mst1)*pow2(s2t)*
+                   (15*(pow2(Dmsqst1)*
+                        (1920*pow2(Mgl) + 
+                        (215 - 72*shiftst1 - 
+                        16*lmMst1*(5 - 3*shiftst1 - 2*shiftst2) - 
+                        208*shiftst2)*pow2(Mst1)) + 
+                        Dmsqst1*pow2(Msq)*
+                        (1920*pow2(Mgl) + 
+                        (5 - 72*shiftst1 - 
+                        16*lmMst1*(5 - 3*shiftst1 - 2*shiftst2) - 
+                        48*shiftst2)*pow2(Mst1))) - 
+                     2*(10*(425 - 18*lmMgl - 83*lmMst1 - 
+                        91*pow2(lmMst1))*pow2(Mgl) - 
+                        (605 - 180*shiftst1 - 120*shiftst2 - 
+                        8*lmMst1*
+                        (110 - 45*shiftst1 - 30*shiftst2 - 
+                        27*shiftst3) - 348*shiftst3 - 820*pow2(lmMst1)
+)*pow2(Mst1))*pow4(Msq)) + Mt*
+                   (16*Mgl*s2t*pow2(Mst1)*
+                      (14400*pow2(Dmsqst1) + 18000*Dmsqst1*pow2(Msq) - 
+                        (365 - 1049*lmMst1 - 123*pow2(lmMst1))*pow4(Msq)
+) - 192*pow2(Mgl)*(300*(3 - lmMgl + lmMst1)*Mgl*s2t*
+                         (pow2(Dmsqst1) + Dmsqst1*pow2(Msq)) + 
+                        (-20*Mgl*s2t*
+                        (130 - 159*lmMgl + (162 + 20*lmMgl)*lmMst1 - 
+                        27*pow2(lmMgl) - pow2(lmMst1)) + 
+                         Mt*(323 - 75*lmMgl + 383*lmMst1 - 100*lmMt + 
+                         32*pow2(lmMst1)))*pow4(Msq)))) - 
+               15*s2t*xDmsqst1*pow3(Dmsqst1)*
+                (Mt*(-11520*Mgl*pow2(Mst1) + 
+                     3840*(3 - lmMgl + lmMst1)*pow3(Mgl)) + 
+                  s2t*(-5760*pow2(Mgl)*pow2(Mst1) - 
+                     (1275 - 136*shiftst1 - 
+                        48*lmMst1*(5 - 3*shiftst1 - 2*shiftst2) - 
+                        1184*shiftst2)*pow4(Mst1)))))/
+           (pow4(Mst1)*pow6(Msq)) - 
+          (72*Al4p*s2t*twoLoopFlag*
+             (Mt*(160*(1 - lmMgl + lmMst1)*pow2(Mst1)*pow3(Mgl) + 
+                  2*(9 + 2*lmMst1)*Mgl*pow4(Mst1) - 
+                  40*(1 - 3*lmMgl + 3*lmMst1)*x*pow5(Mgl)) + 
+               s2t*(5*(1 + 2*lmMst1)*pow2(Mgl)*pow4(Mst1) - 
+                  20*lmMst1*pow6(Mst1))))/pow6(Mst1)) + 
+       pow2(Mst2)*(405*oneLoopFlag*pow2(Dmst12)*pow2(s2t) - 
+          (2160*Al4p*Dmst12*s2t*twoLoopFlag*
+             (4*Mgl*Mt*pow2(Mst2)*
+                ((1 - 2*lmMgl + 2*lmMst1)*pow2(Mgl)*pow2(Mst1) + 
+                  (1 - 3*lmMgl + 3*lmMst1)*x*pow4(Mgl) + 
+                  (2 + lmMst1)*pow4(Mst1)) + 
+               Dmst12*(Mt*(2*((3 - 2*lmMgl + 2*lmMst1)*pow2(Mst1)*
+                         pow3(Mgl) + Mgl*pow4(Mst1)) - 
+                     4*(1 - 3*lmMgl + 3*lmMst1)*x*pow5(Mgl)) + 
+                  s2t*((3 + 2*lmMst1)*pow2(Mgl)*pow4(Mst1) - 
+                     (1 + 2*lmMst1)*pow6(Mst1)))))/pow6(Mst1)) + 
+       (10*Al4p*xMgl*pow4(Mgl)*
+           (2*xDmst12*(216*(1 - 3*lmMgl + 3*lmMst1)*twoLoopFlag*
+                 pow2(Mst1)*pow2(s2t) + 
+                Al4p*threeLoopFlag*
+                 (288*(262 + 335*lmMst1 - 
+                      lmMgl*(199 + 120*lmMst1 - 72*lmMt) + 
+                      (-96 - 72*lmMst1)*lmMt + 120*pow2(lmMst1))*
+                    pow2(Mt) + 
+                   (41653 - 48*lmMgl*(313 - 180*lmMst1) + 
+                      11784*lmMst1 - 12636*pow2(lmMgl) + 
+                      540*pow2(lmMst1))*pow2(Mst1)*pow2(s2t)))*
+              pow3(Dmst12) + pow2(Mst2)*
+              (-216*(1 - 3*lmMgl + 3*lmMst1)*twoLoopFlag*pow2(Dmst12)*
+                 pow2(Mst1)*pow2(s2t) + 
+                Al4p*threeLoopFlag*
+                 (-(pow2(Dmst12)*
+                      (576*(262 + 335*lmMst1 - 
+                         lmMgl*(199 + 120*lmMst1 - 72*lmMt) + 
+                         (-96 - 72*lmMst1)*lmMt + 120*pow2(lmMst1))*
+                         pow2(Mt) + 
+                        (41653 - 48*lmMgl*(313 - 180*lmMst1) + 
+                         11784*lmMst1 - 12636*pow2(lmMgl) + 
+                         540*pow2(lmMst1))*pow2(Mst1)*pow2(s2t))) + 
+                   pow2(Mt)*(576*Dmst12*
+                       (262 + lmMst1*(335 - 72*lmMt) - 
+                         lmMgl*(199 + 120*lmMst1 - 72*lmMt) - 96*lmMt + 
+                         120*pow2(lmMst1))*pow2(Mst2) + 
+                      1152*(59 + lmMst1*(85 - 24*lmMt) - 
+                         lmMgl*(53 + 40*lmMst1 - 24*lmMt) - 24*lmMt + 
+                         40*pow2(lmMst1))*pow4(Mst2))))) - 
+          9*threeLoopFlag*pow2(Al4p)*
+           (Dmst12*pow2(Mst2)*((320*Mgl*Mt*s2t*pow2(Mst1)*
+                    (30*(pow2(Dmsqst1)*
+                        (Dmst12*
+                        (-4*(3 - lmMgl + lmMst1 - z2)*pow2(Mgl) + 
+                        (3 - z2)*pow2(Mst1)) + 
+                        (4*(3 - lmMgl + lmMst1 - z2)*pow2(Mgl) + 
+                        5*(2 - z2)*pow2(Mst1))*pow2(Mst2)) + 
+                        Dmsqst1*pow2(Msq)*
+                        (Dmst12*
+                        (-4*(3 - lmMgl + lmMst1 - z2)*pow2(Mgl) + 
+                        (7 - 4*z2)*pow2(Mst1)) + 
+                        2*(2*(3 - lmMgl + lmMst1 - z2)*pow2(Mgl) + 
+                        (3 - z2)*pow2(Mst1))*pow2(Mst2))) + 
+                      (Dmst12*
+                        ((498 + 352*lmMst1 - 
+                       lmMgl*(328 - 40*lmMst1 - 90*z2) + 
+                       (-263 - 90*lmMst1)*z2 - 54*pow2(lmMgl) - 
+                       2*pow2(lmMst1))*pow2(Mgl) + 
+                        (149 + 41*lmMst1 - 30*z2)*pow2(Mst1)) + 
+                        (2*(22 + 296*lmMst1 - 
+                       lmMgl*(308 - 40*lmMst1 - 90*z2) + 
+                       (-113 - 90*lmMst1)*z2 - 54*pow2(lmMgl) - 
+                       2*pow2(lmMst1))*pow2(Mgl) + 
+                        (215 + 118*lmMst1 + 34*z2 + 41*pow2(lmMst1))*
+                        pow2(Mst1))*pow2(Mst2))*pow4(Msq)) + 
+                   10*pow2(s2t)*
+                    (15*pow2(Dmsqst1)*
+                       (Dmst12*
+                        (48*(4 - z2)*pow2(Mgl) + 
+                        (33 - 32*shiftst2 - 
+                        16*(lmMst1*(2 - shiftst1 - shiftst2) + 
+                       shiftst1*(2 - z2)) + (-72 + 16*shiftst2)*z2)*
+                        pow2(Mst1)) + 
+                        32*(shiftst1 - shiftst2)*(2 - lmMst1 - z2)*
+                        pow2(Mst1)*pow2(Mst2)) + 
+                      60*Dmsqst1*pow2(Msq)*
+                       (Dmst12*
+                        (12*(4 - z2)*pow2(Mgl) + 
+                        (3 - 4*lmMst1*(2 - shiftst1 - shiftst2) - 
+                        6*(shiftst1 + shiftst2) + 
+                        (-12 + 4*(shiftst1 + shiftst2))*z2)*pow2(Mst1)
+) + 4*(shiftst1 - shiftst2)*(3 - 2*(lmMst1 + z2))*pow2(Mst1)*pow2(Mst2)
+) + 4*(Dmst12*(2*(200 + 18*lmMgl + 265*lmMst1 + 274*z2 + 
+                       91*pow2(lmMst1))*pow2(Mgl) - 
+                        (32 + 30*(shiftst1 + shiftst2) + 
+                        2*lmMst1*
+                       (115 - 30*(shiftst1 + shiftst2) - 9*shiftst3) 
++ 21*shiftst3 + (82 - 60*(shiftst1 + shiftst2) - 18*shiftst3)*z2 + 
+                        82*pow2(lmMst1))*pow2(Mst1)) + 
+                        6*(10*shiftst1 - 10*shiftst2 + shiftst3)*
+                        (1 - 2*(lmMst1 + z2))*pow2(Mst1)*pow2(Mst2))*
+                       pow4(Msq))*pow4(Mst1))/pow4(Msq) + 
+                (100*s2t*xDmsqst1*pow2(Mst1)*pow3(Dmsqst1)*
+                   (16*pow2(Mst2)*
+                      (Mt*(12*Mgl*(7 - 4*z2)*pow2(Mst1) + 
+                         24*(3 - lmMgl + lmMst1 - z2)*pow3(Mgl)) + 
+                        s2t*(shiftst1 - shiftst2)*(7 - 3*(lmMst1 + z2))*
+                         pow4(Mst1)) + 
+                     Dmst12*(Mt*
+                         (-96*Mgl*(1 - 2*z2)*pow2(Mst1) - 
+                         384*(3 - lmMgl + lmMst1 - z2)*pow3(Mgl)) + 
+                        s2t*(72*(4 - z2)*pow2(Mgl)*pow2(Mst1) + 
+                         (81 - 52*shiftst1 - 
+                         24*lmMst1*(2 - shiftst1 - shiftst2) - 
+                         68*shiftst2 + 
+                         (-144 + 24*(shiftst1 + shiftst2))*z2)*pow4(Mst1))
+)))/pow6(Msq)) + pow2(Mst1)*(64*pow2(Mgl)*pow2(Mst2)*pow2(Mt)*
+                 (-(pow2(Dmst12)*
+                      (163 + 15*lmMgl - 27*lmMst1 + 20*lmMt - 11*z2 - 
+                        8*pow2(lmMst1))) - 
+                   20*Dmst12*(16 - 9*lmMgl + 41*lmMst1 - 12*lmMt + 
+                      26*z2 + 4*pow2(lmMst1))*pow2(Mst2) + 
+                   10*(5 + 18*lmMgl - 74*lmMst1 + 24*lmMt - 52*z2 - 
+                      8*pow2(lmMst1))*pow4(Mst2)) - 
+                (32*xDmst12*z2*pow3(Dmst12)*
+                   (-(pow2(s2t)*pow4(Mst1)*
+                        (15*(15 - 3*shiftst1 - 2*shiftst2)*
+                         pow2(Dmsqst1)*pow2(Msq) + 
+                         15*(30 - 3*shiftst1 - 2*shiftst2)*xDmsqst1*
+                         pow3(Dmsqst1) - 
+                         15*Dmsqst1*(3*shiftst1 + 2*shiftst2)*
+                        pow4(Msq) - 
+                         (10 + 45*shiftst1 + 30*shiftst2 + 27*shiftst3)*
+                         pow6(Msq))) - 
+                     pow2(Mgl)*
+                      (450*xDmsqst1*pow2(Mst1)*pow2(s2t)*pow3(Dmsqst1) + 
+                        450*pow2(Mst1)*pow2(s2t)*
+                         (pow2(Dmsqst1)*pow2(Msq) + Dmsqst1*pow4(Msq)) + 
+                        (996*pow2(Mt) - 455*pow2(Mst1)*pow2(s2t))*
+                         pow6(Msq)) + 
+                     Mt*s2t*(-6*Mgl*pow2(Mst1)*
+                         (350*pow2(Dmsqst1)*pow2(Msq) + 
+                         200*xDmsqst1*pow3(Dmsqst1) + 
+                         500*Dmsqst1*pow4(Msq) - 79*pow6(Msq)) + 
+                        80*pow3(Mgl)*
+                         (15*xDmsqst1*pow3(Dmsqst1) + 
+                         15*(pow2(Dmsqst1)*pow2(Msq) + 
+                        Dmsqst1*pow4(Msq)) - 
+                         (94 - 45*lmMgl + 45*lmMst1)*pow6(Msq)))))/
+                 pow6(Msq)) - 320*xMgl*z2*pow4(Mgl)*
+              (-3*pow2(Dmst12)*pow2(Mst2)*
+                 (24*(17 - 4*lmMgl + 4*lmMst1)*pow2(Mt) + 
+                   (49 - 17*lmMgl + 17*lmMst1)*pow2(Mst1)*pow2(s2t)) + 
+                6*xDmst12*(12*(17 - 4*lmMgl + 4*lmMst1)*pow2(Mt) + 
+                   (49 - 17*lmMgl + 17*lmMst1)*pow2(Mst1)*pow2(s2t))*
+                 pow3(Dmst12) + 
+                pow2(Mt)*(72*Dmst12*(17 - 4*lmMgl + 4*lmMst1)*pow4(Mst2) + 
+                   16*(47 - 12*lmMgl + 12*lmMst1)*pow6(Mst2))) - 
+             (3*z3*(3*xDmst12*pow3(Dmst12)*
+                   ((-40*pow2(Mgl)*pow2(Mst1)*
+                        (14*pow2(Mt) + 15*pow2(Mst1)*pow2(s2t)) - 
+                        80*xMgl*
+                        (484*pow2(Mt) + 259*pow2(Mst1)*pow2(s2t))*
+                        pow4(Mgl) + 
+                        Mt*s2t*
+                         (34560*pow2(Mst1)*pow3(Mgl) - 
+                        32*Mgl*pow4(Mst1)))*pow6(Msq) + 
+                     5*pow2(s2t)*
+                      (175*pow2(Dmsqst1)*pow2(Msq) + 
+                        385*xDmsqst1*pow3(Dmsqst1) - 
+                        35*Dmsqst1*pow4(Msq) - 22*pow6(Msq))*pow6(Mst1)) - 
+                  5*pow2(Dmst12)*pow2(Mst2)*
+                   ((pow2(Mst1)*
+                        (8*pow2(Mgl)*
+                        (7*pow2(Mt) - 90*pow2(Mst1)*pow2(s2t)) + 
+                        5184*Mt*s2t*pow3(Mgl)) - 
+                        24*xMgl*
+                         (968*pow2(Mt) + 259*pow2(Mst1)*pow2(s2t))*
+                         pow4(Mgl))*pow6(Msq) + 
+                     3*pow2(s2t)*
+                      (245*pow2(Dmsqst1)*pow2(Msq) + 
+                        350*xDmsqst1*pow3(Dmsqst1) + 
+                        140*Dmsqst1*pow4(Msq) + 48*pow6(Msq))*pow6(Mst1)) 
++ 320*pow6(Msq)*(Dmst12*Mgl*Mt*
+                      ((7*Mgl*Mt - 162*s2t*pow2(Mgl))*pow2(Mst1) - 
+                        363*Mt*xMgl*pow3(Mgl) + 7*s2t*pow4(Mst1))*
+                      pow4(Mst2) + 
+                     pow2(Mgl)*(-242*xMgl*pow2(Mgl) + 7*pow2(Mst1))*
+                      pow2(Mt)*pow6(Mst2))))/pow6(Msq)))/pow6(Mst1)))/
+  (19440.*pow6(Mst2))

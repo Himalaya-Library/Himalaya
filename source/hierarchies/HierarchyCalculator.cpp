@@ -49,7 +49,6 @@ template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
 template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
 template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x;}
 template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x;}
-template <typename T> T upcut(T x, bool cut) { if(cut){return 0;} else{return x;}}
 
 extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
@@ -59,6 +58,10 @@ extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double 
  */
 h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    this -> p = p;
+   // fill flag list
+   for(int i = xx; i <= xxMgl; i++){
+      flagMap.insert(std::pair<unsigned int, unsigned int> (i, 1));
+   }
    // init constants
    // imaginary unit
    const std::complex<double> I(0., 1.);
@@ -118,7 +121,9 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
  * 	compares deviation of all hierarchies with the exact 2-loop result and returns the hierarchy which minimizes the error
  */
 int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
-   isComparingHierarchies = true;
+   // set flags to truncate the expansion
+   flagMap.at(xx) = 0;
+   flagMap.at(xxMst) = 0;
    double error = -1.;
    int suitableHierarchy = -1;
    // sine of 2 times beta
@@ -163,6 +168,13 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
 	 // estimate the error
 	 double currError = fabs((Mh2l - Mh2LExpanded));
 	 
+	 // estimate the error due to the expansion
+	 double expError = getExpansionError(hierarchy, isBottom, treelvl + Mt41L + shift + Mt42L);
+	 
+	 // add these errors to include the error of the expansion in the comparison
+	 currError = sqrt(pow2(currError) + pow2(expError));
+	 
+	 std::cout << "err " << hierarchy << " " << Mh2l << " " << Mh2LExpanded << " " << currError << std::endl;
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
 	    error = currError;
@@ -175,7 +187,9 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
 	 }
       }
    }
-   isComparingHierarchies = false;
+   // reset the flags
+   flagMap.at(xx) = 1;
+   flagMap.at(xxMst) = 1;
    return suitableHierarchy;
 }
 
@@ -216,16 +230,20 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
    Mst1 = p.MSt(0, 0);
    Mst2 = p.MSt(1, 0);
    
-   // bool to truncate the expansion while comparing at 2-loop level or to estimate the expansion error
-   bool cut = false;
-   // bool to truncate the expansion while comparing at 2-loop level or to estimate the expansion error (when estimating the error
-   //	this variable should always be false!!
-   bool cutErr = false;
-   // if isComparingHierarchies == true, than truncate the two-terms like in H3m
-   if(isComparingHierarchies){
-      cut = true;
-      cutErr = true;
-   }
+   // flags to truncate the expansion while comparing at 2-loop level or to estimate the error
+   int x, xMst, xDmglst1, xDmsqst1, xDmst12, xAt, xlmMsusy, xMsq, xMsusy, xDmglst2, xDmsqst2, xMgl;
+   x = flagMap.at(xx);
+   xMst = flagMap.at(xxMst);
+   xDmglst1 = flagMap.at(xxDmglst1);
+   xDmsqst1 = flagMap.at(xxDmsqst1);
+   xDmst12 = flagMap.at(xxDmst12);
+   xAt = flagMap.at(xxAt);
+   xlmMsusy = flagMap.at(xxlmMsusy);
+   xMsq = flagMap.at(xxMsq);
+   xMsusy = flagMap.at(xxMsusy);
+   xDmglst2 = flagMap.at(xxDmglst2);
+   xDmsqst2 = flagMap.at(xxDmsqst2);
+   xMgl = flagMap.at(xxMgl);
    // this loop is needed to calculate the suitable mass shift order by order
    for(int currentLoopOrder = 1; currentLoopOrder < 4; currentLoopOrder ++){
       bool runThisOrder;
@@ -856,3 +874,133 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(const int tag, const bool isB
    Mt42L(1, 1) = S22;
    return Mt42L;
 }
+
+/*
+ * 	evaluates the error due to the expansion in mass ratios and differences
+ * 	first calc the full 3-loop contribution and than truncate the expansion at different variable orders to estimate the expansion error
+ */
+double h3m::HierarchyCalculator::getExpansionError(const unsigned int tag, const bool isBottom, const Eigen::Matrix2d& twoLoopMassMatrix){
+   double Mh3l;
+   double Mh3lcut;
+   std::vector<double> errors;
+   // reset flags
+   flagMap.at(xxMst) = 1;
+   Eigen::EigenSolver<Eigen::Matrix2d> es;
+   switch (hierarchyMap.at(tag)) {
+   case h3:
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3l = sortEigenvalues(es).at(0);
+      // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion error 
+      flagMap.at(xxDmglst1) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmglst1) = 1;
+      flagMap.at(xxDmsqst1) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmsqst1) = 1;
+      flagMap.at(xxDmst12) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmst12) = 1;
+      break;
+   case h4:
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3l = sortEigenvalues(es).at(0);
+      flagMap.at(xxAt) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxAt) = 1;
+      flagMap.at(xxlmMsusy) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxlmMsusy) = 1;
+      flagMap.at(xxMsq) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxMsq) = 1;
+      flagMap.at(xxMsusy) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxMsusy) = 1;
+      break;
+   case h5:
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3l = sortEigenvalues(es).at(0);
+      flagMap.at(xxDmglst1) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmglst1) = 1;
+      flagMap.at(xxMsq) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxMsq) = 1;
+      break;
+   case h6:
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3l = sortEigenvalues(es).at(0);
+      flagMap.at(xxDmglst2) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmglst2) = 1;
+      flagMap.at(xxMsq) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxMsq) = 1;
+      break;
+   case h6b:
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3l = sortEigenvalues(es).at(0);
+      flagMap.at(xxDmglst2) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmglst2) = 1;
+      flagMap.at(xxDmsqst2) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmsqst2) = 1;
+      break;
+   case h9:
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3l = sortEigenvalues(es).at(0);
+      flagMap.at(xxDmsqst1) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmsqst1) = 1;
+      flagMap.at(xxDmst12) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxDmst12) = 1;
+      flagMap.at(xxMgl) = 0;
+      es.compute(twoLoopMassMatrix + calculateHierarchy(tag, isBottom, 0, 0, 1), false);
+      Mh3lcut = sortEigenvalues(es).at(0);
+      errors.push_back(fabs(Mh3l - Mh3lcut));
+      flagMap.at(xxMgl) = 1;
+      break;
+   }
+   // evalue the sqrt of the squared errors
+   double squaredErrorSum = 0.;
+   for(auto const& error: errors){
+      squaredErrorSum = squaredErrorSum + pow2(error);
+   }
+   // set the expansion depth for the next comparison
+   flagMap.at(xxMst) = 0;
+   flagMap.at(xx) = 0;
+   return sqrt(squaredErrorSum);
+}
+

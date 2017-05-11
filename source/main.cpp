@@ -356,19 +356,125 @@ h3m::Parameters Xt33(){
    return pars;
 }
 
+h3m::Parameters MS350(){
+
+   h3m::Parameters pars;
+
+   pars.scale = 379.219;
+   pars.mu = 350.21;
+   pars.g3 =  1.1223;
+   pars.vd = 49.3791;
+   pars.vu = 241.173;
+   pars.mq2 <<  121599, 0, 0,
+               0, 121599, 0,
+               0, 0, 121716;
+   pars.md2 << 121725, 0, 0,
+               0, 121725, 0,
+               0, 0, 121762;
+   pars.mu2 << 121722 , 0, 0,
+               0, 121722, 0,
+               0, 0, 121926;
+   pars.Ab = 1752.9;
+   pars.At = 73.137;
+
+   pars.MA = 351.585;
+   pars.MG = 348.783;
+   pars.MW = 79.4527;
+   pars.MZ = 90.9831;
+   pars.Mt = 154.569;
+   pars.Mb = 2.56808;
+   pars.MSt << 378.123 , 380.319;
+   pars.MSb <<  349.809, 353.456;
+   pars.s2t =  -0.265985;
+   pars.s2b = -0.0849635;
+
+   return pars;
+}
+
+h3m::Parameters MS400(){
+
+   h3m::Parameters pars;
+
+ pars.scale   = 425.41;
+  pars.mu  = 400.179;
+  pars.g3  = 1.11453;
+  pars.vd  = 49.4249;
+  pars.vu  = 241.011;
+  pars.mq2 << 159105 ,     0,      0,
+     0 ,159105   ,   0,
+     0    ,  0, 159222;
+  pars.md2 << 159231  ,    0 ,     0,
+     0, 159231     , 0,
+     0 ,     0, 159267;
+  pars.mu2 << 159228  ,    0 ,     0,
+     0, 159228 ,     0,
+     0     , 0 ,159432;
+  pars.At  = 82.7215;
+  pars.Ab  = 2002.52;
+  pars.MG  = 398.945;
+  pars.MW  = 79.3087;
+  pars.MZ  = 90.858;
+  pars.Mt  = 153.446;
+  pars.Mb  = 2.54742;
+  pars.MA  = 401.38;
+  pars.MSt << 424.466, 426.356;
+  pars.MSb << 399.836, 403.023;
+  pars.s2t = -0.125094;
+  pars.s2b = -0.101822;
+
+   return pars;
+}
+
+h3m::Parameters MS480(){
+
+   h3m::Parameters pars;
+
+  pars.scale   = 500.92;
+  pars.mu  = 480.143;
+  pars.g3  = 1.104;
+  pars.vd  = 49.4878;
+  pars.vu  = 240.782;
+  pars.mq2 << 229519    ,  0 ,     0,
+     0 ,229519    ,  0,
+     0  ,    0, 229635;
+  pars.md2 << 229645,      0,      0,
+     0, 229645     , 0,
+     0 ,     0, 229680;
+  pars.mu2 << 229641 ,     0     , 0,
+     0, 229641      ,0,
+     0 ,     0, 229843;
+  pars.At  = 98.2263;
+  pars.Ab  = 2402.06;
+  pars.MG  = 479.138;
+  pars.MW  = 79.1151;
+  pars.MZ  = 90.6904;
+  pars.Mt  = 151.895;
+  pars.Mb  = 2.51902;
+  pars.MA  = 481.136;
+  pars.MSt << 500.129, 501.711;
+  pars.MSb << 479.872, 482.523;
+  pars.s2t = 0.0876104;
+  pars.s2b = -0.130184;
+
+   return pars;
+}
+
 int main(int argc, char **argv) {
    try{
       const std::vector<h3m::Parameters> points = {
-	 setup_SPS1a(),
-	 setup_SPS2(),
-	 setup_CMSSM_large_m0(),
-	 setup_HSSUSY_minmix(),
-	 checkH3m(),
-	 checkH3m2(),
-	 Xt29(),
-	 Xt3(),
-	 Xt31(),
+	 //setup_SPS1a(),
+	 //setup_SPS2(),
+	 //setup_CMSSM_large_m0(),
+	 //setup_HSSUSY_minmix(),
+	 //checkH3m(),
+	 //checkH3m2(),
+	 //Xt29(),
+	 //Xt3(),
+	 //Xt31(),
 	 Xt33()
+	 //MS350(),
+	 //MS400(),
+	 //MS480()
       }; 
       for (const auto point: points) {
 	 std::cout << "----------------------------------" << std::endl;
@@ -379,11 +485,11 @@ int main(int argc, char **argv) {
 	 const int suitableHierarchyBot = hierarchyCalculator.compareHierarchies(true);
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 
-	 /*for(int i = 0; i <= 13; i++){
+	 for(int i = 0; i <= 13; i++){
 	    hierarchyCalculator.calculateHierarchy(i, false, 1,0,0);
 	    hierarchyCalculator.calculateHierarchy(i, false, 0,1,0);
 	    hierarchyCalculator.calculateHierarchy(i, false, 0,0,1);
-	 }*/
+	 }
 	 //Eigen::Matrix2d DMh3L = hierarchyCalculator.calculateHierarchy(suitableHierarchyTop, false, 0, 0, 1);
 	 //Eigen::Matrix2d DMh3Lb = hierarchyCalculator.calculateHierarchy(suitableHierarchyBot, true, 0, 0, 1);
 	 std::cout << "hierarchy top: " << suitableHierarchyTop << ", hierarchy bot: " << suitableHierarchyBot << std::endl;

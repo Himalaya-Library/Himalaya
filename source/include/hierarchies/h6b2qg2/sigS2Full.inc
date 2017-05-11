@@ -1,2977 +1,4890 @@
--(oneLoopFlag*(4*pow2(Mt)*pow2(s2t)*((lmMst1-lmMst2)*(2*pow2(Mst1)-2*pow2(Mst2))+
-pow2(MuSUSY)*(2-lmMst1+lmMst2-
-(2*(lmMst1-lmMst2)*pow2(Mst1)*(pow2(Mst1)+pow2(Mst2)))/pow4(Mst2)))-4*((Mt*MuSUSY*s2t*(2*(pow2(Mst1)-pow2(Mst2))*pow2(s2t)+
-(-lmMst1+lmMst2)*(4*pow2(Mt)-(pow2(Mst1)+pow2(Mst2))*pow2(s2t))))/Tbeta+(pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*(2-lmMst1+lmMst2-
-(2*(lmMst1-lmMst2)*pow2(Mst1)*(pow2(Mst1)+pow2(Mst2)))/pow4(Mst2)))/pow2(Sbeta))+
-16*(lmMst1+lmMst2-2*lmMt)*pow4(Mt)-
-(-4*pow2(Mst1)*pow2(Mst2)+(2+lmMst1-lmMst2)*pow4(Mst1)+
-(2-lmMst1+lmMst2)*pow4(Mst2))*pow4(s2t)))/32.+
-(Al4p*twoLoopFlag*z2*(pow2(Mgl)*(pow4(Mst1)*(96*(2*MuSUSY+Mst2*Tbeta)*pow2(Sbeta)*pow4(Mt)+
-Tbeta*(-16*s2t*(pow2(MuSUSY)*(1-pow2(Sbeta))+
-4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*pow4(s2t)*pow5(Mst2)))+
-pow4(Mst2)*(4*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+6*Mst2*pow2(Sbeta))+
-pow2(Sbeta)*(-4*Mt*(MuSUSY+2*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)+32*(2*MuSUSY+Mst2*Tbeta)*pow4(Mt))+
-Tbeta*(-16*s2t*(pow2(MuSUSY)*(1-pow2(Sbeta))+
-4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*pow4(s2t)*pow5(Mst2)))-
-2*pow2(Mst1)*pow2(Mst2)*(pow2(Sbeta)*(-2*Mt*(MuSUSY+2*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)-32*(2*MuSUSY+Mst2*Tbeta)*pow4(Mt))+
-Tbeta*(8*s2t*(pow2(MuSUSY)+
-(4*pow2(Mst2)-pow2(MuSUSY))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*pow4(s2t)*pow5(Mst2))))+
-2*pow2(Dmglst2)*(-4*pow2(Mt)*(-8*(4*MuSUSY+9*Mst2*Tbeta)*pow2(Mt)*pow2(Sbeta)-
-3*Mst2*MuSUSY*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+10*Mst2*pow2(Sbeta))+
-2*Mt*s2t*Tbeta*(31*pow2(MuSUSY)*(1-pow2(Sbeta))+
-12*pow2(Mst2)*pow2(Sbeta)))*pow4(Mst1)+
-pow4(Mst2)*(12*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+11*Mst2*pow2(Sbeta))-
-8*s2t*Tbeta*(11*pow2(MuSUSY)*(1-pow2(Sbeta))+
-4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)-
-4*Mt*(3*MuSUSY+11*Mst2*Tbeta)*pow2(Sbeta)*pow3(Mst2)*pow3(s2t)+pow2(Sbeta)*(32*MuSUSY*pow4(Mt)+3*Tbeta*pow4(s2t)*pow5(Mst2)))+
-pow2(Mst1)*pow2(Mst2)*(12*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*(10*Mst2*pow2(Sbeta)+MuSUSY*(Tbeta-Tbeta*pow2(Sbeta)))+
-32*(MuSUSY+Mst2*Tbeta)*pow2(Sbeta)*pow4(Mt)+
-Tbeta*(-168*s2t*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(4*Mt*pow3(s2t)*pow4(Mst2)-
-3*pow4(s2t)*pow5(Mst2)))))+
-4*Dmglst2*Mgl*(4*pow2(Mt)*(-12*(MuSUSY+2*Mst2*Tbeta)*pow2(Mt)*pow2(Sbeta)+
-Mst2*MuSUSY*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+6*Mst2*pow2(Sbeta))+
-Mt*s2t*Tbeta*(-13*pow2(MuSUSY)*(1-pow2(Sbeta))+
-12*pow2(Mst2)*pow2(Sbeta)))*pow4(Mst1)+
-pow4(Mst2)*(2*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*(2*MuSUSY*Tbeta*(1-pow2(Sbeta))+15*Mst2*pow2(Sbeta))-
-4*s2t*Tbeta*(5*pow2(MuSUSY)*(1-pow2(Sbeta))+
-4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)-
-2*Mt*(2*MuSUSY+5*Mst2*Tbeta)*pow2(Sbeta)*pow3(Mst2)*pow3(s2t)+pow2(Sbeta)*(16*MuSUSY*pow4(Mt)+Tbeta*pow4(s2t)*pow5(Mst2)))+
-pow2(Mst1)*pow2(Mst2)*(8*s2t*(3*MuSUSY*s2t+2*Mt*Tbeta)*pow2(Mst2)*pow2(Mt)*pow2(Sbeta)+Tbeta*(-4*Mst2*pow2(Mt)*(-(pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta)))+
-8*pow2(Mt)*pow2(Sbeta))-
-36*s2t*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(2*Mt*pow3(s2t)*pow4(Mst2)-
-pow4(s2t)*pow5(Mst2)))))))/(6.*Tbeta*pow2(Mgl)*pow2(Sbeta)*pow5(Mst2))-
-(Al4p*twoLoopFlag*(-(xDR2DRMOD*(-2*Dmglst2*lmMst2*Mgl+(2-3*lmMst2)*pow2(Dmglst2)-
-(1+lmMst2)*pow2(Mgl))*(-(pow2(Mst2)*pow2(s2t)*pow4(Mst1)*(-4*Mt*(MuSUSY*s2t-2*Mt*Tbeta)*pow2(Mst2)*pow2(Sbeta)+
-Tbeta*(8*(lmMst1-lmMst2)*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(1-2*lmMst1+2*lmMst2)*pow2(s2t)*pow2(Sbeta)*pow4(Mst2))))-
-pow2(Mst1)*pow4(Mst2)*(-4*Tbeta*pow2(Mt)*pow2(s2t)*((1-2*lmMst1+2*lmMst2)*pow2(MuSUSY)*(1-pow2(Sbeta))+4*pow2(Mst2)*pow2(Sbeta))+
-pow2(Sbeta)*(MuSUSY*(16*s2t*pow3(Mt)-
-8*(lmMst1-lmMst2)*Mt*pow2(Mst2)*pow3(s2t))+
-Tbeta*(-16*pow4(Mt)+
-(1+2*lmMst1-2*lmMst2)*pow4(Mst2)*pow4(s2t))))+
-Tbeta*pow2(s2t)*((-8*lmMst1+8*lmMst2)*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))+
-pow2(s2t)*pow2(Sbeta)*pow4(Mst2))*pow6(Mst1)+
-(-4*Tbeta*pow2(Mt)*pow2(s2t)*(-(pow2(MuSUSY)*(1-pow2(Sbeta)))+
-2*pow2(Mst2)*pow2(Sbeta))+
-pow2(Sbeta)*(MuSUSY*(16*s2t*pow3(Mt)-4*Mt*pow2(Mst2)*pow3(s2t))+
-Tbeta*(16*pow4(Mt)+pow4(Mst2)*pow4(s2t))))*pow6(Mst2)))/(6.*Tbeta*pow2(Mst1)*pow2(Sbeta)*pow4(Mst2))+
-((72*Mt*pow3(s2t)*(pow2(Mgl)*(4*(3+lmMst1*(2+lmMst2)-pow2(lmMst2))*pow2(Mst1)*pow2(Mst2)+(3+2*lmMst1-2*lmMst2)*pow4(Mst1)-
-4*(4-lmMst1+(3-lmMst1)*lmMst2+pow2(lmMst2))*pow4(Mst2))-
-Dmglst2*Mgl*(-4*(1-lmMst1*(2-lmMst2)+4*lmMst2-pow2(lmMst2))*pow2(Mst1)*pow2(Mst2)+
-(1+6*lmMst1-6*lmMst2)*pow4(Mst1)+
-4*(6+lmMst1+lmMst2-lmMst1*lmMst2+
-pow2(lmMst2))*pow4(Mst2))-
-pow2(Dmglst2)*((7-6*lmMst1+6*lmMst2)*pow4(Mst1)+
-4*((3+lmMst1*(2-lmMst2)-4*lmMst2+
-pow2(lmMst2))*pow2(Mst1)*pow2(Mst2)+
-(14+lmMst1*(2-lmMst2)+pow2(lmMst2))*pow4(Mst2)))))/Mst2-(9*pow4(s2t)*(4*Dmglst2*Mgl*pow2(Mst1)*((1+2*lmMst1)*pow4(Mst1)-
-2*((lmMst1-2*lmMst1*lmMst2+2*pow2(lmMst2))*pow2(Mst1)*pow2(Mst2)+
-(1+lmMst1+2*lmMst1*lmMst2-2*pow2(lmMst2))*pow4(Mst2)))+
-2*pow2(Dmglst2)*(6*(2+lmMst1*(-1+2*lmMst2)-2*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)-
-6*(2-lmMst1+2*(lmMst2+lmMst1*lmMst2)-
-2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(1+6*lmMst1)*pow6(Mst1)-
-2*(2-3*lmMst2)*pow6(Mst2))+
-pow2(Mgl)*(-4*(14+3*lmMst1+(6+2*lmMst1)*lmMst2-
-2*pow2(lmMst1))*pow2(Mst2)*pow4(Mst1)+
-2*(10+16*lmMst2-2*lmMst1*(5+3*lmMst2)-
-pow2(lmMst1)+7*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(35+lmMst1*(34-12*lmMst2)-14*lmMst2+
-10*pow2(lmMst1)+2*pow2(lmMst2))*pow6(Mst1)+
-4*(1+lmMst2)*pow6(Mst2))))/pow2(Mst1)-
-(16*pow3(Mt)*(s2t*(-(pow2(Dmglst2)*(36*pow2(Mst1)*pow2(Mst2)*((13-2*lmMst1+4*lmMst2-2*lmMt)*pow2(Mst2)+
-(31+3*lmMst1*(2-lmMst2)-4*lmMst2+
-3*pow2(lmMst2))*pow2(MuSUSY))+
-9*(4*(28+41*lmMst2-
-lmMst1*(31+6*lmMst2-6*lmMt)+
-(-10-6*lmMst2)*lmMt+6*pow2(lmMst2))*pow2(Mst2)+
-(199+lmMst1*(34-20*lmMst2)-
-26*lmMst2+20*pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst1)-
-2*((161-36*lmMst1*(2-lmMst2)+
-78*lmMst2-6*lmMt-36*pow2(lmMst2))*pow2(Mst2)-
-18*(14+lmMst1*(2-lmMst2)+pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst2)))+
-9*(pow2(Mgl)*(4*pow2(Mst1)*pow2(Mst2)*((4-5*lmMst2+
-lmMst1*(5+2*lmMst2-2*lmMt)+
-2*lmMst2*lmMt-2*pow2(lmMst2))*pow2(Mst2)-
-(5+6*lmMst2-lmMst1*(4+3*lmMst2)+
-3*pow2(lmMst2))*pow2(MuSUSY))+
-(4*(5-7*lmMst2+
-lmMst1*(7+2*lmMst2-2*lmMt)+
-2*lmMst2*lmMt-2*pow2(lmMst2))*pow2(Mst2)-
-(21+38*lmMst2-
-10*lmMst1*(3+2*lmMst2)+20*pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst1)+
-4*((3-4*lmMst2+
-2*(lmMst1*(1+lmMst2)+lmMt)-
-2*pow2(lmMst2))*pow2(Mst2)-
-(4-lmMst1+(3-lmMst1)*lmMst2+
-pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst2))+
-Dmglst2*Mgl*(-((4*(1-29*lmMst2+
-lmMst1*(25+6*lmMst2-6*lmMt)+
-(4+6*lmMst2)*lmMt-6*pow2(lmMst2))*pow2(Mst2)+
-(65+lmMst1*(34-20*lmMst2)-26*lmMst2+
-20*pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst1))+
-4*(pow2(Mst1)*pow2(Mst2)*((6+13*lmMst2-
-lmMst1*(9+2*lmMst2-2*lmMt)+
-(-4-2*lmMst2)*lmMt+2*pow2(lmMst2))*pow2(Mst2)-
-(11+lmMst1*(4-3*lmMst2)-2*lmMst2+
-3*pow2(lmMst2))*pow2(MuSUSY))+
-(2*(5-lmMst1*(1-lmMst2)+lmMst2-
-pow2(lmMst2))*pow2(Mst2)-
-(6+lmMst1+lmMst2-lmMst1*lmMst2+
-pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst2)))))+
-(2*Mst2*Mt*(2*pow2(Dmglst2)*(9*(27+19*lmMst2-
-2*lmMst1*(6+lmMst2-lmMt)+
-(-7-2*lmMst2)*lmMt+2*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)-
-(2-9*lmMst1-3*lmMst2-15*lmMt)*pow2(Mst1)*pow4(Mst2)+
-27*(23+38*lmMst2-
-lmMst1*(29+6*lmMst2-6*lmMt)+
-(-9-6*lmMst2)*lmMt+6*pow2(lmMst2))*pow6(Mst1)-9*(2-3*lmMst2)*pow6(Mst2))-
-2*Dmglst2*Mgl*((53-18*lmMst1+24*lmMst2-24*lmMt)*pow2(Mst1)*pow4(Mst2)+
-18*((5+lmMst2*(11-2*lmMt)-
-2*lmMst1*(4+lmMst2-lmMt)-3*lmMt+
-2*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-(3-lmMst1*(25+6*lmMst2-6*lmMt)+
-6*lmMst2*(5-lmMt)-5*lmMt+6*pow2(lmMst2))*pow6(Mst1))-18*lmMst2*pow6(Mst2))-
-9*pow2(Mgl)*(2*(2-lmMst2*(7-2*lmMt)+
-2*lmMst1*(3+lmMst2-lmMt)+lmMt-
-2*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-(3+2*lmMst1*(3+lmMst2)-
-lmMst2*(5-4*lmMt)+lmMt+pow2(lmMst1)-
-pow2(lmMst2)-6*pow2(lmMt))*pow2(Mst1)*pow4(Mst2)+
-(9+lmMst1*(22+6*lmMst2-6*lmMt)-
-6*lmMst2*(4-lmMt)+2*lmMt-6*pow2(lmMst2))*pow6(Mst1)-2*(1+lmMst2)*pow6(Mst2))))/pow2(Mst1))+
-4*((18*Dmglst2*lmMst2*Mgl*pow11(Mst2)*pow4(s2t)+
-(9*s2t*pow2(Mt)*pow2(MuSUSY)*(-2*pow2(Dmglst2)*(-2*((-3*Mst2*s2t*(4-lmMst1*(1-2*lmMst2)+lmMst2-
-2*pow2(lmMst2))+
-4*Mt*(31+3*lmMst1*(2-lmMst2)-4*lmMst2+
-3*pow2(lmMst2)))*pow2(Mst2)*pow4(Mst1)+
-(-(Mst2*s2t*(10-lmMst1*(3-6*lmMst2)-
-6*pow2(lmMst2)))+
-4*Mt*(14+lmMst1*(2-lmMst2)+pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2))-
-(-3*Mst2*s2t*(9-4*lmMst1*(1-lmMst2)+4*lmMst2-
-4*pow2(lmMst2))+
-Mt*(398+lmMst1*(68-40*lmMst2)-
-52*lmMst2+40*pow2(lmMst2)))*pow6(Mst1)+
-2*(2-3*lmMst2)*s2t*pow7(Mst2))+
-pow2(Mgl)*(4*(-(Mst2*s2t*(1-13*lmMst2+lmMst1*(13+8*lmMst2)-
-pow2(lmMst1)-7*pow2(lmMst2)))+
-4*Mt*(5+6*lmMst2-lmMst1*(4+3*lmMst2)+
-3*pow2(lmMst2)))*pow2(Mst2)*pow4(Mst1)+
-2*(8*Mt*(4-lmMst1+(3-lmMst1)*lmMst2+
-pow2(lmMst2))+
-Mst2*s2t*(14-10*lmMst1+(20-6*lmMst1)*lmMst2-
-pow2(lmMst1)+7*pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2)+
-(-(Mst2*s2t*(1-50*lmMst2+lmMst1*(50+64*lmMst2)-
-20*pow2(lmMst1)-44*pow2(lmMst2)))+
-4*Mt*(21+38*lmMst2-
-10*lmMst1*(3+2*lmMst2)+20*pow2(lmMst2)))*pow6(Mst1)+4*(1+lmMst2)*s2t*pow7(Mst2))+
-4*Dmglst2*Mgl*((-(Mst2*s2t*(5-8*lmMst2+4*lmMst1*(2+lmMst2)-
-4*pow2(lmMst2)))+
-Mt*(65+lmMst1*(34-20*lmMst2)-
-26*lmMst2+20*pow2(lmMst2)))*pow6(Mst1)+
-2*((-(Mst2*s2t*(2+3*lmMst1+(-3+2*lmMst1)*lmMst2-
-2*pow2(lmMst2)))+
-Mt*(22+8*lmMst1+(-4-6*lmMst1)*lmMst2+
-6*pow2(lmMst2)))*pow2(Mst2)*pow4(Mst1)+
-(-(Mst2*s2t*(1+lmMst1+(-2+2*lmMst1)*lmMst2-
-2*pow2(lmMst2)))+
-2*Mt*(6+lmMst1*(1-lmMst2)+lmMst2+
-pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2)+
-lmMst2*s2t*pow7(Mst2)))))/pow2(Sbeta))/pow2(Mst1)-
-(Mt*MuSUSY*(54*Mt*pow2(Mst2)*pow2(s2t)*(pow2(Dmglst2)*((75+lmMst1*(10-8*lmMst2)-10*lmMst2+
-8*pow2(lmMst2))*pow4(Mst1)+
-4*((17+2*lmMst1*(2-lmMst2)-4*lmMst2+
-2*pow2(lmMst2))*pow2(Mst1)*pow2(Mst2)+
-(14+lmMst1*(2-lmMst2)+pow2(lmMst2))*pow4(Mst2)))+
-Dmglst2*Mgl*((21+lmMst1*(18-8*lmMst2)-18*lmMst2+
-8*pow2(lmMst2))*pow4(Mst1)+
-4*((5+lmMst1*(3-2*lmMst2)-3*lmMst2+
-2*pow2(lmMst2))*pow2(Mst1)*pow2(Mst2)+
-(6+lmMst1+lmMst2-lmMst1*lmMst2+
-pow2(lmMst2))*pow4(Mst2)))+
-pow2(Mgl)*((1+14*lmMst2-2*lmMst1*(7+4*lmMst2)+
-8*pow2(lmMst2))*pow4(Mst1)+
-4*((1+3*lmMst2-lmMst1*(3+2*lmMst2)+
-2*pow2(lmMst2))*pow2(Mst1)*pow2(Mst2)+
-(4+3*lmMst2-lmMst1*(1+lmMst2)+
-pow2(lmMst2))*pow4(Mst2))))+
-(-9*pow3(Mst2)*pow3(s2t)*(4*Dmglst2*Mgl*(2*((1+2*lmMst1-lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(1+lmMst1+(-1+2*lmMst1)*lmMst2-
-2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2))+
-(1+2*lmMst1-2*lmMst2)*pow6(Mst1)-
-2*lmMst2*pow6(Mst2))-
-pow2(Mgl)*(-2*(16-6*lmMst2+2*lmMst1*(8+5*lmMst2)-
-3*pow2(lmMst1)-7*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-2*(12+18*lmMst2-
-2*lmMst1*(5+3*lmMst2)-pow2(lmMst1)+
-7*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(3+lmMst1*(2-32*lmMst2)-2*lmMst2+
-16*pow2(lmMst1)+16*pow2(lmMst2))*pow6(Mst1)
-+4*(1+lmMst2)*pow6(Mst2))+
-2*pow2(Dmglst2)*((3-6*lmMst1+6*lmMst2)*pow6(Mst1)+
-2*((2+3*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(8-lmMst1*(3-6*lmMst2)+3*lmMst2-
-6*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(2-3*lmMst2)*pow6(Mst2))))-
-8*pow2(Mt)*(-(pow2(Dmglst2)*((-3*(11-18*lmMst2)*Mst2*s2t+
-2*Mt*(79-18*lmMst1*(2-lmMst2)+39*lmMst2-
-3*lmMt-18*pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2)-
-2*((9*(3-lmMst1+lmMst2)*Mst2*s2t+
-Mt*(29+18*lmMst1*(1-lmMst2)-
-3*lmMst2-15*lmMt+18*pow2(lmMst2)))*pow2(Mst2)*pow4(Mst1)+
-(9*(7-6*lmMst1+6*lmMst2)*Mst2*s2t+
-Mt*(236+339*lmMst2-
-18*lmMst1*(13+4*lmMst2-3*lmMt)+
-(-105-54*lmMst2)*lmMt+72*pow2(lmMst2)))*pow6(Mst1))+18*(2-3*lmMst2)*s2t*pow7(Mst2)))+18*Dmglst2*Mgl*(-2*((7-lmMst1*(5-lmMt)+
-lmMst2*(7-lmMt)-2*lmMt)*Mt+
-(1-lmMst1+lmMst2)*Mst2*s2t)*pow2(Mst2)*pow4(Mst1)-
-((1+2*lmMst2)*Mst2*s2t+
-2*Mt*(5-lmMst1*(1-lmMst2)+lmMst2-
-pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2)-
-(2*(1-2*lmMst1+2*lmMst2)*Mst2*s2t+
-Mt*(11-lmMst1*(32+6*lmMst2-8*lmMt)+
-8*lmMst2*(5-lmMt)-8*lmMt+6*pow2(lmMst2)))*pow6(Mst1)+2*lmMst2*s2t*pow7(Mst2))+
-9*pow2(Mgl)*(-((Mst2*s2t*(2*lmMst1*(3+lmMst2)-
-lmMst2*(4+3*lmMst2)+pow2(lmMst1))+
-4*Mt*(2+lmMst1+(-2+lmMst1)*lmMst2+lmMt-
-pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2))-
-2*((2*Mt*(4-lmMst2*(4-lmMt)+
-lmMst1*(3+2*lmMst2-lmMt)+lmMt-
-2*pow2(lmMst2))+
-Mst2*s2t*(lmMst1-lmMst2+2*lmMst1*lmMst2-
-pow2(lmMst1)-pow2(lmMst2)))*pow2(Mst2)*pow4(Mst1)+
-(Mt*(13-14*lmMst2+4*lmMst2*lmMt+
-2*(lmMst1*(6+3*lmMst2-2*lmMt)+lmMt)-
-6*pow2(lmMst2))+
-Mst2*s2t*(lmMst1-lmMst2+2*lmMst1*lmMst2-
-pow2(lmMst1)-pow2(lmMst2)))*pow6(Mst1))+
-2*(1+lmMst2)*s2t*pow7(Mst2))))/pow2(Mst1)))/Tbeta))/pow5(Mst2)-
-(12*pow2(Mt)*pow2(s2t)*(-4*pow2(Mst2)*(-3*pow2(Mgl)*pow2(Mst2)*(pow2(lmMst2)*(pow2(Mst1)-3*pow2(Mst2))+
-2*lmMst2*(pow2(Mst1)-pow2(Mst2))-
-pow2(lmMst1)*(3*pow2(Mst1)-pow2(Mst2))+
-2*pow2(Mst2)-
-2*lmMst1*((2-lmMst2)*pow2(Mst1)-
-(3+lmMst2)*pow2(Mst2)))+
-pow2(Dmglst2)*((7-6*lmMst1+24*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-6*(4-5*lmMst1+5*lmMst2)*pow4(Mst1)+
-(23-36*lmMst2)*pow4(Mst2))-
-6*Dmglst2*Mgl*(pow2(Mst1)*pow2(Mst2)-
-2*lmMst1*pow2(Mst1)*(pow2(Mst1)+pow2(Mst2))+
-2*lmMst2*pow4(Mst1)+pow4(Mst2)+
-4*lmMst2*pow4(Mst2)))+
-(24*((2-3*lmMst2)*pow2(Dmglst2)-
-(1+lmMst2)*pow2(Mgl))*pow8(Mst2))/pow2(Mst1)-
-(3*(-(pow2(MuSUSY)*(4*Dmglst2*Mgl*(2*((2-3*lmMst2+lmMst1*(3+2*lmMst2)-
-2*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-(1+lmMst1+(-2+2*lmMst1)*lmMst2-
-2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2))+
-(5-8*lmMst2+4*lmMst1*(2+lmMst2)-
-4*pow2(lmMst2))*pow6(Mst1)-
-2*lmMst2*pow6(Mst2))+
-pow2(Mgl)*(4*(1-13*lmMst2+lmMst1*(13+8*lmMst2)-
-pow2(lmMst1)-7*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)-
-2*(14+20*lmMst2-
-2*lmMst1*(5+3*lmMst2)-pow2(lmMst1)+
-7*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(1-50*lmMst2+lmMst1*(50+64*lmMst2)-
-20*pow2(lmMst1)-44*pow2(lmMst2))*pow6(Mst1)
--4*(1+lmMst2)*pow6(Mst2))+
-2*pow2(Dmglst2)*(6*(4-lmMst1*(1-2*lmMst2)+lmMst2-
-2*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-3*(9-4*lmMst1*(1-lmMst2)+4*lmMst2-
-4*pow2(lmMst2))*pow6(Mst1)+
-2*((10-lmMst1*(3-6*lmMst2)-
-6*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(2-3*lmMst2)*pow6(Mst2)))))+
-16*Dmglst2*lmMst2*Mgl*pow8(Mst2)))/pow2(Mst1)))/pow4(Mst2))/216.))/pow2(Mgl)-
-threeLoopFlag*pow2(Al4p)*((40*pow2(Mt)*pow3(Dmsqst2))/(3.*pow4(Mst2))+
-pow2(s2t)*(pow2(Mt)*((pow2(MuSUSY)*(17297/324.+(40*B4)/9.-(4*D3)/9.+(2*DN)/9.+
-(1672*lmMst1)/27.+(53*pow2(lmMst1))/9.-
-lmMst2*(3508/27.-72*lmMst1+(13*pow2(lmMst1))/3.)-
-(2*(470-147*lmMst1)*pow2(lmMst2))/9.+
-(16*pow3(lmMst1))/9.-(271*pow3(lmMst2))/9.-
-(Dmglst2*(14267/162.-(8*B4)/3.+(32*D3)/9.-
-(20*DN)/9.+(88*lmMst1)/3.-
-lmMst2*(28+(928*lmMst1)/9.-
-(64*pow2(lmMst1))/9.)-(26*pow2(lmMst1))/3.+
-(4*(281-123*lmMst1)*pow2(lmMst2))/9.+
-(428*pow3(lmMst2))/9.))/Mgl-
-(pow2(Dmglst2)*(441179/4860.-(100*B4)/9.+(112*D3)/9.-
-(62*DN)/9.+(788*lmMst1)/9.-
-(16*lmMst2*(241+171*lmMst1-18*pow2(lmMst1)))/27.-(103*pow2(lmMst1))/9.+
-(376/3.-82*lmMst1)*pow2(lmMst2)+
-(214*pow3(lmMst2))/3.))/pow2(Mgl)-
-((5*Dmsqst2*(288*(4+lmMst1-lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1141+48*lmMst1*(7-3*lmMst2)-
-264*lmMst2+144*pow2(lmMst2))*pow2(Mgl)))/(54.*pow2(Mgl))-
-(20*pow2(Dmsqst2))/(3.*pow2(Mst1))-
-pow2(Mst1)*(10552777/24300.+(76*B4)/9.-(2*DN)/9.+
-(69088*lmMst1)/405.-(1313*pow2(lmMst1))/27.-
-(4*lmMst2*(16192-26430*lmMst1+3465*pow2(lmMst1)))/405.-
-((5735-3072*lmMst1)*pow2(lmMst2))/27.-
-(62*pow3(lmMst1))/27.-
-(2086*pow3(lmMst2))/27.-
-(pow2(Dmglst2)*(14159179/91125.-(164*B4)/9.+
-(176*D3)/9.-(94*DN)/9.-
-(21449*lmMst1)/675.-
-(lmMst2*(54451+22990*lmMst1-65550*pow2(lmMst1)))/675.-(7556*pow2(lmMst1))/135.+
-(2*(6077-17130*lmMst1)*pow2(lmMst2))/135.-(10*pow3(lmMst1))/27.+
-(4240*pow3(lmMst2))/27.))/pow2(Mgl)-
-(2*Dmglst2*(2695042-40500*B4+54000*D3-33750*DN-
-326895*lmMst1-324900*pow2(lmMst1)+
-lmMst2*(-294105-1935450*lmMst1+
-938250*pow2(lmMst1))+
-(2260350-2524500*lmMst1)*pow2(lmMst2)+
-11250*pow3(lmMst1)+1575000*pow3(lmMst2)))/(30375.*Mgl)))/pow2(Mst2)+
-((5*(1925+72*lmMst1-72*lmMst2)*pow2(Dmsqst2))/324.+Dmsqst2*(817051/4050.+(622*lmMst1)/15.-
-(2*(311-10*lmMst1)*lmMst2)/15.-
-(22*pow2(lmMst1))/3.+6*pow2(lmMst2)+
-(10*Dmglst2*(23-42*lmMst1+42*lmMst2)*(Dmglst2+Mgl))/(3.*pow2(Mgl)))*pow2(Mst1)+
-(314145861731/5.00094e8+(76*B4)/9.-(2*DN)/9.+
-(6317839*lmMst1)/396900.-
-(66307*pow2(lmMst1))/315.-
-lmMst2*(4972789/396900.-(182909*lmMst1)/315.+
-(274*pow2(lmMst1))/3.)-
-(2*(58301-37135*lmMst1)*pow2(lmMst2))/315.-
-(44*pow3(lmMst1))/9.-(1256*pow3(lmMst2))/9.-
-(Dmglst2*(Dmglst2+Mgl)*(219487237477/3.750705e8-(8*B4)/3.+
-(32*D3)/9.-(20*DN)/9.-
-(20109937*lmMst1)/297675.-
-(15886*pow2(lmMst1))/945.+
-lmMst2*(5093887/297675.-(144628*lmMst1)/945.+
-(1180*pow2(lmMst1))/9.)+
-(2*(80257-138180*lmMst1)*pow2(lmMst2))/945.-(92*pow3(lmMst1))/27.+
-(4448*pow3(lmMst2))/27.))/pow2(Mgl))*pow4(Mst1))/pow4(Mst2)+S2*(921+138*lmMst1-138*lmMst2+
-(Dmglst2*(3354-28*lmMst1+28*lmMst2))/Mgl+
-((116129-350*lmMst1+350*lmMst2)*pow2(Dmglst2))/(15.*pow2(Mgl))-
-(30*Dmsqst2*(15-2*lmMst1+2*lmMst2)-
-(11243/3.+(2114*lmMst1)/3.-
-(2114*lmMst2)/3.+
-(Dmglst2*(62572/9.-344*lmMst1+344*lmMst2))/Mgl+
-((2179414/135.-(740*lmMst1)/9.+
-(740*lmMst2)/9.)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst1))/pow2(Mst2)-
-(10*(43+2*lmMst1-2*lmMst2)*pow2(Dmsqst2)+
-(10*Dmsqst2*(17-78*lmMst1+78*lmMst2)*pow2(Mst1))/3.-
-((583071+119133*lmMst1-119133*lmMst2+
-(8*Dmglst2*(93919-12981*lmMst1+12981*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow4(Mst1))/81.)/pow4(Mst2)-
-(10*Dmsqst2*pow2(Mst1)*(84*Dmsqst2*(32+3*lmMst1-3*lmMst2)-
-13*(95+102*lmMst1-102*lmMst2)*pow2(Mst1)))/(27.*pow6(Mst2)))+
-Dmsqst2*((-10*(1-2*lmMst2+
-(12*Dmglst2*(Dmglst2+Mgl))/pow2(Mgl)))/(3.*pow2(Mst1))-
-(pow2(Mst1)*(Dmsqst2*(325493/12150.-
-lmMst1*(2137/135.-8*lmMst2)+
-(2137*lmMst2)/135.-4*pow2(lmMst1)-
-4*pow2(lmMst2))-
-(593331163/2.50047e6-
-(2*lmMst1*(8263-71820*lmMst2))/3969.+
-(16526*lmMst2)/3969.-
-(520*pow2(lmMst1))/21.-(80*pow2(lmMst2))/7.)*pow2(Mst1)))/pow6(Mst2))+
-(((pow2(Dmglst2)*(852+32*lmMst1*(2-3*lmMst2)-
-358*lmMst2-497*pow2(lmMst2))+
-2*Dmglst2*Mgl*(20-2*(99+16*lmMst1)*lmMst2-
-123*pow2(lmMst2))-
-(103+186*lmMst2+
-32*lmMst1*(1+lmMst2)+91*pow2(lmMst2))*pow2(Mgl))*pow2(Mst2))/(9.*pow2(Mst1))-
-(16*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow4(Mst2))/(9.*pow4(Mst1))+
-(4*OepS2*(pow2(Mgl)*(180*pow2(Dmsqst2)*(14*pow2(Mst1)+3*pow2(Mst2))-
-60*Dmsqst2*(117*pow2(Mst1)*pow2(Mst2)+221*pow4(Mst1)+
-27*pow4(Mst2)))+
-pow2(Mst2)*(4*Dmglst2*Mgl*(2322*pow2(Mst1)*pow2(Mst2)+
-8654*pow4(Mst1)+189*pow4(Mst2))+
-pow2(Dmglst2)*(2220*pow2(Mst1)*pow2(Mst2)+
-34616*pow4(Mst1)+630*pow4(Mst2))-
-3*pow2(Mgl)*(6342*pow2(Mst1)*pow2(Mst2)+
-13237*pow4(Mst1)+1242*pow4(Mst2)))))/(2187.*pow6(Mst2)))/pow2(Mgl)))/pow2(Sbeta)+
-(5*Dmsqst2*(3*Dmsqst2*(167-5*lmMst1+5*lmMst2)*pow2(Mgl)-
-4*Dmglst2*(1081-165*lmMst1+165*lmMst2)*(Dmglst2+Mgl)*pow2(Mst2))*pow2(Sbeta)*pow4(Mst1))/(18.*pow2(Mgl)*pow6(Mst2)))+
-(5*Dmsqst2*Mt*pow2(Sbeta)*(4*Dmglst2*(1081-165*lmMst1+165*lmMst2)*(Dmglst2+Mgl)*Mt*pow2(Mst2)*pow2(Sbeta)-
-3*Dmsqst2*pow2(Mgl)*(-2*(11+39*lmMst1-39*lmMst2)*Mst2*s2t*(2-pow2(Sbeta))+
-(167-5*lmMst1+5*lmMst2)*Mt*pow2(Sbeta)))*pow4(Mst1))/(36.*pow2(Mgl)*pow6(Mst2)))-
-Mt*pow3(s2t)*(-(Mst2*((80*Dmsqst2*((2+5*lmMst1-5*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1+lmMst1-lmMst2)*pow2(Mgl)))/(3.*pow2(Mgl))-
-pow2(Mst1)*(51041/972.+(68*B4)/9.+(2*DN)/9.-
-(742*lmMst1)/9.-
-(2*lmMst2*(221+428*lmMst1-48*pow2(lmMst1)))/9.-
-(8*pow2(lmMst1))/3.+
-(4*(122-89*lmMst1)*pow2(lmMst2))/9.+
-(260*pow3(lmMst2))/9.+
-(Dmglst2*(27211/4860.+(68*B4)/9.+(2*DN)/9.-
-(1658*lmMst1)/27.-
-(2*lmMst2*(503+636*lmMst1-144*pow2(lmMst1)))/27.+(8*pow2(lmMst1))/3.-
-(4*(30+89*lmMst1)*pow2(lmMst2))/9.+
-(260*pow3(lmMst2))/9.))/Mgl+
-(pow2(Dmglst2)*(280885/1458.+(68*B4)/9.+(2*DN)/9.-
-(7894*lmMst1)/81.-(64*pow2(lmMst1))/3.+
-(2*lmMst2*(3449+72*lmMst1+432*pow2(lmMst1)))/81.-(4*(134+89*lmMst1)*pow2(lmMst2))/9.+
-(260*pow3(lmMst2))/9.))/pow2(Mgl))))+
-(-5*pow2(Dmsqst2)*pow2(Mst1)*((29+41*lmMst1-41*lmMst2)*pow2(Mst1)+
-16*(1-lmMst1+lmMst2)*pow2(Mst2))+
-(20*Dmsqst2*((40-3*lmMst1+3*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(4-lmMst1+lmMst2)*pow2(Mgl))*pow2(Mst2)*pow4(Mst1))/pow2(Mgl)+3*((40*(3+2*lmMst1-2*lmMst2)*pow2(Dmsqst2))/3.+(80*Dmsqst2*((12-5*lmMst1+5*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1-lmMst1+lmMst2)*pow2(Mgl))*pow2(Mst1))/(3.*pow2(Mgl))+
-(551987/5832.-(248*lmMst1)/27.-
-(2*lmMst2*(23+910*lmMst1-432*pow2(lmMst1)))/27.+
-(820*pow2(lmMst1))/27.+
-(8*(125-204*lmMst1)*pow2(lmMst2))/27.-
-(32*pow3(lmMst1))/27.-
-(Dmglst2*(Dmglst2+Mgl)*(31897243-6714720*lmMst2+
-38880*(37-40*lmMst2)*pow2(lmMst1)+
-3188160*pow2(lmMst2)+
-720*lmMst1*(8705-6426*lmMst2+5616*pow2(lmMst2))-
-311040*pow3(lmMst1)-2177280*pow3(lmMst2)))/(87480.*pow2(Mgl))+(800*pow3(lmMst2))/27.)*pow4(Mst1))*pow4(Mst2))/(3.*pow5(Mst2))+
-(-(Dmglst2*Mgl*(-72*(16040*OepS2-
-27*(14033+12030*lmMst1-12030*lmMst2)*S2)*pow2(Mst2)*pow4(Mst1)-
-27*pow2(Mst1)*(69997+188640*B4-3600*DN-37440*lmMst1+
-5600*OepS2+
-(146772-113400*lmMst1+113400*lmMst2)*S2+
-lmMst2*(590400-158400*lmMst1-
-11520*pow2(lmMst1))+11520*pow2(lmMst1)+
-(264960-174240*lmMst1)*pow2(lmMst2)+
-185760*pow3(lmMst2))*pow4(Mst2)-
-(2491360*OepS2-
-108*(836021+467130*lmMst1-467130*lmMst2)*S2)*pow6(Mst1)+
-622080*(1-2*lmMst2-3*pow2(lmMst2))*pow6(Mst2)))-
-pow2(Dmglst2)*(6240*(236*OepS2+27*(32-177*lmMst1+177*lmMst2)*S2)*pow2(Mst2)*pow4(Mst1)+
-9*pow2(Mst1)*(2048393-1058400*B4+23760*DN-
-1779840*lmMst1+1120*OepS2+
-(449388-22680*lmMst1+22680*lmMst2)*S2-
-69120*pow2(lmMst1)+
-lmMst2*(-1139040-155520*lmMst1+
-34560*pow2(lmMst1))+
-(-129600+937440*lmMst1)*pow2(lmMst2)-
-972000*pow3(lmMst2))*pow4(Mst2)-
-(2491360*OepS2-
-108*(836021+467130*lmMst1-467130*lmMst2)*S2)*pow6(Mst1)+1244160*(2+lmMst2-3*pow2(lmMst2))*pow6(Mst2))+15*pow2(Mgl)*(-24*(584*OepS2-81*(347+146*lmMst1-146*lmMst2)*S2)*pow2(Mst2)*pow4(Mst1)+
-27*pow2(Mst1)*(25611+5280*B4-48*DN-5952*lmMst1-
-224*OepS2+(-324+4536*lmMst1-4536*lmMst2)*S2+
-lmMst2*(34944-14016*lmMst1-768*pow2(lmMst1))-
-768*pow2(lmMst1)+(22656-5472*lmMst1)*pow2(lmMst2)+
-6240*pow3(lmMst2))*pow4(Mst2)-
-4*(3512*OepS2-27*(6121+2634*lmMst1-2634*lmMst2)*S2)*pow6(Mst1)+41472*pow2(1+lmMst2)*pow6(Mst2)))/(87480.*Mst2*pow2(Mgl)*pow2(Mst1)))+
-pow2(Mt)*pow2(s2t)*((5*Dmsqst2*(368*(Dmglst2*Mgl+pow2(Dmglst2))-
-(391+32*lmMst1-128*lmMst2)*pow2(Mgl)))/(18.*pow2(Mgl))-
-(40*pow2(Dmsqst2))/(3.*pow2(Mst1))-
-pow2(Mst2)*(1013263/3240.+(8*D3)/9.-(8*DN)/9.+
-(806*lmMst1)/27.+(32*lmMt)/3.+
-(2*lmMst2*(2267+90*lmMst1-117*pow2(lmMst1)))/27.+
-(124*pow2(lmMst1))/9.+(4*(133+8*lmMst1)*pow2(lmMst2))/9.-
-(20*Dmsqst2*(1-2*lmMst2+
-(12*Dmglst2*(Dmglst2+Mgl))/pow2(Mgl)))/(3.*pow2(Mst1))+
-(32*pow3(lmMst1))/9.+(14*pow3(lmMst2))/9.+
-(pow2(Dmglst2)*(939499/630.-(16*B4)/3.+(16*D3)/3.-
-(8*DN)/3.+(608*lmMst1)/9.-(32*lmMt)/9.+
-(2*lmMst2*(13339+1206*lmMst1-288*pow2(lmMst1)))/27.+(58*pow2(lmMst1))/3.+
-(2*(473-96*lmMst1)*pow2(lmMst2))/9.+
-(128*pow3(lmMst2))/3.))/pow2(Mgl)+
-(4*Dmglst2*(11674-120*B4+120*D3-60*DN+690*lmMst1+
-lmMst2*(17135+270*lmMst1-480*pow2(lmMst1))+
-345*pow2(lmMst1)+(4515-480*lmMst1)*pow2(lmMst2)+
-960*pow3(lmMst2)))/(135.*Mgl))-
-(pow2(Mst1)*(-112*Dmglst2*Mgl*(-8*(152101-40500*lmMt)-
-15*lmMst2*(77657-10800*lmMt)+
-225*(341-30*lmMst2)*pow2(lmMst1)-
-30*lmMst1*(34484-16260*lmMst2+5400*lmMt-
-21825*pow2(lmMst2))-365400*pow2(lmMst2)+
-2250*pow3(lmMst1)-650250*pow3(lmMst2))+
-35*pow2(Mgl)*(2367149-21600*D3+21600*DN-
-5339040*lmMst1+(-518400*lmMst1+518400*lmMst2)*lmMt-
-1564200*pow2(lmMst1)+
-lmMst2*(6278640-565200*lmMst1+37800*pow2(lmMst1))+
-(1724400-853200*lmMst1)*pow2(lmMst2)-
-234000*pow3(lmMst1)+1049400*pow3(lmMst2))+
-2*pow2(Dmglst2)*(273721621+
-420*lmMst2*(463453-3600*lmMt)+9072000*lmMt-
-6300*(289+30*lmMst2)*pow2(lmMst1)+
-840*lmMst1*(211261+90510*lmMst2+1800*lmMt-
-64575*pow2(lmMst2))-84886200*pow2(lmMst2)+
-63000*pow3(lmMst1)+54369000*pow3(lmMst2))))/(850500.*pow2(Mgl))+
-((40*(5+9*lmMst1-9*lmMst2)*pow2(Dmsqst2))/81.+
-Dmsqst2*(36449/2025.+(1468*lmMst1)/45.-
-(4*(517+180*lmMst1)*lmMst2)/45.+8*pow2(lmMst1)+
-8*pow2(lmMst2)+
-(20*Dmglst2*(113-6*lmMst1+6*lmMst2)*(Dmglst2+Mgl))/(9.*pow2(Mgl)))*pow2(Mst1)-
-(6250593568/3.1255875e7-(18614063*lmMst1)/66150.+
-lmMst2*(19407863/66150.-(25514*lmMst1)/945.-
-(286*pow2(lmMst1))/9.)-(48143*pow2(lmMst1))/945.+
-(32*lmMt*(-2*lmMst1*(1+lmMst2)+lmMst2*(2+lmMst2)+
-pow2(lmMst1)))/3.+
-(73657/945.-(2*lmMst1)/9.)*pow2(lmMst2)+
-(190*pow3(lmMst1))/27.-
-(Dmglst2*(Dmglst2+Mgl)*(3650009897+889056000*lmMt+
-1260*lmMst2*(4261807+1764000*lmMt)-
-529200*(4447+910*lmMst2-840*lmMt)*pow2(lmMst1)-
-1260*lmMst1*(8789407-420*lmMst2*(13199-1680*lmMt)+
-1764000*lmMt-2146200*pow2(lmMst2))-
-4233600*(1094-105*lmMt)*pow2(lmMst2)+
-12348000*pow3(lmMst1)-2234988000*pow3(lmMst2)))/(2.083725e7*pow2(Mgl))+(674*pow3(lmMst2))/27.)*pow4(Mst1))/pow2(Mst2)-(Dmsqst2*(22430251/6.251175e6-(470824*lmMst1)/19845.+
-(4*(117706+34965*lmMst1)*lmMst2)/19845.-
-(74*pow2(lmMst1))/21.-(74*pow2(lmMst2))/21.-
-(160*Dmglst2*(41-12*lmMst1+12*lmMst2)*(Dmglst2+Mgl))/(27.*pow2(Mgl)))*pow4(Mst1))/pow4(Mst2)-
-pow2(MuSUSY)*(17297/324.+(40*B4)/9.-(4*D3)/9.+(2*DN)/9.+
-(1672*lmMst1)/27.+(53*pow2(lmMst1))/9.-
-lmMst2*(3508/27.-72*lmMst1+(13*pow2(lmMst1))/3.)-
-(940/9.-(98*lmMst1)/3.)*pow2(lmMst2)+(16*pow3(lmMst1))/9.-
-(271*pow3(lmMst2))/9.-
-(pow2(Dmglst2)*(441179/4860.-(100*B4)/9.+(112*D3)/9.-
-(62*DN)/9.+(788*lmMst1)/9.-
-(16*lmMst2*(241+171*lmMst1-18*pow2(lmMst1)))/27.-
-(103*pow2(lmMst1))/9.+
-(376/3.-82*lmMst1)*pow2(lmMst2)+(214*pow3(lmMst2))/3.))/pow2(Mgl)-(Dmglst2*(14267-432*B4+576*D3-360*DN+
-4752*lmMst1-
-72*lmMst2*(63+232*lmMst1-16*pow2(lmMst1))-
-1404*pow2(lmMst1)+72*(281-123*lmMst1)*pow2(lmMst2)+
-7704*pow3(lmMst2)))/(162.*Mgl)-
-((5*Dmsqst2*(288*(4+lmMst1-lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1141+48*lmMst1*(7-3*lmMst2)-264*lmMst2+
-144*pow2(lmMst2))*pow2(Mgl)))/(54.*pow2(Mgl))-
-(20*pow2(Dmsqst2))/(3.*pow2(Mst1))-
-pow2(Mst1)*(10552777/24300.+(76*B4)/9.-(2*DN)/9.+
-(69088*lmMst1)/405.-(1313*pow2(lmMst1))/27.-
-(4*lmMst2*(16192-26430*lmMst1+3465*pow2(lmMst1)))/405.-((5735-3072*lmMst1)*pow2(lmMst2))/27.-
-(62*pow3(lmMst1))/27.-(2086*pow3(lmMst2))/27.-
-(pow2(Dmglst2)*(14159179/91125.-(164*B4)/9.+(176*D3)/9.-
-(94*DN)/9.-(21449*lmMst1)/675.-
-(lmMst2*(54451+22990*lmMst1-65550*pow2(lmMst1)))/675.-(7556*pow2(lmMst1))/135.+
-(2*(6077-17130*lmMst1)*pow2(lmMst2))/135.-
-(10*pow3(lmMst1))/27.+(4240*pow3(lmMst2))/27.))/pow2(Mgl)-
-(2*Dmglst2*(2695042-40500*B4+54000*D3-33750*DN-
-326895*lmMst1-324900*pow2(lmMst1)+
-lmMst2*(-294105-1935450*lmMst1+938250*pow2(lmMst1))
-+(2260350-2524500*lmMst1)*pow2(lmMst2)+11250*pow3(lmMst1)+
-1575000*pow3(lmMst2)))/(30375.*Mgl)))/pow2(Mst2)+
-((5*(1925+72*lmMst1-72*lmMst2)*pow2(Dmsqst2))/324.+
-Dmsqst2*(817051/4050.+(622*lmMst1)/15.-
-(622/15.-(4*lmMst1)/3.)*lmMst2-
-(22*pow2(lmMst1))/3.+6*pow2(lmMst2)+
-(10*Dmglst2*(23-42*lmMst1+42*lmMst2)*(Dmglst2+Mgl))/(3.*pow2(Mgl)))*pow2(Mst1)+
-(314145861731/5.00094e8+(76*B4)/9.-(2*DN)/9.+
-(6317839*lmMst1)/396900.-(66307*pow2(lmMst1))/315.-
-lmMst2*(4972789/396900.-(182909*lmMst1)/315.+
-(274*pow2(lmMst1))/3.)-
-(2*(58301-37135*lmMst1)*pow2(lmMst2))/315.-
-(44*pow3(lmMst1))/9.-(1256*pow3(lmMst2))/9.-
-(Dmglst2*(Dmglst2+Mgl)*(219487237477/3.750705e8-(8*B4)/3.+
-(32*D3)/9.-(20*DN)/9.-
-(20109937*lmMst1)/297675.-
-(15886*pow2(lmMst1))/945.+
-lmMst2*(5093887/297675.-(144628*lmMst1)/945.+
-(1180*pow2(lmMst1))/9.)+
-(160514/945.-(2632*lmMst1)/9.)*pow2(lmMst2)-
-(92*pow3(lmMst1))/27.+(4448*pow3(lmMst2))/27.))/pow2(Mgl))*pow4(Mst1))/pow4(Mst2)+
-(((pow2(Dmglst2)*(852+32*lmMst1*(2-3*lmMst2)-358*lmMst2-
-497*pow2(lmMst2))+
-2*Dmglst2*Mgl*(20-2*(99+16*lmMst1)*lmMst2-
-123*pow2(lmMst2))-
-(103+186*lmMst2+32*lmMst1*(1+lmMst2)+
-91*pow2(lmMst2))*pow2(Mgl))*pow2(Mst2))/(9.*pow2(Mst1))-
-(16*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow4(Mst2))/(9.*pow4(Mst1)))/pow2(Mgl)+
-Dmsqst2*((-10*(1-2*lmMst2+
-(12*Dmglst2*(Dmglst2+Mgl))/pow2(Mgl)))/(3.*pow2(Mst1))-
-(pow2(Mst1)*(Dmsqst2*(325493/12150.-lmMst1*(2137/135.-8*lmMst2)+
-(2137*lmMst2)/135.-4*pow2(lmMst1)-
-4*pow2(lmMst2))-
-(593331163/2.50047e6-(16526*lmMst1)/3969.+
-(2*(8263+71820*lmMst1)*lmMst2)/3969.-
-(520*pow2(lmMst1))/21.-(80*pow2(lmMst2))/7.)*pow2(Mst1)))/pow6(Mst2)))-
-S2*(30*Dmsqst2*(9+2*lmMst1-2*lmMst2)+
-((9191+6290*lmMst1-6290*lmMst2-
-(24*Dmglst2*(31+250*lmMst1-250*lmMst2))/Mgl-
-(15*(84766/105.+796*lmMst1-796*lmMst2)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst1))/15.-
-(423/10.-159*lmMst1+159*lmMst2+
-(2532*Dmglst2)/(5.*Mgl)+
-((20862/35.+84*lmMst1-84*lmMst2)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst2)-
-(10*(1+2*lmMst1-2*lmMst2)*pow2(Dmsqst2)-
-(20*Dmsqst2*(23+6*lmMst1-6*lmMst2)*pow2(Mst1))/3.-
-(399127/270.+(6857*lmMst1)/9.-(6857*lmMst2)/9.-
-(4*Dmglst2*(28283+23070*lmMst1-23070*lmMst2)*(Dmglst2+Mgl))/(45.*pow2(Mgl)))*pow4(Mst1))/pow2(Mst2)+(40*Dmsqst2*(35+12*lmMst1-12*lmMst2)*pow4(Mst1))/(27.*pow4(Mst2))+
-pow2(MuSUSY)*(921+138*lmMst1-138*lmMst2+
-(Dmglst2*(3354-28*lmMst1+28*lmMst2))/Mgl+
-((116129-350*lmMst1+350*lmMst2)*pow2(Dmglst2))/(15.*pow2(Mgl))-
-(Dmsqst2*(450-60*lmMst1+60*lmMst2)-
-((60*Dmglst2*(15643-774*lmMst1+774*lmMst2)*Mgl+
-2*(1089707-5550*lmMst1+5550*lmMst2)*pow2(Dmglst2)+
-45*(11243+2114*lmMst1-2114*lmMst2)*pow2(Mgl))*pow2(Mst1))/(135.*pow2(Mgl)))/pow2(Mst2)-
-(10*(43+2*lmMst1-2*lmMst2)*pow2(Dmsqst2)+
-Dmsqst2*(170/3.-260*lmMst1+260*lmMst2)*pow2(Mst1)-
-((583071+119133*lmMst1-119133*lmMst2+
-(8*Dmglst2*(93919-12981*lmMst1+12981*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow4(Mst1))/81.)/pow4(Mst2)-(10*Dmsqst2*pow2(Mst1)*(84*Dmsqst2*(32+3*lmMst1-3*lmMst2)-
-13*(95+102*lmMst1-102*lmMst2)*pow2(Mst1)))/(27.*pow6(Mst2)))-
-(10*pow2(Dmsqst2)*pow2(Mst1)*((209+90*lmMst1-90*lmMst2)*pow2(Mst1)+
-3*(71+30*lmMst1-30*lmMst2)*pow2(Mst2)))/(27.*pow6(Mst2)))-
-(pow2(Dmsqst2)*pow2(Mst1)*(1125*(44193+lmMst1*(65324-31752*lmMst2)-
-65324*lmMst2+15876*pow2(lmMst1)+15876*pow2(lmMst2))*pow2(Mst1)+686*(121757+90*lmMst1*(887-630*lmMst2)-79830*lmMst2+
-28350*pow2(lmMst1)+28350*pow2(lmMst2))*pow2(Mst2)))/(4.16745e6*pow6(Mst2))+
-((-2*(pow2(Dmglst2)*(820+32*lmMst1*(2-3*lmMst2)-
-166*lmMst2-337*pow2(lmMst2))+
-2*Dmglst2*Mgl*(52-2*(67+16*lmMst1)*lmMst2-91*pow2(lmMst2))-
-(87+154*lmMst2+32*lmMst1*(1+lmMst2)+
-75*pow2(lmMst2))*pow2(Mgl))*pow4(Mst2))/(9.*pow2(Mst1))+
-(32*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow6(Mst2))/(9.*pow4(Mst1)))/pow2(Mgl)-(4*OepS2*(pow2(Mgl)*(180*pow2(Dmsqst2)*(3*pow2(Mst2)*(pow2(Mst2)+pow2(MuSUSY))+
-pow2(Mst1)*(5*pow2(Mst2)+14*pow2(MuSUSY))+
-5*pow4(Mst1))-
-60*Dmsqst2*((8*pow2(Mst2)+221*pow2(MuSUSY))*pow4(Mst1)+
-27*(pow2(Mst2)+pow2(MuSUSY))*pow4(Mst2)+
-9*pow2(Mst1)*(13*pow2(Mst2)*pow2(MuSUSY)+2*pow4(Mst2))))+
-pow2(Mst2)*(4*Dmglst2*Mgl*(2*(6921*pow2(Mst2)+4327*pow2(MuSUSY))*pow4(Mst1)+
-189*pow2(MuSUSY)*pow4(Mst2)+
-54*pow2(Mst1)*(43*pow2(Mst2)*pow2(MuSUSY)+50*pow4(Mst2)))+
-pow2(Dmglst2)*(8*(6921*pow2(Mst2)+4327*pow2(MuSUSY))*pow4(Mst1)+
-126*(18*pow2(Mst2)+5*pow2(MuSUSY))*pow4(Mst2)+
-12*pow2(Mst1)*(185*pow2(Mst2)*pow2(MuSUSY)+1791*pow4(Mst2)))-
-3*pow2(Mgl)*((6857*pow2(Mst2)+13237*pow2(MuSUSY))*pow4(Mst1)+
-6*pow2(Mst1)*(1057*pow2(Mst2)*pow2(MuSUSY)+629*pow4(Mst2))+
-27*(46*pow2(MuSUSY)*pow4(Mst2)+53*pow6(Mst2))))))/(2187.*pow2(Mgl)*pow6(Mst2)))-
-pow4(Mt)*(389597/810.-(640*lmMst1)/9.-
-(4*lmMst2*(553+1224*lmMst1-63*pow2(lmMst1)))/81.-
-(392*pow2(lmMst1))/9.+(32*(121-18*lmMst1)*pow2(lmMst2))/27.+
-(4*lmMt*(926-749*lmMst2+6*lmMst1*(27+32*lmMst2)+
-9*pow2(lmMst1)+57*pow2(lmMst2)))/27.+
-(4*(12-lmMst1-55*lmMst2)*pow2(lmMt))/3.-
-(68*pow3(lmMst1))/9.+
-(pow2(Dmglst2)*(13292051-lmMst2*(606612-493920*lmMt)+
-3597840*lmMt-18900*pow2(lmMst1)-223920*pow2(lmMst2)+
-10800*lmMst1*(85-8*lmMst2-16*lmMt+48*pow2(lmMst2))+
-313200*pow2(lmMt)-518400*pow3(lmMst2)))/(6075.*pow2(Mgl))+
-(4*Dmglst2*(773533-35*lmMst2*(6569-2220*lmMt)+131775*lmMt-
-4410*pow2(lmMst1)-199920*pow2(lmMst2)+
-5040*lmMst1*(13+28*lmMst2-8*lmMt+8*pow2(lmMst2))+
-63000*pow2(lmMt)-40320*pow3(lmMst2)))/(2835.*Mgl)+
-(8*pow3(lmMst2))/9.+(184*pow3(lmMt))/3.-
-((5*pow2(Dmsqst2)*(3095-1224*lmMst1+
-6*lmMst2*(365-36*lmMt)-966*lmMt+
-108*pow2(lmMst2)+108*pow2(lmMt)))/81.+
-(4*Dmsqst2*(91321-51510*lmMst1+
-30*(3067-120*lmMst1)*lmMst2-
-4500*(9-lmMst1+lmMst2)*lmMt-450*pow2(lmMst1)+
-4050*pow2(lmMst2)-
-(2250*Dmglst2*(Dmglst2+Mgl)*(401+lmMst2*(274-4*lmMt)-
-2*lmMst1*(71+2*lmMst2-2*lmMt)-132*lmMt+
-4*pow2(lmMst2)))/pow2(Mgl))*pow2(Mst1))/675.-
-(187545955063/1.250235e8+(43574647*lmMst1)/99225.-
-(139432*pow2(lmMst1))/945.-
-lmMst2*(71170222/99225.-(49754*lmMst1)/945.+
-(376*pow2(lmMst1))/9.)+
-(2*(34339+46620*lmMst1)*pow2(lmMst2))/945.+
-(lmMt*(3155+1418*lmMst2-
-2*lmMst1*(513+572*lmMst2)+312*pow2(lmMst1)+
-832*pow2(lmMst2)))/9.-
-(64/3.-64*lmMst1+64*lmMst2)*pow2(lmMt)+
-(64*pow3(lmMst1))/27.-(1600*pow3(lmMst2))/27.-
-(Dmglst2*(Dmglst2+Mgl)*(54946675289/1.8753525e7+(55510684*lmMst1)/59535.-
-(126272*pow2(lmMst1))/189.-
-(4*lmMst2*(42300121+12578580*lmMst1+
-2487240*pow2(lmMst1)))/59535.+
-(32*(10166-693*lmMst1)*pow2(lmMst2))/189.+
-(8*lmMt*(5695+1974*lmMst2-
-12*lmMst1*(163+47*lmMst2)+
-468*pow2(lmMst1)+96*pow2(lmMst2)))/27.-
-(128*(5-6*lmMst1+6*lmMst2)*pow2(lmMt))/3.+
-(256*pow3(lmMst1))/27.+(7424*pow3(lmMst2))/27.))/pow2(Mgl))*pow4(Mst1))/pow4(Mst2)-
-S2*(654/5.+84*lmMst1-84*lmMst2-
-(Dmglst2*(6372/35.-112*lmMst1+112*lmMst2))/Mgl+
-((7738/15.-(728*lmMst1)/3.+(728*lmMst2)/3.)*pow2(Dmglst2))/pow2(Mgl)+(8*(363426+183960*lmMst1-183960*lmMst2+
-(Dmglst2*(1000621+1172220*lmMst1-1172220*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow4(Mst1))/(2835.*pow4(Mst2))+
-((2*(690*Dmglst2*(115+588*lmMst1-588*lmMst2)*Mgl+
-(128797-1975260*lmMst1+1975260*lmMst2)*pow2(Dmglst2)+
-63*(4163+2090*lmMst1-2090*lmMst2)*pow2(Mgl))*pow2(Mst1))/(945.*pow2(Mst2))-
-(4*pow2(MuSUSY)*(pow2(Mst2)*(30*Dmglst2*Mgl*((65+14*lmMst1-14*lmMst2)*pow2(Mst1)+
-48*pow2(Mst2))+
-pow2(Dmglst2)*((5361+350*lmMst1-350*lmMst2)*pow2(Mst1)+
-2196*pow2(Mst2)))+
-5*pow2(Mgl)*(9*(43-14*lmMst1+14*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(57-545*lmMst1+545*lmMst2)*pow4(Mst1)+
-216*pow4(Mst2))))/(15.*pow6(Mst2)))/pow2(Mgl))+
-Dmsqst2*((40*(12*(Dmglst2*Mgl+pow2(Dmglst2))+
-(1-2*lmMst2)*pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1))-
-(2*pow2(Mst1)*(343*Dmsqst2*(176473-63000*lmMt+30*lmMst2*(3871+150*lmMt)-
-30*lmMst1*(1771-90*lmMst2+150*lmMt)+
-900*pow2(lmMst1)-3600*pow2(lmMst2))+
-4*(26331136-
-105*lmMst1*(236317+35070*lmMst2-36750*lmMt)+
-210*lmMst2*(175121-18375*lmMt)-11962125*lmMt-
-88200*pow2(lmMst1)+3770550*pow2(lmMst2))*pow2(Mst1)))/(231525.*pow6(Mst2)))+
-(((-4*(pow2(Dmglst2)*(788+32*lmMst1*(2-3*lmMst2)+26*lmMst2-
-177*pow2(lmMst2))+
-2*Dmglst2*Mgl*(84-(70+32*lmMst1)*lmMst2-59*pow2(lmMst2))
--(71+122*lmMst2+32*lmMst1*(1+lmMst2)+59*pow2(lmMst2))*pow2(Mgl))*pow2(Mst2))/9.-
-(34020000*pow2(Dmsqst2)*pow2(Mgl)-
-630000*Dmsqst2*((2954-864*lmMst1+1713*lmMst2-849*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))-
-3*(103-42*lmMst1-78*lmMt+
-6*lmMst2*(23+3*lmMt)-9*pow2(lmMst2)-
-9*pow2(lmMt))*pow2(Mgl))*pow2(Mst1)+
-(-12*Dmglst2*Mgl*(98884301-57865500*lmMt+
-12600*(1213+285*lmMst2-225*lmMt)*pow2(lmMst1)-
-18900*(5953-310*lmMt)*pow2(lmMst2)+
-13608000*pow2(lmMt)+
-1260*(lmMst1*(28194+lmMst2*(61415-2400*lmMt)-
-1075*lmMt+13800*pow2(lmMst2)-
-7200*pow2(lmMt))+
-lmMst2*(8581+6025*lmMt+7200*pow2(lmMt)))
--252000*pow3(lmMst1)-20727000*pow3(lmMst2))-
-105*pow2(Mgl)*(7319011+3223800*lmMt-
-1800*(391+114*lmMst2-90*lmMt)*pow2(lmMst1)+
-3600*(568+99*lmMt)*pow2(lmMst2)-
-259200*pow2(lmMt)-
-120*lmMst2*(22352-2835*lmMt+4320*pow2(lmMt))+
-120*lmMst1*(4217+1215*lmMt-
-15*lmMst2*(871+288*lmMt)+
-3240*pow2(lmMst2)+4320*pow2(lmMt))+
-14400*pow3(lmMst1)-198000*pow3(lmMst2))+
-2*pow2(Dmglst2)*(55610713-1448685000*lmMt+
-37800*(1783+285*lmMst2-225*lmMt)*pow2(lmMst1)-
-18900*(43477-930*lmMt)*pow2(lmMst2)-
-1260*lmMst2*(297379-133245*lmMt-21600*pow2(lmMt))+
-3780*lmMst1*(75993+15*lmMst2*(9947-160*lmMt)-
-19265*lmMt-5400*pow2(lmMst2)-
-7200*pow2(lmMt))+95256000*pow2(lmMt)-
-756000*pow3(lmMst1)+10395000*pow3(lmMst2)))*pow4(Mst1))/(1.27575e6*pow2(Mst2)))/pow2(Mst1)+
-(64*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow4(Mst2))/(9.*pow4(Mst1))+
-(-(pow2(MuSUSY)*(pow2(Mst2)*(60*Dmglst2*Mgl*(72*pow2(Mst2)*(180-2*B4+2*D3-DN+16*lmMst1+
-144*lmMst2+(32-16*lmMst1)*pow2(lmMst2)+
-16*pow3(lmMst2))+
-pow2(Mst1)*(28405-288*B4+288*D3-144*DN+
-5472*lmMst1+(25632-576*lmMst1)*lmMst2+
-(-1152+576*lmMst1-576*lmMst2)*lmMt+
-(5184-4608*lmMst1)*pow2(lmMst2)+
-4608*pow3(lmMst2)))+
-2*pow2(Dmglst2)*(24*pow2(Mst2)*(50134-270*B4+270*D3-135*DN+
-2160*lmMst1+(32520+2880*lmMst1)*lmMst2-
-120*lmMt+
-(1440-2160*lmMst1)*pow2(lmMst2)+
-2160*pow3(lmMst2))+
-pow2(Mst1)*(3051661-12960*B4+12960*D3-6480*DN+
-304320*lmMst1+
-(2137920+273600*lmMst1)*lmMst2+
-(11520+2880*lmMst1-2880*lmMst2)*lmMt+
-(-66240-207360*lmMst1)*pow2(lmMst2)+
-207360*pow3(lmMst2))))+
-5*pow2(Mgl)*(18*pow2(Mst1)*pow2(Mst2)*(10667-96*B4+96*D3-48*DN-3072*lmMst1+
-(9600-3456*lmMst1)*lmMst2+
-(384-384*lmMst1+384*lmMst2)*lmMt+
-(4992-1536*lmMst1)*pow2(lmMst2)+
-1536*pow3(lmMst2))+
-(383185-2592*B4+2592*D3-1296*DN-
-187704*lmMst1+
-lmMst2*(374328-136080*lmMst1-5616*pow2(lmMst1))
--7992*pow2(lmMst1)+(185544-53136*lmMst1)*pow2(lmMst2)+
-lmMt*(10368-20736*lmMst1+
-(20736-6912*lmMst1)*lmMst2+
-3456*pow2(lmMst1)+3456*pow2(lmMst2))+
-720*pow3(lmMst1)+58032*pow3(lmMst2))*pow4(Mst1)+
-144*(436-6*B4+6*D3-3*DN-48*lmMst1+
-(408-96*lmMst1)*lmMst2+24*lmMt+
-(192-48*lmMst1)*pow2(lmMst2)+
-48*pow3(lmMst2))*pow4(Mst2))))/2430.+
-(16*OepS2*(pow2(Mst2)*(2*pow2(Dmglst2)*(-3*pow2(Mst1)*(4703*pow2(Mst2)+105*pow2(MuSUSY))+
-11164*pow4(Mst1)-819*pow4(Mst2))+
-4*Dmglst2*Mgl*(63*pow2(Mst1)*(23*pow2(Mst2)-3*pow2(MuSUSY))+
-5582*pow4(Mst1)+189*pow4(Mst2)))+
-3*pow2(Mgl)*((1168*pow2(Mst2)+1635*pow2(MuSUSY))*pow4(Mst1)+
-pow2(Mst1)*(378*pow2(Mst2)*pow2(MuSUSY)+627*pow4(Mst2))+
-189*pow6(Mst2))))/2187.)/pow6(Mst2))/pow2(Mgl))-
-(pow2(MuSUSY)*pow3(Mt)*((18*Mt*(pow2(Mst2)*(60*Dmglst2*Mgl*(72*pow2(Mst2)*(180-2*B4+2*D3-DN+16*lmMst1+
-144*lmMst2-216*S2+
-(32-16*lmMst1)*pow2(lmMst2)+
-16*pow3(lmMst2))+
-pow2(Mst1)*(28405-288*B4+288*D3-144*DN+
-5472*lmMst1+(25632-576*lmMst1)*lmMst2+
-(-1152+576*lmMst1-576*lmMst2)*lmMt+
-224*OepS2+
-(-21060-4536*lmMst1+4536*lmMst2)*S2+
-(5184-4608*lmMst1)*pow2(lmMst2)+
-4608*pow3(lmMst2)))+
-2*pow2(Dmglst2)*(24*pow2(Mst2)*(50134-270*B4+270*D3-135*DN+
-2160*lmMst1+(32520+2880*lmMst1)*lmMst2-
-120*lmMt-29646*S2+
-(1440-2160*lmMst1)*pow2(lmMst2)+
-2160*pow3(lmMst2))+
-pow2(Mst1)*(3051661-12960*B4+12960*D3-6480*DN+
-304320*lmMst1+
-(2137920+273600*lmMst1)*lmMst2+
-(11520+2880*lmMst1-2880*lmMst2)*lmMt+
-5600*OepS2+
-(-1736964-113400*lmMst1+113400*lmMst2)*S2+
-(-66240-207360*lmMst1)*pow2(lmMst2)+
-207360*pow3(lmMst2))))+
-5*pow2(Mgl)*(18*pow2(Mst1)*pow2(Mst2)*(10667-96*B4+96*D3-48*DN-3072*lmMst1+
-(9600-3456*lmMst1)*lmMst2+
-(384-384*lmMst1+384*lmMst2)*lmMt-224*OepS2+
-(-13932+4536*lmMst1-4536*lmMst2)*S2+
-(4992-1536*lmMst1)*pow2(lmMst2)+
-1536*pow3(lmMst2))+
-(383185-2592*B4+2592*D3-1296*DN-
-187704*lmMst1-17440*OepS2+
-(-36936+353160*lmMst1-353160*lmMst2)*S2+
-lmMst2*(374328-136080*lmMst1-
-5616*pow2(lmMst1))-7992*pow2(lmMst1)+
-(185544-53136*lmMst1)*pow2(lmMst2)+
-lmMt*(10368-20736*lmMst1+
-(20736-6912*lmMst1)*lmMst2+
-3456*pow2(lmMst1)+3456*pow2(lmMst2))+
-720*pow3(lmMst1)+58032*pow3(lmMst2))*pow4(Mst1)+
-144*(436-6*B4+6*D3-3*DN-48*lmMst1+
-(408-96*lmMst1)*lmMst2+24*lmMt-972*S2+
-(192-48*lmMst1)*pow2(lmMst2)+48*pow3(lmMst2))*pow4(Mst2))))/pow2(Mgl)+
-Mst2*s2t*(43740*((80*(3+2*lmMst1-2*lmMst2)*pow2(Dmsqst2))/3.+(160*Dmsqst2*(1+3*lmMst1-3*lmMst2+
-(Dmglst2*(8-15*lmMst1+15*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow2(Mst1))/3.+
-((1702429+257904*B4-648*DN-748656*lmMst1+
-41904*pow2(lmMst1)+
-216*lmMst2*(5971-6106*lmMst1+576*pow2(lmMst1))+
-41904*(34-15*lmMst1)*pow2(lmMst2)-
-3456*pow3(lmMst1)-
-(1458*Dmglst2*(Dmglst2+Mgl)*(2773621/4374.-(3416*B4)/9.+(52*DN)/9.+
-(111356*lmMst1)/243.+(8*pow2(lmMst1))/9.-
-lmMst2*(294416/243.-376*lmMst1+
-(512*pow2(lmMst1))/9.)-
-(344*(14-15*lmMst1)*pow2(lmMst2))/9.-
-(64*pow3(lmMst1))/9.-(1528*pow3(lmMst2))/3.))/pow2(Mgl)+507600*pow3(lmMst2))*pow4(Mst1))/1458.)+
-(6*pow2(Mst2)*(-(pow2(Dmglst2)*(388800*Dmsqst2*(2+5*lmMst1-5*lmMst2)+
-pow2(Mst1)*(4580489-3285360*B4+68040*DN-
-3918600*lmMst1+
-lmMst2*(-4036680-492480*lmMst1-51840*pow2(lmMst1))
-+103680*pow2(lmMst1)+(-1386720+3389040*lmMst1)*pow2(lmMst2)-
-3337200*pow3(lmMst2))))+
-60*pow2(Mgl)*(6480*Dmsqst2*(1+lmMst1-lmMst2)+
-pow2(Mst1)*(75569+13716*B4-54*DN-33426*lmMst1-
-2376*pow2(lmMst1)+
-lmMst2*(77058-54648*lmMst1+864*pow2(lmMst1))+
-(69336-21924*lmMst1)*pow2(lmMst2)+
-21060*pow3(lmMst2)))-
-6*Dmglst2*Mgl*(64800*Dmsqst2*(2+5*lmMst1-5*lmMst2)-
-pow2(Mst1)*(66761+301320*B4-4860*DN-205380*lmMst1+
-23760*pow2(lmMst1)+
-lmMst2*(898740-352080*lmMst1+8640*pow2(lmMst1))+
-(520560-357480*lmMst1)*pow2(lmMst2)+
-348840*pow3(lmMst2))))+
-(-(Dmglst2*Mgl*(-288*(5060*OepS2-
-27*(2489+3795*lmMst1-3795*lmMst2)*S2)*pow2(Mst2)*pow4(Mst1)-
-27*pow2(Mst1)*(23917+188640*B4-3600*DN-37440*lmMst1+
-5600*OepS2+
-(146772-113400*lmMst1+113400*lmMst2)*S2+
-lmMst2*(682560-158400*lmMst1-11520*pow2(lmMst1))
-+11520*pow2(lmMst1)+(403200-174240*lmMst1)*pow2(lmMst2)+
-185760*pow3(lmMst2))*pow4(Mst2)-
-40*(131368*OepS2-
-27*(123113+98526*lmMst1-98526*lmMst2)*S2)*pow6(Mst1)+
-622080*(1-2*lmMst2-3*pow2(lmMst2))*pow6(Mst2)))-
-pow2(Dmglst2)*(24*(62200*OepS2+
-27*(20803-46650*lmMst1+46650*lmMst2)*S2)*pow2(Mst2)*pow4(Mst1)+
-9*pow2(Mst1)*(2601353-1058400*B4+23760*DN-
-1779840*lmMst1+1120*OepS2+
-(449388-22680*lmMst1+22680*lmMst2)*S2-
-69120*pow2(lmMst1)+
-lmMst2*(-862560-155520*lmMst1+
-34560*pow2(lmMst1))+
-(-959040+937440*lmMst1)*pow2(lmMst2)-
-972000*pow3(lmMst2))*pow4(Mst2)-
-40*(131368*OepS2-
-27*(123113+98526*lmMst1-98526*lmMst2)*S2)*pow6(Mst1)+
-1244160*(2+lmMst2-3*pow2(lmMst2))*pow6(Mst2))
-+15*pow2(Mgl)*(-48*(544*OepS2-81*(169+136*lmMst1-136*lmMst2)*S2)*pow2(Mst2)*pow4(Mst1)+
-27*pow2(Mst1)*(28683+5280*B4-48*DN-5952*lmMst1-
-224*OepS2+
-(-324+4536*lmMst1-4536*lmMst2)*S2+
-lmMst2*(41088-14016*lmMst1-768*pow2(lmMst1))-
-768*pow2(lmMst1)+
-(25728-5472*lmMst1)*pow2(lmMst2)+
-6240*pow3(lmMst2))*pow4(Mst2)-
-8*(7528*OepS2-
-27*(9185+5646*lmMst1-5646*lmMst2)*S2)*pow6(Mst1)+41472*pow2(1+lmMst2)*pow6(Mst2)))/pow2(Mst1))/pow2(Mgl))))/(43740.*pow2(Sbeta)*pow6(Mst2))-
-(s2t*pow3(Mt)*((80*(11-6*lmMst1+12*lmMst2-6*lmMt)*pow2(Dmsqst2)*pow2(Mst1))/3.-
-(40*Dmsqst2*((Dmglst2*Mgl+pow2(Dmglst2))*(465+374*lmMst2-
-4*lmMst1*(52+3*lmMst2-3*lmMt)+
-(-166-12*lmMst2)*lmMt+12*pow2(lmMst2))-
-(35+50*lmMst2-4*lmMst1*(8+lmMst2-lmMt)+
-(-18-4*lmMst2)*lmMt+4*pow2(lmMst2))*pow2(Mgl))*pow4(Mst1))/(3.*pow2(Mgl))+
-pow2(Mst2)*((20*(15-16*lmMst1+30*lmMst2-14*lmMt)*pow2(Dmsqst2))/3.-
-(320*Dmsqst2*(4*(7-3*lmMst1+6*lmMst2-3*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(3-2*lmMst1+4*lmMst2-2*lmMt)*pow2(Mgl))*pow2(Mst1))/(3.*pow2(Mgl))-
-(2*(6050721-1364040*lmMst1-
-3240*lmMst2*(167+413*lmMst1-6*pow2(lmMst1))-
-511920*pow2(lmMst1)+
-9720*lmMt*(34+22*lmMst2-
-4*lmMst1*(5+3*lmMst2)+13*pow2(lmMst1)-
-pow2(lmMst2))+
-3240*(565-129*lmMst1)*pow2(lmMst2)+
-233280*(lmMst1-lmMst2)*pow2(lmMt)+
-3240*pow3(lmMst1)+395280*pow3(lmMst2)-
-(Dmglst2*(Dmglst2+Mgl)*(20964397+4563540*lmMt-
-9720*(266+74*lmMst2-55*lmMt)*pow2(lmMst1)+
-3240*(1493+39*lmMt)*pow2(lmMst2)-
-180*lmMst1*(32857+11844*lmMt+
-18*lmMst2*(485+204*lmMt)-
-1674*pow2(lmMst2)-3888*pow2(lmMt))+
-1440*lmMst2*(1181+1332*lmMt-486*pow2(lmMt))-
-466560*pow2(lmMt)+9720*pow3(lmMst1)+
-408240*pow3(lmMst2)))/pow2(Mgl))*pow4(Mst1))/10935.)-pow2(MuSUSY)*(-(pow2(Mst2)*((160*Dmsqst2*((2+5*lmMst1-5*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1+lmMst1-lmMst2)*pow2(Mgl)))/(3.*pow2(Mgl))
--pow2(Mst1)*(151138/243.+(1016*B4)/9.-(4*DN)/9.-
-(2476*lmMst1)/9.-(176*pow2(lmMst1))/9.+
-(4*lmMst2*(1427-1012*lmMst1+16*pow2(lmMst1)))/9.+(8*(642-203*lmMst1)*pow2(lmMst2))/9.-
-(pow2(Dmglst2)*(4580489/7290.-(1352*B4)/3.+(28*DN)/3.-
-(43540*lmMst1)/81.+(128*pow2(lmMst1))/9.-
-(4*lmMst2*(11213+1368*lmMst1+144*pow2(lmMst1)))/81.-(8*(214-523*lmMst1)*pow2(lmMst2))/9.-(4120*pow3(lmMst2))/9.))/pow2(Mgl)+(520*pow3(lmMst2))/3.+
-(Dmglst2*(248*B4-4*DN+
-(66761+898740*lmMst2+
-2160*(11+4*lmMst2)*pow2(lmMst1)+
-520560*pow2(lmMst2)-
-180*lmMst1*(1141+1956*lmMst2+1986*pow2(lmMst2))+
-348840*pow3(lmMst2))/1215.))/Mgl)))+
-((1702429+257904*B4-648*DN-748656*lmMst1+
-41904*pow2(lmMst1)+
-216*lmMst2*(5971-6106*lmMst1+576*pow2(lmMst1))+
-41904*(34-15*lmMst1)*pow2(lmMst2)-
-3456*pow3(lmMst1)-
-(1458*Dmglst2*(Dmglst2+Mgl)*(2773621/4374.-(3416*B4)/9.+(52*DN)/9.+
-(111356*lmMst1)/243.+(8*pow2(lmMst1))/9.-
-lmMst2*(294416/243.-376*lmMst1+
-(512*pow2(lmMst1))/9.)-
-(344*(14-15*lmMst1)*pow2(lmMst2))/9.-
-(64*pow3(lmMst1))/9.-(1528*pow3(lmMst2))/3.))/pow2(Mgl)+507600*pow3(lmMst2))*pow4(Mst1))/1458.+
-((9561+1760*B4-16*DN-1984*lmMst1+
-64*lmMst2*(214-73*lmMst1-4*pow2(lmMst1))-
-256*pow2(lmMst1)+
-32*(268-57*lmMst1)*pow2(lmMst2)-
-(36*pow2(Dmglst2)*(2601353/4860.-(1960*B4)/9.+(44*DN)/9.-
-(3296*lmMst1)/9.-
-lmMst2*(4792/27.+32*lmMst1-(64*pow2(lmMst1))/9.)
--(128*pow2(lmMst1))/9.-(8*(222-217*lmMst1)*pow2(lmMst2))/9.-
-200*pow3(lmMst2)))/pow2(Mgl)+
-2080*pow3(lmMst2)+
-(36*Dmglst2*(23917/1620.+(1048*B4)/9.-(20*DN)/9.-
-(208*lmMst1)/9.+
-(16*lmMst2*(237-55*lmMst1-4*pow2(lmMst1)))/9.+(64*pow2(lmMst1))/9.+
-(8*(280-121*lmMst1)*pow2(lmMst2))/9.+
-(344*pow3(lmMst2))/3.))/Mgl)*pow4(Mst2))/36.)+
-((-80*Dmsqst2*(Dmsqst2*(3+2*lmMst1-2*lmMst2)*pow2(Mgl)+
-2*((8-15*lmMst1+15*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))+
-(1+3*lmMst1-3*lmMst2)*pow2(Mgl))*pow2(Mst1))*pow2(MuSUSY))/3.-
-((pow2(Dmglst2)*(151200*Dmsqst2*(289-180*lmMst1+354*lmMst2-174*lmMt)-
-pow2(Mst1)*(79386499-72455040*lmMt+
-52920*lmMst2*(1095+2*lmMt)+
-725760*(5-2*lmMst2)*pow2(lmMst1)-
-7560*lmMst1*(3601+370*lmMst2-178*lmMt-
-384*pow2(lmMst2))-4460400*pow2(lmMst2)+
-2177280*pow2(lmMt)-1451520*pow3(lmMst2)))+
-63*Dmglst2*Mgl*(2400*Dmsqst2*(289-180*lmMst1+354*lmMst2-174*lmMt)-
-pow2(Mst1)*(322421+414720*lmMt-
-2880*(21+12*lmMst2-4*lmMt)*pow2(lmMst1)+
-480*(1097-24*lmMt)*pow2(lmMst2)+
-160*lmMst2*(2852-231*lmMt-216*pow2(lmMt))-
-160*lmMst1*(2969+2211*lmMst2+39*lmMt-
-72*pow2(lmMst2)-216*pow2(lmMt))-
-69120*pow2(lmMt)+23040*pow3(lmMst2)))+
-21*pow2(Mgl)*(64800*Dmsqst2*(7+4*lmMst1-10*lmMst2+6*lmMt)+
-pow2(Mst1)*(1156193+198720*lmMt-
-8640*(13-4*(lmMst2+lmMt))*pow2(lmMst1)+
-17280*(51-2*lmMt)*pow2(lmMst2)-
-2160*lmMst1*(295+360*lmMst2-52*lmMt+
-112*pow2(lmMst2)-48*pow2(lmMt))-
-6480*lmMst2*(21+16*(lmMt+pow2(lmMt)))+
-207360*pow3(lmMst2))))*pow4(Mst2))/51030.-
-((-105*Dmglst2*Mgl*(30183+lmMst2*(67184-4704*lmMt)+45408*lmMt-
-2304*(1-lmMst2)*pow2(lmMst1)-
-288*lmMst1*(30-16*lmMt+2*lmMst2*(5+8*lmMt)-
-41*pow2(lmMst2))+
-96*(199+48*lmMt)*pow2(lmMst2)-
-14112*pow3(lmMst2))+
-189*pow2(Mgl)*(20253-4160*lmMt-80*lmMst2*(13+66*lmMt)-
-1280*(1+lmMst2)*pow2(lmMst1)+
-160*(155-16*lmMt)*pow2(lmMst2)-
-160*lmMst1*(54+2*lmMst2*(61-8*lmMt)-16*lmMt+
-41*pow2(lmMst2))-3840*pow2(lmMt)+
-7840*pow3(lmMst2))+
-pow2(Dmglst2)*(6779161-5040*lmMst2*(4309-210*lmMt)+
-4495680*lmMt+241920*(2-lmMst2)*pow2(lmMst1)-
-30240*(195+16*lmMt)*pow2(lmMst2)-
-30240*lmMst1*(-4*(75-8*lmMt+lmMst2*(19+4*lmMt))+
-41*pow2(lmMst2))+120960*pow2(lmMt)+
-1481760*pow3(lmMst2)))*pow6(Mst2))/17010.-
-(7*Dmglst2*Mgl*(8*pow2(Mst2)*(2*(257300*OepS2-
-27*(220117+192975*lmMst1-192975*lmMst2)*S2)*pow2(Mst1)+
-9*(5060*OepS2-
-27*(2489+3795*lmMst1-3795*lmMst2)*S2)*pow2(MuSUSY))*pow4(Mst1)+
-27*pow2(Mst1)*((36880*OepS2-
-18*(15691+41490*lmMst1-41490*lmMst2)*S2)*pow2(Mst1)+
-(1400*OepS2+
-81*(453-350*lmMst1+350*lmMst2)*S2)*pow2(MuSUSY))*pow4(Mst2)+
-10*(131368*OepS2-
-27*(123113+98526*lmMst1-98526*lmMst2)*S2)*pow2(MuSUSY)*pow6(Mst1)-
-270*(-5*(56*OepS2+
-81*(27-14*lmMst1+14*lmMst2)*S2)*pow2(Mst1)
-+576*(1-2*lmMst2-3*pow2(lmMst2))*pow2(MuSUSY))*pow6(Mst2))+
-pow2(Dmglst2)*(14*pow2(Mst2)*(8*(257300*OepS2-
-27*(220117+192975*lmMst1-192975*lmMst2)*S2)*pow2(Mst1)-
-3*(62200*OepS2+
-27*(20803-46650*lmMst1+46650*lmMst2)*S2)*pow2(MuSUSY))*pow4(Mst1)-
-3*pow2(Mst1)*((2411920*OepS2+
-54*(760703-904470*lmMst1+904470*lmMst2)*S2)*pow2(Mst1)+
-21*(280*OepS2+
-81*(1387-70*lmMst1+70*lmMst2)*S2)*pow2(MuSUSY))*pow4(Mst2)+
-70*(131368*OepS2-
-27*(123113+98526*lmMst1-98526*lmMst2)*S2)*pow2(MuSUSY)*pow6(Mst1)-
-18*((1960*OepS2+
-81*(9361-490*lmMst1+490*lmMst2)*S2)*pow2(Mst1)+
-120960*(2+lmMst2-3*pow2(lmMst2))*pow2(MuSUSY))*pow6(Mst2))-
-21*pow2(Mgl)*(4*pow2(Mst2)*(4*(13700*OepS2-
-27*(16297+10275*lmMst1-10275*lmMst2)*S2)*pow2(Mst1)+
-15*(544*OepS2-
-81*(169+136*lmMst1-136*lmMst2)*S2)*pow2(MuSUSY))*pow4(Mst1)+
-3*pow2(Mst1)*((30160*OepS2-
-162*(4367+3770*lmMst1-3770*lmMst2)*S2)*pow2(Mst1)+
-45*(56*OepS2+
-81*(1-14*lmMst1+14*lmMst2)*S2)*pow2(MuSUSY))*pow4(Mst2)+
-10*(7528*OepS2-
-27*(9185+5646*lmMst1-5646*lmMst2)*S2)*pow2(MuSUSY)*pow6(Mst1)-
-54*(-((280*OepS2+
-81*(79-70*lmMst1+70*lmMst2)*S2)*pow2(Mst1))+960*pow2(1+lmMst2)*pow2(MuSUSY))*pow6(Mst2)))/(76545.*pow2(Mst1))+
-(256*(pow2(Dmglst2)*(4+2*lmMst2-6*pow2(lmMst2))+
-Dmglst2*Mgl*(1-2*lmMst2-3*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow8(Mst2))/(9.*pow2(Mst1)))/pow2(Mgl)))/pow5(Mst2)+
-pow4(s2t)*((5*(1061+72*lmMst1-72*lmMst2)*pow2(Dmsqst2))/1296.-
-Dmsqst2*(52199/16200.+(467*lmMst1)/90.-
-(317/90.+7*lmMst1)*lmMst2+(11*pow2(lmMst1))/6.+
-(31*pow2(lmMst2))/6.-
-(5*Dmglst2*(75-26*lmMst1+26*lmMst2)*(Dmglst2+Mgl))/(6.*pow2(Mgl)))*pow2(Mst1)-
-(pow2(Dmsqst2)*(120796/6075.-lmMst1*(1837/540.-2*lmMst2)+
-(1837*lmMst2)/540.-pow2(lmMst1)-pow2(lmMst2))*pow2(Mst1))/pow2(Mst2)+pow2(Mst2)*((5*pow2(Dmsqst2))/(3.*pow2(Mst1))+
-pow2(Mst1)*(7680127/97200.-B4/9.+(2*D3)/9.-DN/6.+
-(4372*lmMst1)/405.+
-(lmMst2*(16051+22980*lmMst1-5175*pow2(lmMst1)))/810.-
-(1631*pow2(lmMst1))/108.-
-((92-327*lmMst1)*pow2(lmMst2))/27.-
-(79*pow3(lmMst1))/54.+
-(pow2(Dmglst2)*(22023067/729000.-B4+(4*D3)/3.-
-(5*DN)/6.+(144449*lmMst1)/2700.+
-(2233*pow2(lmMst1))/270.-
-(lmMst2*(165199+121010*lmMst1+
-51150*pow2(lmMst1)))/2700.+
-(14231/540.+(202*lmMst1)/9.)*pow2(lmMst2)+
-(5*pow3(lmMst1))/54.-(97*pow3(lmMst2))/27.))/pow2(Mgl)+(Dmglst2*(95041/121500.-(2*B4)/3.+(8*D3)/9.-(5*DN)/9.+
-(81193*lmMst1)/4050.+(137*pow2(lmMst1))/135.-
-(lmMst2*(81643+86970*lmMst1+48150*pow2(lmMst1)))/4050.+((4969+3840*lmMst1)*pow2(lmMst2))/270.-
-(5*pow3(lmMst1))/27.-(58*pow3(lmMst2))/27.))/Mgl-
-(115*pow3(lmMst2))/27.))-
-pow4(Mst1)*(93508520089/2.000376e9+B4+D3/9.-DN/9.+
-(34838747*lmMst1)/529200.-
-(lmMst2*(23468297+17276980*lmMst1-3601500*pow2(lmMst1)))/529200.+(50723*pow2(lmMst1))/1890.+
-(4*(2941-2415*lmMst1)*pow2(lmMst2))/945.-
-(10*pow3(lmMst1))/27.+(409*pow3(lmMst2))/108.+
-(Dmglst2*(Dmglst2+Mgl)*(119405394763/1.500282e9+(8287903*lmMst2)/1.1907e6+
-((1363+1155*lmMst2)*pow2(lmMst1))/315.+
-lmMst1*(1436147/1.1907e6-(101*lmMst2)/315.-
-(11*pow2(lmMst2))/3.)-(51*pow2(lmMst2))/70.-
-(11*pow3(lmMst1))/9.+(11*pow3(lmMst2))/9.))/pow2(Mgl)-
-(pow2(Dmsqst2)*(38390869/2.000376e7+(8753*lmMst2)/31752.-
-lmMst1*(8753/31752.+(25*lmMst2)/7.)+
-(25*pow2(lmMst1))/14.+(25*pow2(lmMst2))/14.))/pow4(Mst2))
-+((25289+1440*B4-144*D3+72*DN+22368*lmMst1+
-1908*pow2(lmMst1)-
-12*lmMst2*(2296-2136*lmMst1+117*pow2(lmMst1))-
-504*(53-21*lmMst1)*pow2(lmMst2)-
-(1296*Dmsqst2*(5/6.-(5*lmMst2)/3.+
-(10*Dmglst2*(Dmglst2+Mgl))/pow2(Mgl)))/pow2(Mst1)+
-576*pow3(lmMst1)-9756*pow3(lmMst2)-
-(1296*pow2(Dmglst2)*(1395899/19440.-(25*B4)/9.+(28*D3)/9.-
-(31*DN)/18.+(229*lmMst1)/9.-
-(lmMst2*(1525+828*lmMst1-72*pow2(lmMst1)))/27.-
-(103*pow2(lmMst1))/36.-
-((13+369*lmMst1)*pow2(lmMst2))/18.+
-(107*pow3(lmMst2))/6.))/pow2(Mgl)-
-(2*Dmglst2*(15707-432*B4+576*D3-360*DN+
-4752*lmMst1-
-72*lmMst2*(277+264*lmMst1-16*pow2(lmMst1))-
-1404*pow2(lmMst1)+
-72*(142-123*lmMst1)*pow2(lmMst2)+7704*pow3(lmMst2)))/Mgl)*pow4(Mst2))/1296.-S2*((5*(43+2*lmMst1-2*lmMst2)*pow2(Dmsqst2))/2.-
-(5*Dmsqst2*(253+42*lmMst1-42*lmMst2)*pow2(Mst1))/6.+
-pow2(Mst1)*((5*(61+24*lmMst1-24*lmMst2)*pow2(Dmsqst2))/(9.*pow2(Mst2))-
-(5717/12.+(643*lmMst1)/6.-(643*lmMst2)/6.+
-(Dmglst2*(550/9.-72*lmMst1+72*lmMst2))/Mgl+
-((22273/135.-(80*lmMst1)/9.+(80*lmMst2)/9.)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst2))-
-(pow4(Mst1)*(50550+16155*lmMst1-16155*lmMst2-
-(2*Dmglst2*(51635+25194*lmMst1-25194*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl)-
-(60*(113+42*lmMst1-42*lmMst2)*pow2(Dmsqst2))/pow4(Mst2)))/324.-
-(921/4.+(69*lmMst1)/2.-(69*lmMst2)/2.+
-(Dmglst2*(1677/2.-7*lmMst1+7*lmMst2))/Mgl+
-((116129-350*lmMst1+350*lmMst2)*pow2(Dmglst2))/(60.*pow2(Mgl)))*pow4(Mst2)-
-(5*Dmsqst2*((326+84*lmMst1-84*lmMst2)*pow4(Mst1)-
-81*(15-2*lmMst1+2*lmMst2)*pow4(Mst2)))/(54.*pow2(Mst2)))+(-(Dmsqst2*(4630500*(Dmglst2*Mgl+pow2(Dmglst2))*((76-249*lmMst1+249*lmMst2)*pow4(Mst1)+
-72*(1+lmMst1-lmMst2)*pow4(Mst2))+
-pow2(Mgl)*(2*(378483467+
-630*lmMst1*(555521-200340*lmMst2)-
-391652730*lmMst2+63107100*pow2(lmMst1)+
-63107100*pow2(lmMst2))*pow4(Mst1)-
-1157625*(1213+48*lmMst1*(7-3*lmMst2)-
-408*lmMst2+144*pow2(lmMst2))*pow4(Mst2))))/(5.00094e7*pow2(Mst2))+
-(OepS2*(pow2(Mgl)*(60*pow2(Dmsqst2)*(24*pow2(Mst1)*pow2(Mst2)+14*pow4(Mst1)+
-9*pow4(Mst2))-
-60*Dmsqst2*pow2(Mst2)*(63*pow2(Mst1)*pow2(Mst2)+14*pow4(Mst1)+
-27*pow4(Mst2)))+
-pow4(Mst2)*(4*Dmglst2*Mgl*(1944*pow2(Mst1)*pow2(Mst2)+4199*pow4(Mst1)+
-189*pow4(Mst2))+
-2*pow2(Dmglst2)*(480*pow2(Mst1)*pow2(Mst2)+8398*pow4(Mst1)+
-315*pow4(Mst2))-
-3*pow2(Mgl)*(3858*pow2(Mst1)*pow2(Mst2)+1795*pow4(Mst1)+
-1242*pow4(Mst2)))))/(2187.*pow4(Mst2))+
-((pow2(Dmglst2)*(980+32*lmMst1*(2-3*lmMst2)-
-422*lmMst2-817*pow2(lmMst2))+
-2*Dmglst2*Mgl*(20-(262+32*lmMst1)*lmMst2-187*pow2(lmMst2))-
-(135+250*lmMst2+32*lmMst1*(1+lmMst2)+
-123*pow2(lmMst2))*pow2(Mgl))*pow6(Mst2))/(36.*pow2(Mst1))-
-(8*pow2(Dmglst2)*(2+lmMst2-3*pow2(lmMst2))*pow8(Mst2))/(9.*pow4(Mst1)))/pow2(Mgl))+
-((-5*shiftst1*((4*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*(pow2(Dmsqst2)*((2*lmMst1-2*lmMst2)*pow2(Mst1)-pow2(Mst2))*(pow2(Mst1)+pow2(Mst2))+
-((1-2*lmMst1+2*lmMst2)*pow2(Mst1)+pow2(Mst2))*pow3(Dmsqst2)-
-(Dmsqst2*(3-2*lmMst2)+(1-2*lmMst2)*pow2(Mst2))*((pow2(Mst1)+pow2(Mst2))*pow4(Mst2)+
-(-2*lmMst1+2*lmMst2)*pow2(Mst1)*(pow2(Mst1)*pow2(Mst2)+pow4(Mst1)+pow4(Mst2)))))/pow2(Sbeta)+16*(Dmsqst2+pow2(Mst2))*(pow2(Mst1)+pow2(Mst2))*(pow2(Dmsqst2)-2*Dmsqst2*pow2(Mst2)-
-(1-2*lmMst2)*pow4(Mst2))*pow4(Mt)+
-(pow2(Mst1)-pow2(Mst2))*(Dmsqst2+pow2(Mst2))*(2*(lmMst1-lmMst2)*pow2(Mst1)*pow2(Mst2)+
-pow4(Mst1)-pow4(Mst2))*(pow2(Dmsqst2)-2*Dmsqst2*pow2(Mst2)-
-(1-2*lmMst2)*pow4(Mst2))*pow4(s2t)-
-4*pow2(Mt)*pow2(s2t)*(pow3(Dmsqst2)*(pow2(Mst2)*(2*pow2(Mst2)+pow2(MuSUSY))-
-pow2(Mst1)*(4*pow2(Mst2)-
-(1-2*lmMst1+2*lmMst2)*pow2(MuSUSY))+
-2*pow4(Mst1))-
-pow2(Dmsqst2)*(-(pow2(Mst1)*pow2(Mst2)*(4*pow2(Mst2)-
-(1-2*lmMst1+2*lmMst2)*pow2(MuSUSY)))+
-2*(pow2(Mst2)-(lmMst1-lmMst2)*pow2(MuSUSY))*pow4(Mst1)+
-(2*pow2(Mst2)+pow2(MuSUSY))*pow4(Mst2))+
-(Dmsqst2*(3-2*lmMst2)+(1-2*lmMst2)*pow2(Mst2))*(-2*pow2(Mst2)*(pow2(Mst2)-(lmMst1-lmMst2)*pow2(MuSUSY))*pow4(Mst1)+
-pow2(Mst1)*(4*pow2(Mst2)-
-(1-2*lmMst1+2*lmMst2)*pow2(MuSUSY))*pow4(Mst2)
-+2*(lmMst1-lmMst2)*pow2(MuSUSY)*pow6(Mst1)-
-(2*pow2(Mst2)+pow2(MuSUSY))*pow6(Mst2)))))/(6.*pow6(Mst2))-((1-2*lmMst2)*shiftst3*((-8*pow2(Mt)*(2*pow2(Mt)+
-(1-lmMst1+lmMst2)*pow2(Mst1)*pow2(s2t))-
-(-4*pow2(Mst1)*pow2(Mst2)+
-(3+2*lmMst1-2*lmMst2)*pow4(Mst1)+pow4(Mst2))*pow4(s2t))*pow6(Mst2)-
-(4*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*(2*((1-2*lmMst1+2*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(1-lmMst1+lmMst2)*pow2(Mst1)*pow4(Mst2))+
-(2-6*lmMst1+6*lmMst2)*pow6(Mst1)+pow6(Mst2)))/pow2(Sbeta)+4*pow2(Mt)*pow2(s2t)*(pow2(MuSUSY)*pow6(Mst2)+
-2*(pow2(MuSUSY)*((1-2*lmMst1+2*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(1-lmMst1+lmMst2)*pow2(Mst1)*pow4(Mst2)+
-(1-3*lmMst1+3*lmMst2)*pow6(Mst1))+pow8(Mst2)))))/(12.*pow4(Mst2)))/pow2(Mst1)-
-(T1ep*(Mst2*(-4*Dmglst2*Mgl*(pow4(Mst1)*(8*Mst2*pow2(Mt)*pow2(s2t)*(-4327*pow2(MuSUSY)*(1-pow2(Sbeta))+
-6921*pow2(Mst2)*pow2(Sbeta))-
-4*s2t*(-16421*pow2(MuSUSY)*(1-pow2(Sbeta))+
-51460*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(15571*Mt*pow3(s2t)*pow4(Mst2)+
-89312*Mst2*pow4(Mt)-4199*pow4(s2t)*pow5(Mst2)))
-+189*pow4(Mst2)*(-4*Mst2*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))-
-10*s2t*(-(pow2(MuSUSY)*(1-pow2(Sbeta)))+
-2*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(5*Mt*pow3(s2t)*pow4(Mst2)+16*Mst2*pow4(Mt)-
-pow4(s2t)*pow5(Mst2)))+
-18*Mst2*pow2(Mst1)*(12*pow2(Mst2)*pow2(Mt)*pow2(s2t)*(-43*pow2(MuSUSY)*(1-pow2(Sbeta))+
-50*pow2(Mst2)*pow2(Sbeta))-
-2*Mst2*s2t*(-506*pow2(MuSUSY)*(1-pow2(Sbeta))+
-1383*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-56*(3*pow2(MuSUSY)*(1-pow2(Sbeta))+
-23*pow2(Mst2)*pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(401*Mt*pow3(s2t)*pow5(Mst2)-
-108*pow4(s2t)*pow6(Mst2))))+
-2*pow2(Dmglst2)*(-2*pow4(Mst1)*(8*Mst2*pow2(Mt)*pow2(s2t)*(-4327*pow2(MuSUSY)*(1-pow2(Sbeta))+
-6921*pow2(Mst2)*pow2(Sbeta))-
-4*s2t*(-16421*pow2(MuSUSY)*(1-pow2(Sbeta))+
-51460*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(15571*Mt*pow3(s2t)*pow4(Mst2)+
-89312*Mst2*pow4(Mt)-4199*pow4(s2t)*pow5(Mst2)))+
-63*pow4(Mst2)*(-4*(Mst2*pow2(Mt)*pow2(s2t)*(-5*pow2(MuSUSY)*(1-pow2(Sbeta))+
-18*pow2(Mst2)*pow2(Sbeta))+
-s2t*(-(pow2(MuSUSY)*(1-pow2(Sbeta)))+
-2*pow2(Mst2)*pow2(Sbeta))*pow3(Mt))+
-pow2(Sbeta)*(2*Mt*pow3(s2t)*pow4(Mst2)+208*Mst2*pow4(Mt)+
-5*pow4(s2t)*pow5(Mst2)))+
-24*Mst2*pow2(Mst1)*(-(pow2(Mst2)*pow2(Mt)*pow2(s2t)*(-185*pow2(MuSUSY)*(1-pow2(Sbeta))+
-1791*pow2(Mst2)*pow2(Sbeta)))-
-Mst2*s2t*(-1555*pow2(MuSUSY)*(1-pow2(Sbeta))+
-4307*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-(-210*pow2(MuSUSY)*(1-pow2(Sbeta))+
-9406*pow2(Mst2)*pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(767*Mt*pow3(s2t)*pow5(Mst2)+
-20*pow4(s2t)*pow6(Mst2)))))-
-3*pow2(Mgl)*(-(pow4(Mst1)*(-4*pow2(Mt)*pow2(s2t)*(300*pow2(Dmsqst2)*pow2(Sbeta)-
-20*Dmsqst2*(-221*pow2(MuSUSY)*(1-pow2(Sbeta))+
-8*pow2(Mst2)*pow2(Sbeta))-
-pow2(Mst2)*(-13237*pow2(MuSUSY)*(1-pow2(Sbeta))+
-6857*pow2(Mst2)*pow2(Sbeta)))-
-16*(Mst2*s2t*(-941*pow2(MuSUSY)*(1-pow2(Sbeta))+
-2740*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-(-1635*pow2(MuSUSY)*(1-pow2(Sbeta))+
-1168*pow2(Mst2)*pow2(Sbeta))*pow4(Mt))+
-pow2(Sbeta)*(5*pow2(Mst2)*(56*pow2(Dmsqst2)-56*Dmsqst2*pow2(Mst2)-
-359*pow4(Mst2))*pow4(s2t)+
-1756*Mt*pow3(s2t)*pow5(Mst2))))+
-18*pow2(Mst2)*(40*Dmsqst2*pow2(Mst2)*pow2(Mt)*pow2(s2t)*(3*pow2(MuSUSY)*(1-pow2(Sbeta))+Dmsqst2*pow2(Sbeta))
-+pow2(MuSUSY)*(1-pow2(Sbeta))*(-40*pow2(Dmsqst2)*pow2(Mt)*pow2(s2t)-
-84*s2t*pow3(Mst2)*pow3(Mt))+
-2*pow4(Mst2)*(-6*pow2(Mt)*pow2(s2t)*(-23*pow2(MuSUSY)*(1-pow2(Sbeta))+
-10*Dmsqst2*pow2(Sbeta))+
-pow2(Sbeta)*(84*pow4(Mt)-5*pow2(Dmsqst2)*pow4(s2t)))
-+pow2(Sbeta)*(168*s2t*pow3(Mt)*pow5(Mst2)-
-6*pow2(s2t)*(53*pow2(Mt)-5*Dmsqst2*pow2(s2t))*pow6(Mst2)-42*Mt*pow3(s2t)*pow7(Mst2)+
-69*pow4(s2t)*pow8(Mst2)))+
-6*pow2(Mst1)*(-8*pow2(Mst2)*pow2(Mt)*(126*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))-
-5*Dmsqst2*pow2(s2t)*(39*pow2(MuSUSY)*(1-pow2(Sbeta))+
-5*Dmsqst2*pow2(Sbeta)))+
-pow2(MuSUSY)*(1-pow2(Sbeta))*(-560*pow2(Dmsqst2)*pow2(Mt)*pow2(s2t)-
-1088*s2t*pow3(Mst2)*pow3(Mt))+
-4*pow4(Mst2)*(-(pow2(Mt)*pow2(s2t)*(-1057*pow2(MuSUSY)*(1-pow2(Sbeta))+
-60*Dmsqst2*pow2(Sbeta)))+
-pow2(Sbeta)*(418*pow4(Mt)-20*pow2(Dmsqst2)*pow4(s2t)))+pow2(Sbeta)*(3016*s2t*pow3(Mt)*pow5(Mst2)-
-2*pow2(s2t)*(1258*pow2(Mt)-105*Dmsqst2*pow2(s2t))*pow6(Mst2)-292*Mt*pow3(s2t)*pow7(Mst2)+
-643*pow4(s2t)*pow8(Mst2))))))/(1458.*pow2(Mgl)*pow2(Sbeta)*pow6(Mst2))-
-(MuSUSY*(729*pow2(Mt)*pow2(s2t)*(-(Mst2*(9049/24.+(220*B4)/3.-(2*DN)/3.-
-(248*lmMst1)/3.+
-(8*lmMst2*(198-73*lmMst1-4*pow2(lmMst1)))/3.-
-(32*pow2(lmMst1))/3.+(336-76*lmMst1)*pow2(lmMst2)-
-(pow2(Dmglst2)*(2324873/3240.-(980*B4)/3.+(22*DN)/3.-
-(1648*lmMst1)/3.-
-lmMst2*(2780/9.+48*lmMst1-(32*pow2(lmMst1))/3.)-
-(64*pow2(lmMst1))/3.-
-(168-(868*lmMst1)/3.)*pow2(lmMst2)-
-300*pow3(lmMst2)))/pow2(Mgl)+
-(260*pow3(lmMst2))/3.+
-(Dmglst2*(46957/1080.+(524*B4)/3.-(10*DN)/3.-
-(104*lmMst1)/3.+
-(8*lmMst2*(221-55*lmMst1-4*pow2(lmMst1)))/3.+(32*pow2(lmMst1))/3.+
-(4*(232-121*lmMst1)*pow2(lmMst2))/3.+
-172*pow3(lmMst2)))/Mgl))+
-((80*Dmsqst2*((2+5*lmMst1-5*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1+lmMst1-lmMst2)*pow2(Mgl)))/pow2(Mgl)-
-pow2(Mst1)*(346405/648.+96*B4-330*lmMst1-
-(56*pow2(lmMst1))/3.+
-(2*lmMst2*(571-720*lmMst1+32*pow2(lmMst1)))/3.+
-(8*(187-73*lmMst1)*pow2(lmMst2))/3.-
-(pow2(Dmglst2)*(1356919/9720.-(1048*B4)/3.+(20*DN)/3.-
-(6938*lmMst1)/27.+(128*pow2(lmMst1))/3.-
-(2*lmMst2*(7619+720*lmMst1+288*pow2(lmMst1)))/27.+
-(8*(4+153*lmMst1)*pow2(lmMst2))/3.-
-(1160*pow3(lmMst2))/3.))/pow2(Mgl)+
-(520*pow3(lmMst2))/3.+
-(Dmglst2*(195293/3240.+(592*B4)/3.-(8*DN)/3.-
-(1970*lmMst1)/9.+(56*pow2(lmMst1))/3.+
-(2*lmMst2*(2149-1296*lmMst1+96*pow2(lmMst1)))/9.+
-(808/3.-280*lmMst1)*pow2(lmMst2)+
-(776*pow3(lmMst2))/3.))/Mgl))/Mst2+
-(64*(pow2(Dmglst2)*(4+2*lmMst2-6*pow2(lmMst2))+
-Dmglst2*Mgl*(1-2*lmMst2-3*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow3(Mst2))/(3.*pow2(Mgl)*pow2(Mst1))-
-S2*(-(Mst2*(9/2.-63*lmMst1+63*lmMst2-
-(Dmglst2*(1359/10.-105*lmMst1+105*lmMst2))/Mgl+((1387/10.-7*lmMst1+7*lmMst2)*pow2(Dmglst2))/pow2(Mgl)))+
-((685/2.+209*lmMst1-209*lmMst2-
-(Dmglst2*(23989/30.+907*lmMst1-907*lmMst2))/Mgl-((29123-92670*lmMst1+92670*lmMst2)*pow2(Dmglst2))/(90.*pow2(Mgl)))*pow2(Mst1))/Mst2
-+((6143+3198*lmMst1-3198*lmMst2-
-(Dmglst2*(525961+356010*lmMst1-356010*lmMst2)*(Dmglst2+Mgl))/(15.*pow2(Mgl)))*pow4(Mst1))/(9.*pow3(Mst2)))-
-(4*OepS2*(pow2(Dmglst2)*(-9267*pow2(Mst1)*pow2(Mst2)+23734*pow4(Mst1)-
-63*pow4(Mst2))-
-3*pow2(Mgl)*(627*pow2(Mst1)*pow2(Mst2)+1066*pow4(Mst1)+
-189*pow4(Mst2))+
-Dmglst2*Mgl*(8163*pow2(Mst1)*pow2(Mst2)+23734*pow4(Mst1)+
-945*pow4(Mst2))))/(729.*pow2(Mgl)*pow3(Mst2))-
-(40*(1+4*lmMst1-4*lmMst2)*pow2(Dmsqst2)*pow2(Mst1)-
-20*Dmsqst2*(4-9*lmMst1+9*lmMst2-
-(Dmglst2*(80-43*lmMst1+43*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow4(Mst1)+
-pow2(Mst2)*(40*(3+2*lmMst1-2*lmMst2)*pow2(Dmsqst2)+
-160*Dmsqst2*(lmMst1-lmMst2+
-(5*Dmglst2*(1-lmMst1+lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow2(Mst1)+
-(795601/972.+96*B4-(3218*lmMst1)/9.+
-(652*pow2(lmMst1))/9.+
-(4*lmMst2*(845-1535*lmMst1+264*pow2(lmMst1)))/9.+(5488/9.-376*lmMst1)*pow2(lmMst2)-
-(32*pow3(lmMst1))/9.-
-(Dmglst2*(Dmglst2+Mgl)*(15069803/14580.-(592*B4)/3.+(8*DN)/3.+
-(35140*lmMst1)/81.+(92*pow2(lmMst1))/3.-
-(2*lmMst2*(28667-5238*lmMst1+3024*pow2(lmMst1)))/81.-(8*(60-157*lmMst1)*pow2(lmMst2))/3.-(32*pow3(lmMst1))/3.-
-(1000*pow3(lmMst2))/3.))/pow2(Mgl)+
-(2360*pow3(lmMst2))/9.)*pow4(Mst1)))/pow5(Mst2))-
-729*(pow3(Mt)*(s2t*(979423/1620.+(16*D3)/9.-(16*DN)/9.+
-(1228*lmMst1)/27.+(64*lmMt)/3.+
-(4*lmMst2*(1901-6*lmMst1-117*pow2(lmMst1)))/27.+
-(248*pow2(lmMst1))/9.+
-(92+(64*lmMst1)/9.)*pow2(lmMst2)+
-(64*pow3(lmMst1))/9.+(28*pow3(lmMst2))/9.+
-(pow2(Dmglst2)*(348073/105.-(32*B4)/3.+(32*D3)/3.-
-(16*DN)/3.+(1472*lmMst1)/9.-(64*lmMt)/9.+
-lmMst2*(51748/27.+136*lmMst1-
-(128*pow2(lmMst1))/3.)+
-(116*pow2(lmMst1))/3.+
-(32*(37-12*lmMst1)*pow2(lmMst2))/9.+
-(256*pow3(lmMst2))/3.))/pow2(Mgl)+
-(8*Dmglst2*(12454-120*B4+120*D3-60*DN+690*lmMst1+
-lmMst2*(15605-210*lmMst1-480*pow2(lmMst1))+
-345*pow2(lmMst1)+
-(3630-480*lmMst1)*pow2(lmMst2)+
-960*pow3(lmMst2)))/(135.*Mgl)+
-((80*(22-9*lmMst1+9*lmMst2)*pow2(Dmsqst2))/81.+
-Dmsqst2*(339977/2025.-(712*lmMst1)/15.+
-(8*(89+60*lmMst1)*lmMst2)/15.-
-16*pow2(lmMst1)-16*pow2(lmMst2)-
-(40*Dmglst2*(65-2*lmMst1+2*lmMst2)*(Dmglst2+Mgl))/(3.*pow2(Mgl)))*pow2(Mst1)+
-(149949681779/1.250235e8-
-(99165049*lmMst1)/99225.+
-lmMst2*(141677449/99225.-(115988*lmMst1)/945.-
-(700*pow2(lmMst1))/9.)-
-(181826*pow2(lmMst1))/945.+
-(378454/945.-(572*lmMst1)/9.)*pow2(lmMst2)+
-(64*lmMt*(1+4*lmMst2-2*lmMst1*(2+lmMst2)+
-pow2(lmMst1)+pow2(lmMst2)))/3.+
-(52*pow3(lmMst1))/27.+
-(3764*pow3(lmMst2))/27.+
-(Dmglst2*(Dmglst2+Mgl)*(1297790971/2.083725e6-(64*B4)/9.+
-(64*D3)/9.-(32*DN)/9.+
-(29853268*lmMst1)/19845.+
-(38704*pow2(lmMst1))/189.+
-(4*lmMst2*(2917823-3813600*lmMst1+
-97020*pow2(lmMst1)))/19845.+
-(16*(8677-5439*lmMst1)*pow2(lmMst2))/189.-
-(128*lmMt*(4+6*lmMst2-2*lmMst1*(3+lmMst2)+
-pow2(lmMst1)+pow2(lmMst2)))/3.-
-(16*pow3(lmMst1))/9.+(1328*pow3(lmMst2))/3.))/pow2(Mgl))*pow4(Mst1))/pow4(Mst2)-
-S2*(423/5.-318*lmMst1+318*lmMst2+
-(5064*Dmglst2)/(5.*Mgl)+
-((41724/35.+168*lmMst1-168*lmMst2)*pow2(Dmglst2))/pow2(Mgl)-
-(60*Dmsqst2*(9+2*lmMst1-2*lmMst2)+
-(17113/15.+(3470*lmMst1)/3.-
-(3470*lmMst2)/3.-
-(8*Dmglst2*(139+100*lmMst1-100*lmMst2))/Mgl-
-((294704/105.+1760*lmMst1-1760*lmMst2)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst1))/pow2(Mst2)
-+(20*(1+2*lmMst1-2*lmMst2)*pow2(Dmsqst2)-
-(20*Dmsqst2*(127+30*lmMst1-30*lmMst2)*pow2(Mst1))/3.-
-(4*(138286+90465*lmMst1-90465*lmMst2-
-(12*Dmglst2*(17269+13785*lmMst1-13785*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow4(Mst1))/135.)/pow4(Mst2)+
-(20*Dmsqst2*pow2(Mst1)*(48*Dmsqst2*(5+3*lmMst1-3*lmMst2)-
-(1283+318*lmMst1-318*lmMst2)*pow2(Mst1)))/(27.*pow6(Mst2)))+
-Dmsqst2*((-40*(12*(Dmglst2*Mgl+pow2(Dmglst2))+
-(1-2*lmMst2)*pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1))+
-(pow2(Mst1)*(2058*Dmsqst2*(187757+90*lmMst1*(587-630*lmMst2)-
-52830*lmMst2+28350*pow2(lmMst1)+
-28350*pow2(lmMst2))+
-(1094369501-
-2520*lmMst1*(235453-114345*lmMst2)+
-593341560*lmMst2-144074700*pow2(lmMst1)-
-144074700*pow2(lmMst2))*pow2(Mst1)))/(6.251175e6*pow6(Mst2)))+
-(((4*(pow2(Dmglst2)*(756+32*lmMst1*(2-3*lmMst2)-
-134*lmMst2-177*pow2(lmMst2))+
-2*Dmglst2*Mgl*(52-2*(51+16*lmMst1)*lmMst2-
-59*pow2(lmMst2))-
-(71+122*lmMst2+
-32*lmMst1*(1+lmMst2)+59*pow2(lmMst2))*pow2(Mgl))*pow2(Mst2))/9.+
-(22680000*pow2(Dmsqst2)*pow2(Mgl)-
-472500*Dmsqst2*(656*(Dmglst2*Mgl+pow2(Dmglst2))-
-(367+32*lmMst1-80*lmMst2)*pow2(Mgl))*pow2(Mst1)+
-(448*Dmglst2*Mgl*(1928479-13500*B4+13500*D3-6750*DN+
-635385*lmMst1+
-(-162000+81000*lmMst1-81000*lmMst2)*lmMt+
-lmMst2*(2297490-267525*lmMst1-
-50625*pow2(lmMst1))+450*pow2(lmMst1)+
-(591075-381375*lmMst1)*pow2(lmMst2)-
-1125*pow3(lmMst1)+433125*pow3(lmMst2))+
-35*pow2(Mgl)*(19425643+518400*lmMt+
-240*lmMst2*(82997+4320*lmMt)-
-3600*(683+96*lmMst2)*pow2(lmMst1)+
-5684400*pow2(lmMst2)-
-240*lmMst1*(42047+4800*lmMst2+4320*lmMt+
-6390*pow2(lmMst2))-295200*pow3(lmMst1)+
-2174400*pow3(lmMst2))+
-8*pow2(Dmglst2)*(491552723-1134000*B4+1134000*D3-
-567000*DN+106495620*lmMst1+
-(3780000+756000*lmMst1-756000*lmMst2)*lmMt+
-lmMst2*(300704880+52472700*lmMst1-
-4630500*pow2(lmMst1))+
-3200400*pow2(lmMst1)+
-(-28457100-31657500*lmMst1)*pow2(lmMst2)+
-31500*pow3(lmMst1)+36256500*pow3(lmMst2)))*pow4(Mst1))/(850500.*pow2(Mst2)))/pow2(Mst1)-
-(64*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow4(Mst2))/(9.*pow4(Mst1))+
-(8*OepS2*(pow2(Mgl)*(60*pow2(Dmsqst2)*(8*pow2(Mst1)+3*pow2(Mst2))-
-20*Dmsqst2*(45*pow2(Mst1)*pow2(Mst2)+53*pow4(Mst1)+
-27*pow4(Mst2)))+
-pow2(Mst2)*(24*Dmglst2*Mgl*pow2(Mst1)*(919*pow2(Mst1)+150*pow2(Mst2))+
-12*pow2(Dmglst2)*(660*pow2(Mst1)*pow2(Mst2)+
-1838*pow4(Mst1)+63*pow4(Mst2))-
-pow2(Mgl)*(5205*pow2(Mst1)*pow2(Mst2)+
-12062*pow4(Mst1)+1431*pow4(Mst2)))))/(729.*pow6(Mst2)))/pow2(Mgl))+
-(Mt*(153090*((40*(4-8*lmMst1+15*lmMst2-7*lmMt)*pow2(Dmsqst2))/3.-
-(160*Dmsqst2*((497-306*lmMst1+609*lmMst2-303*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))+
-9*(1+6*lmMst1-13*lmMst2+7*lmMt)*pow2(Mgl))*pow2(Mst1))/(27.*pow2(Mgl))-
-(2*(2036769-596484*lmMst1-
-324*lmMst2*(619+2626*lmMst1-12*pow2(lmMst1))-
-148068*pow2(lmMst1)+
-1944*lmMt*(30-83*lmMst2+lmMst1*(70+4*lmMst2)+
-21*pow2(lmMst1)-25*pow2(lmMst2))+
-1620*(661-168*lmMst1)*pow2(lmMst2)-
-46656*(1-2*lmMst1+2*lmMst2)*pow2(lmMt)+
-648*pow3(lmMst1)+267624*pow3(lmMst2)-
-(Dmglst2*(Dmglst2+Mgl)*(5659217+1592460*lmMt-
-972*(569+180*lmMst2-126*lmMt)*pow2(lmMst1)+
-324*(5353+126*lmMt)*pow2(lmMst2)+
-36*lmMst2*(39031+3204*lmMt-5184*pow2(lmMt))-
-72*lmMst1*(27653+3015*lmMt+
-18*lmMst2*(689+126*lmMt)-
-2160*pow2(lmMst2)-2592*pow2(lmMt))-
-186624*pow2(lmMt)+1944*pow3(lmMst1)+
-17496*pow3(lmMst2)))/pow2(Mgl))*pow4(Mst1))/2187.)+
-(-24*pow2(Mst2)*(pow2(Dmglst2)*(37800*Dmsqst2*(101-90*lmMst1+177*lmMst2-87*lmMt)-
-pow2(Mst1)*(2848907+13230*lmMst2*(1176-29*lmMt)-
-10515960*lmMt+
-90720*(3-lmMst2)*pow2(lmMst1)-
-1890*lmMst1*(3460-281*lmMt+lmMst2*(689+96*lmMt)-
-438*pow2(lmMst2))+
-1890*(347+96*lmMt)*pow2(lmMst2)+
-226800*pow2(lmMt)-737100*pow3(lmMst2)))+
-63*Dmglst2*Mgl*(600*Dmsqst2*(101-90*lmMst1+177*lmMst2-87*lmMt)-
-pow2(Mst1)*(97837+71580*lmMt-
-360*(23+8*lmMst2-4*lmMt)*pow2(lmMst1)+
-720*(97+2*lmMt)*pow2(lmMst2)-
-10*lmMst1*(6157-642*lmMt+
-6*lmMst2*(791+48*lmMt)-
-882*pow2(lmMst2)-432*pow2(lmMt))+
-30*lmMst2*(2911-396*lmMt-144*pow2(lmMt))-
-8640*pow2(lmMt)-5940*pow3(lmMst2)))+
-42*pow2(Mgl)*(8100*Dmsqst2*(5+2*lmMst1-5*lmMst2+3*lmMt)+
-pow2(Mst1)*(110219-1080*lmMt-
-540*(15-4*lmMt)*pow2(lmMst1)+
-810*(121-8*lmMt)*pow2(lmMst2)-
-135*lmMst1*(337+lmMst2*(588-32*lmMt)-132*lmMt+
-194*pow2(lmMst2)-48*pow2(lmMt))-
-6480*pow2(lmMt)-
-405*lmMst2*(31+54*lmMt+16*pow2(lmMt))+
-26190*pow3(lmMst2))))-
-9*(-105*Dmglst2*Mgl*(57495+lmMst2*(55616-4704*lmMt)+
-45408*lmMt-
-2304*(1-lmMst2)*pow2(lmMst1)-
-288*lmMst1*(22-16*lmMt+2*lmMst2*(9+8*lmMt)-
-41*pow2(lmMst2))+
-96*(79+48*lmMt)*pow2(lmMst2)-
-14112*pow3(lmMst2))+
-189*pow2(Mgl)*(18813+480*lmMst2*(3-11*lmMt)-
-8000*lmMt-1280*(1+lmMst2)*pow2(lmMst1)+
-160*(163-16*lmMt)*pow2(lmMst2)-
-160*lmMst1*(46+2*lmMst2*(57-8*lmMt)-16*lmMt+
-41*pow2(lmMst2))-3840*pow2(lmMt)+
-7840*pow3(lmMst2))+
-pow2(Dmglst2)*(7152121-70560*lmMst2*(314-15*lmMt)+
-4616640*lmMt+
-241920*(2-lmMst2)*pow2(lmMst1)-
-30240*((107+16*lmMt)*pow2(lmMst2)+
-lmMst1*(-4*(71-8*lmMt+lmMst2*(21+4*lmMt))+
-41*pow2(lmMst2)))+120960*pow2(lmMt)+
-1481760*pow3(lmMst2)))*pow4(Mst2)-
-1120*OepS2*(pow2(Dmglst2)*(-12984*pow2(Mst1)*pow2(Mst2)+
-64852*pow4(Mst1)-63*pow4(Mst2))-
-3*pow2(Mgl)*(1320*pow2(Mst1)*pow2(Mst2)+
-4060*pow4(Mst1)+189*pow4(Mst2))+
-Dmglst2*Mgl*(13392*pow2(Mst1)*pow2(Mst2)+
-64852*pow4(Mst1)+945*pow4(Mst2)))+
-108*S2*(7*Dmglst2*Mgl*(144*(601+2790*lmMst1-2790*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-40*(46187+48639*lmMst1-48639*lmMst2)*pow4(Mst1)-
-2025*(27-14*lmMst1+14*lmMst2)*pow4(Mst2))
--21*pow2(Mgl)*(72*(457+550*lmMst1-550*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-40*(4082+3045*lmMst1-3045*lmMst2)*pow4(Mst1)-
-81*(79-70*lmMst1+70*lmMst2)*pow4(Mst2))+
-pow2(Dmglst2)*(24*(105619-113610*lmMst1+113610*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-280*(46187+48639*lmMst1-48639*lmMst2)*pow4(Mst1)+
-27*(9361-490*lmMst1+490*lmMst2)*pow4(Mst2)))+(4354560*(pow2(Dmglst2)*(4+2*lmMst2-6*pow2(lmMst2))+
-Dmglst2*Mgl*(1-2*lmMst2-3*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow6(Mst2))/pow2(Mst1))/pow2(Mgl)))/(153090.*pow5(Mst2)))+
-Mt*((-10*s2t*shiftst1*(Dmsqst2+pow2(Mst2))*(4*pow2(Mst2)*pow2(Mt)-
-2*pow2(Mst1)*(2*pow2(Mt)-
-(lmMst1-lmMst2)*pow2(Mst2)*pow2(s2t))+
-pow2(s2t)*(pow4(Mst1)-pow4(Mst2)))*(pow2(Dmsqst2)-2*Dmsqst2*pow2(Mst2)-
-(1-2*lmMst2)*pow4(Mst2)))/(3.*pow2(Mst1)*pow6(Mst2))+
-pow3(s2t)*((5*Dmsqst2*(144*(5+2*lmMst1-2*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1177+48*lmMst1*(7-3*lmMst2)-336*lmMst2+
-144*pow2(lmMst2))*pow2(Mgl)))/(54.*pow2(Mgl))-
-(20*pow2(Dmsqst2))/(3.*pow2(Mst1))-
-(pow2(Mst2)*(21005+1440*B4-144*D3+72*DN+21216*lmMst1+
-1908*pow2(lmMst1)-
-12*lmMst2*(2950-2040*lmMst1+117*pow2(lmMst1))-
-108*(283-98*lmMst1)*pow2(lmMst2)-
-(1080*Dmsqst2*(1-2*lmMst2+
-(12*Dmglst2*(Dmglst2+Mgl))/pow2(Mgl)))/pow2(Mst1)+576*pow3(lmMst1)-
-9756*pow3(lmMst2)-
-(324*pow2(Dmglst2)*(901259/4860.-(100*B4)/9.+(112*D3)/9.-
-(62*DN)/9.+(284*lmMst1)/3.-
-lmMst2*(4930/27.+112*lmMst1-(32*pow2(lmMst1))/3.)
--(103*pow2(lmMst1))/9.+(631/9.-82*lmMst1)*pow2(lmMst2)+
-(214*pow3(lmMst2))/3.))/pow2(Mgl)-
-(2*Dmglst2*(14987-432*B4+576*D3-360*DN+
-4752*lmMst1-
-144*lmMst2*(81+124*lmMst1-8*pow2(lmMst1))-
-1404*pow2(lmMst1)+
-36*(439-246*lmMst1)*pow2(lmMst2)+
-7704*pow3(lmMst2)))/Mgl))/324.-
-pow2(Mst1)*(4627751/12150.+4*B4+(4*D3)/9.-(4*DN)/9.+
-(44008*lmMst1)/405.-(1472*pow2(lmMst1))/27.-
-(lmMst2*(12148-76560*lmMst1+12105*pow2(lmMst1)))/405.-(5*(583-438*lmMst1)*pow2(lmMst2))/27.-
-(110*pow3(lmMst1))/27.-(1273*pow3(lmMst2))/27.-
-(pow2(Dmglst2)*(23548291/364500.-(64*B4)/9.+(64*D3)/9.-
-(32*DN)/9.-(80549*lmMst1)/675.-
-(6011*pow2(lmMst1))/135.+
-(lmMst2*(41949+45410*lmMst1+58350*pow2(lmMst1)))/675.-
-(2*(2383+11595*lmMst1)*pow2(lmMst2))/135.-
-(10*pow3(lmMst1))/27.+(2314*pow3(lmMst2))/27.))/pow2(Mgl)-(Dmglst2*(5430043+524580*lmMst2-
-900*(859-3690*lmMst2)*pow2(lmMst1)+
-1454400*pow2(lmMst2)-
-60*lmMst1*(51493+24630*lmMst2+112950*pow2(lmMst2))+
-45000*pow3(lmMst1)+3411000*pow3(lmMst2)))/(60750.*Mgl))-
-((5*(1493+72*lmMst1-72*lmMst2)*pow2(Dmsqst2))/324.+
-Dmsqst2*(194588/2025.+(466*lmMst1)/45.-
-(766/45.-(44*lmMst1)/3.)*lmMst2-
-(22*pow2(lmMst1))/3.-(22*pow2(lmMst2))/3.+
-(10*Dmglst2*(55-34*lmMst1+34*lmMst2)*(Dmglst2+Mgl))/(3.*pow2(Mgl)))*pow2(Mst1)+
-(96969711071/5.00094e8-
-(61388401*lmMst1)/396900.+
-lmMst2*(58499851/396900.+(302047*lmMst1)/945.-
-(514*pow2(lmMst1))/9.)-
-(152966*pow2(lmMst1))/945.-
-(149081/945.-122*lmMst1)*pow2(lmMst2)-
-(70*pow3(lmMst1))/27.-
-(1682*pow3(lmMst2))/27.-
-(Dmglst2*(Dmglst2+Mgl)*(30586096049/7.50141e7+
-(2171669*lmMst2)/59535.+
-(2*(433+6552*lmMst2)*pow2(lmMst1))/189.+
-(3974*pow2(lmMst2))/189.-
-(lmMst1*(2740559+1524600*lmMst2+
-7514640*pow2(lmMst2)))/59535.-
-(112*pow3(lmMst1))/27.+
-(1648*pow3(lmMst2))/27.))/pow2(Mgl))*pow4(Mst1))/pow2(Mst2)-
-(Dmsqst2*(222209689/6.251175e6-
-(905536*lmMst1)/19845.+
-(905536/19845.+(244*lmMst1)/7.)*lmMst2-
-(122*pow2(lmMst1))/7.-(122*pow2(lmMst2))/7.+
-(10*Dmglst2*(419-57*lmMst1+57*lmMst2)*(Dmglst2+Mgl))/(27.*pow2(Mgl)))*pow4(Mst1))/pow4(Mst2)+
-pow2(Dmsqst2)*(((1372861/24300.-
-lmMst1*(1987/135.-8*lmMst2)+
-(1987*lmMst2)/135.-4*pow2(lmMst1)-
-4*pow2(lmMst2))*pow2(Mst1))/pow4(Mst2)+
-((305179906/6.251175e6-
-lmMst1*(540413/39690.-(156*lmMst2)/7.)+
-(540413*lmMst2)/39690.-
-(78*pow2(lmMst1))/7.-(78*pow2(lmMst2))/7.)*pow4(Mst1))/pow6(Mst2))+
-(-((pow2(Dmglst2)*(916+32*lmMst1*(2-3*lmMst2)-
-390*lmMst2-657*pow2(lmMst2))+
-2*Dmglst2*Mgl*(20-(230+32*lmMst1)*lmMst2-
-155*pow2(lmMst2))-
-(119+218*lmMst2+32*lmMst1*(1+lmMst2)+
-107*pow2(lmMst2))*pow2(Mgl))*pow4(Mst2))/(9.*pow2(Mst1))+
-((-4*OepS2*(pow2(Mgl)*(60*pow2(Dmsqst2)*(33*pow2(Mst1)*pow2(Mst2)+47*pow4(Mst1)+
-9*pow4(Mst2))-
-60*Dmsqst2*pow2(Mst2)*(90*pow2(Mst1)*pow2(Mst2)+104*pow4(Mst1)+
-27*pow4(Mst2)))+
-pow4(Mst2)*(4*Dmglst2*Mgl*(2133*pow2(Mst1)*pow2(Mst2)+
-6332*pow4(Mst1)+189*pow4(Mst2))+
-2*pow2(Dmglst2)*(795*pow2(Mst1)*pow2(Mst2)+
-12664*pow4(Mst1)+315*pow4(Mst2))-
-3*pow2(Mgl)*(5100*pow2(Mst1)*pow2(Mst2)+
-6895*pow4(Mst1)+1242*pow4(Mst2)))))/2187.-
-(S2*(pow2(Mgl)*(-150*pow2(Dmsqst2)*(3*(509+66*lmMst1-66*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(1753+282*lmMst1-282*lmMst2)*pow4(Mst1)+
-27*(43+2*lmMst1-2*lmMst2)*pow4(Mst2))+
-150*Dmsqst2*pow2(Mst2)*(18*(59+30*lmMst1-30*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-4*(347+156*lmMst1-156*lmMst2)*pow4(Mst1)-
-81*(15-2*lmMst1+2*lmMst2)*pow4(Mst2)))+
-pow4(Mst2)*(15*pow2(Mgl)*(180*(424+85*lmMst1-85*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-35*(2662+591*lmMst1-591*lmMst2)*pow4(Mst1)+
-81*(307+46*lmMst1-46*lmMst2)*pow4(Mst2))+
-10*Dmglst2*Mgl*(9*(16193-1422*lmMst1+1422*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(94102-37992*lmMst1+37992*lmMst2)*pow4(Mst1)+
-81*(1677-14*lmMst1+14*lmMst2)*pow4(Mst2))
-+pow2(Dmglst2)*(159*(21401-150*lmMst1+150*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-20*(47051-18996*lmMst1+18996*lmMst2)*pow4(Mst1)+
-27*(116129-350*lmMst1+350*lmMst2)*pow4(Mst2)))))/405.)/pow6(Mst2)+
-(16*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow6(Mst2))/(9.*pow4(Mst1)))/pow2(Mgl))))+
-Mt*((-243*(1-2*lmMst2)*s2t*shiftst3*pow2(Mst2)*(4*pow2(Mt)+
-((1+lmMst1-lmMst2)*pow2(Mst1)-pow2(Mst2))*pow2(s2t)))/pow2(Mst1)+
-(2*T1ep*(Mst2*(pow2(Dmglst2)*(3*pow2(Mst1)*pow2(Mst2)*(15840*Mst2*s2t*pow2(Mt)-
-9267*Mt*pow2(Mst2)*pow2(s2t)+
-17312*pow3(Mt)-530*pow3(Mst2)*pow3(s2t))-
-2*(-66168*Mst2*s2t*pow2(Mt)-
-35601*Mt*pow2(Mst2)*pow2(s2t)+
-129704*pow3(Mt)+12664*pow3(Mst2)*pow3(s2t))*pow4(Mst1)+
-63*(72*Mst2*s2t*pow2(Mt)-
-3*Mt*pow2(Mst2)*pow2(s2t)+4*pow3(Mt)-
-10*pow3(Mst2)*pow3(s2t))*pow4(Mst2))-
-Dmglst2*Mgl*(27*pow2(Mst1)*pow2(Mst2)*(-800*Mst2*s2t*pow2(Mt)-
-907*Mt*pow2(Mst2)*pow2(s2t)+1984*pow3(Mt)+
-316*pow3(Mst2)*pow3(s2t))+
-2*(-66168*Mst2*s2t*pow2(Mt)-
-35601*Mt*pow2(Mst2)*pow2(s2t)+
-129704*pow3(Mt)+12664*pow3(Mst2)*pow3(s2t))*pow4(Mst1)+
-189*(20*pow3(Mt)*pow4(Mst2)-
-15*Mt*pow2(s2t)*pow6(Mst2)+
-4*pow3(s2t)*pow7(Mst2))))+
-3*pow2(Mgl)*(pow4(Mst1)*(-20*Dmsqst2*s2t*(106*pow2(Mt)+47*Dmsqst2*pow2(s2t))-
-3198*Mt*pow2(s2t)*pow3(Mst2)+
-16240*Mst2*pow3(Mt)-
-4*pow2(Mst2)*(6031*s2t*pow2(Mt)-520*Dmsqst2*pow3(s2t))+
-6895*pow3(s2t)*pow4(Mst2))+
-3*pow2(Mst1)*(320*s2t*pow2(Dmsqst2)*pow2(Mt)-
-20*Dmsqst2*s2t*pow2(Mst2)*(30*pow2(Mt)+11*Dmsqst2*pow2(s2t))+
-1760*pow3(Mst2)*pow3(Mt)-
-(3470*s2t*pow2(Mt)-600*Dmsqst2*pow3(s2t))*pow4(Mst2)-627*Mt*pow2(s2t)*pow5(Mst2)+
-1700*pow3(s2t)*pow6(Mst2))+
-9*(40*s2t*pow2(Dmsqst2)*pow2(Mst2)*pow2(Mt)-
-20*Dmsqst2*s2t*(6*pow2(Mt)+Dmsqst2*pow2(s2t))*pow4(Mst2)+84*pow3(Mt)*pow5(Mst2)-
-6*(53*s2t*pow2(Mt)-10*Dmsqst2*pow3(s2t))*pow6(Mst2)-63*Mt*pow2(s2t)*pow7(Mst2)+
-138*pow3(s2t)*pow8(Mst2)))))/(pow2(Mgl)*pow6(Mst2)))))/(729.*Tbeta))+threeLoopFlag*pow2(Al4p)*(shiftst1*(pow2(Mt)*pow2(s2t)*(-30*pow2(Mst1)*(xDR2DRMOD+(Dmsqst2*xDR2DRMOD)/pow2(Mst2))+
-xDR2DRMOD*((60-(30*Dmsqst2)/pow2(Mst1))*pow2(Mst2)+
-(-30*pow4(Mst2)-
-(15*(Dmsqst2+pow2(Mst2))*pow2(MuSUSY)*((pow2(Mst1)+pow2(Mst2))*pow4(Mst2)+
-(-2*lmMst1+2*lmMst2)*pow2(Mst1)*(pow2(Mst1)*pow2(Mst2)+pow4(Mst1)+pow4(Mst2))))/pow6(Mst2))/pow2(Mst1)))+xDR2DRMOD*(60*(Dmsqst2*pow2(Mt)*pow2(s2t)+
-((Dmsqst2+pow2(Mst2))*(pow2(Mst1)+pow2(Mst2))*pow4(Mt))/(pow2(Mst1)*pow2(Mst2)))+
-(15*(((Dmsqst2*(pow2(Mst1)-pow2(Mst2))*(2*(lmMst1-lmMst2)*pow2(Mst1)*pow2(Mst2)+
-pow4(Mst1)-pow4(Mst2))+
-pow2(Mst1)*pow2(Mst2)*(-((1-2*lmMst1+2*lmMst2)*pow2(Mst1)*pow2(Mst2))+pow4(Mst1)-
-(1+2*lmMst1-2*lmMst2)*pow4(Mst2)))*pow4(s2t))/pow2(Mst2)+(pow2(s2t)*(pow12(Mst2)*pow2(s2t)+
-(4*(Dmsqst2+pow2(Mst2))*pow2(Mt)*pow2(MuSUSY)*((pow2(Mst1)+pow2(Mst2))*pow4(Mst2)+
-(-2*lmMst1+2*lmMst2)*pow2(Mst1)*(pow2(Mst1)*pow2(Mst2)+pow4(Mst1)+
-pow4(Mst2))))/pow2(Sbeta)))/pow6(Mst2)))/(4.*pow2(Mst1))))+
-xDR2DRMOD*((32*Mt*pow3(s2t)*(3*(1+lmMst2)*pow2(Mgl)*(2*((2+2*lmMst1-lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(1-3*lmMst2+lmMst1*(3+2*lmMst2)-
-2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2))+
-(1+2*lmMst1-2*lmMst2)*pow6(Mst1)-
-2*(1+lmMst2)*pow6(Mst2))+
-pow2(Dmglst2)*(-((71+6*lmMst1*(1-lmMst2)-lmMst2-
-30*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1))+
-pow2(Mst1)*(5+167*lmMst2-
-6*lmMst1*(10+3*lmMst2-12*pow2(lmMst2))+
-18*pow2(lmMst2)-72*pow3(lmMst2))*pow4(Mst2)+
-(3+39*lmMst2-6*lmMst1*(5+3*lmMst2)+
-18*pow2(lmMst2))*pow6(Mst1)+
-12*(2+lmMst2-3*pow2(lmMst2))*pow6(Mst2))+
-3*Dmglst2*Mgl*((1+13*lmMst2-2*lmMst1*(5+3*lmMst2)+
-6*pow2(lmMst2))*pow6(Mst1)+
-2*((1-4*lmMst1+10*lmMst2+3*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-pow2(Mst1)*(6+11*lmMst2-
-lmMst1*(3-5*lmMst2-6*pow2(lmMst2))-
-5*pow2(lmMst2)-6*pow3(lmMst2))*pow4(Mst2)+
-(1-2*lmMst2-3*pow2(lmMst2))*pow6(Mst2)))))/(27.*Mst2*pow2(Mgl)*pow2(Mst1))+
-((Mt*MuSUSY*(4860*s2t*shiftst1*pow2(Mst1)*(Dmsqst2+pow2(Mst2))*(4*pow2(Mst2)*pow2(Mt)-
-2*pow2(Mst1)*(2*pow2(Mt)-
-(lmMst1-lmMst2)*pow2(Mst2)*pow2(s2t))+
-pow2(s2t)*(pow4(Mst1)-pow4(Mst2)))*pow4(Mst2)+
-(512*Mst2*pow2(Mst1)*pow3(Mt)*(9*(1+lmMst2)*pow2(Mgl)*((3-21*lmMst2+
-2*lmMst1*(8+3*lmMst2-3*lmMt)+
-(5+6*lmMst2)*lmMt-6*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)-
-(1+7*lmMst2-
-2*lmMst1*(2+lmMst2-lmMt)+
-(-3-2*lmMst2)*lmMt+2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(12-45*lmMst2+
-2*lmMst1*(19+6*lmMst2-6*lmMt)+
-(7+12*lmMst2)*lmMt-12*pow2(lmMst2))*pow6(Mst1)-2*(1+lmMst2)*pow6(Mst2))+
-Dmglst2*Mgl*(pow2(Mst2)*(263+lmMst2*(962-213*lmMt)-177*lmMt+
-3*(131-6*lmMt)*pow2(lmMst2)-
-18*lmMst1*(26+lmMst2*(17-lmMt)-7*lmMt+
-pow2(lmMst2))+18*pow3(lmMst2))*pow4(Mst1)-
-pow2(Mst1)*(-(lmMst2*(224-15*lmMt))-
-17*(7-3*lmMt)+
-18*lmMst1*(4-lmMt+lmMst2*(1+lmMt)-
-pow2(lmMst2))-
-3*(5+6*lmMt)*pow2(lmMst2)+18*pow3(lmMst2))*pow4(Mst2)+(lmMst2*(2447-645*lmMt)+5*(58-75*lmMt)+
-3*(509-60*lmMt)*pow2(lmMst2)-
-18*lmMst1*(87+lmMst2*(71-10*lmMt)-22*lmMt+
-10*pow2(lmMst2))+180*pow3(lmMst2))*pow6(Mst1)+
-18*(1-2*lmMst2-3*pow2(lmMst2))*pow6(Mst2))
-+pow2(Dmglst2)*(-(pow2(Mst2)*(834+lmMst2*(569-33*lmMt)-162*lmMt+
-(51-18*lmMt)*pow2(lmMst2)-
-18*lmMst1*(13+lmMst2-lmMst2*lmMt+pow2(lmMst2))+
-18*pow3(lmMst2))*pow4(Mst1))-
-pow2(Mst1)*(96-lmMst2*(187-39*lmMt)+36*lmMt+
-18*lmMst1*(3-2*lmMt+lmMst2*(3+lmMt)-
-pow2(lmMst2))-
-3*(19+6*lmMt)*pow2(lmMst2)+
-18*pow3(lmMst2))*pow4(Mst2)+
-(lmMst2*(2447-645*lmMt)+
-5*(58-75*lmMt)+
-3*(509-60*lmMt)*pow2(lmMst2)-
-18*lmMst1*(87+lmMst2*(71-10*lmMt)-22*lmMt+
-10*pow2(lmMst2))+180*pow3(lmMst2))*pow6(Mst1)
-+36*(2+lmMst2-3*pow2(lmMst2))*pow6(Mst2)))-
-1152*Mt*pow2(Mst1)*pow2(s2t)*pow3(Mst2)*(pow2(Dmglst2)*(-6*pow2(Mst2)*(7-30*lmMst2+
-lmMst1*(11+2*lmMst2-12*pow2(lmMst2))-
-2*pow2(lmMst2)+12*pow3(lmMst2))*pow4(Mst1)+
-pow2(Mst1)*(29+179*lmMst2-
-6*lmMst1*(10+3*lmMst2-12*pow2(lmMst2))-
-18*pow2(lmMst2)-72*pow3(lmMst2))*pow4(Mst2)
-+3*(17+51*lmMst2-4*lmMst1*(6-lmMst2-3*pow2(lmMst2))-
-4*pow2(lmMst2)-12*pow3(lmMst2))*pow6(Mst1)+
-12*(2+lmMst2-3*pow2(lmMst2))*pow6(Mst2))+
-3*(1+lmMst2)*pow2(Mgl)*(2*(2-5*lmMst2+lmMst1*(5+2*lmMst2)-
-2*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-(5-12*lmMst2+4*lmMst1*(3+lmMst2)-
-4*pow2(lmMst2))*pow6(Mst1)-
-2*((2*lmMst2*(2+lmMst2)-
-lmMst1*(3+2*lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(1+lmMst2)*pow6(Mst2)))+
-3*Dmglst2*Mgl*((17+51*lmMst2-
-4*lmMst1*(6-lmMst2-3*pow2(lmMst2))-
-4*pow2(lmMst2)-12*pow3(lmMst2))*pow6(Mst1)+
-2*(pow2(Mst2)*(8+19*lmMst2-
-lmMst1*(7-5*lmMst2-6*pow2(lmMst2))-
-5*pow2(lmMst2)-6*pow3(lmMst2))*pow4(Mst1)+
-pow2(Mst1)*(7+9*lmMst2-
-lmMst1*(3-5*lmMst2-6*pow2(lmMst2))-
-8*pow2(lmMst2)-6*pow3(lmMst2))*pow4(Mst2)+
-(1-2*lmMst2-3*pow2(lmMst2))*pow6(Mst2))))-
-3*pow3(s2t)*(pow2(Mst1)*(135*((2*lmMst1-2*lmMst2)*pow2(Mgl)*pow2(Mst1)-
-(2*Dmglst2*Mgl+3*pow2(Dmglst2)+
-pow2(Mgl))*pow2(Mst2))*pow4(Dmsqst2)-
-540*pow3(Dmsqst2)*((2*Dmglst2*Mgl+3*pow2(Dmglst2))*((2*lmMst1-2*lmMst2)*pow2(Mst1)-
-pow2(Mst2))*pow2(Mst2)+
-pow2(Mgl)*(2*(lmMst1-lmMst2)*pow2(Mst1)*pow2(Mst2)+
-pow4(Mst1)-pow4(Mst2)))+
-(2*(lmMst1-lmMst2)*pow2(Mst1)*pow2(Mst2)+
-pow4(Mst1)-pow4(Mst2))*(90*pow2(Dmsqst2)*(14*Dmglst2*Mgl+33*pow2(Dmglst2)+
-pow2(Mgl))*pow2(Mst2)-
-180*Dmsqst2*(2*Dmglst2*Mgl+15*pow2(Dmglst2)-
-5*pow2(Mgl))*pow4(Mst2)))-
-4*pow4(Mst2)*(pow2(Dmglst2)*(-96*pow2(lmMst1)*pow4(Mst1)*(2*(8*pow2(Mst1)*pow2(Mst2)+pow4(Mst2))-
-lmMst2*(24*pow2(Mst1)*pow2(Mst2)+16*pow4(Mst1)+
-3*pow4(Mst2)))-
-4*pow2(Mst2)*(-20*pow2(Mst2)*pow4(Mst1)+
-363*pow2(Mst1)*pow4(Mst2)+65*pow6(Mst1)-
-48*pow6(Mst2))-
-6*lmMst1*pow2(Mst1)*(-16*(7+27*lmMst2-48*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)-
-(500-502*lmMst2-369*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-32*(3+2*lmMst2+16*pow2(lmMst2))*pow6(Mst1)+16*(2-3*lmMst2)*pow6(Mst2))+
-6*pow3(lmMst2)*(321*pow4(Mst1)*pow4(Mst2)+
-384*pow2(Mst2)*pow6(Mst1)+256*pow8(Mst1))+
-3*pow2(lmMst2)*(588*pow4(Mst1)*pow4(Mst2)-
-465*pow2(Mst2)*pow6(Mst1)+
-657*pow2(Mst1)*pow6(Mst2)+128*pow8(Mst1)-
-160*pow8(Mst2))+
-2*lmMst2*(-1172*pow4(Mst1)*pow4(Mst2)-
-769*pow2(Mst2)*pow6(Mst1)+
-585*pow2(Mst1)*pow6(Mst2)+336*pow8(Mst1)-
-48*pow8(Mst2)))+
-6*Dmglst2*Mgl*(4*pow2(Mst1)*pow2(Mst2)*(20*pow2(Mst1)*pow2(Mst2)+9*pow4(Mst1)-
-5*pow4(Mst2))+
-32*lmMst2*pow2(lmMst1)*pow4(Mst1)*(8*(pow2(Mst1)*pow2(Mst2)+pow4(Mst1))+
-pow4(Mst2))+
-pow3(lmMst2)*(214*pow4(Mst1)*pow4(Mst2)+
-256*(pow2(Mst2)*pow6(Mst1)+pow8(Mst1)))-
-2*lmMst1*(-((4-246*lmMst2-123*pow2(lmMst2))*pow4(Mst1)*pow4(Mst2))-
-16*lmMst2*pow2(Mst1)*pow6(Mst2)+
-16*((3+3*lmMst2+16*pow2(lmMst2))*pow2(Mst2)*pow6(Mst1)+
-(3+2*lmMst2+16*pow2(lmMst2))*pow8(Mst1)))
-+pow2(lmMst2)*(396*pow4(Mst1)*pow4(Mst2)+
-37*pow2(Mst2)*pow6(Mst1)+
-155*pow2(Mst1)*pow6(Mst2)+64*pow8(Mst1)-
-32*pow8(Mst2))+
-2*lmMst2*(4*pow4(Mst1)*pow4(Mst2)+
-21*pow2(Mst2)*pow6(Mst1)+
-115*pow2(Mst1)*pow6(Mst2)+56*pow8(Mst1)-
-16*pow8(Mst2)))+
-3*pow2(Mgl)*(-2*(8-237*lmMst2-
-16*(1+lmMst2)*pow2(lmMst1)-
-308*pow2(lmMst2)+
-lmMst1*(269+348*lmMst2+123*pow2(lmMst2))-
-107*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2)-
-pow2(Mst2)*(125+156*lmMst2+
-512*lmMst1*lmMst2*(1+lmMst2)-
-181*pow2(lmMst2)-
-256*((1+lmMst2)*pow2(lmMst1)+pow3(lmMst2)))*pow6(Mst1)+
-(221+284*lmMst2+32*lmMst1*(1+lmMst2)+
-107*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-16*(1+lmMst2)*(1+lmMst1*(2-32*lmMst2)-2*lmMst2+
-16*pow2(lmMst1)+16*pow2(lmMst2))*pow8(Mst1)
--16*pow2(1+lmMst2)*pow8(Mst2))))-
-12*s2t*pow2(Mt)*(pow2(Mst1)*(-540*(-(pow2(Mgl)*(pow2(Mst1)-pow2(Mst2)))+
-(2*Dmglst2*Mgl+3*pow2(Dmglst2))*pow2(Mst2))*pow3(Dmsqst2)+135*pow2(Mgl)*pow4(Dmsqst2)+
-(pow2(Mst1)-pow2(Mst2))*(-90*pow2(Dmsqst2)*(14*Dmglst2*Mgl+33*pow2(Dmglst2)+
-pow2(Mgl))*pow2(Mst2)+
-180*Dmsqst2*(2*Dmglst2*Mgl+15*pow2(Dmglst2)-
-5*pow2(Mgl))*pow4(Mst2)))-
-4*pow2(Mst2)*(2*Dmglst2*Mgl*((52+lmMst2*(370-96*pow2(lmMst1))+
-81*pow2(lmMst2)-
-96*(lmMst1*(1-lmMst2-2*pow2(lmMst2))+
-pow3(lmMst2)))*pow4(Mst1)*pow4(Mst2)-
-96*(lmMst2*pow2(lmMst1)+
-lmMst1*(4+2*lmMst2-2*pow2(lmMst2))-
-(4-lmMst2)*pow2(1+lmMst2))*pow2(Mst2)*pow6(Mst1)+
-3*(52-2*(51+16*lmMst1)*lmMst2-
-59*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-96*(6+lmMst2*(14-pow2(lmMst1))-
-lmMst1*(9+6*lmMst2-2*pow2(lmMst2))+
-6*pow2(lmMst2)-pow3(lmMst2))*pow8(Mst1)+
-96*lmMst2*(1+lmMst2)*pow8(Mst2))+
-pow2(Dmglst2)*(-((860-434*lmMst2-
-96*(2-3*lmMst2)*pow2(lmMst1)+
-96*lmMst1*(3+lmMst2-6*pow2(lmMst2))-
-243*pow2(lmMst2)+288*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2))+
-96*pow2(Mst2)*((2-3*lmMst2)*pow2(lmMst1)+
-lmMst1*(8-2*lmMst2+6*pow2(lmMst2))-
-3*(6+5*lmMst2+pow3(lmMst2)))*pow6(Mst1)+
-3*(324+32*lmMst1*(2-3*lmMst2)-
-134*lmMst2-177*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-192*(6+lmMst2*(14-pow2(lmMst1))-
-lmMst1*(9+6*lmMst2-2*pow2(lmMst2))+
-6*pow2(lmMst2)-pow3(lmMst2))*pow8(Mst1)-
-96*(2-lmMst2-5*pow2(lmMst2))*pow8(Mst2))-
-3*pow2(Mgl)*(-((109+76*lmMst2-21*pow2(lmMst2)+
-64*lmMst1*pow2(1+lmMst2)-
-32*((1+lmMst2)*pow2(lmMst1)+pow3(lmMst2)))*pow4(Mst1)*pow4(Mst2))+
-(173+188*lmMst2+32*lmMst1*(1+lmMst2)+
-59*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-32*(1+lmMst2)*(pow2(1-lmMst1+lmMst2)*pow2(Mst2)*pow6(Mst1)+
-(1+3*lmMst2-lmMst1*(3+2*lmMst2)+
-pow2(lmMst1)+pow2(lmMst2))*pow8(Mst1))-
-16*pow2(1+lmMst2)*pow8(Mst2)))))/pow2(Mgl)))/(324.*Tbeta)+(s2t*(pow3(s2t)*(pow2(Mst1)*(135*pow4(Dmsqst2)*((2*Dmglst2*Mgl+3*pow2(Dmglst2))*((1+2*lmMst1-2*lmMst2)*pow2(Mst1)-
-pow2(Mst2))*pow2(Mst2)+
-pow2(Mgl)*((1+2*lmMst1-2*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(1-2*lmMst1+2*lmMst2)*pow4(Mst1)-
-pow4(Mst2)))+
-540*pow3(Dmsqst2)*(pow2(Mgl)*(pow2(Mst1)-pow2(Mst2))*(2*(lmMst1-lmMst2)*pow2(Mst1)*pow2(Mst2)+
-pow4(Mst1)-pow4(Mst2))+
-(-2*Dmglst2*Mgl-3*pow2(Dmglst2))*pow2(Mst2)*((1+2*lmMst1-2*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(1-2*lmMst1+2*lmMst2)*pow4(Mst1)-
-pow4(Mst2)))+
-180*Dmsqst2*pow4(Mst2)*((2*Dmglst2*Mgl-5*pow2(Mgl))*(pow2(Mst1)-pow2(Mst2))*(2*(lmMst1-lmMst2)*pow2(Mst1)*pow2(Mst2)+
-pow4(Mst1)-pow4(Mst2))+
-pow2(Dmglst2)*(-15*((1-2*lmMst1+2*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(1+2*lmMst1-2*lmMst2)*pow2(Mst1)*pow4(Mst2))+2*pow6(Mst1)+15*pow6(Mst2)))-
-90*pow2(Dmsqst2)*pow2(Mst2)*((14*Dmglst2*Mgl+pow2(Mgl))*(pow2(Mst1)-pow2(Mst2))*(2*(lmMst1-lmMst2)*pow2(Mst1)*pow2(Mst2)+
-pow4(Mst1)-pow4(Mst2))+
-pow2(Dmglst2)*(-33*((1-2*lmMst1+2*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(1+2*lmMst1-2*lmMst2)*pow2(Mst1)*pow4(Mst2))+14*pow6(Mst1)+33*pow6(Mst2))))+
-4*pow6(Mst2)*(pow2(Mst1)*(6*Dmglst2*Mgl*(pow2(Mst2)*(44+lmMst2*(-34-224*pow2(lmMst1))+
-359*pow2(lmMst2)+
-2*lmMst1*(52-198*lmMst2+133*pow2(lmMst2))-
-42*pow3(lmMst2))*pow4(Mst1)-
-pow2(Mst1)*(100+lmMst2*(-222+32*pow2(lmMst1))+
-lmMst1*(8-524*lmMst2-246*pow2(lmMst2))+
-241*pow2(lmMst2)+214*pow3(lmMst2))*pow4(Mst2)+
-(36-(70+32*lmMst1)*lmMst2-
-27*pow2(lmMst2))*pow6(Mst1)+
-(20-(262+32*lmMst1)*lmMst2-
-187*pow2(lmMst2))*pow6(Mst2))-
-3*pow2(Mgl)*(-(pow2(Mst2)*(109+630*lmMst2-
-224*(1+lmMst2)*pow2(lmMst1)-
-lmMst1*(538+184*lmMst2-266*pow2(lmMst2))+
-435*pow2(lmMst2)-42*pow3(lmMst2))*pow4(Mst1))
--pow2(Mst1)*(237-190*lmMst2-32*(1+lmMst2)*pow2(lmMst1)-
-509*pow2(lmMst2)+
-2*lmMst1*(285+364*lmMst2+123*pow2(lmMst2))-
-214*pow3(lmMst2))*pow4(Mst2)+
-(141+140*lmMst2+32*lmMst1*(1+lmMst2)+
-43*pow2(lmMst2))*pow6(Mst1)+
-(237+316*lmMst2+32*lmMst1*(1+lmMst2)+
-123*pow2(lmMst2))*pow6(Mst2)))+
-pow2(Dmglst2)*(-((1532-3514*lmMst2-
-96*(2-3*lmMst2)*pow2(lmMst1)+
-6*lmMst1*(532-550*lmMst2-369*pow2(lmMst2))-
-207*pow2(lmMst2)+1926*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2))+
-pow2(Mst2)*(340-806*lmMst2+
-672*(2-3*lmMst2)*pow2(lmMst1)+
-3159*pow2(lmMst2)+
-6*lmMst1*(388-934*lmMst2+399*pow2(lmMst2))-
-378*pow3(lmMst2))*pow6(Mst1)+
-3*(548+32*lmMst1*(2-3*lmMst2)-
-422*lmMst2-817*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-6*(36-(70+32*lmMst1)*lmMst2-
-27*pow2(lmMst2))*pow8(Mst1)-
-96*(2+lmMst2-3*pow2(lmMst2))*pow8(Mst2))))+
-(4*pow2(Mt)*pow2(MuSUSY)*(256*Mst2*Mt*pow2(Mst1)*(pow2(Dmglst2)*(pow2(Mst2)*(11+371*lmMst2-
-6*lmMst1*(21+5*lmMst2-24*pow2(lmMst2))-
-42*pow2(lmMst2)-144*pow3(lmMst2))*pow4(Mst1)
-+pow2(Mst1)*(53+191*lmMst2-
-6*lmMst1*(10+3*lmMst2-12*pow2(lmMst2))-
-54*pow2(lmMst2)-72*pow3(lmMst2))*pow4(Mst2)
-+3*(49+103*lmMst2-4*lmMst1*(11-6*lmMst2-9*pow2(lmMst2))-
-36*(pow2(lmMst2)+pow3(lmMst2)))*pow6(Mst1)+
-12*(2+lmMst2-3*pow2(lmMst2))*pow6(Mst2))+
-3*(1+lmMst2)*pow2(Mgl)*(2*(1-10*lmMst2+4*lmMst1*(2+lmMst2)-
-4*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)+
-(7-32*lmMst2+4*lmMst1*(7+3*lmMst2)-
-12*pow2(lmMst2))*pow6(Mst1)-
-2*((1+5*lmMst2-lmMst1*(3+2*lmMst2)+
-2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)+
-(1+lmMst2)*pow6(Mst2)))+
-3*Dmglst2*Mgl*(4*pow2(Mst2)*(8+13*lmMst2-
-lmMst1*(5-5*lmMst2-6*pow2(lmMst2))-
-8*pow2(lmMst2)-6*pow3(lmMst2))*pow4(Mst1)+
-(49+103*lmMst2-
-4*lmMst1*(11-6*lmMst2-9*pow2(lmMst2))-
-36*(pow2(lmMst2)+pow3(lmMst2)))*pow6(Mst1)+
-2*(pow2(Mst1)*(8+7*lmMst2-
-lmMst1*(3-5*lmMst2-6*pow2(lmMst2))-
-11*pow2(lmMst2)-6*pow3(lmMst2))*pow4(Mst2)+
-(1-2*lmMst2-3*pow2(lmMst2))*pow6(Mst2))))-
-s2t*(pow2(Mst1)*(-540*((2*Dmglst2*Mgl+3*pow2(Dmglst2))*pow2(Mst2)+
-pow2(Mgl)*((1-2*lmMst1+2*lmMst2)*pow2(Mst1)+
-pow2(Mst2)))*pow3(Dmsqst2)+
-135*pow2(Mgl)*pow4(Dmsqst2))+
-pow2(Mst1)*(90*pow2(Dmsqst2)*((14*Dmglst2*Mgl+33*pow2(Dmglst2)+
-pow2(Mgl))*pow2(Mst2)*(pow2(Mst1)+pow2(Mst2))+
-(-2*lmMst1+2*lmMst2)*pow2(Mst1)*((14*Dmglst2*Mgl+33*pow2(Dmglst2))*pow2(Mst2)+
-pow2(Mgl)*(pow2(Mst1)+pow2(Mst2))))-
-180*Dmsqst2*((2*Dmglst2*Mgl+15*pow2(Dmglst2)-
-5*pow2(Mgl))*(pow2(Mst1)+pow2(Mst2))*pow4(Mst2)+
-(-2*lmMst1+2*lmMst2)*pow2(Mst1)*((2*Dmglst2*Mgl+15*pow2(Dmglst2))*pow2(Mst2)*(pow2(Mst1)+pow2(Mst2))-
-5*pow2(Mgl)*(pow2(Mst1)*pow2(Mst2)+pow4(Mst1)+
-pow4(Mst2)))))+
-4*pow2(Mst2)*(6*Dmglst2*Mgl*((60+lmMst2*(206+32*pow2(lmMst1))+
-lmMst1*(8-460*lmMst2-246*pow2(lmMst2))+
-519*pow2(lmMst2)+214*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2)-
-(20-2*(99+16*lmMst1)*lmMst2-
-123*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-2*(pow2(Mst2)*(48+lmMst2*(124+144*pow2(lmMst1))+
-278*pow2(lmMst2)-
-lmMst1*(44+278*lmMst2+379*pow2(lmMst2))+
-235*pow3(lmMst2))*pow6(Mst1)+
-(48+lmMst2*(180+272*pow2(lmMst1))+
-310*pow2(lmMst2)-
-lmMst1*(92+310*lmMst2+635*pow2(lmMst2))+
-363*pow3(lmMst2))*pow8(Mst1))-
-32*lmMst2*(1+lmMst2)*pow8(Mst2))+
-pow2(Dmglst2)*(-((1180+1270*lmMst2+
-96*(2-3*lmMst2)*pow2(lmMst1)-
-6*lmMst1*(468-454*lmMst2-369*pow2(lmMst2))-
-3255*pow2(lmMst2)-1926*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2))-
-6*pow2(Mst2)*(240+468*lmMst2+
-144*(2-3*lmMst2)*pow2(lmMst1)-
-lmMst1*(580-22*lmMst2-1137*pow2(lmMst2))-
-310*pow2(lmMst2)-705*pow3(lmMst2))*pow6(Mst1)
--3*(420+32*lmMst1*(2-3*lmMst2)-358*lmMst2-497*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-12*(48+lmMst2*(180+272*pow2(lmMst1))+
-310*pow2(lmMst2)-
-lmMst1*(92+310*lmMst2+635*pow2(lmMst2))+
-363*pow3(lmMst2))*pow8(Mst1)+
-96*(2-lmMst2-5*pow2(lmMst2))*pow8(Mst2))+
-3*pow2(Mgl)*((189+726*lmMst2+
-32*(1+lmMst2)*pow2(lmMst1)+
-707*pow2(lmMst2)-
-2*lmMst1*(253+332*lmMst2+123*pow2(lmMst2))+
-214*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2)+
-(205+252*lmMst2+32*lmMst1*(1+lmMst2)+
-91*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-2*(pow2(Mst2)*(32+285*lmMst2+
-144*(1+lmMst2)*pow2(lmMst1)+
-444*pow2(lmMst2)-
-lmMst1*(253+588*lmMst2+379*pow2(lmMst2))+
-235*pow3(lmMst2))*pow6(Mst1)+
-(40+277*lmMst2+
-272*(1+lmMst2)*pow2(lmMst1)+
-556*pow2(lmMst2)-
-lmMst1*(237+828*lmMst2+635*pow2(lmMst2))+
-363*pow3(lmMst2))*pow8(Mst1))-
-16*pow2(1+lmMst2)*pow8(Mst2))))))/pow2(Sbeta)))/(432.*pow2(Mgl)))/(pow4(Mst1)*pow6(Mst2))-
-pow2(Mt)*(pow2(Mt)*(8468/81.-(256*lmMst1)/3.+
-(16*(1199-576*lmMst1)*lmMst2)/81.-
-(128*(1+lmMst2)*(7-6*lmMst1+6*lmMst2)*lmMt)/27.+
-(4*(1217-192*lmMst1)*pow2(lmMst2))/27.-
-(8*Dmglst2*(4220+6*lmMst2*(1019-216*lmMt)-
-576*lmMst1*(4+2*lmMst2-lmMt)-1392*lmMt+
-1341*pow2(lmMst2)))/(81.*Mgl)-
-(4*pow2(Dmglst2)*(6*lmMst2*(587-4800*lmMst1-6120*lmMt)-
-4*(45937-60*(137+60*lmMst1)*lmMt)+
-25695*pow2(lmMst2)))/(2025.*pow2(Mgl))+
-(256*pow3(lmMst2))/9.+
-(64*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow4(Mst2))/(9.*pow2(Mgl)*pow4(Mst1))+
-((-20*Dmsqst2*(2*Dmglst2*Mgl+15*pow2(Dmglst2)-
-5*pow2(Mgl)))/(3.*pow2(Mgl))+
-((-4*(pow2(Dmglst2)*(356+32*lmMst1*(2-3*lmMst2)+
-26*lmMst2-177*pow2(lmMst2))+
-2*Dmglst2*Mgl*(84-(70+32*lmMst1)*lmMst2-
-59*pow2(lmMst2))-
-(173+188*lmMst2+32*lmMst1*(1+lmMst2)+
-59*pow2(lmMst2))*pow2(Mgl))*pow2(Mst2))/9.+
-(2*(pow2(Mgl)*(15*pow2(Dmsqst2)+150*Dmsqst2*pow2(Mst1)+
-64*(1+lmMst2)*(2+lmMst2*(27-6*lmMt)-
-lmMst1*(22+6*lmMst2-6*lmMt)-5*lmMt+
-6*pow2(lmMst2))*pow4(Mst1))+
-pow2(Dmglst2)*(495*pow2(Dmsqst2)-450*Dmsqst2*pow2(Mst1)+
-64*(221+lmMst2*(299-47*lmMt)-62*lmMt+
-(87-6*lmMt)*pow2(lmMst2)-
-2*lmMst1*(65+lmMst2*(32-3*lmMt)-12*lmMt+
-3*pow2(lmMst2))+6*pow3(lmMst2))*pow4(Mst1))+
-2*Dmglst2*Mgl*(105*pow2(Dmsqst2)-30*Dmsqst2*pow2(Mst1)-
-64*(31+lmMst2*(95-23*lmMt)-16*lmMt+
-(51-6*lmMt)*pow2(lmMst2)-
-2*lmMst1*(25+lmMst2*(20-3*lmMt)-6*lmMt+
-3*pow2(lmMst2))+6*pow3(lmMst2))*pow4(Mst1))))/(9.*pow2(Mst2))-
-(2*(pow2(Mgl)*(-15*pow2(Dmsqst2)*pow2(Mst1)+
-90*pow3(Dmsqst2)+
-64*(1+lmMst2)*(5+2*lmMst1*(25+6*lmMst2-6*lmMt)-
-3*lmMst2*(19-4*lmMt)+7*lmMt-
-12*pow2(lmMst2))*pow6(Mst1))+
-2*Dmglst2*Mgl*(-105*pow2(Dmsqst2)*pow2(Mst1)+
-90*pow3(Dmsqst2)+
-64*(42+lmMst2*(242-62*lmMt)-33*lmMt+
-6*(29-4*lmMt)*pow2(lmMst2)-
-2*lmMst1*(81+lmMst2*(74-12*lmMt)-18*lmMt+
-12*pow2(lmMst2))+24*pow3(lmMst2))*pow6(Mst1))
-+pow2(Dmglst2)*(-495*pow2(Dmsqst2)*pow2(Mst1)+270*pow3(Dmsqst2)+
-128*(42+lmMst2*(242-62*lmMt)-33*lmMt+
-6*(29-4*lmMt)*pow2(lmMst2)-
-2*lmMst1*(81+lmMst2*(74-12*lmMt)-18*lmMt+
-12*pow2(lmMst2))+24*pow3(lmMst2))*pow6(Mst1))))/(9.*pow4(Mst2)))/pow2(Mgl)+
-(5*(Dmsqst2-4*pow2(Mst1))*pow3(Dmsqst2))/pow6(Mst2))/pow2(Mst1))-(64*Mt*s2t*(9*(1+lmMst2)*pow2(Mgl)*(-2*pow2(Mst2)*((3+2*lmMst1*(7+2*lmMst2-2*lmMt)-
-4*lmMst2*(4-lmMt)+2*lmMt-4*pow2(lmMst2))*pow2(Mst2)+
-(1-10*lmMst2+4*lmMst1*(2+lmMst2)-
-4*pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst1)+
-pow2(Mst1)*((1-2*lmMst1*(5+2*lmMst2-2*lmMt)+
-4*lmMst2*(3-lmMt)-6*lmMt+4*pow2(lmMst2))*pow2(Mst2)+
-2*(1+5*lmMst2-lmMst1*(3+2*lmMst2)+
-2*pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst2)-
-(2*(8-27*lmMst2+
-lmMst1*(25+6*lmMst2-6*lmMt)+
-(2+6*lmMst2)*lmMt-6*pow2(lmMst2))*pow2(Mst2)+
-(7-32*lmMst2+4*lmMst1*(7+3*lmMst2)-
-12*pow2(lmMst2))*pow2(MuSUSY))*pow6(Mst1)+
-2*(1+lmMst2)*(2*pow2(Mst2)+pow2(MuSUSY))*pow6(Mst2))-pow2(Dmglst2)*(-3*pow2(Mst2)*(6*(93-lmMst1*(34+8*lmMst2-4*lmMt)+
-8*lmMst2*(11-lmMt)-22*lmMt+
-12*pow2(lmMst2))*pow2(Mst2)-
-pow2(MuSUSY)*(11+371*lmMst2-
-6*lmMst1*(21+5*lmMst2-24*pow2(lmMst2))-
-42*pow2(lmMst2)-144*pow3(lmMst2)))*pow4(Mst1)
--pow2(Mst1)*(-3*pow2(MuSUSY)*(53+191*lmMst2-
-lmMst1*(60+18*lmMst2-72*pow2(lmMst2))-
-54*pow2(lmMst2)-72*pow3(lmMst2))+
-pow2(Mst2)*(300-lmMst2*(341-78*lmMt)+72*lmMt+
-18*lmMst1*(8+5*lmMst2+(-4+2*lmMst2)*lmMt-
-2*pow2(lmMst2))-
-12*(26+3*lmMt)*pow2(lmMst2)+36*pow3(lmMst2)))*pow4(Mst2)+9*(pow2(Mst2)*(28+6*lmMst2*(63-16*lmMt)-44*lmMt+
-18*(15-2*lmMt)*pow2(lmMst2)-
-lmMst1*(274+lmMst2*(234-36*lmMt)-60*lmMt+
-36*pow2(lmMst2))+36*pow3(lmMst2))+
-pow2(MuSUSY)*(49+103*lmMst2-
-4*lmMst1*(11-6*lmMst2-9*pow2(lmMst2))-
-36*(pow2(lmMst2)+pow3(lmMst2))))*pow6(Mst1)+
-36*(2+lmMst2-3*pow2(lmMst2))*(2*pow2(Mst2)+pow2(MuSUSY))*pow6(Mst2))-
-Dmglst2*Mgl*(pow2(Mst1)*(pow2(Mst2)*(253+5*lmMst2*(107-6*lmMt)-102*lmMt+
-12*(10+3*lmMt)*pow2(lmMst2)-
-18*lmMst1*(9+lmMst2*(1+2*lmMt)-
-2*(lmMt+pow2(lmMst2)))-36*pow3(lmMst2))+
-18*pow2(MuSUSY)*(8+7*lmMst2-
-lmMst1*(3-5*lmMst2-6*pow2(lmMst2))-
-11*pow2(lmMst2)-6*pow3(lmMst2)))*pow4(Mst2)+
-9*(pow2(Mst2)*(28+6*lmMst2*(63-16*lmMt)-44*lmMt+
-18*(15-2*lmMt)*pow2(lmMst2)-
-lmMst1*(274+lmMst2*(234-36*lmMt)-60*lmMt+
-36*pow2(lmMst2))+36*pow3(lmMst2))+
-pow2(MuSUSY)*(49+103*lmMst2-
-4*lmMst1*(11-6*lmMst2-9*pow2(lmMst2))-
-36*(pow2(lmMst2)+pow3(lmMst2))))*pow6(Mst1)+
-18*(pow2(Mst2)*(2*pow2(MuSUSY)*(8+13*lmMst2-
-lmMst1*(5-5*lmMst2-6*pow2(lmMst2))-
-8*pow2(lmMst2)-6*pow3(lmMst2))+
-pow2(Mst2)*(23+lmMst2*(93-22*lmMt)-14*lmMt+
-4*(11-lmMt)*pow2(lmMst2)-
-2*lmMst1*(25+lmMst2*(17-2*lmMt)-6*lmMt+
-2*pow2(lmMst2))+4*pow3(lmMst2)))*pow4(Mst1)+
-(1-2*lmMst2-3*pow2(lmMst2))*(2*pow2(Mst2)+pow2(MuSUSY))*pow6(Mst2)))))/(81.*pow2(Mgl)*pow2(Mst1)*pow5(Mst2))-
-(pow2(s2t)*((720*Dmsqst2*(2*Dmglst2*Mgl+15*pow2(Dmglst2)-5*pow2(Mgl))+
-(180*pow2(Dmsqst2)*(14*Dmglst2*Mgl+33*pow2(Dmglst2)+pow2(Mgl)))/pow2(Mst1)+
-8*(-2*Dmglst2*Mgl*(332+302*lmMst2-288*lmMst1*(1+lmMst2)+
-111*pow2(lmMst2))+
-pow2(Dmglst2)*(868-96*lmMst1*(11-lmMst2)+1874*lmMst2+
-243*pow2(lmMst2))+
-3*(141+172*lmMst2+75*pow2(lmMst2))*pow2(Mgl))*pow2(Mst1))/pow2(Mgl)+
-pow3(Dmsqst2)*((270*(2*Dmglst2*Mgl+3*pow2(Dmglst2)+pow2(Mgl))*(Dmsqst2+8*pow2(Mst1)))/(pow2(Mgl)*pow2(Mst1)*pow4(Mst2))-
-(540*(Dmsqst2+2*pow2(Mst1)))/pow6(Mst2))+
-((180*pow2(Dmsqst2)*(14*Dmglst2*Mgl+33*pow2(Dmglst2)+pow2(Mgl))*(pow2(Mst1)-2*pow2(Mst2)))/pow4(Mst2)+
-(-8*pow2(Mst2)*(pow2(Dmglst2)*(675*Dmsqst2-
-2*pow2(Mst1)*(916-418*lmMst2-
-48*(2-3*lmMst2)*pow2(lmMst1)+
-48*lmMst1*(5-2*lmMst2-6*pow2(lmMst2))-
-387*pow2(lmMst2)+144*pow3(lmMst2)))-
-3*pow2(Mgl)*(75*Dmsqst2-
-2*pow2(Mst1)*(141+132*lmMst2+19*pow2(lmMst2)+
-16*lmMst1*(3+5*lmMst2+2*pow2(lmMst2))-
-16*((1+lmMst2)*pow2(lmMst1)+pow3(lmMst2))))
-+2*Dmglst2*Mgl*(45*Dmsqst2-
-2*pow2(Mst1)*(52+lmMst2*(-338+48*pow2(lmMst1))-
-129*pow2(lmMst2)+
-48*(lmMst1*(1-2*(lmMst2+pow2(lmMst2)))+
-pow3(lmMst2)))))-
-24*(pow2(Dmglst2)*(388+32*lmMst1*(2-3*lmMst2)-
-166*lmMst2-337*pow2(lmMst2))+
-2*Dmglst2*Mgl*(52-2*(67+16*lmMst1)*lmMst2-
-91*pow2(lmMst2))-
-(189+220*lmMst2+32*lmMst1*(1+lmMst2)+
-75*pow2(lmMst2))*pow2(Mgl))*pow4(Mst2)-
-(24*(pow2(Mgl)*(45*pow3(Dmsqst2)-75*Dmsqst2*pow4(Mst1)+
-32*(lmMst1-lmMst2)*(1+lmMst2)*pow6(Mst1))+
-2*Dmglst2*Mgl*(45*pow3(Dmsqst2)+15*Dmsqst2*pow4(Mst1)+
-32*(2+7*lmMst2-lmMst1*(5+4*lmMst2)+
-4*pow2(lmMst2))*pow6(Mst1))+
-pow2(Dmglst2)*(135*pow3(Dmsqst2)+225*Dmsqst2*pow4(Mst1)+
-64*(2+7*lmMst2-lmMst1*(5+4*lmMst2)+
-4*pow2(lmMst2))*pow6(Mst1))))/pow2(Mst2))/pow2(Mst1)+
-(384*(-4*Dmglst2*lmMst2*(1+lmMst2)*Mgl+
-2*pow2(Dmglst2)*(2-lmMst2-5*pow2(lmMst2))-
-pow2(1+lmMst2)*pow2(Mgl))*pow6(Mst2))/pow4(Mst1)
-+(pow2(MuSUSY)*(pow2(Mst1)*(-540*((2*Dmglst2*Mgl+3*pow2(Dmglst2))*pow2(Mst2)+
-pow2(Mgl)*((1-2*lmMst1+2*lmMst2)*pow2(Mst1)+
-pow2(Mst2)))*pow3(Dmsqst2)+
-135*pow2(Mgl)*pow4(Dmsqst2))+
-pow2(Mst1)*(90*pow2(Dmsqst2)*((14*Dmglst2*Mgl+33*pow2(Dmglst2)+
-pow2(Mgl))*pow2(Mst2)*(pow2(Mst1)+pow2(Mst2))
-+(-2*lmMst1+2*lmMst2)*pow2(Mst1)*((14*Dmglst2*Mgl+33*pow2(Dmglst2))*pow2(Mst2)+pow2(Mgl)*(pow2(Mst1)+pow2(Mst2))))-180*Dmsqst2*((2*Dmglst2*Mgl+15*pow2(Dmglst2)-5*pow2(Mgl))*(pow2(Mst1)+pow2(Mst2))*pow4(Mst2)+
-(-2*lmMst1+2*lmMst2)*pow2(Mst1)*((2*Dmglst2*Mgl+15*pow2(Dmglst2))*pow2(Mst2)*(pow2(Mst1)+pow2(Mst2))-
-5*pow2(Mgl)*(pow2(Mst1)*pow2(Mst2)+pow4(Mst1)+
-pow4(Mst2)))))+
-4*pow2(Mst2)*(6*Dmglst2*Mgl*((60+lmMst2*(206+32*pow2(lmMst1))+
-lmMst1*(8-460*lmMst2-246*pow2(lmMst2))+
-519*pow2(lmMst2)+214*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2)-
-(20-2*(99+16*lmMst1)*lmMst2-
-123*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-2*(pow2(Mst2)*(48+lmMst2*(124+144*pow2(lmMst1))+
-278*pow2(lmMst2)-
-lmMst1*(44+278*lmMst2+379*pow2(lmMst2))+
-235*pow3(lmMst2))*pow6(Mst1)+
-(48+lmMst2*(180+272*pow2(lmMst1))+
-310*pow2(lmMst2)-
-lmMst1*(92+310*lmMst2+635*pow2(lmMst2))+
-363*pow3(lmMst2))*pow8(Mst1))-
-32*lmMst2*(1+lmMst2)*pow8(Mst2))+
-pow2(Dmglst2)*(-((1180+1270*lmMst2+
-96*(2-3*lmMst2)*pow2(lmMst1)-
-6*lmMst1*(468-454*lmMst2-369*pow2(lmMst2))-
-3255*pow2(lmMst2)-1926*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2))-
-6*pow2(Mst2)*(240+468*lmMst2+
-144*(2-3*lmMst2)*pow2(lmMst1)-
-lmMst1*(580-22*lmMst2-1137*pow2(lmMst2))-
-310*pow2(lmMst2)-705*pow3(lmMst2))*pow6(Mst1)
--3*(420+32*lmMst1*(2-3*lmMst2)-358*lmMst2-497*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-12*(48+lmMst2*(180+272*pow2(lmMst1))+
-310*pow2(lmMst2)-
-lmMst1*(92+310*lmMst2+635*pow2(lmMst2))+
-363*pow3(lmMst2))*pow8(Mst1)+
-96*(2-lmMst2-5*pow2(lmMst2))*pow8(Mst2))+
-3*pow2(Mgl)*((189+726*lmMst2+
-32*(1+lmMst2)*pow2(lmMst1)+
-707*pow2(lmMst2)-
-2*lmMst1*(253+332*lmMst2+123*pow2(lmMst2))+
-214*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2)+
-(205+252*lmMst2+32*lmMst1*(1+lmMst2)+
-91*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2)+
-2*(pow2(Mst2)*(32+285*lmMst2+
-144*(1+lmMst2)*pow2(lmMst1)+
-444*pow2(lmMst2)-
-lmMst1*(253+588*lmMst2+379*pow2(lmMst2))+
-235*pow3(lmMst2))*pow6(Mst1)+
-(40+277*lmMst2+
-272*(1+lmMst2)*pow2(lmMst1)+
-556*pow2(lmMst2)-
-lmMst1*(237+828*lmMst2+635*pow2(lmMst2))+
-363*pow3(lmMst2))*pow8(Mst1))-
-16*pow2(1+lmMst2)*pow8(Mst2)))))/(pow4(Mst1)*pow6(Mst2)))/pow2(Mgl)))/108.)))-
-threeLoopFlag*pow2(Al4p)*(-(z2*(Mt*pow3(s2t)*(-(((80*Dmsqst2*((5-3*lmMst1+3*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))+
-(1+lmMst1-lmMst2)*pow2(Mgl))*pow2(Mst1))/(3.*pow2(Mgl))-
-(104839/4860.-34*lmMst1+34*lmMst2-
-(Dmglst2*(8583283-2329560*lmMst1+2329560*lmMst2)*(Dmglst2+Mgl))/(14580.*pow2(Mgl)))*pow4(Mst1))/Mst2)+((Mst2*(-15*pow2(Mgl)*(8640*Dmsqst2*(2+lmMst1-lmMst2)-
-2*(4673-5976*lmMst1+8424*lmMst2)*pow2(Mst1)+
-9*(2269+664*lmMst1-56*lmMst2)*pow2(Mst2))+
-3*Dmglst2*Mgl*(43200*Dmsqst2*(2+3*lmMst1-3*lmMst2)-
-2*(206741-101880*lmMst1+89640*lmMst2)*pow2(Mst1)-
-3*(173947-25080*lmMst1+68760*lmMst2)*pow2(Mst2))+
-pow2(Dmglst2)*(129600*Dmsqst2*(2+3*lmMst1-3*lmMst2)+
-20*(143005+30024*lmMst1-26352*lmMst2)*pow2(Mst1)-
-3*(897737+47880*lmMst1+238680*lmMst2)*pow2(Mst2))))/4860.-
-(10*Dmsqst2*(4*(11*(Dmglst2*Mgl+pow2(Dmglst2))-pow2(Mgl))*pow2(Mst2)*pow4(Mst1)-
-Dmsqst2*pow2(Mgl)*(4*(1-lmMst1+lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(17+10*lmMst1-10*lmMst2)*pow4(Mst1)-
-4*(3+lmMst1-lmMst2)*pow4(Mst2))))/(3.*pow5(Mst2)))/pow2(Mgl))+
-pow2(Mt)*(-(Mt*s2t*(-(((160*Dmsqst2*((19-6*lmMst1+12*lmMst2-6*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(1-2*lmMst1+4*lmMst2-2*lmMt)*pow2(Mgl)))/(3.*pow2(Mgl))-
-(470657/405.-(1912*lmMst1)/9.+440*lmMst2-
-(Dmglst2*(510149-55320*lmMst1+118200*lmMst2-
-32160*lmMt))/(135.*Mgl)+
-((47845349/8505.-(6728*lmMst1)/9.+
-(14168*lmMst2)/9.-(2480*lmMt)/3.)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst1))/Mst2)+
-((80*(5-2*lmMst1+4*lmMst2-2*lmMt)*pow2(Dmsqst2))/3.-
-(160*Dmsqst2*((51-14*lmMst1+28*lmMst2-14*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(5-2*lmMst1+4*lmMst2-2*lmMt)*pow2(Mgl))*pow2(Mst1))/(3.*pow2(Mgl))+
-(4*(1724277-291600*lmMst1+492480*lmMst2-
-(Dmglst2*(9908167-949320*lmMst1+1769040*lmMst2-
-217080*lmMt)*(Dmglst2+Mgl))/pow2(Mgl))*pow4(Mst1))/3645.)/pow3(Mst2)+
-((Mst2*(-315*Dmglst2*(4189-1672*lmMst1+1448*lmMst2-
-1888*lmMt)*Mgl+
-(2661049-335160*lmMst1+1408680*lmMst2-
-408240*lmMt)*pow2(Dmglst2)+
-21*(68693-9960*lmMst1+45480*lmMst2-
-3840*lmMt)*pow2(Mgl)))/2835.-
-(pow2(MuSUSY)*(388800*Dmsqst2*((Dmglst2*Mgl+pow2(Dmglst2))*((1-9*lmMst1+9*lmMst2)*pow2(Mst1)-
-(2+3*lmMst1-3*lmMst2)*pow2(Mst2))+
-pow2(Mgl)*((5+3*lmMst1-3*lmMst2)*pow2(Mst1)+
-(2+lmMst1-lmMst2)*pow2(Mst2)))+
-Dmglst2*Mgl*(36*(364291-88560*lmMst1+147960*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(30115666-8028720*lmMst1+
-11126160*lmMst2)*pow4(Mst1)+
-27*(173947-25080*lmMst1+68760*lmMst2)*pow4(Mst2))+
-pow2(Dmglst2)*(6*(1263161-156600*lmMst1+979560*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(30115666-8028720*lmMst1+
-11126160*lmMst2)*pow4(Mst1)+
-9*(897737+47880*lmMst1+238680*lmMst2)*pow4(Mst2))+
-pow2(Mgl)*(194400*(3+lmMst1-lmMst2)*pow2(Dmsqst2)+
-3*(120*(3937+2988*lmMst1-2232*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(533726+792720*lmMst1-693360*lmMst2)*pow4(Mst1)+
-135*(2269+664*lmMst1-56*lmMst2)*pow4(Mst2)))))/(7290.*pow5(Mst2)))/pow2(Mgl)+
-(160*Dmsqst2*pow2(Mst1)*(Dmsqst2*(7-2*lmMst1+4*lmMst2-2*lmMt)*pow2(Mgl)-
-((87-22*lmMst1+44*lmMst2-22*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(5-2*lmMst1+4*lmMst2-2*lmMt)*pow2(Mgl))*pow2(Mst1)))/(3.*pow2(Mgl)*pow5(Mst2))))+
-pow2(Mt)*(48983/135.-(832*lmMst1)/9.+(596*lmMst2)/3.-
-(812*lmMt)/9.-
-(4*Dmglst2*(209341-26880*lmMst1+82320*lmMst2-
-1680*lmMt))/(945.*Mgl)+
-(2*(66191-9288*lmMst1+11952*lmMst2-16488*lmMt)*pow2(Dmglst2))/(81.*pow2(Mgl))-
-((160*Dmsqst2*((23-5*lmMst1+10*lmMst2-5*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(3-lmMst1+2*lmMst2-lmMt)*pow2(Mgl)))/(3.*pow2(Mgl))-
-(40*pow2(Dmsqst2))/(3.*pow2(Mst1))-
-(310039/405.-(2024*lmMst1)/9.+
-(3224*lmMst2)/9.-(976*lmMt)/9.-
-(Dmglst2*(12737588/2835.-672*lmMst1+1632*lmMst2-
-(2048*lmMt)/9.))/Mgl+
-((21051518/1701.-(4048*lmMst1)/3.+
-(23984*lmMst2)/9.-(12640*lmMt)/9.)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst1))/pow2(Mst2)
-+((40*(13-3*lmMst1+6*lmMst2-3*lmMt)*pow2(Dmsqst2))/3.-
-(160*Dmsqst2*((77-18*lmMst1+36*lmMst2-18*lmMt)*(Dmglst2*Mgl+pow2(Dmglst2))-
-2*(3-lmMst1+2*lmMst2-lmMt)*pow2(Mgl))*pow2(Mst1))/(3.*pow2(Mgl))+
-(1253738/1215.-(4448*lmMst1)/9.+
-(1952*lmMst2)/3.-(1168*lmMt)/9.-
-(16*Dmglst2*(19152737-3674160*lmMst1+
-6872040*lmMst2-850500*lmMt)*(Dmglst2+Mgl))/(25515.*pow2(Mgl)))*pow4(Mst1))/pow4(Mst2)+
-Dmsqst2*((-80*(2*(Dmglst2*Mgl+pow2(Dmglst2))-pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1))+
-(40*pow2(Mst1)*(5*Dmsqst2*(9-2*lmMst1+4*lmMst2-2*lmMt)+
-4*(7-3*lmMst1+6*lmMst2-3*lmMt)*pow2(Mst1)))/(3.*pow6(Mst2)))+((8*(-28*Dmglst2*Mgl+24*pow2(Dmglst2)+
-19*pow2(Mgl))*pow2(Mst2))/(9.*pow2(Mst1))+
-(pow2(MuSUSY)*(pow2(Mst2)*(60*Dmglst2*Mgl*((3643-120*lmMst1+3192*lmMst2)*pow2(Mst1)+192*(5+6*lmMst2)*pow2(Mst2))+
-2*pow2(Dmglst2)*((122051+1800*lmMst1+274680*lmMst2)*pow2(Mst1)+48*(617+2040*lmMst2)*pow2(Mst2)))-5*pow2(Mgl)*(6*(353-72*lmMst1-696*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-(38401+1080*lmMst1-7992*lmMst2)*pow4(Mst1)-96*(53+24*lmMst2)*pow4(Mst2))))/(405.*pow6(Mst2)))/pow2(Mgl))+
-pow2(s2t)*((5*Dmsqst2*(192*(Dmglst2*Mgl+pow2(Dmglst2))+77*pow2(Mgl)))/(9.*pow2(Mgl))-(20*pow2(Dmsqst2))/(3.*pow2(Mst1))+
-(5927/540.+(226*lmMst1)/9.-(610*lmMst2)/9.-
-(Dmglst2*(19396/135.-8*lmMst1+264*lmMst2))/Mgl-
-((123227/315.-(52*lmMst1)/9.+(6580*lmMst2)/9.)*pow2(Dmglst2))/pow2(Mgl)+
-(40*Dmsqst2*(2*(Dmglst2*Mgl+pow2(Dmglst2))-pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1)))*pow2(Mst2)-
-((865*pow2(Dmsqst2))/27.-
-(10*Dmsqst2*(288*(Dmglst2*Mgl+pow2(Dmglst2))+
-101*pow2(Mgl))*pow2(Mst1))/(27.*pow2(Mgl))-
-(3291029/4860.+(130*lmMst1)/3.-(130*lmMst2)/3.-
-(2*Dmglst2*(78533+6732*lmMst1+180*lmMst2)*(Dmglst2+Mgl))/(81.*pow2(Mgl)))*pow4(Mst1))/pow2(Mst2)+(((-5040*Dmglst2*(505+68*lmMst1+124*lmMst2)*Mgl+
-30*(5208*lmMst1-37*(7339+3192*lmMst2))*pow2(Dmglst2)+
-7*(309749+12240*lmMst1-12240*lmMst2)*pow2(Mgl))*pow2(Mst1))/5670.+
-(40*Dmsqst2*(648*(Dmglst2*Mgl+pow2(Dmglst2))+
-101*pow2(Mgl))*pow4(Mst1))/(243.*pow4(Mst2)))/pow2(Mgl)-(4*(-28*Dmglst2*Mgl+24*pow2(Dmglst2)+19*pow2(Mgl))*pow4(Mst2))/(9.*pow2(Mgl)*pow2(Mst1))+
-pow2(MuSUSY)*(5597/54.+(94*lmMst1)/9.-
-(184*lmMst2)/9.+
-(Dmglst2*(24*lmMst1-(7*(233+240*lmMst2))/27.))/Mgl-((88931/810.+(368*lmMst1)/9.+
-(148*lmMst2)/9.)*pow2(Dmglst2))/pow2(Mgl)+
-(Dmsqst2*(265/9.+
-(40*Dmglst2*(2+lmMst1-lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))-
-(10*pow2(Dmsqst2))/(3.*pow2(Mst1))+
-(533629/810.-(10*lmMst1)/9.+(2*lmMst2)/9.-
-(2*Dmglst2*(6803-1810*lmMst1+2670*lmMst2))/(45.*Mgl)-
-((21223+13230*lmMst1+702*lmMst2)*pow2(Dmglst2))/(243.*pow2(Mgl)))*pow2(Mst1))/pow2(Mst2)-
-(2*(-28*Dmglst2*Mgl+24*pow2(Dmglst2)+
-19*pow2(Mgl))*pow2(Mst2))/(9.*pow2(Mgl)*pow2(Mst1))-
-((5*(209+18*lmMst1-18*lmMst2)*pow2(Dmsqst2))/27.-
-(5*Dmsqst2*(1097-72*lmMst1+
-72*(lmMst2+
-(Dmglst2*(3+8*lmMst1-8*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl)))*pow2(Mst1))/27.-
-(6649153/4860.-(151*lmMst1)/9.+
-(143*lmMst2)/9.-
-(2*Dmglst2*(2128489-307800*lmMst1+377460*lmMst2)*(Dmglst2+Mgl))/(3645.*pow2(Mgl)))*pow4(Mst1))/pow4(Mst2)+
-Dmsqst2*((20*(2*(Dmglst2*Mgl+pow2(Dmglst2))-pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1))-
-(5*pow2(Mst1)*(12*Dmsqst2*(421+54*lmMst1-54*lmMst2)-
-(20701-648*lmMst1+648*lmMst2)*pow2(Mst1)))/(243.*pow6(Mst2))))-
-(3605*pow2(Dmsqst2)*pow2(Mst1)*(pow2(Mst1)+pow2(Mst2)))/(81.*pow6(Mst2))))+
-pow2(s2t)*(-(pow2(Mt)*((pow2(MuSUSY)*(5597/54.+(94*lmMst1)/9.-(184*lmMst2)/9.+
-(Dmglst2*(24*lmMst1-(7*(233+240*lmMst2))/27.))/Mgl-
-((88931+33120*lmMst1+13320*lmMst2)*pow2(Dmglst2))/(810.*pow2(Mgl))+
-(Dmsqst2*(265/9.+
-(40*Dmglst2*(2+lmMst1-lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))-
-(10*pow2(Dmsqst2))/(3.*pow2(Mst1))-
-((108*Dmglst2*(6803-1810*lmMst1+2670*lmMst2)*Mgl+
-10*(21223+13230*lmMst1+702*lmMst2)*pow2(Dmglst2)-
-3*(533629-900*lmMst1+180*lmMst2)*pow2(Mgl))*pow2(Mst1))/(2430.*pow2(Mgl)))/pow2(Mst2)-
-(2*(-28*Dmglst2*Mgl+24*pow2(Dmglst2)+
-19*pow2(Mgl))*pow2(Mst2))/(9.*pow2(Mgl)*pow2(Mst1))-
-((5*(209+18*lmMst1-18*lmMst2)*pow2(Dmsqst2))/27.-
-(5*Dmsqst2*(1097-72*lmMst1+
-72*(lmMst2+
-(Dmglst2*(3+8*lmMst1-8*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl)))*pow2(Mst1))/27.-
-(6649153/4860.-(151*lmMst1)/9.+
-(143*lmMst2)/9.-
-(2*Dmglst2*(2128489-307800*lmMst1+377460*lmMst2)*(Dmglst2+Mgl))/(3645.*pow2(Mgl)))*pow4(Mst1))/pow4(Mst2)+
-Dmsqst2*((20*(2*(Dmglst2*Mgl+pow2(Dmglst2))-pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1))-
-(5*pow2(Mst1)*(12*Dmsqst2*(421+54*lmMst1-54*lmMst2)-
-(20701-648*lmMst1+648*lmMst2)*pow2(Mst1)))/(243.*pow6(Mst2)))))/pow2(Sbeta)-
-(5*Dmsqst2*(3*Dmsqst2*(17-2*lmMst1+2*lmMst2)*pow2(Mgl)-
-4*Dmglst2*(93-10*lmMst1+10*lmMst2)*(Dmglst2+Mgl)*pow2(Mst2))*pow2(Sbeta)*pow4(Mst1))/(3.*pow2(Mgl)*pow6(Mst2))))+
-(5*Dmsqst2*Mt*pow2(Sbeta)*(4*Dmglst2*(93-10*lmMst1+10*lmMst2)*(Dmglst2+Mgl)*Mt*pow2(Mst2)*pow2(Sbeta)-
-Dmsqst2*pow2(Mgl)*(-2*(11+10*lmMst1-10*lmMst2)*Mst2*s2t*(2-pow2(Sbeta))+
-3*(17-2*lmMst1+2*lmMst2)*Mt*pow2(Sbeta)))*pow4(Mst1))/(6.*pow2(Mgl)*pow6(Mst2)))-
-(pow2(MuSUSY)*pow3(Mt)*(Mst2*(Dmglst2*Mgl*(27*pow2(Mst2)*(7680*(5+6*lmMst2)*Mst2*Mt+
-s2t*(-14400*Dmsqst2*(2+3*lmMst1-3*lmMst2)+
-(173947-25080*lmMst1+68760*lmMst2)*pow2(Mst2)))+
-36*pow2(Mst1)*(30*(3643-120*lmMst1+3192*lmMst2)*Mst2*Mt+
-s2t*(10800*Dmsqst2*(1-9*lmMst1+9*lmMst2)+
-(364291-88560*lmMst1+147960*lmMst2)*pow2(Mst2)))+
-2*(15057833-4014360*lmMst1+5563080*lmMst2)*s2t*pow4(Mst1))+
-pow2(Dmglst2)*(9*pow2(Mst2)*(192*(617+2040*lmMst2)*Mst2*Mt+
-s2t*(-43200*Dmsqst2*(2+3*lmMst1-3*lmMst2)+
-(897737+47880*lmMst1+238680*lmMst2)*pow2(Mst2)))+
-6*pow2(Mst1)*(6*(122051+1800*lmMst1+274680*lmMst2)*Mst2*Mt+
-s2t*(64800*Dmsqst2*(1-9*lmMst1+9*lmMst2)+
-(1263161-156600*lmMst1+979560*lmMst2)*pow2(Mst2)))+
-2*(15057833-4014360*lmMst1+5563080*lmMst2)*s2t*pow4(Mst1)))-
-3*pow2(Mgl)*(2*(15*(38401+1080*lmMst1-7992*lmMst2)*Mt-
-(266863+396360*lmMst1-346680*lmMst2)*Mst2*s2t)*pow4(Mst1)+
-Mst2*(60*pow2(Mst1)*(3*(353-72*lmMst1-696*lmMst2)*Mst2*Mt+
-s2t*(-2160*Dmsqst2*(5+3*lmMst1-3*lmMst2)-
-2*(3937+2988*lmMst1-2232*lmMst2)*pow2(Mst2)))-45*(64*(53+24*lmMst2)*Mt*pow3(Mst2)+
-s2t*(1440*(3+lmMst1-lmMst2)*pow2(Dmsqst2)+
-2880*Dmsqst2*(2+lmMst1-lmMst2)*pow2(Mst2)+
-3*(2269+664*lmMst1-56*lmMst2)*pow4(Mst2)))))))/(7290.*pow2(Mgl)*pow2(Sbeta)*pow6(Mst2))+
-pow4(s2t)*((5*((173+18*lmMst1-18*lmMst2)*pow2(Dmsqst2)+
-(Dmsqst2*(144*(4-lmMst1+lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(743-72*lmMst1+72*lmMst2)*pow2(Mgl))*pow2(Mst1))/pow2(Mgl)))/108.+
-(5*(121+27*lmMst1-27*lmMst2)*pow2(Dmsqst2)*pow2(Mst1))/(81.*pow2(Mst2))+
-((5*pow2(Dmsqst2))/(6.*pow2(Mst1))-
-((-72*Dmglst2*(5917-1095*lmMst1-195*lmMst2)*Mgl+
-4*(77099+16605*lmMst1+18225*lmMst2)*pow2(Dmglst2)+
-3*(362299-17820*lmMst1+33300*lmMst2)*pow2(Mgl))*pow2(Mst1))/(9720.*pow2(Mgl)))*pow2(Mst2)-
-Dmsqst2*((5*(77+
-(24*Dmglst2*(4+3*lmMst1-3*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow2(Mst2))/36.+
-((5965/486.+(10*lmMst1)/3.-(10*lmMst2)/3.-
-(5*Dmglst2*(7+10*lmMst1-10*lmMst2)*(Dmglst2+Mgl))/(3.*pow2(Mgl)))*pow4(Mst1))/pow2(Mst2))-
-pow4(Mst1)*(149867/3888.-(37*lmMst1)/36.-(5*lmMst2)/4.-
-(Dmglst2*(2272991/14580.-8*lmMst1+8*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl)-
-((5045/972.-(5*lmMst1)/2.+(5*lmMst2)/2.)*pow2(Dmsqst2))/pow4(Mst2))-
-(6053/216.+(47*lmMst1)/18.-(46*lmMst2)/9.+
-(Dmglst2*(6*lmMst1-(7*(281+240*lmMst2))/108.))/Mgl-
-((80291/3240.+(92*lmMst1)/9.+(37*lmMst2)/9.)*pow2(Dmglst2))/pow2(Mgl)+
-(5*Dmsqst2*(2*(Dmglst2*Mgl+pow2(Dmglst2))-
-pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1)))*pow4(Mst2)+
-((-28*Dmglst2*Mgl+24*pow2(Dmglst2)+19*pow2(Mgl))*pow6(Mst2))/(18.*pow2(Mgl)*pow2(Mst1)))+
-((5*shiftst1*(Dmsqst2+pow2(Mst2))*((-2*lmMst1+2*lmMst2)*pow2(Mst1)*pow2(s2t)*(4*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mst1)-
-pow2(Mst1)*pow2(Mst2)*(-4*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))+
-pow2(s2t)*pow2(Sbeta)*pow4(Mst2))+
-pow4(Mst2)*(4*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))+
-pow2(s2t)*pow2(Sbeta)*pow4(Mst2)))+
-pow4(Mst2)*(pow2(Mst1)*(4*pow2(Mt)*pow2(s2t)*(pow2(MuSUSY)+
-(4*pow2(Mst2)-pow2(MuSUSY))*pow2(Sbeta))+
-pow2(Sbeta)*(16*pow4(Mt)-pow4(Mst2)*pow4(s2t)))+
-pow2(Mst2)*(-4*pow2(Mt)*pow2(s2t)*(-(pow2(MuSUSY)*(1-pow2(Sbeta)))+
-2*pow2(Mst2)*pow2(Sbeta))+
-pow2(Sbeta)*(16*pow4(Mt)+pow4(Mst2)*pow4(s2t)))+
-pow2(Sbeta)*(-(pow2(s2t)*(8*pow2(Mt)+pow2(Mst2)*pow2(s2t))*pow4(Mst1))+pow4(s2t)*pow6(Mst1)))))/(3.*pow6(Mst2))+
-(shiftst3*(pow2(s2t)*(-4*pow2(Mst1)*pow4(Mst2)*(-2*(1-lmMst1+lmMst2)*pow2(Mt)*(pow2(MuSUSY)*(1-pow2(Sbeta))+
-pow2(Mst2)*pow2(Sbeta))+
-pow2(s2t)*pow2(Sbeta)*pow4(Mst2))+
-pow2(Mst2)*pow4(Mst1)*(8*(1-2*lmMst1+2*lmMst2)*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(3+2*lmMst1-2*lmMst2)*pow2(s2t)*pow2(Sbeta)*pow4(Mst2))+
-8*(1-3*lmMst1+3*lmMst2)*pow2(Mt)*pow2(MuSUSY)*(1-pow2(Sbeta))*pow6(Mst1))+
-(-4*pow2(Mt)*pow2(s2t)*(-(pow2(MuSUSY)*(1-pow2(Sbeta)))+
-2*pow2(Mst2)*pow2(Sbeta))+
-pow2(Sbeta)*(16*pow4(Mt)+pow4(Mst2)*pow4(s2t)))*pow6(Mst2)))/(6.*pow4(Mst2)))/(pow2(Mst1)*pow2(Sbeta))+
-(MuSUSY*((Mt*((2*shiftst3*((1+lmMst1-lmMst2)*pow2(Mst1)-
-pow2(Mst2))*pow2(Mst2)*pow3(s2t))/3.+
-(20*s2t*shiftst1*(pow2(Mst2)*(4*pow2(Mst2)*pow2(Mt)-
-2*pow2(Mst1)*(2*pow2(Mt)-
-(lmMst1-lmMst2)*pow2(Mst2)*pow2(s2t))+
-pow2(s2t)*pow4(Mst1))+
-Dmsqst2*(4*pow2(Mst2)*pow2(Mt)-
-2*pow2(Mst1)*(2*pow2(Mt)-
-(lmMst1-lmMst2)*pow2(Mst2)*pow2(s2t))+
-pow2(s2t)*(pow4(Mst1)-pow4(Mst2)))))/(3.*pow2(Mst2)))-
-(4*(-2*s2t*shiftst3*pow2(Mst2)*pow3(Mt)+
-5*Mt*shiftst1*pow3(s2t)*pow4(Mst2)))/3.)/pow2(Mst1)
-+pow2(Mt)*pow2(s2t)*((Mst2*(3*Dmglst2*(173947-25080*lmMst1+68760*lmMst2)*Mgl+
-(897737+47880*lmMst1+238680*lmMst2)*pow2(Dmglst2)+
-45*(2269+664*lmMst1-56*lmMst2)*pow2(Mgl)))/(540.*pow2(Mgl))-
-((80*Dmsqst2*((2+3*lmMst1-3*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))-
-(2+lmMst1-lmMst2)*pow2(Mgl)))/pow2(Mgl)-
-(11075/108.+166*lmMst1-(482*lmMst2)/3.+
-(Dmglst2*(935323/540.-(1550*lmMst1)/3.+714*lmMst2))/Mgl-((166889/1620.+282*lmMst1-(2302*lmMst2)/3.)*pow2(Dmglst2))/pow2(Mgl))*pow2(Mst1))/Mst2+
-(40*(3+lmMst1-lmMst2)*pow2(Dmsqst2)+
-80*Dmsqst2*(3+2*lmMst1-2*lmMst2+
-(3*Dmglst2*(1-2*lmMst1+2*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow2(Mst1)+
-(30643/810.+268*lmMst1-(788*lmMst2)/3.+
-(Dmglst2*(1700119-484056*lmMst1+579960*lmMst2)*(Dmglst2+Mgl))/(486.*pow2(Mgl)))*pow4(Mst1))/pow3(Mst2)+
-(40*Dmsqst2*pow2(Mst1)*(2*Dmsqst2*(1+lmMst1-lmMst2)*pow2(Mgl)+
-((17-12*lmMst1+12*lmMst2)*(Dmglst2*Mgl+pow2(Dmglst2))+
-(5+4*lmMst1-4*lmMst2)*pow2(Mgl))*pow2(Mst1)))/(pow2(Mgl)*pow5(Mst2)))+Mt*pow3(s2t)*((5*Dmsqst2*(65+
-(24*Dmglst2*(5+3*lmMst1-3*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl)))/9.-
-(10*pow2(Dmsqst2))/(3.*pow2(Mst1))+
-((-18*Dmglst2*(32663-7620*lmMst1+7620*lmMst2)*Mgl+
-(54563-32940*lmMst1+32940*lmMst2)*pow2(Dmglst2)+
-6*(224837-4680*lmMst1+8370*lmMst2)*pow2(Mgl))*pow2(Mst1))/(2430.*pow2(Mgl))+
-(5825/54.+(94*lmMst1)/9.-(184*lmMst2)/9.+
-(Dmglst2*(24*lmMst1-(7*(257+240*lmMst2))/27.))/Mgl-
-((84611/810.+(368*lmMst1)/9.+
-(148*lmMst2)/9.)*pow2(Dmglst2))/pow2(Mgl)+
-(20*Dmsqst2*(2*(Dmglst2*Mgl+pow2(Dmglst2))-pow2(Mgl)))/(3.*pow2(Mgl)*pow2(Mst1)))*pow2(Mst2)-
-((5*(191+18*lmMst1-18*lmMst2)*pow2(Dmsqst2))/27.-(10*Dmsqst2*(469-36*lmMst1+36*lmMst2-
-(36*Dmglst2*(3-5*lmMst1+5*lmMst2)*(Dmglst2+Mgl))/pow2(Mgl))*pow2(Mst1))/27.-
-(3447379/4860.-(47*lmMst1)/3.+
-(47*lmMst2)/3.-
-(4*Dmglst2*(788723-80595*lmMst1+80595*lmMst2)*(Dmglst2+Mgl))/(3645.*pow2(Mgl)))*pow4(Mst1))/pow2(Mst2)+
-(Dmsqst2*(54140/243.-
-(260*Dmglst2*(Dmglst2+Mgl))/(3.*pow2(Mgl)))*pow4(Mst1))/pow4(Mst2)-
-(2*(-28*Dmglst2*Mgl+24*pow2(Dmglst2)+
-19*pow2(Mgl))*pow4(Mst2))/(9.*pow2(Mgl)*pow2(Mst1))-
-(5*pow2(Dmsqst2)*pow2(Mst1)*(4180*pow2(Mst1)+
-3*(1057+162*lmMst1-162*lmMst2)*pow2(Mst2)))/(243.*pow6(Mst2)))+
-(pow3(Mt)*(2*Mst2*Mt*(1360800*(2-lmMst1+2*lmMst2-lmMt)*pow2(Dmsqst2)*pow2(Mgl)+
-2721600*Dmsqst2*(-((Dmglst2*Mgl+pow2(Dmglst2))*(10*(3-lmMst1+2*lmMst2-lmMt)*pow2(Mst1)+
-(8-3*lmMst1+6*lmMst2-3*lmMt)*pow2(Mst2)))
-+pow2(Mgl)*(2*(1-lmMst1+2*lmMst2-lmMt)*pow2(Mst1)-
-(lmMst1-2*lmMst2+lmMt)*pow2(Mst2)))-
-pow2(Dmglst2)*(-48*(3231296-460215*lmMst1+1100925*lmMst2-
-515970*lmMt)*pow2(Mst1)*pow2(Mst2)+
-28*(13463149-1492020*lmMst1+
-2713500*lmMst2-625320*lmMt)*pow4(Mst1)-
-9*(2456929-335160*lmMst1+1408680*lmMst2-
-408240*lmMt)*pow4(Mst2))+
-21*pow2(Mgl)*(48*(41936-7245*lmMst1+19665*lmMst2-
-720*lmMt)*pow2(Mst1)*pow2(Mst2)+
-4*(1077991-184140*lmMst1+400140*lmMst2-
-8640*lmMt)*pow4(Mst1)+
-9*(66773-9960*lmMst1+45480*lmMst2-
-3840*lmMt)*pow4(Mst2))-
-7*Dmglst2*Mgl*(216*(67843-10050*lmMst1+17490*lmMst2-
-7560*lmMt)*pow2(Mst1)*pow2(Mst2)+
-4*(13463149-1492020*lmMst1+
-2713500*lmMst2-625320*lmMt)*pow4(Mst1)+
-405*(3245-1672*lmMst1+1448*lmMst2-
-1888*lmMt)*pow4(Mst2)))+
-(3*s2t*(2100*pow2(Dmsqst2)*pow2(Mgl)*(627*pow2(Mst1)*pow2(Mst2)+1348*pow4(Mst1)+
-108*pow4(Mst2))-
-700*Dmsqst2*(1296*(Dmglst2*Mgl+pow2(Dmglst2))*pow2(Mst2)*(5*pow2(Mst1)*pow2(Mst2)+9*pow4(Mst1)+
-pow4(Mst2))+
-pow2(Mgl)*(3249*pow2(Mst2)*pow4(Mst1)+
-1431*pow2(Mst1)*pow4(Mst2)+4057*pow6(Mst1)-
-648*pow6(Mst2)))-
-pow2(Mst2)*(7*pow2(Mgl)*(3*(623599+65160*lmMst1-134280*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-9*(1367+13560*lmMst1-36600*lmMst2)*pow2(Mst1)*pow4(Mst2)+
-(5161826+406080*lmMst1-613440*lmMst2)*pow6(Mst1)-41040*pow6(Mst2))-
-168*Dmglst2*Mgl*(6*((19579+1770*lmMst1+12630*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-(4429-270*lmMst1+8910*lmMst2)*pow2(Mst1)*pow4(Mst2))+
-(510139+44280*lmMst1+76680*lmMst2)*pow6(Mst1)-2520*pow6(Mst2))-
-12*pow2(Dmglst2)*(12*(434369-7875*lmMst1+320355*lmMst2)*pow2(Mst2)*pow4(Mst1)+
-9*(126587-1820*lmMst1+230300*lmMst2)*pow2(Mst1)*pow4(Mst2)+
-14*(510139+44280*lmMst1+76680*lmMst2)*pow6(Mst1)+30240*pow6(Mst2)))))/pow2(Mst1)))/(51030.*pow2(Mgl)*pow6(Mst2))))/Tbeta))-
-((z3*(-240*Dmsqst2*(pow2(Mgl)*(4*pow4(Mst1)*(pow2(Mt)*pow2(s2t)*(-1771*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(7776*Mst2*MuSUSY+112*Tbeta*pow2(Mst2))*pow2(Sbeta))+
-pow2(Sbeta)*(-4*s2t*(965*MuSUSY+1296*Mst2*Tbeta)*pow3(Mt)+
-1456*Mt*MuSUSY*pow2(Mst2)*pow3(s2t)+
-Tbeta*(7776*pow4(Mt)-130*pow4(Mst2)*pow4(s2t))))+
-27*pow3(Mst2)*(4*Mst2*pow2(Mt)*pow2(s2t)*(23*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(216*Mst2*MuSUSY+58*Tbeta*pow2(Mst2))*pow2(Sbeta))-
-16*s2t*(36*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(29*Mst2*MuSUSY+48*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-4*Mt*(23*MuSUSY+72*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)+
-384*(2*MuSUSY+Mst2*Tbeta)*pow4(Mt)+
-23*Tbeta*pow4(s2t)*pow5(Mst2)))-
-9*Mst2*pow2(Mst1)*(-4*Mst2*pow2(Mt)*pow2(s2t)*(-35*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(864*Mst2*MuSUSY+28*Tbeta*pow2(Mst2))*pow2(Sbeta))+
-16*s2t*(252*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(101*Mst2*MuSUSY+144*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-32*Mt*(13*MuSUSY-9*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)-
-2304*(2*MuSUSY+Mst2*Tbeta)*pow4(Mt)+
-173*Tbeta*pow4(s2t)*pow5(Mst2))))+
-324*Mst2*(Dmglst2*Mgl+pow2(Dmglst2))*(s2t*pow2(Sbeta)*(-2*s2t*pow2(Mt)*(48*MuSUSY-
-5*Mst2*Tbeta*(2-pow2(Sbeta))*pow2(Sbeta))+
-Tbeta*(704*pow3(Mt)+5*pow3(Mst2)*pow3(s2t)))*pow4(Mst1)-
-2*pow2(Mst1)*(16*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+
-3*Mst2*pow2(Sbeta))+
-pow2(Sbeta)*(-2*Mt*(5*MuSUSY+6*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)+
-32*(10*MuSUSY+9*Mst2*Tbeta)*pow4(Mt))+
-Tbeta*(-8*s2t*(5*pow2(MuSUSY)*(1-pow2(Sbeta))+
-28*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*pow4(s2t)*pow5(Mst2)))-
-pow2(Mst2)*(12*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+
-2*Mst2*pow2(Sbeta))+
-pow2(Sbeta)*(-4*Mt*(3*MuSUSY+2*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)+
-32*(6*MuSUSY+5*Mst2*Tbeta)*pow4(Mt))+
-Tbeta*(-16*s2t*(pow2(MuSUSY)*(1-pow2(Sbeta))+
-12*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-3*pow2(Sbeta)*pow4(s2t)*pow5(Mst2)))))+
-15*pow2(Dmsqst2)*pow2(Mgl)*(-(pow2(Mst2)*(84*Tbeta*pow2(Mt)*pow2(s2t)*(1887*pow2(MuSUSY)*(1-pow2(Sbeta))+
-2*pow2(Mst1)*pow2(Sbeta))+
-pow2(Sbeta)*(MuSUSY*(43344*s2t*pow3(Mt)-
-203988*Mt*pow2(Mst1)*pow3(s2t))+
-Tbeta*(97200*pow4(Mt)-2453*pow4(Mst1)*pow4(s2t)))))
--32*Mt*pow2(Mst1)*(MuSUSY*pow2(Sbeta)*(1344*s2t*pow2(Mt)-6068*pow2(Mst1)*pow3(s2t))+
-Tbeta*(12960*pow2(Sbeta)*pow3(Mt)+
-3*Mt*pow2(s2t)*(3776*pow2(MuSUSY)*(1-pow2(Sbeta))-
-pow2(Mst1)*pow2(Sbeta)*(140+162*pow2(Sbeta)-81*pow4(Sbeta)))))-
-5184*Mst2*Mt*(MuSUSY*pow2(Sbeta)*(24*Mt*pow2(Mst1)*pow2(s2t)+32*pow3(Mt))+
-Tbeta*(-8*s2t*pow2(Mt)*(pow2(MuSUSY)*(1-pow2(Sbeta))+
-8*pow2(Mst1)*pow2(Sbeta))+
-5*pow2(Sbeta)*pow3(s2t)*pow4(Mst1)*(2+2*pow2(Sbeta)-pow4(Sbeta))))+
-pow2(Sbeta)*(-20736*Mt*s2t*(3*Mt*MuSUSY*s2t+
-Tbeta*(-8*pow2(Mt)-pow2(Mst1)*pow2(s2t)))*pow3(Mst2)+
-6*pow2(s2t)*(26418*Mt*MuSUSY*s2t+
-Tbeta*(3612*pow2(Mt)-1895*pow2(Mst1)*pow2(s2t)))*pow4(Mst2)+
-Tbeta*(20736*Mt*pow3(s2t)*pow5(Mst2)-
-39627*pow4(s2t)*pow6(Mst2))))-
-4*(12*pow2(Mgl)*(3*pow2(Mst1)*pow2(Mst2)*(4*pow2(Mst2)*pow2(Mt)*(-((35719+108*lmMst1-108*lmMst2)*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta)))+
-(1859*Mt*MuSUSY*s2t+69050*Tbeta*pow2(Mt))*pow2(Sbeta))+
-32*Mst2*MuSUSY*(-3659*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-8219*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(2*s2t*(34131*MuSUSY*s2t-96908*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-8*Mt*((11924+27*lmMst1-27*lmMst2)*MuSUSY*s2t+(55-54*lmMst1+54*lmMst2)*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(-15696*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(13036*Mt*pow3(s2t)*pow5(Mst2)-
-11977*pow4(s2t)*pow6(Mst2))))-
-9*pow4(Mst2)*(-12*pow2(Mst2)*pow2(Mt)*(-((1319+6*lmMst1-6*lmMst2)*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta)))+
-(3*(77-8*lmMst1+8*lmMst2)*Mt*MuSUSY*s2t+
-8*(514-3*(lmMst1+lmMst2)+6*lmMt)*Tbeta*pow2(Mt))*pow2(Sbeta))-
-4*Mst2*MuSUSY*(-5965*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-5766*Mt*pow2(Sbeta))*pow3(Mt)-
-6*pow2(Sbeta)*(s2t*(5965*MuSUSY*s2t-3844*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-Mt*(2*(1319+6*lmMst1-6*lmMst2)*MuSUSY*s2t-3*(77-8*lmMst1+8*lmMst2)*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(3680*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(11930*Mt*pow3(s2t)*pow5(Mst2)+
-3*(1319+6*lmMst1-6*lmMst2)*pow4(s2t)*pow6(Mst2))))+
-pow4(Mst1)*(-8*pow2(Mst2)*pow2(Mt)*((91963+162*lmMst1-162*lmMst2)*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(13543*Mt*MuSUSY*s2t-193928*Tbeta*pow2(Mt))*pow2(Sbeta))+
-64*Mst2*MuSUSY*(-6227*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-26768*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(16*s2t*(4431*MuSUSY*s2t-57758*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-2*Mt*(153538*MuSUSY*s2t+32663*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(-18024*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(44630*Mt*pow3(s2t)*pow5(Mst2)-
-(5225-162*lmMst1+162*lmMst2)*pow4(s2t)*pow6(Mst2)))))+
-Mst2*(2*Dmglst2*Mgl*(pow4(Mst1)*(16*Mst2*pow2(Mt)*pow2(s2t)*(-353116*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(546087*Mst2*MuSUSY-6606*Tbeta*pow2(Mst2))*pow2(Sbeta))-
-32*s2t*(395581*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(25254*Mst2*MuSUSY-
-653582*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)
-+pow2(Sbeta)*(52*Mt*(27676*MuSUSY-21739*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)-
-64*(417241*MuSUSY+591386*Mst2*Tbeta)*pow4(Mt)+217283*Tbeta*pow4(s2t)*pow5(Mst2)))
--18*Mst2*pow2(Mst1)*(8*pow2(Mst2)*pow2(Mt)*(29241*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(7080*Mt*MuSUSY*s2t+57692*Tbeta*pow2(Mt))*pow2(Sbeta))+
-64*Mst2*MuSUSY*(5932*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-5025*Mt*pow2(Sbeta))*pow3(Mt)-
-6*pow2(Sbeta)*(s2t*(49501*MuSUSY*s2t+53564*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-Mt*(21373*MuSUSY*s2t+2964*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(-12000*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(8180*Mt*pow3(s2t)*pow5(Mst2)+
-5637*pow4(s2t)*pow6(Mst2))))-
-27*pow3(Mst2)*(4*pow2(Mst2)*pow2(Mt)*(17615*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(3512*Mt*MuSUSY*s2t-18034*Tbeta*pow2(Mt))*pow2(Sbeta))+
-8*Mst2*MuSUSY*(15137*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-18*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-12*s2t*(15137*MuSUSY*s2t+12*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)-
-4*Mt*(17615*MuSUSY*s2t+1756*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(-5312*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(60548*Mt*pow3(s2t)*pow5(Mst2)+
-17615*pow4(s2t)*pow6(Mst2)))))+
-pow2(Dmglst2)*(2*pow4(Mst1)*(16*Mst2*pow2(Mt)*pow2(s2t)*(-353116*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(546087*Mst2*MuSUSY-6606*Tbeta*pow2(Mst2))*pow2(Sbeta))-
-32*s2t*(395581*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(25254*Mst2*MuSUSY-653582*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(52*Mt*(27676*MuSUSY-21739*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)-
-64*(417241*MuSUSY+591386*Mst2*Tbeta)*pow4(Mt)+217283*Tbeta*pow4(s2t)*pow5(Mst2)))+
-6*Mst2*pow2(Mst1)*(-32*pow2(Mst2)*pow2(Mt)*(101147*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(56232*Mt*MuSUSY*s2t-223217*Tbeta*pow2(Mt))*pow2(Sbeta))+
-16*Mst2*MuSUSY*(-304286*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-221681*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(4*s2t*(827103*MuSUSY*s2t-499172*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-2*Mt*(932531*MuSUSY*s2t-82125*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(1309344*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(228680*Mt*pow3(s2t)*pow5(Mst2)-
-123355*pow4(s2t)*pow6(Mst2))))-
-9*pow3(Mst2)*(4*pow2(Mst2)*pow2(Mt)*(228607*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(354654*Mt*MuSUSY*s2t-520966*Tbeta*pow2(Mt))*pow2(Sbeta))-
-176*Mst2*MuSUSY*(-10087*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-5872*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-88*s2t*(30261*MuSUSY*s2t-11744*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)-
-4*Mt*(228607*MuSUSY*s2t+177327*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(-382080*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(887656*Mt*pow3(s2t)*pow5(Mst2)+
-228607*pow4(s2t)*pow6(Mst2))))))))+
-8*z4*(Mst2*(4*Dmglst2*Mgl*(pow4(Mst1)*(2*Mst2*pow2(Mt)*pow2(s2t)*(22654*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(15189*Mst2*MuSUSY-27684*Tbeta*pow2(Mst2))*pow2(Sbeta))+
-8*s2t*(659*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(13626*Mst2*MuSUSY+25730*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-(Mt*(25328*MuSUSY+15571*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t))-
-16*(14269*MuSUSY+5582*Mst2*Tbeta)*pow4(Mt)+4199*Tbeta*pow4(s2t)*pow5(Mst2)))-
-9*Mst2*pow2(Mst1)*(4*(pow2(Mst2)*pow2(Mt)*(-555*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(48*Mt*MuSUSY*s2t+644*Tbeta*pow2(Mt))*pow2(Sbeta))+
-Mst2*MuSUSY*(-709*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-624*Mt*pow2(Sbeta))*pow3(Mt))+
-pow2(Sbeta)*(3*s2t*(605*MuSUSY*s2t-1844*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-12*Mt*(79*MuSUSY*s2t+100*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(-2256*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(208*Mt*pow3(s2t)*pow5(Mst2)+
-81*pow4(s2t)*pow6(Mst2))))+
-27*pow3(Mst2)*(-8*pow2(Mst2)*pow2(Mt)*(-53*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(108*Mt*MuSUSY*s2t+14*Tbeta*pow2(Mt))*pow2(Sbeta))+
-2*Mst2*MuSUSY*(271*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-506*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-(s2t*(813*MuSUSY*s2t+1012*Mt*Tbeta)*pow2(Mt)*pow3(Mst2))-
-8*Mt*(53*MuSUSY*s2t-54*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(432*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(271*Mt*pow3(s2t)*pow5(Mst2)+
-106*pow4(s2t)*pow6(Mst2)))))+
-2*pow2(Dmglst2)*(2*pow4(Mst1)*(2*Mst2*pow2(Mt)*pow2(s2t)*(22654*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(15189*Mst2*MuSUSY-27684*Tbeta*pow2(Mst2))*pow2(Sbeta))+
-8*s2t*(659*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(13626*Mst2*MuSUSY+25730*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-(Mt*(25328*MuSUSY+15571*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t))-
-16*(14269*MuSUSY+5582*Mst2*Tbeta)*pow4(Mt)+
-4199*Tbeta*pow4(s2t)*pow5(Mst2)))+
-3*Mst2*pow2(Mst1)*(4*pow2(Mst2)*pow2(Mt)*(10819*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(2088*Mt*MuSUSY*s2t+18812*Tbeta*pow2(Mt))*pow2(Sbeta))+
-32*Mst2*MuSUSY*(1543*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-1730*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-2*s2t*(25791*MuSUSY*s2t+17228*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)-
-4*Mt*(4153*MuSUSY*s2t+3582*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(21648*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(9700*Mt*pow3(s2t)*pow5(Mst2)-
-2513*pow4(s2t)*pow6(Mst2))))+
-18*pow3(Mst2)*(-4*pow2(Mst2)*pow2(Mt)*(-1111*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(846*Mt*MuSUSY*s2t-182*Tbeta*pow2(Mt))*pow2(Sbeta))+
-2*Mst2*MuSUSY*(1249*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-1742*Mt*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-(s2t*(3747*MuSUSY*s2t+3484*Mt*Tbeta)*pow2(Mt)*pow3(Mst2))-
-4*Mt*(1111*MuSUSY*s2t-423*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(1944*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(1249*Mt*pow3(s2t)*pow5(Mst2)+
-1111*pow4(s2t)*pow6(Mst2))))))+
-3*pow2(Mgl)*(pow4(Mst1)*(32*Mst2*MuSUSY*(2941*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-3326*Mt*pow2(Sbeta))*pow3(Mt)+
-16*Mt*(-5*((47*MuSUSY*s2t+15*Mt*Tbeta)*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta)+
-Dmsqst2*Mt*MuSUSY*s2t*(221*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-106*Mt*pow2(Sbeta)))+
-3093*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt))-
-4*pow2(Mst2)*(-(Tbeta*pow2(Mt)*pow2(s2t)*(-13723*pow2(MuSUSY)*(1-pow2(Sbeta))+
-160*Dmsqst2*pow2(Sbeta)))+
-pow2(Sbeta)*(MuSUSY*(24124*s2t*pow3(Mt)-
-2080*Dmsqst2*Mt*pow3(s2t))+
-Tbeta*(4672*pow4(Mt)-70*pow2(Dmsqst2)*pow4(s2t))))
-+pow2(Sbeta)*(-8*s2t*(7431*MuSUSY*s2t+5480*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-4*pow2(s2t)*(6895*Mt*MuSUSY*s2t+
-Tbeta*(6857*pow2(Mt)-70*Dmsqst2*pow2(s2t)))*pow4(Mst2)+
-Tbeta*(1756*Mt*pow3(s2t)*pow5(Mst2)-
-1147*pow4(s2t)*pow6(Mst2))))+
-12*pow2(Mst1)*(20*Mt*pow2(Mst2)*(-((11*MuSUSY*s2t+5*Mt*Tbeta)*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta))-
-3*Dmsqst2*Mt*MuSUSY*s2t*(13*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-10*Mt*pow2(Sbeta))+
-90*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt))+MuSUSY*(40*s2t*pow2(Dmsqst2)*pow2(Mt)*(7*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-8*Mt*pow2(Sbeta))+
-4*(1135*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-1304*Mt*pow2(Sbeta))*pow3(Mst2)*pow3(Mt))-
-2*pow4(Mst2)*(-2*Tbeta*pow2(Mt)*pow2(s2t)*(-569*pow2(MuSUSY)*(1-pow2(Sbeta))+
-30*Dmsqst2*pow2(Sbeta))+
-pow2(Sbeta)*(MuSUSY*(1735*s2t*pow3(Mt)-300*Dmsqst2*Mt*pow3(s2t))
-+Tbeta*(418*pow4(Mt)-20*pow2(Dmsqst2)*pow4(s2t))))+
-pow2(Sbeta)*(-(s2t*(4515*MuSUSY*s2t+1508*Mt*Tbeta)*pow2(Mt)*pow5(Mst2))+
-pow2(s2t)*(1916*Mt*MuSUSY*s2t+
-Tbeta*(826*pow2(Mt)-105*Dmsqst2*pow2(s2t)))*pow6(Mst2)+
-Tbeta*(740*Mt*pow3(s2t)*pow7(Mst2)-
-389*pow4(s2t)*pow8(Mst2))))+
-36*pow2(Mst2)*(4*Mt*pow2(Mst2)*(-5*(MuSUSY*s2t+Mt*Tbeta)*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta)-
-15*Dmsqst2*Mt*MuSUSY*s2t*(MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-2*Mt*pow2(Sbeta))+
-54*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt))
-+MuSUSY*(20*s2t*pow2(Dmsqst2)*pow2(Mt)*(MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-2*Mt*pow2(Sbeta))+
-6*(85*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-206*Mt*pow2(Sbeta))*pow3(Mst2)*pow3(Mt))-
-pow4(Mst2)*(-60*Tbeta*pow2(Mt)*pow2(s2t)*(-2*pow2(MuSUSY)*(1-pow2(Sbeta))+
-Dmsqst2*pow2(Sbeta))+
-pow2(Sbeta)*(MuSUSY*(606*s2t*pow3(Mt)-60*Dmsqst2*Mt*pow3(s2t))+
-Tbeta*(84*pow4(Mt)-5*pow2(Dmsqst2)*pow4(s2t))))+pow2(Sbeta)*(-3*s2t*(255*MuSUSY*s2t+412*Mt*Tbeta)*pow2(Mt)*pow5(Mst2)+
-3*pow2(s2t)*(40*Mt*MuSUSY*s2t+
-Tbeta*(101*pow2(Mt)-5*Dmsqst2*pow2(s2t)))*pow6(Mst2)+
-Tbeta*(255*Mt*pow3(s2t)*pow7(Mst2)-
-30*pow4(s2t)*pow8(Mst2))))))+
-12*pow2(z2)*(Mst2*(4*Dmglst2*Mgl*(-9*Mst2*Mt*pow2(Mst1)*(8*Mst2*MuSUSY*pow2(Mt)*(2845*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-744*Mt*pow2(Sbeta))-
-8*Mt*pow2(Mst2)*(237*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(300*Mt*MuSUSY*s2t-322*Tbeta*pow2(Mt))*pow2(Sbeta))+
-pow2(Sbeta)*(-3*Mt*s2t*(6091*MuSUSY*s2t+1844*Mt*Tbeta)*pow3(Mst2)+
-12*(79*MuSUSY*s2t+100*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(336*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt)+
-802*pow2(Sbeta)*pow3(s2t)*pow5(Mst2)))+
-pow4(Mst1)*(2*Mst2*pow2(Mt)*pow2(s2t)*(21196*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(105585*Mst2*MuSUSY-27684*Tbeta*pow2(Mst2))*pow2(Sbeta))+
-4*s2t*(-86405*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(33084*Mst2*MuSUSY+51460*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-(Mt*(25328*MuSUSY+15571*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t))-
-16*(16213*MuSUSY+5582*Mst2*Tbeta)*pow4(Mt)+
-4199*Tbeta*pow4(s2t)*pow5(Mst2)))+
-27*pow4(Mst2)*(Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*(316*MuSUSY*Tbeta*(1-pow2(Sbeta))+
-5289*Mst2*pow2(Sbeta))+
-pow2(Sbeta)*(-(Mt*(316*MuSUSY+1763*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t))-
-28*(5*MuSUSY+4*Mst2*Tbeta)*pow4(Mt))+
-Tbeta*(2*s2t*(-1763*pow2(MuSUSY)*(1-pow2(Sbeta))+
-70*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)+
-79*pow2(Sbeta)*pow4(s2t)*pow5(Mst2))))+
-2*pow2(Dmglst2)*(9*pow4(Mst2)*(2*Mst2*pow2(Mt)*pow2(s2t)*(1366*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(31083*Mst2*MuSUSY-252*Tbeta*pow2(Mst2))*pow2(Sbeta))+
-4*s2t*(-10361*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(252*Mst2*MuSUSY-14*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-2*Mt*(1366*MuSUSY+10361*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t)+
-56*(MuSUSY+26*Mst2*Tbeta)*pow4(Mt)+
-683*Tbeta*pow4(s2t)*pow5(Mst2)))+
-2*pow4(Mst1)*(2*Mst2*pow2(Mt)*pow2(s2t)*(21196*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(105585*Mst2*MuSUSY-27684*Tbeta*pow2(Mst2))*pow2(Sbeta))+
-4*s2t*(-86405*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))+
-(33084*Mst2*MuSUSY+51460*Tbeta*pow2(Mst2))*pow2(Sbeta))*pow3(Mt)+
-pow2(Sbeta)*(-(Mt*(25328*MuSUSY+15571*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t))-
-16*(16213*MuSUSY+5582*Mst2*Tbeta)*pow4(Mt)+
-4199*Tbeta*pow4(s2t)*pow5(Mst2)))+
-6*Mst2*pow2(Mst1)*(4*(pow2(Mst2)*pow2(Mt)*(1157*Tbeta*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))+
-(3960*Mt*MuSUSY*s2t+9406*Tbeta*pow2(Mt))*pow2(Sbeta))+
-Mst2*MuSUSY*(-29549*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-4328*Mt*pow2(Sbeta))*pow3(Mt))+
-pow2(Sbeta)*(s2t*(84045*MuSUSY*s2t-17228*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)-
-2*Mt*(265*MuSUSY*s2t+3582*Mt*Tbeta)*pow2(s2t)*pow4(Mst2))+
-Tbeta*(-840*pow2(MuSUSY)*(1-pow2(Sbeta))*pow4(Mt)+
-pow2(Sbeta)*(3068*Mt*pow3(s2t)*pow5(Mst2)-
-892*pow4(s2t)*pow6(Mst2))))))-
-3*pow2(Mgl)*(-(pow4(Mst1)*(80*Mst2*MuSUSY*(-1367*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-812*Mt*pow2(Sbeta))*pow3(Mt)+
-80*Mt*(-((47*MuSUSY*s2t+15*Mt*Tbeta)*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta))-
-Dmsqst2*Mt*MuSUSY*s2t*(221*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-106*Mt*pow2(Sbeta))+
-327*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt))-
-4*pow2(Mst2)*(-(Tbeta*pow2(Mt)*pow2(s2t)*(-11941*pow2(MuSUSY)*(1-pow2(Sbeta))+
-160*Dmsqst2*pow2(Sbeta)))+
-pow2(Sbeta)*(MuSUSY*(24124*s2t*pow3(Mt)-
-2080*Dmsqst2*Mt*pow3(s2t))+
-Tbeta*(4672*pow4(Mt)-70*pow2(Dmsqst2)*pow4(s2t))))
-+pow2(Sbeta)*(8*s2t*(6177*MuSUSY*s2t-5480*Mt*Tbeta)*pow2(Mt)*pow3(Mst2)+
-4*pow2(s2t)*(6895*Mt*MuSUSY*s2t+
-Tbeta*(6857*pow2(Mt)-70*Dmsqst2*pow2(s2t)))*pow4(Mst2)+
-Tbeta*(1756*Mt*pow3(s2t)*pow5(Mst2)-
-1795*pow4(s2t)*pow6(Mst2)))))-
-6*pow2(Mst1)*(8*Mt*pow2(Mst2)*(-5*(11*MuSUSY*s2t+5*Mt*Tbeta)*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta)-
-15*Dmsqst2*Mt*MuSUSY*s2t*(13*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-10*Mt*pow2(Sbeta))+
-126*Tbeta*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt))+MuSUSY*(80*s2t*pow2(Dmsqst2)*pow2(Mt)*(7*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-8*Mt*pow2(Sbeta))+
-64*(-199*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-55*Mt*pow2(Sbeta))*pow3(Mst2)*pow3(Mt))-
-4*pow4(Mst2)*(-(Tbeta*pow2(Mt)*pow2(s2t)*(-841*pow2(MuSUSY)*(1-pow2(Sbeta))+
-60*Dmsqst2*pow2(Sbeta)))+
-pow2(Sbeta)*(MuSUSY*(1735*s2t*pow3(Mt)-300*Dmsqst2*Mt*pow3(s2t))
-+Tbeta*(418*pow4(Mt)-20*pow2(Dmsqst2)*pow4(s2t))))+
-pow2(Sbeta)*(2*(s2t*(4557*MuSUSY*s2t-1508*Mt*Tbeta)*pow2(Mt)*pow5(Mst2)+
-pow2(s2t)*(1700*Mt*MuSUSY*s2t+
-Tbeta*(1258*pow2(Mt)-105*Dmsqst2*pow2(s2t)))*pow6(Mst2))+
-Tbeta*(292*Mt*pow3(s2t)*pow7(Mst2)-
-859*pow4(s2t)*pow8(Mst2))))+
-18*pow2(Mst2)*(40*Dmsqst2*Mt*s2t*pow2(Mst2)*(MuSUSY*(6*pow2(Mt)+Dmsqst2*pow2(s2t))*pow2(Sbeta)+
-Mt*s2t*Tbeta*(3*pow2(MuSUSY)*(1-pow2(Sbeta))+
-Dmsqst2*pow2(Sbeta)))+
-MuSUSY*(-40*s2t*pow2(Dmsqst2)*pow2(Mt)*(MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-2*Mt*pow2(Sbeta))-
-12*(-185*MuSUSY*s2t*Tbeta*(1-pow2(Sbeta))+
-14*Mt*pow2(Sbeta))*pow3(Mst2)*pow3(Mt))+
-2*pow4(Mst2)*(-6*Tbeta*pow2(Mt)*pow2(s2t)*(pow2(MuSUSY)*(1-pow2(Sbeta))+
-10*Dmsqst2*pow2(Sbeta))+
-pow2(Sbeta)*(MuSUSY*(318*s2t*pow3(Mt)-60*Dmsqst2*Mt*pow3(s2t))+
-Tbeta*(84*pow4(Mt)-5*pow2(Dmsqst2)*pow4(s2t))))+pow2(Sbeta)*(-6*s2t*(555*MuSUSY*s2t-28*Mt*Tbeta)*pow2(Mt)*pow5(Mst2)+
-6*pow2(s2t)*(2*Mt*MuSUSY*s2t+
-Tbeta*(-53*pow2(Mt)+5*Dmsqst2*pow2(s2t)))*pow6(Mst2)+
-Tbeta*(1110*Mt*pow3(s2t)*pow7(Mst2)-
-3*pow4(s2t)*pow8(Mst2)))))))/(Tbeta*pow2(Sbeta)*pow6(Mst2))+
-5184*xDR2DRMOD*z2*(64*Mt*(-(Dmglst2*(Mgl+3*lmMst2*Mgl))+
-(1-6*lmMst2)*pow2(Dmglst2)-(1+lmMst2)*pow2(Mgl))*pow3(Mst2)*pow3(s2t)+
-(128*s2t*pow3(Mt)*((1+lmMst2)*pow2(Mgl)*(2*pow2(Mst2)+pow2(MuSUSY))*(2*pow2(Mst1)*pow2(Mst2)+3*pow4(Mst1)+pow4(Mst2))-
-pow2(Dmglst2)*(-2*pow2(Mst1)*pow2(Mst2)*(2*pow2(Mst2)-(1-6*lmMst2)*pow2(MuSUSY))+
-3*(2*(5+3*lmMst2)*pow2(Mst2)-
-(1+3*lmMst2)*pow2(MuSUSY))*pow4(Mst1)+
-(2*(2-lmMst2)*pow2(Mst2)+
-(1-6*lmMst2)*pow2(MuSUSY))*pow4(Mst2))-
-Dmglst2*Mgl*(2*pow2(Mst1)*pow2(Mst2)*(2*(3+lmMst2)*pow2(Mst2)-
-(1+3*lmMst2)*pow2(MuSUSY))+
-3*(2*(5+3*lmMst2)*pow2(Mst2)-
-(1+3*lmMst2)*pow2(MuSUSY))*pow4(Mst1)+
-(2*(1-lmMst2)*pow2(Mst2)-
-(1+3*lmMst2)*pow2(MuSUSY))*pow4(Mst2))))/pow5(Mst2)
-+(16*pow4(Mt)*(Dmglst2*Mgl*(96*(2+lmMst2)*pow2(Mst2)*pow4(Mst1)+
-39*pow2(Mst1)*pow4(Mst2)+
-192*(3+2*lmMst2)*pow6(Mst1)+7*pow6(Mst2))-
-pow2(Mgl)*((29+16*lmMst2)*pow2(Mst1)*pow4(Mst2)+
-(1+lmMst2)*(48*pow2(Mst2)*pow4(Mst1)+96*pow6(Mst1))+
-13*pow6(Mst2))+
-pow2(Dmglst2)*(-48*(4+lmMst2)*pow2(Mst2)*pow4(Mst1)+
-43*pow2(Mst1)*pow4(Mst2)+
-192*(3+2*lmMst2)*pow6(Mst1)+27*pow6(Mst2))))/(pow2(Mst1)*pow4(Mst2))-
-(4*pow2(Mt)*pow2(s2t)*(-(pow2(Dmglst2)*(-2*pow2(Mst2)*(27*pow2(Mst2)-
-(8+27*lmMst1-39*lmMst2)*pow2(MuSUSY))*pow4(Mst1)+
-pow2(Mst1)*(108*pow2(Mst2)-
-(11-54*lmMst1+78*lmMst2)*pow2(MuSUSY))*pow4(Mst2)+
-2*(7*lmMst1-15*lmMst2)*pow2(MuSUSY)*pow6(Mst1)-
-27*(2*pow2(Mst2)+pow2(MuSUSY))*pow6(Mst2)))+
-pow2(Mgl)*(-2*pow2(Mst2)*(13*pow2(Mst2)-
-(4+13*lmMst1-9*lmMst2)*pow2(MuSUSY))*pow4(Mst1)+
-pow2(Mst1)*(52*pow2(Mst2)-
-(5-26*lmMst1+18*lmMst2)*pow2(MuSUSY))*pow4(Mst2)+
-2*(4+13*lmMst1-9*lmMst2)*pow2(MuSUSY)*pow6(Mst1)-
-13*(2*pow2(Mst2)+pow2(MuSUSY))*pow6(Mst2))-
-Dmglst2*Mgl*(-2*pow2(Mst2)*(7*pow2(Mst2)-(7*lmMst1-15*lmMst2)*pow2(MuSUSY))*pow4(Mst1)+
-pow2(Mst1)*(28*pow2(Mst2)-
-(7-14*lmMst1+30*lmMst2)*pow2(MuSUSY))*pow4(Mst2)+
-2*(7*lmMst1-15*lmMst2)*pow2(MuSUSY)*pow6(Mst1)-
-7*(2*pow2(Mst2)+pow2(MuSUSY))*pow6(Mst2))))/(pow2(Mst1)*pow4(Mst2))+
-(-(pow4(s2t)*((pow2(Mst1)-pow2(Mst2))*(pow2(Mgl)*(2*(4+13*lmMst1-9*lmMst2)*pow2(Mst1)*pow2(Mst2)+13*pow4(Mst1)-13*pow4(Mst2))-
-Dmglst2*Mgl*(2*(7*lmMst1-15*lmMst2)*pow2(Mst1)*pow2(Mst2)+
-7*pow4(Mst1)-7*pow4(Mst2)))-
-pow2(Dmglst2)*(-((11-54*lmMst1+78*lmMst2)*pow2(Mst2)*pow4(Mst1))-
-(43+54*lmMst1-78*lmMst2)*pow2(Mst1)*pow4(Mst2)+7*pow6(Mst1)+27*pow6(Mst2))))+
-(4*((s2t*pow2(Mt)*pow2(MuSUSY)*(Dmglst2*Mgl*(-((32*(1+3*lmMst2)*Mt-
-(7-14*lmMst1+30*lmMst2)*Mst2*s2t)*pow2(Mst1)*pow4(Mst2))-
-2*((32*(1+3*lmMst2)*Mt+
-(7*lmMst1-15*lmMst2)*Mst2*s2t)*pow2(Mst2)*pow4(Mst1)+
-(48*(1+3*lmMst2)*Mt+
-(7*lmMst1-15*lmMst2)*Mst2*s2t)*pow6(Mst1))+
-7*s2t*pow7(Mst2))-
-pow2(Mgl)*((32*(1+lmMst2)*Mt+
-(5-26*lmMst1+18*lmMst2)*Mst2*s2t)*pow2(Mst1)*pow4(Mst2)+
-2*((32*(1+lmMst2)*Mt-
-(4+13*lmMst1-9*lmMst2)*Mst2*s2t)*pow2(Mst2)*pow4(Mst1)+
-(48*(1+lmMst2)*Mt-
-(4+13*lmMst1-9*lmMst2)*Mst2*s2t)*pow6(Mst1))+13*s2t*pow7(Mst2))+
-pow2(Dmglst2)*(2*(32*(1-6*lmMst2)*Mt-
-(8+27*lmMst1-39*lmMst2)*Mst2*s2t)*pow2(Mst2)*pow4(Mst1)+
-(32*(1-6*lmMst2)*Mt+
-(11-54*lmMst1+78*lmMst2)*Mst2*s2t)*pow2(Mst1)*pow4(Mst2)-
-2*(48*(1+3*lmMst2)*Mt+
-(7*lmMst1-15*lmMst2)*Mst2*s2t)*pow6(Mst1)+
-27*s2t*pow7(Mst2))))/pow2(Sbeta)+
-(Mt*MuSUSY*(-(pow2(Mgl)*(pow2(Mst2)*((1+lmMst2)*(-48*Mt*pow2(Mst2)*pow2(s2t)+192*pow3(Mt))
-+13*pow3(Mst2)*pow3(s2t))*pow4(Mst1)+
-2*pow2(Mst1)*(-26*Mst2*s2t*pow2(Mt)-
-24*(1+lmMst2)*Mt*pow2(Mst2)*pow2(s2t)+
-32*(1+lmMst2)*pow3(Mt)+
-(4+13*lmMst1-9*lmMst2)*pow3(Mst2)*pow3(s2t))*pow4(Mst2)+
-48*(1+lmMst2)*Mt*(8*pow2(Mt)-pow2(Mst2)*pow2(s2t))*pow6(Mst1)
-+13*s2t*(4*pow2(Mt)-pow2(Mst2)*pow2(s2t))*pow7(Mst2)))+
-pow2(Dmglst2)*(2*pow2(Mst1)*(-54*Mst2*s2t*pow2(Mt)-
-24*(1-6*lmMst2)*Mt*pow2(Mst2)*pow2(s2t)+
-32*(2-lmMst2)*pow3(Mt)+
-(8+27*lmMst1-39*lmMst2)*pow3(Mst2)*pow3(s2t))*pow4(Mst2)-
-pow4(Mst1)*(3*(16*Mt-9*Mst2*s2t)*pow2(s2t)*pow4(Mst2)+
-32*lmMst2*(2*pow2(Mst2)*pow3(Mt)-
-9*Mt*pow2(s2t)*pow4(Mst2)))+
-16*Mt*(8*(11+5*lmMst2)*pow2(Mt)+
-3*(1+3*lmMst2)*pow2(Mst2)*pow2(s2t))*pow6(Mst1)+
-27*s2t*(4*pow2(Mt)-pow2(Mst2)*pow2(s2t))*pow7(Mst2))+
-Dmglst2*Mgl*(pow2(Mst2)*(48*(1+3*lmMst2)*Mt*pow2(Mst2)*pow2(s2t)+
-64*(7+lmMst2)*pow3(Mt)+
-7*pow3(Mst2)*pow3(s2t))*pow4(Mst1)+
-2*pow2(Mst1)*(-14*Mst2*s2t*pow2(Mt)+
-24*(1+3*lmMst2)*Mt*pow2(Mst2)*pow2(s2t)+
-32*(1-lmMst2)*pow3(Mt)+
-(7*lmMst1-15*lmMst2)*pow3(Mst2)*pow3(s2t))*pow4(Mst2)+
-16*Mt*(8*(11+5*lmMst2)*pow2(Mt)+
-3*(1+3*lmMst2)*pow2(Mst2)*pow2(s2t))*pow6(Mst1)+28*s2t*pow2(Mt)*pow7(Mst2)-
-7*pow3(s2t)*pow9(Mst2))))/Tbeta))/pow5(Mst2))/pow2(Mst1)))/(23328.*pow2(Mgl)))-
-((((lmMst1-lmMst2)*oneLoopFlag*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta)))/(4.*pow2(Sbeta))-
-(8*Al4p*twoLoopFlag*(18*Dmglst2*Mgl*(4-61*lmMst2+6*lmMst1*(9+2*lmMst2-2*lmMt)+
-(7+12*lmMst2)*lmMt-12*pow2(lmMst2))+
-9*pow2(Dmglst2)*(102+353*lmMst2-6*lmMst1*(49+10*lmMst2-10*lmMt)+
-(-59-60*lmMst2)*lmMt+60*pow2(lmMst2))-
-(65-159*lmMst2+6*lmMst1*(25+6*lmMst2-6*lmMt)+
-(9+36*lmMst2)*lmMt-36*pow2(lmMst2))*pow2(Mgl))*pow4(Mt))/(27.*pow2(Mgl)))/pow6(Mst2)+
-(Al4p*twoLoopFlag*(8*s2t*(Dmglst2*Mgl*(4*(95-447*lmMst2+
-lmMst1*(411+90*lmMst2-90*lmMt)+
-(36+90*lmMst2)*lmMt-90*pow2(lmMst2))*pow2(Mst2)+
-(785+6*lmMst1*(85-42*lmMst2)-438*lmMst2+
-252*pow2(lmMst2))*pow2(MuSUSY))+
-pow2(Dmglst2)*(4*(257+6*lmMst2*(179-30*lmMt)-
-12*lmMst1*(76+15*lmMst2-15*lmMt)-162*lmMt+
-180*pow2(lmMst2))*pow2(Mst2)+
-(2501+42*lmMst1*(7-6*lmMst2)-222*lmMst2+
-252*pow2(lmMst2))*pow2(MuSUSY))-
-pow2(Mgl)*(4*(49-75*lmMst2+
-3*lmMst1*(25+6*lmMst2-6*lmMt)+18*lmMst2*lmMt-
-18*pow2(lmMst2))*pow2(Mst2)-
-(193+474*lmMst2-6*lmMst1*(67+42*lmMst2)+
-252*pow2(lmMst2))*pow2(MuSUSY)))*pow3(Mt)-
-4*(Mst2*pow2(Mt)*(2*(1-111*lmMst2+3*lmMst1*(37+72*lmMst2)-
-81*pow2(lmMst1)-135*pow2(lmMst2))*pow2(Mgl)*pow2(MuSUSY)-
-3*pow2(Dmglst2)*(12*(4-9*lmMst1+9*lmMst2)*pow2(Mst2)-
-(85-60*lmMst1+(60+36*lmMst1)*lmMst2-
-36*pow2(lmMst2))*pow2(MuSUSY))+
-2*Dmglst2*Mgl*(36*lmMst2*pow2(Mst2)+
-(49-84*lmMst2-36*pow2(lmMst2))*pow2(MuSUSY)-
-12*lmMst1*(3*pow2(Mst2)-(7+3*lmMst2)*pow2(MuSUSY))))*pow2(s2t)+Mt*(Dmglst2*(11+42*lmMst1-42*lmMst2)*Mgl+
-(35-102*lmMst1+102*lmMst2)*pow2(Dmglst2)-
-(5+6*lmMst1-6*lmMst2)*pow2(Mgl))*pow3(s2t)*pow4(Mst2))
-+(-8*s2t*(Dmglst2*Mgl*(785+6*lmMst1*(85-42*lmMst2)-438*lmMst2+
-252*pow2(lmMst2))+
-pow2(Dmglst2)*(2501+42*lmMst1*(7-6*lmMst2)-222*lmMst2+
-252*pow2(lmMst2))+
-(193+474*lmMst2-6*lmMst1*(67+42*lmMst2)+
-252*pow2(lmMst2))*pow2(Mgl))*pow2(MuSUSY)*pow3(Mt)+
-2*Mst2*pow2(Mt)*pow2(s2t)*(4*(Dmglst2*Mgl*(49-84*lmMst2+12*lmMst1*(7+3*lmMst2)-
-36*pow2(lmMst2))+
-(1-111*lmMst2+3*lmMst1*(37+72*lmMst2)-
-81*pow2(lmMst1)-135*pow2(lmMst2))*pow2(Mgl))*pow2(MuSUSY)+
-3*pow2(Dmglst2)*(2*(85-12*lmMst1*(5-3*lmMst2)+60*lmMst2-
-36*pow2(lmMst2))*pow2(MuSUSY)-
-5*(43-60*lmMst1+60*lmMst2)*pow2(Mst2)*(2-pow2(Sbeta))*pow4(Sbeta))))/pow2(Sbeta)+
-(-2*Mt*MuSUSY*(8*Dmglst2*Mgl*(-36*(1-3*lmMst1+3*lmMst2)*Mst2*s2t*pow2(Mt)-
-3*Mt*(50+lmMst1*(51-18*lmMst2)-51*lmMst2+
-18*pow2(lmMst2))*pow2(Mst2)*pow2(s2t)+
-4*(7-381*lmMst2+
-lmMst1*(327+72*lmMst2-81*lmMt)+
-(54+81*lmMst2)*lmMt-72*pow2(lmMst2))*pow3(Mt)
-+2*(1+3*lmMst1-3*lmMst2)*pow3(Mst2)*pow3(s2t))+
-4*pow2(Dmglst2)*(36*(11-15*lmMst1+15*lmMst2)*Mst2*s2t*pow2(Mt)-
-3*Mt*(355+6*lmMst2-6*lmMst1*(1+6*lmMst2)+
-36*pow2(lmMst2))*pow2(Mst2)*pow2(s2t)+
-4*(412-6*lmMst1*(176+42*lmMst2-39*lmMt)+
-9*lmMst2*(147-26*lmMt)-267*lmMt+
-252*pow2(lmMst2))*pow3(Mt)+
-6*(1-6*lmMst1+6*lmMst2)*pow3(Mst2)*pow3(s2t))-
-pow2(Mgl)*(144*Mst2*s2t*(lmMst1-lmMst2+2*lmMst1*lmMst2-
-pow2(lmMst1)-pow2(lmMst2))*pow2(Mt)+
-24*Mt*(1+33*lmMst2-3*lmMst1*(11+6*lmMst2)+
-18*pow2(lmMst2))*pow2(Mst2)*pow2(s2t)+
-32*(83-96*lmMst2+
-3*lmMst1*(29+12*lmMst2-9*lmMt)+
-(9+27*lmMst2)*lmMt-36*pow2(lmMst2))*pow3(Mt)+
-(5+lmMst1*(6-288*lmMst2)-6*lmMst2+
-144*pow2(lmMst1)+144*pow2(lmMst2))*pow3(Mst2)*pow3(s2t)))+
-(pow2(Mt)*(-144*z2*(2*Mt*pow2(Mgl)*(16*Mt*MuSUSY*pow2(Sbeta)-
-s2t*Tbeta*(pow2(MuSUSY)*(1-pow2(Sbeta))+
-4*pow2(Mst2)*pow2(Sbeta)))-
-2*Dmglst2*Mgl*(32*MuSUSY*pow2(Mt)*pow2(Sbeta)-
-Mst2*MuSUSY*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+
-6*Mst2*pow2(Sbeta))-
-Mt*s2t*Tbeta*(-17*pow2(MuSUSY)*(1-pow2(Sbeta))+
-20*pow2(Mst2)*pow2(Sbeta)))+
-pow2(Dmglst2)*(112*MuSUSY*pow2(Mt)*pow2(Sbeta)+
-3*Mst2*MuSUSY*pow2(s2t)*(MuSUSY*Tbeta*(1-pow2(Sbeta))+
-10*Mst2*pow2(Sbeta))-
-2*Mt*s2t*Tbeta*(41*pow2(MuSUSY)*(1-pow2(Sbeta))+
-40*pow2(Mst2)*pow2(Sbeta))))+
-24*Mst2*(Tbeta*(-12*Dmglst2*Mgl*(xDR2DRMOD*(lmMst1*lmMst2-pow2(lmMst2))*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))-
-48*z2*pow2(Mt)*pow2(Sbeta))+
-6*pow2(Mgl)*(xDR2DRMOD*(lmMst2-lmMst1*(1+lmMst2)+pow2(lmMst2))*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))-
-16*z2*pow2(Mt)*pow2(Sbeta)))+
-pow2(Dmglst2)*(Tbeta*(6*(2-3*lmMst2)*(lmMst1-lmMst2)*xDR2DRMOD*pow2(MuSUSY)*pow2(s2t)*(1-pow2(Sbeta))-
-1440*z2*pow2(Mt)*pow2(Sbeta))+
-5*(43-60*lmMst1+60*lmMst2)*Mt*MuSUSY*s2t*pow4(Sbeta)))))/pow2(Sbeta))/Tbeta-
-((5+6*lmMst1-6*lmMst2)*(2*Dmglst2*Mgl+3*pow2(Dmglst2))-
-(11+6*lmMst1-6*lmMst2)*pow2(Mgl))*pow4(s2t)*pow5(Mst2)))/(108.*pow2(Mgl)*pow7(Mst2)))*upcut(pow6(Mst1),cutErr)
+-(oneLoopFlag*(4*pow2(Mt)*pow2(s2t)*
+         ((lmMst1 - lmMst2)*(2*pow2(Mst1) - 2*pow2(Mst2)) + 
+           pow2(MuSUSY)*(2 - lmMst1 + lmMst2 - 
+              (2*(lmMst1 - lmMst2)*pow2(Mst1)*(pow2(Mst1) + pow2(Mst2)))/
+               pow4(Mst2))) - 4*
+         ((Mt*MuSUSY*s2t*(2*(pow2(Mst1) - pow2(Mst2))*pow2(s2t) + 
+                (-lmMst1 + lmMst2)*
+                 (4*pow2(Mt) - (pow2(Mst1) + pow2(Mst2))*pow2(s2t))))/
+            Tbeta + (pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*
+              (2 - lmMst1 + lmMst2 - 
+                (2*(lmMst1 - lmMst2)*pow2(Mst1)*
+                   (pow2(Mst1) + pow2(Mst2)))/pow4(Mst2)))/pow2(Sbeta)) + 
+        16*(lmMst1 + lmMst2 - 2*lmMt)*pow4(Mt) - 
+        (-4*pow2(Mst1)*pow2(Mst2) + (2 + lmMst1 - lmMst2)*pow4(Mst1) + 
+           (2 - lmMst1 + lmMst2)*pow4(Mst2))*pow4(s2t)))/32. - 
+  xMst*pow6(Mst1)*((((lmMst1 - lmMst2)*oneLoopFlag*pow2(Mt)*pow2(MuSUSY)*
+           pow2(s2t)*(1 - pow2(Sbeta)))/(4.*pow2(Sbeta)) - 
+        (8*Al4p*twoLoopFlag*(-(Mgl*
+                (65 - 159*lmMst2 + 6*lmMst1*(25 + 6*lmMst2 - 6*lmMt) + 
+                  (9 + 36*lmMst2)*lmMt - 36*pow2(lmMst2))) + 
+             18*Dmglst2*(4 - 61*lmMst2 + 
+                6*lmMst1*(9 + 2*lmMst2 - 2*lmMt) + 
+                (7 + 12*lmMst2)*lmMt - 12*pow2(lmMst2)))*pow4(Mt))/
+         (27.*Mgl))/pow6(Mst2) + 
+     (Al4p*twoLoopFlag*(Mgl*(-8*Mst2*pow2(Mt)*
+              (Mgl*(1 - 111*lmMst2 + 3*lmMst1*(37 + 72*lmMst2) - 
+                   81*pow2(lmMst1) - 135*pow2(lmMst2))*pow2(MuSUSY) + 
+                Dmglst2*(36*lmMst2*pow2(Mst2) + 
+                   (49 - 84*lmMst2 - 36*pow2(lmMst2))*pow2(MuSUSY) - 
+                   12*lmMst1*(3*pow2(Mst2) - (7 + 3*lmMst2)*pow2(MuSUSY))
+))*pow2(s2t) - (8*s2t*(Dmglst2*
+                   (-(Mst2*s2t*
+                        (49 - 84*lmMst2 + 12*lmMst1*(7 + 3*lmMst2) - 
+                        36*pow2(lmMst2))) + 
+                     Mt*(785 + 6*lmMst1*(85 - 42*lmMst2) - 
+                        438*lmMst2 + 252*pow2(lmMst2))) + 
+                  Mgl*(-(Mst2*s2t*
+                        (1 - 111*lmMst2 + 3*lmMst1*(37 + 72*lmMst2) - 
+                        81*pow2(lmMst1) - 135*pow2(lmMst2))) + 
+                     Mt*(193 + 474*lmMst2 - 6*lmMst1*(67 + 42*lmMst2) + 
+                        252*pow2(lmMst2))))*pow2(Mt)*pow2(MuSUSY))/
+              pow2(Sbeta) + 8*s2t*
+              (Dmglst2*(4*(95 - 447*lmMst2 + 
+                      lmMst1*(411 + 90*lmMst2 - 90*lmMt) + 
+                      (36 + 90*lmMst2)*lmMt - 90*pow2(lmMst2))*
+                    pow2(Mst2) + 
+                   (785 + 6*lmMst1*(85 - 42*lmMst2) - 438*lmMst2 + 
+                      252*pow2(lmMst2))*pow2(MuSUSY)) - 
+                Mgl*(4*(49 - 75*lmMst2 + 
+                      3*lmMst1*(25 + 6*lmMst2 - 6*lmMt) + 
+                      18*lmMst2*lmMt - 18*pow2(lmMst2))*pow2(Mst2) - 
+                   (193 + 474*lmMst2 - 6*lmMst1*(67 + 42*lmMst2) + 
+                      252*pow2(lmMst2))*pow2(MuSUSY)))*pow3(Mt) - 
+             (2*Mt*MuSUSY*(8*Dmglst2*
+                   (-36*(1 - 3*lmMst1 + 3*lmMst2)*Mst2*s2t*pow2(Mt) - 
+                     3*Mt*(50 + 3*lmMst1*(17 - 6*lmMst2) - 
+                        51*lmMst2 + 18*pow2(lmMst2))*pow2(Mst2)*
+                      pow2(s2t) + 
+                     4*(7 - 381*lmMst2 + 
+                        lmMst1*(327 + 72*lmMst2 - 81*lmMt) + 
+                        (54 + 81*lmMst2)*lmMt - 72*pow2(lmMst2))*
+                      pow3(Mt) + 
+                     2*(1 + 3*lmMst1 - 3*lmMst2)*pow3(Mst2)*pow3(s2t)) - 
+                  Mgl*(144*Mst2*s2t*
+                      (lmMst1 - lmMst2 + 2*lmMst1*lmMst2 - 
+                        pow2(lmMst1) - pow2(lmMst2))*pow2(Mt) + 
+                     24*Mt*(1 + 33*lmMst2 - 3*lmMst1*(11 + 6*lmMst2) + 
+                        18*pow2(lmMst2))*pow2(Mst2)*pow2(s2t) + 
+                     32*(83 - 96*lmMst2 + 
+                        3*lmMst1*(29 + 12*lmMst2 - 9*lmMt) + 
+                        (9 + 27*lmMst2)*lmMt - 36*pow2(lmMst2))*pow3(Mt) 
++ (5 + lmMst1*(6 - 288*lmMst2) - 6*lmMst2 + 144*pow2(lmMst1) + 
+                        144*pow2(lmMst2))*pow3(Mst2)*pow3(s2t))))/Tbeta - 
+             4*(Dmglst2*(11 + 42*lmMst1 - 42*lmMst2) - 
+                (5 + 6*lmMst1 - 6*lmMst2)*Mgl)*Mt*pow3(s2t)*pow4(Mst2) - 
+             (2*Dmglst2*(5 + 6*lmMst1 - 6*lmMst2) - 
+                (11 + 6*lmMst1 - 6*lmMst2)*Mgl)*pow4(s2t)*pow5(Mst2)) + 
+          (-144*(lmMst1 - lmMst2)*Mst2*xDR2DRMOD*
+              (2*Dmglst2*lmMst2*Mgl - 
+                (2 - 3*lmMst2)*xDmglst2*pow2(Dmglst2) + 
+                (1 + lmMst2)*pow2(Mgl))*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*
+              (1 - pow2(Sbeta)) - 
+             (xDmglst2*pow2(Dmglst2)*
+                (8*s2t*(Tbeta*
+                      (2501 + 42*lmMst1*(7 - 6*lmMst2) - 222*lmMst2 + 
+                        252*pow2(lmMst2))*pow2(MuSUSY)*
+                      (1 - pow2(Sbeta)) + 
+                     (-4*Tbeta*
+                        (257 + 6*lmMst2*(179 - 30*lmMt) - 
+                        12*lmMst1*(76 + 15*lmMst2 - 15*lmMt) - 
+                        162*lmMt + 180*pow2(lmMst2))*pow2(Mst2) + 
+                        3*Mst2*MuSUSY*
+                        (132 + 
+                        (-60*lmMst1 + 60*lmMst2)*(3 - 5*pow2(Sbeta)) - 
+                        215*pow2(Sbeta)))*pow2(Sbeta))*pow3(Mt) - 
+                  6*Mst2*pow2(Mt)*pow2(s2t)*
+                   (4*Mst2*MuSUSY*
+                      (355 + 6*lmMst2 - 6*lmMst1*(1 + 6*lmMst2) + 
+                        36*pow2(lmMst2))*pow2(Sbeta) + 
+                     Tbeta*(2*
+                         (85 - 12*lmMst1*(5 - 3*lmMst2) + 60*lmMst2 - 
+                        36*pow2(lmMst2))*pow2(MuSUSY)*(1 - pow2(Sbeta)) 
++ pow2(Mst2)*pow2(Sbeta)*(96 - 430*pow2(Sbeta) + 215*pow4(Sbeta) + 
+                         (-12*lmMst1 + 12*lmMst2)*
+                         (18 - 50*pow2(Sbeta) + 25*pow4(Sbeta))))) + 
+                  pow2(Sbeta)*
+                   (4*Mt*(12*(1 - 6*lmMst1 + 6*lmMst2)*MuSUSY + 
+                        (35 - 102*lmMst1 + 102*lmMst2)*Mst2*Tbeta)*
+                      pow3(Mst2)*pow3(s2t) + 
+                     32*(9*Mst2*Tbeta*
+                        (102 + lmMst2*(353 - 60*lmMt) - 
+                        6*lmMst1*(49 + 10*lmMst2 - 10*lmMt) - 
+                        59*lmMt + 60*pow2(lmMst2)) + 
+                        MuSUSY*
+                         (412 - 6*lmMst1*(176 + 42*lmMst2 - 39*lmMt) + 
+                         9*lmMst2*(147 - 26*lmMt) - 267*lmMt + 
+                         252*pow2(lmMst2)))*pow4(Mt) + 
+                     3*(5 + 6*lmMst1 - 6*lmMst2)*Tbeta*pow4(s2t)*
+                      pow5(Mst2))))/Tbeta)/pow2(Sbeta)))/
+      (108.*pow2(Mgl)*pow7(Mst2))) - 
+  threeLoopFlag*pow2(Al4p)*((40*pow2(Mt)*pow3(Dmsqst2))/(3.*pow4(Mst2)) + 
+     pow2(s2t)*(pow2(Mt)*((pow2(MuSUSY)*
+              (17297/324. + (40*B4)/9. - (4*D3)/9. + (2*DN)/9. + 
+                (1672*lmMst1)/27. + (53*pow2(lmMst1))/9. - 
+                lmMst2*(3508/27. - 72*lmMst1 + (13*pow2(lmMst1))/3.) - 
+                (2*(470 - 147*lmMst1)*pow2(lmMst2))/9. + 
+                (16*pow3(lmMst1))/9. - (271*pow3(lmMst2))/9. + 
+                ((-10*Dmsqst2*(12*Dmglst2 + Mgl - 2*lmMst2*Mgl))/
+                    (3.*pow2(Mst1)) - 
+                   Dmglst2*(14267/162. - (8*B4)/3. + (32*D3)/9. - 
+                      (20*DN)/9. + (88*lmMst1)/3. - 
+                      lmMst2*
+                       (28 + (928*lmMst1)/9. - (64*pow2(lmMst1))/9.) - 
+                      (26*pow2(lmMst1))/3. + 
+                      (4*(281 - 123*lmMst1)*pow2(lmMst2))/9. + 
+                      (428*pow3(lmMst2))/9.))/Mgl + 
+                ((5*(1925 + 72*lmMst1 - 72*lmMst2)*pow2(Dmsqst2))/
+                    324. + Dmsqst2*
+                    (817051/4050. + (622*lmMst1)/15. - 
+                      (2*(311 - 10*lmMst1)*lmMst2)/15. + 
+                      (Dmglst2*(230/3. - 140*lmMst1 + 140*lmMst2))/
+                       Mgl - (22*pow2(lmMst1))/3. + 6*pow2(lmMst2))*
+                    pow2(Mst1) + 
+                   (314145861731/5.00094e8 + (76*B4)/9. - (2*DN)/9. + 
+                      (6317839*lmMst1)/396900. - 
+                      (66307*pow2(lmMst1))/315. - 
+                      lmMst2*
+                       (4972789/396900. - (182909*lmMst1)/315. + 
+                        (274*pow2(lmMst1))/3.) - 
+                      (2*(58301 - 37135*lmMst1)*pow2(lmMst2))/315. - 
+                      (44*pow3(lmMst1))/9. - (1256*pow3(lmMst2))/9. - 
+                      (Dmglst2*
+                        (219487237477/3.750705e8 - (8*B4)/3. + 
+                        (32*D3)/9. - (20*DN)/9. - 
+                        (20109937*lmMst1)/297675. - 
+                        (15886*pow2(lmMst1))/945. + 
+                        lmMst2*
+                       (5093887/297675. - (144628*lmMst1)/945. + 
+                       (1180*pow2(lmMst1))/9.) + 
+                        (2*(80257 - 138180*lmMst1)*pow2(lmMst2))/
+                       945. - (92*pow3(lmMst1))/27. + 
+                        (4448*pow3(lmMst2))/27.))/Mgl)*pow4(Mst1))/
+                 pow4(Mst2) + 
+                ((((Dmglst2*
+                      (40 - 4*(99 + 16*lmMst1)*lmMst2 - 
+                      246*pow2(lmMst2)) - 
+                       Mgl*
+                       (103 + 186*lmMst2 + 
+                       32*lmMst1*(1 + lmMst2) + 91*pow2(lmMst2)))*
+                       pow2(Mst2))/9. + 
+                      (810000*Mgl*pow2(Dmsqst2) - 
+                       11250*Dmsqst2*
+                       (288*Dmglst2*(4 + lmMst1 - lmMst2) - 
+                       Mgl*
+                       (1141 + 48*lmMst1*(7 - 3*lmMst2) - 
+                       264*lmMst2 + 144*pow2(lmMst2)))*pow2(Mst1) - 
+                       (-5*Mgl*
+                       (10552777 + 205200*B4 - 5400*DN + 
+                       4145280*lmMst1 + 
+                       lmMst2*
+                      (-3886080 + 6343200*lmMst1 - 
+                      831600*pow2(lmMst1)) - 
+                       1181700*pow2(lmMst1) + 
+                       (-5161500 + 2764800*lmMst1)*pow2(lmMst2) - 
+                       55800*pow3(lmMst1) - 1877400*pow3(lmMst2)) 
++ 8*Dmglst2*(2695042 - 40500*B4 + 54000*D3 - 33750*DN - 
+                       326895*lmMst1 - 324900*pow2(lmMst1) + 
+                       lmMst2*
+                       (-294105 - 1935450*lmMst1 + 
+                       938250*pow2(lmMst1)) + 
+                       (2260350 - 2524500*lmMst1)*pow2(lmMst2) + 
+                       11250*pow3(lmMst1) + 1575000*pow3(lmMst2)))*
+                       pow4(Mst1))/(121500.*pow2(Mst2)))/pow2(Mst1) + 
+                   (16*(1 + lmMst2)*
+                      (4*Dmglst2*lmMst2 + Mgl + lmMst2*Mgl)*
+                      pow4(Mst2))/(9.*pow4(Mst1)) + 
+                   ((4*OepS2*
+                       (Mgl*
+                       (180*pow2(Dmsqst2)*
+                       (14*pow2(Mst1) + 3*pow2(Mst2)) - 
+                       60*Dmsqst2*
+                       (117*pow2(Mst1)*pow2(Mst2) + 
+                       221*pow4(Mst1) + 27*pow4(Mst2))) + 
+                       pow2(Mst2)*
+                       (4*Dmglst2*
+                       (2322*pow2(Mst1)*pow2(Mst2) + 
+                       8654*pow4(Mst1) + 189*pow4(Mst2)) - 
+                       3*Mgl*
+                       (6342*pow2(Mst1)*pow2(Mst2) + 
+                       13237*pow4(Mst1) + 1242*pow4(Mst2)))))/2187. - 
+                      (S2*(Mgl*
+                       (90*pow2(Dmsqst2)*
+                       (28*(32 + 3*lmMst1 - 3*lmMst2)*pow2(Mst1) + 
+                       9*(43 + 2*lmMst1 - 2*lmMst2)*pow2(Mst2)) - 
+                       30*Dmsqst2*
+                       (-9*(17 - 78*lmMst1 + 78*lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                       13*(95 + 102*lmMst1 - 102*lmMst2)*
+                       pow4(Mst1) - 
+                       81*(15 - 2*lmMst1 + 2*lmMst2)*pow4(Mst2))) - 
+                        pow2(Mst2)*
+                        (3*Mgl*
+                       (9*(11243 + 2114*lmMst1 - 2114*lmMst2)*
+                       pow2(Mst1)*pow2(Mst2) + 
+                       (194357 + 39711*lmMst1 - 39711*lmMst2)*
+                       pow4(Mst1) + 
+                       81*(307 + 46*lmMst1 - 46*lmMst2)*pow4(Mst2)) 
++ Dmglst2*(36*(15643 - 774*lmMst1 + 774*lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                        8*(93919 - 12981*lmMst1 + 12981*lmMst2)*
+                       pow4(Mst1) + 
+                        162*(1677 - 14*lmMst1 + 14*lmMst2)*pow4(Mst2)
+))))/81.)/pow6(Mst2))/Mgl - (Dmsqst2*pow2(Mst1)*
+                   (Dmsqst2*(325493/12150. - 
+                        lmMst1*(2137/135. - 8*lmMst2) + 
+                        (2137*lmMst2)/135. - 4*pow2(lmMst1) - 
+                        4*pow2(lmMst2)) - 
+                     (593331163/2.50047e6 - 
+                        (2*lmMst1*(8263 - 71820*lmMst2))/3969. + 
+                        (16526*lmMst2)/3969. - 
+                        (520*pow2(lmMst1))/21. - (80*pow2(lmMst2))/7.)*
+                      pow2(Mst1)))/pow6(Mst2)))/pow2(Sbeta) + 
+           (5*Dmsqst2*(3*Dmsqst2*(167 - 5*lmMst1 + 5*lmMst2)*Mgl - 
+                4*Dmglst2*(1081 - 165*lmMst1 + 165*lmMst2)*pow2(Mst2))*
+              pow2(Sbeta)*pow4(Mst1))/(18.*Mgl*pow6(Mst2))) + 
+        (5*Dmsqst2*Mt*pow2(Sbeta)*
+           (4*Dmglst2*(1081 - 165*lmMst1 + 165*lmMst2)*Mt*pow2(Mst2)*
+              pow2(Sbeta) - 3*Dmsqst2*Mgl*
+              (-2*(11 + 39*lmMst1 - 39*lmMst2)*Mst2*s2t*
+                 (2 - pow2(Sbeta)) + 
+                (167 - 5*lmMst1 + 5*lmMst2)*Mt*pow2(Sbeta)))*pow4(Mst1))/
+         (36.*Mgl*pow6(Mst2))) + 
+     pow4(s2t)*((5*(1061 + 72*lmMst1 - 72*lmMst2)*pow2(Dmsqst2))/1296. - 
+        Dmsqst2*(52199/16200. + (467*lmMst1)/90. - 
+           (317/90. + 7*lmMst1)*lmMst2 - 
+           (5*Dmglst2*(75 - 26*lmMst1 + 26*lmMst2))/(6.*Mgl) + 
+           (11*pow2(lmMst1))/6. + (31*pow2(lmMst2))/6.)*pow2(Mst1) - 
+        (pow2(Dmsqst2)*(120796/6075. - lmMst1*(1837/540. - 2*lmMst2) + 
+             (1837*lmMst2)/540. - pow2(lmMst1) - pow2(lmMst2))*pow2(Mst1))/
+         pow2(Mst2) + pow2(Mst2)*
+         ((5*pow2(Dmsqst2))/(3.*pow2(Mst1)) + 
+           pow2(Mst1)*(7680127/97200. - B4/9. + (2*D3)/9. - DN/6. + 
+              (4372*lmMst1)/405. + 
+              (lmMst2*(16051 + 22980*lmMst1 - 5175*pow2(lmMst1)))/810. - 
+              (1631*pow2(lmMst1))/108. - 
+              ((92 - 327*lmMst1)*pow2(lmMst2))/27. - 
+              (79*pow3(lmMst1))/54. + 
+              (Dmglst2*(95041/121500. - (2*B4)/3. + (8*D3)/9. - 
+                   (5*DN)/9. + (81193*lmMst1)/4050. + 
+                   (137*pow2(lmMst1))/135. - 
+                   (lmMst2*(81643 + 86970*lmMst1 + 48150*pow2(lmMst1)))/
+                    4050. + ((4969 + 3840*lmMst1)*pow2(lmMst2))/270. - 
+                   (5*pow3(lmMst1))/27. - (58*pow3(lmMst2))/27.))/Mgl - 
+              (115*pow3(lmMst2))/27.)) - 
+        pow4(Mst1)*(93508520089/2.000376e9 + B4 + D3/9. - DN/9. + 
+           (34838747*lmMst1)/529200. - 
+           (lmMst2*(23468297 + 17276980*lmMst1 - 3601500*pow2(lmMst1)))/
+            529200. + (50723*pow2(lmMst1))/1890. + 
+           (4*(2941 - 2415*lmMst1)*pow2(lmMst2))/945. - 
+           (10*pow3(lmMst1))/27. + (409*pow3(lmMst2))/108. + 
+           (Dmglst2*(119405394763/1.500282e9 + 
+                (8287903*lmMst2)/1.1907e6 + 
+                ((1363 + 1155*lmMst2)*pow2(lmMst1))/315. + 
+                lmMst1*(1436147/1.1907e6 - (101*lmMst2)/315. - 
+                   (11*pow2(lmMst2))/3.) - (51*pow2(lmMst2))/70. - 
+                (11*pow3(lmMst1))/9. + (11*pow3(lmMst2))/9.))/Mgl - 
+           (pow2(Dmsqst2)*(38390869/2.000376e7 + (8753*lmMst2)/31752. - 
+                lmMst1*(8753/31752. + (25*lmMst2)/7.) + 
+                (25*pow2(lmMst1))/14. + (25*pow2(lmMst2))/14.))/pow4(Mst2)) 
++ ((25289 + 1440*B4 - 144*D3 + 72*DN + 22368*lmMst1 + 
+             1908*pow2(lmMst1) - 
+             12*lmMst2*(2296 - 2136*lmMst1 + 117*pow2(lmMst1)) - 
+             504*(53 - 21*lmMst1)*pow2(lmMst2) + 576*pow3(lmMst1) - 
+             9756*pow3(lmMst2) + 
+             ((-1080*Dmsqst2*(12*Dmglst2 + Mgl - 2*lmMst2*Mgl))/
+                 pow2(Mst1) - 
+                2*Dmglst2*(15707 - 432*B4 + 576*D3 - 360*DN + 
+                   4752*lmMst1 - 
+                   72*lmMst2*(277 + 264*lmMst1 - 16*pow2(lmMst1)) - 
+                   1404*pow2(lmMst1) + 
+                   72*(142 - 123*lmMst1)*pow2(lmMst2) + 
+                   7704*pow3(lmMst2)))/Mgl)*pow4(Mst2))/1296. + 
+        (-(Dmsqst2*(4630500*Dmglst2*
+                  ((76 - 249*lmMst1 + 249*lmMst2)*pow4(Mst1) + 
+                    72*(1 + lmMst1 - lmMst2)*pow4(Mst2)) + 
+                 Mgl*(2*(378483467 + 
+                       630*lmMst1*(555521 - 200340*lmMst2) - 
+                       391652730*lmMst2 + 63107100*pow2(lmMst1) + 
+                       63107100*pow2(lmMst2))*pow4(Mst1) - 
+                    1157625*(1213 + 48*lmMst1*(7 - 3*lmMst2) - 
+                       408*lmMst2 + 144*pow2(lmMst2))*pow4(Mst2))))/
+            (5.00094e7*pow2(Mst2)) + 
+           ((OepS2*(Mgl*(60*pow2(Dmsqst2)*
+                       (24*pow2(Mst1)*pow2(Mst2) + 14*pow4(Mst1) + 
+                        9*pow4(Mst2)) - 
+                      60*Dmsqst2*pow2(Mst2)*
+                       (63*pow2(Mst1)*pow2(Mst2) + 14*pow4(Mst1) + 
+                        27*pow4(Mst2))) + 
+                   pow4(Mst2)*
+                    (4*Dmglst2*
+                       (1944*pow2(Mst1)*pow2(Mst2) + 
+                        4199*pow4(Mst1) + 189*pow4(Mst2)) - 
+                      3*Mgl*(3858*pow2(Mst1)*pow2(Mst2) + 
+                        1795*pow4(Mst1) + 1242*pow4(Mst2)))))/2187. + 
+              (S2*(Mgl*(-30*pow2(Dmsqst2)*
+                       (6*(61 + 24*lmMst1 - 24*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                        (226 + 84*lmMst1 - 84*lmMst2)*pow4(Mst1) + 
+                        27*(43 + 2*lmMst1 - 2*lmMst2)*pow4(Mst2)) + 
+                      30*Dmsqst2*pow2(Mst2)*
+                       (9*(253 + 42*lmMst1 - 42*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                        (326 + 84*lmMst1 - 84*lmMst2)*pow4(Mst1) - 
+                        81*(15 - 2*lmMst1 + 2*lmMst2)*pow4(Mst2))) + 
+                   pow4(Mst2)*
+                    (3*Mgl*(9*(5717 + 1286*lmMst1 - 1286*lmMst2)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        5*(3370 + 1077*lmMst1 - 1077*lmMst2)*
+                        pow4(Mst1) + 
+                        81*(307 + 46*lmMst1 - 46*lmMst2)*pow4(Mst2)) - 
+                      2*Dmglst2*
+                       (-36*(275 - 324*lmMst1 + 324*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                         (51635 + 25194*lmMst1 - 25194*lmMst2)*
+                        pow4(Mst1) - 
+                         81*(1677 - 14*lmMst1 + 14*lmMst2)*pow4(Mst2))))
+)/324.)/pow4(Mst2) + ((Dmglst2*
+                 (40 - (524 + 64*lmMst1)*lmMst2 - 374*pow2(lmMst2)) - 
+                Mgl*(135 + 250*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                   123*pow2(lmMst2)))*pow6(Mst2))/(36.*pow2(Mst1)))/Mgl) - 
+     (s2t*pow3(Mt)*(pow2(Mst1)*
+           (291600*Mgl*pow2(Dmsqst2)*
+              (4*(11 - 6*lmMst1 + 12*lmMst2 - 6*lmMt)*pow2(Mst1) + 
+                (15 - 16*lmMst1 + 30*lmMst2 - 14*lmMt)*pow2(Mst2) - 
+                4*(3 + 2*lmMst1 - 2*lmMst2)*pow2(MuSUSY)) - 
+             64800*Dmsqst2*(-9*Mgl*
+                 (4*pow2(Mst1)*
+                    ((6 - 4*lmMst1 + 8*lmMst2 - 4*lmMt)*pow2(Mst2) - 
+                      (1 + 3*lmMst1 - 3*lmMst2)*pow2(MuSUSY)) - 
+                   2*pow2(Mst2)*
+                    ((7 + 4*lmMst1 - 10*lmMst2 + 6*lmMt)*pow2(Mst2) + 
+                      2*(1 + lmMst1 - lmMst2)*pow2(MuSUSY)) + 
+                   (35 + 50*lmMst2 - 4*lmMst1*(8 + lmMst2 - lmMt) + 
+                      (-18 - 4*lmMst2)*lmMt + 4*pow2(lmMst2))*pow4(Mst1)) 
++ Dmglst2*(2*pow2(Mst2)*((289 - 180*lmMst1 + 354*lmMst2 - 174*lmMt)*
+                       pow2(Mst2) - 
+                      18*(2 + 5*lmMst1 - 5*lmMst2)*pow2(MuSUSY)) + 
+                   36*pow2(Mst1)*
+                    (8*(7 - 3*lmMst1 + 6*lmMst2 - 3*lmMt)*pow2(Mst2) + 
+                      (8 - 15*lmMst1 + 15*lmMst2)*pow2(MuSUSY)) + 
+                   9*(465 + 374*lmMst2 - 
+                      4*lmMst1*(52 + 3*lmMst2 - 3*lmMt) + 
+                      (-166 - 12*lmMst2)*lmMt + 12*pow2(lmMst2))*
+                    pow4(Mst1)))) + 
+          Dmglst2*(-18*pow2(Mst2)*
+              (-3*pow2(Mst2)*
+                 (322421 + 414720*lmMt - 73760*OepS2 + 564876*S2 - 
+                   2880*(21 + 12*lmMst2 - 4*lmMt)*pow2(lmMst1) + 
+                   480*(1097 - 24*lmMt)*pow2(lmMst2) + 
+                   40*lmMst2*
+                    (11408 - 924*lmMt - 37341*S2 - 864*pow2(lmMt)) - 
+                   40*lmMst1*
+                    (11876 + 8844*lmMst2 + 156*lmMt - 37341*S2 - 
+                      288*pow2(lmMst2) - 864*pow2(lmMt)) - 
+                   69120*pow2(lmMt) + 23040*pow3(lmMst2)) + 
+                2*pow2(MuSUSY)*
+                 (66761 + 301320*B4 - 4860*DN - 205380*lmMst1 + 
+                   40480*OepS2 + 
+                   (-537624 - 819720*lmMst1 + 819720*lmMst2)*S2 + 
+                   23760*pow2(lmMst1) + 
+                   lmMst2*(898740 - 352080*lmMst1 + 
+                      8640*pow2(lmMst1)) + 
+                   (520560 - 357480*lmMst1)*pow2(lmMst2) + 
+                   348840*pow3(lmMst2)))*pow4(Mst1) - 
+             27*pow2(Mst1)*(-10*pow2(Mst2)*
+                 (30183 + 45408*lmMt - 1120*OepS2 + 
+                   8*lmMst2*(8398 - 588*lmMt - 2835*S2) - 43740*S2 - 
+                   2304*(1 - lmMst2)*pow2(lmMst1) - 
+                   72*lmMst1*
+                    (120 - 64*lmMt + 8*lmMst2*(5 + 8*lmMt) - 315*S2 - 
+                      164*pow2(lmMst2)) + 
+                   96*(199 + 48*lmMt)*pow2(lmMst2) - 14112*pow3(lmMst2)
+) + pow2(MuSUSY)*(23917 + 188640*B4 - 3600*DN - 37440*lmMst1 + 
+                   5600*OepS2 + 
+                   (146772 - 113400*lmMst1 + 113400*lmMst2)*S2 + 
+                   lmMst2*(682560 - 158400*lmMst1 - 
+                      11520*pow2(lmMst1)) + 11520*pow2(lmMst1) + 
+                   (403200 - 174240*lmMst1)*pow2(lmMst2) + 
+                   185760*pow3(lmMst2)))*pow4(Mst2) + 
+             2*(5*pow2(MuSUSY)*
+                 (2773621 - 1660176*B4 + 25272*DN + 2004408*lmMst1 - 
+                   525472*OepS2 + 
+                   (13296204 + 10640808*lmMst1 - 10640808*lmMst2)*S2 + 
+                   lmMst2*(-5299488 + 1644624*lmMst1 - 
+                      248832*pow2(lmMst1)) + 3888*pow2(lmMst1) + 
+                   (-2340576 + 2507760*lmMst1)*pow2(lmMst2) - 
+                   31104*pow3(lmMst1) - 2227824*pow3(lmMst2)) + 
+                4*pow2(Mst2)*
+                 (20964397 + 4563540*lmMt - 2058400*OepS2 + 
+                   47545272*S2 - 
+                   9720*(266 + 74*lmMst2 - 55*lmMt)*pow2(lmMst1) + 
+                   3240*(1493 + 39*lmMt)*pow2(lmMst2) - 
+                   180*lmMst1*
+                    (32857 + 11844*lmMt + 18*lmMst2*(485 + 204*lmMt) - 
+                      231570*S2 - 1674*pow2(lmMst2) - 3888*pow2(lmMt)) 
++ 360*lmMst2*(4724 + 5328*lmMt - 115785*S2 - 1944*pow2(lmMt)) - 
+                   466560*pow2(lmMt) + 9720*pow3(lmMst1) + 
+                   408240*pow3(lmMst2)))*pow6(Mst1) + 
+             622080*(1 - 2*lmMst2 - 3*pow2(lmMst2))*
+              (2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)) - 
+          3*Mgl*(6*pow2(Mst2)*
+              (20*pow2(MuSUSY)*
+                 (75569 + 13716*B4 - 54*DN - 33426*lmMst1 - 
+                   1088*OepS2 + 
+                   (27378 + 22032*lmMst1 - 22032*lmMst2)*S2 - 
+                   2376*pow2(lmMst1) + 
+                   lmMst2*(77058 - 54648*lmMst1 + 864*pow2(lmMst1)) + 
+                   (69336 - 21924*lmMst1)*pow2(lmMst2) + 
+                   21060*pow3(lmMst2)) + 
+                pow2(Mst2)*(1156193 + 198720*lmMt - 60320*OepS2 + 
+                   1414908*S2 - 
+                   8640*(13 - 4*(lmMst2 + lmMt))*pow2(lmMst1) + 
+                   17280*(51 - 2*lmMt)*pow2(lmMst2) - 
+                   1080*lmMst1*
+                    (590 + 720*lmMst2 - 104*lmMt - 1131*S2 + 
+                      224*pow2(lmMst2) - 96*pow2(lmMt)) - 
+                   3240*lmMst2*(42 + 377*S2 + 32*(lmMt + pow2(lmMt))) + 
+                   207360*pow3(lmMst2)))*pow4(Mst1) + 
+             27*pow2(Mst1)*(5*pow2(MuSUSY)*
+                 (28683 + 5280*B4 - 48*DN - 5952*lmMst1 - 224*OepS2 + 
+                   (-324 + 4536*lmMst1 - 4536*lmMst2)*S2 + 
+                   lmMst2*(41088 - 14016*lmMst1 - 768*pow2(lmMst1)) - 
+                   768*pow2(lmMst1) + 
+                   (25728 - 5472*lmMst1)*pow2(lmMst2) + 
+                   6240*pow3(lmMst2)) + 
+                2*pow2(Mst2)*(60759 - 12480*lmMt - 1120*OepS2 - 
+                   25596*S2 - 120*lmMst2*(26 + 132*lmMt + 189*S2) - 
+                   3840*(1 + lmMst2)*pow2(lmMst1) + 
+                   480*(155 - 16*lmMt)*pow2(lmMst2) - 
+                   120*lmMst1*
+                    (216 + 8*lmMst2*(61 - 8*lmMt) - 64*lmMt - 189*S2 + 
+                      164*pow2(lmMst2)) - 11520*pow2(lmMt) + 
+                   23520*pow3(lmMst2)))*pow4(Mst2) + 
+             2*(4*pow2(Mst2)*
+                 (2016907 + 110160*lmMt - 109600*OepS2 + 3520152*S2 - 
+                   1080*(158 - 6*lmMst2 - 39*lmMt)*pow2(lmMst1) + 
+                   1080*(565 - 3*lmMt)*pow2(lmMst2) - 
+                   1080*lmMst1*
+                    (421 + 60*lmMt + lmMst2*(413 + 36*lmMt) - 
+                      2055*S2 + 129*pow2(lmMst2) - 72*pow2(lmMt)) - 
+                   1080*lmMst2*
+                    (167 - 66*lmMt + 2055*S2 + 72*pow2(lmMt)) + 
+                   1080*pow3(lmMst1) + 131760*pow3(lmMst2)) + 
+                5*pow2(MuSUSY)*
+                 (1702429 + 257904*B4 - 648*DN - 748656*lmMst1 - 
+                   30112*OepS2 + 
+                   (991980 + 609768*lmMst1 - 609768*lmMst2)*S2 + 
+                   41904*pow2(lmMst1) + 
+                   lmMst2*(1289736 - 1318896*lmMst1 + 
+                      124416*pow2(lmMst1)) + 
+                   (1424736 - 628560*lmMst1)*pow2(lmMst2) - 
+                   3456*pow3(lmMst1) + 507600*pow3(lmMst2)))*pow6(Mst1) + 
+             207360*pow2(1 + lmMst2)*(2*pow2(Mst2) + pow2(MuSUSY))*
+              pow6(Mst2))))/(43740.*Mgl*pow2(Mst1)*pow5(Mst2)) + 
+     (Mt*pow3(s2t)*(pow2(Mst1)*
+           (145800*Mgl*pow2(Dmsqst2)*
+              (16*(1 - lmMst1 + lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                (29 + 41*lmMst1 - 41*lmMst2)*pow4(Mst1) - 
+                8*(3 + 2*lmMst1 - 2*lmMst2)*pow4(Mst2)) - 
+             583200*Dmsqst2*pow2(Mst2)*
+              (Dmglst2*(4*(12 - 5*lmMst1 + 5*lmMst2)*pow2(Mst1)*
+                    pow2(Mst2) + (40 - 3*lmMst1 + 3*lmMst2)*pow4(Mst1) - 
+                   4*(2 + 5*lmMst1 - 5*lmMst2)*pow4(Mst2)) - 
+                Mgl*(4*(1 - lmMst1 + lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                   (4 - lmMst1 + lmMst2)*pow4(Mst1) - 
+                   4*(1 + lmMst1 - lmMst2)*pow4(Mst2)))) - 
+          pow4(Mst2)*(-(Dmglst2*
+                (-18*pow2(Mst2)*
+                   (27211 + 36720*B4 + 1080*DN - 298440*lmMst1 + 
+                     64160*OepS2 + 
+                     (-1515564 - 1299240*lmMst1 + 1299240*lmMst2)*S2 + 
+                     12960*pow2(lmMst1) + 
+                     lmMst2*(-181080 - 228960*lmMst1 + 
+                        51840*pow2(lmMst1)) + 
+                     (-64800 - 192240*lmMst1)*pow2(lmMst2) + 
+                     140400*pow3(lmMst2))*pow4(Mst1) - 
+                  27*pow2(Mst1)*
+                   (69997 + 188640*B4 - 3600*DN - 37440*lmMst1 + 
+                     5600*OepS2 + 
+                     (146772 - 113400*lmMst1 + 113400*lmMst2)*S2 + 
+                     lmMst2*(590400 - 158400*lmMst1 - 
+                        11520*pow2(lmMst1)) + 11520*pow2(lmMst1) + 
+                     (264960 - 174240*lmMst1)*pow2(lmMst2) + 
+                     185760*pow3(lmMst2))*pow4(Mst2) + 
+                  (31897243 - 2491360*OepS2 + 90290268*S2 - 
+                     360*lmMst2*(18652 + 140139*S2) + 
+                     38880*(37 - 40*lmMst2)*pow2(lmMst1) + 
+                     3188160*pow2(lmMst2) + 
+                     360*lmMst1*
+                      (17410 - 12852*lmMst2 + 140139*S2 + 
+                        11232*pow2(lmMst2)) - 311040*pow3(lmMst1) - 
+                     2177280*pow3(lmMst2))*pow6(Mst1) + 
+                  622080*(1 - 2*lmMst2 - 3*pow2(lmMst2))*pow6(Mst2))) + 
+             15*Mgl*(6*pow2(Mst2)*
+                 (51041 + 7344*B4 + 216*DN - 80136*lmMst1 - 2336*OepS2 + 
+                   (112428 + 47304*lmMst1 - 47304*lmMst2)*S2 - 
+                   2592*pow2(lmMst1) + 
+                   lmMst2*(-47736 - 92448*lmMst1 + 10368*pow2(lmMst1)) + 
+                   (52704 - 38448*lmMst1)*pow2(lmMst2) + 
+                   28080*pow3(lmMst2))*pow4(Mst1) + 
+                27*pow2(Mst1)*
+                 (25611 + 5280*B4 - 48*DN - 5952*lmMst1 - 224*OepS2 + 
+                   (-324 + 4536*lmMst1 - 4536*lmMst2)*S2 + 
+                   lmMst2*(34944 - 14016*lmMst1 - 768*pow2(lmMst1)) - 
+                   768*pow2(lmMst1) + 
+                   (22656 - 5472*lmMst1)*pow2(lmMst2) + 6240*pow3(lmMst2)
+)*pow4(Mst2) + (551987 - 14048*OepS2 + 661068*S2 - 
+                   216*lmMst2*(46 + 1317*S2) + 
+                   864*(205 + 216*lmMst2)*pow2(lmMst1) + 
+                   216000*pow2(lmMst2) - 
+                   216*lmMst1*
+                    (248 + 1820*lmMst2 - 1317*S2 + 1632*pow2(lmMst2)) - 
+                   6912*pow3(lmMst1) + 172800*pow3(lmMst2))*pow6(Mst1) + 
+                41472*pow2(1 + lmMst2)*pow6(Mst2)))))/
+      (87480.*Mgl*pow2(Mst1)*pow5(Mst2)) + 
+     pow2(Mt)*pow2(s2t)*((5*Dmsqst2*
+           (368*Dmglst2 - (391 + 32*lmMst1 - 128*lmMst2)*Mgl))/(18.*Mgl) - 
+        (40*pow2(Dmsqst2))/(3.*pow2(Mst1)) - 
+        (pow2(Mst1)*(16*Dmglst2*
+              (1216808 + 1164855*lmMst2 + 
+                (-324000 - 162000*lmMst2)*lmMt - 
+                225*(341 - 30*lmMst2)*pow2(lmMst1) + 
+                30*lmMst1*(34484 - 16260*lmMst2 + 5400*lmMt - 
+                   21825*pow2(lmMst2)) + 365400*pow2(lmMst2) - 
+                2250*pow3(lmMst1) + 650250*pow3(lmMst2)) + 
+             5*Mgl*(2367149 - 21600*D3 + 21600*DN - 5339040*lmMst1 + 
+                (-518400*lmMst1 + 518400*lmMst2)*lmMt - 
+                1564200*pow2(lmMst1) + 
+                lmMst2*(6278640 - 565200*lmMst1 + 37800*pow2(lmMst1)) + 
+                (1724400 - 853200*lmMst1)*pow2(lmMst2) - 
+                234000*pow3(lmMst1) + 1049400*pow3(lmMst2))))/(121500.*Mgl) 
++ ((40*(5 + 9*lmMst1 - 9*lmMst2)*pow2(Dmsqst2))/81. + 
+           Dmsqst2*(36449/2025. + (1468*lmMst1)/45. - 
+              (4*(517 + 180*lmMst1)*lmMst2)/45. + 
+              (20*Dmglst2*(113 - 6*lmMst1 + 6*lmMst2))/(9.*Mgl) + 
+              8*pow2(lmMst1) + 8*pow2(lmMst2))*pow2(Mst1) - 
+           (6250593568/3.1255875e7 - (18614063*lmMst1)/66150. + 
+              lmMst2*(19407863/66150. - (25514*lmMst1)/945. - 
+                 (286*pow2(lmMst1))/9.) - (48143*pow2(lmMst1))/945. + 
+              (32*lmMt*(-2*lmMst1*(1 + lmMst2) + lmMst2*(2 + lmMst2) + 
+                   pow2(lmMst1)))/3. + 
+              (73657/945. - (2*lmMst1)/9.)*pow2(lmMst2) + 
+              (190*pow3(lmMst1))/27. - 
+              (Dmglst2*(3650009897/2.083725e7 - 
+                   (17578814*lmMst1)/33075. + 
+                   lmMst2*(8523614/33075. + (105592*lmMst1)/315. - 
+                      (208*pow2(lmMst1))/9.) - 
+                   (35576*pow2(lmMst1))/315. - 
+                   (16*(4376 - 2555*lmMst1)*pow2(lmMst2))/315. + 
+                   (64*lmMt*
+                      (2 + 5*lmMst2 - lmMst1*(5 + 2*lmMst2) + 
+                        pow2(lmMst1) + pow2(lmMst2)))/3. + 
+                   (16*pow3(lmMst1))/27. - (2896*pow3(lmMst2))/27.))/Mgl 
++ (674*pow3(lmMst2))/27.)*pow4(Mst1))/pow2(Mst2) - 
+        (Dmsqst2*(22430251/6.251175e6 - (470824*lmMst1)/19845. + 
+             (4*(117706 + 34965*lmMst1)*lmMst2)/19845. - 
+             (160*Dmglst2*(41 - 12*lmMst1 + 12*lmMst2))/(27.*Mgl) - 
+             (74*pow2(lmMst1))/21. - (74*pow2(lmMst2))/21.)*pow4(Mst1))/
+         pow4(Mst2) - pow2(MuSUSY)*
+         (17297/324. + (40*B4)/9. - (4*D3)/9. + (2*DN)/9. + 
+           (1672*lmMst1)/27. + (53*pow2(lmMst1))/9. - 
+           lmMst2*(3508/27. - 72*lmMst1 + (13*pow2(lmMst1))/3.) - 
+           (940/9. - (98*lmMst1)/3.)*pow2(lmMst2) + (16*pow3(lmMst1))/9. - 
+           (271*pow3(lmMst2))/9. + 
+           ((-10*Dmsqst2*(12*Dmglst2 + Mgl - 2*lmMst2*Mgl))/
+               (3.*pow2(Mst1)) - 
+              (Dmglst2*(14267 - 432*B4 + 576*D3 - 360*DN + 
+                   4752*lmMst1 - 
+                   72*lmMst2*(63 + 232*lmMst1 - 16*pow2(lmMst1)) - 
+                   1404*pow2(lmMst1) + 
+                   72*(281 - 123*lmMst1)*pow2(lmMst2) + 
+                   7704*pow3(lmMst2)))/162.)/Mgl + 
+           ((5*(1925 + 72*lmMst1 - 72*lmMst2)*pow2(Dmsqst2))/324. + 
+              Dmsqst2*(817051/4050. + (622*lmMst1)/15. - 
+                 (622/15. - (4*lmMst1)/3.)*lmMst2 + 
+                 (10*Dmglst2*(23 - 42*lmMst1 + 42*lmMst2))/(3.*Mgl) - 
+                 (22*pow2(lmMst1))/3. + 6*pow2(lmMst2))*pow2(Mst1) + 
+              (314145861731/5.00094e8 + (76*B4)/9. - (2*DN)/9. + 
+                 (6317839*lmMst1)/396900. - (66307*pow2(lmMst1))/315. - 
+                 lmMst2*(4972789/396900. - (182909*lmMst1)/315. + 
+                    (274*pow2(lmMst1))/3.) - 
+                 (2*(58301 - 37135*lmMst1)*pow2(lmMst2))/315. - 
+                 (44*pow3(lmMst1))/9. - (1256*pow3(lmMst2))/9. - 
+                 (Dmglst2*(219487237477/3.750705e8 - (8*B4)/3. + 
+                      (32*D3)/9. - (20*DN)/9. - 
+                      (20109937*lmMst1)/297675. - 
+                      (15886*pow2(lmMst1))/945. + 
+                      lmMst2*
+                       (5093887/297675. - (144628*lmMst1)/945. + 
+                        (1180*pow2(lmMst1))/9.) + 
+                      (160514/945. - (2632*lmMst1)/9.)*pow2(lmMst2) - 
+                      (92*pow3(lmMst1))/27. + (4448*pow3(lmMst2))/27.))/
+                  Mgl)*pow4(Mst1))/pow4(Mst2) + 
+           ((((Dmglst2*(40 - 4*(99 + 16*lmMst1)*lmMst2 - 
+                       246*pow2(lmMst2)) - 
+                      Mgl*(103 + 186*lmMst2 + 
+                       32*lmMst1*(1 + lmMst2) + 91*pow2(lmMst2)))*
+                    pow2(Mst2))/9. + 
+                 (810000*Mgl*pow2(Dmsqst2) - 
+                    11250*Dmsqst2*
+                     (288*Dmglst2*(4 + lmMst1 - lmMst2) - 
+                       Mgl*(1141 + 48*lmMst1*(7 - 3*lmMst2) - 
+                       264*lmMst2 + 144*pow2(lmMst2)))*pow2(Mst1) - 
+                    (-5*Mgl*
+                       (10552777 + 205200*B4 - 5400*DN + 
+                       4145280*lmMst1 + 
+                       lmMst2*
+                       (-3886080 + 6343200*lmMst1 - 
+                       831600*pow2(lmMst1)) - 
+                       1181700*pow2(lmMst1) + 
+                       (-5161500 + 2764800*lmMst1)*pow2(lmMst2) - 
+                       55800*pow3(lmMst1) - 1877400*pow3(lmMst2)) + 
+                       8*Dmglst2*
+                        (2695042 - 40500*B4 + 54000*D3 - 33750*DN - 
+                        326895*lmMst1 - 324900*pow2(lmMst1) + 
+                        lmMst2*
+                       (-294105 - 1935450*lmMst1 + 
+                       938250*pow2(lmMst1)) + 
+                        (2260350 - 2524500*lmMst1)*pow2(lmMst2) + 
+                        11250*pow3(lmMst1) + 1575000*pow3(lmMst2)))*
+                     pow4(Mst1))/(121500.*pow2(Mst2)))/pow2(Mst1) + 
+              (16*(1 + lmMst2)*(4*Dmglst2*lmMst2 + Mgl + lmMst2*Mgl)*
+                 pow4(Mst2))/(9.*pow4(Mst1)))/Mgl - 
+           (Dmsqst2*pow2(Mst1)*
+              (Dmsqst2*(325493/12150. - lmMst1*(2137/135. - 8*lmMst2) + 
+                   (2137*lmMst2)/135. - 4*pow2(lmMst1) - 4*pow2(lmMst2)) 
+- (593331163/2.50047e6 - (16526*lmMst1)/3969. + 
+                   (2*(8263 + 71820*lmMst1)*lmMst2)/3969. - 
+                   (520*pow2(lmMst1))/21. - (80*pow2(lmMst2))/7.)*
+                 pow2(Mst1)))/pow6(Mst2)) - 
+        (pow2(Dmsqst2)*pow2(Mst1)*
+           (1125*(44193 + lmMst1*(65324 - 31752*lmMst2) - 
+                65324*lmMst2 + 15876*pow2(lmMst1) + 15876*pow2(lmMst2))*
+              pow2(Mst1) + 686*
+              (121757 + 90*lmMst1*(887 - 630*lmMst2) - 79830*lmMst2 + 
+                28350*pow2(lmMst1) + 28350*pow2(lmMst2))*pow2(Mst2)))/
+         (4.16745e6*pow6(Mst2)) + 
+        (((pow2(Mst2)*(96*Dmglst2*
+                    (2700*Dmsqst2 - 
+                      pow2(Mst1)*
+                       (11674 - 120*B4 + 120*D3 - 60*DN + 
+                        690*lmMst1 + 
+                        lmMst2*
+                       (17135 + 270*lmMst1 - 480*pow2(lmMst1)) + 
+                        345*pow2(lmMst1) + 
+                        (4515 - 480*lmMst1)*pow2(lmMst2) + 
+                        960*pow3(lmMst2))) + 
+                   Mgl*(21600*Dmsqst2*(1 - 2*lmMst2) - 
+                      pow2(Mst1)*
+                       (1013263 + 2880*D3 - 2880*DN + 96720*lmMst1 + 
+                        34560*lmMt + 
+                        lmMst2*
+                        (544080 + 21600*lmMst1 - 28080*pow2(lmMst1)) 
++ 44640*pow2(lmMst1) + (191520 + 11520*lmMst1)*pow2(lmMst2) + 
+                        11520*pow3(lmMst1) + 5040*pow3(lmMst2)))))/
+               3240. - (2*(2*Dmglst2*
+                    (52 - 2*(67 + 16*lmMst1)*lmMst2 - 
+                      91*pow2(lmMst2)) - 
+                   Mgl*(87 + 154*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                      75*pow2(lmMst2)))*pow4(Mst2))/9.)/pow2(Mst1) - 
+           (32*(1 + lmMst2)*(4*Dmglst2*lmMst2 + Mgl + lmMst2*Mgl)*
+              pow6(Mst2))/(9.*pow4(Mst1)))/Mgl + 
+        (-(S2*(Mgl*(-300*pow2(Dmsqst2)*
+                     (3*pow2(Mst1)*
+                        ((71 + 30*lmMst1 - 30*lmMst2)*pow2(Mst2) + 
+                        28*(32 + 3*lmMst1 - 3*lmMst2)*pow2(MuSUSY)) + 
+                       27*pow2(Mst2)*
+                        ((1 + 2*lmMst1 - 2*lmMst2)*pow2(Mst2) + 
+                        (43 + 2*lmMst1 - 2*lmMst2)*pow2(MuSUSY)) + 
+                       (209 + 90*lmMst1 - 90*lmMst2)*pow4(Mst1)) + 
+                    300*Dmsqst2*
+                     (9*pow2(Mst1)*pow2(Mst2)*
+                        (2*(23 + 6*lmMst1 - 6*lmMst2)*pow2(Mst2) - 
+                        (17 - 78*lmMst1 + 78*lmMst2)*pow2(MuSUSY)) + 
+                       (4*(35 + 12*lmMst1 - 12*lmMst2)*pow2(Mst2) + 
+                        13*(95 + 102*lmMst1 - 102*lmMst2)*pow2(MuSUSY)
+)*pow4(Mst1) + 81*((9 + 2*lmMst1 - 2*lmMst2)*pow2(Mst2) - 
+                        (15 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst2))) + 
+                 pow2(Mst2)*(3*Mgl*
+                     (18*pow2(Mst1)*pow2(Mst2)*
+                        ((9191 + 6290*lmMst1 - 6290*lmMst2)*
+                        pow2(Mst2) + 
+                        5*(11243 + 2114*lmMst1 - 2114*lmMst2)*
+                        pow2(MuSUSY)) + 
+                       ((399127 + 205710*lmMst1 - 205710*lmMst2)*
+                        pow2(Mst2) + 
+                        10*(194357 + 39711*lmMst1 - 39711*lmMst2)*
+                        pow2(MuSUSY))*pow4(Mst1) - 
+                       81*((141 - 530*lmMst1 + 530*lmMst2)*
+                       pow2(Mst2) - 
+                        10*(307 + 46*lmMst1 - 46*lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst2)) - 
+                    4*Dmglst2*
+                     (18*pow2(Mst1)*pow2(Mst2)*
+                        (18*(31 + 250*lmMst1 - 250*lmMst2)*pow2(Mst2) - 
+                         5*(15643 - 774*lmMst1 + 774*lmMst2)*
+                         pow2(MuSUSY)) + 
+                       2*(9*(28283 + 23070*lmMst1 - 23070*lmMst2)*
+                        pow2(Mst2) - 
+                        10*(93919 - 12981*lmMst1 + 12981*lmMst2)*
+                        pow2(MuSUSY))*pow4(Mst1) + 
+                       81*(1266*pow2(Mst2) - 
+                         5*(1677 - 14*lmMst1 + 14*lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst2)))))/810. - 
+           (4*OepS2*(Mgl*(180*pow2(Dmsqst2)*
+                    (3*pow2(Mst2)*(pow2(Mst2) + pow2(MuSUSY)) + 
+                      pow2(Mst1)*(5*pow2(Mst2) + 14*pow2(MuSUSY)) + 
+                      5*pow4(Mst1)) - 
+                   60*Dmsqst2*
+                    ((8*pow2(Mst2) + 221*pow2(MuSUSY))*pow4(Mst1) + 
+                      27*(pow2(Mst2) + pow2(MuSUSY))*pow4(Mst2) + 
+                      9*pow2(Mst1)*
+                       (13*pow2(Mst2)*pow2(MuSUSY) + 2*pow4(Mst2)))) + 
+                pow2(Mst2)*(4*Dmglst2*
+                    (2*(6921*pow2(Mst2) + 4327*pow2(MuSUSY))*
+                       pow4(Mst1) + 189*pow2(MuSUSY)*pow4(Mst2) + 
+                      54*pow2(Mst1)*
+                       (43*pow2(Mst2)*pow2(MuSUSY) + 50*pow4(Mst2))) - 
+                   3*Mgl*((6857*pow2(Mst2) + 13237*pow2(MuSUSY))*
+                       pow4(Mst1) + 
+                      6*pow2(Mst1)*
+                       (1057*pow2(Mst2)*pow2(MuSUSY) + 629*pow4(Mst2)) + 
+                      27*(46*pow2(MuSUSY)*pow4(Mst2) + 53*pow6(Mst2))))))/
+            2187.)/(Mgl*pow6(Mst2))) - 
+     pow4(Mt)*(389597/810. - (640*lmMst1)/9. - 
+        (4*lmMst2*(553 + 1224*lmMst1 - 63*pow2(lmMst1)))/81. - 
+        (392*pow2(lmMst1))/9. + (32*(121 - 18*lmMst1)*pow2(lmMst2))/27. + 
+        (4*lmMt*(926 - 749*lmMst2 + 6*lmMst1*(27 + 32*lmMst2) + 
+             9*pow2(lmMst1) + 57*pow2(lmMst2)))/27. + 
+        (4*(12 - lmMst1 - 55*lmMst2)*pow2(lmMt))/3. - 
+        (68*pow3(lmMst1))/9. + 
+        ((40*Dmsqst2*(12*Dmglst2 + Mgl - 2*lmMst2*Mgl))/(3.*pow2(Mst1)) + 
+           (4*Dmglst2*(773533 - 35*lmMst2*(6569 - 2220*lmMt) + 
+                131775*lmMt - 4410*pow2(lmMst1) - 199920*pow2(lmMst2) + 
+                5040*lmMst1*(13 + 28*lmMst2 - 8*lmMt + 8*pow2(lmMst2)) + 
+                63000*pow2(lmMt) - 40320*pow3(lmMst2)))/2835.)/Mgl + 
+        (8*pow3(lmMst2))/9. + (184*pow3(lmMt))/3. - 
+        ((5*pow2(Dmsqst2)*(3095 - 1224*lmMst1 + 
+                6*lmMst2*(365 - 36*lmMt) - 966*lmMt + 
+                108*pow2(lmMst2) + 108*pow2(lmMt)))/81. - 
+           (4*Dmsqst2*(2250*Dmglst2*
+                 (401 + 274*lmMst2 - 
+                   2*lmMst1*(71 + 2*lmMst2 - 2*lmMt) + 
+                   (-132 - 4*lmMst2)*lmMt + 4*pow2(lmMst2)) - 
+                Mgl*(91321 + 92010*lmMst2 - 
+                   30*lmMst1*(1717 + 120*lmMst2 - 150*lmMt) + 
+                   (-40500 - 4500*lmMst2)*lmMt - 450*pow2(lmMst1) + 
+                   4050*pow2(lmMst2)))*pow2(Mst1))/(675.*Mgl) - 
+           (187545955063/1.250235e8 + (43574647*lmMst1)/99225. - 
+              (139432*pow2(lmMst1))/945. - 
+              lmMst2*(71170222/99225. - (49754*lmMst1)/945. + 
+                 (376*pow2(lmMst1))/9.) + 
+              (2*(34339 + 46620*lmMst1)*pow2(lmMst2))/945. + 
+              (lmMt*(3155 + 1418*lmMst2 - 
+                   2*lmMst1*(513 + 572*lmMst2) + 312*pow2(lmMst1) + 
+                   832*pow2(lmMst2)))/9. - 
+              (64/3. - 64*lmMst1 + 64*lmMst2)*pow2(lmMt) + 
+              (64*pow3(lmMst1))/27. - (1600*pow3(lmMst2))/27. - 
+              (Dmglst2*(54946675289/1.8753525e7 + 
+                   (55510684*lmMst1)/59535. - 
+                   (126272*pow2(lmMst1))/189. - 
+                   (4*lmMst2*
+                      (42300121 + 12578580*lmMst1 + 
+                        2487240*pow2(lmMst1)))/59535. + 
+                   (32*(10166 - 693*lmMst1)*pow2(lmMst2))/189. + 
+                   (8*lmMt*(5695 + 1974*lmMst2 - 
+                        12*lmMst1*(163 + 47*lmMst2) + 
+                        468*pow2(lmMst1) + 96*pow2(lmMst2)))/27. - 
+                   (128*(5 - 6*lmMst1 + 6*lmMst2)*pow2(lmMt))/3. + 
+                   (256*pow3(lmMst1))/27. + (7424*pow3(lmMst2))/27.))/Mgl
+)*pow4(Mst1))/pow4(Mst2) - (2*Dmsqst2*pow2(Mst1)*
+           (343*Dmsqst2*(176473 - 63000*lmMt + 
+                30*lmMst2*(3871 + 150*lmMt) - 
+                30*lmMst1*(1771 - 90*lmMst2 + 150*lmMt) + 
+                900*pow2(lmMst1) - 3600*pow2(lmMst2)) + 
+             4*(26331136 - 105*lmMst1*
+                 (236317 + 35070*lmMst2 - 36750*lmMt) + 
+                210*lmMst2*(175121 - 18375*lmMt) - 11962125*lmMt - 
+                88200*pow2(lmMst1) + 3770550*pow2(lmMst2))*pow2(Mst1)))/
+         (231525.*pow6(Mst2)) + 
+        (((-4*(2*Dmglst2*(84 - (70 + 32*lmMst1)*lmMst2 - 
+                      59*pow2(lmMst2)) - 
+                   Mgl*(71 + 122*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                      59*pow2(lmMst2)))*pow2(Mst2))/9. - 
+              (11340000*Mgl*pow2(Dmsqst2) - 
+                 210000*Dmsqst2*
+                  (Dmglst2*(2954 - 864*lmMst1 + 1713*lmMst2 - 
+                       849*lmMt) - 
+                    3*Mgl*(103 - 42*lmMst1 - 78*lmMt + 
+                       6*lmMst2*(23 + 3*lmMt) - 9*pow2(lmMst2) - 
+                       9*pow2(lmMt)))*pow2(Mst1) - 
+                 (4*Dmglst2*(98884301 - 57865500*lmMt + 
+                       12600*(1213 + 285*lmMst2 - 225*lmMt)*
+                        pow2(lmMst1) - 
+                       18900*(5953 - 310*lmMt)*pow2(lmMst2) + 
+                       13608000*pow2(lmMt) + 
+                       1260*
+                        (lmMst1*
+                       (28194 + lmMst2*(61415 - 2400*lmMt) - 
+                       1075*lmMt + 13800*pow2(lmMst2) - 
+                       7200*pow2(lmMt)) + 
+                        lmMst2*(8581 + 6025*lmMt + 7200*pow2(lmMt))) 
+- 252000*pow3(lmMst1) - 20727000*pow3(lmMst2)) + 
+                    35*Mgl*(7319011 + 3223800*lmMt - 
+                       1800*(391 + 114*lmMst2 - 90*lmMt)*
+                       pow2(lmMst1) + 
+                       3600*(568 + 99*lmMt)*pow2(lmMst2) - 
+                       259200*pow2(lmMt) - 
+                       120*lmMst2*
+                        (22352 - 2835*lmMt + 4320*pow2(lmMt)) + 
+                       120*lmMst1*
+                        (4217 + 1215*lmMt - 
+                        15*lmMst2*(871 + 288*lmMt) + 
+                        3240*pow2(lmMst2) + 4320*pow2(lmMt)) + 
+                       14400*pow3(lmMst1) - 198000*pow3(lmMst2)))*
+                  pow4(Mst1))/(425250.*pow2(Mst2)))/pow2(Mst1) - 
+           (64*(1 + lmMst2)*(4*Dmglst2*lmMst2 + Mgl + lmMst2*Mgl)*
+              pow4(Mst2))/(9.*pow4(Mst1)) + 
+           (-(pow2(MuSUSY)*(12*Dmglst2*pow2(Mst2)*
+                     (72*pow2(Mst2)*
+                        (180 - 2*B4 + 2*D3 - DN + 16*lmMst1 + 
+                        144*lmMst2 + (32 - 16*lmMst1)*pow2(lmMst2) + 
+                        16*pow3(lmMst2)) + 
+                       pow2(Mst1)*
+                        (28405 - 288*B4 + 288*D3 - 144*DN + 
+                        5472*lmMst1 + (25632 - 576*lmMst1)*lmMst2 + 
+                        (-1152 + 576*lmMst1 - 576*lmMst2)*lmMt + 
+                        (5184 - 4608*lmMst1)*pow2(lmMst2) + 
+                        4608*pow3(lmMst2))) + 
+                    Mgl*(18*pow2(Mst1)*pow2(Mst2)*
+                        (10667 - 96*B4 + 96*D3 - 48*DN - 3072*lmMst1 + 
+                        (9600 - 3456*lmMst1)*lmMst2 + 
+                        (384 - 384*lmMst1 + 384*lmMst2)*lmMt + 
+                        (4992 - 1536*lmMst1)*pow2(lmMst2) + 
+                        1536*pow3(lmMst2)) + 
+                       (383185 - 2592*B4 + 2592*D3 - 1296*DN - 
+                        187704*lmMst1 + 
+                        lmMst2*
+                        (374328 - 136080*lmMst1 - 5616*pow2(lmMst1)) 
+- 7992*pow2(lmMst1) + (185544 - 53136*lmMst1)*pow2(lmMst2) + 
+                        lmMt*
+                        (10368 - 20736*lmMst1 + 
+                        (20736 - 6912*lmMst1)*lmMst2 + 
+                        3456*pow2(lmMst1) + 3456*pow2(lmMst2)) + 
+                        720*pow3(lmMst1) + 58032*pow3(lmMst2))*
+                        pow4(Mst1) + 
+                       144*(436 - 6*B4 + 6*D3 - 3*DN - 48*lmMst1 + 
+                        (408 - 96*lmMst1)*lmMst2 + 24*lmMt + 
+                        (192 - 48*lmMst1)*pow2(lmMst2) + 
+                        48*pow3(lmMst2))*pow4(Mst2))))/486. + 
+              (16*OepS2*(4*Dmglst2*pow2(Mst2)*
+                    (63*pow2(Mst1)*(23*pow2(Mst2) - 3*pow2(MuSUSY)) + 
+                      5582*pow4(Mst1) + 189*pow4(Mst2)) + 
+                   3*Mgl*((1168*pow2(Mst2) + 1635*pow2(MuSUSY))*
+                       pow4(Mst1) + 
+                      pow2(Mst1)*
+                       (378*pow2(Mst2)*pow2(MuSUSY) + 627*pow4(Mst2)) + 
+                      189*pow6(Mst2))))/2187. - 
+              (2*S2*(2*Dmglst2*pow2(Mst2)*
+                    (45*pow2(Mst1)*
+                       (23*(115 + 588*lmMst1 - 588*lmMst2)*
+                       pow2(Mst2) - 
+                        126*(65 + 14*lmMst1 - 14*lmMst2)*pow2(MuSUSY)) 
++ (2001242 + 2344440*lmMst1 - 2344440*lmMst2)*pow4(Mst1) - 
+                      81*(3360*pow2(Mst2)*pow2(MuSUSY) + 
+                         (1593 - 980*lmMst1 + 980*lmMst2)*pow4(Mst2))) + 
+                   21*Mgl*(9*pow2(Mst1)*pow2(Mst2)*
+                       ((4163 + 2090*lmMst1 - 2090*lmMst2)*pow2(Mst2) - 
+                         90*(43 - 14*lmMst1 + 14*lmMst2)*pow2(MuSUSY)) + 
+                      (8*(8653 + 4380*lmMst1 - 4380*lmMst2)*
+                        pow2(Mst2) - 
+                        90*(57 - 545*lmMst1 + 545*lmMst2)*pow2(MuSUSY))*
+                       pow4(Mst1) + 
+                      81*(-240*pow2(MuSUSY)*pow4(Mst2) + 
+                         (109 + 70*lmMst1 - 70*lmMst2)*pow6(Mst2)))))/
+               2835.)/pow6(Mst2))/Mgl) - 
+     (pow2(MuSUSY)*pow3(Mt)*(-(Dmglst2*Mst2*
+             (-27*pow2(Mst1)*pow2(Mst2)*
+                (2880*Mst2*Mt*
+                   (180 - 2*B4 + 2*D3 - DN + 16*lmMst1 + 144*lmMst2 - 
+                     216*S2 + (32 - 16*lmMst1)*pow2(lmMst2) + 
+                     16*pow3(lmMst2)) + 
+                  s2t*(-86400*Dmsqst2*(2 + 5*lmMst1 - 5*lmMst2) + 
+                     pow2(Mst2)*
+                      (23917 + 188640*B4 - 3600*DN - 37440*lmMst1 + 
+                        5600*OepS2 + 
+                        (146772 - 113400*lmMst1 + 113400*lmMst2)*S2 + 
+                        lmMst2*
+                         (682560 - 158400*lmMst1 - 11520*pow2(lmMst1)) + 
+                        11520*pow2(lmMst1) + 
+                        (403200 - 174240*lmMst1)*pow2(lmMst2) + 
+                        185760*pow3(lmMst2)))) - 
+               36*(30*Mst2*Mt*
+                   (28405 - 288*B4 + 288*D3 - 144*DN + 5472*lmMst1 + 
+                     (25632 - 576*lmMst1)*lmMst2 + 
+                     (-1152 + 576*lmMst1 - 576*lmMst2)*lmMt + 
+                     224*OepS2 + 
+                     (-21060 - 4536*lmMst1 + 4536*lmMst2)*S2 + 
+                     (5184 - 4608*lmMst1)*pow2(lmMst2) + 
+                     4608*pow3(lmMst2)) + 
+                  s2t*(64800*Dmsqst2*(8 - 15*lmMst1 + 15*lmMst2) + 
+                     pow2(Mst2)*
+                      (66761 + 301320*B4 - 4860*DN - 205380*lmMst1 + 
+                        40480*OepS2 + 
+                        (-537624 - 819720*lmMst1 + 819720*lmMst2)*S2 + 
+                        23760*pow2(lmMst1) + 
+                        lmMst2*
+                        (898740 - 352080*lmMst1 + 8640*pow2(lmMst1)) + 
+                        (520560 - 357480*lmMst1)*pow2(lmMst2) + 
+                        348840*pow3(lmMst2))))*pow4(Mst1) + 
+               s2t*(10*(2773621 - 1660176*B4 + 25272*DN + 
+                     2004408*lmMst1 - 525472*OepS2 + 
+                     (13296204 + 10640808*lmMst1 - 10640808*lmMst2)*
+                      S2 + lmMst2*
+                      (-5299488 + 1644624*lmMst1 - 248832*pow2(lmMst1)) 
++ 3888*pow2(lmMst1) + (-2340576 + 2507760*lmMst1)*pow2(lmMst2) - 
+                     31104*pow3(lmMst1) - 2227824*pow3(lmMst2))*
+                   pow6(Mst1) + 
+                  622080*(1 - 2*lmMst2 - 3*pow2(lmMst2))*pow6(Mst2)))) + 
+          15*Mgl*(Mst2*(12*(9*Mst2*Mt*
+                    (10667 - 96*B4 + 96*D3 - 48*DN - 3072*lmMst1 + 
+                      (9600 - 3456*lmMst1)*lmMst2 + 
+                      (384 - 384*lmMst1 + 384*lmMst2)*lmMt - 
+                      224*OepS2 + 
+                      (-13932 + 4536*lmMst1 - 4536*lmMst2)*S2 + 
+                      (4992 - 1536*lmMst1)*pow2(lmMst2) + 
+                      1536*pow3(lmMst2)) + 
+                   s2t*(12960*Dmsqst2*(1 + 3*lmMst1 - 3*lmMst2) + 
+                      2*pow2(Mst2)*
+                       (75569 + 13716*B4 - 54*DN - 33426*lmMst1 - 
+                         1088*OepS2 + 
+                         (27378 + 22032*lmMst1 - 22032*lmMst2)*S2 - 
+                         2376*pow2(lmMst1) + 
+                         lmMst2*
+                        (77058 - 54648*lmMst1 + 864*pow2(lmMst1)) + 
+                         (69336 - 21924*lmMst1)*pow2(lmMst2) + 
+                         21060*pow3(lmMst2))))*pow4(Mst1) + 
+                27*pow2(Mst1)*
+                 (32*Mt*(436 - 6*B4 + 6*D3 - 3*DN - 48*lmMst1 + 
+                      (408 - 96*lmMst1)*lmMst2 + 24*lmMt - 972*S2 + 
+                      (192 - 48*lmMst1)*pow2(lmMst2) + 48*pow3(lmMst2))*
+                    pow3(Mst2) + 
+                   s2t*(2880*(3 + 2*lmMst1 - 2*lmMst2)*pow2(Dmsqst2) + 
+                      5760*Dmsqst2*(1 + lmMst1 - lmMst2)*pow2(Mst2) + 
+                      (28683 + 5280*B4 - 48*DN - 5952*lmMst1 - 
+                         224*OepS2 + 
+                         (-324 + 4536*lmMst1 - 4536*lmMst2)*S2 + 
+                         lmMst2*
+                         (41088 - 14016*lmMst1 - 768*pow2(lmMst1)) - 
+                         768*pow2(lmMst1) + 
+                         (25728 - 5472*lmMst1)*pow2(lmMst2) + 
+                         6240*pow3(lmMst2))*pow4(Mst2)))) + 
+             2*(3*Mt*(383185 - 2592*B4 + 2592*D3 - 1296*DN - 
+                   187704*lmMst1 - 17440*OepS2 + 
+                   (-36936 + 353160*lmMst1 - 353160*lmMst2)*S2 + 
+                   lmMst2*(374328 - 136080*lmMst1 - 
+                      5616*pow2(lmMst1)) - 7992*pow2(lmMst1) + 
+                   (185544 - 53136*lmMst1)*pow2(lmMst2) + 
+                   lmMt*(10368 - 20736*lmMst1 + 
+                      (20736 - 6912*lmMst1)*lmMst2 + 
+                      3456*pow2(lmMst1) + 3456*pow2(lmMst2)) + 
+                   720*pow3(lmMst1) + 58032*pow3(lmMst2)) + 
+                Mst2*s2t*(1702429 + 257904*B4 - 648*DN - 748656*lmMst1 - 
+                   30112*OepS2 + 
+                   (991980 + 609768*lmMst1 - 609768*lmMst2)*S2 + 
+                   41904*pow2(lmMst1) + 
+                   lmMst2*(1289736 - 1318896*lmMst1 + 
+                      124416*pow2(lmMst1)) + 
+                   (1424736 - 628560*lmMst1)*pow2(lmMst2) - 
+                   3456*pow3(lmMst1) + 507600*pow3(lmMst2)))*pow6(Mst1) + 
+             41472*s2t*pow2(1 + lmMst2)*pow7(Mst2))))/
+      (43740.*Mgl*pow2(Mst1)*pow2(Sbeta)*pow6(Mst2)) + 
+     ((-5*shiftst1*((4*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*
+                (pow2(Dmsqst2)*
+                   ((2*lmMst1 - 2*lmMst2)*pow2(Mst1) - pow2(Mst2))*
+                   (pow2(Mst1) + pow2(Mst2)) + 
+                  ((1 - 2*lmMst1 + 2*lmMst2)*pow2(Mst1) + pow2(Mst2))*
+                   pow3(Dmsqst2) - 
+                  (Dmsqst2*(3 - 2*lmMst2) + (1 - 2*lmMst2)*pow2(Mst2))*
+                   ((pow2(Mst1) + pow2(Mst2))*pow4(Mst2) + 
+                     (-2*lmMst1 + 2*lmMst2)*pow2(Mst1)*
+                      (pow2(Mst1)*pow2(Mst2) + pow4(Mst1) + pow4(Mst2))
+)))/pow2(Sbeta) + 16*(Dmsqst2 + pow2(Mst2))*(pow2(Mst1) + pow2(Mst2))*
+              (pow2(Dmsqst2) - 2*Dmsqst2*pow2(Mst2) - 
+                (1 - 2*lmMst2)*pow4(Mst2))*pow4(Mt) + 
+             (pow2(Mst1) - pow2(Mst2))*(Dmsqst2 + pow2(Mst2))*
+              (2*(lmMst1 - lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                pow4(Mst1) - pow4(Mst2))*
+              (pow2(Dmsqst2) - 2*Dmsqst2*pow2(Mst2) - 
+                (1 - 2*lmMst2)*pow4(Mst2))*pow4(s2t) - 
+             4*pow2(Mt)*pow2(s2t)*
+              (pow3(Dmsqst2)*
+                 (pow2(Mst2)*(2*pow2(Mst2) + pow2(MuSUSY)) - 
+                   pow2(Mst1)*
+                    (4*pow2(Mst2) - 
+                      (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY)) + 
+                   2*pow4(Mst1)) - 
+                pow2(Dmsqst2)*
+                 (-(pow2(Mst1)*pow2(Mst2)*
+                      (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))) + 
+                   2*(pow2(Mst2) - (lmMst1 - lmMst2)*pow2(MuSUSY))*
+                    pow4(Mst1) + 
+                   (2*pow2(Mst2) + pow2(MuSUSY))*pow4(Mst2)) + 
+                (Dmsqst2*(3 - 2*lmMst2) + (1 - 2*lmMst2)*pow2(Mst2))*
+                 (-2*pow2(Mst2)*
+                    (pow2(Mst2) - (lmMst1 - lmMst2)*pow2(MuSUSY))*
+                    pow4(Mst1) + 
+                   pow2(Mst1)*
+                    (4*pow2(Mst2) - 
+                      (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*pow4(Mst2) 
++ 2*(lmMst1 - lmMst2)*pow2(MuSUSY)*pow6(Mst1) - 
+                   (2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)))))/
+         (6.*pow6(Mst2)) - ((1 - 2*lmMst2)*shiftst3*
+           ((-8*pow2(Mt)*(2*pow2(Mt) + 
+                   (1 - lmMst1 + lmMst2)*pow2(Mst1)*pow2(s2t)) - 
+                (-4*pow2(Mst1)*pow2(Mst2) + 
+                   (3 + 2*lmMst1 - 2*lmMst2)*pow4(Mst1) + pow4(Mst2))*
+                 pow4(s2t))*pow6(Mst2) - 
+             (4*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*
+                (2*((1 - 2*lmMst1 + 2*lmMst2)*pow2(Mst2)*pow4(Mst1) + 
+                     (1 - lmMst1 + lmMst2)*pow2(Mst1)*pow4(Mst2)) + 
+                  (2 - 6*lmMst1 + 6*lmMst2)*pow6(Mst1) + pow6(Mst2)))/
+              pow2(Sbeta) + 4*pow2(Mt)*pow2(s2t)*
+              (pow2(MuSUSY)*pow6(Mst2) + 
+                2*(pow2(MuSUSY)*
+                    ((1 - 2*lmMst1 + 2*lmMst2)*pow2(Mst2)*pow4(Mst1) + 
+                      (1 - lmMst1 + lmMst2)*pow2(Mst1)*pow4(Mst2) + 
+                      (1 - 3*lmMst1 + 3*lmMst2)*pow6(Mst1)) + pow8(Mst2)))
+))/(12.*pow4(Mst2)))/pow2(Mst1) + 
+     (T1ep*(4*Dmglst2*Mst2*(pow4(Mst1)*
+              (8*Mst2*pow2(Mt)*pow2(s2t)*
+                 (-4327*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                   6921*pow2(Mst2)*pow2(Sbeta)) - 
+                4*s2t*(-16421*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                   51460*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                pow2(Sbeta)*(15571*Mt*pow3(s2t)*pow4(Mst2) + 
+                   89312*Mst2*pow4(Mt) - 4199*pow4(s2t)*pow5(Mst2))) + 
+             189*pow4(Mst2)*(-4*Mst2*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*
+                 (1 - pow2(Sbeta)) - 
+                10*s2t*(-(pow2(MuSUSY)*(1 - pow2(Sbeta))) + 
+                   2*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                pow2(Sbeta)*(5*Mt*pow3(s2t)*pow4(Mst2) + 
+                   16*Mst2*pow4(Mt) - pow4(s2t)*pow5(Mst2))) + 
+             18*Mst2*pow2(Mst1)*
+              (12*pow2(Mst2)*pow2(Mt)*pow2(s2t)*
+                 (-43*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                   50*pow2(Mst2)*pow2(Sbeta)) - 
+                2*Mst2*s2t*(-506*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                   1383*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                56*(3*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                   23*pow2(Mst2)*pow2(Sbeta))*pow4(Mt) + 
+                pow2(Sbeta)*(401*Mt*pow3(s2t)*pow5(Mst2) - 
+                   108*pow4(s2t)*pow6(Mst2)))) + 
+          3*Mgl*(-(pow4(Mst1)*
+                (-4*pow2(Mt)*pow2(s2t)*
+                   (300*pow2(Dmsqst2)*pow2(Sbeta) - 
+                     20*Dmsqst2*
+                      (-221*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        8*pow2(Mst2)*pow2(Sbeta)) - 
+                     pow2(Mst2)*
+                      (-13237*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        6857*pow2(Mst2)*pow2(Sbeta))) - 
+                  16*(Mst2*s2t*
+                      (-941*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        2740*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                     (-1635*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        1168*pow2(Mst2)*pow2(Sbeta))*pow4(Mt)) + 
+                  pow2(Sbeta)*
+                   (5*pow2(Mst2)*
+                      (56*pow2(Dmsqst2) - 56*Dmsqst2*pow2(Mst2) - 
+                        359*pow4(Mst2))*pow4(s2t) + 
+                     1756*Mt*pow3(s2t)*pow5(Mst2)))) + 
+             18*pow2(Mst2)*(40*Dmsqst2*pow2(Mst2)*pow2(Mt)*pow2(s2t)*
+                 (3*pow2(MuSUSY)*(1 - pow2(Sbeta)) + Dmsqst2*pow2(Sbeta)) 
++ pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                 (-40*pow2(Dmsqst2)*pow2(Mt)*pow2(s2t) - 
+                   84*s2t*pow3(Mst2)*pow3(Mt)) + 
+                2*pow4(Mst2)*(-6*pow2(Mt)*pow2(s2t)*
+                    (-23*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                      10*Dmsqst2*pow2(Sbeta)) + 
+                   pow2(Sbeta)*(84*pow4(Mt) - 5*pow2(Dmsqst2)*pow4(s2t))) 
++ pow2(Sbeta)*(168*s2t*pow3(Mt)*pow5(Mst2) - 
+                   6*pow2(s2t)*(53*pow2(Mt) - 5*Dmsqst2*pow2(s2t))*
+                    pow6(Mst2) - 42*Mt*pow3(s2t)*pow7(Mst2) + 
+                   69*pow4(s2t)*pow8(Mst2))) + 
+             6*pow2(Mst1)*(-8*pow2(Mst2)*pow2(Mt)*
+                 (126*pow2(Mt)*pow2(MuSUSY)*(1 - pow2(Sbeta)) - 
+                   5*Dmsqst2*pow2(s2t)*
+                    (39*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                      5*Dmsqst2*pow2(Sbeta))) + 
+                pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                 (-560*pow2(Dmsqst2)*pow2(Mt)*pow2(s2t) - 
+                   1088*s2t*pow3(Mst2)*pow3(Mt)) + 
+                4*pow4(Mst2)*(-(pow2(Mt)*pow2(s2t)*
+                      (-1057*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        60*Dmsqst2*pow2(Sbeta))) + 
+                   pow2(Sbeta)*(418*pow4(Mt) - 20*pow2(Dmsqst2)*pow4(s2t))
+) + pow2(Sbeta)*(3016*s2t*pow3(Mt)*pow5(Mst2) - 
+                   2*pow2(s2t)*(1258*pow2(Mt) - 105*Dmsqst2*pow2(s2t))*
+                    pow6(Mst2) - 292*Mt*pow3(s2t)*pow7(Mst2) + 
+                   643*pow4(s2t)*pow8(Mst2))))))/
+      (1458.*Mgl*pow2(Sbeta)*pow6(Mst2)) + 
+     (MuSUSY*((pow2(Mt)*pow2(s2t)*
+             (pow2(Mst1)*(1166400*Mgl*pow2(Dmsqst2)*
+                   ((1 + 4*lmMst1 - 4*lmMst2)*pow2(Mst1) + 
+                     (3 + 2*lmMst1 - 2*lmMst2)*pow2(Mst2)) + 
+                  583200*Dmsqst2*
+                   (Dmglst2*(40*(1 - lmMst1 + lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                        (80 - 43*lmMst1 + 43*lmMst2)*pow4(Mst1) - 
+                        4*(2 + 5*lmMst1 - 5*lmMst2)*pow4(Mst2)) - 
+                     Mgl*(-8*(lmMst1 - lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                        (4 - 9*lmMst1 + 9*lmMst2)*pow4(Mst1) - 
+                        4*(1 + lmMst1 - lmMst2)*pow4(Mst2)))) + 
+               pow2(Mst2)*(-(Dmglst2*
+                     (-9*pow2(Mst2)*
+                        (195293 + 639360*B4 - 8640*DN - 
+                        709200*lmMst1 + 145120*OepS2 + 
+                        (-2590812 - 2938680*lmMst1 + 2938680*lmMst2)*
+                        S2 + 60480*pow2(lmMst1) + 
+                        lmMst2*
+                        (1547280 - 933120*lmMst1 + 69120*pow2(lmMst1)) 
++ (872640 - 907200*lmMst1)*pow2(lmMst2) + 838080*pow3(lmMst2))*
+                        pow4(Mst1) - 
+                       27*pow2(Mst1)*
+                        (46957 + 188640*B4 - 3600*DN - 37440*lmMst1 + 
+                        5600*OepS2 + 
+                        (146772 - 113400*lmMst1 + 113400*lmMst2)*S2 + 
+                        lmMst2*
+                        (636480 - 158400*lmMst1 - 11520*pow2(lmMst1)) 
++ 11520*pow2(lmMst1) + (334080 - 174240*lmMst1)*pow2(lmMst2) + 
+                        185760*pow3(lmMst2))*pow4(Mst2) + 
+                       2*(15069803 - 2877120*B4 + 38880*DN + 
+                        6325200*lmMst1 - 1898720*OepS2 + 
+                        (56803788 + 38449080*lmMst1 - 
+                       38449080*lmMst2)*S2 + 
+                        lmMst2*
+                        (-10320120 + 1885680*lmMst1 - 
+                        1088640*pow2(lmMst1)) + 447120*pow2(lmMst1) + 
+                        (-2332800 + 6104160*lmMst1)*pow2(lmMst2) - 
+                        155520*pow3(lmMst1) - 4860000*pow3(lmMst2))*
+                        pow6(Mst1) + 
+                       622080*(1 - 2*lmMst2 - 3*pow2(lmMst2))*pow6(Mst2))
+) + 15*Mgl*(3*pow2(Mst2)*(346405 + 62208*B4 + 246672*lmMst2 - 
+                        6688*OepS2 + (221940 - 135432*lmMst2)*S2 - 
+                        1728*(7 - 8*lmMst2)*pow2(lmMst1) + 
+                        323136*pow2(lmMst2) - 
+                        216*lmMst1*
+                        (990 + 1440*lmMst2 - 627*S2 + 584*pow2(lmMst2)) 
++ 112320*pow3(lmMst2))*pow4(Mst1) + 
+                     27*pow2(Mst1)*
+                      (27147 + 5280*B4 - 48*DN - 5952*lmMst1 - 
+                        224*OepS2 + 
+                        (-324 + 4536*lmMst1 - 4536*lmMst2)*S2 + 
+                        lmMst2*
+                        (38016 - 14016*lmMst1 - 768*pow2(lmMst1)) - 
+                        768*pow2(lmMst1) + 
+                        (24192 - 5472*lmMst1)*pow2(lmMst2) + 
+                        6240*pow3(lmMst2))*pow4(Mst2) + 
+                     2*(795601 + 93312*B4 + 365040*lmMst2 - 
+                        17056*OepS2 + (663444 - 345384*lmMst2)*S2 + 
+                        432*(163 + 264*lmMst2)*pow2(lmMst1) + 
+                        592704*pow2(lmMst2) - 
+                        216*lmMst1*
+                        (1609 + 3070*lmMst2 - 1599*S2 + 
+                        1692*pow2(lmMst2)) - 3456*pow3(lmMst1) + 
+                        254880*pow3(lmMst2))*pow6(Mst1) + 
+                     41472*pow2(1 + lmMst2)*pow6(Mst2)))))/
+           (Mgl*pow2(Mst1)*pow5(Mst2)) + 
+          29160*(pow3(Mt)*(s2t*
+                 (979423/1620. + (16*D3)/9. - (16*DN)/9. + 
+                   (1228*lmMst1)/27. + (64*lmMt)/3. + 
+                   (4*lmMst2*(1901 - 6*lmMst1 - 117*pow2(lmMst1)))/27. + 
+                   (248*pow2(lmMst1))/9. + 
+                   (92 + (64*lmMst1)/9.)*pow2(lmMst2) + 
+                   (64*pow3(lmMst1))/9. + (28*pow3(lmMst2))/9. + 
+                   ((-40*Dmsqst2*(12*Dmglst2 + Mgl - 2*lmMst2*Mgl))/
+                       (3.*pow2(Mst1)) + 
+                      (8*Dmglst2*
+                        (12454 - 120*B4 + 120*D3 - 60*DN + 
+                        690*lmMst1 + 
+                        lmMst2*
+                        (15605 - 210*lmMst1 - 480*pow2(lmMst1)) + 
+                        345*pow2(lmMst1) + 
+                        (3630 - 480*lmMst1)*pow2(lmMst2) + 
+                        960*pow3(lmMst2)))/135.)/Mgl + 
+                   ((80*(22 - 9*lmMst1 + 9*lmMst2)*pow2(Dmsqst2))/
+                       81. + 
+                      Dmsqst2*
+                       (339977/2025. - (712*lmMst1)/15. + 
+                        (8*(89 + 60*lmMst1)*lmMst2)/15. - 
+                        (40*Dmglst2*(65 - 2*lmMst1 + 2*lmMst2))/
+                       (3.*Mgl) - 16*pow2(lmMst1) - 16*pow2(lmMst2))*
+                       pow2(Mst1) + 
+                      (149949681779/1.250235e8 - 
+                        (99165049*lmMst1)/99225. + 
+                        lmMst2*
+                        (141677449/99225. - (115988*lmMst1)/945. - 
+                        (700*pow2(lmMst1))/9.) - 
+                        (181826*pow2(lmMst1))/945. + 
+                        (378454/945. - (572*lmMst1)/9.)*
+                       pow2(lmMst2) + 
+                        (64*lmMt*
+                       (1 + 4*lmMst2 - 2*lmMst1*(2 + lmMst2) + 
+                       pow2(lmMst1) + pow2(lmMst2)))/3. + 
+                        (52*pow3(lmMst1))/27. + 
+                        (3764*pow3(lmMst2))/27. + 
+                        (Dmglst2*
+                        (1297790971/2.083725e6 - (64*B4)/9. + 
+                        (64*D3)/9. - (32*DN)/9. + 
+                        (29853268*lmMst1)/19845. + 
+                        (38704*pow2(lmMst1))/189. + 
+                        (4*lmMst2*
+                       (2917823 - 3813600*lmMst1 + 
+                       97020*pow2(lmMst1)))/19845. + 
+                        (16*(8677 - 5439*lmMst1)*pow2(lmMst2))/
+                       189. - 
+                        (128*lmMt*
+                       (4 + 6*lmMst2 - 2*lmMst1*(3 + lmMst2) + 
+                       pow2(lmMst1) + pow2(lmMst2)))/3. - 
+                        (16*pow3(lmMst1))/9. + (1328*pow3(lmMst2))/3.
+))/Mgl)*pow4(Mst1))/pow4(Mst2) + 
+                   (((4*(2*Dmglst2*
+                      (52 - 2*(51 + 16*lmMst1)*lmMst2 - 
+                      59*pow2(lmMst2)) - 
+                       Mgl*
+                       (71 + 122*lmMst2 + 
+                       32*lmMst1*(1 + lmMst2) + 59*pow2(lmMst2)))*
+                       pow2(Mst2))/9. + 
+                        (3240000*Mgl*pow2(Dmsqst2) - 
+                       67500*Dmsqst2*
+                       (656*Dmglst2 - 
+                       (367 + 32*lmMst1 - 80*lmMst2)*Mgl)*
+                       pow2(Mst1) + 
+                       (64*Dmglst2*
+                       (1928479 - 13500*B4 + 13500*D3 - 6750*DN + 
+                       635385*lmMst1 + 
+                       (-162000 + 81000*lmMst1 - 81000*lmMst2)*
+                      lmMt + 
+                       lmMst2*
+                      (2297490 - 267525*lmMst1 - 
+                      50625*pow2(lmMst1)) + 450*pow2(lmMst1) + 
+                       (591075 - 381375*lmMst1)*pow2(lmMst2) - 
+                       1125*pow3(lmMst1) + 433125*pow3(lmMst2)) + 
+                       5*Mgl*
+                       (19425643 + 518400*lmMt + 
+                       240*lmMst2*(82997 + 4320*lmMt) - 
+                       3600*(683 + 96*lmMst2)*pow2(lmMst1) + 
+                       5684400*pow2(lmMst2) - 
+                       240*lmMst1*
+                       (42047 + 4800*lmMst2 + 4320*lmMt + 
+                       6390*pow2(lmMst2)) - 295200*pow3(lmMst1) + 
+                       2174400*pow3(lmMst2)))*pow4(Mst1))/
+                        (121500.*pow2(Mst2)))/pow2(Mst1) + 
+                      (64*(1 + lmMst2)*
+                        (4*Dmglst2*lmMst2 + Mgl + lmMst2*Mgl)*
+                        pow4(Mst2))/(9.*pow4(Mst1)) + 
+                      ((8*OepS2*
+                       (Mgl*
+                       (60*pow2(Dmsqst2)*
+                       (8*pow2(Mst1) + 3*pow2(Mst2)) - 
+                       20*Dmsqst2*
+                       (45*pow2(Mst1)*pow2(Mst2) + 53*pow4(Mst1) + 
+                       27*pow4(Mst2))) + 
+                       pow2(Mst2)*
+                       (24*Dmglst2*
+                       (150*pow2(Mst1)*pow2(Mst2) + 919*pow4(Mst1)) 
+- Mgl*(5205*pow2(Mst1)*pow2(Mst2) + 12062*pow4(Mst1) + 
+                       1431*pow4(Mst2)))))/729. - 
+                        (S2*
+                        (Mgl*
+                       (300*pow2(Dmsqst2)*
+                       (16*(5 + 3*lmMst1 - 3*lmMst2)*pow2(Mst1) + 
+                       9*(1 + 2*lmMst1 - 2*lmMst2)*pow2(Mst2)) - 
+                       100*Dmsqst2*
+                       (9*(127 + 30*lmMst1 - 30*lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                       (1283 + 318*lmMst1 - 318*lmMst2)*
+                      pow4(Mst1) + 
+                       81*(9 + 2*lmMst1 - 2*lmMst2)*pow4(Mst2))) + 
+                        pow2(Mst2)*
+                        (24*Dmglst2*
+                       (45*(139 + 100*lmMst1 - 100*lmMst2)*
+                       pow2(Mst1)*pow2(Mst2) + 
+                       (34538 + 27570*lmMst1 - 27570*lmMst2)*
+                       pow4(Mst1) + 5697*pow4(Mst2)) - 
+                        Mgl*
+                        (9*(17113 + 17350*lmMst1 - 17350*lmMst2)*
+                       pow2(Mst1)*pow2(Mst2) + 
+                        4*(138286 + 90465*lmMst1 - 90465*lmMst2)*
+                       pow4(Mst1) - 
+                        81*(141 - 530*lmMst1 + 530*lmMst2)*pow4(Mst2)
+))))/135.)/pow6(Mst2))/Mgl + (Dmsqst2*pow2(Mst1)*
+                      (2058*Dmsqst2*
+                        (187757 + 90*lmMst1*(587 - 630*lmMst2) - 
+                        52830*lmMst2 + 28350*pow2(lmMst1) + 
+                        28350*pow2(lmMst2)) + 
+                        (1094369501 - 
+                        2520*lmMst1*(235453 - 114345*lmMst2) + 
+                        593341560*lmMst2 - 144074700*pow2(lmMst1) - 
+                        144074700*pow2(lmMst2))*pow2(Mst1)))/
+                    (6.251175e6*pow6(Mst2))) + 
+                (Mt*(pow2(Mst1)*
+                      (291600*(4 - 8*lmMst1 + 15*lmMst2 - 7*lmMt)*Mgl*
+                        pow2(Dmsqst2) - 
+                        129600*Dmsqst2*
+                         (Dmglst2*
+                        ((497 - 306*lmMst1 + 609*lmMst2 - 303*lmMt)*
+                        pow2(Mst1) + 
+                        (101 - 90*lmMst1 + 177*lmMst2 - 87*lmMt)*
+                        pow2(Mst2)) + 
+                         9*Mgl*
+                         ((1 + 6*lmMst1 - 13*lmMst2 + 7*lmMt)*
+                        pow2(Mst1) + 
+                         (5 + 2*lmMst1 - 5*lmMst2 + 3*lmMt)*pow2(Mst2)))
+) + Dmglst2*(216*pow2(Mst2)*(97837 + 71580*lmMt - 9920*OepS2 + 
+                        43272*S2 - 
+                        360*(23 + 8*lmMst2 - 4*lmMt)*pow2(lmMst1) + 
+                        720*(97 + 2*lmMt)*pow2(lmMst2) - 
+                        10*lmMst1*
+                        (6157 - 642*lmMt + 
+                        6*lmMst2*(791 + 48*lmMt) - 20088*S2 - 
+                        882*pow2(lmMst2) - 432*pow2(lmMt)) + 
+                        30*lmMst2*
+                        (2911 - 396*lmMt - 6696*S2 - 144*pow2(lmMt)) 
+- 8640*pow2(lmMt) - 5940*pow3(lmMst2))*pow4(Mst1) + 
+                        135*pow2(Mst1)*
+                        (57495 + 45408*lmMt - 1120*OepS2 + 
+                        8*lmMst2*(6952 - 588*lmMt - 2835*S2) - 
+                        43740*S2 - 2304*(1 - lmMst2)*pow2(lmMst1) - 
+                        72*lmMst1*
+                        (88 - 64*lmMt + 8*lmMst2*(9 + 8*lmMt) - 
+                        315*S2 - 164*pow2(lmMst2)) + 
+                        96*(79 + 48*lmMt)*pow2(lmMst2) - 
+                        14112*pow3(lmMst2))*pow4(Mst2) + 
+                        20*(5659217 + 1592460*lmMt - 518816*OepS2 + 
+                        9976392*S2 - 
+                        972*(569 + 180*lmMst2 - 126*lmMt)*
+                        pow2(lmMst1) + 
+                        324*(5353 + 126*lmMt)*pow2(lmMst2) + 
+                        36*lmMst2*
+                        (39031 + 3204*lmMt - 291834*S2 - 
+                        5184*pow2(lmMt)) - 
+                        72*lmMst1*
+                        (27653 + 3015*lmMt + 
+                        18*lmMst2*(689 + 126*lmMt) - 145917*S2 - 
+                        2160*pow2(lmMst2) - 2592*pow2(lmMt)) - 
+                        186624*pow2(lmMt) + 1944*pow3(lmMst1) + 
+                        17496*pow3(lmMst2))*pow6(Mst1) + 
+                        622080*(1 - 2*lmMst2 - 3*pow2(lmMst2))*
+                         pow6(Mst2)) - 
+                     3*Mgl*(48*pow2(Mst2)*
+                         (110219 - 1080*lmMt - 4400*OepS2 + 74034*S2 - 
+                        540*(15 - 4*lmMt)*pow2(lmMst1) + 
+                        810*(121 - 8*lmMt)*pow2(lmMst2) - 
+                        135*lmMst1*
+                        (337 + lmMst2*(588 - 32*lmMt) - 132*lmMt - 
+                        660*S2 + 194*pow2(lmMst2) - 48*pow2(lmMt)) - 
+                        6480*pow2(lmMt) - 
+                        405*lmMst2*
+                        (31 + 54*lmMt + 220*S2 + 16*pow2(lmMt)) + 
+                        26190*pow3(lmMst2))*pow4(Mst1) + 
+                        27*pow2(Mst1)*
+                         (56439 - 24000*lmMt - 1120*OepS2 + 
+                        360*lmMst2*(12 - 44*lmMt - 63*S2) - 25596*S2 - 
+                        3840*(1 + lmMst2)*pow2(lmMst1) + 
+                        480*(163 - 16*lmMt)*pow2(lmMst2) - 
+                        120*lmMst1*
+                        (184 + 8*lmMst2*(57 - 8*lmMt) - 64*lmMt - 
+                        189*S2 + 164*pow2(lmMst2)) - 
+                        11520*pow2(lmMt) + 23520*pow3(lmMst2))*
+                         pow4(Mst2) + 
+                        20*(678923 + 19440*lmMt - 32480*OepS2 + 
+                        881712*S2 - 
+                        108*(457 - 12*lmMst2 - 126*lmMt)*
+                       pow2(lmMst1) + 
+                        540*(661 - 30*lmMt)*pow2(lmMst2) - 
+                        108*lmMst1*
+                        (1841 + lmMst2*(2626 - 24*lmMt) - 420*lmMt - 
+                        6090*S2 + 840*pow2(lmMst2) - 288*pow2(lmMt)) - 
+                        15552*pow2(lmMt) - 
+                        108*lmMst2*
+                        (619 + 498*lmMt + 6090*S2 + 288*pow2(lmMt)) + 
+                        216*pow3(lmMst1) + 89208*pow3(lmMst2))*
+                         pow6(Mst1) + 207360*pow2(1 + lmMst2)*pow6(Mst2))
+))/(21870.*Mgl*pow2(Mst1)*pow5(Mst2))) + 
+             Mt*((-10*s2t*shiftst1*(Dmsqst2 + pow2(Mst2))*
+                   (4*pow2(Mst2)*pow2(Mt) - 
+                     2*pow2(Mst1)*
+                      (2*pow2(Mt) - 
+                        (lmMst1 - lmMst2)*pow2(Mst2)*pow2(s2t)) + 
+                     pow2(s2t)*(pow4(Mst1) - pow4(Mst2)))*
+                   (pow2(Dmsqst2) - 2*Dmsqst2*pow2(Mst2) - 
+                     (1 - 2*lmMst2)*pow4(Mst2)))/
+                 (3.*pow2(Mst1)*pow6(Mst2)) + 
+                pow3(s2t)*((5*Dmsqst2*
+                      (144*Dmglst2*(5 + 2*lmMst1 - 2*lmMst2) - 
+                        Mgl*(1177 + 48*lmMst1*(7 - 3*lmMst2) - 
+                         336*lmMst2 + 144*pow2(lmMst2))))/(54.*Mgl) - 
+                   (20*pow2(Dmsqst2))/(3.*pow2(Mst1)) + 
+                   (pow2(Mst1)*
+                      (-5*Mgl*
+                         (4627751 + 48600*B4 + 5400*D3 - 5400*DN + 
+                         1320240*lmMst1 + 
+                         lmMst2*
+                        (-364440 + 2296800*lmMst1 - 
+                        363150*pow2(lmMst1)) - 662400*pow2(lmMst1) + 
+                         (-1311750 + 985500*lmMst1)*pow2(lmMst2) - 
+                         49500*pow3(lmMst1) - 572850*pow3(lmMst2)) + 
+                        Dmglst2*
+                         (5430043 + 524580*lmMst2 - 
+                         900*(859 - 3690*lmMst2)*pow2(lmMst1) + 
+                         1454400*pow2(lmMst2) - 
+                         60*lmMst1*
+                         (51493 + 24630*lmMst2 + 112950*pow2(lmMst2)) + 
+                         45000*pow3(lmMst1) + 3411000*pow3(lmMst2))))/
+                    (60750.*Mgl) - 
+                   (pow2(Mst2)*
+                      (21005 + 1440*B4 - 144*D3 + 72*DN + 21216*lmMst1 + 
+                        1908*pow2(lmMst1) - 
+                        12*lmMst2*
+                         (2950 - 2040*lmMst1 + 117*pow2(lmMst1)) - 
+                        108*(283 - 98*lmMst1)*pow2(lmMst2) + 
+                        576*pow3(lmMst1) - 9756*pow3(lmMst2) + 
+                        ((-1080*Dmsqst2*
+                        (12*Dmglst2 + Mgl - 2*lmMst2*Mgl))/pow2(Mst1) - 
+                         2*Dmglst2*
+                         (14987 - 432*B4 + 576*D3 - 360*DN + 
+                         4752*lmMst1 - 
+                         144*lmMst2*
+                        (81 + 124*lmMst1 - 8*pow2(lmMst1)) - 
+                         1404*pow2(lmMst1) + 
+                         36*(439 - 246*lmMst1)*pow2(lmMst2) + 
+                         7704*pow3(lmMst2)))/Mgl))/324. - 
+                   ((5*(1493 + 72*lmMst1 - 72*lmMst2)*pow2(Dmsqst2))/
+                       324. + 
+                      (2*Dmsqst2*
+                        (3375*Dmglst2*(55 - 34*lmMst1 + 34*lmMst2) + 
+                        Mgl*(97294 - 17235*lmMst2 + 
+                        45*lmMst1*(233 + 330*lmMst2) - 
+                        7425*pow2(lmMst1) - 7425*pow2(lmMst2)))*
+                        pow2(Mst1))/(2025.*Mgl) + 
+                      (96969711071/5.00094e8 - 
+                         (61388401*lmMst1)/396900. + 
+                         lmMst2*
+                        (58499851/396900. + (302047*lmMst1)/945. - 
+                        (514*pow2(lmMst1))/9.) - 
+                         (152966*pow2(lmMst1))/945. - 
+                         (149081/945. - 122*lmMst1)*pow2(lmMst2) - 
+                         (70*pow3(lmMst1))/27. - 
+                         (1682*pow3(lmMst2))/27. - 
+                         (Dmglst2*
+                        (30586096049/7.50141e7 + 
+                        (2171669*lmMst2)/59535. + 
+                        (2*(433 + 6552*lmMst2)*pow2(lmMst1))/189. + 
+                        (3974*pow2(lmMst2))/189. - 
+                        (lmMst1*
+                        (2740559 + 1524600*lmMst2 + 
+                        7514640*pow2(lmMst2)))/59535. - 
+                        (112*pow3(lmMst1))/27. + 
+                        (1648*pow3(lmMst2))/27.))/Mgl)*pow4(Mst1))/
+                    pow2(Mst2) - 
+                   (Dmsqst2*(222209689/6.251175e6 - 
+                        (905536*lmMst1)/19845. + 
+                        (905536/19845. + (244*lmMst1)/7.)*lmMst2 + 
+                        (10*Dmglst2*(419 - 57*lmMst1 + 57*lmMst2))/
+                        (27.*Mgl) - (122*pow2(lmMst1))/7. - 
+                        (122*pow2(lmMst2))/7.)*pow4(Mst1))/pow4(Mst2) + 
+                   pow2(Dmsqst2)*
+                    (((1372861/24300. - 
+                        lmMst1*(1987/135. - 8*lmMst2) + 
+                        (1987*lmMst2)/135. - 4*pow2(lmMst1) - 
+                        4*pow2(lmMst2))*pow2(Mst1))/pow4(Mst2) + 
+                      ((305179906/6.251175e6 - 
+                         lmMst1*(540413/39690. - (156*lmMst2)/7.) + 
+                         (540413*lmMst2)/39690. - 
+                         (78*pow2(lmMst1))/7. - (78*pow2(lmMst2))/7.)*
+                         pow4(Mst1))/pow6(Mst2)) + 
+                   (-((Dmglst2*
+                        (40 - (460 + 64*lmMst1)*lmMst2 - 
+                        310*pow2(lmMst2)) - 
+                        Mgl*(119 + 218*lmMst2 + 
+                        32*lmMst1*(1 + lmMst2) + 107*pow2(lmMst2)))*
+                         pow4(Mst2))/(9.*pow2(Mst1)) + 
+                      ((-4*OepS2*
+                        (Mgl*
+                        (60*pow2(Dmsqst2)*
+                       (33*pow2(Mst1)*pow2(Mst2) + 47*pow4(Mst1) + 
+                       9*pow4(Mst2)) - 
+                        60*Dmsqst2*pow2(Mst2)*
+                        (90*pow2(Mst1)*pow2(Mst2) + 104*pow4(Mst1) + 
+                        27*pow4(Mst2))) + 
+                        pow4(Mst2)*
+                        (4*Dmglst2*
+                        (2133*pow2(Mst1)*pow2(Mst2) + 
+                        6332*pow4(Mst1) + 189*pow4(Mst2)) - 
+                        3*Mgl*
+                        (5100*pow2(Mst1)*pow2(Mst2) + 
+                        6895*pow4(Mst1) + 1242*pow4(Mst2)))))/2187. - 
+                         (S2*
+                        (Mgl*
+                        (-30*pow2(Dmsqst2)*
+                        (3*(509 + 66*lmMst1 - 66*lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                        (1753 + 282*lmMst1 - 282*lmMst2)*
+                       pow4(Mst1) + 
+                        27*(43 + 2*lmMst1 - 2*lmMst2)*pow4(Mst2)) + 
+                        30*Dmsqst2*pow2(Mst2)*
+                        (18*(59 + 30*lmMst1 - 30*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                        4*(347 + 156*lmMst1 - 156*lmMst2)*
+                       pow4(Mst1) - 
+                        81*(15 - 2*lmMst1 + 2*lmMst2)*pow4(Mst2))) + 
+                        pow4(Mst2)*
+                        (3*Mgl*
+                        (180*(424 + 85*lmMst1 - 85*lmMst2)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        35*(2662 + 591*lmMst1 - 591*lmMst2)*
+                        pow4(Mst1) + 
+                        81*(307 + 46*lmMst1 - 46*lmMst2)*pow4(Mst2)) + 
+                        Dmglst2*
+                        (18*(16193 - 1422*lmMst1 + 1422*lmMst2)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        (188204 - 75984*lmMst1 + 75984*lmMst2)*
+                        pow4(Mst1) + 
+                        162*(1677 - 14*lmMst1 + 14*lmMst2)*pow4(Mst2)))
+))/81.)/pow6(Mst2) - (16*(1 + lmMst2)*
+                         (4*Dmglst2*lmMst2 + Mgl + lmMst2*Mgl)*pow6(Mst2)
+)/(9.*pow4(Mst1)))/Mgl))) + Mt*
+           ((9720*(1 - 2*lmMst2)*s2t*shiftst3*pow2(Mst2)*
+                (4*pow2(Mt) + 
+                  ((1 + lmMst1 - lmMst2)*pow2(Mst1) - pow2(Mst2))*
+                   pow2(s2t)))/pow2(Mst1) + 
+             (80*T1ep*(Dmglst2*Mst2*
+                   (27*pow2(Mst1)*pow2(Mst2)*
+                      (-800*Mst2*s2t*pow2(Mt) - 
+                        907*Mt*pow2(Mst2)*pow2(s2t) + 1984*pow3(Mt) + 
+                        316*pow3(Mst2)*pow3(s2t)) + 
+                     2*(-66168*Mst2*s2t*pow2(Mt) - 
+                        35601*Mt*pow2(Mst2)*pow2(s2t) + 
+                        129704*pow3(Mt) + 12664*pow3(Mst2)*pow3(s2t))*
+                      pow4(Mst1) + 
+                     189*(20*pow3(Mt)*pow4(Mst2) - 
+                        15*Mt*pow2(s2t)*pow6(Mst2) + 
+                        4*pow3(s2t)*pow7(Mst2))) - 
+                  3*Mgl*(pow4(Mst1)*
+                      (-20*Dmsqst2*s2t*
+                         (106*pow2(Mt) + 47*Dmsqst2*pow2(s2t)) - 
+                        3198*Mt*pow2(s2t)*pow3(Mst2) + 
+                        16240*Mst2*pow3(Mt) - 
+                        4*pow2(Mst2)*
+                         (6031*s2t*pow2(Mt) - 520*Dmsqst2*pow3(s2t)) + 
+                        6895*pow3(s2t)*pow4(Mst2)) + 
+                     3*pow2(Mst1)*
+                      (320*s2t*pow2(Dmsqst2)*pow2(Mt) - 
+                        20*Dmsqst2*s2t*pow2(Mst2)*
+                         (30*pow2(Mt) + 11*Dmsqst2*pow2(s2t)) + 
+                        1760*pow3(Mst2)*pow3(Mt) - 
+                        (3470*s2t*pow2(Mt) - 600*Dmsqst2*pow3(s2t))*
+                         pow4(Mst2) - 627*Mt*pow2(s2t)*pow5(Mst2) + 
+                        1700*pow3(s2t)*pow6(Mst2)) + 
+                     9*(40*s2t*pow2(Dmsqst2)*pow2(Mst2)*pow2(Mt) - 
+                        20*Dmsqst2*s2t*(6*pow2(Mt) + Dmsqst2*pow2(s2t))*
+                         pow4(Mst2) + 84*pow3(Mt)*pow5(Mst2) - 
+                        6*(53*s2t*pow2(Mt) - 10*Dmsqst2*pow3(s2t))*
+                         pow6(Mst2) - 63*Mt*pow2(s2t)*pow7(Mst2) + 
+                        138*pow3(s2t)*pow8(Mst2)))))/(Mgl*pow6(Mst2)))))/
+      (29160.*Tbeta)) - (Al4p*xDmglst2*z2*pow2(Dmglst2)*
+      (-(twoLoopFlag*(-4*pow2(Mt)*
+               (-8*(4*MuSUSY + 9*Mst2*Tbeta)*pow2(Mt)*pow2(Sbeta) - 
+                 3*Mst2*MuSUSY*pow2(s2t)*
+                  (MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 
+                    10*Mst2*pow2(Sbeta)) + 
+                 2*Mt*s2t*Tbeta*
+                  (31*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                    12*pow2(Mst2)*pow2(Sbeta)))*pow4(Mst1) + 
+              pow4(Mst2)*(12*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*
+                  (MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 
+                    11*Mst2*pow2(Sbeta)) - 
+                 8*s2t*Tbeta*
+                  (11*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                    4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) - 
+                 4*Mt*(3*MuSUSY + 11*Mst2*Tbeta)*pow2(Sbeta)*
+                  pow3(Mst2)*pow3(s2t) + 
+                 pow2(Sbeta)*
+                  (32*MuSUSY*pow4(Mt) + 3*Tbeta*pow4(s2t)*pow5(Mst2))) + 
+              pow2(Mst1)*pow2(Mst2)*
+               (12*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*
+                  (10*Mst2*pow2(Sbeta) + 
+                    MuSUSY*(Tbeta - Tbeta*pow2(Sbeta))) + 
+                 32*(MuSUSY + Mst2*Tbeta)*pow2(Sbeta)*pow4(Mt) + 
+                 Tbeta*(-168*s2t*pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                     pow3(Mt) + 
+                    pow2(Sbeta)*
+                     (4*Mt*pow3(s2t)*pow4(Mst2) - 3*pow4(s2t)*pow5(Mst2))
+))))/(3.*Tbeta*pow2(Sbeta)*pow5(Mst2)) + 
+        (Al4p*threeLoopFlag*((7*Mt*pow3(s2t)*
+                (194400*Dmsqst2*
+                   (2*(5 - 3*lmMst1 + 3*lmMst2)*pow2(Mst1)*
+                      pow2(Mst2) + 11*pow4(Mst1) - 
+                     2*(2 + 3*lmMst1 - 3*lmMst2)*pow4(Mst2)) + 
+                  pow2(Mst2)*
+                   (-60*(143005 + 30024*lmMst1 - 26352*lmMst2)*
+                      pow2(Mst1)*pow2(Mst2) + 
+                     (8583283 - 2329560*lmMst1 + 2329560*lmMst2)*
+                      pow4(Mst1) + 
+                     9*(897737 + 47880*lmMst1 + 238680*lmMst2)*
+                      pow4(Mst2))))/pow3(Mst2) - 
+             (2*s2t*pow3(Mt)*
+                (-6*pow2(Mst1)*pow2(Mst2)*
+                   ((47845349 - 6357960*lmMst1 + 13388760*lmMst2 - 
+                        7030800*lmMt)*pow2(Mst2) - 
+                     7*(1263161 - 156600*lmMst1 + 979560*lmMst2)*
+                      pow2(MuSUSY)) + 
+                  14*(4*(9908167 - 949320*lmMst1 + 1769040*lmMst2 - 
+                       217080*lmMt)*pow2(Mst2) + 
+                     (15057833 - 4014360*lmMst1 + 5563080*lmMst2)*
+                      pow2(MuSUSY))*pow4(Mst1) + 
+                  2721600*Dmsqst2*
+                   (pow2(Mst2)*
+                      ((19 - 6*lmMst1 + 12*lmMst2 - 6*lmMt)*
+                        pow2(Mst2) - 
+                        (2 + 3*lmMst1 - 3*lmMst2)*pow2(MuSUSY)) + 
+                     pow2(Mst1)*
+                      ((51 - 14*lmMst1 + 28*lmMst2 - 14*lmMt)*
+                        pow2(Mst2) + 
+                        (1 - 9*lmMst1 + 9*lmMst2)*pow2(MuSUSY)) + 
+                     (87 - 22*lmMst1 + 44*lmMst2 - 22*lmMt)*pow4(Mst1)) 
+- 9*((5322098 - 670320*lmMst1 + 2817360*lmMst2 - 816480*lmMt)*
+                      pow2(Mst2) - 
+                     7*(897737 + 47880*lmMst1 + 238680*lmMst2)*
+                      pow2(MuSUSY))*pow4(Mst2)))/pow5(Mst2) + 
+             (8*pow4(Mt)*(-63*pow2(Mst1)*pow2(Mst2)*
+                   (5*(66191 - 9288*lmMst1 + 11952*lmMst2 - 
+                        16488*lmMt)*pow2(Mst2) + 
+                     48*(617 + 2040*lmMst2)*pow2(MuSUSY)) - 
+                  3*(5*(10525759 - 1147608*lmMst1 + 
+                       2266488*lmMst2 - 1194480*lmMt)*pow2(Mst2) + 
+                     21*(122051 + 1800*lmMst1 + 274680*lmMst2)*
+                      pow2(MuSUSY))*pow4(Mst1) + 
+                  680400*Dmsqst2*
+                   ((23 - 5*lmMst1 + 10*lmMst2 - 5*lmMt)*pow2(Mst1)*
+                      pow2(Mst2) + 
+                     (77 - 18*lmMst1 + 36*lmMst2 - 18*lmMt)*
+                      pow4(Mst1) + pow4(Mst2)) + 
+                  8*(19152737 - 3674160*lmMst1 + 6872040*lmMst2 - 
+                     850500*lmMt)*pow6(Mst1) - 272160*pow6(Mst2)))/
+              (pow2(Mst1)*pow4(Mst2)) - 
+             102060*pow4(s2t)*
+              ((20*Dmsqst2*(4 - lmMst1 + lmMst2)*pow2(Mst1))/3. - 
+                ((10*Dmsqst2*(4 + 3*lmMst1 - 3*lmMst2))/3. + 
+                   (77099/2430. + (41*lmMst1)/6. + (15*lmMst2)/2.)*
+                    pow2(Mst1))*pow2(Mst2) + 
+                (2272991/14580. - 8*lmMst1 + 8*lmMst2 + 
+                   (5*Dmsqst2*(7 + 10*lmMst1 - 10*lmMst2))/
+                    (3.*pow2(Mst2)))*pow4(Mst1) + 
+                (80291/3240. + (92*lmMst1)/9. + (37*lmMst2)/9. - 
+                   (10*Dmsqst2)/(3.*pow2(Mst1)))*pow4(Mst2) + 
+                (4*pow6(Mst2))/(3.*pow2(Mst1))) + 
+             (2*pow2(Mt)*pow2(s2t)*
+                (-30*pow2(Mst2)*
+                   (9*(5208*lmMst1 - 37*(7339 + 3192*lmMst2))*
+                      pow2(Mst2) - 
+                     7*(21223 + 13230*lmMst1 + 702*lmMst2)*
+                      pow2(MuSUSY))*pow4(Mst1) + 
+                  9*pow2(Mst1)*
+                   (18*(123227 - 1820*lmMst1 + 230300*lmMst2)*
+                      pow2(Mst2) + 
+                     7*(88931 + 33120*lmMst1 + 13320*lmMst2)*
+                      pow2(MuSUSY))*pow4(Mst2) + 
+                  28*(45*(78533 + 6732*lmMst1 + 180*lmMst2)*
+                      pow2(Mst2) + 
+                     (2128489 - 307800*lmMst1 + 377460*lmMst2)*
+                      pow2(MuSUSY))*pow6(Mst1) - 
+                  680400*Dmsqst2*
+                   (pow2(Mst1)*pow2(Mst2)*
+                      (8*pow2(Mst2) + 
+                        3*(2 + lmMst1 - lmMst2)*pow2(MuSUSY)) + 
+                     (8*pow2(Mst2) + 
+                        (3 + 8*lmMst1 - 8*lmMst2)*pow2(MuSUSY))*
+                      pow4(Mst1) + 
+                     (2*pow2(Mst2) + pow2(MuSUSY))*pow4(Mst2) + 
+                     8*pow6(Mst1)) + 
+                  272160*(2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)))/
+              (pow2(Mst1)*pow4(Mst2)) + 
+             ((14*pow2(MuSUSY)*pow3(Mt)*
+                   (9*pow2(Mst2)*
+                      (192*(617 + 2040*lmMst2)*Mst2*Mt + 
+                        s2t*
+                        (-43200*Dmsqst2*(2 + 3*lmMst1 - 3*lmMst2) + 
+                        (897737 + 47880*lmMst1 + 238680*lmMst2)*
+                        pow2(Mst2))) + 
+                     6*pow2(Mst1)*
+                      (6*(122051 + 1800*lmMst1 + 274680*lmMst2)*
+                       Mst2*Mt + 
+                        s2t*
+                        (64800*Dmsqst2*(1 - 9*lmMst1 + 9*lmMst2) + 
+                        (1263161 - 156600*lmMst1 + 979560*lmMst2)*
+                        pow2(Mst2))) + 
+                     2*(15057833 - 4014360*lmMst1 + 5563080*lmMst2)*
+                      s2t*pow4(Mst1)))/pow5(Mst2) - 
+                (14*pow2(Mt)*pow2(s2t)*
+                   (-24300*Dmsqst2*
+                      (pow2(MuSUSY)*
+                        (12*(2 + lmMst1 - lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                        4*(3 + 8*lmMst1 - 8*lmMst2)*pow4(Mst1) + 
+                        4*pow4(Mst2)) + 
+                        (93 - 10*lmMst1 + 10*lmMst2)*
+                        (2 - pow2(Sbeta))*pow4(Sbeta)*pow6(Mst1)) + 
+                     pow2(MuSUSY)*
+                      (30*(21223 + 13230*lmMst1 + 702*lmMst2)*
+                        pow2(Mst2)*pow4(Mst1) + 
+                        9*(88931 + 33120*lmMst1 + 13320*lmMst2)*
+                        pow2(Mst1)*pow4(Mst2) + 
+                        4*(2128489 - 307800*lmMst1 + 377460*lmMst2)*
+                        pow6(Mst1) + 38880*pow6(Mst2))))/
+                 (pow2(Mst1)*pow4(Mst2)))/pow2(Sbeta) + 
+             (Mt*MuSUSY*(-3*pow2(Mst2)*
+                   (288*(434369 - 7875*lmMst1 + 320355*lmMst2)*Mst2*
+                      s2t*pow2(Mt) - 
+                     21*(166889 + 456840*lmMst1 - 1243080*lmMst2)*Mt*
+                      pow2(Mst2)*pow2(s2t) + 
+                     64*(3231296 - 460215*lmMst1 + 1100925*lmMst2 - 
+                        515970*lmMt)*pow3(Mt) + 
+                     14*(54563 - 32940*lmMst1 + 32940*lmMst2)*
+                      pow3(Mst2)*pow3(s2t))*pow4(Mst1) - 
+                  9*pow2(Mst1)*
+                   (72*(126587 - 1820*lmMst1 + 230300*lmMst2)*Mst2*
+                      s2t*pow2(Mt) + 
+                     21*(897737 + 47880*lmMst1 + 238680*lmMst2)*Mt*
+                      pow2(Mst2)*pow2(s2t) + 
+                     4*(2456929 - 335160*lmMst1 + 1408680*lmMst2 - 
+                        408240*lmMt)*pow3(Mt) - 
+                     14*(84611 + 33120*lmMst1 + 13320*lmMst2)*
+                      pow3(Mst2)*pow3(s2t))*pow4(Mst2) + 
+                  14*(-72*(510139 + 44280*lmMst1 + 76680*lmMst2)*Mst2*
+                      s2t*pow2(Mt) - 
+                     15*(1700119 - 484056*lmMst1 + 579960*lmMst2)*Mt*
+                      pow2(Mst2)*pow2(s2t) + 
+                     8*(13463149 - 1492020*lmMst1 + 2713500*lmMst2 - 
+                        625320*lmMt)*pow3(Mt) + 
+                     8*(788723 - 80595*lmMst1 + 80595*lmMst2)*
+                      pow3(Mst2)*pow3(s2t))*pow6(Mst1) + 
+                  680400*Dmsqst2*
+                   (2*(pow2(Mst1)*pow2(Mst2)*
+                        (20*Mst2*s2t*pow2(Mt) + 
+                        6*(2 + 3*lmMst1 - 3*lmMst2)*Mt*pow2(Mst2)*
+                        pow2(s2t) + 
+                        8*(8 - 3*lmMst1 + 6*lmMst2 - 3*lmMt)*
+                       pow3(Mt) - 
+                        (5 + 3*lmMst1 - 3*lmMst2)*pow3(Mst2)*pow3(s2t)
+) + (36*Mst2*s2t*pow2(Mt) - 18*(1 - 2*lmMst1 + 2*lmMst2)*Mt*
+                        pow2(Mst2)*pow2(s2t) + 
+                        80*(3 - lmMst1 + 2*lmMst2 - lmMt)*pow3(Mt) + 
+                        (3 - 5*lmMst1 + 5*lmMst2)*pow3(Mst2)*pow3(s2t)
+)*pow4(Mst1)) + 8*s2t*pow2(Mt)*pow5(Mst2) - 
+                     (6*(17 - 12*lmMst1 + 12*lmMst2)*Mt - 13*Mst2*s2t)*
+                      pow2(s2t)*pow6(Mst1) - 2*pow3(s2t)*pow7(Mst2)) - 
+                  544320*(4*s2t*pow2(Mt)*pow7(Mst2) - 
+                     pow3(s2t)*pow9(Mst2))))/(Tbeta*pow2(Mst1)*pow5(Mst2))
+))/102060.) - (threeLoopFlag*pow2(Al4p)*
+        (Mst2*(8*Dmglst2*Mgl*(-(pow4(Mst1)*
+                   (8*s2t*(pow2(Sbeta)*
+                        (-36*Mst2*MuSUSY*
+                       (2806*z3 + 1514*z4 + 2757*pow2(z2)) - 
+                        4*Tbeta*pow2(Mst2)*
+                        (-653582*z3 + 25730*z4 + 38595*pow2(z2))) + 
+                        Tbeta*
+                        (855360*Dmsqst2*z3*pow2(Sbeta) + 
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                        (-1582324*z3 - 2636*z4 + 259215*pow2(z2))))*
+                      pow3(Mt) + 
+                     pow2(Sbeta)*
+                      (2*Mt*(8*MuSUSY*
+                       (89947*z3 + 6332*z4 + 9498*pow2(z2)) + 
+                        Mst2*Tbeta*
+                        (-565214*z3 + 31142*z4 + 46713*pow2(z2)))*
+                        pow3(Mst2)*pow3(s2t) + 
+                        32*(2*Mst2*Tbeta*
+                        (-591386*z3 + 5582*z4 + 8373*pow2(z2)) + 
+                        MuSUSY*
+                        (-834482*z3 + 28538*z4 + 48639*pow2(z2)))*
+                        pow4(Mt)) + 
+                     Tbeta*pow2(Sbeta)*
+                      (48600*Dmsqst2*z3 - 
+                        pow2(Mst2)*
+                        (-217283*z3 + 16796*z4 + 25194*pow2(z2)))*
+                      pow3(Mst2)*pow4(s2t) - 
+                     4*pow2(Mt)*pow2(s2t)*
+                      (pow2(Sbeta)*
+                        (233280*Dmsqst2*MuSUSY*z3 + 
+                        3*MuSUSY*pow2(Mst2)*
+                        (-728116*z3 + 10126*z4 + 105585*pow2(z2)) - 
+                        36*Tbeta*(-734*z3 + 1538*z4 + 2307*pow2(z2))*
+                        pow3(Mst2)) - 
+                        4*Mst2*Tbeta*
+                         (-(pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                        (353116*z3 + 11327*z4 + 15897*pow2(z2))) + 
+                         6075*Dmsqst2*z3*(2 - pow2(Sbeta))*pow4(Sbeta)))
+)) + 18*pow2(Mst1)*(8*pow2(Mst2)*pow2(Mt)*
+                    (6480*Dmsqst2*MuSUSY*z3*pow2(s2t)*pow2(Sbeta) - 
+                      24*MuSUSY*pow2(Mt)*pow2(Sbeta)*
+                       (-1675*z3 + 26*z4 + 93*pow2(z2)) - 
+                      Mt*s2t*Tbeta*
+                       (30240*Dmsqst2*z3*pow2(Sbeta) + 
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                        (-47456*z3 - 709*z4 + 8535*pow2(z2)))) + 
+                   43200*Dmsqst2*MuSUSY*z3*
+                    (-(MuSUSY*s2t*Tbeta*(1 - pow2(Sbeta))) + 
+                      8*Mt*pow2(Sbeta))*pow3(Mt) + 
+                   Mt*(-8*pow3(Mst2)*
+                       (Tbeta*
+                        (-3*Mt*pow2(MuSUSY)*pow2(s2t)*
+                       (1 - pow2(Sbeta))*
+                       (9747*z3 + 185*z4 + 237*pow2(z2)) + 
+                        2*pow2(Sbeta)*
+                        (-28846*z3 + 322*z4 + 483*pow2(z2))*pow3(Mt)) 
++ MuSUSY*pow2(Sbeta)*(-12*s2t*pow2(Mt)*
+                       (590*z3 - 4*z4 + 75*pow2(z2)) + 
+                        1350*Dmsqst2*z3*pow3(s2t))) - 
+                      3*s2t*pow2(Sbeta)*
+                       (4320*Dmsqst2*Tbeta*z3*pow2(s2t) - 
+                        4*Tbeta*pow2(Mt)*
+                        (-26782*z3 + 922*z4 + 1383*pow2(z2)) - 
+                        Mt*MuSUSY*s2t*
+                        (-99002*z3 - 1210*z4 + 18273*pow2(z2)))*
+                       pow4(Mst2)) + 
+                   6*pow2(s2t)*pow2(Sbeta)*
+                    (-(Mt*MuSUSY*s2t*
+                        (21373*z3 + 316*z4 + 474*pow2(z2))) + 
+                      Tbeta*(180*Dmsqst2*z3*pow2(s2t) - 
+                        4*pow2(Mt)*(741*z3 + 100*z4 + 150*pow2(z2))))*
+                    pow5(Mst2) + 
+                   Tbeta*(48*Mst2*pow2(Mt)*
+                       (360*Dmsqst2*z3*pow2(MuSUSY)*pow2(s2t)*
+                        (1 - pow2(Sbeta)) + 
+                        pow2(Mt)*
+                        (6480*Dmsqst2*z3*pow2(Sbeta) - 
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                        (250*z3 - 94*z4 + 21*pow2(z2)))) + 
+                      pow2(Sbeta)*
+                       (-2*Mt*(-4090*z3 + 208*z4 + 1203*pow2(z2))*
+                        pow3(s2t)*pow6(Mst2) + 
+                         3*(1879*z3 - 54*z4)*pow4(s2t)*pow7(Mst2)))) + 
+                27*pow2(Mst2)*
+                 (pow2(Mt)*(32*Mst2*Tbeta*
+                       (135*Dmsqst2*z3*pow2(MuSUSY)*pow2(s2t)*
+                        (1 - pow2(Sbeta)) + 
+                        2*pow2(Mt)*
+                        (-((83*z3 - 27*z4)*pow2(MuSUSY)*
+                        (1 - pow2(Sbeta))) + 900*Dmsqst2*z3*pow2(Sbeta)
+)) + 4*pow2(Mst2)*(2160*Dmsqst2*MuSUSY*z3*pow2(s2t)*pow2(Sbeta) - 
+                         2*MuSUSY*pow2(Mt)*pow2(Sbeta)*
+                        (-18*z3 - 506*z4 + 105*pow2(z2)) - 
+                         Mt*s2t*Tbeta*
+                         (17280*Dmsqst2*z3*pow2(Sbeta) + 
+                         pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (-30274*z3 - 542*z4 + 5289*pow2(z2))))) + 
+                   5760*Dmsqst2*MuSUSY*z3*
+                    (-(MuSUSY*s2t*Tbeta*(1 - pow2(Sbeta))) + 
+                      12*Mt*pow2(Sbeta))*pow3(Mt) - 
+                   4*Mt*pow3(Mst2)*
+                    (-(Mt*Tbeta*pow2(MuSUSY)*pow2(s2t)*
+                        (1 - pow2(Sbeta))*
+                        (17615*z3 + 424*z4 + 474*pow2(z2))) + 
+                      pow2(Sbeta)*
+                       (-8*MuSUSY*s2t*(439*z3 - 108*z4)*pow2(Mt) + 
+                         2*Tbeta*(9017*z3 + 56*z4 + 84*pow2(z2))*
+                        pow3(Mt) + 1080*Dmsqst2*MuSUSY*z3*pow3(s2t))) + 
+                   pow2(Sbeta)*
+                    (-2*Mt*s2t*
+                       (1440*Dmsqst2*Tbeta*z3*pow2(s2t) - 
+                        4*Tbeta*pow2(Mt)*
+                        (-18*z3 - 506*z4 + 105*pow2(z2)) - 
+                        3*Mt*MuSUSY*s2t*
+                        (-30274*z3 - 542*z4 + 5289*pow2(z2)))*pow4(Mst2) 
++ 4*pow2(s2t)*(Tbeta*(-4*(439*z3 - 108*z4)*pow2(Mt) + 
+                        270*Dmsqst2*z3*pow2(s2t)) - 
+                        Mt*MuSUSY*s2t*
+                        (17615*z3 + 424*z4 + 474*pow2(z2)))*pow5(Mst2) + 
+                      Tbeta*(-2*Mt*(-30274*z3 - 542*z4 + 5289*pow2(z2))*
+                         pow3(s2t)*pow6(Mst2) + 
+                         (17615*z3 + 424*z4 + 474*pow2(z2))*pow4(s2t)*
+                         pow7(Mst2))))) + 
+             4*xDmglst2*pow2(Dmglst2)*
+              (-2*pow4(Mst1)*(8*s2t*
+                    (pow2(Sbeta)*
+                       (-36*Mst2*MuSUSY*
+                        (2806*z3 + 1514*z4 + 2757*pow2(z2)) - 
+                        4*Tbeta*pow2(Mst2)*
+                        (-653582*z3 + 25730*z4 + 38595*pow2(z2))) + 
+                      Tbeta*(855360*Dmsqst2*z3*pow2(Sbeta) + 
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                        (-1582324*z3 - 2636*z4 + 259215*pow2(z2))))*
+                    pow3(Mt) + 
+                   pow2(Sbeta)*
+                    (2*Mt*(8*MuSUSY*
+                        (89947*z3 + 6332*z4 + 9498*pow2(z2)) + 
+                        Mst2*Tbeta*
+                        (-565214*z3 + 31142*z4 + 46713*pow2(z2)))*
+                       pow3(Mst2)*pow3(s2t) + 
+                      32*(2*Mst2*Tbeta*
+                        (-591386*z3 + 5582*z4 + 8373*pow2(z2)) + 
+                        MuSUSY*(-834482*z3 + 28538*z4 + 48639*pow2(z2))
+)*pow4(Mt)) + Tbeta*pow2(Sbeta)*
+                    (48600*Dmsqst2*z3 - 
+                      pow2(Mst2)*
+                       (-217283*z3 + 16796*z4 + 25194*pow2(z2)))*
+                    pow3(Mst2)*pow4(s2t) - 
+                   4*pow2(Mt)*pow2(s2t)*
+                    (pow2(Sbeta)*
+                       (233280*Dmsqst2*MuSUSY*z3 + 
+                         3*MuSUSY*pow2(Mst2)*
+                        (-728116*z3 + 10126*z4 + 105585*pow2(z2)) - 
+                         36*Tbeta*(-734*z3 + 1538*z4 + 2307*pow2(z2))*
+                         pow3(Mst2)) - 
+                      4*Mst2*Tbeta*
+                       (-(pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (353116*z3 + 11327*z4 + 15897*pow2(z2))) + 
+                         6075*Dmsqst2*z3*(2 - pow2(Sbeta))*pow4(Sbeta)))) 
++ 9*pow2(Mst2)*(8*pow2(Mst2)*pow2(Mt)*
+                    (6480*Dmsqst2*MuSUSY*z3*pow2(s2t)*pow2(Sbeta) + 
+                      2*MuSUSY*pow2(Mt)*pow2(Sbeta)*
+                       (-64592*z3 + 1742*z4 + 21*pow2(z2)) - 
+                      Mt*s2t*Tbeta*
+                       (51840*Dmsqst2*z3*pow2(Sbeta) + 
+                         pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (-221914*z3 - 2498*z4 + 31083*pow2(z2)))) + 
+                   34560*Dmsqst2*MuSUSY*z3*
+                    (-(MuSUSY*s2t*Tbeta*(1 - pow2(Sbeta))) + 
+                      12*Mt*pow2(Sbeta))*pow3(Mt) - 
+                   4*Mt*pow3(Mst2)*
+                    (Tbeta*(-(Mt*pow2(MuSUSY)*pow2(s2t)*
+                        (1 - pow2(Sbeta))*
+                        (228607*z3 + 8888*z4 + 4098*pow2(z2))) - 
+                        2*pow2(Sbeta)*
+                        (-260483*z3 + 728*z4 + 1092*pow2(z2))*pow3(Mt)) 
++ MuSUSY*pow2(Sbeta)*(-18*s2t*pow2(Mt)*
+                        (19703*z3 - 376*z4 + 84*pow2(z2)) + 
+                         6480*Dmsqst2*z3*pow3(s2t))) + 
+                   pow2(Sbeta)*
+                    (-4*Mt*s2t*
+                       (-3*Mt*MuSUSY*s2t*
+                        (-221914*z3 - 2498*z4 + 31083*pow2(z2)) + 
+                        Tbeta*
+                        (4320*Dmsqst2*z3*pow2(s2t) + 
+                        4*pow2(Mt)*(-64592*z3 + 1742*z4 + 21*pow2(z2))
+))*pow4(Mst2) + 4*pow2(s2t)*(-(Mt*MuSUSY*s2t*
+                        (228607*z3 + 8888*z4 + 4098*pow2(z2))) + 
+                        Tbeta*
+                        (1620*Dmsqst2*z3*pow2(s2t) - 
+                        9*pow2(Mt)*(19703*z3 - 376*z4 + 84*pow2(z2))))*
+                       pow5(Mst2)) + 
+                   Tbeta*(192*Mst2*pow2(Mt)*
+                       (135*Dmsqst2*z3*pow2(MuSUSY)*pow2(s2t)*
+                        (1 - pow2(Sbeta)) + 
+                         pow2(Mt)*
+                         (-((1990*z3 - 81*z4)*pow2(MuSUSY)*
+                        (1 - pow2(Sbeta))) + 1800*Dmsqst2*z3*pow2(Sbeta)
+)) + pow2(Sbeta)*(-4*Mt*(-221914*z3 - 2498*z4 + 31083*pow2(z2))*
+                         pow3(s2t)*pow6(Mst2) + 
+                         (228607*z3 + 8888*z4 + 4098*pow2(z2))*pow4(s2t)*
+                         pow7(Mst2)))) + 
+                6*pow2(Mst1)*(8*pow2(Mst2)*pow2(Mt)*
+                    (38880*Dmsqst2*MuSUSY*z3*pow2(s2t)*pow2(Sbeta) + 
+                      2*MuSUSY*pow2(Mt)*pow2(Sbeta)*
+                       (-221681*z3 + 6920*z4 + 6492*pow2(z2)) - 
+                      Mt*s2t*Tbeta*
+                       (181440*Dmsqst2*z3*pow2(Sbeta) + 
+                         pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (-608572*z3 - 12344*z4 + 88647*pow2(z2)))) + 
+                   259200*Dmsqst2*MuSUSY*z3*
+                    (-(MuSUSY*s2t*Tbeta*(1 - pow2(Sbeta))) + 
+                      8*Mt*pow2(Sbeta))*pow3(Mt) - 
+                   8*Mt*pow3(Mst2)*
+                    (Tbeta*(-(Mt*pow2(MuSUSY)*pow2(s2t)*
+                        (1 - pow2(Sbeta))*
+                        (404588*z3 + 10819*z4 + 3471*pow2(z2))) - 
+                         2*pow2(Sbeta)*
+                         (-446434*z3 + 9406*z4 + 14109*pow2(z2))*
+                         pow3(Mt)) + 
+                      MuSUSY*pow2(Sbeta)*
+                       (-72*s2t*pow2(Mt)*
+                         (3124*z3 + 29*z4 + 165*pow2(z2)) + 
+                         8100*Dmsqst2*z3*pow3(s2t))) + 
+                   pow2(Sbeta)*
+                    (-2*Mt*s2t*
+                       (-3*Mt*MuSUSY*s2t*
+                        (-551402*z3 - 17194*z4 + 84045*pow2(z2)) + 
+                        Tbeta*
+                        (38880*Dmsqst2*z3*pow2(s2t) + 
+                        4*pow2(Mt)*
+                        (-249586*z3 + 8614*z4 + 12921*pow2(z2))))*
+                       pow4(Mst2) + 
+                      2*pow2(s2t)*
+                       (-(Mt*MuSUSY*s2t*
+                        (932531*z3 + 16612*z4 + 1590*pow2(z2))) + 
+                         Tbeta*
+                         (3240*Dmsqst2*z3*pow2(s2t) - 
+                         9*pow2(Mt)*(-9125*z3 + 1592*z4 + 2388*pow2(z2))
+))*pow5(Mst2)) + Tbeta*(48*Mst2*pow2(Mt)*
+                       (2160*Dmsqst2*z3*pow2(MuSUSY)*pow2(s2t)*
+                         (1 - pow2(Sbeta)) + 
+                         pow2(Mt)*
+                         (38880*Dmsqst2*z3*pow2(Sbeta) - 
+                         pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (27278*z3 - 902*z4 + 105*pow2(z2)))) + 
+                      pow2(Sbeta)*
+                       (8*Mt*(-28585*z3 + 2425*z4 + 2301*pow2(z2))*
+                         pow3(s2t)*pow6(Mst2) - 
+                         (-123355*z3 + 5026*z4 + 5352*pow2(z2))*pow4(s2t)*
+                         pow7(Mst2)))))) - 
+          3*pow2(Mgl)*(-(pow4(Mst1)*
+                (-32*s2t*pow2(Mt)*pow2(Sbeta)*
+                   (8*Mt*Tbeta*(-57758*z3 + 1370*z4 + 2055*pow2(z2)) - 
+                     3*MuSUSY*s2t*(-11816*z3 - 4954*z4 + 6177*pow2(z2)))*
+                   pow3(Mst2) - 
+                  pow2(Mst2)*(16*Tbeta*pow2(Mt)*pow2(s2t)*
+                      (-160*Dmsqst2*pow2(Sbeta)*
+                        (-2*(7*z3 - z4) + 3*pow2(z2)) + 
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (-8*(91963 + 162*lmMst1 - 162*lmMst2)*z3 + 
+                         27446*z4 + 35823*pow2(z2))) + 
+                     pow2(Sbeta)*
+                      (MuSUSY*
+                         (64*s2t*
+                        (-27086*z3 + 12062*z4 + 18093*pow2(z2))*
+                        pow3(Mt) - 
+                         33280*Dmsqst2*Mt*(-2*(7*z3 - z4) + 3*pow2(z2))*
+                         pow3(s2t)) + 
+                        Tbeta*
+                         (1024*(24241*z3 + 146*z4 + 219*pow2(z2))*
+                         pow4(Mt) - 
+                         5*pow2(Dmsqst2)*
+                         (2453*z3 + 448*z4 + 672*pow2(z2))*pow4(s2t)))) + 
+                  32*Mt*(-10*Dmsqst2*Mt*
+                      (Tbeta*pow2(MuSUSY)*pow2(s2t)*(1 - pow2(Sbeta))*
+                        (-1771*z3 + 442*z4 + 663*pow2(z2)) + 
+                        pow2(Sbeta)*
+                         (7776*Tbeta*z3*pow2(Mt) + 
+                         2*Mt*MuSUSY*s2t*
+                         (-1930*z3 + 106*z4 + 159*pow2(z2)))) + 
+                     6*Tbeta*pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                      (1502*z3 + 2062*z4 + 1635*pow2(z2))*pow3(Mt) - 
+                     5*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta)*
+                      (2*MuSUSY*s2t*(-3034*z3 + 94*z4 + 141*pow2(z2)) + 
+                        3*Mt*Tbeta*
+                         (20*z4 + 30*pow2(z2) - 
+                         z3*(140 + 162*pow2(Sbeta) - 81*pow4(Sbeta))))) - 
+                  64*Mst2*Mt*(-(s2t*Tbeta*pow2(Mt)*
+                        (25920*Dmsqst2*z3*pow2(Sbeta) - 
+                         pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (-99632*z3 - 11764*z4 + 20505*pow2(z2)))) - 
+                     4*MuSUSY*pow2(Sbeta)*
+                      (-107072*z3 + 3326*z4 + 3045*pow2(z2))*pow3(Mt) + 
+                     z3*pow2(Sbeta)*
+                      (38880*Dmsqst2*Mt*MuSUSY*pow2(s2t) + 
+                        2025*Tbeta*pow2(Dmsqst2)*pow3(s2t)*
+                         (2 + 2*pow2(Sbeta) - pow4(Sbeta)))) + 
+                  pow2(Sbeta)*
+                   (16*pow2(s2t)*
+                      (7*Mt*MuSUSY*s2t*
+                        (-43868*z3 + 1970*z4 + 2955*pow2(z2)) + 
+                        Tbeta*
+                         (-10*Dmsqst2*pow2(s2t)*
+                        (-260*z3 + 14*z4 + 21*pow2(z2)) + 
+                         pow2(Mt)*
+                         (-65326*z3 + 13714*z4 + 20571*pow2(z2))))*
+                      pow4(Mst2) + 
+                     Tbeta*(16*Mt*(-44630*z3 + 878*z4 + 1317*pow2(z2))*
+                         pow3(s2t)*pow5(Mst2) - 
+                        4*(-4*(5225 - 162*lmMst1 + 162*lmMst2)*z3 + 
+                         2294*z4 + 5385*pow2(z2))*pow4(s2t)*pow6(Mst2))))) 
++ 6*pow2(Mst1)*(34560*Dmsqst2*Mst2*z3*pow2(Mt)*
+                 (MuSUSY*(16*pow2(Mt) + 3*Dmsqst2*pow2(s2t))*
+                    pow2(Sbeta) - 
+                   2*Mt*s2t*Tbeta*
+                    (7*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                      4*Dmsqst2*pow2(Sbeta))) + 
+                320*pow2(Dmsqst2)*pow2(Mt)*
+                 (-8*Mt*MuSUSY*s2t*pow2(Sbeta)*
+                    (-2*(7*z3 - z4) + 3*pow2(z2)) + 
+                   Tbeta*(1080*z3*pow2(Mt)*pow2(Sbeta) - 
+                      pow2(MuSUSY)*pow2(s2t)*(1 - pow2(Sbeta))*
+                       (-944*z3 + 14*z4 + 21*pow2(z2)))) - 
+                2*Mt*pow2(Mst2)*
+                 (-5*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta)*
+                    (2*Mt*Tbeta*(7*z3 + 80*z4 + 120*pow2(z2)) + 
+                      MuSUSY*s2t*(-16999*z3 + 352*z4 + 528*pow2(z2))) - 
+                   240*Dmsqst2*Mt*
+                    (Tbeta*pow2(MuSUSY)*pow2(s2t)*(1 - pow2(Sbeta))*
+                       (-35*z3 + 26*z4 + 39*pow2(z2)) + 
+                      pow2(Sbeta)*
+                       (576*Tbeta*z3*pow2(Mt) + 
+                         2*Mt*MuSUSY*s2t*(-202*z3 + 10*z4 + 15*pow2(z2))
+)) + 288*Tbeta*pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                    (218*z3 + 50*z4 + 21*pow2(z2))*pow3(Mt)) + 
+                64*Mt*pow3(Mst2)*
+                 (-(s2t*Tbeta*pow2(Mt)*
+                      (4320*Dmsqst2*z3*pow2(Sbeta) - 
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                         (-14636*z3 - 1135*z4 + 2388*pow2(z2)))) - 
+                   4*MuSUSY*pow2(Sbeta)*
+                    (-8219*z3 + 326*z4 + 165*pow2(z2))*pow3(Mt) + 
+                   z3*pow2(Sbeta)*
+                    (6480*Dmsqst2*Mt*MuSUSY*pow2(s2t) - 
+                      270*Tbeta*pow2(Dmsqst2)*pow3(s2t))) - 
+                pow4(Mst2)*(-16*Tbeta*pow2(Mt)*pow2(s2t)*
+                    (-60*Dmsqst2*pow2(Sbeta)*
+                       (-2*(7*z3 - z4) + 3*pow2(z2)) + 
+                      pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                       (-((71438 + 216*lmMst1 - 216*lmMst2)*z3) + 
+                         2276*z4 + 2523*pow2(z2))) + 
+                   pow2(Sbeta)*
+                    (-16*MuSUSY*s2t*(3718*z3 + 3470*z4 + 5205*pow2(z2))*
+                       pow3(Mt) + 
+                      960*Dmsqst2*Mt*MuSUSY*
+                       (-52*z3 + 10*z4 + 15*pow2(z2))*pow3(s2t) + 
+                      Tbeta*(-32*(69050*z3 + 418*z4 + 627*pow2(z2))*
+                         pow4(Mt) + 
+                         5*pow2(Dmsqst2)*
+                         (-1895*z3 + 128*z4 + 192*pow2(z2))*pow4(s2t)))) 
++ pow2(Sbeta)*(-8*Mt*s2t*(3*Mt*MuSUSY*s2t*
+                       (-22754*z3 - 3010*z4 + 4557*pow2(z2)) + 
+                      Tbeta*(4320*Dmsqst2*z3*pow2(s2t) - 
+                        4*pow2(Mt)*(-48454*z3 + 754*z4 + 1131*pow2(z2))
+))*pow5(Mst2) + 8*pow2(s2t)*(-4*Mt*MuSUSY*s2t*
+                       (-((23848 + 54*lmMst1 - 54*lmMst2)*z3) + 
+                        958*z4 + 1275*pow2(z2)) + 
+                      Tbeta*(15*Dmsqst2*pow2(s2t)*
+                        (-173*z3 + 14*z4 + 21*pow2(z2)) - 
+                         2*pow2(Mt)*
+                         (-4*(55 - 54*lmMst1 + 54*lmMst2)*z3 + 826*z4 + 
+                         1887*pow2(z2))))*pow6(Mst2)) + 
+                Tbeta*pow2(Sbeta)*
+                 (-16*Mt*(-6518*z3 + 740*z4 + 219*pow2(z2))*pow3(s2t)*
+                    pow7(Mst2) + 
+                   4*(-23954*z3 + 1556*z4 + 2577*pow2(z2))*pow4(s2t)*
+                    pow8(Mst2))) + 
+             9*Mst2*(20*Mst2*pow2(Dmsqst2)*pow2(Mt)*
+                 (-(Tbeta*pow2(MuSUSY)*pow2(s2t)*(1 - pow2(Sbeta))*
+                      (-4403*z3 + 32*z4 + 48*pow2(z2))) + 
+                   pow2(Sbeta)*
+                    (2700*Tbeta*z3*pow2(Mt) - 
+                      4*Mt*MuSUSY*s2t*(-301*z3 + 16*z4 + 24*pow2(z2)))) - 
+                4*Mt*pow3(Mst2)*
+                 (-5*pow2(Dmsqst2)*pow2(s2t)*pow2(Sbeta)*
+                    (2*Mt*Tbeta*(-301*z3 + 16*z4 + 24*pow2(z2)) + 
+                      MuSUSY*s2t*(-4403*z3 + 32*z4 + 48*pow2(z2))) - 
+                   240*Dmsqst2*Mt*
+                    (Tbeta*pow2(MuSUSY)*pow2(s2t)*(1 - pow2(Sbeta))*
+                       (23*z3 + 2*z4 + 3*pow2(z2)) + 
+                      pow2(Sbeta)*
+                       (96*Tbeta*z3*pow2(Mt) + 
+                         2*Mt*MuSUSY*s2t*(-58*z3 + 2*z4 + 3*pow2(z2)))) + 
+                   64*Tbeta*(230*z3 + 27*z4)*pow2(MuSUSY)*
+                    (1 - pow2(Sbeta))*pow3(Mt)) + 
+                z3*(11520*Dmsqst2*pow2(Mst2)*pow2(Mt)*
+                    (MuSUSY*(16*pow2(Mt) + 3*Dmsqst2*pow2(s2t))*
+                       pow2(Sbeta) - 
+                      4*Mt*s2t*Tbeta*
+                       (3*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                         2*Dmsqst2*pow2(Sbeta))) + 
+                   23040*MuSUSY*pow2(Dmsqst2)*
+                    (-(MuSUSY*s2t*Tbeta*(1 - pow2(Sbeta))) + 
+                      4*Mt*pow2(Sbeta))*pow3(Mt)) - 
+                (96*Tbeta*pow2(Mt)*pow2(s2t)*
+                    (pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                       (2*((1319 + 6*lmMst1 - 6*lmMst2)*z3 - 20*z4) + 
+                        3*pow2(z2)) + 
+                      10*Dmsqst2*pow2(Sbeta)*
+                       (-58*z3 + 2*z4 + 3*pow2(z2))) + 
+                   pow2(Sbeta)*
+                    (-96*MuSUSY*s2t*
+                       (6*(77 - 8*lmMst1 + 8*lmMst2)*z3 + 202*z4 + 
+                        159*pow2(z2))*pow3(Mt) + 
+                      960*Dmsqst2*Mt*MuSUSY*(23*z3 + 2*z4 + 3*pow2(z2))*
+                       pow3(s2t) + 
+                      Tbeta*(-192*
+                         (8*(514 - 3*(lmMst1 + lmMst2) + 6*lmMt)*z3 + 
+                        14*z4 + 21*pow2(z2))*pow4(Mt) + 
+                         5*pow2(Dmsqst2)*
+                         (-4403*z3 + 32*z4 + 48*pow2(z2))*pow4(s2t))))*
+                 pow5(Mst2) + Mt*
+                 (32*(-5*s2t*Tbeta*pow2(Mt)*
+                       (1152*Dmsqst2*z3*pow2(Sbeta) - 
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                        (-2386*z3 - 102*z4 + 333*pow2(z2))) - 
+                      6*MuSUSY*pow2(Sbeta)*
+                       (-1922*z3 + 206*z4 + 21*pow2(z2))*pow3(Mt) + 
+                      z3*pow2(Sbeta)*
+                       (6480*Dmsqst2*Mt*MuSUSY*pow2(s2t) - 
+                         360*Tbeta*pow2(Dmsqst2)*pow3(s2t)))*pow4(Mst2) - 
+                   48*s2t*pow2(Sbeta)*
+                    (1440*Dmsqst2*Tbeta*z3*pow2(s2t) - 
+                      4*Tbeta*pow2(Mt)*
+                       (-1922*z3 + 206*z4 + 21*pow2(z2)) + 
+                      5*Mt*MuSUSY*s2t*(-2386*z3 - 102*z4 + 333*pow2(z2)))*
+                    pow6(Mst2)) + 
+                48*pow2(s2t)*pow2(Sbeta)*
+                 (2*Mt*MuSUSY*s2t*
+                    (2*((1319 + 6*lmMst1 - 6*lmMst2)*z3 - 20*z4) + 
+                      3*pow2(z2)) + 
+                   Tbeta*(5*Dmsqst2*pow2(s2t)*
+                       (23*z3 + 2*z4 + 3*pow2(z2)) - 
+                      pow2(Mt)*
+                       (6*(77 - 8*lmMst1 + 8*lmMst2)*z3 + 202*z4 + 
+                         159*pow2(z2))))*pow7(Mst2) + 
+                Tbeta*pow2(Sbeta)*
+                 (80*Mt*(-2386*z3 - 102*z4 + 333*pow2(z2))*pow3(s2t)*
+                    pow8(Mst2) - 
+                   24*(2*((1319 + 6*lmMst1 - 6*lmMst2)*z3 - 20*z4) + 
+                      3*pow2(z2))*pow4(s2t)*pow9(Mst2))))))/
+      (23328.*Tbeta*pow2(Sbeta)*pow6(Mst2)))/pow2(Mgl) - 
+  Al4p*(-((xDmglst2*pow2(Dmglst2)*
+          ((twoLoopFlag*((9*pow4(s2t)*
+                    (6*(2 + lmMst1*(-1 + 2*lmMst2) - 2*pow2(lmMst2))*
+                       pow2(Mst2)*pow4(Mst1) - 
+                      6*(2 - lmMst1 + 2*(lmMst2 + lmMst1*lmMst2) - 
+                        2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2) + 
+                      (1 + 6*lmMst1)*pow6(Mst1) - 
+                      2*(2 - 3*lmMst2)*pow6(Mst2)))/pow2(Mst1) + 
+                 (Mt*(4*(-2*s2t*pow2(Mt)*
+                        (36*pow2(Mst1)*pow2(Mst2)*
+                        ((13 - 2*lmMst1 + 4*lmMst2 - 2*lmMt)*
+                       pow2(Mst2) + 
+                        (31 + 3*lmMst1*(2 - lmMst2) - 4*lmMst2 + 
+                       3*pow2(lmMst2))*pow2(MuSUSY)) + 
+                        9*(4*
+                       (28 + 41*lmMst2 - 
+                       lmMst1*(31 + 6*lmMst2 - 6*lmMt) + 
+                       (-10 - 6*lmMst2)*lmMt + 6*pow2(lmMst2))*
+                       pow2(Mst2) + 
+                       (199 + lmMst1*(34 - 20*lmMst2) - 
+                       26*lmMst2 + 20*pow2(lmMst2))*pow2(MuSUSY))*
+                        pow4(Mst1) - 
+                        2*((161 - 36*lmMst1*(2 - lmMst2) + 
+                       78*lmMst2 - 6*lmMt - 36*pow2(lmMst2))*
+                       pow2(Mst2) - 
+                        18*(14 + lmMst1*(2 - lmMst2) + pow2(lmMst2))*
+                        pow2(MuSUSY))*pow4(Mst2)) + 
+                        9*pow3(s2t)*pow4(Mst2)*
+                        ((7 - 6*lmMst1 + 6*lmMst2)*pow4(Mst1) + 
+                        4*((3 + lmMst1*(2 - lmMst2) - 4*lmMst2 + 
+                       pow2(lmMst2))*pow2(Mst1)*pow2(Mst2) + 
+                        (14 + lmMst1*(2 - lmMst2) + pow2(lmMst2))*
+                        pow4(Mst2))) + 
+                        (8*Mst2*pow3(Mt)*
+                        (9*(27 + 19*lmMst2 - 
+                       2*lmMst1*(6 + lmMst2 - lmMt) + 
+                       (-7 - 2*lmMst2)*lmMt + 2*pow2(lmMst2))*
+                       pow2(Mst2)*pow4(Mst1) - 
+                        (2 - 9*lmMst1 - 3*lmMst2 - 15*lmMt)*
+                       pow2(Mst1)*pow4(Mst2) + 
+                        27*(23 + 38*lmMst2 - 
+                       lmMst1*(29 + 6*lmMst2 - 6*lmMt) + 
+                       (-9 - 6*lmMst2)*lmMt + 6*pow2(lmMst2))*
+                       pow6(Mst1) - 9*(2 - 3*lmMst2)*pow6(Mst2)))/
+                        pow2(Mst1) + 
+                        (3*Mst2*Mt*pow2(s2t)*
+                        (-2*pow2(Mst2)*
+                        ((7 - 6*lmMst1 + 24*lmMst2)*pow2(Mst2) - 
+                       9*(4 - lmMst1 + lmMst2 + 2*lmMst1*lmMst2 - 
+                       2*pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst1) - 
+                        2*pow2(Mst1)*
+                        ((23 - 36*lmMst2)*pow2(Mst2) - 
+                       3*(10 + lmMst1*(-3 + 6*lmMst2) - 
+                       6*pow2(lmMst2))*pow2(MuSUSY))*pow4(Mst2) - 
+                        (12*(4 - 5*lmMst1 + 5*lmMst2)*pow2(Mst2) - 
+                       9*(9 - 4*lmMst1*(1 - lmMst2) + 4*lmMst2 - 
+                       4*pow2(lmMst2))*pow2(MuSUSY))*pow6(Mst1) + 
+                        6*(2 - 3*lmMst2)*
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)))/
+                        pow2(Mst1)) - 
+                      (4*MuSUSY*
+                        ((9*Mt*MuSUSY*s2t*
+                        (-2*
+                       ((-3*Mst2*s2t*
+                      (4 - lmMst1*(1 - 2*lmMst2) + lmMst2 - 
+                      2*pow2(lmMst2)) + 
+                       4*Mt*
+                       (31 + 3*lmMst1*(2 - lmMst2) - 4*lmMst2 + 
+                       3*pow2(lmMst2)))*pow2(Mst2)*pow4(Mst1) + 
+                       (-(Mst2*s2t*
+                       (10 - lmMst1*(3 - 6*lmMst2) - 
+                       6*pow2(lmMst2))) + 
+                       4*Mt*
+                       (14 + lmMst1*(2 - lmMst2) + pow2(lmMst2)))*
+                       pow2(Mst1)*pow4(Mst2)) - 
+                        (-3*Mst2*s2t*
+                       (9 - 4*lmMst1*(1 - lmMst2) + 4*lmMst2 - 
+                       4*pow2(lmMst2)) + 
+                       Mt*(398 + lmMst1*(68 - 40*lmMst2) - 
+                       52*lmMst2 + 40*pow2(lmMst2)))*pow6(Mst1) + 
+                        2*(2 - 3*lmMst2)*s2t*pow7(Mst2)))/pow2(Sbeta) 
++ (-2*pow2(Mst2)*(36*(3 - lmMst1 + lmMst2)*Mst2*s2t*pow2(Mt) - 
+                       54*Mt*
+                       (17 + 2*lmMst1*(2 - lmMst2) - 4*lmMst2 + 
+                       2*pow2(lmMst2))*pow2(Mst2)*pow2(s2t) + 
+                       4*(29 + 18*lmMst1*(1 - lmMst2) - 
+                       3*lmMst2 - 15*lmMt + 18*pow2(lmMst2))*
+                       pow3(Mt) + 
+                       9*(2 + 3*lmMst2)*pow3(Mst2)*pow3(s2t))*
+                        pow4(Mst1) + 
+                        2*pow2(Mst1)*
+                        (-6*(11 - 18*lmMst2)*Mst2*s2t*pow2(Mt) + 
+                       54*Mt*
+                       (14 + lmMst1*(2 - lmMst2) + pow2(lmMst2))*
+                       pow2(Mst2)*pow2(s2t) + 
+                       4*(79 - 18*lmMst1*(2 - lmMst2) + 
+                       39*lmMst2 - 3*lmMt - 18*pow2(lmMst2))*
+                       pow3(Mt) - 
+                       9*(8 - lmMst1*(3 - 6*lmMst2) + 3*lmMst2 - 
+                       6*pow2(lmMst2))*pow3(Mst2)*pow3(s2t))*
+                        pow4(Mst2) - 
+                        (72*(7 - 6*lmMst1 + 6*lmMst2)*Mst2*s2t*
+                       pow2(Mt) - 
+                       27*Mt*
+                       (75 + lmMst1*(10 - 8*lmMst2) - 10*lmMst2 + 
+                       8*pow2(lmMst2))*pow2(Mst2)*pow2(s2t) + 
+                       8*(236 + 339*lmMst2 - 
+                       18*lmMst1*(13 + 4*lmMst2 - 3*lmMt) + 
+                       (-105 - 54*lmMst2)*lmMt + 72*pow2(lmMst2))*
+                       pow3(Mt) + 
+                       27*(1 - 2*lmMst1 + 2*lmMst2)*pow3(Mst2)*
+                       pow3(s2t))*pow6(Mst1) + 
+                        18*(2 - 3*lmMst2)*s2t*
+                        (4*pow2(Mt) - pow2(Mst2)*pow2(s2t))*pow7(Mst2)
+)/Tbeta))/pow2(Mst1)))/pow5(Mst2)))/108. - 
+            Al4p*threeLoopFlag*
+             (-(pow2(Mt)*((5*Dmsqst2*(1081 - 165*lmMst1 + 165*lmMst2)*
+                       pow2(s2t)*(2 - pow2(Sbeta))*pow2(Sbeta)*
+                       pow4(Mst1))/(9.*pow4(Mst2)) + 
+                    (pow2(MuSUSY)*
+                       ((pow2(Mt)*
+                        (24*pow2(Mst2)*
+                        (50134 - 270*B4 + 270*D3 - 135*DN + 
+                        2160*lmMst1 + (32520 + 2880*lmMst1)*lmMst2 - 
+                        120*lmMt - 29646*S2 + 
+                        (1440 - 2160*lmMst1)*pow2(lmMst2) + 
+                        2160*pow3(lmMst2)) + 
+                        pow2(Mst1)*
+                        (3051661 - 12960*B4 + 12960*D3 - 6480*DN + 
+                        304320*lmMst1 + 
+                        (2137920 + 273600*lmMst1)*lmMst2 + 
+                        (11520 + 2880*lmMst1 - 2880*lmMst2)*lmMt + 
+                        5600*OepS2 + 
+                        (-1736964 - 113400*lmMst1 + 113400*lmMst2)*
+                       S2 + (-66240 - 207360*lmMst1)*pow2(lmMst2) + 
+                        207360*pow3(lmMst2))))/(1215.*pow4(Mst2)) + 
+                         pow2(s2t)*
+                         (441179/4860. - (100*B4)/9. + (112*D3)/9. - 
+                         (62*DN)/9. + (788*lmMst1)/9. - 
+                         (16*lmMst2*
+                        (241 + 171*lmMst1 - 18*pow2(lmMst1)))/27. - 
+                         (103*pow2(lmMst1))/9. + 
+                         (376/3. - 82*lmMst1)*pow2(lmMst2) - 
+                         ((852 + 32*lmMst1*(2 - 3*lmMst2) - 
+                        358*lmMst2 - 497*pow2(lmMst2))*pow2(Mst2))/
+                        (9.*pow2(Mst1)) + (214*pow3(lmMst2))/3. + 
+                         ((80*Dmsqst2*(4 + lmMst1 - lmMst2))/3. + 
+                        pow2(Mst1)*
+                        (14159179/91125. - (164*B4)/9. + 
+                        (176*D3)/9. - (94*DN)/9. - 
+                        (21449*lmMst1)/675. - 
+                        (lmMst2*
+                       (54451 + 22990*lmMst1 - 65550*pow2(lmMst1)))/
+                        675. - (7556*pow2(lmMst1))/135. + 
+                        (2*(6077 - 17130*lmMst1)*pow2(lmMst2))/135. - 
+                        (10*pow3(lmMst1))/27. + 
+                        (4240*pow3(lmMst2))/27.))/pow2(Mst2) + 
+                         Dmsqst2*
+                        (40/pow2(Mst1) - 
+                        ((230/3. - 140*lmMst1 + 140*lmMst2)*
+                        pow2(Mst1))/pow4(Mst2)) + 
+                         ((219487237477/3.750705e8 - (8*B4)/3. + 
+                        (32*D3)/9. - (20*DN)/9. - 
+                        (20109937*lmMst1)/297675. - 
+                        (15886*pow2(lmMst1))/945. + 
+                        lmMst2*
+                       (5093887/297675. - (144628*lmMst1)/945. + 
+                       (1180*pow2(lmMst1))/9.) + 
+                        (2*(80257 - 138180*lmMst1)*pow2(lmMst2))/
+                       945. - (92*pow3(lmMst1))/27. + 
+                        (4448*pow3(lmMst2))/27.)*pow4(Mst1))/pow4(Mst2) 
++ (32*(2 - lmMst2 - 5*pow2(lmMst2))*pow4(Mst2))/(9.*pow4(Mst1)) + 
+                         ((-8*OepS2*
+                        (1110*pow2(Mst1)*pow2(Mst2) + 
+                        17308*pow4(Mst1) + 315*pow4(Mst2)))/2187. - 
+                        (S2*(6*(1089707 - 5550*lmMst1 + 5550*lmMst2)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        40*(93919 - 12981*lmMst1 + 12981*lmMst2)*
+                        pow4(Mst1) + 
+                        27*(116129 - 350*lmMst1 + 350*lmMst2)*
+                        pow4(Mst2)))/405.)/pow4(Mst2)) - 
+                         (Mt*s2t*
+                         (-2332800*Dmsqst2*pow2(Mst1)*
+                        ((8 - 15*lmMst1 + 15*lmMst2)*pow2(Mst1) - 
+                        (2 + 5*lmMst1 - 5*lmMst2)*pow2(Mst2)) + 
+                         6*pow2(Mst2)*
+                        (4580489 - 3285360*B4 + 68040*DN - 
+                        3918600*lmMst1 + 248800*OepS2 + 
+                        (2246724 - 5038200*lmMst1 + 5038200*lmMst2)*
+                        S2 + 
+                        lmMst2*
+                        (-4036680 - 492480*lmMst1 - 
+                        51840*pow2(lmMst1)) + 103680*pow2(lmMst1) + 
+                        (-1386720 + 3389040*lmMst1)*pow2(lmMst2) - 
+                        3337200*pow3(lmMst2))*pow4(Mst1) + 
+                         9*pow2(Mst1)*
+                        (2601353 - 1058400*B4 + 23760*DN - 
+                        1779840*lmMst1 + 1120*OepS2 + 
+                        (449388 - 22680*lmMst1 + 22680*lmMst2)*S2 - 
+                        69120*pow2(lmMst1) + 
+                        lmMst2*
+                        (-862560 - 155520*lmMst1 + 
+                       34560*pow2(lmMst1)) + 
+                        (-959040 + 937440*lmMst1)*pow2(lmMst2) - 
+                        972000*pow3(lmMst2))*pow4(Mst2) + 
+                         10*(2773621 - 1660176*B4 + 25272*DN + 
+                        2004408*lmMst1 - 525472*OepS2 + 
+                        (13296204 + 10640808*lmMst1 - 
+                       10640808*lmMst2)*S2 + 
+                        lmMst2*
+                        (-5299488 + 1644624*lmMst1 - 
+                        248832*pow2(lmMst1)) + 3888*pow2(lmMst1) + 
+                        (-2340576 + 2507760*lmMst1)*pow2(lmMst2) - 
+                        31104*pow3(lmMst1) - 2227824*pow3(lmMst2))*
+                        pow6(Mst1) + 
+                         1244160*(2 + lmMst2 - 3*pow2(lmMst2))*
+                         pow6(Mst2)))/(43740.*pow2(Mst1)*pow5(Mst2))))/
+                     pow2(Sbeta))) + 
+               (MuSUSY*(s2t*pow3(Mt)*
+                     (348073/105. - (32*B4)/3. + (32*D3)/3. - 
+                       (16*DN)/3. + (1472*lmMst1)/9. - (64*lmMt)/9. + 
+                       lmMst2*
+                        (51748/27. + 136*lmMst1 - 
+                        (128*pow2(lmMst1))/3.) + 
+                       (116*pow2(lmMst1))/3. + 
+                       (32*(37 - 12*lmMst1)*pow2(lmMst2))/9. + 
+                       (4*(756 + 32*lmMst1*(2 - 3*lmMst2) - 
+                        134*lmMst2 - 177*pow2(lmMst2))*pow2(Mst2))/
+                        (9.*pow2(Mst1)) + (256*pow3(lmMst2))/3. - 
+                       ((3280*Dmsqst2)/9. - 
+                        pow2(Mst1)*
+                        (983105446/212625. - (32*B4)/3. + 
+                        (32*D3)/3. - (16*DN)/3. + 
+                        (2028488*lmMst1)/2025. + 
+                        (64*(5 + lmMst1 - lmMst2)*lmMt)/9. + 
+                        (8*lmMst2*
+                       (715964 + 124935*lmMst1 - 11025*pow2(lmMst1))
+)/2025. + (4064*pow2(lmMst1))/135. - 
+                        (8*(4517 + 5025*lmMst1)*pow2(lmMst2))/135. + 
+                        (8*pow3(lmMst1))/27. + (9208*pow3(lmMst2))/27.
+))/pow2(Mst2) + ((1297790971/2.083725e6 - (64*B4)/9. + (64*D3)/9. - 
+                        (32*DN)/9. + (29853268*lmMst1)/19845. + 
+                        (38704*pow2(lmMst1))/189. + 
+                        (4*lmMst2*
+                       (2917823 - 3813600*lmMst1 + 
+                       97020*pow2(lmMst1)))/19845. + 
+                        (16*(8677 - 5439*lmMst1)*pow2(lmMst2))/
+                       189. - 
+                        (128*lmMt*
+                       (4 + 6*lmMst2 - 2*lmMst1*(3 + lmMst2) + 
+                       pow2(lmMst1) + pow2(lmMst2)))/3. - 
+                        (16*pow3(lmMst1))/9. + (1328*pow3(lmMst2))/3.
+)*pow4(Mst1))/pow4(Mst2) - (128*(2 - lmMst2 - 5*pow2(lmMst2))*
+                        pow4(Mst2))/(9.*pow4(Mst1)) + 
+                       ((-40*Dmsqst2*
+                        ((65 - 2*lmMst1 + 2*lmMst2)*pow4(Mst1) + 
+                        12*pow4(Mst2)))/(3.*pow2(Mst1)) + 
+                        (32*OepS2*
+                        (660*pow2(Mst1)*pow2(Mst2) + 
+                        1838*pow4(Mst1) + 63*pow4(Mst2)))/243. - 
+                        (4*S2*
+                        (12*(18419 + 11550*lmMst1 - 11550*lmMst2)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        28*(17269 + 13785*lmMst1 - 13785*lmMst2)*
+                        pow4(Mst1) + 
+                        27*(3477 + 490*lmMst1 - 490*lmMst2)*pow4(Mst2)
+))/315.)/pow4(Mst2)) - pow2(Mt)*pow2(s2t)*
+                     ((80*Dmsqst2*(2 + 5*lmMst1 - 5*lmMst2) + 
+                        pow2(Mst1)*
+                        (1356919/9720. - (1048*B4)/3. + (20*DN)/3. - 
+                        (6938*lmMst1)/27. + (128*pow2(lmMst1))/3. - 
+                        (2*lmMst2*
+                       (7619 + 720*lmMst1 + 288*pow2(lmMst1)))/27. + 
+                        (8*(4 + 153*lmMst1)*pow2(lmMst2))/3. - 
+                        (1160*pow3(lmMst2))/3.))/Mst2 + 
+                       Mst2*(2324873/3240. - (980*B4)/3. + 
+                        (22*DN)/3. - (1648*lmMst1)/3. - 
+                        lmMst2*
+                        (2780/9. + 48*lmMst1 - (32*pow2(lmMst1))/3.) - 
+                        (64*pow2(lmMst1))/3. - 
+                        (168 - (868*lmMst1)/3.)*pow2(lmMst2) - 
+                        300*pow3(lmMst2)) + 
+                       (128*(2 + lmMst2 - 3*pow2(lmMst2))*pow3(Mst2))/
+                        (3.*pow2(Mst1)) + 
+                       ((15069803/14580. - (592*B4)/3. + (8*DN)/3. + 
+                        (35140*lmMst1)/81. + (92*pow2(lmMst1))/3. - 
+                        (2*lmMst2*
+                       (28667 - 5238*lmMst1 + 3024*pow2(lmMst1)))/
+                       81. - (8*(60 - 157*lmMst1)*pow2(lmMst2))/3. - 
+                        (32*pow3(lmMst1))/3. - (1000*pow3(lmMst2))/3.
+)*pow4(Mst1))/pow3(Mst2) + ((-4*OepS2*
+                       (-9267*pow2(Mst1)*pow2(Mst2) + 
+                       23734*pow4(Mst1) - 63*pow4(Mst2)))/729. + 
+                        (S2*
+                        (3*(29123 - 92670*lmMst1 + 92670*lmMst2)*
+                       pow2(Mst1)*pow2(Mst2) + 
+                        2*(525961 + 356010*lmMst1 - 356010*lmMst2)*
+                       pow4(Mst1) + 
+                        27*(1387 - 70*lmMst1 + 70*lmMst2)*pow4(Mst2))
+)/270.)/pow3(Mst2) - (20*Dmsqst2*pow2(Mst1)*
+                        ((80 - 43*lmMst1 + 43*lmMst2)*pow2(Mst1) + 
+                        40*(1 - lmMst1 + lmMst2)*pow2(Mst2)))/pow5(Mst2)
+) + (pow4(Mt)*(-907200*Dmsqst2*pow2(Mst1)*
+                        ((497 - 306*lmMst1 + 609*lmMst2 - 303*lmMt)*
+                        pow2(Mst1) + 
+                        (101 - 90*lmMst1 + 177*lmMst2 - 87*lmMt)*
+                        pow2(Mst2)) + 
+                        24*pow2(Mst2)*
+                        (2848907 - 10515960*lmMt + 605920*OepS2 + 
+                        11406852*S2 + 
+                        1890*lmMst2*(8232 - 203*lmMt + 6492*S2) + 
+                        90720*(3 - lmMst2)*pow2(lmMst1) - 
+                        1890*lmMst1*
+                       (3460 - 281*lmMt + lmMst2*(689 + 96*lmMt) + 
+                       6492*S2 - 438*pow2(lmMst2)) + 
+                        1890*(347 + 96*lmMt)*pow2(lmMst2) + 
+                        226800*pow2(lmMt) - 737100*pow3(lmMst2))*
+                        pow4(Mst1) - 
+                        9*pow2(Mst1)*
+                        (7152121 + 4616640*lmMt - 7840*OepS2 - 
+                        3032964*S2 - 
+                        17640*lmMst2*(1256 - 60*lmMt + 9*S2) + 
+                        241920*(2 - lmMst2)*pow2(lmMst1) + 
+                        7560*lmMst1*
+                       (1136 - 128*lmMt + 16*lmMst2*(21 + 4*lmMt) + 
+                       21*S2 - 164*pow2(lmMst2)) - 
+                        30240*(107 + 16*lmMt)*pow2(lmMst2) + 
+                        120960*pow2(lmMt) + 1481760*pow3(lmMst2))*
+                        pow4(Mst2) + 
+                        140*(5659217 + 1592460*lmMt - 518816*OepS2 + 
+                        9976392*S2 - 
+                        972*(569 + 180*lmMst2 - 126*lmMt)*
+                       pow2(lmMst1) + 
+                        324*(5353 + 126*lmMt)*pow2(lmMst2) + 
+                        36*lmMst2*
+                       (39031 + 3204*lmMt - 291834*S2 - 
+                       5184*pow2(lmMt)) - 
+                        72*lmMst1*
+                       (27653 + 3015*lmMt + 
+                       18*lmMst2*(689 + 126*lmMt) - 145917*S2 - 
+                       2160*pow2(lmMst2) - 2592*pow2(lmMt)) - 
+                        186624*pow2(lmMt) + 1944*pow3(lmMst1) + 
+                        17496*pow3(lmMst2))*pow6(Mst1) + 
+                        8709120*(2 + lmMst2 - 3*pow2(lmMst2))*
+                        pow6(Mst2)))/(153090.*pow2(Mst1)*pow5(Mst2)) + 
+                    Mt*((-2*T1ep*
+                        (3*pow2(Mst1)*pow2(Mst2)*
+                        (15840*Mst2*s2t*pow2(Mt) - 
+                        9267*Mt*pow2(Mst2)*pow2(s2t) + 
+                        17312*pow3(Mt) - 530*pow3(Mst2)*pow3(s2t)) - 
+                        2*(-66168*Mst2*s2t*pow2(Mt) - 
+                        35601*Mt*pow2(Mst2)*pow2(s2t) + 
+                        129704*pow3(Mt) + 12664*pow3(Mst2)*pow3(s2t))*
+                        pow4(Mst1) + 
+                        63*(72*Mst2*s2t*pow2(Mt) - 
+                        3*Mt*pow2(Mst2)*pow2(s2t) + 4*pow3(Mt) - 
+                        10*pow3(Mst2)*pow3(s2t))*pow4(Mst2)))/
+                        (729.*pow5(Mst2)) + 
+                       pow3(s2t)*
+                        ((40*Dmsqst2*(5 + 2*lmMst1 - 2*lmMst2))/3. + 
+                         pow2(Mst2)*
+                         (901259/4860. - (100*B4)/9. + (112*D3)/9. - 
+                         (62*DN)/9. + (284*lmMst1)/3. - 
+                         lmMst2*
+                        (4930/27. + 112*lmMst1 - (32*pow2(lmMst1))/3.) 
+- (103*pow2(lmMst1))/9. + (631/9. - 82*lmMst1)*pow2(lmMst2) + 
+                         (40*Dmsqst2)/pow2(Mst1) + (214*pow3(lmMst2))/3.
+) + pow2(Mst1)*(23548291/364500. - (64*B4)/9. + (64*D3)/9. - 
+                         (32*DN)/9. - (80549*lmMst1)/675. - 
+                         (6011*pow2(lmMst1))/135. + 
+                         (lmMst2*
+                        (41949 + 45410*lmMst1 + 58350*pow2(lmMst1)))/
+                        675. - 
+                         (2*(2383 + 11595*lmMst1)*pow2(lmMst2))/135. - 
+                         (10*pow3(lmMst1))/27. + (2314*pow3(lmMst2))/27.
+) + ((30586096049/7.50141e7 + (2171669*lmMst2)/59535. + 
+                        (2*(433 + 6552*lmMst2)*pow2(lmMst1))/189. + 
+                        (3974*pow2(lmMst2))/189. - 
+                        (lmMst1*
+                       (2740559 + 1524600*lmMst2 + 
+                       7514640*pow2(lmMst2)))/59535. - 
+                        (112*pow3(lmMst1))/27. + 
+                        (1648*pow3(lmMst2))/27.)*pow4(Mst1))/pow2(Mst2) 
+- (10*Dmsqst2*pow2(Mst1)*((419 - 57*lmMst1 + 57*lmMst2)*pow2(Mst1) + 
+                        9*(55 - 34*lmMst1 + 34*lmMst2)*pow2(Mst2)))/
+                         (27.*pow4(Mst2)) - 
+                         ((916 + 32*lmMst1*(2 - 3*lmMst2) - 
+                        390*lmMst2 - 657*pow2(lmMst2))*pow4(Mst2))/
+                         (9.*pow2(Mst1)) + 
+                         ((-8*OepS2*
+                        (795*pow2(Mst1)*pow2(Mst2) + 
+                        12664*pow4(Mst1) + 315*pow4(Mst2)))/2187. - 
+                        (S2*(159*(21401 - 150*lmMst1 + 150*lmMst2)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        20*(47051 - 18996*lmMst1 + 18996*lmMst2)*
+                        pow4(Mst1) + 
+                        27*(116129 - 350*lmMst1 + 350*lmMst2)*
+                        pow4(Mst2)))/405.)/pow2(Mst2) + 
+                         (32*(2 - lmMst2 - 5*pow2(lmMst2))*pow6(Mst2))/
+                         (9.*pow4(Mst1))))))/Tbeta - 
+               (T1ep*(-2*pow4(Mst1)*
+                     (8*Mst2*pow2(Mt)*pow2(s2t)*
+                        (-4327*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        6921*pow2(Mst2)*pow2(Sbeta)) - 
+                       4*s2t*
+                        (-16421*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        51460*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                       pow2(Sbeta)*
+                        (15571*Mt*pow3(s2t)*pow4(Mst2) + 
+                         89312*Mst2*pow4(Mt) - 4199*pow4(s2t)*pow5(Mst2)
+)) + 63*pow4(Mst2)*(-4*(Mst2*pow2(Mt)*pow2(s2t)*
+                        (-5*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        18*pow2(Mst2)*pow2(Sbeta)) + 
+                        s2t*(-(pow2(MuSUSY)*(1 - pow2(Sbeta))) + 
+                        2*pow2(Mst2)*pow2(Sbeta))*pow3(Mt)) + 
+                       pow2(Sbeta)*
+                        (2*Mt*pow3(s2t)*pow4(Mst2) + 
+                         208*Mst2*pow4(Mt) + 5*pow4(s2t)*pow5(Mst2))) + 
+                    24*Mst2*pow2(Mst1)*
+                     (-(pow2(Mst2)*pow2(Mt)*pow2(s2t)*
+                         (-185*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                         1791*pow2(Mst2)*pow2(Sbeta))) - 
+                       Mst2*s2t*
+                        (-1555*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        4307*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                       (-210*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        9406*pow2(Mst2)*pow2(Sbeta))*pow4(Mt) + 
+                       pow2(Sbeta)*
+                        (767*Mt*pow3(s2t)*pow5(Mst2) + 
+                         20*pow4(s2t)*pow6(Mst2)))))/
+                (729.*pow2(Sbeta)*pow5(Mst2)) + 
+               pow4(s2t)*((5*Dmsqst2*(75 - 26*lmMst1 + 26*lmMst2)*
+                     pow2(Mst1))/6. - 
+                  pow2(Mst2)*((20*Dmsqst2*(1 + lmMst1))/3. - 
+                     (20*Dmsqst2*lmMst2)/3. - 
+                     pow2(Mst1)*
+                      (22023067/729000. - B4 + (4*D3)/3. - (5*DN)/6. + 
+                        (144449*lmMst1)/2700. + 
+                        (2233*pow2(lmMst1))/270. - 
+                        (lmMst2*
+                        (165199 + 121010*lmMst1 + 51150*pow2(lmMst1)))/
+                         2700. + 
+                        (14231/540. + (202*lmMst1)/9.)*pow2(lmMst2) + 
+                        (5*pow3(lmMst1))/54. - (97*pow3(lmMst2))/27.)) - 
+                  (119405394763/1.500282e9 + 
+                     (1436147*lmMst1)/1.1907e6 + 
+                     (1363*pow2(lmMst1))/315. + 
+                     lmMst2*(8287903/1.1907e6 - (101*lmMst1)/315. + 
+                        (11*pow2(lmMst1))/3.) - 
+                     (51/70. + (11*lmMst1)/3.)*pow2(lmMst2) + 
+                     (5*Dmsqst2*(76 - 249*lmMst1 + 249*lmMst2))/
+                      (54.*pow2(Mst2)) - (11*pow3(lmMst1))/9. + 
+                     (11*pow3(lmMst2))/9.)*pow4(Mst1) - 
+                  (9*(1395899 - 54000*B4 + 60480*D3 - 33480*DN + 
+                        494640*lmMst1 - 5600*OepS2 + 
+                        (-37625796 + 113400*lmMst1 - 113400*lmMst2)*
+                        S2 - 55620*pow2(lmMst1) + 
+                        lmMst2*
+                        (-1098000 - 596160*lmMst1 + 
+                        51840*pow2(lmMst1)) + 
+                        (-14040 - 398520*lmMst1)*pow2(lmMst2) + 
+                        346680*pow3(lmMst2))*pow4(Mst1)*pow4(Mst2) - 
+                     48*(1600*OepS2 + 
+                        27*(22273 - 1200*lmMst1 + 1200*lmMst2)*S2)*
+                      pow2(Mst2)*pow6(Mst1) + 
+                     pow2(Mst1)*
+                      (1749600*Dmsqst2*pow4(Mst2) - 
+                        4860*
+                         (980 + 32*lmMst1*(2 - 3*lmMst2) - 
+                        422*lmMst2 - 817*pow2(lmMst2))*pow6(Mst2)) - 
+                     40*(33592*OepS2 - 
+                        27*(51635 + 25194*lmMst1 - 25194*lmMst2)*S2)*
+                      pow8(Mst1) + 
+                     155520*(2 + lmMst2 - 3*pow2(lmMst2))*pow8(Mst2))/
+                   (174960.*pow4(Mst1))) + 
+               (Mt*(-2450*s2t*pow2(Mst1)*pow2(Mt)*
+                     (6*pow2(Mst2)*
+                        (7*pow2(MuSUSY)*
+                        (4580489 - 3285360*B4 + 68040*DN - 
+                        3918600*lmMst1 + 248800*OepS2 + 
+                        (2246724 - 5038200*lmMst1 + 5038200*lmMst2)*
+                        S2 + 
+                        lmMst2*
+                        (-4036680 - 492480*lmMst1 - 
+                        51840*pow2(lmMst1)) + 103680*pow2(lmMst1) + 
+                        (-1386720 + 3389040*lmMst1)*pow2(lmMst2) - 
+                        3337200*pow3(lmMst2)) + 
+                        pow2(Mst2)*
+                        (79386499 - 72455040*lmMt + 4823840*OepS2 + 
+                        82155924*S2 + 
+                        7560*lmMst2*(7665 + 14*lmMt + 12921*S2) + 
+                        725760*(5 - 2*lmMst2)*pow2(lmMst1) - 
+                        7560*lmMst1*
+                        (3601 + 370*lmMst2 - 178*lmMt + 12921*S2 - 
+                        384*pow2(lmMst2)) - 4460400*pow2(lmMst2) + 
+                        2177280*pow2(lmMt) - 1451520*pow3(lmMst2)))*
+                        pow4(Mst1) + 
+                       pow2(Mst1)*
+                        (-453600*Dmsqst2*
+                        (2*pow2(Mst2)*
+                        ((289 - 180*lmMst1 + 354*lmMst2 - 174*lmMt)*
+                        pow2(Mst2) - 
+                        18*(2 + 5*lmMst1 - 5*lmMst2)*pow2(MuSUSY)) + 
+                        36*pow2(Mst1)*
+                        (8*(7 - 3*lmMst1 + 6*lmMst2 - 3*lmMt)*
+                        pow2(Mst2) + 
+                        (8 - 15*lmMst1 + 15*lmMst2)*pow2(MuSUSY)) + 
+                        9*(465 + 374*lmMst2 - 
+                        4*lmMst1*(52 + 3*lmMst2 - 3*lmMt) + 
+                        (-166 - 12*lmMst2)*lmMt + 12*pow2(lmMst2))*
+                        pow4(Mst1)) - 
+                         9*(-7*pow2(MuSUSY)*
+                        (2601353 - 1058400*B4 + 23760*DN - 
+                        1779840*lmMst1 + 1120*OepS2 + 
+                        (449388 - 22680*lmMst1 + 22680*lmMst2)*S2 - 
+                        69120*pow2(lmMst1) + 
+                        lmMst2*
+                        (-862560 - 155520*lmMst1 + 
+                       34560*pow2(lmMst1)) + 
+                        (-959040 + 937440*lmMst1)*pow2(lmMst2) - 
+                        972000*pow3(lmMst2)) + 
+                        2*pow2(Mst2)*
+                        (6779161 + 4495680*lmMt - 7840*OepS2 - 
+                        3032964*S2 - 
+                        2520*lmMst2*(8618 - 420*lmMt + 63*S2) + 
+                        241920*(2 - lmMst2)*pow2(lmMst1) + 
+                        7560*lmMst1*
+                        (1200 - 128*lmMt + 16*lmMst2*(19 + 4*lmMt) + 
+                        21*S2 - 164*pow2(lmMst2)) - 
+                        30240*(195 + 16*lmMt)*pow2(lmMst2) + 
+                        120960*pow2(lmMt) + 1481760*pow3(lmMst2)))*
+                         pow4(Mst2)) + 
+                       14*(5*pow2(MuSUSY)*
+                        (2773621 - 1660176*B4 + 25272*DN + 
+                        2004408*lmMst1 - 525472*OepS2 + 
+                        (13296204 + 10640808*lmMst1 - 
+                       10640808*lmMst2)*S2 + 
+                        lmMst2*
+                        (-5299488 + 1644624*lmMst1 - 
+                        248832*pow2(lmMst1)) + 3888*pow2(lmMst1) + 
+                        (-2340576 + 2507760*lmMst1)*pow2(lmMst2) - 
+                        31104*pow3(lmMst1) - 2227824*pow3(lmMst2)) + 
+                        4*pow2(Mst2)*
+                        (20964397 + 4563540*lmMt - 2058400*OepS2 + 
+                        47545272*S2 - 
+                        9720*(266 + 74*lmMst2 - 55*lmMt)*
+                       pow2(lmMst1) + 
+                        3240*(1493 + 39*lmMt)*pow2(lmMst2) - 
+                        180*lmMst1*
+                        (32857 + 11844*lmMt + 
+                        18*lmMst2*(485 + 204*lmMt) - 231570*S2 - 
+                        1674*pow2(lmMst2) - 3888*pow2(lmMt)) + 
+                        360*lmMst2*
+                        (4724 + 5328*lmMt - 115785*S2 - 
+                        1944*pow2(lmMt)) - 466560*pow2(lmMt) + 
+                        9720*pow3(lmMst1) + 408240*pow3(lmMst2)))*
+                        pow6(Mst1) + 
+                       8709120*(2 + lmMst2 - 3*pow2(lmMst2))*
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)) - 
+                    8575*pow2(Mst1)*pow2(Mst2)*pow3(s2t)*
+                     (583200*Dmsqst2*pow2(Mst1)*
+                        (4*(12 - 5*lmMst1 + 5*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                         (40 - 3*lmMst1 + 3*lmMst2)*pow4(Mst1) - 
+                         4*(2 + 5*lmMst1 - 5*lmMst2)*pow4(Mst2)) - 
+                       pow2(Mst2)*
+                        (-60*pow2(Mst2)*
+                         (280885 + 11016*B4 + 324*DN - 142092*lmMst1 - 
+                        24544*OepS2 + 
+                        (-89856 + 497016*lmMst1 - 497016*lmMst2)*S2 - 
+                        31104*pow2(lmMst1) + 
+                        lmMst2*
+                        (124164 + 2592*lmMst1 + 15552*pow2(lmMst1)) + 
+                        (-86832 - 57672*lmMst1)*pow2(lmMst2) + 
+                        42120*pow3(lmMst2))*pow4(Mst1) + 
+                         9*pow2(Mst1)*
+                         (2048393 - 1058400*B4 + 23760*DN - 
+                        1779840*lmMst1 + 1120*OepS2 + 
+                        (449388 - 22680*lmMst1 + 22680*lmMst2)*S2 - 
+                        69120*pow2(lmMst1) + 
+                        lmMst2*
+                        (-1139040 - 155520*lmMst1 + 
+                        34560*pow2(lmMst1)) + 
+                        (-129600 + 937440*lmMst1)*pow2(lmMst2) - 
+                        972000*pow3(lmMst2))*pow4(Mst2) + 
+                         (31897243 - 2491360*OepS2 + 90290268*S2 - 
+                        360*lmMst2*(18652 + 140139*S2) + 
+                        38880*(37 - 40*lmMst2)*pow2(lmMst1) + 
+                        3188160*pow2(lmMst2) + 
+                        360*lmMst1*
+                        (17410 - 12852*lmMst2 + 140139*S2 + 
+                        11232*pow2(lmMst2)) - 311040*pow3(lmMst1) - 
+                        2177280*pow3(lmMst2))*pow6(Mst1) + 
+                         1244160*(2 + lmMst2 - 3*pow2(lmMst2))*pow6(Mst2)
+)) + 8*Mst2*pow3(Mt)*(15435*pow2(Mst2)*
+                        (-(pow2(Mst2)*
+                        (13292051 + 3597840*lmMt - 72800*OepS2 - 
+                        3133890*S2 - 
+                        lmMst2*(606612 - 493920*lmMt + 1474200*S2) - 
+                        18900*pow2(lmMst1) - 223920*pow2(lmMst2) + 
+                        5400*lmMst1*
+                        (170 - 16*lmMst2 - 32*lmMt + 273*S2 + 
+                        96*pow2(lmMst2)) + 313200*pow2(lmMt) - 
+                        518400*pow3(lmMst2))) + 
+                        120*pow2(MuSUSY)*
+                        (50134 - 270*B4 + 270*D3 - 135*DN + 
+                        2160*lmMst1 + (32520 + 2880*lmMst1)*lmMst2 - 
+                        120*lmMt - 29646*S2 + 
+                        (1440 - 2160*lmMst1)*pow2(lmMst2) + 
+                        2160*pow3(lmMst2)))*pow4(Mst1) + 
+                       147*(525*pow2(MuSUSY)*
+                        (3051661 - 12960*B4 + 12960*D3 - 6480*DN + 
+                        304320*lmMst1 + 
+                        (2137920 + 273600*lmMst1)*lmMst2 + 
+                        (11520 + 2880*lmMst1 - 2880*lmMst2)*lmMt + 
+                        5600*OepS2 + 
+                        (-1736964 - 113400*lmMst1 + 113400*lmMst2)*
+                       S2 + (-66240 - 207360*lmMst1)*pow2(lmMst2) + 
+                        207360*pow3(lmMst2)) + 
+                        pow2(Mst2)*
+                        (55610713 - 1448685000*lmMt + 
+                        131684000*OepS2 + 173875950*S2 + 
+                        37800*(1783 + 285*lmMst2 - 225*lmMt)*
+                        pow2(lmMst1) - 
+                        18900*(43477 - 930*lmMt)*pow2(lmMst2) - 
+                        1260*lmMst2*
+                        (297379 - 133245*lmMt - 2116350*S2 - 
+                        21600*pow2(lmMt)) + 
+                        3780*lmMst1*
+                        (75993 + 15*lmMst2*(9947 - 160*lmMt) - 
+                        19265*lmMt - 705450*S2 - 5400*pow2(lmMst2) - 
+                        7200*pow2(lmMt)) + 95256000*pow2(lmMt) - 
+                        756000*pow3(lmMst1) + 10395000*pow3(lmMst2)))*
+                        pow6(Mst1) - 
+                       46305000*Dmsqst2*
+                        ((2954 - 864*lmMst1 + 1713*lmMst2 - 849*lmMt)*
+                        pow2(Mst2)*pow4(Mst1) + 
+                         324*pow2(Mst1)*pow4(Mst2) + 
+                         27*(401 + 274*lmMst2 - 
+                        2*lmMst1*(71 + 2*lmMst2 - 2*lmMt) + 
+                        (-132 - 4*lmMst2)*lmMt + 4*pow2(lmMst2))*
+                         pow6(Mst1)) + 
+                       41674500*
+                        (788 + 32*lmMst1*(2 - 3*lmMst2) + 26*lmMst2 - 
+                        177*pow2(lmMst2))*pow2(Mst1)*pow6(Mst2) + 
+                       5*(54946675289 + 31644837000*lmMt - 
+                        3063401600*OepS2 + 52952863320*S2 - 
+                        3175200*(3946 + 987*lmMst2 - 819*lmMt)*
+                        pow2(lmMst1) + 
+                        6350400*(5083 + 84*lmMt)*pow2(lmMst2) - 
+                        4000752000*pow2(lmMt) - 
+                        1260*lmMst2*
+                        (42300121 - 8705340*lmMt + 49233240*S2 + 
+                        3810240*pow2(lmMt)) + 
+                        1260*lmMst1*
+                        (13877671 - 8625960*lmMt - 
+                        1260*lmMst2*(9983 + 1974*lmMt) + 
+                        49233240*S2 - 1746360*pow2(lmMst2) + 
+                        3810240*pow2(lmMt)) + 177811200*pow3(lmMst1) + 
+                        5156524800*pow3(lmMst2))*pow8(Mst1) - 
+                       1333584000*(2 - lmMst2 - 5*pow2(lmMst2))*
+                        pow8(Mst2)) + 
+                    2*Mst2*Mt*pow2(s2t)*
+                     (-11025*(18*pow2(Mst2)*
+                        (2818497 - 10080*B4 + 10080*D3 - 5040*DN + 
+                        127680*lmMst1 - 6720*lmMt + 7840*OepS2 + 
+                        (-1126548 - 158760*lmMst1 + 158760*lmMst2)*
+                       S2 + lmMst2*
+                        (1867460 + 168840*lmMst1 - 40320*pow2(lmMst1)) 
++ 36540*pow2(lmMst1) + (198660 - 40320*lmMst1)*pow2(lmMst2) + 
+                        80640*pow3(lmMst2)) - 
+                         7*pow2(MuSUSY)*
+                         (441179 - 54000*B4 + 60480*D3 - 33480*DN + 
+                         425520*lmMst1 - 5600*OepS2 + 
+                         (-37625796 + 113400*lmMst1 - 113400*lmMst2)*
+                        S2 - 55620*pow2(lmMst1) + 
+                         lmMst2*
+                        (-694080 - 492480*lmMst1 + 51840*pow2(lmMst1)) 
++ (609120 - 398520*lmMst1)*pow2(lmMst2) + 346680*pow3(lmMst2)))*
+                        pow4(Mst1)*pow4(Mst2) + 
+                       294*pow2(Mst2)*
+                        (14*pow2(MuSUSY)*
+                        (14159179 - 1660500*B4 + 1782000*D3 - 
+                        951750*DN - 2895615*lmMst1 - 370000*OepS2 + 
+                        (-1471104450 + 7492500*lmMst1 - 
+                        7492500*lmMst2)*S2 - 5100300*pow2(lmMst1) + 
+                        lmMst2*
+                        (-7350885 - 3103650*lmMst1 + 
+                        8849250*pow2(lmMst1)) + 
+                        (8203950 - 23125500*lmMst1)*pow2(lmMst2) - 
+                        33750*pow3(lmMst1) + 14310000*pow3(lmMst2)) - 
+                         3*pow2(Mst2)*
+                         (273721621 + 9072000*lmMt + 16716000*OepS2 - 
+                         343302300*S2 + 
+                         420*lmMst2*(463453 - 3600*lmMt + 805950*S2) - 
+                         6300*(289 + 30*lmMst2)*pow2(lmMst1) + 
+                         840*lmMst1*
+                        (211261 + 90510*lmMst2 + 1800*lmMt - 
+                        402975*S2 - 64575*pow2(lmMst2)) - 
+                         84886200*pow2(lmMst2) + 63000*pow3(lmMst1) + 
+                         54369000*pow3(lmMst2)))*pow6(Mst1) + 
+                       pow2(Mst1)*
+                        (138915000*Dmsqst2*
+                         (12*pow2(Mst1)*pow2(Mst2)*
+                        (23*pow2(Mst2) + 
+                        6*(4 + lmMst1 - lmMst2)*pow2(MuSUSY)) + 
+                         3*(2*(113 - 6*lmMst1 + 6*lmMst2)*
+                       pow2(Mst2) - 
+                        3*(23 - 42*lmMst1 + 42*lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst1) + 
+                         108*(2*pow2(Mst2) + pow2(MuSUSY))*pow4(Mst2) + 
+                         16*(41 - 12*lmMst1 + 12*lmMst2)*pow6(Mst1)) - 
+                         41674500*
+                         (2*(820 + 32*lmMst1*(2 - 3*lmMst2) - 
+                        166*lmMst2 - 337*pow2(lmMst2))*pow2(Mst2) + 
+                         (852 + 32*lmMst1*(2 - 3*lmMst2) - 
+                        358*lmMst2 - 497*pow2(lmMst2))*pow2(MuSUSY))*
+                         pow6(Mst2)) + 
+                       (18*pow2(Mst2)*
+                        (3650009897 + 889056000*lmMt - 
+                        2110136000*OepS2 + 
+                        1260*lmMst2*
+                        (4261807 + 1764000*lmMt - 33912900*S2) + 
+                        52385772600*S2 - 
+                        529200*(4447 + 910*lmMst2 - 840*lmMt)*
+                        pow2(lmMst1) - 
+                        1260*lmMst1*
+                        (8789407 - 420*lmMst2*(13199 - 1680*lmMt) + 
+                        1764000*lmMt - 33912900*S2 - 
+                        2146200*pow2(lmMst2)) - 
+                        4233600*(1094 - 105*lmMt)*pow2(lmMst2) + 
+                        12348000*pow3(lmMst1) - 2234988000*pow3(lmMst2)
+) + pow2(MuSUSY)*(219487237477 - 1000188000*B4 + 1333584000*D3 - 
+                         833490000*DN - 25338520620*lmMst1 - 
+                         23746576000*OepS2 + 
+                         (-3479135436000 + 480868164000*lmMst1 - 
+                        480868164000*lmMst2)*S2 - 
+                         6305153400*pow2(lmMst1) + 
+                         lmMst2*
+                        (6418297620 - 57402853200*lmMst1 + 
+                        49175910000*pow2(lmMst1)) + 
+                         (63708006600 - 109687284000*lmMst1)*
+                        pow2(lmMst2) - 1278018000*pow3(lmMst1) + 
+                         61789392000*pow3(lmMst2)))*pow8(Mst1) + 
+                       1333584000*(2 - lmMst2 - 5*pow2(lmMst2))*
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow8(Mst2))))/
+                (7.50141e8*pow4(Mst1)*pow5(Mst2)))))/pow2(Mgl)) + 
+     (twoLoopFlag*(((72*Mt*pow3(s2t)*
+                (Mgl*(4*(3 + lmMst1*(2 + lmMst2) - pow2(lmMst2))*
+                      pow2(Mst1)*pow2(Mst2) + 
+                     (3 + 2*lmMst1 - 2*lmMst2)*pow4(Mst1) - 
+                     4*(4 - lmMst1 + (3 - lmMst1)*lmMst2 + 
+                        pow2(lmMst2))*pow4(Mst2)) - 
+                  Dmglst2*(-4*
+                      (1 - lmMst1*(2 - lmMst2) + 4*lmMst2 - 
+                        pow2(lmMst2))*pow2(Mst1)*pow2(Mst2) + 
+                     (1 + 6*lmMst1 - 6*lmMst2)*pow4(Mst1) + 
+                     4*(6 + lmMst1 + lmMst2 - lmMst1*lmMst2 + 
+                        pow2(lmMst2))*pow4(Mst2))))/Mst2 + 
+             (-9*pow4(s2t)*(4*Dmglst2*pow2(Mst1)*
+                    ((1 + 2*lmMst1)*pow4(Mst1) - 
+                      2*((lmMst1 - 2*lmMst1*lmMst2 + 
+                       2*pow2(lmMst2))*pow2(Mst1)*pow2(Mst2) + 
+                        (1 + lmMst1 + 2*lmMst1*lmMst2 - 
+                       2*pow2(lmMst2))*pow4(Mst2))) + 
+                   Mgl*(-4*(14 + 3*lmMst1 + (6 + 2*lmMst1)*lmMst2 - 
+                       2*pow2(lmMst1))*pow2(Mst2)*pow4(Mst1) + 
+                      2*(10 - 10*lmMst1 + (16 - 6*lmMst1)*lmMst2 - 
+                       pow2(lmMst1) + 7*pow2(lmMst2))*pow2(Mst1)*
+                       pow4(Mst2) + 
+                      (35 + 34*lmMst1 + (-14 - 12*lmMst1)*lmMst2 + 
+                       10*pow2(lmMst1) + 2*pow2(lmMst2))*pow6(Mst1) + 
+                      4*(1 + lmMst2)*pow6(Mst2))) - 
+                (16*pow3(Mt)*
+                   (Dmglst2*
+                      (-36*pow2(Mst2)*
+                       (2*Mst2*Mt*
+                       (5 + 11*lmMst2 - 
+                       2*lmMst1*(4 + lmMst2 - lmMt) + 
+                       (-3 - 2*lmMst2)*lmMt + 2*pow2(lmMst2)) + 
+                       s2t*
+                       (-((6 + 13*lmMst2 - 
+                      lmMst1*(9 + 2*lmMst2 - 2*lmMt) + 
+                      (-4 - 2*lmMst2)*lmMt + 2*pow2(lmMst2))*
+                       pow2(Mst2)) + 
+                       (11 + lmMst1*(4 - 3*lmMst2) - 2*lmMst2 + 
+                       3*pow2(lmMst2))*pow2(MuSUSY)))*pow4(Mst1) - 
+                        4*pow2(Mst1)*
+                       ((53 - 18*lmMst1 + 24*lmMst2 - 24*lmMt)*
+                       Mst2*Mt + 
+                       s2t*
+                       (-18*
+                       (5 - lmMst1*(1 - lmMst2) + lmMst2 - 
+                      pow2(lmMst2))*pow2(Mst2) + 
+                       9*(6 + lmMst1*(1 - lmMst2) + lmMst2 + 
+                       pow2(lmMst2))*pow2(MuSUSY)))*pow4(Mst2) - 
+                        9*(8*Mst2*Mt*
+                       (3 - lmMst1*(25 + 6*lmMst2 - 6*lmMt) - 
+                       5*lmMt + 
+                       6*(lmMst2*(5 - lmMt) + pow2(lmMst2))) + 
+                       s2t*
+                       (4*(1 - lmMst2*(29 - 6*lmMt) + 
+                      lmMst1*(25 + 6*lmMst2 - 6*lmMt) + 4*lmMt - 
+                      6*pow2(lmMst2))*pow2(Mst2) + 
+                       (65 + lmMst1*(34 - 20*lmMst2) - 
+                       26*lmMst2 + 20*pow2(lmMst2))*pow2(MuSUSY)))*
+                       pow6(Mst1) + 72*lmMst2*Mt*pow7(Mst2)) + 
+                     9*Mgl*(-4*pow2(Mst2)*
+                        (Mst2*Mt*
+                       (2 - 7*lmMst2 + 
+                       2*lmMst1*(3 + lmMst2 - lmMt) + lmMt + 
+                       2*lmMst2*lmMt - 2*pow2(lmMst2)) + 
+                       s2t*(-((4 - 5*lmMst2 + 
+                       lmMst1*(5 + 2*lmMst2 - 2*lmMt) + 
+                       2*lmMst2*lmMt - 2*pow2(lmMst2))*pow2(Mst2)) 
++ (5 + 6*lmMst2 - lmMst1*(4 + 3*lmMst2) + 3*pow2(lmMst2))*
+                       pow2(MuSUSY)))*pow4(Mst1) - 
+                        2*pow2(Mst1)*
+                        (Mst2*Mt*
+                       (3 - 5*lmMst2 + 2*lmMst1*(3 + lmMst2) + 
+                       lmMt + 4*lmMst2*lmMt + pow2(lmMst1) - 
+                       pow2(lmMst2) - 6*pow2(lmMt)) + 
+                       s2t*(-2*
+                       (3 - 4*lmMst2 + 
+                       2*(lmMst1*(1 + lmMst2) + lmMt) - 
+                       2*pow2(lmMst2))*pow2(Mst2) + 
+                       2*(4 - lmMst1 + (3 - lmMst1)*lmMst2 + 
+                       pow2(lmMst2))*pow2(MuSUSY)))*pow4(Mst2) - 
+                        (2*Mst2*Mt*
+                       (9 + lmMst1*(22 + 6*lmMst2 - 6*lmMt) - 
+                       6*lmMst2*(4 - lmMt) + 2*lmMt - 
+                       6*pow2(lmMst2)) + 
+                       s2t*(-4*
+                       (5 - lmMst2*(7 - 2*lmMt) + 
+                       lmMst1*(7 + 2*lmMst2 - 2*lmMt) - 
+                       2*pow2(lmMst2))*pow2(Mst2) + 
+                       (21 + 38*lmMst2 - 
+                       10*lmMst1*(3 + 2*lmMst2) + 20*pow2(lmMst2))*
+                       pow2(MuSUSY)))*pow6(Mst1) + 
+                        4*(1 + lmMst2)*Mt*pow7(Mst2))))/pow5(Mst2))/
+              pow2(Mst1) - (36*
+                ((2*Dmglst2*lmMst2*pow11(Mst2)*pow4(s2t) + 
+                     (s2t*pow2(Mt)*pow2(MuSUSY)*
+                        (Mgl*
+                       (4*(-(Mst2*s2t*
+                      (1 - 13*lmMst2 + lmMst1*(13 + 8*lmMst2) - 
+                      pow2(lmMst1) - 7*pow2(lmMst2))) + 
+                       4*Mt*
+                       (5 + 6*lmMst2 - lmMst1*(4 + 3*lmMst2) + 
+                       3*pow2(lmMst2)))*pow2(Mst2)*pow4(Mst1) + 
+                       2*(8*Mt*
+                      (4 - lmMst1 + (3 - lmMst1)*lmMst2 + 
+                      pow2(lmMst2)) + 
+                       Mst2*s2t*
+                       (14 - 10*lmMst1 + (20 - 6*lmMst1)*lmMst2 - 
+                       pow2(lmMst1) + 7*pow2(lmMst2)))*pow2(Mst1)*
+                       pow4(Mst2) + 
+                       (-(Mst2*s2t*
+                      (1 - 50*lmMst2 + lmMst1*(50 + 64*lmMst2) - 
+                      20*pow2(lmMst1) - 44*pow2(lmMst2))) + 
+                       4*Mt*
+                       (21 + 38*lmMst2 - 
+                       10*lmMst1*(3 + 2*lmMst2) + 20*pow2(lmMst2))
+)*pow6(Mst1) + 4*(1 + lmMst2)*s2t*pow7(Mst2)) + 
+                        4*Dmglst2*
+                        ((-(Mst2*s2t*
+                       (5 - 8*lmMst2 + 4*lmMst1*(2 + lmMst2) - 
+                       4*pow2(lmMst2))) + 
+                       Mt*(65 + lmMst1*(34 - 20*lmMst2) - 
+                       26*lmMst2 + 20*pow2(lmMst2)))*pow6(Mst1) + 
+                        2*((-(Mst2*s2t*
+                       (2 + 3*lmMst1 + (-3 + 2*lmMst1)*lmMst2 - 
+                       2*pow2(lmMst2))) + 
+                       Mt*(22 + 8*lmMst1 + 
+                       (-4 - 6*lmMst1)*lmMst2 + 6*pow2(lmMst2)))*
+                       pow2(Mst2)*pow4(Mst1) + 
+                        (-(Mst2*s2t*
+                       (1 + lmMst1 + (-2 + 2*lmMst1)*lmMst2 - 
+                       2*pow2(lmMst2))) + 
+                       2*Mt*
+                       (6 + lmMst1*(1 - lmMst2) + lmMst2 + 
+                       pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2) + 
+                        lmMst2*s2t*pow7(Mst2)))))/pow2(Sbeta))/
+                   pow2(Mst1) - 
+                  (Mt*MuSUSY*
+                     (6*Mt*pow2(Mst2)*pow2(s2t)*
+                        (Dmglst2*
+                        ((21 + lmMst1*(18 - 8*lmMst2) - 
+                       18*lmMst2 + 8*pow2(lmMst2))*pow4(Mst1) + 
+                        4*((5 + lmMst1*(3 - 2*lmMst2) - 3*lmMst2 + 
+                       2*pow2(lmMst2))*pow2(Mst1)*pow2(Mst2) + 
+                        (6 + lmMst1 + lmMst2 - lmMst1*lmMst2 + 
+                       pow2(lmMst2))*pow4(Mst2))) + 
+                        Mgl*((1 + 14*lmMst2 - 
+                       2*lmMst1*(7 + 4*lmMst2) + 8*pow2(lmMst2))*
+                        pow4(Mst1) + 
+                        4*((1 + 3*lmMst2 - lmMst1*(3 + 2*lmMst2) + 
+                       2*pow2(lmMst2))*pow2(Mst1)*pow2(Mst2) + 
+                        (4 + 3*lmMst2 - lmMst1*(1 + lmMst2) + 
+                        pow2(lmMst2))*pow4(Mst2)))) + 
+                       (-(pow3(Mst2)*pow3(s2t)*
+                        (4*Dmglst2*
+                       (2*((1 + 2*lmMst1 - lmMst2)*pow2(Mst2)*
+                       pow4(Mst1) + 
+                       (1 + lmMst1 + (-1 + 2*lmMst1)*lmMst2 - 
+                       2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)) + 
+                       (1 + 2*lmMst1 - 2*lmMst2)*pow6(Mst1) - 
+                       2*lmMst2*pow6(Mst2)) - 
+                        Mgl*
+                        (-2*
+                       (16 - 6*lmMst2 + 2*lmMst1*(8 + 5*lmMst2) - 
+                       3*pow2(lmMst1) - 7*pow2(lmMst2))*pow2(Mst2)*
+                       pow4(Mst1) + 
+                        2*(12 + 18*lmMst2 - 
+                       2*lmMst1*(5 + 3*lmMst2) - pow2(lmMst1) + 
+                       7*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2) + 
+                        (3 + lmMst1*(2 - 32*lmMst2) - 2*lmMst2 + 
+                       16*pow2(lmMst1) + 16*pow2(lmMst2))*pow6(Mst1) 
++ 4*(1 + lmMst2)*pow6(Mst2)))) - 
+                        8*pow2(Mt)*
+                        (2*Dmglst2*
+                        (-2*
+                       ((7 - lmMst1*(5 - lmMt) + 
+                      lmMst2*(7 - lmMt) - 2*lmMt)*Mt + 
+                       (1 - lmMst1 + lmMst2)*Mst2*s2t)*pow2(Mst2)*
+                       pow4(Mst1) - 
+                        ((1 + 2*lmMst2)*Mst2*s2t + 
+                       2*Mt*
+                       (5 - lmMst1*(1 - lmMst2) + lmMst2 - 
+                       pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2) - 
+                        (2*(1 - 2*lmMst1 + 2*lmMst2)*Mst2*s2t + 
+                       Mt*(11 - lmMst1*(32 + 6*lmMst2 - 8*lmMt) + 
+                       8*lmMst2*(5 - lmMt) - 8*lmMt + 
+                       6*pow2(lmMst2)))*pow6(Mst1) + 
+                        2*lmMst2*s2t*pow7(Mst2)) + 
+                        Mgl*(-((Mst2*s2t*
+                       (2*lmMst1*(3 + lmMst2) - 
+                       lmMst2*(4 + 3*lmMst2) + pow2(lmMst1)) + 
+                       4*Mt*
+                       (2 + lmMst1 + (-2 + lmMst1)*lmMst2 + lmMt - 
+                       pow2(lmMst2)))*pow2(Mst1)*pow4(Mst2)) - 
+                        2*((2*Mt*
+                       (4 - lmMst2*(4 - lmMt) + 
+                       lmMst1*(3 + 2*lmMst2 - lmMt) + lmMt - 
+                       2*pow2(lmMst2)) + 
+                       Mst2*s2t*
+                       (lmMst1 - lmMst2 + 2*lmMst1*lmMst2 - 
+                       pow2(lmMst1) - pow2(lmMst2)))*pow2(Mst2)*
+                       pow4(Mst1) + 
+                        (Mt*
+                       (13 - 14*lmMst2 + 4*lmMst2*lmMt + 
+                       2*(lmMst1*(6 + 3*lmMst2 - 2*lmMt) + lmMt) - 
+                       6*pow2(lmMst2)) + 
+                       Mst2*s2t*
+                       (lmMst1 - lmMst2 + 2*lmMst1*lmMst2 - 
+                       pow2(lmMst1) - pow2(lmMst2)))*pow6(Mst1)) + 
+                        2*(1 + lmMst2)*s2t*pow7(Mst2))))/pow2(Mst1)))/
+                   Tbeta))/pow5(Mst2))/Mgl + 
+          (36*pow2(Mt)*pow2(s2t)*
+             ((8*(1 + lmMst2)*pow8(Mst2))/pow2(Mst1) + 
+               (-4*pow2(Mst2)*
+                   (Mgl*pow2(Mst2)*
+                      (pow2(lmMst2)*(pow2(Mst1) - 3*pow2(Mst2)) + 
+                        2*lmMst2*(pow2(Mst1) - pow2(Mst2)) - 
+                        pow2(lmMst1)*(3*pow2(Mst1) - pow2(Mst2)) + 
+                        2*pow2(Mst2) - 
+                        2*lmMst1*
+                        ((2 - lmMst2)*pow2(Mst1) - 
+                        (3 + lmMst2)*pow2(Mst2))) + 
+                     2*Dmglst2*
+                      (pow2(Mst1)*pow2(Mst2) - 
+                        2*lmMst1*pow2(Mst1)*(pow2(Mst1) + pow2(Mst2)) + 
+                        2*lmMst2*pow4(Mst1) + pow4(Mst2) + 
+                        4*lmMst2*pow4(Mst2))) - 
+                  (Mgl*pow2(MuSUSY)*
+                      (4*(1 - 13*lmMst2 + lmMst1*(13 + 8*lmMst2) - 
+                        pow2(lmMst1) - 7*pow2(lmMst2))*pow2(Mst2)*
+                        pow4(Mst1) - 
+                        2*(14 + 20*lmMst2 - 
+                        2*lmMst1*(5 + 3*lmMst2) - pow2(lmMst1) + 
+                        7*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2) + 
+                        (1 - 50*lmMst2 + 2*lmMst1*(25 + 32*lmMst2) - 
+                        20*pow2(lmMst1) - 44*pow2(lmMst2))*pow6(Mst1) 
+- 4*(1 + lmMst2)*pow6(Mst2)) - 
+                     4*Dmglst2*
+                      (pow2(Mst1)*pow2(MuSUSY)*
+                        (-((5 + 8*lmMst1)*pow4(Mst1)) + 
+                        4*pow2(lmMst2)*
+                        (pow2(Mst1)*pow2(Mst2) + pow4(Mst1) + 
+                        pow4(Mst2)) - 
+                        2*((2 + 3*lmMst1)*pow2(Mst1)*pow2(Mst2) + 
+                        (1 + lmMst1)*pow4(Mst2))) + 
+                        2*lmMst2*
+                         (pow2(MuSUSY)*
+                        ((3 - 2*lmMst1)*pow2(Mst2)*pow4(Mst1) + 
+                        2*(1 - lmMst1)*pow2(Mst1)*pow4(Mst2) + 
+                        pow6(Mst2)) + 
+                         2*((2 - lmMst1)*pow2(MuSUSY)*pow6(Mst1) + 
+                         pow8(Mst2)))))/pow2(Mst1))/Mgl))/pow4(Mst2)))/216. 
++ xDR2DRMOD*(((2*Dmglst2*lmMst2 + Mgl + lmMst2*Mgl)*twoLoopFlag*
+           (-(pow2(Mst2)*pow2(s2t)*pow4(Mst1)*
+                (-4*Mt*(MuSUSY*s2t - 2*Mt*Tbeta)*pow2(Mst2)*pow2(Sbeta) + 
+                  Tbeta*(8*(lmMst1 - lmMst2)*pow2(Mt)*pow2(MuSUSY)*
+                      (1 - pow2(Sbeta)) + 
+                     (1 - 2*lmMst1 + 2*lmMst2)*pow2(s2t)*pow2(Sbeta)*
+                      pow4(Mst2)))) - 
+             pow2(Mst1)*pow4(Mst2)*
+              (-4*Tbeta*pow2(Mt)*pow2(s2t)*
+                 ((1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY)*
+                    (1 - pow2(Sbeta)) + 4*pow2(Mst2)*pow2(Sbeta)) + 
+                pow2(Sbeta)*(MuSUSY*
+                    (16*s2t*pow3(Mt) - 
+                      8*(lmMst1 - lmMst2)*Mt*pow2(Mst2)*pow3(s2t)) + 
+                   Tbeta*(-16*pow4(Mt) + 
+                      (1 + 2*lmMst1 - 2*lmMst2)*pow4(Mst2)*pow4(s2t)))) + 
+             Tbeta*pow2(s2t)*((-8*lmMst1 + 8*lmMst2)*pow2(Mt)*
+                 pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                pow2(s2t)*pow2(Sbeta)*pow4(Mst2))*pow6(Mst1) + 
+             (-4*Tbeta*pow2(Mt)*pow2(s2t)*
+                 (-(pow2(MuSUSY)*(1 - pow2(Sbeta))) + 
+                   2*pow2(Mst2)*pow2(Sbeta)) + 
+                pow2(Sbeta)*(MuSUSY*
+                    (16*s2t*pow3(Mt) - 4*Mt*pow2(Mst2)*pow3(s2t)) + 
+                   Tbeta*(16*pow4(Mt) + pow4(Mst2)*pow4(s2t))))*pow6(Mst2))
+)/(6.*Mgl*Tbeta*pow2(Mst1)*pow2(Sbeta)*pow4(Mst2)) - 
+        ((5*Al4p*threeLoopFlag*xDmsqst2*pow4(Dmsqst2)*
+              (2*Dmglst2*Mgl*pow2(Mst2)*pow2(s2t)*
+                 (4*Mt*MuSUSY*s2t + 
+                   Tbeta*(8*pow2(Mt) + 
+                      ((1 + 2*lmMst1 - 2*lmMst2)*pow2(Mst1) - 
+                        pow2(Mst2))*pow2(s2t)))*pow2(Sbeta) + 
+                3*xDmglst2*pow2(Dmglst2)*pow2(Mst2)*pow2(s2t)*
+                 (4*Mt*MuSUSY*s2t + 
+                   Tbeta*(8*pow2(Mt) + 
+                      ((1 + 2*lmMst1 - 2*lmMst2)*pow2(Mst1) - 
+                        pow2(Mst2))*pow2(s2t)))*pow2(Sbeta) - 
+                pow2(Mgl)*(4*Tbeta*pow2(Mt)*pow2(s2t)*
+                    (pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                      2*(2*pow2(Mst1) - pow2(Mst2))*pow2(Sbeta)) + 
+                   pow2(Sbeta)*
+                    (MuSUSY*(16*s2t*pow3(Mt) + 
+                         4*Mt*
+                         ((2*lmMst1 - 2*lmMst2)*pow2(Mst1) - pow2(Mst2))*
+                         pow3(s2t)) + 
+                      Tbeta*(16*pow4(Mt) - 
+                         ((1 + 2*lmMst1 - 2*lmMst2)*pow2(Mst1)*
+                         pow2(Mst2) + 
+                         (1 - 2*lmMst1 + 2*lmMst2)*pow4(Mst1) - 
+                         pow4(Mst2))*pow4(s2t))))))/
+            (Tbeta*pow2(Mst1)*pow2(Sbeta)*pow6(Mst2)) + 
+           16*xDmglst2*pow2(Dmglst2)*
+            (((2 - 3*lmMst2)*twoLoopFlag*
+                 (4*((Mt*MuSUSY*s2t*
+                        (4*pow2(Mst2)*pow2(Mt) - 
+                        2*pow2(Mst1)*
+                        (2*pow2(Mt) - 
+                        (lmMst1 - lmMst2)*pow2(Mst2)*pow2(s2t)) + 
+                        pow2(s2t)*(pow4(Mst1) - pow4(Mst2))))/Tbeta + 
+                      (pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*
+                         ((pow2(Mst1) + pow2(Mst2))*pow4(Mst2) + 
+                         (-2*lmMst1 + 2*lmMst2)*pow2(Mst1)*
+                         (pow2(Mst1)*pow2(Mst2) + pow4(Mst1) + 
+                         pow4(Mst2))))/(pow2(Sbeta)*pow4(Mst2))) + 
+                   16*(pow2(Mst1) + pow2(Mst2))*pow4(Mt) + 
+                   (pow2(Mst1) - pow2(Mst2))*
+                    (2*(lmMst1 - lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                      pow4(Mst1) - pow4(Mst2))*pow4(s2t) + 
+                   (4*pow2(Mt)*pow2(s2t)*
+                      (-2*pow2(Mst2)*
+                         (pow2(Mst2) - (lmMst1 - lmMst2)*pow2(MuSUSY))*
+                         pow4(Mst1) + 
+                        pow2(Mst1)*
+                         (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*
+                         pow4(Mst2) + 
+                        2*(lmMst1 - lmMst2)*pow2(MuSUSY)*pow6(Mst1) - 
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)))/
+                    pow4(Mst2)))/(6.*pow2(Mst1)) + 
+              (Al4p*threeLoopFlag*
+                 (19200*Mt*pow2(Mst1)*pow3(s2t)*pow4(Mst2)*
+                    (-((71 + 6*lmMst1*(1 - lmMst2) - lmMst2 - 
+                         30*pow2(lmMst2))*pow2(Mst2)*pow4(Mst1)) + 
+                      pow2(Mst1)*
+                       (5 + 167*lmMst2 - 
+                         6*lmMst1*(10 + 3*lmMst2 - 12*pow2(lmMst2)) + 
+                         18*pow2(lmMst2) - 72*pow3(lmMst2))*pow4(Mst2) + 
+                      (3 + 39*lmMst2 - 6*lmMst1*(5 + 3*lmMst2) + 
+                         18*pow2(lmMst2))*pow6(Mst1) + 
+                      12*(2 + lmMst2 - 3*pow2(lmMst2))*pow6(Mst2)) - 
+                   12800*s2t*pow2(Mst1)*pow3(Mt)*
+                    (-3*pow2(Mst2)*
+                       (6*(93 - lmMst1*(34 + 8*lmMst2 - 4*lmMt) + 
+                        8*lmMst2*(11 - lmMt) - 22*lmMt + 
+                        12*pow2(lmMst2))*pow2(Mst2) - 
+                         pow2(MuSUSY)*
+                         (11 + 371*lmMst2 - 
+                         6*lmMst1*(21 + 5*lmMst2 - 24*pow2(lmMst2)) - 
+                         42*pow2(lmMst2) - 144*pow3(lmMst2)))*pow4(Mst1) 
+- pow2(Mst1)*(-3*pow2(MuSUSY)*
+                        (53 + 191*lmMst2 - 
+                        lmMst1*(60 + 18*lmMst2 - 72*pow2(lmMst2)) - 
+                        54*pow2(lmMst2) - 72*pow3(lmMst2)) + 
+                         pow2(Mst2)*
+                         (300 - lmMst2*(341 - 78*lmMt) + 72*lmMt + 
+                         18*lmMst1*
+                        (8 + 5*lmMst2 + (-4 + 2*lmMst2)*lmMt - 
+                        2*pow2(lmMst2)) - 
+                         12*(26 + 3*lmMt)*pow2(lmMst2) + 36*pow3(lmMst2)
+))*pow4(Mst2) + 9*(pow2(Mst2)*
+                        (28 + 6*lmMst2*(63 - 16*lmMt) - 44*lmMt + 
+                        18*(15 - 2*lmMt)*pow2(lmMst2) - 
+                        lmMst1*
+                        (274 + lmMst2*(234 - 36*lmMt) - 60*lmMt + 
+                        36*pow2(lmMst2)) + 36*pow3(lmMst2)) + 
+                         pow2(MuSUSY)*
+                         (49 + 103*lmMst2 - 
+                         4*lmMst1*(11 - 6*lmMst2 - 9*pow2(lmMst2)) - 
+                         36*(pow2(lmMst2) + pow3(lmMst2))))*pow6(Mst1) + 
+                      36*(2 + lmMst2 - 3*pow2(lmMst2))*
+                       (2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)) + 
+                   16*Mst2*pow4(Mt)*
+                    (pow2(Mst1)*
+                       ((pow2(Mst1) + pow2(Mst2))*
+                         (-111375*pow2(Dmsqst2) + 
+                         101250*Dmsqst2*pow2(Mst2)) + 60750*pow3(Dmsqst2)
+) + 2*((6*lmMst2*(587 - 4800*lmMst1 - 6120*lmMt) - 
+                         4*(45937 - 60*(137 + 60*lmMst1)*lmMt) + 
+                         25695*pow2(lmMst2))*pow4(Mst1)*pow4(Mst2) - 
+                         7200*pow2(Mst2)*
+                         (221 + lmMst2*(299 - 47*lmMt) - 62*lmMt + 
+                         (87 - 6*lmMt)*pow2(lmMst2) - 
+                         2*lmMst1*
+                        (65 + lmMst2*(32 - 3*lmMt) - 12*lmMt + 
+                        3*pow2(lmMst2)) + 6*pow3(lmMst2))*pow6(Mst1) + 
+                         225*(356 + 32*lmMst1*(2 - 3*lmMst2) + 
+                         26*lmMst2 - 177*pow2(lmMst2))*pow2(Mst1)*
+                         pow6(Mst2) + 
+                         14400*
+                         (42 + lmMst2*(242 - 62*lmMt) - 33*lmMt + 
+                         6*(29 - 4*lmMt)*pow2(lmMst2) - 
+                         2*lmMst1*
+                        (81 + lmMst2*(74 - 12*lmMt) - 18*lmMt + 
+                        12*pow2(lmMst2)) + 24*pow3(lmMst2))*pow8(Mst1) - 
+                         7200*(2 - lmMst2 - 5*pow2(lmMst2))*pow8(Mst2))) - 
+                   75*Mst2*pow4(s2t)*
+                    (810*pow2(Mst1)*pow3(Dmsqst2)*
+                       ((1 + 2*lmMst1 - 2*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                         (1 - 2*lmMst1 + 2*lmMst2)*pow4(Mst1) - 
+                         pow4(Mst2)) + 
+                      45*pow2(Dmsqst2)*
+                       (-33*((1 + 2*lmMst1 - 2*lmMst2)*pow4(Mst1)*
+                        pow4(Mst2) + 
+                         (1 - 2*lmMst1 + 2*lmMst2)*pow2(Mst2)*pow6(Mst1)
+) + 33*pow2(Mst1)*pow6(Mst2) + 14*pow8(Mst1)) - 
+                      2*pow4(Mst2)*
+                       (-((1532 - 3514*lmMst2 - 
+                        96*(2 - 3*lmMst2)*pow2(lmMst1) + 
+                        6*lmMst1*
+                        (532 - 550*lmMst2 - 369*pow2(lmMst2)) - 
+                        207*pow2(lmMst2) + 1926*pow3(lmMst2))*
+                         pow4(Mst1)*pow4(Mst2)) + 
+                         pow2(Mst2)*
+                         (340 - 806*lmMst2 + 
+                        672*(2 - 3*lmMst2)*pow2(lmMst1) + 
+                        3159*pow2(lmMst2) + 
+                        6*lmMst1*
+                        (388 - 934*lmMst2 + 399*pow2(lmMst2)) - 
+                        378*pow3(lmMst2))*pow6(Mst1) + 
+                         3*(548 + 32*lmMst1*(2 - 3*lmMst2) - 
+                        422*lmMst2 - 817*pow2(lmMst2))*pow2(Mst1)*
+                         pow6(Mst2) + 
+                         6*(36 - (70 + 32*lmMst1)*lmMst2 - 
+                        27*pow2(lmMst2))*pow8(Mst1) - 
+                         96*(2 + lmMst2 - 3*pow2(lmMst2))*pow8(Mst2)) - 
+                      90*Dmsqst2*
+                       (-15*((1 - 2*lmMst1 + 2*lmMst2)*pow4(Mst2)*
+                         pow6(Mst1) + 
+                         (1 + 2*lmMst1 - 2*lmMst2)*pow4(Mst1)*pow6(Mst2)) 
++ 2*pow2(Mst2)*pow8(Mst1) + 15*pow2(Mst1)*pow8(Mst2))) + 
+                   300*Mst2*pow2(Mt)*pow2(s2t)*
+                    (pow2(Mst1)*
+                       (810*(4*pow2(Mst1) - 2*pow2(Mst2) - 
+                        pow2(MuSUSY))*pow3(Dmsqst2) + 
+                         1485*pow2(Dmsqst2)*
+                         (pow2(Mst2)*(2*pow2(Mst2) + pow2(MuSUSY)) - 
+                         pow2(Mst1)*
+                        (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY)) + 
+                         2*pow4(Mst1)) - 
+                         1350*Dmsqst2*
+                         (-(pow2(Mst1)*pow2(Mst2)*
+                         (4*pow2(Mst2) - 
+                         (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))) + 
+                         2*(pow2(Mst2) - 
+                        (lmMst1 - lmMst2)*pow2(MuSUSY))*pow4(Mst1) + 
+                         (2*pow2(Mst2) + pow2(MuSUSY))*pow4(Mst2))) + 
+                      2*((-(pow2(MuSUSY)*
+                        (1180 + 1270*lmMst2 + 
+                        96*(2 - 3*lmMst2)*pow2(lmMst1) - 
+                        6*lmMst1*
+                        (468 - 454*lmMst2 - 369*pow2(lmMst2)) - 
+                        3255*pow2(lmMst2) - 1926*pow3(lmMst2))) + 
+                         4*pow2(Mst2)*
+                         (916 - 418*lmMst2 - 
+                         48*(2 - 3*lmMst2)*pow2(lmMst1) + 
+                         48*lmMst1*(5 - 2*lmMst2 - 6*pow2(lmMst2)) - 
+                         387*pow2(lmMst2) + 144*pow3(lmMst2)))*
+                         pow4(Mst1)*pow4(Mst2) + 
+                         2*pow2(Mst2)*
+                         ((868 - 96*lmMst1*(11 - lmMst2) + 
+                        1874*lmMst2 + 243*pow2(lmMst2))*pow2(Mst2) - 
+                         3*pow2(MuSUSY)*
+                         (240 + 468*lmMst2 + 
+                         144*(2 - 3*lmMst2)*pow2(lmMst1) - 
+                         lmMst1*(580 - 22*lmMst2 - 1137*pow2(lmMst2)) - 
+                         310*pow2(lmMst2) - 705*pow3(lmMst2)))*pow6(Mst1) 
+- 3*pow2(Mst1)*(2*(388 + 64*lmMst1 + (-166 - 96*lmMst1)*lmMst2 - 
+                        337*pow2(lmMst2))*pow2(Mst2) + 
+                         (420 + 64*lmMst1 + 
+                        (-358 - 96*lmMst1)*lmMst2 - 497*pow2(lmMst2))*
+                         pow2(MuSUSY))*pow6(Mst2) - 
+                         12*(32*
+                        (2 + 7*lmMst2 - lmMst1*(5 + 4*lmMst2) + 
+                        4*pow2(lmMst2))*pow2(Mst2) - 
+                         pow2(MuSUSY)*
+                         (48 + lmMst2*(180 + 272*pow2(lmMst1)) + 
+                         310*pow2(lmMst2) - 
+                         lmMst1*(92 + 310*lmMst2 + 635*pow2(lmMst2)) + 
+                         363*pow3(lmMst2)))*pow8(Mst1) + 
+                         96*(2 - lmMst2 - 5*pow2(lmMst2))*
+                         (2*pow2(Mst2) + pow2(MuSUSY))*pow8(Mst2))) - 
+                   (300*s2t*pow2(Mt)*pow2(MuSUSY)*
+                      (Mst2*(-(pow4(Mst1)*
+                        (128*Mt*
+                        (53 + 191*lmMst2 - 
+                        lmMst1*(60 + 18*lmMst2 - 72*pow2(lmMst2)) - 
+                        54*pow2(lmMst2) - 72*pow3(lmMst2))*pow3(Mst2) 
++ s2t*((1 - 2*lmMst1 + 2*lmMst2)*
+                        (-1485*pow2(Dmsqst2) + 
+                        1350*Dmsqst2*pow2(Mst2)) + 
+                        2*(1180 + 1270*lmMst2 + 
+                        96*(2 - 3*lmMst2)*pow2(lmMst1) - 
+                        6*lmMst1*
+                        (468 - 454*lmMst2 - 369*pow2(lmMst2)) - 
+                        3255*pow2(lmMst2) - 1926*pow3(lmMst2))*
+                        pow4(Mst2)))) - 
+                         4*(s2t*
+                        (-675*Dmsqst2*(lmMst1 - lmMst2) + 
+                        3*pow2(Mst2)*
+                        (240 + 468*lmMst2 + 
+                        144*(2 - 3*lmMst2)*pow2(lmMst1) - 
+                        lmMst1*
+                       (580 - 22*lmMst2 - 1137*pow2(lmMst2)) - 
+                        310*pow2(lmMst2) - 705*pow3(lmMst2))) + 
+                        32*Mst2*Mt*
+                        (11 + 371*lmMst2 - 
+                        6*lmMst1*(21 + 5*lmMst2 - 24*pow2(lmMst2)) - 
+                        42*pow2(lmMst2) - 144*pow3(lmMst2)))*pow6(Mst1)) 
+- 3*pow2(Mst1)*(512*Mt*(2 + lmMst2 - 3*pow2(lmMst2))*pow6(Mst2) + 
+                         s2t*
+                         (270*Mst2*pow3(Dmsqst2) - 
+                         495*pow2(Dmsqst2)*pow3(Mst2) + 
+                         450*Dmsqst2*pow5(Mst2) + 
+                         2*(420 + 64*lmMst1 + 
+                        (-358 - 96*lmMst1)*lmMst2 - 497*pow2(lmMst2))*
+                         pow7(Mst2))) - 
+                        24*(-(Mst2*s2t*
+                        (48 + lmMst2*(180 + 272*pow2(lmMst1)) + 
+                        310*pow2(lmMst2) - 
+                        lmMst1*(92 + 310*lmMst2 + 635*pow2(lmMst2)) + 
+                        363*pow3(lmMst2))) + 
+                        16*Mt*
+                        (49 + 103*lmMst2 - 
+                        4*lmMst1*(11 - 6*lmMst2 - 9*pow2(lmMst2)) - 
+                        36*(pow2(lmMst2) + pow3(lmMst2))))*pow8(Mst1) + 
+                        192*s2t*(2 - lmMst2 - 5*pow2(lmMst2))*pow9(Mst2))
+)/pow2(Sbeta) - (100*Mt*MuSUSY*
+                      (Mst2*(-18*s2t*pow2(Mst2)*
+                        (225*Dmsqst2*pow2(s2t) + 
+                        128*pow2(Mt)*
+                        ((2 - 3*lmMst2)*pow2(lmMst1) + 
+                        lmMst1*(8 - 2*lmMst2 + 6*pow2(lmMst2)) - 
+                        3*(6 + 5*lmMst2 + pow3(lmMst2)))) - 
+                         3456*Mt*pow2(s2t)*
+                        (7 - 30*lmMst2 + 
+                        lmMst1*(11 + 2*lmMst2 - 12*pow2(lmMst2)) - 
+                        2*pow2(lmMst2) + 12*pow3(lmMst2))*pow3(Mst2) + 
+                         256*Mst2*
+                        (834 + lmMst2*(569 - 33*lmMt) - 162*lmMt + 
+                        3*(17 - 6*lmMt)*pow2(lmMst2) - 
+                        18*lmMst1*
+                        (13 + lmMst2 - lmMst2*lmMt + pow2(lmMst2)) + 
+                        18*pow3(lmMst2))*pow3(Mt) + 
+                         pow3(s2t)*
+                         (4455*pow2(Dmsqst2) + 
+                         6*(260 + 1538*lmMst2 + 
+                        768*(2 - 3*lmMst2)*pow2(lmMst1) - 
+                        96*lmMst1*(7 + 27*lmMst2 - 48*pow2(lmMst2)) + 
+                        1395*pow2(lmMst2) - 2304*pow3(lmMst2))*
+                         pow4(Mst2)))*pow6(Mst1) + 
+                        2*Mst2*pow4(Mst1)*
+                         (128*
+                         (-(lmMst2*(187 - 39*lmMt)) + 
+                        12*(8 + 3*lmMt) + 
+                        18*lmMst1*
+                        (3 - 2*lmMt + lmMst2*(3 + lmMt) - 
+                        pow2(lmMst2)) - 3*(19 + 6*lmMt)*pow2(lmMst2) + 
+                        18*pow3(lmMst2))*pow3(Mst2)*pow3(Mt) + 
+                         s2t*
+                         (-810*pow2(Dmsqst2)*
+                        (11*pow2(Mt) + 
+                        3*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t)) + 
+                         405*Dmsqst2*pow2(Mst2)*
+                        (20*pow2(Mt) + 
+                        11*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t)) + 
+                         6*(-675*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t) + 
+                        2*pow2(Mt)*
+                        (860 - 434*lmMst2 - 
+                        96*(2 - 3*lmMst2)*pow2(lmMst1) + 
+                        96*lmMst1*(3 + lmMst2 - 6*pow2(lmMst2)) - 
+                        243*pow2(lmMst2) + 288*pow3(lmMst2)))*pow4(Mst2)
+) + 288*Mt*pow2(s2t)*(29 + 179*lmMst2 - 
+                        lmMst1*(60 + 18*lmMst2 - 72*pow2(lmMst2)) - 
+                        18*pow2(lmMst2) - 72*pow3(lmMst2))*pow5(Mst2) - 
+                         6*(40 - 1172*lmMst2 - 
+                         48*(2 - 3*lmMst2)*pow2(lmMst1) + 
+                         3*lmMst1*
+                        (500 - 502*lmMst2 - 369*pow2(lmMst2)) + 
+                         882*pow2(lmMst2) + 963*pow3(lmMst2))*pow3(s2t)*
+                         pow6(Mst2)) - 
+                        64*(-27*Mt*pow2(Mst2)*pow2(s2t)*
+                        (17 + 51*lmMst2 - 
+                        4*lmMst1*(6 - lmMst2 - 3*pow2(lmMst2)) - 
+                        4*pow2(lmMst2) - 12*pow3(lmMst2)) + 
+                         72*Mst2*s2t*pow2(Mt)*
+                        (6 + lmMst2*(14 - pow2(lmMst1)) - 
+                        lmMst1*(9 + 6*lmMst2 - 2*pow2(lmMst2)) + 
+                        6*pow2(lmMst2) - pow3(lmMst2)) + 
+                         4*(lmMst2*(2447 - 645*lmMt) + 
+                        5*(58 - 75*lmMt) + 
+                        3*(509 - 60*lmMt)*pow2(lmMst2) - 
+                        18*lmMst1*
+                        (87 + lmMst2*(71 - 10*lmMt) - 22*lmMt + 
+                        10*pow2(lmMst2)) + 180*pow3(lmMst2))*pow3(Mt) + 
+                         9*(16*lmMst2*pow2(lmMst1) - 
+                        2*lmMst1*(3 + 2*lmMst2 + 16*pow2(lmMst2)) + 
+                        lmMst2*(7 + 4*lmMst2 + 16*pow2(lmMst2)))*
+                         pow3(Mst2)*pow3(s2t))*pow8(Mst1) + 
+                        576*s2t*(2 - lmMst2 - 5*pow2(lmMst2))*
+                         (4*pow2(Mt) - pow2(Mst2)*pow2(s2t))*pow9(Mst2) - 
+                        9*pow2(Mst1)*
+                         (1080*Mst2*s2t*pow2(Mt)*pow3(Dmsqst2) + 
+                         1024*(2 + lmMst2 - 3*pow2(lmMst2))*pow3(Mt)*
+                         pow6(Mst2) + 
+                         s2t*(-90*pow2(Dmsqst2)*
+                         (22*pow2(Mt) + 3*Dmsqst2*pow2(s2t))*pow3(Mst2) 
++ 45*Dmsqst2*(40*pow2(Mt) + 11*Dmsqst2*pow2(s2t))*pow5(Mst2) + 
+                         2*(4*
+                        (324 + 64*lmMst1 + 
+                        (-134 - 96*lmMst1)*lmMst2 - 177*pow2(lmMst2))*
+                        pow2(Mt) - 225*Dmsqst2*pow2(s2t))*pow7(Mst2)) - 
+                         768*Mt*(2 + lmMst2 - 3*pow2(lmMst2))*pow2(s2t)*
+                         pow8(Mst2) - 
+                         2*(484 + 32*lmMst1*(2 - 3*lmMst2) - 
+                         390*lmMst2 - 657*pow2(lmMst2))*pow3(s2t)*
+                         pow9(Mst2))))/Tbeta))/
+               (16200.*pow4(Mst1)*pow5(Mst2))))/(16.*pow2(Mgl)))) - 
+  z2*(-(Al4p*twoLoopFlag*(Mgl*
+            (pow4(Mst1)*(96*(2*MuSUSY + Mst2*Tbeta)*pow2(Sbeta)*
+                  pow4(Mt) + Tbeta*
+                  (-16*s2t*(pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                       4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                    pow2(Sbeta)*pow4(s2t)*pow5(Mst2))) + 
+              pow4(Mst2)*(4*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*
+                  (MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 6*Mst2*pow2(Sbeta)) 
++ pow2(Sbeta)*(-4*Mt*(MuSUSY + 2*Mst2*Tbeta)*pow3(Mst2)*pow3(s2t) + 
+                    32*(2*MuSUSY + Mst2*Tbeta)*pow4(Mt)) + 
+                 Tbeta*(-16*s2t*
+                     (pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                       4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) + 
+                    pow2(Sbeta)*pow4(s2t)*pow5(Mst2))) - 
+              2*pow2(Mst1)*pow2(Mst2)*
+               (pow2(Sbeta)*(-2*Mt*(MuSUSY + 2*Mst2*Tbeta)*pow3(Mst2)*
+                     pow3(s2t) - 32*(2*MuSUSY + Mst2*Tbeta)*pow4(Mt)) + 
+                 Tbeta*(8*s2t*
+                     (pow2(MuSUSY) + 
+                       (4*pow2(Mst2) - pow2(MuSUSY))*pow2(Sbeta))*
+                     pow3(Mt) + pow2(Sbeta)*pow4(s2t)*pow5(Mst2)))) + 
+           4*Dmglst2*(4*pow2(Mt)*
+               (-12*(MuSUSY + 2*Mst2*Tbeta)*pow2(Mt)*pow2(Sbeta) + 
+                 Mst2*MuSUSY*pow2(s2t)*
+                  (MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 6*Mst2*pow2(Sbeta)) 
++ Mt*s2t*Tbeta*(-13*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                    12*pow2(Mst2)*pow2(Sbeta)))*pow4(Mst1) + 
+              pow4(Mst2)*(2*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*
+                  (2*MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 
+                    15*Mst2*pow2(Sbeta)) - 
+                 4*s2t*Tbeta*(5*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                    4*pow2(Mst2)*pow2(Sbeta))*pow3(Mt) - 
+                 2*Mt*(2*MuSUSY + 5*Mst2*Tbeta)*pow2(Sbeta)*pow3(Mst2)*
+                  pow3(s2t) + 
+                 pow2(Sbeta)*(16*MuSUSY*pow4(Mt) + 
+                    Tbeta*pow4(s2t)*pow5(Mst2))) + 
+              pow2(Mst1)*pow2(Mst2)*
+               (8*s2t*(3*MuSUSY*s2t + 2*Mt*Tbeta)*pow2(Mst2)*pow2(Mt)*
+                  pow2(Sbeta) + 
+                 Tbeta*(-4*Mst2*pow2(Mt)*
+                     (-(pow2(MuSUSY)*pow2(s2t)*(1 - pow2(Sbeta))) + 
+                       8*pow2(Mt)*pow2(Sbeta)) - 
+                    36*s2t*pow2(MuSUSY)*(1 - pow2(Sbeta))*pow3(Mt) + 
+                    pow2(Sbeta)*
+                     (2*Mt*pow3(s2t)*pow4(Mst2) - pow4(s2t)*pow5(Mst2))))))
+)/(6.*Mgl*Tbeta*pow2(Sbeta)*pow5(Mst2)) + 
+     (4*Al4p*twoLoopFlag*xMst*pow2(Mt)*
+        (2*Mt*pow2(Mgl)*(-8*Mt*(2*MuSUSY + Mst2*Tbeta)*pow2(Sbeta) + 
+             s2t*Tbeta*(pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                4*pow2(Mst2)*pow2(Sbeta))) - 
+          2*Dmglst2*Mgl*(-16*(2*MuSUSY + 3*Mst2*Tbeta)*pow2(Mt)*
+              pow2(Sbeta) + Mst2*MuSUSY*pow2(s2t)*
+              (MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 6*Mst2*pow2(Sbeta)) + 
+             Mt*s2t*Tbeta*(-17*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                20*pow2(Mst2)*pow2(Sbeta))) + 
+          xDmglst2*pow2(Dmglst2)*
+           (-16*(7*MuSUSY + 15*Mst2*Tbeta)*pow2(Mt)*pow2(Sbeta) - 
+             3*Mst2*MuSUSY*pow2(s2t)*
+              (MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 10*Mst2*pow2(Sbeta)) + 
+             2*Mt*s2t*Tbeta*(41*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                40*pow2(Mst2)*pow2(Sbeta))))*pow6(Mst1))/
+      (3.*Tbeta*pow2(Mgl)*pow2(Sbeta)*pow7(Mst2)) - 
+     (threeLoopFlag*pow2(Al4p)*
+        (((680400*shiftst1*(Dmsqst2 + pow2(Mst2))*
+                ((-2*lmMst1 + 2*lmMst2)*pow2(Mst1)*pow2(s2t)*
+                   (4*pow2(Mt)*pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                      pow4(Mst1) - 
+                     pow2(Mst1)*pow2(Mst2)*
+                      (-4*pow2(Mt)*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        pow2(s2t)*pow2(Sbeta)*pow4(Mst2)) + 
+                     pow4(Mst2)*
+                      (4*pow2(Mt)*pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        pow2(s2t)*pow2(Sbeta)*pow4(Mst2))) + 
+                  pow4(Mst2)*
+                   (pow2(Mst1)*
+                      (4*pow2(Mt)*pow2(s2t)*
+                        (pow2(MuSUSY) + 
+                        (4*pow2(Mst2) - pow2(MuSUSY))*pow2(Sbeta)) + 
+                        pow2(Sbeta)*
+                        (16*pow4(Mt) - pow4(Mst2)*pow4(s2t))) + 
+                     pow2(Mst2)*
+                      (-4*pow2(Mt)*pow2(s2t)*
+                        (-(pow2(MuSUSY)*(1 - pow2(Sbeta))) + 
+                        2*pow2(Mst2)*pow2(Sbeta)) + 
+                        pow2(Sbeta)*
+                        (16*pow4(Mt) + pow4(Mst2)*pow4(s2t))) + 
+                     pow2(Sbeta)*
+                      (-(pow2(s2t)*
+                        (8*pow2(Mt) + pow2(Mst2)*pow2(s2t))*pow4(Mst1)
+) + pow4(s2t)*pow6(Mst1)))))/pow6(Mst2) + 
+             (68040*shiftst3*
+                (pow2(s2t)*(-4*pow2(Mst1)*pow4(Mst2)*
+                      (-2*(1 - lmMst1 + lmMst2)*pow2(Mt)*
+                        (pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        pow2(Mst2)*pow2(Sbeta)) + 
+                        pow2(s2t)*pow2(Sbeta)*pow4(Mst2)) + 
+                     pow2(Mst2)*pow4(Mst1)*
+                      (8*(1 - 2*lmMst1 + 2*lmMst2)*pow2(Mt)*
+                        pow2(MuSUSY)*(1 - pow2(Sbeta)) + 
+                        (3 + 2*lmMst1 - 2*lmMst2)*pow2(s2t)*
+                        pow2(Sbeta)*pow4(Mst2)) + 
+                     8*(1 - 3*lmMst1 + 3*lmMst2)*pow2(Mt)*pow2(MuSUSY)*
+                      (1 - pow2(Sbeta))*pow6(Mst1)) + 
+                  (-4*pow2(Mt)*pow2(s2t)*
+                      (-(pow2(MuSUSY)*(1 - pow2(Sbeta))) + 
+                        2*pow2(Mst2)*pow2(Sbeta)) + 
+                     pow2(Sbeta)*(16*pow4(Mt) + pow4(Mst2)*pow4(s2t)))*
+                   pow6(Mst2)))/pow4(Mst2))/(pow2(Mst1)*pow2(Sbeta)) + 
+          (28*MuSUSY*((Mt*(9720*shiftst3*
+                      ((1 + lmMst1 - lmMst2)*pow2(Mst1) - 
+                       pow2(Mst2))*pow2(Mst2)*pow3(s2t) + 
+                     (97200*s2t*shiftst1*
+                        (pow2(Mst2)*
+                       (4*pow2(Mst2)*pow2(Mt) - 
+                       2*pow2(Mst1)*
+                       (2*pow2(Mt) - 
+                       (lmMst1 - lmMst2)*pow2(Mst2)*pow2(s2t)) + 
+                       pow2(s2t)*pow4(Mst1)) + 
+                        Dmsqst2*
+                        (4*pow2(Mst2)*pow2(Mt) - 
+                        2*pow2(Mst1)*
+                       (2*pow2(Mt) - 
+                       (lmMst1 - lmMst2)*pow2(Mst2)*pow2(s2t)) + 
+                        pow2(s2t)*(pow4(Mst1) - pow4(Mst2)))))/
+                      pow2(Mst2)) - 
+                  19440*(-2*s2t*shiftst3*pow2(Mst2)*pow3(Mt) + 
+                     5*Mt*shiftst1*pow3(s2t)*pow4(Mst2)))/pow2(Mst1) + 
+               ((3*pow2(Mt)*pow2(s2t)*
+                     (pow2(Mst2)*
+                        (3*Mgl*
+                       (15*(11075 + 17928*lmMst1 - 17352*lmMst2)*
+                       pow2(Mst1)*pow2(Mst2) + 
+                       (61286 + 434160*lmMst1 - 425520*lmMst2)*
+                       pow4(Mst1) + 
+                       135*(2269 + 664*lmMst1 - 56*lmMst2)*
+                       pow4(Mst2)) + 
+                        Dmglst2*
+                        (9*(935323 - 279000*lmMst1 + 385560*lmMst2)*
+                       pow2(Mst1)*pow2(Mst2) + 
+                        (17001190 - 4840560*lmMst1 + 
+                       5799600*lmMst2)*pow4(Mst1) + 
+                        27*(173947 - 25080*lmMst1 + 68760*lmMst2)*
+                        pow4(Mst2))) + 
+                       194400*
+                        (Mgl*pow2(Dmsqst2)*
+                        (2*(1 + lmMst1 - lmMst2)*pow2(Mst1) + 
+                        (3 + lmMst1 - lmMst2)*pow2(Mst2)) + 
+                        Dmsqst2*
+                        (Dmglst2*
+                        (6*(1 - 2*lmMst1 + 2*lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                        (17 - 12*lmMst1 + 12*lmMst2)*pow4(Mst1) - 
+                        2*(2 + 3*lmMst1 - 3*lmMst2)*pow4(Mst2)) + 
+                        Mgl*((5 + 4*lmMst1 - 4*lmMst2)*pow4(Mst1) + 
+                        2*((3 + 2*lmMst1 - 2*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + (2 + lmMst1 - lmMst2)*pow4(Mst2))
+)))))/pow5(Mst2) + (-(Mt*pow3(s2t)*
+                        (-(pow4(Mst2)*
+                        (-4*Dmglst2*
+                       (27*(32663 - 7620*lmMst1 + 7620*lmMst2)*
+                       pow2(Mst2)*pow4(Mst1) + 
+                       135*(1799 - 648*lmMst1 + 1680*lmMst2)*
+                       pow2(Mst1)*pow4(Mst2) + 
+                       4*(788723 - 80595*lmMst1 + 80595*lmMst2)*
+                       pow6(Mst1) - 22680*pow6(Mst2)) + 
+                        3*Mgl*
+                        (12*(224837 - 4680*lmMst1 + 8370*lmMst2)*
+                       pow2(Mst2)*pow4(Mst1) + 
+                        90*(5825 + 564*lmMst1 - 1104*lmMst2)*
+                       pow2(Mst1)*pow4(Mst2) + 
+                        (3447379 - 76140*lmMst1 + 76140*lmMst2)*
+                       pow6(Mst1) - 20520*pow6(Mst2)))) + 
+                        300*Mgl*pow2(Dmsqst2)*
+                        (3*(1057 + 162*lmMst1 - 162*lmMst2)*
+                       pow2(Mst2)*pow4(Mst1) + 
+                        9*(191 + 18*lmMst1 - 18*lmMst2)*pow2(Mst1)*
+                       pow4(Mst2) + 4180*pow6(Mst1) + 162*pow6(Mst2)) 
+- 300*Dmsqst2*pow2(Mst2)*(Mgl*
+                        (18*(469 - 36*lmMst1 + 36*lmMst2)*
+                       pow2(Mst2)*pow4(Mst1) + 
+                        1755*pow2(Mst1)*pow4(Mst2) + 
+                        10828*pow6(Mst1) - 324*pow6(Mst2)) - 
+                        324*Dmglst2*
+                        (2*(3 - 5*lmMst1 + 5*lmMst2)*pow2(Mst2)*
+                        pow4(Mst1) + 13*pow6(Mst1) - 
+                        2*((5 + 3*lmMst1 - 3*lmMst2)*pow2(Mst1)*
+                        pow4(Mst2) + pow6(Mst2)))))) + 
+                     2*pow3(Mt)*
+                      (900*Mgl*pow2(Dmsqst2)*
+                        (3*Mst2*
+                        (144*(2 - lmMst1 + 2*lmMst2 - lmMt)*Mt + 
+                       209*Mst2*s2t)*pow2(Mst1) + 
+                        s2t*(1348*pow4(Mst1) + 108*pow4(Mst2))) - 
+                        300*Dmsqst2*
+                        (1296*Dmglst2*Mst2*
+                        ((2*(8 - 3*lmMst1 + 6*lmMst2 - 3*lmMt)*
+                      Mt + 5*Mst2*s2t)*pow2(Mst1)*pow2(Mst2) + 
+                        (20*(3 - lmMst1 + 2*lmMst2 - lmMt)*Mt + 
+                       9*Mst2*s2t)*pow4(Mst1) + s2t*pow5(Mst2)) + 
+                        Mgl*(27*
+                        ((96*lmMst1 - 192*lmMst2 + 96*lmMt)*Mt + 
+                       53*Mst2*s2t)*pow2(Mst1)*pow3(Mst2) - 
+                        9*Mst2*
+                        (576*(1 - lmMst1 + 2*lmMst2 - lmMt)*Mt - 
+                       361*Mst2*s2t)*pow4(Mst1) + 
+                        s2t*(4057*pow6(Mst1) - 648*pow6(Mst2)))) + 
+                        Mst2*
+                        (3*Mgl*
+                        (3*(32*
+                       (41936 - 7245*lmMst1 + 19665*lmMst2 - 
+                       720*lmMt)*Mt - 
+                       (623599 + 65160*lmMst1 - 134280*lmMst2)*Mst2*
+                       s2t)*pow2(Mst2)*pow4(Mst1) + 
+                        9*(2*
+                       (66773 - 9960*lmMst1 + 45480*lmMst2 - 
+                       3840*lmMt)*Mt - 
+                       (1367 + 13560*lmMst1 - 36600*lmMst2)*Mst2*s2t
+)*pow2(Mst1)*pow4(Mst2) + 2*
+                        (4*
+                       (1077991 - 184140*lmMst1 + 400140*lmMst2 - 
+                       8640*lmMt)*Mt - 
+                       (2580913 + 203040*lmMst1 - 306720*lmMst2)*
+                       Mst2*s2t)*pow6(Mst1) + 41040*s2t*pow7(Mst2)) - 
+                        2*Dmglst2*
+                        (216*
+                        ((67843 - 10050*lmMst1 + 17490*lmMst2 - 
+                       7560*lmMt)*Mt - 
+                        (19579 + 1770*lmMst1 + 12630*lmMst2)*Mst2*s2t
+)*pow2(Mst2)*pow4(Mst1) + 27*
+                        (15*
+                       (3245 - 1672*lmMst1 + 1448*lmMst2 - 
+                       1888*lmMt)*Mt - 
+                        8*(4429 - 270*lmMst1 + 8910*lmMst2)*Mst2*s2t)*
+                        pow2(Mst1)*pow4(Mst2) + 
+                        4*((13463149 - 1492020*lmMst1 + 
+                       2713500*lmMst2 - 625320*lmMt)*Mt - 
+                        9*(510139 + 44280*lmMst1 + 76680*lmMst2)*
+                        Mst2*s2t)*pow6(Mst1) + 90720*s2t*pow7(Mst2)))))/
+                   (pow2(Mst1)*pow6(Mst2)))/Mgl))/Tbeta + 
+          ((28*Mt*pow3(s2t)*(48600*Mgl*pow2(Dmsqst2)*
+                   (4*(1 - lmMst1 + lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                     (17 + 10*lmMst1 - 10*lmMst2)*pow4(Mst1) - 
+                     4*(3 + lmMst1 - lmMst2)*pow4(Mst2)) + 
+                  pow4(Mst2)*
+                   (3*Mgl*(30*(4673 - 5976*lmMst1 + 8424*lmMst2)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        17*(6167 - 9720*lmMst1 + 9720*lmMst2)*
+                        pow4(Mst1) - 
+                        135*(2269 + 664*lmMst1 - 56*lmMst2)*pow4(Mst2)
+) - Dmglst2*(18*(206741 - 101880*lmMst1 + 89640*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 
+                        (8583283 - 2329560*lmMst1 + 2329560*lmMst2)*
+                        pow4(Mst1) + 
+                        27*(173947 - 25080*lmMst1 + 68760*lmMst2)*
+                        pow4(Mst2))) - 
+                  194400*Dmsqst2*pow2(Mst2)*
+                   (Dmglst2*(2*(5 - 3*lmMst1 + 3*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 11*pow4(Mst1) - 
+                        2*(2 + 3*lmMst1 - 3*lmMst2)*pow4(Mst2)) - 
+                     Mgl*(pow4(Mst1) - 
+                        2*((1 + lmMst1 - lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + (2 + lmMst1 - lmMst2)*pow4(Mst2))))
+))/pow5(Mst2) + (7*((-8*pow2(MuSUSY)*pow3(Mt)*
+                      (Dmglst2*Mst2*
+                        (27*pow2(Mst2)*
+                       (7680*(5 + 6*lmMst2)*Mst2*Mt + 
+                       s2t*(-14400*Dmsqst2*
+                       (2 + 3*lmMst1 - 3*lmMst2) + 
+                       (173947 - 25080*lmMst1 + 68760*lmMst2)*
+                       pow2(Mst2))) + 
+                        36*pow2(Mst1)*
+                       (30*(3643 - 120*lmMst1 + 3192*lmMst2)*Mst2*
+                       Mt + 
+                       s2t*(10800*Dmsqst2*
+                       (1 - 9*lmMst1 + 9*lmMst2) + 
+                       (364291 - 88560*lmMst1 + 147960*lmMst2)*
+                       pow2(Mst2))) + 
+                        2*(15057833 - 4014360*lmMst1 + 
+                       5563080*lmMst2)*s2t*pow4(Mst1)) - 
+                        3*Mgl*
+                        (2*(15*(38401 + 1080*lmMst1 - 7992*lmMst2)*
+                       Mt - 
+                       (266863 + 396360*lmMst1 - 346680*lmMst2)*
+                       Mst2*s2t)*pow4(Mst1) + 
+                        Mst2*
+                        (60*pow2(Mst1)*
+                        (3*(353 - 72*lmMst1 - 696*lmMst2)*Mst2*Mt + 
+                        s2t*
+                        (-2160*Dmsqst2*(5 + 3*lmMst1 - 3*lmMst2) - 
+                        2*(3937 + 2988*lmMst1 - 2232*lmMst2)*
+                        pow2(Mst2))) - 
+                        45*(64*(53 + 24*lmMst2)*Mt*pow3(Mst2) + 
+                        s2t*(1440*(3 + lmMst1 - lmMst2)*
+                       pow2(Dmsqst2) + 
+                        2880*Dmsqst2*(2 + lmMst1 - lmMst2)*
+                       pow2(Mst2) + 
+                        3*(2269 + 664*lmMst1 - 56*lmMst2)*pow4(Mst2)))
+))))/pow2(Sbeta) + pow2(s2t)*
+                    (48600*Dmsqst2*Mt*pow2(Sbeta)*
+                       (4*Dmglst2*(93 - 10*lmMst1 + 10*lmMst2)*Mt*
+                       pow2(Mst2)*pow2(Sbeta) - 
+                        Dmsqst2*Mgl*
+                        (-2*(11 + 10*lmMst1 - 10*lmMst2)*Mst2*s2t*
+                       (2 - pow2(Sbeta)) + 
+                        3*(17 - 2*lmMst1 + 2*lmMst2)*Mt*pow2(Sbeta)))*
+                       pow4(Mst1) - 
+                      (4*pow2(Mt)*
+                        (-900*Mgl*pow2(Dmsqst2)*
+                        (pow2(MuSUSY)*
+                       (3*(209 + 18*lmMst1 - 18*lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                       4*(421 + 54*lmMst1 - 54*lmMst2)*pow4(Mst1) + 
+                       54*pow4(Mst2)) + 
+                        81*(17 - 2*lmMst1 + 2*lmMst2)*pow4(Sbeta)*
+                        pow6(Mst1)) + 
+                        pow2(Mst2)*pow2(MuSUSY)*
+                        (-4*Dmglst2*
+                       (162*(6803 - 1810*lmMst1 + 2670*lmMst2)*
+                       pow2(Mst2)*pow4(Mst1) + 
+                       135*(1631 - 648*lmMst1 + 1680*lmMst2)*
+                       pow2(Mst1)*pow4(Mst2) + 
+                       (4256978 - 615600*lmMst1 + 754920*lmMst2)*
+                       pow6(Mst1) - 22680*pow6(Mst2)) + 
+                        3*Mgl*
+                        (6*(533629 - 900*lmMst1 + 180*lmMst2)*
+                       pow2(Mst2)*pow4(Mst1) + 
+                        90*(5597 + 564*lmMst1 - 1104*lmMst2)*
+                       pow2(Mst1)*pow4(Mst2) + 
+                        (6649153 - 81540*lmMst1 + 77220*lmMst2)*
+                       pow6(Mst1) - 20520*pow6(Mst2))) + 
+                        300*Dmsqst2*
+                        (324*Dmglst2*pow2(Mst2)*
+                        (pow2(MuSUSY)*
+                       (6*(2 + lmMst1 - lmMst2)*pow2(Mst1)*
+                       pow2(Mst2) + 
+                       2*(3 + 8*lmMst1 - 8*lmMst2)*pow4(Mst1) + 
+                       2*pow4(Mst2)) + 
+                        (93 - 10*lmMst1 + 10*lmMst2)*pow4(Sbeta)*
+                        pow6(Mst1)) + 
+                        Mgl*pow2(MuSUSY)*
+                        (9*(1097 - 72*lmMst1 + 72*lmMst2)*pow2(Mst2)*
+                        pow4(Mst1) + 1431*pow2(Mst1)*pow4(Mst2) + 
+                        (20701 - 648*lmMst1 + 648*lmMst2)*
+                       pow6(Mst1) - 324*pow6(Mst2)))))/
+                       (pow2(Mst1)*pow2(Sbeta))) + 
+                   (pow2(Mst2)*pow4(s2t)*
+                      (-(pow4(Mst2)*
+                        (-4*Dmglst2*
+                        (108*(5917 - 1095*lmMst1 - 195*lmMst2)*
+                       pow2(Mst2)*pow4(Mst1) + 
+                        135*(1967 - 648*lmMst1 + 1680*lmMst2)*
+                       pow2(Mst1)*pow4(Mst2) + 
+                        (2272991 - 116640*lmMst1 + 116640*lmMst2)*
+                       pow6(Mst1) - 22680*pow6(Mst2)) + 
+                        3*Mgl*
+                        (6*(362299 - 17820*lmMst1 + 33300*lmMst2)*
+                        pow2(Mst2)*pow4(Mst1) + 
+                        90*(6053 + 564*lmMst1 - 1104*lmMst2)*
+                        pow2(Mst1)*pow4(Mst2) + 
+                        5*(149867 - 3996*lmMst1 - 4860*lmMst2)*
+                        pow6(Mst1) - 20520*pow6(Mst2)))) + 
+                        300*Mgl*pow2(Dmsqst2)*
+                        (12*(121 + 27*lmMst1 - 27*lmMst2)*pow2(Mst2)*
+                        pow4(Mst1) + 
+                        9*(173 + 18*lmMst1 - 18*lmMst2)*pow2(Mst1)*
+                        pow4(Mst2) + 
+                        (1009 - 486*lmMst1 + 486*lmMst2)*pow6(Mst1) + 
+                        162*pow6(Mst2)) - 
+                        300*Dmsqst2*pow2(Mst2)*
+                        (Mgl*
+                        (9*(743 - 72*lmMst1 + 72*lmMst2)*pow2(Mst2)*
+                        pow4(Mst1) + 2079*pow2(Mst1)*pow4(Mst2) + 
+                        (2386 + 648*lmMst1 - 648*lmMst2)*pow6(Mst1) - 
+                        324*pow6(Mst2)) - 
+                        324*Dmglst2*
+                        (4*(4 - lmMst1 + lmMst2)*pow2(Mst2)*
+                        pow4(Mst1) + 
+                        (7 + 10*lmMst1 - 10*lmMst2)*pow6(Mst1) - 
+                        2*((4 + 3*lmMst1 - 3*lmMst2)*pow2(Mst1)*
+                        pow4(Mst2) + pow6(Mst2))))))/pow2(Mst1)) + 
+                4*pow2(Mt)*(-14*Mst2*Mt*s2t*
+                    (194400*Mgl*pow2(Dmsqst2)*
+                       (2*(7 - 2*lmMst1 + 4*lmMst2 - 2*lmMt)*
+                        pow2(Mst1) + 
+                        (5 - 2*lmMst1 + 4*lmMst2 - 2*lmMt)*
+                       pow2(Mst2) - (3 + lmMst1 - lmMst2)*pow2(MuSUSY)) 
+- 388800*Dmsqst2*(Dmglst2*(pow2(Mst2)*
+                        ((19 - 6*lmMst1 + 12*lmMst2 - 6*lmMt)*
+                       pow2(Mst2) - 
+                        (2 + 3*lmMst1 - 3*lmMst2)*pow2(MuSUSY)) + 
+                        pow2(Mst1)*
+                        ((51 - 14*lmMst1 + 28*lmMst2 - 14*lmMt)*
+                       pow2(Mst2) + 
+                        (1 - 9*lmMst1 + 9*lmMst2)*pow2(MuSUSY)) + 
+                        (87 - 22*lmMst1 + 44*lmMst2 - 22*lmMt)*
+                        pow4(Mst1)) - 
+                        Mgl*(pow2(Mst1)*
+                        ((5 - 2*lmMst1 + 4*lmMst2 - 2*lmMt)*
+                        pow2(Mst2) - 
+                        (5 + 3*lmMst1 - 3*lmMst2)*pow2(MuSUSY)) + 
+                        pow2(Mst2)*
+                        ((1 - 2*lmMst1 + 4*lmMst2 - 2*lmMt)*
+                        pow2(Mst2) - 
+                        (2 + lmMst1 - lmMst2)*pow2(MuSUSY)) + 
+                        (5 - 2*lmMst1 + 4*lmMst2 - 2*lmMt)*pow4(Mst1))) 
++ 3*Mgl*(6*pow2(Mst1)*pow2(Mst2)*
+                        ((470657 - 86040*lmMst1 + 178200*lmMst2)*
+                        pow2(Mst2) - 
+                        20*(3937 + 2988*lmMst1 - 2232*lmMst2)*
+                        pow2(MuSUSY)) + 
+                        2*(4*
+                       (574759 - 97200*lmMst1 + 164160*lmMst2)*
+                       pow2(Mst2) - 
+                        (266863 + 396360*lmMst1 - 346680*lmMst2)*
+                        pow2(MuSUSY))*pow4(Mst1) + 
+                        9*(2*
+                        (68693 - 9960*lmMst1 + 45480*lmMst2 - 
+                       3840*lmMt)*pow2(Mst2) - 
+                        15*(2269 + 664*lmMst1 - 56*lmMst2)*
+                        pow2(MuSUSY))*pow4(Mst2)) - 
+                      Dmglst2*
+                       (18*pow2(Mst1)*pow2(Mst2)*
+                        (3*(510149 - 55320*lmMst1 + 118200*lmMst2 - 
+                        32160*lmMt)*pow2(Mst2) + 
+                        2*(364291 - 88560*lmMst1 + 147960*lmMst2)*
+                        pow2(MuSUSY)) + 
+                         2*(4*
+                        (9908167 - 949320*lmMst1 + 1769040*lmMst2 - 
+                       217080*lmMt)*pow2(Mst2) + 
+                        (15057833 - 4014360*lmMst1 + 5563080*lmMst2)*
+                        pow2(MuSUSY))*pow4(Mst1) + 
+                         27*(30*
+                        (4189 - 1672*lmMst1 + 1448*lmMst2 - 
+                       1888*lmMt)*pow2(Mst2) + 
+                        (173947 - 25080*lmMst1 + 68760*lmMst2)*
+                        pow2(MuSUSY))*pow4(Mst2))) - 
+                   (7*pow2(s2t)*
+                      (900*Mgl*pow2(Dmsqst2)*
+                        (3*pow2(Mst1)*pow2(Mst2)*
+                        (173*pow2(Mst2) + 
+                        (209 + 18*lmMst1 - 18*lmMst2)*pow2(MuSUSY)) + 
+                        (721*pow2(Mst2) + 
+                       4*(421 + 54*lmMst1 - 54*lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst1) + 
+                        54*(2*pow2(Mst2) + pow2(MuSUSY))*pow4(Mst2) + 
+                        721*pow6(Mst1)) + 
+                        pow2(Mst2)*
+                        (3*Mgl*
+                        (-6*pow2(Mst2)*
+                       ((309749 + 12240*lmMst1 - 12240*lmMst2)*
+                       pow2(Mst2) + 
+                       (533629 - 900*lmMst1 + 180*lmMst2)*
+                       pow2(MuSUSY))*pow4(Mst1) - 
+                        9*pow2(Mst1)*
+                       ((5927 + 13560*lmMst1 - 36600*lmMst2)*
+                       pow2(Mst2) + 
+                       10*(5597 + 564*lmMst1 - 1104*lmMst2)*
+                       pow2(MuSUSY))*pow4(Mst2) - 
+                        ((3291029 + 210600*lmMst1 - 
+                      210600*lmMst2)*pow2(Mst2) + 
+                       (6649153 - 81540*lmMst1 + 77220*lmMst2)*
+                       pow2(MuSUSY))*pow6(Mst1) + 
+                        20520*(2*pow2(Mst2) + pow2(MuSUSY))*
+                        pow6(Mst2)) - 
+                        4*Dmglst2*
+                        (-162*pow2(Mst2)*
+                        (20*(505 + 68*lmMst1 + 124*lmMst2)*
+                       pow2(Mst2) + 
+                       (6803 - 1810*lmMst1 + 2670*lmMst2)*
+                       pow2(MuSUSY))*pow4(Mst1) - 
+                        27*pow2(Mst1)*
+                        (4*(4849 - 270*lmMst1 + 8910*lmMst2)*
+                       pow2(Mst2) + 
+                       5*(1631 - 648*lmMst1 + 1680*lmMst2)*
+                       pow2(MuSUSY))*pow4(Mst2) - 
+                        2*(45*(78533 + 6732*lmMst1 + 180*lmMst2)*
+                       pow2(Mst2) + 
+                       (2128489 - 307800*lmMst1 + 377460*lmMst2)*
+                       pow2(MuSUSY))*pow6(Mst1) + 
+                        22680*(2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2)
+)) - 300*Dmsqst2*(648*Dmglst2*pow2(Mst2)*
+                        (pow2(Mst1)*pow2(Mst2)*
+                        (8*pow2(Mst2) + 
+                        3*(2 + lmMst1 - lmMst2)*pow2(MuSUSY)) + 
+                        (8*pow2(Mst2) + 
+                       (3 + 8*lmMst1 - 8*lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst1) + 
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow4(Mst2) + 
+                        8*pow6(Mst1)) - 
+                        Mgl*(-9*pow2(Mst2)*
+                        (202*pow2(Mst2) + 
+                        (1097 - 72*lmMst1 + 72*lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst1) - 
+                        (808*pow2(Mst2) + 
+                        (20701 - 648*lmMst1 + 648*lmMst2)*
+                        pow2(MuSUSY))*pow6(Mst1) + 
+                        324*(2*pow2(Mst2) + pow2(MuSUSY))*pow6(Mst2) - 
+                        27*pow2(Mst1)*
+                        (53*pow2(MuSUSY)*pow4(Mst2) + 77*pow6(Mst2)))))
+)/pow2(Mst1) + (4*pow2(Mt)*(340200*Mgl*pow2(Dmsqst2)*
+                        ((13 - 3*lmMst1 + 6*lmMst2 - 3*lmMt)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        5*(9 - 2*lmMst1 + 4*lmMst2 - 2*lmMt)*
+                        pow4(Mst1) + pow4(Mst2)) - 
+                        4*Dmglst2*pow2(Mst2)*
+                        (27*pow2(Mst1)*pow2(Mst2)*
+                        ((209341 - 26880*lmMst1 + 82320*lmMst2 - 
+                       1680*lmMt)*pow2(Mst2) - 
+                        6720*(5 + 6*lmMst2)*pow2(MuSUSY)) + 
+                        9*((3184397 - 476280*lmMst1 + 
+                       1156680*lmMst2 - 161280*lmMt)*pow2(Mst2) - 
+                        105*(3643 - 120*lmMst1 + 3192*lmMst2)*
+                        pow2(MuSUSY))*pow4(Mst1) + 
+                        4*(19152737 - 3674160*lmMst1 + 
+                        6872040*lmMst2 - 850500*lmMt)*pow6(Mst1) + 
+                        158760*pow6(Mst2)) - 
+                        680400*Dmsqst2*
+                        (2*Dmglst2*pow2(Mst2)*
+                        ((23 - 5*lmMst1 + 10*lmMst2 - 5*lmMt)*
+                        pow2(Mst1)*pow2(Mst2) + 
+                        (77 - 18*lmMst1 + 36*lmMst2 - 18*lmMt)*
+                        pow4(Mst1) + pow4(Mst2)) - 
+                        Mgl*((3 - lmMst1 + 2*lmMst2 - lmMt)*
+                        (4*pow2(Mst2)*pow4(Mst1) + 
+                        2*pow2(Mst1)*pow4(Mst2)) + 
+                        2*(7 - 3*lmMst1 + 6*lmMst2 - 3*lmMt)*
+                        pow6(Mst1) + pow6(Mst2))) + 
+                        21*Mgl*
+                         (3*pow2(Mst2)*
+                        ((310039 - 91080*lmMst1 + 145080*lmMst2 - 
+                       43920*lmMt)*pow2(Mst2) - 
+                        30*(353 - 72*lmMst1 - 696*lmMst2)*pow2(MuSUSY)
+)*pow4(Mst1) + 9*pow2(Mst1)*((48983 - 12480*lmMst1 + 26820*lmMst2 - 
+                       12180*lmMt)*pow2(Mst2) + 
+                        160*(53 + 24*lmMst2)*pow2(MuSUSY))*pow4(Mst2) + 
+                         (2*
+                        (626869 - 300240*lmMst1 + 395280*lmMst2 - 
+                       78840*lmMt)*pow2(Mst2) - 
+                        15*(38401 + 1080*lmMst1 - 7992*lmMst2)*
+                        pow2(MuSUSY))*pow6(Mst1) + 20520*pow8(Mst2))))/
+                    pow2(Mst1)))/pow6(Mst2))/Mgl))/408240. - 
+     (2*threeLoopFlag*xDR2DRMOD*pow2(Al4p)*
+        ((-64*(Dmglst2 + Mgl + lmMst2*Mgl)*Mt*pow3(Mst2)*pow3(s2t))/Mgl - 
+          4*pow2(Mt)*pow2(s2t)*
+           (-(pow2(MuSUSY)*(5 - 26*lmMst1 + 18*lmMst2 + 
+                  (-(Dmglst2*(7 - 14*lmMst1 + 30*lmMst2)) - 
+                     ((7*Dmglst2 - 13*Mgl)*pow2(Mst2))/pow2(Mst1) + 
+                     (2*(Dmglst2*(7*lmMst1 - 15*lmMst2) - 
+                        (4 + 13*lmMst1 - 9*lmMst2)*Mgl)*pow2(Mst1)*
+                        (pow2(Mst1) + pow2(Mst2)))/pow4(Mst2))/Mgl)) + 
+             ((7*Dmglst2 - 13*Mgl)*
+                (2*pow2(Mst1) - 4*pow2(Mst2) + (2*pow4(Mst2))/pow2(Mst1)))/
+              Mgl) + ((128*s2t*pow3(Mt)*
+                ((1 + lmMst2)*Mgl*(2*pow2(Mst2) + pow2(MuSUSY))*
+                   (2*pow2(Mst1)*pow2(Mst2) + 3*pow4(Mst1) + 
+                     pow4(Mst2)) - 
+                  Dmglst2*(2*pow2(Mst1)*pow2(Mst2)*
+                      (2*(3 + lmMst2)*pow2(Mst2) - 
+                        (1 + 3*lmMst2)*pow2(MuSUSY)) + 
+                     3*(2*(5 + 3*lmMst2)*pow2(Mst2) - 
+                        (1 + 3*lmMst2)*pow2(MuSUSY))*pow4(Mst1) + 
+                     (2*(1 - lmMst2)*pow2(Mst2) - 
+                        (1 + 3*lmMst2)*pow2(MuSUSY))*pow4(Mst2))))/
+              pow5(Mst2) + (16*pow4(Mt)*
+                (Dmglst2*(96*(2 + lmMst2)*pow2(Mst2)*pow4(Mst1) + 
+                     39*pow2(Mst1)*pow4(Mst2) + 
+                     192*(3 + 2*lmMst2)*pow6(Mst1) + 7*pow6(Mst2)) - 
+                  Mgl*((29 + 16*lmMst2)*pow2(Mst1)*pow4(Mst2) + 
+                     (1 + lmMst2)*
+                      (48*pow2(Mst2)*pow4(Mst1) + 96*pow6(Mst1)) + 
+                     13*pow6(Mst2))))/(pow2(Mst1)*pow4(Mst2)))/Mgl - 
+          (-((xDmglst2*pow2(Dmglst2)*
+                  (-(pow2(Mst1)*pow4(Mst2)*
+                       (4*Mst2*pow2(Mt)*pow2(s2t)*
+                        (-((11 - 54*lmMst1 + 78*lmMst2)*Tbeta*
+                        pow2(MuSUSY)*(1 - pow2(Sbeta))) + 
+                        (48*(1 - 6*lmMst2)*Mst2*MuSUSY - 
+                        108*Tbeta*pow2(Mst2))*pow2(Sbeta)) + 
+                         16*s2t*
+                        (-8*(1 - 6*lmMst2)*Tbeta*pow2(MuSUSY)*
+                        (1 - pow2(Sbeta)) + 
+                        (27*Mst2*MuSUSY + 
+                        16*(2 - lmMst2)*Tbeta*pow2(Mst2))*pow2(Sbeta))*
+                        pow3(Mt) + 
+                         pow2(Sbeta)*
+                         (-8*Mt*
+                        ((8 + 27*lmMst1 - 39*lmMst2)*MuSUSY + 
+                        8*(1 - 6*lmMst2)*Mst2*Tbeta)*pow3(Mst2)*
+                        pow3(s2t) - 
+                         16*(16*(2 - lmMst2)*MuSUSY + 43*Mst2*Tbeta)*
+                        pow4(Mt) + 
+                         (43 + 54*lmMst1 - 78*lmMst2)*Tbeta*pow4(s2t)*
+                         pow5(Mst2)))) - 
+                    pow2(Mst2)*pow4(Mst1)*
+                     (pow2(Sbeta)*
+                        (64*s2t*(3*MuSUSY*s2t - 8*Mt*Tbeta)*
+                        pow2(Mst2)*pow2(Mt) - 
+                        108*Mt*(MuSUSY*s2t - 2*Mt*Tbeta)*pow2(s2t)*
+                        pow3(Mst2)) + 
+                       Tbeta*
+                        (8*Mst2*pow2(Mt)*
+                        ((8 + 27*lmMst1)*pow2(MuSUSY)*pow2(s2t)*
+                        (1 - pow2(Sbeta)) + 384*pow2(Mt)*pow2(Sbeta)) 
+- 256*s2t*pow2(MuSUSY)*(1 - pow2(Sbeta))*pow3(Mt) + 
+                        (11 - 54*lmMst1)*pow2(Sbeta)*pow4(s2t)*
+                        pow5(Mst2)) + 
+                       2*lmMst2*
+                        (-12*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*
+                        (13*MuSUSY*Tbeta*(1 - pow2(Sbeta)) + 
+                        48*Mst2*pow2(Sbeta)) + 
+                         128*(MuSUSY + 3*Mst2*Tbeta)*pow2(Sbeta)*
+                        pow4(Mt) + 
+                         Tbeta*
+                         (768*s2t*pow2(MuSUSY)*(1 - pow2(Sbeta))*
+                        pow3(Mt) + 39*pow2(Sbeta)*pow4(s2t)*pow5(Mst2)))
+) + (8*Mst2*MuSUSY*pow2(Mt)*pow2(s2t)*
+                        (-((7*lmMst1 - 15*lmMst2)*MuSUSY*Tbeta*
+                        (1 - pow2(Sbeta))) + 
+                        24*(1 + 3*lmMst2)*Mst2*pow2(Sbeta)) + 
+                       512*((11 + 5*lmMst2)*MuSUSY + 
+                        6*(3 + 2*lmMst2)*Mst2*Tbeta)*pow2(Sbeta)*
+                        pow4(Mt) + 
+                       Tbeta*
+                        (-384*s2t*
+                        ((1 + 3*lmMst2)*pow2(MuSUSY)*
+                       (1 - pow2(Sbeta)) + 
+                        2*(5 + 3*lmMst2)*pow2(Mst2)*pow2(Sbeta))*
+                        pow3(Mt) + 7*pow2(Sbeta)*pow4(s2t)*pow5(Mst2)))*
+                     pow6(Mst1) + 
+                    27*(-4*Tbeta*pow2(Mt)*pow2(s2t)*
+                        (-(pow2(MuSUSY)*(1 - pow2(Sbeta))) + 
+                        2*pow2(Mst2)*pow2(Sbeta)) + 
+                       pow2(Sbeta)*
+                        (MuSUSY*
+                        (16*s2t*pow3(Mt) - 4*Mt*pow2(Mst2)*pow3(s2t)) + 
+                         Tbeta*(16*pow4(Mt) + pow4(Mst2)*pow4(s2t))))*
+                     pow7(Mst2)))/
+                (Tbeta*pow2(Mst1)*pow2(Sbeta)*pow5(Mst2))) + 
+             Mgl*(192*Dmglst2*lmMst2*Mt*pow3(Mst2)*pow3(s2t) + 
+                ((pow2(Mst1) - pow2(Mst2))*
+                    (Mgl*(2*(4 + 13*lmMst1 - 9*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 13*pow4(Mst1) - 13*pow4(Mst2)) - 
+                      Dmglst2*
+                       (2*(7*lmMst1 - 15*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2) + 7*pow4(Mst1) - 7*pow4(Mst2)))*
+                    pow4(s2t) - 
+                   (4*((s2t*pow2(Mt)*pow2(MuSUSY)*
+                        (Dmglst2*
+                        (-((32*(1 + 3*lmMst2)*Mt - 
+                       (7 - 14*lmMst1 + 30*lmMst2)*Mst2*s2t)*
+                        pow2(Mst1)*pow4(Mst2)) - 
+                        2*((32*(1 + 3*lmMst2)*Mt + 
+                       (7*lmMst1 - 15*lmMst2)*Mst2*s2t)*pow2(Mst2)*
+                       pow4(Mst1) + 
+                        (48*(1 + 3*lmMst2)*Mt + 
+                       (7*lmMst1 - 15*lmMst2)*Mst2*s2t)*pow6(Mst1)) + 
+                        7*s2t*pow7(Mst2)) - 
+                        Mgl*((32*(1 + lmMst2)*Mt + 
+                        (5 - 26*lmMst1 + 18*lmMst2)*Mst2*s2t)*
+                        pow2(Mst1)*pow4(Mst2) + 
+                        2*((32*(1 + lmMst2)*Mt - 
+                       (4 + 13*lmMst1 - 9*lmMst2)*Mst2*s2t)*
+                        pow2(Mst2)*pow4(Mst1) + 
+                        (48*(1 + lmMst2)*Mt - 
+                        (4 + 13*lmMst1 - 9*lmMst2)*Mst2*s2t)*
+                        pow6(Mst1)) + 13*s2t*pow7(Mst2))))/pow2(Sbeta) + 
+                        (Mt*MuSUSY*
+                         (-(Mgl*
+                        (pow2(Mst2)*
+                        ((1 + lmMst2)*
+                       (-48*Mt*pow2(Mst2)*pow2(s2t) + 192*pow3(Mt)) 
++ 13*pow3(Mst2)*pow3(s2t))*pow4(Mst1) + 
+                        2*pow2(Mst1)*
+                        (-26*Mst2*s2t*pow2(Mt) - 
+                        24*(1 + lmMst2)*Mt*pow2(Mst2)*pow2(s2t) + 
+                        32*(1 + lmMst2)*pow3(Mt) + 
+                        (4 + 13*lmMst1 - 9*lmMst2)*pow3(Mst2)*
+                        pow3(s2t))*pow4(Mst2) + 
+                        48*(1 + lmMst2)*Mt*
+                        (8*pow2(Mt) - pow2(Mst2)*pow2(s2t))*pow6(Mst1) 
++ 13*s2t*(4*pow2(Mt) - pow2(Mst2)*pow2(s2t))*pow7(Mst2))) + 
+                         Dmglst2*
+                         (pow2(Mst2)*
+                        (48*(1 + 3*lmMst2)*Mt*pow2(Mst2)*pow2(s2t) + 
+                        64*(7 + lmMst2)*pow3(Mt) + 
+                        7*pow3(Mst2)*pow3(s2t))*pow4(Mst1) + 
+                         2*pow2(Mst1)*
+                        (-14*Mst2*s2t*pow2(Mt) + 
+                        24*(1 + 3*lmMst2)*Mt*pow2(Mst2)*pow2(s2t) + 
+                        32*(1 - lmMst2)*pow3(Mt) + 
+                        (7*lmMst1 - 15*lmMst2)*pow3(Mst2)*pow3(s2t))*
+                        pow4(Mst2) + 
+                         16*Mt*
+                        (8*(11 + 5*lmMst2)*pow2(Mt) + 
+                        3*(1 + 3*lmMst2)*pow2(Mst2)*pow2(s2t))*
+                        pow6(Mst1) + 28*s2t*pow2(Mt)*pow7(Mst2) - 
+                         7*pow3(s2t)*pow9(Mst2))))/Tbeta))/pow5(Mst2))/
+                 pow2(Mst1)))/pow2(Mgl)))/9.) + 
+  (threeLoopFlag*pow2(Al4p)*(648*shiftst1*
+        (pow2(Mt)*pow2(s2t)*(-30*pow2(Mst1)*
+              (xDR2DRMOD + (Dmsqst2*xDR2DRMOD)/pow2(Mst2)) + 
+             xDR2DRMOD*((60 - (30*Dmsqst2)/pow2(Mst1))*pow2(Mst2) + 
+                (-30*pow4(Mst2) - 
+                   (15*(Dmsqst2 + pow2(Mst2))*pow2(MuSUSY)*
+                      ((pow2(Mst1) + pow2(Mst2))*pow4(Mst2) + 
+                        (-2*lmMst1 + 2*lmMst2)*pow2(Mst1)*
+                         (pow2(Mst1)*pow2(Mst2) + pow4(Mst1) + 
+                         pow4(Mst2))))/pow6(Mst2))/pow2(Mst1))) + 
+          xDR2DRMOD*(60*(Dmsqst2*pow2(Mt)*pow2(s2t) + 
+                ((Dmsqst2 + pow2(Mst2))*(pow2(Mst1) + pow2(Mst2))*
+                   pow4(Mt))/(pow2(Mst1)*pow2(Mst2))) + 
+             (15*(((Dmsqst2*(pow2(Mst1) - pow2(Mst2))*
+                        (2*(lmMst1 - lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                        pow4(Mst1) - pow4(Mst2)) + 
+                       pow2(Mst1)*pow2(Mst2)*
+                        (-((1 - 2*lmMst1 + 2*lmMst2)*pow2(Mst1)*
+                        pow2(Mst2)) + pow4(Mst1) - 
+                         (1 + 2*lmMst1 - 2*lmMst2)*pow4(Mst2)))*pow4(s2t)
+)/pow2(Mst2) + (pow2(s2t)*(pow12(Mst2)*pow2(s2t) + 
+                       (4*(Dmsqst2 + pow2(Mst2))*pow2(Mt)*pow2(MuSUSY)*
+                         ((pow2(Mst1) + pow2(Mst2))*pow4(Mst2) + 
+                         (-2*lmMst1 + 2*lmMst2)*pow2(Mst1)*
+                         (pow2(Mst1)*pow2(Mst2) + pow4(Mst1) + 
+                         pow4(Mst2))))/pow2(Sbeta)))/pow6(Mst2)))/
+              (4.*pow2(Mst1)))) + 
+       xDR2DRMOD*((4*Mt*MuSUSY*
+             (2430*s2t*shiftst1*pow2(Mst1)*(Dmsqst2 + pow2(Mst2))*
+                (4*pow2(Mst2)*pow2(Mt) - 
+                  2*pow2(Mst1)*
+                   (2*pow2(Mt) - (lmMst1 - lmMst2)*pow2(Mst2)*pow2(s2t)) 
++ pow2(s2t)*(pow4(Mst1) - pow4(Mst2)))*pow4(Mst2) + 
+               (2*Dmglst2*Mst2*
+                   (Mst2*((-18*s2t*pow2(Mst2)*
+                        (128*
+                       (lmMst2*pow2(lmMst1) + 
+                       lmMst1*(4 + 2*lmMst2 - 2*pow2(lmMst2)) - 
+                       (4 - lmMst2)*pow2(1 + lmMst2))*pow2(Mt) - 
+                        15*Dmsqst2*pow2(s2t)) - 
+                        1728*Mt*pow2(s2t)*
+                        (8 + 19*lmMst2 - 
+                       lmMst1*(7 - 5*lmMst2 - 6*pow2(lmMst2)) - 
+                       5*pow2(lmMst2) - 6*pow3(lmMst2))*pow3(Mst2) + 
+                        128*Mst2*
+                        (263 + lmMst2*(962 - 213*lmMt) - 177*lmMt + 
+                       3*(131 - 6*lmMt)*pow2(lmMst2) - 
+                       18*lmMst1*
+                       (26 + lmMst2*(17 - lmMt) - 7*lmMt + 
+                       pow2(lmMst2)) + 18*pow3(lmMst2))*pow3(Mt) + 
+                        pow3(s2t)*
+                        (-945*pow2(Dmsqst2) + 
+                        18*(36 + lmMst2*(42 + 256*pow2(lmMst1)) + 
+                        37*pow2(lmMst2) - 
+                        32*lmMst1*(3 + 3*lmMst2 + 16*pow2(lmMst2)) + 
+                        256*pow3(lmMst2))*pow4(Mst2)))*pow6(Mst1) + 
+                        2*pow4(Mst1)*
+                         (64*
+                        (119 + lmMst2*(224 - 15*lmMt) - 51*lmMt - 
+                        18*lmMst1*
+                        (4 - lmMt + lmMst2*(1 + lmMt) - pow2(lmMst2)) 
++ 3*(5 + 6*lmMt)*pow2(lmMst2) - 18*pow3(lmMst2))*pow3(Mst2)*pow3(Mt) + 
+                         s2t*
+                        (270*pow2(Dmsqst2)*
+                        (7*pow2(Mt) + 
+                        3*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t)) - 
+                        135*Dmsqst2*pow2(Mst2)*
+                        (4*pow2(Mt) + 
+                        7*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t)) + 
+                        6*(45*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t) + 
+                        2*pow2(Mt)*
+                        (52 + lmMst2*(370 - 96*pow2(lmMst1)) + 
+                        81*pow2(lmMst2) - 
+                        96*(lmMst1*(1 - lmMst2 - 2*pow2(lmMst2)) + 
+                        pow3(lmMst2))))*pow4(Mst2)) - 
+                         864*Mt*pow2(s2t)*
+                        (7 + 9*lmMst2 - 
+                        lmMst1*(3 - 5*lmMst2 - 6*pow2(lmMst2)) - 
+                        8*pow2(lmMst2) - 6*pow3(lmMst2))*pow5(Mst2) + 
+                         18*(40 + lmMst2*(4 + 16*pow2(lmMst1)) + 
+                        lmMst1*(4 - 246*lmMst2 - 123*pow2(lmMst2)) + 
+                        198*pow2(lmMst2) + 107*pow3(lmMst2))*pow3(s2t)*
+                         pow6(Mst2))) + 
+                     32*(-27*Mt*pow2(Mst2)*pow2(s2t)*
+                        (17 + 51*lmMst2 - 
+                        4*lmMst1*(6 - lmMst2 - 3*pow2(lmMst2)) - 
+                        4*pow2(lmMst2) - 12*pow3(lmMst2)) + 
+                        72*Mst2*s2t*pow2(Mt)*
+                        (6 + lmMst2*(14 - pow2(lmMst1)) - 
+                        lmMst1*(9 + 6*lmMst2 - 2*pow2(lmMst2)) + 
+                        6*pow2(lmMst2) - pow3(lmMst2)) + 
+                        4*(lmMst2*(2447 - 645*lmMt) + 
+                        5*(58 - 75*lmMt) + 
+                        3*(509 - 60*lmMt)*pow2(lmMst2) - 
+                        18*lmMst1*
+                       (87 + lmMst2*(71 - 10*lmMt) - 22*lmMt + 
+                       10*pow2(lmMst2)) + 180*pow3(lmMst2))*pow3(Mt) + 
+                        9*(16*lmMst2*pow2(lmMst1) - 
+                        2*lmMst1*(3 + 2*lmMst2 + 16*pow2(lmMst2)) + 
+                        lmMst2*(7 + 4*lmMst2 + 16*pow2(lmMst2)))*
+                        pow3(Mst2)*pow3(s2t))*pow8(Mst1) + 
+                     576*lmMst2*(1 + lmMst2)*s2t*
+                      (4*pow2(Mt) - pow2(Mst2)*pow2(s2t))*pow9(Mst2) + 
+                     9*pow2(Mst1)*
+                      (360*Mst2*s2t*pow2(Mt)*pow3(Dmsqst2) + 
+                        256*(1 - 2*lmMst2 - 3*pow2(lmMst2))*pow3(Mt)*
+                         pow6(Mst2) + 
+                        s2t*(-30*pow2(Dmsqst2)*
+                        (14*pow2(Mt) + 3*Dmsqst2*pow2(s2t))*pow3(Mst2) 
++ 15*Dmsqst2*(8*pow2(Mt) + 7*Dmsqst2*pow2(s2t))*pow5(Mst2) + 
+                         2*(4*
+                        (52 + (-102 - 32*lmMst1)*lmMst2 - 
+                        59*pow2(lmMst2))*pow2(Mt) - 
+                        15*Dmsqst2*pow2(s2t))*pow7(Mst2)) - 
+                        192*Mt*(1 - 2*lmMst2 - 3*pow2(lmMst2))*
+                         pow2(s2t)*pow8(Mst2) - 
+                        2*(20 - (230 + 32*lmMst1)*lmMst2 - 
+                         155*pow2(lmMst2))*pow3(s2t)*pow9(Mst2))) + 
+                  9*Mgl*(pow6(Mst1)*
+                      (-2*s2t*
+                         (128*(1 + lmMst2)*pow2(1 - lmMst1 + lmMst2)*
+                        pow2(Mt) + 75*Dmsqst2*pow2(s2t))*pow4(Mst2) + 
+                        (1 + lmMst2)*
+                         (256*
+                        (3 + 2*lmMst1*(8 + 3*lmMst2 - 3*lmMt) - 
+                        3*lmMst2*(7 - 2*lmMt) + 5*lmMt - 
+                        6*pow2(lmMst2))*pow3(Mst2)*pow3(Mt) - 
+                         384*Mt*
+                         (2 - 5*lmMst2 + lmMst1*(5 + 2*lmMst2) - 
+                        2*pow2(lmMst2))*pow2(s2t)*pow5(Mst2)) + 
+                        pow3(s2t)*
+                         (-15*pow2(Dmsqst2)*pow2(Mst2) + 
+                         90*pow3(Dmsqst2) - 
+                         2*(125 + 156*lmMst2 + 
+                         512*lmMst1*lmMst2*(1 + lmMst2) - 
+                         181*pow2(lmMst2) - 
+                         256*((1 + lmMst2)*pow2(lmMst1) + pow3(lmMst2)))*
+                         pow6(Mst2))) - 
+                     pow2(Mst1)*pow2(Mst2)*
+                      (-360*s2t*pow2(Mt)*pow3(Dmsqst2) + 
+                        512*pow2(1 + lmMst2)*pow3(Mt)*pow5(Mst2) + 
+                        s2t*(30*pow2(Dmsqst2)*pow2(Mst2)*
+                        (2*pow2(Mt) + 3*Dmsqst2*pow2(s2t)) + 
+                         15*Dmsqst2*(40*pow2(Mt) - Dmsqst2*pow2(s2t))*
+                        pow4(Mst2) + 
+                         2*(4*
+                        (173 + 188*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                        59*pow2(lmMst2))*pow2(Mt) - 
+                        75*Dmsqst2*pow2(s2t))*pow6(Mst2)) - 
+                        384*Mt*pow2(1 + lmMst2)*pow2(s2t)*pow7(Mst2) - 
+                        2*(221 + 284*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                         107*pow2(lmMst2))*pow3(s2t)*pow8(Mst2)) - 
+                     2*pow4(Mst1)*
+                      (180*s2t*pow2(Mt)*pow3(Dmsqst2) + 
+                        128*(1 + lmMst2)*
+                         (1 + lmMst2*(7 - 2*lmMt) - 
+                        2*lmMst1*(2 + lmMst2 - lmMt) - 3*lmMt + 
+                        2*pow2(lmMst2))*pow3(Mt)*pow5(Mst2) + 
+                        s2t*(-30*pow2(Dmsqst2)*pow2(Mst2)*
+                        (pow2(Mt) + 
+                        3*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t)) - 
+                         15*Dmsqst2*
+                        (20*pow2(Mt) - 
+                        Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t))*pow4(Mst2) 
+- 2*(-75*Dmsqst2*(lmMst1 - lmMst2)*pow2(s2t) + 
+                        2*pow2(Mt)*
+                        (109 + 76*lmMst2 - 21*pow2(lmMst2) + 
+                        64*lmMst1*pow2(1 + lmMst2) - 
+                        32*((1 + lmMst2)*pow2(lmMst1) + pow3(lmMst2))))*
+                         pow6(Mst2)) - 
+                        192*(1 + lmMst2)*
+                         (2*lmMst2*(2 + lmMst2) - 
+                        lmMst1*(3 + 2*lmMst2))*Mt*pow2(s2t)*pow7(Mst2) + 
+                        2*(8 - 237*lmMst2 - 
+                         16*(1 + lmMst2)*pow2(lmMst1) - 
+                         308*pow2(lmMst2) + 
+                         lmMst1*(269 + 348*lmMst2 + 123*pow2(lmMst2)) - 
+                         107*pow3(lmMst2))*pow3(s2t)*pow8(Mst2)) + 
+                     32*((1 + lmMst2)*Mst2*
+                         (-8*Mst2*s2t*
+                        (1 + 3*lmMst2 - lmMst1*(3 + 2*lmMst2) + 
+                        pow2(lmMst1) + pow2(lmMst2))*pow2(Mt) - 
+                         6*Mt*
+                        (5 - 12*lmMst2 + 4*lmMst1*(3 + lmMst2) - 
+                        4*pow2(lmMst2))*pow2(Mst2)*pow2(s2t) + 
+                         8*(12 - 45*lmMst2 + 
+                        2*lmMst1*(19 + 6*lmMst2 - 6*lmMt) + 
+                        (7 + 12*lmMst2)*lmMt - 12*pow2(lmMst2))*
+                        pow3(Mt) + 
+                         (1 + lmMst1*(2 - 32*lmMst2) - 2*lmMst2 + 
+                        16*pow2(lmMst1) + 16*pow2(lmMst2))*pow3(Mst2)*
+                         pow3(s2t))*pow8(Mst1) + 
+                        s2t*pow2(1 + lmMst2)*
+                         (4*pow2(Mt) - pow2(Mst2)*pow2(s2t))*power10(Mst2)
+)))/Mgl))/(Tbeta*pow4(Mst1)*pow6(Mst2)) + 
+          ((2304*Mt*pow3(s2t)*
+                ((1 + lmMst2)*Mgl*
+                   (2*((2 + 2*lmMst1 - lmMst2)*pow2(Mst2)*pow4(Mst1) + 
+                        (1 - 3*lmMst2 + lmMst1*(3 + 2*lmMst2) - 
+                        2*pow2(lmMst2))*pow2(Mst1)*pow4(Mst2)) + 
+                     (1 + 2*lmMst1 - 2*lmMst2)*pow6(Mst1) - 
+                     2*(1 + lmMst2)*pow6(Mst2)) + 
+                  Dmglst2*((1 + 13*lmMst2 - 2*lmMst1*(5 + 3*lmMst2) + 
+                        6*pow2(lmMst2))*pow6(Mst1) + 
+                     2*((1 - 4*lmMst1 + 10*lmMst2 + 3*pow2(lmMst2))*
+                         pow2(Mst2)*pow4(Mst1) + 
+                        pow2(Mst1)*
+                         (6 + 11*lmMst2 - 
+                         lmMst1*(3 - 5*lmMst2 - 6*pow2(lmMst2)) - 
+                         5*pow2(lmMst2) - 6*pow3(lmMst2))*pow4(Mst2) + 
+                        (1 - 2*lmMst2 - 3*pow2(lmMst2))*pow6(Mst2)))))/
+              (Mst2*pow2(Mst1)) + 
+             (4*pow2(Mt)*(pow2(Mst1)*
+                    (810*pow3(Dmsqst2)*
+                       (2*Dmglst2*pow2(Mst2)*
+                        (4*pow2(Mt) + 
+                        (4*pow2(Mst1) - 2*pow2(Mst2) - pow2(MuSUSY))*
+                        pow2(s2t)) - 
+                         Mgl*
+                         (-(pow2(Mst2)*
+                        (4*pow2(Mt) - 
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow2(s2t))) - 
+                         pow2(Mst1)*
+                        (4*pow2(Mt) + 
+                        (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*
+                        pow2(s2t)) + 2*pow2(s2t)*pow4(Mst1))) + 
+                      135*pow2(Dmsqst2)*
+                       (14*Dmglst2*pow2(Mst2)*
+                        (-(pow2(Mst2)*
+                        (4*pow2(Mt) - 
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow2(s2t))) - 
+                        pow2(Mst1)*
+                        (4*pow2(Mt) + 
+                        (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*
+                        pow2(s2t)) + 2*pow2(s2t)*pow4(Mst1)) + 
+                         Mgl*
+                         (-(pow2(Mst1)*pow2(Mst2)*
+                        (4*pow2(Mt) + 
+                        (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*
+                        pow2(s2t))) + 
+                         2*(pow2(Mst2) - 
+                        (lmMst1 - lmMst2)*pow2(MuSUSY))*pow2(s2t)*
+                        pow4(Mst1) - 
+                         (4*pow2(Mt) - 
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow2(s2t))*
+                         pow4(Mst2))) - 
+                      270*Dmsqst2*
+                       (2*Dmglst2*pow2(Mst2)*
+                         (-(pow2(Mst1)*pow2(Mst2)*
+                        (4*pow2(Mt) + 
+                        (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*
+                        pow2(s2t))) + 
+                         2*(pow2(Mst2) - 
+                        (lmMst1 - lmMst2)*pow2(MuSUSY))*pow2(s2t)*
+                        pow4(Mst1) - 
+                         (4*pow2(Mt) - 
+                        (2*pow2(Mst2) + pow2(MuSUSY))*pow2(s2t))*
+                         pow4(Mst2)) + 
+                         5*Mgl*
+                         (pow2(Mst1)*
+                         (4*pow2(Mt) + 
+                        (4*pow2(Mst2) - 
+                        (1 - 2*lmMst1 + 2*lmMst2)*pow2(MuSUSY))*
+                        pow2(s2t))*pow4(Mst2) + 
+                         pow2(s2t)*
+                         (-2*pow2(Mst2)*
+                        (pow2(Mst2) - (lmMst1 - lmMst2)*pow2(MuSUSY))*
+                        pow4(Mst1) + 
+                         2*(lmMst1 - lmMst2)*pow2(MuSUSY)*pow6(Mst1)) + 
+                         (4*pow2(Mt) - 
+                         (2*pow2(Mst2) + pow2(MuSUSY))*pow2(s2t))*
+                         pow6(Mst2)))) + 
+                   2*Mst2*(2*Dmglst2*
+                       (-((Mt*s2t*
+                        (32*pow2(Mst2)*
+                        (253 + lmMst2*(535 - 30*lmMt) - 102*lmMt + 
+                        12*(10 + 3*lmMt)*pow2(lmMst2) - 
+                        18*lmMst1*
+                       (9 + lmMst2*(1 + 2*lmMt) - 
+                       2*(lmMt + pow2(lmMst2))) - 36*pow3(lmMst2)) + 
+                        576*pow2(MuSUSY)*
+                        (8 + 7*lmMst2 - 
+                        lmMst1*(3 - 5*lmMst2 - 6*pow2(lmMst2)) - 
+                        11*pow2(lmMst2) - 6*pow3(lmMst2))) - 
+                        Mst2*
+                        (4*(4220 + 6114*lmMst2 - 
+                       576*lmMst1*(4 + 2*lmMst2 - lmMt) + 
+                       (-1392 - 1296*lmMst2)*lmMt + 
+                       1341*pow2(lmMst2))*pow2(Mt) + 
+                        9*pow2(MuSUSY)*pow2(s2t)*
+                        (60 + lmMst2*(206 + 32*pow2(lmMst1)) + 
+                        lmMst1*(8 - 460*lmMst2 - 246*pow2(lmMst2)) + 
+                        519*pow2(lmMst2) + 214*pow3(lmMst2))) - 
+                        12*pow2(s2t)*
+                        (52 + lmMst2*(-338 + 48*pow2(lmMst1)) - 
+                        129*pow2(lmMst2) + 
+                        48*(lmMst1*(1 - 2*(lmMst2 + pow2(lmMst2))) + 
+                        pow3(lmMst2)))*pow3(Mst2))*pow4(Mst1)*pow4(Mst2)
+) - 6*pow2(Mst2)*(Mt*s2t*(192*pow2(MuSUSY)*
+                        (8 + 13*lmMst2 - 
+                        lmMst1*(5 - 5*lmMst2 - 6*pow2(lmMst2)) - 
+                        8*pow2(lmMst2) - 6*pow3(lmMst2)) + 
+                        96*pow2(Mst2)*
+                        (23 + lmMst2*(93 - 22*lmMt) - 14*lmMt + 
+                        4*(11 - lmMt)*pow2(lmMst2) - 
+                        2*lmMst1*
+                        (25 + lmMst2*(17 - 2*lmMt) - 6*lmMt + 
+                        2*pow2(lmMst2)) + 4*pow3(lmMst2))) - 
+                        3*Mst2*
+                        (64*pow2(Mt)*
+                        (31 + lmMst2*(95 - 23*lmMt) - 16*lmMt + 
+                        (51 - 6*lmMt)*pow2(lmMst2) - 
+                        2*lmMst1*
+                       (25 + lmMst2*(20 - 3*lmMt) - 6*lmMt + 
+                       3*pow2(lmMst2)) + 6*pow3(lmMst2)) + 
+                        pow2(MuSUSY)*pow2(s2t)*
+                        (48 + lmMst2*(124 + 144*pow2(lmMst1)) + 
+                        278*pow2(lmMst2) - 
+                        lmMst1*(44 + 278*lmMst2 + 379*pow2(lmMst2)) + 
+                        235*pow3(lmMst2))) + 
+                        (332 + 302*lmMst2 - 288*lmMst1*(1 + lmMst2) + 
+                        111*pow2(lmMst2))*pow2(s2t)*pow3(Mst2))*
+                         pow6(Mst1) - 
+                         9*pow2(Mst1)*
+                         (Mt*s2t*(1 - 2*lmMst2 - 3*pow2(lmMst2))*
+                        (128*pow2(Mst2) + 64*pow2(MuSUSY)) - 
+                        Mst2*
+                        (4*(84 + (-70 - 32*lmMst1)*lmMst2 - 
+                       59*pow2(lmMst2))*pow2(Mt) - 
+                        (20 + (-198 - 32*lmMst1)*lmMst2 - 
+                        123*pow2(lmMst2))*pow2(MuSUSY)*pow2(s2t)) + 
+                        2*(52 - 2*(67 + 16*lmMst1)*lmMst2 - 
+                        91*pow2(lmMst2))*pow2(s2t)*pow3(Mst2))*
+                         pow6(Mst2) - 
+                         18*(-(Mst2*
+                        (64*pow2(Mt)*
+                        (42 + lmMst2*(242 - 62*lmMt) - 33*lmMt + 
+                        6*(29 - 4*lmMt)*pow2(lmMst2) - 
+                        2*lmMst1*
+                       (81 + lmMst2*(74 - 12*lmMt) - 18*lmMt + 
+                       12*pow2(lmMst2)) + 24*pow3(lmMst2)) + 
+                        pow2(MuSUSY)*pow2(s2t)*
+                        (48 + lmMst2*(180 + 272*pow2(lmMst1)) + 
+                        310*pow2(lmMst2) - 
+                        lmMst1*(92 + 310*lmMst2 + 635*pow2(lmMst2)) + 
+                        363*pow3(lmMst2)))) + 
+                        Mt*s2t*
+                        (32*pow2(Mst2)*
+                        (14 + 3*lmMst2*(63 - 16*lmMt) - 22*lmMt + 
+                        9*(15 - 2*lmMt)*pow2(lmMst2) - 
+                        lmMst1*
+                       (137 + 9*lmMst2*(13 - 2*lmMt) - 30*lmMt + 
+                       18*pow2(lmMst2)) + 18*pow3(lmMst2)) + 
+                        16*pow2(MuSUSY)*
+                        (49 + 103*lmMst2 - 
+                        4*lmMst1*(11 - 6*lmMst2 - 9*pow2(lmMst2)) - 
+                        36*(pow2(lmMst2) + pow3(lmMst2)))) + 
+                        32*(2 + 7*lmMst2 - lmMst1*(5 + 4*lmMst2) + 
+                        4*pow2(lmMst2))*pow2(s2t)*pow3(Mst2))*pow8(Mst1) 
++ 288*lmMst2*(1 + lmMst2)*(4*pow2(Mt) - 
+                         (2*pow2(Mst2) + pow2(MuSUSY))*pow2(s2t))*
+                         pow9(Mst2)) + 
+                      Mgl*(((1 + lmMst2)*Mt*s2t*
+                        (576*
+                        (1 - 2*lmMst1*(5 + 2*lmMst2 - 2*lmMt) + 
+                        4*lmMst2*(3 - lmMt) - 6*lmMt + 4*pow2(lmMst2)
+)*pow2(Mst2) + 1152*(1 + 5*lmMst2 - lmMst1*(3 + 2*lmMst2) + 
+                        2*pow2(lmMst2))*pow2(MuSUSY)) - 
+                         Mst2*
+                        (-9*pow2(MuSUSY)*pow2(s2t)*
+                        (189 + 726*lmMst2 + 
+                        32*(1 + lmMst2)*pow2(lmMst1) + 
+                        707*pow2(lmMst2) - 
+                        2*lmMst1*
+                        (253 + 332*lmMst2 + 123*pow2(lmMst2)) + 
+                        214*pow3(lmMst2)) + 
+                        4*pow2(Mt)*
+                        (2117 + 4*lmMst2*(1199 - 312*lmMt) - 
+                        576*lmMst1*(1 + lmMst2)*(3 + lmMst2 - lmMt) - 
+                        672*lmMt + (3651 - 576*lmMt)*pow2(lmMst2) + 
+                        576*pow3(lmMst2))) - 
+                         36*pow2(s2t)*
+                         (141 + 132*lmMst2 + 19*pow2(lmMst2) + 
+                        16*lmMst1*(3 + 5*lmMst2 + 2*pow2(lmMst2)) - 
+                        16*((1 + lmMst2)*pow2(lmMst1) + pow3(lmMst2)))*
+                         pow3(Mst2))*pow4(Mst1)*pow4(Mst2) + 
+                         9*pow2(Mst1)*
+                         (Mt*s2t*pow2(1 + lmMst2)*
+                        (256*pow2(Mst2) + 128*pow2(MuSUSY)) - 
+                         Mst2*
+                        (4*(173 + 188*lmMst2 + 
+                        32*lmMst1*(1 + lmMst2) + 59*pow2(lmMst2))*
+                        pow2(Mt) - 
+                        (205 + 252*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                        91*pow2(lmMst2))*pow2(MuSUSY)*pow2(s2t)) + 
+                         2*(189 + 220*lmMst2 + 
+                        32*lmMst1*(1 + lmMst2) + 75*pow2(lmMst2))*
+                         pow2(s2t)*pow3(Mst2))*pow6(Mst2) - 
+                         18*(pow2(Mst2)*
+                         (64*(1 + lmMst2)*Mt*s2t*
+                        ((3 + 2*lmMst1*(7 + 2*lmMst2 - 2*lmMt) - 
+                       4*lmMst2*(4 - lmMt) + 2*lmMt - 4*pow2(lmMst2)
+)*pow2(Mst2) + (1 - 10*lmMst2 + 4*lmMst1*(2 + lmMst2) - 
+                        4*pow2(lmMst2))*pow2(MuSUSY)) + 
+                        Mst2*
+                        (64*(1 + lmMst2)*
+                        (2 - lmMst1*(22 + 6*lmMst2 - 6*lmMt) + 
+                       3*lmMst2*(9 - 2*lmMt) - 5*lmMt + 
+                       6*pow2(lmMst2))*pow2(Mt) - 
+                        pow2(MuSUSY)*pow2(s2t)*
+                        (32 + 285*lmMst2 + 
+                        144*(1 + lmMst2)*pow2(lmMst1) + 
+                        444*pow2(lmMst2) - 
+                        lmMst1*
+                       (253 + 588*lmMst2 + 379*pow2(lmMst2)) + 
+                        235*pow3(lmMst2))) - 
+                        (141 + 172*lmMst2 + 75*pow2(lmMst2))*pow2(s2t)*
+                        pow3(Mst2))*pow6(Mst1) + 
+                         (-(Mst2*
+                        (64*(1 + lmMst2)*
+                        (5 + 2*lmMst1*(25 + 6*lmMst2 - 6*lmMt) - 
+                        3*lmMst2*(19 - 4*lmMt) + 7*lmMt - 
+                        12*pow2(lmMst2))*pow2(Mt) + 
+                        pow2(MuSUSY)*pow2(s2t)*
+                        (40 + 277*lmMst2 + 
+                        272*(1 + lmMst2)*pow2(lmMst1) + 
+                        556*pow2(lmMst2) - 
+                        lmMst1*(237 + 828*lmMst2 + 635*pow2(lmMst2)) + 
+                        363*pow3(lmMst2)))) + 
+                         (1 + lmMst2)*
+                         (Mt*s2t*
+                        (64*(8 - 27*lmMst2 + 
+                        lmMst1*(25 + 6*lmMst2 - 6*lmMt) + 
+                        (2 + 6*lmMst2)*lmMt - 6*pow2(lmMst2))*
+                        pow2(Mst2) + 
+                        32*(7 - 32*lmMst2 + 4*lmMst1*(7 + 3*lmMst2) - 
+                        12*pow2(lmMst2))*pow2(MuSUSY)) + 
+                         32*(lmMst1 - lmMst2)*pow2(s2t)*pow3(Mst2)))*
+                         pow8(Mst1)) + 
+                         144*pow2(1 + lmMst2)*
+                         (4*pow2(Mt) - 
+                         (2*pow2(Mst2) + pow2(MuSUSY))*pow2(s2t))*
+                         pow9(Mst2)))) - 
+                9*s2t*(pow2(Mst1)*pow3(s2t)*
+                    (-90*pow3(Dmsqst2)*
+                       (Mgl*(pow2(Mst1) - pow2(Mst2))*
+                         (2*(lmMst1 - lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                         pow4(Mst1) - pow4(Mst2)) - 
+                         2*Dmglst2*pow2(Mst2)*
+                         ((1 + 2*lmMst1 - 2*lmMst2)*pow2(Mst1)*
+                         pow2(Mst2) + 
+                         (1 - 2*lmMst1 + 2*lmMst2)*pow4(Mst1) - 
+                         pow4(Mst2))) + 
+                      (pow2(Mst1) - pow2(Mst2))*
+                       (2*(lmMst1 - lmMst2)*pow2(Mst1)*pow2(Mst2) + 
+                         pow4(Mst1) - pow4(Mst2))*
+                       (15*(14*Dmglst2 + Mgl)*pow2(Dmsqst2)*pow2(Mst2) - 
+                         30*Dmsqst2*(2*Dmglst2 - 5*Mgl)*pow4(Mst2)) - 
+                      2*pow6(Mst2)*
+                       (2*Dmglst2*
+                         (pow2(Mst2)*
+                         (44 + lmMst2*(-34 - 224*pow2(lmMst1)) + 
+                        359*pow2(lmMst2) + 
+                        2*lmMst1*
+                       (52 - 198*lmMst2 + 133*pow2(lmMst2)) - 
+                        42*pow3(lmMst2))*pow4(Mst1) - 
+                         pow2(Mst1)*
+                         (100 + lmMst2*(-222 + 32*pow2(lmMst1)) + 
+                        lmMst1*(8 - 524*lmMst2 - 246*pow2(lmMst2)) + 
+                        241*pow2(lmMst2) + 214*pow3(lmMst2))*pow4(Mst2) 
++ (36 - (70 + 32*lmMst1)*lmMst2 - 27*pow2(lmMst2))*pow6(Mst1) + 
+                         (20 - (262 + 32*lmMst1)*lmMst2 - 
+                         187*pow2(lmMst2))*pow6(Mst2)) - 
+                         Mgl*(-(pow2(Mst2)*
+                         (109 + 630*lmMst2 - 
+                         224*(1 + lmMst2)*pow2(lmMst1) - 
+                         lmMst1*(538 + 184*lmMst2 - 266*pow2(lmMst2)) + 
+                         435*pow2(lmMst2) - 42*pow3(lmMst2))*pow4(Mst1)) 
+- pow2(Mst1)*(237 - 190*lmMst2 - 32*(1 + lmMst2)*pow2(lmMst1) - 
+                         509*pow2(lmMst2) + 
+                         2*lmMst1*
+                        (285 + 364*lmMst2 + 123*pow2(lmMst2)) - 
+                         214*pow3(lmMst2))*pow4(Mst2) + 
+                         (141 + 140*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                         43*pow2(lmMst2))*pow6(Mst1) + 
+                         (237 + 316*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                         123*pow2(lmMst2))*pow6(Mst2)))) - 
+                   (4*pow2(Mt)*pow2(MuSUSY)*
+                      (2*Dmglst2*Mst2*
+                         (Mst2*pow4(Mst1)*
+                         (128*Mt*
+                        (8 + 7*lmMst2 - 
+                        lmMst1*(3 - 5*lmMst2 - 6*pow2(lmMst2)) - 
+                        11*pow2(lmMst2) - 6*pow3(lmMst2))*pow3(Mst2) + 
+                         s2t*
+                         ((1 - 2*lmMst1 + 2*lmMst2)*
+                        (-105*pow2(Dmsqst2) + 30*Dmsqst2*pow2(Mst2)) - 
+                         2*(60 + lmMst2*(206 + 32*pow2(lmMst1)) + 
+                        lmMst1*(8 - 460*lmMst2 - 246*pow2(lmMst2)) + 
+                        519*pow2(lmMst2) + 214*pow3(lmMst2))*pow4(Mst2))
+) + pow2(Mst1)*(128*Mt*(1 - 2*lmMst2 - 3*pow2(lmMst2))*pow6(Mst2) + 
+                         s2t*
+                         (90*Mst2*pow3(Dmsqst2) - 
+                         105*pow2(Dmsqst2)*pow3(Mst2) + 
+                         30*Dmsqst2*pow5(Mst2) + 
+                         2*(20 + (-198 - 32*lmMst1)*lmMst2 - 
+                        123*pow2(lmMst2))*pow7(Mst2))) + 
+                         4*(Mst2*
+                        (64*Mst2*Mt*
+                        (8 + 13*lmMst2 - 
+                        lmMst1*(5 - 5*lmMst2 - 6*pow2(lmMst2)) - 
+                        8*pow2(lmMst2) - 6*pow3(lmMst2)) + 
+                        s2t*(-15*Dmsqst2*(lmMst1 - lmMst2) - 
+                        pow2(Mst2)*
+                        (48 + lmMst2*(124 + 144*pow2(lmMst1)) + 
+                        278*pow2(lmMst2) - 
+                        lmMst1*(44 + 278*lmMst2 + 379*pow2(lmMst2)) + 
+                        235*pow3(lmMst2))))*pow6(Mst1) + 
+                         (-(Mst2*s2t*
+                        (48 + lmMst2*(180 + 272*pow2(lmMst1)) + 
+                        310*pow2(lmMst2) - 
+                        lmMst1*(92 + 310*lmMst2 + 635*pow2(lmMst2)) + 
+                        363*pow3(lmMst2))) + 
+                        16*Mt*
+                        (49 + 103*lmMst2 - 
+                        4*lmMst1*(11 - 6*lmMst2 - 9*pow2(lmMst2)) - 
+                        36*(pow2(lmMst2) + pow3(lmMst2))))*pow8(Mst1)) + 
+                         64*lmMst2*(1 + lmMst2)*s2t*pow9(Mst2)) + 
+                        Mgl*(2*
+                         (128*(1 + lmMst2)*Mt*
+                        (1 - 10*lmMst2 + 4*lmMst1*(2 + lmMst2) - 
+                        4*pow2(lmMst2))*pow3(Mst2) + 
+                         s2t*
+                         ((lmMst1 - lmMst2)*
+                        (15*pow2(Dmsqst2) + 150*Dmsqst2*pow2(Mst2)) - 
+                         2*(32 + 285*lmMst2 + 
+                        144*(1 + lmMst2)*pow2(lmMst1) + 
+                        444*pow2(lmMst2) - 
+                        lmMst1*(253 + 588*lmMst2 + 379*pow2(lmMst2)) + 
+                        235*pow3(lmMst2))*pow4(Mst2)))*pow6(Mst1) - 
+                         pow4(Mst1)*
+                         (256*(1 + lmMst2)*Mt*
+                         (1 + 5*lmMst2 - lmMst1*(3 + 2*lmMst2) + 
+                        2*pow2(lmMst2))*pow5(Mst2) + 
+                         s2t*((1 - 2*lmMst1 + 2*lmMst2)*
+                         (15*pow2(Dmsqst2)*pow2(Mst2) - 
+                         90*pow3(Dmsqst2) + 150*Dmsqst2*pow4(Mst2)) + 
+                         2*(189 + 726*lmMst2 + 
+                         32*(1 + lmMst2)*pow2(lmMst1) + 
+                         707*pow2(lmMst2) - 
+                         2*lmMst1*
+                        (253 + 332*lmMst2 + 123*pow2(lmMst2)) + 
+                         214*pow3(lmMst2))*pow6(Mst2))) + 
+                         4*(32*(1 + lmMst2)*Mst2*Mt*
+                        (7 - 32*lmMst2 + 4*lmMst1*(7 + 3*lmMst2) - 
+                        12*pow2(lmMst2)) + 
+                         s2t*
+                         (75*Dmsqst2*(lmMst1 - lmMst2) - 
+                         pow2(Mst2)*
+                         (40 + 277*lmMst2 + 
+                         272*(1 + lmMst2)*pow2(lmMst1) + 
+                         556*pow2(lmMst2) - 
+                         lmMst1*(237 + 828*lmMst2 + 635*pow2(lmMst2)) + 
+                         363*pow3(lmMst2))))*pow8(Mst1) - 
+                         pow2(Mst1)*
+                         (256*Mt*pow2(1 + lmMst2)*pow7(Mst2) + 
+                         s2t*(-90*pow2(Mst2)*pow3(Dmsqst2) + 
+                         15*pow2(Dmsqst2)*pow4(Mst2) + 
+                         150*Dmsqst2*pow6(Mst2) + 
+                         2*(205 + 252*lmMst2 + 32*lmMst1*(1 + lmMst2) + 
+                         91*pow2(lmMst2))*pow8(Mst2))) + 
+                         32*s2t*pow2(1 + lmMst2)*power10(Mst2))))/
+                    pow2(Sbeta)))/(pow4(Mst1)*pow6(Mst2)))/Mgl)))/648.
