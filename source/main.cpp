@@ -468,31 +468,30 @@ int main(int argc, char **argv) {
 	 //setup_HSSUSY_minmix(),
 	 //checkH3m(),
 	 //checkH3m2(),
-	 //Xt29(),
-	 //Xt3(),
-	 //Xt31(),
-	 Xt33()
-	 //MS350(),
-	 //MS400(),
-	 //MS480()
+	 Xt29(),
+	 Xt3(),
+	 Xt31(),
+	 Xt33(),
+	 MS350(),
+	 MS400(),
+	 MS480()
       }; 
       for (const auto point: points) {
 	 std::cout << "----------------------------------" << std::endl;
 	 // init hierarchy calculator
 	 h3m::HierarchyCalculator hierarchyCalculator(point);
 	 // compare expanded terms at 2-loop level with the exact 2-loop result and choose a suitable hierarchy
-	 const int suitableHierarchyTop = hierarchyCalculator.compareHierarchies(false);
-	 const int suitableHierarchyBot = hierarchyCalculator.compareHierarchies(true);
+	 const int suitableHierarchyTop = hierarchyCalculator.compareHierarchies(false, 2.);
+	 const int suitableHierarchyBot = hierarchyCalculator.compareHierarchies(true, 2.);
 	 // calculate the 3-loop corrections with the suiatble hierarchy
+	
+	 // check terms
+	 //hierarchyCalculator.checkTerms();
 	 
-	 for(int i = 0; i <= 13; i++){
-	    hierarchyCalculator.calculateHierarchy(i, false, 1,0,0);
-	    hierarchyCalculator.calculateHierarchy(i, false, 0,1,0);
-	    hierarchyCalculator.calculateHierarchy(i, false, 0,0,1);
-	 }
-	 //Eigen::Matrix2d DMh3L = hierarchyCalculator.calculateHierarchy(suitableHierarchyTop, false, 0, 0, 1);
+	 Eigen::Matrix2d DMh3L = hierarchyCalculator.calculateHierarchy(suitableHierarchyTop, false, 0, 0, 1);
 	 //Eigen::Matrix2d DMh3Lb = hierarchyCalculator.calculateHierarchy(suitableHierarchyBot, true, 0, 0, 1);
 	 std::cout << "hierarchy top: " << suitableHierarchyTop << ", hierarchy bot: " << suitableHierarchyBot << std::endl;
+	 //std::cout << "shifts " << hierarchyCalculator.calcDRbarToMDRbarShift(suitableHierarchyTop, false, true, true) << std::endl;
 	 //std::cout << "DMh3L = " << DMh3L.row(0) << ' ' << DMh3L.row(1) << std::endl;
 	 //std::cout << "DMh3Lb = " << DMh3Lb.row(0) << ' ' << DMh3Lb.row(1) << std::endl;
       }

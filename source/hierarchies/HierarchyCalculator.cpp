@@ -3,6 +3,7 @@
 #include <HierarchyCalculator.hpp>
 #include <iostream>
 #include <stdexcept>
+#include <iomanip>
 #include <type_traits>
 
 // some templates to perform operations between int's and complex<double>
@@ -58,24 +59,20 @@ extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double 
  */
 h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    this -> p = p;
-   // fill flag list
-   for(int i = xx; i <= xxMgl; i++){
-      flagMap.insert(std::pair<unsigned int, unsigned int> (i, 1));
-   }
    // init constants
    // imaginary unit
    const std::complex<double> I(0., 1.);
-   
+
    // Riemann-Zeta
    z2 = pow2(Pi)/6.;
    z3 = 1.202056903159594;
    z4 = pow4(Pi)/90.;
-   
+
    // polylogs
    double pl412 = 0.51747906167389934317668576113647; // PolyLog[4,1/2]
    std::complex<double> pl2expPi3 (0.27415567780803773941206919444, 1.014941606409653625021202554275); // PolyLog[2, Exp[I Pi / 3]]
    std::complex<double> pl3expPi6sqrt3 (0.51928806536375962552715984277228, - 0.33358157526196370641686908633664); // PolyLog[3, Exp[- I Pi / 6] / Sqrt[3]]
-   
+
    // polylog functions, checked
    B4 = (-4 * z2 * pow2(log(2)) + 2 / 3.* pow4(log(2)) - 13 / 2. * z4 + 16. * pl412);
    D3 = 6 * z3 - 15 / 4. * z4 - 6. * pow2(std::imag(pl2expPi3));
@@ -86,19 +83,32 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    S2 = 4 * std::imag(pl2expPi3) / (9. * sqrt(3));
    T1ep = - 45 / 2. - (Pi * sqrt(3) * pow2(log(3))) / 8. - (35 * pow3(Pi) * sqrt(3)) / 216. - 9 / 2. * z2 + z3 
       + 6. * sqrt(3) * std::imag(pl2expPi3) - 6. * sqrt(3) * std::imag(pl3expPi6sqrt3);
-   
+
+   // init common variables
+   init();
+}
+
+/*
+ *  	init common variables
+ */
+void h3m::HierarchyCalculator::init(){
+   // fill flag list
+   flagMap.clear();
+   for(int i = xx; i <= xxMgl; i++){
+      flagMap.insert(std::pair<unsigned int, unsigned int> (i, 1));
+   }
    // beta
    const double beta = atan(p.vu / p.vd);
-   
+
    //sw2
    const double sw2 = 1 - pow2(p.MW / p.MZ);
-   
+
    // Al4p
    Al4p = pow2(p.g3 / (4 * Pi));
-   
+
    // MGl
    Mgl = p.MG;
-   
+
    // Msq, checked
    Msq = (2 * sqrt(p.mq2(0, 0)) + sqrt(p.mu2(0, 0)) + sqrt(p.md2(0, 0))	// sup and sdown
       + 2 * sqrt(p.mq2(1, 1)) + sqrt(p.mu2(1, 1)) + sqrt(p.md2(1, 1))	// scharm and sstrange
@@ -108,19 +118,19 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
 
    // lmMsq, checked
    lmMsq = log(pow2(p.scale / Msq));
-   
+
    // lmMgl, checked
    lmMgl = log(pow2(p.scale / Mgl));
-   
+
    // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here GF is calculated in the DRbar scheme, checked)
    prefac = (3. / (sqrt(2) * (pow2(p.vu) + pow2(p.vd)) * sqrt(2) * pow2(Pi) * pow2(sin(beta))));
-   //prefac = 2.53386E-6;
 }
+
 
 /*
  * 	compares deviation of all hierarchies with the exact 2-loop result and returns the hierarchy which minimizes the error
  */
-int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
+int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom, const double maxError){
    // set flags to truncate the expansion
    flagMap.at(xx) = 0;
    flagMap.at(xxMst) = 0;
@@ -135,28 +145,31 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
    treelvl (1,0) = s2b/2.*(-pow2(p.MZ) - pow2(p.MA));
    treelvl (0,1) = treelvl (1,0);
    treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tbeta + pow2(p.MA) / tbeta);
-   
-   // calculate the exact 1-loop result (only alpha_t/b)
-   Eigen::Matrix2d Mt41L = getMt41L(isBottom);
 
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
    for(unsigned int hierarchy = h3; hierarchy <= h9q2; hierarchy ++){
       // first, check if the hierarchy is suitable to the mass spectrum
       if(isHierarchySuitable(hierarchy, isBottom)){
+	 // calculate the exact 1-loop result (only alpha_t/b)
+	 Eigen::Matrix2d Mt41L = getMt41L(hierarchyMap.at(hierarchy), isBottom, 1, 0);
+	 
 	 // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
-	 Eigen::Matrix2d Mt42L = getMt42L(hierarchyMap.at(hierarchy), isBottom);
+	 Eigen::Matrix2d Mt42L = getMt42L(hierarchyMap.at(hierarchy), isBottom, 1, 0);
 	 
 	 // check for spurious poles. If this is the case slightly change Mst2
 	 if(std::isnan(Mt42L(0,0)) || std::isnan(Mt42L(1,0)) || std::isnan(Mt42L(1,1))){
 	    deltaDSZ = 1.0E-6;
-	    Mt42L = getMt42L(hierarchyMap.at(hierarchy), isBottom);
+	    Mt42L = getMt42L(hierarchyMap.at(hierarchy), isBottom, 1, 0);
 	 }
 	 
-	 // calc 1-loop shift for DRbar -> MDRbar
-	 Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isBottom);
+	 //DEPRECATED calc 1-loop shift for DRbar -> MDRbar
+	 //calc difference of Mt41L or Mt41L in the MDRbar scheme directly
+	 //it seems that in H3m the sign of the function getShift is wrong as well(Mt4LDRbar - Mt4LMDRbar)????
+	 //to be consistent everything should be calculated in the MDRbar-scheme so we should subtract Mt4LDRbar, shouldn't we?
+	 //Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isBottom);
 	 
 	 //calculate the exact higgs mass at 2-loop (only up to alpha_s alpha_t/b)
-	 Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + shift + Mt42L);
+	 Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
 	 double Mh2l = sortEigenvalues(es2L).at(0);
 
 	 // calculate the expanded 2-loop expression with the specific hierarchy
@@ -166,22 +179,21 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
 	 double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
 
 	 // estimate the error
-	 double currError = fabs((Mh2l - Mh2LExpanded));
+	 double twoLoopError = fabs((Mh2l - Mh2LExpanded));
 	 
 	 // estimate the error due to the expansion
-	 double expError = getExpansionError(hierarchy, isBottom, treelvl + Mt41L + shift + Mt42L);
+	 double expError = getExpansionError(hierarchy, isBottom, treelvl + Mt41L + Mt42L);
 	 
 	 // add these errors to include the error of the expansion in the comparison
-	 currError = sqrt(pow2(currError) + pow2(expError));
-	 
-	 std::cout << "err " << hierarchy << " " << Mh2l << " " << Mh2LExpanded << " " << currError << std::endl;
+	 double currError = sqrt(pow2(twoLoopError) + pow2(expError));
+
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
-	 if(error < 0){
+	 if(error < 0 && twoLoopError < maxError){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
 	 }
 	 // compare the current error with the last error and choose the hierarchy which fits best (lowest error)
-	 else if(currError < error){
+	 else if(currError < error && twoLoopError < maxError){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
 	 }
@@ -189,7 +201,10 @@ int h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
    }
    // reset the flags
    flagMap.at(xx) = 1;
-   flagMap.at(xxMst) = 1;
+   flagMap.at(xxMst) = 1;;
+   if(suitableHierarchy == -1){
+      throw std::runtime_error("No hierarchy is chosen due to errors larger than " +  std::to_string(maxError) + " GeV at two-loop level!");
+   }
    return suitableHierarchy;
 }
 
@@ -202,7 +217,7 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
             const unsigned int threeLoopFlagIn) {
    // the hierarchy files containing 1-, 2- and 3-loop terms (alpha_s^0 alpha_t/b, alpha_s alpha_t/b, alpha_s^2 alpha_t/b)
    double sigS1Full = 0., sigS2Full = 0., sigS12Full = 0.;
-   
+
    // common variables
    double At, Mt, s2t, Mst1, Mst2;
    if (!isBottom) {
@@ -215,6 +230,7 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
       Mt = p.Mb;
       s2t = p.s2b;
    }
+
    const double Tbeta = p.vu / p.vd;
    const double Cbeta = cos(atan(Tbeta));
    const double Sbeta = sin(atan(Tbeta));
@@ -229,7 +245,7 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const unsigned int 
    int xDR2DRMOD;
    Mst1 = p.MSt(0, 0);
    Mst2 = p.MSt(1, 0);
-   
+
    // flags to truncate the expansion while comparing at 2-loop level or to estimate the error
    int x, xMst, xDmglst1, xDmsqst1, xDmst12, xAt, xlmMsusy, xMsq, xMsusy, xDmglst2, xDmsqst2, xMgl;
    x = flagMap.at(xx);
@@ -575,7 +591,7 @@ bool h3m::HierarchyCalculator::isHierarchySuitable(const unsigned int tag, const
 /*
  * 	shifts Mst1/Msb1 according to the hierarchy to the MDRbar scheme, checked
  */
-double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag) {
+double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bool isBottom, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
    double Mst1mod = 0., Mst1, Mst2;
    if(!isBottom){
       Mst1 = p.MSt(0, 0);
@@ -587,7 +603,7 @@ double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bo
    }
    double lmMst2 = log(pow2(p.scale) / pow2(Mst2));
    double Dmglst2 = Mgl - Mst2;
-   double mdr2mst1ka = (-8. * threeLoopFlag * pow2(Al4p) * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2) * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
+   double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p) * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2) * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
    switch (tag) {
    case h3:
       Mst1mod = (1 + mdr2mst1ka);
@@ -599,14 +615,14 @@ double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bo
       Mst1mod = (1 + mdr2mst1ka);
       break;
    case h6:
-      Mst1mod = (144 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) * pow4(Msq) + 27 * (1 + mdr2mst1ka) * pow4(Msq) * pow2(Mst1) +
-         threeLoopFlag * pow2(Al4p) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow5(Mgl) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow3(Mgl) * pow2(Msq) +
+      Mst1mod = (144 * oneLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) * pow4(Msq) + 27 * (1 + mdr2mst1ka) * pow4(Msq) * pow2(Mst1) +
+         twoLoopFlag * pow2(Al4p) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow5(Mgl) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow3(Mgl) * pow2(Msq) +
             288 * Dmglst2 * pow4(Msq) * (1 - 2 * z2) + 12 * Mgl * pow4(Msq) * (79 + 144 * pow2(lmMgl) - 150 * lmMsq +
                90 * pow2(lmMsq) - 90 * lmMgl * (-3 + 2 * lmMsq) + 208 * z2))) / (27. * pow4(Msq) * pow2(Mst1));
       break;
    case h6b:
-      Mst1mod = (48 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) + 9 * (1 + mdr2mst1ka) * pow2(Mst1) +
-         8 * threeLoopFlag * pow2(Al4p) * (-135 * pow2(Msq) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
+      Mst1mod = (48 * oneLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) + 9 * (1 + mdr2mst1ka) * pow2(Mst1) +
+         8 * twoLoopFlag * pow2(Al4p) * (-135 * pow2(Msq) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
             pow2(Mgl) * (77 + 135 * lmMgl + 72 * pow2(lmMgl) - 75 * lmMsq -
                90 * lmMgl * lmMsq + 45 * pow2(lmMsq) + 104 * z2))) / (9. * pow2(Mst1));
       break;
@@ -620,7 +636,7 @@ double h3m::HierarchyCalculator::shiftMst1ToMDR(const unsigned int tag, const bo
 /*
  * 	shifts Mst2/Msb2 according to the hierarchy to the MDRbar scheme, checked
  */
-double h3m::HierarchyCalculator::shiftMst2ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag) {
+double h3m::HierarchyCalculator::shiftMst2ToMDR(const unsigned int tag, const bool isBottom, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
    double Mst2mod;
    double Mst1;
    double Mst2;
@@ -633,7 +649,7 @@ double h3m::HierarchyCalculator::shiftMst2ToMDR(const unsigned int tag, const bo
       Mst2 = p.MSb(1, 0);
    }
    double Dmglst2 = Mgl - Mst2;
-   double mdr2mst2ka = (-80. * threeLoopFlag * pow2(Al4p) * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
+   double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p) * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
    switch (tag) {
    case h3:
       Mst2mod = (1 + mdr2mst2ka);
@@ -645,14 +661,14 @@ double h3m::HierarchyCalculator::shiftMst2ToMDR(const unsigned int tag, const bo
       Mst2mod = (1 + mdr2mst2ka);
       break;
    case h6:
-      Mst2mod = (144 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) * pow4(Msq) + 27 * (1 + mdr2mst2ka) * pow4(Msq) * pow2(Mst2) +
-         threeLoopFlag * pow2(Al4p) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow5(Mgl) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow3(Mgl) * pow2(Msq) +
+      Mst2mod = (144 * oneLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) * pow4(Msq) + 27 * (1 + mdr2mst2ka) * pow4(Msq) * pow2(Mst2) +
+         twoLoopFlag * pow2(Al4p) * Mgl * (-5 * (67 + 84 * lmMgl - 84 * lmMsq) * pow5(Mgl) - 40 * (43 + 30 * lmMgl - 30 * lmMsq) * pow3(Mgl) * pow2(Msq) +
             288 * Dmglst2 * pow4(Msq) * (1 - 2 * z2) + 12 * Mgl * pow4(Msq) * (79 + 144 * pow2(lmMgl) - 150 * lmMsq +
                90 * pow2(lmMsq) - 90 * lmMgl * (-3 + 2 * lmMsq) + 208 * z2))) / (27. * pow4(Msq) * pow2(Mst2));
       break;
    case h6b:
-      Mst2mod = (48 * twoLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) + 9 * (1 + mdr2mst2ka) * pow2(Mst2) +
-         8 * threeLoopFlag * pow2(Al4p) * (-135 * pow2(Msq) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
+      Mst2mod = (48 * oneLoopFlag * Al4p * (1 + lmMgl) * pow2(Mgl) + 9 * (1 + mdr2mst2ka) * pow2(Mst2) +
+         8 * twoLoopFlag * pow2(Al4p) * (-135 * pow2(Msq) + 12 * Dmglst2 * Mgl * (1 - 22 * z2) +
             pow2(Mgl) * (77 + 135 * lmMgl + 72 * pow2(lmMgl) - 75 * lmMsq -
                90 * lmMgl * lmMsq + 45 * pow2(lmMsq) + 104 * z2))) / (9. * pow2(Mst2));
       break;
@@ -678,7 +694,7 @@ std::vector<double> h3m::HierarchyCalculator::sortEigenvalues(const Eigen::Eigen
 /*
  * 	calculates the 1-loop alpha_t/b Higgs mass matrix
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(const bool isBottom){
+Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(const unsigned int tag, const bool isBottom, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
    Eigen::Matrix2d Mt41L;
    double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
    double Mst1;
@@ -687,14 +703,14 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(const bool isBottom){
    double s2t;
    const double beta = atan(p.vu/p.vd);
    if(!isBottom){
-      Mst1 = p.MSt(0, 0);
-      Mst2 = p.MSt(1, 0);
+      Mst1 = shiftMst1ToMDR(tag, false, shiftOneLoop, shiftTwoLoop);
+      Mst2 = shiftMst2ToMDR(tag, false, shiftOneLoop, shiftTwoLoop);
       s2t = p.s2t;
       Mt = p.Mt;
    }
    else{
-      Mst1 = p.MSb(0, 0);
-      Mst2 = p.MSb(1, 0);
+      Mst1 = shiftMst1ToMDR(tag, true, shiftOneLoop, shiftTwoLoop);
+      Mst2 = shiftMst2ToMDR(tag, true, shiftOneLoop, shiftTwoLoop);
       s2t = p.s2b;
       Mt = p.Mb;
    }
@@ -745,9 +761,10 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(const bool isBottom){
 }
 
 /*
+ * 	DEPRECATED! Just use differences of Mt41L
  * 	calculates the DRbar -> MDRbar shift for the one loop contribution
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::getShift(const int tag, const bool isBottom){
+Eigen::Matrix2d h3m::HierarchyCalculator::getShift(const unsigned int tag, const bool isBottom){
    Eigen::Matrix2d shift;
    double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
    double Mst1;
@@ -835,7 +852,7 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getShift(const int tag, const bool isB
 /*
  * 	calculates the 2-loop higgs mass matrix according to Pietro Slavich
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(const int tag, const bool isBottom){
+Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(const unsigned int tag, const bool isBottom, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
    Eigen::Matrix2d Mt42L;
    double S11, S12, S22;
    double Mt2;
@@ -847,16 +864,16 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(const int tag, const bool isB
    if(!isBottom){
       const double theta = asin(p.s2t)/2.;
       Mt2 = pow2(p.Mt);
-      Mst12 = pow2(shiftMst1ToMDR(tag, false, 1, 0));
-      Mst22 = pow2(shiftMst2ToMDR(tag, false, 1, 0) + deltaDSZ);
+      Mst12 = pow2(shiftMst1ToMDR(tag, false, shiftOneLoop, shiftTwoLoop));
+      Mst22 = pow2(shiftMst2ToMDR(tag, false, shiftOneLoop, shiftTwoLoop) + deltaDSZ);
       st = sin(theta);
       ct = cos(theta);
    }
    else{
       const double theta = asin(p.s2b)/2.;
       Mt2 = pow2(p.Mb);
-      Mst12 = pow2(shiftMst1ToMDR(tag, true, 1, 0));
-      Mst22 = pow2(shiftMst2ToMDR(tag, true, 1, 0) + deltaDSZ);
+      Mst12 = pow2(shiftMst1ToMDR(tag, true, shiftOneLoop, shiftTwoLoop));
+      Mst22 = pow2(shiftMst2ToMDR(tag, true, shiftOneLoop, shiftTwoLoop) + deltaDSZ);
       st = sin(theta);
       ct = cos(theta);
    }
@@ -874,6 +891,25 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(const int tag, const bool isB
    Mt42L(1, 1) = S22;
    return Mt42L;
 }
+
+
+/*
+ * 	calculates the contribution to the order (alpha_t) and (alpha_s alpha_t) in the MDRbar scheme
+ * 	the result is the difference in the Higgs mass matrix of the MDRbar and DRbar scheme
+ */
+Eigen::Matrix2d h3m::HierarchyCalculator::calcDRbarToMDRbarShift(const unsigned int tag, const bool isBottom, const bool shiftOneLoop, const bool shiftTwoLoop){
+   const unsigned int hierarchyTag = hierarchyMap.at(tag);
+   if(shiftOneLoop && shiftTwoLoop){
+      return getMt41L(hierarchyTag, isBottom, 1, 1) + getMt42L(hierarchyTag, isBottom, 1, 1) - getMt41L(hierarchyTag, isBottom, 0, 0) - getMt42L(hierarchyTag, isBottom, 0, 0);
+   }
+   else if(shiftOneLoop){
+      return getMt41L(hierarchyTag, isBottom, 1, 1) - getMt41L(hierarchyTag, isBottom, 0, 0);
+   }
+   else if(shiftTwoLoop){
+      return getMt42L(hierarchyTag, isBottom, 1, 1) - getMt42L(hierarchyTag, isBottom, 0, 0);
+   }
+}
+
 
 /*
  * 	evaluates the error due to the expansion in mass ratios and differences
@@ -1003,4 +1039,193 @@ double h3m::HierarchyCalculator::getExpansionError(const unsigned int tag, const
    flagMap.at(xx) = 0;
    return sqrt(squaredErrorSum);
 }
+
+/*
+ * 	input parameters for the check
+ */
+h3m::Parameters checkTermsXt33(){
+
+   h3m::Parameters pars;
+
+   pars.scale = 1973.75;
+   pars.mu = 1999.82;
+   pars.g3 =  1.02907;
+   pars.vd = 49.5751;
+   pars.vu = 236.115;
+   pars.mq2 <<  4.00428e+06 , 0, 0,
+               0, 4.00428e+06, 0,
+               0, 0, 3.99786e+06;
+   pars.md2 << 4.00361e+06, 0, 0,
+               0, 4.00361e+06, 0,
+               0, 0, 4.00346e+06;
+   pars.mu2 << 4.00363e+06 , 0, 0,
+               0, 4.00363e+06, 0,
+               0, 0, 3.99067e+06;
+   pars.Ab = 9996.81;
+   pars.At = 6992.34;
+
+   pars.MA = 1992.14;
+   pars.MG = 2000.96;
+   pars.MW = 76.7777;
+   pars.MZ = 88.4219;
+   pars.Mt = 147.295;
+   pars.Mb = 2.23149;
+   pars.MSt << 1745.3 , 2232.1;
+   pars.MSb <<  2000.14, 2001.09;
+   pars.s2t = -0.999995;
+   pars.s2b =-0.550527;
+
+   return pars;
+}
+
+/*
+ * 	check the expansion terms
+ */
+void h3m::HierarchyCalculator::checkTerms(){
+   p = checkTermsXt33();
+   init();
+   for(int i = h3; i <= h9q2; i++){
+      Eigen::Matrix2d oloMat = calculateHierarchy(i, false, 1,0,0);
+      Eigen::Matrix2d twloMat = calculateHierarchy(i, false, 0,1,0);
+      Eigen::Matrix2d thloMat = calculateHierarchy(i, false, 0,0,1);
+      bool ck1LPassed, ck2LPassed, ck3LPassed;
+      switch(i){
+	 case h3:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-13.4248798129061) < 1e-06 && twloMat(1,0) - 10.91323060388626 < 1e-06 && twloMat(1,1) - 1477.154147584478 < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 1.163582002655875 < 1e-06 && thloMat(1,0) - 9.897241079348351 < 1e-06 && thloMat(1,1) - 369.9741236956309 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h32q2g:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-13.66052379180129) < 1e-06 && twloMat(1,0) - 11.26755617866339 < 1e-06 && twloMat(1,1) - 1477.465656153518 < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 1.113051431370291 < 1e-06 && thloMat(1,0) - 9.903809573970422 < 1e-06 && thloMat(1,1) - 369.7408109643386 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h3q22g:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-13.66052379180129) < 1e-06 && twloMat(1,0) - 11.26755617866339 < 1e-06 && twloMat(1,1) - 1477.465656153518 < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 1.058450932536496 < 1e-06 && thloMat(1,0) - 10.0141272838662 < 1e-06 && thloMat(1,1) - 370.3301180635573 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h4:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 0 < 1e-06 && oloMat(1,0) - 0 < 1e-06 && oloMat(1,1) - 6685.123085628641 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - 0 < 1e-06 && twloMat(1,0) - 1183.325484493686 < 1e-06 && twloMat(1,1) - 1458.970501474495 < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 162.1379208650191 < 1e-06 && thloMat(1,0) - 326.0219627343553 < 1e-06 && thloMat(1,1) - 431.6926278454841 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h5:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 15921.69462848581 < 1e-06 && oloMat(1,0) - (-388569.2043081555) < 1e-06 && oloMat(1,1) - 7874.401574063407 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-86.77887344841422) < 1e-06 && twloMat(1,0) - (-20625.63783863484) < 1e-06 && twloMat(1,1) - (-42446.62009872038) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 2442.115080578889 < 1e-06 && thloMat(1,0) - (-3859.942907446577) < 1e-06 && thloMat(1,1) - 60593.055768119 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h5g1:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 15921.69462848581 < 1e-06 && oloMat(1,0) - (-388569.2043081556) < 1e-06 && oloMat(1,1) - 7874.401574063407 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-114.6037388932203) < 1e-06 && twloMat(1,0) - (-20341.84471909946) < 1e-06 && twloMat(1,1) - (-42843.48046642416) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 2415.507513838155 < 1e-06 && thloMat(1,0) - (-3766.750163753644) < 1e-06 && thloMat(1,1) - 59380.34497121828 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h6:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-1078.578574572312) < 1e-06 && twloMat(1,0) - 7096.529601647042 < 1e-06 && twloMat(1,1) - (-1927.791631086123) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 245.4412216221288 < 1e-06 && thloMat(1,0) - 573.1296253278389 < 1e-06 && thloMat(1,1) - 8448.4582538127 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h6b:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 9272.477351702311 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-1078.578574572312) < 1e-06 && twloMat(1,0) - 7096.52960164704 < 1e-06 && twloMat(1,1) - (-1900.197036824461) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 283.0253770519464 < 1e-06 && thloMat(1,0) - 566.2182257407396 < 1e-06 && thloMat(1,1) - 10093.33785879814 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h6b2qg2:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 9272.477351702311 < 1e-06 && oloMat(1,0) - (-184.7601614832759) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2077.345120153528) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 285.3154791763894 < 1e-06 && thloMat(1,0) - 544.3654284413091 < 1e-06 && thloMat(1,1) - 10336.22756889787 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h6bq22g:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-1078.578574572311) < 1e-06 && twloMat(1,0) - 7096.529601647042 < 1e-06 && twloMat(1,1) - (-1900.197036824461) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 283.0220052455883 < 1e-06 && thloMat(1,0) - 566.2190953470737 < 1e-06 && thloMat(1,1) - 10093.33986048966 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;;
+	 break;
+	 case h6bq2g2:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832759) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2077.345120153528) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 285.3120881213721 < 1e-06 && thloMat(1,0) - 544.3662758149513 < 1e-06 && thloMat(1,1) - 10336.23012077387 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h6g2:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832761) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2112.642999123034) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 246.0217489966267 < 1e-06 && thloMat(1,0) - 557.451210096066 < 1e-06 && thloMat(1,1) - 8628.076480526881 < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h9:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.352110199906) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - 420.2050380976995 < 1e-06 && twloMat(1,0) - (-554.6021924866435) < 1e-06 && twloMat(1,1) - (-797.8089039452509) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 132.8584579769461 < 1e-06 && thloMat(1,0) - (-171.9326869339159) < 1e-06 && thloMat(1,1) - (-800.8408283898472) < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+	 case h9q2:
+	    ck1LPassed = false;
+	    ck2LPassed = false;
+	    ck3LPassed = false;
+	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999065) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - 420.2050380976993 < 1e-06 && twloMat(1,0) - (-554.6021924866436) < 1e-06 && twloMat(1,1) - (-797.8089039452487) < 1e-06;
+	    ck3LPassed = thloMat(0,0) - 132.6358855624267 < 1e-06 && thloMat(1,0) - (-171.4711818838455) < 1e-06 && thloMat(1,1) - (-800.9569014303727) < 1e-06;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	 break;
+      }
+   }
+}
+
+/*
+ * 	returns "true" or "false" with respect to the bool tf
+ */
+std::string h3m::HierarchyCalculator::tf(const bool tf){
+   return tf ? "true" : "false";
+}
+
+
 
