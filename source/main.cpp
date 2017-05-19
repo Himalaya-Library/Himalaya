@@ -481,16 +481,16 @@ int main(int argc, char **argv) {
 	 // init hierarchy calculator
 	 h3m::HierarchyCalculator hierarchyCalculator(point);
 	 // compare expanded terms at 2-loop level with the exact 2-loop result and choose a suitable hierarchy
-	 const int suitableHierarchyTop = hierarchyCalculator.compareHierarchies(false, 2.);
-	 const int suitableHierarchyBot = hierarchyCalculator.compareHierarchies(true, 2.);
+	 std::pair<unsigned int, double> pairTop = hierarchyCalculator.compareHierarchies(false);
+	 std::pair<unsigned int, double> pairBot = hierarchyCalculator.compareHierarchies(true);
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	
 	 // check terms
 	 //hierarchyCalculator.checkTerms();
-	 
-	 Eigen::Matrix2d DMh3L = hierarchyCalculator.calculateHierarchy(suitableHierarchyTop, false, 0, 0, 1);
-	 //Eigen::Matrix2d DMh3Lb = hierarchyCalculator.calculateHierarchy(suitableHierarchyBot, true, 0, 0, 1);
-	 std::cout << "hierarchy top: " << suitableHierarchyTop << ", hierarchy bot: " << suitableHierarchyBot << std::endl;
+	 //Eigen::Matrix2d DMh3lt = hierarchyCalculator.calculateHierarchy(pairTop.first, false, 0, 0, 1);
+	 //Eigen::Matrix2d DMh3Lb = hierarchyCalculator.calculateHierarchy(pairBot.second, true, 0, 0, 1);
+	 std::cout << "hierarchy top: " << pairTop.first << ", hierarchy bot: " << pairBot.first << std::endl;
+	 std::cout << "error top " << pairTop.second << " error bot: " << pairBot.second << std::endl;
 	 //std::cout << "shifts " << hierarchyCalculator.calcDRbarToMDRbarShift(suitableHierarchyTop, false, true, true) << std::endl;
 	 //std::cout << "DMh3L = " << DMh3L.row(0) << ' ' << DMh3L.row(1) << std::endl;
 	 //std::cout << "DMh3Lb = " << DMh3Lb.row(0) << ' ' << DMh3Lb.row(1) << std::endl;

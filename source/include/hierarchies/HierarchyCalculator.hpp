@@ -11,13 +11,13 @@ namespace h3m{
    class HierarchyCalculator{
    public:
       HierarchyCalculator(const Parameters& p);														// constructor
-      int compareHierarchies(const bool isBottom, const double maxError);													// compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error
+      std::pair<unsigned int, double> compareHierarchies(const bool isBottom);													// compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error
       Eigen::Matrix2d calculateHierarchy(const unsigned int tag, const bool isbottom, const unsigned int oneLoopFlagIn, const unsigned int twoLoopFlagIn,
 			      const unsigned int threeLoopFlagIn);											// calculates the hierarchy contributions for a specific hierarchy (tag) and a specific loop order
       Eigen::Matrix2d calcDRbarToMDRbarShift(const unsigned int tag, const bool isBottom, const bool shiftOneLoop, const bool shiftTwoLoop);	// calculates the contribution to the order (alpha_t) and (alpha_s alpha_t) in the MDRbar scheme
       double shiftMst1ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);		// shifts Mst1 according to the hierarchy to the MDRbar scheme
       double shiftMst2ToMDR(const unsigned int tag, const bool isBottom, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);		// shifts Mst2 according to the hierarchy to the MDRbar scheme
-      double getExpansionError(const unsigned int tag, const bool isBottom, const Eigen::Matrix2d& twoLoopMassMatrix);
+      double getExpansionError(const unsigned int tag, const bool isBottom, const Eigen::Matrix2d& massMatrix, const unsigned int loops);
       void checkTerms();																// checks the expansion terms
    private:
       Parameters p;
