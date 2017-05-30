@@ -459,6 +459,70 @@ h3m::Parameters MS480(){
    return pars;
 }
 
+h3m::Parameters bug(){
+
+  h3m::Parameters pars;
+   pars.scale   = 1158.13;
+    pars.mu  = 1150.17;
+    pars.g3  = 1.05606;
+    pars.vd  = 49.7917;
+    pars.vu  = 239.757;
+    pars.mq2 << 1.32202e+06 ,          0 ,          0,
+            0, 1.32202e+06    ,       0,
+            0 ,          0, 1.32212e+06;
+    pars.md2 << 1.32214e+06,           0 ,          0,
+            0, 1.32214e+06     ,      0,
+            0 ,          0, 1.32217e+06;
+    pars.mu2 << 1.32213e+06,           0,           0,
+            0, 1.32213e+06    ,       0,
+            0 ,          0, 1.32231e+06;
+    pars.At  = 230.831;
+    pars.Ab  = 5751.4;
+    pars.MG  = 1149.82;
+    pars.MW  = 78.2546;
+    pars.MZ  = 89.962;
+    pars.Mt  = 144.595;
+    pars.Mb  = 2.38715;
+    pars.MA  = 1150.55;
+    pars.MSt << 1157.54, 1158.73;
+    pars.MSb << 1150.08, 1151.23;
+    pars.s2t = 0.841368;
+    pars.s2b = -0.381861;
+     return pars;
+}
+
+h3m::Parameters bug2(){
+  h3m::Parameters pars;
+ pars.scale   = 1158.13;
+  pars.mu  = 1150.17;
+  pars.g3  = 1.05606;
+  pars.vd  = 49.7917;
+  pars.vu  = 239.757;
+  pars.mq2 << 1.32202e+06,           0,           0,
+          0, 1.32202e+06       ,    0,
+          0 ,          0, 1.32212e+06;
+  pars.md2 << 1.32214e+06,           0 ,          0,
+          0, 1.32214e+06    ,       0,
+          0 ,          0, 1.32217e+06;
+  pars.mu2 << 1.32213e+06 ,          0  ,         0,
+          0 ,1.32213e+06   ,        0,
+          0  ,         0, 1.32231e+06;
+  pars.At  = 230.831;
+  pars.Ab  = 5751.4;
+  pars.MG  = 1149.82;
+  pars.MW  = 78.2546;
+  pars.MZ  = 89.962;
+  pars.Mt  = 144.595;
+  pars.Mb  = 2.38715;
+  pars.MA  = 1150.55;
+  pars.MSt << 1157.54, 1158.73;
+  pars.MSb << 1150.08, 1151.23;
+  pars.s2t = 0.841368;
+  pars.s2b = -0.381861;
+    return pars;
+
+}
+
 int main(int argc, char **argv) {
    try{
       const std::vector<h3m::Parameters> points = {
@@ -474,26 +538,31 @@ int main(int argc, char **argv) {
 	 Xt33(),
 	 MS350(),
 	 MS400(),
-	 MS480()
+	 MS480(),
+	 bug(),
+	 bug2()
       }; 
       for (const auto point: points) {
 	 std::cout << "----------------------------------" << std::endl;
 	 // init hierarchy calculator
 	 h3m::HierarchyCalculator hierarchyCalculator(point);
 	 // compare expanded terms at 2-loop level with the exact 2-loop result and choose a suitable hierarchy
-	 std::pair<unsigned int, double> pairTop = hierarchyCalculator.compareHierarchies(false);
-	 std::pair<unsigned int, double> pairBot = hierarchyCalculator.compareHierarchies(true);
+
 	 // calculate the 3-loop corrections with the suiatble hierarchy
-	
+	 //top
+	 auto pairTop = hierarchyCalculator.compareHierarchies(false);
+	 auto DMh2lt = hierarchyCalculator.calcDRbarToMDRbarShift(pairTop.first, false, true, true);
+	 auto DMh3lt = hierarchyCalculator.calculateHierarchy(pairTop.first, false, 0, 0, 1);
+
+	 //bottom
+	 auto pairBottom = hierarchyCalculator.compareHierarchies(true);
+	 auto DMh2lb = hierarchyCalculator.calcDRbarToMDRbarShift(pairBottom.first, true, true, true);
+	 auto DMh3lb = hierarchyCalculator.calculateHierarchy(pairBottom.first, true, 0, 0, 1); 
+	 
 	 // check terms
 	 //hierarchyCalculator.checkTerms();
-	 //Eigen::Matrix2d DMh3lt = hierarchyCalculator.calculateHierarchy(pairTop.first, false, 0, 0, 1);
-	 //Eigen::Matrix2d DMh3Lb = hierarchyCalculator.calculateHierarchy(pairBot.second, true, 0, 0, 1);
-	 std::cout << "hierarchy top: " << pairTop.first << ", hierarchy bot: " << pairBot.first << std::endl;
-	 std::cout << "error top " << pairTop.second << " error bot: " << pairBot.second << std::endl;
-	 //std::cout << "shifts " << hierarchyCalculator.calcDRbarToMDRbarShift(suitableHierarchyTop, false, true, true) << std::endl;
-	 //std::cout << "DMh3L = " << DMh3L.row(0) << ' ' << DMh3L.row(1) << std::endl;
-	 //std::cout << "DMh3Lb = " << DMh3Lb.row(0) << ' ' << DMh3Lb.row(1) << std::endl;
+	 std::cout << "hierarchy top: " << pairTop.first << ", hierarchy bot: " << pairBottom.first << std::endl;
+	 std::cout << "error top " << pairTop.second << " error bot: " << pairBottom.second << std::endl;
       }
    }
    catch (std::exception& e){
