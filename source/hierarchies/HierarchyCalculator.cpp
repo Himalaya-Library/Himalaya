@@ -562,21 +562,21 @@ bool h3m::HierarchyCalculator::isHierarchySuitable(const int tag, const bool isB
       case h4:
 	 return (Mst1 < Msq) && (Mst1 >= Mgl);
       case h5:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mst1 >= Mgl);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < std::abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mst1 >= Mgl);
       case h5g1:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mgl > Mst1);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < std::abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mgl > Mst1);
       case h6:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mst2 >= Mgl);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mst2 >= Mgl);
       case h6g2:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mgl > Mst2);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mgl > Mst2);
       case h6b:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mst2 >= Mgl);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mst2 >= Mgl);
       case h6b2qg2:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mgl > Mst2);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mgl > Mst2);
       case h6bq22g:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < abs(Mgl - Mst1)) && (Msq > Mst2) && (Mst2 >= Mgl);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Msq > Mst2) && (Mst2 >= Mgl);
       case h6bq2g2:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < abs(Mgl - Mst1)) && (Msq > Mst2) && (Mgl > Mst2);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Msq > Mst2) && (Mgl > Mst2);
       case h9:
 	 return (Mst2 >= Msq) && ((Mst2 - Mst1) < (Mst1 - Mgl));
       case h9q2:
