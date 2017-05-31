@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 project(h3cc CXX Fortran)
 
 #SET (CMAKE_Fortran_COMPILER gfortran)
-#SET (CMAKE_CC_COMPILER gcc)
+
+#Mac users should use g++ and modify the line below
 #SET (CMAKE_CXX_COMPILER g++)
 
 #include c++ header files

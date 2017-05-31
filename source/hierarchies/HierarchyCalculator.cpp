@@ -48,8 +48,8 @@ template <typename T> T pow7(T x)  { return x*x*x*x*x*x*x; }
 template <typename T> T pow8(T x)  { return x*x*x*x*x*x*x*x; }
 template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
 template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
-template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x;}
-template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x;}
+template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x; }
+template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x; }
 
 extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
