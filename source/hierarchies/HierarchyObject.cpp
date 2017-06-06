@@ -1,6 +1,6 @@
 #include <HierarchyObject.hpp>
 
-himalaya::HierarchyObject::HierarchyObject(const bool& isAlphab){
+himalaya::HierarchyObject::HierarchyObject(bool isAlphab){
    this -> isAlphab = isAlphab;
 }
 
@@ -8,7 +8,7 @@ bool himalaya::HierarchyObject::getIsAlphab() const{
    return isAlphab;
 }
 
-void himalaya::HierarchyObject::setSuitableHierarchy(const int& hierarchy){
+void himalaya::HierarchyObject::setSuitableHierarchy(int hierarchy){
    this -> hierarchy = hierarchy;
 }
 
@@ -16,7 +16,7 @@ int himalaya::HierarchyObject::getSuitableHierarchy() const{
    return hierarchy;
 }
 
-void himalaya::HierarchyObject::setAbsDiff2L(const double& absDiff2L){
+void himalaya::HierarchyObject::setAbsDiff2L(double absDiff2L){
    this -> absDiff2L = absDiff2L;
 }
 
@@ -24,7 +24,7 @@ double himalaya::HierarchyObject::getAbsDiff2L() const{
    return absDiff2L;
 }
 
-void himalaya::HierarchyObject::setRelDiff2L(const double& relDiff2L){
+void himalaya::HierarchyObject::setRelDiff2L(double relDiff2L){
    this -> relDiff2L = relDiff2L;
 }
 
@@ -32,7 +32,7 @@ double himalaya::HierarchyObject::getRelDiff2L() const{
    return relDiff2L;
 }
 
-void himalaya::HierarchyObject::setExpUncertainty(const int& loops, const double& uncertainty){
+void himalaya::HierarchyObject::setExpUncertainty(int loops, double uncertainty){
    if(loops > 0 && loops <=3){
       expUncertainties.insert(std::pair<int, double> (loops, uncertainty));
    }
@@ -41,7 +41,7 @@ void himalaya::HierarchyObject::setExpUncertainty(const int& loops, const double
    }
 }
 
-double himalaya::HierarchyObject::getExpUncertainty(const int& loops) const{
+double himalaya::HierarchyObject::getExpUncertainty(int loops) const{
    if(loops > 0 && loops <=3){
       return expUncertainties.at(loops);
    }
@@ -50,7 +50,7 @@ double himalaya::HierarchyObject::getExpUncertainty(const int& loops) const{
    }
 }
 
-void himalaya::HierarchyObject::setDMh(const int& loops, const Eigen::Matrix2d& dMh){
+void himalaya::HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh){
    if(loops >= 0 && loops <=3){
       dMhMap.insert(std::pair<int, Eigen::Matrix2d> (loops, dMh));
    }
@@ -59,7 +59,7 @@ void himalaya::HierarchyObject::setDMh(const int& loops, const Eigen::Matrix2d& 
    }
 }
 
-Eigen::Matrix2d himalaya::HierarchyObject::getDMh(const int& loops) const{
+Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
    if(loops >= 0 && loops <=3){
       return dMhMap.at(loops);
    }

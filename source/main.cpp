@@ -552,7 +552,7 @@ int main(int argc, char **argv) {
 	 // check terms
 	 //hierarchyCalculator.checkTerms();
 	 
-	 /*std::cout << "hierarchy top: " << hoTop.getSuitableHierarchy() << ", hierarchy bot: " << hoBot.getSuitableHierarchy() << std::endl;
+	 std::cout << "hierarchy top: " << hoTop.getSuitableHierarchy() << ", hierarchy bot: " << hoBot.getSuitableHierarchy() << std::endl;
 	 std::cout << "error top " << hoTop.getRelDiff2L() << " error bot: " << hoBot.getRelDiff2L() << std::endl;
 	 std::cout << "abs err top " << hoTop.getAbsDiff2L() << " abs err bot " << hoBot.getAbsDiff2L() << std::endl; 
 	 std::cout << "mdr " << hoTop.getMDRMasses() << std::endl;
@@ -563,7 +563,7 @@ int main(int argc, char **argv) {
 	 std::cout << "exp 2 " << hoTop.getExpUncertainty(2) << std::endl;
 	 std::cout << "exp 3 " << hoTop.getExpUncertainty(3) << std::endl;
 	 std::cout << "shift " << hoTop.getDRToMDRShift() << std::endl;
-	 std::cout << "3l " << hoTop.getDMh(3) << std::endl;*/
+	 std::cout << "3l " << hoTop.getDMh(3) << std::endl;
 	 std::cout << "----------------------------------" << std::endl;
       }
    }
