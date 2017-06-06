@@ -4,8 +4,9 @@ To build Himalaya
   1) Check your c++ compiler. Mac users should use g++ and edit the corresponding line in CMakeLists.txt
 
   2) Just call
-
-    cmake CMakeLists.txt
+    mkdir build
+    cd build
+    cmake ../
     make
 	   
   3) Link the static library libhimalaya.a to your project
