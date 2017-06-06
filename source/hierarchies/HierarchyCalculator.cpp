@@ -57,8 +57,10 @@ extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double 
 /*
  * 	constructor
  */
-h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
+himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
+   printInfo();
    this -> p = p;
+   this -> p.validate();
    // init constants
    // imaginary unit
    const std::complex<double> I(0., 1.);
@@ -91,7 +93,7 @@ h3m::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
 /*
  *  	init common variables
  */
-void h3m::HierarchyCalculator::init(){
+void himalaya::HierarchyCalculator::init(){
    // fill flag list
    flagMap.clear();
    for(int i = xx; i <= xxMgl; i++){
@@ -126,16 +128,47 @@ void h3m::HierarchyCalculator::init(){
    prefac = (3. / (sqrt(2) * (pow2(p.vu) + pow2(p.vd)) * sqrt(2) * pow2(Pi) * pow2(sin(beta))));
 }
 
+/*
+ * 	calculates everything that is needed for the 3-loop Higgs mass matrix and returns these results in the hierarchy object ho
+ */
+himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(const bool& isAlphab){
+   HierarchyObject ho (isAlphab);
+   
+   // compare hierarchies and get the best fitting hierarchy
+   compareHierarchies(ho);
+   
+   // calculate the DR to MDR shift with the obtained hierarchy
+   ho.setDRToMDRShift(calcDRbarToMDRbarShift(ho, true, true));
+   
+   // calculate the 3-loop Higgs mass matrix for the obtained hierarhy
+   ho.setDMh3l(calculateHierarchy(ho, 0, 0, 1));
+   
+   // set the alpha_x contributions
+   ho.setDMh1l(getMt41L(ho, 1, 1));
+   
+   // set the alpha_x*alpha_s contributions
+   ho.setDMh2l(getMt42L(ho, 1, 1));
+   
+   // estimate the uncertainty of the expansion at 3-loop level
+   ho.setExpUncertainty(3, getExpansionUncertainty(ho,
+						   ho.getDMh0l() + ho.getDMh1l() + ho.getDMh2L(), 0, 0, 1));
+   
+   // set the uncertainty of the expansion at 1-loop level to 0 by convention, if the user needs this value getExpansionUncertainty should be called
+   ho.setExpUncertainty(1, 0.);
+   
+   return ho;
+}
+
+
 
 /*
  * 	compares deviation of all hierarchies with the exact 2-loop result and returns the hierarchy which minimizes the error
  */
-std::pair<int, double> h3m::HierarchyCalculator::compareHierarchies(const bool isBottom){
+int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho){
    // set flags to truncate the expansion
    flagMap.at(xx) = 0;
    flagMap.at(xxMst) = 0;
    double error = -1.;
-   double error2l;
    int suitableHierarchy = -1;
    // sine of 2 times beta
    const double s2b = sin(2*atan(p.vu/p.vd));
@@ -146,35 +179,38 @@ std::pair<int, double> h3m::HierarchyCalculator::compareHierarchies(const bool i
    treelvl (1,0) = s2b/2.*(-pow2(p.MZ) - pow2(p.MA));
    treelvl (0,1) = treelvl (1,0);
    treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tbeta + pow2(p.MA) / tbeta);
+   
+   ho.setDMh0l(treelvl);
 
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
    for(int hierarchy = h3; hierarchy <= h9q2; hierarchy ++){
       // first, check if the hierarchy is suitable to the mass spectrum
-      if(isHierarchySuitable(hierarchy, isBottom)){
+      ho.setSuitableHierarchy(hierarchy);
+      if(isHierarchySuitable(ho)){
 	 // calculate the exact 1-loop result (only alpha_t/b)
-	 Eigen::Matrix2d Mt41L = getMt41L(hierarchy, isBottom, 1, 0);
+	 Eigen::Matrix2d Mt41L = getMt41L(ho, 1, 0);
 	 
 	 // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
-	 Eigen::Matrix2d Mt42L = getMt42L(hierarchy, isBottom, 1, 0);
+	 Eigen::Matrix2d Mt42L = getMt42L(ho, 1, 0);
 	 
 	 // check for spurious poles. If this is the case slightly change Mst2
 	 if(std::isnan(Mt42L(0,0)) || std::isnan(Mt42L(1,0)) || std::isnan(Mt42L(1,1))){
 	    deltaDSZ = 1.0E-6;
-	    Mt42L = getMt42L(hierarchy, isBottom, 1, 0);
+	    Mt42L = getMt42L(ho, 1, 0);
 	 }
 	 
 	 //DEPRECATED calc 1-loop shift for DRbar -> MDRbar
 	 //calc difference of Mt41L or Mt41L in the MDRbar scheme directly
 	 //it seems that in H3m the sign of the function getShift is wrong as well(Mt4LDRbar - Mt4LMDRbar)????
 	 //to be consistent everything should be calculated in the MDRbar-scheme so we should subtract Mt4LDRbar, shouldn't we?
-	 //Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isBottom);
+	 //Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isAlphab);
 	 
 	 //calculate the exact higgs mass at 2-loop (only up to alpha_s alpha_t/b)
 	 Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
 	 double Mh2l = sortEigenvalues(es2L).at(0);
 
 	 // calculate the expanded 2-loop expression with the specific hierarchy
-	 Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L + calculateHierarchy(hierarchy, isBottom, 0,1,0));
+	 Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L + calculateHierarchy(ho, 0, 1, 0));
 	 
 	 // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
 	 double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
@@ -183,7 +219,7 @@ std::pair<int, double> h3m::HierarchyCalculator::compareHierarchies(const bool i
 	 double twoLoopError = fabs((Mh2l - Mh2LExpanded));
 
 	 // estimate the uncertainty of the expansion
-	 double expUncertainty = getExpansionUncertainty(hierarchy, isBottom, treelvl + Mt41L, 0, 1, 0);
+	 double expUncertainty = getExpansionUncertainty(ho, treelvl + Mt41L, 0, 1, 0);
 	 
 	 // add these errors to include the error of the expansion in the comparison
 	 double currError = sqrt(pow2(twoLoopError) + pow2(expUncertainty));
@@ -191,37 +227,44 @@ std::pair<int, double> h3m::HierarchyCalculator::compareHierarchies(const bool i
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
 	    error = currError;
-	    error2l = twoLoopError/Mh2l;
 	    suitableHierarchy = hierarchy;
+	    ho.setAbsDiff2l(twoLoopError);
+	    ho.setRelDiff2l(twoLoopError/Mh2l);
+	    ho.setExpUncertainty(2, expUncertainty);
 	 }
 	 // compare the current error with the last error and choose the hierarchy which fits best (lowest error)
 	 else if(currError < error){
 	    error = currError;
-	    error2l = twoLoopError/Mh2l;
 	    suitableHierarchy = hierarchy;
+	    ho.setAbsDiff2l(twoLoopError);
+	    ho.setRelDiff2l(twoLoopError/Mh2l);
+	    ho.setExpUncertainty(2, expUncertainty);
 	 }
       }
+      else{
+	 ho.setSuitableHierarchy(suitableHierarchy);	// captures the case if no hierarchy is fitting
+      }
    }
+   ho.setSuitableHierarchy(suitableHierarchy);
    // reset the flags
    flagMap.at(xx) = 1;
    flagMap.at(xxMst) = 1;
-   return std::pair<int, double> (suitableHierarchy, error2l);
+   return suitableHierarchy;
 }
 
 /*
- * 	calculates the expanded self-energy to a given order and for a specific hierarchy (tag)
+ * 	calculates the expanded self-energy to a given order and for a specific hierarchy
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, const bool isBottom,
-      const unsigned int oneLoopFlagIn,
-         const unsigned int twoLoopFlagIn,
-            const unsigned int threeLoopFlagIn) {
-   getCorrectHierarchy(tag);
+Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::HierarchyObject& ho, const unsigned int oneLoopFlagIn, const unsigned int twoLoopFlagIn, const unsigned int threeLoopFlagIn) {
+   // get the hierarchy
+   const int hierarchy = ho.getSuitableHierarchy();
+
    // the hierarchy files containing 1-, 2- and 3-loop terms (alpha_s^0 alpha_t/b, alpha_s alpha_t/b, alpha_s^2 alpha_t/b)
    double sigS1Full = 0., sigS2Full = 0., sigS12Full = 0.;
 
    // common variables
    double At, Mt, s2t, Mst1, Mst2;
-   if (!isBottom) {
+   if (!ho.getIsAlphab()) {
       At = p.At;
       Mt = p.Mt;
       s2t = p.s2t;
@@ -260,7 +303,7 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
    xDmsqst2 = flagMap.at(xxDmsqst2);
    xMgl = flagMap.at(xxMgl);
    // this loop is needed to calculate the suitable mass shift order by order
-   for(int currentLoopOrder = 1; currentLoopOrder < 4; currentLoopOrder ++){
+   for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
       bool runThisOrder;
       double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
       int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
@@ -279,23 +322,23 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
 	 break;
       }
       if(runThisOrder){
-	 // select the suitable hierarchy for the specific tag and set variables
-	 switch(hierarchyMap.at(tag)){
+	 // select the suitable hierarchy for the specific hierarchy and set variables
+	 switch(getCorrectHierarchy(hierarchy)){
 	    case h3:
 	       if(threeLoopFlag == 0){
-		  Mst1 = shiftMst1ToMDR(h3, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2ToMDR(h3, isBottom, twoLoopFlag, 0);
+		  Mst1 = shiftMst1ToMDR(ho, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(ho, twoLoopFlag, 0);
 	       }
 	       else{
-		  Mst1 = shiftMst1ToMDR(h3, isBottom, 1, 1);
-		  Mst2 = shiftMst2ToMDR(h3, isBottom, 1, 1);
+		  Mst1 = shiftMst1ToMDR(ho, 1, 1);
+		  Mst2 = shiftMst2ToMDR(ho, 1, 1);
 	       }
 	       Dmglst1 = Mgl - Mst1;
 	       Dmsqst1 = pow2(Msq) - pow2(Mst1);
 	       Dmst12 = pow2(Mst1) - pow2(Mst2);
 	       lmMst1 = log(pow2(scale / Mst1));
 	       lmMsusy = log(pow2(scale / ((Mst1 + Mst2 + Mgl + 10*Msq) / 13.)));
-	       switch(tag){
+	       switch(hierarchy){
 		  case h3:
 		     curSig1 = 
 		     #include "../hierarchies/h3/sigS1Full.inc"
@@ -333,12 +376,12 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
 	       break;
 	    case h4:
 	       if(threeLoopFlag == 0){
-		  Mst1 = shiftMst1ToMDR(h4, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2ToMDR(h4, isBottom, twoLoopFlag, 0);
+		  Mst1 = shiftMst1ToMDR(ho, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(ho, twoLoopFlag, 0);
 	       }
 	       else{
-		  Mst1 = shiftMst1ToMDR(h4, isBottom, 1, 1);
-		  Mst2 = shiftMst2ToMDR(h4, isBottom, 1, 1);
+		  Mst1 = shiftMst1ToMDR(ho, 1, 1);
+		  Mst2 = shiftMst2ToMDR(ho, 1, 1);
 	       }
 	       Msusy = (Mst1 + Mst2 + Mgl) / 3.;
 	       lmMsusy = log(pow2(scale / Msusy));
@@ -354,17 +397,17 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
 	       break;
 	    case h5:
 	       if(threeLoopFlag == 0){
-		  Mst1 = shiftMst1ToMDR(h5, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2ToMDR(h5, isBottom, twoLoopFlag, 0);
+		  Mst1 = shiftMst1ToMDR(ho, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(ho, twoLoopFlag, 0);
 	       }
 	       else{
-		  Mst1 = shiftMst1ToMDR(h5, isBottom, 1, 1);
-		  Mst2 = shiftMst2ToMDR(h5, isBottom, 1, 1);
+		  Mst1 = shiftMst1ToMDR(ho, 1, 1);
+		  Mst2 = shiftMst2ToMDR(ho, 1, 1);
 	       }
 	       Dmglst1 = Mgl - Mst1;
 	       lmMst1 = log(pow2(scale / Mst1));
 	       lmMst2 = log(pow2(scale / Mst2));
-	       switch(tag){
+	       switch(hierarchy){
 		  case h5:
 		     curSig1 = 
 		     #include "../hierarchies/h5/sigS1Full.inc"
@@ -391,18 +434,18 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
 	       break;
 	    case h6:
 	       if(threeLoopFlag == 0){
-		  Mst1 = shiftMst1ToMDR(h6, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2ToMDR(h6, isBottom, twoLoopFlag, 0);
+		  Mst1 = shiftMst1ToMDR(ho, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(ho, twoLoopFlag, 0);
 	       }
 	       else{
-		  Mst1 = shiftMst1ToMDR(h6, isBottom, 1, 1);
-		  Mst2 = shiftMst2ToMDR(h6, isBottom, 1, 1);
+		  Mst1 = shiftMst1ToMDR(ho, 1, 1);
+		  Mst2 = shiftMst2ToMDR(ho, 1, 1);
 	       }
 	       Dmglst2 = Mgl - Mst2;
 	       lmMst1 = log(pow2(scale / Mst1));
 	       lmMst2 = log(pow2(scale / Mst2));
 	       xDR2DRMOD = 1;
-	       switch(tag){
+	       switch(hierarchy){
 		  case h6:
 		     curSig1 = 
 		     #include "../hierarchies/h6/sigS1Full.inc"
@@ -429,19 +472,19 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
 	       break;
 	    case h6b:
 	       if(threeLoopFlag == 0){
-		  Mst1 = shiftMst1ToMDR(h6b, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2ToMDR(h6b, isBottom, twoLoopFlag, 0);
+		  Mst1 = shiftMst1ToMDR(ho, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(ho, twoLoopFlag, 0);
 	       }
 	       else{
-		  Mst1 = shiftMst1ToMDR(h6b, isBottom, 1, 1);
-		  Mst2 = shiftMst2ToMDR(h6b, isBottom, 1, 1);
+		  Mst1 = shiftMst1ToMDR(ho, 1, 1);
+		  Mst2 = shiftMst2ToMDR(ho, 1, 1);
 	       }
 	       Dmglst2 = Mgl - Mst2;
 	       Dmsqst2 = Msq - Mst2;
 	       lmMst1 = log(pow2(scale / Mst1));
 	       lmMst2 = log(pow2(scale / Mst2));
 	       xDR2DRMOD = 1;
-	       switch(tag){
+	       switch(hierarchy){
 		  case h6b:
 		     curSig1 = 
 		     #include "../hierarchies/h6b/sigS1Full.inc"
@@ -490,17 +533,17 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
 	       break;
 	    case h9:
 	       if(threeLoopFlag == 0){
-		  Mst1 = shiftMst1ToMDR(h9, isBottom, twoLoopFlag, 0);
-		  Mst2 = shiftMst2ToMDR(h9, isBottom, twoLoopFlag, 0);
+		  Mst1 = shiftMst1ToMDR(ho, twoLoopFlag, 0);
+		  Mst2 = shiftMst2ToMDR(ho, twoLoopFlag, 0);
 	       }
 	       else{
-		  Mst1 = shiftMst1ToMDR(h9, isBottom, 1, 1);
-		  Mst2 = shiftMst2ToMDR(h9, isBottom, 1, 1);
+		  Mst1 = shiftMst1ToMDR(ho, 1, 1);
+		  Mst2 = shiftMst2ToMDR(ho, 1, 1);
 	       }
 	       lmMst1 = log(pow2(scale / Mst1));
 	       Dmst12 = pow2(Mst1) - pow2(Mst2);
 	       Dmsqst1 = pow2(Msq) - pow2(Mst1);
-	       switch(tag){
+	       switch(hierarchy){
 		  case h9:
 		     curSig1 = 
 		     #include "../hierarchies/h9/sigS1Full.inc"
@@ -531,6 +574,13 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
       sigS2Full += curSig2;
       sigS12Full += curSig12;
    }
+   // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
+   if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
+      Eigen::Matrix<double,2,1> mdrMasses;
+      mdrMasses(0) = Mst1;
+      mdrMasses(1) = Mst2;
+      ho.setMDRMasses(mdrMasses);
+   }
    Eigen::Matrix2d higgsMassMatrix;
    higgsMassMatrix(0, 0) = prefac * sigS1Full;
    higgsMassMatrix(0, 1) = prefac * sigS12Full;
@@ -542,17 +592,17 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calculateHierarchy(const int tag, cons
 /*
  * 	checks if hierarchy is suitable to the given mass spectrum
  */
-bool h3m::HierarchyCalculator::isHierarchySuitable(const int tag, const bool isBottom){
+bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& ho){
    double Mst1, Mst2;
-   if(!isBottom){
-      Mst1 = p.MSt(0, 0);
-      Mst2 = p.MSt(1, 0);
+   if(!ho.getIsAlphab()){
+      Mst1 = p.MSt(0);
+      Mst2 = p.MSt(1);
    }
    else{
-      Mst1 = p.MSb(0, 0);
-      Mst2 = p.MSb(1, 0);
+      Mst1 = p.MSb(0);
+      Mst2 = p.MSb(1);
    }
-   switch (tag){
+   switch (ho.getSuitableHierarchy()){
       case h3:
 	 return Mgl > Mst2;
       case h32q2g:
@@ -587,20 +637,20 @@ bool h3m::HierarchyCalculator::isHierarchySuitable(const int tag, const bool isB
 /*
  * 	shifts Mst1/Msb1 according to the hierarchy to the MDRbar scheme, checked
  */
-double h3m::HierarchyCalculator::shiftMst1ToMDR(int tag, const bool isBottom, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
+double himalaya::HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
    double Mst1mod = 0., Mst1, Mst2;
-   if(!isBottom){
-      Mst1 = p.MSt(0, 0);
-      Mst2 = p.MSt(1, 0);
+   if(!ho.getIsAlphab()){
+      Mst1 = p.MSt(0);
+      Mst2 = p.MSt(1);
    }
    else{
-      Mst1 = p.MSb(0, 0);
-      Mst2 = p.MSb(1, 0);
+      Mst1 = p.MSb(0);
+      Mst2 = p.MSb(1);
    }
    double lmMst2 = log(pow2(p.scale) / pow2(Mst2));
    double Dmglst2 = Mgl - Mst2;
    double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p) * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2) * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
-   switch (getCorrectHierarchy(tag)) {
+   switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
    case h3:
       Mst1mod = (1 + mdr2mst1ka);
       break;
@@ -632,21 +682,21 @@ double h3m::HierarchyCalculator::shiftMst1ToMDR(int tag, const bool isBottom, co
 /*
  * 	shifts Mst2/Msb2 according to the hierarchy to the MDRbar scheme, checked
  */
-double h3m::HierarchyCalculator::shiftMst2ToMDR(int tag, const bool isBottom, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
+double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
    double Mst2mod;
    double Mst1;
    double Mst2;
-   if(!isBottom){
-      Mst1 = p.MSt(0, 0);
-      Mst2 = p.MSt(1, 0);
+   if(!ho.getIsAlphab()){
+      Mst1 = p.MSt(0);
+      Mst2 = p.MSt(1);
    }
    else{
-      Mst1 = p.MSb(0, 0);
-      Mst2 = p.MSb(1, 0);
+      Mst1 = p.MSb(0);
+      Mst2 = p.MSb(1);
    }
    double Dmglst2 = Mgl - Mst2;
    double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p) * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
-   switch (getCorrectHierarchy(tag)) {
+   switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
    case h3:
       Mst2mod = (1 + mdr2mst2ka);
       break;
@@ -679,10 +729,8 @@ double h3m::HierarchyCalculator::shiftMst2ToMDR(int tag, const bool isBottom, co
 /*
  * 	sorts the eigenvalues of a 2x2 matrix and returns them in a vector
  */
-std::vector<double> h3m::HierarchyCalculator::sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d> es){
-  std::vector<double> sortedEigenvalues;
-  sortedEigenvalues.push_back(sqrt(std::real(es.eigenvalues()(0))));
-  sortedEigenvalues.push_back(sqrt(std::real(es.eigenvalues()(1))));
+std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d> es){
+  std::vector<double> sortedEigenvalues = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
   std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
   return sortedEigenvalues;
 }
@@ -690,8 +738,7 @@ std::vector<double> h3m::HierarchyCalculator::sortEigenvalues(const Eigen::Eigen
 /*
  * 	calculates the 1-loop alpha_t/b Higgs mass matrix
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(int tag, const bool isBottom, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
-   tag = getCorrectHierarchy(tag);
+Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
    Eigen::Matrix2d Mt41L;
    double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
    double Mst1;
@@ -699,15 +746,13 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(int tag, const bool isBottom,
    double Mt;
    double s2t;
    const double beta = atan(p.vu/p.vd);
-   if(!isBottom){
-      Mst1 = shiftMst1ToMDR(tag, false, shiftOneLoop, shiftTwoLoop);
-      Mst2 = shiftMst2ToMDR(tag, false, shiftOneLoop, shiftTwoLoop);
+   Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
+   Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
+   if(!ho.getIsAlphab()){
       s2t = p.s2t;
       Mt = p.Mt;
    }
    else{
-      Mst1 = shiftMst1ToMDR(tag, true, shiftOneLoop, shiftTwoLoop);
-      Mst2 = shiftMst2ToMDR(tag, true, shiftOneLoop, shiftTwoLoop);
       s2t = p.s2b;
       Mt = p.Mb;
    }
@@ -761,8 +806,7 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt41L(int tag, const bool isBottom,
  * 	DEPRECATED! Just use differences of Mt41L
  * 	calculates the DRbar -> MDRbar shift for the one loop contribution
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::getShift(int tag, const bool isBottom){
-   tag = getCorrectHierarchy(tag);
+Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::HierarchyObject& ho){
    Eigen::Matrix2d shift;
    double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
    double Mst1;
@@ -771,21 +815,21 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getShift(int tag, const bool isBottom)
    double s2t;
    const double beta = atan(p.vu/p.vd);
    double deltamst1, deltamst2;
-   if(!isBottom){
-      Mst1 = p.MSt(0, 0);
-      Mst2 = p.MSt(1, 0);
+   if(!ho.getIsAlphab()){
+      Mst1 = p.MSt(0);
+      Mst2 = p.MSt(1);
       s2t = p.s2t;
       Mt = p.Mt;
-      deltamst1 = -(Mst1 - shiftMst1ToMDR(tag, false, 1, 0));
-      deltamst2 = -(Mst2 - shiftMst2ToMDR(tag, false, 1, 0));
+      deltamst1 = -(Mst1 - shiftMst1ToMDR(ho, 1, 0));
+      deltamst2 = -(Mst2 - shiftMst2ToMDR(ho, 1, 0));
    }
    else{
-      Mst1 = p.MSb(0, 0);
-      Mst2 = p.MSb(1, 0);
+      Mst1 = p.MSb(0);
+      Mst2 = p.MSb(1);
       s2t = p.s2b;
       Mt = p.Mb;
-      deltamst1 = -(Mst1 - shiftMst1ToMDR(tag, true, 1, 0));
-      deltamst2 = -(Mst2 - shiftMst2ToMDR(tag, true, 1, 0));
+      deltamst1 = -(Mst1 - shiftMst1ToMDR(ho, 1, 0));
+      deltamst2 = -(Mst2 - shiftMst2ToMDR(ho, 1, 0));
    }
    shift(0, 0) = (3 * GF * (deltamst2 * Mst1 - deltamst1 * Mst2) * pow2(Mt) * pow2(p.mu) * pow2(1 / Pi) *
       pow2(1/sin(beta)) * pow2(1 / (pow2(Mst1) - pow2(Mst2))) * pow2(s2t) *
@@ -850,8 +894,8 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getShift(int tag, const bool isBottom)
 /*
  * 	calculates the 2-loop higgs mass matrix according to Pietro Slavich
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(int tag, const bool isBottom, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
-   tag = getCorrectHierarchy(tag);
+Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
+   const int hierarchy = getCorrectHierarchy(ho.getSuitableHierarchy());
    Eigen::Matrix2d Mt42L;
    double S11, S12, S22;
    double Mt2;
@@ -860,19 +904,17 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(int tag, const bool isBottom,
    double Mst22;
    double st;
    double ct;
-   if(!isBottom){
+   Mst12 = pow2(shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop));
+   Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop) + deltaDSZ);
+   if(!ho.getIsAlphab()){
       const double theta = asin(p.s2t)/2.;
       Mt2 = pow2(p.Mt);
-      Mst12 = pow2(shiftMst1ToMDR(tag, false, shiftOneLoop, shiftTwoLoop));
-      Mst22 = pow2(shiftMst2ToMDR(tag, false, shiftOneLoop, shiftTwoLoop) + deltaDSZ);
       st = sin(theta);
       ct = cos(theta);
    }
    else{
       const double theta = asin(p.s2b)/2.;
       Mt2 = pow2(p.Mb);
-      Mst12 = pow2(shiftMst1ToMDR(tag, true, shiftOneLoop, shiftTwoLoop));
-      Mst22 = pow2(shiftMst2ToMDR(tag, true, shiftOneLoop, shiftTwoLoop) + deltaDSZ);
       st = sin(theta);
       ct = cos(theta);
    }
@@ -896,16 +938,15 @@ Eigen::Matrix2d h3m::HierarchyCalculator::getMt42L(int tag, const bool isBottom,
  * 	calculates the contribution to the order (alpha_t) and (alpha_s alpha_t) in the MDRbar scheme
  * 	the result is the difference in the Higgs mass matrix of the MDRbar and DRbar scheme
  */
-Eigen::Matrix2d h3m::HierarchyCalculator::calcDRbarToMDRbarShift(const int tag, const bool isBottom, const bool shiftOneLoop, const bool shiftTwoLoop){
-   const int hierarchyTag = getCorrectHierarchy(tag);
+Eigen::Matrix2d himalaya::HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::HierarchyObject& ho, const bool shiftOneLoop, const bool shiftTwoLoop){
    if(shiftOneLoop && shiftTwoLoop){
-      return getMt41L(hierarchyTag, isBottom, 1, 1) + getMt42L(hierarchyTag, isBottom, 1, 1) - getMt41L(hierarchyTag, isBottom, 0, 0) - getMt42L(hierarchyTag, isBottom, 0, 0);
+      return getMt41L(ho, 1, 1) + getMt42L(ho, 1, 1) - getMt41L(ho, 0, 0) - getMt42L(ho, 0, 0);
    }
    else if(shiftOneLoop){
-      return getMt41L(hierarchyTag, isBottom, 1, 1) - getMt41L(hierarchyTag, isBottom, 0, 0);
+      return getMt41L(ho, 1, 1) - getMt41L(ho, 0, 0);
    }
    else if(shiftTwoLoop){
-      return getMt42L(hierarchyTag, isBottom, 1, 1) - getMt42L(hierarchyTag, isBottom, 0, 0);
+      return getMt42L(ho, 1, 1) - getMt42L(ho, 0, 0);
    }
 }
 
@@ -914,116 +955,115 @@ Eigen::Matrix2d h3m::HierarchyCalculator::calcDRbarToMDRbarShift(const int tag, 
  * 	evaluates the error due to the expansion in mass ratios and differences
  * 	first calc the full 3-loop contribution and than truncate the expansion at different variable orders to estimate the expansion error
  */
-double h3m::HierarchyCalculator::getExpansionUncertainty(const int tag, const bool isBottom, const Eigen::Matrix2d& massMatrix,
-						   const unsigned int oneLoopFlag, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag){
+double himalaya::HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag){
    double Mh;
    double Mhcut;
    std::vector<double> errors;
    // reset flags
    flagMap.at(xxMst) = 1;
    Eigen::EigenSolver<Eigen::Matrix2d> es;
-   switch (getCorrectHierarchy(tag)) {
+   switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
    case h3:
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
       // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion error 
       flagMap.at(xxDmglst1) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmglst1) = 1;
       flagMap.at(xxDmsqst1) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmsqst1) = 1;
       flagMap.at(xxDmst12) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmst12) = 1;
       break;
    case h4:
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
       flagMap.at(xxAt) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxAt) = 1;
       flagMap.at(xxlmMsusy) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxlmMsusy) = 1;
       flagMap.at(xxMsq) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxMsq) = 1;
       flagMap.at(xxMsusy) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxMsusy) = 1;
       break;
    case h5:
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
       flagMap.at(xxDmglst1) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmglst1) = 1;
       flagMap.at(xxMsq) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxMsq) = 1;
       break;
    case h6:
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
       flagMap.at(xxDmglst2) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmglst2) = 1;
       flagMap.at(xxMsq) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxMsq) = 1;
       break;
    case h6b:
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
       flagMap.at(xxDmglst2) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmglst2) = 1;
       flagMap.at(xxDmsqst2) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmsqst2) = 1;
       break;
    case h9:
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
       flagMap.at(xxDmsqst1) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmsqst1) = 1;
       flagMap.at(xxDmst12) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxDmst12) = 1;
       flagMap.at(xxMgl) = 0;
-      es.compute(massMatrix + calculateHierarchy(tag, isBottom, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+      es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(fabs(Mh - Mhcut));
       flagMap.at(xxMgl) = 1;
@@ -1043,9 +1083,9 @@ double h3m::HierarchyCalculator::getExpansionUncertainty(const int tag, const bo
 /*
  * 	input parameters for the check
  */
-h3m::Parameters checkTermsXt33(){
+himalaya::Parameters checkTermsXt33(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
    pars.scale = 1973.75;
    pars.mu = 1999.82;
@@ -1081,13 +1121,15 @@ h3m::Parameters checkTermsXt33(){
 /*
  * 	check the expansion terms
  */
-void h3m::HierarchyCalculator::checkTerms(){
+void himalaya::HierarchyCalculator::checkTerms(){
    p = checkTermsXt33();
    init();
+   himalaya::HierarchyObject ho (false);
    for(int i = h3; i <= h9q2; i++){
-      Eigen::Matrix2d oloMat = calculateHierarchy(i, false, 1,0,0);
-      Eigen::Matrix2d twloMat = calculateHierarchy(i, false, 0,1,0);
-      Eigen::Matrix2d thloMat = calculateHierarchy(i, false, 0,0,1);
+      ho.setSuitableHierarchy(i);
+      Eigen::Matrix2d oloMat = calculateHierarchy(ho, 1,0,0);
+      Eigen::Matrix2d twloMat = calculateHierarchy(ho, 0,1,0);
+      Eigen::Matrix2d thloMat = calculateHierarchy(ho, 0,0,1);
       bool ck1LPassed, ck2LPassed, ck3LPassed;
       switch(i){
 	 case h3:
@@ -1223,15 +1265,19 @@ void h3m::HierarchyCalculator::checkTerms(){
 /*
  * 	returns "true" or "false" with respect to the bool tf
  */
-std::string h3m::HierarchyCalculator::tf(const bool tf){
+std::string himalaya::HierarchyCalculator::tf(const bool tf){
    return tf ? "true" : "false";
 }
 
-int h3m::HierarchyCalculator::getCorrectHierarchy(const int tag){
-   if(tag < 0 || tag > 13){
-      throw std::runtime_error("Hierarchy " + std::to_string(tag) + " not included!");
+int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
+   if(hierarchy < 0 || hierarchy > 13){
+      throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) + " not included!");
    }
-   return hierarchyMap.at(tag);
+   return hierarchyMap.at(hierarchy);
 }
 
-
+void himalaya::HierarchyCalculator::printInfo(){
+   //std::cout << ".  .         .          \n|__|*._ _  _.| _.  . _.\n|  ||[ | )(_]|(_]\\_|(_]\n                 ._|   " << std::endl;
+   std::cout << "Himalaya contains code by: P. Slavich et al. (2-loop rMSSM Higgs self-energies)" << std::endl;
+   std::cout << "Himalaya uses the 3-loop contributions of Kant et al." << std::endl;
+}

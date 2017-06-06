@@ -1,10 +1,10 @@
-#ifndef H3m_interface_HPP
-#define H3m_interface_HPP
+#ifndef Himalaya_interface_HPP
+#define Himalaya_interface_HPP
 
 #include <complex>
 #include <Eigen>
 
-namespace h3m {
+namespace himalaya {
 
 typedef Eigen::Matrix<double,2,1> V2;
 typedef Eigen::Matrix<double,2,2> RM22;
@@ -36,8 +36,21 @@ struct Parameters {
    // DR-bar mixing angles
    double s2t{};	   ///< sine of 2 times the stop mixing angle
    double s2b{};	   ///< sine of 2 times the sbot mixing angle
+   
+   // checks if all variables are ordered in the right way
+   void validate(){
+      if (MSt(0) > MSt(1)) {
+	 std::swap(MSt(0), MSt(1));
+	 s2t *= -1;
+      }
+
+      if (MSb(0) > MSb(1)) {
+	 std::swap(MSb(0), MSb(1));
+	 s2b *= -1;
+      }
+   };
 };
 
-}	//	h3m
+}	//	himalaya
 
-#endif	//	H3m_interface_HPP
+#endif	//	Himalaya_interface_HPP

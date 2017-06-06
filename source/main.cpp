@@ -3,12 +3,12 @@
 #include <Eigen>
 #include <HierarchyCalculator.hpp>
 #include <iostream>
-#include <H3m_interface.hpp>
+#include <Himalaya_interface.hpp>
+#include <HierarchyObject.hpp>
 #include <vector>
 
-h3m::Parameters setup_SPS1a()
-{
-   h3m::Parameters pars;
+himalaya::Parameters setup_SPS1a(){
+   himalaya::Parameters pars;
 
    pars.scale = 4.67491329E+02;
    pars.mu = 3.52600579E+02;
@@ -41,9 +41,8 @@ h3m::Parameters setup_SPS1a()
    return pars;
 }
 
-h3m::Parameters setup_SPS2()
-{
-   h3m::Parameters pars;
+himalaya::Parameters setup_SPS2(){
+   himalaya::Parameters pars;
 
    pars.scale = 1.11090135E+03;
    pars.mu = 3.73337018E+02;
@@ -76,9 +75,8 @@ h3m::Parameters setup_SPS2()
    return pars;
 }
 
-h3m::Parameters setup_CMSSM_large_m0()
-{
-   h3m::Parameters pars;
+himalaya::Parameters setup_CMSSM_large_m0(){
+   himalaya::Parameters pars;
 
    pars.scale = 4.88927977E+03;
    pars.mu = 3.25904948E+03;
@@ -111,9 +109,8 @@ h3m::Parameters setup_CMSSM_large_m0()
    return pars;
 }
 
-h3m::Parameters setup_HSSUSY_minmix()
-{
-   h3m::Parameters pars;
+himalaya::Parameters setup_HSSUSY_minmix(){
+   himalaya::Parameters pars;
 
    pars.scale = 1.00000069E+05;
    pars.mu = 1.00012235E+05;
@@ -146,9 +143,8 @@ h3m::Parameters setup_HSSUSY_minmix()
    return pars;
 }
 
-h3m::Parameters checkH3m()
-{
-   h3m::Parameters pars;
+himalaya::Parameters checkH3m(){
+   himalaya::Parameters pars;
 
    pars.scale = 173.3;
    pars.mu = 352.573;
@@ -181,9 +177,9 @@ h3m::Parameters checkH3m()
    return pars;
 }
 
-h3m::Parameters checkH3m2(){
+himalaya::Parameters checkH3m2(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
    pars.scale = 1056.26;
    pars.mu = 134.903;
@@ -216,9 +212,9 @@ h3m::Parameters checkH3m2(){
    return pars;
 }
 
-h3m::Parameters Xt29(){
+himalaya::Parameters Xt29(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
    pars.scale = 1981.84;
    pars.mu = 1999.88;
@@ -251,9 +247,9 @@ h3m::Parameters Xt29(){
    return pars;
 }
 
-h3m::Parameters Xt3(){
+himalaya::Parameters Xt3(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
    pars.scale = 1979.99;
    pars.mu = 1999.87;
@@ -286,9 +282,9 @@ h3m::Parameters Xt3(){
    return pars;
 }
 
-h3m::Parameters Xt31(){
+himalaya::Parameters Xt31(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
    pars.scale = 1978.03;
    pars.mu = 1999.86;
@@ -321,9 +317,9 @@ h3m::Parameters Xt31(){
    return pars;
 }
 
-h3m::Parameters Xt33(){
+himalaya::Parameters Xt33(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
    pars.scale = 1973.75;
    pars.mu = 1999.82;
@@ -356,9 +352,9 @@ h3m::Parameters Xt33(){
    return pars;
 }
 
-h3m::Parameters MS350(){
+himalaya::Parameters MS350(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
    pars.scale = 379.219;
    pars.mu = 350.21;
@@ -391,9 +387,9 @@ h3m::Parameters MS350(){
    return pars;
 }
 
-h3m::Parameters MS400(){
+himalaya::Parameters MS400(){
 
-   h3m::Parameters pars;
+   himalaya::Parameters pars;
 
  pars.scale   = 425.41;
   pars.mu  = 400.179;
@@ -425,9 +421,9 @@ h3m::Parameters MS400(){
    return pars;
 }
 
-h3m::Parameters MS480(){
+himalaya::Parameters MS480(){
 
-   h3m::Parameters pars;
+  himalaya::Parameters pars;
 
   pars.scale   = 500.92;
   pars.mu  = 480.143;
@@ -459,9 +455,9 @@ h3m::Parameters MS480(){
    return pars;
 }
 
-h3m::Parameters bug(){
+himalaya::Parameters bug(){
 
-  h3m::Parameters pars;
+  himalaya::Parameters pars;
    pars.scale   = 1158.13;
     pars.mu  = 1150.17;
     pars.g3  = 1.05606;
@@ -491,8 +487,8 @@ h3m::Parameters bug(){
      return pars;
 }
 
-h3m::Parameters bug2(){
-  h3m::Parameters pars;
+himalaya::Parameters bug2(){
+  himalaya::Parameters pars;
  pars.scale   = 1158.13;
   pars.mu  = 1150.17;
   pars.g3  = 1.05606;
@@ -525,44 +521,50 @@ h3m::Parameters bug2(){
 
 int main(int argc, char **argv) {
    try{
-      const std::vector<h3m::Parameters> points = {
+      const std::vector<himalaya::Parameters> points = {
 	 //setup_SPS1a(),
-	 //setup_SPS2(),
+	 setup_SPS2(),
 	 //setup_CMSSM_large_m0(),
 	 //setup_HSSUSY_minmix(),
 	 //checkH3m(),
 	 //checkH3m2(),
-	 Xt29(),
-	 Xt3(),
-	 Xt31(),
-	 Xt33(),
-	 MS350(),
-	 MS400(),
-	 MS480(),
-	 bug(),
-	 bug2()
+	 //Xt29(),
+	 //Xt3(),
+	 //Xt31(),
+	 //Xt33(),
+	 //MS350(),
+	 //MS400(),
+	 //MS480(),
+	 //bug(),
+	 //bug2()
       }; 
       for (const auto point: points) {
-	 std::cout << "----------------------------------" << std::endl;
 	 // init hierarchy calculator
-	 h3m::HierarchyCalculator hierarchyCalculator(point);
-	 // compare expanded terms at 2-loop level with the exact 2-loop result and choose a suitable hierarchy
+	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 //top
-	 auto pairTop = hierarchyCalculator.compareHierarchies(false);
-	 auto DMh2lt = hierarchyCalculator.calcDRbarToMDRbarShift(pairTop.first, false, true, true);
-	 auto DMh3lt = hierarchyCalculator.calculateHierarchy(pairTop.first, false, 0, 0, 1);
+	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
 
 	 //bottom
-	 auto pairBottom = hierarchyCalculator.compareHierarchies(true);
-	 auto DMh2lb = hierarchyCalculator.calcDRbarToMDRbarShift(pairBottom.first, true, true, true);
-	 auto DMh3lb = hierarchyCalculator.calculateHierarchy(pairBottom.first, true, 0, 0, 1); 
+	 himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true);
 	 
 	 // check terms
 	 //hierarchyCalculator.checkTerms();
-	 std::cout << "hierarchy top: " << pairTop.first << ", hierarchy bot: " << pairBottom.first << std::endl;
-	 std::cout << "error top " << pairTop.second << " error bot: " << pairBottom.second << std::endl;
+	 
+	 std::cout << "hierarchy top: " << hoTop.getSuitableHierarchy() << ", hierarchy bot: " << hoBot.getSuitableHierarchy() << std::endl;
+	 /*std::cout << "error top " << hoTop.getRelDiff2l() << " error bot: " << hoBot.getRelDiff2l() << std::endl;
+	 std::cout << "abs err top " << hoTop.getAbsDiff2l() << " abs err bot " << hoBot.getAbsDiff2l() << std::endl; 
+	 std::cout << "mdr " << hoTop.getMDRMasses() << std::endl;
+	 std::cout << "tree " << hoTop.getDMh0l() << std::endl;
+	 std::cout << "1l " << hoTop.getDMh1l() << std::endl;
+	 std::cout << "2l " << hoTop.getDMh2L() << std::endl;
+	 std::cout << "exp 1 " << hoTop.getExpUncertainty(1) << std::endl;
+	 std::cout << "exp 2 " << hoTop.getExpUncertainty(2) << std::endl;
+	 std::cout << "exp 3 " << hoTop.getExpUncertainty(3) << std::endl;
+	 std::cout << "shift " << hoTop.getDRToMDRShift() << std::endl;
+	 std::cout << "3l " << hoTop.getDMh3L() << std::endl;*/
+	 std::cout << "----------------------------------" << std::endl;
       }
    }
    catch (std::exception& e){
