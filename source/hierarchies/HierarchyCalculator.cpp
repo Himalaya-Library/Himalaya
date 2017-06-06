@@ -141,17 +141,17 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(const bo
    ho.setDRToMDRShift(calcDRbarToMDRbarShift(ho, true, true));
    
    // calculate the 3-loop Higgs mass matrix for the obtained hierarhy
-   ho.setDMh3l(calculateHierarchy(ho, 0, 0, 1));
+   ho.setDMh(3, calculateHierarchy(ho, 0, 0, 1));
    
    // set the alpha_x contributions
-   ho.setDMh1l(getMt41L(ho, 1, 1));
+   ho.setDMh(1, getMt41L(ho, 1, 1));
    
    // set the alpha_x*alpha_s contributions
-   ho.setDMh2l(getMt42L(ho, 1, 1));
+   ho.setDMh(2, getMt42L(ho, 1, 1));
    
    // estimate the uncertainty of the expansion at 3-loop level
    ho.setExpUncertainty(3, getExpansionUncertainty(ho,
-						   ho.getDMh0l() + ho.getDMh1l() + ho.getDMh2L(), 0, 0, 1));
+						   ho.getDMh(0) + ho.getDMh(1) + ho.getDMh(2), 0, 0, 1));
    
    // set the uncertainty of the expansion at 1-loop level to 0 by convention, if the user needs this value getExpansionUncertainty should be called
    ho.setExpUncertainty(1, 0.);
@@ -180,7 +180,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    treelvl (0,1) = treelvl (1,0);
    treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tbeta + pow2(p.MA) / tbeta);
    
-   ho.setDMh0l(treelvl);
+   ho.setDMh(0, treelvl);
 
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
    for(int hierarchy = h3; hierarchy <= h9q2; hierarchy ++){
@@ -228,16 +228,16 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 if(error < 0){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
-	    ho.setAbsDiff2l(twoLoopError);
-	    ho.setRelDiff2l(twoLoopError/Mh2l);
+	    ho.setAbsDiff2L(twoLoopError);
+	    ho.setRelDiff2L(twoLoopError/Mh2l);
 	    ho.setExpUncertainty(2, expUncertainty);
 	 }
 	 // compare the current error with the last error and choose the hierarchy which fits best (lowest error)
 	 else if(currError < error){
 	    error = currError;
 	    suitableHierarchy = hierarchy;
-	    ho.setAbsDiff2l(twoLoopError);
-	    ho.setRelDiff2l(twoLoopError/Mh2l);
+	    ho.setAbsDiff2L(twoLoopError);
+	    ho.setRelDiff2L(twoLoopError/Mh2l);
 	    ho.setExpUncertainty(2, expUncertainty);
 	 }
       }
