@@ -131,7 +131,7 @@ void himalaya::HierarchyCalculator::init(){
 /*
  * 	calculates everything that is needed for the 3-loop Higgs mass matrix and returns these results in the hierarchy object ho
  */
-himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(const bool& isAlphab){
+himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab){
    HierarchyObject ho (isAlphab);
    
    // compare hierarchies and get the best fitting hierarchy

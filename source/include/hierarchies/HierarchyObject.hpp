@@ -21,7 +21,7 @@ namespace himalaya{
        */
       bool getIsAlphab() const;
       /**
-       * 	@return The key to the suitable hierarchy/
+       * 	@return The key to the suitable hierarchy
        */
       int getSuitableHierarchy() const;
       /**
