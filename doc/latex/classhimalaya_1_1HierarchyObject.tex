@@ -23,7 +23,7 @@ Eigen\+::\+Matrix2d \hyperlink{classhimalaya_1_1HierarchyObject_a81e50f8e67ccb10
 \item 
 Eigen\+::\+Matrix2d \hyperlink{classhimalaya_1_1HierarchyObject_a992a8b0156296168ca71b6701ab1b1b7}{get\+D\+R\+To\+M\+D\+R\+Shift} () const 
 \item 
-Eigen\+::\+Matrix$<$ double, 2, 1 $>$ \hyperlink{classhimalaya_1_1HierarchyObject_aa2cfb844949191ab509bd645a75b6259}{get\+M\+D\+R\+Masses} () const 
+Eigen\+::\+Matrix$<$ double, 2, 1 $>$ \hyperlink{classhimalaya_1_1HierarchyObject_a023c789e0c2c17810bbf12d7075ce887}{get\+M\+D\+R\+Masses} () const 
 \item 
 void \hyperlink{classhimalaya_1_1HierarchyObject_a6f77f9c7f9173858089e83bcaa8362f2}{set\+Suitable\+Hierarchy} (int hierarchy)
 \item 
@@ -67,16 +67,19 @@ A constructor.
 {}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classhimalaya_1_1HierarchyObject_a9dd4da9b49984440fe2c8cbcd0f0c5d8}{}\label{classhimalaya_1_1HierarchyObject_a9dd4da9b49984440fe2c8cbcd0f0c5d8}
-Returns the absolute difference of the exact and expanded Higgs masses at two-\/loop level at the order O(alpha\+\_\+x + alpha\+\_\+x$\ast$alpha\+\_\+s). \index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!get\+D\+Mh@{get\+D\+Mh}}
+\begin{DoxyReturn}{Returns}
+The absolute difference of the exact and expanded Higgs masses at two-\/loop level at the order O(alpha\+\_\+x + alpha\+\_\+x$\ast$alpha\+\_\+s). 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!get\+D\+Mh@{get\+D\+Mh}}
 \index{get\+D\+Mh@{get\+D\+Mh}!himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}}
 \subsubsection[{\texorpdfstring{get\+D\+Mh(int loops) const }{getDMh(int loops) const }}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix2d himalaya\+::\+Hierarchy\+Object\+::get\+D\+Mh (
 \begin{DoxyParamCaption}
 \item[{int}]{loops}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classhimalaya_1_1HierarchyObject_a81e50f8e67ccb1055088b0d7ed591205}{}\label{classhimalaya_1_1HierarchyObject_a81e50f8e67ccb1055088b0d7ed591205}
-Returns the loop corrected C\+P-\/even Higgs mass matrix for the given loop order. 
+
 \begin{DoxyParams}{Parameters}
-{\em loops} & an integer which can be 0, 1, 2, 3. Here 0 corresponds to the tree-\/level matrix. \\
+{\em loops} & an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-\/level matrix. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -89,7 +92,7 @@ The C\+P-\/even Higgs mass matrix at the given loop order.
 {}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classhimalaya_1_1HierarchyObject_a992a8b0156296168ca71b6701ab1b1b7}{}\label{classhimalaya_1_1HierarchyObject_a992a8b0156296168ca71b6701ab1b1b7}
-Returns the DR to M\+DR shift. \begin{DoxyReturn}{Returns}
+\begin{DoxyReturn}{Returns}
 The matrix M(\+M\+D\+R) -\/ M(\+D\+R) at the order O(alpha\+\_\+x + alpha\+\_\+x$\ast$alpha\+\_\+s) 
 \end{DoxyReturn}
 \index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!get\+Exp\+Uncertainty@{get\+Exp\+Uncertainty}}
@@ -99,7 +102,7 @@ The matrix M(\+M\+D\+R) -\/ M(\+D\+R) at the order O(alpha\+\_\+x + alpha\+\_\+x
 \item[{int}]{loops}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classhimalaya_1_1HierarchyObject_a28ec351fd97a6c0de44ae51ce7415033}{}\label{classhimalaya_1_1HierarchyObject_a28ec351fd97a6c0de44ae51ce7415033}
-Returns the expansion uncertainty at a given loop order. 
+
 \begin{DoxyParams}{Parameters}
 {\em loops} & an integer which can be 1, 2 or 3. \\
 \hline
@@ -116,12 +119,12 @@ A double which is the expansion uncertainty for the given loop order.
 ) const}\hypertarget{classhimalaya_1_1HierarchyObject_a1666f351914e563ac910afc552a6932a}{}\label{classhimalaya_1_1HierarchyObject_a1666f351914e563ac910afc552a6932a}
 Returns the value of is\+Alphab. \index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!get\+M\+D\+R\+Masses@{get\+M\+D\+R\+Masses}}
 \index{get\+M\+D\+R\+Masses@{get\+M\+D\+R\+Masses}!himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}}
-\subsubsection[{\texorpdfstring{get\+M\+D\+R\+Masses() const }{getMDRMasses() const }}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix$<$double, 2, 1$>$ himalaya\+::\+Hierarchy\+Object\+::get\+M\+D\+R\+Masses (
+\subsubsection[{\texorpdfstring{get\+M\+D\+R\+Masses() const }{getMDRMasses() const }}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix$<$ double, 2, 1 $>$ himalaya\+::\+Hierarchy\+Object\+::get\+M\+D\+R\+Masses (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\hypertarget{classhimalaya_1_1HierarchyObject_aa2cfb844949191ab509bd645a75b6259}{}\label{classhimalaya_1_1HierarchyObject_aa2cfb844949191ab509bd645a75b6259}
-Returns the M\+DR masses at the order O(alpha\+\_\+s + alpha\+\_\+s$^\wedge$2). \begin{DoxyReturn}{Returns}
+) const}\hypertarget{classhimalaya_1_1HierarchyObject_a023c789e0c2c17810bbf12d7075ce887}{}\label{classhimalaya_1_1HierarchyObject_a023c789e0c2c17810bbf12d7075ce887}
+\begin{DoxyReturn}{Returns}
 A vector of the M\+DR stop/sbottom masses. The 0th entry corresponds to the lighter particle. 
 \end{DoxyReturn}
 \index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!get\+Rel\+Diff2L@{get\+Rel\+Diff2L}}
@@ -131,14 +134,20 @@ A vector of the M\+DR stop/sbottom masses. The 0th entry corresponds to the ligh
 {}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classhimalaya_1_1HierarchyObject_a8f37a14669ca0890edce34836d119073}{}\label{classhimalaya_1_1HierarchyObject_a8f37a14669ca0890edce34836d119073}
-Returns the relative difference of the exact and expanded Higgs masses at two-\/loop level at the order O(alpha\+\_\+x + alpha\+\_\+x$\ast$alpha\+\_\+s). \index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!get\+Suitable\+Hierarchy@{get\+Suitable\+Hierarchy}}
+\begin{DoxyReturn}{Returns}
+The relative difference of the exact and expanded Higgs masses at two-\/loop level at the order O(alpha\+\_\+x + alpha\+\_\+x$\ast$alpha\+\_\+s). 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!get\+Suitable\+Hierarchy@{get\+Suitable\+Hierarchy}}
 \index{get\+Suitable\+Hierarchy@{get\+Suitable\+Hierarchy}!himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}}
 \subsubsection[{\texorpdfstring{get\+Suitable\+Hierarchy() const }{getSuitableHierarchy() const }}]{\setlength{\rightskip}{0pt plus 5cm}int himalaya\+::\+Hierarchy\+Object\+::get\+Suitable\+Hierarchy (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 ) const}\hypertarget{classhimalaya_1_1HierarchyObject_aa22fec3eb13eb3302fd7034d87dc91db}{}\label{classhimalaya_1_1HierarchyObject_aa22fec3eb13eb3302fd7034d87dc91db}
-Returns the key to the suitable hierarchy/ \index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!set\+Abs\+Diff2L@{set\+Abs\+Diff2L}}
+\begin{DoxyReturn}{Returns}
+The key to the suitable hierarchy/ 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!set\+Abs\+Diff2L@{set\+Abs\+Diff2L}}
 \index{set\+Abs\+Diff2L@{set\+Abs\+Diff2L}!himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}}
 \subsubsection[{\texorpdfstring{set\+Abs\+Diff2\+L(double abs\+Diff2\+L)}{setAbsDiff2L(double absDiff2L)}}]{\setlength{\rightskip}{0pt plus 5cm}void himalaya\+::\+Hierarchy\+Object\+::set\+Abs\+Diff2L (
 \begin{DoxyParamCaption}
@@ -174,7 +183,7 @@ Sets the delta of the C\+P-\/even Higgs mass matrix
 )}\hypertarget{classhimalaya_1_1HierarchyObject_ac3a7082d088ae64fcdda09325b214c18}{}\label{classhimalaya_1_1HierarchyObject_ac3a7082d088ae64fcdda09325b214c18}
 Sets the DR -\/$>$ M\+DR shift 
 \begin{DoxyParams}{Parameters}
-{\em d\+Mh2l} & the DR -\/$>$ M\+DR shiftet matrix of the form M(\+M\+D\+R) -\/ M(\+D\+R). \\
+{\em d\+Mh2L} & the DR -\/$>$ M\+DR shiftet matrix of the form M(\+M\+D\+R) -\/ M(\+D\+R). \\
 \hline
 \end{DoxyParams}
 \index{himalaya\+::\+Hierarchy\+Object@{himalaya\+::\+Hierarchy\+Object}!set\+Exp\+Uncertainty@{set\+Exp\+Uncertainty}}
@@ -230,6 +239,7 @@ Sets the suitable hierarchy
 \end{DoxyParams}
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jonas/\+Himalaya/\+Himalaya/source/include/hierarchies/Hierarchy\+Object.\+hpp\end{DoxyCompactItemize}
+/home/jonas/\+Himalaya/\+Himalaya/source/include/hierarchies/Hierarchy\+Object.\+hpp\item 
+/home/jonas/\+Himalaya/\+Himalaya/source/hierarchies/Hierarchy\+Object.\+cpp\end{DoxyCompactItemize}

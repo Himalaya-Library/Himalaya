@@ -2,6 +2,7 @@ var searchData=
 [
   ['s2b',['s2b',['../structhimalaya_1_1Parameters.html#ae6574cf2bb33e968f3285167941cd696',1,'himalaya::Parameters']]],
   ['s2t',['s2t',['../structhimalaya_1_1Parameters.html#a0f85389598077341d20683c371a8d1be',1,'himalaya::Parameters']]],
+  ['scale',['scale',['../structhimalaya_1_1Parameters.html#a88f2975f66e3b8bc32f973606f2579c4',1,'himalaya::Parameters']]],
   ['setabsdiff2l',['setAbsDiff2L',['../classhimalaya_1_1HierarchyObject.html#a48341b55e1bb9270c7666a3be8f4d0fd',1,'himalaya::HierarchyObject']]],
   ['setdmh',['setDMh',['../classhimalaya_1_1HierarchyObject.html#a45d768b383fa137780094ab5b315bb3c',1,'himalaya::HierarchyObject']]],
   ['setdrtomdrshift',['setDRToMDRShift',['../classhimalaya_1_1HierarchyObject.html#ac3a7082d088ae64fcdda09325b214c18',1,'himalaya::HierarchyObject']]],

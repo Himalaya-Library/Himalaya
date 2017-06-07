@@ -114,8 +114,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a81e50f8e67ccb1055088b0d7ed591205"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a992a8b0156296168ca71b6701ab1b1b7"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix2d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhimalaya_1_1HierarchyObject.html#a992a8b0156296168ca71b6701ab1b1b7">getDRToMDRShift</a> () const </td></tr>
 <tr class="separator:a992a8b0156296168ca71b6701ab1b1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa2cfb844949191ab509bd645a75b6259"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix&lt; double, 2, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhimalaya_1_1HierarchyObject.html#aa2cfb844949191ab509bd645a75b6259">getMDRMasses</a> () const </td></tr>
-<tr class="separator:aa2cfb844949191ab509bd645a75b6259"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a023c789e0c2c17810bbf12d7075ce887"><td class="memItemLeft" align="right" valign="top">Eigen::Matrix&lt; double, 2, 1 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhimalaya_1_1HierarchyObject.html#a023c789e0c2c17810bbf12d7075ce887">getMDRMasses</a> () const </td></tr>
+<tr class="separator:a023c789e0c2c17810bbf12d7075ce887"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f77f9c7f9173858089e83bcaa8362f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhimalaya_1_1HierarchyObject.html#a6f77f9c7f9173858089e83bcaa8362f2">setSuitableHierarchy</a> (int hierarchy)</td></tr>
 <tr class="separator:a6f77f9c7f9173858089e83bcaa8362f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48341b55e1bb9270c7666a3be8f4d0fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhimalaya_1_1HierarchyObject.html#a48341b55e1bb9270c7666a3be8f4d0fd">setAbsDiff2L</a> (double absDiff2L)</td></tr>
@@ -169,7 +169,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s). </p>
+<dl class="section return"><dt>Returns</dt><dd>The absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s). </dd></dl>
 
 </div>
 </div>
@@ -186,9 +186,9 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the loop corrected CP-even Higgs mass matrix for the given loop order. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">loops</td><td>an integer which can be 0, 1, 2, 3. Here 0 corresponds to the tree-level matrix. </td></tr>
+    <tr><td class="paramname">loops</td><td>an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix. </td></tr>
   </table>
   </dd>
 </dl>
@@ -208,7 +208,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the DR to MDR shift. </p><dl class="section return"><dt>Returns</dt><dd>The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s) </dd></dl>
 
 </div>
 </div>
@@ -225,7 +225,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the expansion uncertainty at a given loop order. </p><dl class="params"><dt>Parameters</dt><dd>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">loops</td><td>an integer which can be 1, 2 or 3. </td></tr>
   </table>
@@ -251,19 +251,19 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa2cfb844949191ab509bd645a75b6259"></a>
+<a class="anchor" id="a023c789e0c2c17810bbf12d7075ce887"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Eigen::Matrix&lt;double, 2, 1&gt; himalaya::HierarchyObject::getMDRMasses </td>
+          <td class="memname">Eigen::Matrix&lt; double, 2, 1 &gt; himalaya::HierarchyObject::getMDRMasses </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the MDR masses at the order O(alpha_s + alpha_s^2). </p><dl class="section return"><dt>Returns</dt><dd>A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle. </dd></dl>
 
 </div>
 </div>
@@ -279,7 +279,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s). </p>
+<dl class="section return"><dt>Returns</dt><dd>The relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s). </dd></dl>
 
 </div>
 </div>
@@ -295,7 +295,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the key to the suitable hierarchy/ </p>
+<dl class="section return"><dt>Returns</dt><dd>The key to the suitable hierarchy/ </dd></dl>
 
 </div>
 </div>
@@ -369,7 +369,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Sets the DR -&gt; MDR shift </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dMh2l</td><td>the DR -&gt; MDR shiftet matrix of the form M(MDR) - M(DR). </td></tr>
+    <tr><td class="paramname">dMh2L</td><td>the DR -&gt; MDR shiftet matrix of the form M(MDR) - M(DR). </td></tr>
   </table>
   </dd>
 </dl>
@@ -475,8 +475,9 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/jonas/Himalaya/Himalaya/source/include/hierarchies/<a class="el" href="HierarchyObject_8hpp_source.html">HierarchyObject.hpp</a></li>
+<li>/home/jonas/Himalaya/Himalaya/source/hierarchies/HierarchyObject.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

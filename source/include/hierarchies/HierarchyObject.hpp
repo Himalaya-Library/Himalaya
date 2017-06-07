@@ -21,36 +21,32 @@ namespace himalaya{
        */
       bool getIsAlphab() const;
       /**
-       * 	Returns the key to the suitable hierarchy/
+       * 	@return The key to the suitable hierarchy/
        */
       int getSuitableHierarchy() const;
       /**
-       * 	Returns the absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
+       * 	@return The absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
        */
       double getAbsDiff2L() const;
       /**
-       * 	Returns the relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
+       * 	@return The relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
        */
       double getRelDiff2L() const;
       /**
-       * 	Returns the expansion uncertainty at a given loop order.
        * 	@param loops an integer which can be 1, 2 or 3.
        * 	@return A double which is the expansion uncertainty for the given loop order.
        */
       double getExpUncertainty(int loops) const;
       /**
-       * 	Returns the loop corrected CP-even Higgs mass matrix for the given loop order.
-       * 	@param loops an integer which can be 0, 1, 2, 3. Here 0 corresponds to the tree-level matrix.
+       * 	@param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
        * 	@return The CP-even Higgs mass matrix at the given loop order.
        */
       Eigen::Matrix2d getDMh(int loops) const;
       /**
-       * 	Returns the DR to MDR shift.
        * 	@return The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s)
        */
       Eigen::Matrix2d getDRToMDRShift() const;
       /**
-       * 	Returns the MDR masses at the order O(alpha_s + alpha_s^2).
        * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
        */
       Eigen::Matrix<double, 2, 1> getMDRMasses() const;
@@ -77,7 +73,7 @@ namespace himalaya{
       void setExpUncertainty(int loops, double uncertainty);
       /**
        * 	Sets the DR -> MDR shift
-       * 	@param dMh2l the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+       * 	@param dMh2L the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
        */
       void setDRToMDRShift(const Eigen::Matrix2d& dMh2L);
       /**
@@ -92,16 +88,18 @@ namespace himalaya{
        */
       void setDMh(int loops, const Eigen::Matrix2d& dMh);
    private:
-      bool isAlphab;									/** the bool isAlphab */
-      int hierarchy;									/** the suitable hierarchy */
-      double absDiff2L;									/** the absolute difference of the two loop Higgs masses */
-      double relDiff2L;									/** the relative difference of the two loop Higgs masses */
-      std::map<int, double> expUncertainties;						/** the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
-      std::map<int, Eigen::Matrix2d> dMhMap;						/** the map which holds all mass matrices at the given loop order */
-      Eigen::Matrix2d mdrShift;								/** the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
-      Eigen::Matrix<double, 2, 1> mdrMasses;						/** the 'vector' which holds the MDR masses */
+      bool isAlphab;									/**< the bool isAlphab */
+      int hierarchy;									/**< the suitable hierarchy */
+      double absDiff2L;									/**< the absolute difference of the two loop Higgs masses */
+      double relDiff2L;									/**< the relative difference of the two loop Higgs masses */
+      std::map<int, double> expUncertainties;						/**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
+      std::map<int, Eigen::Matrix2d> dMhMap;						/**< the map which holds all mass matrices at the given loop order */
+      Eigen::Matrix2d mdrShift;								/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
+      Eigen::Matrix<double, 2, 1> mdrMasses;						/**< the 'vector' which holds the MDR masses */
       /**
-       * 	Sorts a vector returning the lightest entry at position 0.
+       * 	Sorts a vector.
+       * 	@param vector The vector which should be sorted.
+       *	@return Returns a vector the lightest entry at position 0.
        */
       Eigen::Matrix<double, 2, 1> sortVector(Eigen::Matrix<double, 2, 1>& vector);
    };
