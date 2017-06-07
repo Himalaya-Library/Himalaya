@@ -1,0 +1,250 @@
+\hypertarget{classhimalaya_1_1HierarchyCalculator}{}\section{himalaya\+:\+:Hierarchy\+Calculator Class Reference}
+\label{classhimalaya_1_1HierarchyCalculator}\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+
+
+{\ttfamily \#include $<$Hierarchy\+Calculator.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhimalaya_1_1HierarchyCalculator_a8d1d3911a84f05c234e0f66bd80d77e4}{Hierarchy\+Calculator} (const \hyperlink{structhimalaya_1_1Parameters}{Parameters} \&p)
+\item 
+\hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \hyperlink{classhimalaya_1_1HierarchyCalculator_abf7f5305373058bea5b173e734d07d6c}{calculate\+D\+Mh3L} (const bool \&is\+Alphab)
+\item 
+int \hyperlink{classhimalaya_1_1HierarchyCalculator_a6ae7d2bf7742c1a961a79bab4c860378}{compare\+Hierarchies} (\hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \&ho)
+\item 
+Eigen\+::\+Matrix2d \hyperlink{classhimalaya_1_1HierarchyCalculator_aa9a5d68155fa1b5d7376d9bf08470946}{calculate\+Hierarchy} (\hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \&ho, const unsigned int one\+Loop\+Flag\+In, const unsigned int two\+Loop\+Flag\+In, const unsigned int three\+Loop\+Flag\+In)
+\item 
+Eigen\+::\+Matrix2d \hyperlink{classhimalaya_1_1HierarchyCalculator_ab0e05fd01311e162d50acc741dcc9f8b}{calc\+D\+Rbar\+To\+M\+D\+Rbar\+Shift} (const \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \&ho, const bool shift\+One\+Loop, const bool shift\+Two\+Loop)
+\item 
+Eigen\+::\+Matrix2d \hyperlink{classhimalaya_1_1HierarchyCalculator_a2366610066b408bbad9aeba98ada07fb}{get\+Mt41L} (const \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \&ho, const unsigned int shift\+One\+Loop, const unsigned int shift\+Two\+Loop)
+\item 
+Eigen\+::\+Matrix2d \hyperlink{classhimalaya_1_1HierarchyCalculator_aa35b62a12a4f97b77830abf292858b05}{get\+Mt42L} (const \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \&ho, const unsigned int shift\+One\+Loop, const unsigned int shift\+Two\+Loop)
+\item 
+double \hyperlink{classhimalaya_1_1HierarchyCalculator_a3d58d2ecf6e53b0691ad50b940c852df}{shift\+Mst1\+To\+M\+DR} (const \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \&ho, const unsigned int one\+Loop\+Flag, const unsigned int two\+Loop\+Flag)
+\item 
+double \hyperlink{classhimalaya_1_1HierarchyCalculator_ac165e8a9bc30b126fdced08dc23dcfd6}{shift\+Mst2\+To\+M\+DR} (const \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} \&ho, const unsigned int one\+Loop\+Flag, const unsigned int two\+Loop\+Flag)
+\item 
+double \hyperlink{classhimalaya_1_1HierarchyCalculator_a30998752a650fb301bca6e1694f01f9c}{get\+Expansion\+Uncertainty} (\hyperlink{classhimalaya_1_1HierarchyObject}{himalaya\+::\+Hierarchy\+Object} \&ho, const Eigen\+::\+Matrix2d \&mass\+Matrix, const unsigned int one\+Loop\+Flag, const unsigned int two\+Loop\+Flag, const unsigned int three\+Loop\+Flag)
+\item 
+void \hyperlink{classhimalaya_1_1HierarchyCalculator_a80f6af79a55c982e1b36f01679e9791c}{check\+Terms} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Hierarchy\+Calculatur class 
+
+\subsection{Constructor \& Destructor Documentation}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!Hierarchy\+Calculator@{Hierarchy\+Calculator}}
+\index{Hierarchy\+Calculator@{Hierarchy\+Calculator}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{Hierarchy\+Calculator(const Parameters \&p)}{HierarchyCalculator(const Parameters &p)}}]{\setlength{\rightskip}{0pt plus 5cm}himalaya\+::\+Hierarchy\+Calculator\+::\+Hierarchy\+Calculator (
+\begin{DoxyParamCaption}
+\item[{const {\bf Parameters} \&}]{p}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_a8d1d3911a84f05c234e0f66bd80d77e4}{}\label{classhimalaya_1_1HierarchyCalculator_a8d1d3911a84f05c234e0f66bd80d77e4}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em p} & a Himalaya\+Interface struct \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!calc\+D\+Rbar\+To\+M\+D\+Rbar\+Shift@{calc\+D\+Rbar\+To\+M\+D\+Rbar\+Shift}}
+\index{calc\+D\+Rbar\+To\+M\+D\+Rbar\+Shift@{calc\+D\+Rbar\+To\+M\+D\+Rbar\+Shift}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{calc\+D\+Rbar\+To\+M\+D\+Rbar\+Shift(const Hierarchy\+Object \&ho, const bool shift\+One\+Loop, const bool shift\+Two\+Loop)}{calcDRbarToMDRbarShift(const HierarchyObject &ho, const bool shiftOneLoop, const bool shiftTwoLoop)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix2d himalaya\+::\+Hierarchy\+Calculator\+::calc\+D\+Rbar\+To\+M\+D\+Rbar\+Shift (
+\begin{DoxyParamCaption}
+\item[{const {\bf Hierarchy\+Object} \&}]{ho, }
+\item[{const bool}]{shift\+One\+Loop, }
+\item[{const bool}]{shift\+Two\+Loop}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_ab0e05fd01311e162d50acc741dcc9f8b}{}\label{classhimalaya_1_1HierarchyCalculator_ab0e05fd01311e162d50acc741dcc9f8b}
+Calculates the contribution to the order (alpha\+\_\+x) and (alpha\+\_\+s alpha\+\_\+x) as the difference of the Higgs mass matrices of the M\+DR and DR scheme. Here x can be t or b. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+{\em shift\+One\+Loop} & a bool to shift the terms at one-\/loop level. \\
+\hline
+{\em shift\+Two\+Loop} & a bool to shift the terms at two-\/loop level. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The loop corrected Higgs mass matrix difference of the M\+DR and DR scheme at the given order. 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!calculate\+D\+Mh3L@{calculate\+D\+Mh3L}}
+\index{calculate\+D\+Mh3L@{calculate\+D\+Mh3L}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{calculate\+D\+Mh3\+L(const bool \&is\+Alphab)}{calculateDMh3L(const bool &isAlphab)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Hierarchy\+Object} himalaya\+::\+Hierarchy\+Calculator\+::calculate\+D\+Mh3L (
+\begin{DoxyParamCaption}
+\item[{const bool \&}]{is\+Alphab}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_abf7f5305373058bea5b173e734d07d6c}{}\label{classhimalaya_1_1HierarchyCalculator_abf7f5305373058bea5b173e734d07d6c}
+Calculates the 3-\/loop mass matrix and other information of the hierarchy selection process. 
+\begin{DoxyParams}{Parameters}
+{\em is\+Alphab} & a bool which determines if the returned object is proportinal to alpha\+\_\+b. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} which holds all information of the calculation. 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!calculate\+Hierarchy@{calculate\+Hierarchy}}
+\index{calculate\+Hierarchy@{calculate\+Hierarchy}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{calculate\+Hierarchy(\+Hierarchy\+Object \&ho, const unsigned int one\+Loop\+Flag\+In, const unsigned int two\+Loop\+Flag\+In, const unsigned int three\+Loop\+Flag\+In)}{calculateHierarchy(HierarchyObject &ho, const unsigned int oneLoopFlagIn, const unsigned int twoLoopFlagIn, const unsigned int threeLoopFlagIn)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix2d himalaya\+::\+Hierarchy\+Calculator\+::calculate\+Hierarchy (
+\begin{DoxyParamCaption}
+\item[{{\bf Hierarchy\+Object} \&}]{ho, }
+\item[{const unsigned int}]{one\+Loop\+Flag\+In, }
+\item[{const unsigned int}]{two\+Loop\+Flag\+In, }
+\item[{const unsigned int}]{three\+Loop\+Flag\+In}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_aa9a5d68155fa1b5d7376d9bf08470946}{}\label{classhimalaya_1_1HierarchyCalculator_aa9a5d68155fa1b5d7376d9bf08470946}
+Calculates the hierarchy contributions for a specific hierarchy at a specific loop order. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+{\em one\+Loop\+Flag\+In} & an integer flag which is 0 or 1 in order to add or omit the expanded one-\/loop results to the returned value, respectivley. \\
+\hline
+{\em two\+Loop\+Flag\+In} & an integer flag which is 0 or 1 in order to add or omit the expanded two-\/loop results to the returned value, respectivley. \\
+\hline
+{\em three\+Loop\+Flag\+In} & an integer flag which is 0 or 1 in order to add or omit the expanded three-\/loop results to the returned value, respectivley. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The loop corrected Higgs mass matrix which contains the expanded corrections at the given order. 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!check\+Terms@{check\+Terms}}
+\index{check\+Terms@{check\+Terms}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{check\+Terms()}{checkTerms()}}]{\setlength{\rightskip}{0pt plus 5cm}void himalaya\+::\+Hierarchy\+Calculator\+::check\+Terms (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_a80f6af79a55c982e1b36f01679e9791c}{}\label{classhimalaya_1_1HierarchyCalculator_a80f6af79a55c982e1b36f01679e9791c}
+Performs a sanity check of the implemented expansion terms by comparing them to their numerical value at a given parameter point. \index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!compare\+Hierarchies@{compare\+Hierarchies}}
+\index{compare\+Hierarchies@{compare\+Hierarchies}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{compare\+Hierarchies(\+Hierarchy\+Object \&ho)}{compareHierarchies(HierarchyObject &ho)}}]{\setlength{\rightskip}{0pt plus 5cm}int himalaya\+::\+Hierarchy\+Calculator\+::compare\+Hierarchies (
+\begin{DoxyParamCaption}
+\item[{{\bf Hierarchy\+Object} \&}]{ho}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_a6ae7d2bf7742c1a961a79bab4c860378}{}\label{classhimalaya_1_1HierarchyCalculator_a6ae7d2bf7742c1a961a79bab4c860378}
+Compares deviation of all hierarchies with the exact two-\/loop result and returns the hierarchy which minimizes the error. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A integer which is identified with the suitable hierarchy. 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!get\+Expansion\+Uncertainty@{get\+Expansion\+Uncertainty}}
+\index{get\+Expansion\+Uncertainty@{get\+Expansion\+Uncertainty}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{get\+Expansion\+Uncertainty(himalaya\+::\+Hierarchy\+Object \&ho, const Eigen\+::\+Matrix2d \&mass\+Matrix, const unsigned int one\+Loop\+Flag, const unsigned int two\+Loop\+Flag, const unsigned int three\+Loop\+Flag)}{getExpansionUncertainty(himalaya::HierarchyObject &ho, const Eigen::Matrix2d &massMatrix, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag)}}]{\setlength{\rightskip}{0pt plus 5cm}double himalaya\+::\+Hierarchy\+Calculator\+::get\+Expansion\+Uncertainty (
+\begin{DoxyParamCaption}
+\item[{{\bf himalaya\+::\+Hierarchy\+Object} \&}]{ho, }
+\item[{const Eigen\+::\+Matrix2d \&}]{mass\+Matrix, }
+\item[{const unsigned int}]{one\+Loop\+Flag, }
+\item[{const unsigned int}]{two\+Loop\+Flag, }
+\item[{const unsigned int}]{three\+Loop\+Flag}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_a30998752a650fb301bca6e1694f01f9c}{}\label{classhimalaya_1_1HierarchyCalculator_a30998752a650fb301bca6e1694f01f9c}
+Estimates the uncertainty of the expansion at a given order. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+{\em mass\+Matrix} & the C\+P-\/even Higgs mass matrix without the corrections whose uncertainty should be estimated. \\
+\hline
+{\em one\+Loop\+Flag} & an integer flag which is 0 or 1 in order to estimate the uncertainty of the one-\/loop expansion terms. \\
+\hline
+{\em two\+Loop\+Flag} & an integer flag which is 0 or 1 in order to estimate the uncertainty of the two-\/loop expansion terms. \\
+\hline
+{\em three\+Loop\+Flag} & an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-\/loop expansion terms. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A double which is the estimated uncertainty. 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!get\+Mt41L@{get\+Mt41L}}
+\index{get\+Mt41L@{get\+Mt41L}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{get\+Mt41\+L(const Hierarchy\+Object \&ho, const unsigned int shift\+One\+Loop, const unsigned int shift\+Two\+Loop)}{getMt41L(const HierarchyObject &ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix2d himalaya\+::\+Hierarchy\+Calculator\+::get\+Mt41L (
+\begin{DoxyParamCaption}
+\item[{const {\bf Hierarchy\+Object} \&}]{ho, }
+\item[{const unsigned int}]{shift\+One\+Loop, }
+\item[{const unsigned int}]{shift\+Two\+Loop}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_a2366610066b408bbad9aeba98ada07fb}{}\label{classhimalaya_1_1HierarchyCalculator_a2366610066b408bbad9aeba98ada07fb}
+Calculates the loop corrected Higgs mass matrix at the order O(alpha\+\_\+x). Here x can be t or b. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+{\em shift\+One\+Loop} & An integer flag which is 0 or 1 in order to shift the one-\/loop terms to the M\+DR scheme. \\
+\hline
+{\em shift\+Two\+Loop} & An integer flag which is 0 or 1 in order to shift the two-\/loop terms to the M\+DR scheme. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The loop corrected Higgs mass matrix at the order O(alpha\+\_\+x). 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!get\+Mt42L@{get\+Mt42L}}
+\index{get\+Mt42L@{get\+Mt42L}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{get\+Mt42\+L(const Hierarchy\+Object \&ho, const unsigned int shift\+One\+Loop, const unsigned int shift\+Two\+Loop)}{getMt42L(const HierarchyObject &ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop)}}]{\setlength{\rightskip}{0pt plus 5cm}Eigen\+::\+Matrix2d himalaya\+::\+Hierarchy\+Calculator\+::get\+Mt42L (
+\begin{DoxyParamCaption}
+\item[{const {\bf Hierarchy\+Object} \&}]{ho, }
+\item[{const unsigned int}]{shift\+One\+Loop, }
+\item[{const unsigned int}]{shift\+Two\+Loop}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_aa35b62a12a4f97b77830abf292858b05}{}\label{classhimalaya_1_1HierarchyCalculator_aa35b62a12a4f97b77830abf292858b05}
+Calculates the loop corrected Higgs mass matrix at the order O(alpha\+\_\+x$\ast$alpha\+\_\+s). Here x can be t or b. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+{\em shift\+One\+Loop} & An integer flag which is 0 or 1 in order to shift the one-\/loop terms to the M\+DR scheme. \\
+\hline
+{\em shift\+Two\+Loop} & An integer flag which is 0 or 1 in order to shift the two-\/loop terms to the M\+DR scheme. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The loop corrected Higgs mass matrix at the order O(alpha\+\_\+x$\ast$alpha\+\_\+s). 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!shift\+Mst1\+To\+M\+DR@{shift\+Mst1\+To\+M\+DR}}
+\index{shift\+Mst1\+To\+M\+DR@{shift\+Mst1\+To\+M\+DR}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{shift\+Mst1\+To\+M\+D\+R(const Hierarchy\+Object \&ho, const unsigned int one\+Loop\+Flag, const unsigned int two\+Loop\+Flag)}{shiftMst1ToMDR(const HierarchyObject &ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag)}}]{\setlength{\rightskip}{0pt plus 5cm}double himalaya\+::\+Hierarchy\+Calculator\+::shift\+Mst1\+To\+M\+DR (
+\begin{DoxyParamCaption}
+\item[{const {\bf Hierarchy\+Object} \&}]{ho, }
+\item[{const unsigned int}]{one\+Loop\+Flag, }
+\item[{const unsigned int}]{two\+Loop\+Flag}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_a3d58d2ecf6e53b0691ad50b940c852df}{}\label{classhimalaya_1_1HierarchyCalculator_a3d58d2ecf6e53b0691ad50b940c852df}
+Shifts Mst1 according to the hierarchy to the M\+DR scheme. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+{\em one\+Loop\+Flag} & an integer flag which is 0 or 1 in order to shift the order O(alpha\+\_\+s). \\
+\hline
+{\em two\+Loop\+Flag} & an integer flag which is 0 or 1 in order to shift the order O(alpha\+\_\+s$^\wedge$2). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A double which is the M\+DR stop\+\_\+1 mass. 
+\end{DoxyReturn}
+\index{himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}!shift\+Mst2\+To\+M\+DR@{shift\+Mst2\+To\+M\+DR}}
+\index{shift\+Mst2\+To\+M\+DR@{shift\+Mst2\+To\+M\+DR}!himalaya\+::\+Hierarchy\+Calculator@{himalaya\+::\+Hierarchy\+Calculator}}
+\subsubsection[{\texorpdfstring{shift\+Mst2\+To\+M\+D\+R(const Hierarchy\+Object \&ho, const unsigned int one\+Loop\+Flag, const unsigned int two\+Loop\+Flag)}{shiftMst2ToMDR(const HierarchyObject &ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag)}}]{\setlength{\rightskip}{0pt plus 5cm}double himalaya\+::\+Hierarchy\+Calculator\+::shift\+Mst2\+To\+M\+DR (
+\begin{DoxyParamCaption}
+\item[{const {\bf Hierarchy\+Object} \&}]{ho, }
+\item[{const unsigned int}]{one\+Loop\+Flag, }
+\item[{const unsigned int}]{two\+Loop\+Flag}
+\end{DoxyParamCaption}
+)}\hypertarget{classhimalaya_1_1HierarchyCalculator_ac165e8a9bc30b126fdced08dc23dcfd6}{}\label{classhimalaya_1_1HierarchyCalculator_ac165e8a9bc30b126fdced08dc23dcfd6}
+Shifts Mst2 according to the hierarchy to the M\+DR scheme. 
+\begin{DoxyParams}{Parameters}
+{\em ho} & a \hyperlink{classhimalaya_1_1HierarchyObject}{Hierarchy\+Object} with constant is\+Alphab. \\
+\hline
+{\em one\+Loop\+Flag} & an integer flag which is 0 or 1 in order to shift the order O(alpha\+\_\+s). \\
+\hline
+{\em two\+Loop\+Flag} & an integer flag which is 0 or 1 in order to shift the order O(alpha\+\_\+s$^\wedge$2). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A double which is the M\+DR stop\+\_\+2 mass. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/jonas/\+Himalaya/\+Himalaya/source/include/hierarchies/Hierarchy\+Calculator.\+hpp\end{DoxyCompactItemize}

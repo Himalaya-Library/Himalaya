@@ -6,35 +6,104 @@
 #include <map>
 
 namespace himalaya{
-   
+   /**
+    * 	The HierarchyObject class.
+    */
    class HierarchyObject{
    public:
-      HierarchyObject(bool isAlphab);							// constructor
-      bool getIsAlphab() const;								// returns if the corresponding object contains contributions proportional to alpha_b or alpha_t
-      int getSuitableHierarchy() const;							// returns the suitable hierarchy for the parameter point
-      double getAbsDiff2L() const;							// returns the absolute difference of the Higgs masses at 2-loop level of the exact and the expanded terms
-      double getRelDiff2L() const;							// returns the relative difference of the Higgs masses at 2-loop level of the exact and the expanded terms |Mh(2l,exact) - Mh(2l, expanded)|/Mh(2l, exact)
-      double getExpUncertainty(int loops) const;					// returns the uncertainty of the expansion at the given loop order
-      Eigen::Matrix2d getDMh(int loops) const;						// returns the @loops mass matrix for the given hierarchy and parameter point
-      Eigen::Matrix2d getDRToMDRShift() const;						// returns the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s, with x is b,t with respect to isAlphab
-      Eigen::Matrix<double, 2, 1> getMDRMasses() const;					// returns a vector of the MDR masses. The first entry is Msx1 and the second Msx2, with x is b or t
-      void setSuitableHierarchy(int hierarchy);						// sets the value of the suitable hierarchy
-      void setAbsDiff2L(double absDiff2L);						// sets the absolute difference of the Higgs masses at 2-loop level
-      void setRelDiff2L(double relDiff2L);						// sets the relative difference of the Higgs masses at 2-loop level
-      void setExpUncertainty(int loops, double uncertainty);				// sets the expansion uncertainties
-      void setDRToMDRShift(const Eigen::Matrix2d& dMh2L);				// sets the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s, with x is b or t 
-      void setMDRMasses(Eigen::Matrix<double, 2, 1>& mdrMasses);			// sets the MDR masses
-      void setDMh(int loops, const Eigen::Matrix2d& dMh);				// sets the @loops mass matrix for the given hierarchy and parameter point
+      /**
+       * 	A constructor.
+       * 	@param isAlphab the boolean which determines wether the members are proportinal to alpha_b or alpha_t.
+       */
+      HierarchyObject(bool isAlphab);
+      /**
+       * 	Returns the value of isAlphab.
+       */
+      bool getIsAlphab() const;
+      /**
+       * 	Returns the key to the suitable hierarchy/
+       */
+      int getSuitableHierarchy() const;
+      /**
+       * 	Returns the absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
+       */
+      double getAbsDiff2L() const;
+      /**
+       * 	Returns the relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
+       */
+      double getRelDiff2L() const;
+      /**
+       * 	Returns the expansion uncertainty at a given loop order.
+       * 	@param loops an integer which can be 1, 2 or 3.
+       * 	@return A double which is the expansion uncertainty for the given loop order.
+       */
+      double getExpUncertainty(int loops) const;
+      /**
+       * 	Returns the loop corrected CP-even Higgs mass matrix for the given loop order.
+       * 	@param loops an integer which can be 0, 1, 2, 3. Here 0 corresponds to the tree-level matrix.
+       * 	@return The CP-even Higgs mass matrix at the given loop order.
+       */
+      Eigen::Matrix2d getDMh(int loops) const;
+      /**
+       * 	Returns the DR to MDR shift.
+       * 	@return The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s)
+       */
+      Eigen::Matrix2d getDRToMDRShift() const;
+      /**
+       * 	Returns the MDR masses at the order O(alpha_s + alpha_s^2).
+       * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
+       */
+      Eigen::Matrix<double, 2, 1> getMDRMasses() const;
+      /**
+       * 	Sets the suitable hierarchy
+       * 	@param hierarchy the integer key of the hierarchy.
+       */
+      void setSuitableHierarchy(int hierarchy);
+      /**
+       * 	Sets the absolute difference of the Higgs masses at two-loop level
+       * 	@param absDiff2L the absolute difference of the Higgs masses as a double.
+       */
+      void setAbsDiff2L(double absDiff2L);
+      /**
+       * 	Sets the relative difference ot the Higgs masses at two-loop level
+       * 	@param relDiff2L the relative difference of the Higgs masses as a double.
+       */
+      void setRelDiff2L(double relDiff2L);
+      /**
+       * 	Sets the uncertainty of the expansion at a given loop level.
+       * 	@param loops the integer value of the corresponding loops. Can be 1, 2 or 3.
+       * 	@param uncertainty the expansion untertainty at the given loop order as a double.
+       */
+      void setExpUncertainty(int loops, double uncertainty);
+      /**
+       * 	Sets the DR -> MDR shift
+       * 	@param dMh2l the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+       */
+      void setDRToMDRShift(const Eigen::Matrix2d& dMh2L);
+      /**
+       * 	Sets the MDR masses
+       * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
+       */
+      void setMDRMasses(Eigen::Matrix<double, 2, 1>& mdrMasses);
+      /**
+       * 	Sets the delta of the CP-even Higgs mass matrix
+       * 	@param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
+       * 	@param dMh the delta of the mass matrix.
+       */
+      void setDMh(int loops, const Eigen::Matrix2d& dMh);
    private:
-      bool isAlphab;									// the bool isAlphab
-      int hierarchy;									// the suitable hierarchy
-      double absDiff2L;									// the absolute difference of the two loop Higgs masses
-      double relDiff2L;									// the relative difference of the two loop Higgs masses
-      std::map<int, double> expUncertainties;						// the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3
-      std::map<int, Eigen::Matrix2d> dMhMap;						// the map which holds all mass matrices at the given loop order
-      Eigen::Matrix2d mdrShift;								// the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s
-      Eigen::Matrix<double, 2, 1> mdrMasses;						// the 'vector' which holds the MDR masses
-      Eigen::Matrix<double, 2, 1> sortVector(Eigen::Matrix<double, 2, 1>& vector);	// sorts the vector
+      bool isAlphab;									/** the bool isAlphab */
+      int hierarchy;									/** the suitable hierarchy */
+      double absDiff2L;									/** the absolute difference of the two loop Higgs masses */
+      double relDiff2L;									/** the relative difference of the two loop Higgs masses */
+      std::map<int, double> expUncertainties;						/** the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
+      std::map<int, Eigen::Matrix2d> dMhMap;						/** the map which holds all mass matrices at the given loop order */
+      Eigen::Matrix2d mdrShift;								/** the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
+      Eigen::Matrix<double, 2, 1> mdrMasses;						/** the 'vector' which holds the MDR masses */
+      /**
+       * 	Sorts a vector returning the lightest entry at position 0.
+       */
+      Eigen::Matrix<double, 2, 1> sortVector(Eigen::Matrix<double, 2, 1>& vector);
    };
 }	// himalaya
 #endif	// HierarchyObject_HPP
