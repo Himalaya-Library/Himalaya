@@ -141,75 +141,6 @@ himalaya::Parameters setup_HSSUSY_minmix(){
    return pars;
 }
 
-himalaya::Parameters checkH3m(){
-   himalaya::Parameters pars;
-
-   pars.scale = 173.3;
-   pars.mu = 352.573;
-   pars.g3 = 1.1218;
-   pars.vd = 24.7443;
-   pars.vu = 244.974;
-   pars.mq2 << 330852, 0, 0,
-               0, 330850, 0,
-               0, 0, 274503;
-   pars.md2 << 309155, 0, 0,
-               0, 309153, 0,
-               0, 0, 305087;
-   pars.mu2 << 311332, 0, 0,
-               0, 311330, 0,
-               0, 0, 200009;
-   pars.Ab = -529.657;
-   pars.At = -529.657;
-
-   pars.MA = 397.338;
-   pars.MG = 615.162;
-   pars.MW = 80.399;
-   pars.MZ = 91.2;
-   pars.Mt = 153.608;
-   pars.Mb = 4.25;
-   pars.MSt << 405.778, 594.116;
-   pars.MSb << 405.778, 594.116;
-   pars.s2t = sin(2*0.983974);
-   pars.s2b = 1.;
-
-   return pars;
-}
-
-himalaya::Parameters checkH3m2(){
-
-   himalaya::Parameters pars;
-
-   pars.scale = 1056.26;
-   pars.mu = 134.903;
-   pars.g3 = 1.07022;
-   pars.vd = 25.01481631;
-   pars.vu = 241.4436584;
-   pars.mq2 << pow(1468.7,2), 0, 0,
-               0, pow(1468.7,2), 0,
-               0, 0, pow(1214.45,2);
-   pars.md2 << pow(1470.63,2), 0, 0,
-               0, pow(1470.62,2), 0,
-               0, 0, pow(1458.97,2);
-   pars.mu2 << pow(1470.37,2), 0, 0,
-               0, pow(1470.36,2), 0,
-               0, 0, pow(903.144,2);
-   pars.Ab = -528.861551;
-   pars.At = -361.862050;
-
-   pars.MA = 1437.52;
-   pars.MG = 450.708;
-   pars.MW = 78.3505;
-   pars.MZ = 89.8558;
-   pars.Mt = 145.353;
-   pars.Mb = 4.25;
-   pars.MSt << 911.608, 1223.86;
-   pars.MSb << 1216.13, 1459.28;
-   pars.s2t = 0.163855;
-   pars.s2b = 0.127886;
-
-   return pars;
-}
-
 himalaya::Parameters Xt29(){
 
    himalaya::Parameters pars;
@@ -453,79 +384,13 @@ himalaya::Parameters MS480(){
    return pars;
 }
 
-himalaya::Parameters bug(){
-
-  himalaya::Parameters pars;
-   pars.scale   = 1158.13;
-    pars.mu  = 1150.17;
-    pars.g3  = 1.05606;
-    pars.vd  = 49.7917;
-    pars.vu  = 239.757;
-    pars.mq2 << 1.32202e+06 ,          0 ,          0,
-            0, 1.32202e+06    ,       0,
-            0 ,          0, 1.32212e+06;
-    pars.md2 << 1.32214e+06,           0 ,          0,
-            0, 1.32214e+06     ,      0,
-            0 ,          0, 1.32217e+06;
-    pars.mu2 << 1.32213e+06,           0,           0,
-            0, 1.32213e+06    ,       0,
-            0 ,          0, 1.32231e+06;
-    pars.At  = 230.831;
-    pars.Ab  = 5751.4;
-    pars.MG  = 1149.82;
-    pars.MW  = 78.2546;
-    pars.MZ  = 89.962;
-    pars.Mt  = 144.595;
-    pars.Mb  = 2.38715;
-    pars.MA  = 1150.55;
-    pars.MSt << 1157.54, 1158.73;
-    pars.MSb << 1150.08, 1151.23;
-    pars.s2t = 0.841368;
-    pars.s2b = -0.381861;
-     return pars;
-}
-
-himalaya::Parameters bug2(){
-  himalaya::Parameters pars;
- pars.scale   = 1158.13;
-  pars.mu  = 1150.17;
-  pars.g3  = 1.05606;
-  pars.vd  = 49.7917;
-  pars.vu  = 239.757;
-  pars.mq2 << 1.32202e+06,           0,           0,
-          0, 1.32202e+06       ,    0,
-          0 ,          0, 1.32212e+06;
-  pars.md2 << 1.32214e+06,           0 ,          0,
-          0, 1.32214e+06    ,       0,
-          0 ,          0, 1.32217e+06;
-  pars.mu2 << 1.32213e+06 ,          0  ,         0,
-          0 ,1.32213e+06   ,        0,
-          0  ,         0, 1.32231e+06;
-  pars.At  = 230.831;
-  pars.Ab  = 5751.4;
-  pars.MG  = 1149.82;
-  pars.MW  = 78.2546;
-  pars.MZ  = 89.962;
-  pars.Mt  = 144.595;
-  pars.Mb  = 2.38715;
-  pars.MA  = 1150.55;
-  pars.MSt << 1157.54, 1158.73;
-  pars.MSb << 1150.08, 1151.23;
-  pars.s2t = 0.841368;
-  pars.s2b = -0.381861;
-    return pars;
-
-}
-
 int main(int argc, char **argv) {
    try{
       const std::vector<himalaya::Parameters> points = {
 	 //setup_SPS1a(),
-	 setup_SPS2(),
+	 setup_SPS2()
 	 //setup_CMSSM_large_m0(),
-	 //setup_HSSUSY_minmix(),
-	 //checkH3m(),
-	 //checkH3m2(),
+	 //setup_HSSUSY_minmix()
 	 //Xt29(),
 	 //Xt3(),
 	 //Xt31(),
@@ -533,8 +398,6 @@ int main(int argc, char **argv) {
 	 //MS350(),
 	 //MS400(),
 	 //MS480(),
-	 //bug(),
-	 //bug2()
       }; 
       for (const auto point: points) {
 	 // init hierarchy calculator
@@ -545,24 +408,23 @@ int main(int argc, char **argv) {
 	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
 
 	 //bottom
-	 himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true);
+	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true);
 	 
 	 // check terms
 	 //hierarchyCalculator.checkTerms();
 	 
-	 std::cout << "hierarchy top: " << hoTop.getSuitableHierarchy() << ", hierarchy bot: " << hoBot.getSuitableHierarchy() << std::endl;
-	 std::cout << "error top " << hoTop.getRelDiff2L() << " error bot: " << hoBot.getRelDiff2L() << std::endl;
-	 std::cout << "abs err top " << hoTop.getAbsDiff2L() << " abs err bot " << hoBot.getAbsDiff2L() << std::endl; 
-	 std::cout << "mdr " << hoTop.getMDRMasses() << std::endl;
-	 std::cout << "tree " << hoTop.getDMh(0) << std::endl;
-	 std::cout << "1l " << hoTop.getDMh(1) << std::endl;
-	 std::cout << "2l " << hoTop.getDMh(2) << std::endl;
-	 std::cout << "exp 1 " << hoTop.getExpUncertainty(1) << std::endl;
-	 std::cout << "exp 2 " << hoTop.getExpUncertainty(2) << std::endl;
-	 std::cout << "exp 3 " << hoTop.getExpUncertainty(3) << std::endl;
-	 std::cout << "shift " << hoTop.getDRToMDRShift() << std::endl;
-	 std::cout << "3l " << hoTop.getDMh(3) << std::endl;
-	 std::cout << "----------------------------------" << std::endl;
+	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << std::endl;
+	 std::cout << "Error: " << hoTop.getRelDiff2L() << std::endl;
+	 std::cout << "Abs err: " << hoTop.getAbsDiff2L() << std::endl; 
+	 std::cout << "MDR masses: " << hoTop.getMDRMasses()(0) << " " << hoTop.getMDRMasses()(1) << std::endl;
+	 std::cout << "Mh^tree: " << hoTop.getDMh(0).row(0) << " " << hoTop.getDMh(0).row(1) << std::endl;
+	 std::cout << "Mh^1L: " << hoTop.getDMh(1).row(0) << " " << hoTop.getDMh(1).row(1) << std::endl;
+	 std::cout << "Mh^2L: " << hoTop.getDMh(2).row(0) << " " << hoTop.getDMh(2).row(1) << std::endl;
+	 std::cout << "Mh^3L: " << hoTop.getDMh(3).row(0) << " " << hoTop.getDMh(3).row(1) << std::endl;
+	 std::cout << "Exp uncert. 1L: " << hoTop.getExpUncertainty(1) << std::endl;
+	 std::cout << "Exp uncert. 2L: " << hoTop.getExpUncertainty(2) << std::endl;
+	 std::cout << "Exp uncert. 3L: " << hoTop.getExpUncertainty(3) << std::endl;
+	 std::cout << "DR -> MDR shift: " << hoTop.getDRToMDRShift().row(0) << " " << hoTop.getDRToMDRShift().row(1)  << std::endl;
       }
    }
    catch (std::exception& e){

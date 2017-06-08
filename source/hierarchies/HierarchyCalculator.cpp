@@ -241,9 +241,6 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	    ho.setExpUncertainty(2, expUncertainty);
 	 }
       }
-      else{
-	 ho.setSuitableHierarchy(suitableHierarchy);	// captures the case if no hierarchy is fitting
-      }
    }
    ho.setSuitableHierarchy(suitableHierarchy);
    // reset the flags
@@ -1277,7 +1274,9 @@ int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
 }
 
 void himalaya::HierarchyCalculator::printInfo(){
-   //std::cout << ".  .         .          \n|__|*._ _  _.| _.  . _.\n|  ||[ | )(_]|(_]\\_|(_]\n                 ._|   " << std::endl;
-   std::cout << "Himalaya contains code by: P. Slavich et al. (2-loop rMSSM Higgs self-energies)" << std::endl;
-   std::cout << "Himalaya uses the 3-loop contributions of Kant et al." << std::endl;
+   std::cout << "......................................................................." << std::endl;
+   std::cout << "Himalaya 1.0.0" << std::endl;
+   std::cout << "Contains code by: P. Slavich et al. (2-loop rMSSM Higgs self-energies)." << std::endl;
+   std::cout << "Uses the 3-loop contributions of Kant et al." << std::endl;
+   std::cout << "......................................................................." << std::endl;
 }

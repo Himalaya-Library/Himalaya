@@ -1,3 +1,5 @@
+#Readme of Himalaya 1.0.0
+
 #Installation
 To build Himalaya
 	
@@ -25,4 +27,8 @@ The Himalaya library provides these functions:
   getExpansionUncertainty
   checkTerms
 
-They are documented in the /doc directory.
+They are documented in the doc/ directory. To generate the documentation type
+
+     cd doc/
+     doxygen himalaya.conf
+     
