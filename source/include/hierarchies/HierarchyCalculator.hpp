@@ -66,11 +66,11 @@ namespace himalaya{
        */
       Eigen::Matrix2d getMt42L(const HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop);
       /**
-       *	Shifts Mst1 according to the hierarchy to the MDR scheme.
+       *	Shifts Msx1 according to the hierarchy to the MDR scheme.
        * 	@param ho a HierarchyObject with constant isAlphab.
        * 	@param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
        * 	@param twoLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s^2).
-       * 	@return A double which is the MDR stop_1 mass.
+       * 	@return A double which is the MDR sx_1 mass.
        */
       double shiftMst1ToMDR(const HierarchyObject& ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag);
       /**

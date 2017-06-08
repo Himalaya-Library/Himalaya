@@ -17,7 +17,7 @@ namespace himalaya{
        */
       HierarchyObject(bool isAlphab);
       /**
-       * 	Returns the value of isAlphab.
+       * 	@return the value of isAlphab.
        */
       bool getIsAlphab() const;
       /**

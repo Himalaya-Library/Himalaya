@@ -413,22 +413,22 @@ int main(int argc, char **argv) {
 	 // check terms
 	 //hierarchyCalculator.checkTerms();
 	 
-	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << std::endl;
-	 std::cout << "Error: " << hoTop.getRelDiff2L() << std::endl;
-	 std::cout << "Abs err: " << hoTop.getAbsDiff2L() << std::endl; 
-	 std::cout << "MDR masses: " << hoTop.getMDRMasses()(0) << " " << hoTop.getMDRMasses()(1) << std::endl;
-	 std::cout << "Mh^tree: " << hoTop.getDMh(0).row(0) << " " << hoTop.getDMh(0).row(1) << std::endl;
-	 std::cout << "Mh^1L: " << hoTop.getDMh(1).row(0) << " " << hoTop.getDMh(1).row(1) << std::endl;
-	 std::cout << "Mh^2L: " << hoTop.getDMh(2).row(0) << " " << hoTop.getDMh(2).row(1) << std::endl;
-	 std::cout << "Mh^3L: " << hoTop.getDMh(3).row(0) << " " << hoTop.getDMh(3).row(1) << std::endl;
-	 std::cout << "Exp uncert. 1L: " << hoTop.getExpUncertainty(1) << std::endl;
-	 std::cout << "Exp uncert. 2L: " << hoTop.getExpUncertainty(2) << std::endl;
-	 std::cout << "Exp uncert. 3L: " << hoTop.getExpUncertainty(3) << std::endl;
-	 std::cout << "DR -> MDR shift: " << hoTop.getDRToMDRShift().row(0) << " " << hoTop.getDRToMDRShift().row(1)  << std::endl;
+	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << "\n";
+	 std::cout << "Error: " << hoTop.getRelDiff2L() << "\n";
+	 std::cout << "Abs err: " << hoTop.getAbsDiff2L() << "\n"; 
+	 std::cout << "MDR masses: " << hoTop.getMDRMasses()(0) << " " << hoTop.getMDRMasses()(1) << "\n";
+	 std::cout << "Mh^tree: " << hoTop.getDMh(0).row(0) << " " << hoTop.getDMh(0).row(1) << "\n";
+	 std::cout << "Mh^1L: " << hoTop.getDMh(1).row(0) << " " << hoTop.getDMh(1).row(1) << "\n";
+	 std::cout << "Mh^2L: " << hoTop.getDMh(2).row(0) << " " << hoTop.getDMh(2).row(1) << "\n";
+	 std::cout << "Mh^3L: " << hoTop.getDMh(3).row(0) << " " << hoTop.getDMh(3).row(1) << "\n";
+	 std::cout << "Exp uncert. 1L: " << hoTop.getExpUncertainty(1) << "\n";
+	 std::cout << "Exp uncert. 2L: " << hoTop.getExpUncertainty(2) << "\n";
+	 std::cout << "Exp uncert. 3L: " << hoTop.getExpUncertainty(3) << "\n";
+	 std::cout << "DR -> MDR shift: " << hoTop.getDRToMDRShift().row(0) << " " << hoTop.getDRToMDRShift().row(1)  << "\n";
       }
    }
    catch (std::exception& e){
-      std::cout << e.what() << std::endl;
+      std::cout << e.what() << "\n";
       return EXIT_FAILURE;
    }
    return 0;

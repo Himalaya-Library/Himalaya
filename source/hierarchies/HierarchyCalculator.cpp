@@ -54,11 +54,17 @@ template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x; }
 extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
 
-/*
- * 	constructor
+static bool isInfoPrinted; /**< If this bool is true, than no info will be printed in further runs */
+
+/**
+ * 	Constructor 
+ * 	@param p a HimalayaInterface struct
  */
 himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
-   printInfo();
+   if(!isInfoPrinted){
+      printInfo();
+      isInfoPrinted = true;
+   }
    this -> p = p;
    this -> p.validate();
    // init constants
@@ -90,8 +96,8 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
    init();
 }
 
-/*
- *  	init common variables
+/**
+ * 	Initializes all common variables.
  */
 void himalaya::HierarchyCalculator::init(){
    // fill flag list
@@ -128,8 +134,10 @@ void himalaya::HierarchyCalculator::init(){
    prefac = (3. / (sqrt(2) * (pow2(p.vu) + pow2(p.vd)) * sqrt(2) * pow2(Pi) * pow2(sin(beta))));
 }
 
-/*
- * 	calculates everything that is needed for the 3-loop Higgs mass matrix and returns these results in the hierarchy object ho
+/**
+ * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
+ * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
+ * 	@return A HierarchyObject which holds all information of the calculation.
  */
 himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab){
    HierarchyObject ho (isAlphab);
@@ -159,10 +167,10 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    return ho;
 }
 
-
-
-/*
- * 	compares deviation of all hierarchies with the exact 2-loop result and returns the hierarchy which minimizes the error
+/**
+ * 	Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@return A integer which is identified with the suitable hierarchy.
  */
 int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho){
    // set flags to truncate the expansion
@@ -249,8 +257,13 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    return suitableHierarchy;
 }
 
-/*
- * 	calculates the expanded self-energy to a given order and for a specific hierarchy
+/**
+ * 	Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@param oneLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded one-loop results to the returned value, respectivley.
+ * 	@param twoLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded two-loop results to the returned value, respectivley.
+ * 	@param threeLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded three-loop results to the returned value, respectivley.
+ * 	@return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::HierarchyObject& ho, const unsigned int oneLoopFlagIn, const unsigned int twoLoopFlagIn, const unsigned int threeLoopFlagIn) {
    // get the hierarchy
@@ -586,8 +599,10 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
    return higgsMassMatrix;
 }
 
-/*
- * 	checks if hierarchy is suitable to the given mass spectrum
+/**
+ * 	Checks if a hierarchy is suitable to the given mass spectrum.
+ * 	@param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
+ * 	@returns A bool if the hierarchy candidate is suitable to the given mass spectrum.
  */
 bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& ho){
    double Mst1, Mst2;
@@ -631,8 +646,12 @@ bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::Hierarch
    }
 }
 
-/*
- * 	shifts Mst1/Msb1 according to the hierarchy to the MDRbar scheme, checked
+/**
+ * 	Shifts Msx1 according to the hierarchy to the MDR scheme.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
+ * 	@param twoLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s^2).
+ * 	@return A double which is the MDR sx_1 mass.
  */
 double himalaya::HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
    double Mst1mod = 0., Mst1, Mst2;
@@ -676,8 +695,12 @@ double himalaya::HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyOb
    return Mst1 * sqrt(Mst1mod);
 }
 
-/*
- * 	shifts Mst2/Msb2 according to the hierarchy to the MDRbar scheme, checked
+/**
+ * 	Shifts Msx2 according to the hierarchy to the MDR scheme.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
+ * 	@param twoLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s^2).
+ * 	@return A double which is the MDR sx_2 mass.
  */
 double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
    double Mst2mod;
@@ -723,8 +746,10 @@ double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyOb
 }
 
 
-/*
- * 	sorts the eigenvalues of a 2x2 matrix and returns them in a vector
+/**
+ * 	Sorts the eigenvalues of a 2x2 matrix.
+ * 	@param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
+ * 	@return A sorted vector with the lowest eigenvalue at position 0.
  */
 std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d> es){
   std::vector<double> sortedEigenvalues = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
@@ -732,8 +757,12 @@ std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::
   return sortedEigenvalues;
 }
 
-/*
- * 	calculates the 1-loop alpha_t/b Higgs mass matrix
+/**
+ * 	Calculates the loop corrected Higgs mass matrix at the order O(alpha_x). Here, x can be t or b.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@param shiftOneLoop An integer flag which is 0 or 1 in order to shift the one-loop terms to the MDR scheme.
+ * 	@param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
+ * 	@return The loop corrected Higgs mass matrix at the order O(alpha_x).
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
    Eigen::Matrix2d Mt41L;
@@ -799,9 +828,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::Hierarch
     return Mt41L;
 }
 
-/*
- * 	DEPRECATED! Just use differences of Mt41L
- * 	calculates the DRbar -> MDRbar shift for the one loop contribution
+/**
+ * 	@deprecated
+ * 	Shifts the 1-loop terms to the MDRbar scheme.
+ * 	@param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
+ * 	@return A matrix which corresponds to the difference of the DR and MDR scheme.
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::HierarchyObject& ho){
    Eigen::Matrix2d shift;
@@ -888,8 +919,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::Hierarch
 }
 
 
-/*
- * 	calculates the 2-loop higgs mass matrix according to Pietro Slavich
+/**
+ * 	Calculates the loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s). Here, x can be t or b.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@param shiftOneLoop An integer flag which is 0 or 1 in order to shift the one-loop terms to the MDR scheme.
+ * 	@param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
+ * 	@return The loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s).
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
    const int hierarchy = getCorrectHierarchy(ho.getSuitableHierarchy());
@@ -930,10 +965,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::Hierarch
    return Mt42L;
 }
 
-
-/*
- * 	calculates the contribution to the order (alpha_t) and (alpha_s alpha_t) in the MDRbar scheme
- * 	the result is the difference in the Higgs mass matrix of the MDRbar and DRbar scheme
+/**
+ * 	Calculates the contribution to the order (alpha_x) and (alpha_s alpha_x) as the difference
+ * 	of the Higgs mass matrices of the MDR and DR scheme. Here, x can be t or b.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@param shiftOneLoop a bool to shift the terms at one-loop level.
+ * 	@param shiftTwoLoop a bool to shift the terms at two-loop level.
+ * 	@return The loop corrected Higgs mass matrix difference of the MDR and DR scheme at the given order.
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::HierarchyObject& ho, const bool shiftOneLoop, const bool shiftTwoLoop){
    if(shiftOneLoop && shiftTwoLoop){
@@ -948,9 +986,14 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calcDRbarToMDRbarShift(const hima
 }
 
 
-/*
- * 	evaluates the error due to the expansion in mass ratios and differences
- * 	first calc the full 3-loop contribution and than truncate the expansion at different variable orders to estimate the expansion error
+/**
+ * 	Estimates the uncertainty of the expansion at a given order.
+ * 	@param ho a HierarchyObject with constant isAlphab.
+ * 	@param massMatrix the CP-even Higgs mass matrix without the corrections whose uncertainty should be estimated.
+ * 	@param oneLoopFlag an integer flag which is 0 or 1 in order to estimate the uncertainty of the one-loop expansion terms.
+ * 	@param twoLoopFlag an integer flag which is 0 or 1 in order to estimate the uncertainty of the two-loop expansion terms.
+ * 	@param threeLoopFlag an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-loop expansion terms.
+ * 	@return A double which is the estimated uncertainty.
  */
 double himalaya::HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag, const unsigned int threeLoopFlag){
    double Mh;
@@ -1115,8 +1158,8 @@ himalaya::Parameters checkTermsXt33(){
    return pars;
 }
 
-/*
- * 	check the expansion terms
+/**
+ * 	Performs a sanity check of the implemented expansion terms by comparing them to their numerical value at a given parameter point.
  */
 void himalaya::HierarchyCalculator::checkTerms(){
    p = checkTermsXt33();
@@ -1136,7 +1179,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-13.4248798129061) < 1e-06 && twloMat(1,0) - 10.91323060388626 < 1e-06 && twloMat(1,1) - 1477.154147584478 < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 1.163582002655875 < 1e-06 && thloMat(1,0) - 9.897241079348351 < 1e-06 && thloMat(1,1) - 369.9741236956309 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h32q2g:
 	    ck1LPassed = false;
@@ -1145,7 +1188,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-13.66052379180129) < 1e-06 && twloMat(1,0) - 11.26755617866339 < 1e-06 && twloMat(1,1) - 1477.465656153518 < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 1.113051431370291 < 1e-06 && thloMat(1,0) - 9.903809573970422 < 1e-06 && thloMat(1,1) - 369.7408109643386 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h3q22g:
 	    ck1LPassed = false;
@@ -1154,7 +1197,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-13.66052379180129) < 1e-06 && twloMat(1,0) - 11.26755617866339 < 1e-06 && twloMat(1,1) - 1477.465656153518 < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 1.058450932536496 < 1e-06 && thloMat(1,0) - 10.0141272838662 < 1e-06 && thloMat(1,1) - 370.3301180635573 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h4:
 	    ck1LPassed = false;
@@ -1163,7 +1206,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 0 < 1e-06 && oloMat(1,0) - 0 < 1e-06 && oloMat(1,1) - 6685.123085628641 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - 0 < 1e-06 && twloMat(1,0) - 1183.325484493686 < 1e-06 && twloMat(1,1) - 1458.970501474495 < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 162.1379208650191 < 1e-06 && thloMat(1,0) - 326.0219627343553 < 1e-06 && thloMat(1,1) - 431.6926278454841 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h5:
 	    ck1LPassed = false;
@@ -1172,7 +1215,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 15921.69462848581 < 1e-06 && oloMat(1,0) - (-388569.2043081555) < 1e-06 && oloMat(1,1) - 7874.401574063407 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-86.77887344841422) < 1e-06 && twloMat(1,0) - (-20625.63783863484) < 1e-06 && twloMat(1,1) - (-42446.62009872038) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 2442.115080578889 < 1e-06 && thloMat(1,0) - (-3859.942907446577) < 1e-06 && thloMat(1,1) - 60593.055768119 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h5g1:
 	    ck1LPassed = false;
@@ -1181,7 +1224,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 15921.69462848581 < 1e-06 && oloMat(1,0) - (-388569.2043081556) < 1e-06 && oloMat(1,1) - 7874.401574063407 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-114.6037388932203) < 1e-06 && twloMat(1,0) - (-20341.84471909946) < 1e-06 && twloMat(1,1) - (-42843.48046642416) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 2415.507513838155 < 1e-06 && thloMat(1,0) - (-3766.750163753644) < 1e-06 && thloMat(1,1) - 59380.34497121828 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h6:
 	    ck1LPassed = false;
@@ -1190,7 +1233,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-1078.578574572312) < 1e-06 && twloMat(1,0) - 7096.529601647042 < 1e-06 && twloMat(1,1) - (-1927.791631086123) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 245.4412216221288 < 1e-06 && thloMat(1,0) - 573.1296253278389 < 1e-06 && thloMat(1,1) - 8448.4582538127 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h6b:
 	    ck1LPassed = false;
@@ -1199,7 +1242,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 9272.477351702311 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-1078.578574572312) < 1e-06 && twloMat(1,0) - 7096.52960164704 < 1e-06 && twloMat(1,1) - (-1900.197036824461) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 283.0253770519464 < 1e-06 && thloMat(1,0) - 566.2182257407396 < 1e-06 && thloMat(1,1) - 10093.33785879814 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h6b2qg2:
 	    ck1LPassed = false;
@@ -1208,7 +1251,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 9272.477351702311 < 1e-06 && oloMat(1,0) - (-184.7601614832759) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2077.345120153528) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 285.3154791763894 < 1e-06 && thloMat(1,0) - 544.3654284413091 < 1e-06 && thloMat(1,1) - 10336.22756889787 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h6bq22g:
 	    ck1LPassed = false;
@@ -1217,7 +1260,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-1078.578574572311) < 1e-06 && twloMat(1,0) - 7096.529601647042 < 1e-06 && twloMat(1,1) - (-1900.197036824461) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 283.0220052455883 < 1e-06 && thloMat(1,0) - 566.2190953470737 < 1e-06 && thloMat(1,1) - 10093.33986048966 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h6bq2g2:
 	    ck1LPassed = false;
@@ -1226,7 +1269,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832759) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2077.345120153528) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 285.3120881213721 < 1e-06 && thloMat(1,0) - 544.3662758149513 < 1e-06 && thloMat(1,1) - 10336.23012077387 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h6g2:
 	    ck1LPassed = false;
@@ -1235,7 +1278,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832761) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2112.642999123034) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 246.0217489966267 < 1e-06 && thloMat(1,0) - 557.451210096066 < 1e-06 && thloMat(1,1) - 8628.076480526881 < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h9:
 	    ck1LPassed = false;
@@ -1244,7 +1287,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.352110199906) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - 420.2050380976995 < 1e-06 && twloMat(1,0) - (-554.6021924866435) < 1e-06 && twloMat(1,1) - (-797.8089039452509) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 132.8584579769461 < 1e-06 && thloMat(1,0) - (-171.9326869339159) < 1e-06 && thloMat(1,1) - (-800.8408283898472) < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h9q2:
 	    ck1LPassed = false;
@@ -1253,19 +1296,27 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999065) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
 	    ck2LPassed = twloMat(0,0) - 420.2050380976993 < 1e-06 && twloMat(1,0) - (-554.6021924866436) < 1e-06 && twloMat(1,1) - (-797.8089039452487) < 1e-06;
 	    ck3LPassed = thloMat(0,0) - 132.6358855624267 < 1e-06 && thloMat(1,0) - (-171.4711818838455) < 1e-06 && thloMat(1,1) - (-800.9569014303727) < 1e-06;
-	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << std::endl;
+	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
       }
    }
 }
 
-/*
- * 	returns "true" or "false" with respect to the bool tf
+/**
+ * 	A function which maps a boolean to a string.
+ * 	@param tf a boolean.
+ * 	@return A string which is 'true' if tf is true or 'false' if tf is false.
  */
 std::string himalaya::HierarchyCalculator::tf(const bool tf){
    return tf ? "true" : "false";
 }
 
+/**
+ * 	Maps a hierarchy to it's mother hierarchy.
+ * 	@param hierarchy the key to a hierarchy.
+ * 	@throws runtime_error Throws a runtime_error if the given hierarchy is not included.
+ * 	@returns The key of the mother hierarchy.
+ */
 int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
    if(hierarchy < 0 || hierarchy > 13){
       throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) + " not included!");
@@ -1273,10 +1324,13 @@ int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
    return hierarchyMap.at(hierarchy);
 }
 
+/**
+ * 	Prints out some information about Himalaya.
+ */
 void himalaya::HierarchyCalculator::printInfo(){
-   std::cout << "......................................................................." << std::endl;
-   std::cout << "Himalaya 1.0.0" << std::endl;
-   std::cout << "Contains code by: P. Slavich et al. (2-loop rMSSM Higgs self-energies)." << std::endl;
-   std::cout << "Uses the 3-loop contributions of Kant et al." << std::endl;
-   std::cout << "......................................................................." << std::endl;
+   std::cout << "......................................................................." << "\n";
+   std::cout << "Himalaya 1.0.0" << "\n";
+   std::cout << "Contains code by: P. Slavich et al. (2-loop rMSSM Higgs self-energies)." << "\n";
+   std::cout << "Uses the 3-loop contributions of Kant et al." << "\n";
+   std::cout << "......................................................................." << "\n";
 }
