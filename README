@@ -1,11 +1,11 @@
 # Himalaya
 
-Himalaya can calculate corrections of the order O((alpha_b + alpha_t)*alpha_s^2) to the CP-even Higgs mass matrix in the DR-bar scheme.
+Himalaya can calculate corrections of the order O((alpha_b + alpha_t)*alpha_s^2 ) to the CP-even Higgs mass matrix in the DR-bar scheme.
 
 ## Requirements
 The program requires:
-*CMake >= 3.0
-*Mac users should use `g++`.
+* CMake >= 3.0
+* Mac users should use `g++`.
 
 ## Installation
 CMake is used to generate build files.
