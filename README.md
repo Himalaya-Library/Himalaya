@@ -1,34 +1,64 @@
-#Readme of Himalaya 1.0.0
+# Himalaya
 
-#Installation
-To build Himalaya
-	
-  1) Check your c++ compiler. Mac users should use g++ and edit the corresponding line in CMakeLists.txt
+Himalaya can calculate corrections of the order O((alpha_b + alpha_t)*alpha_s^2) to the CP-even Higgs mass matrix in the DR-bar scheme.
 
-  2) Just call
-    mkdir build
-    cd build
-    cmake ../
-    make
-	   
-  3) Link the static library libhimalaya.a to your project
+## Requirements
+The program requires:
+*CMake >= 3.0
+*Mac users should use `g++`.
 
-#Usage
-The Himalaya library provides these functions:
+## Installation
+CMake is used to generate build files.
+To create these build files, you have to create a separate build directory.
+Run:
+```
+mkdir build
+cd build
+cmake PATH_TO_HIMALAYA_DIR
+```
+By default the code is compiled optimized and with debugging symbols.
 
-  calculateDMh3L
-  compareHierarchies
-  calculateHierarchy
-  calcDRbarToMDRbarShift
-  getMt41L
-  getMt42L
-  shiftMst1ToMDR
-  shiftMst2ToMDR
-  getExpansionUncertainty
-  checkTerms
+After calling `cmake` the build directory contains all required build files. Assuming that Makefiles are used, you can now run:
+```
+make
+```
 
-They are documented in the doc/ directory. To generate the documentation type
+## Running the code
+After the compilation the static library `libhimalaya.a` has been created which should be linked to your code.
 
-     cd doc/
-     doxygen himalaya.conf
-     
+### Example
+We present a brief step by step guide how to run Himalaya and obtain the three-loop results. First you have to include the headers
+```
+#include <HierarchyCalculator.hpp>
+#include <Himalaya_interface.hpp>
+#include <HierarchyObject.hpp>
+```
+to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`:
+```
+himalaya::Parameters point;
+point.scale = <renormalization scale>;
+...
+```
+Now you can create a `HierarchyCalculator` object with the given `struct`:
+```
+himalaya::HierarchyCalculator hc(point);
+```
+To calculate the results you just have to call:
+```
+himalaya::HierarchyObject ho = hc.calculateDMh3L(false); \\ the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true)
+```
+All information which has been gathered during the calculation will be stored in a `HierarchyObject` and can be accessed by member functions. To obtain the 3-loop correction to the Higgs mass matrix you have to call:
+```
+ho.getDMh(3); \\ this returns a 2x2 matrix which contains the alpha_t*alpha_s^2 corrections for the given parameter point
+```
+The returned matrix should be added to your two-loop results **before** diagonalization.
+
+A full and detailed example can be found in `source/example.cpp` with its executable `example`.
+
+## Code Documentation
+Doxygen can be used to generate code documentation. Go to the `doc` directory
+and run
+```
+doxygen
+```
+to generate `html/index.html` and a LaTeX version.
