@@ -45,11 +45,11 @@ himalaya::HierarchyCalculator hc(point);
 ```
 To calculate the results you just have to call:
 ```
-himalaya::HierarchyObject ho = hc.calculateDMh3L(false); \\ the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true)
+himalaya::HierarchyObject ho = hc.calculateDMh3L(false, 1); // the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true). The integer is a flag to choose among the DR- (0) or the MDR-scheme (1)
 ```
 All information which has been gathered during the calculation will be stored in a `HierarchyObject` and can be accessed by member functions. To obtain the 3-loop correction to the Higgs mass matrix you have to call:
 ```
-ho.getDMh(3); \\ this returns a 2x2 matrix which contains the alpha_t*alpha_s^2 corrections for the given parameter point
+ho.getDMh(3); // this returns a 2x2 matrix which contains the alpha_t*alpha_s^2 corrections for the given parameter point
 ```
 The returned matrix should be added to your two-loop results **before** diagonalization.
 
