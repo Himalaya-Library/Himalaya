@@ -127,7 +127,7 @@ void himalaya::HierarchyObject::setDRToMDRShift(const Eigen::Matrix2d& mdrShift)
  * 	@return The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s)
  */
 Eigen::Matrix2d himalaya::HierarchyObject::getDRToMDRShift() const{
-   return this -> mdrShift;
+   return mdrShift;
 }
 
 /**
@@ -142,8 +142,25 @@ void himalaya::HierarchyObject::setMDRMasses(Eigen::Matrix<double,2,1>& mdrMasse
  * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
  */
 Eigen::Matrix<double,2,1> himalaya::HierarchyObject::getMDRMasses() const{
-   return this -> mdrMasses;
+   return mdrMasses;
 }
+
+/**
+ * 	Sets the mdrFlag to calculate the corretions in the DR (0) or MDR (1) scheme
+ * 	@param mdrFlag an int. (0) for DR- and (1) for MDR-scheme
+ */
+void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
+   this -> mdrFlag = mdrFlag;
+}
+
+/**
+ * 	@return the MDRFlag integer.
+ */
+int himalaya::HierarchyObject::getMDRFlag() const{
+   return mdrFlag;
+}
+
+
 
 /**
  * 	Sorts a vector.

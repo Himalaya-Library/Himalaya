@@ -51,6 +51,10 @@ namespace himalaya{
        */
       Eigen::Matrix<double, 2, 1> getMDRMasses() const;
       /**
+       * 	@return the MDRFlag integer.
+       */
+      int getMDRFlag() const;
+      /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
        */
@@ -87,9 +91,15 @@ namespace himalaya{
        * 	@param dMh the delta of the mass matrix.
        */
       void setDMh(int loops, const Eigen::Matrix2d& dMh);
+      /**
+       * 	Sets the mdrFlag to calculate the corretions in the DR (0) or MDR (1) scheme
+       * 	@param mdrFlag an int. (0) for DR- and (1) for MDR-scheme
+       */
+      void setMDRFlag(int mdrFlag);
    private:
       bool isAlphab;									/**< the bool isAlphab */
       int hierarchy;									/**< the suitable hierarchy */
+      int mdrFlag = 0;									/**< the MDR-scheme flag */
       double absDiff2L;									/**< the absolute difference of the two loop Higgs masses */
       double relDiff2L;									/**< the relative difference of the two loop Higgs masses */
       std::map<int, double> expUncertainties;						/**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */

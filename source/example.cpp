@@ -141,248 +141,6 @@ himalaya::Parameters setup_HSSUSY_minmix(){
    return pars;
 }
 
-himalaya::Parameters Xt29(){
-
-   himalaya::Parameters pars;
-
-   pars.scale = 1981.84;
-   pars.mu = 1999.88;
-   pars.g3 = 1.02887;
-   pars.vd = 49.723;
-   pars.vu = 237.098;
-   pars.mq2 <<  4.00295e+06, 0, 0,
-               0, 4.00295e+06, 0,
-               0, 0, 3.99948e+06;
-   pars.md2 << 4.00249e+06, 0, 0,
-               0, 4.00249e+06, 0,
-               0, 0, 4.00239e+06;
-   pars.mu2 << 4.00251e+06, 0, 0,
-               0, 4.00251e+06 , 0,
-               0, 0, 3.99551e+06;
-   pars.Ab = 9997.88;
-   pars.At = 6195.23;
-
-   pars.MA = 1995.22;
-   pars.MG = 2000.66;
-   pars.MW = 77.0967;
-   pars.MZ = 88.7893;
-   pars.Mt = 145.817;
-   pars.Mb = 2.2495;
-   pars.MSt << 1781.78, 2204.35;
-   pars.MSb << 2000.42, 2000.95;
-   pars.s2t = -0.999999;
-   pars.s2b = -0.973654;
-
-   return pars;
-}
-
-himalaya::Parameters Xt3(){
-
-   himalaya::Parameters pars;
-
-   pars.scale = 1979.99;
-   pars.mu = 1999.87;
-   pars.g3 = 1.02891;
-   pars.vd = 49.6913;
-   pars.vu = 236.886;
-   pars.mq2 << 4.00326e+06 , 0, 0,
-               0, 4.00326e+06, 0,
-               0, 0, 3.99918e+06;
-   pars.md2 << 4.00275e+06, 0, 0,
-               0, 4.00275e+06, 0,
-               0, 0, 4.00263e+06;
-   pars.mu2 << 4.00277e+06, 0, 0,
-               0,4.00277e+06, 0,
-               0, 0, 3.99455e+06;
-   pars.Ab = 9997.64;
-   pars.At = 6394.6;
-
-   pars.MA = 1994.56;
-   pars.MG = 2000.73;
-   pars.MW = 77.0275;
-   pars.MZ = 88.7096;
-   pars.Mt = 146.148;
-   pars.Mb = 2.24524;
-   pars.MSt << 1772.9, 2211.26;
-   pars.MSb << 2000.39, 2000.97;
-   pars.s2t = -0.999998;
-   pars.s2b = -0.895782;
-
-   return pars;
-}
-
-himalaya::Parameters Xt31(){
-
-   himalaya::Parameters pars;
-
-   pars.scale = 1978.03;
-   pars.mu = 1999.86;
-   pars.g3 =  1.02896;
-   pars.vd = 49.6565;
-   pars.vu = 236.653;
-   pars.mq2 <<  4.00358e+06 , 0, 0,
-               0, 4.00358e+06, 0,
-               0, 0, 3.99882e+06;
-   pars.md2 << 4.00302e+06, 0, 0,
-               0, 4.00302e+06, 0,
-               0, 0, 4.00289e+06;
-   pars.mu2 << 4.00304e+06 , 0, 0,
-               0, 4.00304e+06, 0,
-               0, 0, 3.99344e+06;
-   pars.Ab = 9997.39;
-   pars.At = 6593.92;
-
-   pars.MA = 1993.83;
-   pars.MG = 2000.8;
-   pars.MW = 76.9519;
-   pars.MZ = 88.6226;
-   pars.Mt = 146.502;
-   pars.Mb = 2.24085;
-   pars.MSt << 1763.87 , 2218.18;
-   pars.MSb <<  2000.33, 2001;
-   pars.s2t = -0.999997;
-   pars.s2b =-0.783043;
-
-   return pars;
-}
-
-himalaya::Parameters Xt33(){
-
-   himalaya::Parameters pars;
-
-   pars.scale = 1973.75;
-   pars.mu = 1999.82;
-   pars.g3 =  1.02907;
-   pars.vd = 49.5751;
-   pars.vu = 236.115;
-   pars.mq2 <<  4.00428e+06 , 0, 0,
-               0, 4.00428e+06, 0,
-               0, 0, 3.99786e+06;
-   pars.md2 << 4.00361e+06, 0, 0,
-               0, 4.00361e+06, 0,
-               0, 0, 4.00346e+06;
-   pars.mu2 << 4.00363e+06 , 0, 0,
-               0, 4.00363e+06, 0,
-               0, 0, 3.99067e+06;
-   pars.Ab = 9996.81;
-   pars.At = 6992.34;
-
-   pars.MA = 1992.14;
-   pars.MG = 2000.96;
-   pars.MW = 76.7777;
-   pars.MZ = 88.4219;
-   pars.Mt = 147.295;
-   pars.Mb = 2.23149;
-   pars.MSt << 1745.3 , 2232.1;
-   pars.MSb <<  2000.14, 2001.09;
-   pars.s2t = -0.999995;
-   pars.s2b =-0.550527;
-
-   return pars;
-}
-
-himalaya::Parameters MS350(){
-
-   himalaya::Parameters pars;
-
-   pars.scale = 379.219;
-   pars.mu = 350.21;
-   pars.g3 =  1.1223;
-   pars.vd = 49.3791;
-   pars.vu = 241.173;
-   pars.mq2 <<  121599, 0, 0,
-               0, 121599, 0,
-               0, 0, 121716;
-   pars.md2 << 121725, 0, 0,
-               0, 121725, 0,
-               0, 0, 121762;
-   pars.mu2 << 121722 , 0, 0,
-               0, 121722, 0,
-               0, 0, 121926;
-   pars.Ab = 1752.9;
-   pars.At = 73.137;
-
-   pars.MA = 351.585;
-   pars.MG = 348.783;
-   pars.MW = 79.4527;
-   pars.MZ = 90.9831;
-   pars.Mt = 154.569;
-   pars.Mb = 2.56808;
-   pars.MSt << 378.123 , 380.319;
-   pars.MSb <<  349.809, 353.456;
-   pars.s2t =  -0.265985;
-   pars.s2b = -0.0849635;
-
-   return pars;
-}
-
-himalaya::Parameters MS400(){
-
-   himalaya::Parameters pars;
-
- pars.scale   = 425.41;
-  pars.mu  = 400.179;
-  pars.g3  = 1.11453;
-  pars.vd  = 49.4249;
-  pars.vu  = 241.011;
-  pars.mq2 << 159105 ,     0,      0,
-     0 ,159105   ,   0,
-     0    ,  0, 159222;
-  pars.md2 << 159231  ,    0 ,     0,
-     0, 159231     , 0,
-     0 ,     0, 159267;
-  pars.mu2 << 159228  ,    0 ,     0,
-     0, 159228 ,     0,
-     0     , 0 ,159432;
-  pars.At  = 82.7215;
-  pars.Ab  = 2002.52;
-  pars.MG  = 398.945;
-  pars.MW  = 79.3087;
-  pars.MZ  = 90.858;
-  pars.Mt  = 153.446;
-  pars.Mb  = 2.54742;
-  pars.MA  = 401.38;
-  pars.MSt << 424.466, 426.356;
-  pars.MSb << 399.836, 403.023;
-  pars.s2t = -0.125094;
-  pars.s2b = -0.101822;
-
-   return pars;
-}
-
-himalaya::Parameters MS480(){
-
-  himalaya::Parameters pars;
-
-  pars.scale   = 500.92;
-  pars.mu  = 480.143;
-  pars.g3  = 1.104;
-  pars.vd  = 49.4878;
-  pars.vu  = 240.782;
-  pars.mq2 << 229519    ,  0 ,     0,
-     0 ,229519    ,  0,
-     0  ,    0, 229635;
-  pars.md2 << 229645,      0,      0,
-     0, 229645     , 0,
-     0 ,     0, 229680;
-  pars.mu2 << 229641 ,     0     , 0,
-     0, 229641      ,0,
-     0 ,     0, 229843;
-  pars.At  = 98.2263;
-  pars.Ab  = 2402.06;
-  pars.MG  = 479.138;
-  pars.MW  = 79.1151;
-  pars.MZ  = 90.6904;
-  pars.Mt  = 151.895;
-  pars.Mb  = 2.51902;
-  pars.MA  = 481.136;
-  pars.MSt << 500.129, 501.711;
-  pars.MSb << 479.872, 482.523;
-  pars.s2t = 0.0876104;
-  pars.s2b = -0.130184;
-
-   return pars;
-}
 
 int main(int argc, char **argv) {
    try{
@@ -391,31 +149,25 @@ int main(int argc, char **argv) {
 	 setup_SPS2()
 	 //setup_CMSSM_large_m0(),
 	 //setup_HSSUSY_minmix()
-	 //Xt29(),
-	 //Xt3(),
-	 //Xt31(),
-	 //Xt33(),
-	 //MS350(),
-	 //MS400(),
-	 //MS480(),
       }; 
       for (const auto point: points) {
 	 // init hierarchy calculator
 	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
-	 //top
-	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
+	 //top and MDR
+	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, 1);
 
-	 //bottom
-	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true);
+	 //bottom and MDR
+	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
 	 
 	 // check terms
 	 //hierarchyCalculator.checkTerms();
 	 
 	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << "\n";
-	 std::cout << "Error: " << hoTop.getRelDiff2L() << "\n";
-	 std::cout << "Abs err: " << hoTop.getAbsDiff2L() << "\n"; 
+	 std::cout << "MDR flag: " << hoTop.getMDRFlag() << "\n";
+	 std::cout << "Rel. Error 2L: " << hoTop.getRelDiff2L() << "\n";
+	 std::cout << "Abs. Error 2L: " << hoTop.getAbsDiff2L() << "\n"; 
 	 std::cout << "MDR masses: " << hoTop.getMDRMasses()(0) << " " << hoTop.getMDRMasses()(1) << "\n";
 	 std::cout << "Mh^tree: " << hoTop.getDMh(0).row(0) << " " << hoTop.getDMh(0).row(1) << "\n";
 	 std::cout << "Mh^1L: " << hoTop.getDMh(1).row(0) << " " << hoTop.getDMh(1).row(1) << "\n";

@@ -14,19 +14,20 @@ namespace himalaya{
    class HierarchyCalculator{
    public:
       /**
-      * 	Constructor 
-      * 	@param p a HimalayaInterface struct
-      */
+       * 	Constructor 
+       * 	@param p a HimalayaInterface struct
+       */
       HierarchyCalculator(const Parameters& p);
       /**
        * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
        * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
        * 	@return A HierarchyObject which holds all information of the calculation.
        */
-      HierarchyObject calculateDMh3L(bool isAlphab);
+      HierarchyObject calculateDMh3L(bool isAlphab, int mdrFlag);
       /**
        * 	Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
        * 	@param ho a HierarchyObject with constant isAlphab.
+       * 	@param mdrFlag (0) to use the DR-scheme (1) to use the MDR-scheme.
        * 	@return A integer which is identified with the suitable hierarchy.
        */
       int compareHierarchies(HierarchyObject& ho);
@@ -36,6 +37,7 @@ namespace himalaya{
        * 	@param oneLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded one-loop results to the returned value, respectivley.
        * 	@param twoLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded two-loop results to the returned value, respectivley.
        * 	@param threeLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded three-loop results to the returned value, respectivley.
+       * 	@throws runtime_error Throws a runtime_error if the tree-level is requested in terms of hierarchies.
        * 	@return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
        */
       Eigen::Matrix2d calculateHierarchy(HierarchyObject& ho, const unsigned int oneLoopFlagIn, const unsigned int twoLoopFlagIn,
