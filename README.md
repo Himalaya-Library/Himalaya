@@ -5,7 +5,7 @@ Himalaya can calculate corrections of the order O((alpha_b + alpha_t)*alpha_s^2 
 ## Requirements
 The program requires:
 * CMake >= 3.0
-* Mac users should use `g++`.
+* Mac users should use `g++`
 
 ## Installation
 CMake is used to generate build files.
@@ -28,13 +28,13 @@ After the compilation the static library `libhimalaya.a` has been created which 
 
 ### Example
 We present a brief step by step guide how to run Himalaya and obtain the three-loop results. First you have to include the headers
-```
+```cpp
 #include <HierarchyCalculator.hpp>
 #include <Himalaya_interface.hpp>
 #include <HierarchyObject.hpp>
 ```
 to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`:
-```
+```cpp
 himalaya::Parameters point;
 point.scale = <renormalization scale>;
 ...
@@ -44,11 +44,11 @@ Now you can create a `HierarchyCalculator` object with the given `struct`:
 himalaya::HierarchyCalculator hc(point);
 ```
 To calculate the results you just have to call:
-```
+```cpp
 himalaya::HierarchyObject ho = hc.calculateDMh3L(false, 1); // the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true). The integer is a flag to choose among the DR- (0) or the MDR-scheme (1)
 ```
 All information which has been gathered during the calculation will be stored in a `HierarchyObject` and can be accessed by member functions. To obtain the 3-loop correction to the Higgs mass matrix you have to call:
-```
+```cpp
 ho.getDMh(3); // this returns a 2x2 matrix which contains the alpha_t*alpha_s^2 corrections for the given parameter point
 ```
 The returned matrix should be added to your two-loop results **before** diagonalization.
