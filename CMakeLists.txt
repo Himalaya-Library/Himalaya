@@ -6,7 +6,7 @@ project(himalaya CXX Fortran)
 #Mac users should use g++ and modify the line below
 #SET (CMAKE_CXX_COMPILER g++)
 
-#setthe CXX flags
+#set the CXX flags
 SET(CMAKE_CXX_FLAGS "-std=c++11")
 
 #include c++ header files

@@ -102,7 +102,7 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
 void himalaya::HierarchyCalculator::init(){
    // fill flag list
    flagMap.clear();
-   for(int i = xx; i <= xxMgl; i++){
+   for(unsigned int i = xx; i <= xxMgl; i++){
       flagMap.insert(std::pair<unsigned int, unsigned int> (i, 1));
    }
    // beta
@@ -326,7 +326,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
    for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
       bool runThisOrder;
       double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
-      int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
+      unsigned int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
       switch (currentLoopOrder){
 	 case 1:
 	    oneLoopFlag = 1;
@@ -622,6 +622,7 @@ bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::Hierarch
       case h9q2:
 	 return (Msq > Mst2) && ((Mst1 - Mst1) < (Mst1 - Mgl));
    }
+   return false;
 }
 
 /**
@@ -682,14 +683,11 @@ double himalaya::HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyOb
  */
 double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
    double Mst2mod;
-   double Mst1;
    double Mst2;
    if(!ho.getIsAlphab()){
-      Mst1 = p.MSt(0);
       Mst2 = p.MSt(1);
    }
    else{
-      Mst1 = p.MSb(0);
       Mst2 = p.MSb(1);
    }
    double Dmglst2 = Mgl - Mst2;
@@ -905,7 +903,6 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::Hierarch
  * 	@return The loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s).
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
-   const int hierarchy = getCorrectHierarchy(ho.getSuitableHierarchy());
    Eigen::Matrix2d Mt42L;
    double S11, S12, S22;
    double Mt2;

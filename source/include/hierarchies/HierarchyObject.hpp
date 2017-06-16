@@ -93,7 +93,8 @@ namespace himalaya{
       void setDMh(int loops, const Eigen::Matrix2d& dMh);
       /**
        * 	Sets the mdrFlag to calculate the corretions in the DR (0) or MDR (1) scheme
-       * 	@param mdrFlag an int. (0) for DR- and (1) for MDR-scheme
+       * 	@param mdrFlag an int. (0) for DR- and (1) for MDR-scheme.
+       * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
        */
       void setMDRFlag(int mdrFlag);
    private:

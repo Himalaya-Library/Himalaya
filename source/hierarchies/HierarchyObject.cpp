@@ -148,8 +148,11 @@ Eigen::Matrix<double,2,1> himalaya::HierarchyObject::getMDRMasses() const{
 /**
  * 	Sets the mdrFlag to calculate the corretions in the DR (0) or MDR (1) scheme
  * 	@param mdrFlag an int. (0) for DR- and (1) for MDR-scheme
+ * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
  */
 void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
+   if(mdrFlag != 0 || mdrFlag != 1)
+      throw std::runtime_error("The MDR-flag has to be 0 (DR-scheme) or 1 (MDR-scheme). Input: " + std::to_string(mdrFlag) + ".");
    this -> mdrFlag = mdrFlag;
 }
 
