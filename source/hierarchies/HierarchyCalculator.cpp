@@ -275,7 +275,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
  * 	@throws runtime_error Throws a runtime_error if the tree-level is requested in terms of hierarchies.
  * 	@return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
  */
-Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::HierarchyObject& ho, const unsigned int oneLoopFlagIn, const unsigned int twoLoopFlagIn, const unsigned int threeLoopFlagIn) {
+Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::HierarchyObject& ho, const int oneLoopFlagIn, const int twoLoopFlagIn, const int threeLoopFlagIn) {
    // get the hierarchy
    const int hierarchy = ho.getSuitableHierarchy();
 
@@ -326,7 +326,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
    for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
       bool runThisOrder;
       double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
-      unsigned int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
+      int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
       switch (currentLoopOrder){
 	 case 1:
 	    oneLoopFlag = 1;

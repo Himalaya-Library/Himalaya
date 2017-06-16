@@ -151,7 +151,7 @@ Eigen::Matrix<double,2,1> himalaya::HierarchyObject::getMDRMasses() const{
  * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
  */
 void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
-   if(mdrFlag != 0 || mdrFlag != 1)
+   if(mdrFlag != 0 && mdrFlag != 1)
       throw std::runtime_error("The MDR-flag has to be 0 (DR-scheme) or 1 (MDR-scheme). Input: " + std::to_string(mdrFlag) + ".");
    this -> mdrFlag = mdrFlag;
 }

@@ -40,8 +40,7 @@ namespace himalaya{
        * 	@throws runtime_error Throws a runtime_error if the tree-level is requested in terms of hierarchies.
        * 	@return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
        */
-      Eigen::Matrix2d calculateHierarchy(HierarchyObject& ho, const unsigned int oneLoopFlagIn, const unsigned int twoLoopFlagIn,
-			      const unsigned int threeLoopFlagIn);
+      Eigen::Matrix2d calculateHierarchy(himalaya::HierarchyObject& ho, const int oneLoopFlagIn, const int twoLoopFlagIn, const int threeLoopFlagIn);
       /**
        * 	Calculates the contribution to the order (alpha_x) and (alpha_s alpha_x) as the difference
        *	of the Higgs mass matrices of the MDR and DR scheme. Here, x can be t or b.
