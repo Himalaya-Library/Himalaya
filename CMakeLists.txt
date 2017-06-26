@@ -3,9 +3,6 @@ project(himalaya CXX Fortran)
 
 #SET (CMAKE_Fortran_COMPILER gfortran)
 
-#Mac users should use g++ and modify the line below
-#SET (CMAKE_CXX_COMPILER g++)
-
 #set the CXX flags
 SET(CMAKE_CXX_FLAGS "-std=c++11")
 
