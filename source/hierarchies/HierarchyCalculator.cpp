@@ -1,6 +1,6 @@
 #define Pi M_PI
 
-#include <HierarchyCalculator.hpp>
+#include "HierarchyCalculator.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <iomanip>
