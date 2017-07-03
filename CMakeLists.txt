@@ -7,7 +7,7 @@ project(himalaya CXX Fortran)
 #SET (CMAKE_CXX_COMPILER g++)
 
 #set the CXX flags
-SET(CMAKE_CXX_FLAGS "-std=c++11")
+SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -pedantic")
 
 #include c++ header files
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source/include)

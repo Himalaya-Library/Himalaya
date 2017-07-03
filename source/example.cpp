@@ -142,7 +142,7 @@ himalaya::Parameters setup_HSSUSY_minmix(){
 }
 
 
-int main(int argc, char **argv) {
+int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
 	 //setup_SPS1a(),
