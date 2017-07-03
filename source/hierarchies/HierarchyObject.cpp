@@ -1,4 +1,4 @@
-#include <HierarchyObject.hpp>
+#include "HierarchyObject.hpp"
 
 /**
  * 	A constructor.

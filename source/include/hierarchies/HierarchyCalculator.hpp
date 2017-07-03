@@ -1,9 +1,9 @@
 #ifndef HierarchyCalculator_HPP
 #define HierarchyCalculator_HPP
 
+#include "Himalaya_interface.hpp"
+#include "HierarchyObject.hpp"
 #include <Eigen>
-#include <Himalaya_interface.hpp>
-#include <HierarchyObject.hpp>
 #include <map>
 #include <vector>
 
