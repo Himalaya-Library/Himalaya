@@ -28,9 +28,9 @@ After the compilation the static library `libhimalaya.a` has been created which 
 ### Example
 We present a brief step by step guide how to run Himalaya and obtain the three-loop results. First you have to include the headers
 ```cpp
-#include <HierarchyCalculator.hpp>
-#include <Himalaya_interface.hpp>
-#include <HierarchyObject.hpp>
+#include "HierarchyCalculator.hpp"
+#include "Himalaya_interface.hpp"
+#include "HierarchyObject.hpp"
 ```
 to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`:
 ```cpp
