@@ -32,9 +32,9 @@ We present a brief step by step guide how to run Himalaya and obtain the three-l
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
 ```
-to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`. Note that all input parameter have to be in the **DR-bar** scheme. Here, an example for a SPS2 benchmark point is given:
+to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`. Note that the input has to be provided in the **DR-bar** scheme. Here, an example for a SPS2 benchmark point is given:
 ```cpp
-himalaya::Parameters pars;
+himalaya::Parameters pars;	// DR-bar parameters struct
 pars.scale = 1.11090135E+03; // renormalization scale
 pars.mu = 3.73337018E+02;    // mu parameter
 pars.g3 = 1.06187116E+00;    // gauge coupling g3 SU(3)
