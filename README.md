@@ -82,6 +82,6 @@ A full and detailed example can be found in `source/example.cpp` with its execut
 Doxygen can be used to generate code documentation. Go to the `doc` directory
 and run
 ```
-doxygen
+doxygen himalaya.conf
 ```
 to generate `html/index.html` and a LaTeX version.
