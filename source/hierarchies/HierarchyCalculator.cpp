@@ -57,6 +57,42 @@ extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double 
 static bool isInfoPrinted; /**< If this bool is true, than no info will be printed in further runs */
 
 /**
+ * 	Define static variables
+ */
+
+namespace himalaya {
+   // Hierarchy keys
+   const int HierarchyCalculator::h3 		= 0;	/**< The key to hierarchy h3 */
+   const int HierarchyCalculator::h32q2g 	= 1;	/**< The key to hierarchy h32q2g */
+   const int HierarchyCalculator::h3q22g 	= 2;	/**< The key to hierarchy h3q22g */
+   const int HierarchyCalculator::h4 		= 3;	/**< The key to hierarchy h4 */
+   const int HierarchyCalculator::h5 		= 4;	/**< The key to hierarchy h5 */
+   const int HierarchyCalculator::h5g1 		= 5;	/**< The key to hierarchy h5g1 */
+   const int HierarchyCalculator::h6 		= 6;	/**< The key to hierarchy h6 */
+   const int HierarchyCalculator::h6b 		= 7;	/**< The key to hierarchy h6b */
+   const int HierarchyCalculator::h6b2qg2 	= 8;	/**< The key to hierarchy h6b2qg2 */
+   const int HierarchyCalculator::h6bq22g	= 9;	/**< The key to hierarchy h6bq22g */
+   const int HierarchyCalculator::h6bq2g2	= 10;	/**< The key to hierarchy h6bq2g2 */
+   const int HierarchyCalculator::h6g2		= 11;	/**< The key to hierarchy h6g2 */
+   const int HierarchyCalculator::h9 		= 12;	/**< The key to hierarchy h9 */
+   const int HierarchyCalculator::h9q2		= 13;	/**< The key to hierarchy h9q2 */
+   // expansion depth flags
+   const unsigned int HierarchyCalculator::xx				= 14;	/**< This flag can truncate the two loop expansion at the three loop expansion depth */
+   const unsigned int HierarchyCalculator::xxMst			= 15;	/**< This flag can truncate the expansion depth of the stop/sbottom masses by one order */
+   const unsigned int HierarchyCalculator::xxDmglst1			= 16;	/**< This flag can truncate the expansion depth of the difference of stop/sbottom 1 mass and the gluino mass by one order*/
+   const unsigned int HierarchyCalculator::xxDmsqst1			= 17;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 1 mass and the average squark mass by one order*/
+   const unsigned int HierarchyCalculator::xxDmst12			= 18; 	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom masses by one order*/
+   const unsigned int HierarchyCalculator::xxAt				= 19;	/**< This flag can truncate the expansion depth of At/Ab by one order*/
+   const unsigned int HierarchyCalculator::xxlmMsusy			= 20;	/**< This flag can truncate the expansion depth of log(Msusy) by one order*/
+   const unsigned int HierarchyCalculator::xxMsq			= 21;	/**< This flag can truncate the expansion depth of the average squark mass by one order*/
+   const unsigned int HierarchyCalculator::xxMsusy			= 22;	/**< This flag can truncate the expansion depth of the average SUSY mass by one order*/
+   const unsigned int HierarchyCalculator::xxDmglst2			= 23;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 2 mass and the gluino mass by one order*/
+   const unsigned int HierarchyCalculator::xxDmsqst2			= 24;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
+   const unsigned int HierarchyCalculator::xxMgl			= 25;	/**< This flag can truncate the expansion depth of the gluino mass by one order*/
+   
+}
+
+/**
  * 	Constructor 
  * 	@param p a HimalayaInterface struct
  */
@@ -239,7 +275,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 
 	 // add these errors to include the error of the expansion in the comparison
 	 double currError = sqrt(pow2(twoLoopError) + pow2(expUncertainty));
-	 
+
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
 	    error = currError;
@@ -265,7 +301,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    return suitableHierarchy;
 }
 
-//TODO: if one is interested in the expansion at one and two loop choose a unifed choice for the MDR scheme
+//TODO: if one is interested in the expansion at one and two loop choose a unified choice for the MDR scheme
 /**
  * 	Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
  * 	@param ho a HierarchyObject with constant isAlphab.
