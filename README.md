@@ -34,33 +34,33 @@ We present a brief step by step guide how to run Himalaya and obtain the three-l
 ```
 to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`. Note that the input has to be provided in the **DR-bar** scheme. Here, an example for a SPS2 benchmark point is given:
 ```cpp
-himalaya::Parameters pars;	// DR-bar parameters struct
-pars.scale = 1.11090135E+03; // renormalization scale
-pars.mu = 3.73337018E+02;    // mu parameter
-pars.g3 = 1.06187116E+00;    // gauge coupling g3 SU(3)
-pars.vd = 2.51008404E+01;    // VEV of down Higgs doublet
-pars.vu = 2.41869332E+02;    // VEV of up Higgs doublet
+himalaya::Parameters pars;                      // DR-bar parameters struct
+pars.scale = 1.11090135E+03;                    // renormalization scale
+pars.mu = 3.73337018E+02;                       // mu parameter
+pars.g3 = 1.06187116E+00;                       // gauge coupling g3 SU(3)
+pars.vd = 2.51008404E+01;                       // VEV of down Higgs doublet
+pars.vu = 2.41869332E+02;                       // VEV of up Higgs doublet
 pars.mq2 << 2.36646981E+06, 0, 0,
             0, 2.36644973E+06, 0,
-            0, 0, 1.63230152E+06;	// soft-breaking squared left-handed squark mass parameters
+            0, 0, 1.63230152E+06;               // soft-breaking squared left-handed squark mass parameters
 pars.md2 << 2.35612778E+06, 0, 0,
             0, 2.35610884E+06, 0,
-            0, 0, 2.31917415E+06;	// soft-breaking squared right-handed down-squark mass parameters
+            0, 0, 2.31917415E+06;               // soft-breaking squared right-handed down-squark mass parameters
 pars.mu2 << 2.35685097E+06, 0, 0,
             0, 2.35682945E+06, 0,
-            0, 0, 9.05923409E+05;	// soft-breaking squared right-handed up-squark mass parameters
-pars.Ab = -784.3356416708631;		// soft-breaking trilinear term Ab
-pars.At = -527.8746242245387;		// soft-breaking trilinear term At
-pars.MA = 1.48446235E+03;		// Mass of the A boson
-pars.MG = 6.69045022E+02;		// Mass of the Gluino
-pars.MW = 8.04001915E+01;		// Mass of the W boson
-pars.MZ = 8.97608307E+01;		// Mass of the Z boson 
-pars.Mt = 1.47685846E+02;		// Mass of the top quark
-pars.Mb = 2.38918959E+00;		// Mass of the bottom quark
+            0, 0, 9.05923409E+05;               // soft-breaking squared right-handed up-squark mass parameters
+pars.Ab = -784.3356416708631;                   // soft-breaking trilinear term Ab
+pars.At = -527.8746242245387;                   // soft-breaking trilinear term At
+pars.MA = 1.48446235E+03;                       // Mass of the A boson
+pars.MG = 6.69045022E+02;                       // Mass of the Gluino
+pars.MW = 8.04001915E+01;                       // Mass of the W boson
+pars.MZ = 8.97608307E+01;                       // Mass of the Z boson 
+pars.Mt = 1.47685846E+02;                       // Mass of the top quark
+pars.Mb = 2.38918959E+00;                       // Mass of the bottom quark
 pars.MSt << 9.57566721E+02, 1.28878643E+03;	// Masses of the stop quarks
 pars.MSb << 1.27884964E+03, 1.52314587E+03;	// Masses of the sbottom quarks
-pars.s2t = sin(2*asin(1.13197339E-01));		// 2 times the sine of the stop mixing angle
-pars.s2b = sin(2*asin(-9.99883015E-01));	// 2 times the sine of the sbottom mixing angle
+pars.s2t = sin(2*asin(1.13197339E-01));         // 2 times the sine of the stop mixing angle
+pars.s2b = sin(2*asin(-9.99883015E-01));        // 2 times the sine of the sbottom mixing angle
 ```
 Now you can create a `HierarchyCalculator` object with the given `struct`:
 ```
