@@ -316,7 +316,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
    double sigS1Full = 0., sigS2Full = 0., sigS12Full = 0.;
 
    // common variables
-   double At, Mt, s2t, Mst1, Mst2;
+   double At, Mt, s2t, Mst1 = 0., Mst2 = 0.;
    if (!ho.getIsAlphab()) {
       At = p.At;
       Mt = p.Mt;
@@ -715,8 +715,7 @@ double himalaya::HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyOb
  * 	@return A double which is the MDR sx_2 mass.
  */
 double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho, const unsigned int oneLoopFlag, const unsigned int twoLoopFlag) {
-   double Mst2mod;
-   double Mst2;
+   double Mst2mod = 0., Mst2;
    if(!ho.getIsAlphab()){
       Mst2 = p.MSt(1);
    }
