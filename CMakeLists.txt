@@ -3,8 +3,16 @@ project(himalaya CXX Fortran)
 
 #SET (CMAKE_Fortran_COMPILER gfortran)
 
+#set the build type to release. If one needs debugging symbols, compile
+#with "CMAKE_BUILD_TYPE Debug"
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
+
 #set the CXX flags
 set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 #include c++ header files
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source/include)
