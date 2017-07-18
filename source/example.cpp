@@ -141,7 +141,6 @@ himalaya::Parameters setup_HSSUSY_minmix(){
    return pars;
 }
 
-
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
@@ -156,7 +155,7 @@ int main() {
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 //top and MDR
-	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, 1);
+	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, 0);
 
 	 //bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);

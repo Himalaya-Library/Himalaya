@@ -245,11 +245,8 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
 	 Eigen::Matrix2d Mt42L = getMt42L(ho, ho.getMDRFlag(), 0);
 	 
-	 // check for spurious poles. If this is the case slightly change Mst2
-	 if(std::isnan(Mt42L(0,0)) || std::isnan(Mt42L(1,0)) || std::isnan(Mt42L(1,1))){
-	    deltaDSZ = 1.0E-6;
-	    Mt42L = getMt42L(ho, 1, 0);
-	 }
+	 // Note: spurious poles are handeld by the validate method
+	 // of the Himalaya_Interface struct
 	 
 	 //DEPRECATED calc 1-loop shift for DRbar -> MDRbar
 	 //calc difference of Mt41L or Mt41L in the MDRbar scheme directly

@@ -43,6 +43,7 @@ struct Parameters {
    /**
     * 	Checks if the stob/sbottom masses are ordered in the right way. If these masses are wrongly ordered
     * 	the right ordering will be introduced.
+    *   Checks if the stops/sbottom masses are degenerated and introduce a small shift to the 1st stop/sbottom mass in this case.
     */
    void validate(){
       if (MSt(0) > MSt(1)) {
@@ -54,6 +55,18 @@ struct Parameters {
 	 std::swap(MSb(0), MSb(1));
 	 s2b *= -1;
       }
+
+      // check if the stop/sbottom masses are degenerated. If this is the case one could get spurious poles
+      // in Pietro's code. To avoid this numerical issue we shift the stop/bottom 1 mass by a relative (but small)
+      // value.
+      if(std::abs(MSt(0) - MSt(1)) < 1.0E-5){
+	MSt(0) = MSt(1) / (1. + 1.0E-5);
+      }
+
+      if(std::abs(MSb(0) - MSb(1)) < 1.0E-5){
+	MSb(0) = MSb(0) / (1. + 1.0E-5);
+      }
+      
    };
 };
 
