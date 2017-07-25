@@ -62,6 +62,8 @@ pars.MSb << 1.27884964E+03, 1.52314587E+03;	// Masses of the sbottom quarks
 pars.s2t = sin(2*asin(1.13197339E-01));         // 2 times the sine of the stop mixing angle
 pars.s2b = sin(2*asin(-9.99883015E-01));        // 2 times the sine of the sbottom mixing angle
 ```
+Note that the values of `MSt`, `MSb`, `s2t` and `s2b` are optional. If they are not provided, they will get calculated internally.
+
 Now you can create a `HierarchyCalculator` object with the given `struct`:
 ```
 himalaya::HierarchyCalculator hc(pars);
