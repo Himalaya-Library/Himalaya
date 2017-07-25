@@ -3,6 +3,7 @@
 
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
+#include "version.hpp"
 #include <map>
 #include <vector>
 

@@ -1,6 +1,7 @@
 #ifndef HierarchyObject_HPP
 #define HierarchyObject_HPP
 
+#include "version.hpp"
 #include <Eigen>
 #include <vector>
 #include <map>

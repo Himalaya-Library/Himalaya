@@ -1,6 +1,7 @@
 #ifndef H3_HPP
 #define H3_HPP
 
+#include "version.hpp"
 #include <map>
 
 namespace himalaya{

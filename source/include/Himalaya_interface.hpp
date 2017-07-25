@@ -1,6 +1,7 @@
 #ifndef Himalaya_interface_HPP
 #define Himalaya_interface_HPP
 
+#include "version.hpp"
 #include <complex>
 #include <Eigen>
 #include <iostream>
