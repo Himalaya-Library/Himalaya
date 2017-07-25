@@ -97,10 +97,23 @@ namespace himalaya{
        * 	Performs a sanity check of the implemented expansion terms by comparing them to their numerical value at a given parameter point.
        */
       void checkTerms();
+      // expansion depth flags
+      const static unsigned int xx;		/**< This flag can truncate the two loop expansion at the three loop expansion depth */
+      const static unsigned int xxMst;		/**< This flag can truncate the expansion depth of the stop/sbottom masses by one order */
+      const static unsigned int xxDmglst1;	/**< This flag can truncate the expansion depth of the difference of stop/sbottom 1 mass and the gluino mass by one order*/
+      const static unsigned int xxDmsqst1;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 1 mass and the average squark mass by one order*/
+      const static unsigned int xxDmst12; 	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom masses by one order*/
+      const static unsigned int xxAt;		/**< This flag can truncate the expansion depth of At/Ab by one order*/
+      const static unsigned int xxlmMsusy;	/**< This flag can truncate the expansion depth of log(Msusy) by one order*/
+      const static unsigned int xxMsq;		/**< This flag can truncate the expansion depth of the average squark mass by one order*/
+      const static unsigned int xxMsusy;	/**< This flag can truncate the expansion depth of the average SUSY mass by one order*/
+      const static unsigned int xxDmglst2;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 2 mass and the gluino mass by one order*/
+      const static unsigned int xxDmsqst2;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
+      const static unsigned int xxMgl;		/**< This flag can truncate the expansion depth of the gluino mass by one order*/      
    private:
       Parameters p;	/** The HimalayaInterface struct. */
-      double Al4p,lmMgl, lmMsq, Mgl, Msq, prefac, z2, z3, z4, deltaDSZ = 0.; /** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix, Zeta[2], Zeta[3], Zeta[4] */
-      double B4, D3, DN, OepS2, S2, T1ep; /** Polylogarithmic functions. */
+      double Al4p,lmMgl, lmMsq, Mgl, Msq, prefac, z2;//, z3, z4; /** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix, Zeta[2], Zeta[3], Zeta[4] */
+      //double B4, D3, DN, OepS2, S2, T1ep; /** Polylogarithmic functions. */
       /**
        * 	Initializes all common variables.
        */
@@ -159,19 +172,6 @@ namespace himalaya{
       static const int h9q2;	/**< The key to hierarchy h9q2 */
       const std::map<int, int> hierarchyMap = {{h3, h3}, {h32q2g, h3}, {h3q22g, h3}, {h4, h4}, {h5, h5}, {h5g1, h5},
 	 {h6, h6}, {h6g2, h6}, {h6b, h6b}, {h6b2qg2, h6b}, {h6bq22g, h6b}, {h6bq2g2, h6b}, {h9, h9}, {h9q2, h9}}; /** The hierarchy map which maps all hierarchies to their mother hierarchies */
-      // expansion depth flags
-      const static unsigned int xx;		/**< This flag can truncate the two loop expansion at the three loop expansion depth */
-      const static unsigned int xxMst;		/**< This flag can truncate the expansion depth of the stop/sbottom masses by one order */
-      const static unsigned int xxDmglst1;	/**< This flag can truncate the expansion depth of the difference of stop/sbottom 1 mass and the gluino mass by one order*/
-      const static unsigned int xxDmsqst1;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 1 mass and the average squark mass by one order*/
-      const static unsigned int xxDmst12; 	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom masses by one order*/
-      const static unsigned int xxAt;		/**< This flag can truncate the expansion depth of At/Ab by one order*/
-      const static unsigned int xxlmMsusy;	/**< This flag can truncate the expansion depth of log(Msusy) by one order*/
-      const static unsigned int xxMsq;		/**< This flag can truncate the expansion depth of the average squark mass by one order*/
-      const static unsigned int xxMsusy;	/**< This flag can truncate the expansion depth of the average SUSY mass by one order*/
-      const static unsigned int xxDmglst2;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 2 mass and the gluino mass by one order*/
-      const static unsigned int xxDmsqst2;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
-      const static unsigned int xxMgl;		/**< This flag can truncate the expansion depth of the gluino mass by one order*/
   };
 }	// himalaya
 #endif	// HierarchyCalculator_HPP

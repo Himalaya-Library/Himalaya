@@ -1,43 +1,24 @@
 #define Pi M_PI
 
 #include "HierarchyCalculator.hpp"
+#include "H3.hpp"
+#include "H32q2g.hpp"
+#include "H3q22g.hpp"
+#include "H4.hpp"
+#include "H5.hpp"
+#include "H5g1.hpp"
+#include "H6.hpp"
+#include "H6b.hpp"
+#include "H6b2qg2.hpp"
+#include "H6bq22g.hpp"
+#include "H6bq2g2.hpp"
+#include "H6g2.hpp"
+#include "H9.hpp"
+#include "H9q2.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <iomanip>
 #include <type_traits>
-
-// some templates to perform operations between int's and complex<double>
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator* ( const std::complex<T>& c, SCALAR n ) { return c * T(n) ; }
-
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator* ( SCALAR n, const std::complex<T>& c ) { return T(n) * c ; }
-
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator/ ( const std::complex<T>& c, SCALAR n ) { return c / T(n) ; }
-
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator/ ( SCALAR n, const std::complex<T>& c ) { return T(n) / c ; }
-
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator+ ( const std::complex<T>& c, SCALAR n ) { return c + T(n) ; }
-
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator+ ( SCALAR n, const std::complex<T>& c ) { return T(n) + c ; }
-
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator- ( const std::complex<T>& c, SCALAR n ) { return c - T(n) ; }
-
-template< typename T, typename SCALAR > inline
-typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
-operator- ( SCALAR n, const std::complex<T>& c ) { return T(n) - c ; }
 
 template <typename T> T pow2(T x)  { return x*x; }
 template <typename T> T pow3(T x)  { return x*x*x; }
@@ -59,7 +40,6 @@ static bool isInfoPrinted; /**< If this bool is true, than no info will be print
 /**
  * 	Define static variables
  */
-
 namespace himalaya {
    // Hierarchy keys
    const int HierarchyCalculator::h3 		= 0;	/**< The key to hierarchy h3 */
@@ -109,24 +89,6 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
 
    // Riemann-Zeta
    z2 = pow2(Pi)/6.;
-   z3 = 1.202056903159594;
-   z4 = pow4(Pi)/90.;
-
-   // polylogs
-   double pl412 = 0.51747906167389934317668576113647; // PolyLog[4,1/2]
-   std::complex<double> pl2expPi3 (0.27415567780803773941206919444, 1.014941606409653625021202554275); // PolyLog[2, Exp[I Pi / 3]]
-   std::complex<double> pl3expPi6sqrt3 (0.51928806536375962552715984277228, - 0.33358157526196370641686908633664); // PolyLog[3, Exp[- I Pi / 6] / Sqrt[3]]
-
-   // polylog functions, checked
-   B4 = (-4 * z2 * pow2(log(2)) + 2 / 3.* pow4(log(2)) - 13 / 2. * z4 + 16. * pl412);
-   D3 = 6 * z3 - 15 / 4. * z4 - 6. * pow2(std::imag(pl2expPi3));
-   DN = 6 * z3 - 4 * z2 * pow2(log(2)) + 2 / 3. * pow4(log(2)) - 21 / 2. * z4 + 16. * pl412;
-   OepS2 = - 763 / 32. - (9 * Pi * sqrt(3) * pow2(log(3))) / 16. - (35 * pow3(Pi) * sqrt(3)) / 48.
-      + 195 / 16. * z2 - 15 / 4. * z3 + 57 / 16. * z4 + 45 * sqrt(3) / 2. * std::imag(pl2expPi3)
-      - 27 * sqrt(3) * std::imag(pl3expPi6sqrt3);
-   S2 = 4 * std::imag(pl2expPi3) / (9. * sqrt(3));
-   T1ep = - 45 / 2. - (Pi * sqrt(3) * pow2(log(3))) / 8. - (35 * pow3(Pi) * sqrt(3)) / 216. - 9 / 2. * z2 + z3 
-      + 6. * sqrt(3) * std::imag(pl2expPi3) - 6. * sqrt(3) * std::imag(pl3expPi6sqrt3);
 
    // init common variables
    init();
@@ -159,7 +121,6 @@ void himalaya::HierarchyCalculator::init(){
       // sbottom
       + sqrt(p.mq2(2, 2) + pow2(p.Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(p.MZ) * cos(2 * beta))
       + sqrt(p.md2(2, 2) + pow2(p.Mb) - 1 / 3. * sw2 * pow2(p.MZ) * cos(2 * beta))) / 10.;
-
    // lmMsq, checked
    lmMsq = log(pow2(p.scale / Msq));
 
@@ -328,33 +289,9 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
       s2t = p.s2b;
    }
 
-   const double Tbeta = p.vu / p.vd;
-   const double Cbeta = cos(atan(Tbeta));
-   const double Sbeta = sin(atan(Tbeta));
-   const double scale = p.scale;
-   const double lmMt = log(pow2(scale / Mt));
-   const double MuSUSY = p.mu;
+   const double beta = atan(p.vu / p.vd);
+   const double lmMt = log(pow2(p.scale / Mt));
 
-   // these shifts are needed to eliminate huge corrections (cf. arXiv:1005.5709 [hep-ph] eq. (46) - (49))
-   int shiftst1 = ho.getMDRFlag(), shiftst2 = ho.getMDRFlag(), shiftst3 = ho.getMDRFlag();
-   // specific variables for hierarchies
-   double Dmglst1, Dmglst2, Dmsqst1, Dmsqst2, Dmst12, lmMst1, lmMst2, Msusy, lmMsusy;
-   int xDR2DRMOD;
-   
-   // flags to truncate the expansion while comparing at 2-loop level or to estimate the error
-   int x, xMst, xDmglst1, xDmsqst1, xDmst12, xAt, xlmMsusy, xMsq, xMsusy, xDmglst2, xDmsqst2, xMgl;
-   x = flagMap.at(xx);
-   xMst = flagMap.at(xxMst);
-   xDmglst1 = flagMap.at(xxDmglst1);
-   xDmsqst1 = flagMap.at(xxDmsqst1);
-   xDmst12 = flagMap.at(xxDmst12);
-   xAt = flagMap.at(xxAt);
-   xlmMsusy = flagMap.at(xxlmMsusy);
-   xMsq = flagMap.at(xxMsq);
-   xMsusy = flagMap.at(xxMsusy);
-   xDmglst2 = flagMap.at(xxDmglst2);
-   xDmsqst2 = flagMap.at(xxDmsqst2);
-   xMgl = flagMap.at(xxMgl);
    // this loop is needed to calculate the suitable mass shift order by order
    for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
       bool runThisOrder;
@@ -393,202 +330,202 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	 }
 	 // select the suitable hierarchy for the specific hierarchy and set variables
 	 switch(getCorrectHierarchy(hierarchy)){
-	    case h3:
-	       Dmglst1 = Mgl - Mst1;
-	       Dmsqst1 = pow2(Msq) - pow2(Mst1);
-	       Dmst12 = pow2(Mst1) - pow2(Mst2);
-	       lmMst1 = log(pow2(scale / Mst1));
-	       lmMsusy = log(pow2(scale / ((Mst1 + Mst2 + Mgl + 10*Msq) / 13.)));
+	    case h3:{
+	       double Dmglst1 = Mgl - Mst1;
+	       double Dmsqst1 = pow2(Msq) - pow2(Mst1);
+	       double Dmst12 = pow2(Mst1) - pow2(Mst2);
+	       double lmMst1 = log(pow2(p.scale / Mst1));
 	       switch(hierarchy){
-		  case h3:
-		     curSig1 = 
-		     #include "../hierarchies/h3/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h3/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h3/sigS12Full.inc"
-		     ;
-		     break;
-		  case h32q2g:
-		     curSig1 = 
-		     #include "../hierarchies/h32q2g/sigS1Full.inc"
-		     ;
-		     curSig2 =
-		     #include "../hierarchies/h32q2g/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h32q2g/sigS12Full.inc"
-		     ;
-		     break;
-		  case h3q22g:
-		     curSig1 = 
-		     #include "../hierarchies/h3q22g/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h3q22g/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h3q22g/sigS12Full.inc"
-		     ;
-		     break;
+		  case h3:{
+		     H3 hierarchy3(flagMap, Al4p, beta,
+			Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
+			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
+			s2t, 
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy3.getS1();
+		     curSig2 = hierarchy3.getS2();
+		     curSig12 = hierarchy3.getS12();
+		  }
+		  break;
+		  case h32q2g:{
+		     H32q2g hierarchy32q2g(flagMap, Al4p, beta,
+			Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
+			Mt, Mst1, Mst2, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy32q2g.getS1();
+		     curSig2 = hierarchy32q2g.getS2();
+		     curSig12 = hierarchy32q2g.getS12();
+		  }
+		  break;
+		  case h3q22g:{
+		     H3q22g hierarchy3q22g(flagMap, Al4p, beta,
+			Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
+			Mt, Mst1, Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy3q22g.getS1();
+		     curSig2 = hierarchy3q22g.getS2();
+		     curSig12 = hierarchy3q22g.getS12();
+		  }
+		  break;
 	       }
-	       break;
-	    case h4:
-	       Msusy = (Mst1 + Mst2 + Mgl) / 3.;
-	       lmMsusy = log(pow2(scale / Msusy));
-	       curSig1 = 
-	       #include "../hierarchies/h4/sigS1Full.inc"
-	       ;
-	       curSig2 = 
-	       #include "../hierarchies/h4/sigS2Full.inc"
-	       ;
-	       curSig12 = 
-	       #include "../hierarchies/h4/sigS12Full.inc"
-	       ;
-	       break;
-	    case h5:
-	       Dmglst1 = Mgl - Mst1;
-	       lmMst1 = log(pow2(scale / Mst1));
-	       lmMst2 = log(pow2(scale / Mst2));
+	    }
+	    break;
+	    case h4:{
+	       double Msusy = (Mst1 + Mst2 + Mgl) / 3.;
+	       double lmMsusy = log(pow2(p.scale / Msusy));
+	       H4 hierarchy4(flagMap, Al4p, At, beta,
+		  lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
+		  ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+	       curSig1 = hierarchy4.getS1();
+	       curSig2 = hierarchy4.getS2();
+	       curSig12 = hierarchy4.getS12();
+	    }
+	    break;
+	    case h5:{
+	       double Dmglst1 = Mgl - Mst1;
+	       double lmMst1 = log(pow2(p.scale / Mst1));
+	       double lmMst2 = log(pow2(p.scale / Mst2));
 	       switch(hierarchy){
-		  case h5:
-		     curSig1 = 
-		     #include "../hierarchies/h5/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h5/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h5/sigS12Full.inc"
-		     ;
-		     break;
-		  case h5g1:
-		     curSig1 = 
-		     #include "../hierarchies/h5g1/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h5g1/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h5g1/sigS12Full.inc"
-		     ;
-		     break;
+		  case h5:{
+		     H5 hierarchy5(flagMap, Al4p, beta, Dmglst1,
+			lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
+			Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy5.getS1();
+		     curSig2 = hierarchy5.getS2();
+		     curSig12 = hierarchy5.getS12();
+		  }
+		  break;
+		  case h5g1:{
+		     H5g1 hierarchy5g1(flagMap, Al4p, beta, Dmglst1,
+			lmMt, lmMst1, lmMst2, lmMsq,
+			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy5g1.getS1();
+		     curSig2 = hierarchy5g1.getS2();
+		     curSig12 = hierarchy5g1.getS12();
+		  }
+		  break;
 	       }
-	       break;
-	    case h6:
-	       Dmglst2 = Mgl - Mst2;
-	       lmMst1 = log(pow2(scale / Mst1));
-	       lmMst2 = log(pow2(scale / Mst2));
-	       xDR2DRMOD = ho.getMDRFlag();
+	    }
+	    break;
+	    case h6:{
+	       double Dmglst2 = Mgl - Mst2;
+	       double lmMst1 = log(pow2(p.scale / Mst1));
+	       double lmMst2 = log(pow2(p.scale / Mst2));
 	       switch(hierarchy){
-		  case h6:
-		     curSig1 = 
-		     #include "../hierarchies/h6/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h6/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h6/sigS12Full.inc"
-		     ;
-		     break;
-		  case h6g2:
-		     curSig1 = 
-		     #include "../hierarchies/h6g2/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h6g2/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h6g2/sigS12Full.inc"
-		     ;
-		     break;
+		  case h6:{
+		     H6 hierarchy6(flagMap, Al4p, beta, Dmglst2,
+			lmMt, lmMst1, lmMst2, lmMsq,
+			Mt, Mst1, Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy6.getS1();
+		     curSig2 = hierarchy6.getS2();
+		     curSig12 = hierarchy6.getS12();
+		  }
+		  break;
+		  case h6g2:{
+		     H6g2 hierarchy6g2(flagMap, Al4p, beta, Dmglst2,
+			lmMt, lmMst1, lmMst2, lmMsq,
+			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy6g2.getS1();
+		     curSig2 = hierarchy6g2.getS2();
+		     curSig12 = hierarchy6g2.getS12();
+		  }
+		  break;
 	       }
-	       break;
-	    case h6b:
-	       Dmglst2 = Mgl - Mst2;
-	       Dmsqst2 = Msq - Mst2;
-	       lmMst1 = log(pow2(scale / Mst1));
-	       lmMst2 = log(pow2(scale / Mst2));
-	       xDR2DRMOD = ho.getMDRFlag();
+	    }
+	    break;
+	    case h6b:{
+	       double Dmglst2 = Mgl - Mst2;
+	       double Dmsqst2 = Msq - Mst2;
+	       double lmMst1 = log(pow2(p.scale / Mst1));
+	       double lmMst2 = log(pow2(p.scale / Mst2));
 	       switch(hierarchy){
-		  case h6b:
-		     curSig1 = 
-		     #include "../hierarchies/h6b/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h6b/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h6b/sigS12Full.inc"
-		     ;
-		     break;
-		  case h6b2qg2:
-		     curSig1 = 
-		     #include "../hierarchies/h6b2qg2/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h6b2qg2/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h6b2qg2/sigS12Full.inc"
-		     ;
-		     break;
-		  case h6bq22g:
-		     curSig1 = 
-		     #include "../hierarchies/h6bq22g/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h6bq22g/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h6bq22g/sigS12Full.inc"
-		     ;
-		     break;
-		  case h6bq2g2:
-		     curSig1 = 
-		     #include "../hierarchies/h6bq2g2/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h6bq2g2/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h6bq2g2/sigS12Full.inc"
-		     ;
-		     break;
+		  case h6b:{
+		     H6b hierarchy6b(flagMap, Al4p, beta, Dmglst2,
+			Dmsqst2, lmMt, lmMst1, lmMst2,
+		       Mt, Mst1, Mst2, p.mu,
+		       s2t,
+		       ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy6b.getS1();
+		     curSig2 = hierarchy6b.getS2();
+		     curSig12 = hierarchy6b.getS12();
+		  }
+		  break;
+		  case h6b2qg2:{
+		     H6b2qg2 hierarchy6b2qg2(flagMap, Al4p, beta, Dmglst2,
+			Dmsqst2, lmMt, lmMst1, lmMst2,
+			Mgl, Mt, Mst1, Mst2, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy6b2qg2.getS1();
+		     curSig2 = hierarchy6b2qg2.getS2();
+		     curSig12 = hierarchy6b2qg2.getS12();
+		  }
+		  break;
+		  case h6bq22g:{
+		     H6bq22g hierarchy6bq22g(flagMap, Al4p, beta, Dmglst2,
+			Dmsqst2, lmMt, lmMst1, lmMst2,
+			Mt, Mst1, Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy6bq22g.getS1();
+		     curSig2 = hierarchy6bq22g.getS2();
+		     curSig12 = hierarchy6bq22g.getS12();
+		  }
+		  break;
+		  case h6bq2g2:{
+		     H6bq2g2 hierarchy6bq2g2(flagMap, Al4p, beta, Dmglst2,
+			Dmsqst2, lmMt, lmMst1, lmMst2,
+			Mgl, Mt, Mst1,Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy6bq2g2.getS1();
+		     curSig2 = hierarchy6bq2g2.getS2();
+		     curSig12 = hierarchy6bq2g2.getS12();
+		  }
+		  break;
 	       }
-	       break;
-	    case h9:
-	       lmMst1 = log(pow2(scale / Mst1));
-	       Dmst12 = pow2(Mst1) - pow2(Mst2);
-	       Dmsqst1 = pow2(Msq) - pow2(Mst1);
+	    }
+	    break;
+	    case h9:{
+	       double lmMst1 = log(pow2(p.scale / Mst1));
+	       double Dmst12 = pow2(Mst1) - pow2(Mst2);
+	       double Dmsqst1 = pow2(Msq) - pow2(Mst1);
 	       switch(hierarchy){
-		  case h9:
-		     curSig1 = 
-		     #include "../hierarchies/h9/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h9/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h9/sigS12Full.inc"
-		     ;
-		     break;
-		  case h9q2:
-		     curSig1 = 
-		     #include "../hierarchies/h9q2/sigS1Full.inc"
-		     ;
-		     curSig2 = 
-		     #include "../hierarchies/h9q2/sigS2Full.inc"
-		     ;
-		     curSig12 = 
-		     #include "../hierarchies/h9q2/sigS12Full.inc"
-		     ;
-		     break;
+		  case h9:{
+		     H9 hierarchy9(flagMap, Al4p, beta, Dmst12, Dmsqst1,
+			lmMt, lmMgl, lmMst1,
+			Mgl, Mt, Mst1, Mst2, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy9.getS1();
+		     curSig2 = hierarchy9.getS2();
+		     curSig12 = hierarchy9.getS12();
+		  }
+		  break;
+		  case h9q2:{
+		     H9q2 hierarchy9q2(flagMap, Al4p, beta, Dmst12, Dmsqst1,
+			lmMt, lmMgl, lmMst1,
+			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+		     curSig1 = hierarchy9q2.getS1();
+		     curSig2 = hierarchy9q2.getS2();
+		     curSig12 = hierarchy9q2.getS12();
+		  }
+		  break;
 	       }
-	       break;
+	    }
+	    break;
 	 }
       }
       sigS1Full += curSig1;
@@ -944,7 +881,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::Hierarch
    double st;
    double ct;
    Mst12 = pow2(shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop));
-   Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop) + deltaDSZ);
+   Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop));
    if(!ho.getIsAlphab()){
       const double theta = asin(p.s2t)/2.;
       Mt2 = pow2(p.Mt);
@@ -1016,7 +953,7 @@ double himalaya::HierarchyCalculator::getExpansionUncertainty(himalaya::Hierarch
    case h3:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
-      // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion error 
+      // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion uncertainty 
       flagMap.at(xxDmglst1) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
@@ -1330,7 +1267,7 @@ std::string himalaya::HierarchyCalculator::tf(const bool tf){
  */
 int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
    if(hierarchy < 0 || hierarchy > 13){
-      throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) + " not included!");
+      throw std::runtime_error("\033[1;31m Error: Hierarchy " + std::to_string(hierarchy) + " not included!\033[0m");
    }
    return hierarchyMap.at(hierarchy);
 }
