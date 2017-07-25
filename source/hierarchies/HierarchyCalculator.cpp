@@ -15,7 +15,6 @@
 #include "H6g2.hpp"
 #include "H9.hpp"
 #include "H9q2.hpp"
-#include <iostream>
 #include <stdexcept>
 #include <iomanip>
 #include <type_traits>

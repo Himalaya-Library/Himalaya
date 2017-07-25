@@ -1,9 +1,8 @@
 #define Pi M_PI
 
-#include <HierarchyCalculator.hpp>
-#include <Himalaya_interface.hpp>
-#include <HierarchyObject.hpp>
-#include <iostream>
+#include "HierarchyCalculator.hpp"
+#include "Himalaya_interface.hpp"
+#include "HierarchyObject.hpp"
 
 himalaya::Parameters setup_SPS1a(){
    himalaya::Parameters pars;

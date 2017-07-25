@@ -1,10 +1,9 @@
 #define Pi M_PI
 
 #include "H3q22g.hpp"
-#include <HierarchyCalculator.hpp>
+#include "HierarchyCalculator.hpp"
 #include <type_traits>
 #include <math.h>
-#include <complex>
 
 // some templates to perform operations between int's and complex<double>
 template< typename T, typename SCALAR > inline
