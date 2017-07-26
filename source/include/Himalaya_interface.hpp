@@ -3,7 +3,7 @@
 
 #include "version.hpp"
 #include <complex>
-#include <Eigen>
+#include <Eigen/Eigenvalues>
 #include <iostream>
 
 namespace himalaya {

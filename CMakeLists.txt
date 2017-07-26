@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 project(Himalaya CXX Fortran)
 
+#require an Eigen installation
+find_package(Eigen3 REQUIRED)
+
 #SET (CMAKE_Fortran_COMPILER gfortran)
 
 #set the build type to release. If one needs debugging symbols, compile
@@ -25,7 +28,8 @@ set(INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/include)
 #include c++ header files
 include_directories(${INCLUDE_PATH})
 include_directories(${INCLUDE_PATH}/hierarchies)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source/Eigen/)
+include_directories(${EIGEN3_INCLUDE_DIR})
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source/Eigen/)
 
 #setting the correct version to all headers
 configure_file (

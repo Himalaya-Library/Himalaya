@@ -2,7 +2,7 @@
 #define HierarchyObject_HPP
 
 #include "version.hpp"
-#include <Eigen>
+#include <Eigen/Eigenvalues>
 #include <vector>
 #include <map>
 
