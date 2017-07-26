@@ -5,6 +5,8 @@
 #include <complex>
 #include <Eigen/Eigenvalues>
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 namespace himalaya {
 
