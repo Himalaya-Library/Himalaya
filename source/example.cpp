@@ -149,12 +149,12 @@ int main() {
 	 //setup_HSSUSY_minmix()
       }; 
       for (const auto point: points) {
-	 // init hierarchy calculator with verbose output
+	 // init hierarchy calculator
 	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
-	 //top and MDR
-	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, 0);
+	 //top and DR
+	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
 
 	 //bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
