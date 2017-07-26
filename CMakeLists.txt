@@ -59,4 +59,4 @@ target_compile_features(example PRIVATE cxx_range_for)
 target_link_libraries(example Himalaya DSZ)
 
 #install
-install(TARGETS example Himalaya RUNTIME DESTINATION bin ARCHIVE DESTINATION lib/static)
+install(TARGETS Himalaya ARCHIVE DESTINATION lib/static)
