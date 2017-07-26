@@ -46,8 +46,9 @@ file(GLOB_RECURSE FSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/include/mh2l/*f)
 
 #build the himalaya library and combine it wtih mh2l
 file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.hpp)
-file(GLOB LIBSOURCES ${SOURCES} ${HEADERS} ${FSOURCES})
+file(GLOB LIBSOURCES ${SOURCES} ${HEADERS})
 list(REMOVE_ITEM LIBSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
+add_library(DSZ STATIC ${FSOURCES})
 add_library(Himalaya STATIC ${LIBSOURCES})
 
 #set the executable and specify the c++ version
@@ -55,7 +56,7 @@ add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
 target_compile_features(example PRIVATE cxx_range_for)
 
 #link mh2l and himalaya to the executable
-target_link_libraries(example Himalaya)
+target_link_libraries(example Himalaya DSZ)
 
 #install
 install(TARGETS example Himalaya RUNTIME DESTINATION bin ARCHIVE DESTINATION lib/static)
