@@ -29,7 +29,6 @@ set(INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/include)
 include_directories(${INCLUDE_PATH})
 include_directories(${INCLUDE_PATH}/hierarchies)
 include_directories(${EIGEN3_INCLUDE_DIR})
-#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source/Eigen/)
 
 #setting the correct version to all headers
 configure_file (

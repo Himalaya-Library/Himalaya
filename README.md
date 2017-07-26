@@ -69,9 +69,9 @@ Now you can create a `HierarchyCalculator` object with the given `struct`:
 ```
 himalaya::HierarchyCalculator hc(pars);
 ```
-To calculate the results you just have to call:
+To calculate the DR-bar results you just have to call:
 ```cpp
-himalaya::HierarchyObject ho = hc.calculateDMh3L(false, 0); // the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true). The integer is a flag to choose among the DR- (0) or the MDR-scheme (1)
+himalaya::HierarchyObject ho = hc.calculateDMh3L(false); // the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true).
 ```
 All information which has been gathered during the calculation will be stored in a `HierarchyObject` and can be accessed by member functions. To obtain the 3-loop correction to the Higgs mass matrix you have to call:
 ```cpp

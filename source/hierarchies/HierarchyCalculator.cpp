@@ -136,7 +136,7 @@ void himalaya::HierarchyCalculator::init(){
  * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
  * 	@return A HierarchyObject which holds all information of the calculation.
  */
-himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab, int mdrFlag){
+himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab, const int mdrFlag){
    HierarchyObject ho (isAlphab);
    
    // set mdrFlag
