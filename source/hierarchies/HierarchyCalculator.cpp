@@ -31,7 +31,7 @@ template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
 template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x; }
 template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x; }
 
-extern "C" void DSZHiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
+extern "C" void dszhiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
 
 static bool isInfoPrinted; /**< If this bool is true, than no info will be printed in further runs */
@@ -900,7 +900,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::Hierarch
    double v2 = pow2(p.vu) + pow2(p.vd);
    double gs = p.g3;
    int os = 0;
-   DSZHiggs_(&Mt2, &MG, &Mst12, &Mst22, &st, &ct, &scale2, &mu, &tanb, &v2, &gs, &os, &S11, &S22, &S12);
+   dszhiggs_(&Mt2, &MG, &Mst12, &Mst22, &st, &ct, &scale2, &mu, &tanb, &v2, &gs, &os, &S11, &S22, &S12);
    Mt42L(0, 0) = S11;
    Mt42L(1, 0) = S12;
    Mt42L(0, 1) = S12;

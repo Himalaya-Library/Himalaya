@@ -1,6 +1,6 @@
 
-      subroutine DSZHiggs(t,mg,T1,T2,st,ct,q,mu,tanb,v2,gs,
-     $     OS,S11,S22,S12) bind(C, name="DSZHiggs_")
+      subroutine dszhiggs(t,mg,T1,T2,st,ct,q,mu,tanb,v2,gs,
+     $     OS,S11,S22,S12) bind(C, name="dszhiggs_")
       use iso_c_binding
 
 c     Two-loop O(a_t a_s) corrections to the CP-even Higgs mass matrix. 
