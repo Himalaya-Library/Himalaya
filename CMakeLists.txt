@@ -18,7 +18,7 @@ set(Himalaya_VERSION_MINOR 0)
 set(Himalaya_VERSION_RELEASE 0)
 
 #set the CXX flags
-set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -pedantic")
+set(CMAKE_CXX_FLAGS "-fPIC -std=c++11 -Wall -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
