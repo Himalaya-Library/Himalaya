@@ -5,6 +5,7 @@ Himalaya can calculate corrections of the order O((alpha_b + alpha_t)*alpha_s^2 
 ## Requirements
 The program requires:
 * CMake >= 3.0
+* Eigen3
 
 ## Installation
 CMake is used to generate build files.
