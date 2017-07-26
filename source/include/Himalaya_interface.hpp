@@ -48,9 +48,10 @@ struct Parameters {
     * 	Checks if the stop/sbottom masses and mixing angles are provided. Otherwise calculate them.
     * 	Checks if the stop/sbottom masses are ordered in the right way. If these masses are wrongly ordered
     * 	the right ordering will be introduced.
-    *   Checks if the stops/sbottom masses are degenerated and introduce a small shift to the 1st stop/sbottom mass in this case.
+    * 	Checks if the stops/sbottom masses are degenerated and introduce a small shift to the 1st stop/sbottom mass in this case.
+    * 	@param verbose a bool which suppresses the information of the calculation if set to flase
     */
-   void validate(){
+   void validate(const bool verbose){
       // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
       if(std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)){
 	 double beta = atan(vu / vd);
@@ -77,9 +78,11 @@ struct Parameters {
 	    theta = -acos(std::real(es.eigenvectors().col(1)(0)));
 	 }
 	 s2t = sin(2 * theta);
-	 std::cout << "\033[1;34m Info:\033[0m Stop masses or mixing angle not provided. Calculated values:\n" <<
-	    "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" << 
-	    "\tmixing angle: " << theta << ".\n";
+	 if(verbose){
+	    std::cout << "\033[1;34m Info:\033[0m Stop masses or mixing angle not provided. Calculated values:\n" <<
+	       "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" << 
+	       "\tmixing angle: " << theta << ".\n";
+	 }
       }
       if(std::isnan(MSb(0)) || std::isnan(MSb(1)) || std::isnan(s2b)){
 	 double beta = atan(vu / vd);
@@ -106,9 +109,11 @@ struct Parameters {
 	    theta = -acos(std::real(es.eigenvectors().col(1)(0)));
 	 }
 	 s2b = sin(2 * theta);
-	 std::cout << "\033[1;34m Info:\033[0m Sbottom masses or mixing angle not provided. Calculated values:\n" <<
-	    "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" << 
-	    "\tmixing angle: " << theta << ".\n";
+	 if(verbose){
+	    std::cout << "\033[1;34m Info:\033[0m Sbottom masses or mixing angle not provided. Calculated values:\n" <<
+	       "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" << 
+	       "\tmixing angle: " << theta << ".\n";
+	 }
       }
       // check the ordering of the stop/sbottom quarks
       if (MSt(0) > MSt(1)) {

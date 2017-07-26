@@ -74,14 +74,15 @@ namespace himalaya {
 /**
  * 	Constructor 
  * 	@param p a HimalayaInterface struct
+ * 	@param verbose a bool which suppresses the information of the calculation if set to flase
  */
-himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p){
-   if(!isInfoPrinted){
+himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p, const bool verbose){
+   if(!isInfoPrinted && verbose){
       printInfo();
       isInfoPrinted = true;
    }
    this -> p = p;
-   this -> p.validate();
+   this -> p.validate(verbose);
    // init constants
    // imaginary unit
    const std::complex<double> I(0., 1.);

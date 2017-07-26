@@ -149,8 +149,8 @@ int main() {
 	 //setup_HSSUSY_minmix()
       }; 
       for (const auto point: points) {
-	 // init hierarchy calculator
-	 himalaya::HierarchyCalculator hierarchyCalculator(point);
+	 // init hierarchy calculator with verbose output
+	 himalaya::HierarchyCalculator hierarchyCalculator(point, true);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 //top and MDR
