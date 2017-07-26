@@ -24,7 +24,7 @@ make
 ```
 
 ## Running the code
-After the compilation the static library `libhimalaya.a` has been created which should be linked to your code.
+After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to your program. `libDSZ.a` is optional and has to be linked, if your program does not incorporate the associated Fortran code of arXiv:hep-ph/0105096.
 
 ### Example
 We present a brief step by step guide how to run Himalaya and obtain the three-loop results. First you have to include the headers
