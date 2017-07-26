@@ -150,7 +150,7 @@ int main() {
       }; 
       for (const auto point: points) {
 	 // init hierarchy calculator with verbose output
-	 himalaya::HierarchyCalculator hierarchyCalculator(point, true);
+	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 //top and MDR

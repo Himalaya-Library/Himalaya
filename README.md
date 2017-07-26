@@ -67,7 +67,7 @@ The input values of `MSt`, `MSb`, `s2t` and `s2b` are optional. If they are not 
 
 Now you can create a `HierarchyCalculator` object with the given `struct`:
 ```
-himalaya::HierarchyCalculator hc(pars, true); // the bool argument sets the level of verbosity (true = any information, false = silent mode)
+himalaya::HierarchyCalculator hc(pars);
 ```
 To calculate the results you just have to call:
 ```cpp

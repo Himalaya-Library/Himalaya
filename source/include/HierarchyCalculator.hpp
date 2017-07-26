@@ -18,7 +18,7 @@ namespace himalaya{
        * 	@param p a HimalayaInterface struct
        * 	@param verbose a bool which suppresses the information of the calculation if set to flase
        */
-      HierarchyCalculator(const Parameters& p, const bool verbose);
+      HierarchyCalculator(const Parameters& p, const bool verbose = true);
       /**
        * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
        * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
