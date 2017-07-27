@@ -37,12 +37,12 @@ struct Parameters {
    double Mt{};					/**< top-quark */
    double Mb{};					/**< down-quark */
    double MA{};					/**< A boson */
-   V2 MSt{std::nan("NaN"), std::nan("NaN")};	/**< stops */
-   V2 MSb{std::nan("NaN"), std::nan("NaN")};	/**< sbottoms */
+   V2 MSt{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< stops */
+   V2 MSb{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< sbottoms */
 
    // DR-bar mixing angles
-   double s2t = std::nan("NaN");		/**< sine of 2 times the stop mixing angle */
-   double s2b = std::nan("NaN");		/**< sine of 2 times the sbot mixing angle */
+   double s2t = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the stop mixing angle */
+   double s2b = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the sbot mixing angle */
    
    /**
     * 	Checks if the stop/sbottom masses and mixing angles are provided. Otherwise calculate them.
