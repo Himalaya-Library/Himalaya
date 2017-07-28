@@ -1276,9 +1276,9 @@ int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
  * 	Prints out some information about Himalaya.
  */
 void himalaya::HierarchyCalculator::printInfo(){
-   std::cout << "......................................................................." << "\n";
-   std::cout << "Himalaya 1.0.0" << "\n";
-   std::cout << "Contains code by: P. Slavich et al. (2-loop rMSSM Higgs self-energies)." << "\n";
+   std::cout << "....................................................." << "\n";
+   std::cout << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\n";
+   std::cout << "Uses code by: P. Slavich et al. (2-loop at*as)." << "\n";
    std::cout << "Uses the 3-loop at*as^2 contributions of Kant et al." << "\n";
-   std::cout << "......................................................................." << "\n";
+   std::cout << "....................................................." << "\n";
 }
