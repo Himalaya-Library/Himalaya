@@ -4,7 +4,9 @@ project(Himalaya CXX Fortran)
 #require an Eigen installation
 find_package(Eigen3 REQUIRED)
 
-#SET (CMAKE_Fortran_COMPILER gfortran)
+#if needed, set your Fortran and C++ compiler
+#set (CMAKE_Fortran_COMPILER gfortran)
+#set (CMAKE_CXX_COMPILER clang++-3.8)
 
 #set the build type to release. If one needs debugging symbols, compile
 #with "CMAKE_BUILD_TYPE Debug"

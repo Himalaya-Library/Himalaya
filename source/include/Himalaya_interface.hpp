@@ -67,8 +67,8 @@ struct Parameters {
 	 // set stop masses
 	 MSt << sortedEigenvalues.at(0), sortedEigenvalues.at(1);
 	 // extraxt mixing angle
-	 double delta1 = abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
-	 double delta2 = abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
+	 double delta1 = std::abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
+	 double delta2 = std::abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
 	 
 	 double theta;
 	 if(delta1 < delta2){
@@ -98,8 +98,8 @@ struct Parameters {
 	 // set sbottom masses
 	 MSb << sortedEigenvalues.at(0), sortedEigenvalues.at(1);
 	 // extract mixing angle
-	 double delta1 = abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
-	 double delta2 = abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
+	 double delta1 = std::abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
+	 double delta2 = std::abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
 	 
 	 double theta;
 	 if(delta1 < delta2){
