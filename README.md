@@ -2,7 +2,7 @@
 
 Himalaya can calculate corrections of order O((alpha_t + alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR-bar scheme using the results of
 * R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs boson mass in supersymmetry to three loops*, [*Phys. Rev. Lett.* **100** (2008) 191602](https://doi.org/10.1103/PhysRevLett.100.191602), [[0803.0672](https://arxiv.org/abs/0803.0672)],
-* P. Kant, R. V. Harlander, L. Mihaila and M. Steinhauser, *Light MSSM Higgs boson mass to three-loop accuracy*, [JHEP **08** (2010) 104](https://doi.org/10.1007/JHEP08(2010)104), [[1005.5709](https://arxiv.org/abs/1005.5709)].
+* P. Kant, R. V. Harlander, L. Mihaila and M. Steinhauser, *Light MSSM Higgs boson mass to three-loop accuracy*, [*JHEP* **08** (2010) 104](https://doi.org/10.1007/JHEP08(2010)104), [[1005.5709](https://arxiv.org/abs/1005.5709)].
 
 Please refer to these papers as well as <to be published> when using Himalaya.
 
