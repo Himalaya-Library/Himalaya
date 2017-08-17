@@ -1,6 +1,6 @@
 # Himalaya
 
-Himalaya can calculate corrections of order O((alpha_b + alpha_t)*alpha_s^2 ) to the CP-even Higgs mass matrix in the DR-bar scheme using the results of Kant et al. (arXiv:0803.0672, arXiv:1005.5709).
+Himalaya can calculate corrections of order <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal{O}((\alpha_b&space;&plus;&space;\alpha_t)\alpha_s^2&space;)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal{O}((\alpha_b&space;&plus;&space;\alpha_t)\alpha_s^2&space;)" title="\mathcal{O}((\alpha_b + \alpha_t)\alpha_s^2 )" /></a> to the CP-even Higgs mass matrix in the DR-bar scheme using the results of Kant et al. ([arXiv:0803.0672](https://arxiv.org/abs/0803.0672), [arXiv:1005.5709](https://arxiv.org/abs/1005.5709)).
 
 ## Requirements
 The program requires:
