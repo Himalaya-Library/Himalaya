@@ -1,6 +1,10 @@
 # Himalaya
 
-Himalaya can calculate corrections of order <a href="https://www.codecogs.com/eqnedit.php?latex=\mathcal{O}((\alpha_b&space;&plus;&space;\alpha_t)\alpha_s^2&space;)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathcal{O}((\alpha_b&space;&plus;&space;\alpha_t)\alpha_s^2&space;)" title="\mathcal{O}((\alpha_b + \alpha_t)\alpha_s^2 )" /></a> to the CP-even Higgs mass matrix in the DR-bar scheme using the results of Kant et al. ([arXiv:0803.0672](https://arxiv.org/abs/0803.0672), [arXiv:1005.5709](https://arxiv.org/abs/1005.5709)).
+Himalaya can calculate corrections of order O((alpha_t + alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR-bar scheme using the results of
+* R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs boson mass in supersymmetry to three loops*, [*Phys. Rev. Lett.* **100** (2008) 191602](https://doi.org/10.1103/PhysRevLett.100.191602), [[0803.0672](https://arxiv.org/abs/0803.0672)],
+* P. Kant, R. V. Harlander, L. Mihaila and M. Steinhauser, *Light MSSM Higgs boson mass to three-loop accuracy*, [JHEP **08** (2010) 104](https://doi.org/10.1007/JHEP08(2010)104), [[1005.5709](https://arxiv.org/abs/1005.5709)].
+
+Please refer to these papers as well as <to be published> when using Himalaya.
 
 ## Requirements
 The program requires:
