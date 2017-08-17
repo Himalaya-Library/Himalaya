@@ -29,7 +29,7 @@ make
 ```
 
 ## Running the code
-After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to your program. `libDSZ.a` is optional and has to be linked, if your program does not incorporate the associated Fortran code of arXiv:hep-ph/0105096.
+After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to your program. `libDSZ.a` is optional and has to be linked, if your program does not incorporate the associated Fortran code of G. Degrassi, P. Slavich and F. Zwirner ([arXiv:hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)).
 
 ### Example
 We present a brief step by step guide how to run Himalaya and obtain the three-loop results. First you have to include the headers
