@@ -110,11 +110,10 @@ namespace himalaya{
       const static unsigned int xxMsusy;	/**< This flag can truncate the expansion depth of the average SUSY mass by one order*/
       const static unsigned int xxDmglst2;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 2 mass and the gluino mass by one order*/
       const static unsigned int xxDmsqst2;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
-      const static unsigned int xxMgl;		/**< This flag can truncate the expansion depth of the gluino mass by one order*/      
+      const static unsigned int xxMgl;		/**< This flag can truncate the expansion depth of the gluino mass by one order*/
    private:
       Parameters p;	/** The HimalayaInterface struct. */
-      double Al4p,lmMgl, lmMsq, Mgl, Msq, prefac, z2;//, z3, z4; /** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix, Zeta[2], Zeta[3], Zeta[4] */
-      //double B4, D3, DN, OepS2, S2, T1ep; /** Polylogarithmic functions. */
+      double Al4p,lmMgl, lmMsq, Mgl, Msq, prefac, z2;/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix, Zeta[2] */
       /**
        * 	Initializes all common variables.
        */

@@ -155,12 +155,6 @@ int main() {
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 //top and DR
 	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
-
-	 //bottom and MDR
-	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
-	 
-	 // check terms
-	 //hierarchyCalculator.checkTerms();
 	 
 	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << "\n";
 	 std::cout << "MDR flag: " << hoTop.getMDRFlag() << "\n";
@@ -171,10 +165,16 @@ int main() {
 	 std::cout << "Mh^1L: " << hoTop.getDMh(1).row(0) << " " << hoTop.getDMh(1).row(1) << "\n";
 	 std::cout << "Mh^2L: " << hoTop.getDMh(2).row(0) << " " << hoTop.getDMh(2).row(1) << "\n";
 	 std::cout << "Mh^3L: " << hoTop.getDMh(3).row(0) << " " << hoTop.getDMh(3).row(1) << "\n";
-	 std::cout << "Exp uncert. 1L: " << hoTop.getExpUncertainty(1) << "\n";
+	 std::cout << "Exp uncert. 1L: " << hierarchyCalculator.getExpansionUncertainty(hoTop, hoTop.getDMh(0), 1, 0, 0) << "\n";
 	 std::cout << "Exp uncert. 2L: " << hoTop.getExpUncertainty(2) << "\n";
 	 std::cout << "Exp uncert. 3L: " << hoTop.getExpUncertainty(3) << "\n";
 	 std::cout << "DR -> MDR shift: " << hoTop.getDRToMDRShift().row(0) << " " << hoTop.getDRToMDRShift().row(1)  << "\n";
+	 
+	 //bottom and MDR
+	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
+	 
+	 // check terms
+	 //hierarchyCalculator.checkTerms();
       }
    }
    catch (std::exception& e){

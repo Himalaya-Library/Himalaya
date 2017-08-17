@@ -9,12 +9,13 @@ The program requires:
 
 ## Installation
 CMake is used to generate build files.
-To create these build files, you have to create a separate build directory.
+To create these build files, you should create a separate build directory inside Himalaya's top directory.
 Run:
 ```
+cd $HIMALAY_PATH
 mkdir build
 cd build
-cmake PATH_TO_HIMALAYA_DIR
+cmake ..
 ```
 By default the code is compiled optimized.
 
@@ -50,9 +51,9 @@ pars.md2 << 2.35612778E+06, 0, 0,
 pars.mu2 << 2.35685097E+06, 0, 0,
             0, 2.35682945E+06, 0,
             0, 0, 9.05923409E+05;               // soft-breaking squared right-handed up-squark mass parameters
-pars.Ab = -784.3356416708631;                   // soft-breaking trilinear term Ab
-pars.At = -527.8746242245387;                   // soft-breaking trilinear term At
-pars.MA = 1.48446235E+03;                       // Mass of the A boson
+pars.Ab = -784.3356416708631;                   // trilinear sbottom-Higgs coupling
+pars.At = -527.8746242245387;                   // trilinear stop-Higgs coupling
+pars.MA = 1.48446235E+03;                       // Mass of the CP-odd Higgs
 pars.MG = 6.69045022E+02;                       // Mass of the Gluino
 pars.MW = 8.04001915E+01;                       // Mass of the W boson
 pars.MZ = 8.97608307E+01;                       // Mass of the Z boson 

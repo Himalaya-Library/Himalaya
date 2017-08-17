@@ -15,21 +15,10 @@
 #include "H6g2.hpp"
 #include "H9.hpp"
 #include "H9q2.hpp"
+#include "Utils.hpp"
 #include <stdexcept>
 #include <iomanip>
 #include <type_traits>
-
-template <typename T> T pow2(T x)  { return x*x; }
-template <typename T> T pow3(T x)  { return x*x*x; }
-template <typename T> T pow4(T x)  { return x*x*x*x; }
-template <typename T> T pow5(T x)  { return x*x*x*x*x; }
-template <typename T> T pow6(T x)  { return x*x*x*x*x*x; }
-template <typename T> T pow7(T x)  { return x*x*x*x*x*x*x; }
-template <typename T> T pow8(T x)  { return x*x*x*x*x*x*x*x; }
-template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
-template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
-template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x; }
-template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x; }
 
 extern "C" void dszhiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
@@ -83,7 +72,7 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p, const bo
    }
    this -> p = p;
    this -> p.validate(verbose);
-   // init constants
+
    // imaginary unit
    const std::complex<double> I(0., 1.);
 
@@ -206,16 +195,16 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
 	 Eigen::Matrix2d Mt42L = getMt42L(ho, ho.getMDRFlag(), 0);
 	 
-	 // Note: spurious poles are handeld by the validate method
+	 // Note: spurious poles are handled by the validate method
 	 // of the Himalaya_Interface struct
 	 
 	 //DEPRECATED calc 1-loop shift for DRbar -> MDRbar
 	 //calc difference of Mt41L or Mt41L in the MDRbar scheme directly
-	 //it seems that in H3m the sign of the function getShift is wrong as well(Mt4LDRbar - Mt4LMDRbar)????
-	 //to be consistent everything should be calculated in the MDRbar-scheme so we should subtract Mt4LDRbar, shouldn't we?
+	 //it seems that in H3m the sign of the function getShift is wrong (Mt4LDRbar - Mt4LMDRbar)????
+	 //to be consistent in the MDRbar-scheme we should subtract Mt4LDRbar, shouldn't we?
 	 //Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isAlphab);
 	 
-	 //calculate the exact higgs mass at 2-loop (only up to alpha_s alpha_t/b)
+	 //calculate the exact Higgs mass at 2-loop (only up to alpha_s alpha_t/b)
 	 Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
 	 double Mh2l = sortEigenvalues(es2L).at(0);
 
@@ -259,7 +248,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    return suitableHierarchy;
 }
 
-//TODO: if one is interested in the expansion at one and two loop choose a unified choice for the MDR scheme
+//TODO: if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
 /**
  * 	Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
  * 	@param ho a HierarchyObject with constant isAlphab.
@@ -269,7 +258,8 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
  * 	@throws runtime_error Throws a runtime_error if the tree-level is requested in terms of hierarchies.
  * 	@return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
  */
-Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::HierarchyObject& ho, const int oneLoopFlagIn, const int twoLoopFlagIn, const int threeLoopFlagIn) {
+Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::HierarchyObject& ho, const int oneLoopFlagIn,
+								  const int twoLoopFlagIn, const int threeLoopFlagIn) {
    // get the hierarchy
    const int hierarchy = ho.getSuitableHierarchy();
 
@@ -326,7 +316,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	    Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
 	 }
 	 else{
-	    throw std::runtime_error("Tree-level not in hierarchies included!");
+	    throw std::runtime_error("There are no tree-level hierarchies included!");
 	 }
 	 // select the suitable hierarchy for the specific hierarchy and set variables
 	 switch(getCorrectHierarchy(hierarchy)){
@@ -1277,7 +1267,7 @@ int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
  */
 void himalaya::HierarchyCalculator::printInfo(){
    std::cout << "....................................................." << "\n";
-   std::cout << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\n";
+   std::cout << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\tѧѦ ѧ \n";
    std::cout << "Uses code by: P. Slavich et al. (2-loop at*as)." << "\n";
    std::cout << "Uses the 3-loop at*as^2 contributions of Kant et al." << "\n";
    std::cout << "....................................................." << "\n";

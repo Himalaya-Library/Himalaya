@@ -27,8 +27,8 @@ struct Parameters {
    RM33 mq2{RM33::Zero()};			/**< soft-breaking squared left-handed squark mass parameters */
    RM33 md2{RM33::Zero()};			/**< soft-breaking squared right-handed down-squark mass parameters */
    RM33 mu2{RM33::Zero()};			/**< soft-breaking squared right-handed up-squark mass parameters */
-   double At{};					/**< soft-breaking trilinear coupling */
-   double Ab{};					/**< soft-breaking trilinear coupling */
+   double At{};					/**< trilinear stop-Higgs coupling */
+   double Ab{};					/**< trilinear sbottom-Higgs coupling */
 
    // DR-bar masses
    double MG{};					/**< gluino */
@@ -36,13 +36,13 @@ struct Parameters {
    double MZ{};					/**< Z */
    double Mt{};					/**< top-quark */
    double Mb{};					/**< down-quark */
-   double MA{};					/**< A boson */
+   double MA{};					/**< CP-odd Higgs */
    V2 MSt{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< stops */
    V2 MSb{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< sbottoms */
 
    // DR-bar mixing angles
    double s2t = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the stop mixing angle */
-   double s2b = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the sbot mixing angle */
+   double s2b = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the sbottom mixing angle */
    
    /**
     * 	Checks if the stop/sbottom masses and mixing angles are provided. Otherwise calculate them.
