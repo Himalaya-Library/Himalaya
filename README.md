@@ -1,10 +1,13 @@
 # Himalaya
 
-Himalaya can calculate corrections of order O((alpha_t + alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR-bar scheme using the results of
+Himalaya can calculate corrections of order O((alpha_t + alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR-bar scheme using the results of:
 * R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs boson mass in supersymmetry to three loops*, [*Phys. Rev. Lett.* **100** (2008) 191602](https://doi.org/10.1103/PhysRevLett.100.191602), [[0803.0672](https://arxiv.org/abs/0803.0672)],
 * P. Kant, R. V. Harlander, L. Mihaila and M. Steinhauser, *Light MSSM Higgs boson mass to three-loop accuracy*, [*JHEP* **08** (2010) 104](https://doi.org/10.1007/JHEP08(2010)104), [[1005.5709](https://arxiv.org/abs/1005.5709)].
 
-Please refer to these papers as well as <to be published> when using Himalaya.
+Please refer to these papers as well as
+* R. V. Harlander, J. Klappert and A. Voigt, *Higgs mass prediction in the MSSM at three-loop level in a pure DR context*, [[1708.05720](https://arxiv.org/abs/1708.05720)]
+
+when using Himalaya.
 
 ## Requirements
 The program requires:
@@ -21,12 +24,12 @@ mkdir build
 cd build
 cmake ..
 ```
-By default the code is compiled optimized.
 
 After calling `cmake` the build directory contains all required build files. Assuming that Makefiles are used, you can now run:
 ```
 make
 ```
+By default the code is compiled optimized.
 
 ## Running the code
 After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to your program. `libDSZ.a` is optional and has to be linked, if your program does not incorporate the associated Fortran code of G. Degrassi, P. Slavich and F. Zwirner ([arXiv:hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)).
