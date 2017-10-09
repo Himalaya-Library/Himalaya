@@ -30,6 +30,8 @@ set(INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/include)
 #include c++ header files
 include_directories(${INCLUDE_PATH})
 include_directories(${INCLUDE_PATH}/hierarchies)
+include_directories(${INCLUDE_PATH}/mh2_eft)
+include_directories(${INCLUDE_PATH}/misc)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 # setting the correct version to all headers

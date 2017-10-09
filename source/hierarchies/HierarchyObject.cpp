@@ -134,14 +134,14 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDRToMDRShift() const{
  * 	Sets the MDR masses
  * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
  */
-void himalaya::HierarchyObject::setMDRMasses(Eigen::Matrix<double,2,1>& mdrMasses){
+void himalaya::HierarchyObject::setMDRMasses(Eigen::Matrix<double, 2, 1>& mdrMasses){
    this -> mdrMasses = sortVector(mdrMasses);
 }
 
 /**
  * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
  */
-Eigen::Matrix<double,2,1> himalaya::HierarchyObject::getMDRMasses() const{
+Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::getMDRMasses() const{
    return mdrMasses;
 }
 
@@ -163,14 +163,27 @@ int himalaya::HierarchyObject::getMDRFlag() const{
    return mdrFlag;
 }
 
+/**
+ * 	Sets the delta lambdas at 1-, 2- and 3-loop order.
+ * 	@param deltaLambdas a vector containing the delta lambda contributions ordered by loop order.
+ */
+void himalaya::HierarchyObject::setDeltaLambdas(Eigen::Matrix<double, 3, 1>& deltaLambdas){
+   this -> deltaLambdas = deltaLambdas;
+}
 
+/**
+ * 	@return A vector of the delta lambdas. The 0th entry corresponds to the 1-loop, the 1st to the 2-loop and the 2nd to the 3-loop result.
+ */
+Eigen::Matrix<double, 3, 1> himalaya::HierarchyObject::getDeltaLambdas() const{
+   return deltaLambdas;
+}
 
 /**
  * 	Sorts a vector.
  * 	@param vector The vector which should be sorted.
- *	@return Returns a vector the lightest entry at position 0.
+ * 	@return Returns a vector the lightest entry at position 0.
  */
-Eigen::Matrix<double,2,1> himalaya::HierarchyObject::sortVector(Eigen::Matrix<double,2,1>& vector){
+Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::sortVector(Eigen::Matrix<double, 2, 1>& vector){
    // checks if all variables are ordered in the right way
    if (vector(0) > vector(1)) {
       std::swap(vector(0), vector(1));

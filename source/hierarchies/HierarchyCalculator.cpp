@@ -1,6 +1,7 @@
 #define Pi M_PI
 
 #include "HierarchyCalculator.hpp"
+#include "Mh2EFTCalculator.hpp"
 #include "H3.hpp"
 #include "H32q2g.hpp"
 #include "H3q22g.hpp"
@@ -158,6 +159,35 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // set the uncertainty of the expansion at 1-loop level to 0 by convention, if the user needs this value getExpansionUncertainty should be called
    ho.setExpUncertainty(1, 0.);
    
+   // get the higgs mass squared at tree level to combine it with the EFT result
+   Eigen::EigenSolver<Eigen::Matrix2d> estree (ho.getDMh(0));
+   const double Mh2tree = pow2(sortEigenvalues(estree).at(0));
+   
+   // get all squared Higgs masses of the fixed order result to extract the delta lambdas
+   Eigen::EigenSolver<Eigen::Matrix2d> es1L (ho.getDMh(0) + ho.getDMh(1));
+   const double Mh21L = pow2(sortEigenvalues(es1L).at(0));
+   Eigen::EigenSolver<Eigen::Matrix2d> es2L (ho.getDMh(0) + ho.getDMh(2));
+   const double Mh22L = pow2(sortEigenvalues(es2L).at(0));
+   Eigen::EigenSolver<Eigen::Matrix2d> es3L (ho.getDMh(0) + ho.getDMh(3));
+   const double Mh23L = pow2(sortEigenvalues(es3L).at(0));
+
+   // convert mQ3 and mU3 to MDR scheme
+   const double mst12 = pow2(ho.getMDRMasses()(0));
+   const double mst22 = pow2(ho.getMDRMasses()(1));
+   const double mt2 = pow2(p.Mt);
+   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double mQ32 = (1 / 2. * (mst12 + mst22 - 2 * mt2 + std::sqrt(pow2((mst12 - mst22)) - 4 * pow2(Xt) * mt2)));
+   const double mU32 = (1 / 2. * (mst12 + mst22 - 2 * mt2 - std::sqrt(pow2((mst12 - mst22)) - 4 * pow2(Xt) * mt2)));
+
+   // get the delta lambdas
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
+   Eigen::Matrix<double, 3, 1> deltaLambdas;
+   const double yt = p.Mt / std::sqrt(2.) / p.vu;
+   const double tb = p.vu / p.vd;
+   deltaLambdas(0) = Mh21L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_1loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale)));
+   deltaLambdas(1) = Mh22L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_2loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG));
+   deltaLambdas(2) = Mh23L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_3loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG, Msq));
+   ho.setDeltaLambdas(deltaLambdas);
    return ho;
 }
 
@@ -524,7 +554,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
    }
    // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
    if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-      Eigen::Matrix<double,2,1> mdrMasses;
+      Eigen::Matrix<double, 2, 1> mdrMasses;
       mdrMasses(0) = Mst1;
       mdrMasses(1) = Mst2;
       ho.setMDRMasses(mdrMasses);
@@ -1101,6 +1131,12 @@ himalaya::Parameters checkTermsXt33(){
 void himalaya::HierarchyCalculator::checkTerms(){
    p = checkTermsXt33();
    init();
+   
+   // check EFT coefficients
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
+   mh2EFTCalculator.checkTerms(p.mq2(2, 2), p.mu2(2, 2), p.At - p.mu * p.vd / p.vd, pow2(p.scale), p.MG, pow2(Msq));
+   
+   // check hierarchies
    himalaya::HierarchyObject ho (false);
    ho.setMDRFlag(1);
    for(int i = h3; i <= h9q2; i++){

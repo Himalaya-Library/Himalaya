@@ -56,6 +56,10 @@ namespace himalaya{
        */
       int getMDRFlag() const;
       /**
+       * 	@return A vector of the delta lambdas. The 0th entry corresponds to the 1-loop, the 1st to the 2-loop and the 2nd to the 3-loop result.
+       */
+      Eigen::Matrix<double, 3, 1> getDeltaLambdas() const;
+      /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
        */
@@ -98,6 +102,11 @@ namespace himalaya{
        * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
        */
       void setMDRFlag(int mdrFlag);
+      /**
+       * 	Sets the delta lambdas at 1-, 2- and 3-loop order.
+       * 	@param deltaLambdas a vector containing the delta lambda contributions ordered by loop order.
+       */
+      void setDeltaLambdas(Eigen::Matrix<double, 3, 1>& deltaLambdas);
    private:
       bool isAlphab;									/**< the bool isAlphab */
       int hierarchy;									/**< the suitable hierarchy */
@@ -108,6 +117,7 @@ namespace himalaya{
       std::map<int, Eigen::Matrix2d> dMhMap;						/**< the map which holds all mass matrices at the given loop order */
       Eigen::Matrix2d mdrShift;								/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
       Eigen::Matrix<double, 2, 1> mdrMasses;						/**< the 'vector' which holds the MDR masses */
+      Eigen::Matrix<double, 3, 1> deltaLambdas;						/**< the 'vector' which holds the delta lambdas*/
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.
