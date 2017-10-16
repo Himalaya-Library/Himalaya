@@ -171,7 +171,7 @@ int main() {
 	 std::cout << "DR -> MDR shift: " << hoTop.getDRToMDRShift().row(0) << " " << hoTop.getDRToMDRShift().row(1)  << "\n";
 	 std::cout << "Delta lambda 1L: " << hoTop.getDeltaLambdas()(0) << "\n";
 	 std::cout << "Delta lambda 2L: " << hoTop.getDeltaLambdas()(1) << "\n";
-	 std::cout << "Delta lambda 3L: " << hoTop.getDeltaLambdas()(2) << "\n";	 
+	 std::cout << "Delta lambda 3L: " << hoTop.getDeltaLambdas()(2) << "\n"; 
 	 
 	 //bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);

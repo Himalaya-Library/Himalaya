@@ -182,7 +182,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // get the delta lambdas
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
    Eigen::Matrix<double, 3, 1> deltaLambdas;
-   const double yt = p.Mt / std::sqrt(2.) / p.vu;
+   const double yt = p.Mt * std::sqrt(2.) / p.vu;
    const double tb = p.vu / p.vd;
    deltaLambdas(0) = Mh21L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_1loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale)));
    deltaLambdas(1) = Mh22L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_2loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG));
