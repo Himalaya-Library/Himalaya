@@ -159,16 +159,21 @@ int main() {
 	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << "\n";
 	 std::cout << "MDR flag: " << hoTop.getMDRFlag() << "\n";
 	 std::cout << "Rel. Error 2L: " << hoTop.getRelDiff2L() << "\n";
-	 std::cout << "Abs. Error 2L: " << hoTop.getAbsDiff2L() << "\n"; 
-	 std::cout << "MDR masses: " << hoTop.getMDRMasses()(0) << " " << hoTop.getMDRMasses()(1) << "\n";
-	 std::cout << "Mh^tree: " << hoTop.getDMh(0).row(0) << " " << hoTop.getDMh(0).row(1) << "\n";
-	 std::cout << "Mh^1L: " << hoTop.getDMh(1).row(0) << " " << hoTop.getDMh(1).row(1) << "\n";
-	 std::cout << "Mh^2L: " << hoTop.getDMh(2).row(0) << " " << hoTop.getDMh(2).row(1) << "\n";
-	 std::cout << "Mh^3L: " << hoTop.getDMh(3).row(0) << " " << hoTop.getDMh(3).row(1) << "\n";
-	 std::cout << "Exp uncert. 1L: " << hierarchyCalculator.getExpansionUncertainty(hoTop, hoTop.getDMh(0), 1, 0, 0) << "\n";
-	 std::cout << "Exp uncert. 2L: " << hoTop.getExpUncertainty(2) << "\n";
-	 std::cout << "Exp uncert. 3L: " << hoTop.getExpUncertainty(3) << "\n";
-	 std::cout << "DR -> MDR shift: " << hoTop.getDRToMDRShift().row(0) << " " << hoTop.getDRToMDRShift().row(1)  << "\n";
+	 std::cout << "Abs. Error 2L: " << hoTop.getAbsDiff2L() << " GeV\n"; 
+	 std::cout << "MDR masses: Mstop_1 = " << hoTop.getMDRMasses()(0) << " GeV, Mstop_2 = " << hoTop.getMDRMasses()(1) << " GeV\n";
+	 std::cout << "Mh^2_tree: {{" << hoTop.getDMh(0).row(0)(0) << ", " << hoTop.getDMh(0).row(0)(1)
+		   << "}, {" << hoTop.getDMh(0).row(1)(0) << ", " << hoTop.getDMh(0).row(1)(1) << "}} GeV^2\n";
+	 std::cout << "Mh^2_1L: {{" << hoTop.getDMh(1).row(0)(0) << ", " << hoTop.getDMh(1).row(0)(1)
+		   << "}, {" << hoTop.getDMh(1).row(1)(0) << ", " << hoTop.getDMh(1).row(1)(1) << "}} GeV^2\n";
+	 std::cout << "Mh^2_2L: {{" << hoTop.getDMh(2).row(0)(0) << ", " << hoTop.getDMh(2).row(0)(1)
+		   <<"}, {" << hoTop.getDMh(2).row(1)(0) << ", " << hoTop.getDMh(2).row(1)(1) << "}} GeV^2\n";
+	 std::cout << "Mh^2_3L: {{" << hoTop.getDMh(3).row(0)(0) << ", " << hoTop.getDMh(3).row(0)(1)
+		   << "}, {" << hoTop.getDMh(3).row(1)(0) << ", " << hoTop.getDMh(3).row(1)(1) << "}} GeV^2\n";
+	 std::cout << "Expansion uncert. 1L: " << hierarchyCalculator.getExpansionUncertainty(hoTop, hoTop.getDMh(0), 1, 0, 0) << " GeV\n";
+	 std::cout << "Expansion uncert. 2L: " << hoTop.getExpUncertainty(2) << " GeV\n";
+	 std::cout << "Expansion uncert. 3L: " << hoTop.getExpUncertainty(3) << " GeV\n";
+	 std::cout << "DR -> MDR shift: {{" << hoTop.getDRToMDRShift().row(0)(0) << ", " << hoTop.getDRToMDRShift().row(0)(1)
+		   << "}, {" << hoTop.getDRToMDRShift().row(1)(0) << ", " << hoTop.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n";
 	 
 	 //bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
