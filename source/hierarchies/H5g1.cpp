@@ -4,7 +4,7 @@
 #include "HierarchyCalculator.hpp"
 #include "Utils.hpp"
 #include <type_traits>
-#include <math.h>
+#include <cmath>
 
 /**
  * 	Constructor
