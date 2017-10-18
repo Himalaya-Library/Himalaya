@@ -717,7 +717,7 @@ double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyOb
  * 	@param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
  * 	@return A sorted vector with the lowest eigenvalue at position 0.
  */
-std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d> es){
+std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es){
   std::vector<double> sortedEigenvalues = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
   std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
   return sortedEigenvalues;
