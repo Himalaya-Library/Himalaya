@@ -98,6 +98,12 @@ namespace himalaya{
        * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
        */
       void setMDRFlag(int mdrFlag);
+      /**
+       *      Returns the H3m notation of a given hierarchy.
+       *      @param hierarchy An integer of a Himalaya hierarchy.
+       *      @return Returns the corresponding H3m notation of the given hierarchy as a string.
+       */
+      std::string getH3mHierarchyNotation(int hierarchy);
    private:
       bool isAlphab;									/**< the bool isAlphab */
       int hierarchy;									/**< the suitable hierarchy */

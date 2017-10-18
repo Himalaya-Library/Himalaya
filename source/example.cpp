@@ -155,10 +155,11 @@ int main() {
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 //top and DR
 	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
-	 
-	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << "\n";
-	 std::cout << "MDR flag: " << hoTop.getMDRFlag() << "\n";
-	 std::cout << "Rel. difference 2L: " << hoTop.getRelDiff2L() << "\n";
+
+	 const std::string renSchemeString = hoTop.getMDRFlag() == 0 ? "DR" : "MDR";
+	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << " (" << hoTop.getH3mHierarchyNotation(hoTop.getSuitableHierarchy()) << ")\n";
+	 std::cout << "Ren. scheme: " << renSchemeString << "\n";
+	 std::cout << "Rel. difference 2L: " << hoTop.getRelDiff2L()*100 << " %\n";
 	 std::cout << "Abs. difference 2L: " << hoTop.getAbsDiff2L() << " GeV\n"; 
 	 std::cout << "MDR masses: Mstop_1 = " << hoTop.getMDRMasses()(0) << " GeV, Mstop_2 = " << hoTop.getMDRMasses()(1) << " GeV\n";
 	 std::cout << "Mh^2_tree: {{" << hoTop.getDMh(0).row(0)(0) << ", " << hoTop.getDMh(0).row(0)(1)
