@@ -158,8 +158,8 @@ int main() {
 	 
 	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << "\n";
 	 std::cout << "MDR flag: " << hoTop.getMDRFlag() << "\n";
-	 std::cout << "Rel. Error 2L: " << hoTop.getRelDiff2L() << "\n";
-	 std::cout << "Abs. Error 2L: " << hoTop.getAbsDiff2L() << " GeV\n"; 
+	 std::cout << "Rel. difference 2L: " << hoTop.getRelDiff2L() << "\n";
+	 std::cout << "Abs. difference 2L: " << hoTop.getAbsDiff2L() << " GeV\n"; 
 	 std::cout << "MDR masses: Mstop_1 = " << hoTop.getMDRMasses()(0) << " GeV, Mstop_2 = " << hoTop.getMDRMasses()(1) << " GeV\n";
 	 std::cout << "Mh^2_tree: {{" << hoTop.getDMh(0).row(0)(0) << ", " << hoTop.getDMh(0).row(0)(1)
 		   << "}, {" << hoTop.getDMh(0).row(1)(0) << ", " << hoTop.getDMh(0).row(1)(1) << "}} GeV^2\n";

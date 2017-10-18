@@ -78,9 +78,9 @@ namespace himalaya{
       void setExpUncertainty(int loops, double uncertainty);
       /**
        * 	Sets the DR -> MDR shift
-       * 	@param dMh2L the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+       * 	@param mdrShift the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
        */
-      void setDRToMDRShift(const Eigen::Matrix2d& dMh2L);
+      void setDRToMDRShift(const Eigen::Matrix2d& mdrShift);
       /**
        * 	Sets the MDR masses
        * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.

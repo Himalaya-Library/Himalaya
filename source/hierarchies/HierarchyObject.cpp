@@ -117,7 +117,7 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
 
 /**
  * 	Sets the DR -> MDR shift
- * 	@param dMh2L the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+ * 	@param mdrShift the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
  */
 void himalaya::HierarchyObject::setDRToMDRShift(const Eigen::Matrix2d& mdrShift){
    this -> mdrShift = mdrShift;

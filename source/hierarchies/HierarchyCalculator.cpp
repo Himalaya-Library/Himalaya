@@ -123,6 +123,7 @@ void himalaya::HierarchyCalculator::init(){
 /**
  * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
  * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
+ *        @param mdrFlag an integer to choose among DR and MDR scheme. Set to DR by default.
  * 	@return A HierarchyObject which holds all information of the calculation.
  */
 himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab, const int mdrFlag){
@@ -1266,9 +1267,9 @@ int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
  * 	Prints out some information about Himalaya.
  */
 void himalaya::HierarchyCalculator::printInfo(){
-   std::cout << "....................................................." << "\n";
+   std::cout << "......................................................................" << "\n";
    std::cout << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\tѧѦ ѧ \n";
-   std::cout << "Uses code by: P. Slavich et al. (2-loop at*as)." << "\n";
-   std::cout << "Uses the 3-loop at*as^2 contributions of Kant et al." << "\n";
-   std::cout << "....................................................." << "\n";
+   std::cout << "Uses code by: P. Slavich et al. (2-loop at*as) [hep-ph/0105096]" << "\n";
+   std::cout << "Uses the 3-loop at*as^2 contributions of Kant et al. [arXiv:1005.5709]" << "\n";
+   std::cout << "......................................................................" << "\n";
 }
