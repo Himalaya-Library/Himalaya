@@ -129,7 +129,7 @@ namespace himalaya{
        * 	@param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
        * 	@return A sorted vector with the lowest eigenvalue at position 0.
        */
-      std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d> es);
+      std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es);
       /**
        * 	@deprecated
        * 	Shifts the 1-loop terms to the MDRbar scheme.
