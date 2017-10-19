@@ -183,11 +183,10 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // get the delta lambdas
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
    Eigen::Matrix<double, 3, 1> deltaLambdas;
-   const double yt = p.Mt * std::sqrt(2.) / p.vu;
-   const double tb = p.vu / p.vd;
-   deltaLambdas(0) = Mh21L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_1loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale)));
-   deltaLambdas(1) = Mh22L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_2loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG));
-   deltaLambdas(2) = Mh23L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_3loop(yt, tb, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG, Msq));
+   const double at = pow2(p.Mt * std::sqrt(2.) / p.vu * std::sin(std::atan(p.vu / p.vd))) / (4. * Pi);
+   deltaLambdas(0) = Mh21L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_1loop(at, p.Mt, mQ32, mU32, Xt, pow2(p.scale)));
+   deltaLambdas(1) = Mh22L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_2loop(at, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG));
+   deltaLambdas(2) = Mh23L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_3loop(at, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG, Msq));
    ho.setDeltaLambdas(deltaLambdas);
    return ho;
 }
@@ -1133,10 +1132,6 @@ void himalaya::HierarchyCalculator::checkTerms(){
    p = checkTermsXt33();
    init();
    
-   // check EFT coefficients
-   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
-   mh2EFTCalculator.checkTerms(p.mq2(2, 2), p.mu2(2, 2), p.At - p.mu * p.vd / p.vd, pow2(p.scale), p.MG, pow2(Msq));
-   
    // check hierarchies
    himalaya::HierarchyObject ho (false);
    ho.setMDRFlag(1);
@@ -1233,6 +1228,16 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	 break;
       }
    }
+   // check EFT coefficients
+   const double mQ32 = 10000;
+   const double mU32 = 20000;
+   const double Xt = 2 * 100.;
+   const double MR2 = 500;
+   const double m3 = 300;
+   const double msq2 = 400;
+   
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
+   mh2EFTCalculator.checkTerms(mQ32, mU32, Xt, MR2, m3, msq2);
 }
 
 /**

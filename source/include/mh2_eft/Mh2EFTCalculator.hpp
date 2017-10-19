@@ -15,13 +15,7 @@ namespace mh2_eft{
    class Mh2EFTCalculator{
    public:
       /**
-       * 	A constructor.
-       */
-      //Mh2EFTCalculator();
-      
-      /**
-       * 	@param yt the top yukawa coupling.
-       * 	@param tb tangens of beta.
+       * 	@param at the top yukawa coupling at = yt^2 Sin[beta]^2/(4 Pi).
        * 	@param mt running dr-bar top mass.
        * 	@param mQ32 the squared left-handed soft-breaking mass term of the third generation.
        * 	@param mU32 the squared right-handed soft-breaking mass term of the third generation.
@@ -29,12 +23,11 @@ namespace mh2_eft{
        * 	@param MR2 the squared renormalization scale.
        * 	@return the squared CP even light Higgs mass at 1-loop level (at) EFT
        */
-      double Mh2_EFT_1loop(double yt, double tb, double mt, double mQ32, double mU32,
-	 double Xt, double MR2);
+      double Mh2_EFT_1loop(double at, double mt, double mQ32, double mU32,
+			   double Xt, double MR2);
       
       /**
-       *        @param yt the top yukawa coupling.
-       * 	@param tb tangens of beta.
+       * 	@param at the top yukawa coupling at = yt^2 Sin[beta]^2/(4 Pi).
        * 	@param mt running dr-bar top mass.
        * 	@param mQ32 the squared left-handed soft-breaking mass term of the third generation.
        * 	@param mU32 the squared right-handed soft-breaking mass term of the third generation.
@@ -44,12 +37,11 @@ namespace mh2_eft{
        * 	@param m3 the gluino mass.
        * 	@return the squared CP even light Higgs mass at 2-loop level (at*as) EFT
        */
-      double Mh2_EFT_2loop(double yt, double tb, double mt, double mQ32, double mU32,
-	 double Xt, double MR2, double g3, double m3);
+      double Mh2_EFT_2loop(double at, double mt, double mQ32, double mU32,
+			   double Xt, double MR2, double g3, double m3);
       
       /**
-       *        @param yt the top yukawa coupling.
-       * 	@param tb tangens of beta.
+       * 	@param at the top yukawa coupling at = yt^2 Sin[beta]^2/(4 Pi).
        * 	@param mt running dr-bar top mass.
        * 	@param mQ32 the squared left-handed soft-breaking mass term of the third generation.
        * 	@param mU32 the squared right-handed soft-breaking mass term of the third generation.
@@ -60,8 +52,8 @@ namespace mh2_eft{
        * 	@param msq2 the squared common squark mass of the first two generation.
        * 	@return the squared CP even light Higgs mass at 3-loop level (at*as^2) EFT
        */
-      double Mh2_EFT_3loop(double yt, double tb, double mt, double mQ32, double mU32,
-	 double Xt, double MR2, double g3, double m3, double msq2);
+      double Mh2_EFT_3loop(double at, double mt, double mQ32, double mU32,
+			   double Xt, double MR2, double g3, double m3, double msq2);
 
       /**
        * 	Function to check terms
