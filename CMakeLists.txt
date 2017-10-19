@@ -17,7 +17,7 @@ endif()
 #set version number
 set(Himalaya_VERSION_MAJOR 1)
 set(Himalaya_VERSION_MINOR 0)
-set(Himalaya_VERSION_RELEASE 0)
+set(Himalaya_VERSION_RELEASE 1)
 
 # set the CXX flags
 set(CMAKE_CXX_FLAGS "-fPIC -std=c++11 -Wall -Wextra -pedantic")

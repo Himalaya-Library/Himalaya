@@ -81,7 +81,7 @@ To calculate the DR-bar results you just have to call:
 ```cpp
 himalaya::HierarchyObject ho = hc.calculateDMh3L(false); // the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true).
 ```
-All information which has been gathered during the calculation will be stored in a `HierarchyObject` and can be accessed by member functions. To obtain the 3-loop correction to the Higgs mass matrix you have to call:
+All information which has been gathered during the calculation will be stored in a `HierarchyObject` and can be accessed by member functions. To obtain the three-loop correction to the Higgs mass matrix you have to call:
 ```cpp
 auto dMh3L = ho.getDMh(3); // this returns a 2x2 matrix which contains the alpha_t*alpha_s^2 corrections for the given parameter point
 ```

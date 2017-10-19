@@ -117,7 +117,7 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
 
 /**
  * 	Sets the DR -> MDR shift
- * 	@param dMh2L the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+ * 	@param mdrShift the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
  */
 void himalaya::HierarchyObject::setDRToMDRShift(const Eigen::Matrix2d& mdrShift){
    this -> mdrShift = mdrShift;
@@ -189,4 +189,59 @@ Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::sortVector(Eigen::Matrix<
       std::swap(vector(0), vector(1));
    }
    return vector;
+}
+
+/**
+ *      Returns the H3m notation of a given hierarchy.
+ *      @param hierarchy An integer of a Himalaya hierarchy.
+ *      @return Returns the corresponding H3m notation of the given hierarchy as a string.
+ */
+std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy){
+   //todo: merge these numbers with the ones of HierarcyCalcultor !
+   const int h3 = 0;
+   const int h32q2g = 1;
+   const int h3q22g = 2;
+   const int h4 = 3;
+   const int h5 = 4;
+   const int h5g1 = 5;
+   const int h6 = 6;
+   const int h6b = 7;
+   const int h6b2qg2 = 8;
+   const int h6bq22g = 9;
+   const int h6bq2g2 = 10;
+   const int h6g2 = 11;
+   const int h9 = 12;
+   const int h9q2 = 13;
+   switch (hierarchy){
+      case h3:
+	 return "h3";
+      case h32q2g:
+	 return "h32q2g";
+      case h3q22g:
+	 return "h3q22g";
+      case h4:
+	 return "h4";
+      case h5:
+	 return "h5";
+      case h5g1:
+	 return "h5g1";
+      case h6:
+	 return "h6";
+      case h6b:
+	 return "h6b";
+      case h6b2qg2:
+	 return "h6b2qg2";
+      case h6bq22g:
+	 return "h6bq22g";
+      case h6bq2g2:
+	 return "h6bq2g2";
+      case h6g2:
+	 return "h6g2";
+      case h9:
+	 return "h9";
+      case h9q2:
+	 return "h9q2";
+      default:
+	 return "Hierarchy " + std::to_string(hierarchy) + " not included";
+   }
 }

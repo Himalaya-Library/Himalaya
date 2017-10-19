@@ -22,13 +22,13 @@ namespace himalaya{
       /**
        * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
        * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
+       *        @param mdrFlag an integer to choose among DR and MDR scheme. Set to DR by default.
        * 	@return A HierarchyObject which holds all information of the calculation.
        */
       HierarchyObject calculateDMh3L(bool isAlphab, const int mdrFlag = 0);
       /**
        * 	Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
        * 	@param ho a HierarchyObject with constant isAlphab.
-       * 	@param mdrFlag (0) to use the DR-scheme (1) to use the MDR-scheme.
        * 	@return A integer which is identified with the suitable hierarchy.
        */
       int compareHierarchies(HierarchyObject& ho);
