@@ -3292,10 +3292,10 @@ void himalaya::mh2_eft::Mh2EFTCalculator::checkTerms(double mQ32, double mU32, d
    checkPassed = dum - 96. < 1e-03;
    std::cout << "Check as^1 log^2 passed: " << tf(checkPassed) << ".\n";
    dum = coeff_as_2_log_0(mQ32, mU32, Xt, m3, msq2, MR2);
-   checkPassed = dum - (-13930.41545) < 1e-03;// this number is not right
+   checkPassed = dum - (-13930.41545) < 1e-03;
    std::cout << "Check as^2 log^0 passed: " << tf(checkPassed) << ".\n";
    dum = coeff_as_2_log_1(mQ32, mU32, Xt, m3, msq2, MR2);
-   checkPassed = dum - (-5580.985505) < 1e-03;// this number is not right
+   checkPassed = dum - (-5580.985505) < 1e-03;
    std::cout << "Check as^2 log^1 passed: " << tf(checkPassed) << ".\n";
    dum = coeff_as_2_log_2(mQ32, mU32, Xt, m3, msq2, MR2);
    checkPassed = dum - 2929.488094 < 1e-03;

@@ -1144,8 +1144,8 @@ void himalaya::HierarchyCalculator::checkTerms(){
       switch(i){
 	 case h3:
 	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-13.4248798129061) < 1e-06 && twloMat(1,0) - 10.91323060388626 < 1e-06 && twloMat(1,1) - 1477.154147584478 < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 1.163582002655875 < 1e-06 && thloMat(1,0) - 9.897241079348351 < 1e-06 && thloMat(1,1) - 369.9741236956309 < 1e-06;
+	    ck2LPassed = twloMat(0,0) - (-13.48340821650015) < 1e-04 && twloMat(1,0) - 11.12436787252288 < 1e-04 && twloMat(1,1) - 1476.660068002361 < 1e-03;
+	    ck3LPassed = thloMat(0,0) - 1.096612614742133 < 1e-06 && thloMat(1,0) - 9.986750150481939 < 1e-06 && thloMat(1,1) - 370.2505433664134 < 1e-06;
 	    std::cout << "Hierarchy " << i << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
 	 break;
 	 case h32q2g:

@@ -46,6 +46,85 @@ namespace himalaya{
        */
       double getS12();
    private:
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^0 s1 term
+       */
+      double calc_coeff_as_0_log_0_s1();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^1 s1 term
+       */
+      double calc_coeff_as_1_log_0_s1();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^2 s1 term
+       */
+      double calc_coeff_as_2_log_0_s1();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^1 s1 term
+       */
+      double calc_coeff_as_2_log_1_s1();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^0 s2 term
+       */
+      double calc_coeff_as_0_log_0_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^0 s2 term
+       */
+      double calc_coeff_as_0_log_1_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^1 s2 term
+       */
+      double calc_coeff_as_1_log_0_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^1 s2 term
+       */
+      double calc_coeff_as_1_log_1_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^2 as^1 s2 term
+       */
+      double calc_coeff_as_1_log_2_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^2 s2 term
+       */
+      double calc_coeff_as_2_log_0_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^2 s2 term
+       */
+      double calc_coeff_as_2_log_1_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^2 as^2 s2 term
+       */
+      double calc_coeff_as_2_log_2_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^3 as^2 s2 term
+       */
+      double calc_coeff_as_2_log_3_s2();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^0 s12 term
+       */
+      double calc_coeff_as_0_log_0_s12();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^1 s12 term
+       */
+      double calc_coeff_as_1_log_0_s12();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^1 s12 term
+       */
+      double calc_coeff_as_1_log_1_s12();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^2 s12 term
+       */
+      double calc_coeff_as_2_log_0_s12();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^2 s12 term
+       */
+      double calc_coeff_as_2_log_1_s12();
+      /**
+       * 	@return The coefficient of the log(mu^2/mt^2)^2 as^2 s12 term
+       */
+      double calc_coeff_as_2_log_2_s12();
+      double Dmglst1, Dmst12, Dmsqst1, lmMst1, Mgl, Mt, Mst1, Mst2, Msq, MuSUSY, s2t, Tbeta, Sbeta; /**< common variables */
+      double z2, z3;	/**< Zeta functions */
+      int shiftst1, shiftst2, shiftst3, xDmst12, xDmglst1, xDmsqst1; /**< MDR and truncation flags */
       double s1 = 0., s2 = 0., s12 = 0.;	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
    };
 }	// himalaya
