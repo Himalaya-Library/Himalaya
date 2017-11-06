@@ -178,7 +178,7 @@ int main() {
 	 std::cout << "Delta lambda 1L: " << hoTop.getDeltaLambdas()(0) << " GeV^2\n";
 	 std::cout << "Delta lambda 2L: " << hoTop.getDeltaLambdas()(1) << " GeV^2\n";
 	 std::cout << "Delta lambda 3L: " << hoTop.getDeltaLambdas()(2) << " GeV^2\n";
-	 
+
 	 //bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
 	 
