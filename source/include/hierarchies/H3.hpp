@@ -45,6 +45,26 @@ namespace himalaya{
        * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H3'
        */
       double getS12();
+      /**
+       * 	@return returns the constant term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_at_as2_no_logs();
+      /**
+       * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log0();
+      /**
+       * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log1();
+      /**
+       * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log2();
+      /**
+       * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log3();
    private:
       /**
        * 	@return The coefficient of the log(mu^2/mt^2)^0 as^0 s1 term

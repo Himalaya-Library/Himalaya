@@ -143,10 +143,10 @@ himalaya::Parameters setup_HSSUSY_minmix(){
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
-	 //setup_SPS1a(),
-	 setup_SPS2()
-	 //setup_CMSSM_large_m0(),
-	 //setup_HSSUSY_minmix()
+	 setup_SPS1a(),
+	 setup_SPS2(),
+	 setup_CMSSM_large_m0(),
+	 setup_HSSUSY_minmix()
       }; 
       for (const auto point: points) {
 	 // init hierarchy calculator
@@ -175,9 +175,8 @@ int main() {
 	 std::cout << "Expansion uncert. 3L: " << hoTop.getExpUncertainty(3) << " GeV\n";
 	 std::cout << "DR -> MDR shift: {{" << hoTop.getDRToMDRShift().row(0)(0) << ", " << hoTop.getDRToMDRShift().row(0)(1)
 		   << "}, {" << hoTop.getDRToMDRShift().row(1)(0) << ", " << hoTop.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n";
-	 std::cout << "Delta lambda 1L: " << hoTop.getDeltaLambdas()(0) << " GeV^2\n";
-	 std::cout << "Delta lambda 2L: " << hoTop.getDeltaLambdas()(1) << " GeV^2\n";
-	 std::cout << "Delta lambda 3L: " << hoTop.getDeltaLambdas()(2) << " GeV^2\n";
+	 std::cout << "Zeta 3L Himalaya: " << hoTop.getZetaHimalaya() << "\n";
+	 std::cout << "Zeta 3L EFT: " << hoTop.getZetaEFT() << "\n";
 
 	 //bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);

@@ -59,6 +59,51 @@ namespace mh2_eft{
        * 	Function to check terms
        */
       void checkTerms(double mQ32, double mU32, double Xt, double MR2, double m3, double msq2);
+      
+      /**
+       * 	@param mQ3 the left-handed soft-breaking mass term of the third generation.
+       * 	@param mU3 the right-handed soft-breaking mass term of the thrird generation.
+       * 	@param Xt the Xt parameter of the stop mixing matrix
+       * 	@param m3 the gluino mass.
+       * 	@param msq the common squark mass of the first two generations.
+       * 	@return the 3-loop coefficient O(at*as^2*log^0) -> all Log(MR^2/x) terms are set to zero, x can be mt or a SUSY mass
+       */
+      double coeff_as2_no_log(double mQ3, double mU3, double Xt, double m3, double msq);
+      
+      /**
+       * 	@param mQ3 the left-handed soft-breaking mass term of the third generation.
+       * 	@param mU3 the right-handed soft-breaking mass term of the third generation.
+       * 	@param Xt the Xt parameter of the stop mixing matrix.
+       * 	@param m3 the gluino mass.
+       * 	@param msq the common squark mass of the first two generations.
+       * 	@return the 3-loop coefficient O(at*as^2*log^0) with susy logs Log(MR^2/mQ3^2)^0, Log(MR^2/mt^2) -> 0
+       */
+      double coeff_as2_susy_log0(double mQ3, double mU3, double Xt, double m3, double msq);
+      
+      /**
+       * 	@param mQ3 the left-handed soft-breaking mass term of the third generation.
+       * 	@param mU3 the right-handed soft-breaking mass term of the third generation.
+       * 	@param Xt the Xt parameter of the stop mixing matrix.
+       * 	@param m3 the gluino mass.
+       * 	@param msq the common squark mass of the first two generations.
+       * 	@return the 3-loop coefficient O(at*as^2*log^1) with susy logs Log(MR^2/mQ3^2)^1
+       */
+      double coeff_as2_susy_log1(double mQ3, double mU3, double Xt, double m3, double msq);
+      
+      /**
+       * 	@param mQ3 the left-handed soft-breaking mass term of the third generation.
+       * 	@param mU3 the right-handed soft-breaking mass term of the third generation.
+       * 	@param Xt the Xt parameter of the stop mixing matrix.
+       * 	@param m3 the gluino mass.
+       * 	@param msq the common squark mass of the first two generations.
+       * 	@return the 3-loop coefficient O(at*as^2*log^2) with susy logs Log(MR^2/mQ3^2)^2
+       */
+      double coeff_as2_susy_log2(double mQ3, double mU3, double Xt, double m3, double msq);
+      
+      /**
+       * 	@return the 3-loop coefficient O(at*as^2*log^3) with susy logs Log(MR^2/mQ3^2)^3
+       */
+      double coeff_as2_susy_log3();
    private:
       /**
        * 	fin[] function from arXiv:hep-ph/0507139 .
@@ -147,12 +192,6 @@ namespace mh2_eft{
        * 	@returns the coefficient of order as^2 Log(MR^2/mt^2)^3
        */
       double coeff_as_2_log_3();
-      
-      /**
-       * 	A function which maps a boolean to a string.
-       * 	@param tf a boolean.
-       * 	@return A string which is 'true' if tf is true or 'false' if tf is false.
-       */
       std::string tf(const bool tf);
       Parameters p;
       static const double zt2;

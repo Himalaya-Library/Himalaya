@@ -159,35 +159,38 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    
    // set the uncertainty of the expansion at 1-loop level to 0 by convention, if the user needs this value getExpansionUncertainty should be called
    ho.setExpUncertainty(1, 0.);
-   
-   // get the higgs mass squared at tree level to combine it with the EFT result
-   Eigen::EigenSolver<Eigen::Matrix2d> estree (ho.getDMh(0));
-   const double Mh2tree = pow2(sortEigenvalues(estree).at(0));
-   
-   // get all squared Higgs masses of the fixed order result to extract the delta lambdas
-   Eigen::EigenSolver<Eigen::Matrix2d> es1L (ho.getDMh(0) + ho.getDMh(1));
-   const double Mh21L = pow2(sortEigenvalues(es1L).at(0));
-   Eigen::EigenSolver<Eigen::Matrix2d> es2L (ho.getDMh(0) + ho.getDMh(2));
-   const double Mh22L = pow2(sortEigenvalues(es2L).at(0));
-   Eigen::EigenSolver<Eigen::Matrix2d> es3L (ho.getDMh(0) + ho.getDMh(3));
-   const double Mh23L = pow2(sortEigenvalues(es3L).at(0));
 
    // convert mQ3 and mU3 to MDR scheme
-   const double mst12 = pow2(ho.getMDRMasses()(0));
+   /*const double mst12 = pow2(ho.getMDRMasses()(0));
    const double mst22 = pow2(ho.getMDRMasses()(1));
    const double mt2 = pow2(p.Mt);
    const double Xt = p.At - p.mu * p.vd / p.vu;
    const double mQ32 = (1 / 2. * (mst12 + mst22 - 2 * mt2 + std::sqrt(pow2((mst12 - mst22)) - 4 * pow2(Xt) * mt2)));
-   const double mU32 = (1 / 2. * (mst12 + mst22 - 2 * mt2 - std::sqrt(pow2((mst12 - mst22)) - 4 * pow2(Xt) * mt2)));
+   const double mU32 = (1 / 2. * (mst12 + mst22 - 2 * mt2 - std::sqrt(pow2((mst12 - mst22)) - 4 * pow2(Xt) * mt2)));*/
 
-   // get the delta lambdas
+   // calc the delta zeta
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
-   Eigen::Matrix<double, 3, 1> deltaLambdas;
-   const double at = pow2(p.Mt * std::sqrt(2.) / p.vu * std::sin(std::atan(p.vu / p.vd))) / (4. * Pi);
-   deltaLambdas(0) = Mh21L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_1loop(at, p.Mt, mQ32, mU32, Xt, pow2(p.scale)));
-   deltaLambdas(1) = Mh22L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_2loop(at, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG));
-   deltaLambdas(2) = Mh23L - (Mh2tree + mh2EFTCalculator.Mh2_EFT_3loop(at, p.Mt, mQ32, mU32, Xt, pow2(p.scale), p.g3, p.MG, Msq));
-   ho.setDeltaLambdas(deltaLambdas);
+   const double mQ3 = sqrt(p.mq2(2,2));
+   const double mU3 = sqrt(p.mu2(2,2));
+   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double lmMQ3 = log(pow2(p.scale / mQ3));
+   
+   // subtract the constant SM part from zeta himalaya to avoid double counting
+   // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
+   //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2
+   // M_X is a susy mass
+   ho.setZetaHimalaya(ho.getZetaHimalaya() 
+      - mh2EFTCalculator.coeff_as2_no_log(mQ3, mU3, Xt, p.MG, Msq));
+   
+   // add the EFT logs and subtract constant part twice to avoid double counting
+   // Factorization: Himalaya_const - 2 * EFT_const_w/o_dlatas2 + EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
+   //	+ Log(mu^2/mQ3^2)^1 EFT_coeff_log^1  + Log(mu^2/mQ3^2)^2 EFT_coeff_log^2 + Log(mu^2/mQ3^2)^3 EFT_coeff_log^3
+   ho.setZetaEFT(ho.getZetaEFT() 
+      - 2 * mh2EFTCalculator.coeff_as2_no_log(mQ3, mU3, Xt, p.MG, Msq)
+      + mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq)
+      + lmMQ3 * mh2EFTCalculator.coeff_as2_susy_log1(mQ3, mU3, Xt, p.MG, Msq)
+      + pow2(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log2(mQ3, mU3, Xt, p.MG, Msq)
+      + pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3());
    return ho;
 }
 
@@ -365,6 +368,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy3.getS1();
 		     curSig2 = hierarchy3.getS2();
 		     curSig12 = hierarchy3.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy3.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy3.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy3.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 		  case h32q2g:{
@@ -376,6 +386,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy32q2g.getS1();
 		     curSig2 = hierarchy32q2g.getS2();
 		     curSig12 = hierarchy32q2g.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy32q2g.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 		  case h3q22g:{
@@ -387,6 +404,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy3q22g.getS1();
 		     curSig2 = hierarchy3q22g.getS2();
 		     curSig12 = hierarchy3q22g.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy3q22g.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 	       }
@@ -401,6 +425,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	       curSig1 = hierarchy4.getS1();
 	       curSig2 = hierarchy4.getS2();
 	       curSig12 = hierarchy4.getS12();
+	       if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		  ho.setZetaHimalaya(hierarchy4.calc_coef_at_as2_no_sm_logs_log0()
+		     + lmMsusy * hierarchy4.calc_coef_at_as2_no_sm_logs_log1()
+		     + pow2(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
+		     + pow3(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
+		  ho.setZetaEFT(hierarchy4.calc_at_as2_no_logs());
+	       }
 	    }
 	    break;
 	    case h5:{
@@ -417,17 +448,31 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy5.getS1();
 		     curSig2 = hierarchy5.getS2();
 		     curSig12 = hierarchy5.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy5.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy5.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy5.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 		  case h5g1:{
 		     H5g1 hierarchy5g1(flagMap, Al4p, beta, Dmglst1,
-			lmMt, lmMst1, lmMst2, lmMsq,
-			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
+			lmMt, lmMst1, lmMst2, lmMsq, Mgl, Mt, Mst1,
+			Mst2, Msq, p.mu,
 			s2t,
 			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
 		     curSig1 = hierarchy5g1.getS1();
 		     curSig2 = hierarchy5g1.getS2();
 		     curSig12 = hierarchy5g1.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy5g1.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 	       }
@@ -447,6 +492,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6.getS1();
 		     curSig2 = hierarchy6.getS2();
 		     curSig12 = hierarchy6.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy6.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy6.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy6.calc_at_as2_no_logs());
+		     };
 		  }
 		  break;
 		  case h6g2:{
@@ -458,6 +510,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6g2.getS1();
 		     curSig2 = hierarchy6g2.getS2();
 		     curSig12 = hierarchy6g2.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy6g2.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 	       }
@@ -472,12 +531,19 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  case h6b:{
 		     H6b hierarchy6b(flagMap, Al4p, beta, Dmglst2,
 			Dmsqst2, lmMt, lmMst1, lmMst2,
-		       Mt, Mst1, Mst2, p.mu,
-		       s2t,
-		       ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+			Mt, Mst1, Mst2, p.mu,
+			s2t,
+			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
 		     curSig1 = hierarchy6b.getS1();
 		     curSig2 = hierarchy6b.getS2();
 		     curSig12 = hierarchy6b.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy6b.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy6b.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 		  case h6b2qg2:{
@@ -489,6 +555,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6b2qg2.getS1();
 		     curSig2 = hierarchy6b2qg2.getS2();
 		     curSig12 = hierarchy6b2qg2.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy6b2qg2.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 		  case h6bq22g:{
@@ -500,6 +573,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6bq22g.getS1();
 		     curSig2 = hierarchy6bq22g.getS2();
 		     curSig12 = hierarchy6bq22g.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy6bq22g.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 		  case h6bq2g2:{
@@ -511,6 +591,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6bq2g2.getS1();
 		     curSig2 = hierarchy6bq2g2.getS2();
 		     curSig12 = hierarchy6bq2g2.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy6bq2g2.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 	       }
@@ -530,6 +617,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy9.getS1();
 		     curSig2 = hierarchy9.getS2();
 		     curSig12 = hierarchy9.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy9.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy9.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy9.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 		  case h9q2:{
@@ -541,6 +635,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy9q2.getS1();
 		     curSig2 = hierarchy9q2.getS2();
 		     curSig12 = hierarchy9q2.getS12();
+		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+			ho.setZetaHimalaya(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0()
+			   + lmMst1 * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log1()
+			   + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
+			   + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
+			ho.setZetaEFT(hierarchy9q2.calc_at_as2_no_logs());
+		     }
 		  }
 		  break;
 	       }
@@ -559,6 +660,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
       mdrMasses(1) = Mst2;
       ho.setMDRMasses(mdrMasses);
    }
+
    Eigen::Matrix2d higgsMassMatrix;
    higgsMassMatrix(0, 0) = prefac * sigS1Full;
    higgsMassMatrix(0, 1) = prefac * sigS12Full;
@@ -1134,7 +1236,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
    
    // check hierarchies
    himalaya::HierarchyObject ho (false);
-   ho.setMDRFlag(1);
+   ho.setMDRFlag(0);
    for(int i = h3; i <= h9q2; i++){
       ho.setSuitableHierarchy(i);
       Eigen::Matrix2d oloMat = calculateHierarchy(ho, 1,0,0);
@@ -1143,74 +1245,74 @@ void himalaya::HierarchyCalculator::checkTerms(){
       bool ck1LPassed = false, ck2LPassed = false, ck3LPassed = false;
       switch(i){
 	 case h3:
-	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-13.48340821650015) < 1e-04 && twloMat(1,0) - 11.12436787252288 < 1e-04 && twloMat(1,1) - 1476.660068002361 < 1e-03;
-	    ck3LPassed = thloMat(0,0) - 1.096612614742133 < 1e-06 && thloMat(1,0) - 9.986750150481939 < 1e-06 && thloMat(1,1) - 370.2505433664134 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - (-1033.437882123761)) < 1e-06 && abs(oloMat(1,0) - (-394.3521101999062)) < 1e-06 && abs(oloMat(1,1) - 17633.47392819223) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-13.48340821650015)) < 1e-04 && abs(twloMat(1,0) - 11.12436787252288) < 1e-04 && abs(twloMat(1,1) - 1476.660068002361) < 1e-03;
+	    ck3LPassed = abs(thloMat(0,0) - 1.096612614742133) < 1e-06 && abs(thloMat(1,0) - 9.986750150481939) < 1e-06 && abs(thloMat(1,1) - 370.2505433664134) < 1e-06;
 	 break;
 	 case h32q2g:
-	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-13.66052379180129) < 1e-06 && twloMat(1,0) - 11.26755617866339 < 1e-06 && twloMat(1,1) - 1477.465656153518 < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 1.113051431370291 < 1e-06 && thloMat(1,0) - 9.903809573970422 < 1e-06 && thloMat(1,1) - 369.7408109643386 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - (-1033.437882123761)) < 1e-06 && abs(oloMat(1,0) - (-394.3521101999062)) < 1e-06 && abs(oloMat(1,1) - 17633.47392819223) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-13.66052379180129)) < 1e-06 && abs(twloMat(1,0) - 11.26755617866339) < 1e-06 && abs(twloMat(1,1) - 1477.465656153518) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 1.113051431370291) < 1e-06 && abs(thloMat(1,0) - 9.903809573970422) < 1e-06 && abs(thloMat(1,1) - 369.7408109643386) < 1e-06;
 	 break;
 	 case h3q22g:
-	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999062) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-13.66052379180129) < 1e-06 && twloMat(1,0) - 11.26755617866339 < 1e-06 && twloMat(1,1) - 1477.465656153518 < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 1.058450932536496 < 1e-06 && thloMat(1,0) - 10.0141272838662 < 1e-06 && thloMat(1,1) - 370.3301180635573 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - (-1033.437882123761)) < 1e-06 && abs(oloMat(1,0) - (-394.3521101999062)) < 1e-06 && abs(oloMat(1,1) - 17633.47392819223) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-13.66052379180129)) < 1e-06 && abs(twloMat(1,0) - 11.26755617866339) < 1e-06 && abs(twloMat(1,1) - 1477.465656153518) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 1.058450932536496) < 1e-06 && abs(thloMat(1,0) - 10.0141272838662) < 1e-06 && abs(thloMat(1,1) - 370.3301180635573) < 1e-06;
 	 break;
 	 case h4:
-	    ck1LPassed = oloMat(0,0) - 0 < 1e-06 && oloMat(1,0) - 0 < 1e-06 && oloMat(1,1) - 6685.123085628641 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - 0 < 1e-06 && twloMat(1,0) - 1183.325484493686 < 1e-06 && twloMat(1,1) - 1458.970501474495 < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 162.1379208650191 < 1e-06 && thloMat(1,0) - 326.0219627343553 < 1e-06 && thloMat(1,1) - 431.6926278454841 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 0) < 1e-06 && abs(oloMat(1,0) - 0) < 1e-06 && abs(oloMat(1,1) - 6685.123085628641) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - 0) < 1e-06 && abs(twloMat(1,0) - 1183.325484493686) < 1e-06 && abs(twloMat(1,1) - 1458.970501474495) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 162.1379208650191) < 1e-06 && abs(thloMat(1,0) - 326.0219627343553) < 1e-06 && abs(thloMat(1,1) - 431.6926278454841) < 1e-06;
 	 break;
 	 case h5:
-	    ck1LPassed = oloMat(0,0) - 15921.69462848581 < 1e-06 && oloMat(1,0) - (-388569.2043081555) < 1e-06 && oloMat(1,1) - 7874.401574063407 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-86.77887344841422) < 1e-06 && twloMat(1,0) - (-20625.63783863484) < 1e-06 && twloMat(1,1) - (-42446.62009872038) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 2442.115080578889 < 1e-06 && thloMat(1,0) - (-3859.942907446577) < 1e-06 && thloMat(1,1) - 60593.055768119 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 15921.69462848581) < 1e-06 && abs(oloMat(1,0) - (-388569.2043081555)) < 1e-06 && abs(oloMat(1,1) - 7874.401574063407) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-86.77887344841422)) < 1e-06 && abs(twloMat(1,0) - (-20625.63783863484)) < 1e-06 && abs(twloMat(1,1) - (-42446.62009872038)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 2442.115080578889) < 1e-06 && abs(thloMat(1,0) - (-3859.942907446577)) < 1e-06 && abs(thloMat(1,1) - 60593.055768119) < 1e-06;
 	 break;
 	 case h5g1:
-	    ck1LPassed = oloMat(0,0) - 15921.69462848581 < 1e-06 && oloMat(1,0) - (-388569.2043081556) < 1e-06 && oloMat(1,1) - 7874.401574063407 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-114.6037388932203) < 1e-06 && twloMat(1,0) - (-20341.84471909946) < 1e-06 && twloMat(1,1) - (-42843.48046642416) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 2415.507513838155 < 1e-06 && thloMat(1,0) - (-3766.750163753644) < 1e-06 && thloMat(1,1) - 59380.34497121828 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 15921.69462848581) < 1e-06 && abs(oloMat(1,0) - (-388569.2043081556)) < 1e-06 && abs(oloMat(1,1) - 7874.401574063407) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-114.6037388932203)) < 1e-06 && abs(twloMat(1,0) - (-20341.84471909946)) < 1e-06 && abs(twloMat(1,1) - (-42843.48046642416)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 2415.507513838155) < 1e-06 && abs(thloMat(1,0) - (-3766.750163753644)) < 1e-06 && abs(thloMat(1,1) - 59380.34497121828) < 1e-06;
 	 break;
 	 case h6:
-	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-1078.578574572312) < 1e-06 && twloMat(1,0) - 7096.529601647042 < 1e-06 && twloMat(1,1) - (-1927.791631086123) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 245.4412216221288 < 1e-06 && thloMat(1,0) - 573.1296253278389 < 1e-06 && thloMat(1,1) - 8448.4582538127 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 9272.477351702315) < 1e-06 && abs(oloMat(1,0) - (-184.7601614832763)) < 1e-06 && abs(oloMat(1,1) - 7581.278122072418) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-1078.578574572312)) < 1e-06 && abs(twloMat(1,0) - 7096.529601647042) < 1e-06 && abs(twloMat(1,1) - (-1927.791631086123)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 245.4412216221288) < 1e-06 && abs(thloMat(1,0) - 573.1296253278389) < 1e-06 && abs(thloMat(1,1) - 8448.4582538127) < 1e-06;
 	 break;
 	 case h6b:
-	    ck1LPassed = oloMat(0,0) - 9272.477351702311 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-1078.578574572312) < 1e-06 && twloMat(1,0) - 7096.52960164704 < 1e-06 && twloMat(1,1) - (-1900.197036824461) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 283.0253770519464 < 1e-06 && thloMat(1,0) - 566.2182257407396 < 1e-06 && thloMat(1,1) - 10093.33785879814 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 9272.477351702311) < 1e-06 && abs(oloMat(1,0) - (-184.7601614832763)) < 1e-06 && abs(oloMat(1,1) - 7581.278122072418) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-1078.578574572312)) < 1e-06 && abs(twloMat(1,0) - 7096.52960164704) < 1e-06 && abs(twloMat(1,1) - (-1900.197036824461)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 283.0253770519464) < 1e-06 && abs(thloMat(1,0) - 566.2182257407396) < 1e-06 && abs(thloMat(1,1) - 10093.33785879814) < 1e-06;
 	 break;
 	 case h6b2qg2:
-	    ck1LPassed = oloMat(0,0) - 9272.477351702311 < 1e-06 && oloMat(1,0) - (-184.7601614832759) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2077.345120153528) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 285.3154791763894 < 1e-06 && thloMat(1,0) - 544.3654284413091 < 1e-06 && thloMat(1,1) - 10336.22756889787 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 9272.477351702311) < 1e-06 && abs(oloMat(1,0) - (-184.7601614832759)) < 1e-06 && abs(oloMat(1,1) - 7581.278122072418) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-1089.201418061661)) < 1e-06 && abs(twloMat(1,0) - 7145.267026465748) < 1e-06 && abs(twloMat(1,1) - (-2077.345120153528)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 285.3154791763894) < 1e-06 && abs(thloMat(1,0) - 544.3654284413091) < 1e-06 && abs(thloMat(1,1) - 10336.22756889787) < 1e-06;
 	 break;
 	 case h6bq22g:
-	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832763) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-1078.578574572311) < 1e-06 && twloMat(1,0) - 7096.529601647042 < 1e-06 && twloMat(1,1) - (-1900.197036824461) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 283.0220052455883 < 1e-06 && thloMat(1,0) - 566.2190953470737 < 1e-06 && thloMat(1,1) - 10093.33986048966 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 9272.477351702315) < 1e-06 && abs(oloMat(1,0) - (-184.7601614832763)) < 1e-06 && abs(oloMat(1,1) - 7581.278122072418) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-1078.578574572311)) < 1e-06 && abs(twloMat(1,0) - 7096.529601647042) < 1e-06 && abs(twloMat(1,1) - (-1900.197036824461)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 283.0220052455883) < 1e-06 && abs(thloMat(1,0) - 566.2190953470737) < 1e-06 && abs(thloMat(1,1) - 10093.33986048966) < 1e-06;
 	 break;
 	 case h6bq2g2:
-	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832759) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2077.345120153528) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 285.3120881213721 < 1e-06 && thloMat(1,0) - 544.3662758149513 < 1e-06 && thloMat(1,1) - 10336.23012077387 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 9272.477351702315) < 1e-06 && abs(oloMat(1,0) - (-184.7601614832759)) < 1e-06 && abs(oloMat(1,1) - 7581.278122072418) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-1089.201418061661)) < 1e-06 && abs(twloMat(1,0) - 7145.267026465748) < 1e-06 && abs(twloMat(1,1) - (-2077.345120153528)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 285.3120881213721) < 1e-06 && abs(thloMat(1,0) - 544.3662758149513) < 1e-06 && abs(thloMat(1,1) - 10336.23012077387) < 1e-06;
 	 break;
 	 case h6g2:
-	    ck1LPassed = oloMat(0,0) - 9272.477351702315 < 1e-06 && oloMat(1,0) - (-184.7601614832761) < 1e-06 && oloMat(1,1) - 7581.278122072418 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - (-1089.201418061661) < 1e-06 && twloMat(1,0) - 7145.267026465748 < 1e-06 && twloMat(1,1) - (-2112.642999123034) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 246.0217489966267 < 1e-06 && thloMat(1,0) - 557.451210096066 < 1e-06 && thloMat(1,1) - 8628.076480526881 < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - 9272.477351702315) < 1e-06 && abs(oloMat(1,0) - (-184.7601614832761)) < 1e-06 && abs(oloMat(1,1) - 7581.278122072418) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - (-1089.201418061661)) < 1e-06 && abs(twloMat(1,0) - 7145.267026465748) < 1e-06 && abs(twloMat(1,1) - (-2112.642999123034)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 246.0217489966267) < 1e-06 && abs(thloMat(1,0) - 557.451210096066) < 1e-06 && abs(thloMat(1,1) - 8628.076480526881) < 1e-06;
 	 break;
 	 case h9:
-	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.352110199906) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - 420.2050380976995 < 1e-06 && twloMat(1,0) - (-554.6021924866435) < 1e-06 && twloMat(1,1) - (-797.8089039452509) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 132.8584579769461 < 1e-06 && thloMat(1,0) - (-171.9326869339159) < 1e-06 && thloMat(1,1) - (-800.8408283898472) < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - (-1033.437882123761)) < 1e-06 && abs(oloMat(1,0) - (-394.352110199906)) < 1e-06 && abs(oloMat(1,1) - 17633.47392819223) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - 420.2050380976995) < 1e-06 && abs(twloMat(1,0) - (-554.6021924866435)) < 1e-06 && abs(twloMat(1,1) - (-797.8089039452509)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 132.8584579769461) < 1e-06 && abs(thloMat(1,0) - (-171.9326869339159)) < 1e-06 && abs(thloMat(1,1) - (-800.8408283898472)) < 1e-06;
 	 break;
 	 case h9q2:
-	    ck1LPassed = oloMat(0,0) - (-1033.437882123761) < 1e-06 && oloMat(1,0) - (-394.3521101999065) < 1e-06 && oloMat(1,1) - 17633.47392819223 < 1e-06;
-	    ck2LPassed = twloMat(0,0) - 420.2050380976993 < 1e-06 && twloMat(1,0) - (-554.6021924866436) < 1e-06 && twloMat(1,1) - (-797.8089039452487) < 1e-06;
-	    ck3LPassed = thloMat(0,0) - 132.6358855624267 < 1e-06 && thloMat(1,0) - (-171.4711818838455) < 1e-06 && thloMat(1,1) - (-800.9569014303727) < 1e-06;
+	    ck1LPassed = abs(oloMat(0,0) - (-1033.437882123761)) < 1e-06 && abs(oloMat(1,0) - (-394.3521101999065)) < 1e-06 && abs(oloMat(1,1) - 17633.47392819223) < 1e-06;
+	    ck2LPassed = abs(twloMat(0,0) - 420.2050380976993) < 1e-06 && abs(twloMat(1,0) - (-554.6021924866436)) < 1e-06 && abs(twloMat(1,1) - (-797.8089039452487)) < 1e-06;
+	    ck3LPassed = abs(thloMat(0,0) - 132.6358855624267) < 1e-06 && abs(thloMat(1,0) - (-171.4711818838455)) < 1e-06 && abs(thloMat(1,1) - (-800.9569014303727)) < 1e-06;
 	 break;
       }
       std::cout << "Hierarchy " << i << " (" << ho.getH3mHierarchyNotation(i) << ")" << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
@@ -1232,9 +1334,16 @@ void himalaya::HierarchyCalculator::checkTerms(){
    const double MR2 = 500;
    const double m3 = 300;
    const double msq2 = 400;
+   //const double lmMQ3 = log(MR2/mQ32);
    
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
    mh2EFTCalculator.checkTerms(mQ32, mU32, Xt, MR2, m3, msq2);
+   
+   /*std::cout << mh2EFTCalculator.coeff_as2_susy_log0(sqrt(mQ32), sqrt(mU32), Xt, m3, sqrt(msq2)) << "\n" <<
+   lmMQ3 * mh2EFTCalculator.coeff_as2_susy_log1(sqrt(mQ32), sqrt(mU32), Xt, m3, sqrt(msq2)) << "\n" << 
+   pow2(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log2(sqrt(mQ32), sqrt(mU32), Xt, m3, sqrt(msq2)) << "\n" << 
+   pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3() << "\n";
+   should be -2603.72, 3832.15, -18520.5, 8029.63*/
 }
 
 /**

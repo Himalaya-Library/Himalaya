@@ -27,20 +27,28 @@ himalaya::H4::H4(std::map<unsigned int, unsigned int> flagMap, double Al4p, doub
 		 double lmMt, double lmMsq, double lmMsusy, double Mt, double Msusy, double Msq,
 		 int mdrFlag, int oneLoopFlag, int twoLoopFlag, int threeLoopFlag){
    // abbrev for cos(beta) and sin(beta)
-   double Cbeta = cos(beta);
-   double Sbeta = sin(beta);
+   Cbeta = cos(beta);
+   Sbeta = sin(beta);
+   this -> At = At;
+   this -> lmMt = lmMt;
+   this -> lmMsq = lmMsq;
+   this -> lmMsusy = lmMsusy;
+   this -> Mt = Mt;
+   this -> Msusy = Msusy;
+   this -> Msq = Msq;
    // zeta functions
-   double z2 = pow2(Pi)/6.;
-   double z3 = 1.202056903159594;
+   z2 = pow2(Pi) / 6.;
+   z3 = 1.202056903159594;
    // mdr flags, indicates if one wants to shift the dr stop mass to the mdr stop mass
-   int shiftst1 = mdrFlag;
-   int shiftst2 = mdrFlag;
-   int shiftst3 = mdrFlag;
+   shiftst1 = mdrFlag;
+   shiftst2 = mdrFlag;
+   shiftst3 = mdrFlag;
    // expansion flags
-   int xAt = flagMap.at(HierarchyCalculator::xxAt);
-   int xMsq = flagMap.at(HierarchyCalculator::xxMsq);
-   int xlmMsusy = flagMap.at(HierarchyCalculator::xxlmMsusy);
-   int xMsusy = flagMap.at(HierarchyCalculator::xxMsusy);
+   xAt = flagMap.at(HierarchyCalculator::xxAt);
+   xMsq = flagMap.at(HierarchyCalculator::xxMsq);
+   xlmMsusy = flagMap.at(HierarchyCalculator::xxlmMsusy);
+   xMsusy = flagMap.at(HierarchyCalculator::xxMsusy);
+   
    s1 = 
    #include "../hierarchies/h4/sigS1Full.inc"
    ;
@@ -71,6 +79,85 @@ double himalaya::H4::getS2(){
  */
 double himalaya::H4::getS12(){
    return s12;
+}
+
+/**
+ * 	@return returns the constant term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H4::calc_at_as2_no_logs(){
+
+   const double result =
+      ((pow2(Sbeta)*pow4(Mt)*(591666768*(-10589 + 7500*z2)*pow4(Msusy)*pow6(Msq)
+        + 1724976*(-2819419 + 1800750*z2)*pow4(Msq)*pow6(Msusy) + 14791669200*(
+        -691 + 270*z2 - 6*z3)*pow2(Msusy)*pow8(Msq) + 665500*(-6262157 +
+        4000752*z2)*pow2(Msq)*pow8(Msusy) + 1331250228000*(1 - 2*z2)*power10(
+        Msq) + 5145*(-742606013 + 474368400*z2)*power10(Msusy)))/(4.992188355e10
+        *pow2(Msusy)*pow8(Msq)))/pow4(Mt)/pow2(Sbeta)*12.;
+ 
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H4::calc_coef_at_as2_no_sm_logs_log0(){
+
+   const double result =
+      (-(pow2(Sbeta)*pow4(Mt)*(-591666768*(-10589 + 7500*z2)*pow4(Msusy)*pow6(
+        Msq) - 1724976*(-2819419 + 1800750*z2)*pow4(Msq)*pow6(Msusy) -
+        14791669200*(-691 + 270*z2 - 6*z3)*pow2(Msusy)*pow8(Msq) +
+        221875038000*pow2(Msusy)*pow3(log(pow2(Msq)/pow2(Msusy)))*pow8(Msq) -
+        665500*(-6262157 + 4000752*z2)*pow2(Msq)*pow8(Msusy) - 96049800*pow2(
+        Msusy)*pow2(log(pow2(Msq)/pow2(Msusy)))*(14586*pow4(Msq)*pow4(Msusy) +
+        20328*pow2(Msusy)*pow6(Msq) + 12760*pow2(Msq)*pow6(Msusy) + 23100*pow8(
+        Msq) + 11865*pow8(Msusy)) + 1331250228000*(-1 + 2*z2)*power10(Msq) -
+        55440*log(pow2(Msq)/pow2(Msusy))*(-28388052*pow4(Msusy)*pow6(Msq) -
+        51750369*pow4(Msq)*pow6(Msusy) - 16008300*(-5 + 3*z2)*pow2(Msusy)*pow8(
+        Msq) - 58536775*pow2(Msq)*pow8(Msusy) + 48024900*power10(Msq) -
+        63123270*power10(Msusy)) - 5145*(-742606013 + 474368400*z2)*power10(
+        Msusy)))/(4.992188355e10*pow2(Msusy)*pow8(Msq)))/pow4(Mt)/pow2(Sbeta)*
+        12.;
+
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H4::calc_coef_at_as2_no_sm_logs_log1(){
+
+   const double result =
+      (-(pow2(Sbeta)*pow4(Mt)*(2160*pow4(Msusy)*pow6(Msq) + 540*pow4(Msq)*pow6(
+        Msusy) - 16*(-173 + 135*z2 + 54*z3)*pow2(Msusy)*pow8(Msq) + 240*pow2(
+        Msq)*pow8(Msusy) + 180*log(pow2(Msq)/pow2(Msusy))*pow2(Msusy)*(14*pow4(
+        Msq)*pow4(Msusy) + 20*pow2(Msusy)*pow6(Msq) + 12*pow2(Msq)*pow6(Msusy)
+        + 28*pow8(Msq) + 11*pow8(Msusy)) + 4320*power10(Msq) + 135*power10(
+        Msusy)))/(81.*pow2(Msusy)*pow8(Msq)))/pow4(Mt)/pow2(Sbeta)*12.; 
+
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H4::calc_coef_at_as2_no_sm_logs_log2(){
+
+   const double result =
+      ((8*(221 + 45*log(pow2(Msq)/pow2(Msusy)))*pow2(Sbeta)*pow4(Mt))/27.)/
+      pow4(Mt)/pow2(Sbeta)*12.; 
+
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H4::calc_coef_at_as2_no_sm_logs_log3(){
+
+   const double result =
+      ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 
+
+   return result;
 }
 
 

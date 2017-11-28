@@ -130,11 +130,15 @@ struct Parameters {
       // in Pietro's code. To avoid this numerical issue we shift the stop/bottom 1 mass by a relative (but small)
       // value.
       if(std::abs(MSt(0) - MSt(1)) < 1.0E-5){
-	MSt(0) = MSt(1) / (1. + 1.0E-5);
+	 MSt(0) = MSt(1) / (1. + 1.0E-5);
       }
 
       if(std::abs(MSb(0) - MSb(1)) < 1.0E-5){
-	MSb(0) = MSb(0) / (1. + 1.0E-5);
+	 MSb(0) = MSb(0) / (1. + 1.0E-5);
+      }
+      
+      if(std::abs(mq2(2, 2) - mu2(2, 2)) < 1.0E-5){
+	 mq2(2,2) = mu2(2,2) / (1. + 1.0E-5);
       }
    };
 };

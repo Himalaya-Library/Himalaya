@@ -45,7 +45,31 @@ namespace himalaya{
        * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5'
        */
       double getS12();
+      /**
+       * 	@return returns the constant term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_at_as2_no_logs();
+      /**
+       * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log0();
+      /**
+       * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log1();
+      /**
+       * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log2();
+      /**
+       * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+       */
+      double calc_coef_at_as2_no_sm_logs_log3();
    private:
+      double Dmglst1, lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1, Mst2, Msq, MuSUSY, s2t, Tbeta, Sbeta, Cbeta; /**< common variables */
+      double z2, z3, z4;	/**< Zeta functions */
+      double B4, DN, OepS2, S2, T1ep;	/**< PolyLog functions */
+      int shiftst1, shiftst2, shiftst3, xDmglst1, xMsq; /**< MDR and truncation flags */
       double s1 = 0., s2 = 0., s12 = 0.;	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
    };
 }	// himalaya

@@ -15,8 +15,8 @@
  * 	@param Dmglst1 a double Mgl - Mst1
  * 	@param Dmst12 a double Mst1^2 - Mst2^2
  * 	@param Dmsqst1 a double Msq^2 - Mst1^2
- * 	@param lmMt a double log((<renormalization scale> / Mt)^2)
- * 	@param lmMst1 a double log((<renormalization scale> / Mst1)^2)
+ * 	@param lmMt a double log((renormalization scale / Mt)^2)
+ * 	@param lmMst1 a double log((renormalization scale / Mst1)^2)
  * 	@param Mgl a double gluino mass
  * 	@param Mt a double top/bottom quark mass
  * 	@param Mst1 a double stop 1 mass
@@ -48,7 +48,7 @@ himalaya::H3::H3 (std::map<unsigned int, unsigned int> flagMap, double Al4p, dou
    this -> MuSUSY = MuSUSY;
    this -> s2t = s2t;
    // zeta functions
-   z2 = pow2 ( Pi ) /6.;
+   z2 = pow2 ( Pi ) / 6.;
    z3 = 1.202056903159594;
    // mdr flags, indicates if one wants to shift the dr stop mass to the mdr stop mass
    shiftst1 = mdrFlag;
@@ -72,15 +72,6 @@ himalaya::H3::H3 (std::map<unsigned int, unsigned int> flagMap, double Al4p, dou
       + twoLoopFlag * Al4p * (calc_coeff_as_1_log_0_s12() + lmMt * calc_coeff_as_1_log_1_s12())
       + threeLoopFlag * pow2(Al4p) * (calc_coeff_as_2_log_0_s12() + lmMt * calc_coeff_as_2_log_1_s12()
 	 + pow2(lmMt) * calc_coeff_as_2_log_2_s12());
-   /*s1 =
-#include "../hierarchies/h3/sigS1Full.inc"
-      ;
-   s2 =
-#include "../hierarchies/h3/sigS2Full.inc"
-      ;
-   s12 =
-#include "../hierarchies/h3/sigS12Full.inc"
-      ;*/
 }
 
 /**
@@ -104,13 +95,338 @@ double himalaya::H3::getS12() {
    return s12;
 }
 
-/// calc coeffcieint O(as^0,log(mu^2/mt^2)^0) s1
+/**
+ * 	@return returns the constant term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H3::calc_at_as2_no_logs(){
+
+   const double result =
+      (-(Mt*pow2(Sbeta)*(14700*pow3(Dmst12)*pow3(Mst1)*pow3(s2t)*(-27220 - (
+        332610*Dmglst1)/Mgl - (1286791*pow2(Dmglst1))/pow2(Mgl) - (62050222*
+        pow3(Dmglst1))/(15.*pow3(Mgl)) - (200*Dmsqst1*(5*Mgl*pow2(Dmglst1) + 5*
+        Dmglst1*pow2(Mgl) + 5*pow3(Dmglst1) + 21*pow3(Mgl))*(pow2(Dmsqst1) +
+        Dmsqst1*pow2(Msq) + pow4(Msq)))/(pow3(Mgl)*pow6(Msq))) + (4*Dmst12*
+        Mst1*s2t*pow2(Mt)*(-2*pow3(Dmglst1)*(11760*Dmsqst1*pow4(Msq)*(8543*
+        pow2(Dmst12) - 5458*Dmst12*pow2(Mst2) + 2373*pow4(Mst2)) + 11760*pow3(
+        Dmsqst1)*(10918*pow2(Dmst12) - 7833*Dmst12*pow2(Mst2) + 4748*pow4(Mst2)
+        ) + 5880*pow2(Dmsqst1)*pow2(Msq)*(19461*pow2(Dmst12) - 13291*Dmst12*
+        pow2(Mst2) + 7121*pow4(Mst2)) + (137797425107*pow2(Dmst12) -
+        51549748862*Dmst12*pow2(Mst2) - 47840652944*pow4(Mst2))*pow6(Msq)) -
+        98*Mgl*pow2(Dmglst1)*(1200*Dmsqst1*pow4(Msq)*(1050*pow2(Dmst12) - 433*
+        Dmst12*pow2(Mst2) - 184*pow4(Mst2)) + 600*pow2(Dmsqst1)*pow2(Msq)*(
+        2575*pow2(Dmst12) - 1341*Dmst12*pow2(Mst2) + 107*pow4(Mst2)) + 1200*
+        pow3(Dmsqst1)*(1525*pow2(Dmst12) - 908*Dmst12*pow2(Mst2) + 291*pow4(
+        Mst2)) + (740926715*pow2(Dmst12) - 353948822*Dmst12*pow2(Mst2) -
+        301247960*pow4(Mst2))*pow6(Msq)) + 735*pow3(Mgl)*(-4000*Dmsqst1*pow4(
+        Msq)*(13*pow2(Dmst12) + 49*Dmst12*pow2(Mst2) - 111*pow4(Mst2)) - 4000*
+        pow2(Dmsqst1)*pow2(Msq)*(39*pow2(Dmst12) + 23*Dmst12*pow2(Mst2) - 85*
+        pow4(Mst2)) + 4000*pow3(Dmsqst1)*(-65*pow2(Dmst12) + 3*Dmst12*pow2(
+        Mst2) + 59*pow4(Mst2)) + (558619*pow2(Dmst12) + 1751200*Dmst12*pow2(
+        Mst2) + 555200*pow4(Mst2))*pow6(Msq)) - 98*Dmglst1*pow2(Mgl)*(600*pow2(
+        Dmsqst1)*pow2(Msq)*(193*pow2(Dmst12) + 1041*Dmst12*pow2(Mst2) - 2275*
+        pow4(Mst2)) + 1200*pow3(Dmsqst1)*(334*pow2(Dmst12) + 283*Dmst12*pow2(
+        Mst2) - 900*pow4(Mst2)) - 1200*Dmsqst1*pow4(Msq)*(141*pow2(Dmst12) -
+        758*Dmst12*pow2(Mst2) + 1375*pow4(Mst2)) - (28188929*pow2(Dmst12) +
+        90230980*Dmst12*pow2(Mst2) + 59568000*pow4(Mst2))*pow6(Msq))))/(pow3(
+        Mgl)*pow6(Msq)) + (14700*Mt*pow2(Mst1)*(-15*pow2(Dmsqst1)*pow2(Dmst12)*
+        pow2(Msq)*pow2(s2t)*(3832*Mgl*pow2(Dmglst1)*(2*Dmst12 - pow2(Mst2)) +
+        3760*Dmglst1*pow2(Mgl)*(2*Dmst12 - pow2(Mst2)) + 3904*(2*Dmst12 - pow2(
+        Mst2))*pow3(Dmglst1) + 5*(-273*Dmst12 + 229*pow2(Mst2))*pow3(Mgl)) -
+        15*Dmsqst1*pow2(Dmst12)*pow2(s2t)*(3832*Mgl*pow2(Dmglst1)*(2*Dmst12 -
+        pow2(Mst2)) + 3760*Dmglst1*pow2(Mgl)*(2*Dmst12 - pow2(Mst2)) + 3904*(2*
+        Dmst12 - pow2(Mst2))*pow3(Dmglst1) + 5*(137*Dmst12 + 24*pow2(Mst2))*
+        pow3(Mgl))*pow4(Msq) + pow2(Dmst12)*pow2(s2t)*(3*Mgl*pow2(Dmglst1)*(
+        612347*Dmst12 - 26498*pow2(Mst2)) + 12*Dmglst1*pow2(Mgl)*(40034*Dmst12
+        - 22575*pow2(Mst2)) + (-973342*Dmst12 + 2195420*pow2(Mst2))*pow3(
+        Dmglst1) + 15*(2785*Dmst12 - 4904*pow2(Mst2))*pow3(Mgl))*pow6(Msq) +
+        15*pow3(Dmsqst1)*(-3832*Mgl*pow2(Dmglst1)*pow2(Dmst12)*(2*Dmst12 -
+        pow2(Mst2))*pow2(s2t) - 3760*Dmglst1*pow2(Dmst12)*pow2(Mgl)*(2*Dmst12 -
+        pow2(Mst2))*pow2(s2t) + 3904*pow2(Dmst12)*(-2*Dmst12 + pow2(Mst2))*
+        pow2(s2t)*pow3(Dmglst1) + 5*pow3(Mgl)*(-434*pow2(Dmst12)*pow2(Mst2)*
+        pow2(s2t) + 683*pow2(s2t)*pow3(Dmst12) + 96*pow6(Mst2)))))/(pow3(Mgl)*
+        pow6(Msq)) - (2*pow3(Mt)*(196*Dmglst1*pow2(Mgl)*(pow6(Msq)*(22574599*
+        pow2(Dmst12)*pow2(Mst2) + 57588222*pow3(Dmst12) - 102737420*Dmst12*
+        pow4(Mst2) - 93426000*pow6(Mst2)) + 1200*pow3(Dmsqst1)*(-3807*pow2(
+        Dmst12)*pow2(Mst2) + 3807*pow3(Dmst12) + 3807*Dmst12*pow4(Mst2) + 4000*
+        pow6(Mst2)) + 1200*pow2(Dmsqst1)*pow2(Msq)*(-3807*pow2(Dmst12)*pow2(
+        Mst2) + 3807*pow3(Dmst12) + 3807*Dmst12*pow4(Mst2) + 5650*pow6(Mst2)) +
+        1200*Dmsqst1*pow4(Msq)*(-3807*pow2(Dmst12)*pow2(Mst2) + 3807*pow3(
+        Dmst12) + 3807*Dmst12*pow4(Mst2) + 7300*pow6(Mst2))) - 49*pow3(Mgl)*(
+        600*pow3(Dmsqst1)*(-9589*pow2(Dmst12)*pow2(Mst2) + 1078*pow3(Dmst12) +
+        18100*Dmst12*pow4(Mst2) + 4700*pow6(Mst2)) - 600*pow2(Dmsqst1)*pow2(
+        Msq)*(2514*pow2(Dmst12)*pow2(Mst2) + 5997*pow3(Dmst12) - 11025*Dmst12*
+        pow4(Mst2) + 10250*pow6(Mst2)) - 600*Dmsqst1*pow4(Msq)*(-4561*pow2(
+        Dmst12)*pow2(Mst2) + 13072*pow3(Dmst12) - 3950*Dmst12*pow4(Mst2) +
+        25200*pow6(Mst2)) + pow6(Msq)*(3758920*pow2(Dmst12)*pow2(Mst2) -
+        20857591*pow3(Dmst12) + 98658000*Dmst12*pow4(Mst2) + 14952000*pow6(
+        Mst2))) + 8*pow3(Dmglst1)*(11760*pow3(Dmsqst1)*(-10203*pow2(Dmst12)*
+        pow2(Mst2) + 10203*pow3(Dmst12) + 10203*Dmst12*pow4(Mst2) + 11384*pow6(
+        Mst2)) + 11760*Dmsqst1*pow4(Msq)*(-10203*pow2(Dmst12)*pow2(Mst2) +
+        10203*pow3(Dmst12) + 10203*Dmst12*pow4(Mst2) + 19241*pow6(Mst2)) +
+        5880*pow2(Dmsqst1)*pow2(Msq)*(-20406*pow2(Dmst12)*pow2(Mst2) + 20406*
+        pow3(Dmst12) + 20406*Dmst12*pow4(Mst2) + 30625*pow6(Mst2)) - pow6(Msq)*
+        (-7672052891*pow2(Dmst12)*pow2(Mst2) + 5247448314*pow3(Dmst12) +
+        10096657468*Dmst12*pow4(Mst2) + 12422457852*pow6(Mst2))) + 2*Mgl*pow2(
+        Dmglst1)*(11760*pow3(Dmsqst1)*(-39441*pow2(Dmst12)*pow2(Mst2) + 39441*
+        pow3(Dmst12) + 39441*Dmst12*pow4(Mst2) + 47926*pow6(Mst2)) + 11760*
+        pow2(Dmsqst1)*pow2(Msq)*(-39441*pow2(Dmst12)*pow2(Mst2) + 39441*pow3(
+        Dmst12) + 39441*Dmst12*pow4(Mst2) + 64033*pow6(Mst2)) + 11760*Dmsqst1*
+        pow4(Msq)*(-39441*pow2(Dmst12)*pow2(Mst2) + 39441*pow3(Dmst12) + 39441*
+        Dmst12*pow4(Mst2) + 80140*pow6(Mst2)) - pow6(Msq)*(-15777194973*pow2(
+        Dmst12)*pow2(Mst2) + 7000007590*pow3(Dmst12) + 24554382356*Dmst12*pow4(
+        Mst2) + 25274184320*pow6(Mst2)))))/(pow3(Mgl)*pow6(Msq)) + (55125*z3*(
+        630*Dmsqst1*Dmst12*Mt*pow3(Mgl)*pow4(Msq)*(pow2(Dmst12)*(48*pow2(Mt) -
+        pow2(Mst1)*pow2(s2t)) + 4*Dmst12*pow2(Mst2)*(-3*pow2(Mt) + 2*pow2(Mst1)
+        *pow2(s2t)) - 24*pow2(Mt)*pow4(Mst2)) + 630*Mt*pow3(Dmsqst1)*pow3(Mgl)*
+        (2*pow2(Dmst12)*pow2(Mst2)*(6*pow2(Mt) + 11*pow2(Mst1)*pow2(s2t)) + (
+        24*pow2(Mt) - 29*pow2(Mst1)*pow2(s2t))*pow3(Dmst12) - 48*Dmst12*pow2(
+        Mt)*pow4(Mst2) - 48*pow2(Mt)*pow6(Mst2)) + 1890*Mt*pow2(Dmsqst1)*pow2(
+        Msq)*pow3(Mgl)*(5*pow2(Dmst12)*pow2(Mst1)*pow2(Mst2)*pow2(s2t) + (12*
+        pow2(Mt) - 5*pow2(Mst1)*pow2(s2t))*pow3(Dmst12) - 12*Dmst12*pow2(Mt)*
+        pow4(Mst2) - 8*pow2(Mt)*pow6(Mst2)) - pow6(Msq)*(-4*Dmglst1*pow2(Mgl)*(
+        3*Mt*pow2(Dmst12)*pow2(Mst2)*(-44200*Mst1*Mt*s2t + 10455*pow2(Mt) +
+        2898*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(-41066*Mst1*s2t*pow2(Mt) -
+        20157*Mt*pow2(Mst1)*pow2(s2t) + 76374*pow3(Mt) + 18791*pow3(Mst1)*pow3(
+        s2t)) - 48*Dmst12*(2898*Mt + 1963*Mst1*s2t)*pow2(Mt)*pow4(Mst2) -
+        120816*pow3(Mt)*pow6(Mst2)) + pow3(Mgl)*(12*Mt*pow2(Dmst12)*pow2(Mst2)*
+        (6580*Mst1*Mt*s2t + 921*pow2(Mt) - 660*pow2(Mst1)*pow2(s2t)) + pow3(
+        Dmst12)*(23402*Mst1*s2t*pow2(Mt) + 666*Mt*pow2(Mst1)*pow2(s2t) - 33933*
+        pow3(Mt) - 6024*pow3(Mst1)*pow3(s2t)) + 48*Dmst12*(2565*Mt + 424*Mst1*
+        s2t)*pow2(Mt)*pow4(Mst2) - 41088*pow3(Mt)*pow6(Mst2)) + 2*Mgl*pow2(
+        Dmglst1)*(3*Mt*pow2(Dmst12)*pow2(Mst2)*(347204*Mst1*Mt*s2t - 157101*
+        pow2(Mt) + 6590*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(-2189540*Mst1*
+        s2t*pow2(Mt) + 175218*Mt*pow2(Mst1)*pow2(s2t) + 256446*pow3(Mt) -
+        142987*pow3(Mst1)*pow3(s2t)) + 48*Dmst12*(14295*Mt + 18902*Mst1*s2t)*
+        pow2(Mt)*pow4(Mst2) + 677232*pow3(Mt)*pow6(Mst2)) + 4*pow3(Dmglst1)*(-
+        6*Mt*pow2(Dmst12)*pow2(Mst2)*(-258833*Mst1*Mt*s2t + 77043*pow2(Mt) -
+        23862*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(-4155994*Mst1*s2t*pow2(Mt)
+        - 74355*Mt*pow2(Mst1)*pow2(s2t) + 355140*pow3(Mt) - 229554*pow3(Mst1)*
+        pow3(s2t)) + 24*Dmst12*(23724*Mt + 60437*Mst1*s2t)*pow2(Mt)*pow4(Mst2)
+        + 683184*pow3(Mt)*pow6(Mst2)))))/(pow3(Mgl)*pow6(Msq))))/(2.3814e7*
+        pow6(Mst2)))/pow4(Mt)/pow2(Sbeta)*12.;
+ 
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log0(){
+
+   const double result =
+      ((Mt*pow2(Sbeta)*(1470*Dmsqst1*pow4(Msq)*(80*Dmglst1*pow2(Mgl)*(-2*Mt*
+        pow2(Dmst12)*pow2(Mst2)*(-1516*Mst1*Mt*s2t + 7614*pow2(Mt) + 3525*pow2(
+        Mst1)*pow2(s2t)) + pow3(Dmst12)*(-564*Mst1*s2t*pow2(Mt) + 14100*Mt*
+        pow2(Mst1)*pow2(s2t) + 15228*pow3(Mt) + 125*pow3(Mst1)*pow3(s2t)) + 4*
+        Dmst12*(3807*Mt - 1375*Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 29200*pow3(Mt)*
+        pow6(Mst2)) + 16*pow3(Dmglst1)*(-8*Mt*pow2(Dmst12)*pow2(Mst2)*(2729*
+        Mst1*Mt*s2t + 10203*pow2(Mt) + 4575*pow2(Mst1)*pow2(s2t)) + pow3(
+        Dmst12)*(34172*Mst1*s2t*pow2(Mt) + 73200*Mt*pow2(Mst1)*pow2(s2t) +
+        81624*pow3(Mt) + 625*pow3(Mst1)*pow3(s2t)) + 12*Dmst12*(6802*Mt + 791*
+        Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 153928*pow3(Mt)*pow6(Mst2)) + 16*Mgl*
+        pow2(Dmglst1)*(-(Mt*pow2(Dmst12)*pow2(Mst2)*(8660*Mst1*Mt*s2t + 78882*
+        pow2(Mt) + 35925*pow2(Mst1)*pow2(s2t))) + pow3(Dmst12)*(21000*Mst1*s2t*
+        pow2(Mt) + 71850*Mt*pow2(Mst1)*pow2(s2t) + 78882*pow3(Mt) + 625*pow3(
+        Mst1)*pow3(s2t)) + 2*Dmst12*(39441*Mt - 1840*Mst1*s2t)*pow2(Mt)*pow4(
+        Mst2) + 160280*pow3(Mt)*pow6(Mst2)) + 5*pow3(Mgl)*(4*Mt*pow2(Dmst12)*
+        pow2(Mst2)*(19600*Mst1*Mt*s2t + (-9122 + 14175*z3)*pow2(Mt) + 450*(2 -
+        21*z3)*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(20800*Mst1*s2t*pow2(Mt) +
+        75*Mt*(274 + 63*z3)*pow2(Mst1)*pow2(s2t) - 16*(-6536 + 14175*z3)*pow3(
+        Mt) + 8400*pow3(Mst1)*pow3(s2t)) + 200*Dmst12*(-888*Mst1*s2t + Mt*(-158
+        + 567*z3))*pow2(Mt)*pow4(Mst2) + 201600*pow3(Mt)*pow6(Mst2))) + 1470*
+        pow2(Dmsqst1)*pow2(Msq)*(80*Dmglst1*pow2(Mgl)*(-6*Mt*pow2(Dmst12)*pow2(
+        Mst2)*(-347*Mst1*Mt*s2t + 2538*pow2(Mt) + 1175*pow2(Mst1)*pow2(s2t)) +
+        pow3(Dmst12)*(386*Mst1*s2t*pow2(Mt) + 14100*Mt*pow2(Mst1)*pow2(s2t) +
+        15228*pow3(Mt) + 125*pow3(Mst1)*pow3(s2t)) + 2*Dmst12*(7614*Mt - 2275*
+        Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 22600*pow3(Mt)*pow6(Mst2)) + 16*pow3(
+        Dmglst1)*(-2*Mt*pow2(Dmst12)*pow2(Mst2)*(13291*Mst1*Mt*s2t + 40812*
+        pow2(Mt) + 18300*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(38922*Mst1*s2t*
+        pow2(Mt) + 73200*Mt*pow2(Mst1)*pow2(s2t) + 81624*pow3(Mt) + 625*pow3(
+        Mst1)*pow3(s2t)) + 2*Dmst12*(40812*Mt + 7121*Mst1*s2t)*pow2(Mt)*pow4(
+        Mst2) + 122500*pow3(Mt)*pow6(Mst2)) + 16*Mgl*pow2(Dmglst1)*(-3*Mt*pow2(
+        Dmst12)*pow2(Mst2)*(4470*Mst1*Mt*s2t + 26294*pow2(Mt) + 11975*pow2(
+        Mst1)*pow2(s2t)) + pow3(Dmst12)*(25750*Mst1*s2t*pow2(Mt) + 71850*Mt*
+        pow2(Mst1)*pow2(s2t) + 78882*pow3(Mt) + 625*pow3(Mst1)*pow3(s2t)) + 2*
+        Dmst12*(39441*Mt + 535*Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 128066*pow3(Mt)*
+        pow6(Mst2)) + 5*pow3(Mgl)*(Mt*pow2(Dmst12)*pow2(Mst2)*(36800*Mst1*Mt*
+        s2t + 20112*pow2(Mt) + 75*(458 - 945*z3)*pow2(Mst1)*pow2(s2t)) + pow3(
+        Dmst12)*(62400*Mst1*s2t*pow2(Mt) + 1575*Mt*(-26 + 45*z3)*pow2(Mst1)*
+        pow2(s2t) + (47976 - 170100*z3)*pow3(Mt) + 8400*pow3(Mst1)*pow3(s2t)) +
+        100*Dmst12*(-1360*Mst1*s2t + 63*Mt*(-14 + 27*z3))*pow2(Mt)*pow4(Mst2) +
+        200*(410 + 567*z3)*pow3(Mt)*pow6(Mst2))) + pow6(Msq)*(-49*pow3(Mgl)*(-
+        20*Mt*pow2(Dmst12)*pow2(Mst2)*(300*Mst1*Mt*s2t*(-17512 + 14805*z3) + (-
+        375892 + 621675*z3)*pow2(Mt) - 900*(-1226 + 495*z3)*pow2(Mst1)*pow2(
+        s2t)) + pow3(Dmst12)*(-30*Mst1*s2t*(-1117238 + 877575*z3)*pow2(Mt) -
+        2250*Mt*(-5570 + 333*z3)*pow2(Mst1)*pow2(s2t) + (-41715182 + 38174625*
+        z3)*pow3(Mt) + 3000*(-2722 + 2259*z3)*pow3(Mst1)*pow3(s2t)) - 6000*
+        Dmst12*(81*Mt*(-406 + 285*z3) + 8*Mst1*s2t*(-694 + 477*z3))*pow2(Mt)*
+        pow4(Mst2) + 48000*(623 + 963*z3)*pow3(Mt)*pow6(Mst2)) - 196*Dmglst1*
+        pow2(Mgl)*(Mt*pow2(Dmst12)*pow2(Mst2)*(-40*Mst1*Mt*s2t*(-4511549 +
+        3729375*z3) + (-45149198 + 35285625*z3)*pow2(Mt) + 47250*(-430 + 207*
+        z3)*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(2*Mst1*s2t*(28188929 -
+        23099625*z3)*pow2(Mt) - 225*Mt*(-160136 + 100785*z3)*pow2(Mst1)*pow2(
+        s2t) + 6*(-19196074 + 14320125*z3)*pow3(Mt) + 1125*(-22174 + 18791*z3)*
+        pow3(Mst1)*pow3(s2t)) - 40*Dmst12*(150*Mst1*s2t*(-19856 + 17667*z3) +
+        Mt*(-5136871 + 3912300*z3))*pow2(Mt)*pow4(Mst2) - 6000*(-31142 + 22653*
+        z3)*pow3(Mt)*pow6(Mst2)) + 2*Mgl*pow2(Dmglst1)*(Mt*pow2(Dmst12)*pow2(
+        Mst2)*(196*Mst1*Mt*s2t*(-353948822 + 292953375*z3) + (31554389946 -
+        25980577875*z3)*pow2(Mt) + 22050*(26498 + 49425*z3)*pow2(Mst1)*pow2(
+        s2t)) + 5*pow3(Dmst12)*(-196*Mst1*s2t*(-148185343 + 123161625*z3)*pow2(
+        Mt) + 4410*Mt*(-612347 + 438045*z3)*pow2(Mst1)*pow2(s2t) + (-2800003036
+        + 2827317150*z3)*pow3(Mt) - 735*(-2573582 + 2144805*z3)*pow3(Mst1)*
+        pow3(s2t)) + 392*Dmst12*(260*Mst1*s2t*(-579323 + 490725*z3) + Mt*(-
+        125277461 + 96491250*z3))*pow2(Mt)*pow4(Mst2) + 3920*(-12894992 +
+        9523575*z3)*pow3(Mt)*pow6(Mst2)) + 4*pow3(Dmglst1)*(2*Mt*pow2(Dmst12)*
+        pow2(Mst2)*(Mst1*Mt*s2t*(-51549748862 + 42804507375*z3) + (15344105782
+        - 12740986125*z3)*pow2(Mt) + 36750*(-109771 + 107379*z3)*pow2(Mst1)*
+        pow2(s2t)) + pow3(Dmst12)*(2*Mst1*s2t*(137797425107 - 114549584625*z3)*
+        pow2(Mt) - 3675*Mt*(-973342 + 1115325*z3)*pow2(Mst1)*pow2(s2t) + 12*(-
+        1749149438 + 1631424375*z3)*pow3(Mt) - 6370*(-2386547 + 1986525*z3)*
+        pow3(Mst1)*pow3(s2t)) + 8*Dmst12*(49*Mst1*s2t*(-244084964 + 203974875*
+        z3) + Mt*(-5048328734 + 3923356500*z3))*pow2(Mt)*pow4(Mst2) + 2352*(-
+        21126629 + 16012125*z3)*pow3(Mt)*pow6(Mst2))) + 1470*pow3(Dmsqst1)*(80*
+        Dmglst1*pow2(Mgl)*(-2*Mt*pow2(Dmst12)*pow2(Mst2)*(-566*Mst1*Mt*s2t +
+        7614*pow2(Mt) + 3525*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(1336*Mst1*
+        s2t*pow2(Mt) + 14100*Mt*pow2(Mst1)*pow2(s2t) + 15228*pow3(Mt) + 125*
+        pow3(Mst1)*pow3(s2t)) + 36*Dmst12*(423*Mt - 100*Mst1*s2t)*pow2(Mt)*
+        pow4(Mst2) + 16000*pow3(Mt)*pow6(Mst2)) + 16*pow3(Dmglst1)*(-12*Mt*
+        pow2(Dmst12)*pow2(Mst2)*(2611*Mst1*Mt*s2t + 6802*pow2(Mt) + 3050*pow2(
+        Mst1)*pow2(s2t)) + pow3(Dmst12)*(43672*Mst1*s2t*pow2(Mt) + 73200*Mt*
+        pow2(Mst1)*pow2(s2t) + 81624*pow3(Mt) + 625*pow3(Mst1)*pow3(s2t)) + 8*
+        Dmst12*(10203*Mt + 2374*Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 91072*pow3(Mt)*
+        pow6(Mst2)) + 16*Mgl*pow2(Dmglst1)*(-(Mt*pow2(Dmst12)*pow2(Mst2)*(
+        18160*Mst1*Mt*s2t + 78882*pow2(Mt) + 35925*pow2(Mst1)*pow2(s2t))) +
+        pow3(Dmst12)*(30500*Mst1*s2t*pow2(Mt) + 71850*Mt*pow2(Mst1)*pow2(s2t) +
+        78882*pow3(Mt) + 625*pow3(Mst1)*pow3(s2t)) + 6*Dmst12*(13147*Mt + 970*
+        Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 95852*pow3(Mt)*pow6(Mst2)) + 5*pow3(
+        Mgl)*(8400*pow3(Dmst12)*pow3(Mst1)*pow3(s2t) + 1600*Dmst12*Mst1*s2t*
+        pow2(Mt)*(65*pow2(Dmst12) - 3*Dmst12*pow2(Mst2) - 59*pow4(Mst2)) - 75*
+        Mt*pow2(Mst1)*(14*(-62 + 99*z3)*pow2(Dmst12)*pow2(Mst2)*pow2(s2t) + (
+        1366 - 1827*z3)*pow2(s2t)*pow3(Dmst12) + 192*pow6(Mst2)) - 4*pow3(Mt)*(
+        (-19178 + 14175*z3)*pow2(Dmst12)*pow2(Mst2) + 14*(154 + 2025*z3)*pow3(
+        Dmst12) - 100*Dmst12*(-362 + 567*z3)*pow4(Mst2) + 100*(94 - 567*z3)*
+        pow6(Mst2))))))/(2.3814e7*pow3(Mgl)*pow6(Msq)*pow6(Mst2)))/pow4(Mt)/
+        pow2(Sbeta)*12.;
+
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log1(){
+
+   const double result =
+      ((Mt*pow2(Sbeta)*(2*pow3(Dmglst1)*(2940*pow2(Dmsqst1)*pow2(Msq)*pow2(Mt)*(
+        -((42*Mt + 11*Mst1*s2t)*pow2(Dmst12)*pow2(Mst2)) + (42*Mt + 51*Mst1*
+        s2t)*pow3(Dmst12) + Dmst12*(42*Mt - 29*Mst1*s2t)*pow4(Mst2) - 65*Mt*
+        pow6(Mst2)) + 5880*pow2(Mt)*pow3(Dmsqst1)*(-3*(7*Mt + 6*Mst1*s2t)*pow2(
+        Dmst12)*pow2(Mst2) + (21*Mt + 38*Mst1*s2t)*pow3(Dmst12) + Dmst12*(21*Mt
+        - 2*Mst1*s2t)*pow4(Mst2) - 37*Mt*pow6(Mst2)) + 5880*Dmsqst1*pow2(Mt)*
+        pow4(Msq)*(7*(-3*Mt + Mst1*s2t)*pow2(Dmst12)*pow2(Mst2) + (21*Mt + 13*
+        Mst1*s2t)*pow3(Dmst12) + 3*Dmst12*(7*Mt - 9*Mst1*s2t)*pow4(Mst2) - 28*
+        Mt*pow6(Mst2)) + pow6(Msq)*(-10*Mt*pow2(Dmst12)*pow2(Mst2)*(623998*
+        Mst1*Mt*s2t + 46947*pow2(Mt) + 134505*pow2(Mst1)*pow2(s2t)) + pow3(
+        Dmst12)*(17975555*Mst1*s2t*pow2(Mt) + 1956570*Mt*pow2(Mst1)*pow2(s2t) +
+        2032034*pow3(Mt) + 1187760*pow3(Mst1)*pow3(s2t)) - 2*Dmst12*(546547*Mt
+        + 2011058*Mst1*s2t)*pow2(Mt)*pow4(Mst2) - 11351536*pow3(Mt)*pow6(Mst2))
+        ) - 98*Dmglst1*pow2(Mgl)*(1200*pow2(Mt)*pow3(Dmsqst1)*((-3*Mt + 2*Mst1*
+        s2t)*pow2(Dmst12)*pow2(Mst2) + (3*Mt - 4*Mst1*s2t)*pow3(Dmst12) + 3*
+        Dmst12*Mt*pow4(Mst2) + 5*Mt*pow6(Mst2)) + 600*Dmsqst1*pow2(Mt)*pow4(
+        Msq)*(-((6*Mt + Mst1*s2t)*pow2(Dmst12)*pow2(Mst2)) + (6*Mt - 3*Mst1*
+        s2t)*pow3(Dmst12) + Dmst12*(6*Mt + 5*Mst1*s2t)*pow4(Mst2) + 25*Mt*pow6(
+        Mst2)) + 300*pow2(Dmsqst1)*pow2(Msq)*pow2(Mt)*(3*(-4*Mt + Mst1*s2t)*
+        pow2(Dmst12)*pow2(Mst2) + (12*Mt - 11*Mst1*s2t)*pow3(Dmst12) + Dmst12*(
+        12*Mt + 5*Mst1*s2t)*pow4(Mst2) + 35*Mt*pow6(Mst2)) + pow6(Msq)*(Mt*
+        pow2(Dmst12)*pow2(Mst2)*(29758*Mst1*Mt*s2t + 6677*pow2(Mt) + 22350*
+        pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(-34587*Mst1*s2t*pow2(Mt) - 18045*
+        Mt*pow2(Mst1)*pow2(s2t) + 22414*pow3(Mt) + 3325*pow3(Mst1)*pow3(s2t)) -
+        8*Dmst12*(4471*Mt + 6875*Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 50800*pow3(Mt)
+        *pow6(Mst2))) - Mgl*pow2(Dmglst1)*(5880*pow2(Mt)*pow3(Dmsqst1)*((-9*Mt
+        + 10*Mst1*s2t)*pow2(Dmst12)*pow2(Mst2) + (9*Mt - 50*Mst1*s2t)*pow3(
+        Dmst12) + 3*Dmst12*(3*Mt + 10*Mst1*s2t)*pow4(Mst2) + 79*Mt*pow6(Mst2))
+        + 5880*pow2(Dmsqst1)*pow2(Msq)*pow2(Mt)*(-3*(3*Mt + 5*Mst1*s2t)*pow2(
+        Dmst12)*pow2(Mst2) + (9*Mt - 25*Mst1*s2t)*pow3(Dmst12) + Dmst12*(9*Mt +
+        55*Mst1*s2t)*pow4(Mst2) + 112*Mt*pow6(Mst2)) + 5880*Dmsqst1*pow2(Mt)*
+        pow4(Msq)*(-((9*Mt + 40*Mst1*s2t)*pow2(Dmst12)*pow2(Mst2)) + 9*Mt*pow3(
+        Dmst12) + Dmst12*(9*Mt + 80*Mst1*s2t)*pow4(Mst2) + 145*Mt*pow6(Mst2)) +
+        pow6(Msq)*(3*Mt*pow2(Dmst12)*pow2(Mst2)*(2334948*Mst1*Mt*s2t - 104761*
+        pow2(Mt) + 112210*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(-10892014*Mst1*
+        s2t*pow2(Mt) + 1366365*Mt*pow2(Mst1)*pow2(s2t) + 177178*pow3(Mt) -
+        363580*pow3(Mst1)*pow3(s2t)) + 196*Dmst12*(2303*Mt - 30942*Mst1*s2t)*
+        pow2(Mt)*pow4(Mst2) + 13177472*pow3(Mt)*pow6(Mst2))) - 49*pow3(Mgl)*(-
+        150*Dmsqst1*Mt*pow4(Msq)*(pow2(Dmst12)*pow2(Mst2)*(-80*Mst1*Mt*s2t -
+        17*pow2(Mt) + 180*pow2(Mst1)*pow2(s2t)) + 2*(20*Mst1*Mt*s2t + 187*pow2(
+        Mt) - 90*pow2(Mst1)*pow2(s2t))*pow3(Dmst12) - 20*Dmst12*Mt*(17*Mt - 6*
+        Mst1*s2t)*pow4(Mst2) - 1080*pow2(Mt)*pow6(Mst2)) - 150*Mt*pow2(Dmsqst1)
+        *pow2(Msq)*(-4*pow2(Dmst12)*pow2(Mst2)*(10*Mst1*Mt*s2t + 3*pow2(Mt) -
+        45*pow2(Mst1)*pow2(s2t)) + 9*(41*pow2(Mt) - 20*pow2(Mst1)*pow2(s2t))*
+        pow3(Dmst12) + 5*Dmst12*Mt*(-69*Mt + 16*Mst1*s2t)*pow4(Mst2) - 1010*
+        pow2(Mt)*pow6(Mst2)) - 150*Mt*pow3(Dmsqst1)*(pow2(Dmst12)*pow2(Mst2)*(-
+        7*pow2(Mt) + 180*pow2(Mst1)*pow2(s2t)) + 4*(-10*Mst1*Mt*s2t + 91*pow2(
+        Mt) - 45*pow2(Mst1)*pow2(s2t))*pow3(Dmst12) + 10*Dmst12*Mt*(-35*Mt + 4*
+        Mst1*s2t)*pow4(Mst2) - 940*pow2(Mt)*pow6(Mst2)) - pow6(Msq)*(-2*Mt*
+        pow2(Dmst12)*pow2(Mst2)*(25850*Mst1*Mt*s2t + 21033*pow2(Mt) + 75*pow2(
+        Mst1)*pow2(s2t)) + pow3(Dmst12)*(68264*Mst1*s2t*pow2(Mt) + 5700*Mt*
+        pow2(Mst1)*pow2(s2t) + 36107*pow3(Mt) + 250*pow3(Mst1)*pow3(s2t)) +
+        200*Dmst12*(131*Mt + 100*Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 400*(-533 +
+        54*z3)*pow3(Mt)*pow6(Mst2)))))/(99225.*pow3(Mgl)*pow6(Msq)*pow6(Mst2))
+	)/pow4(Mt)/pow2(Sbeta)*12.; 
+
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log2(){
+
+   const double result =
+      ((2*Mt*pow2(Sbeta)*(7*Dmglst1*pow2(Mgl)*pow4(Msq)*(-2*Mt*pow2(Dmst12)*
+        pow2(Mst2)*(-1304*Mst1*Mt*s2t + 888*pow2(Mt) + 645*pow2(Mst1)*pow2(s2t)
+        ) + pow3(Dmst12)*(-1544*Mst1*s2t*pow2(Mt) + 2250*Mt*pow2(Mst1)*pow2(
+        s2t) + 1640*pow3(Mt) - 275*pow3(Mst1)*pow3(s2t)) + 8*Dmst12*(239*Mt -
+        35*Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 6520*pow3(Mt)*pow6(Mst2)) + pow3(
+        Dmglst1)*pow4(Msq)*(-4*Mt*pow2(Dmst12)*pow2(Mst2)*(-6158*Mst1*Mt*s2t +
+        7818*pow2(Mt) - 5565*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(-109632*
+        Mst1*s2t*pow2(Mt) - 8820*Mt*pow2(Mst1)*pow2(s2t) + 98096*pow3(Mt) -
+        9765*pow3(Mst1)*pow3(s2t)) + 16*Dmst12*(-2222*Mt + 5257*Mst1*s2t)*pow2(
+        Mt)*pow4(Mst2) + 36232*pow3(Mt)*pow6(Mst2)) + Mgl*pow2(Dmglst1)*pow4(
+        Msq)*(-3*Mt*pow2(Dmst12)*pow2(Mst2)*(-7448*Mst1*Mt*s2t + 11772*pow2(Mt)
+        + 35*pow2(Mst1)*pow2(s2t)) + pow3(Dmst12)*(-53536*Mst1*s2t*pow2(Mt) +
+        16905*Mt*pow2(Mst1)*pow2(s2t) + 68252*pow3(Mt) - 5285*pow3(Mst1)*pow3(
+        s2t)) + 28*Dmst12*(85*Mt + 1164*Mst1*s2t)*pow2(Mt)*pow4(Mst2) + 49588*
+        pow3(Mt)*pow6(Mst2)) + 7*pow3(Mgl)*(Mt*pow2(Dmst12)*pow2(Mst2)*(1760*
+        Mst1*Mt*s2t + 538*pow2(Mt) + 105*pow2(Mst1)*pow2(s2t))*pow4(Msq) -
+        pow3(Dmst12)*(1032*Mst1*s2t*pow2(Mt) + 480*Mt*pow2(Mst1)*pow2(s2t) +
+        644*pow3(Mt) - 45*pow3(Mst1)*pow3(s2t))*pow4(Msq) - 40*Dmst12*(11*Mt +
+        61*Mst1*s2t)*pow2(Mt)*pow4(Msq)*pow4(Mst2) + 10*pow3(Mt)*(45*pow2(
+        Dmsqst1) + 90*Dmsqst1*pow2(Msq) + 442*pow4(Msq))*pow6(Mst2))))/(945.*
+        pow3(Mgl)*pow4(Msq)*pow6(Mst2)))/pow4(Mt)/pow2(Sbeta)*12.; 
+
+   return result;
+}
+
+/**
+ * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ */
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log3(){
+
+   const double result =
+      ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 
+
+   return result;
+}
+
+/// calc coefficient
+
+/// calc coefficient O(as^0,log(mu^2/mt^2)^0) s1
 double himalaya::H3::calc_coeff_as_0_log_0_s1 () {
    return -(pow2(Dmst12)*(-(Dmst12*xDmst12)+pow2(Mst2))*pow2(Mt)*pow2(MuSUSY)*
    pow2(s2t))/(48.*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^1,log(mu^2/mt^2)^0) s1
+/// calc coefficient O(as^1,log(mu^2/mt^2)^0) s1
 double himalaya::H3::calc_coeff_as_1_log_0_s1 () {
    return -(Dmst12*s2t*pow2(Mt)*pow2(MuSUSY)*(4*xDmglst1*pow3(Dmglst1)*((3*(9+10
    *lmMst1)*Mt-10*(13-12*lmMst1)*Mst1*s2t)*xDmst12*pow2(Dmst12)-Dmst12*(52*Mt-5*
@@ -124,7 +440,7 @@ double himalaya::H3::calc_coeff_as_1_log_0_s1 () {
    pow4(Mst2)))))/(270.*Mst1*pow3(Mgl)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^0) s1
+/// calc coefficient O(as^2,log(mu^2/mt^2)^0) s1
 double himalaya::H3::calc_coeff_as_2_log_0_s1() {
    return -(pow2(Mt)*pow2(MuSUSY)*(-4*xDmst12*pow3(Dmst12)*(((72*pow2(Dmglst1)*(3891491+27200*lmMst1-
 19200*pow2(lmMst1))+
@@ -240,7 +556,7 @@ xDmglst1*pow3(Dmglst1)*(-(pow2(Dmst12)*pow2(Mst2)*(1475294*Mst1*Mt*s2t+884106*po
 687960*pow2(Mt)*pow6(Mst2)))))/(pow2(Mst1)*pow3(Mgl)*pow6(Msq))))/(777600.*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^1) s1
+/// calc coefficient O(as^2,log(mu^2/mt^2)^1) s1
 double himalaya::H3::calc_coeff_as_2_log_1_s1(){
    return (16*pow2(MuSUSY)*pow4(Mt)*(-5*pow3(Mgl)*(2*(pow2(Dmst12)*pow2(Mst2)+xDmst12*pow3(Dmst12))-
 6*Dmst12*pow4(Mst2)-9*pow6(Mst2))-
@@ -252,7 +568,7 @@ Mgl*pow2(Dmglst1)*(9*pow2(Dmst12)*pow2(Mst2)-
 9*(xDmst12*pow3(Dmst12)+Dmst12*pow4(Mst2))+5*pow6(Mst2))))/(405.*pow2(Mst1)*pow3(Mgl)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^0,log(mu^2/mt^2)^0) s2
+/// calc coefficient O(as^0,log(mu^2/mt^2)^0) s2
 double himalaya::H3::calc_coeff_as_0_log_0_s2(){
    return -(Mt*(Mt*pow2(Dmst12)*pow2(Mst2)*((12*Mt*MuSUSY*s2t-12*Tbeta*pow2(Mt))*pow2(Sbeta)+
 Tbeta*pow2(s2t)*(pow2(MuSUSY)+
@@ -264,12 +580,12 @@ pow2(Sbeta)*(-24*Dmst12*(MuSUSY*s2t-Mt*Tbeta)*pow2(Mt)*pow4(Mst2)+
 48*lmMst1*Tbeta*pow3(Mt)*pow6(Mst2))))/(48.*Tbeta*pow2(Sbeta)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^0,log(mu^2/mt^2)^1) s2
+/// calc coefficient O(as^0,log(mu^2/mt^2)^1) s2
 double himalaya::H3::calc_coeff_as_0_log_1_s2(){
    return pow4(Mt);
 }
 
-/// calc coeffcieint O(as^1,log(mu^2/mt^2)^0) s2
+/// calc coefficient O(as^1,log(mu^2/mt^2)^0) s2
 double himalaya::H3::calc_coeff_as_1_log_0_s2(){
    return -(Mt*(pow3(Mt)*(3600*(1+lmMst1+pow2(lmMst1))-
 (2*(25*Dmst12*pow2(Mgl)*(Dmst12*(5+42*lmMst1)-8*(4+3*lmMst1)*pow2(Mst2))-
@@ -375,7 +691,7 @@ Mgl*pow2(Dmglst1)*(15*Mst1*Mt*pow2(s2t)*(10*(5-6*lmMst1)*Tbeta*pow2(MuSUSY)*(1-p
 (11-6*lmMst1)*Mst1*Tbeta)*pow3(Mst1)*pow3(s2t))))))/pow6(Mst2))/(Tbeta*pow2(Sbeta)*pow3(Mgl)))/Mst1))/1350.;
 }
 
-/// calc coeffcieint O(as^1,log(mu^2/mt^2)^1) s2
+/// calc coefficient O(as^1,log(mu^2/mt^2)^1) s2
 double himalaya::H3::calc_coeff_as_1_log_1_s2(){
    return (-2*pow3(Mt)*(pow3(Mgl)*(-5*pow2(Dmst12)*(Mt*(2*MuSUSY+5*Mst1*Tbeta)+8*s2t*Tbeta*pow2(Mst1))*pow2(Mst2)+6*Mst1*(3*Mt+5*Mst1*s2t)*Tbeta*xDmst12*pow3(Dmst12)+20*Dmst12*(Mt*(MuSUSY+2*Mst1*Tbeta)+3*s2t*Tbeta*pow2(Mst1))*pow4(Mst2)
 +60*Mt*(MuSUSY-(1-2*lmMst1)*Mst1*Tbeta)*pow6(Mst2))-
@@ -387,12 +703,12 @@ Mgl*pow2(Dmglst1)*(pow2(Dmst12)*(-2*Mt*(MuSUSY+2*Mst1*Tbeta)+3*s2t*Tbeta*pow2(Ms
 40*Mst1*Tbeta*pow6(Mst2))))))/(45.*Mst1*Tbeta*pow3(Mgl)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^1,log(mu^2/mt^2)^2) s2
+/// calc coefficient O(as^1,log(mu^2/mt^2)^2) s2
 double himalaya::H3::calc_coeff_as_1_log_2_s2(){
    return 8*pow4(Mt);
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^0) s2
+/// calc coefficient O(as^2,log(mu^2/mt^2)^0) s2
 double himalaya::H3::calc_coeff_as_2_log_0_s2(){
    return -(((pow2(Dmst12)*pow2(Mt)*pow2(s2t)*(pow2(Dmglst1)*(114960*(pow2(Dmsqst1)+Dmsqst1*pow2(Msq))*pow2(Mst1)-(12*(13249-916*lmMst1-60*pow2(lmMst1))*pow2(Mst1)-
 (1732531+16896*lmMst1-24840*pow2(lmMst1))*pow2(MuSUSY))*pow4(Msq))+
@@ -1013,7 +1329,7 @@ Tbeta*(884106*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt)+
 (241748*Mst1*MuSUSY+113864*Tbeta*pow2(Mst1))*pow2(Sbeta))*pow3(Mt)*pow6(Mst2)))))/(3456.*pow2(Mst1)*pow3(Mgl)))/(Tbeta*pow2(Sbeta)*pow6(Msq)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^1) s2
+/// calc coefficient O(as^2,log(mu^2/mt^2)^1) s2
 double himalaya::H3::calc_coeff_as_2_log_1_s2(){
    return (pow2(Mt)*(pow2(Mst2)*(Mgl*(4200*pow2(Dmst12)*pow2(Dmglst1+3*Mgl)*pow2(Mst1)*pow2(s2t)+
 (420*Dmst12*Mt*s2t*(-(pow2(Dmglst1)*(-2*pow2(Mst2)*(Mst1*Tbeta*(55*pow2(Dmsqst1)+80*Dmsqst1*pow2(Msq))+
@@ -1157,7 +1473,7 @@ Tbeta*(-105*(947+488*lmMst1)*Mt*s2t*pow3(Mst1)+
 7980*pow2(s2t)*pow4(Mst1))))*pow6(Msq)))))/pow6(Msq))/(Tbeta*pow2(Mst1)*pow2(Sbeta))))/(14175.*pow3(Mgl)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^2) s2
+/// calc coefficient O(as^2,log(mu^2/mt^2)^2) s2
 double himalaya::H3::calc_coeff_as_2_log_2_s2(){
    return (-2*pow3(Mt)*(pow3(Mgl)*(pow4(Msq)*(-5*pow2(Dmst12)*(Mt*(16*MuSUSY+43*Mst1*Tbeta)+
 64*s2t*Tbeta*pow2(Mst1))*pow2(Mst2)+
@@ -1186,12 +1502,12 @@ Dmst12*(Mt*(3*MuSUSY+4*Mst1*Tbeta)+
 Mt*(4*MuSUSY+51*Mst1*Tbeta)*pow6(Mst2))))))/(45.*Mst1*Tbeta*pow3(Mgl)*pow4(Msq)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^3) s2
+/// calc coefficient O(as^2,log(mu^2/mt^2)^3) s2
 double himalaya::H3::calc_coeff_as_2_log_3_s2(){
    return (184*pow4(Mt))/3.;
 }
 
-/// calc coeffcieint O(as^0,log(mu^2/mt^2)^0) s12
+/// calc coefficient (as^0,log(mu^2/mt^2)^0) s12
 double himalaya::H3::calc_coeff_as_0_log_0_s12(){
    return -(Dmst12*Mt*MuSUSY*s2t*(-2*Dmst12*Mt*(MuSUSY*s2t+6*Mt*Tbeta)*pow2(Mst2)+
 pow2(Dmst12)*(2*Mt*MuSUSY*s2t+
@@ -1241,17 +1557,18 @@ pow3(Dmst12)*(-20*s2t*(5*(1+6*lmMst1)*MuSUSY+6*(29-45*lmMst1)*Mst1*Tbeta)*pow2(M
 1200*(4-3*lmMst1)*Tbeta*pow3(Mt)*pow6(Mst2)))))/(2700.*Mst1*Tbeta*pow3(Mgl)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^1,log(mu^2/mt^2)^1) s12
+/// calc coefficient O(as^1,log(mu^2/mt^2)^1) s12
 double himalaya::H3::calc_coeff_as_1_log_1_s12(){
-   return (-2*MuSUSY*pow4(Mt)*(5*pow2(Mst2)*pow3(Mgl)*(pow2(Dmst12)-2*Dmst12*pow2(Mst2)-6*pow4(Mst2))+
-Dmst12*Mgl*pow2(Dmglst1)*(pow2(Dmst12)-2*Dmst12*pow2(Mst2)+3*pow4(Mst2))+
-xDmglst1*pow3(Dmglst1)*(-2*pow2(Dmst12)*pow2(Mst2)+pow3(Dmst12)+
-3*Dmst12*pow4(Mst2)+4*pow6(Mst2))-
-Dmglst1*pow2(Mgl)*(-(pow2(Dmst12)*pow2(Mst2))+2*pow3(Dmst12)+
-10*pow6(Mst2))))/(45.*Mst1*pow3(Mgl)*pow6(Mst2));
+   return (-2 * MuSUSY * pow4(Mt) * (5 * pow2(Mst2) * pow3(Mgl) * (pow2(Dmst12) - 2 *
+         Dmst12 * pow2(Mst2) - 6 * pow4(Mst2)) + Dmst12 * Mgl * pow2(Dmglst1) *
+      (pow2(Dmst12) - 2 * Dmst12 * pow2(Mst2) + 3 * pow4(Mst2)) + xDmglst1 *
+      pow3(Dmglst1) * (-2 * pow2(Dmst12) * pow2(Mst2) + pow3(Dmst12) + 3 *
+         Dmst12 * pow4(Mst2) + 4 * pow6(Mst2)) - Dmglst1 * pow2(Mgl) * (-(
+         pow2(Dmst12) * pow2(Mst2)) + 2 * pow3(Dmst12) + 10 * pow6(Mst2)))) / (
+      45. * Mst1 * pow3(Mgl) * pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^0) s12
+/// calc coefficient O(as^2,log(mu^2/mt^2)^0) s12
 double himalaya::H3::calc_coeff_as_2_log_0_s12(){
    return -(Mt*MuSUSY*(((-490*Mt*MuSUSY*((Dmst12*(-30*pow2(s2t)*(-(pow4(Msq)*(Dmst12*(4*pow2(Dmglst1)*(1732531+16896*lmMst1-
 24840*pow2(lmMst1))+
@@ -1521,7 +1838,7 @@ Dmsqst1*pow2(Msq)*((557+120*lmMst1)*(-(pow2(Dmst12)*pow2(Mst2))+pow3(Dmst12)+
 Dmst12*pow4(Mst2))+16*(4+15*lmMst1)*pow6(Mst2)))))))/Mst1)/(pow2(Mgl)*pow4(Msq)))))/(1.90512e8*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^1) s12
+/// calc coefficient O(as^2,log(mu^2/mt^2)^1) s12
 double himalaya::H3::calc_coeff_as_2_log_1_s12(){
    return (MuSUSY*pow3(Mt)*((-((xDmglst1*pow3(Dmglst1)*(-(pow2(Dmst12)*pow2(Mst2)*(16800*Mst1*Mt*Tbeta*(pow2(Dmsqst1)+Dmsqst1*pow2(Msq))+
 (-(Mt*(15680*MuSUSY+
@@ -1570,7 +1887,7 @@ Dmst12*pow4(Mst2)+2*pow6(Mst2))+
 (539-486*lmMst1)*Mt*pow6(Mst2)))))))/pow6(Msq)))/(14175.*pow2(Mst1)*pow3(Mgl)*pow6(Mst2));
 }
 
-/// calc coeffcieint O(as^2,log(mu^2/mt^2)^2) s12
+/// calc coefficient O(as^2,log(mu^2/mt^2)^2) s12
 double himalaya::H3::calc_coeff_as_2_log_2_s12(){
    return (-16*MuSUSY*pow4(Mt)*(5*pow2(Mst2)*pow3(Mgl)*(pow2(Dmst12)-2*Dmst12*pow2(Mst2)-6*pow4(Mst2))+
 Dmst12*Mgl*pow2(Dmglst1)*(pow2(Dmst12)-2*Dmst12*pow2(Mst2)+3*pow4(Mst2))+
@@ -1579,10 +1896,3 @@ xDmglst1*pow3(Dmglst1)*(-2*pow2(Dmst12)*pow2(Mst2)+pow3(Dmst12)+
 Dmglst1*pow2(Mgl)*(-(pow2(Dmst12)*pow2(Mst2))+2*pow3(Dmst12)+
 10*pow6(Mst2))))/(45.*Mst1*pow3(Mgl)*pow6(Mst2));
 }
-
-
-
-
-
-
-

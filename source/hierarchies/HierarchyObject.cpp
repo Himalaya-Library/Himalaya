@@ -164,18 +164,33 @@ int himalaya::HierarchyObject::getMDRFlag() const{
 }
 
 /**
- * 	Sets the delta lambdas at 1-, 2- and 3-loop order.
- * 	@param deltaLambdas a vector containing the delta lambda contributions ordered by loop order.
+ * 	Sets the zeta at 3-loop order with Himalaya logs.
+ * 	@param zeta zeta at 3-loop order.
  */
-void himalaya::HierarchyObject::setDeltaLambdas(Eigen::Matrix<double, 3, 1>& deltaLambdas){
-   this -> deltaLambdas = deltaLambdas;
+void himalaya::HierarchyObject::setZetaHimalaya(double zeta){
+   this -> zetaHimalaya = zeta;
 }
 
 /**
- * 	@return A vector of the delta lambdas. The 0th entry corresponds to the 1-loop, the 1st to the 2-loop and the 2nd to the 3-loop result.
+ * 	@return 3-loop zeta with Himalaya logs
  */
-Eigen::Matrix<double, 3, 1> himalaya::HierarchyObject::getDeltaLambdas() const{
-   return deltaLambdas;
+double himalaya::HierarchyObject::getZetaHimalaya() const{
+   return zetaHimalaya;
+}
+
+/**
+ * 	Sets the zeta at 3-loop order with EFT logs.
+ * 	@param zeta zeta at 3-loop order.
+ */
+void himalaya::HierarchyObject::setZetaEFT(double zeta){
+   this -> zetaEFT = zeta;
+}
+
+/**
+ * 	@return 3-loop zeta with EFT logs
+ */
+double himalaya::HierarchyObject::getZetaEFT() const{
+   return zetaEFT;
 }
 
 /**
