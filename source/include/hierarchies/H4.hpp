@@ -60,7 +60,7 @@ namespace himalaya{
        */
       double calc_coef_at_as2_no_sm_logs_log3();
    private:
-      double At, lmMt, lmMsq, lmMsusy, lmMst1, Msusy, Mt, Msq, Cbeta, Sbeta; /**< common variables */
+      double At, lmMt, lmMsq, lmMsusy, lmMst1{}, Msusy, Mt, Msq, Cbeta, Sbeta; /**< common variables */
       double z2, z3;	/**< Zeta functions */
       double shiftst1, shiftst2, shiftst3, xAt, xMsq, xlmMsusy, xMsusy; /**< MDR and truncation flags */
       double s1 = 0., s2 = 0., s12 = 0.;	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */

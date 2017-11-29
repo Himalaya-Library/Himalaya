@@ -83,9 +83,9 @@ double himalaya::HierarchyObject::getExpUncertainty(int loops) const{
    if(loops > 0 && loops <=3){
       return expUncertainties.at(loops);
    }
-   else {
-      throw std::runtime_error("Expansion uncertainty for " + std::to_string(loops) + " loop(s) is not available.");
-   }
+   
+   throw std::runtime_error("Expansion uncertainty for " + std::to_string(loops) + " loop(s) is not available.");
+   
 }
 
 /**
@@ -110,9 +110,9 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
    if(loops >= 0 && loops <=3){
       return dMhMap.at(loops);
    }
-   else {
-      throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops) + " loop(s) is not available.");
-   }
+   
+   throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops) + " loop(s) is not available.");
+   
 }
 
 /**
@@ -151,8 +151,9 @@ Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::getMDRMasses() const{
  * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
  */
 void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
-   if(mdrFlag != 0 && mdrFlag != 1)
+   if(mdrFlag != 0 && mdrFlag != 1) {
       throw std::runtime_error("The MDR-flag has to be 0 (DR-scheme) or 1 (MDR-scheme). Input: " + std::to_string(mdrFlag) + ".");
+}
    this -> mdrFlag = mdrFlag;
 }
 

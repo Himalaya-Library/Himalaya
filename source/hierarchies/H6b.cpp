@@ -3,8 +3,8 @@
 #include "H6b.hpp"
 #include "HierarchyCalculator.hpp"
 #include "Utils.hpp"
-#include <type_traits>
 #include <cmath>
+#include <type_traits>
 
 /**
  * 	Constructor

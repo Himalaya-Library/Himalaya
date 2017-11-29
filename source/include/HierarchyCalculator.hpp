@@ -113,7 +113,7 @@ namespace himalaya{
       const static unsigned int xxMgl;		/**< This flag can truncate the expansion depth of the gluino mass by one order*/
    private:
       Parameters p;	/** The HimalayaInterface struct. */
-      double Al4p,lmMgl, lmMsq, Mgl, Msq, prefac, z2;/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix, Zeta[2] */
+      double Al4p{},lmMgl{}, lmMsq{}, Mgl{}, Msq{}, prefac{}, z2;/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix, Zeta[2] */
       /**
        * 	Initializes all common variables.
        */

@@ -4,8 +4,8 @@
 #include "HierarchyCalculator.hpp"
 #include "Utils.hpp"
 #include <iomanip>      // std::setprecision
-#include <type_traits>
 #include <cmath>
+#include <type_traits>
 
 /**
  * 	Constuctor

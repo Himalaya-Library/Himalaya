@@ -3,8 +3,8 @@
 #include "H32q2g.hpp"
 #include "HierarchyCalculator.hpp"
 #include "Utils.hpp"
-#include <type_traits>
 #include <cmath>
+#include <type_traits>
 
 /**
  * 	Constuctor

@@ -17,8 +17,8 @@
 #include "H9.hpp"
 #include "H9q2.hpp"
 #include "Utils.hpp"
-#include <stdexcept>
 #include <iomanip>
+#include <stdexcept>
 #include <type_traits>
 
 extern "C" void dszhiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
@@ -59,7 +59,7 @@ namespace himalaya {
    const unsigned int HierarchyCalculator::xxDmsqst2			= 24;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
    const unsigned int HierarchyCalculator::xxMgl			= 25;	/**< This flag can truncate the expansion depth of the gluino mass by one order*/
    
-}
+}  // namespace himalaya
 
 /**
  * 	Constructor 
@@ -281,7 +281,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    return suitableHierarchy;
 }
 
-//TODO: if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
+// TODO(avoigt): if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
 /**
  * 	Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
  * 	@param ho a HierarchyObject with constant isAlphab.
