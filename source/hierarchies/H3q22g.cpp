@@ -38,7 +38,6 @@ himalaya::H3q22g::H3q22g(std::map<unsigned int, unsigned int> flagMap, double Al
    this -> Dmst12 = Dmst12;
    this -> Dmsqst1 = Dmsqst1;
    this -> lmMst1 = lmMst1;
-   this -> Mgl = Mgl;
    this -> Mt = Mt;
    this -> Mst1 = Mst1;
    this -> Mst2 = Mst2;
