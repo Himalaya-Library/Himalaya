@@ -176,7 +176,6 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // M_X is a susy mass
    ho.setZetaHimalaya(ho.getZetaHimalaya() 
       - mh2EFTCalculator.coeff_as2_no_log(mQ3, mU3, Xt, p.MG, Msq));
-   
    // add the EFT logs and subtract constant part twice to avoid double counting
    // Factorization: Himalaya_const - 2 * EFT_const_w/o_dlatas2 + EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    //	+ Log(mu^2/mQ3^2)^1 EFT_coeff_log^1  + Log(mu^2/mQ3^2)^2 EFT_coeff_log^2 + Log(mu^2/mQ3^2)^3 EFT_coeff_log^3
@@ -1231,7 +1230,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
    
    // check hierarchies
    himalaya::HierarchyObject ho (false);
-   ho.setMDRFlag(0);
+   ho.setMDRFlag(1);
    for(int i = h3; i <= h9q2; i++){
       ho.setSuitableHierarchy(i);
       Eigen::Matrix2d oloMat = calculateHierarchy(ho, 1,0,0);
