@@ -1,3 +1,7 @@
+#pragma once
+
+namespace himalaya {
+
 // some templates to perform operations between int's and complex<double>
 template< typename T, typename SCALAR > inline
 typename std::enable_if< !std::is_same<T,SCALAR>::value, std::complex<T> >::type
@@ -42,3 +46,5 @@ template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
 template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
 template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x; }
 template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x; }
+
+} // namespace himalaya

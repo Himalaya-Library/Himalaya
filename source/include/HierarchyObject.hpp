@@ -126,17 +126,17 @@ namespace himalaya{
        * 	
        */
    private:
-      bool isAlphab;									/**< the bool isAlphab */
-      int hierarchy;									/**< the suitable hierarchy */
-      int mdrFlag = 0;									/**< the MDR-scheme flag */
-      double absDiff2L;									/**< the absolute difference of the two loop Higgs masses */
-      double relDiff2L;									/**< the relative difference of the two loop Higgs masses */
-      std::map<int, double> expUncertainties;						/**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
-      std::map<int, Eigen::Matrix2d> dMhMap;						/**< the map which holds all mass matrices at the given loop order */
-      Eigen::Matrix2d mdrShift;								/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
-      Eigen::Matrix<double, 2, 1> mdrMasses;						/**< the 'vector' which holds the MDR masses */
-      double zetaHimalaya;								/**< zeta lambda 3-loop from Himalaya only */
-      double zetaEFT;									/**< zeta lambda 3-loop from EFT and Himalaya */
+      bool isAlphab{false};								/**< the bool isAlphab */
+      int hierarchy{};									/**< the suitable hierarchy */
+      int mdrFlag{0};									/**< the MDR-scheme flag */
+      double absDiff2L{};								/**< the absolute difference of the two loop Higgs masses */
+      double relDiff2L{};								/**< the relative difference of the two loop Higgs masses */
+      std::map<int, double> expUncertainties{};						/**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
+      std::map<int, Eigen::Matrix2d> dMhMap{};						/**< the map which holds all mass matrices at the given loop order */
+      Eigen::Matrix2d mdrShift{};							/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
+      Eigen::Matrix<double, 2, 1> mdrMasses{};						/**< the 'vector' which holds the MDR masses */
+      double zetaHimalaya{};								/**< zeta lambda 3-loop from Himalaya only */
+      double zetaEFT{};									/**< zeta lambda 3-loop from EFT and Himalaya */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

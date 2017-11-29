@@ -112,8 +112,8 @@ namespace himalaya{
       const static unsigned int xxDmsqst2;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
       const static unsigned int xxMgl;		/**< This flag can truncate the expansion depth of the gluino mass by one order*/
    private:
-      Parameters p;	/** The HimalayaInterface struct. */
-      double Al4p,lmMgl, lmMsq, Mgl, Msq, prefac, z2;/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix, Zeta[2] */
+      Parameters p{};	/** The HimalayaInterface struct. */
+      double Al4p{}, lmMgl{}, lmMsq{}, Mgl{}, Msq{}, prefac{};/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix */
       /**
        * 	Initializes all common variables.
        */
@@ -137,7 +137,7 @@ namespace himalaya{
        * 	@return A matrix which corresponds to the difference of the DR and MDR scheme.
        */
       Eigen::Matrix2d getShift(const HierarchyObject& ho);
-      std::map<unsigned int, unsigned int> flagMap;	/** A map which holds all hierarchy key value pairs. */
+      std::map<unsigned int, unsigned int> flagMap{};	/** A map which holds all hierarchy key value pairs. */
       /**
        * 	A function which maps a boolean to a string.
        * 	@param tf a boolean.

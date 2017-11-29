@@ -1,5 +1,3 @@
-#define Pi M_PI
-
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "H3.hpp"
@@ -16,9 +14,10 @@
 #include "H6g2.hpp"
 #include "H9.hpp"
 #include "H9q2.hpp"
+#include "Constants.hpp"
 #include "Utils.hpp"
-#include <stdexcept>
 #include <iomanip>
+#include <stdexcept>
 #include <type_traits>
 
 extern "C" void dszhiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
@@ -59,26 +58,22 @@ namespace himalaya {
    const unsigned int HierarchyCalculator::xxDmsqst2			= 24;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
    const unsigned int HierarchyCalculator::xxMgl			= 25;	/**< This flag can truncate the expansion depth of the gluino mass by one order*/
    
-}
+}  // namespace himalaya
 
 /**
  * 	Constructor 
- * 	@param p a HimalayaInterface struct
+ * 	@param p_ a HimalayaInterface struct
  * 	@param verbose a bool which suppresses the information of the calculation if set to flase
  */
-himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p, const bool verbose){
+himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_, const bool verbose)
+   : p(p_)
+{
    if(!isInfoPrinted && verbose){
       printInfo();
       isInfoPrinted = true;
    }
-   this -> p = p;
-   this -> p.validate(verbose);
 
-   // imaginary unit
-   const std::complex<double> I(0., 1.);
-
-   // Riemann-Zeta
-   z2 = pow2(Pi)/6.;
+   p.validate(verbose);
 
    // init common variables
    init();
@@ -281,7 +276,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    return suitableHierarchy;
 }
 
-//TODO: if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
+// TODO(avoigt): if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
 /**
  * 	Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
  * 	@param ho a HierarchyObject with constant isAlphab.

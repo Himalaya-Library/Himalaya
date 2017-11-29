@@ -1,60 +1,56 @@
-#define Pi M_PI
-
 #include "Mh2EFTCalculator.hpp"
-
-template <typename T> T pow2(T x)  { return x*x; }
-template <typename T> T pow3(T x)  { return x*x*x; }
-template <typename T> T pow4(T x)  { return x*x*x*x; }
-template <typename T> T pow5(T x)  { return x*x*x*x*x; }
-template <typename T> T pow6(T x)  { return x*x*x*x*x*x; }
-template <typename T> T pow7(T x)  { return x*x*x*x*x*x*x; }
-template <typename T> T pow8(T x)  { return x*x*x*x*x*x*x*x; }
-template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
-template <typename T> T power10(T x) { return pow9(x)*x; }
-template <typename T> T pow11(T x) { return pow2(x)*pow9(x); }
-template <typename T> T pow12(T x) { return pow2(pow6(x)); }
-template <typename T> T pow13(T x) { return pow4(x)*pow9(x); }
-template <typename T> T pow14(T x) { return pow2(pow7(x)); }
-template <typename T> T pow15(T x) { return pow6(x)*pow9(x); }
-template <typename T> T pow16(T x) { return pow2(pow8(x)); }
-template <typename T> T pow17(T x) { return pow16(x)*x; }
-template <typename T> T pow18(T x) { return pow2(pow9(x)); }
-template <typename T> T pow19(T x) { return pow18(x)*x; }
-template <typename T> T pow20(T x) { return pow19(x)*x; }
 
 namespace himalaya {
 namespace mh2_eft {
+namespace {
+   const double zt2 = 1.6449340668482264364724151666460;
+   const double zt3 = 1.2020569031595942853997381615114;
+   const double Pi  = 3.1415926535897932384626433832795;
+   const double log2 = std::log(2.);
+   template <typename T> T pow2(T x)  { return x*x; }
+   template <typename T> T pow3(T x)  { return x*x*x; }
+   template <typename T> T pow4(T x)  { return x*x*x*x; }
+   template <typename T> T pow5(T x)  { return x*x*x*x*x; }
+   template <typename T> T pow6(T x)  { return x*x*x*x*x*x; }
+   template <typename T> T pow7(T x)  { return x*x*x*x*x*x*x; }
+   template <typename T> T pow8(T x)  { return x*x*x*x*x*x*x*x; }
+   template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
+   template <typename T> T power10(T x) { return pow9(x)*x; }
+   template <typename T> T pow11(T x) { return pow2(x)*pow9(x); }
+   template <typename T> T pow12(T x) { return pow2(pow6(x)); }
+   template <typename T> T pow13(T x) { return pow4(x)*pow9(x); }
+   template <typename T> T pow14(T x) { return pow2(pow7(x)); }
+   template <typename T> T pow15(T x) { return pow6(x)*pow9(x); }
+   template <typename T> T pow16(T x) { return pow2(pow8(x)); }
+   template <typename T> T pow17(T x) { return pow16(x)*x; }
+   template <typename T> T pow18(T x) { return pow2(pow9(x)); }
+   template <typename T> T pow19(T x) { return pow18(x)*x; }
+   template <typename T> T pow20(T x) { return pow19(x)*x; }
 
-   const double Mh2EFTCalculator::zt2 = 1.6449340668482264364724151666460;
-   const double Mh2EFTCalculator::zt3 = 1.2020569031595942853997381615114;
-   const double Mh2EFTCalculator::log2 = std::log(2.);
+} // anonymous namespace
+} // namespace mh2_eft
+} // namespace himalaya
+
+/**
+ * 	fin[] function from arXiv:hep-ph/0507139 .
+ *
+ * 	@param m12 squared mass \f$m_1^2\f$
+ * 	@param m22 squared mass \f$m_2^2\f$
+ * 	@param MR2 squared renormalization scale
+ *
+ * 	@return fin(m12, m22)
+ */
+double himalaya::mh2_eft::Mh2EFTCalculator::fin(double m12, double m22, double MR2)
+{
+   using std::log;
+   using gm2calc::dilog;
+   return (6*(m12*log(m12/MR2) + m22*log(m22/MR2)) +
+      (-m12 - m22)*(7 + zt2) +
+      (m12 - m22)*(2*dilog(1 - m12/m22) +
+         pow2(log(m12/m22))/2.) +
+      ((m12 + m22)*pow2(log(m12/m22)))/2. -
+      2*(m12*pow2(log(m12/MR2)) + m22*pow2(log(m22/MR2))))/2.;
 }
-}
-   
-//himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(const Parameters& p){
-//}
-
-
-   /**
-    * 	fin[] function from arXiv:hep-ph/0507139 .
-    *
-    * 	@param m12 squared mass \f$m_1^2\f$
-    * 	@param m22 squared mass \f$m_2^2\f$
-    * 	@param MR2 squared renormalization scale
-    *
-    * 	@return fin(m12, m22)
-    */
-   double himalaya::mh2_eft::Mh2EFTCalculator::fin(double m12, double m22, double MR2)
-   {
-      using std::log;
-      using gm2calc::dilog;
-      return (6*(m12*log(m12/MR2) + m22*log(m22/MR2)) +
-         (-m12 - m22)*(7 + zt2) +
-         (m12 - m22)*(2*dilog(1 - m12/m22) +
-            pow2(log(m12/m22))/2.) +
-         ((m12 + m22)*pow2(log(m12/m22)))/2. -
-         2*(m12*pow2(log(m12/MR2)) + m22*pow2(log(m22/MR2))))/2.;
-   }
 
 /// 1-loop coefficient O(at*log^0)
 double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as_0_log_0(double mQ32, double mU32, double Xt, double MR2)

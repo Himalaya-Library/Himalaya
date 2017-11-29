@@ -1,10 +1,9 @@
-#define Pi M_PI
-
 #include "H3q22g.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Constants.hpp"
 #include "Utils.hpp"
-#include <type_traits>
 #include <cmath>
+#include <type_traits>
 
 /**
  * 	Constructor
@@ -46,9 +45,6 @@ himalaya::H3q22g::H3q22g(std::map<unsigned int, unsigned int> flagMap, double Al
    this -> Msq = Msq;
    this -> MuSUSY = MuSUSY;
    this -> s2t = s2t;
-   // zeta functions
-   z2 = pow2 ( Pi ) / 6.;
-   z3 = 1.202056903159594;
    // mdr flags, indicates if one wants to shift the dr stop mass to the mdr stop mass
    shiftst1 = mdrFlag;
    shiftst2 = mdrFlag;
