@@ -1,3 +1,5 @@
+#pragma once
+
 namespace himalaya {
 
 // some templates to perform operations between int's and complex<double>
