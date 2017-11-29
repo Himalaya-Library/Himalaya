@@ -4,8 +4,9 @@
  * 	A constructor.
  * 	@param isAlphab the boolean which determines wether the members are proportinal to alpha_b or alpha_t.
  */
-himalaya::HierarchyObject::HierarchyObject(bool isAlphab){
-   this -> isAlphab = isAlphab;
+himalaya::HierarchyObject::HierarchyObject(bool isAlphab)
+   : isAlphab(isAlphab)
+{
 }
 
 /**

@@ -1,5 +1,3 @@
-#define Pi M_PI
-
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "H3.hpp"
@@ -16,6 +14,7 @@
 #include "H6g2.hpp"
 #include "H9.hpp"
 #include "H9q2.hpp"
+#include "Constants.hpp"
 #include "Utils.hpp"
 #include <iomanip>
 #include <stdexcept>
@@ -63,22 +62,18 @@ namespace himalaya {
 
 /**
  * 	Constructor 
- * 	@param p a HimalayaInterface struct
+ * 	@param p_ a HimalayaInterface struct
  * 	@param verbose a bool which suppresses the information of the calculation if set to flase
  */
-himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p, const bool verbose){
+himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_, const bool verbose)
+   : p(p_)
+{
    if(!isInfoPrinted && verbose){
       printInfo();
       isInfoPrinted = true;
    }
-   this -> p = p;
-   this -> p.validate(verbose);
 
-   // imaginary unit
-   const std::complex<double> I(0., 1.);
-
-   // Riemann-Zeta
-   z2 = pow2(Pi)/6.;
+   p.validate(verbose);
 
    // init common variables
    init();
