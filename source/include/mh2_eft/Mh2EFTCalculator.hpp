@@ -194,9 +194,6 @@ namespace mh2_eft{
       double coeff_as_2_log_3();
       std::string tf(const bool tf);
       Parameters p;
-      static const double zt2;
-      static const double zt3;
-      static const double log2;
    };
 }	// mh2_eft
 }	// himalaya
