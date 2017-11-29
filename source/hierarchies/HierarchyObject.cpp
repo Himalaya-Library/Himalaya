@@ -69,7 +69,7 @@ double himalaya::HierarchyObject::getRelDiff2L() const{
  */
 void himalaya::HierarchyObject::setExpUncertainty(int loops, double uncertainty){
    if(loops > 0 && loops <=3){
-      expUncertainties.insert(std::pair<int, double> (loops, uncertainty));
+      expUncertainties.emplace(loops, uncertainty);
    }
    else {
       throw std::runtime_error("Expansion uncertainty for " + std::to_string(loops) + " loop(s) is not available.");
@@ -96,7 +96,7 @@ double himalaya::HierarchyObject::getExpUncertainty(int loops) const{
  */
 void himalaya::HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh){
    if(loops >= 0 && loops <=3){
-      dMhMap.insert(std::pair<int, Eigen::Matrix2d> (loops, dMh));
+      dMhMap.emplace(loops, dMh);
    }
    else {
       throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops) + " loop(s) is not available.");

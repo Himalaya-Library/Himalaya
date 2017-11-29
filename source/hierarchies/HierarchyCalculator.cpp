@@ -86,7 +86,7 @@ void himalaya::HierarchyCalculator::init(){
    // fill flag list
    flagMap.clear();
    for(unsigned int i = xx; i <= xxMgl; i++){
-      flagMap.insert(std::pair<unsigned int, unsigned int> (i, 1));
+      flagMap.emplace(i, 1u);
    }
    // beta
    const double beta = atan(p.vu / p.vd);
