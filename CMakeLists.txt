@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
 project(Himalaya CXX Fortran)
 
 # require an Eigen installation
@@ -7,6 +7,7 @@ find_package(Eigen3 REQUIRED)
 # if needed, set your Fortran and C++ compiler
 #set (CMAKE_Fortran_COMPILER gfortran)
 #set (CMAKE_CXX_COMPILER clang++-3.8)
+#set (CMAKE_CXX_COMPILER icpc)
 
 # set the build type to release. If one needs debugging symbols, compile
 # with "CMAKE_BUILD_TYPE Debug"
@@ -23,6 +24,7 @@ set(Himalaya_VERSION_RELEASE 1)
 set(CMAKE_CXX_FLAGS "-fPIC -std=c++11 -Wall -Wextra -pedantic")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+set(CMAKE_CXX_STANDARD 11)
 
 # set paths
 set(INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/include)
@@ -54,9 +56,8 @@ list(REMOVE_ITEM LIBSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
 add_library(DSZ STATIC ${FSOURCES})
 add_library(Himalaya STATIC ${LIBSOURCES})
 
-# set the executable and specify the c++ version
+# set the executable
 add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
-target_compile_features(example PRIVATE cxx_range_for)
 
 # link mh2l and himalaya to the executable
 target_link_libraries(example Himalaya DSZ)
