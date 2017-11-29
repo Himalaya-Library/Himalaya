@@ -148,7 +148,7 @@ int main() {
 	 setup_CMSSM_large_m0(),
 	 setup_HSSUSY_minmix()
       }; 
-      for (const auto point: points) {
+      for (const auto& point: points) {
 	 // init hierarchy calculator
 	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
