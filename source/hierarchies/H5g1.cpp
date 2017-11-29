@@ -1,7 +1,6 @@
-#define Pi M_PI
-
 #include "H5g1.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
 #include <type_traits>
@@ -49,24 +48,7 @@ himalaya::H5g1::H5g1(std::map<unsigned int, unsigned int> flagMap, double Al4p, 
    this -> Msq = Msq;
    this -> MuSUSY = MuSUSY;
    this -> s2t = s2t;
-   // zeta functions
-   z2 = pow2(Pi) / 6.;
-   z3 = 1.202056903159594;
-   z4 = pow4(Pi) / 90.;
-   // poly logs
-   double pl412 = 0.51747906167389934317668576113647; // PolyLog[4,1/2]
-   std::complex<double> pl2expPi3(0.27415567780803773941206919444, 1.014941606409653625021202554275); // PolyLog[2, Exp[I Pi / 3]]
-   std::complex<double> pl3expPi6sqrt3(0.51928806536375962552715984277228, - 0.33358157526196370641686908633664); // PolyLog[3, Exp[- I Pi / 6] / Sqrt[3]]
 
-   // polylog functions, checked
-   B4 = (-4 * z2 * pow2(log(2)) + 2 / 3.* pow4(log(2)) - 13 / 2. * z4 + 16. * pl412);
-   DN = 6 * z3 - 4 * z2 * pow2(log(2)) + 2 / 3. * pow4(log(2)) - 21 / 2. * z4 + 16. * pl412;
-   OepS2 = - 763 / 32. - (9 * Pi * sqrt(3) * pow2(log(3))) / 16. - (35 * pow3(Pi) * sqrt(3)) / 48.
-      + 195 / 16. * z2 - 15 / 4. * z3 + 57 / 16. * z4 + 45 * sqrt(3) / 2. * std::imag(pl2expPi3)
-      - 27 * sqrt(3) * std::imag(pl3expPi6sqrt3);
-   S2 = 4 * std::imag(pl2expPi3) / (9. * sqrt(3));
-   T1ep = - 45 / 2. - (Pi * sqrt(3) * pow2(log(3))) / 8. - (35 * pow3(Pi) * sqrt(3)) / 216. - 9 / 2. * z2 + z3 
-      + 6. * sqrt(3) * std::imag(pl2expPi3) - 6. * sqrt(3) * std::imag(pl3expPi6sqrt3);
    // mdr flags, indicates if one wants to shift the dr stop mass to the mdr stop mass
    shiftst1 = mdrFlag;
    shiftst2 = mdrFlag;

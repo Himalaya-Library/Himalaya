@@ -67,10 +67,9 @@ namespace himalaya{
        */
       double calc_coef_at_as2_no_sm_logs_log3();
    private:
-      double Dmst12, Dmsqst1, lmMt, lmMgl, lmMst1, Mgl, Mt, Mst1, Mst2, Msq, MuSUSY, s2t, Tbeta, Sbeta; /**< common variables */
-      double z2, z3;	/**< Zeta functions */
-      int shiftst1, shiftst2, shiftst3, xDmst12, x, xMgl, xDmsqst1; /**< MDR and truncation flags */
-      double s1 = 0., s2 = 0., s12 = 0.;	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
+      double Dmst12{}, Dmsqst1{}, lmMt{}, lmMgl{}, lmMst1{}, Mgl{}, Mt{}, Mst1{}, Mst2{}, Msq{}, MuSUSY{}, s2t{}, Tbeta{}, Sbeta{}; /**< common variables */
+      int shiftst1{}, shiftst2{}, shiftst3{}, xDmst12{}, x{}, xMgl{}, xDmsqst1{}; /**< MDR and truncation flags */
+      double s1{}, s2{}, s12{};	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
    };
 }	// himalaya
 #endif	// H9q2_HPP
