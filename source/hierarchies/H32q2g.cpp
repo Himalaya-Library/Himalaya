@@ -37,11 +37,9 @@ himalaya::H32q2g::H32q2g(const std::map<unsigned int, unsigned int>& flagMap, do
    this -> Dmst12 = Dmst12;
    this -> Dmsqst1 = Dmsqst1;
    this -> lmMst1 = lmMst1;
-   this -> Mgl = Mgl;
    this -> Mt = Mt;
    this -> Mst1 = Mst1;
    this -> Mst2 = Mst2;
-   this -> Msq = Msq;
    this -> MuSUSY = MuSUSY;
    this -> s2t = s2t;
    // mdr flags, indicates if one wants to shift the dr stop mass to the mdr stop mass
