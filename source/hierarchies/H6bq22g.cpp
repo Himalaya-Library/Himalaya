@@ -26,7 +26,7 @@
  * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms
  * 	@param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-himalaya::H6bq22g::H6bq22g(std::map<unsigned int, unsigned int> flagMap, double Al4p, double beta, double Dmglst2,
+himalaya::H6bq22g::H6bq22g(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmglst2,
 		 double Dmsqst2, double lmMt, double lmMst1, double lmMst2,
 		 double Mt, double Mst1, double Mst2, double Msq, double MuSUSY,
 		 double s2t,

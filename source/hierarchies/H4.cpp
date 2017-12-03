@@ -22,7 +22,7 @@
  * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms
  * 	@param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-himalaya::H4::H4(std::map<unsigned int, unsigned int> flagMap, double Al4p, double At, double beta,
+himalaya::H4::H4(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double At, double beta,
 		 double lmMt, double lmMsq, double lmMsusy, double Mt, double Msusy, double Msq,
 		 int mdrFlag, int oneLoopFlag, int twoLoopFlag, int threeLoopFlag){
    // abbrev for cos(beta) and sin(beta)
