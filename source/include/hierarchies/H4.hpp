@@ -15,7 +15,6 @@ namespace himalaya{
        * 	@param beta a double which is the mixing angle beta
        * 	@param lmMt a double log((<renormalization scale> / Mt)^2)
        * 	@param lmMsq a double log((<renormalization scale> / Msq)^2)
-       * 	@param lmMst1 a double log((<renormalization scale> / Mst1)^2)
        * 	@param Mt a double top/bottom quark mass
        * 	@param Msusy a double (Mst1 + Mst2 + Mgl) / 3.
        * 	@param Msq a double the average squark mass w/o the top squark
@@ -60,7 +59,7 @@ namespace himalaya{
        */
       double calc_coef_at_as2_no_sm_logs_log3();
    private:
-      double At{}, lmMt{}, lmMsq{}, lmMsusy{}, lmMst1{}, Msusy{}, Mt{}, Msq{}, Cbeta{}, Sbeta{}; /**< common variables */
+      double At{}, lmMt{}, lmMsq{}, lmMsusy{}, Msusy{}, Mt{}, Msq{}, Cbeta{}, Sbeta{}; /**< common variables */
       double shiftst1{}, shiftst2{}, shiftst3{}, xAt{}, xMsq{}, xlmMsusy{}, xMsusy{}; /**< MDR and truncation flags */
       double s1{}, s2{}, s12{};	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
    };

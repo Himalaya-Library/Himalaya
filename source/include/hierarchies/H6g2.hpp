@@ -68,7 +68,7 @@ namespace himalaya{
       double calc_coef_at_as2_no_sm_logs_log3();
    private:
       double Dmglst2{}, lmMt{}, lmMst1{}, lmMst2{}, lmMsq{}, Mgl{}, Mt{}, Mst1{}, Mst2{}, Msq{}, MuSUSY{}, s2t{}, Tbeta{}, Sbeta{}; /**< common variables */
-      int shiftst1{}, shiftst2{}, shiftst3{}, xDR2DRMOD{}, xDmglst1{}, xDmglst2{}, xMsq{}, xMst{}; /**< MDR and truncation flags */
+      int shiftst1{}, shiftst2{}, shiftst3{}, xDR2DRMOD{}, xDmglst2{}, xMsq{}, xMst{}; /**< MDR and truncation flags */
       double s1{}, s2{}, s12{};	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
    };
 }	// himalaya
