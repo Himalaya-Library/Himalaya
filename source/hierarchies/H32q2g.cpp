@@ -54,7 +54,7 @@ himalaya::H32q2g::H32q2g(std::map<unsigned int, unsigned int> flagMap, double Al
    xDmsqst1 = flagMap.at (HierarchyCalculator::xxDmsqst1);
    
    s1 = 
-   #include "../hierarchies/h32q2g//sigS1Full.inc"
+   #include "../hierarchies/h32q2g/sigS1Full.inc"
    ;
    s2 = 
    #include "../hierarchies/h32q2g/sigS2Full.inc"
