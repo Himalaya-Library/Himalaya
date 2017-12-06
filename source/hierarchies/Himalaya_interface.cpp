@@ -1,11 +1,11 @@
 #include "Himalaya_interface.hpp"
+#include <Eigen/Eigenvalues>
 #include <cmath>
 #include <iostream>
 #include <string>
 #include <tuple>
 #include <utility>
 #include <vector>
-#include <Eigen/Eigenvalues>
 
 namespace himalaya {
 
