@@ -53,14 +53,24 @@ file(GLOB_RECURSE FSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/include/mh2l/*f)
 file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.hpp)
 file(GLOB LIBSOURCES ${SOURCES} ${HEADERS})
 list(REMOVE_ITEM LIBSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
-add_library(DSZ STATIC ${FSOURCES})
-add_library(Himalaya STATIC ${LIBSOURCES})
+add_library(DSZ_static STATIC ${FSOURCES})
+set_target_properties(DSZ_static PROPERTIES OUTPUT_NAME DSZ)
+add_library(DSZ_shared SHARED ${FSOURCES})
+set_target_properties(DSZ_shared PROPERTIES OUTPUT_NAME DSZ)
+add_library(Himalaya_static STATIC ${LIBSOURCES})
+set_target_properties(Himalaya_static PROPERTIES OUTPUT_NAME Himalaya)
+add_library(Himalaya_shared SHARED ${LIBSOURCES})
+set_target_properties(Himalaya_shared PROPERTIES OUTPUT_NAME Himalaya)
 
 # set the executable
 add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
 
 # link mh2l and himalaya to the executable
-target_link_libraries(example Himalaya DSZ)
+target_link_libraries(example Himalaya_static DSZ_static)
 
 # install
-install(TARGETS Himalaya ARCHIVE DESTINATION lib)
+install(
+  TARGETS Himalaya_static Himalaya_shared
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+)
