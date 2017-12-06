@@ -28,12 +28,17 @@ void Parameters::validate(bool verbose)
       std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
       // set stop masses
       MSt << sortedEigenvalues.at(0), sortedEigenvalues.at(1);
-      // extraxt mixing angle
-      const double delta1 = std::abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
-      const double delta2 = std::abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
 
+      // extract mixing angle
       const double theta = [&] {
-         if(delta1 < delta2){
+         const double delta1 =
+            std::abs(acos(std::real(es.eigenvectors().col(0)(0))) +
+                     asin(std::real(es.eigenvectors().col(0)(1))));
+         const double delta2 =
+            std::abs(acos(std::real(es.eigenvectors().col(1)(0))) +
+                     asin(std::real(es.eigenvectors().col(1)(1))));
+
+         if (delta1 < delta2) {
             return acos(std::real(es.eigenvectors().col(0)(0)));
          } else {
             return -acos(std::real(es.eigenvectors().col(1)(0)));
@@ -42,7 +47,7 @@ void Parameters::validate(bool verbose)
 
       s2t = sin(2 * theta);
 
-      if(verbose){
+      if (verbose) {
          std::cout << "\033[1;34m Info:\033[0m Stop masses or mixing angle not provided. Calculated values:\n" <<
             "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" <<
             "\tmixing angle: " << theta << ".\n";
@@ -62,12 +67,17 @@ void Parameters::validate(bool verbose)
       std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
       // set sbottom masses
       MSb << sortedEigenvalues.at(0), sortedEigenvalues.at(1);
-      // extract mixing angle
-      const double delta1 = std::abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
-      const double delta2 = std::abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
 
+      // extract mixing angle
       const double theta = [&] {
-         if(delta1 < delta2){
+         const double delta1 =
+            std::abs(acos(std::real(es.eigenvectors().col(0)(0))) +
+                     asin(std::real(es.eigenvectors().col(0)(1))));
+         const double delta2 =
+            std::abs(acos(std::real(es.eigenvectors().col(1)(0))) +
+                     asin(std::real(es.eigenvectors().col(1)(1))));
+
+         if (delta1 < delta2) {
             return acos(std::real(es.eigenvectors().col(0)(0)));
          } else {
             return -acos(std::real(es.eigenvectors().col(1)(0)));
@@ -76,7 +86,7 @@ void Parameters::validate(bool verbose)
 
       s2b = sin(2 * theta);
 
-      if(verbose){
+      if (verbose) {
          std::cout << "\033[1;34m Info:\033[0m Sbottom masses or mixing angle not provided. Calculated values:\n" <<
             "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" <<
             "\tmixing angle: " << theta << ".\n";
