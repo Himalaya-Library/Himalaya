@@ -34,8 +34,8 @@ std::pair<V2,double> calculate_MSf_s2f(const RM22& M)
 
    if (ew.minCoeff() < 0.) {
       throw std::runtime_error(
-         "DR stop masses are tachyonic: mst1^2 = " + std::to_string(ew(0)) +
-         ", mst2^2 = " + std::to_string(ew(1)));
+         "DR sfermion masses are tachyonic: mst1^2 = " + std::to_string(ew(0))
+         + ", mst2^2 = " + std::to_string(ew(1)));
    }
 
    ew = ew.unaryExpr([](double x){ return std::sqrt(x); });
@@ -108,13 +108,14 @@ void Parameters::validate(bool verbose)
       }
    }
 
-   // check the ordering of the stop/sbottom quarks
+   // sort stops/sbottoms
    sort_ew(MSt, s2t);
    sort_ew(MSb, s2b);
 
-   // check if the stop/sbottom masses are degenerated. If this is the case one could get spurious poles
-   // in Pietro's code. To avoid this numerical issue we shift the stop/bottom 1 mass by a relative (but small)
-   // value.
+   // check if the stop/sbottom masses are degenerated. If this is the
+   // case one could get spurious poles in Pietro's code. To avoid
+   // this numerical issue we shift the stop/bottom 1 mass by a
+   // relative (but small) value.
    if (std::abs(MSt(0) - MSt(1)) < 1.0E-5) {
       MSt(0) = MSt(1) / (1. + 1.0E-5);
    }
