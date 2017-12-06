@@ -1,4 +1,5 @@
 #include "Mh2EFTCalculator.hpp"
+#include <iostream>
 
 namespace himalaya {
 namespace mh2_eft {

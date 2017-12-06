@@ -3,6 +3,7 @@
 #include "HierarchyCalculator.hpp"
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
+#include <iostream>
 
 himalaya::Parameters setup_SPS1a(){
    himalaya::Parameters pars;
