@@ -73,9 +73,10 @@ void Parameters::validate(bool verbose)
 {
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)) {
-      const double beta = std::atan(vu / vd);
+      const double tan_beta = vu / vd;
+      const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
-      const double Xt = Mt * (At - mu * 1 / tan(beta));
+      const double Xt = Mt * (At - mu * 1 / tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 stopMatrix;
       stopMatrix << mq2(2, 2) + Mt * Mt + (1/2. - 2/3. * sw2) * MZ * MZ * cos_2beta, Xt,
@@ -91,9 +92,10 @@ void Parameters::validate(bool verbose)
    }
 
    if (std::isnan(MSb(0)) || std::isnan(MSb(1)) || std::isnan(s2b)) {
-      const double beta = atan(vu / vd);
+      const double tan_beta = vu / vd;
+      const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
-      const double Xb = Mb * (Ab - mu * tan(beta));
+      const double Xb = Mb * (Ab - mu * tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 sbottomMatrix;
       sbottomMatrix << mq2(2, 2) + Mb * Mb - (1/2. - 1/3. * sw2) * MZ * MZ * cos_2beta, Xb,
