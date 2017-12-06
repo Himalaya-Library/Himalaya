@@ -17,6 +17,7 @@
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <iomanip>
+#include <iostream>
 #include <stdexcept>
 #include <type_traits>
 
