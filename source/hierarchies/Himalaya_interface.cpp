@@ -1,9 +1,66 @@
 #include "Himalaya_interface.hpp"
-#include <iostream>
-#include <vector>
 #include <Eigen/Eigenvalues>
+#include <cmath>
+#include <iostream>
+#include <string>
+#include <tuple>
+#include <utility>
+#include <vector>
 
 namespace himalaya {
+
+namespace {
+
+double sign(double x) noexcept
+{
+   return x >= 0. ? 1. : -1.;
+}
+
+/// sorts two eigenvalues
+void sort_ew(V2& ew, double& theta) noexcept
+{
+   if (ew(0) > ew(1)) {
+      std::swap(ew(0), ew(1));
+      theta *= -1;
+   }
+}
+
+/// calculates mass eigenvalues (in GeV) and sin(2*theta)
+std::pair<V2,double> calculate_MSf_s2f(const RM22& M)
+{
+   const Eigen::SelfAdjointEigenSolver<RM22> es(M);
+   RM22 ev = es.eigenvectors().real();
+   V2 ew = es.eigenvalues();
+
+   if (ew.minCoeff() < 0.) {
+      throw std::runtime_error(
+         "DR sfermion masses are tachyonic: mst1^2 = " + std::to_string(ew(0))
+         + ", mst2^2 = " + std::to_string(ew(1)));
+   }
+
+   ew = ew.unaryExpr([](double x){ return std::sqrt(x); });
+
+   // extract mixing angle in the convention of hep-ph/0105096
+   double theta = 0.;
+
+   if (sign(ev(0,0)) == sign(ev(1,1))) {
+      theta = std::acos(std::abs(ev(0,0)));
+   } else {
+      theta = std::acos(std::abs(ev(0,1)));
+      ev.col(0).swap(ev.col(1));
+      std::swap(ew(0), ew(1));
+   }
+
+   theta = sign(M(0,1) / (M(0,0) - M(1,1))) * std::abs(theta);
+
+   sort_ew(ew, theta);
+
+   const double s2t = std::sin(2 * theta);
+
+   return std::make_pair(ew, s2t);
+}
+
+} // anonymous namespace
 
 /**
  * 	Checks if the stop/sbottom masses and mixing angles are provided. Otherwise calculate them.
@@ -16,87 +73,51 @@ void Parameters::validate(bool verbose)
 {
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)) {
-      const double beta = atan(vu / vd);
-      const double Xt = Mt * (At - mu * 1 / tan(beta));
+      const double tan_beta = vu / vd;
+      const double beta = std::atan(tan_beta);
+      const double cos_2beta = std::cos(2 * beta);
+      const double Xt = Mt * (At - mu * 1 / tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
-      Eigen::Matrix2d stopMatrix;
-      stopMatrix << mq2(2, 2) + Mt * Mt + (1/2. - 2/3. * sw2) * MZ * MZ * cos(2 * beta), Xt,
-         Xt, mu2(2, 2) + Mt * Mt + 2 / 3. * sw2 * MZ * MZ * cos(2 * beta);
-      // solve eigenvalues and sort them
-      const Eigen::EigenSolver<Eigen::Matrix2d> es(stopMatrix);
-      std::vector<double> sortedEigenvalues = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
-      std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
-      // set stop masses
-      MSt << sortedEigenvalues.at(0), sortedEigenvalues.at(1);
-      // extraxt mixing angle
-      const double delta1 = std::abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
-      const double delta2 = std::abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
+      RM22 stopMatrix;
+      stopMatrix << mq2(2, 2) + Mt * Mt + (1/2. - 2/3. * sw2) * MZ * MZ * cos_2beta, Xt,
+         Xt, mu2(2, 2) + Mt * Mt + 2 / 3. * sw2 * MZ * MZ * cos_2beta;
 
-      const double theta = [&] {
-         if(delta1 < delta2){
-            return acos(std::real(es.eigenvectors().col(0)(0)));
-         } else {
-            return -acos(std::real(es.eigenvectors().col(1)(0)));
-         }
-      }();
+      std::tie(MSt, s2t) = calculate_MSf_s2f(stopMatrix);
 
-      s2t = sin(2 * theta);
-
-      if(verbose){
+      if (verbose) {
          std::cout << "\033[1;34m Info:\033[0m Stop masses or mixing angle not provided. Calculated values:\n" <<
             "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" <<
-            "\tmixing angle: " << theta << ".\n";
+            "\tmixing angle sin(2*theta): " << s2t << "\n";
       }
    }
 
    if (std::isnan(MSb(0)) || std::isnan(MSb(1)) || std::isnan(s2b)) {
-      const double beta = atan(vu / vd);
-      const double Xb = Mb * (Ab - mu * tan(beta));
+      const double tan_beta = vu / vd;
+      const double beta = std::atan(tan_beta);
+      const double cos_2beta = std::cos(2 * beta);
+      const double Xb = Mb * (Ab - mu * tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
-      Eigen::Matrix2d sbottomMatrix;
-      sbottomMatrix << mq2(2, 2) + Mb * Mb - (1/2. - 1/3. * sw2) * MZ * MZ * cos(2 * beta), Xb,
-         Xb, md2(2, 2) + Mb * Mb - 1/3. * sw2 * MZ * MZ * cos(2 * beta);
-      // solve eigenvalues and sort them
-      const Eigen::EigenSolver<Eigen::Matrix2d> es(sbottomMatrix);
-      std::vector<double> sortedEigenvalues = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
-      std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
-      // set sbottom masses
-      MSb << sortedEigenvalues.at(0), sortedEigenvalues.at(1);
-      // extract mixing angle
-      const double delta1 = std::abs(acos(std::real(es.eigenvectors().col(0)(0))) + asin(std::real(es.eigenvectors().col(0)(1))));
-      const double delta2 = std::abs(acos(std::real(es.eigenvectors().col(1)(0))) + asin(std::real(es.eigenvectors().col(1)(1))));
+      RM22 sbottomMatrix;
+      sbottomMatrix << mq2(2, 2) + Mb * Mb - (1/2. - 1/3. * sw2) * MZ * MZ * cos_2beta, Xb,
+         Xb, md2(2, 2) + Mb * Mb - 1/3. * sw2 * MZ * MZ * cos_2beta;
 
-      const double theta = [&] {
-         if(delta1 < delta2){
-            return acos(std::real(es.eigenvectors().col(0)(0)));
-         } else {
-            return -acos(std::real(es.eigenvectors().col(1)(0)));
-         }
-      }();
+      std::tie(MSb, s2b) = calculate_MSf_s2f(sbottomMatrix);
 
-      s2b = sin(2 * theta);
-
-      if(verbose){
+      if (verbose) {
          std::cout << "\033[1;34m Info:\033[0m Sbottom masses or mixing angle not provided. Calculated values:\n" <<
             "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" <<
-            "\tmixing angle: " << theta << ".\n";
+            "\tmixing angle sin(2*theta): " << s2b << ".\n";
       }
    }
 
-   // check the ordering of the stop/sbottom quarks
-   if (MSt(0) > MSt(1)) {
-      std::swap(MSt(0), MSt(1));
-      s2t *= -1;
-   }
+   // sort stops/sbottoms
+   sort_ew(MSt, s2t);
+   sort_ew(MSb, s2b);
 
-   if (MSb(0) > MSb(1)) {
-      std::swap(MSb(0), MSb(1));
-      s2b *= -1;
-   }
-
-   // check if the stop/sbottom masses are degenerated. If this is the case one could get spurious poles
-   // in Pietro's code. To avoid this numerical issue we shift the stop/bottom 1 mass by a relative (but small)
-   // value.
+   // check if the stop/sbottom masses are degenerated. If this is the
+   // case one could get spurious poles in Pietro's code. To avoid
+   // this numerical issue we shift the stop/bottom 1 mass by a
+   // relative (but small) value.
    if (std::abs(MSt(0) - MSt(1)) < 1.0E-5) {
       MSt(0) = MSt(1) / (1. + 1.0E-5);
    }
