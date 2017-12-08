@@ -39,10 +39,6 @@ namespace himalaya{
        */
       double getS12();
       /**
-       * 	@return returns the constant term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
-       */
-      double calc_at_as2_no_logs();
-      /**
        * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
        */
       double calc_coef_at_as2_no_sm_logs_log0();

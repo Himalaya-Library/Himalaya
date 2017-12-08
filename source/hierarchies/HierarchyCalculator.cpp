@@ -173,16 +173,15 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    
    // subtract the constant SM part from zeta himalaya to avoid double counting
    // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
-   //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2
+   //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    // M_X is a susy mass
    ho.setZetaHimalaya(ho.getZetaHimalaya() 
-      - mh2EFTCalculator.coeff_as2_no_log(mQ3, mU3, Xt, p.MG, Msq));
+      - mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq));
    // add the EFT logs and subtract constant part twice to avoid double counting
-   // Factorization: Himalaya_const - 2 * EFT_const_w/o_dlatas2 + EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
+   // Factorization: Himalaya_const - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    //	+ Log(mu^2/mQ3^2)^1 EFT_coeff_log^1  + Log(mu^2/mQ3^2)^2 EFT_coeff_log^2 + Log(mu^2/mQ3^2)^3 EFT_coeff_log^3
-   ho.setZetaEFT(ho.getZetaEFT() 
-      - 2 * mh2EFTCalculator.coeff_as2_no_log(mQ3, mU3, Xt, p.MG, Msq)
-      + mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq)
+   ho.setZetaEFT(ho.getZetaEFT()
+      - mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq)
       + lmMQ3 * mh2EFTCalculator.coeff_as2_susy_log1(mQ3, mU3, Xt, p.MG, Msq)
       + pow2(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log2(mQ3, mU3, Xt, p.MG, Msq)
       + pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3());
@@ -192,7 +191,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 /**
  * 	Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
  * 	@param ho a HierarchyObject with constant isAlphab.
- * 	@return A integer which is identified with the suitable hierarchy.
+ * 	@return An integer which is identified with the suitable hierarchy.
  */
 int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho){
    // set flags to truncate the expansion
@@ -363,12 +362,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy3.getS1();
 		     curSig2 = hierarchy3.getS2();
 		     curSig12 = hierarchy3.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy3.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy3.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy3.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy3.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -381,12 +380,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy32q2g.getS1();
 		     curSig2 = hierarchy32q2g.getS2();
 		     curSig12 = hierarchy32q2g.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy32q2g.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -399,12 +398,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy3q22g.getS1();
 		     curSig2 = hierarchy3q22g.getS2();
 		     curSig12 = hierarchy3q22g.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy3q22g.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -420,12 +419,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	       curSig1 = hierarchy4.getS1();
 	       curSig2 = hierarchy4.getS2();
 	       curSig12 = hierarchy4.getS12();
-	       if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+	       if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 		  ho.setZetaHimalaya(hierarchy4.calc_coef_at_as2_no_sm_logs_log0()
 		     + lmMsusy * hierarchy4.calc_coef_at_as2_no_sm_logs_log1()
 		     + pow2(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
 		     + pow3(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
-		  ho.setZetaEFT(hierarchy4.calc_at_as2_no_logs());
+		  ho.setZetaEFT(hierarchy4.calc_coef_at_as2_no_sm_logs_log0());
 	       }
 	    }
 	    break;
@@ -443,12 +442,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy5.getS1();
 		     curSig2 = hierarchy5.getS2();
 		     curSig12 = hierarchy5.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy5.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy5.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy5.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy5.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -461,12 +460,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy5g1.getS1();
 		     curSig2 = hierarchy5g1.getS2();
 		     curSig12 = hierarchy5g1.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy5g1.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -487,12 +486,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6.getS1();
 		     curSig2 = hierarchy6.getS2();
 		     curSig12 = hierarchy6.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy6.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy6.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy6.calc_coef_at_as2_no_sm_logs_log0());
 		     };
 		  }
 		  break;
@@ -505,12 +504,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6g2.getS1();
 		     curSig2 = hierarchy6g2.getS2();
 		     curSig12 = hierarchy6g2.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6g2.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -532,12 +531,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6b.getS1();
 		     curSig2 = hierarchy6b.getS2();
 		     curSig12 = hierarchy6b.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy6b.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6b.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -550,12 +549,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6b2qg2.getS1();
 		     curSig2 = hierarchy6b2qg2.getS2();
 		     curSig12 = hierarchy6b2qg2.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6b2qg2.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -568,12 +567,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6bq22g.getS1();
 		     curSig2 = hierarchy6bq22g.getS2();
 		     curSig12 = hierarchy6bq22g.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6bq22g.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -586,12 +585,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy6bq2g2.getS1();
 		     curSig2 = hierarchy6bq2g2.getS2();
 		     curSig12 = hierarchy6bq2g2.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6bq2g2.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -612,12 +611,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy9.getS1();
 		     curSig2 = hierarchy9.getS2();
 		     curSig12 = hierarchy9.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy9.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy9.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy9.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy9.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -630,12 +629,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig1 = hierarchy9q2.getS1();
 		     curSig2 = hierarchy9q2.getS2();
 		     curSig12 = hierarchy9q2.getS12();
-		     if(oneLoopFlag == 0 && twoLoopFlag == 0 && threeLoopFlag == 1){
+		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
 			ho.setZetaHimalaya(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0()
 			   + lmMst1 * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy9q2.calc_at_as2_no_logs());
+			ho.setZetaEFT(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -932,7 +931,8 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::Hierarch
 	       (-2 * Mst1 * Mst2 * (deltamst1 * Mst1 + deltamst2 * Mst2) *
 		  (log(Mst1) - log(Mst2)) +
 		  (deltamst2 * Mst1 + deltamst1 * Mst2) * pow2(Mst1) -
-		  (deltamst2 * Mst1 + deltamst1 * Mst2) * pow2(Mst2)) * pow2(s2t))) + 2 * (deltamst2 * Mst1 - deltamst1 * Mst2) * Mt * p.mu * 1/tan(beta) *
+		  (deltamst2 * Mst1 + deltamst1 * Mst2) * pow2(Mst2)) * pow2(s2t))) 
+	 + 2 * (deltamst2 * Mst1 - deltamst1 * Mst2) * Mt * p.mu * 1/tan(beta) *
 	 (4 * (log(Mst1) - log(Mst2)) * pow2(Mst1) * pow2(Mst2) - pow4(Mst1) +
 	    pow4(Mst2)) * s2t)) / (8. * sqrt(2) * Mst1 * Mst2);
    shift(1, 0) = shift(0, 1);
@@ -1333,12 +1333,6 @@ void himalaya::HierarchyCalculator::checkTerms(){
    
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
    mh2EFTCalculator.checkTerms(mQ32, mU32, Xt, MR2, m3, msq2);
-   
-   /*std::cout << mh2EFTCalculator.coeff_as2_susy_log0(sqrt(mQ32), sqrt(mU32), Xt, m3, sqrt(msq2)) << "\n" <<
-   lmMQ3 * mh2EFTCalculator.coeff_as2_susy_log1(sqrt(mQ32), sqrt(mU32), Xt, m3, sqrt(msq2)) << "\n" << 
-   pow2(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log2(sqrt(mQ32), sqrt(mU32), Xt, m3, sqrt(msq2)) << "\n" << 
-   pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3() << "\n";
-   should be -2603.72, 3832.15, -18520.5, 8029.63*/
 }
 
 /**

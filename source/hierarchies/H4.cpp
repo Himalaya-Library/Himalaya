@@ -78,22 +78,6 @@ double himalaya::H4::getS12(){
 }
 
 /**
- * 	@return returns the constant term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
- */
-double himalaya::H4::calc_at_as2_no_logs(){
-
-   const double result =
-      ((pow2(Sbeta)*pow4(Mt)*(591666768*(-10589 + 7500*z2)*pow4(Msusy)*pow6(Msq)
-        + 1724976*(-2819419 + 1800750*z2)*pow4(Msq)*pow6(Msusy) + 14791669200*(
-        -691 + 270*z2 - 6*z3)*pow2(Msusy)*pow8(Msq) + 665500*(-6262157 +
-        4000752*z2)*pow2(Msq)*pow8(Msusy) + 1331250228000*(1 - 2*z2)*power10(
-        Msq) + 5145*(-742606013 + 474368400*z2)*power10(Msusy)))/(4.992188355e10
-        *pow2(Msusy)*pow8(Msq)))/pow4(Mt)/pow2(Sbeta)*12.;
- 
-   return result;
-}
-
-/**
  * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
 double himalaya::H4::calc_coef_at_as2_no_sm_logs_log0(){

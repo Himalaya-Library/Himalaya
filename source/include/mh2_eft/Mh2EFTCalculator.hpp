@@ -62,16 +62,6 @@ namespace mh2_eft{
       
       /**
        * 	@param mQ3 the left-handed soft-breaking mass term of the third generation.
-       * 	@param mU3 the right-handed soft-breaking mass term of the thrird generation.
-       * 	@param Xt the Xt parameter of the stop mixing matrix
-       * 	@param m3 the gluino mass.
-       * 	@param msq the common squark mass of the first two generations.
-       * 	@return the 3-loop coefficient O(at*as^2*log^0) -> all Log(MR^2/x) terms are set to zero, x can be mt or a SUSY mass
-       */
-      double coeff_as2_no_log(double mQ3, double mU3, double Xt, double m3, double msq);
-      
-      /**
-       * 	@param mQ3 the left-handed soft-breaking mass term of the third generation.
        * 	@param mU3 the right-handed soft-breaking mass term of the third generation.
        * 	@param Xt the Xt parameter of the stop mixing matrix.
        * 	@param m3 the gluino mass.
