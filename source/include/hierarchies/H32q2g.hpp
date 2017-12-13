@@ -34,31 +34,31 @@ namespace himalaya{
       /**
        * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H32q2g'
        */
-      double getS1();
+      double getS1() const;
       /**
        * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H32q2g'
        */
-      double getS2();
+      double getS2() const;
       /**
        * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H32q2g'
        */
-      double getS12();
+      double getS12() const;
       /**
        * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
        */
-      double calc_coef_at_as2_no_sm_logs_log0();
+      double calc_coef_at_as2_no_sm_logs_log0() const;
       /**
        * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
        */
-      double calc_coef_at_as2_no_sm_logs_log1();
+      double calc_coef_at_as2_no_sm_logs_log1() const;
       /**
        * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
        */
-      double calc_coef_at_as2_no_sm_logs_log2();
+      double calc_coef_at_as2_no_sm_logs_log2() const;
       /**
        * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
        */
-      double calc_coef_at_as2_no_sm_logs_log3();
+      double calc_coef_at_as2_no_sm_logs_log3() const;
    private:
       double Dmglst1{}, Dmst12{}, Dmsqst1{}, lmMst1{}, Mt{}, Mst1{}, Mst2{}, MuSUSY{}, s2t{}, Tbeta{}, Sbeta{}; /**< common variables */
       int shiftst1{}, shiftst2{}, shiftst3{}, xDmst12{}, xDmglst1{}, xDmsqst1{}; /**< MDR and truncation flags */

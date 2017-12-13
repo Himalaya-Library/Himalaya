@@ -71,28 +71,28 @@ himalaya::H5g1::H5g1(const std::map<unsigned int, unsigned int>& flagMap, double
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5g1'
  */
-double himalaya::H5g1::getS1(){
+double himalaya::H5g1::getS1() const {
    return s1;
 }
 
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5g1'
  */
-double himalaya::H5g1::getS2(){
+double himalaya::H5g1::getS2() const {
    return s2;
 }
 
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5g1'
  */
-double himalaya::H5g1::getS12(){
+double himalaya::H5g1::getS12() const {
    return s12;
 }
 
 /**
  * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log0(){
+double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       (pow2(Mt)*pow2(MuSUSY)*((Mt*s2t*pow3(Mst1)*((3*(535 + 60*log(pow2(Msq)/
@@ -1052,7 +1052,7 @@ double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log0(){
 /**
  * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log1(){
+double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       ((1296000*pow2(Mgl)*pow2(Mst2)*pow2(Mt)*pow2(MuSUSY)*pow2(s2t)*pow4(Msq)*
@@ -1420,7 +1420,7 @@ double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log1(){
 /**
  * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log2(){
+double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       ((14760*pow2(Mgl)*pow2(Mst1)*pow2(Mst2)*pow2(Mt)*pow2(MuSUSY)*pow2(s2t) -
@@ -1538,7 +1538,7 @@ double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log2(){
 /**
  * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log3(){
+double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 

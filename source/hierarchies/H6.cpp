@@ -70,25 +70,25 @@ himalaya::H6::H6(const std::map<unsigned int, unsigned int>& flagMap, double Al4
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
  */
-double himalaya::H6::getS1(){
+double himalaya::H6::getS1() const {
    return s1;
 }
 
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
  */
-double himalaya::H6::getS2(){
+double himalaya::H6::getS2() const {
    return s2;
 }
 
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
  */
-double himalaya::H6::getS12(){
+double himalaya::H6::getS12() const {
    return s12;
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log0(){
+double himalaya::H6::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       (pow2(Sbeta)*(-(3*Mst2*pow2(Dmglst2)*(3*pow2(Mst2)*(12*pow2(Mst2)*pow2(Mt)
@@ -685,7 +685,7 @@ double himalaya::H6::calc_coef_at_as2_no_sm_logs_log0(){
    return result;
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log1(){
+double himalaya::H6::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       ((pow2(Sbeta)*(115200*pow11(Mst2)*pow2(Mt)*pow2(s2t)*pow4(Msq) - 2451200*
@@ -886,7 +886,7 @@ double himalaya::H6::calc_coef_at_as2_no_sm_logs_log1(){
    return result;
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log2(){
+double himalaya::H6::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       ((pow2(Sbeta)*(1920*pow11(Mst2)*pow2(Mt)*pow2(s2t) + 52480*s2t*pow2(
@@ -951,7 +951,7 @@ double himalaya::H6::calc_coef_at_as2_no_sm_logs_log2(){
    return result;
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log3(){
+double himalaya::H6::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 

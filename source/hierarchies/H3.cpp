@@ -73,28 +73,28 @@ himalaya::H3::H3 (const std::map<unsigned int, unsigned int>& flagMap, double Al
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H3'
  */
-double himalaya::H3::getS1() {
+double himalaya::H3::getS1() const {
    return s1;
 }
 
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H3'
  */
-double himalaya::H3::getS2() {
+double himalaya::H3::getS2() const {
    return s2;
 }
 
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H3'
  */
-double himalaya::H3::getS12() {
+double himalaya::H3::getS12() const {
    return s12;
 }
 
 /**
  * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H3::calc_coef_at_as2_no_sm_logs_log0(){
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       ((Mt*pow2(Sbeta)*(1470*Dmsqst1*pow4(Msq)*(80*Dmglst1*pow2(Mgl)*(-2*Mt*
@@ -197,7 +197,7 @@ double himalaya::H3::calc_coef_at_as2_no_sm_logs_log0(){
 /**
  * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H3::calc_coef_at_as2_no_sm_logs_log1(){
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       ((Mt*pow2(Sbeta)*(2*pow3(Dmglst1)*(2940*pow2(Dmsqst1)*pow2(Msq)*pow2(Mt)*(
@@ -262,7 +262,7 @@ double himalaya::H3::calc_coef_at_as2_no_sm_logs_log1(){
 /**
  * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H3::calc_coef_at_as2_no_sm_logs_log2(){
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       ((2*Mt*pow2(Sbeta)*(7*Dmglst1*pow2(Mgl)*pow4(Msq)*(-2*Mt*pow2(Dmst12)*
@@ -293,7 +293,7 @@ double himalaya::H3::calc_coef_at_as2_no_sm_logs_log2(){
 /**
  * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H3::calc_coef_at_as2_no_sm_logs_log3(){
+double himalaya::H3::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 
@@ -304,13 +304,13 @@ double himalaya::H3::calc_coef_at_as2_no_sm_logs_log3(){
 /// calc coefficient
 
 /// calc coefficient O(as^0,log(mu^2/mt^2)^0) s1
-double himalaya::H3::calc_coeff_as_0_log_0_s1 () {
+double himalaya::H3::calc_coeff_as_0_log_0_s1() const {
    return -(pow2(Dmst12)*(-(Dmst12*xDmst12)+pow2(Mst2))*pow2(Mt)*pow2(MuSUSY)*
    pow2(s2t))/(48.*pow6(Mst2));
 }
 
 /// calc coefficient O(as^1,log(mu^2/mt^2)^0) s1
-double himalaya::H3::calc_coeff_as_1_log_0_s1 () {
+double himalaya::H3::calc_coeff_as_1_log_0_s1() const {
    return -(Dmst12*s2t*pow2(Mt)*pow2(MuSUSY)*(4*xDmglst1*pow3(Dmglst1)*((3*(9+10
    *lmMst1)*Mt-10*(13-12*lmMst1)*Mst1*s2t)*xDmst12*pow2(Dmst12)-Dmst12*(52*Mt-5*
    (13-12*lmMst1)*Mst1*s2t)*pow2(Mst2)+(77-30*lmMst1)*Mt*pow4(Mst2))+20*Dmglst1*
@@ -324,7 +324,7 @@ double himalaya::H3::calc_coeff_as_1_log_0_s1 () {
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^0) s1
-double himalaya::H3::calc_coeff_as_2_log_0_s1() {
+double himalaya::H3::calc_coeff_as_2_log_0_s1() const {
    return -(pow2(Mt)*pow2(MuSUSY)*(-4*xDmst12*pow3(Dmst12)*(((72*pow2(Dmglst1)*(3891491+27200*lmMst1-
 19200*pow2(lmMst1))+
 200*Dmglst1*Mgl*(403559+384*lmMst1-4608*pow2(lmMst1))-
@@ -440,7 +440,7 @@ xDmglst1*pow3(Dmglst1)*(-(pow2(Dmst12)*pow2(Mst2)*(1475294*Mst1*Mt*s2t+884106*po
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^1) s1
-double himalaya::H3::calc_coeff_as_2_log_1_s1(){
+double himalaya::H3::calc_coeff_as_2_log_1_s1() const {
    return (16*pow2(MuSUSY)*pow4(Mt)*(-5*pow3(Mgl)*(2*(pow2(Dmst12)*pow2(Mst2)+xDmst12*pow3(Dmst12))-
 6*Dmst12*pow4(Mst2)-9*pow6(Mst2))-
 10*Dmglst1*pow2(Mgl)*(pow2(Dmst12)*pow2(Mst2)-
@@ -452,7 +452,7 @@ Mgl*pow2(Dmglst1)*(9*pow2(Dmst12)*pow2(Mst2)-
 }
 
 /// calc coefficient O(as^0,log(mu^2/mt^2)^0) s2
-double himalaya::H3::calc_coeff_as_0_log_0_s2(){
+double himalaya::H3::calc_coeff_as_0_log_0_s2() const {
    return -(Mt*(Mt*pow2(Dmst12)*pow2(Mst2)*((12*Mt*MuSUSY*s2t-12*Tbeta*pow2(Mt))*pow2(Sbeta)+
 Tbeta*pow2(s2t)*(pow2(MuSUSY)+
 (-12*pow2(Mst1)-pow2(MuSUSY))*pow2(Sbeta)))-
@@ -464,12 +464,12 @@ pow2(Sbeta)*(-24*Dmst12*(MuSUSY*s2t-Mt*Tbeta)*pow2(Mt)*pow4(Mst2)+
 }
 
 /// calc coefficient O(as^0,log(mu^2/mt^2)^1) s2
-double himalaya::H3::calc_coeff_as_0_log_1_s2(){
+double himalaya::H3::calc_coeff_as_0_log_1_s2() const {
    return pow4(Mt);
 }
 
 /// calc coefficient O(as^1,log(mu^2/mt^2)^0) s2
-double himalaya::H3::calc_coeff_as_1_log_0_s2(){
+double himalaya::H3::calc_coeff_as_1_log_0_s2() const {
    return -(Mt*(pow3(Mt)*(3600*(1+lmMst1+pow2(lmMst1))-
 (2*(25*Dmst12*pow2(Mgl)*(Dmst12*(5+42*lmMst1)-8*(4+3*lmMst1)*pow2(Mst2))-
 2*pow2(Dmglst1)*((83-120*lmMst1)*pow2(Dmst12)+
@@ -575,7 +575,7 @@ Mgl*pow2(Dmglst1)*(15*Mst1*Mt*pow2(s2t)*(10*(5-6*lmMst1)*Tbeta*pow2(MuSUSY)*(1-p
 }
 
 /// calc coefficient O(as^1,log(mu^2/mt^2)^1) s2
-double himalaya::H3::calc_coeff_as_1_log_1_s2(){
+double himalaya::H3::calc_coeff_as_1_log_1_s2() const {
    return (-2*pow3(Mt)*(pow3(Mgl)*(-5*pow2(Dmst12)*(Mt*(2*MuSUSY+5*Mst1*Tbeta)+8*s2t*Tbeta*pow2(Mst1))*pow2(Mst2)+6*Mst1*(3*Mt+5*Mst1*s2t)*Tbeta*xDmst12*pow3(Dmst12)+20*Dmst12*(Mt*(MuSUSY+2*Mst1*Tbeta)+3*s2t*Tbeta*pow2(Mst1))*pow4(Mst2)
 +60*Mt*(MuSUSY-(1-2*lmMst1)*Mst1*Tbeta)*pow6(Mst2))-
 2*(Dmglst1*pow2(Mgl)*(pow2(Dmst12)*(Mt*(MuSUSY-4*Mst1*Tbeta)+10*s2t*Tbeta*pow2(Mst1))*pow2(Mst2)-xDmst12*(2*Mt*(MuSUSY+Mst1*Tbeta)+9*s2t*Tbeta*pow2(Mst1))*pow3(Dmst12)+10*Dmst12*Mst1*(Mt-Mst1*s2t)*Tbeta*pow4(Mst2)-10*Mt*(MuSUSY-4*Mst1*Tbeta)*pow6(Mst2))+
@@ -587,12 +587,12 @@ Mgl*pow2(Dmglst1)*(pow2(Dmst12)*(-2*Mt*(MuSUSY+2*Mst1*Tbeta)+3*s2t*Tbeta*pow2(Ms
 }
 
 /// calc coefficient O(as^1,log(mu^2/mt^2)^2) s2
-double himalaya::H3::calc_coeff_as_1_log_2_s2(){
+double himalaya::H3::calc_coeff_as_1_log_2_s2() const {
    return 8*pow4(Mt);
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^0) s2
-double himalaya::H3::calc_coeff_as_2_log_0_s2(){
+double himalaya::H3::calc_coeff_as_2_log_0_s2() const {
    return -(((pow2(Dmst12)*pow2(Mt)*pow2(s2t)*(pow2(Dmglst1)*(114960*(pow2(Dmsqst1)+Dmsqst1*pow2(Msq))*pow2(Mst1)-(12*(13249-916*lmMst1-60*pow2(lmMst1))*pow2(Mst1)-
 (1732531+16896*lmMst1-24840*pow2(lmMst1))*pow2(MuSUSY))*pow4(Msq))+
 5*Dmglst1*Mgl*(22560*(pow2(Dmsqst1)+Dmsqst1*pow2(Msq))*pow2(Mst1)-(24*(4515-596*lmMst1-516*pow2(lmMst1))*pow2(Mst1)-
@@ -1213,7 +1213,7 @@ Tbeta*(884106*pow2(MuSUSY)*(1-pow2(Sbeta))*pow3(Mt)+
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^1) s2
-double himalaya::H3::calc_coeff_as_2_log_1_s2(){
+double himalaya::H3::calc_coeff_as_2_log_1_s2() const {
    return (pow2(Mt)*(pow2(Mst2)*(Mgl*(4200*pow2(Dmst12)*pow2(Dmglst1+3*Mgl)*pow2(Mst1)*pow2(s2t)+
 (420*Dmst12*Mt*s2t*(-(pow2(Dmglst1)*(-2*pow2(Mst2)*(Mst1*Tbeta*(55*pow2(Dmsqst1)+80*Dmsqst1*pow2(Msq))+
 (10*MuSUSY-(539-486*lmMst1)*Mst1*Tbeta)*pow4(Msq))+
@@ -1357,7 +1357,7 @@ Tbeta*(-105*(947+488*lmMst1)*Mt*s2t*pow3(Mst1)+
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^2) s2
-double himalaya::H3::calc_coeff_as_2_log_2_s2(){
+double himalaya::H3::calc_coeff_as_2_log_2_s2() const {
    return (-2*pow3(Mt)*(pow3(Mgl)*(pow4(Msq)*(-5*pow2(Dmst12)*(Mt*(16*MuSUSY+43*Mst1*Tbeta)+
 64*s2t*Tbeta*pow2(Mst1))*pow2(Mst2)+
 2*Mst1*(77*Mt+120*Mst1*s2t)*Tbeta*xDmst12*pow3(Dmst12)+
@@ -1386,12 +1386,12 @@ Mt*(4*MuSUSY+51*Mst1*Tbeta)*pow6(Mst2))))))/(45.*Mst1*Tbeta*pow3(Mgl)*pow4(Msq)*
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^3) s2
-double himalaya::H3::calc_coeff_as_2_log_3_s2(){
+double himalaya::H3::calc_coeff_as_2_log_3_s2() const {
    return (184*pow4(Mt))/3.;
 }
 
 /// calc coefficient (as^0,log(mu^2/mt^2)^0) s12
-double himalaya::H3::calc_coeff_as_0_log_0_s12(){
+double himalaya::H3::calc_coeff_as_0_log_0_s12() const {
    return -(Dmst12*Mt*MuSUSY*s2t*(-2*Dmst12*Mt*(MuSUSY*s2t+6*Mt*Tbeta)*pow2(Mst2)+
 pow2(Dmst12)*(2*Mt*MuSUSY*s2t+
 Tbeta*(8*pow2(Mt)-pow2(Mst1)*pow2(s2t)))+
@@ -1399,7 +1399,7 @@ Tbeta*(8*pow2(Mt)-pow2(Mst1)*pow2(s2t)))+
 }
 
 /// calc coeffcieint O(as^1,log(mu^2/mt^2)^0) s12
-double himalaya::H3::calc_coeff_as_1_log_0_s12(){
+double himalaya::H3::calc_coeff_as_1_log_0_s12() const {
    return (Mt*MuSUSY*(25*pow3(Mgl)*(-2*Mt*pow2(Dmst12)*pow2(Mst2)*(4*Mt*s2t*(MuSUSY+6*(1-3*lmMst1)*Mst1*Tbeta)+
 2*(5+6*lmMst1)*Tbeta*pow2(Mt)-
 3*Mst1*(MuSUSY-3*(1+2*lmMst1)*Mst1*Tbeta)*pow2(s2t))-
@@ -1441,7 +1441,7 @@ pow3(Dmst12)*(-20*s2t*(5*(1+6*lmMst1)*MuSUSY+6*(29-45*lmMst1)*Mst1*Tbeta)*pow2(M
 }
 
 /// calc coefficient O(as^1,log(mu^2/mt^2)^1) s12
-double himalaya::H3::calc_coeff_as_1_log_1_s12(){
+double himalaya::H3::calc_coeff_as_1_log_1_s12() const {
    return (-2 * MuSUSY * pow4(Mt) * (5 * pow2(Mst2) * pow3(Mgl) * (pow2(Dmst12) - 2 *
          Dmst12 * pow2(Mst2) - 6 * pow4(Mst2)) + Dmst12 * Mgl * pow2(Dmglst1) *
       (pow2(Dmst12) - 2 * Dmst12 * pow2(Mst2) + 3 * pow4(Mst2)) + xDmglst1 *
@@ -1452,7 +1452,7 @@ double himalaya::H3::calc_coeff_as_1_log_1_s12(){
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^0) s12
-double himalaya::H3::calc_coeff_as_2_log_0_s12(){
+double himalaya::H3::calc_coeff_as_2_log_0_s12() const {
    return -(Mt*MuSUSY*(((-490*Mt*MuSUSY*((Dmst12*(-30*pow2(s2t)*(-(pow4(Msq)*(Dmst12*(4*pow2(Dmglst1)*(1732531+16896*lmMst1-
 24840*pow2(lmMst1))+
 20*Dmglst1*Mgl*(84209+1264*lmMst1-240*pow2(lmMst1)))*(2*Dmst12-pow2(Mst2))-
@@ -1722,7 +1722,7 @@ Dmst12*pow4(Mst2))+16*(4+15*lmMst1)*pow6(Mst2)))))))/Mst1)/(pow2(Mgl)*pow4(Msq))
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^1) s12
-double himalaya::H3::calc_coeff_as_2_log_1_s12(){
+double himalaya::H3::calc_coeff_as_2_log_1_s12() const {
    return (MuSUSY*pow3(Mt)*((-((xDmglst1*pow3(Dmglst1)*(-(pow2(Dmst12)*pow2(Mst2)*(16800*Mst1*Mt*Tbeta*(pow2(Dmsqst1)+Dmsqst1*pow2(Msq))+
 (-(Mt*(15680*MuSUSY+
 3*(84421-13340*lmMst1)*Mst1*Tbeta))+
@@ -1771,7 +1771,7 @@ Dmst12*pow4(Mst2)+2*pow6(Mst2))+
 }
 
 /// calc coefficient O(as^2,log(mu^2/mt^2)^2) s12
-double himalaya::H3::calc_coeff_as_2_log_2_s12(){
+double himalaya::H3::calc_coeff_as_2_log_2_s12() const {
    return (-16*MuSUSY*pow4(Mt)*(5*pow2(Mst2)*pow3(Mgl)*(pow2(Dmst12)-2*Dmst12*pow2(Mst2)-6*pow4(Mst2))+
 Dmst12*Mgl*pow2(Dmglst1)*(pow2(Dmst12)-2*Dmst12*pow2(Mst2)+3*pow4(Mst2))+
 xDmglst1*pow3(Dmglst1)*(-2*pow2(Dmst12)*pow2(Mst2)+pow3(Dmst12)+
