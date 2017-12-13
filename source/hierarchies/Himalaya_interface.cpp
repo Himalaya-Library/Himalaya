@@ -81,7 +81,7 @@ void Parameters::validate(bool verbose)
       const double tan_beta = vu / vd;
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
-      const double Xt = Mt * (At - mu * 1 / tan_beta);
+      const double Xt = Mt * (At - mu / tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 stopMatrix;
       stopMatrix << mq2(2, 2) + sqr(Mt) + (1/2. - 2/3. * sw2) * sqr(MZ) * cos_2beta, Xt,
