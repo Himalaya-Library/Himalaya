@@ -16,6 +16,11 @@ int sign(double x) noexcept
    return x >= 0. ? 1 : -1;
 }
 
+double sqr(double x) noexcept
+{
+   return x*x;
+}
+
 /// sorts two eigenvalues
 void sort_ew(V2& ew, double& theta) noexcept
 {
@@ -79,8 +84,8 @@ void Parameters::validate(bool verbose)
       const double Xt = Mt * (At - mu * 1 / tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 stopMatrix;
-      stopMatrix << mq2(2, 2) + Mt * Mt + (1/2. - 2/3. * sw2) * MZ * MZ * cos_2beta, Xt,
-         Xt, mu2(2, 2) + Mt * Mt + 2 / 3. * sw2 * MZ * MZ * cos_2beta;
+      stopMatrix << mq2(2, 2) + sqr(Mt) + (1/2. - 2/3. * sw2) * sqr(MZ) * cos_2beta, Xt,
+         Xt, mu2(2, 2) + sqr(Mt) + 2 / 3. * sw2 * sqr(MZ) * cos_2beta;
 
       std::tie(MSt, s2t) = calculate_MSf_s2f(stopMatrix);
 
@@ -98,8 +103,8 @@ void Parameters::validate(bool verbose)
       const double Xb = Mb * (Ab - mu * tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 sbottomMatrix;
-      sbottomMatrix << mq2(2, 2) + Mb * Mb - (1/2. - 1/3. * sw2) * MZ * MZ * cos_2beta, Xb,
-         Xb, md2(2, 2) + Mb * Mb - 1/3. * sw2 * MZ * MZ * cos_2beta;
+      sbottomMatrix << mq2(2, 2) + sqr(Mb) - (1/2. - 1/3. * sw2) * sqr(MZ) * cos_2beta, Xb,
+         Xb, md2(2, 2) + sqr(Mb) - 1/3. * sw2 * sqr(MZ) * cos_2beta;
 
       std::tie(MSb, s2b) = calculate_MSf_s2f(sbottomMatrix);
 
