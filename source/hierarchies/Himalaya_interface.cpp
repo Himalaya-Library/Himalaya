@@ -11,9 +11,9 @@ namespace himalaya {
 
 namespace {
 
-double sign(double x) noexcept
+int sign(double x) noexcept
 {
-   return x >= 0. ? 1. : -1.;
+   return x >= 0. ? 1 : -1;
 }
 
 /// sorts two eigenvalues
