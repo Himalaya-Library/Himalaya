@@ -1,5 +1,4 @@
-#ifndef H32q2g_HPP
-#define H32q2g_HPP
+#pragma once
 
 #include <map>
 
@@ -66,4 +65,3 @@ namespace himalaya{
       double s1{}, s2{}, s12{};	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
    };
 }	// himalaya
-#endif	// H32q2g_HPP

@@ -1,5 +1,4 @@
-#ifndef HierarchyObject_HPP
-#define HierarchyObject_HPP
+#pragma once
 
 #include "version.hpp"
 #include <Eigen/Eigenvalues>
@@ -145,4 +144,3 @@ namespace himalaya{
       Eigen::Matrix<double, 2, 1> sortVector(Eigen::Matrix<double, 2, 1>& vector);
    };
 }	// himalaya
-#endif	// HierarchyObject_HPP

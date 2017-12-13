@@ -1,5 +1,4 @@
-#ifndef Mh2EFTCalculator_HPP
-#define Mh2EFTCalculator_HPP
+#pragma once
 
 #include "Himalaya_interface.hpp"
 #include "dilog.h"
@@ -187,5 +186,3 @@ namespace mh2_eft{
    };
 }	// mh2_eft
 }	// himalaya
-
-#endif // Mh2EFTCalculator_HPP

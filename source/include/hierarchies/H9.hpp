@@ -1,5 +1,4 @@
-#ifndef H9_HPP
-#define H9_HPP
+#pragma once
 
 #include <map>
 
@@ -67,4 +66,3 @@ namespace himalaya{
       double s1{}, s2{}, s12{};	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
    };
 }	// himalaya
-#endif	// H9_HPP

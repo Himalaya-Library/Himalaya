@@ -1,5 +1,4 @@
-#ifndef HierarchyCalculator_HPP
-#define HierarchyCalculator_HPP
+#pragma once
 
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
@@ -174,4 +173,3 @@ namespace himalaya{
 	 {h6, h6}, {h6g2, h6}, {h6b, h6b}, {h6b2qg2, h6b}, {h6bq22g, h6b}, {h6bq2g2, h6b}, {h9, h9}, {h9q2, h9}}; /** The hierarchy map which maps all hierarchies to their mother hierarchies */
   };
 }	// himalaya
-#endif	// HierarchyCalculator_HPP

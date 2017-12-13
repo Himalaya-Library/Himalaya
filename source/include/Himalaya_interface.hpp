@@ -1,5 +1,4 @@
-#ifndef Himalaya_interface_HPP
-#define Himalaya_interface_HPP
+#pragma once
 
 #include <iosfwd>
 #include <limits>
@@ -47,5 +46,3 @@ struct Parameters {
 std::ostream& operator<<(std::ostream&, const Parameters&);
 
 }	//	himalaya
-
-#endif	//	Himalaya_interface_HPP
