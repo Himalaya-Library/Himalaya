@@ -93,7 +93,7 @@ double himalaya::H5::getS12() const {
 double himalaya::H5::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
-      (((-4*(-108*Mst1*s2t*pow2(Sbeta)*(240*Dmglst1*s2t*z4*pow2(Mt) + 2*Mt*pow2(
+     (((-4*(-108*Mst1*s2t*pow2(Sbeta)*(240*Dmglst1*s2t*z4*pow2(Mt) + 2*Mt*pow2(
         s2t)*(30*pow2(Dmglst1)*(41*z4 + 8*pow2(z2)) + pow2(Mst2)*(-241*z4 + 32*
         pow2(z2))) + 32*(-z4 + 2*pow2(z2))*pow3(Mt) - Dmglst1*pow2(Mst2)*(265*
         z4 + 4*pow2(z2))*pow3(s2t))*pow4(Mst2) + 27*s2t*pow2(Sbeta)*pow4(Mst2)*

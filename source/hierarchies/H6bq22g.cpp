@@ -94,7 +94,7 @@ double himalaya::H6bq22g::getS12() const {
 double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
-      (pow2(Sbeta)*(-(z4*((4*Dmglst2*(pow4(Mst1)*(55368*pow2(Mst2)*pow2(Mt)*
+      ((-(z4*((4*Dmglst2*(pow4(Mst1)*(55368*pow2(Mst2)*pow2(Mt)*
         pow2(s2t) - 205840*Mst2*s2t*pow3(Mt) + 15571*Mt*pow3(Mst2)*pow3(s2t) +
         89312*pow4(Mt) - 4199*pow4(Mst2)*pow4(s2t)) + 9*pow2(Mst1)*pow2(Mst2)*(
         1200*pow2(Mst2)*pow2(Mt)*pow2(s2t) - 5532*Mst2*s2t*pow3(Mt) + 208*Mt*
@@ -679,7 +679,7 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log0() const {
         Mst1)*pow4(Mst2) + 98*(77657 + 202500*S2)*pow2(Mst2)*pow6(Mst1) -
         2954700*pow2(Mst1)*pow6(Mst2) + 3*(-4261807 + 33912900*S2)*pow8(Mst1) +
         705600*pow8(Mst2))))))/(2.50047e8*pow3(Mst2)*pow4(Mst1)*pow8(Msq)))))/
-        pow4(Mt)/pow2(Sbeta)*12.;
+        pow4(Mt)*12.;
 
    return result;
 }
@@ -690,7 +690,7 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log0() const {
 double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
-      ((pow2(Sbeta)*(4*Mst2*pow2(Dmglst2)*(-225*pow2(Mst1)*pow4(Mst2)*(-664*
+      (((4*Mst2*pow2(Dmglst2)*(-225*pow2(Mst1)*pow4(Mst2)*(-664*
         pow2(Mst2)*pow2(Mt)*pow2(s2t) - 2048*Mst2*s2t*pow3(Mt) + 512*Mt*pow3(
         Mst2)*pow3(s2t) + 1840*pow4(Mt) + 83*pow4(Mst2)*pow4(s2t)) + 2*pow2(
         Mst2)*pow4(Mst1)*(-150*(-7121 + 6336*z2)*pow2(Mst2)*pow2(Mt)*pow2(s2t)
@@ -828,7 +828,7 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log1() const {
         pow8(Mst2)) - 360*pow4(Dmsqst2)*pow4(Mst1)*(8*(5*Mt - 2*Mst2*s2t)*pow3(
         Mt)*pow4(Mst1) + 4*pow4(Mst2)*pow4(Mt) - pow2(Mst1)*(4*pow2(Mst2)*pow4(
         Mt) + pow4(s2t)*pow6(Mst2)) + pow4(s2t)*pow8(Mst2))))))/(16200.*pow4(
-        Mst1)*pow5(Mst2)*pow8(Msq)))/pow4(Mt)/pow2(Sbeta)*12.; 
+        Mst1)*pow5(Mst2)*pow8(Msq)))/pow4(Mt)*12.; 
 
    return result;
 }
@@ -839,7 +839,7 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log1() const {
 double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
-      ((pow2(Sbeta)*(Mst2*pow2(Dmglst2)*(pow2(Mst2)*pow4(Mst1)*(33360*pow2(Mst2)
+      (((Mst2*pow2(Dmglst2)*(pow2(Mst2)*pow4(Mst1)*(33360*pow2(Mst2)
         *pow2(Mt)*pow2(s2t) + 52480*Mst2*s2t*pow3(Mt) + 18896*pow4(Mt) - 10005*
         pow4(Mst2)*pow4(s2t)) + 15*pow2(Mst1)*pow4(Mst2)*(-1496*pow2(Mst2)*
         pow2(Mt)*pow2(s2t) - 3072*Mst2*s2t*pow3(Mt) + 768*Mt*pow3(Mst2)*pow3(
@@ -884,8 +884,8 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log2() const {
         256*Mt*pow3(Mst2)*pow3(s2t) + 1456*pow4(Mt) + 155*pow4(Mst2)*pow4(s2t))
         *pow6(Mst2) + (384*Mst2*s2t*pow3(Mt) - 2400*pow4(Mt) + 717*pow4(Mst2)*
         pow4(s2t))*pow8(Mst1) + 384*pow2(Mt)*(-2*pow2(Mt) + pow2(Mst2)*pow2(
-        s2t))*pow8(Mst2)))))/(540.*pow4(Mst1)*pow5(Mst2)*pow8(Msq)))/pow4(Mt)/
-        pow2(Sbeta)*12.; 
+        s2t))*pow8(Mst2)))))/(540.*pow4(Mst1)*pow5(Mst2)*pow8(Msq)))/pow4(Mt)
+        *12.; 
 
    return result;
 }
@@ -896,7 +896,7 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log2() const {
 double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
-      ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 
+      ((-224*pow4(Mt))/9.)/pow4(Mt)*12.; 
 
    return result;
 }

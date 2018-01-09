@@ -157,34 +157,49 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setExpUncertainty(1, 0.);
 
    // convert mQ3 and mU3 to MDR scheme
-   /*const double mst12 = pow2(ho.getMDRMasses()(0));
-   const double mst22 = pow2(ho.getMDRMasses()(1));
+   const double mst12 = pow2(p.MSt(0));
+   const double mst22 = pow2(p.MSt(1));
    const double mt2 = pow2(p.Mt);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
-   const double mQ32 = (1 / 2. * (mst12 + mst22 - 2 * mt2 + std::sqrt(pow2((mst12 - mst22)) - 4 * pow2(Xt) * mt2)));
-   const double mU32 = (1 / 2. * (mst12 + mst22 - 2 * mt2 - std::sqrt(pow2((mst12 - mst22)) - 4 * pow2(Xt) * mt2)));*/
-
+   const double Xtt = p.At - p.mu * p.vd / p.vu;
+   const double mU3 = std::sqrt((1 / 2. * (mst12 + mst22 - 2 * mt2 - std::sqrt(pow2((mst22 - mst12)) - 4 * pow2(Xtt) * mt2))));
+   const double mQ3 = std::sqrt((1 / 2. * (mst12 + mst22 - 2 * mt2 + std::sqrt(pow2((mst22 - mst12)) - 4 * pow2(Xtt) * mt2))));
+   //const double mU32 = p.mq2(2,2);
+   //const double mQ32 = p.mu2(2,2);
    // calc the delta zeta
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
-   const double mQ3 = sqrt(p.mq2(2,2));
-   const double mU3 = sqrt(p.mu2(2,2));
+   //      const double mU3 = p.MSt(0);
+   //      const double mQ3 = p.MSt(1);
    const double Xt = p.At - p.mu * p.vd / p.vu;
-   const double lmMQ3 = log(pow2(p.scale / mQ3));
+   //const double lmMQ3 = log(pow2(p.scale / mQ3));
+   const double lmMst1 = log(pow2(p.scale / p.MSt(0)));
    
    // subtract the constant SM part from zeta himalaya to avoid double counting
    // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
    //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    // M_X is a susy mass
    ho.setZetaHimalaya(ho.getZetaHimalaya() 
-      - mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq));
+      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt));
    // add the EFT logs and subtract constant part twice to avoid double counting
    // Factorization: Himalaya_const - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    //	+ Log(mu^2/mQ3^2)^1 EFT_coeff_log^1  + Log(mu^2/mQ3^2)^2 EFT_coeff_log^2 + Log(mu^2/mQ3^2)^3 EFT_coeff_log^3
+   //const double part = ho.getZetaEFT();
    ho.setZetaEFT(ho.getZetaEFT()
+      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+      + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+      + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32());
+   
+   /*   std::cout << "zeta 1 " << part 
       - mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq)
       + lmMQ3 * mh2EFTCalculator.coeff_as2_susy_log1(mQ3, mU3, Xt, p.MG, Msq)
       + pow2(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log2(mQ3, mU3, Xt, p.MG, Msq)
-      + pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3());
+      + pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3()<< "\n";
+      
+   std::cout << "zeta 2 " << part 
+      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+      + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+      + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32() << "\n";*/
    return ho;
 }
 

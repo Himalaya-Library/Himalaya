@@ -83,7 +83,7 @@ double himalaya::H4::getS12() const {
 double himalaya::H4::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
-      (-(pow2(Sbeta)*pow4(Mt)*(-591666768*(-10589 + 7500*z2)*pow4(Msusy)*pow6(
+      (-(pow4(Mt)*(-591666768*(-10589 + 7500*z2)*pow4(Msusy)*pow6(
         Msq) - 1724976*(-2819419 + 1800750*z2)*pow4(Msq)*pow6(Msusy) -
         14791669200*(-691 + 270*z2 - 6*z3)*pow2(Msusy)*pow8(Msq) +
         221875038000*pow2(Msusy)*pow3(log(pow2(Msq)/pow2(Msusy)))*pow8(Msq) -
@@ -95,7 +95,7 @@ double himalaya::H4::calc_coef_at_as2_no_sm_logs_log0() const {
         51750369*pow4(Msq)*pow6(Msusy) - 16008300*(-5 + 3*z2)*pow2(Msusy)*pow8(
         Msq) - 58536775*pow2(Msq)*pow8(Msusy) + 48024900*power10(Msq) -
         63123270*power10(Msusy)) - 5145*(-742606013 + 474368400*z2)*power10(
-        Msusy)))/(4.992188355e10*pow2(Msusy)*pow8(Msq)))/pow4(Mt)/pow2(Sbeta)*
+        Msusy)))/(4.992188355e10*pow2(Msusy)*pow8(Msq)))/pow4(Mt)*
         12.;
 
    return result;
@@ -107,12 +107,12 @@ double himalaya::H4::calc_coef_at_as2_no_sm_logs_log0() const {
 double himalaya::H4::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
-      (-(pow2(Sbeta)*pow4(Mt)*(2160*pow4(Msusy)*pow6(Msq) + 540*pow4(Msq)*pow6(
+      (-(pow4(Mt)*(2160*pow4(Msusy)*pow6(Msq) + 540*pow4(Msq)*pow6(
         Msusy) - 16*(-173 + 135*z2 + 54*z3)*pow2(Msusy)*pow8(Msq) + 240*pow2(
         Msq)*pow8(Msusy) + 180*log(pow2(Msq)/pow2(Msusy))*pow2(Msusy)*(14*pow4(
         Msq)*pow4(Msusy) + 20*pow2(Msusy)*pow6(Msq) + 12*pow2(Msq)*pow6(Msusy)
         + 28*pow8(Msq) + 11*pow8(Msusy)) + 4320*power10(Msq) + 135*power10(
-        Msusy)))/(81.*pow2(Msusy)*pow8(Msq)))/pow4(Mt)/pow2(Sbeta)*12.; 
+        Msusy)))/(81.*pow2(Msusy)*pow8(Msq)))/pow4(Mt)*12.; 
 
    return result;
 }
@@ -123,8 +123,8 @@ double himalaya::H4::calc_coef_at_as2_no_sm_logs_log1() const {
 double himalaya::H4::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
-      ((8*(221 + 45*log(pow2(Msq)/pow2(Msusy)))*pow2(Sbeta)*pow4(Mt))/27.)/
-      pow4(Mt)/pow2(Sbeta)*12.; 
+      ((8*(221 + 45*log(pow2(Msq)/pow2(Msusy)))*pow4(Mt))/27.)/
+      pow4(Mt)*12.; 
 
    return result;
 }
@@ -135,7 +135,7 @@ double himalaya::H4::calc_coef_at_as2_no_sm_logs_log2() const {
 double himalaya::H4::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
-      ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 
+      ((-224*pow4(Mt))/9.)/pow4(Mt)*12.; 
 
    return result;
 }

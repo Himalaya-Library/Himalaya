@@ -93,6 +93,10 @@ namespace mh2_eft{
        * 	@return the 3-loop coefficient O(at*as^2*log^3) with susy logs Log(MR^2/mQ3^2)^3
        */
       double coeff_as2_susy_log3();
+      double coeff_as2_susy_log02(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt);
+      double coeff_as2_susy_log12(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt);
+      double coeff_as2_susy_log22(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt);
+      double coeff_as2_susy_log32();
    private:
       /**
        * 	fin[] function from arXiv:hep-ph/0507139 .

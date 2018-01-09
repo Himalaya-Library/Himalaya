@@ -144,10 +144,10 @@ himalaya::Parameters setup_HSSUSY_minmix(){
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
-	 //setup_SPS1a(),
-	 //setup_SPS2(),
-	 setup_CMSSM_large_m0()//,
-	 //setup_HSSUSY_minmix()
+	 setup_SPS1a(),
+	 setup_SPS2(),
+	 setup_CMSSM_large_m0(),
+	 setup_HSSUSY_minmix()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator

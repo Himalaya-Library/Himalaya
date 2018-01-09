@@ -6274,6 +6274,5320 @@ double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log3(){
 
 /*******************************SUSY Logs**************************************/
 
+/******************************SUSY Logs 2*************************************/
+
+
+
+double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log02(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt){
+
+   using std::log;
+   using gm2calc::dilog;
+   
+   const double dlatas2Const = 0.;
+   const double mQ32 = pow2(mQ3);
+   const double mU32 = pow2(mU3);
+   const double m32 = pow2(m3);
+   const double msq2 = pow2(msq);
+   const double Mst12 = pow2(Mst1);
+   
+   const double result =
+      248.1215180432007 + dlatas2Const + (128*mQ32*mU32)/(3.*(m32 - mQ32)*(m32
+        - mU32)) - (64*m3*(14*m32 - 3*(mQ32 + 10*msq2 + mU32))*Xt)/(3.*(m32 -
+        mQ32)*(m32 - mU32)) - (48*pow2(-(mQ32*mU32) + pow4(m3)))/(pow2(m32 -
+        mQ32)*pow2(m32 - mU32)) - (128*pow4(m3))/(3.*(m32 - mQ32)*(m32 - mU32))
+        - (16*(-(mQ32*mU32) + pow4(m3)))/((m32 - mQ32)*(m32 - mU32)) - (64*m32*
+        pow2(Xt)*(-5*mQ32*mU32 - 3*m32*(mQ32 + mU32) + 11*pow4(m3)))/(3.*(-m32
+        + mQ32)*(m32 - mU32)*pow2(mQ3)*pow2(mU3)) + (512*m3*pow3(Xt)*(-5*mQ32*
+        mU32 - 3*m32*(mQ32 + mU32) + 11*pow4(m3)))/(3.*(m32 - mQ32)*(m32 -
+        mU32)*pow2(mQ32 - mU32)) + (80*(mQ32 - msq2)*dilog(1 - msq2/pow2(mQ3))*
+        (-3*m32*(mQ32 - msq2)*(mQ32 - mU32) + mQ32*(mQ32 + msq2)*(mQ32 - mU32)
+        + 8*m3*mQ32*(-mQ32 + msq2)*Xt + 8*(mQ32 - msq2)*Xt*pow3(m3) - 2*(mQ32 -
+        mU32)*pow4(m3))*(-2*mQ32*mU32 + pow4(mQ3) + pow4(mU3) - 2*pow4(Xt)))/(
+        pow3(m32 - mQ32)*pow3(mQ32 - mU32)) + (80*(-msq2 + mU32)*dilog(1 -
+        msq2/pow2(mU3))*(3*m32*(mQ32 - mU32)*(msq2 - mU32) + (mQ32 - mU32)*
+        mU32*(msq2 + mU32) + 8*m3*mU32*(-msq2 + mU32)*Xt + 8*(msq2 - mU32)*Xt*
+        pow3(m3) - 2*(mQ32 - mU32)*pow4(m3))*(-2*mQ32*mU32 + pow4(mQ3) + pow4(
+        mU3) - 2*pow4(Xt)))/(pow3(m32 - mU32)*pow3(mQ32 - mU32)) + (128*m3*(14*
+        m32 - 3*(mQ32 + 10*msq2 + mU32))*pow5(Xt))/(3.*(m32 - mQ32)*(m32 -
+        mU32)*pow2(mQ32 - mU32)) + 40*pow2(log(Mst12/pow2(msq)))*((8*m3*(m32 -
+        msq2)*(mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*
+        Xt)/(pow2(m32 - mQ32)*pow2(m32 - mU32)) + ((mQ32 - msq2)*(-3*m32*(mQ32
+        - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 -
+        mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-
+        m32 + mU32) - (2*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 +
+        msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(3*m32*(msq2 -
+        mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 + mU32))*pow4(Xt))/
+        pow2(mQ32 - mU32) - (16*m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) + msq2*
+        mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow5(Xt))/(pow2(m32 - mQ32)*pow2(m32
+        - mU32)*pow2(mQ32 - mU32))) - (16*(5*mQ32*mU32 + 3*m32*(mQ32 + mU32) -
+        11*pow4(m3))*(-6*m32*mQ32*mU32*(mQ32 + mU32) + 3*pow4(mQ3)*pow4(mU3) +
+        pow4(m3)*(9*mQ32*mU32 + 2*pow4(mQ3) + 2*pow4(mU3)) - 2*(mQ32 + mU32)*
+        pow6(m3)))/(3.*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)) +
+        (4*(-(mQ32*mU32*(6*mU32*(10*msq2 + mU32) + mQ32*(60*msq2 + 169*mU32) +
+        6*pow4(mQ3))) + pow4(m3)*(4*mQ32*(75*msq2 - 28*mU32) + 300*msq2*mU32 +
+        93*pow4(mQ3) + 93*pow4(mU3)) - 6*(47*mQ32 + 60*msq2 + 47*mU32)*pow6(m3)
+        - 2*m32*(2*(45*msq2 - 52*mU32)*pow4(mQ3) + 9*(10*msq2 + mU32)*pow4(mU3)
+        - 8*mQ32*(15*msq2*mU32 + 13*pow4(mU3)) + 9*pow6(mQ3)) + 291*pow8(m3)))/
+        (3.*pow2(m32 - mQ32)*pow2(m32 - mU32)) + (80*(m32 - msq2)*dilog(1 -
+        m32/pow2(msq))*(-2*mQ32*mU32 + pow4(mQ3) + pow4(mU3) - 2*pow4(Xt))*(8*
+        m3*mQ32*mU32*(mQ32*(msq2 - 2*mU32) + msq2*mU32)*Xt - mQ32*msq2*mU32*(
+        pow4(mQ3) + pow4(mU3)) - 8*Xt*pow3(m3)*((msq2 - 3*mU32)*pow4(mQ3) +
+        mQ32*(4*msq2*mU32 - 3*pow4(mU3)) + msq2*pow4(mU3)) - 8*Xt*(-3*msq2*mU32
+        + mQ32*(-3*msq2 + 4*mU32) + pow4(mQ3) + pow4(mU3))*pow5(m3) + (-8*msq2*
+        mU32 + mQ32*(-8*msq2 + 30*mU32) + 3*pow4(mQ3) + 3*pow4(mU3))*pow6(m3) -
+        pow4(m3)*((-9*msq2 + 15*mU32)*pow4(mQ3) - 9*msq2*pow4(mU3) + 3*mQ32*(2*
+        msq2*mU32 + 5*pow4(mU3)) + pow6(mQ3) + pow6(mU3)) + m32*(3*msq2*mU32*
+        pow4(mQ3) + (-3*msq2 + 5*mU32)*pow6(mQ3) - 3*msq2*pow6(mU3) + mQ32*(3*
+        msq2*pow4(mU3) + 5*pow6(mU3))) + 8*(mQ32 - 2*msq2 + mU32)*Xt*pow7(m3) +
+        (-8*mQ32 + 6*msq2 - 8*mU32)*pow8(m3) + 2*power10(m3)))/(pow2(mQ32 -
+        mU32)*pow3(m32 - mQ32)*pow3(m32 - mU32)) + (8*dilog(1 - mQ32/pow2(mU3))
+        *(-2*mQ32*mU32 + pow4(mQ3) + pow4(mU3) - 2*pow4(Xt))*(-8*m3*mQ32*mU32*
+        Xt*(-(mQ32*mU32) + 3*pow4(mQ3) + 3*pow4(mU3)) - 16*Xt*(7*mQ32*mU32 + 4*
+        pow4(mQ3) + 4*pow4(mU3))*pow5(m3) + (-76*mQ32*mU32 + 34*pow4(mQ3) + 34*
+        pow4(mU3))*pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*pow4(
+        mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(mQ3)*
+        pow6(mU3) + 8*Xt*pow3(m3)*(7*mU32*pow4(mQ3) + 7*mQ32*pow4(mU3) + 3*
+        pow6(mQ3) + 3*pow6(mU3)) + 80*(mQ32 + mU32)*Xt*pow7(m3) - 14*(mQ32 +
+        mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(
+        mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) +
+        9*pow8(mU3)) - 40*Xt*pow9(m3) + 12*power10(m3)))/(3.*(mQ32 - mU32)*
+        pow3(m32 - mQ32)*pow3(m32 - mU32)) + (8*pow4(Xt)*(pow4(mQ3)*(6*mU32*(
+        10*msq2 + mU32) + mQ32*(60*msq2 + 277*mU32) + 6*pow4(mQ3))*pow4(mU3) -
+        mQ32*mU32*pow4(m3)*(300*msq2*mU32 + 12*mQ32*(25*msq2 + 14*mU32) + 173*
+        pow4(mQ3) + 173*pow4(mU3)) + 2*m32*mQ32*mU32*(2*(45*msq2 - 59*mU32)*
+        pow4(mQ3) + 9*(10*msq2 + mU32)*pow4(mU3) - 2*mQ32*(60*msq2*mU32 + 59*
+        pow4(mU3)) + 9*pow6(mQ3)) - 6*pow6(m3)*(-93*mU32*pow4(mQ3) - 3*mQ32*(
+        20*msq2*mU32 + 31*pow4(mU3)) + 2*pow6(mQ3) + 2*pow6(mU3)) + 7*(-65*
+        mQ32*mU32 + 8*pow4(mQ3) + 8*pow4(mU3))*pow8(m3) - 44*(mQ32 + mU32)*
+        power10(m3)))/(3.*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)
+        *pow2(mQ32 - mU32)) - (80*log(Mst12/pow2(msq))*((24*m3*msq2*Xt)/((m32 -
+        mQ32)*(m32 - mU32)) - (4*m32*pow2(Xt))/(pow2(mQ3)*pow2(mU3)) - (32*m3*
+        pow3(Xt))/pow2(mQ32 - mU32) + 2*dilog(1 - m32/pow2(mQ3))*((8*Xt*pow3(
+        m3))/((m32 - mQ32)*(mQ32 - mU32)) + (4*m3*(2*m32 - mQ32 - mU32)*pow3(
+        Xt))/pow3(mQ32 - mU32) - (2*pow4(m3))/pow2(m32 - mQ32) - ((-2*m32 +
+        mQ32 + mU32)*pow4(Xt))/pow3(mQ32 - mU32)) + 2*dilog(1 - m32/pow2(mU3))*
+        ((8*Xt*pow3(m3))/((m32 - mU32)*(-mQ32 + mU32)) + (4*m3*(-2*m32 + mQ32 +
+        mU32)*pow3(Xt))/pow3(mQ32 - mU32) - (2*pow4(m3))/pow2(m32 - mU32) + ((-
+        2*m32 + mQ32 + mU32)*pow4(Xt))/pow3(mQ32 - mU32)) - (48*m3*msq2*pow5(
+        Xt))/((m32 - mQ32)*(m32 - mU32)*pow2(mQ32 - mU32)) + (2*pow4(Xt)*(mQ32*
+        mU32*pow4(m3)*(15*mU32*(-msq2 + mU32) + mQ32*(-15*msq2 + 64*mU32) + 15*
+        pow4(mQ3)) + 3*msq2*pow4(mQ3)*pow6(mU3) + pow6(m3)*(-30*mU32*pow4(mQ3)
+        + 6*mQ32*(3*msq2*mU32 - 5*pow4(mU3)) + pow6(mQ3) + pow6(mU3)) + pow6(
+        mQ3)*(3*msq2*pow4(mU3) + 16*pow6(mU3)) + m32*((9*msq2*mU32 - 32*pow4(
+        mU3))*pow6(mQ3) + 9*mQ32*msq2*pow6(mU3) - 4*pow4(mQ3)*(3*msq2*pow4(mU3)
+        + 8*pow6(mU3))) - 2*(-7*mQ32*mU32 + pow4(mQ3) + pow4(mU3))*pow8(m3) + (
+        mQ32 + mU32)*power10(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(
+        m32 - mU32)*pow2(mQ32 - mU32)) + (mQ32*mU32*pow4(m3)*(mQ32*(15*msq2 -
+        68*mU32) + 15*msq2*mU32 - 19*pow4(mQ3) - 19*pow4(mU3)) - (3*msq2*mU32 +
+        mQ32*(3*msq2 + 14*mU32))*pow4(mQ3)*pow4(mU3) + pow6(m3)*(41*mU32*pow4(
+        mQ3) + mQ32*(-18*msq2*mU32 + 41*pow4(mU3)) + 2*pow6(mQ3) + 2*pow6(mU3))
+        + m32*((-9*msq2*mU32 + 31*pow4(mU3))*pow6(mQ3) - 9*mQ32*msq2*pow6(mU3)
+        + pow4(mQ3)*(12*msq2*pow4(mU3) + 31*pow6(mU3))) - 4*(6*mQ32*mU32 +
+        pow4(mQ3) + pow4(mU3))*pow8(m3) + 2*(mQ32 + mU32)*power10(m3))/(pow2(
+        mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32))))/3. - (4*pow3(log(
+        Mst12/pow2(mU3)))*(8*m3*(m32 - mU32)*Xt*pow3(-mQ32 + mU32)*(pow4(m3)*(
+        185*mQ32*mU32 + pow4(mQ3) - 202*pow4(mU3)) - 20*(mQ32 - mU32)*pow6(m3)
+        + mU32*(10*mU32*pow4(mQ3) + 30*mU32*pow4(msq) - 60*msq2*pow4(mU3) +
+        mQ32*(60*msq2*mU32 - 30*pow4(msq) + 32*pow4(mU3)) - 3*pow6(mQ3) - 55*
+        pow6(mU3)) + m32*(-11*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + mQ32*(-60*
+        msq2*mU32 + 30*pow4(msq) - 149*pow4(mU3)) + 60*msq2*pow4(mU3) + 3*pow6(
+        mQ3) + 189*pow6(mU3))) + 320*(mQ32 + mU32)*pow2(-(m3*mU32) + pow3(m3))*
+        pow4(mU3)*pow6(Xt) + 8*m3*(m32 - mU32)*pow2(mQ32 - mU32)*pow3(Xt)*(
+        pow4(m3)*(205*mQ32*mU32 + 2*pow4(mQ3) - 131*pow4(mU3)) - (37*mQ32 + 35*
+        mU32)*pow6(m3) + mU32*(20*mU32*pow4(mQ3) + 60*mU32*pow4(msq) - 120*
+        msq2*pow4(mU3) + mQ32*(120*msq2*mU32 - 60*pow4(msq) + 81*pow4(mU3)) -
+        6*pow6(mQ3) - 157*pow6(mU3)) + m32*(-22*mU32*pow4(mQ3) - 60*mU32*pow4(
+        msq) + mQ32*(-120*msq2*mU32 + 60*pow4(msq) - 281*pow4(mU3)) + 120*msq2*
+        pow4(mU3) + 6*pow6(mQ3) + 353*pow6(mU3)) + 2*pow8(m3)) + 8*m3*(m32 -
+        mU32)*pow5(Xt)*(2*(-16*mQ32*mU32 + 9*pow4(mQ3) + 7*pow4(mU3))*pow6(m3)
+        - pow4(m3)*(70*mU32*pow4(mQ3) - 145*mQ32*pow4(mU3) + pow6(mQ3) - 86*
+        pow6(mU3)) + mU32*(mQ32 + mU32)*(-10*mU32*pow4(mQ3) - 30*mU32*pow4(msq)
+        + 2*mQ32*(-30*msq2*mU32 + 15*pow4(msq) - 8*pow4(mU3)) + 60*msq2*pow4(
+        mU3) + 3*pow6(mQ3) + 103*pow6(mU3)) + m32*(30*pow4(msq)*pow4(mU3) +
+        pow4(mQ3)*(60*msq2*mU32 - 30*pow4(msq) + 94*pow4(mU3)) + 8*mU32*pow6(
+        mQ3) - 200*mQ32*pow6(mU3) - 60*msq2*pow6(mU3) - 3*pow8(mQ3) - 219*pow8(
+        mU3))) - 2*pow2(Xt)*pow3(mQ32 - mU32)*(2*(10*mQ32*(3*msq2 - 7*mU32) -
+        5*mU32*(6*msq2 + 167*mU32) + pow4(mQ3))*pow6(m3) + 2*m32*mU32*(-18*
+        mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 3*mQ32*(-30*msq2*mU32 + 10*pow4(
+        msq) - 39*pow4(mU3)) + 90*msq2*pow4(mU3) + 3*pow6(mQ3) + 124*pow6(mU3))
+        + pow4(mU3)*(mU32*pow4(mQ3) + mQ32*(30*pow4(msq) + 63*pow4(mU3)) + 3*
+        pow6(mQ3) - 15*(2*mU32*pow4(msq) + 9*pow6(mU3))) + pow4(m3)*(33*mU32*
+        pow4(mQ3) + mQ32*(120*msq2*mU32 - 90*pow4(msq) + 361*pow4(mU3)) - 9*
+        pow6(mQ3) + 15*(6*mU32*pow4(msq) - 8*msq2*pow4(mU3) + 41*pow6(mU3))) -
+        6*(7*mQ32 - 177*mU32)*pow8(m3) - 128*power10(m3)) + pow4(mQ32 - mU32)*(
+        (mQ32 - mU32)*pow4(mU3)*(4*mQ32*mU32 + 3*pow4(mQ3) + 30*pow4(msq) + 67*
+        pow4(mU3)) + 2*(6*mQ32*(5*msq2 - 23*mU32) - 30*msq2*mU32 + pow4(mQ3) -
+        247*pow4(mU3))*pow6(m3) + pow4(m3)*(33*mU32*pow4(mQ3) + 90*mU32*pow4(
+        msq) - 120*msq2*pow4(mU3) + mQ32*(120*msq2*mU32 - 90*pow4(msq) + 429*
+        pow4(mU3)) - 9*pow6(mQ3) + 59*pow6(mU3)) + 2*m32*mU32*(-18*mU32*pow4(
+        mQ3) - 30*mU32*pow4(msq) + 3*mQ32*(-30*msq2*mU32 + 10*pow4(msq) - 39*
+        pow4(mU3)) + 90*msq2*pow4(mU3) + 3*pow6(mQ3) + 68*pow6(mU3)) + (-38*
+        mQ32 + 550*mU32)*pow8(m3) - 128*power10(m3)) + (mQ32 - mU32)*pow4(Xt)*(
+        2*pow6(m3)*((30*msq2 - 33*mU32)*pow4(mQ3) - 1157*mQ32*pow4(mU3) - 30*
+        msq2*pow4(mU3) + pow6(mQ3) - 2363*pow6(mU3)) + (mQ32 + mU32)*pow4(mU3)*
+        (mU32*pow4(mQ3) - 30*mU32*pow4(msq) + mQ32*(30*pow4(msq) + 29*pow4(mU3)
+        ) + 3*pow6(mQ3) - 169*pow6(mU3)) + (872*mQ32*mU32 - 44*pow4(mQ3) +
+        4276*pow4(mU3))*pow8(m3) + 2*m32*mU32*(pow4(mQ3)*(-90*msq2*mU32 + 30*
+        pow4(msq) - 67*pow4(mU3)) - 30*pow4(msq)*pow4(mU3) - 15*mU32*pow6(mQ3)
+        - 319*mQ32*pow6(mU3) + 90*msq2*pow6(mU3) + 3*pow8(mQ3) + 302*pow8(mU3))
+        + pow4(m3)*(90*pow4(msq)*pow4(mU3) + pow4(mQ3)*(120*msq2*mU32 - 90*
+        pow4(msq) + 222*pow4(mU3)) + 24*mU32*pow6(mQ3) + 2344*mQ32*pow6(mU3) -
+        120*msq2*pow6(mU3) - 9*pow8(mQ3) + 1163*pow8(mU3)) - 4*(31*mQ32 + 289*
+        mU32)*power10(m3))))/(3.*pow4(m32 - mU32)*pow5(-mQ32 + mU32)) + (8*
+        dilog(1 - m32/pow2(mQ3))*((-16*m3*(2*m32 - mQ32 - mU32)*pow2(m32 -
+        mU32)*pow3(Xt)*(-5*mQ32*mU32 - 3*m32*(mQ32 + mU32) + 11*pow4(m3)))/(m32
+        - mQ32) + 16*m3*(m32 - mU32)*(m32*(mQ32 - 37*mU32) - 7*mQ32*mU32 + 18*
+        pow4(m3) + 3*pow4(mQ3) + 22*pow4(mU3))*pow5(Xt) - (8*m3*(m32 - mU32)*
+        Xt*pow2(mQ32 - mU32)*(22*pow4(mQ3)*pow4(mU3) + pow4(m3)*(59*mQ32*mU32 +
+        19*pow4(mQ3) + 34*pow4(mU3)) - (47*mQ32 + 93*mU32)*pow6(m3) - 7*mU32*
+        pow6(mQ3) - m32*(23*mU32*pow4(mQ3) + 24*mQ32*pow4(mU3) + 5*pow6(mQ3)) +
+        62*pow8(m3) + 3*pow8(mQ3)))/pow2(m32 - mQ32) + (pow2(mQ32 - mU32)*(-2*(
+        167*mQ32 + 217*mU32)*pow12(m3) + 128*pow14(m3) + mU32*pow6(mQ3)*(mU32*
+        pow4(mQ3) + 19*mQ32*pow4(mU3) + 3*pow6(mQ3) - 23*pow6(mU3)) - (1145*
+        mU32*pow4(mQ3) + 1177*mQ32*pow4(mU3) + 89*pow6(mQ3) + 149*pow6(mU3))*
+        pow8(m3) + pow6(m3)*(1498*pow4(mQ3)*pow4(mU3) + 100*mU32*pow6(mQ3) +
+        324*mQ32*pow6(mU3) + 11*pow8(mQ3) - 13*pow8(mU3)) + m32*pow4(mQ3)*(-42*
+        pow4(mQ3)*pow4(mU3) - 44*mU32*pow6(mQ3) + 148*mQ32*pow6(mU3) + 9*pow8(
+        mQ3) + 57*pow8(mU3)) + 16*(67*mQ32*mU32 + 23*pow4(mQ3) + 30*pow4(mU3))*
+        power10(m3) + pow4(m3)*(-376*pow4(mU3)*pow6(mQ3) - 598*pow4(mQ3)*pow6(
+        mU3) + 192*mU32*pow8(mQ3) + 43*mQ32*pow8(mU3) - 29*power10(mQ3))))/
+        pow3(m32 - mQ32) - (2*pow4(Xt)*(172*pow12(m3) + pow6(m3)*(-313*mU32*
+        pow4(mQ3) - 1151*mQ32*pow4(mU3) + 3*pow6(mQ3) - 59*pow6(mU3)) - mU32*
+        pow4(mQ3)*(mU32*pow4(mQ3) + 29*mQ32*pow4(mU3) + 3*pow6(mQ3) - 13*pow6(
+        mU3)) + 2*(542*mQ32*mU32 + 69*pow4(mQ3) + 199*pow4(mU3))*pow8(m3) +
+        pow4(m3)*(411*pow4(mQ3)*pow4(mU3) - 149*mU32*pow6(mQ3) + 409*mQ32*pow6(
+        mU3) + 20*pow8(mQ3) - 31*pow8(mU3)) - 12*(31*mQ32 + 39*mU32)*power10(
+        m3) + m32*(55*pow4(mU3)*pow6(mQ3) - 129*pow4(mQ3)*pow6(mU3) + 41*mU32*
+        pow8(mQ3) - 30*mQ32*pow8(mU3) - 9*power10(mQ3))))/pow2(m32 - mQ32)))/(
+        3.*pow3(m32 - mU32)*pow3(mQ32 - mU32)) + (8*dilog(1 - m32/pow2(mU3))*((
+        16*m3*(-2*m32 + mQ32 + mU32)*pow2(m32 - mQ32)*pow3(Xt)*(5*mQ32*mU32 +
+        3*m32*(mQ32 + mU32) - 11*pow4(m3)))/(m32 - mU32) - 16*m3*(m32 - mQ32)*(
+        -7*mQ32*mU32 + m32*(-37*mQ32 + mU32) + 18*pow4(m3) + 22*pow4(mQ3) + 3*
+        pow4(mU3))*pow5(Xt) + (8*m3*(m32 - mQ32)*Xt*pow2(mQ32 - mU32)*(22*pow4(
+        mQ3)*pow4(mU3) + pow4(m3)*(59*mQ32*mU32 + 34*pow4(mQ3) + 19*pow4(mU3))
+        - (93*mQ32 + 47*mU32)*pow6(m3) - 7*mQ32*pow6(mU3) - m32*(24*mU32*pow4(
+        mQ3) + 23*mQ32*pow4(mU3) + 5*pow6(mU3)) + 62*pow8(m3) + 3*pow8(mU3)))/
+        pow2(m32 - mU32) - (pow2(mQ32 - mU32)*(-2*(217*mQ32 + 167*mU32)*pow12(
+        m3) + 128*pow14(m3) + mQ32*pow6(mU3)*(19*mU32*pow4(mQ3) + mQ32*pow4(
+        mU3) - 23*pow6(mQ3) + 3*pow6(mU3)) - (1177*mU32*pow4(mQ3) + 1145*mQ32*
+        pow4(mU3) + 149*pow6(mQ3) + 89*pow6(mU3))*pow8(m3) + mU32*pow4(m3)*(-
+        376*pow4(mQ3)*pow4(mU3) - 598*mU32*pow6(mQ3) + 192*mQ32*pow6(mU3) + 43*
+        pow8(mQ3) - 29*pow8(mU3)) + m32*pow4(mU3)*(-42*pow4(mQ3)*pow4(mU3) +
+        148*mU32*pow6(mQ3) - 44*mQ32*pow6(mU3) + 57*pow8(mQ3) + 9*pow8(mU3)) +
+        pow6(m3)*(1498*pow4(mQ3)*pow4(mU3) + 324*mU32*pow6(mQ3) + 100*mQ32*
+        pow6(mU3) - 13*pow8(mQ3) + 11*pow8(mU3)) + 16*(67*mQ32*mU32 + 30*pow4(
+        mQ3) + 23*pow4(mU3))*power10(m3)))/pow3(m32 - mU32) + (2*pow4(Xt)*(172*
+        pow12(m3) + mQ32*pow4(mU3)*(-29*mU32*pow4(mQ3) - mQ32*pow4(mU3) + 13*
+        pow6(mQ3) - 3*pow6(mU3)) - pow6(m3)*(1151*mU32*pow4(mQ3) + 313*mQ32*
+        pow4(mU3) + 59*pow6(mQ3) - 3*pow6(mU3)) + 2*(542*mQ32*mU32 + 199*pow4(
+        mQ3) + 69*pow4(mU3))*pow8(m3) + pow4(m3)*(411*pow4(mQ3)*pow4(mU3) +
+        409*mU32*pow6(mQ3) - 149*mQ32*pow6(mU3) - 31*pow8(mQ3) + 20*pow8(mU3))
+        - 12*(39*mQ32 + 31*mU32)*power10(m3) + m32*(-129*pow4(mU3)*pow6(mQ3) +
+        55*pow4(mQ3)*pow6(mU3) - 30*mU32*pow8(mQ3) + 41*mQ32*pow8(mU3) - 9*
+        power10(mU3))))/pow2(m32 - mU32)))/(3.*pow3(m32 - mQ32)*pow3(mQ32 -
+        mU32)) + (4*pow2(log(Mst12/pow2(mU3)))*((-640*pow2(-(m3*mU32) + pow3(
+        m3))*pow4(mU3)*pow6(Xt))/pow4(mQ32 - mU32) + (32*m3*pow2(m32 - mU32)*
+        pow3(Xt)*(-2*pow4(m3)*(-75*mQ32*mU32 + 7*pow4(mQ3) + 24*pow4(mU3)) +
+        m32*mU32*(30*msq2*mU32 - mQ32*(30*msq2 + 47*mU32) - 117*pow4(mQ3) + 66*
+        pow4(mU3)) + (7*mQ32 - 37*mU32)*pow6(m3) + mU32*((30*msq2 + 82*mU32)*
+        pow4(mQ3) - mQ32*(30*msq2*mU32 + 53*pow4(mU3)) + 3*pow6(mQ3) - 3*pow6(
+        mU3)) + 11*pow8(m3)))/((m32 - mQ32)*pow3(mQ32 - mU32)) + (8*m3*(m32 -
+        mU32)*Xt*(-((380*mQ32*mU32 + pow4(mQ3) - 397*pow4(mU3))*pow6(m3)) +
+        pow4(m3)*(311*mU32*pow4(mQ3) + 30*mU32*pow4(msq) - 120*msq2*pow4(mU3) +
+        mQ32*(120*msq2*mU32 - 30*pow4(msq) + 122*pow4(mU3)) - 2*pow6(mQ3) -
+        479*pow6(mU3)) + 32*(mQ32 - mU32)*pow8(m3) + mU32*(pow4(mQ3)*(120*msq2*
+        mU32 - 30*pow4(msq) + 137*pow4(mU3)) + 16*mU32*pow6(mQ3) + 10*mQ32*(3*
+        mU32*pow4(msq) - 12*msq2*pow4(mU3) - 16*pow6(mU3)) - 3*pow8(mQ3) - 6*
+        pow8(mU3)) + m32*(pow4(mQ3)*(-120*msq2*mU32 + 30*pow4(msq) - 367*pow4(
+        mU3)) - 30*pow4(msq)*pow4(mU3) - 14*mU32*pow6(mQ3) + 226*mQ32*pow6(mU3)
+        + 120*msq2*pow6(mU3) + 3*pow8(mQ3) + 200*pow8(mU3))))/((m32 - mQ32)*
+        pow2(mQ32 - mU32)) - (16*m3*(m32 - mU32)*pow5(Xt)*((-6*mQ32*mU32 - 35*
+        pow4(mQ3) + 179*pow4(mU3))*pow6(m3) - pow4(m3)*(5*mU32*pow4(mQ3) - 30*
+        mU32*pow4(msq) + 90*msq2*pow4(mU3) + 6*mQ32*(-5*msq2*mU32 + 5*pow4(msq)
+        + 51*pow4(mU3)) + 2*pow6(mQ3) + 437*pow6(mU3)) + (34*mQ32 + 30*mU32)*
+        pow8(m3) - mU32*(pow4(mQ3)*(-30*msq2*mU32 + 30*pow4(msq) + 82*pow4(mU3)
+        ) - 7*mU32*pow6(mQ3) + mQ32*(-30*mU32*pow4(msq) + 90*msq2*pow4(mU3) +
+        201*pow6(mU3)) + 3*pow8(mQ3) + 3*pow8(mU3)) + m32*(-30*pow4(msq)*pow4(
+        mU3) + 2*pow4(mQ3)*(-15*msq2*mU32 + 15*pow4(msq) + 53*pow4(mU3)) - 5*
+        mU32*pow6(mQ3) + 90*msq2*pow6(mU3) + mQ32*(60*msq2*pow4(mU3) + 511*
+        pow6(mU3)) + 3*pow8(mQ3) + 215*pow8(mU3))))/((m32 - mQ32)*pow4(mQ32 -
+        mU32)) - 20*(m32 - mU32)*log(Mst12/pow2(msq))*((6*msq2 + 7*mU32)*pow4(
+        m3) - 3*mU32*pow4(msq) + (4*m3*(m32 - mU32)*Xt*(-3*m32*mU32 - 12*msq2*
+        mU32 + 2*pow4(m3) + 6*pow4(msq) + pow4(mU3)))/(-mQ32 + mU32) - 3*m32*(-
+        6*msq2*mU32 + 3*pow4(msq) + 2*pow4(mU3)) + (2*pow2(Xt)*(3*msq2*(mQ32 -
+        mU32)*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)) + (m32 - mU32)*(
+        (mQ32 - 3*mU32)*pow4(m3) + 2*(mQ32 - 2*mU32)*pow4(mU3) + m32*(-4*mQ32*
+        mU32 + 8*pow4(mU3)))))/pow2(mQ32 - mU32) + (4*m3*(m32 - mU32)*(mQ32 +
+        mU32)*(m32*mU32 + 12*msq2*mU32 - 6*pow4(msq) - pow4(mU3))*pow5(Xt))/
+        pow4(mQ32 - mU32) - 3*pow6(m3) + 2*pow6(mU3) + (4*m3*(m32 - mU32)*pow3(
+        Xt)*(-((mQ32 + 5*mU32)*pow4(m3)) + 12*mU32*pow4(msq) - 24*msq2*pow4(
+        mU3) + 2*m32*(2*mQ32*mU32 + pow4(mU3)) - 3*mQ32*(-8*msq2*mU32 + 4*pow4(
+        msq) + pow4(mU3)) + 2*pow6(m3) + pow6(mU3)))/pow3(-mQ32 + mU32) + (
+        pow4(Xt)*(-3*msq2*(mQ32 - mU32)*(mQ32 + mU32)*(3*m32*(msq2 - 2*mU32) +
+        msq2*mU32 - 2*pow4(m3)) + (m32 - mU32)*(8*mQ32*mU32*pow4(m3) + 2*m32*
+        mU32*(-5*mQ32*mU32 + pow4(mQ3) - 4*pow4(mU3)) - pow4(mQ3)*pow4(mU3) -
+        2*(mQ32 - mU32)*pow6(m3) + 4*mQ32*pow6(mU3) + 5*pow8(mU3))))/pow4(mQ32
+        - mU32)) - (4*(m32 - mU32)*pow2(Xt)*(pow6(m3)*(1346*mU32*pow4(mQ3) -
+        90*msq2*pow4(mU3) + 3*mQ32*(30*msq2*mU32 + 491*pow4(mU3)) - 41*pow6(
+        mQ3) - 226*pow6(mU3)) + mQ32*pow4(mU3)*(3*(10*msq2 - 59*mU32)*pow4(mQ3)
+        + mQ32*(-30*msq2*mU32 + 151*pow4(mU3)) + 3*pow6(mQ3) + 3*pow6(mU3)) +
+        mU32*pow4(m3)*(-4*(45*msq2 + 403*mU32)*pow4(mQ3) - 30*msq2*pow4(mU3) +
+        mQ32*(210*msq2*mU32 + 137*pow4(mU3)) - 373*pow6(mQ3) + 192*pow6(mU3)) +
+        (-1462*mQ32*mU32 + 65*pow4(mQ3) - 383*pow4(mU3))*pow8(m3) + m32*mU32*(
+        pow4(mQ3)*(-150*msq2*mU32 + 338*pow4(mU3)) + (90*msq2 + 471*mU32)*pow6(
+        mQ3) + mQ32*(60*msq2*pow4(mU3) - 391*pow6(mU3)) + 9*pow8(mQ3) + 9*pow8(
+        mU3)) + (-24*mQ32 + 492*mU32)*power10(m3)))/(pow2(m32 - mQ32)*pow2(mQ32
+        - mU32)) + (2*pow4(Xt)*(176*(mQ32 - mU32)*pow14(m3) + pow12(m3)*(120*
+        mQ32*mU32 - 322*pow4(mQ3) + 2586*pow4(mU3)) + 2*pow8(m3)*(pow4(mQ3)*(-
+        135*msq2*mU32 + 45*pow4(msq) + 3052*pow4(mU3)) + 3*(20*msq2 + 79*mU32)*
+        pow6(mQ3) + mQ32*(-90*mU32*pow4(msq) + 180*msq2*pow4(mU3) + 6811*pow6(
+        mU3)) + 5*pow8(mQ3) + 5*(9*pow4(msq)*pow4(mU3) - 21*msq2*pow6(mU3) +
+        403*pow8(mU3))) + 3*(-((20*msq2 + 67*mU32)*pow4(mQ3)) + mQ32*(40*msq2*
+        mU32 - 2089*pow4(mU3)) - 20*msq2*pow4(mU3) + 49*pow6(mQ3) - 1893*pow6(
+        mU3))*power10(m3) - 2*pow6(m3)*((-90*msq2*mU32 + 90*pow4(msq) + 1601*
+        pow4(mU3))*pow6(mQ3) + 2*(-60*msq2*mU32 + 15*pow4(msq) + 92*pow4(mU3))*
+        pow6(mU3) + pow4(mQ3)*(-150*mU32*pow4(msq) + 210*msq2*pow4(mU3) + 5695*
+        pow6(mU3)) + (30*msq2 + 89*mU32)*pow8(mQ3) + mQ32*(30*pow4(msq)*pow4(
+        mU3) - 30*msq2*pow6(mU3) + 4741*pow8(mU3)) + 10*power10(mQ3)) + pow4(
+        m3)*(9*pow12(mQ3) + mQ32*(-480*msq2*mU32 + 180*pow4(msq) + 1079*pow4(
+        mU3))*pow6(mU3) + pow6(mQ3)*(-60*mU32*pow4(msq) + 4230*pow6(mU3)) + (-
+        30*msq2*mU32 + 90*pow4(msq) + 692*pow4(mU3))*pow8(mQ3) - 2*(-15*msq2*
+        mU32 + 15*pow4(msq) + 196*pow4(mU3))*pow8(mU3) + pow4(mQ3)*(-180*pow4(
+        msq)*pow4(mU3) + 480*msq2*pow6(mU3) + 7123*pow8(mU3)) - 21*mU32*
+        power10(mQ3)) - m32*mU32*(6*pow12(mQ3) + 9*pow12(mU3) + pow6(mQ3)*(-
+        180*mU32*pow4(msq) + 300*msq2*pow4(mU3) + 1861*pow6(mU3)) + 2*(-60*
+        msq2*mU32 + 30*pow4(msq) + 361*pow4(mU3))*pow8(mQ3) + 5*pow4(mQ3)*(36*
+        pow4(msq)*pow4(mU3) - 48*msq2*pow6(mU3) + 203*pow8(mU3)) - 42*mU32*
+        power10(mQ3) + mQ32*(-60*pow4(msq)*pow6(mU3) + 60*msq2*pow8(mU3) - 787*
+        power10(mU3))) - mQ32*pow4(mU3)*(10*(3*msq2*mU32 + 3*pow4(msq) - 19*
+        pow4(mU3))*pow6(mQ3) - 4*pow4(mQ3)*(15*mU32*pow4(msq) + 61*pow6(mU3)) +
+        mU32*pow8(mQ3) + mQ32*(30*pow4(msq)*pow4(mU3) - 30*msq2*pow6(mU3) +
+        347*pow8(mU3)) + 3*power10(mQ3) + 3*power10(mU3))))/(pow2(m32 - mQ32)*
+        pow4(mQ32 - mU32)) + (4*(63*mQ32 + 257*mU32)*pow12(m3) - 128*pow14(m3)
+        + mQ32*(mQ32 - mU32)*pow4(mU3)*(-2*mU32*pow4(mQ3) + 3*mQ32*(-20*msq2*
+        mU32 + 10*pow4(msq) + 99*pow4(mU3)) + 3*pow6(mQ3) + 6*pow6(mU3)) + (-3*
+        (40*msq2 - 949*mU32)*pow4(mQ3) + 90*mU32*pow4(msq) - 300*msq2*pow4(mU3)
+        + mQ32*(420*msq2*mU32 - 90*pow4(msq) + 4635*pow4(mU3)) - 115*pow6(mQ3)
+        + 313*pow6(mU3))*pow8(m3) + 4*pow6(m3)*(3*pow4(mQ3)*(-55*msq2*mU32 +
+        15*pow4(msq) - 401*pow4(mU3)) - 15*pow4(msq)*pow4(mU3) + (15*msq2 -
+        191*mU32)*pow6(mQ3) + mQ32*(-30*mU32*pow4(msq) + 75*msq2*pow4(mU3) -
+        511*pow6(mU3)) + 75*msq2*pow6(mU3) + 5*pow8(mQ3) + 140*pow8(mU3)) - 4*(
+        15*msq2*mU32 + mQ32*(-15*msq2 + 783*mU32) + 5*pow4(mQ3) + 332*pow4(mU3)
+        )*power10(m3) + pow4(m3)*((300*msq2*mU32 - 90*pow4(msq) + 1436*pow4(
+        mU3))*pow6(mQ3) - 3*(-20*msq2*mU32 + 10*pow4(msq) + 97*pow4(mU3))*pow6(
+        mU3) + pow4(mQ3)*(-30*mU32*pow4(msq) + 300*msq2*pow4(mU3) + 2968*pow6(
+        mU3)) + 39*mU32*pow8(mQ3) + 5*mQ32*(30*pow4(msq)*pow4(mU3) - 132*msq2*
+        pow6(mU3) - 163*pow8(mU3)) - 9*power10(mQ3)) - 2*m32*mU32*((150*msq2*
+        mU32 - 30*pow4(msq) + 496*pow4(mU3))*pow6(mQ3) + 2*pow4(mQ3)*(30*mU32*
+        pow4(msq) - 105*msq2*pow4(mU3) + 71*pow6(mU3)) + 27*mU32*pow8(mQ3) +
+        mQ32*(-30*pow4(msq)*pow4(mU3) + 60*msq2*pow6(mU3) - 351*pow8(mU3)) - 3*
+        power10(mQ3) + 9*power10(mU3)))/((mQ32 - mU32)*pow2(m32 - mQ32))))/(3.*
+        pow4(m32 - mU32)) + (8*pow2(log(Mst12/pow2(m3)))*(8*pow2(m32 - mU32)*
+        pow2(Xt)*pow4(m3)*((-28*m32)/pow2(m32 - mQ32) + (3*(m32 - mU32)*(-m32 +
+        mQ32 + mU32)*(2 + (8*pow4(m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3) +
+        pow4(mQ3) + pow4(mU3)))/(3.*pow2(m32 - mQ32)*pow2(m32 - mU32))))/((-m32
+        + mQ32)*pow2(mQ3)*pow2(mU3))) - (320*pow2(m32 - mU32)*pow6(m3)*pow6(Xt)
+        )/(pow2(m32 - mQ32)*pow2(mQ32 - mU32)) - (256*(m32 - mQ32 - mU32)*pow2(
+        m32 - mU32)*pow3(Xt)*pow7(m3))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)) -
+        (16*(m32 - mU32)*pow3(m3)*pow5(Xt)*(-134*m32*(mQ32 + mU32)*pow4(mQ3)*
+        pow4(mU3) + 47*mQ32*mU32*pow4(m3)*(4*mQ32*mU32 + pow4(mQ3) + pow4(mU3))
+        + 87*pow6(mQ3)*pow6(mU3) + pow6(m3)*(-54*mU32*pow4(mQ3) - 54*mQ32*pow4(
+        mU3) + 8*pow6(mQ3) + 8*pow6(mU3)) + (7*mQ32*mU32 - 16*pow4(mQ3) - 16*
+        pow4(mU3))*pow8(m3) + 8*(mQ32 + mU32)*power10(m3)))/(pow2(mQ3)*pow2(
+        mU3)*pow2(mQ32 - mU32)*pow3(-m32 + mQ32)) - (8*(m32 - mU32)*Xt*pow3(m3)
+        *(130*m32*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 81*pow6(mQ3)*pow6(mU3) +
+        2*pow6(m3)*(9*mU32*pow4(mQ3) + 9*mQ32*pow4(mU3) + 8*pow6(mQ3) + 8*pow6(
+        mU3)) - pow4(m3)*(196*pow4(mQ3)*pow4(mU3) + 25*mU32*pow6(mQ3) + 25*
+        mQ32*pow6(mU3)) + (31*mQ32*mU32 - 32*pow4(mQ3) - 32*pow4(mU3))*pow8(m3)
+        + 16*(mQ32 + mU32)*power10(m3)))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)
+        ) - (2*pow4(Xt)*(44*(mQ32 + mU32)*pow18(m3) - 2*pow16(m3)*(mQ32*mU32 +
+        72*pow4(mQ3) + 72*pow4(mU3)) - pow4(m3)*(548*mQ32*mU32 + 49*pow4(mQ3) +
+        49*pow4(mU3))*pow6(mQ3)*pow6(mU3) - 2*pow4(mQ3)*pow4(mU3)*pow6(m3)*(44*
+        mU32*pow4(mQ3) + 44*mQ32*pow4(mU3) + 35*pow6(mQ3) + 35*pow6(mU3)) + 2*
+        pow14(m3)*(-147*mU32*pow4(mQ3) - 147*mQ32*pow4(mU3) + 92*pow6(mQ3) +
+        92*pow6(mU3)) + pow12(m3)*(1932*pow4(mQ3)*pow4(mU3) + 277*mU32*pow6(
+        mQ3) + 277*mQ32*pow6(mU3) - 112*pow8(mQ3) - 112*pow8(mU3)) + mQ32*mU32*
+        pow8(m3)*(1712*pow4(mQ3)*pow4(mU3) + 572*mU32*pow6(mQ3) + 572*mQ32*
+        pow6(mU3) - 25*pow8(mQ3) - 25*pow8(mU3)) + 156*m32*(mQ32 + mU32)*pow8(
+        mQ3)*pow8(mU3) - 36*power10(mQ3)*power10(mU3) + 4*power10(m3)*(-503*
+        pow4(mU3)*pow6(mQ3) - 503*pow4(mQ3)*pow6(mU3) + mU32*pow8(mQ3) + mQ32*
+        pow8(mU3) + 7*power10(mQ3) + 7*power10(mU3))))/(pow2(mQ3)*pow2(mU3)*
+        pow2(mQ32 - mU32)*pow4(m32 - mQ32)) + (-88*(mQ32 + mU32)*pow18(m3) +
+        pow16(m3)*(302*mQ32*mU32 + 288*pow4(mQ3) + 288*pow4(mU3)) - pow4(m3)*(
+        452*mQ32*mU32 + 25*pow4(mQ3) + 25*pow4(mU3))*pow6(mQ3)*pow6(mU3) - 2*
+        pow4(mQ3)*pow4(mU3)*pow6(m3)*(136*mU32*pow4(mQ3) + 136*mQ32*pow4(mU3) +
+        67*pow6(mQ3) + 67*pow6(mU3)) - 2*pow14(m3)*(419*mU32*pow4(mQ3) + 419*
+        mQ32*pow4(mU3) + 184*pow6(mQ3) + 184*pow6(mU3)) + 144*m32*(mQ32 + mU32)
+        *pow8(mQ3)*pow8(mU3) + mQ32*mU32*pow8(m3)*(2048*pow4(mQ3)*pow4(mU3) +
+        908*mU32*pow6(mQ3) + 908*mQ32*pow6(mU3) + 39*pow8(mQ3) + 39*pow8(mU3))
+        + pow12(m3)*(2636*pow4(mQ3)*pow4(mU3) + 797*mU32*pow6(mQ3) + 797*mQ32*
+        pow6(mU3) + 224*pow8(mQ3) + 224*pow8(mU3)) - 36*power10(mQ3)*power10(
+        mU3) - 4*power10(m3)*(647*pow4(mU3)*pow6(mQ3) + 647*pow4(mQ3)*pow6(mU3)
+        + 70*mU32*pow8(mQ3) + 70*mQ32*pow8(mU3) + 14*power10(mQ3) + 14*power10(
+        mU3)))/(pow2(mQ3)*pow2(mU3)*pow4(m32 - mQ32)) - (log(Mst12/pow2(mQ3))*(
+        -2700*mQ32*mU32*pow12(m3) + 814*mQ32*pow14(m3) + 638*mU32*pow14(m3) -
+        198*pow16(m3) - 877*pow12(m3)*pow4(mQ3) - 565*pow12(m3)*pow4(mU3) +
+        368*pow4(mU3)*pow6(m3)*pow6(mQ3) + 272*pow4(mQ3)*pow6(m3)*pow6(mU3) +
+        452*pow4(m3)*pow6(mQ3)*pow6(mU3) + (160*(mQ32 + mU32)*pow2(m32 - mQ32)*
+        pow2(m32 - mU32)*pow6(m3)*pow6(Xt))/pow3(mQ32 - mU32) - 2240*pow4(mQ3)*
+        pow4(mU3)*pow8(m3) - 1004*mU32*pow6(mQ3)*pow8(m3) - 812*mQ32*pow6(mU3)*
+        pow8(m3) - (8*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*pow5(Xt)*(-142*m32*
+        mQ32*mU32*pow2(mQ32 + mU32) + 87*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) -
+        94*pow2(mQ32 + mU32)*pow6(m3) + pow4(m3)*(283*mU32*pow4(mQ3) + 283*
+        mQ32*pow4(mU3) + 63*pow6(mQ3) + 63*pow6(mU3)) + 39*(mQ32 + mU32)*pow8(
+        m3)))/pow3(mQ32 - mU32) + pow4(m3)*pow4(mU3)*pow8(mQ3) + 158*mU32*pow6(
+        m3)*pow8(mQ3) - 144*m32*pow6(mU3)*pow8(mQ3) - 55*pow8(m3)*pow8(mQ3) +
+        25*pow4(m3)*pow4(mQ3)*pow8(mU3) + 110*mQ32*pow6(m3)*pow8(mU3) - 144*
+        m32*pow6(mQ3)*pow8(mU3) + pow8(m3)*pow8(mU3) + 36*pow8(mQ3)*pow8(mU3) +
+        2796*mU32*pow4(mQ3)*power10(m3) + 2604*mQ32*pow4(mU3)*power10(m3) +
+        344*pow6(mQ3)*power10(m3) + 120*pow6(mU3)*power10(m3) - (8*(m32 - mQ32)
+        *(m32 - mU32)*Xt*pow3(m3)*(2*(36*mQ32*mU32 + 61*pow4(mQ3) + 11*pow4(
+        mU3))*pow6(m3) - 87*pow4(mU3)*pow6(mQ3) + 75*pow4(mQ3)*pow6(mU3) +
+        pow4(m3)*(-209*mU32*pow4(mQ3) + 101*mQ32*pow4(mU3) - 63*pow6(mQ3) + 19*
+        pow6(mU3)) + 2*m32*(18*pow4(mQ3)*pow4(mU3) + 71*mU32*pow6(mQ3) - 59*
+        mQ32*pow6(mU3)) - (79*mQ32 + 77*mU32)*pow8(m3) + 44*power10(m3)))/(mQ32
+        - mU32) - (16*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*pow3(Xt)*(44*pow12(m3)
+        + 186*pow6(mQ3)*pow6(mU3) + pow6(m3)*(-250*mU32*pow4(mQ3) - 250*mQ32*
+        pow4(mU3) + 66*pow6(mQ3) + 66*pow6(mU3)) + 3*(94*mQ32*mU32 + 15*pow4(
+        mQ3) + 15*pow4(mU3))*pow8(m3) - 87*pow4(mU3)*pow8(mQ3) - 87*pow4(mQ3)*
+        pow8(mU3) - pow4(m3)*(-422*pow4(mQ3)*pow4(mU3) + 42*mU32*pow6(mQ3) +
+        42*mQ32*pow6(mU3) + 63*pow8(mQ3) + 63*pow8(mU3)) + 2*m32*(-89*pow4(mU3)
+        *pow6(mQ3) - 89*pow4(mQ3)*pow6(mU3) + 71*mU32*pow8(mQ3) + 71*mQ32*pow8(
+        mU3)) - 100*(mQ32 + mU32)*power10(m3)))/pow3(mQ32 - mU32) + (2*pow2(Xt)
+        *((334*mQ32 + 238*mU32)*pow14(m3) - 30*pow16(m3) + pow4(m3)*pow4(mQ3)*
+        pow4(mU3)*(452*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - pow12(m3)*(1484*
+        mQ32*mU32 + 517*pow4(mQ3) + 325*pow4(mU3)) - 144*m32*(mQ32 + mU32)*
+        pow6(mQ3)*pow6(mU3) + 36*pow8(mQ3)*pow8(mU3) - pow8(m3)*(1648*pow4(mQ3)
+        *pow4(mU3) + 844*mU32*pow6(mQ3) + 652*mQ32*pow6(mU3) + 55*pow8(mQ3) +
+        55*pow8(mU3)) + 2*pow6(m3)*(144*pow4(mU3)*pow6(mQ3) + 96*pow4(mQ3)*
+        pow6(mU3) + 79*mU32*pow8(mQ3) + 79*mQ32*pow8(mU3)) + 4*(487*mU32*pow4(
+        mQ3) + 415*mQ32*pow4(mU3) + 66*pow6(mQ3) + 42*pow6(mU3))*power10(m3)))/
+        (mQ32 - mU32) - (pow4(Xt)*(2786*(mQ32 + mU32)*pow16(m3) - 1024*pow18(
+        m3) - 2*pow14(m3)*(4002*mQ32*mU32 + 913*pow4(mQ3) + 913*pow4(mU3)) +
+        pow12(m3)*(5903*mU32*pow4(mQ3) + 5903*mQ32*pow4(mU3) - 549*pow6(mQ3) -
+        549*pow6(mU3)) - 144*m32*pow2(mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + pow4(
+        m3)*pow4(mQ3)*pow4(mU3)*(453*mU32*pow4(mQ3) + 453*mQ32*pow4(mU3) +
+        pow6(mQ3) + pow6(mU3)) + 36*(mQ32 + mU32)*pow8(mQ3)*pow8(mU3) + 2*mQ32*
+        mU32*pow6(m3)*(-464*pow4(mQ3)*pow4(mU3) + 423*mU32*pow6(mQ3) + 423*
+        mQ32*pow6(mU3) + 79*pow8(mQ3) + 79*pow8(mU3)) + (-5224*pow4(mQ3)*pow4(
+        mU3) + 868*mU32*pow6(mQ3) + 868*mQ32*pow6(mU3) + 664*pow8(mQ3) + 664*
+        pow8(mU3))*power10(m3) - pow8(m3)*(-292*pow4(mU3)*pow6(mQ3) - 292*pow4(
+        mQ3)*pow6(mU3) + 1699*mU32*pow8(mQ3) + 1699*mQ32*pow8(mU3) + 55*
+        power10(mQ3) + 55*power10(mU3))))/pow3(mQ32 - mU32)))/pow4(m32 - mQ32)
+        - (log(Mst12/pow2(mU3))*(-2700*mQ32*mU32*pow12(m3) + 638*mQ32*pow14(m3)
+        + 814*mU32*pow14(m3) - 198*pow16(m3) - 565*pow12(m3)*pow4(mQ3) - 877*
+        pow12(m3)*pow4(mU3) + 272*pow4(mU3)*pow6(m3)*pow6(mQ3) + 368*pow4(mQ3)*
+        pow6(m3)*pow6(mU3) + 452*pow4(m3)*pow6(mQ3)*pow6(mU3) - (160*(mQ32 +
+        mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow6(m3)*pow6(Xt))/pow3(mQ32 -
+        mU32) - 2240*pow4(mQ3)*pow4(mU3)*pow8(m3) - 812*mU32*pow6(mQ3)*pow8(m3)
+        - 1004*mQ32*pow6(mU3)*pow8(m3) + (8*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*
+        pow5(Xt)*(-142*m32*mQ32*mU32*pow2(mQ32 + mU32) + 87*(mQ32 + mU32)*pow4(
+        mQ3)*pow4(mU3) - 94*pow2(mQ32 + mU32)*pow6(m3) + pow4(m3)*(283*mU32*
+        pow4(mQ3) + 283*mQ32*pow4(mU3) + 63*pow6(mQ3) + 63*pow6(mU3)) + 39*(
+        mQ32 + mU32)*pow8(m3)))/pow3(mQ32 - mU32) + 25*pow4(m3)*pow4(mU3)*pow8(
+        mQ3) + 110*mU32*pow6(m3)*pow8(mQ3) - 144*m32*pow6(mU3)*pow8(mQ3) +
+        pow8(m3)*pow8(mQ3) + pow4(m3)*pow4(mQ3)*pow8(mU3) + 158*mQ32*pow6(m3)*
+        pow8(mU3) - 144*m32*pow6(mQ3)*pow8(mU3) - 55*pow8(m3)*pow8(mU3) + 36*
+        pow8(mQ3)*pow8(mU3) + 2604*mU32*pow4(mQ3)*power10(m3) + 2796*mQ32*pow4(
+        mU3)*power10(m3) + 120*pow6(mQ3)*power10(m3) + 344*pow6(mU3)*power10(
+        m3) + (8*(m32 - mQ32)*(m32 - mU32)*Xt*pow3(m3)*(2*(36*mQ32*mU32 + 11*
+        pow4(mQ3) + 61*pow4(mU3))*pow6(m3) + 75*pow4(mU3)*pow6(mQ3) + pow4(m3)*
+        (101*mU32*pow4(mQ3) - 209*mQ32*pow4(mU3) + 19*pow6(mQ3) - 63*pow6(mU3))
+        - 87*pow4(mQ3)*pow6(mU3) + m32*(36*pow4(mQ3)*pow4(mU3) - 118*mU32*pow6(
+        mQ3) + 142*mQ32*pow6(mU3)) - (77*mQ32 + 79*mU32)*pow8(m3) + 44*power10(
+        m3)))/(mQ32 - mU32) + (16*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*pow3(Xt)*(
+        44*pow12(m3) + 186*pow6(mQ3)*pow6(mU3) + pow6(m3)*(-250*mU32*pow4(mQ3)
+        - 250*mQ32*pow4(mU3) + 66*pow6(mQ3) + 66*pow6(mU3)) + 3*(94*mQ32*mU32 +
+        15*pow4(mQ3) + 15*pow4(mU3))*pow8(m3) - 87*pow4(mU3)*pow8(mQ3) - 87*
+        pow4(mQ3)*pow8(mU3) - pow4(m3)*(-422*pow4(mQ3)*pow4(mU3) + 42*mU32*
+        pow6(mQ3) + 42*mQ32*pow6(mU3) + 63*pow8(mQ3) + 63*pow8(mU3)) + 2*m32*(-
+        89*pow4(mU3)*pow6(mQ3) - 89*pow4(mQ3)*pow6(mU3) + 71*mU32*pow8(mQ3) +
+        71*mQ32*pow8(mU3)) - 100*(mQ32 + mU32)*power10(m3)))/pow3(mQ32 - mU32)
+        - (2*pow2(Xt)*((238*mQ32 + 334*mU32)*pow14(m3) - 30*pow16(m3) + pow4(
+        m3)*pow4(mQ3)*pow4(mU3)*(452*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) -
+        pow12(m3)*(1484*mQ32*mU32 + 325*pow4(mQ3) + 517*pow4(mU3)) - 144*m32*(
+        mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + 36*pow8(mQ3)*pow8(mU3) - pow8(m3)*(
+        1648*pow4(mQ3)*pow4(mU3) + 652*mU32*pow6(mQ3) + 844*mQ32*pow6(mU3) +
+        55*pow8(mQ3) + 55*pow8(mU3)) + 2*pow6(m3)*(96*pow4(mU3)*pow6(mQ3) +
+        144*pow4(mQ3)*pow6(mU3) + 79*mU32*pow8(mQ3) + 79*mQ32*pow8(mU3)) + 4*(
+        415*mU32*pow4(mQ3) + 487*mQ32*pow4(mU3) + 42*pow6(mQ3) + 66*pow6(mU3))*
+        power10(m3)))/(mQ32 - mU32) + (pow4(Xt)*(2786*(mQ32 + mU32)*pow16(m3) -
+        1024*pow18(m3) - 2*pow14(m3)*(4002*mQ32*mU32 + 913*pow4(mQ3) + 913*
+        pow4(mU3)) + pow12(m3)*(5903*mU32*pow4(mQ3) + 5903*mQ32*pow4(mU3) -
+        549*pow6(mQ3) - 549*pow6(mU3)) - 144*m32*pow2(mQ32 + mU32)*pow6(mQ3)*
+        pow6(mU3) + pow4(m3)*pow4(mQ3)*pow4(mU3)*(453*mU32*pow4(mQ3) + 453*
+        mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) + 36*(mQ32 + mU32)*pow8(mQ3)*
+        pow8(mU3) + 2*mQ32*mU32*pow6(m3)*(-464*pow4(mQ3)*pow4(mU3) + 423*mU32*
+        pow6(mQ3) + 423*mQ32*pow6(mU3) + 79*pow8(mQ3) + 79*pow8(mU3)) + (-5224*
+        pow4(mQ3)*pow4(mU3) + 868*mU32*pow6(mQ3) + 868*mQ32*pow6(mU3) + 664*
+        pow8(mQ3) + 664*pow8(mU3))*power10(m3) - pow8(m3)*(-292*pow4(mU3)*pow6(
+        mQ3) - 292*pow4(mQ3)*pow6(mU3) + 1699*mU32*pow8(mQ3) + 1699*mQ32*pow8(
+        mU3) + 55*power10(mQ3) + 55*power10(mU3))))/pow3(mQ32 - mU32)))/pow4(
+        m32 - mQ32)))/(3.*pow4(m32 - mU32)) - (4*log(Mst12/pow2(mU3))*((32*
+        pow3(Xt)*(-((m3*(m32 - mU32)*(14*m32 - 3*(mQ32 + 10*msq2 + mU32))*pow2(
+        mQ32 - mU32))/(m32 - mQ32)) + (m3*(m32 - mU32)*(mQ32 + 3*mU32)*(-5*
+        mQ32*mU32 - 3*m32*(mQ32 + mU32) + 11*pow4(m3)))/(m32 - mQ32) + (2*(mQ32
+        - mU32)*(-17*m3*mQ32*pow4(mU3) + pow3(m3)*(26*mQ32*mU32 + 8*pow4(mU3))
+        + (7*mQ32 - 8*mU32)*pow5(m3)))/pow2(mQ3)))/(pow2(m32 - mU32)*pow3(mQ32
+        - mU32)) + 30*pow2(log(Mst12/pow2(msq)))*((-8*m3*(m32 - msq2)*(mQ32*(
+        msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*Xt)/(pow2(m32
+        - mQ32)*pow2(m32 - mU32)) + (16*m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) +
+        msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow3(Xt))/((mQ32 - mU32)*pow2(
+        m32 - mQ32)*pow2(m32 - mU32)) + (2*pow2(Xt)*(((mQ32 - msq2)*(-3*m32*(
+        mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((
+        msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/
+        pow3(-m32 + mU32)))/(mQ32 - mU32) - ((mQ32 - msq2)*(-3*m32*(mQ32 -
+        msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 -
+        mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(m32
+        - mU32) - ((mQ32 + mU32)*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2) + mQ32*(
+        mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(3*m32*(
+        msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 + mU32))*
+        pow4(Xt))/pow3(mQ32 - mU32) - (8*m3*(m32 - msq2)*(mQ32 + mU32)*(mQ32*(
+        msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow5(Xt))/(
+        pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32))) + (16*m3*pow5(Xt)
+        *(mQ32*mU32*(-30*msq2*mU32 + 2*mQ32*(15*msq2 + 92*mU32) + 3*pow4(mQ3) +
+        3*pow4(mU3)) - 2*pow4(m3)*(-86*mQ32*mU32 + 31*pow4(mQ3) + 8*pow4(mU3))
+        + m32*mQ32*(2*mQ32*(15*msq2 - 83*mU32) + 3*pow4(mQ3) - 5*(6*msq2*mU32 +
+        37*pow4(mU3))) + 16*(3*mQ32 + mU32)*pow6(m3)))/((-m32 + mQ32)*pow2(mQ3)
+        *pow2(m32 - mU32)*pow3(mQ32 - mU32)) + (16*m3*Xt*(-2*mQ32*mU32*(-15*
+        msq2*mU32 + mQ32*(30*msq2 + 37*mU32) + 3*pow4(mQ3)) - 4*pow4(m3)*(28*
+        mQ32*mU32 + 5*pow4(mQ3) + 4*pow4(mU3)) + 2*(11*mQ32 + 8*mU32)*pow6(m3)
+        + m32*(10*(3*msq2 + 10*mU32)*pow4(mQ3) + 87*mQ32*pow4(mU3) + 3*pow6(
+        mQ3))))/((-m32 + mQ32)*(mQ32 - mU32)*pow2(mQ3)*pow2(m32 - mU32)) - (60*
+        (mQ32 - msq2)*dilog(1 - msq2/pow2(mQ3))*(-3*m32*(mQ32 - msq2)*(mQ32 -
+        mU32) + mQ32*(mQ32 + msq2)*(mQ32 - mU32) + 8*m3*mQ32*(-mQ32 + msq2)*Xt
+        + 8*(mQ32 - msq2)*Xt*pow3(m3) - 2*(mQ32 - mU32)*pow4(m3))*(-((3*mU32 +
+        2*pow2(Xt))*pow4(mQ3)) - 2*pow2(Xt)*pow4(mU3) + mU32*pow4(Xt) + mQ32*(
+        4*mU32*pow2(Xt) + 3*pow4(mU3) + pow4(Xt)) + pow6(mQ3) - pow6(mU3)))/(
+        pow3(m32 - mQ32)*pow4(mQ32 - mU32)) + (60*(msq2 - mU32)*dilog(1 - msq2/
+        pow2(mU3))*(3*m32*(mQ32 - mU32)*(-msq2 + mU32) + mU32*(-mQ32 + mU32)*(
+        msq2 + mU32) + 8*m3*(msq2 - mU32)*mU32*Xt + 8*(-msq2 + mU32)*Xt*pow3(
+        m3) + 2*(mQ32 - mU32)*pow4(m3))*((3*mU32 + 2*pow2(Xt))*pow4(mQ3) + 2*
+        pow2(Xt)*pow4(mU3) - mU32*pow4(Xt) - mQ32*(4*mU32*pow2(Xt) + 3*pow4(
+        mU3) + pow4(Xt)) - pow6(mQ3) + pow6(mU3)))/(pow3(m32 - mU32)*pow4(mQ32
+        - mU32)) - (60*(m32 - msq2)*dilog(1 - m32/pow2(msq))*(-((3*mU32 + 2*
+        pow2(Xt))*pow4(mQ3)) - 2*pow2(Xt)*pow4(mU3) + mU32*pow4(Xt) + mQ32*(4*
+        mU32*pow2(Xt) + 3*pow4(mU3) + pow4(Xt)) + pow6(mQ3) - pow6(mU3))*(8*m3*
+        mQ32*mU32*(mQ32*(msq2 - 2*mU32) + msq2*mU32)*Xt - mQ32*msq2*mU32*(pow4(
+        mQ3) + pow4(mU3)) - 8*Xt*pow3(m3)*((msq2 - 3*mU32)*pow4(mQ3) + mQ32*(4*
+        msq2*mU32 - 3*pow4(mU3)) + msq2*pow4(mU3)) - 8*Xt*(-3*msq2*mU32 + mQ32*
+        (-3*msq2 + 4*mU32) + pow4(mQ3) + pow4(mU3))*pow5(m3) + (-8*msq2*mU32 +
+        mQ32*(-8*msq2 + 30*mU32) + 3*pow4(mQ3) + 3*pow4(mU3))*pow6(m3) - pow4(
+        m3)*((-9*msq2 + 15*mU32)*pow4(mQ3) - 9*msq2*pow4(mU3) + 3*mQ32*(2*msq2*
+        mU32 + 5*pow4(mU3)) + pow6(mQ3) + pow6(mU3)) + m32*(3*msq2*mU32*pow4(
+        mQ3) + (-3*msq2 + 5*mU32)*pow6(mQ3) - 3*msq2*pow6(mU3) + mQ32*(3*msq2*
+        pow4(mU3) + 5*pow6(mU3))) + 8*(mQ32 - 2*msq2 + mU32)*Xt*pow7(m3) + (-8*
+        mQ32 + 6*msq2 - 8*mU32)*pow8(m3) + 2*power10(m3)))/(pow3(m32 - mQ32)*
+        pow3(m32 - mU32)*pow3(mQ32 - mU32)) - (2*pow2(Xt)*(3*pow4(mQ3)*(2*mU32*
+        (10*msq2 + mU32) + mQ32*(20*msq2 + 79*mU32) + 2*pow4(mQ3))*pow4(mU3) -
+        mQ32*mU32*pow4(m3)*(20*mQ32*(15*msq2 + 2*mU32) + 301*pow4(mQ3) + 5*(60*
+        msq2*mU32 + pow4(mU3))) + 2*m32*mQ32*mU32*(2*(45*msq2 - 53*mU32)*pow4(
+        mQ3) + 9*(10*msq2 + mU32)*pow4(mU3) - 2*mQ32*(60*msq2*mU32 + 77*pow4(
+        mU3)) + 9*pow6(mQ3)) + pow6(m3)*(886*mU32*pow4(mQ3) + mQ32*(360*msq2*
+        mU32 + 326*pow4(mU3)) + 4*pow6(mQ3) - 68*pow6(mU3)) + (-695*mQ32*mU32 -
+        8*pow4(mQ3) + 136*pow4(mU3))*pow8(m3) + 4*(mQ32 - mU32)*power10(m3)))/(
+        (mQ32 - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)) +
+        (4*pow12(m3)*(pow4(mQ3) - pow4(mU3)) - 3*(mQ32 - mU32)*pow4(mQ3)*(mQ32*
+        (40*msq2 - 57*mU32) + 20*msq2*mU32 + 4*pow4(mQ3))*pow6(mU3) - m32*mQ32*
+        pow4(mU3)*(pow4(mQ3)*(-720*msq2*mU32 + 571*pow4(mU3)) + 5*(60*msq2 +
+        101*mU32)*pow6(mQ3) + 6*mQ32*(100*msq2*pow4(mU3) - 99*pow6(mU3)) - 180*
+        msq2*pow6(mU3) + 30*pow8(mQ3)) + mQ32*mU32*pow4(m3)*(pow4(mQ3)*(240*
+        msq2*mU32 + 2359*pow4(mU3)) + (180*msq2 + 541*mU32)*pow6(mQ3) - 283*
+        mQ32*pow6(mU3) - 420*msq2*pow6(mU3) + 18*pow8(mQ3) - 587*pow8(mU3)) +
+        pow8(m3)*(3*pow4(mQ3)*(120*msq2*mU32 + 709*pow4(mU3)) + 704*mU32*pow6(
+        mQ3) - mQ32*(360*msq2*pow4(mU3) + 583*pow6(mU3)) + 4*pow8(mQ3) - 204*
+        pow8(mU3)) - mU32*pow6(m3)*(5*pow4(mQ3)*(108*msq2*mU32 + 395*pow4(mU3))
+        + 3*(100*msq2 + 739*mU32)*pow6(mQ3) - mQ32*(840*msq2*pow4(mU3) + 1259*
+        pow6(mU3)) + 207*pow8(mQ3) - 68*pow8(mU3)) - (611*mU32*pow4(mQ3) + 33*
+        mQ32*pow4(mU3) + 8*pow6(mQ3) - 140*pow6(mU3))*power10(m3))/((mQ32 -
+        mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow3(m32 - mU32)) + (pow4(
+        Xt)*(4*pow12(m3)*(-44*mQ32*mU32 + pow4(mQ3) - pow4(mU3)) + 3*pow4(mQ3)*
+        pow6(mU3)*((20*msq2 - 389*mU32)*pow4(mQ3) - 20*msq2*pow4(mU3) + mQ32*(-
+        80*msq2*mU32 + 139*pow4(mU3)) + 2*pow6(mQ3) + 2*pow6(mU3)) + m32*mQ32*
+        pow4(mU3)*(pow4(mQ3)*(-420*msq2*mU32 + 5659*pow4(mU3)) + 5*(48*msq2 +
+        533*mU32)*pow6(mQ3) + 4*mQ32*(90*msq2*pow4(mU3) - 377*pow6(mU3)) + 18*(
+        -10*msq2 + mU32)*pow6(mU3) + 24*pow8(mQ3)) + pow8(m3)*(3*pow4(mQ3)*(
+        120*msq2*mU32 - 3367*pow4(mU3)) + 1222*mU32*pow6(mQ3) + mQ32*(360*msq2*
+        pow4(mU3) - 7283*pow6(mU3)) + 4*pow8(mQ3) - 204*pow8(mU3)) + mU32*pow6(
+        m3)*(pow4(mQ3)*(-600*msq2*mU32 + 17667*pow4(mU3)) + (-300*msq2 + 6913*
+        mU32)*pow6(mQ3) - 3*mQ32*(340*msq2*pow4(mU3) - 627*pow6(mU3)) - 493*
+        pow8(mQ3) + 68*pow8(mU3)) + mQ32*mU32*pow4(m3)*(-5*pow4(mQ3)*(96*msq2*
+        mU32 + 2687*pow4(mU3)) + (180*msq2 - 1361*mU32)*pow6(mQ3) + mQ32*(1380*
+        msq2*pow4(mU3) - 6073*pow6(mU3)) + 360*msq2*pow6(mU3) + 18*pow8(mQ3) +
+        975*pow8(mU3)) + (-667*mU32*pow4(mQ3) + 4793*mQ32*pow4(mU3) - 8*pow6(
+        mQ3) + 140*pow6(mU3))*power10(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(
+        mU3)*pow3(m32 - mU32)*pow3(mQ32 - mU32)) + (2*dilog(1 - mQ32/pow2(mU3))
+        *(8*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 - mU32)*Xt*(-(mQ32*mU32) - 5*
+        m32*(mQ32 + mU32) + 5*pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3)) - 16*m3*(
+        m32 - mQ32)*(m32 - mU32)*pow3(Xt)*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) +
+        5*pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3)) + (8*m3*(m32 - mQ32)*(m32 -
+        mU32)*(mQ32 + mU32)*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) + 5*pow4(m3) +
+        3*pow4(mQ3) + 3*pow4(mU3))*pow5(Xt))/pow2(mQ32 - mU32) - (mQ32 - mU32)*
+        ((-76*mQ32*mU32 + 34*pow4(mQ3) + 34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*
+        pow6(mQ3) + pow4(m3)*(65*mU32*pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(
+        mQ3) - 29*pow6(mU3)) + 7*pow4(mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(
+        m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(
+        mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) + 9*pow8(
+        mU3)) + 12*power10(m3)) + 2*pow2(Xt)*((-76*mQ32*mU32 + 34*pow4(mQ3) +
+        34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*
+        pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(
+        mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*
+        pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*
+        pow6(mU3) + 9*pow8(mQ3) + 9*pow8(mU3)) + 12*power10(m3)) - ((mQ32 +
+        mU32)*pow4(Xt)*((-76*mQ32*mU32 + 34*pow4(mQ3) + 34*pow4(mU3))*pow6(m3)
+        + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*pow4(mQ3) + 65*mQ32*pow4(
+        mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(mQ3)*pow6(mU3) - 14*(mQ32
+        + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(
+        mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) +
+        9*pow8(mU3)) + 12*power10(m3)))/pow2(mQ32 - mU32)))/(pow3(m32 - mQ32)*
+        pow3(m32 - mU32)) - 20*log(Mst12/pow2(msq))*((8*m3*(-mQ32 - 3*mU32 + (
+        6*msq2*pow2(mQ32 - mU32))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(
+        mQ32 - mU32) + (8*m3*(mU32*pow4(m3) + 3*msq2*pow4(mU3) + mQ32*(-9*msq2*
+        mU32 + 6*pow4(msq) + pow4(mU3)) - m32*(-9*msq2*mU32 + mQ32*(3*msq2 +
+        mU32) + 6*pow4(msq) + pow4(mU3)))*pow5(Xt))/((m32 - mQ32)*pow2(m32 -
+        mU32)*pow3(mQ32 - mU32)) + (8*m3*Xt*(-((mQ32 + 2*mU32)*pow4(m3)) - 3*
+        msq2*pow4(mU3) - mQ32*(-9*msq2*mU32 + 3*pow4(msq) + pow4(mU3)) + m32*(-
+        3*msq2*mU32 + mQ32*(-3*msq2 + 2*mU32) + 3*pow4(msq) + pow4(mU3)) +
+        pow6(m3)))/((m32 - mQ32)*(mQ32 - mU32)*pow2(m32 - mU32)) - (2*pow2(Xt)*
+        (pow4(m3)*(15*mU32*(-msq2 + mU32) + mQ32*(-15*msq2 + 64*mU32) + 17*
+        pow4(mQ3)) + 3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 14*pow4(
+        mU3)) + m32*((9*msq2 - 31*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) - mQ32*(
+        12*msq2*mU32 + 29*pow4(mU3))) + (-35*mQ32 + 18*msq2 - 33*mU32)*pow6(m3)
+        + 18*pow8(m3)))/((mQ32 - mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)) + (
+        pow4(Xt)*(-6*msq2*(mQ32 - mU32)*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*
+        pow4(m3)) + ((m32 - mU32)*(-3*mQ32*(mQ32 + 5*mU32)*pow4(mU3) - pow4(m3)
+        *(15*mQ32*mU32 + 6*pow4(mQ3) + 29*pow4(mU3)) + (3*mQ32 + 7*mU32)*pow6(
+        m3) + m32*(7*mU32*pow4(mQ3) + 31*mQ32*pow4(mU3) + 16*pow6(mU3)) + 4*
+        pow8(m3)))/(m32 - mQ32) + ((m32 - mU32)*(mQ32 + mU32)*(3*mQ32*msq2*
+        pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 11*pow4(mU3)) + pow4(m3)*(-15*
+        msq2*mU32 + mQ32*(-15*msq2 + 44*mU32) + 11*pow4(mQ3) + 11*pow4(mU3)) +
+        m32*((9*msq2 - 22*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) - 2*mQ32*(6*msq2*
+        mU32 + 11*pow4(mU3))) - 2*(11*mQ32 - 9*msq2 + 11*mU32)*pow6(m3) + 11*
+        pow8(m3)))/pow2(m32 - mQ32)))/(pow3(m32 - mU32)*pow3(mQ32 - mU32)) + ((
+        -51*msq2*mU32 + mQ32*(-3*msq2 + 91*mU32) + 17*pow4(mQ3) + 9*pow4(msq) +
+        43*pow4(mU3))*pow6(m3) + pow4(m3)*((3*msq2 - 44*mU32)*pow4(mQ3) + 3*
+        mU32*pow4(msq) + mQ32*(39*msq2*mU32 - 18*pow4(msq) - 83*pow4(mU3)) +
+        24*msq2*pow4(mU3) - 14*pow6(mU3)) + pow4(mQ3)*(3*mU32*pow4(msq) - 3*
+        msq2*pow4(mU3) - 13*pow6(mU3)) - 3*mQ32*msq2*pow6(mU3) + m32*(pow4(mQ3)
+        *(-24*msq2*mU32 + 9*pow4(msq) + 40*pow4(mU3)) - 9*msq2*pow6(mU3) +
+        mQ32*(-6*mU32*pow4(msq) + 15*msq2*pow4(mU3) + 27*pow6(mU3))) + (-35*
+        mQ32 + 12*msq2 - 47*mU32)*pow8(m3) + 18*power10(m3))/(pow2(m32 - mQ32)*
+        pow3(m32 - mU32))) + 2*dilog(1 - m32/pow2(mU3))*((8*pow3(Xt)*((2*m3*(
+        mQ32 - mU32)*(-7*mQ32*mU32 + m32*(-37*mQ32 + mU32) + 18*pow4(m3) + 22*
+        pow4(mQ3) + 3*pow4(mU3)))/pow2(m32 - mQ32) + (m3*(-2*m32 + mQ32 + mU32)
+        *(-34*m32*mU32 + pow4(m3) + 17*pow4(mU3)))/pow2(m32 - mU32)))/pow3(mQ32
+        - mU32) - (4*pow4(m3)*(-34*m32*mU32 + pow4(m3) + 17*pow4(mU3)))/pow4(
+        m32 - mU32) + 8*Xt*(-((m3*(-7*mQ32*mU32 + m32*(-37*mQ32 + mU32) + 18*
+        pow4(m3) + 22*pow4(mQ3) + 3*pow4(mU3)))/((mQ32 - mU32)*pow2(m32 - mQ32)
+        )) + (2*(17*pow3(m3)*pow4(mU3) - 50*mU32*pow5(m3) + pow7(m3)))/((-mQ32
+        + mU32)*pow3(m32 - mU32))) + (8*m3*pow5(Xt)*(-(pow4(mQ3)*pow4(mU3)) +
+        pow4(m3)*(-26*mQ32*mU32 + 37*pow4(mQ3) + pow4(mU3)) - 2*(9*mQ32 - 7*
+        mU32)*pow6(m3) + 6*mU32*pow6(mQ3) - 4*mQ32*pow6(mU3) - 2*m32*(-6*mU32*
+        pow4(mQ3) + 11*pow6(mQ3) + pow6(mU3)) + 3*pow8(mU3)))/((m32 - mU32)*
+        pow2(m32 - mQ32)*pow4(mQ32 - mU32)) + (128*pow12(m3) - pow6(m3)*(1025*
+        mU32*pow4(mQ3) + 251*mQ32*pow4(mU3) + 13*pow6(mQ3) - 9*pow6(mU3)) +
+        mQ32*pow4(mU3)*(-19*mU32*pow4(mQ3) - mQ32*pow4(mU3) + 23*pow6(mQ3) - 3*
+        pow6(mU3)) + (902*mQ32*mU32 + 280*pow4(mQ3) + 98*pow4(mU3))*pow8(m3) +
+        pow4(m3)*(417*pow4(mQ3)*pow4(mU3) + 391*mU32*pow6(mQ3) - 151*mQ32*pow6(
+        mU3) - 37*pow8(mQ3) + 20*pow8(mU3)) - 2*(173*mQ32 + 147*mU32)*power10(
+        m3) + m32*(-167*pow4(mU3)*pow6(mQ3) + 41*pow4(mQ3)*pow6(mU3) - 34*mU32*
+        pow8(mQ3) + 41*mQ32*pow8(mU3) - 9*power10(mU3)))/((mQ32 - mU32)*pow2(
+        m32 - mU32)*pow3(m32 - mQ32)) - (2*pow2(Xt)*(128*pow12(m3) - pow6(m3)*(
+        2561*mU32*pow4(mQ3) + 251*mQ32*pow4(mU3) + 13*pow6(mQ3) - 9*pow6(mU3))
+        + mQ32*pow4(mU3)*(-19*mU32*pow4(mQ3) - mQ32*pow4(mU3) + 23*pow6(mQ3) -
+        3*pow6(mU3)) + (2438*mQ32*mU32 + 280*pow4(mQ3) + 98*pow4(mU3))*pow8(m3)
+        + pow4(m3)*(417*pow4(mQ3)*pow4(mU3) + 903*mU32*pow6(mQ3) - 151*mQ32*
+        pow6(mU3) - 37*pow8(mQ3) + 20*pow8(mU3)) - 2*(173*mQ32 + 403*mU32)*
+        power10(m3) + m32*(-167*pow4(mU3)*pow6(mQ3) + 41*pow4(mQ3)*pow6(mU3) -
+        34*mU32*pow8(mQ3) + 41*mQ32*pow8(mU3) - 9*power10(mU3))))/(pow2(m32 -
+        mU32)*pow2(mQ32 - mU32)*pow3(m32 - mQ32)) + (pow4(Xt)*(4*(31*mQ32 +
+        289*mU32)*pow12(m3) + (5326*mU32*pow4(mQ3) + 6466*mQ32*pow4(mU3) + 262*
+        pow6(mQ3) + 746*pow6(mU3))*pow8(m3) + mQ32*pow4(mU3)*(14*pow4(mQ3)*
+        pow4(mU3) + 4*mU32*pow6(mQ3) - 4*mQ32*pow6(mU3) - 11*pow8(mQ3) - 3*
+        pow8(mU3)) - pow6(m3)*(7596*pow4(mQ3)*pow4(mU3) + 2990*mU32*pow6(mQ3) +
+        2186*mQ32*pow6(mU3) + 3*pow8(mQ3) + 25*pow8(mU3)) - 4*(1025*mQ32*mU32 +
+        83*pow4(mQ3) + 492*pow4(mU3))*power10(m3) - m32*mU32*(774*pow4(mU3)*
+        pow6(mQ3) + 20*pow4(mQ3)*pow6(mU3) + 543*mU32*pow8(mQ3) - 32*mQ32*pow8(
+        mU3) - 34*power10(mQ3) + 9*power10(mU3)) + pow4(m3)*(3712*pow4(mU3)*
+        pow6(mQ3) + 2210*pow4(mQ3)*pow6(mU3) + 526*mU32*pow8(mQ3) - 29*mQ32*
+        pow8(mU3) - 39*power10(mQ3) + 20*power10(mU3))))/(pow2(m32 - mU32)*
+        pow3(m32 - mQ32)*pow4(mQ32 - mU32))) + (2*dilog(1 - m32/pow2(mQ3))*(-8*
+        m3*(m32 - mU32)*pow5(Xt)*(-2*(9*mQ32 - 7*mU32)*pow4(m3) + 4*mU32*pow4(
+        mQ3) + mQ32*pow4(mU3) - m32*(-20*mQ32*mU32 + pow4(mQ3) + 11*pow4(mU3))
+        - 3*pow6(mQ3) - 6*pow6(mU3)) + 8*m3*(m32 - mU32)*(mQ32 - mU32)*pow3(Xt)
+        *(-((37*mQ32 + 33*mU32)*pow4(m3)) + 20*mU32*pow4(mQ3) - 75*mQ32*pow4(
+        mU3) - 2*m32*(-55*mQ32*mU32 + pow4(mQ3) + 3*pow4(mU3)) + 2*pow6(m3) -
+        6*pow6(mQ3) + 27*pow6(mU3)) + (8*m3*(m32 - mU32)*Xt*pow3(mQ32 - mU32)*(
+        22*pow4(mQ3)*pow4(mU3) + pow4(m3)*(135*mQ32*mU32 + 19*pow4(mQ3) + 24*
+        pow4(mU3)) - (37*mQ32 + 73*mU32)*pow6(m3) - 7*mU32*pow6(mQ3) - m32*(23*
+        mU32*pow4(mQ3) + 78*mQ32*pow4(mU3) + 5*pow6(mQ3)) + 20*pow8(m3) + 3*
+        pow8(mQ3)))/pow2(m32 - mQ32) + (pow3(mQ32 - mU32)*(-128*pow12(m3) +
+        mU32*pow4(mQ3)*(mU32*pow4(mQ3) + 19*mQ32*pow4(mU3) + 3*pow6(mQ3) - 23*
+        pow6(mU3)) + pow6(m3)*(251*mU32*pow4(mQ3) + 821*mQ32*pow4(mU3) - 9*
+        pow6(mQ3) + 217*pow6(mU3)) - 2*(381*mQ32*mU32 + 49*pow4(mQ3) + 210*
+        pow4(mU3))*pow8(m3) - pow4(m3)*(417*pow4(mQ3)*pow4(mU3) - 151*mU32*
+        pow6(mQ3) + 323*mQ32*pow6(mU3) + 20*pow8(mQ3) + 31*pow8(mU3)) + m32*
+        mQ32*(-41*pow4(mQ3)*pow4(mU3) - 41*mU32*pow6(mQ3) + 167*mQ32*pow6(mU3)
+        + 9*pow8(mQ3) + 34*pow8(mU3)) + 10*(29*mQ32 + 35*mU32)*power10(m3)))/
+        pow2(m32 - mQ32) - (2*pow2(mQ32 - mU32)*pow2(Xt)*(-128*pow12(m3) +
+        mU32*pow4(mQ3)*(mU32*pow4(mQ3) + 19*mQ32*pow4(mU3) + 3*pow6(mQ3) - 23*
+        pow6(mU3)) + pow6(m3)*(251*mU32*pow4(mQ3) + 2049*mQ32*pow4(mU3) - 9*
+        pow6(mQ3) + 525*pow6(mU3)) - 2*(707*mQ32*mU32 + 49*pow4(mQ3) + 652*
+        pow4(mU3))*pow8(m3) + m32*mQ32*(-41*pow4(mQ3)*pow4(mU3) - 41*mU32*pow6(
+        mQ3) + 167*mQ32*pow6(mU3) + 9*pow8(mQ3) + 34*pow8(mU3)) + pow4(m3)*(-
+        417*pow4(mQ3)*pow4(mU3) + 151*mU32*pow6(mQ3) - 903*mQ32*pow6(mU3) - 20*
+        pow8(mQ3) + 37*pow8(mU3)) + 6*(49*mQ32 + 143*mU32)*power10(m3)))/pow2(
+        m32 - mQ32) - (pow4(Xt)*(4*(31*mQ32 + 289*mU32)*pow12(m3) + (2702*mU32*
+        pow4(mQ3) + 7406*mQ32*pow4(mU3) + 90*pow6(mQ3) + 2602*pow6(mU3))*pow8(
+        m3) + pow6(m3)*(-5516*pow4(mQ3)*pow4(mU3) - 474*mU32*pow6(mQ3) - 6126*
+        mQ32*pow6(mU3) + 11*pow8(mQ3) - 695*pow8(mU3)) + mU32*pow4(mQ3)*(-54*
+        pow4(mQ3)*pow4(mU3) - 4*mU32*pow6(mQ3) + 4*mQ32*pow6(mU3) - 3*pow8(mQ3)
+        + 57*pow8(mU3)) - 4*(767*mQ32*mU32 + 71*pow4(mQ3) + 762*pow4(mU3))*
+        power10(m3) + pow4(m3)*(882*pow4(mU3)*pow6(mQ3) + 3984*pow4(mQ3)*pow6(
+        mU3) - 201*mU32*pow8(mQ3) + 1718*mQ32*pow8(mU3) + 20*power10(mQ3) - 3*
+        power10(mU3)) - m32*mQ32*(-184*pow4(mU3)*pow6(mQ3) + 502*pow4(mQ3)*
+        pow6(mU3) - 32*mU32*pow8(mQ3) + 883*mQ32*pow8(mU3) + 9*power10(mQ3) +
+        102*power10(mU3))))/pow2(m32 - mQ32)))/(pow3(m32 - mU32)*pow4(mQ32 -
+        mU32))))/3. - (4*pow3(log(Mst12/pow2(mQ3)))*(320*(mQ32 + mU32)*pow2(-(
+        m3*mQ32) + pow3(m3))*pow4(mQ3)*pow6(Xt) - (8*m3*(m32 - mQ32)*Xt*pow3(
+        mQ32 - mU32)*(2*pow6(m3)*((-30*msq2 + 243*mU32)*pow4(mQ3) - 3*mU32*(5*
+        pow4(msq) + 13*pow4(mU3)) + 5*mQ32*(6*msq2*mU32 + 3*pow4(msq) + 14*
+        pow4(mU3)) + 14*pow6(mQ3)) + (-291*mQ32*mU32 - 176*pow4(mQ3) + 163*
+        pow4(mU3))*pow8(m3) + pow4(m3)*(pow4(mQ3)*(60*msq2*mU32 - 30*pow4(msq)
+        - 409*pow4(mU3)) + 60*pow4(msq)*pow4(mU3) + 3*(20*msq2 - 59*mU32)*pow6(
+        mQ3) - mQ32*(30*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 13*pow6(mU3)) +
+        55*pow8(mQ3)) + 2*(73*mQ32 - 41*mU32)*power10(m3) + mQ32*(-30*mQ32*
+        msq2*(msq2 + 2*mU32)*pow4(mU3) + 60*pow4(mU3)*pow6(mQ3) + pow4(mQ3)*(
+        60*msq2*pow4(mU3) - 101*pow6(mU3)) + 30*pow4(msq)*pow6(mU3) - 10*mU32*
+        pow8(mQ3) + 3*power10(mQ3)) - 2*m32*(15*mQ32*msq2*(msq2 - 2*mU32)*pow4(
+        mU3) + (60*msq2*mU32 - 95*pow4(mU3))*pow6(mQ3) + 15*pow4(msq)*pow6(mU3)
+        - 6*pow4(mQ3)*(5*mU32*pow4(msq) + 5*msq2*pow4(mU3) + 12*pow6(mU3)) +
+        35*mU32*pow8(mQ3) + 4*power10(mQ3))))/pow2(m32 - mU32) - (8*m3*(m32 -
+        mQ32)*pow5(Xt)*((-181*mU32*pow4(mQ3) + 46*mQ32*pow4(mU3) - 126*pow6(
+        mQ3) + 101*pow6(mU3))*pow8(m3) + 2*pow6(m3)*(3*(5*pow4(msq) - 9*pow4(
+        mU3))*pow4(mU3) + pow4(mQ3)*(-15*pow4(msq) + 149*pow4(mU3)) + 3*(10*
+        msq2 + 63*mU32)*pow6(mQ3) + mQ32*(-30*msq2*pow4(mU3) + 3*pow6(mU3)) +
+        6*pow8(mQ3)) + (mQ32 + mU32)*pow4(m3)*(pow4(mQ3)*(-60*msq2*mU32 + 30*
+        pow4(msq) - 389*pow4(mU3)) - 60*pow4(msq)*pow4(mU3) - 3*(20*msq2 + 43*
+        mU32)*pow6(mQ3) + 5*mQ32*(6*mU32*pow4(msq) + 24*msq2*pow4(mU3) - pow6(
+        mU3)) + 43*pow8(mQ3)) + (-32*mQ32*mU32 + 82*pow4(mQ3) - 50*pow4(mU3))*
+        power10(m3) - mQ32*(mQ32 + mU32)*(-30*mQ32*msq2*(msq2 + 2*mU32)*pow4(
+        mU3) - 38*pow4(mU3)*pow6(mQ3) + 30*pow4(msq)*pow6(mU3) + 5*pow4(mQ3)*(
+        12*msq2*pow4(mU3) + 25*pow6(mU3)) - 10*mU32*pow8(mQ3) + 3*power10(mQ3))
+        + 2*m32*(4*pow12(mQ3) + 30*mQ32*msq2*(msq2 - mU32)*pow6(mU3) + pow6(
+        mQ3)*(-30*mU32*pow4(msq) + 30*msq2*pow4(mU3) + 203*pow6(mU3)) + (60*
+        msq2*mU32 + 88*pow4(mU3))*pow8(mQ3) - 3*pow4(mQ3)*(5*pow4(msq)*pow4(
+        mU3) + 20*msq2*pow6(mU3) - 28*pow8(mU3)) + 15*pow4(msq)*pow8(mU3) - 59*
+        mU32*power10(mQ3))))/pow2(m32 - mU32) - (8*m3*(m32 - mQ32)*(mQ32 -
+        mU32)*pow3(Xt)*(382*(mQ32 - mU32)*pow12(m3) + (1630*mU32*pow4(mQ3) -
+        1609*mQ32*pow4(mU3) + 1201*pow6(mQ3) + 58*pow6(mU3))*pow8(m3) + pow6(
+        m3)*(60*pow4(msq)*pow4(mU3) + 12*pow4(mQ3)*(20*msq2*mU32 + 5*pow4(msq)
+        + 24*pow4(mU3)) - 24*(5*msq2 + 118*mU32)*pow6(mQ3) - 4*mQ32*(30*mU32*
+        pow4(msq) + 30*msq2*pow4(mU3) - 133*pow6(mU3)) - 321*pow8(mQ3) - 227*
+        pow8(mU3)) + (390*mQ32*mU32 - 1191*pow4(mQ3) + 545*pow4(mU3))*power10(
+        m3) + pow4(m3)*((-60*pow4(msq) + 2056*pow4(mU3))*pow6(mQ3) - 120*pow4(
+        msq)*pow6(mU3) - 24*pow4(mQ3)*(15*msq2*pow4(mU3) + 34*pow6(mU3)) + 2*(
+        60*msq2 + 533*mU32)*pow8(mQ3) + mQ32*(180*pow4(msq)*pow4(mU3) + 240*
+        msq2*pow6(mU3) + 347*pow8(mU3)) - 93*power10(mQ3)) - m32*(16*pow12(mQ3)
+        - 20*pow6(mQ3)*(6*mU32*pow4(msq) + 18*msq2*pow4(mU3) - 5*pow6(mU3)) + (
+        240*msq2*mU32 + 1409*pow4(mU3))*pow8(mQ3) + 120*mQ32*msq2*pow8(mU3) -
+        60*pow4(msq)*pow8(mU3) + pow4(mQ3)*(180*pow4(msq)*pow4(mU3) + 37*pow8(
+        mU3)) - 282*mU32*power10(mQ3)) + mQ32*(6*pow12(mQ3) + 120*mQ32*msq2*(
+        msq2 + mU32)*pow6(mU3) + 2*pow6(mQ3)*(60*msq2*pow4(mU3) + 227*pow6(mU3)
+        ) - 63*pow4(mU3)*pow8(mQ3) - 60*pow4(msq)*pow8(mU3) - 5*pow4(mQ3)*(12*
+        pow4(msq)*pow4(mU3) + 48*msq2*pow6(mU3) + 23*pow8(mU3)) - 26*mU32*
+        power10(mQ3))))/pow2(m32 - mU32) + (pow4(mQ32 - mU32)*(2*(231*mQ32 -
+        551*mU32)*pow14(m3) + 128*pow16(m3) + pow12(m3)*(60*msq2*mU32 + mQ32*(-
+        60*msq2 + 290*mU32) - 1666*pow4(mQ3) + 2528*pow4(mU3)) + pow8(m3)*(
+        pow4(mQ3)*(180*msq2*mU32 - 60*pow4(msq) - 263*pow4(mU3)) + 3*pow4(mU3)*
+        (60*msq2*mU32 + 90*pow4(msq) + 239*pow4(mU3)) + (180*msq2 - 4609*mU32)*
+        pow6(mQ3) + mQ32*(-210*mU32*pow4(msq) - 540*msq2*pow4(mU3) + 4531*pow6(
+        mU3)) - 1016*pow8(mQ3)) + (mQ32 - mU32)*mU32*pow4(mQ3)*(-209*pow4(mQ3)*
+        pow4(mU3) + 30*pow4(msq)*pow4(mU3) + 4*mU32*pow6(mQ3) + 3*pow8(mQ3)) +
+        ((-120*msq2 + 3277*mU32)*pow4(mQ3) + mQ32*(300*msq2*mU32 + 90*pow4(msq)
+        - 3539*pow4(mU3)) + 1905*pow6(mQ3) - 3*(30*mU32*pow4(msq) + 60*msq2*
+        pow4(mU3) + 761*pow6(mU3)))*power10(m3) + 2*pow6(m3)*(-3*(90*msq2*mU32
+        + 5*pow4(msq) - 557*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(105*mU32*pow4(
+        msq) + 90*msq2*pow4(mU3) - 1613*pow6(mU3)) + 1212*mU32*pow8(mQ3) + 5*
+        mQ32*(9*pow4(msq)*pow4(mU3) + 42*msq2*pow6(mU3) - 166*pow8(mU3)) - 15*(
+        9*pow4(msq)*pow6(mU3) + 2*msq2*pow8(mU3)) + 136*power10(mQ3)) + m32*
+        mQ32*(9*pow12(mQ3) + 349*pow6(mQ3)*pow6(mU3) + 653*pow4(mU3)*pow8(mQ3)
+        - 60*pow4(msq)*pow8(mU3) - 2*pow4(mQ3)*(45*pow4(msq)*pow4(mU3) + 90*
+        msq2*pow6(mU3) + 418*pow8(mU3)) + 30*mQ32*(5*pow4(msq)*pow6(mU3) + 6*
+        msq2*pow8(mU3)) - 47*mU32*power10(mQ3)) - 2*pow4(m3)*(19*pow12(mQ3) -
+        3*pow6(mQ3)*(15*mU32*pow4(msq) + 90*msq2*pow4(mU3) + 103*pow6(mU3)) +
+        1193*pow4(mU3)*pow8(mQ3) + 3*pow4(mQ3)*(45*pow4(msq)*pow4(mU3) + 70*
+        msq2*pow6(mU3) - 271*pow8(mU3)) - 45*pow4(msq)*pow8(mU3) + mQ32*(-45*
+        pow4(msq)*pow6(mU3) + 60*msq2*pow8(mU3)) + 230*mU32*power10(mQ3))))/
+        pow3(m32 - mU32) + (2*pow2(mQ32 - mU32)*pow2(Xt)*(-768*(4*mQ32 + 3*
+        mU32)*pow16(m3) + 768*pow18(m3) + 2*pow14(m3)*(5100*mQ32*mU32 + 2131*
+        pow4(mQ3) + 833*pow4(mU3)) - 2*pow12(m3)*(10*(3*msq2 + 797*mU32)*pow4(
+        mQ3) + 30*msq2*pow4(mU3) + mQ32*(-60*msq2*mU32 + 5067*pow4(mU3)) + 981*
+        pow6(mQ3) - 578*pow6(mU3)) + (90*pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(
+        210*msq2*mU32 + 45*pow4(msq) + 9994*pow4(mU3)) + (-120*msq2 + 9188*
+        mU32)*pow6(mQ3) + 180*msq2*pow6(mU3) - 4*mQ32*(45*mU32*pow4(msq) + 120*
+        msq2*pow4(mU3) + 53*pow6(mU3)) - 171*pow8(mQ3) - 1913*pow8(mU3))*
+        power10(m3) + (mQ32 - mU32)*mU32*pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3)
+        - 145*pow4(mU3)*pow6(mQ3) - 343*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*
+        pow6(mU3) + mU32*pow8(mQ3) + 3*power10(mQ3)) - pow8(m3)*(2*(30*pow4(
+        msq) + 7559*pow4(mU3))*pow6(mQ3) + 9*(20*msq2*mU32 + 30*pow4(msq) - 71*
+        pow4(mU3))*pow6(mU3) + 2*pow4(mQ3)*(75*mU32*pow4(msq) + 360*msq2*pow4(
+        mU3) + 3121*pow6(mU3)) + (-180*msq2 + 581*mU32)*pow8(mQ3) - 2*mQ32*(
+        240*pow4(msq)*pow4(mU3) + 360*msq2*pow6(mU3) + 2591*pow8(mU3)) + 8*
+        power10(mQ3)) + 2*pow6(m3)*(102*pow12(mQ3) - 10*mQ32*(24*msq2*mU32 +
+        18*pow4(msq) + 103*pow4(mU3))*pow6(mU3) + 8*pow6(mQ3)*(15*mU32*pow4(
+        msq) + 45*msq2*pow4(mU3) + 493*pow6(mU3)) - 3*(90*msq2*mU32 + 5*pow4(
+        msq) - 631*pow4(mU3))*pow8(mQ3) + 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) -
+        5*pow4(mQ3)*(12*pow4(msq)*pow4(mU3) - 24*msq2*pow6(mU3) + 419*pow8(mU3)
+        ) - 126*mU32*power10(mQ3)) + m32*mQ32*(mQ32 - mU32)*(9*pow12(mQ3) +
+        997*pow6(mQ3)*pow6(mU3) + 449*pow4(mU3)*pow8(mQ3) - 2*pow4(mQ3)*(45*
+        pow4(msq)*pow4(mU3) + 90*msq2*pow6(mU3) - 686*pow8(mU3)) - 60*pow4(msq)
+        *pow8(mU3) + 30*mQ32*(5*pow4(msq)*pow6(mU3) + 6*msq2*pow8(mU3)) - 47*
+        mU32*power10(mQ3)) + pow4(m3)*(-218*mU32*pow12(mQ3) - 38*pow14(mQ3) + (
+        90*mU32*pow4(msq) + 540*msq2*pow4(mU3) - 2912*pow6(mU3))*pow8(mQ3) - 8*
+        pow6(mQ3)*(45*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 88*pow8(mU3))
+        - 762*pow4(mU3)*power10(mQ3) + 120*mQ32*msq2*power10(mU3) - 90*pow4(
+        msq)*power10(mU3) + pow4(mQ3)*(360*pow4(msq)*pow6(mU3) + 300*msq2*pow8(
+        mU3) + 2458*power10(mU3)))))/pow3(m32 - mU32) + ((-mQ32 + mU32)*pow4(
+        Xt)*((-860*mQ32 + 604*mU32)*pow16(m3) + 4*pow14(m3)*(155*mQ32*mU32 +
+        426*pow4(mQ3) - 225*pow4(mU3)) + 2*pow12(m3)*(-((30*msq2 + 2131*mU32)*
+        pow4(mQ3)) + 107*mQ32*pow4(mU3) + 30*msq2*pow4(mU3) + 67*pow6(mQ3) -
+        467*pow6(mU3)) + (-90*pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(90*msq2*mU32 +
+        45*pow4(msq) + 3256*pow4(mU3)) + (-120*msq2 + 2278*mU32)*pow6(mQ3) -
+        180*msq2*pow6(mU3) + 10*mQ32*(12*msq2*pow4(mU3) + 431*pow6(mU3)) -
+        1455*pow8(mQ3) + 2131*pow8(mU3))*power10(m3) + mU32*(mQ32 + mU32)*pow4(
+        mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) - 387*pow4(mU3)*pow6(mQ3) - 585*pow4(
+        mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + mU32*pow8(mQ3) + 3*power10(
+        mQ3)) + pow8(m3)*(-4*(-90*msq2*mU32 + 15*pow4(msq) + 2534*pow4(mU3))*
+        pow6(mQ3) + (180*msq2*mU32 + 270*pow4(msq) - 913*pow4(mU3))*pow6(mU3) -
+        2*pow4(mQ3)*(135*mU32*pow4(msq) + 180*msq2*pow4(mU3) + 5579*pow6(mU3))
+        + (180*msq2 + 1379*mU32)*pow8(mQ3) + 4*mQ32*(15*pow4(msq)*pow4(mU3) -
+        90*msq2*pow6(mU3) - 1826*pow8(mU3)) + 52*power10(mQ3)) + 2*pow6(m3)*(
+        223*pow12(mQ3) + 2*mQ32*(90*msq2*mU32 - 45*pow4(msq) + 773*pow4(mU3))*
+        pow6(mU3) + 2*pow6(mQ3)*(45*mU32*pow4(msq) - 90*msq2*pow4(mU3) + 3833*
+        pow6(mU3)) + (-270*msq2*mU32 - 15*pow4(msq) + 2854*pow4(mU3))*pow8(mQ3)
+        - 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) + pow4(mQ3)*(150*pow4(msq)*pow4(
+        mU3) + 300*msq2*pow6(mU3) + 5489*pow8(mU3)) + 230*mU32*power10(mQ3)) +
+        m32*mQ32*(-38*mU32*pow12(mQ3) + 9*pow14(mQ3) + 60*pow4(mQ3)*(pow4(msq)
+        + 39*pow4(mU3))*pow6(mU3) + 2838*pow6(mU3)*pow8(mQ3) - 3*pow6(mQ3)*(30*
+        pow4(msq)*pow4(mU3) + 60*msq2*pow6(mU3) - 1657*pow8(mU3)) + 90*mQ32*
+        msq2*(msq2 + 2*mU32)*pow8(mU3) + 1128*pow4(mU3)*power10(mQ3) - 60*pow4(
+        msq)*power10(mU3)) - 2*pow4(m3)*(510*mU32*pow12(mQ3) + 19*pow14(mQ3) +
+        9*pow4(mQ3)*(30*msq2*mU32 + 10*pow4(msq) + 219*pow4(mU3))*pow6(mU3) + (
+        -45*mU32*pow4(msq) - 270*msq2*pow4(mU3) + 5009*pow6(mU3))*pow8(mQ3) +
+        30*pow6(mQ3)*(3*pow4(msq)*pow4(mU3) - 2*msq2*pow6(mU3) + 163*pow8(mU3))
+        + 1273*pow4(mU3)*power10(mQ3) - 45*pow4(msq)*power10(mU3) + mQ32*(-90*
+        pow4(msq)*pow8(mU3) + 60*msq2*power10(mU3)))))/pow3(m32 - mU32)))/(3.*
+        pow4(m32 - mQ32)*pow5(mQ32 - mU32)) - (4*log(Mst12/pow2(mQ3))*(-
+        115.39746270332105 + 30*pow2(log(Mst12/pow2(msq)))*((-8*m3*(m32 - msq2)
+        *(mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*Xt)/(
+        pow2(m32 - mQ32)*pow2(m32 - mU32)) - (16*m3*(m32 - msq2)*(mQ32*(msq2 -
+        2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow3(Xt))/((mQ32 -
+        mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)) - (2*pow2(Xt)*(((mQ32 - msq2)*
+        (-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 -
+        mQ32) + ((msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*
+        pow4(m3)))/pow3(-m32 + mU32)))/(mQ32 - mU32) - ((mQ32 - msq2)*(-3*m32*(
+        mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((
+        msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/
+        pow3(m32 - mU32) + ((mQ32 + mU32)*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2)
+        + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(
+        3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 +
+        mU32))*pow4(Xt))/pow3(mQ32 - mU32) + (8*m3*(m32 - msq2)*(mQ32 + mU32)*(
+        mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow5(Xt)
+        )/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32))) + (16*m3*pow5(
+        Xt)*(m32*mU32*(3*mU32*(10*msq2 + mU32) - 10*mQ32*(3*msq2 + 17*mU32) -
+        181*pow4(mQ3)) + mQ32*mU32*(3*mU32*(10*msq2 + mU32) + mQ32*(-30*msq2 +
+        184*mU32) + 3*pow4(mQ3)) - 2*pow4(m3)*(-84*mQ32*mU32 + 8*pow4(mQ3) +
+        29*pow4(mU3)) + 16*(mQ32 + 3*mU32)*pow6(m3)))/((m32 - mU32)*pow2(m32 -
+        mQ32)*pow2(mU3)*pow3(mQ32 - mU32)) + (60*(msq2 - mU32)*dilog(1 - msq2/
+        pow2(mU3))*(3*m32*(mQ32 - mU32)*(-msq2 + mU32) + mU32*(-mQ32 + mU32)*(
+        msq2 + mU32) + 8*m3*(msq2 - mU32)*mU32*Xt + 8*(-msq2 + mU32)*Xt*pow3(
+        m3) + 2*(mQ32 - mU32)*pow4(m3))*(pow2(-(mU3*pow2(Xt)) + pow3(mU3)) + (
+        3*mU32 - 2*pow2(Xt))*pow4(mQ3) + mQ32*(4*mU32*pow2(Xt) - 3*pow4(mU3) +
+        pow4(Xt)) - pow6(mQ3)))/(pow3(m32 - mU32)*pow4(mQ32 - mU32)) - (60*(
+        mQ32 - msq2)*dilog(1 - msq2/pow2(mQ3))*(-3*m32*(mQ32 - msq2)*(mQ32 -
+        mU32) + mQ32*(mQ32 + msq2)*(mQ32 - mU32) + 8*m3*mQ32*(-mQ32 + msq2)*Xt
+        + 8*(mQ32 - msq2)*Xt*pow3(m3) - 2*(mQ32 - mU32)*pow4(m3))*(-pow2(-(mU3*
+        pow2(Xt)) + pow3(mU3)) + (-3*mU32 + 2*pow2(Xt))*pow4(mQ3) + mQ32*(-4*
+        mU32*pow2(Xt) + 3*pow4(mU3) - pow4(Xt)) + pow6(mQ3)))/(pow3(m32 - mQ32)
+        *pow4(mQ32 - mU32)) - (16*m3*Xt*(2*mU32*(3*mU32*(10*msq2 + mU32) +
+        mQ32*(-15*msq2 + 37*mU32))*pow4(mQ3) - m32*mQ32*mU32*(36*mQ32*mU32 +
+        30*msq2*mU32 + 151*pow4(mQ3) + 3*pow4(mU3)) + (42*mQ32*mU32 - 144*pow4(
+        mQ3) + 64*pow4(mU3))*pow6(m3) + 4*pow4(m3)*(44*mU32*pow4(mQ3) - 27*
+        mQ32*pow4(mU3) + 20*pow6(mQ3)) + 64*(mQ32 - mU32)*pow8(m3)))/((m32 -
+        mU32)*(mQ32 - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)) + (32*m3*
+        pow3(Xt)*(mU32*pow4(mQ3)*(-60*mQ32*(msq2 - 6*mU32)*mU32 + (30*msq2 -
+        386*mU32)*pow4(mQ3) + 3*(10*msq2 + mU32)*pow4(mU3) + 3*pow6(mQ3)) +
+        pow6(m3)*(399*mU32*pow4(mQ3) - 395*mQ32*pow4(mU3) - 80*pow6(mQ3) + 32*
+        pow6(mU3)) + m32*mQ32*mU32*((-30*msq2 + 434*mU32)*pow4(mQ3) + mQ32*(60*
+        msq2*mU32 - 745*pow4(mU3)) + 310*pow6(mQ3) - 3*(10*msq2*pow4(mU3) +
+        pow6(mU3))) + 32*(pow4(mQ3) - pow4(mU3))*pow8(m3) + pow4(m3)*(315*pow4(
+        mQ3)*pow4(mU3) - 680*mU32*pow6(mQ3) + 385*mQ32*pow6(mU3) + 48*pow8(mQ3)
+        )))/((m32 - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow3(mQ32 -
+        mU32)) - (60*(m32 - msq2)*dilog(1 - m32/pow2(msq))*(-pow2(-(mU3*pow2(
+        Xt)) + pow3(mU3)) + (-3*mU32 + 2*pow2(Xt))*pow4(mQ3) + mQ32*(-4*mU32*
+        pow2(Xt) + 3*pow4(mU3) - pow4(Xt)) + pow6(mQ3))*(8*m3*mQ32*mU32*(mQ32*(
+        msq2 - 2*mU32) + msq2*mU32)*Xt - mQ32*msq2*mU32*(pow4(mQ3) + pow4(mU3))
+        - 8*Xt*pow3(m3)*((msq2 - 3*mU32)*pow4(mQ3) + mQ32*(4*msq2*mU32 - 3*
+        pow4(mU3)) + msq2*pow4(mU3)) - 8*Xt*(-3*msq2*mU32 + mQ32*(-3*msq2 + 4*
+        mU32) + pow4(mQ3) + pow4(mU3))*pow5(m3) + (-8*msq2*mU32 + mQ32*(-8*msq2
+        + 30*mU32) + 3*pow4(mQ3) + 3*pow4(mU3))*pow6(m3) - pow4(m3)*((-9*msq2 +
+        15*mU32)*pow4(mQ3) - 9*msq2*pow4(mU3) + 3*mQ32*(2*msq2*mU32 + 5*pow4(
+        mU3)) + pow6(mQ3) + pow6(mU3)) + m32*(3*msq2*mU32*pow4(mQ3) + (-3*msq2
+        + 5*mU32)*pow6(mQ3) - 3*msq2*pow6(mU3) + mQ32*(3*msq2*pow4(mU3) + 5*
+        pow6(mU3))) + 8*(mQ32 - 2*msq2 + mU32)*Xt*pow7(m3) + (-8*mQ32 + 6*msq2
+        - 8*mU32)*pow8(m3) + 2*power10(m3)))/(pow3(m32 - mQ32)*pow3(m32 - mU32)
+        *pow3(mQ32 - mU32)) + (2*dilog(1 - mQ32/pow2(mU3))*(8*m3*(m32 - mQ32)*(
+        m32 - mU32)*(mQ32 - mU32)*Xt*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) + 5*
+        pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3)) + 16*m3*(m32 - mQ32)*(m32 - mU32)
+        *pow3(Xt)*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) + 5*pow4(m3) + 3*pow4(
+        mQ3) + 3*pow4(mU3)) - (8*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 + mU32)*(-(
+        mQ32*mU32) - 5*m32*(mQ32 + mU32) + 5*pow4(m3) + 3*pow4(mQ3) + 3*pow4(
+        mU3))*pow5(Xt))/pow2(mQ32 - mU32) - (mQ32 - mU32)*((-76*mQ32*mU32 + 34*
+        pow4(mQ3) + 34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(
+        65*mU32*pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) +
+        7*pow4(mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) +
+        3*mQ32*pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) -
+        26*mQ32*pow6(mU3) + 9*pow8(mQ3) + 9*pow8(mU3)) + 12*power10(m3)) - 2*
+        pow2(Xt)*((-76*mQ32*mU32 + 34*pow4(mQ3) + 34*pow4(mU3))*pow6(m3) + 7*
+        pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*pow4(mQ3) + 65*mQ32*pow4(mU3) -
+        29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(mQ3)*pow6(mU3) - 14*(mQ32 + mU32)
+        *pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(mQ3)*
+        pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) + 9*
+        pow8(mU3)) + 12*power10(m3)) + ((mQ32 + mU32)*pow4(Xt)*((-76*mQ32*mU32
+        + 34*pow4(mQ3) + 34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(
+        m3)*(65*mU32*pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(
+        mU3)) + 7*pow4(mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(m3) + 3*mU32*
+        pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(mU3) - 26*mU32*
+        pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) + 9*pow8(mU3)) + 12*
+        power10(m3)))/pow2(mQ32 - mU32)))/(pow3(m32 - mQ32)*pow3(m32 - mU32)) -
+        20*log(Mst12/pow2(msq))*((2*m32)/pow2(mQ3) + (2*m32*mQ32)/pow2(m32 -
+        mQ32) + (2*m32)/pow2(mU3) + (8*m3*(mQ32 + 3*mU32 - (6*msq2*pow2(mQ32 -
+        mU32))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(mQ32 - mU32) - pow4(
+        mQ3)/pow2(m32 - mQ32) - (8*m3*(-9*mQ32*msq2*mU32 + mQ32*pow4(m3) + (3*
+        msq2 + mU32)*pow4(mQ3) - m32*(mQ32*(-9*msq2 + mU32) + 3*msq2*(2*msq2 +
+        mU32) + pow4(mQ3)) + 6*mU32*pow4(msq))*pow5(Xt))/((m32 - mU32)*pow2(m32
+        - mQ32)*pow3(mQ32 - mU32)) - (8*m3*Xt*(9*mQ32*msq2*mU32 - (2*mQ32 +
+        mU32)*pow4(m3) - (3*msq2 + mU32)*pow4(mQ3) + m32*(3*msq2*(msq2 - mU32)
+        + mQ32*(-3*msq2 + 2*mU32) + pow4(mQ3)) - 3*mU32*pow4(msq) + pow6(m3)))/
+        ((m32 - mU32)*(mQ32 - mU32)*pow2(m32 - mQ32)) + (-((7*mQ32 + 6*mU32)*
+        pow4(m3)) - 2*mU32*pow4(mQ3) + m32*(5*mQ32*mU32 + 3*pow4(mQ3)) + 7*
+        pow6(m3))/((m32 - mU32)*pow2(m32 - mQ32)) - (2*(mQ32 + 3*msq2)*pow4(m3)
+        - 3*mQ32*pow4(msq) - 3*m32*(-6*mQ32*msq2 + pow4(mQ3) + 3*pow4(msq)) +
+        pow6(mQ3))/pow3(m32 - mQ32) + (3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(3*
+        msq2*mU32 + 11*pow4(mU3)) + pow4(m3)*(-15*msq2*mU32 + mQ32*(-15*msq2 +
+        44*mU32) + 11*pow4(mQ3) + 11*pow4(mU3)) + m32*((9*msq2 - 22*mU32)*pow4(
+        mQ3) + 9*msq2*pow4(mU3) - 2*mQ32*(6*msq2*mU32 + 11*pow4(mU3))) - 2*(11*
+        mQ32 - 9*msq2 + 11*mU32)*pow6(m3) + 11*pow8(m3))/(pow2(m32 - mQ32)*
+        pow2(m32 - mU32)) + (pow4(Xt)*((2*m32*(mQ32 - mU32))/pow2(mQ3) + (2*
+        m32*(mQ32 - mU32))/pow2(mU3) + (6*msq2*(mQ32 - mU32)*(m32*(6*mQ32 - 3*
+        msq2) - mQ32*msq2 + 2*pow4(m3)))/pow3(m32 - mQ32) - (-3*mU32*(5*mQ32 +
+        mU32)*pow4(mQ3) - pow4(m3)*(15*mQ32*mU32 + 29*pow4(mQ3) + 6*pow4(mU3))
+        + (7*mQ32 + 3*mU32)*pow6(m3) + m32*(31*mU32*pow4(mQ3) + 7*mQ32*pow4(
+        mU3) + 16*pow6(mQ3)) + 4*pow8(m3))/((m32 - mU32)*pow2(m32 - mQ32)) - ((
+        mQ32 + mU32)*(3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 11*pow4(
+        mU3)) + pow4(m3)*(-15*msq2*mU32 + mQ32*(-15*msq2 + 44*mU32) + 11*pow4(
+        mQ3) + 11*pow4(mU3)) + m32*((9*msq2 - 22*mU32)*pow4(mQ3) + 9*msq2*pow4(
+        mU3) - 2*mQ32*(6*msq2*mU32 + 11*pow4(mU3))) - 2*(11*mQ32 - 9*msq2 + 11*
+        mU32)*pow6(m3) + 11*pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 - mU32))))/
+        pow3(mQ32 - mU32) - (2*pow2(Xt)*(mQ32*mU32*pow4(m3)*(mQ32*(15*msq2 -
+        64*mU32) + 15*msq2*mU32 - 19*pow4(mQ3) - 13*pow4(mU3)) - (3*msq2*mU32 +
+        mQ32*(3*msq2 + 14*mU32))*pow4(mQ3)*pow4(mU3) + pow6(m3)*(39*mU32*pow4(
+        mQ3) + mQ32*(-18*msq2*mU32 + 29*pow4(mU3)) + 2*pow6(mQ3) - 2*pow6(mU3))
+        + m32*((-9*msq2*mU32 + 31*pow4(mU3))*pow6(mQ3) - 9*mQ32*msq2*pow6(mU3)
+        + pow4(mQ3)*(12*msq2*pow4(mU3) + 29*pow6(mU3))) - 2*(9*mQ32*mU32 + 2*
+        pow4(mQ3) - 2*pow4(mU3))*pow8(m3) + 2*(mQ32 - mU32)*power10(m3)))/((
+        mQ32 - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32))) +
+        (-128*pow14(m3)*(-(mU32*pow4(mQ3)) + mQ32*pow4(mU3) + pow6(mQ3) - pow6(
+        mU3)) + (mQ32 - mU32)*(228*msq2*mU32 + 7*mQ32*(24*msq2 + 137*mU32) +
+        24*pow4(mQ3) + 24*pow4(mU3))*pow6(mU3)*pow8(mQ3) + 4*pow12(m3)*(32*
+        pow4(mQ3)*pow4(mU3) + 247*mU32*pow6(mQ3) - 311*mQ32*pow6(mU3) + 96*
+        pow8(mQ3) - 64*pow8(mU3)) + m32*pow4(mU3)*pow6(mQ3)*(-3*pow4(mQ3)*(308*
+        msq2*mU32 + 551*pow4(mU3)) - 6*(6*msq2 + 497*mU32)*pow6(mQ3) + mQ32*(
+        936*msq2*pow4(mU3) + 4165*pow6(mU3)) - 48*pow8(mQ3) + 6*(4*msq2*pow6(
+        mU3) + pow8(mU3))) + mQ32*mU32*pow6(m3)*(3*(64*msq2*mU32 - 2695*pow4(
+        mU3))*pow6(mQ3) + pow4(mQ3)*(-324*msq2*pow4(mU3) + 11381*pow6(mU3)) - (
+        324*msq2 + 9851*mU32)*pow8(mQ3) + 12*(9*msq2 + mU32)*pow8(mU3) + mQ32*(
+        348*msq2*pow6(mU3) + 4787*pow8(mU3)) - 1316*power10(mQ3)) + mU32*pow4(
+        m3)*pow4(mQ3)*((228*msq2*mU32 + 9403*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(
+        216*msq2*pow4(mU3) - 3847*pow6(mU3)) + (108*msq2 + 3155*mU32)*pow8(mQ3)
+        - 18*(8*msq2 + mU32)*pow8(mU3) - 3*mQ32*(136*msq2*pow6(mU3) + 2223*
+        pow8(mU3)) + 24*power10(mQ3)) + mQ32*pow8(m3)*(3*(108*msq2*mU32 + 3497*
+        pow4(mU3))*pow6(mQ3) - pow4(mQ3)*(144*msq2*pow4(mU3) + 1567*pow6(mU3))
+        + 3740*mU32*pow8(mQ3) + 4*mQ32*(9*msq2*pow6(mU3) - 2321*pow8(mU3)) - 4*
+        (54*msq2 + 365*mU32)*pow8(mU3) + 128*power10(mQ3)) + power10(m3)*(-((
+        108*msq2*mU32 + 3691*pow4(mU3))*pow6(mQ3)) + 4179*pow4(mQ3)*pow6(mU3) -
+        3564*mU32*pow8(mQ3) + 12*mQ32*(9*msq2*pow6(mU3) + 235*pow8(mU3)) - 384*
+        power10(mQ3) + 128*power10(mU3)))/((mQ32 - mU32)*pow2(m32 - mU32)*pow3(
+        -m32 + mQ32)*pow4(mQ3)*pow4(mU3)) + (pow4(Xt)*(-128*pow14(m3)*pow3(mQ32
+        - mU32) + 3*pow6(mU3)*((16*msq2 - 1425*mU32)*pow4(mQ3) + mQ32*(-80*
+        msq2*mU32 + 1171*pow4(mU3)) + 10*pow6(mQ3) - 2*(8*msq2*pow4(mU3) +
+        pow6(mU3)))*pow8(mQ3) + 4*pow12(m3)*(52*pow4(mQ3)*pow4(mU3) + 55*mU32*
+        pow6(mQ3) - 183*mQ32*pow6(mU3) + 96*pow8(mQ3) - 64*pow8(mU3)) + m32*
+        pow4(mU3)*pow6(mQ3)*(pow4(mQ3)*(36*msq2*mU32 + 10375*pow4(mU3)) + (-
+        396*msq2 + 7636*mU32)*pow6(mQ3) + 564*msq2*pow6(mU3) - mQ32*(204*msq2*
+        pow4(mU3) + 11183*pow6(mU3)) - 30*pow8(mQ3) + 60*pow8(mU3)) + mQ32*
+        mU32*pow6(m3)*((-1668*msq2*mU32 + 32595*pow4(mU3))*pow6(mQ3) - 3*pow4(
+        mQ3)*(128*msq2*pow4(mU3) + 5325*pow6(mU3)) + (-324*msq2 + 13125*mU32)*
+        pow8(mQ3) + mQ32*(348*msq2*pow6(mU3) - 2405*pow8(mU3)) + 12*(9*msq2 +
+        mU32)*pow8(mU3) - 1316*power10(mQ3)) + mU32*pow4(m3)*pow4(mQ3)*((1008*
+        msq2*mU32 - 30145*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(1596*msq2*pow4(mU3)
+        + 1397*pow6(mU3)) + (108*msq2 - 2189*mU32)*pow8(mQ3) - 3*mQ32*(376*
+        msq2*pow6(mU3) - 3685*pow8(mU3)) - 18*(8*msq2 + mU32)*pow8(mU3) + 24*
+        power10(mQ3)) + mQ32*pow8(m3)*(27*(12*msq2*mU32 - 757*pow4(mU3))*pow6(
+        mQ3) + 9*pow4(mQ3)*(64*msq2*pow4(mU3) - 557*pow6(mU3)) + 3484*mU32*
+        pow8(mQ3) - 4*(54*msq2 + 365*mU32)*pow8(mU3) + mQ32*(36*msq2*pow6(mU3)
+        + 6938*pow8(mU3)) + 128*power10(mQ3)) + power10(m3)*((-108*msq2*mU32 +
+        9917*pow4(mU3))*pow6(mQ3) - 5171*pow4(mQ3)*pow6(mU3) - 2796*mU32*pow8(
+        mQ3) + 4*mQ32*(27*msq2*pow6(mU3) + 641*pow8(mU3)) - 384*power10(mQ3) +
+        128*power10(mU3))))/(pow2(m32 - mU32)*pow3(-m32 + mQ32)*pow3(mQ32 -
+        mU32)*pow4(mQ3)*pow4(mU3)) - (2*pow2(Xt)*(128*(mQ32 + mU32)*pow12(m3)*
+        pow2(mQ32 - mU32) + 3*(mQ32 - mU32)*(mQ32*(16*msq2 - 83*mU32) - 56*
+        msq2*mU32 + 6*pow4(mQ3) - 6*pow4(mU3))*pow6(mQ3)*pow6(mU3) - 2*mQ32*
+        mU32*pow6(m3)*(pow4(mQ3)*(72*msq2*mU32 - 9340*pow4(mU3)) + (108*msq2 -
+        287*mU32)*pow6(mQ3) + 18*(6*msq2 + 37*mU32)*pow6(mU3) - mQ32*(288*msq2*
+        pow4(mU3) + 901*pow6(mU3)) + 646*pow8(mQ3)) - 2*m32*pow4(mQ3)*pow4(mU3)
+        *(-6*pow4(mQ3)*(53*msq2*mU32 + 422*pow4(mU3)) + (198*msq2 + 329*mU32)*
+        pow6(mQ3) + mQ32*(102*msq2*pow4(mU3) + 631*pow6(mU3)) + 33*pow8(mQ3) +
+        3*(6*msq2*pow6(mU3) + pow8(mU3))) - 4*(-1454*pow4(mQ3)*pow4(mU3) + 279*
+        mU32*pow6(mQ3) + 279*mQ32*pow6(mU3) + 64*pow8(mQ3) + 64*pow8(mU3))*
+        power10(m3) + mQ32*mU32*pow4(m3)*((516*msq2*mU32 - 8421*pow4(mU3))*
+        pow6(mQ3) - pow4(mQ3)*(648*msq2*pow4(mU3) + 8099*pow6(mU3)) + (108*msq2
+        + 2257*mU32)*pow8(mQ3) + 12*(9*msq2 + mU32)*pow8(mU3) + mQ32*(-84*msq2*
+        pow6(mU3) + 1939*pow8(mU3)) + 24*power10(mQ3)) + pow8(m3)*(9*(12*msq2*
+        mU32 - 893*pow4(mU3))*pow6(mQ3) - 3*pow4(mQ3)*(72*msq2*pow4(mU3) +
+        3173*pow6(mU3)) + 2448*mU32*pow8(mQ3) + 4*mQ32*(27*msq2*pow6(mU3) +
+        641*pow8(mU3)) + 128*power10(mQ3) + 128*power10(mU3))))/(pow2(m32 -
+        mQ32)*pow2(m32 - mU32)*pow2(mQ32 - mU32)*pow4(mQ3)*pow4(mU3)) + (2*
+        dilog(1 - m32/pow2(mU3))*((-8*m3*(m32 - mQ32)*pow5(Xt)*(2*(7*mQ32 - 9*
+        mU32)*pow4(m3) + mU32*pow4(mQ3) + 4*mQ32*pow4(mU3) - m32*(-20*mQ32*mU32
+        + 11*pow4(mQ3) + pow4(mU3)) - 6*pow6(mQ3) - 3*pow6(mU3)))/pow4(mQ32 -
+        mU32) + (8*m3*(m32 - mQ32)*pow3(Xt)*(-3*(201*mQ32 + 29*mU32)*pow4(m3) -
+        49*mU32*pow4(mQ3) - 20*mQ32*pow4(mU3) + 2*m32*(69*mQ32*mU32 + 255*pow4(
+        mQ3) + pow4(mU3)) + 254*pow6(m3) - 151*pow6(mQ3) + 6*pow6(mU3)))/pow3(
+        mQ32 - mU32) - (8*m3*(m32 - mQ32)*Xt*(pow4(m3)*(633*mQ32*mU32 + 352*
+        pow4(mQ3) - 19*pow4(mU3)) - 22*pow4(mQ3)*pow4(mU3) - (679*mQ32 + 347*
+        mU32)*pow6(m3) + 7*mQ32*pow6(mU3) + m32*(-306*mU32*pow4(mQ3) + 23*mQ32*
+        pow4(mU3) + 5*pow6(mU3)) + 356*pow8(m3) - 3*pow8(mU3)))/((-mQ32 + mU32)
+        *pow2(m32 - mU32)) - (pow4(Xt)*((588*mQ32 + 692*mU32)*pow12(m3) + 10*(
+        515*mU32*pow4(mQ3) + 637*mQ32*pow4(mU3) + 7*pow6(mQ3) + 121*pow6(mU3))*
+        pow8(m3) + pow6(m3)*(-7772*pow4(mQ3)*pow4(mU3) - 1630*mU32*pow6(mQ3) -
+        3834*mQ32*pow6(mU3) + 701*pow8(mQ3) - 265*pow8(mU3)) + mQ32*pow4(mU3)*(
+        222*pow4(mQ3)*pow4(mU3) + 4*mU32*pow6(mQ3) - 4*mQ32*pow6(mU3) - 219*
+        pow8(mQ3) - 3*pow8(mU3)) - 4*(909*mQ32*mU32 + 267*pow4(mQ3) + 424*pow4(
+        mU3))*power10(m3) + m32*mU32*(-1622*pow4(mU3)*pow6(mQ3) - 644*pow4(mQ3)
+        *pow6(mU3) + 513*mU32*pow8(mQ3) + 32*mQ32*pow8(mU3) + 450*power10(mQ3)
+        - 9*power10(mU3)) + pow4(m3)*(2864*pow4(mU3)*pow6(mQ3) + 4242*pow4(mQ3)
+        *pow6(mU3) - 1074*mU32*pow8(mQ3) + 627*mQ32*pow8(mU3) - 279*power10(
+        mQ3) + 20*power10(mU3))))/(pow2(m32 - mU32)*pow4(mQ32 - mU32)) + (2*
+        pow2(Xt)*(-256*(11*mQ32 + 7*mU32)*pow12(m3) + 768*pow14(m3) - pow2(-(
+        mQ3*mU32) + pow3(mQ3))*pow4(mU3)*(4*mQ32*mU32 + 23*pow4(mQ3) + 3*pow4(
+        mU3)) - 2*(4087*mU32*pow4(mQ3) + 1838*mQ32*pow4(mU3) + 1612*pow6(mQ3) +
+        143*pow6(mU3))*pow8(m3) + pow6(m3)*(3962*pow4(mQ3)*pow4(mU3) + 5748*
+        mU32*pow6(mQ3) + 892*mQ32*pow6(mU3) + 909*pow8(mQ3) + 9*pow8(mU3)) + 6*
+        (994*mQ32*mU32 + 719*pow4(mQ3) + 207*pow4(mU3))*power10(m3) + m32*mU32*
+        (176*pow4(mU3)*pow6(mQ3) + 517*mU32*pow8(mQ3) + 50*mQ32*pow8(mU3) + 34*
+        power10(mQ3) - 9*power10(mU3)) + pow4(m3)*(-2202*pow4(mU3)*pow6(mQ3) -
+        584*pow4(mQ3)*pow6(mU3) - 1708*mU32*pow8(mQ3) - 171*mQ32*pow8(mU3) +
+        37*power10(mQ3) + 20*power10(mU3))))/(pow2(m32 - mU32)*pow3(-mQ32 +
+        mU32)) + ((-1994*mQ32 + 202*mU32)*pow12(m3) + 384*pow14(m3) + mQ32*(-
+        19*mU32*pow4(mQ3) - mQ32*pow4(mU3) + 23*pow6(mQ3) - 3*pow6(mU3))*pow6(
+        mU3) + (-1927*mU32*pow4(mQ3) + 1997*mQ32*pow4(mU3) - 2719*pow6(mQ3) +
+        89*pow6(mU3))*pow8(m3) + pow6(m3)*(-2222*pow4(mQ3)*pow4(mU3) + 2196*
+        mU32*pow6(mQ3) - 100*mQ32*pow6(mU3) + 777*pow8(mQ3) - 11*pow8(mU3)) +
+        m32*pow4(mU3)*(42*pow4(mQ3)*pow4(mU3) - 148*mU32*pow6(mQ3) + 44*mQ32*
+        pow6(mU3) - 57*pow8(mQ3) - 9*pow8(mU3)) + 4*(94*mQ32*mU32 + 885*pow4(
+        mQ3) - 179*pow4(mU3))*power10(m3) + pow4(m3)*(818*pow4(mU3)*pow6(mQ3) +
+        376*pow4(mQ3)*pow6(mU3) - 775*mU32*pow8(mQ3) - 192*mQ32*pow8(mU3) + 29*
+        power10(mU3)))/((-mQ32 + mU32)*pow3(m32 - mU32))))/pow3(m32 - mQ32) + (
+        pow2(log(Mst12/pow2(mU3)))*((-2*pow2(m32 - mU32)*(-34*m32*mQ32 + pow4(
+        m3) + 17*pow4(mQ3))*(-4*m32*mU32 + 3*pow4(m3) + 2*pow4(mU3)))/pow2(m32
+        - mQ32) + (2*(-34*m32*mU32 + pow4(m3) + 17*pow4(mU3))*(4*m32*mQ32*mU32*
+        (mQ32 + mU32) - 2*pow4(mQ3)*pow4(mU3) - pow4(m3)*(8*mQ32*mU32 + pow4(
+        mQ3) + pow4(mU3)) + 2*(mQ32 + mU32)*pow6(m3)))/pow2(m32 - mQ32) + (320*
+        (mQ32 + mU32)*pow2(-(m3*mU32) + pow3(m3))*(-3*mQ32*pow4(mU3) + m32*(2*
+        mQ32*mU32 + pow4(mU3)))*pow6(Xt))/((m32 - mQ32)*pow5(mQ32 - mU32)) + (
+        4*(m32 - mU32)*(pow4(m3)*(519*mQ32*mU32 - 263*pow4(mU3)) - (239*mQ32 +
+        81*mU32)*pow6(m3) + 138*(mQ32 - mU32)*pow6(mU3) + m32*(-414*mQ32*pow4(
+        mU3) + 350*pow6(mU3)) + 128*pow8(m3)))/(-mQ32 + mU32) + (2*mQ32*(m32 -
+        mU32)*(2*(-94*mQ32*mU32 + 17*pow4(mQ3) - 39*pow4(mU3))*pow6(m3) + 4*
+        pow4(mU3)*pow6(mQ3) + 19*pow4(mQ3)*pow6(mU3) + pow4(m3)*(120*mU32*pow4(
+        mQ3) + 175*mQ32*pow4(mU3) - 29*pow6(mQ3) + 26*pow6(mU3)) + (-14*mQ32 +
+        64*mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + m32*(-65*pow4(mQ3)*pow4(mU3) -
+        35*mU32*pow6(mQ3) - 57*mQ32*pow6(mU3) + 9*pow8(mQ3)) + 12*power10(m3)))
+        /pow3(m32 - mQ32) + (-((-mQ32 + mU32)*pow4(mU3)*(-4*mQ32*mU32 - 3*pow4(
+        mQ3) - 30*pow4(msq) + pow4(mU3))) + (60*msq2*mU32 + mQ32*(-60*msq2 +
+        64*mU32) - 2*pow4(mQ3) + 706*pow4(mU3))*pow6(m3) + pow4(m3)*(-33*mU32*
+        pow4(mQ3) - 90*mU32*pow4(msq) + 3*mQ32*(-40*msq2*mU32 + 30*pow4(msq) -
+        17*pow4(mU3)) + 120*msq2*pow4(mU3) + 9*pow6(mQ3) - 437*pow6(mU3)) - 2*
+        m32*mU32*(-18*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 90*msq2*pow4(mU3) +
+        mQ32*(-90*msq2*mU32 + 30*pow4(msq) + 19*pow4(mU3)) + 3*pow6(mQ3) - 68*
+        pow6(mU3)) + (44*mQ32 - 556*mU32)*pow8(m3) + 128*power10(m3))/(mQ32 -
+        mU32) + (8*m3*(m32 - mU32)*Xt*(pow6(m3)*(1357*mU32*pow4(mQ3) - 30*mU32*
+        pow4(msq) + 2*mQ32*(-30*msq2*mU32 + 15*pow4(msq) - 752*pow4(mU3)) + 60*
+        msq2*pow4(mU3) + 366*pow6(mQ3) - 923*pow6(mU3)) + mU32*pow4(mQ3)*(-10*
+        mU32*pow4(mQ3) + 30*mU32*pow4(msq) - 60*msq2*pow4(mU3) - 2*mQ32*(-30*
+        msq2*mU32 + 15*pow4(msq) + 92*pow4(mU3)) + 3*pow6(mQ3) + 271*pow6(mU3))
+        + (-79*mQ32*mU32 - 700*pow4(mQ3) + 1115*pow4(mU3))*pow8(m3) + pow4(m3)*
+        (pow4(mQ3)*(120*msq2*mU32 - 60*pow4(msq) - 247*pow4(mU3)) + 6*pow4(mU3)
+        *(-10*msq2*mU32 + 5*pow4(msq) + 41*pow4(mU3)) - 952*mU32*pow6(mQ3) + 2*
+        mQ32*(15*mU32*pow4(msq) - 30*msq2*pow4(mU3) + 842*pow6(mU3)) + 5*pow8(
+        mQ3)) + m32*mQ32*(-60*pow4(msq)*pow4(mU3) + pow4(mQ3)*(-60*msq2*mU32 +
+        30*pow4(msq) + 754*pow4(mU3)) + 5*mU32*pow6(mQ3) + mQ32*(30*mU32*pow4(
+        msq) - 60*msq2*pow4(mU3) - 633*pow6(mU3)) + 120*msq2*pow6(mU3) - 3*
+        pow8(mQ3) - 507*pow8(mU3)) + (358*mQ32 - 422*mU32)*power10(m3)))/(pow2(
+        m32 - mQ32)*pow2(mQ32 - mU32)) + (8*m3*(m32 - mU32)*pow3(Xt)*(254*(mQ32
+        - mU32)*pow12(m3) + (1551*mU32*pow4(mQ3) - 2044*mQ32*pow4(mU3) + 484*
+        pow6(mQ3) - 1271*pow6(mU3))*pow8(m3) + mU32*pow4(mQ3)*(-60*pow4(msq)*
+        pow4(mU3) + pow4(mQ3)*(120*msq2*mU32 - 60*pow4(msq) + 349*pow4(mU3)) +
+        78*mU32*pow6(mQ3) + 30*mQ32*(4*mU32*pow4(msq) - 8*msq2*pow4(mU3) - 31*
+        pow6(mU3)) + 120*msq2*pow6(mU3) - 18*pow8(mQ3) + 265*pow8(mU3)) + pow6(
+        m3)*(60*pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(-60*msq2*mU32 + 30*pow4(msq)
+        + 503*pow4(mU3)) - 2022*mU32*pow6(mQ3) - 120*msq2*pow6(mU3) + mQ32*(-
+        120*mU32*pow4(msq) + 240*msq2*pow4(mU3) + 3418*pow6(mU3)) - 125*pow8(
+        mQ3) + 283*pow8(mU3)) + (-246*mQ32*mU32 - 573*pow4(mQ3) + 1075*pow4(
+        mU3))*power10(m3) + pow4(m3)*((240*msq2*mU32 - 120*pow4(msq) + 1222*
+        pow4(mU3))*pow6(mQ3) + 2*pow4(mQ3)*(90*mU32*pow4(msq) - 180*msq2*pow4(
+        mU3) - 1979*pow6(mU3)) + 15*(8*msq2*mU32 - 4*pow4(msq) + 9*pow4(mU3))*
+        pow6(mU3) + 929*mU32*pow8(mQ3) - 858*mQ32*pow8(mU3) - 30*power10(mQ3))
+        + m32*mQ32*(15*(-8*msq2*mU32 + 4*pow4(msq) - 79*pow4(mU3))*pow6(mQ3) +
+        1374*pow4(mQ3)*pow6(mU3) - 12*(20*msq2*mU32 - 10*pow4(msq) + 33*pow4(
+        mU3))*pow6(mU3) - 48*mU32*pow8(mQ3) + mQ32*(-180*pow4(msq)*pow4(mU3) +
+        360*msq2*pow6(mU3) + 1517*pow8(mU3)) + 18*power10(mQ3))))/(pow2(m32 -
+        mQ32)*pow4(mQ32 - mU32)) - (pow4(Xt)*(12*(59*mQ32 + 133*mU32)*pow16(m3)
+        - 4*pow14(m3)*(1979*mQ32*mU32 + 390*pow4(mQ3) + 1747*pow4(mU3)) + (mQ32
+        + mU32)*pow4(mU3)*pow6(mQ3)*(3*mU32*pow4(mQ3) + mQ32*(30*pow4(msq) +
+        131*pow4(mU3)) - 3*mU32*(10*pow4(msq) + 461*pow4(mU3)) + 9*pow6(mQ3)) +
+        2*pow12(m3)*((-30*msq2 + 6953*mU32)*pow4(mQ3) + 12317*mQ32*pow4(mU3) +
+        30*msq2*pow4(mU3) + 361*pow6(mQ3) + 4201*pow6(mU3)) + (30*pow4(mQ3)*(-
+        4*msq2*mU32 + 3*pow4(msq) - 1162*pow4(mU3)) - 90*pow4(msq)*pow4(mU3) +
+        10*(18*msq2 - 991*mU32)*pow6(mQ3) + 120*msq2*pow6(mU3) - 2*mQ32*(90*
+        msq2*pow4(mU3) + 12163*pow6(mU3)) + 329*pow8(mQ3) - 753*pow8(mU3))*
+        power10(m3) + pow8(m3)*((360*msq2*mU32 - 270*pow4(msq) + 23242*pow4(
+        mU3))*pow6(mQ3) - 4*(45*msq2*mU32 - 15*pow4(msq) + 947*pow4(mU3))*pow6(
+        mU3) + pow4(mQ3)*(-60*mU32*pow4(msq) + 360*msq2*pow4(mU3) + 27032*pow6(
+        mU3)) - 4*(45*msq2 - 632*mU32)*pow8(mQ3) + 3*mQ32*(90*pow4(msq)*pow4(
+        mU3) - 120*msq2*pow6(mU3) - 377*pow8(mU3)) - 283*power10(mQ3)) + m32*
+        mU32*pow4(mQ3)*(2*(-90*msq2*mU32 + 30*pow4(msq) - 307*pow4(mU3))*pow6(
+        mQ3) + 9*(10*pow4(msq) + 461*pow4(mU3))*pow6(mU3) + pow4(mQ3)*(-90*
+        mU32*pow4(msq) + 1316*pow6(mU3)) - 117*mU32*pow8(mQ3) + mQ32*(-60*pow4(
+        msq)*pow4(mU3) + 180*msq2*pow6(mU3) + 7744*pow8(mU3)) + 18*power10(mQ3)
+        ) + pow6(m3)*(87*pow12(mQ3) + 4*pow6(mQ3)*(45*mU32*pow4(msq) - 150*
+        msq2*pow4(mU3) - 3629*pow6(mU3)) + 12*mQ32*(45*msq2*mU32 - 15*pow4(msq)
+        + 1024*pow4(mU3))*pow6(mU3) + 5*(-72*msq2*mU32 + 54*pow4(msq) - 1391*
+        pow4(mU3))*pow8(mQ3) + 3*(10*pow4(msq) + 513*pow4(mU3))*pow8(mU3) +
+        pow4(mQ3)*(-300*pow4(msq)*pow4(mU3) + 360*msq2*pow6(mU3) + 6437*pow8(
+        mU3)) + 12*(5*msq2 - 12*mU32)*power10(mQ3)) - mQ32*pow4(m3)*(27*pow12(
+        mQ3) + 4281*pow12(mU3) + 10*pow6(mQ3)*(18*mU32*pow4(msq) - 54*msq2*
+        pow4(mU3) - 401*pow6(mU3)) + 4*mQ32*(135*msq2*mU32 - 45*pow4(msq) +
+        3772*pow4(mU3))*pow6(mU3) + 15*(-8*msq2*mU32 + 6*pow4(msq) - 61*pow4(
+        mU3))*pow8(mQ3) + 90*pow4(msq)*pow8(mU3) + pow4(mQ3)*(-180*pow4(msq)*
+        pow4(mU3) + 120*msq2*pow6(mU3) + 5883*pow8(mU3)) - 18*mU32*power10(mQ3)
+        )))/(pow3(m32 - mQ32)*pow4(mQ32 - mU32)) - (2*pow2(Xt)*(-128*(23*mQ32 +
+        25*mU32)*pow16(m3) + 768*pow18(m3) + 2*pow14(m3)*(5832*mQ32*mU32 +
+        2417*pow4(mQ3) + 2503*pow4(mU3)) - (mQ32 - mU32)*pow4(mU3)*pow6(mQ3)*(
+        3*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + mQ32*(30*pow4(msq) + 441*pow4(
+        mU3)) + 9*pow6(mQ3) - 1073*pow6(mU3)) - 2*pow12(m3)*((-30*msq2 + 9885*
+        mU32)*pow4(mQ3) - 30*msq2*pow4(mU3) + mQ32*(60*msq2*mU32 + 6928*pow4(
+        mU3)) + 1956*pow6(mQ3) + 2735*pow6(mU3)) + (-90*pow4(msq)*pow4(mU3) +
+        pow4(mQ3)*(480*msq2*mU32 - 90*pow4(msq) + 20264*pow4(mU3)) - 4*(45*msq2
+        - 4523*mU32)*pow6(mQ3) + 120*msq2*pow6(mU3) + 4*mQ32*(45*mU32*pow4(msq)
+        - 105*msq2*pow4(mU3) + 2023*pow6(mU3)) + 1301*pow8(mQ3) + 6011*pow8(
+        mU3))*power10(m3) - 3*m32*mU32*pow4(mQ3)*(4*(-15*msq2*mU32 + 5*pow4(
+        msq) - 132*pow4(mU3))*pow6(mQ3) - (30*pow4(msq) + 1073*pow4(mU3))*pow6(
+        mU3) + pow4(mQ3)*(-70*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 1036*pow6(
+        mU3)) - 51*mU32*pow8(mQ3) + mQ32*(80*pow4(msq)*pow4(mU3) - 60*msq2*
+        pow6(mU3) + 354*pow8(mU3)) + 6*power10(mQ3)) + pow8(m3)*(6*(-120*msq2*
+        mU32 + 45*pow4(msq) - 3283*pow4(mU3))*pow6(mQ3) - 4*(45*msq2*mU32 - 15*
+        pow4(msq) + 1076*pow4(mU3))*pow6(mU3) - 2*pow4(mQ3)*(240*mU32*pow4(msq)
+        - 360*msq2*pow4(mU3) + 649*pow6(mU3)) + 10*(18*msq2 - 827*mU32)*pow8(
+        mQ3) + 25*mQ32*(6*pow4(msq)*pow4(mU3) - 379*pow8(mU3)) + 37*power10(
+        mQ3)) + mQ32*pow4(m3)*(27*pow12(mQ3) - 30*mQ32*(18*msq2*mU32 - 12*pow4(
+        msq) + 203*pow4(mU3))*pow6(mU3) - 2*pow6(mQ3)*(150*msq2*pow4(mU3) +
+        1259*pow6(mU3)) + (-120*msq2*mU32 + 90*pow4(msq) - 2621*pow4(mU3))*
+        pow8(mQ3) - (90*pow4(msq) + 3319*pow4(mU3))*pow8(mU3) + pow4(mQ3)*(-
+        360*pow4(msq)*pow4(mU3) + 960*msq2*pow6(mU3) + 8449*pow8(mU3)) - 72*
+        mU32*power10(mQ3)) + pow6(m3)*(-87*pow12(mQ3) + 12*pow6(mQ3)*(30*mU32*
+        pow4(msq) - 20*msq2*pow4(mU3) - 73*pow6(mU3)) + 6*mQ32*(90*msq2*mU32 -
+        40*pow4(msq) + 1633*pow4(mU3))*pow6(mU3) + (480*msq2*mU32 - 270*pow4(
+        msq) + 11121*pow4(mU3))*pow8(mQ3) + pow4(mQ3)*(120*pow4(msq)*pow4(mU3)
+        - 720*msq2*pow6(mU3) - 1079*pow8(mU3)) + 3*(10*pow4(msq) + 399*pow4(
+        mU3))*pow8(mU3) + (-60*msq2 + 1430*mU32)*power10(mQ3))))/(pow3(m32 -
+        mQ32)*pow3(mQ32 - mU32)) + (8*m3*(m32 - mU32)*pow5(Xt)*(mU32*(mQ32 +
+        mU32)*pow4(mQ3)*(-30*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 10*mQ32*(-6*
+        msq2*mU32 + 3*pow4(msq) - 7*pow4(mU3)) + 60*msq2*pow4(mU3) + 9*pow6(
+        mQ3) + 331*pow6(mU3)) + (195*mU32*pow4(mQ3) + 118*mQ32*pow4(mU3) + 58*
+        pow6(mQ3) + 109*pow6(mU3))*pow8(m3) - pow6(m3)*(-30*pow4(msq)*pow4(mU3)
+        + pow4(mQ3)*(-60*msq2*mU32 + 30*pow4(msq) + 603*pow4(mU3)) + 65*mU32*
+        pow6(mQ3) + 767*mQ32*pow6(mU3) + 60*msq2*pow6(mU3) + 24*pow8(mQ3) +
+        461*pow8(mU3)) + (-32*mQ32*mU32 - 46*pow4(mQ3) + 78*pow4(mU3))*power10(
+        m3) + pow4(m3)*((-120*msq2*mU32 + 60*pow4(msq) + 197*pow4(mU3))*pow6(
+        mQ3) + 6*(10*msq2*mU32 - 5*pow4(msq) + 43*pow4(mU3))*pow6(mU3) + pow4(
+        mQ3)*(30*mU32*pow4(msq) - 60*msq2*pow4(mU3) + 1229*pow6(mU3)) - 111*
+        mU32*pow8(mQ3) + mQ32*(-60*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) +
+        1292*pow8(mU3)) + 15*power10(mQ3)) - m32*mQ32*((-60*msq2*mU32 + 30*
+        pow4(msq) - 251*pow4(mU3))*pow6(mQ3) - 60*pow4(msq)*pow6(mU3) + 3*pow4(
+        mQ3)*(20*mU32*pow4(msq) - 40*msq2*pow4(mU3) + 161*pow6(mU3)) - 6*mU32*
+        pow8(mQ3) + 120*msq2*pow8(mU3) + mQ32*(-30*pow4(msq)*pow4(mU3) + 60*
+        msq2*pow6(mU3) + 1106*pow8(mU3)) + 9*power10(mQ3) + 579*power10(mU3))))
+        /(pow2(m32 - mQ32)*pow5(mQ32 - mU32))))/pow4(m32 - mU32) + 2*dilog(1 -
+        m32/pow2(mQ3))*((-8*pow4(m3)*(-105*mQ32*mU32 + m32*(27*mQ32 + 101*mU32)
+        - 64*pow4(m3) + 41*pow4(mQ3)))/((mQ32 - mU32)*pow3(m32 - mQ32)) - (4*
+        pow4(m3)*(-34*m32*mQ32 + pow4(m3) + 17*pow4(mQ3)))/pow4(m32 - mQ32) + (
+        8*pow3(Xt)*(4*(31*m3*(mQ32 + mU32) - 64*pow3(m3)) + (m3*(2*m32 - mQ32 -
+        mU32)*(-34*m32*mQ32 + pow4(m3) + 17*pow4(mQ3)))/pow2(m32 - mQ32) + (2*
+        m3*(mQ32 - mU32)*(m32*(mQ32 - 37*mU32) - 7*mQ32*mU32 + 18*pow4(m3) + 3*
+        pow4(mQ3) + 22*pow4(mU3)))/pow2(m32 - mU32)))/pow3(mQ32 - mU32) + (8*
+        m3*((16*mQ32*(-2*m32 + mQ32 + mU32))/(-m32 + mQ32) - ((mQ32 + mU32)*(
+        m32*(mQ32 - 37*mU32) - 7*mQ32*mU32 + 18*pow4(m3) + 3*pow4(mQ3) + 22*
+        pow4(mU3)))/pow2(m32 - mU32))*pow5(Xt))/pow4(mQ32 - mU32) + 8*Xt*(-((
+        m3*(m32*(mQ32 - 37*mU32) - 7*mQ32*mU32 + 18*pow4(m3) + 3*pow4(mQ3) +
+        22*pow4(mU3)))/((-mQ32 + mU32)*pow2(m32 - mU32))) - (8*(-48*mQ32*pow3(
+        m3) + 47*pow5(m3)))/((mQ32 - mU32)*pow2(m32 - mQ32)) + (2*(17*pow3(m3)*
+        pow4(mQ3) - 50*mQ32*pow5(m3) + pow7(m3)))/((mQ32 - mU32)*pow3(m32 -
+        mQ32))) + (-128*pow12(m3) + mU32*pow4(mQ3)*(mU32*pow4(mQ3) + 19*mQ32*
+        pow4(mU3) + 3*pow6(mQ3) - 23*pow6(mU3)) + pow6(m3)*(251*mU32*pow4(mQ3)
+        + 1025*mQ32*pow4(mU3) - 9*pow6(mQ3) + 13*pow6(mU3)) - 2*(451*mQ32*mU32
+        + 49*pow4(mQ3) + 140*pow4(mU3))*pow8(m3) + m32*mQ32*(-41*pow4(mQ3)*
+        pow4(mU3) - 41*mU32*pow6(mQ3) + 167*mQ32*pow6(mU3) + 9*pow8(mQ3) + 34*
+        pow8(mU3)) + pow4(m3)*(-417*pow4(mQ3)*pow4(mU3) + 151*mU32*pow6(mQ3) -
+        391*mQ32*pow6(mU3) - 20*pow8(mQ3) + 37*pow8(mU3)) + (294*mQ32 + 346*
+        mU32)*power10(m3))/((mQ32 - mU32)*pow2(m32 - mQ32)*pow3(m32 - mU32)) +
+        (2*pow2(Xt)*(-512*(4*mQ32 + 5*mU32)*pow12(m3) + 768*pow14(m3) + mU32*
+        pow2(mQ32 - mU32)*pow4(mQ3)*(4*mQ32*mU32 + 3*pow4(mQ3) + 23*pow4(mU3))
+        - 2*(3666*mU32*pow4(mQ3) + 2953*mQ32*pow4(mU3) + 241*pow6(mQ3) + 820*
+        pow6(mU3))*pow8(m3) + pow6(m3)*(8070*pow4(mQ3)*pow4(mU3) + 1412*mU32*
+        pow6(mQ3) + 1676*mQ32*pow6(mU3) - 9*pow8(mQ3) + 371*pow8(mU3)) + (6068*
+        mQ32*mU32 + 2342*pow4(mQ3) + 3110*pow4(mU3))*power10(m3) + m32*mQ32*(
+        592*pow4(mQ3)*pow6(mU3) - 50*mU32*pow8(mQ3) + 251*mQ32*pow8(mU3) + 9*
+        power10(mQ3) - 34*power10(mU3)) - pow4(m3)*(1720*pow4(mU3)*pow6(mQ3) +
+        3174*pow4(mQ3)*pow6(mU3) - 171*mU32*pow8(mQ3) - 172*mQ32*pow8(mU3) +
+        20*power10(mQ3) + 37*power10(mU3))))/(pow2(m32 - mQ32)*pow3(m32 - mU32)
+        *pow3(mQ32 - mU32)) + (pow4(Xt)*((588*mQ32 + 692*mU32)*pow12(m3) + (
+        2798*mU32*pow4(mQ3) + 7582*mQ32*pow4(mU3) - 374*pow6(mQ3) + 2794*pow6(
+        mU3))*pow8(m3) + pow6(m3)*(-5340*pow4(mQ3)*pow4(mU3) + 1174*mU32*pow6(
+        mQ3) - 7486*mQ32*pow6(mU3) + 251*pow8(mQ3) - 1399*pow8(mU3)) + mU32*
+        pow4(mQ3)*(-262*pow4(mQ3)*pow4(mU3) - 4*mU32*pow6(mQ3) + 4*mQ32*pow6(
+        mU3) - 3*pow8(mQ3) + 265*pow8(mU3)) - 4*(883*mQ32*mU32 + 139*pow4(mQ3)
+        + 578*pow4(mU3))*power10(m3) + pow4(m3)*(-1150*pow4(mU3)*pow6(mQ3) +
+        4832*pow4(mQ3)*pow6(mU3) - 857*mU32*pow8(mQ3) + 3318*mQ32*pow8(mU3) +
+        20*power10(mQ3) + 237*power10(mU3)) + m32*(-9*pow12(mQ3) + 346*pow6(
+        mQ3)*pow6(mU3) + 808*pow4(mU3)*pow8(mQ3) - 1939*pow4(mQ3)*pow8(mU3) +
+        32*mU32*power10(mQ3) - 518*mQ32*power10(mU3))))/(pow2(m32 - mQ32)*pow3(
+        m32 - mU32)*pow4(mQ32 - mU32))) - 2*log(Mst12/pow2(mU3))*((640*m32*
+        mQ32*mU32*pow6(Xt))/((m32 - mQ32)*(m32 - mU32)*pow4(mQ32 - mU32)) - 10*
+        log(Mst12/pow2(msq))*(4*m3*Xt*(-(m32/((m32 - mQ32)*(m32 - mU32))) + 2/(
+        mQ32 - mU32) + (6*msq2*(-2*mQ32 + msq2))/((mQ32 - mU32)*pow2(m32 -
+        mQ32)) + (6*msq2*(msq2 - 2*mU32))/((-mQ32 + mU32)*pow2(m32 - mU32))) +
+        (8*(-(m3*(mQ32 + mU32)) - (6*m3*msq2*(-2*mQ32 + msq2)*(mQ32 - mU32))/
+        pow2(m32 - mQ32) + (6*m3*msq2*(msq2 - 2*mU32)*(-mQ32 + mU32))/pow2(m32
+        - mU32) + ((mQ32 - mU32)*(-2*m3*mQ32*mU32 + (mQ32 + mU32)*pow3(m3)))/((
+        m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(mQ32 - mU32) - (3*msq2*(3*
+        m32*(msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)))/pow3(m32 - mU32) + (3*
+        msq2*(m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*pow4(m3)))/pow3(m32 - mQ32)
+        + (4*m3*(mQ32 + mU32)*((2*mQ32*mU32 - m32*(mQ32 + mU32))/((m32 - mQ32)*
+        (m32 - mU32)) + (6*msq2*(-2*mQ32 + msq2))/pow2(m32 - mQ32) + (6*msq2*(
+        msq2 - 2*mU32))/pow2(m32 - mU32))*pow5(Xt))/pow4(mQ32 - mU32) + (4*m32*
+        mQ32*mU32*(mQ32 + mU32) - 2*pow4(mQ3)*pow4(mU3) - pow4(m3)*(8*mQ32*mU32
+        + pow4(mQ3) + pow4(mU3)) + 2*(mQ32 + mU32)*pow6(m3))/(pow2(m32 - mQ32)*
+        pow2(m32 - mU32)) + 2*pow2(Xt)*((3*msq2*(mQ32*msq2 + m32*(-6*mQ32 + 3*
+        msq2) - 2*pow4(m3)))/((mQ32 - mU32)*pow3(m32 - mQ32)) + (3*msq2*(3*m32*
+        (msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)))/((-mQ32 + mU32)*pow3(m32 -
+        mU32)) + (-4*m32*mQ32*mU32*pow2(mQ32 + mU32) + 3*pow3(mQ32 + mU32)*
+        pow4(m3) + 2*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 2*(2*mQ32*mU32 + 3*
+        pow4(mQ3) + 3*pow4(mU3))*pow6(m3) + 2*(mQ32 + mU32)*pow8(m3))/(pow2(m32
+        - mQ32)*pow2(m32 - mU32)*pow2(mQ32 - mU32))) + pow4(Xt)*((4*m32)/pow3(
+        mQ32 - mU32) - (3*msq2*(mQ32 + mU32)*(3*m32*(msq2 - 2*mU32) + msq2*mU32
+        - 2*pow4(m3)))/(pow3(m32 - mU32)*pow3(-mQ32 + mU32)) + (3*msq2*(mQ32 +
+        mU32)*(m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*pow4(m3)))/(pow3(m32 -
+        mQ32)*pow3(mQ32 - mU32)) - ((mQ32 + mU32)*(-8*m32*mQ32*mU32*pow2(mQ32 +
+        mU32) + 4*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 2*(6*mQ32*mU32 + 5*pow4(
+        mQ3) + 5*pow4(mU3))*pow6(m3) + pow4(m3)*(19*mU32*pow4(mQ3) + 19*mQ32*
+        pow4(mU3) + 5*pow6(mQ3) + 5*pow6(mU3)) + 4*(mQ32 + mU32)*pow8(m3)))/(
+        pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(mQ32 - mU32)))) - (8*m3*Xt*(
+        mQ32*pow4(m3)*((30*msq2 + 677*mU32)*pow4(mQ3) + 5*(6*msq2 - 31*mU32)*
+        pow4(mU3) - 6*mQ32*(10*msq2*mU32 + 163*pow4(mU3)) + 408*pow6(mQ3)) +
+        pow6(m3)*(266*mU32*pow4(mQ3) + 469*mQ32*pow4(mU3) - 735*pow6(mQ3) + 16*
+        pow6(mU3)) + 2*(-153*mQ32*mU32 + 161*pow4(mQ3) - 8*pow4(mU3))*pow8(m3)
+        + pow4(mQ3)*(pow4(mQ3)*(-30*msq2*mU32 + 195*pow4(mU3)) + 10*mU32*pow6(
+        mQ3) + mQ32*(60*msq2*pow4(mU3) - 218*pow6(mU3)) - 30*msq2*pow6(mU3) -
+        3*pow8(mQ3)) + m32*mQ32*(223*pow4(mQ3)*pow4(mU3) - 586*mU32*pow6(mQ3) +
+        412*mQ32*pow6(mU3) + 2*pow8(mQ3) - 3*pow8(mU3))))/(pow2(mQ3)*pow2(m32 -
+        mQ32)*pow2(m32 - mU32)*pow2(mQ32 - mU32)) + (8*m3*pow5(Xt)*(2*pow6(m3)*
+        (10*mU32*pow4(mQ3) + 67*mQ32*pow4(mU3) + 69*pow6(mQ3) - 8*pow6(mU3)) -
+        2*mQ32*pow4(m3)*(3*(5*msq2 + 66*mU32)*pow4(mQ3) + 15*msq2*pow4(mU3) +
+        mQ32*(30*msq2*mU32 + 369*pow4(mU3)) + 74*pow6(mQ3) + 109*pow6(mU3)) +
+        16*(6*mQ32*mU32 + pow4(mQ3) + pow4(mU3))*pow8(m3) + m32*mQ32*(8*pow4(
+        mQ3)*(15*msq2*mU32 + 91*pow4(mU3)) + 246*mU32*pow6(mQ3) + 10*mQ32*(12*
+        msq2*pow4(mU3) + 67*pow6(mU3)) + 13*pow8(mQ3) + 3*pow8(mU3)) - 2*pow4(
+        mQ3)*(pow4(mQ3)*(15*msq2*mU32 + 71*pow4(mU3)) - 7*mU32*pow6(mQ3) +
+        mQ32*(30*msq2*pow4(mU3) + 212*pow6(mU3)) + 3*pow8(mQ3) + 3*(5*msq2*
+        pow6(mU3) + pow8(mU3)))))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(m32 - mU32)*
+        pow4(mQ32 - mU32)) + (16*m3*pow3(Xt)*(-(pow6(m3)*(650*mU32*pow4(mQ3) +
+        617*mQ32*pow4(mU3) + 293*pow6(mQ3) + 16*pow6(mU3))) + 2*mQ32*pow4(m3)*(
+        (15*msq2 + 509*mU32)*pow4(mQ3) + 539*mQ32*pow4(mU3) - 15*msq2*pow4(mU3)
+        + 114*pow6(mQ3) + 156*pow6(mU3)) + mU32*pow4(mQ3)*(5*(6*msq2 + 55*mU32)
+        *pow4(mQ3) + 191*mQ32*pow4(mU3) + 6*pow6(mQ3) - 6*(5*msq2*pow4(mU3) +
+        pow6(mU3))) + (233*mQ32*mU32 - 7*pow4(mQ3) + 16*pow4(mU3))*pow8(m3) -
+        m32*mQ32*(6*pow4(mQ3)*(20*msq2*mU32 + 143*pow4(mU3)) + 539*mU32*pow6(
+        mQ3) - 15*mQ32*(8*msq2*pow4(mU3) - 29*pow6(mU3)) + 3*pow8(mQ3) - 3*
+        pow8(mU3)) + 64*mQ32*power10(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(m32
+        - mU32)*pow3(mQ32 - mU32)) + (-2*pow14(m3)*(96*mQ32*mU32 + 33*pow4(mQ3)
+        - pow4(mU3)) + (mQ32 - mU32)*pow4(mU3)*pow6(mQ3)*(4*mU32*pow4(mQ3) +
+        30*msq2*pow4(mU3) + mQ32*(30*msq2*mU32 + 463*pow4(mU3)) + 3*pow6(mQ3))
+        + 2*pow12(m3)*(1503*mU32*pow4(mQ3) - 799*mQ32*pow4(mU3) + 99*pow6(mQ3)
+        - 35*pow6(mU3)) + 2*mQ32*mU32*pow6(m3)*(3*pow4(mQ3)*(95*msq2*mU32 + 44*
+        pow4(mU3)) - 3*(5*msq2 + 1554*mU32)*pow6(mQ3) + 15*msq2*pow6(mU3) +
+        mQ32*(-285*msq2*pow4(mU3) + 3004*pow6(mU3)) - 846*pow8(mQ3) + 452*pow8(
+        mU3)) - 2*(372*pow4(mQ3)*pow4(mU3) + 3448*mU32*pow6(mQ3) - 1948*mQ32*
+        pow6(mU3) + 99*pow8(mQ3) - 51*pow8(mU3))*power10(m3) + m32*mU32*pow4(
+        mQ3)*(2*(45*msq2*mU32 - 869*pow4(mU3))*pow6(mQ3) - 2*pow4(mQ3)*(135*
+        msq2*pow4(mU3) + 92*pow6(mU3)) - 41*mU32*pow8(mQ3) - 3*(30*msq2 + mU32)
+        *pow8(mU3) + 27*mQ32*(10*msq2*pow6(mU3) + 63*pow8(mU3)) + 9*power10(
+        mQ3)) + pow8(m3)*((-90*msq2*mU32 + 8421*pow4(mU3))*pow6(mQ3) - 6169*
+        pow4(mQ3)*pow6(mU3) + 5849*mU32*pow8(mQ3) + mQ32*(90*msq2*pow6(mU3) -
+        3013*pow8(mU3)) + 66*power10(mQ3) - 34*power10(mU3)) - mQ32*mU32*pow4(
+        m3)*(36*(5*msq2*mU32 - 118*pow4(mU3))*pow6(mQ3) + 3700*pow4(mQ3)*pow6(
+        mU3) - 3013*mU32*pow8(mQ3) - 4*mQ32*(45*msq2*pow6(mU3) - 499*pow8(mU3))
+        + 20*power10(mQ3) + 9*power10(mU3)))/((mQ32 - mU32)*pow2(mQ3)*pow2(mU3)
+        *pow3(-m32 + mQ32)*pow3(m32 - mU32)) - (pow4(Xt)*(2*pow14(m3)*(-817*
+        mU32*pow4(mQ3) + 719*mQ32*pow4(mU3) + 33*pow6(mQ3) + 65*pow6(mU3)) - 2*
+        pow12(m3)*(pow4(mQ3)*(-54*msq2*mU32 + 1024*pow4(mU3)) - 1038*mU32*pow6(
+        mQ3) + mQ32*(54*msq2*pow4(mU3) + 2072*pow6(mU3)) + 99*pow8(mQ3) + 227*
+        pow8(mU3)) + 2*pow4(mU3)*pow6(mQ3)*(3*(5*msq2*mU32 - 182*pow4(mU3))*
+        pow6(mQ3) + pow4(mQ3)*(39*msq2*pow4(mU3) - 710*pow6(mU3)) + mU32*pow8(
+        mQ3) + 3*(5*msq2 + mU32)*pow8(mU3) + mQ32*(-69*msq2*pow6(mU3) + 1169*
+        pow8(mU3)) + 3*power10(mQ3)) + mQ32*mU32*pow6(m3)*((-864*msq2*mU32 +
+        24692*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(-60*msq2*pow4(mU3) + 24556*
+        pow6(mU3)) + (-78*msq2 + 10593*mU32)*pow8(mQ3) + mQ32*(864*msq2*pow6(
+        mU3) - 9583*pow8(mU3)) + (138*msq2 - 2525*mU32)*pow8(mU3) + 1547*
+        power10(mQ3)) - 2*pow8(m3)*(33*pow12(mQ3) + 81*pow12(mU3) - 9*pow6(mQ3)
+        *(31*msq2*pow4(mU3) - 1542*pow6(mU3)) + (-207*msq2*mU32 + 4979*pow4(
+        mU3))*pow8(mQ3) + 3*mQ32*(39*msq2 - 725*mU32)*pow8(mU3) + pow4(mQ3)*(
+        369*msq2*pow6(mU3) + 5493*pow8(mU3)) + 1951*mU32*power10(mQ3)) - mQ32*
+        mU32*pow4(m3)*(67*pow12(mQ3) + 9*pow12(mU3) - 4*pow6(mQ3)*(252*msq2*
+        pow4(mU3) - 5125*pow6(mU3)) + (36*msq2*mU32 + 13231*pow4(mU3))*pow8(
+        mQ3) + pow4(mQ3)*(288*msq2*pow6(mU3) - 4415*pow8(mU3)) + 3528*mU32*
+        power10(mQ3) + mQ32*(684*msq2*pow8(mU3) - 7480*power10(mU3))) + 2*
+        power10(m3)*(-18*(9*msq2*mU32 - 101*pow4(mU3))*pow6(mQ3) + 8446*pow4(
+        mQ3)*pow6(mU3) + 967*mU32*pow8(mQ3) + mQ32*(162*msq2*pow6(mU3) + 427*
+        pow8(mU3)) + 99*power10(mQ3) + 243*power10(mU3)) + m32*mU32*pow4(mQ3)*(
+        18*pow12(mQ3) + pow6(mQ3)*(-324*msq2*pow4(mU3) + 7302*pow6(mU3)) + 5*(
+        18*msq2*mU32 + 703*pow4(mU3))*pow8(mQ3) - 36*pow4(mQ3)*(5*msq2*pow6(
+        mU3) - 57*pow8(mU3)) + mQ32*(324*msq2 - 7243*mU32)*pow8(mU3) - 91*mU32*
+        power10(mQ3) + 15*(6*msq2 + mU32)*power10(mU3))))/(pow2(mQ3)*pow2(mU3)*
+        pow3(-m32 + mQ32)*pow3(m32 - mU32)*pow4(mQ32 - mU32)) - (2*pow2(Xt)*(-
+        6*pow14(m3)*(31*mU32*pow4(mQ3) + 225*mQ32*pow4(mU3) + 11*pow6(mQ3) -
+        11*pow6(mU3)) - 2*(mQ32 - mU32)*pow6(mQ3)*pow6(mU3)*((15*msq2 - 463*
+        mU32)*pow4(mQ3) + mQ32*(-30*msq2*mU32 + 437*pow4(mU3)) + 3*pow6(mQ3) +
+        3*(5*msq2*pow4(mU3) + pow6(mU3))) + 2*pow12(m3)*(572*pow4(mQ3)*pow4(
+        mU3) + 1462*mU32*pow6(mQ3) + 2606*mQ32*pow6(mU3) + 99*pow8(mQ3) - 131*
+        pow8(mU3)) + m32*pow4(mQ3)*pow4(mU3)*(4*(45*msq2*mU32 + 551*pow4(mU3))*
+        pow6(mQ3) + 2420*pow4(mQ3)*pow6(mU3) - 45*(2*msq2 + 71*mU32)*pow8(mQ3)
+        + 15*(6*msq2 + mU32)*pow8(mU3) - 5*mQ32*(36*msq2*pow6(mU3) + 593*pow8(
+        mU3)) - 15*power10(mQ3)) + 2*pow8(m3)*(33*pow12(mQ3) - 49*pow12(mU3) +
+        135*(msq2 - 12*mU32)*pow4(mU3)*pow6(mQ3) + (-45*msq2*mU32 + 5897*pow4(
+        mU3))*pow8(mQ3) - 9*pow4(mQ3)*(15*msq2*pow6(mU3) - 683*pow8(mU3)) + 3*
+        mQ32*(15*msq2 + 784*mU32)*pow8(mU3) + 2600*mU32*power10(mQ3)) - 2*
+        power10(m3)*(1841*pow4(mU3)*pow6(mQ3) + 2727*pow4(mQ3)*pow6(mU3) +
+        3232*mU32*pow8(mQ3) + 3768*mQ32*pow8(mU3) + 99*power10(mQ3) - 147*
+        power10(mU3)) - mQ32*mU32*pow6(m3)*(-60*mU32*(msq2 + 18*mU32)*pow6(mQ3)
+        - 984*pow4(mQ3)*pow6(mU3) + (30*msq2 + 11903*mU32)*pow8(mQ3) - 30*msq2*
+        pow8(mU3) + mQ32*(60*msq2*pow6(mU3) + 10697*pow8(mU3)) + 1431*power10(
+        mQ3) + 1073*power10(mU3)) + mQ32*mU32*pow4(m3)*(9*pow12(mQ3) - 9*pow12(
+        mU3) - 8*pow6(mQ3)*(135*msq2*pow4(mU3) + 1157*pow6(mU3)) + (360*msq2*
+        mU32 + 6117*pow4(mU3))*pow8(mQ3) + pow4(mQ3)*(1080*msq2*pow6(mU3) +
+        5459*pow8(mU3)) + 3740*mU32*power10(mQ3) + mQ32*(-360*msq2*pow8(mU3) +
+        3156*power10(mU3)))))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(m32 -
+        mU32)*pow3(mQ32 - mU32)))))/3. - (8*log(Mst12/pow2(m3))*(64*m3*pow3(Xt)
+        *((4*pow4(m3))/((m32 - mQ32)*(m32 - mU32)*pow2(mQ3)*pow2(mU3)) - (3*(2
+        + (8*pow4(m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(
+        mU3)))/(3.*pow2(m32 - mQ32)*pow2(m32 - mU32))))/pow2(mQ32 - mU32)) + (
+        8*Xt*pow3(m3)*(-4*m32*mQ32*mU32*(28*mQ32 + 15*msq2 + 28*mU32) + 16*
+        pow4(m3)*(8*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) + 3*mQ32*mU32*(10*msq2*
+        mU32 + 10*mQ32*(msq2 + 3*mU32) + pow4(mQ3) + pow4(mU3)) - 16*(mQ32 +
+        mU32)*pow6(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)
+        ) - (16*pow3(m3)*pow5(Xt)*(-5*m32*mQ32*mU32*(23*mQ32 + 12*msq2 + 23*
+        mU32) + mQ32*mU32*(3*mU32*(10*msq2 + mU32) + mQ32*(30*msq2 + 101*mU32)
+        + 3*pow4(mQ3)) + pow4(m3)*(123*mQ32*mU32 - 8*pow4(mQ3) - 8*pow4(mU3)) +
+        8*(mQ32 + mU32)*pow6(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(
+        m32 - mU32)*pow2(mQ32 - mU32)) - (8*m32*pow2(Xt)*(-7*m32*mQ32*mU32*(
+        mQ32 + mU32) + 6*pow4(mQ3)*pow4(mU3) + pow4(m3)*(25*mQ32*mU32 + 17*
+        pow4(mQ3) + 17*pow4(mU3)) - 42*(mQ32 + mU32)*pow6(m3) + 33*pow8(m3)))/(
+        pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)) + 8*dilog(1 -
+        m32/pow2(mQ3))*((6*m3*(2*m32 - mQ32 - mU32)*pow3(Xt)*(2 + (8*pow4(m3)*(
+        -2*m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(mU3)))/(3.*pow2(
+        m32 - mQ32)*pow2(m32 - mU32))))/pow3(mQ32 - mU32) - (3*pow4(m3)*(2 + (
+        8*pow4(m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(mU3)))
+        /(3.*pow2(m32 - mQ32)*pow2(m32 - mU32))))/pow2(m32 - mQ32) + (16*(-2*
+        m32 + mQ32 + mU32)*pow3(m3)*pow5(Xt))/((m32 - mQ32)*(m32 - mU32)*pow3(
+        mQ32 - mU32)) - (128*pow2(Xt)*pow6(m3))/((m32 - mU32)*(mQ32 - mU32)*
+        pow2(m32 - mQ32)) + (8*Xt*pow3(m3)*(-6*m32*mQ32*mU32*(mQ32 + mU32) + 3*
+        pow4(mQ3)*pow4(mU3) + pow4(m3)*(8*mQ32*mU32 + 7*pow4(mQ3) + 11*pow4(
+        mU3)) - 2*(5*mQ32 + 9*mU32)*pow6(m3) + 11*pow8(m3)))/((mQ32 - mU32)*
+        pow2(m32 - mU32)*pow3(m32 - mQ32)) - ((2*m32 - mQ32 - mU32)*pow4(Xt)*(
+        6*m32*mQ32*mU32*(mQ32 + mU32) + pow4(m3)*(52*mQ32*mU32 - 7*pow4(mQ3) -
+        7*pow4(mU3)) - 3*pow4(mQ3)*pow4(mU3) - 50*(mQ32 + mU32)*pow6(m3) + 53*
+        pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32))) + 8*
+        dilog(1 - m32/pow2(mU3))*((6*m3*(-2*m32 + mQ32 + mU32)*pow3(Xt)*(2 + (
+        8*pow4(m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(mU3)))
+        /(3.*pow2(m32 - mQ32)*pow2(m32 - mU32))))/pow3(mQ32 - mU32) - (3*pow4(
+        m3)*(2 + (8*pow4(m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) +
+        pow4(mU3)))/(3.*pow2(m32 - mQ32)*pow2(m32 - mU32))))/pow2(m32 - mU32) -
+        (16*(-2*m32 + mQ32 + mU32)*pow3(m3)*pow5(Xt))/((m32 - mQ32)*(m32 -
+        mU32)*pow3(mQ32 - mU32)) + (128*pow2(Xt)*pow6(m3))/((m32 - mQ32)*(mQ32
+        - mU32)*pow2(m32 - mU32)) - (8*Xt*pow3(m3)*(-6*m32*mQ32*mU32*(mQ32 +
+        mU32) + 3*pow4(mQ3)*pow4(mU3) + pow4(m3)*(8*mQ32*mU32 + 11*pow4(mQ3) +
+        7*pow4(mU3)) - 2*(9*mQ32 + 5*mU32)*pow6(m3) + 11*pow8(m3)))/((mQ32 -
+        mU32)*pow2(m32 - mQ32)*pow3(m32 - mU32)) + ((2*m32 - mQ32 - mU32)*pow4(
+        Xt)*(6*m32*mQ32*mU32*(mQ32 + mU32) + pow4(m3)*(52*mQ32*mU32 - 7*pow4(
+        mQ3) - 7*pow4(mU3)) - 3*pow4(mQ3)*pow4(mU3) - 50*(mQ32 + mU32)*pow6(m3)
+        + 53*pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32)))
+        - (2*pow4(Xt)*(66*(mQ32 + mU32)*pow14(m3) - 2*pow12(m3)*(-938*mQ32*mU32
+        + 75*pow4(mQ3) + 75*pow4(mU3)) + m32*pow4(mQ3)*pow4(mU3)*((30*msq2 -
+        559*mU32)*pow4(mQ3) - 559*mQ32*pow4(mU3) + 3*(10*msq2 + mU32)*pow4(mU3)
+        + 3*pow6(mQ3)) - 5*mQ32*mU32*pow6(m3)*((54*msq2 + 1129*mU32)*pow4(mQ3)
+        + 54*msq2*pow4(mU3) + mQ32*(-36*msq2*mU32 + 1129*pow4(mU3)) + 93*pow6(
+        mQ3) + 93*pow6(mU3)) + mQ32*mU32*pow4(m3)*(pow4(mQ3)*(-90*msq2*mU32 +
+        3522*pow4(mU3)) + 10*(9*msq2 + 85*mU32)*pow6(mQ3) + 9*(10*msq2 + mU32)*
+        pow6(mU3) + mQ32*(-90*msq2*pow4(mU3) + 850*pow6(mU3)) + 9*pow8(mQ3)) +
+        pow8(m3)*(12*pow4(mQ3)*(20*msq2*mU32 + 747*pow4(mU3)) + 2756*mU32*pow6(
+        mQ3) + 4*mQ32*(60*msq2*pow4(mU3) + 689*pow6(mU3)) - 34*pow8(mQ3) - 34*
+        pow8(mU3)) + 120*pow8(mQ3)*pow8(mU3) + 2*(-2095*mU32*pow4(mQ3) - 5*
+        mQ32*(18*msq2*mU32 + 419*pow4(mU3)) + 59*pow6(mQ3) + 59*pow6(mU3))*
+        power10(m3)))/(pow2(mQ3)*pow2(mU3)*pow2(mQ32 - mU32)*pow3(-m32 + mQ32)*
+        pow3(m32 - mU32)) + (-132*(mQ32 + mU32)*pow14(m3) + 4*pow12(m3)*(334*
+        mQ32*mU32 + 75*pow4(mQ3) + 75*pow4(mU3)) + 3*m32*pow4(mQ3)*pow4(mU3)*((
+        10*msq2 - 171*mU32)*pow4(mQ3) - 171*mQ32*pow4(mU3) + 10*msq2*pow4(mU3)
+        + pow6(mQ3) + pow6(mU3)) - mQ32*mU32*pow6(m3)*(5*(54*msq2 + 757*mU32)*
+        pow4(mQ3) - 5*mQ32*(36*msq2*mU32 - 757*pow4(mU3)) + 270*msq2*pow4(mU3)
+        + 519*pow6(mQ3) + 519*pow6(mU3)) + mQ32*mU32*pow4(m3)*(pow4(mQ3)*(-90*
+        msq2*mU32 + 2470*pow4(mU3)) + 10*(9*msq2 + 86*mU32)*pow6(mQ3) + 9*(10*
+        msq2 + mU32)*pow6(mU3) + mQ32*(-90*msq2*pow4(mU3) + 860*pow6(mU3)) + 9*
+        pow8(mQ3)) + 96*pow8(mQ3)*pow8(mU3) + 4*pow8(m3)*(2*pow4(mQ3)*(30*msq2*
+        mU32 + 679*pow4(mU3)) + 504*mU32*pow6(mQ3) + 12*mQ32*(5*msq2*pow4(mU3)
+        + 42*pow6(mU3)) + 17*pow8(mQ3) + 17*pow8(mU3)) - 2*(1369*mU32*pow4(mQ3)
+        + mQ32*(90*msq2*mU32 + 1369*pow4(mU3)) + 118*pow6(mQ3) + 118*pow6(mU3))
+        *power10(m3))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(m32 - mU32))
+        - (20*log(Mst12/pow2(msq))*((2*(-m32 + mQ32 + mU32)*pow2(m32 - mU32)*
+        pow2(Xt)*pow4(m3))/((-m32 + mQ32)*pow2(mQ3)*pow2(mU3)) - (12*(m32 -
+        mU32)*Xt*(-2*mQ32*mU32*pow3(m3) + (mQ32 + mU32)*pow5(m3)))/pow2(m32 -
+        mQ32) + (4*(m32 - mU32)*pow5(Xt)*(-11*mQ32*mU32*pow3(m3) + 5*(mQ32 +
+        mU32)*pow5(m3) + pow7(m3)))/(pow2(m32 - mQ32)*pow2(mQ32 - mU32)) + (
+        pow4(m3)*(8*pow4(mQ3)*pow4(mU3)*(pow4(mQ3) + pow4(mU3)) - m32*mQ32*
+        mU32*(24*mU32*pow4(mQ3) + 24*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) +
+        pow6(m3)*(-11*mU32*pow4(mQ3) - 11*mQ32*pow4(mU3) + 3*pow6(mQ3) + 3*
+        pow6(mU3)) + (2*mQ32*mU32 - 3*pow4(mQ3) - 3*pow4(mU3))*pow8(m3) - pow4(
+        m3)*(-48*pow4(mQ3)*pow4(mU3) - 3*mU32*pow6(mQ3) - 3*mQ32*pow6(mU3) +
+        pow8(mQ3) + pow8(mU3)) + (mQ32 + mU32)*power10(m3)))/(pow2(mQ3)*pow2(
+        mU3)*pow3(-m32 + mQ32)) + (m32*pow4(Xt)*((mQ32 + mU32)*pow12(m3) + (
+        mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + (32*mU32*pow4(mQ3) + 32*mQ32*pow4(
+        mU3) + 3*pow6(mQ3) + 3*pow6(mU3))*pow8(m3) - pow6(m3)*(102*pow4(mQ3)*
+        pow4(mU3) + 16*mU32*pow6(mQ3) + 16*mQ32*pow6(mU3) + pow8(mQ3) + pow8(
+        mU3)) + pow4(m3)*(54*pow4(mU3)*pow6(mQ3) + 54*pow4(mQ3)*pow6(mU3) + 5*
+        mU32*pow8(mQ3) + 5*mQ32*pow8(mU3)) - m32*(6*pow6(mQ3)*pow6(mU3) + 17*
+        pow4(mU3)*pow8(mQ3) + 17*pow4(mQ3)*pow8(mU3)) - (10*mQ32*mU32 + 3*pow4(
+        mQ3) + 3*pow4(mU3))*power10(m3)))/(pow2(mQ3)*pow2(mU3)*pow2(mQ32 -
+        mU32)*pow3(-m32 + mQ32))))/pow3(m32 - mU32) - (log(Mst12/pow2(mU3))*((-
+        640*mU32*pow2(m32 - mU32)*pow4(m3)*pow6(Xt))/((m32 - mQ32)*pow3(mQ32 -
+        mU32)) - (20*(m32 - mU32)*log(Mst12/pow2(msq))*((2*(m32 - mQ32)*(m32 -
+        mU32)*Xt*pow3(m3)*(-3*(mQ32 + mU32)*pow4(m3) - 13*mU32*pow4(mQ3) + m32*
+        (4*mQ32*mU32 + 7*pow4(mQ3) - 5*pow4(mU3)) + 11*mQ32*pow4(mU3) + 2*pow6(
+        m3)))/(mQ32 - mU32) + (2*(m32 - mQ32)*(m32 - mU32)*(mQ32 + mU32)*pow5(
+        Xt)*(-11*mQ32*mU32*pow3(m3) + 5*(mQ32 + mU32)*pow5(m3) + pow7(m3)))/
+        pow3(mQ32 - mU32) + (4*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*pow3(Xt)*(-
+        20*pow4(mQ3)*pow4(mU3) + pow4(m3)*(10*mQ32*mU32 + pow4(mQ3) + pow4(mU3)
+        ) - 4*(mQ32 + mU32)*pow6(m3) + 11*mU32*pow6(mQ3) + m32*(mU32*pow4(mQ3)
+        + mQ32*pow4(mU3) - 5*pow6(mQ3) - 5*pow6(mU3)) + 11*mQ32*pow6(mU3) + 2*
+        pow8(m3)))/pow3(mQ32 - mU32) - (2*pow2(Xt)*pow4(m3)*(7*mQ32*mU32*(pow4(
+        mQ3) + pow4(mU3)) + 3*pow4(m3)*(14*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) -
+        10*(mQ32 + mU32)*pow6(m3) - m32*(21*mU32*pow4(mQ3) + 21*mQ32*pow4(mU3)
+        + pow6(mQ3) + pow6(mU3)) + 2*pow8(m3)))/(mQ32 - mU32) + ((mQ32 + mU32)*
+        pow4(m3)*pow4(Xt)*(7*mQ32*mU32*(pow4(mQ3) + pow4(mU3)) + 3*pow4(m3)*(
+        14*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 10*(mQ32 + mU32)*pow6(m3) -
+        m32*(21*mU32*pow4(mQ3) + 21*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) +
+        2*pow8(m3)))/pow3(mQ32 - mU32) + pow4(m3)*(3*pow4(m3)*(15*mQ32*mU32 +
+        2*pow4(mQ3) + pow4(mU3)) - (13*mQ32 + 11*mU32)*pow6(m3) + 8*mU32*pow6(
+        mQ3) + 7*mQ32*pow6(mU3) - m32*(24*mU32*pow4(mQ3) + 21*mQ32*pow4(mU3) +
+        2*pow6(mQ3) + pow6(mU3)) + 3*pow8(m3))))/pow3(m32 - mQ32) + (8*(m32 -
+        mU32)*Xt*(4*(mQ32 + 4*mU32)*pow11(m3) - 12*m3*pow6(mQ3)*pow6(mU3) +
+        mQ32*pow5(m3)*(-2*(15*msq2 + 34*mU32)*pow4(mQ3) + 90*msq2*pow4(mU3) +
+        mQ32*(-60*msq2*mU32 + 111*pow4(mU3)) - 3*pow6(mQ3) + 86*pow6(mU3)) +
+        mQ32*mU32*pow3(m3)*((30*msq2 + 37*mU32)*pow4(mQ3) - 35*mQ32*pow4(mU3) +
+        3*pow6(mQ3) - 3*(10*msq2*pow4(mU3) + pow6(mU3))) + (2*(30*msq2 - 53*
+        mU32)*pow4(mQ3) - mQ32*(60*msq2*mU32 + 223*pow4(mU3)) + 123*pow6(mQ3) +
+        16*pow6(mU3))*pow7(m3) - 2*(-108*mQ32*mU32 + 65*pow4(mQ3) + 16*pow4(
+        mU3))*pow9(m3)))/((mQ32 - mU32)*pow2(-(m32*mQ3) + pow3(mQ3))) + (8*(m32
+        - mU32)*pow5(Xt)*(4*(13*mQ32 + 4*mU32)*pow11(m3) + mQ32*mU32*pow3(m3)*(
+        3*(10*msq2 + 71*mU32)*pow4(mQ3) + 3*(10*msq2 + mU32)*pow4(mU3) + mQ32*(
+        60*msq2*mU32 + 179*pow4(mU3)) + 3*pow6(mQ3)) + 12*m3*pow6(mQ3)*pow6(
+        mU3) - mQ32*pow5(m3)*((30*msq2 + 407*mU32)*pow4(mQ3) + 90*msq2*pow4(
+        mU3) + mQ32*(120*msq2*mU32 + 737*pow4(mU3)) + 3*pow6(mQ3) + 219*pow6(
+        mU3)) + 2*(5*(6*msq2 + 77*mU32)*pow4(mQ3) + 3*mQ32*(10*msq2*mU32 + 93*
+        pow4(mU3)) + 107*pow6(mQ3) + 8*pow6(mU3))*pow7(m3) - 2*(181*mQ32*mU32 +
+        138*pow4(mQ3) + 16*pow4(mU3))*pow9(m3)))/(pow2(-(m32*mQ3) + pow3(mQ3))*
+        pow3(mQ32 - mU32)) - (16*m3*pow2(m32 - mU32)*pow3(Xt)*(6*(mQ32 + 3*
+        mU32)*pow4(mU3)*pow6(mQ3) - pow6(m3)*(-238*mU32*pow4(mQ3) + 217*mQ32*
+        pow4(mU3) + 193*pow6(mQ3) + 16*pow6(mU3)) + mQ32*pow4(m3)*((60*msq2 -
+        85*mU32)*pow4(mQ3) + 60*msq2*pow4(mU3) - mQ32*(120*msq2*mU32 + 17*pow4(
+        mU3)) + 153*pow6(mQ3) + 165*pow6(mU3)) + 2*(3*mQ32*mU32 + 5*pow4(mQ3) +
+        8*pow4(mU3))*pow8(m3) - m32*mQ32*(-2*pow4(mQ3)*(15*msq2*mU32 + 53*pow4(
+        mU3)) + (30*msq2 + 91*mU32)*pow6(mQ3) - 5*mQ32*(6*msq2*pow4(mU3) - 23*
+        pow6(mU3)) + 3*(10*msq2 + mU32)*pow6(mU3) + 3*pow8(mQ3)) + 22*mQ32*
+        power10(m3)))/(pow2(-(m32*mQ3) + pow3(mQ3))*pow3(mQ32 - mU32)) + (2*(
+        m32 - mU32)*pow2(Xt)*(-2*(mQ32 - mU32)*pow14(m3) + 2*pow12(m3)*(736*
+        mQ32*mU32 + 3*pow4(mQ3) - 35*pow4(mU3)) - mQ32*mU32*pow6(m3)*(9*(30*
+        msq2 + 443*mU32)*pow4(mQ3) - 9*mQ32*(20*msq2*mU32 - 391*pow4(mU3)) + 5*
+        (54*msq2 + 79*mU32)*pow4(mU3) + 587*pow6(mQ3)) + 3*m32*pow4(mQ3)*pow4(
+        mU3)*((10*msq2 - 171*mU32)*pow4(mQ3) - 163*mQ32*pow4(mU3) + 10*msq2*
+        pow4(mU3) + pow6(mQ3) + pow6(mU3)) + mQ32*mU32*pow4(m3)*(-90*(msq2 -
+        27*mU32)*mU32*pow4(mQ3) + 10*(9*msq2 + 85*mU32)*pow6(mQ3) + 9*(10*msq2
+        + mU32)*pow6(mU3) + mQ32*(-90*msq2*pow4(mU3) + 734*pow6(mU3)) + 9*pow8(
+        mQ3)) + 2*pow8(m3)*(8*pow4(mQ3)*(15*msq2*mU32 + 356*pow4(mU3)) + 1218*
+        mU32*pow6(mQ3) + 6*mQ32*(20*msq2*pow4(mU3) + 141*pow6(mU3)) + pow8(mQ3)
+        - 17*pow8(mU3)) + 96*pow8(mQ3)*pow8(mU3) - 2*(1640*mU32*pow4(mQ3) + 10*
+        mQ32*(9*msq2*mU32 + 133*pow4(mU3)) + 3*pow6(mQ3) - 51*pow6(mU3))*
+        power10(m3)))/((mQ32 - mU32)*pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)) + (
+        pow4(Xt)*(2*pow16(m3)*(40*mQ32*mU32 + pow4(mQ3) - pow4(mU3)) - 2*pow14(
+        m3)*(1076*mU32*pow4(mQ3) + 1589*mQ32*pow4(mU3) + 3*pow6(mQ3) - 36*pow6(
+        mU3)) + m32*pow4(mQ3)*pow6(mU3)*(6*pow4(mQ3)*(5*msq2*mU32 - 267*pow4(
+        mU3)) + (30*msq2 - 616*mU32)*pow6(mQ3) + mQ32*(30*msq2*pow4(mU3) - 884*
+        pow6(mU3)) + 3*(10*msq2 + mU32)*pow6(mU3) + 3*pow8(mQ3)) + 2*pow12(m3)*
+        (pow4(mQ3)*(90*msq2*mU32 + 6481*pow4(mU3)) + 2203*mU32*pow6(mQ3) + 5*
+        mQ32*(18*msq2*pow4(mU3) + 911*pow6(mU3)) + 3*pow8(mQ3) - 86*pow8(mU3))
+        + mQ32*pow4(m3)*pow4(mU3)*((-30*msq2*mU32 + 5474*pow4(mU3))*pow6(mQ3) -
+        30*pow4(mQ3)*(7*msq2*pow4(mU3) - 220*pow6(mU3)) + (60*msq2 + 1723*mU32)
+        *pow8(mQ3) + 9*(10*msq2 + mU32)*pow8(mU3) + mQ32*(-30*msq2*pow6(mU3) +
+        1268*pow8(mU3)) + 6*power10(mQ3)) - mQ32*mU32*pow6(m3)*(2*(135*msq2*
+        mU32 + 5431*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(-90*msq2*pow4(mU3) +
+        18070*pow6(mU3)) + 2*(45*msq2 + 914*mU32)*pow8(mQ3) + 18*(20*msq2 + 39*
+        mU32)*pow8(mU3) + mQ32*(90*msq2*pow6(mU3) + 9553*pow8(mU3)) + 9*
+        power10(mQ3)) - 2*power10(m3)*(2*(60*msq2*mU32 + 4397*pow4(mU3))*pow6(
+        mQ3) + 6*pow4(mQ3)*(55*msq2*pow4(mU3) + 2132*pow6(mU3)) + 1498*mU32*
+        pow8(mQ3) + 7*mQ32*(30*msq2*pow6(mU3) + 709*pow8(mU3)) + power10(mQ3) -
+        68*power10(mU3)) + mU32*pow8(m3)*(6*(55*msq2*mU32 + 4273*pow4(mU3))*
+        pow6(mQ3) + 190*pow4(mQ3)*(3*msq2*pow4(mU3) + 121*pow6(mU3)) + (270*
+        msq2 + 9676*mU32)*pow8(mQ3) + mQ32*(510*msq2*pow6(mU3) + 4623*pow8(mU3)
+        ) + 643*power10(mQ3) - 34*power10(mU3)) + 48*(2*mQ32 + 5*mU32)*pow8(
+        mQ3)*power10(mU3)))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(mQ32 -
+        mU32)) - (-2*pow16(m3)*(-64*mQ32*mU32 + pow4(mQ3) - pow4(mU3)) + 2*
+        pow14(m3)*(380*mU32*pow4(mQ3) - 731*mQ32*pow4(mU3) + 3*pow6(mQ3) - 36*
+        pow6(mU3)) - 3*m32*(mQ32 - mU32)*pow4(mQ3)*pow6(mU3)*((10*msq2 - 179*
+        mU32)*pow4(mQ3) - 151*mQ32*pow4(mU3) + 10*msq2*pow4(mU3) + pow6(mQ3) +
+        pow6(mU3)) - 2*pow12(m3)*(5*pow4(mQ3)*(18*msq2*mU32 - 61*pow4(mU3)) +
+        1094*mU32*pow6(mQ3) - 2*mQ32*(45*msq2*pow4(mU3) + 833*pow6(mU3)) + 3*
+        pow8(mQ3) - 86*pow8(mU3)) + mQ32*pow4(m3)*pow4(mU3)*(2*(75*msq2*mU32 -
+        761*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(30*msq2*pow4(mU3) + 2026*pow6(
+        mU3)) - (60*msq2 + 1019*mU32)*pow8(mQ3) + 9*(10*msq2 + mU32)*pow8(mU3)
+        + mQ32*(-210*msq2*pow6(mU3) + 640*pow8(mU3)) - 6*power10(mQ3)) + mQ32*
+        mU32*pow6(m3)*((90*msq2*mU32 + 3698*pow4(mU3))*pow6(mQ3) - 2*pow4(mQ3)*
+        (225*msq2*pow4(mU3) + 841*pow6(mU3)) + 18*(5*msq2 + 54*mU32)*pow8(mQ3)
+        + 63*mQ32*(10*msq2*pow6(mU3) - 53*pow8(mU3)) - 6*(60*msq2 + 71*mU32)*
+        pow8(mU3) + 9*power10(mQ3)) + 2*power10(m3)*(20*(6*msq2*mU32 + 77*pow4(
+        mU3))*pow6(mQ3) + pow4(mQ3)*(90*msq2*pow4(mU3) - 1817*pow6(mU3)) + 951*
+        mU32*pow8(mQ3) - 3*mQ32*(70*msq2*pow6(mU3) + 629*pow8(mU3)) + power10(
+        mQ3) - 68*power10(mU3)) + 84*(-mQ32 + mU32)*pow8(mQ3)*power10(mU3) +
+        mU32*pow8(m3)*(6*(35*msq2*mU32 - 267*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(
+        -450*msq2*pow4(mU3) + 5506*pow6(mU3)) - 18*(15*msq2 + 196*mU32)*pow8(
+        mQ3) + 17*mQ32*(30*msq2*pow6(mU3) + 121*pow8(mU3)) - 547*power10(mQ3) +
+        34*power10(mU3)))/((mQ32 - mU32)*pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32))
+        ))/pow4(m32 - mU32) + (2*pow2(log(Mst12/pow2(mU3)))*(-160*mU32*(mQ32 +
+        mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(m3)*pow6(Xt) - 2*(m32 -
+        mQ32)*(m32 - mU32)*Xt*pow3(mQ32 - mU32)*(18*pow11(m3) - 12*m3*pow4(mQ3)
+        *pow6(mU3) + pow5(m3)*(168*mU32*pow4(mQ3) + 263*mQ32*pow4(mU3) + 13*
+        pow6(mU3)) - pow3(m3)*(87*pow4(mQ3)*pow4(mU3) + 11*mQ32*pow6(mU3)) + (-
+        425*mQ32*mU32 + 27*pow4(mQ3) - 130*pow4(mU3))*pow7(m3) + (-19*mQ32 +
+        195*mU32)*pow9(m3)) + 2*m3*(m32 - mQ32)*(m32 - mU32)*pow5(Xt)*(12*(mQ32
+        + mU32)*pow4(mQ3)*pow6(mU3) + pow6(m3)*(508*mU32*pow4(mQ3) + 585*mQ32*
+        pow4(mU3) + 75*pow6(mQ3) + 216*pow6(mU3)) - (392*mQ32*mU32 + 169*pow4(
+        mQ3) + 159*pow4(mU3))*pow8(m3) - pow4(m3)*(535*pow4(mQ3)*pow4(mU3) +
+        148*mU32*pow6(mQ3) + 384*mQ32*pow6(mU3) + 61*pow8(mU3)) + m32*(93*pow4(
+        mU3)*pow6(mQ3) + 152*pow4(mQ3)*pow6(mU3) + 59*mQ32*pow8(mU3)) + 4*(25*
+        mQ32 + 9*mU32)*power10(m3)) - 4*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 -
+        mU32)*pow3(Xt)*(42*pow12(m3) + pow6(m3)*(214*mU32*pow4(mQ3) - 67*mQ32*
+        pow4(mU3) + 45*pow6(mQ3) - 252*pow6(mU3)) + 18*pow6(mQ3)*pow6(mU3) + (-
+        44*mQ32*mU32 - 67*pow4(mQ3) + 239*pow4(mU3))*pow8(m3) - 6*pow4(mQ3)*
+        pow8(mU3) + pow4(m3)*(-195*pow4(mQ3)*pow4(mU3) - 90*mU32*pow6(mQ3) +
+        268*mQ32*pow6(mU3) + 59*pow8(mU3)) + m32*(59*pow4(mU3)*pow6(mQ3) - 42*
+        pow4(mQ3)*pow6(mU3) - 55*mQ32*pow8(mU3)) - 6*(mQ32 + 20*mU32)*power10(
+        m3)) + pow3(mQ32 - mU32)*((139*mQ32 + 245*mU32)*pow14(m3) - 64*pow16(
+        m3) - 3*pow12(m3)*(211*mQ32*mU32 + 29*pow4(mQ3) + 80*pow4(mU3)) + mQ32*
+        pow4(m3)*pow4(mU3)*(80*mU32*pow4(mQ3) - 101*mQ32*pow4(mU3) + 2*pow6(
+        mQ3) - 45*pow6(mU3)) + 12*m32*pow4(mQ3)*(mQ32*mU32 - 4*pow4(mQ3) + 3*
+        pow4(mU3))*pow6(mU3) + 2*pow8(m3)*(-200*pow4(mQ3)*pow4(mU3) - 158*mU32*
+        pow6(mQ3) - 81*mQ32*pow6(mU3) + 14*pow8(mQ3) - 55*pow8(mU3)) + 12*(mQ32
+        - mU32)*pow6(mQ3)*pow8(mU3) + mU32*pow6(m3)*(20*pow4(mQ3)*pow4(mU3) +
+        146*mU32*pow6(mQ3) + 157*mQ32*pow6(mU3) + 34*pow8(mQ3) + 27*pow8(mU3))
+        + (700*mU32*pow4(mQ3) + 432*mQ32*pow4(mU3) - 22*pow6(mQ3) + 170*pow6(
+        mU3))*power10(m3)) - 2*pow2(mQ32 - mU32)*pow2(Xt)*((54*mQ32 + 502*mU32)
+        *pow14(m3) - 64*pow16(m3) + pow12(m3)*(-962*mQ32*mU32 + 72*pow4(mQ3) -
+        954*pow4(mU3)) + mQ32*pow4(m3)*pow4(mU3)*(-61*mU32*pow4(mQ3) - 325*
+        mQ32*pow4(mU3) + 7*pow6(mQ3) - 97*pow6(mU3)) + 12*m32*pow4(mQ3)*(5*
+        mQ32*mU32 - 4*pow4(mQ3) + 6*pow4(mU3))*pow6(mU3) + pow8(m3)*(-1199*
+        pow4(mQ3)*pow4(mU3) - 79*mU32*pow6(mQ3) - 1401*mQ32*pow6(mU3) + pow8(
+        mQ3) - 302*pow8(mU3)) + 12*(mQ32 - 2*mU32)*pow6(mQ3)*pow8(mU3) + mU32*
+        pow6(m3)*(811*pow4(mQ3)*pow4(mU3) + 189*mU32*pow6(mQ3) + 525*mQ32*pow6(
+        mU3) + 24*pow8(mQ3) + 55*pow8(mU3)) + (545*mU32*pow4(mQ3) + 1897*mQ32*
+        pow4(mU3) - 69*pow6(mQ3) + 759*pow6(mU3))*power10(m3)) + pow4(Xt)*(4*(
+        37*mQ32 - 197*mU32)*pow16(m3) - 4*pow14(m3)*(-449*mQ32*mU32 + 84*pow4(
+        mQ3) - 639*pow4(mU3)) + 2*pow12(m3)*(-393*mU32*pow4(mQ3) - 3683*mQ32*
+        pow4(mU3) + 97*pow6(mQ3) - 1309*pow6(mU3)) + 6*m32*pow4(mQ3)*pow6(mU3)*
+        (15*mU32*pow4(mQ3) + 30*mQ32*pow4(mU3) - 4*pow6(mQ3) + 15*pow6(mU3)) +
+        6*(-4*mQ32*mU32 + pow4(mQ3) - 5*pow4(mU3))*pow6(mQ3)*pow8(mU3) - mQ32*
+        pow4(m3)*pow4(mU3)*(1612*pow4(mQ3)*pow4(mU3) - 234*mU32*pow6(mQ3) +
+        238*mQ32*pow6(mU3) + 37*pow8(mQ3) + 123*pow8(mU3)) + (6232*pow4(mQ3)*
+        pow4(mU3) - 452*mU32*pow6(mQ3) + 8472*mQ32*pow6(mU3) + pow8(mQ3) + 835*
+        pow8(mU3))*power10(m3) - pow8(m3)*(936*pow4(mU3)*pow6(mQ3) + 8712*pow4(
+        mQ3)*pow6(mU3) - 190*mU32*pow8(mQ3) + 3031*mQ32*pow8(mU3) + 13*power10(
+        mQ3) + 58*power10(mU3)) + mU32*pow6(m3)*(2648*pow4(mU3)*pow6(mQ3) +
+        3742*pow4(mQ3)*pow6(mU3) - 479*mU32*pow8(mQ3) + 116*mQ32*pow8(mU3) +
+        64*power10(mQ3) + 69*power10(mU3)))))/(pow3(m32 - mQ32)*pow4(m32 -
+        mU32)*pow4(mQ32 - mU32)) + (2*pow2(log(Mst12/pow2(mQ3)))*(-160*mQ32*(
+        mQ32 + mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(m3)*pow6(Xt) + 2*(
+        m32 - mQ32)*(m32 - mU32)*Xt*pow3(mQ32 - mU32)*(306*pow11(m3) + 12*m3*
+        pow4(mU3)*pow6(mQ3) - pow5(m3)*(553*mU32*pow4(mQ3) + 108*mQ32*pow4(mU3)
+        + 119*pow6(mQ3)) + pow3(m3)*(33*pow4(mQ3)*pow4(mU3) + 133*mU32*pow6(
+        mQ3)) + (703*mQ32*mU32 + 458*pow4(mQ3) + 159*pow4(mU3))*pow7(m3) - (
+        549*mQ32 + 475*mU32)*pow9(m3)) + 2*m3*(m32 - mQ32)*(m32 - mU32)*pow5(
+        Xt)*(12*(mQ32 + mU32)*pow4(mU3)*pow6(mQ3) + pow6(m3)*(461*mU32*pow4(
+        mQ3) + 752*mQ32*pow4(mU3) - 92*pow6(mQ3) + 263*pow6(mU3)) - (328*mQ32*
+        mU32 + 103*pow4(mQ3) + 289*pow4(mU3))*pow8(m3) + pow4(m3)*(-659*pow4(
+        mQ3)*pow4(mU3) - 68*mU32*pow6(mQ3) - 528*mQ32*pow6(mU3) + 127*pow8(mQ3)
+        ) - 19*m32*(-8*pow4(mU3)*pow6(mQ3) - 15*pow4(mQ3)*pow6(mU3) + 7*mU32*
+        pow8(mQ3)) + 4*(25*mQ32 + 9*mU32)*power10(m3)) + 4*m3*(m32 - mQ32)*(m32
+        - mU32)*(mQ32 - mU32)*pow3(Xt)*(426*pow12(m3) + 6*(-3*mQ32 + mU32)*
+        pow4(mU3)*pow6(mQ3) - 3*pow6(m3)*(913*mU32*pow4(mQ3) + 270*mQ32*pow4(
+        mU3) + 60*pow6(mQ3) - 87*pow6(mU3)) + (2472*mQ32*mU32 + 1107*pow4(mQ3)
+        + 77*pow4(mU3))*pow8(m3) + pow4(m3)*(1405*pow4(mQ3)*pow4(mU3) + 932*
+        mU32*pow6(mQ3) - 522*mQ32*pow6(mU3) - 157*pow8(mQ3)) + m32*(-750*pow4(
+        mU3)*pow6(mQ3) + 287*pow4(mQ3)*pow6(mU3) + 161*mU32*pow8(mQ3)) - 2*(
+        614*mQ32 + 365*mU32)*power10(m3)) + pow3(mQ32 - mU32)*((203*mQ32 + 181*
+        mU32)*pow14(m3) - 64*pow16(m3) - pow12(m3)*(59*mQ32*mU32 + 534*pow4(
+        mQ3) + 367*pow4(mU3)) - 12*m32*(mQ32*mU32 + 3*pow4(mQ3) - 4*pow4(mU3))*
+        pow4(mU3)*pow6(mQ3) - mU32*pow4(m3)*pow4(mQ3)*(-142*mU32*pow4(mQ3) +
+        39*mQ32*pow4(mU3) + 60*pow6(mQ3) + 107*pow6(mU3)) + 12*(mQ32 - mU32)*
+        pow6(mU3)*pow8(mQ3) - pow8(m3)*(-373*pow4(mQ3)*pow4(mU3) + 453*mU32*
+        pow6(mQ3) + 393*mQ32*pow6(mU3) + 358*pow8(mQ3) + 129*pow8(mU3)) + mQ32*
+        pow6(m3)*(-307*pow4(mQ3)*pow4(mU3) + 290*mU32*pow6(mQ3) + 155*mQ32*
+        pow6(mU3) + 74*pow8(mQ3) + 172*pow8(mU3)) + (213*mU32*pow4(mQ3) + 27*
+        mQ32*pow4(mU3) + 651*pow6(mQ3) + 389*pow6(mU3))*power10(m3)) - 2*pow4(
+        Xt)*(2*(219*mQ32 - 59*mU32)*pow16(m3) + pow14(m3)*(-854*mQ32*mU32 -
+        1161*pow4(mQ3) + 7*pow4(mU3)) - 3*m32*pow4(mU3)*pow6(mQ3)*(34*mU32*
+        pow4(mQ3) + 11*mQ32*pow4(mU3) + 15*pow6(mQ3) - 4*pow6(mU3)) + pow12(m3)
+        *(3279*mU32*pow4(mQ3) + 958*mQ32*pow4(mU3) + 708*pow6(mQ3) + 343*pow6(
+        mU3)) + 3*(4*mQ32*mU32 + 5*pow4(mQ3) - pow4(mU3))*pow6(mU3)*pow8(mQ3) +
+        mU32*pow4(m3)*pow4(mQ3)*(818*pow4(mQ3)*pow4(mU3) - 5*mU32*pow6(mQ3) -
+        5*mQ32*pow6(mU3) + 9*pow8(mQ3) + 71*pow8(mU3)) + (-3520*pow4(mQ3)*pow4(
+        mU3) - 3005*mU32*pow6(mQ3) - 1041*mQ32*pow6(mU3) + 306*pow8(mQ3) - 284*
+        pow8(mU3))*power10(m3) + mQ32*pow6(m3)*(-1376*pow4(mU3)*pow6(mQ3) -
+        1695*pow4(mQ3)*pow6(mU3) + 420*mU32*pow8(mQ3) - 310*mQ32*pow8(mU3) +
+        16*power10(mQ3) - 135*power10(mU3)) + pow8(m3)*(3985*pow4(mU3)*pow6(
+        mQ3) + 1666*pow4(mQ3)*pow6(mU3) + 263*mU32*pow8(mQ3) + 614*mQ32*pow8(
+        mU3) - 305*power10(mQ3) + 57*power10(mU3))) + 4*(mQ32 - mU32)*pow2(Xt)*
+        (32*(25*mQ32 + 17*mU32)*pow16(m3) - 192*pow18(m3) - 2*pow14(m3)*(1237*
+        mQ32*mU32 + 603*pow4(mQ3) + 176*pow4(mU3)) + 2*pow12(m3)*(2125*mU32*
+        pow4(mQ3) + 993*mQ32*pow4(mU3) + 326*pow6(mQ3) - 84*pow6(mU3)) - 6*m32*
+        pow4(mU3)*pow6(mQ3)*(-(mU32*pow4(mQ3)) - 9*mQ32*pow4(mU3) + 6*pow6(mQ3)
+        + 4*pow6(mU3)) + 6*(-3*mQ32*mU32 + 2*pow4(mQ3) + pow4(mU3))*pow6(mU3)*
+        pow8(mQ3) + mU32*pow4(m3)*pow4(mQ3)*(147*pow4(mQ3)*pow4(mU3) + 123*
+        mU32*pow6(mQ3) - 25*mQ32*pow6(mU3) - 4*pow8(mQ3) - 49*pow8(mU3)) + (-
+        4079*pow4(mQ3)*pow4(mU3) - 3065*mU32*pow6(mQ3) + 139*mQ32*pow6(mU3) +
+        72*pow8(mQ3) + 213*pow8(mU3))*power10(m3) + pow8(m3)*(3405*pow4(mU3)*
+        pow6(mQ3) + 687*pow4(mQ3)*pow6(mU3) + 673*mU32*pow8(mQ3) - 536*mQ32*
+        pow8(mU3) - 147*power10(mQ3) - 50*power10(mU3)) + mQ32*pow6(m3)*(-1027*
+        pow4(mU3)*pow6(mQ3) - 843*pow4(mQ3)*pow6(mU3) + 66*mU32*pow8(mQ3) +
+        322*mQ32*pow8(mU3) + 23*power10(mQ3) + 115*power10(mU3)))))/(pow3(m32 -
+        mU32)*pow4(m32 - mQ32)*pow4(mQ32 - mU32)) - (log(Mst12/pow2(mQ3))*((
+        640*mQ32*pow3(m32 - mU32)*pow4(m3)*pow6(Xt))/(pow2(m32 - mQ32)*pow3(
+        mQ32 - mU32)) - (20*(m32 - mU32)*log(Mst12/pow2(msq))*((-2*(m32 - mQ32)
+        *(m32 - mU32)*Xt*pow3(m3)*(-3*(mQ32 + mU32)*pow4(m3) + 11*mU32*pow4(
+        mQ3) - 13*mQ32*pow4(mU3) + m32*(4*mQ32*mU32 - 5*pow4(mQ3) + 7*pow4(mU3)
+        ) + 2*pow6(m3)))/(mQ32 - mU32) - (2*(m32 - mQ32)*(m32 - mU32)*(mQ32 +
+        mU32)*pow5(Xt)*(-11*mQ32*mU32*pow3(m3) + 5*(mQ32 + mU32)*pow5(m3) +
+        pow7(m3)))/pow3(mQ32 - mU32) - (4*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*
+        pow3(Xt)*(-20*pow4(mQ3)*pow4(mU3) + pow4(m3)*(10*mQ32*mU32 + pow4(mQ3)
+        + pow4(mU3)) - 4*(mQ32 + mU32)*pow6(m3) + 11*mU32*pow6(mQ3) + m32*(
+        mU32*pow4(mQ3) + mQ32*pow4(mU3) - 5*pow6(mQ3) - 5*pow6(mU3)) + 11*mQ32*
+        pow6(mU3) + 2*pow8(m3)))/pow3(mQ32 - mU32) + (2*pow2(Xt)*pow4(m3)*(7*
+        mQ32*mU32*(pow4(mQ3) + pow4(mU3)) + 3*pow4(m3)*(14*mQ32*mU32 + pow4(
+        mQ3) + pow4(mU3)) - 10*(mQ32 + mU32)*pow6(m3) - m32*(21*mU32*pow4(mQ3)
+        + 21*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) + 2*pow8(m3)))/(mQ32 -
+        mU32) - ((mQ32 + mU32)*pow4(m3)*pow4(Xt)*(7*mQ32*mU32*(pow4(mQ3) +
+        pow4(mU3)) + 3*pow4(m3)*(14*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 10*(
+        mQ32 + mU32)*pow6(m3) - m32*(21*mU32*pow4(mQ3) + 21*mQ32*pow4(mU3) +
+        pow6(mQ3) + pow6(mU3)) + 2*pow8(m3)))/pow3(mQ32 - mU32) + pow4(m3)*(3*
+        pow4(m3)*(15*mQ32*mU32 + pow4(mQ3) + 2*pow4(mU3)) - (11*mQ32 + 13*mU32)
+        *pow6(m3) + 7*mU32*pow6(mQ3) + 8*mQ32*pow6(mU3) - m32*(21*mU32*pow4(
+        mQ3) + 24*mQ32*pow4(mU3) + pow6(mQ3) + 2*pow6(mU3)) + 3*pow8(m3))))/
+        pow3(m32 - mQ32) + (8*pow2(m32 - mU32)*pow5(Xt)*(4*pow11(m3)*(13*mQ32*
+        mU32 + 8*pow4(mQ3) - 4*pow4(mU3)) + mU32*pow3(m3)*pow4(mQ3)*((30*msq2 -
+        13*mU32)*pow4(mQ3) + 3*(10*msq2 + mU32)*pow4(mU3) + 15*mQ32*(4*msq2*
+        mU32 + 27*pow4(mU3)) + 3*pow6(mQ3)) - mQ32*mU32*pow5(m3)*((90*msq2 +
+        545*mU32)*pow4(mQ3) + 3*(10*msq2 + mU32)*pow4(mU3) + 3*mQ32*(40*msq2*
+        mU32 + 257*pow4(mU3)) + 47*pow6(mQ3)) + 2*mQ32*(109*mU32*pow4(mQ3) + 5*
+        (6*msq2 + 37*mU32)*pow4(mU3) + mQ32*(30*msq2*mU32 + 469*pow4(mU3)) +
+        16*pow6(mQ3))*pow7(m3) + 12*m3*pow6(mU3)*pow8(mQ3) - 2*(97*mU32*pow4(
+        mQ3) + 214*mQ32*pow4(mU3) + 32*pow6(mQ3) - 8*pow6(mU3))*pow9(m3)))/(
+        pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(mQ32 - mU32)) + (8*Xt*pow2(
+        m32 - mU32)*(-64*(mQ32 - mU32)*pow13(m3) + 4*pow11(m3)*(-15*mQ32*mU32 +
+        56*pow4(mQ3) - 36*pow4(mU3)) + mU32*pow3(m3)*pow4(mQ3)*(-5*(6*msq2 + 7*
+        mU32)*pow4(mQ3) + 37*mQ32*pow4(mU3) + 3*(10*msq2 + mU32)*pow4(mU3) - 3*
+        pow6(mQ3)) + mQ32*mU32*pow5(m3)*(20*mQ32*mU32*(-3*msq2 + mU32) + 3*(30*
+        msq2 + 37*mU32)*pow4(mQ3) - 2*pow6(mQ3) - 3*(10*msq2*pow4(mU3) + pow6(
+        mU3))) + mQ32*(25*mU32*pow4(mQ3) + 60*msq2*pow4(mU3) - 2*mQ32*(30*msq2*
+        mU32 + 133*pow4(mU3)) + 96*pow6(mQ3) - 45*pow6(mU3))*pow7(m3) - 12*m3*
+        pow6(mU3)*pow8(mQ3) + (56*mU32*pow4(mQ3) + 174*mQ32*pow4(mU3) - 256*
+        pow6(mQ3) + 80*pow6(mU3))*pow9(m3)))/((mQ32 - mU32)*pow2(mQ3)*pow2(mU3)
+        *pow3(-m32 + mQ32)) + (16*m3*pow2(m32 - mU32)*pow3(Xt)*(6*(mQ32 + 3*
+        mU32)*pow6(mQ3)*pow6(mU3) + 3*mQ32*mU32*pow4(m3)*(5*(4*msq2 - mU32)*
+        pow4(mQ3) + 20*msq2*pow4(mU3) - mQ32*(40*msq2*mU32 + 29*pow4(mU3)) +
+        73*pow6(mQ3) + 33*pow6(mU3)) + 2*(-9*mU32*pow4(mQ3) + 17*mQ32*pow4(mU3)
+        + 48*pow6(mQ3) - 40*pow6(mU3))*pow8(m3) - m32*mQ32*mU32*(-2*pow4(mQ3)*(
+        15*msq2*mU32 + 53*pow4(mU3)) + 5*(6*msq2 + 25*mU32)*pow6(mQ3) + 3*(10*
+        msq2 + mU32)*pow6(mU3) + mQ32*(-30*msq2*pow4(mU3) + 81*pow6(mU3)) + 3*
+        pow8(mQ3)) + pow6(m3)*(238*pow4(mQ3)*pow4(mU3) - 263*mU32*pow6(mQ3) -
+        147*mQ32*pow6(mU3) - 64*pow8(mQ3) + 48*pow8(mU3)) + (22*mQ32*mU32 - 32*
+        pow4(mQ3) + 32*pow4(mU3))*power10(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*
+        pow2(mU3)*pow3(mQ32 - mU32)) - (2*(m32 - mU32)*pow2(Xt)*(64*pow16(m3)*(
+        pow4(mQ3) - pow4(mU3)) - pow4(mQ3)*pow4(mU3)*pow6(m3)*((270*msq2 +
+        4891*mU32)*pow4(mQ3) - 5*mQ32*(36*msq2*mU32 - 523*pow4(mU3)) + 270*
+        msq2*pow4(mU3) + 1395*pow6(mQ3) - 413*pow6(mU3)) - 2*pow14(m3)*(313*
+        mU32*pow4(mQ3) - 313*mQ32*pow4(mU3) + 96*pow6(mQ3) - 96*pow6(mU3)) + 3*
+        m32*pow6(mQ3)*pow6(mU3)*((10*msq2 - 171*mU32)*pow4(mQ3) - 163*mQ32*
+        pow4(mU3) + 10*msq2*pow4(mU3) + pow6(mQ3) + pow6(mU3)) + pow4(m3)*pow4(
+        mQ3)*pow4(mU3)*(-90*(msq2 - 27*mU32)*mU32*pow4(mQ3) + 2*(45*msq2 + 613*
+        mU32)*pow6(mQ3) + 9*(10*msq2 + mU32)*pow6(mU3) + mQ32*(-90*msq2*pow4(
+        mU3) + 358*pow6(mU3)) + 9*pow8(mQ3)) + 2*mQ32*mU32*pow8(m3)*(8*pow4(
+        mQ3)*(15*msq2*mU32 + 356*pow4(mU3)) + 2318*mU32*pow6(mQ3) + 2*mQ32*(60*
+        msq2*pow4(mU3) - 127*pow6(mU3)) + 281*pow8(mQ3) - 297*pow8(mU3)) + 2*
+        pow12(m3)*(736*pow4(mQ3)*pow4(mU3) + 875*mU32*pow6(mQ3) - 907*mQ32*
+        pow6(mU3) + 96*pow8(mQ3) - 96*pow8(mU3)) - 2*power10(m3)*(2584*pow4(
+        mU3)*pow6(mQ3) + pow4(mQ3)*(90*msq2*pow4(mU3) + 386*pow6(mU3)) + 843*
+        mU32*pow8(mQ3) - 891*mQ32*pow8(mU3) + 32*power10(mQ3) - 32*power10(mU3)
+        ) + 96*power10(mQ3)*power10(mU3)))/((mQ32 - mU32)*pow3(-m32 + mQ32)*
+        pow4(mQ3)*pow4(mU3)) - ((m32 - mU32)*(64*pow18(m3)*(-(mU32*pow4(mQ3)) +
+        mQ32*pow4(mU3) + pow6(mQ3) - pow6(mU3)) + 3*m32*(mQ32 - mU32)*pow6(mU3)
+        *((10*msq2 - 143*mU32)*pow4(mQ3) - 171*mQ32*pow4(mU3) + 10*msq2*pow4(
+        mU3) + pow6(mQ3) + pow6(mU3))*pow8(mQ3) + pow16(m3)*(64*pow4(mQ3)*pow4(
+        mU3) - 434*mU32*pow6(mQ3) + 562*mQ32*pow6(mU3) - 256*pow8(mQ3) + 192*
+        pow8(mU3)) + pow4(m3)*pow4(mU3)*pow6(mQ3)*((-210*msq2*mU32 + 1720*pow4(
+        mU3))*pow6(mQ3) + 10*pow4(mQ3)*(3*msq2*pow4(mU3) - 124*pow6(mU3)) + (
+        90*msq2 + 778*mU32)*pow8(mQ3) + mQ32*(150*msq2*pow6(mU3) - 1133*pow8(
+        mU3)) - 6*(10*msq2 + mU32)*pow8(mU3) + 9*power10(mQ3)) + pow4(mQ3)*
+        pow4(mU3)*pow6(m3)*(70*(9*msq2*mU32 - 20*pow4(mU3))*pow6(mQ3) - 150*
+        pow4(mQ3)*(3*msq2*pow4(mU3) - 28*pow6(mU3)) - (360*msq2 + 4261*mU32)*
+        pow8(mQ3) + 9*(10*msq2 + mU32)*pow8(mU3) + mQ32*(90*msq2*pow6(mU3) +
+        636*pow8(mU3)) + 48*power10(mQ3)) + 2*mQ32*power10(m3)*(32*pow12(mQ3) -
+        361*pow12(mU3) - 6*pow6(mQ3)*(35*msq2*pow4(mU3) + 479*pow6(mU3)) -
+        1730*pow4(mU3)*pow8(mQ3) + 8*mQ32*(15*msq2 - 52*mU32)*pow8(mU3) + pow4(
+        mQ3)*(90*msq2*pow6(mU3) + 2849*pow8(mU3)) + 1220*mU32*power10(mQ3)) +
+        2*pow14(m3)*(-1167*pow4(mU3)*pow6(mQ3) + 566*pow4(mQ3)*pow6(mU3) +
+        1124*mU32*pow8(mQ3) - 1003*mQ32*pow8(mU3) + 192*power10(mQ3) - 96*
+        power10(mU3)) + 84*(mQ32 - mU32)*pow12(mQ3)*power10(mU3) + mU32*pow4(
+        mQ3)*pow8(m3)*((510*msq2*mU32 + 8404*pow4(mU3))*pow6(mQ3) - 2*pow4(mQ3)
+        *(225*msq2*pow4(mU3) + 1858*pow6(mU3)) + 765*mU32*pow8(mQ3) + mQ32*(
+        210*msq2*pow6(mU3) - 3494*pow8(mU3)) - 270*msq2*pow8(mU3) - 626*
+        power10(mQ3) + 587*power10(mU3)) - 2*pow12(m3)*(128*pow12(mQ3) - 32*
+        pow12(mU3) + pow6(mQ3)*(-90*msq2*pow4(mU3) + 131*pow6(mU3)) - 2354*
+        pow4(mU3)*pow8(mQ3) + pow4(mQ3)*(90*msq2*pow6(mU3) + 436*pow8(mU3)) +
+        1782*mU32*power10(mQ3) - 1051*mQ32*power10(mU3))))/((mQ32 - mU32)*pow4(
+        mQ3)*pow4(m32 - mQ32)*pow4(mU3)) + ((m32 - mU32)*pow4(Xt)*(-64*pow18(
+        m3)*pow3(mQ32 - mU32) + m32*pow6(mU3)*pow8(mQ3)*(6*pow4(mQ3)*(5*msq2*
+        mU32 - 267*pow4(mU3)) + 2*(15*msq2 - 592*mU32)*pow6(mQ3) + mQ32*(30*
+        msq2*pow4(mU3) - 316*pow6(mU3)) + 3*(10*msq2 + mU32)*pow6(mU3) + 3*
+        pow8(mQ3)) + 2*pow16(m3)*(136*pow4(mQ3)*pow4(mU3) - 103*mU32*pow6(mQ3)
+        - 25*mQ32*pow6(mU3) + 128*pow8(mQ3) - 96*pow8(mU3)) + pow4(m3)*pow4(
+        mU3)*pow6(mQ3)*((-30*msq2*mU32 + 6740*pow4(mU3))*pow6(mQ3) - 6*pow4(
+        mQ3)*(35*msq2*pow4(mU3) - 939*pow6(mU3)) + 10*(9*msq2 + 182*mU32)*pow8(
+        mQ3) + 6*(10*msq2 + mU32)*pow8(mU3) + mQ32*(-30*msq2*pow6(mU3) + 871*
+        pow8(mU3)) + 9*power10(mQ3)) + mU32*pow4(mQ3)*pow8(m3)*(2*(255*msq2*
+        mU32 + 9127*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(570*msq2*pow4(mU3) +
+        29282*pow6(mU3)) + 5703*mU32*pow8(mQ3) + 5*(54*msq2 - 125*mU32)*pow8(
+        mU3) + 2*mQ32*(165*msq2*pow6(mU3) + 5212*pow8(mU3)) + 498*power10(mQ3))
+        - pow4(mQ3)*pow4(mU3)*pow6(m3)*(90*mU32*(msq2 + 199*mU32)*pow6(mQ3) -
+        18*pow4(mQ3)*(5*msq2*pow4(mU3) - 673*pow6(mU3)) + 270*mQ32*(msq2 + 2*
+        mU32)*pow6(mU3) + (360*msq2 + 9013*mU32)*pow8(mQ3) + 9*(10*msq2 + mU32)
+        *pow8(mU3) + 1438*power10(mQ3)) - 2*mQ32*power10(m3)*(32*pow12(mQ3) -
+        297*pow12(mU3) + 10*pow6(mQ3)*(21*msq2*pow4(mU3) + 1097*pow6(mU3)) +
+        4021*pow4(mU3)*pow8(mQ3) + 24*mQ32*(5*msq2 + 26*mU32)*pow8(mU3) + 30*
+        pow4(mQ3)*(11*msq2*pow6(mU3) + 391*pow8(mU3)) + 900*mU32*power10(mQ3))
+        - 2*pow14(m3)*(583*pow4(mU3)*pow6(mQ3) + 2088*pow4(mQ3)*pow6(mU3) +
+        484*mU32*pow8(mQ3) - 619*mQ32*pow8(mU3) + 192*power10(mQ3) - 96*
+        power10(mU3)) + 48*(5*mQ32 + 2*mU32)*pow12(mQ3)*power10(mU3) + 2*pow12(
+        m3)*(128*pow12(mQ3) - 32*pow12(mU3) + pow6(mQ3)*(90*msq2*pow4(mU3) +
+        7487*pow6(mU3)) + 2435*pow4(mU3)*pow8(mQ3) + pow4(mQ3)*(90*msq2*pow6(
+        mU3) + 2791*pow8(mU3)) + 1142*mU32*power10(mQ3) - 795*mQ32*power10(mU3)
+        )))/(pow3(mQ32 - mU32)*pow4(mQ3)*pow4(m32 - mQ32)*pow4(mU3)) - (2*log(
+        Mst12/pow2(mU3))*(160*(mQ32 + mU32)*(-2*mQ32*mU32 + m32*(mQ32 + mU32))*
+        pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(m3)*pow6(Xt) - 8*(m32 - mQ32)*(
+        m32 - mU32)*Xt*pow3(mQ32 - mU32)*(-2*(83*mQ32 + 103*mU32)*pow11(m3) +
+        72*pow13(m3) + 6*(mQ32 - 11*mU32)*pow3(m3)*pow4(mQ3)*pow4(mU3) - 6*m3*
+        pow6(mQ3)*pow6(mU3) + 3*pow5(m3)*(78*pow4(mQ3)*pow4(mU3) + 7*mU32*pow6(
+        mQ3) + 39*mQ32*pow6(mU3)) - (307*mU32*pow4(mQ3) + 395*mQ32*pow4(mU3) +
+        13*pow6(mQ3) + 53*pow6(mU3))*pow7(m3) + (468*mQ32*mU32 + 115*pow4(mQ3)
+        + 179*pow4(mU3))*pow9(m3)) - 16*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 -
+        mU32)*pow3(Xt)*(-((295*mQ32 + 259*mU32)*pow12(m3)) + 96*pow14(m3) - (
+        1026*mU32*pow4(mQ3) + 744*mQ32*pow4(mU3) + 73*pow6(mQ3) - 109*pow6(mU3)
+        )*pow8(m3) + 9*pow6(mU3)*pow8(mQ3) - 3*pow6(mQ3)*pow8(mU3) - 2*pow6(m3)
+        *(-534*pow4(mQ3)*pow4(mU3) - 177*mU32*pow6(mQ3) + 29*mQ32*pow6(mU3) +
+        14*pow8(mQ3) + 40*pow8(mU3)) + pow4(m3)*(-484*pow4(mU3)*pow6(mQ3) -
+        202*pow4(mQ3)*pow6(mU3) + 57*mU32*pow8(mQ3) + 159*mQ32*pow8(mU3)) - 6*
+        m32*(-29*pow6(mQ3)*pow6(mU3) + 5*pow4(mU3)*pow8(mQ3) + 14*pow4(mQ3)*
+        pow8(mU3)) + 2*(453*mQ32*mU32 + 146*pow4(mQ3) + 71*pow4(mU3))*power10(
+        m3)) - 8*m3*(m32 - mQ32)*(m32 - mU32)*pow5(Xt)*(2*(25*mQ32 + 9*mU32)*
+        pow12(m3) - 6*(mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + 2*(183*mU32*pow4(mQ3)
+        + 228*mQ32*pow4(mU3) + 19*pow6(mQ3) + 96*pow6(mU3))*pow8(m3) + pow6(m3)
+        *(-560*pow4(mQ3)*pow4(mU3) - 158*mU32*pow6(mQ3) - 470*mQ32*pow6(mU3) +
+        13*pow8(mQ3) - 81*pow8(mU3)) + pow4(m3)*(212*pow4(mU3)*pow6(mQ3) + 370*
+        pow4(mQ3)*pow6(mU3) - 28*mU32*pow8(mQ3) + 162*mQ32*pow8(mU3)) + m32*(-
+        70*pow6(mQ3)*pow6(mU3) + 13*pow4(mU3)*pow8(mQ3) - 83*pow4(mQ3)*pow8(
+        mU3)) - (214*mQ32*mU32 + 93*pow4(mQ3) + 121*pow4(mU3))*power10(m3)) +
+        2*pow3(mQ32 - mU32)*(-((179*mQ32 + 269*mU32)*pow16(m3)) + 64*pow18(m3)
+        + 6*pow14(m3)*(95*mQ32*mU32 + 37*pow4(mQ3) + 92*pow4(mU3)) + 24*m32*(
+        pow4(mQ3) - pow4(mU3))*pow6(mQ3)*pow6(mU3) - pow4(m3)*pow4(mQ3)*pow4(
+        mU3)*(54*mU32*pow4(mQ3) - 95*mQ32*pow4(mU3) + 44*pow6(mQ3) + 61*pow6(
+        mU3)) - pow12(m3)*(289*mU32*pow4(mQ3) + 1130*mQ32*pow4(mU3) + 233*pow6(
+        mQ3) + 588*pow6(mU3)) + 6*(-mQ32 + mU32)*pow8(mQ3)*pow8(mU3) + 2*mQ32*
+        mU32*pow6(m3)*(-82*pow4(mQ3)*pow4(mU3) + 56*mU32*pow6(mQ3) + 147*mQ32*
+        pow6(mU3) + 35*pow8(mQ3) + 68*pow8(mU3)) + 2*(168*pow4(mQ3)*pow4(mU3) +
+        76*mU32*pow6(mQ3) + 642*mQ32*pow6(mU3) + 85*pow8(mQ3) + 149*pow8(mU3))*
+        power10(m3) - pow8(m3)*(-194*pow4(mU3)*pow6(mQ3) + 522*pow4(mQ3)*pow6(
+        mU3) + 244*mU32*pow8(mQ3) + 671*mQ32*pow8(mU3) + 42*power10(mQ3) + 59*
+        power10(mU3))) + pow4(Xt)*(8*(91*mQ32 + 69*mU32)*pow18(m3) - 2*pow16(
+        m3)*(2584*mQ32*mU32 + 919*pow4(mQ3) + 1153*pow4(mU3)) + 24*m32*pow6(
+        mQ3)*pow6(mU3)*(13*mU32*pow4(mQ3) + 11*mQ32*pow4(mU3) + 4*pow6(mQ3) +
+        4*pow6(mU3)) + 2*pow14(m3)*(5731*mU32*pow4(mQ3) + 6773*mQ32*pow4(mU3) +
+        443*pow6(mQ3) + 1645*pow6(mU3)) + pow12(m3)*(-27196*pow4(mQ3)*pow4(mU3)
+        - 7760*mU32*pow6(mQ3) - 15088*mQ32*pow6(mU3) + 805*pow8(mQ3) - 2089*
+        pow8(mU3)) - 24*pow2(mQ32 + mU32)*pow8(mQ3)*pow8(mU3) - pow4(m3)*pow4(
+        mQ3)*pow4(mU3)*(3404*pow4(mQ3)*pow4(mU3) - 64*mU32*pow6(mQ3) + 384*
+        mQ32*pow6(mU3) + 145*pow8(mQ3) + 355*pow8(mU3)) + 2*mQ32*mU32*pow6(m3)*
+        (3401*pow4(mU3)*pow6(mQ3) + 4367*pow4(mQ3)*pow6(mU3) - 646*mU32*pow8(
+        mQ3) + 558*mQ32*pow8(mU3) + 25*power10(mQ3) + 231*power10(mU3)) +
+        power10(m3)*(21148*pow4(mU3)*pow6(mQ3) + 27556*pow4(mQ3)*pow6(mU3) -
+        728*mU32*pow8(mQ3) + 7176*mQ32*pow8(mU3) - 596*power10(mQ3) + 740*
+        power10(mU3)) + pow8(m3)*(19*pow12(mQ3) - 183*pow12(mU3) - 22720*pow6(
+        mQ3)*pow6(mU3) - 3735*pow4(mU3)*pow8(mQ3) - 10725*pow4(mQ3)*pow8(mU3) +
+        1576*mU32*power10(mQ3) - 1672*mQ32*power10(mU3))) + 2*(mQ32 - mU32)*
+        pow2(Xt)*(-128*(13*mQ32 + 11*mU32)*pow18(m3) + 384*pow20(m3) + 2*pow16(
+        m3)*(3466*mQ32*mU32 + 1265*pow4(mQ3) + 645*pow4(mU3)) - 2*pow14(m3)*(
+        6053*mU32*pow4(mQ3) + 4349*mQ32*pow4(mU3) + 691*pow6(mQ3) - 341*pow6(
+        mU3)) - 48*m32*(mQ32 - mU32)*pow2(mQ32 + mU32)*pow6(mQ3)*pow6(mU3) +
+        pow12(m3)*(18002*pow4(mQ3)*pow4(mU3) + 8698*mU32*pow6(mQ3) + 1986*mQ32*
+        pow6(mU3) - 93*pow8(mQ3) - 1713*pow8(mU3)) + pow4(m3)*pow4(mQ3)*pow4(
+        mU3)*(558*pow4(mQ3)*pow4(mU3) + 254*mU32*pow6(mQ3) - 218*mQ32*pow6(mU3)
+        + 57*pow8(mQ3) - 267*pow8(mU3)) + 12*(pow4(mQ3) - pow4(mU3))*pow8(mQ3)*
+        pow8(mU3) + 2*mQ32*mU32*pow6(m3)*(-1375*pow4(mU3)*pow6(mQ3) - 951*pow4(
+        mQ3)*pow6(mU3) - 184*mU32*pow8(mQ3) + 768*mQ32*pow8(mU3) + 15*power10(
+        mQ3) + 191*power10(mU3)) + 4*power10(m3)*(-3661*pow4(mU3)*pow6(mQ3) -
+        2341*pow4(mQ3)*pow6(mU3) - 498*mU32*pow8(mQ3) + 826*mQ32*pow8(mU3) +
+        67*power10(mQ3) + 231*power10(mU3)) - pow8(m3)*(47*pow12(mQ3) + 155*
+        pow12(mU3) - 9320*pow6(mQ3)*pow6(mU3) - 4301*pow4(mU3)*pow8(mQ3) + 271*
+        pow4(mQ3)*pow8(mU3) + 130*mU32*power10(mQ3) + 2266*mQ32*power10(mU3))))
+        )/(pow4(m32 - mQ32)*pow4(mQ32 - mU32))))/pow4(m32 - mU32)))/3. + (4*
+        pow2(log(Mst12/pow2(mQ3)))*((-640*m32*pow4(mQ3)*pow6(Xt))/(pow2(m32 -
+        mQ32)*pow4(mQ32 - mU32)) + (32*m3*pow3(Xt)*(-(m32*mU32*pow4(mQ3)*(-30*
+        msq2*mU32 + mQ32*(30*msq2 + 567*mU32) + 326*pow4(mQ3) + 375*pow4(mU3)))
+        - pow6(m3)*(43*mU32*pow4(mQ3) + 201*mQ32*pow4(mU3) + 48*pow6(mQ3) - 16*
+        pow6(mU3)) + mU32*pow4(mQ3)*(275*mU32*pow4(mQ3) + 6*mQ32*(5*msq2*mU32 +
+        27*pow4(mU3)) + 3*pow6(mQ3) - 3*(10*msq2*pow4(mU3) + pow6(mU3))) + (-
+        75*mQ32*mU32 + 16*pow4(mQ3) - 16*pow4(mU3))*pow8(m3) + pow4(m3)*(420*
+        pow4(mQ3)*pow4(mU3) + 468*mU32*pow6(mQ3) + 262*mQ32*pow6(mU3) + 32*
+        pow8(mQ3))))/((m32 - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow3(
+        mQ32 - mU32)) - 20*log(Mst12/pow2(msq))*((4*m3*Xt*(m32*mQ32 - 12*mQ32*
+        msq2 - pow4(mQ3) + 6*pow4(msq)))/((mQ32 - mU32)*pow2(m32 - mQ32)) + (4*
+        m3*(mQ32 + mU32)*(m32*mQ32 + 12*mQ32*msq2 - pow4(mQ3) - 6*pow4(msq))*
+        pow5(Xt))/(pow2(m32 - mQ32)*pow4(mQ32 - mU32)) + ((7*mQ32 + 6*msq2)*
+        pow4(m3) - 3*mQ32*pow4(msq) - 3*m32*(-6*mQ32*msq2 + 2*pow4(mQ3) + 3*
+        pow4(msq)) - 3*pow6(m3) + 2*pow6(mQ3))/pow3(m32 - mQ32) + (4*m3*pow3(
+        Xt)*((-3*mQ32 + mU32)*pow4(m3) - 2*m32*pow4(mQ3) - (24*msq2 + mU32)*
+        pow4(mQ3) - 12*mU32*pow4(msq) + 12*mQ32*(2*msq2*mU32 + pow4(msq)) + 2*
+        pow6(m3) + 3*pow6(mQ3)))/(pow2(m32 - mQ32)*pow3(mQ32 - mU32)) + (2*
+        pow2(Xt)*(3*msq2*(mQ32 - mU32)*(m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*
+        pow4(m3)) - (m32 - mQ32)*((3*mQ32 - mU32)*pow4(m3) + m32*(4*mQ32*mU32 -
+        8*pow4(mQ3)) - 2*mU32*pow4(mQ3) + 4*pow6(mQ3))))/(pow2(mQ32 - mU32)*
+        pow3(m32 - mQ32)) + (pow4(Xt)*(-4*m32*(mQ32 - mU32) + (3*msq2*(mQ32 -
+        mU32)*(mQ32 + mU32)*(mQ32*msq2 + m32*(-6*mQ32 + 3*msq2) - 2*pow4(m3)))/
+        pow3(m32 - mQ32) + (8*mQ32*mU32*pow4(m3) - pow4(mQ3)*pow4(mU3) + 2*(
+        mQ32 - mU32)*pow6(m3) + 4*mU32*pow6(mQ3) - 2*m32*(5*mU32*pow4(mQ3) -
+        mQ32*pow4(mU3) + 4*pow6(mQ3)) + 5*pow8(mQ3))/pow2(m32 - mQ32)))/pow4(
+        mQ32 - mU32)) + (8*m3*Xt*(64*pow12(m3)*pow2(mQ32 - mU32) + 2*mQ32*mU32*
+        pow4(m3)*(3*pow4(mQ3)*(-20*msq2*mU32 + 5*pow4(msq) - 209*pow4(mU3)) -
+        30*pow4(msq)*pow4(mU3) + (-60*msq2 + 930*mU32)*pow6(mQ3) + mQ32*(15*
+        mU32*pow4(msq) + 120*msq2*pow4(mU3) - 574*pow6(mU3)) + 223*pow8(mQ3)) -
+        2*mQ32*pow6(m3)*(-15*pow4(msq)*pow4(mU3) + pow4(mQ3)*(-60*msq2*mU32 +
+        486*pow4(mU3)) + 728*mU32*pow6(mQ3) + mQ32*(15*mU32*pow4(msq) + 60*
+        msq2*pow4(mU3) - 1088*pow6(mU3)) + 48*pow8(mQ3) - 206*pow8(mU3)) +
+        pow8(m3)*(-744*pow4(mQ3)*pow4(mU3) + 1371*mU32*pow6(mQ3) - 963*mQ32*
+        pow6(mU3) + 256*pow8(mQ3) + 64*pow8(mU3)) - 4*(81*mU32*pow4(mQ3) - 169*
+        mQ32*pow4(mU3) + 56*pow6(mQ3) + 32*pow6(mU3))*power10(m3) + mU32*pow4(
+        mQ3)*(253*pow4(mU3)*pow6(mQ3) - 30*pow4(msq)*pow6(mU3) - 12*pow4(mQ3)*(
+        10*msq2*pow4(mU3) + 23*pow6(mU3)) + 4*mU32*pow8(mQ3) + 6*mQ32*(5*pow4(
+        msq)*pow4(mU3) + 20*msq2*pow6(mU3) + pow8(mU3)) - 3*power10(mQ3)) + 2*
+        m32*mQ32*mU32*(6*(20*msq2*mU32 - 27*pow4(mU3))*pow6(mQ3) + 15*pow4(msq)
+        *pow6(mU3) + pow4(mQ3)*(-30*mU32*pow4(msq) - 60*msq2*pow4(mU3) + 514*
+        pow6(mU3)) - 324*mU32*pow8(mQ3) + 3*mQ32*(5*pow4(msq)*pow4(mU3) - 20*
+        msq2*pow6(mU3) - pow8(mU3)) + 7*power10(mQ3))))/(pow2(mQ3)*pow2(mU3)*
+        pow2(m32 - mU32)*pow2(mQ32 - mU32)*pow3(-m32 + mQ32)) + (16*m3*pow5(Xt)
+        *(-((121*mU32*pow4(mQ3) + 84*mQ32*pow4(mU3) + 32*pow6(mQ3) - 163*pow6(
+        mU3))*pow8(m3)) - mU32*pow4(m3)*(60*pow4(msq)*pow4(mU3) + pow4(mQ3)*(
+        150*msq2*mU32 - 30*pow4(msq) + 861*pow4(mU3)) + 15*(6*msq2 + 37*mU32)*
+        pow6(mQ3) - 5*mQ32*(6*mU32*pow4(msq) + 12*msq2*pow4(mU3) - 13*pow6(mU3)
+        ) + 99*pow8(mQ3)) + 2*pow6(m3)*(15*pow4(msq)*pow4(mU3) + pow4(mQ3)*(45*
+        msq2*mU32 + 284*pow4(mU3)) + 113*mU32*pow6(mQ3) - 3*mQ32*(5*mU32*pow4(
+        msq) + 5*msq2*pow4(mU3) - 27*pow6(mU3)) + 8*pow8(mQ3) - 42*pow8(mU3)) +
+        2*(mQ32*mU32 + 8*pow4(mQ3) - 41*pow4(mU3))*power10(m3) - mQ32*mU32*(60*
+        pow4(mU3)*pow6(mQ3) + 30*pow4(msq)*pow6(mU3) + pow4(mQ3)*(90*msq2*pow4(
+        mU3) + 223*pow6(mU3)) - 7*mU32*pow8(mQ3) + mQ32*(-30*pow4(msq)*pow4(
+        mU3) - 30*msq2*pow6(mU3) + 3*pow8(mU3)) + 3*power10(mQ3)) + m32*mU32*(
+        4*(45*msq2*mU32 + 161*pow4(mU3))*pow6(mQ3) + 30*pow4(msq)*pow6(mU3) +
+        pow4(mQ3)*(-60*mU32*pow4(msq) + 30*msq2*pow4(mU3) + 356*pow6(mU3)) +
+        98*mU32*pow8(mQ3) + 3*mQ32*(10*pow4(msq)*pow4(mU3) - 10*msq2*pow6(mU3)
+        + pow8(mU3)) + 11*power10(mQ3))))/(pow2(mU3)*pow2(m32 - mU32)*pow3(m32
+        - mQ32)*pow4(mQ32 - mU32)) + (4*pow2(Xt)*(32*(mQ32 + mU32)*pow14(m3)*
+        pow3(mQ32 - mU32) + (mQ32 - mU32)*(-749*mU32*pow4(mQ3) + 3*(10*msq2 +
+        mU32)*pow4(mU3) + mQ32*(-30*msq2*mU32 + 723*pow4(mU3)) + 3*pow6(mQ3))*
+        pow6(mU3)*pow8(mQ3) - pow4(m3)*pow4(mU3)*pow6(mQ3)*(-(pow4(mQ3)*(240*
+        msq2*mU32 + 4361*pow4(mU3))) + (30*msq2 + 5869*mU32)*pow6(mQ3) - 180*
+        msq2*pow6(mU3) + 3*mQ32*(130*msq2*pow4(mU3) + 681*pow6(mU3)) + 1330*
+        pow8(mQ3) + 2799*pow8(mU3)) + m32*pow4(mU3)*pow6(mQ3)*((60*msq2*mU32 +
+        151*pow4(mU3))*pow6(mQ3) - pow4(mQ3)*(210*msq2*pow4(mU3) + 3013*pow6(
+        mU3)) + 1802*mU32*pow8(mQ3) - 9*(10*msq2 + mU32)*pow8(mU3) + 4*mQ32*(
+        60*msq2*pow6(mU3) + 649*pow8(mU3)) + 9*power10(mQ3)) - 4*pow12(m3)*(-
+        11*pow4(mU3)*pow6(mQ3) + 411*pow4(mQ3)*pow6(mU3) + 25*mU32*pow8(mQ3) -
+        49*mQ32*pow8(mU3) + 24*power10(mQ3) - 16*power10(mU3)) + mU32*pow4(mQ3)
+        *pow6(m3)*((-90*msq2*mU32 + 5069*pow4(mU3))*pow6(mQ3) + 3*pow4(mQ3)*(
+        60*msq2*pow4(mU3) - 911*pow6(mU3)) + 4946*mU32*pow8(mQ3) + mQ32*(-90*
+        msq2*pow6(mU3) + 7055*pow8(mU3)) + 260*power10(mQ3) + 763*power10(mU3))
+        + 4*power10(m3)*(24*pow12(mQ3) - 8*pow12(mU3) + 168*pow6(mQ3)*pow6(mU3)
+        + 669*pow4(mU3)*pow8(mQ3) + 1058*pow4(mQ3)*pow8(mU3) + 155*mU32*
+        power10(mQ3) - 146*mQ32*power10(mU3)) - mQ32*pow8(m3)*(32*pow12(mQ3) -
+        324*pow12(mU3) + 445*pow6(mQ3)*pow6(mU3) + 6261*pow4(mU3)*pow8(mQ3) +
+        4871*pow4(mQ3)*pow8(mU3) + 716*mU32*power10(mQ3) + 3359*mQ32*power10(
+        mU3))))/(pow2(m32 - mU32)*pow3(-m32 + mQ32)*pow3(mQ32 - mU32)*pow4(mQ3)
+        *pow4(mU3)) - (-64*pow18(m3)*(-(mU32*pow4(mQ3)) + mQ32*pow4(mU3) +
+        pow6(mQ3) - pow6(mU3)) + (mQ32 - mU32)*pow6(mU3)*pow8(mQ3)*(297*pow4(
+        mQ3)*pow4(mU3) + 30*pow4(msq)*pow4(mU3) + 10*mU32*pow6(mQ3) - 6*mQ32*(
+        10*msq2*pow4(mU3) + pow6(mU3)) + 3*pow8(mQ3)) + 8*pow16(m3)*(40*pow4(
+        mQ3)*pow4(mU3) + 65*mU32*pow6(mQ3) - 65*mQ32*pow6(mU3) + 32*pow8(mQ3) -
+        24*pow8(mU3)) + mU32*pow4(mQ3)*pow8(m3)*((300*msq2*mU32 + 653*pow4(mU3)
+        )*pow6(mQ3) + pow4(mQ3)*(-60*mU32*pow4(msq) + 600*msq2*pow4(mU3) -
+        5769*pow6(mU3)) + (180*msq2*mU32 + 270*pow4(msq) - 259*pow4(mU3))*pow6(
+        mU3) + 5716*mU32*pow8(mQ3) + mQ32*(-210*pow4(msq)*pow4(mU3) - 1080*
+        msq2*pow6(mU3) + 2147*pow8(mU3)) + 712*power10(mQ3)) - 2*pow4(mQ3)*
+        pow4(mU3)*pow6(m3)*(15*(32*msq2*mU32 + pow4(msq) - 155*pow4(mU3))*pow6(
+        mQ3) + 15*msq2*(9*msq2 + 2*mU32)*pow6(mU3) - pow4(mQ3)*(105*mU32*pow4(
+        msq) + 1061*pow6(mU3)) + (-30*msq2 + 2513*mU32)*pow8(mQ3) - 3*mQ32*(15*
+        pow4(msq)*pow4(mU3) + 160*msq2*pow6(mU3) - 91*pow8(mU3)) + 792*power10(
+        mQ3)) + m32*pow4(mU3)*pow6(mQ3)*(9*pow12(mQ3) + 6*mQ32*(50*msq2*mU32 +
+        25*pow4(msq) + 2*pow4(mU3))*pow6(mU3) + 3*pow6(mQ3)*(60*msq2*pow4(mU3)
+        + 73*pow6(mU3)) - 1075*pow4(mU3)*pow8(mQ3) - 60*pow4(msq)*pow8(mU3) +
+        pow4(mQ3)*(-90*pow4(msq)*pow4(mU3) - 480*msq2*pow6(mU3) + 998*pow8(mU3)
+        ) - 35*mU32*power10(mQ3)) - mQ32*power10(m3)*(64*pow12(mQ3) - 712*
+        pow12(mU3) + pow6(mQ3)*(300*msq2*pow4(mU3) - 4177*pow6(mU3)) + mQ32*(
+        180*msq2*mU32 + 90*pow4(msq) + 53*pow4(mU3))*pow6(mU3) + 6197*pow4(mU3)
+        *pow8(mQ3) - 3*pow4(mQ3)*(30*pow4(msq)*pow4(mU3) + 160*msq2*pow6(mU3) -
+        517*pow8(mU3)) + 2784*mU32*power10(mQ3)) - 8*pow14(m3)*(-6*pow4(mU3)*
+        pow6(mQ3) + 173*pow4(mQ3)*pow6(mU3) + 324*mU32*pow8(mQ3) - 243*mQ32*
+        pow8(mU3) + 48*power10(mQ3) - 24*power10(mU3)) + 4*pow12(m3)*(64*pow12(
+        mQ3) - 16*pow12(mU3) - pow6(mQ3)*(15*msq2*pow4(mU3) + 113*pow6(mU3)) +
+        486*pow4(mU3)*pow8(mQ3) + 5*pow4(mQ3)*(3*msq2*pow6(mU3) + 65*pow8(mU3))
+        + 1020*mU32*power10(mQ3) - 518*mQ32*power10(mU3)) - 2*pow4(m3)*pow4(
+        mQ3)*pow4(mU3)*(28*pow12(mQ3) + pow6(mQ3)*(-45*mU32*pow4(msq) - 540*
+        msq2*pow4(mU3) + 1693*pow6(mU3)) + (90*msq2*mU32 - 751*pow4(mU3))*pow8(
+        mQ3) - 45*pow4(msq)*pow8(mU3) + 3*pow4(mQ3)*(45*pow4(msq)*pow4(mU3) +
+        100*msq2*pow6(mU3) + 67*pow8(mU3)) - 988*mU32*power10(mQ3) + mQ32*(-45*
+        pow4(msq)*pow6(mU3) + 150*msq2*pow8(mU3) + 9*power10(mU3))))/((mQ32 -
+        mU32)*pow3(m32 - mU32)*pow4(mQ3)*pow4(m32 - mQ32)*pow4(mU3)) + (2*pow4(
+        Xt)*(32*pow18(m3)*pow4(mQ32 - mU32) + pow6(mU3)*pow8(mQ3)*(3*pow12(mQ3)
+        + pow6(mQ3)*(78*msq2*pow4(mU3) - 256*pow6(mU3)) + 3*mQ32*(10*msq2*mU32
+        - 20*pow4(msq) + pow4(mU3))*pow6(mU3) - 1362*pow4(mU3)*pow8(mQ3) + 30*
+        pow4(msq)*pow8(mU3) + pow4(mQ3)*(30*pow4(msq)*pow4(mU3) - 108*msq2*
+        pow6(mU3) + 1531*pow8(mU3)) + mU32*power10(mQ3)) - 2*mU32*pow4(mQ3)*
+        pow8(m3)*(114*pow12(mQ3) - 3*mQ32*(-123*msq2*mU32 + 80*pow4(msq) +
+        2415*pow4(mU3))*pow6(mU3) + pow6(mQ3)*(30*mU32*pow4(msq) - 891*msq2*
+        pow4(mU3) + 14570*pow6(mU3)) - 4*(84*msq2*mU32 - 2521*pow4(mU3))*pow8(
+        mQ3) + 3*(48*msq2*mU32 + 45*pow4(msq) - 215*pow4(mU3))*pow8(mU3) +
+        pow4(mQ3)*(75*pow4(msq)*pow4(mU3) + 714*msq2*pow6(mU3) + 4117*pow8(mU3)
+        ) + 3445*mU32*power10(mQ3)) - pow12(m3)*(888*mU32*pow12(mQ3) + 940*
+        mQ32*pow12(mU3) + 128*pow14(mQ3) + 32*pow14(mU3) + (-372*msq2*pow4(mU3)
+        + 5231*pow6(mU3))*pow8(mQ3) + (384*msq2 - 2195*mU32)*pow4(mQ3)*pow8(
+        mU3) + pow6(mQ3)*(-12*msq2*pow6(mU3) + 9563*pow8(mU3)) - 203*pow4(mU3)*
+        power10(mQ3)) + mQ32*power10(m3)*(784*mU32*pow12(mQ3) + 32*pow14(mQ3) +
+        356*pow14(mU3) - 3*pow4(mQ3)*(-194*msq2*mU32 + 60*pow4(msq) + 1049*
+        pow4(mU3))*pow6(mU3) + (-858*msq2*pow4(mU3) + 11179*pow6(mU3))*pow8(
+        mQ3) + mQ32*(504*msq2*mU32 + 90*pow4(msq) - 3451*pow4(mU3))*pow8(mU3) +
+        pow6(mQ3)*(90*pow4(msq)*pow4(mU3) - 228*msq2*pow6(mU3) + 23597*pow8(
+        mU3)) + 6890*pow4(mU3)*power10(mQ3)) + pow4(mQ3)*pow4(mU3)*pow6(m3)*(
+        2065*pow12(mQ3) + 4*pow6(mQ3)*(60*mU32*pow4(msq) - 57*msq2*pow4(mU3) +
+        4057*pow6(mU3)) - 6*(318*msq2*mU32 + 5*pow4(msq) - 4271*pow4(mU3))*
+        pow8(mQ3) + 30*msq2*(9*msq2 + 2*mU32)*pow8(mU3) - 3*pow4(mQ3)*(40*pow4(
+        msq)*pow4(mU3) - 644*msq2*pow6(mU3) + 5429*pow8(mU3)) + (-78*msq2 +
+        16431*mU32)*power10(mQ3) + mQ32*(-360*pow4(msq)*pow6(mU3) + 222*msq2*
+        pow8(mU3) - 6703*power10(mU3))) - 4*pow16(m3)*(-293*pow4(mU3)*pow6(mQ3)
+        + 307*pow4(mQ3)*pow6(mU3) - 63*mU32*pow8(mQ3) - 7*mQ32*pow8(mU3) + 32*
+        power10(mQ3) + 24*power10(mU3)) + 2*pow14(m3)*(96*pow12(mQ3) + 48*
+        pow12(mU3) - 6*pow6(mQ3)*(9*msq2*pow4(mU3) - 316*pow6(mU3)) - 1801*
+        pow4(mU3)*pow8(mQ3) + pow4(mQ3)*(54*msq2*pow6(mU3) + 507*pow8(mU3)) +
+        104*mU32*power10(mQ3) + 342*mQ32*power10(mU3)) + m32*pow4(mU3)*pow6(
+        mQ3)*(-50*mU32*pow12(mQ3) + 9*pow14(mQ3) + 3*pow4(mQ3)*(234*msq2*mU32 +
+        80*pow4(msq) - 2079*pow4(mU3))*pow6(mU3) + (-234*msq2*pow4(mU3) + 5451*
+        pow6(mU3))*pow8(mQ3) + 6*mQ32*(-20*msq2*mU32 - 35*pow4(msq) + pow4(mU3)
+        )*pow8(mU3) - 2*pow6(mQ3)*(45*pow4(msq)*pow4(mU3) + 174*msq2*pow6(mU3)
+        + 352*pow8(mU3)) + 4389*pow4(mU3)*power10(mQ3) + 60*pow4(msq)*power10(
+        mU3)) - pow4(m3)*pow4(mQ3)*pow4(mU3)*(4560*mU32*pow12(mQ3) + 47*pow14(
+        mQ3) + (-90*mU32*pow4(msq) - 1692*msq2*pow4(mU3) + 11639*pow6(mU3))*
+        pow8(mQ3) + 4*pow6(mQ3)*(90*pow4(msq)*pow4(mU3) + 357*msq2*pow6(mU3) -
+        1753*pow8(mU3)) + (-234*msq2*mU32 + 16064*pow4(mU3))*power10(mQ3) +
+        pow4(mQ3)*(-360*pow4(msq)*pow6(mU3) + 528*msq2*pow8(mU3) - 9803*
+        power10(mU3)) + 90*pow4(msq)*power10(mU3) + mQ32*(9*pow12(mU3) - 30*
+        msq2*power10(mU3)))))/(pow3(m32 - mU32)*pow4(mQ3)*pow4(m32 - mQ32)*
+        pow4(mU3)*pow4(mQ32 - mU32)) - (log(Mst12/pow2(mU3))*(-320*m32*(mQ32 +
+        mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)*(-3*mU32*pow4(mQ3) + m32*(2*
+        mQ32*mU32 + pow4(mQ3)))*pow6(Xt) - 8*m3*(m32 - mQ32)*(m32 - mU32)*Xt*
+        pow3(mQ32 - mU32)*(-3*pow12(mQ3) - 30*msq2*(msq2 + 2*mU32)*pow4(mQ3)*
+        pow4(mU3) + pow6(m3)*(-((60*msq2 + 209*mU32)*pow4(mQ3)) + 30*mQ32*(2*
+        msq2*mU32 + pow4(msq) - 54*pow4(mU3)) - 3*mU32*(10*pow4(msq) + 59*pow4(
+        mU3)) + 790*pow6(mQ3)) + 30*mQ32*pow4(msq)*pow6(mU3) + pow6(mQ3)*(60*
+        msq2*pow4(mU3) + 317*pow6(mU3)) + (785*mQ32*mU32 - 665*pow4(mQ3) + 504*
+        pow4(mU3))*pow8(m3) + pow4(m3)*(60*pow4(msq)*pow4(mU3) + pow4(mQ3)*(60*
+        msq2*mU32 - 30*pow4(msq) + 1666*pow4(mU3)) + (60*msq2 - 749*mU32)*pow6(
+        mQ3) - 5*mQ32*(6*mU32*pow4(msq) + 24*msq2*pow4(mU3) - 121*pow6(mU3)) -
+        338*pow8(mQ3)) - 212*pow4(mU3)*pow8(mQ3) + 64*(3*mQ32 - 5*mU32)*
+        power10(m3) + 10*mU32*power10(mQ3) + m32*(-30*mQ32*msq2*(msq2 - 2*mU32)
+        *pow4(mU3) - 2*(60*msq2*mU32 + 193*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(
+        60*mU32*pow4(msq) + 60*msq2*pow4(mU3) - 729*pow6(mU3)) - 30*pow4(msq)*
+        pow6(mU3) + 531*mU32*pow8(mQ3) + 8*power10(mQ3))) + 8*m3*(m32 - mQ32)*(
+        m32 - mU32)*pow5(Xt)*((-318*mU32*pow4(mQ3) + 109*mQ32*pow4(mU3) - 285*
+        pow6(mQ3) + 14*pow6(mU3))*pow8(m3) + pow6(m3)*(30*pow4(msq)*pow4(mU3) +
+        pow4(mQ3)*(-30*pow4(msq) + 583*pow4(mU3)) + (60*msq2 + 601*mU32)*pow6(
+        mQ3) + mQ32*(-60*msq2*pow4(mU3) + 487*pow6(mU3)) + 148*pow8(mQ3) + 101*
+        pow8(mU3)) + 2*(-16*mQ32*mU32 + 73*pow4(mQ3) - 57*pow4(mU3))*power10(
+        m3) - pow4(m3)*((120*msq2*mU32 - 30*pow4(msq) + 963*pow4(mU3))*pow6(
+        mQ3) + 60*pow4(msq)*pow6(mU3) + pow4(mQ3)*(-60*mU32*pow4(msq) - 60*
+        msq2*pow4(mU3) + 1273*pow6(mU3)) + (60*msq2 + 103*mU32)*pow8(mQ3) +
+        mQ32*(30*pow4(msq)*pow4(mU3) - 120*msq2*pow6(mU3) + 533*pow8(mU3)) + 8*
+        power10(mQ3)) - mQ32*(mQ32 + mU32)*(-30*mQ32*msq2*(msq2 + 2*mU32)*pow4(
+        mU3) - 92*pow4(mU3)*pow6(mQ3) + 30*pow4(msq)*pow6(mU3) + pow4(mQ3)*(60*
+        msq2*pow4(mU3) + 353*pow6(mU3)) - 30*mU32*pow8(mQ3) + 9*power10(mQ3)) +
+        m32*(24*pow12(mQ3) - 15*pow6(mQ3)*(4*mU32*pow4(msq) - 4*msq2*pow4(mU3)
+        - 71*pow6(mU3)) + 60*mQ32*msq2*(msq2 - mU32)*pow6(mU3) + (120*msq2*mU32
+        + 263*pow4(mU3))*pow8(mQ3) + 30*pow4(msq)*pow8(mU3) + pow4(mQ3)*(-30*
+        pow4(msq)*pow4(mU3) - 120*msq2*pow6(mU3) + 769*pow8(mU3)) - 201*mU32*
+        power10(mQ3))) - pow4(mQ32 - mU32)*(2*(907*mQ32 - 459*mU32)*pow14(m3) -
+        128*pow16(m3) - 2*pow12(m3)*(30*msq2*mU32 + mQ32*(-30*msq2 + 95*mU32) +
+        2589*pow4(mQ3) - 1340*pow4(mU3)) + pow8(m3)*(3*pow4(mU3)*(-60*msq2*mU32
+        - 90*pow4(msq) + 247*pow4(mU3)) + pow4(mQ3)*(-180*msq2*mU32 + 60*pow4(
+        msq) + 1709*pow4(mU3)) - (180*msq2 + 10181*mU32)*pow6(mQ3) + mQ32*(210*
+        mU32*pow4(msq) + 540*msq2*pow4(mU3) + 6547*pow6(mU3)) - 3296*pow8(mQ3))
+        + (mQ32 - mU32)*mU32*pow4(mQ3)*(-373*pow4(mQ3)*pow4(mU3) - 30*pow4(msq)
+        *pow4(mU3) + 4*mU32*pow6(mQ3) + 3*pow8(mQ3)) + ((120*msq2 + 6721*mU32)*
+        pow4(mQ3) + 90*mU32*pow4(msq) + 180*msq2*pow4(mU3) - mQ32*(300*msq2*
+        mU32 + 90*pow4(msq) + 5939*pow4(mU3)) + 6045*pow6(mQ3) - 2347*pow6(mU3)
+        )*power10(m3) + 2*pow6(m3)*((270*msq2*mU32 + 15*pow4(msq) + 2089*pow4(
+        mU3))*pow6(mQ3) + 15*msq2*(9*msq2 + 2*mU32)*pow6(mU3) - 3*pow4(mQ3)*(
+        35*mU32*pow4(msq) + 30*msq2*pow4(mU3) + 973*pow6(mU3)) + 2958*mU32*
+        pow8(mQ3) - mQ32*(45*pow4(msq)*pow4(mU3) + 210*msq2*pow6(mU3) + 1174*
+        pow8(mU3)) + 390*power10(mQ3)) + m32*mQ32*(9*pow12(mQ3) + 513*pow6(mQ3)
+        *pow6(mU3) + 1145*pow4(mU3)*pow8(mQ3) + 2*pow4(mQ3)*(45*pow4(msq)*pow4(
+        mU3) + 90*msq2*pow6(mU3) - 746*pow8(mU3)) + 60*pow4(msq)*pow8(mU3) -
+        30*mQ32*(5*pow4(msq)*pow6(mU3) + 6*msq2*pow8(mU3)) - 47*mU32*power10(
+        mQ3)) - 2*pow4(m3)*(19*pow12(mQ3) + 15*pow6(mQ3)*(3*mU32*pow4(msq) +
+        18*msq2*pow4(mU3) - 49*pow6(mU3)) + 1863*pow4(mU3)*pow8(mQ3) + 45*pow4(
+        msq)*pow8(mU3) - pow4(mQ3)*(135*pow4(msq)*pow4(mU3) + 210*msq2*pow6(
+        mU3) + 1367*pow8(mU3)) + 15*mQ32*(3*pow4(msq)*pow6(mU3) - 4*msq2*pow8(
+        mU3)) + 668*mU32*power10(mQ3))) + 8*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32
+        - mU32)*pow3(Xt)*(130*(mQ32 - mU32)*pow12(m3) + (808*mU32*pow4(mQ3) +
+        817*mQ32*pow4(mU3) + 263*pow6(mQ3) + 672*pow6(mU3))*pow8(m3) + pow6(m3)
+        *(30*pow4(mQ3)*(8*msq2*mU32 + 2*pow4(msq) - 91*pow4(mU3)) + 60*pow4(
+        msq)*pow4(mU3) - 2*(60*msq2 + 413*mU32)*pow6(mQ3) - 10*mQ32*(12*mU32*
+        pow4(msq) + 12*msq2*pow4(mU3) + 149*pow6(mU3)) + 175*pow8(mQ3) - 249*
+        pow8(mU3)) + (138*mQ32*mU32 - 407*pow4(mQ3) - 243*pow4(mU3))*power10(
+        m3) + pow4(m3)*((-60*pow4(msq) + 3606*pow4(mU3))*pow6(mQ3) - 6*pow4(
+        mQ3)*(60*msq2*pow4(mU3) - 349*pow6(mU3)) - 120*pow4(msq)*pow6(mU3) + 8*
+        (15*msq2 - 88*mU32)*pow8(mQ3) + mQ32*(180*pow4(msq)*pow4(mU3) + 240*
+        msq2*pow6(mU3) + 287*pow8(mU3)) - 163*power10(mQ3)) + mQ32*(18*pow12(
+        mQ3) + 120*mQ32*msq2*(msq2 + mU32)*pow6(mU3) + 6*pow6(mQ3)*(20*msq2*
+        pow4(mU3) + 191*pow6(mU3)) - 351*pow4(mU3)*pow8(mQ3) - 60*pow4(msq)*
+        pow8(mU3) - pow4(mQ3)*(60*pow4(msq)*pow4(mU3) + 240*msq2*pow6(mU3) +
+        223*pow8(mU3)) - 78*mU32*power10(mQ3)) + m32*(-48*pow12(mQ3) + 2*pow6(
+        mQ3)*(60*mU32*pow4(msq) + 180*msq2*pow4(mU3) - 1147*pow6(mU3)) - (240*
+        msq2*mU32 + 1291*pow4(mU3))*pow8(mQ3) - 9*pow4(mQ3)*(20*pow4(msq)*pow4(
+        mU3) - 17*pow8(mU3)) - 120*mQ32*msq2*pow8(mU3) + 60*pow4(msq)*pow8(mU3)
+        + 920*mU32*power10(mQ3))) - 2*pow2(mQ32 - mU32)*pow2(Xt)*(256*(2*mQ32 +
+        mU32)*pow16(m3) - 2*pow14(m3)*(244*mQ32*mU32 + 1523*pow4(mQ3) + 921*
+        pow4(mU3)) + 2*pow12(m3)*((-30*msq2 + 2486*mU32)*pow4(mQ3) - 30*(msq2 -
+        83*mU32)*pow4(mU3) + mQ32*(60*msq2*mU32 + 91*pow4(mU3)) + 2997*pow6(
+        mQ3)) - (-90*pow4(msq)*pow4(mU3) - 2*pow4(mQ3)*(210*msq2*mU32 + 45*
+        pow4(msq) + 3428*pow4(mU3)) + 4*(30*msq2 + 3691*mU32)*pow6(mQ3) - 180*
+        msq2*pow6(mU3) + 4*mQ32*(45*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 2279*
+        pow6(mU3)) + 4757*pow8(mQ3) + 5099*pow8(mU3))*power10(m3) + (mQ32 -
+        mU32)*mU32*pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) + 233*pow4(mU3)*pow6(
+        mQ3) - 1281*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + 3*mU32*pow8(
+        mQ3) + 9*power10(mQ3)) + pow8(m3)*(-6*(10*pow4(msq) + 643*pow4(mU3))*
+        pow6(mQ3) + 9*(-20*msq2*mU32 - 30*pow4(msq) + 189*pow4(mU3))*pow6(mU3)
+        - 2*pow4(mQ3)*(75*mU32*pow4(msq) + 360*msq2*pow4(mU3) + 1357*pow6(mU3))
+        + (180*msq2 + 15701*mU32)*pow8(mQ3) + 6*mQ32*(80*pow4(msq)*pow4(mU3) +
+        120*msq2*pow6(mU3) + 2483*pow8(mU3)) + 1152*power10(mQ3)) + 2*pow6(m3)*
+        (112*pow12(mQ3) - 6*mQ32*(40*msq2*mU32 + 30*pow4(msq) + 503*pow4(mU3))*
+        pow6(mU3) + 20*pow6(mQ3)*(6*mU32*pow4(msq) + 18*msq2*pow4(mU3) + 359*
+        pow6(mU3)) - (270*msq2*mU32 + 15*pow4(msq) + 2161*pow4(mU3))*pow8(mQ3)
+        + pow4(mQ3)*(-60*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 6923*pow8(
+        mU3)) + 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) - 3254*mU32*power10(mQ3)) +
+        2*pow4(m3)*(515*mU32*pow12(mQ3) - 57*pow14(mQ3) + pow4(mQ3)*(150*msq2*
+        mU32 + 180*pow4(msq) + 4093*pow4(mU3))*pow6(mU3) + (45*mU32*pow4(msq) +
+        270*msq2*pow4(mU3) - 4664*pow6(mU3))*pow8(mQ3) - 4*pow6(mQ3)*(45*pow4(
+        msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 272*pow8(mU3)) + 1713*pow4(mU3)*
+        power10(mQ3) + 60*mQ32*msq2*power10(mU3) - 45*pow4(msq)*power10(mU3)) +
+        3*m32*mQ32*(-56*mU32*pow12(mQ3) + 9*pow14(mQ3) + 4*pow4(mQ3)*(30*msq2*
+        mU32 + 20*pow4(msq) - 427*pow4(mU3))*pow6(mU3) + 556*pow6(mU3)*pow8(
+        mQ3) - 5*pow6(mQ3)*(6*pow4(msq)*pow4(mU3) + 12*msq2*pow6(mU3) - 223*
+        pow8(mU3)) - 10*mQ32*msq2*(7*msq2 + 6*mU32)*pow8(mU3) - 172*pow4(mU3)*
+        power10(mQ3) + 20*pow4(msq)*power10(mU3))) + (mQ32 - mU32)*pow4(Xt)*(-
+        12*(23*mQ32 - 87*mU32)*pow16(m3) - 4*pow14(m3)*(703*mQ32*mU32 + 28*
+        pow4(mQ3) + 793*pow4(mU3)) + 2*pow12(m3)*((-30*msq2 + 2627*mU32)*pow4(
+        mQ3) + 4493*mQ32*pow4(mU3) + 5*(6*msq2 + 47*mU32)*pow4(mU3) + 925*pow6(
+        mQ3)) + (2*pow4(mQ3)*(90*msq2*mU32 + 45*pow4(msq) - 4166*pow4(mU3)) +
+        15*pow4(mU3)*(-12*msq2*mU32 - 6*pow4(msq) + 263*pow4(mU3)) - 6*(20*msq2
+        + 1613*mU32)*pow6(mQ3) + 6*mQ32*(20*msq2*pow4(mU3) + 267*pow6(mU3)) -
+        1633*pow8(mQ3))*power10(m3) + pow8(m3)*((360*msq2*mU32 - 60*pow4(msq) +
+        4104*pow4(mU3))*pow6(mQ3) + 3*(60*msq2*mU32 + 90*pow4(msq) - 761*pow4(
+        mU3))*pow6(mU3) - 90*pow4(mQ3)*(3*mU32*pow4(msq) + 4*msq2*pow4(mU3) +
+        139*pow6(mU3)) + (180*msq2 + 8509*mU32)*pow8(mQ3) + 20*mQ32*(3*pow4(
+        msq)*pow4(mU3) - 18*msq2*pow6(mU3) - 784*pow8(mU3)) - 460*power10(mQ3))
+        + mU32*(mQ32 + mU32)*pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) - 285*pow4(
+        mU3)*pow6(mQ3) - 1799*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + 3*
+        mU32*pow8(mQ3) + 9*power10(mQ3)) + 2*pow6(m3)*(355*pow12(mQ3) + 2*pow6(
+        mQ3)*(45*mU32*pow4(msq) - 90*msq2*pow4(mU3) + 5383*pow6(mU3)) - (270*
+        msq2*mU32 + 15*pow4(msq) + 1186*pow4(mU3))*pow8(mQ3) - 15*msq2*(9*msq2
+        + 2*mU32)*pow8(mU3) + 3*pow4(mQ3)*(50*pow4(msq)*pow4(mU3) + 100*msq2*
+        pow6(mU3) + 4459*pow8(mU3)) - 734*mU32*power10(mQ3) + mQ32*(-90*pow4(
+        msq)*pow6(mU3) + 180*msq2*pow8(mU3) + 4118*power10(mU3))) + m32*mQ32*(-
+        114*mU32*pow12(mQ3) + 27*pow14(mQ3) + 3666*pow6(mU3)*pow8(mQ3) - 3*
+        pow6(mQ3)*(30*pow4(msq)*pow4(mU3) + 60*msq2*pow6(mU3) - 3863*pow8(mU3))
+        + 90*mQ32*msq2*(msq2 + 2*mU32)*pow8(mU3) + 756*pow4(mU3)*power10(mQ3) -
+        60*pow4(msq)*power10(mU3) + pow4(mQ3)*(60*pow4(msq)*pow6(mU3) + 7196*
+        power10(mU3))) - 2*pow4(m3)*(360*mU32*pow12(mQ3) + 57*pow14(mQ3) + 9*
+        pow4(mQ3)*(30*msq2*mU32 + 10*pow4(msq) + 631*pow4(mU3))*pow6(mU3) + (-
+        45*mU32*pow4(msq) - 270*msq2*pow4(mU3) + 7247*pow6(mU3))*pow8(mQ3) +
+        10*pow6(mQ3)*(9*pow4(msq)*pow4(mU3) - 6*msq2*pow6(mU3) + 1225*pow8(mU3)
+        ) - pow4(mU3)*power10(mQ3) - 45*pow4(msq)*power10(mU3) + mQ32*(-90*
+        pow4(msq)*pow8(mU3) + 60*msq2*power10(mU3))))))/(pow3(m32 - mU32)*pow4(
+        m32 - mQ32)*pow5(mQ32 - mU32))))/3.;
+ 
+   return result;				     
+}
+
+double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log12(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt){
+
+   using std::log;
+   using gm2calc::dilog;
+   
+   const double mQ32 = pow2(mQ3);
+   const double mU32 = pow2(mU3);
+   const double m32 = pow2(m3);
+   const double msq2 = pow2(msq);
+   const double Mst12 = pow2(Mst1);
+   
+   const double result =
+      (4*(115.39746270332105 - (480*m3*msq2*Xt)/((m32 - mQ32)*(m32 - mU32)) + (
+        80*m32*pow2(Xt))/(pow2(mQ3)*pow2(mU3)) + (640*m3*pow3(Xt))/pow2(mQ32 -
+        mU32) - 128*m3*pow3(Xt)*((4*pow4(m3))/((m32 - mQ32)*(m32 - mU32)*pow2(
+        mQ3)*pow2(mU3)) - (3*(2 + (8*pow4(m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(
+        m3) + pow4(mQ3) + pow4(mU3)))/(3.*pow2(m32 - mQ32)*pow2(m32 - mU32))))/
+        pow2(mQ32 - mU32)) - 40*dilog(1 - m32/pow2(mQ3))*((8*Xt*pow3(m3))/((m32
+        - mQ32)*(mQ32 - mU32)) + (4*m3*(2*m32 - mQ32 - mU32)*pow3(Xt))/pow3(
+        mQ32 - mU32) - (2*pow4(m3))/pow2(m32 - mQ32) - ((-2*m32 + mQ32 + mU32)*
+        pow4(Xt))/pow3(mQ32 - mU32)) - 40*dilog(1 - m32/pow2(mU3))*((8*Xt*pow3(
+        m3))/((m32 - mU32)*(-mQ32 + mU32)) + (4*m3*(-2*m32 + mQ32 + mU32)*pow3(
+        Xt))/pow3(mQ32 - mU32) - (2*pow4(m3))/pow2(m32 - mU32) + ((-2*m32 +
+        mQ32 + mU32)*pow4(Xt))/pow3(mQ32 - mU32)) + (960*m3*msq2*pow5(Xt))/((
+        m32 - mQ32)*(m32 - mU32)*pow2(mQ32 - mU32)) + 60*log(Mst12/pow2(msq))*(
+        (8*m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*
+        msq2 + mU32))*Xt)/(pow2(m32 - mQ32)*pow2(m32 - mU32)) + ((mQ32 - msq2)*
+        (-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 -
+        mQ32) + ((msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*
+        pow4(m3)))/pow3(-m32 + mU32) - (2*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2)
+        + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(
+        3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 +
+        mU32))*pow4(Xt))/pow2(mQ32 - mU32) - (16*m3*(m32 - msq2)*(mQ32*(msq2 -
+        2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow5(Xt))/(pow2(m32 -
+        mQ32)*pow2(m32 - mU32)*pow2(mQ32 - mU32))) - 30*pow2(log(Mst12/pow2(
+        msq)))*((-8*m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(
+        mQ32 - 2*msq2 + mU32))*Xt)/(pow2(m32 - mQ32)*pow2(m32 - mU32)) + (16*
+        m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2
+        + mU32))*pow3(Xt))/((mQ32 - mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)) +
+        (2*pow2(Xt)*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2)
+        - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(3*m32*(msq2 - mU32) +
+        mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 + mU32)))/(mQ32 - mU32) - (
+        (mQ32 - msq2)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))
+        /pow3(m32 - mQ32) + ((msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 +
+        mU32) - 2*pow4(m3)))/pow3(m32 - mU32) - ((mQ32 + mU32)*(((mQ32 - msq2)*
+        (-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 -
+        mQ32) + ((msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*
+        pow4(m3)))/pow3(-m32 + mU32))*pow4(Xt))/pow3(mQ32 - mU32) - (8*m3*(m32
+        - msq2)*(mQ32 + mU32)*(mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 -
+        2*msq2 + mU32))*pow5(Xt))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32
+        - mU32))) - 30*pow2(log(Mst12/pow2(msq)))*((-8*m3*(m32 - msq2)*(mQ32*(
+        msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*Xt)/(pow2(m32
+        - mQ32)*pow2(m32 - mU32)) - (16*m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) +
+        msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow3(Xt))/((mQ32 - mU32)*pow2(
+        m32 - mQ32)*pow2(m32 - mU32)) - (2*pow2(Xt)*(((mQ32 - msq2)*(-3*m32*(
+        mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((
+        msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/
+        pow3(-m32 + mU32)))/(mQ32 - mU32) - ((mQ32 - msq2)*(-3*m32*(mQ32 -
+        msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 -
+        mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(m32
+        - mU32) + ((mQ32 + mU32)*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2) + mQ32*(
+        mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(3*m32*(
+        msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 + mU32))*
+        pow4(Xt))/pow3(mQ32 - mU32) + (8*m3*(m32 - msq2)*(mQ32 + mU32)*(mQ32*(
+        msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow5(Xt))/(
+        pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32))) + (32*pow3(m3)*
+        pow5(Xt)*(-5*m32*mQ32*mU32*(23*mQ32 + 12*msq2 + 23*mU32) + mQ32*mU32*(
+        3*mU32*(10*msq2 + mU32) + mQ32*(30*msq2 + 101*mU32) + 3*pow4(mQ3)) +
+        pow4(m3)*(123*mQ32*mU32 - 8*pow4(mQ3) - 8*pow4(mU3)) + 8*(mQ32 + mU32)*
+        pow6(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)*pow2(
+        mQ32 - mU32)) + (16*Xt*pow3(m3)*(4*m32*mQ32*mU32*(28*mQ32 + 15*msq2 +
+        28*mU32) - 16*pow4(m3)*(8*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 3*mQ32*
+        mU32*(10*msq2*mU32 + 10*mQ32*(msq2 + 3*mU32) + pow4(mQ3) + pow4(mU3)) +
+        16*(mQ32 + mU32)*pow6(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(
+        m32 - mU32)) - (16*m3*pow5(Xt)*(mQ32*mU32*(-30*msq2*mU32 + 2*mQ32*(15*
+        msq2 + 92*mU32) + 3*pow4(mQ3) + 3*pow4(mU3)) - 2*pow4(m3)*(-86*mQ32*
+        mU32 + 31*pow4(mQ3) + 8*pow4(mU3)) + m32*mQ32*(2*mQ32*(15*msq2 - 83*
+        mU32) + 3*pow4(mQ3) - 5*(6*msq2*mU32 + 37*pow4(mU3))) + 16*(3*mQ32 +
+        mU32)*pow6(m3)))/((-m32 + mQ32)*pow2(mQ3)*pow2(m32 - mU32)*pow3(mQ32 -
+        mU32)) - (16*m3*pow5(Xt)*(m32*mU32*(3*mU32*(10*msq2 + mU32) - 10*mQ32*(
+        3*msq2 + 17*mU32) - 181*pow4(mQ3)) + mQ32*mU32*(3*mU32*(10*msq2 + mU32)
+        + mQ32*(-30*msq2 + 184*mU32) + 3*pow4(mQ3)) - 2*pow4(m3)*(-84*mQ32*mU32
+        + 8*pow4(mQ3) + 29*pow4(mU3)) + 16*(mQ32 + 3*mU32)*pow6(m3)))/((m32 -
+        mU32)*pow2(m32 - mQ32)*pow2(mU3)*pow3(mQ32 - mU32)) - (60*(msq2 - mU32)
+        *dilog(1 - msq2/pow2(mU3))*(3*m32*(mQ32 - mU32)*(-msq2 + mU32) + mU32*(
+        -mQ32 + mU32)*(msq2 + mU32) + 8*m3*(msq2 - mU32)*mU32*Xt + 8*(-msq2 +
+        mU32)*Xt*pow3(m3) + 2*(mQ32 - mU32)*pow4(m3))*(pow2(-(mU3*pow2(Xt)) +
+        pow3(mU3)) + (3*mU32 - 2*pow2(Xt))*pow4(mQ3) + mQ32*(4*mU32*pow2(Xt) -
+        3*pow4(mU3) + pow4(Xt)) - pow6(mQ3)))/(pow3(m32 - mU32)*pow4(mQ32 -
+        mU32)) + (60*(mQ32 - msq2)*dilog(1 - msq2/pow2(mQ3))*(-3*m32*(mQ32 -
+        msq2)*(mQ32 - mU32) + mQ32*(mQ32 + msq2)*(mQ32 - mU32) + 8*m3*mQ32*(-
+        mQ32 + msq2)*Xt + 8*(mQ32 - msq2)*Xt*pow3(m3) - 2*(mQ32 - mU32)*pow4(
+        m3))*(-pow2(-(mU3*pow2(Xt)) + pow3(mU3)) + (-3*mU32 + 2*pow2(Xt))*pow4(
+        mQ3) + mQ32*(-4*mU32*pow2(Xt) + 3*pow4(mU3) - pow4(Xt)) + pow6(mQ3)))/(
+        pow3(m32 - mQ32)*pow4(mQ32 - mU32)) - (16*m3*Xt*(-2*mQ32*mU32*(-15*
+        msq2*mU32 + mQ32*(30*msq2 + 37*mU32) + 3*pow4(mQ3)) - 4*pow4(m3)*(28*
+        mQ32*mU32 + 5*pow4(mQ3) + 4*pow4(mU3)) + 2*(11*mQ32 + 8*mU32)*pow6(m3)
+        + m32*(10*(3*msq2 + 10*mU32)*pow4(mQ3) + 87*mQ32*pow4(mU3) + 3*pow6(
+        mQ3))))/((-m32 + mQ32)*(mQ32 - mU32)*pow2(mQ3)*pow2(m32 - mU32)) + (60*
+        (mQ32 - msq2)*dilog(1 - msq2/pow2(mQ3))*(-3*m32*(mQ32 - msq2)*(mQ32 -
+        mU32) + mQ32*(mQ32 + msq2)*(mQ32 - mU32) + 8*m3*mQ32*(-mQ32 + msq2)*Xt
+        + 8*(mQ32 - msq2)*Xt*pow3(m3) - 2*(mQ32 - mU32)*pow4(m3))*(-((3*mU32 +
+        2*pow2(Xt))*pow4(mQ3)) - 2*pow2(Xt)*pow4(mU3) + mU32*pow4(Xt) + mQ32*(
+        4*mU32*pow2(Xt) + 3*pow4(mU3) + pow4(Xt)) + pow6(mQ3) - pow6(mU3)))/(
+        pow3(m32 - mQ32)*pow4(mQ32 - mU32)) - (60*(msq2 - mU32)*dilog(1 - msq2/
+        pow2(mU3))*(3*m32*(mQ32 - mU32)*(-msq2 + mU32) + mU32*(-mQ32 + mU32)*(
+        msq2 + mU32) + 8*m3*(msq2 - mU32)*mU32*Xt + 8*(-msq2 + mU32)*Xt*pow3(
+        m3) + 2*(mQ32 - mU32)*pow4(m3))*((3*mU32 + 2*pow2(Xt))*pow4(mQ3) + 2*
+        pow2(Xt)*pow4(mU3) - mU32*pow4(Xt) - mQ32*(4*mU32*pow2(Xt) + 3*pow4(
+        mU3) + pow4(Xt)) - pow6(mQ3) + pow6(mU3)))/(pow3(m32 - mU32)*pow4(mQ32
+        - mU32)) + (32*m3*pow3(Xt)*((3*mQ32*mU32 + 25*pow4(mQ3) + 16*pow4(mU3))
+        *pow6(m3) - mQ32*mU32*(6*(5*msq2 - 7*mU32)*pow4(mQ3) + 3*(10*msq2 +
+        mU32)*pow4(mU3) + mQ32*(-60*msq2*mU32 + 16*pow4(mU3)) + 3*pow6(mQ3)) -
+        pow4(m3)*(-87*mU32*pow4(mQ3) + 108*mQ32*pow4(mU3) + 31*pow6(mQ3) + 16*
+        pow6(mU3)) + m32*mQ32*((30*msq2 - 43*mU32)*pow4(mQ3) + 30*msq2*pow4(
+        mU3) - 4*mQ32*(15*msq2*mU32 + 8*pow4(mU3)) + 3*pow6(mQ3) + 76*pow6(mU3)
+        )))/((-m32 + mQ32)*pow2(mQ3)*pow2(m32 - mU32)*pow3(mQ32 - mU32)) + (16*
+        m32*pow2(Xt)*(-7*m32*mQ32*mU32*(mQ32 + mU32) + 6*pow4(mQ3)*pow4(mU3) +
+        pow4(m3)*(25*mQ32*mU32 + 17*pow4(mQ3) + 17*pow4(mU3)) - 42*(mQ32 +
+        mU32)*pow6(m3) + 33*pow8(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*
+        pow2(m32 - mU32)) + (16*m3*Xt*(2*mU32*(3*mU32*(10*msq2 + mU32) + mQ32*(
+        -15*msq2 + 37*mU32))*pow4(mQ3) - m32*mQ32*mU32*(36*mQ32*mU32 + 30*msq2*
+        mU32 + 151*pow4(mQ3) + 3*pow4(mU3)) + (42*mQ32*mU32 - 144*pow4(mQ3) +
+        64*pow4(mU3))*pow6(m3) + 4*pow4(m3)*(44*mU32*pow4(mQ3) - 27*mQ32*pow4(
+        mU3) + 20*pow6(mQ3)) + 64*(mQ32 - mU32)*pow8(m3)))/((m32 - mU32)*(mQ32
+        - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)) - 16*dilog(1 - m32/pow2(
+        mQ3))*((6*m3*(2*m32 - mQ32 - mU32)*pow3(Xt)*(2 + (8*pow4(m3)*(-2*m32*(
+        mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(mU3)))/(3.*pow2(m32 -
+        mQ32)*pow2(m32 - mU32))))/pow3(mQ32 - mU32) - (3*pow4(m3)*(2 + (8*pow4(
+        m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(mU3)))/(3.*
+        pow2(m32 - mQ32)*pow2(m32 - mU32))))/pow2(m32 - mQ32) + (16*(-2*m32 +
+        mQ32 + mU32)*pow3(m3)*pow5(Xt))/((m32 - mQ32)*(m32 - mU32)*pow3(mQ32 -
+        mU32)) - (128*pow2(Xt)*pow6(m3))/((m32 - mU32)*(mQ32 - mU32)*pow2(m32 -
+        mQ32)) + (8*Xt*pow3(m3)*(-6*m32*mQ32*mU32*(mQ32 + mU32) + 3*pow4(mQ3)*
+        pow4(mU3) + pow4(m3)*(8*mQ32*mU32 + 7*pow4(mQ3) + 11*pow4(mU3)) - 2*(5*
+        mQ32 + 9*mU32)*pow6(m3) + 11*pow8(m3)))/((mQ32 - mU32)*pow2(m32 - mU32)
+        *pow3(m32 - mQ32)) - ((2*m32 - mQ32 - mU32)*pow4(Xt)*(6*m32*mQ32*mU32*(
+        mQ32 + mU32) + pow4(m3)*(52*mQ32*mU32 - 7*pow4(mQ3) - 7*pow4(mU3)) - 3*
+        pow4(mQ3)*pow4(mU3) - 50*(mQ32 + mU32)*pow6(m3) + 53*pow8(m3)))/(pow2(
+        m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32))) - 16*dilog(1 - m32/
+        pow2(mU3))*((6*m3*(-2*m32 + mQ32 + mU32)*pow3(Xt)*(2 + (8*pow4(m3)*(-2*
+        m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(mU3)))/(3.*pow2(m32 -
+        mQ32)*pow2(m32 - mU32))))/pow3(mQ32 - mU32) - (3*pow4(m3)*(2 + (8*pow4(
+        m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3) + pow4(mQ3) + pow4(mU3)))/(3.*
+        pow2(m32 - mQ32)*pow2(m32 - mU32))))/pow2(m32 - mU32) - (16*(-2*m32 +
+        mQ32 + mU32)*pow3(m3)*pow5(Xt))/((m32 - mQ32)*(m32 - mU32)*pow3(mQ32 -
+        mU32)) + (128*pow2(Xt)*pow6(m3))/((m32 - mQ32)*(mQ32 - mU32)*pow2(m32 -
+        mU32)) - (8*Xt*pow3(m3)*(-6*m32*mQ32*mU32*(mQ32 + mU32) + 3*pow4(mQ3)*
+        pow4(mU3) + pow4(m3)*(8*mQ32*mU32 + 11*pow4(mQ3) + 7*pow4(mU3)) - 2*(9*
+        mQ32 + 5*mU32)*pow6(m3) + 11*pow8(m3)))/((mQ32 - mU32)*pow2(m32 - mQ32)
+        *pow3(m32 - mU32)) + ((2*m32 - mQ32 - mU32)*pow4(Xt)*(6*m32*mQ32*mU32*(
+        mQ32 + mU32) + pow4(m3)*(52*mQ32*mU32 - 7*pow4(mQ3) - 7*pow4(mU3)) - 3*
+        pow4(mQ3)*pow4(mU3) - 50*(mQ32 + mU32)*pow6(m3) + 53*pow8(m3)))/(pow2(
+        m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32))) - (32*m3*pow3(Xt)*(
+        mU32*pow4(mQ3)*(-60*mQ32*(msq2 - 6*mU32)*mU32 + (30*msq2 - 386*mU32)*
+        pow4(mQ3) + 3*(10*msq2 + mU32)*pow4(mU3) + 3*pow6(mQ3)) + pow6(m3)*(
+        399*mU32*pow4(mQ3) - 395*mQ32*pow4(mU3) - 80*pow6(mQ3) + 32*pow6(mU3))
+        + m32*mQ32*mU32*((-30*msq2 + 434*mU32)*pow4(mQ3) + mQ32*(60*msq2*mU32 -
+        745*pow4(mU3)) + 310*pow6(mQ3) - 3*(10*msq2*pow4(mU3) + pow6(mU3))) +
+        32*(pow4(mQ3) - pow4(mU3))*pow8(m3) + pow4(m3)*(315*pow4(mQ3)*pow4(mU3)
+        - 680*mU32*pow6(mQ3) + 385*mQ32*pow6(mU3) + 48*pow8(mQ3))))/((m32 -
+        mU32)*pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow3(mQ32 - mU32)) + (20*
+        pow2(log(Mst12/pow2(mU3)))*(-((6*msq2 + 7*mU32)*pow4(m3)) + 3*mU32*
+        pow4(msq) + (4*m3*(m32 - mU32)*Xt*(-3*m32*mU32 - 12*msq2*mU32 + 2*pow4(
+        m3) + 6*pow4(msq) + pow4(mU3)))/(mQ32 - mU32) + 3*m32*(-6*msq2*mU32 +
+        3*pow4(msq) + 2*pow4(mU3)) - (2*pow2(Xt)*(3*msq2*(mQ32 - mU32)*(3*m32*(
+        msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)) + (m32 - mU32)*((mQ32 - 3*
+        mU32)*pow4(m3) + 2*(mQ32 - 2*mU32)*pow4(mU3) + m32*(-4*mQ32*mU32 + 8*
+        pow4(mU3)))))/pow2(mQ32 - mU32) + (4*m3*(m32 - mU32)*(mQ32 + mU32)*(-(
+        m32*mU32) - 12*msq2*mU32 + 6*pow4(msq) + pow4(mU3))*pow5(Xt))/pow4(mQ32
+        - mU32) + 3*pow6(m3) - 2*pow6(mU3) + (4*m3*(m32 - mU32)*pow3(Xt)*(-((
+        mQ32 + 5*mU32)*pow4(m3)) + 12*mU32*pow4(msq) - 24*msq2*pow4(mU3) + 2*
+        m32*(2*mQ32*mU32 + pow4(mU3)) - 3*mQ32*(-8*msq2*mU32 + 4*pow4(msq) +
+        pow4(mU3)) + 2*pow6(m3) + pow6(mU3)))/pow3(mQ32 - mU32) - (pow4(Xt)*(-
+        3*msq2*(mQ32 - mU32)*(mQ32 + mU32)*(3*m32*(msq2 - 2*mU32) + msq2*mU32 -
+        2*pow4(m3)) + (m32 - mU32)*(8*mQ32*mU32*pow4(m3) + 2*m32*mU32*(-5*mQ32*
+        mU32 + pow4(mQ3) - 4*pow4(mU3)) - pow4(mQ3)*pow4(mU3) - 2*(mQ32 - mU32)
+        *pow6(m3) + 4*mQ32*pow6(mU3) + 5*pow8(mU3))))/pow4(mQ32 - mU32)))/pow3(
+        m32 - mU32) - 20*log(Mst12/pow2(mU3))*((-8*m3*(-mQ32 - 3*mU32 + (6*
+        msq2*pow2(mQ32 - mU32))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(
+        mQ32 - mU32) - (8*m3*(mU32*pow4(m3) + 3*msq2*pow4(mU3) + mQ32*(-9*msq2*
+        mU32 + 6*pow4(msq) + pow4(mU3)) - m32*(-9*msq2*mU32 + mQ32*(3*msq2 +
+        mU32) + 6*pow4(msq) + pow4(mU3)))*pow5(Xt))/((m32 - mQ32)*pow2(m32 -
+        mU32)*pow3(mQ32 - mU32)) + 3*log(Mst12/pow2(msq))*((-8*m3*(m32 - msq2)*
+        (mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*Xt)/(
+        pow2(m32 - mQ32)*pow2(m32 - mU32)) + (16*m3*(m32 - msq2)*(mQ32*(msq2 -
+        2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow3(Xt))/((mQ32 -
+        mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)) + (2*pow2(Xt)*(((mQ32 - msq2)*
+        (-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 -
+        mQ32) + ((msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*
+        pow4(m3)))/pow3(-m32 + mU32)))/(mQ32 - mU32) - ((mQ32 - msq2)*(-3*m32*(
+        mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((
+        msq2 - mU32)*(3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/
+        pow3(m32 - mU32) - ((mQ32 + mU32)*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2)
+        + mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(
+        3*m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 +
+        mU32))*pow4(Xt))/pow3(mQ32 - mU32) - (8*m3*(m32 - msq2)*(mQ32 + mU32)*(
+        mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow5(Xt)
+        )/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32))) - (8*m3*Xt*(-(
+        (mQ32 + 2*mU32)*pow4(m3)) - 3*msq2*pow4(mU3) - mQ32*(-9*msq2*mU32 + 3*
+        pow4(msq) + pow4(mU3)) + m32*(-3*msq2*mU32 + mQ32*(-3*msq2 + 2*mU32) +
+        3*pow4(msq) + pow4(mU3)) + pow6(m3)))/((m32 - mQ32)*(mQ32 - mU32)*pow2(
+        m32 - mU32)) + (2*pow2(Xt)*(pow4(m3)*(15*mU32*(-msq2 + mU32) + mQ32*(-
+        15*msq2 + 64*mU32) + 17*pow4(mQ3)) + 3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*
+        (3*msq2*mU32 + 14*pow4(mU3)) + m32*((9*msq2 - 31*mU32)*pow4(mQ3) + 9*
+        msq2*pow4(mU3) - mQ32*(12*msq2*mU32 + 29*pow4(mU3))) + (-35*mQ32 + 18*
+        msq2 - 33*mU32)*pow6(m3) + 18*pow8(m3)))/((mQ32 - mU32)*pow2(m32 -
+        mQ32)*pow2(m32 - mU32)) - (pow4(Xt)*(-6*msq2*(mQ32 - mU32)*(3*m32*(msq2
+        - 2*mU32) + msq2*mU32 - 2*pow4(m3)) + ((m32 - mU32)*(-3*mQ32*(mQ32 + 5*
+        mU32)*pow4(mU3) - pow4(m3)*(15*mQ32*mU32 + 6*pow4(mQ3) + 29*pow4(mU3))
+        + (3*mQ32 + 7*mU32)*pow6(m3) + m32*(7*mU32*pow4(mQ3) + 31*mQ32*pow4(
+        mU3) + 16*pow6(mU3)) + 4*pow8(m3)))/(m32 - mQ32) + ((m32 - mU32)*(mQ32
+        + mU32)*(3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 11*pow4(mU3))
+        + pow4(m3)*(-15*msq2*mU32 + mQ32*(-15*msq2 + 44*mU32) + 11*pow4(mQ3) +
+        11*pow4(mU3)) + m32*((9*msq2 - 22*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) -
+        2*mQ32*(6*msq2*mU32 + 11*pow4(mU3))) - 2*(11*mQ32 - 9*msq2 + 11*mU32)*
+        pow6(m3) + 11*pow8(m3)))/pow2(m32 - mQ32)))/(pow3(m32 - mU32)*pow3(mQ32
+        - mU32)) + (-((-51*msq2*mU32 + mQ32*(-3*msq2 + 91*mU32) + 17*pow4(mQ3)
+        + 9*pow4(msq) + 43*pow4(mU3))*pow6(m3)) + 3*mQ32*msq2*pow6(mU3) + pow4(
+        mQ3)*(-3*mU32*pow4(msq) + 3*msq2*pow4(mU3) + 13*pow6(mU3)) + pow4(m3)*(
+        (-3*msq2 + 44*mU32)*pow4(mQ3) - 3*mU32*pow4(msq) - 24*msq2*pow4(mU3) +
+        mQ32*(-39*msq2*mU32 + 18*pow4(msq) + 83*pow4(mU3)) + 14*pow6(mU3)) +
+        m32*(pow4(mQ3)*(24*msq2*mU32 - 9*pow4(msq) - 40*pow4(mU3)) + 3*mQ32*(2*
+        mU32*pow4(msq) - 5*msq2*pow4(mU3) - 9*pow6(mU3)) + 9*msq2*pow6(mU3)) +
+        (35*mQ32 - 12*msq2 + 47*mU32)*pow8(m3) - 18*power10(m3))/(pow2(m32 -
+        mQ32)*pow3(m32 - mU32))) + (60*(m32 - msq2)*dilog(1 - m32/pow2(msq))*(-
+        pow2(-(mU3*pow2(Xt)) + pow3(mU3)) + (-3*mU32 + 2*pow2(Xt))*pow4(mQ3) +
+        mQ32*(-4*mU32*pow2(Xt) + 3*pow4(mU3) - pow4(Xt)) + pow6(mQ3))*(8*m3*
+        mQ32*mU32*(mQ32*(msq2 - 2*mU32) + msq2*mU32)*Xt - mQ32*msq2*mU32*(pow4(
+        mQ3) + pow4(mU3)) - 8*Xt*pow3(m3)*((msq2 - 3*mU32)*pow4(mQ3) + mQ32*(4*
+        msq2*mU32 - 3*pow4(mU3)) + msq2*pow4(mU3)) - 8*Xt*(-3*msq2*mU32 + mQ32*
+        (-3*msq2 + 4*mU32) + pow4(mQ3) + pow4(mU3))*pow5(m3) + (-8*msq2*mU32 +
+        mQ32*(-8*msq2 + 30*mU32) + 3*pow4(mQ3) + 3*pow4(mU3))*pow6(m3) - pow4(
+        m3)*((-9*msq2 + 15*mU32)*pow4(mQ3) - 9*msq2*pow4(mU3) + 3*mQ32*(2*msq2*
+        mU32 + 5*pow4(mU3)) + pow6(mQ3) + pow6(mU3)) + m32*(3*msq2*mU32*pow4(
+        mQ3) + (-3*msq2 + 5*mU32)*pow6(mQ3) - 3*msq2*pow6(mU3) + mQ32*(3*msq2*
+        pow4(mU3) + 5*pow6(mU3))) + 8*(mQ32 - 2*msq2 + mU32)*Xt*pow7(m3) + (-8*
+        mQ32 + 6*msq2 - 8*mU32)*pow8(m3) + 2*power10(m3)))/(pow3(m32 - mQ32)*
+        pow3(m32 - mU32)*pow3(mQ32 - mU32)) + (60*(m32 - msq2)*dilog(1 - m32/
+        pow2(msq))*(-((3*mU32 + 2*pow2(Xt))*pow4(mQ3)) - 2*pow2(Xt)*pow4(mU3) +
+        mU32*pow4(Xt) + mQ32*(4*mU32*pow2(Xt) + 3*pow4(mU3) + pow4(Xt)) + pow6(
+        mQ3) - pow6(mU3))*(8*m3*mQ32*mU32*(mQ32*(msq2 - 2*mU32) + msq2*mU32)*Xt
+        - mQ32*msq2*mU32*(pow4(mQ3) + pow4(mU3)) - 8*Xt*pow3(m3)*((msq2 - 3*
+        mU32)*pow4(mQ3) + mQ32*(4*msq2*mU32 - 3*pow4(mU3)) + msq2*pow4(mU3)) -
+        8*Xt*(-3*msq2*mU32 + mQ32*(-3*msq2 + 4*mU32) + pow4(mQ3) + pow4(mU3))*
+        pow5(m3) + (-8*msq2*mU32 + mQ32*(-8*msq2 + 30*mU32) + 3*pow4(mQ3) + 3*
+        pow4(mU3))*pow6(m3) - pow4(m3)*((-9*msq2 + 15*mU32)*pow4(mQ3) - 9*msq2*
+        pow4(mU3) + 3*mQ32*(2*msq2*mU32 + 5*pow4(mU3)) + pow6(mQ3) + pow6(mU3))
+        + m32*(3*msq2*mU32*pow4(mQ3) + (-3*msq2 + 5*mU32)*pow6(mQ3) - 3*msq2*
+        pow6(mU3) + mQ32*(3*msq2*pow4(mU3) + 5*pow6(mU3))) + 8*(mQ32 - 2*msq2 +
+        mU32)*Xt*pow7(m3) + (-8*mQ32 + 6*msq2 - 8*mU32)*pow8(m3) + 2*power10(
+        m3)))/(pow3(m32 - mQ32)*pow3(m32 - mU32)*pow3(mQ32 - mU32)) + (2*pow2(
+        Xt)*(3*pow4(mQ3)*(2*mU32*(10*msq2 + mU32) + mQ32*(20*msq2 + 79*mU32) +
+        2*pow4(mQ3))*pow4(mU3) - mQ32*mU32*pow4(m3)*(20*mQ32*(15*msq2 + 2*mU32)
+        + 301*pow4(mQ3) + 5*(60*msq2*mU32 + pow4(mU3))) + 2*m32*mQ32*mU32*(2*(
+        45*msq2 - 53*mU32)*pow4(mQ3) + 9*(10*msq2 + mU32)*pow4(mU3) - 2*mQ32*(
+        60*msq2*mU32 + 77*pow4(mU3)) + 9*pow6(mQ3)) + pow6(m3)*(886*mU32*pow4(
+        mQ3) + mQ32*(360*msq2*mU32 + 326*pow4(mU3)) + 4*pow6(mQ3) - 68*pow6(
+        mU3)) + (-695*mQ32*mU32 - 8*pow4(mQ3) + 136*pow4(mU3))*pow8(m3) + 4*(
+        mQ32 - mU32)*power10(m3)))/((mQ32 - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*
+        pow2(mU3)*pow2(m32 - mU32)) - (40*pow4(Xt)*(mQ32*mU32*pow4(m3)*(15*
+        mU32*(-msq2 + mU32) + mQ32*(-15*msq2 + 64*mU32) + 15*pow4(mQ3)) + 3*
+        msq2*pow4(mQ3)*pow6(mU3) + pow6(m3)*(-30*mU32*pow4(mQ3) + 6*mQ32*(3*
+        msq2*mU32 - 5*pow4(mU3)) + pow6(mQ3) + pow6(mU3)) + pow6(mQ3)*(3*msq2*
+        pow4(mU3) + 16*pow6(mU3)) + m32*((9*msq2*mU32 - 32*pow4(mU3))*pow6(mQ3)
+        + 9*mQ32*msq2*pow6(mU3) - 4*pow4(mQ3)*(3*msq2*pow4(mU3) + 8*pow6(mU3)))
+        - 2*(-7*mQ32*mU32 + pow4(mQ3) + pow4(mU3))*pow8(m3) + (mQ32 + mU32)*
+        power10(m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)*
+        pow2(mQ32 - mU32)) - (20*(mQ32*mU32*pow4(m3)*(mQ32*(15*msq2 - 68*mU32)
+        + 15*msq2*mU32 - 19*pow4(mQ3) - 19*pow4(mU3)) - (3*msq2*mU32 + mQ32*(3*
+        msq2 + 14*mU32))*pow4(mQ3)*pow4(mU3) + pow6(m3)*(41*mU32*pow4(mQ3) +
+        mQ32*(-18*msq2*mU32 + 41*pow4(mU3)) + 2*pow6(mQ3) + 2*pow6(mU3)) + m32*
+        ((-9*msq2*mU32 + 31*pow4(mU3))*pow6(mQ3) - 9*mQ32*msq2*pow6(mU3) +
+        pow4(mQ3)*(12*msq2*pow4(mU3) + 31*pow6(mU3))) - 4*(6*mQ32*mU32 + pow4(
+        mQ3) + pow4(mU3))*pow8(m3) + 2*(mQ32 + mU32)*power10(m3)))/(pow2(mQ3)*
+        pow2(m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)) + (-4*pow12(m3)*(pow4(mQ3)
+        - pow4(mU3)) + 3*(mQ32 - mU32)*pow4(mQ3)*(mQ32*(40*msq2 - 57*mU32) +
+        20*msq2*mU32 + 4*pow4(mQ3))*pow6(mU3) + m32*mQ32*pow4(mU3)*(pow4(mQ3)*(
+        -720*msq2*mU32 + 571*pow4(mU3)) + 5*(60*msq2 + 101*mU32)*pow6(mQ3) + 6*
+        mQ32*(100*msq2*pow4(mU3) - 99*pow6(mU3)) - 180*msq2*pow6(mU3) + 30*
+        pow8(mQ3)) - mQ32*mU32*pow4(m3)*(pow4(mQ3)*(240*msq2*mU32 + 2359*pow4(
+        mU3)) + (180*msq2 + 541*mU32)*pow6(mQ3) - 283*mQ32*pow6(mU3) - 420*
+        msq2*pow6(mU3) + 18*pow8(mQ3) - 587*pow8(mU3)) + mU32*pow6(m3)*(5*pow4(
+        mQ3)*(108*msq2*mU32 + 395*pow4(mU3)) + 3*(100*msq2 + 739*mU32)*pow6(
+        mQ3) - mQ32*(840*msq2*pow4(mU3) + 1259*pow6(mU3)) + 207*pow8(mQ3) - 68*
+        pow8(mU3)) + pow8(m3)*(-3*pow4(mQ3)*(120*msq2*mU32 + 709*pow4(mU3)) -
+        704*mU32*pow6(mQ3) + mQ32*(360*msq2*pow4(mU3) + 583*pow6(mU3)) - 4*
+        pow8(mQ3) + 204*pow8(mU3)) + (611*mU32*pow4(mQ3) + 33*mQ32*pow4(mU3) +
+        8*pow6(mQ3) - 140*pow6(mU3))*power10(m3))/((mQ32 - mU32)*pow2(mQ3)*
+        pow2(m32 - mQ32)*pow2(mU3)*pow3(m32 - mU32)) + (4*pow2(log(Mst12/pow2(
+        m3)))*(408*(mQ32 + mU32)*Xt*pow13(m3) - 8*Xt*pow15(m3) + 198*pow16(m3)
+        - 6*pow14(m3)*(121*mQ32 + 121*mU32 + 16*pow2(Xt)) - 8*Xt*pow11(m3)*(
+        297*mQ32*mU32 + 91*pow4(mQ3) + 91*pow4(mU3)) + pow12(m3)*(192*mU32*
+        pow2(Xt) + 12*mQ32*(225*mU32 + 16*pow2(Xt)) + 721*pow4(mQ3) + 721*pow4(
+        mU3)) + 1688*(mQ32 + mU32)*Xt*pow4(mQ3)*pow4(mU3)*pow5(m3) + 144*m32*(
+        mQ32 + mU32)*pow6(mQ3)*pow6(mU3) - 648*Xt*pow3(m3)*pow6(mQ3)*pow6(mU3)
+        - 24*mQ32*mU32*Xt*(179*mQ32*mU32 + 57*pow4(mQ3) + 57*pow4(mU3))*pow7(
+        m3) - 36*pow8(mQ3)*pow8(mU3) + pow8(m3)*(64*pow4(mQ3)*(3*mU32*pow2(Xt)
+        + 35*pow4(mU3)) + 908*mU32*pow6(mQ3) + 4*mQ32*(48*pow2(Xt)*pow4(mU3) +
+        227*pow6(mU3)) + 27*pow8(mQ3) + 27*pow8(mU3)) - 2*pow6(m3)*(160*pow4(
+        mU3)*pow6(mQ3) + 16*pow4(mQ3)*(3*pow2(Xt)*pow4(mU3) + 10*pow6(mU3)) +
+        67*mU32*pow8(mQ3) + 67*mQ32*pow8(mU3)) - pow4(m3)*(452*pow6(mQ3)*pow6(
+        mU3) + 13*pow4(mU3)*pow8(mQ3) + 13*pow4(mQ3)*pow8(mU3)) + 8*Xt*(417*
+        mU32*pow4(mQ3) + 417*mQ32*pow4(mU3) + 41*pow6(mQ3) + 41*pow6(mU3))*
+        pow9(m3) - 4*(3*(225*mU32 + 8*pow2(Xt))*pow4(mQ3) + 24*pow2(Xt)*pow4(
+        mU3) + mQ32*(96*mU32*pow2(Xt) + 675*pow4(mU3)) + 58*pow6(mQ3) + 58*
+        pow6(mU3))*power10(m3)))/(pow4(m32 - mQ32)*pow4(m32 - mU32)) + (4*pow4(
+        Xt)*(66*(mQ32 + mU32)*pow14(m3) - 2*pow12(m3)*(-938*mQ32*mU32 + 75*
+        pow4(mQ3) + 75*pow4(mU3)) + m32*pow4(mQ3)*pow4(mU3)*((30*msq2 - 559*
+        mU32)*pow4(mQ3) - 559*mQ32*pow4(mU3) + 3*(10*msq2 + mU32)*pow4(mU3) +
+        3*pow6(mQ3)) - 5*mQ32*mU32*pow6(m3)*((54*msq2 + 1129*mU32)*pow4(mQ3) +
+        54*msq2*pow4(mU3) + mQ32*(-36*msq2*mU32 + 1129*pow4(mU3)) + 93*pow6(
+        mQ3) + 93*pow6(mU3)) + mQ32*mU32*pow4(m3)*(pow4(mQ3)*(-90*msq2*mU32 +
+        3522*pow4(mU3)) + 10*(9*msq2 + 85*mU32)*pow6(mQ3) + 9*(10*msq2 + mU32)*
+        pow6(mU3) + mQ32*(-90*msq2*pow4(mU3) + 850*pow6(mU3)) + 9*pow8(mQ3)) +
+        pow8(m3)*(12*pow4(mQ3)*(20*msq2*mU32 + 747*pow4(mU3)) + 2756*mU32*pow6(
+        mQ3) + 4*mQ32*(60*msq2*pow4(mU3) + 689*pow6(mU3)) - 34*pow8(mQ3) - 34*
+        pow8(mU3)) + 120*pow8(mQ3)*pow8(mU3) + 2*(-2095*mU32*pow4(mQ3) - 5*
+        mQ32*(18*msq2*mU32 + 419*pow4(mU3)) + 59*pow6(mQ3) + 59*pow6(mU3))*
+        power10(m3)))/(pow2(mQ3)*pow2(mU3)*pow2(mQ32 - mU32)*pow3(-m32 + mQ32)*
+        pow3(m32 - mU32)) - (2*(-132*(mQ32 + mU32)*pow14(m3) + 4*pow12(m3)*(
+        334*mQ32*mU32 + 75*pow4(mQ3) + 75*pow4(mU3)) + 3*m32*pow4(mQ3)*pow4(
+        mU3)*((10*msq2 - 171*mU32)*pow4(mQ3) - 171*mQ32*pow4(mU3) + 10*msq2*
+        pow4(mU3) + pow6(mQ3) + pow6(mU3)) - mQ32*mU32*pow6(m3)*(5*(54*msq2 +
+        757*mU32)*pow4(mQ3) - 5*mQ32*(36*msq2*mU32 - 757*pow4(mU3)) + 270*msq2*
+        pow4(mU3) + 519*pow6(mQ3) + 519*pow6(mU3)) + mQ32*mU32*pow4(m3)*(pow4(
+        mQ3)*(-90*msq2*mU32 + 2470*pow4(mU3)) + 10*(9*msq2 + 86*mU32)*pow6(mQ3)
+        + 9*(10*msq2 + mU32)*pow6(mU3) + mQ32*(-90*msq2*pow4(mU3) + 860*pow6(
+        mU3)) + 9*pow8(mQ3)) + 96*pow8(mQ3)*pow8(mU3) + 4*pow8(m3)*(2*pow4(mQ3)
+        *(30*msq2*mU32 + 679*pow4(mU3)) + 504*mU32*pow6(mQ3) + 12*mQ32*(5*msq2*
+        pow4(mU3) + 42*pow6(mU3)) + 17*pow8(mQ3) + 17*pow8(mU3)) - 2*(1369*
+        mU32*pow4(mQ3) + mQ32*(90*msq2*mU32 + 1369*pow4(mU3)) + 118*pow6(mQ3) +
+        118*pow6(mU3))*power10(m3)))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*
+        pow3(m32 - mU32)) - (pow4(Xt)*(4*pow12(m3)*(-44*mQ32*mU32 + pow4(mQ3) -
+        pow4(mU3)) + 3*pow4(mQ3)*pow6(mU3)*((20*msq2 - 389*mU32)*pow4(mQ3) -
+        20*msq2*pow4(mU3) + mQ32*(-80*msq2*mU32 + 139*pow4(mU3)) + 2*pow6(mQ3)
+        + 2*pow6(mU3)) + m32*mQ32*pow4(mU3)*(pow4(mQ3)*(-420*msq2*mU32 + 5659*
+        pow4(mU3)) + 5*(48*msq2 + 533*mU32)*pow6(mQ3) + 4*mQ32*(90*msq2*pow4(
+        mU3) - 377*pow6(mU3)) + 18*(-10*msq2 + mU32)*pow6(mU3) + 24*pow8(mQ3))
+        + pow8(m3)*(3*pow4(mQ3)*(120*msq2*mU32 - 3367*pow4(mU3)) + 1222*mU32*
+        pow6(mQ3) + mQ32*(360*msq2*pow4(mU3) - 7283*pow6(mU3)) + 4*pow8(mQ3) -
+        204*pow8(mU3)) + mU32*pow6(m3)*(pow4(mQ3)*(-600*msq2*mU32 + 17667*pow4(
+        mU3)) + (-300*msq2 + 6913*mU32)*pow6(mQ3) - 3*mQ32*(340*msq2*pow4(mU3)
+        - 627*pow6(mU3)) - 493*pow8(mQ3) + 68*pow8(mU3)) + mQ32*mU32*pow4(m3)*(
+        -5*pow4(mQ3)*(96*msq2*mU32 + 2687*pow4(mU3)) + (180*msq2 - 1361*mU32)*
+        pow6(mQ3) + mQ32*(1380*msq2*pow4(mU3) - 6073*pow6(mU3)) + 360*msq2*
+        pow6(mU3) + 18*pow8(mQ3) + 975*pow8(mU3)) + (-667*mU32*pow4(mQ3) +
+        4793*mQ32*pow4(mU3) - 8*pow6(mQ3) + 140*pow6(mU3))*power10(m3)))/(pow2(
+        mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow3(m32 - mU32)*pow3(mQ32 - mU32)) - (
+        2*dilog(1 - mQ32/pow2(mU3))*(8*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 -
+        mU32)*Xt*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) + 5*pow4(m3) + 3*pow4(mQ3)
+        + 3*pow4(mU3)) - 16*m3*(m32 - mQ32)*(m32 - mU32)*pow3(Xt)*(-(mQ32*mU32)
+        - 5*m32*(mQ32 + mU32) + 5*pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3)) + (8*
+        m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 + mU32)*(-(mQ32*mU32) - 5*m32*(mQ32
+        + mU32) + 5*pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3))*pow5(Xt))/pow2(mQ32 -
+        mU32) - (mQ32 - mU32)*((-76*mQ32*mU32 + 34*pow4(mQ3) + 34*pow4(mU3))*
+        pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*pow4(mQ3) + 65*
+        mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(mQ3)*pow6(mU3) -
+        14*(mQ32 + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(
+        -34*pow4(mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*
+        pow8(mQ3) + 9*pow8(mU3)) + 12*power10(m3)) + 2*pow2(Xt)*((-76*mQ32*mU32
+        + 34*pow4(mQ3) + 34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(
+        m3)*(65*mU32*pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(
+        mU3)) + 7*pow4(mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(m3) + 3*mU32*
+        pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(mU3) - 26*mU32*
+        pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) + 9*pow8(mU3)) + 12*
+        power10(m3)) - ((mQ32 + mU32)*pow4(Xt)*((-76*mQ32*mU32 + 34*pow4(mQ3) +
+        34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*
+        pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(
+        mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*
+        pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*
+        pow6(mU3) + 9*pow8(mQ3) + 9*pow8(mU3)) + 12*power10(m3)))/pow2(mQ32 -
+        mU32)))/(pow3(m32 - mQ32)*pow3(m32 - mU32)) - (2*dilog(1 - mQ32/pow2(
+        mU3))*(8*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 - mU32)*Xt*(-(mQ32*mU32) -
+        5*m32*(mQ32 + mU32) + 5*pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3)) + 16*m3*(
+        m32 - mQ32)*(m32 - mU32)*pow3(Xt)*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) +
+        5*pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3)) - (8*m3*(m32 - mQ32)*(m32 -
+        mU32)*(mQ32 + mU32)*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) + 5*pow4(m3) +
+        3*pow4(mQ3) + 3*pow4(mU3))*pow5(Xt))/pow2(mQ32 - mU32) - (mQ32 - mU32)*
+        ((-76*mQ32*mU32 + 34*pow4(mQ3) + 34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*
+        pow6(mQ3) + pow4(m3)*(65*mU32*pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(
+        mQ3) - 29*pow6(mU3)) + 7*pow4(mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(
+        m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(
+        mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) + 9*pow8(
+        mU3)) + 12*power10(m3)) - 2*pow2(Xt)*((-76*mQ32*mU32 + 34*pow4(mQ3) +
+        34*pow4(mU3))*pow6(m3) + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*
+        pow4(mQ3) + 65*mQ32*pow4(mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(
+        mQ3)*pow6(mU3) - 14*(mQ32 + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*
+        pow8(mU3) + m32*(-34*pow4(mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*
+        pow6(mU3) + 9*pow8(mQ3) + 9*pow8(mU3)) + 12*power10(m3)) + ((mQ32 +
+        mU32)*pow4(Xt)*((-76*mQ32*mU32 + 34*pow4(mQ3) + 34*pow4(mU3))*pow6(m3)
+        + 7*pow4(mU3)*pow6(mQ3) + pow4(m3)*(65*mU32*pow4(mQ3) + 65*mQ32*pow4(
+        mU3) - 29*pow6(mQ3) - 29*pow6(mU3)) + 7*pow4(mQ3)*pow6(mU3) - 14*(mQ32
+        + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(
+        mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) +
+        9*pow8(mU3)) + 12*power10(m3)))/pow2(mQ32 - mU32)))/(pow3(m32 - mQ32)*
+        pow3(m32 - mU32)) + 20*log(Mst12/pow2(msq))*((8*m3*(-mQ32 - 3*mU32 + (
+        6*msq2*pow2(mQ32 - mU32))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(
+        mQ32 - mU32) + (8*m3*(mU32*pow4(m3) + 3*msq2*pow4(mU3) + mQ32*(-9*msq2*
+        mU32 + 6*pow4(msq) + pow4(mU3)) - m32*(-9*msq2*mU32 + mQ32*(3*msq2 +
+        mU32) + 6*pow4(msq) + pow4(mU3)))*pow5(Xt))/((m32 - mQ32)*pow2(m32 -
+        mU32)*pow3(mQ32 - mU32)) + (8*m3*Xt*(-((mQ32 + 2*mU32)*pow4(m3)) - 3*
+        msq2*pow4(mU3) - mQ32*(-9*msq2*mU32 + 3*pow4(msq) + pow4(mU3)) + m32*(-
+        3*msq2*mU32 + mQ32*(-3*msq2 + 2*mU32) + 3*pow4(msq) + pow4(mU3)) +
+        pow6(m3)))/((m32 - mQ32)*(mQ32 - mU32)*pow2(m32 - mU32)) - (2*pow2(Xt)*
+        (pow4(m3)*(15*mU32*(-msq2 + mU32) + mQ32*(-15*msq2 + 64*mU32) + 17*
+        pow4(mQ3)) + 3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 14*pow4(
+        mU3)) + m32*((9*msq2 - 31*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) - mQ32*(
+        12*msq2*mU32 + 29*pow4(mU3))) + (-35*mQ32 + 18*msq2 - 33*mU32)*pow6(m3)
+        + 18*pow8(m3)))/((mQ32 - mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)) + (
+        pow4(Xt)*(-6*msq2*(mQ32 - mU32)*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*
+        pow4(m3)) + ((m32 - mU32)*(-3*mQ32*(mQ32 + 5*mU32)*pow4(mU3) - pow4(m3)
+        *(15*mQ32*mU32 + 6*pow4(mQ3) + 29*pow4(mU3)) + (3*mQ32 + 7*mU32)*pow6(
+        m3) + m32*(7*mU32*pow4(mQ3) + 31*mQ32*pow4(mU3) + 16*pow6(mU3)) + 4*
+        pow8(m3)))/(m32 - mQ32) + ((m32 - mU32)*(mQ32 + mU32)*(3*mQ32*msq2*
+        pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 11*pow4(mU3)) + pow4(m3)*(-15*
+        msq2*mU32 + mQ32*(-15*msq2 + 44*mU32) + 11*pow4(mQ3) + 11*pow4(mU3)) +
+        m32*((9*msq2 - 22*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) - 2*mQ32*(6*msq2*
+        mU32 + 11*pow4(mU3))) - 2*(11*mQ32 - 9*msq2 + 11*mU32)*pow6(m3) + 11*
+        pow8(m3)))/pow2(m32 - mQ32)))/(pow3(m32 - mU32)*pow3(mQ32 - mU32)) + ((
+        -51*msq2*mU32 + mQ32*(-3*msq2 + 91*mU32) + 17*pow4(mQ3) + 9*pow4(msq) +
+        43*pow4(mU3))*pow6(m3) + pow4(m3)*((3*msq2 - 44*mU32)*pow4(mQ3) + 3*
+        mU32*pow4(msq) + mQ32*(39*msq2*mU32 - 18*pow4(msq) - 83*pow4(mU3)) +
+        24*msq2*pow4(mU3) - 14*pow6(mU3)) + pow4(mQ3)*(3*mU32*pow4(msq) - 3*
+        msq2*pow4(mU3) - 13*pow6(mU3)) - 3*mQ32*msq2*pow6(mU3) + m32*(pow4(mQ3)
+        *(-24*msq2*mU32 + 9*pow4(msq) + 40*pow4(mU3)) - 9*msq2*pow6(mU3) +
+        mQ32*(-6*mU32*pow4(msq) + 15*msq2*pow4(mU3) + 27*pow6(mU3))) + (-35*
+        mQ32 + 12*msq2 - 47*mU32)*pow8(m3) + 18*power10(m3))/(pow2(m32 - mQ32)*
+        pow3(m32 - mU32))) + 20*log(Mst12/pow2(msq))*((2*m32)/pow2(mQ3) + (2*
+        m32*mQ32)/pow2(m32 - mQ32) + (2*m32)/pow2(mU3) + (8*m3*(mQ32 + 3*mU32 -
+        (6*msq2*pow2(mQ32 - mU32))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(
+        mQ32 - mU32) - pow4(mQ3)/pow2(m32 - mQ32) - (8*m3*(-9*mQ32*msq2*mU32 +
+        mQ32*pow4(m3) + (3*msq2 + mU32)*pow4(mQ3) - m32*(mQ32*(-9*msq2 + mU32)
+        + 3*msq2*(2*msq2 + mU32) + pow4(mQ3)) + 6*mU32*pow4(msq))*pow5(Xt))/((
+        m32 - mU32)*pow2(m32 - mQ32)*pow3(mQ32 - mU32)) - (8*m3*Xt*(9*mQ32*
+        msq2*mU32 - (2*mQ32 + mU32)*pow4(m3) - (3*msq2 + mU32)*pow4(mQ3) + m32*
+        (3*msq2*(msq2 - mU32) + mQ32*(-3*msq2 + 2*mU32) + pow4(mQ3)) - 3*mU32*
+        pow4(msq) + pow6(m3)))/((m32 - mU32)*(mQ32 - mU32)*pow2(m32 - mQ32)) +
+        (-((7*mQ32 + 6*mU32)*pow4(m3)) - 2*mU32*pow4(mQ3) + m32*(5*mQ32*mU32 +
+        3*pow4(mQ3)) + 7*pow6(m3))/((m32 - mU32)*pow2(m32 - mQ32)) - (2*(mQ32 +
+        3*msq2)*pow4(m3) - 3*mQ32*pow4(msq) - 3*m32*(-6*mQ32*msq2 + pow4(mQ3) +
+        3*pow4(msq)) + pow6(mQ3))/pow3(m32 - mQ32) + (3*mQ32*msq2*pow4(mU3) +
+        pow4(mQ3)*(3*msq2*mU32 + 11*pow4(mU3)) + pow4(m3)*(-15*msq2*mU32 +
+        mQ32*(-15*msq2 + 44*mU32) + 11*pow4(mQ3) + 11*pow4(mU3)) + m32*((9*msq2
+        - 22*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) - 2*mQ32*(6*msq2*mU32 + 11*
+        pow4(mU3))) - 2*(11*mQ32 - 9*msq2 + 11*mU32)*pow6(m3) + 11*pow8(m3))/(
+        pow2(m32 - mQ32)*pow2(m32 - mU32)) + (pow4(Xt)*((2*m32*(mQ32 - mU32))/
+        pow2(mQ3) + (2*m32*(mQ32 - mU32))/pow2(mU3) + (6*msq2*(mQ32 - mU32)*(
+        m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*pow4(m3)))/pow3(m32 - mQ32) - (-
+        3*mU32*(5*mQ32 + mU32)*pow4(mQ3) - pow4(m3)*(15*mQ32*mU32 + 29*pow4(
+        mQ3) + 6*pow4(mU3)) + (7*mQ32 + 3*mU32)*pow6(m3) + m32*(31*mU32*pow4(
+        mQ3) + 7*mQ32*pow4(mU3) + 16*pow6(mQ3)) + 4*pow8(m3))/((m32 - mU32)*
+        pow2(m32 - mQ32)) - ((mQ32 + mU32)*(3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(
+        3*msq2*mU32 + 11*pow4(mU3)) + pow4(m3)*(-15*msq2*mU32 + mQ32*(-15*msq2
+        + 44*mU32) + 11*pow4(mQ3) + 11*pow4(mU3)) + m32*((9*msq2 - 22*mU32)*
+        pow4(mQ3) + 9*msq2*pow4(mU3) - 2*mQ32*(6*msq2*mU32 + 11*pow4(mU3))) -
+        2*(11*mQ32 - 9*msq2 + 11*mU32)*pow6(m3) + 11*pow8(m3)))/(pow2(m32 -
+        mQ32)*pow2(m32 - mU32))))/pow3(mQ32 - mU32) - (2*pow2(Xt)*(mQ32*mU32*
+        pow4(m3)*(mQ32*(15*msq2 - 64*mU32) + 15*msq2*mU32 - 19*pow4(mQ3) - 13*
+        pow4(mU3)) - (3*msq2*mU32 + mQ32*(3*msq2 + 14*mU32))*pow4(mQ3)*pow4(
+        mU3) + pow6(m3)*(39*mU32*pow4(mQ3) + mQ32*(-18*msq2*mU32 + 29*pow4(mU3)
+        ) + 2*pow6(mQ3) - 2*pow6(mU3)) + m32*((-9*msq2*mU32 + 31*pow4(mU3))*
+        pow6(mQ3) - 9*mQ32*msq2*pow6(mU3) + pow4(mQ3)*(12*msq2*pow4(mU3) + 29*
+        pow6(mU3))) - 2*(9*mQ32*mU32 + 2*pow4(mQ3) - 2*pow4(mU3))*pow8(m3) + 2*
+        (mQ32 - mU32)*power10(m3)))/((mQ32 - mU32)*pow2(mQ3)*pow2(m32 - mQ32)*
+        pow2(mU3)*pow2(m32 - mU32))) - (3*pow2(log(Mst12/pow2(mU3)))*(8*m3*(m32
+        - mU32)*Xt*pow3(-mQ32 + mU32)*(pow4(m3)*(185*mQ32*mU32 + pow4(mQ3) -
+        202*pow4(mU3)) - 20*(mQ32 - mU32)*pow6(m3) + mU32*(10*mU32*pow4(mQ3) +
+        30*mU32*pow4(msq) - 60*msq2*pow4(mU3) + mQ32*(60*msq2*mU32 - 30*pow4(
+        msq) + 32*pow4(mU3)) - 3*pow6(mQ3) - 55*pow6(mU3)) + m32*(-11*mU32*
+        pow4(mQ3) - 30*mU32*pow4(msq) + mQ32*(-60*msq2*mU32 + 30*pow4(msq) -
+        149*pow4(mU3)) + 60*msq2*pow4(mU3) + 3*pow6(mQ3) + 189*pow6(mU3))) +
+        320*(mQ32 + mU32)*pow2(-(m3*mU32) + pow3(m3))*pow4(mU3)*pow6(Xt) + 8*
+        m3*(m32 - mU32)*pow2(mQ32 - mU32)*pow3(Xt)*(pow4(m3)*(205*mQ32*mU32 +
+        2*pow4(mQ3) - 131*pow4(mU3)) - (37*mQ32 + 35*mU32)*pow6(m3) + mU32*(20*
+        mU32*pow4(mQ3) + 60*mU32*pow4(msq) - 120*msq2*pow4(mU3) + mQ32*(120*
+        msq2*mU32 - 60*pow4(msq) + 81*pow4(mU3)) - 6*pow6(mQ3) - 157*pow6(mU3))
+        + m32*(-22*mU32*pow4(mQ3) - 60*mU32*pow4(msq) + mQ32*(-120*msq2*mU32 +
+        60*pow4(msq) - 281*pow4(mU3)) + 120*msq2*pow4(mU3) + 6*pow6(mQ3) + 353*
+        pow6(mU3)) + 2*pow8(m3)) + 8*m3*(m32 - mU32)*pow5(Xt)*(2*(-16*mQ32*mU32
+        + 9*pow4(mQ3) + 7*pow4(mU3))*pow6(m3) - pow4(m3)*(70*mU32*pow4(mQ3) -
+        145*mQ32*pow4(mU3) + pow6(mQ3) - 86*pow6(mU3)) + mU32*(mQ32 + mU32)*(-
+        10*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 2*mQ32*(-30*msq2*mU32 + 15*
+        pow4(msq) - 8*pow4(mU3)) + 60*msq2*pow4(mU3) + 3*pow6(mQ3) + 103*pow6(
+        mU3)) + m32*(30*pow4(msq)*pow4(mU3) + pow4(mQ3)*(60*msq2*mU32 - 30*
+        pow4(msq) + 94*pow4(mU3)) + 8*mU32*pow6(mQ3) - 200*mQ32*pow6(mU3) - 60*
+        msq2*pow6(mU3) - 3*pow8(mQ3) - 219*pow8(mU3))) - 2*pow2(Xt)*pow3(mQ32 -
+        mU32)*(2*(10*mQ32*(3*msq2 - 7*mU32) - 5*mU32*(6*msq2 + 167*mU32) +
+        pow4(mQ3))*pow6(m3) + 2*m32*mU32*(-18*mU32*pow4(mQ3) - 30*mU32*pow4(
+        msq) + 3*mQ32*(-30*msq2*mU32 + 10*pow4(msq) - 39*pow4(mU3)) + 90*msq2*
+        pow4(mU3) + 3*pow6(mQ3) + 124*pow6(mU3)) + pow4(mU3)*(mU32*pow4(mQ3) +
+        mQ32*(30*pow4(msq) + 63*pow4(mU3)) + 3*pow6(mQ3) - 15*(2*mU32*pow4(msq)
+        + 9*pow6(mU3))) + pow4(m3)*(33*mU32*pow4(mQ3) + mQ32*(120*msq2*mU32 -
+        90*pow4(msq) + 361*pow4(mU3)) - 9*pow6(mQ3) + 15*(6*mU32*pow4(msq) - 8*
+        msq2*pow4(mU3) + 41*pow6(mU3))) - 6*(7*mQ32 - 177*mU32)*pow8(m3) - 128*
+        power10(m3)) + pow4(mQ32 - mU32)*((mQ32 - mU32)*pow4(mU3)*(4*mQ32*mU32
+        + 3*pow4(mQ3) + 30*pow4(msq) + 67*pow4(mU3)) + 2*(6*mQ32*(5*msq2 - 23*
+        mU32) - 30*msq2*mU32 + pow4(mQ3) - 247*pow4(mU3))*pow6(m3) + pow4(m3)*(
+        33*mU32*pow4(mQ3) + 90*mU32*pow4(msq) - 120*msq2*pow4(mU3) + mQ32*(120*
+        msq2*mU32 - 90*pow4(msq) + 429*pow4(mU3)) - 9*pow6(mQ3) + 59*pow6(mU3))
+        + 2*m32*mU32*(-18*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 3*mQ32*(-30*
+        msq2*mU32 + 10*pow4(msq) - 39*pow4(mU3)) + 90*msq2*pow4(mU3) + 3*pow6(
+        mQ3) + 68*pow6(mU3)) + (-38*mQ32 + 550*mU32)*pow8(m3) - 128*power10(m3)
+        ) + (mQ32 - mU32)*pow4(Xt)*(2*pow6(m3)*((30*msq2 - 33*mU32)*pow4(mQ3) -
+        1157*mQ32*pow4(mU3) - 30*msq2*pow4(mU3) + pow6(mQ3) - 2363*pow6(mU3)) +
+        (mQ32 + mU32)*pow4(mU3)*(mU32*pow4(mQ3) - 30*mU32*pow4(msq) + mQ32*(30*
+        pow4(msq) + 29*pow4(mU3)) + 3*pow6(mQ3) - 169*pow6(mU3)) + (872*mQ32*
+        mU32 - 44*pow4(mQ3) + 4276*pow4(mU3))*pow8(m3) + 2*m32*mU32*(pow4(mQ3)*
+        (-90*msq2*mU32 + 30*pow4(msq) - 67*pow4(mU3)) - 30*pow4(msq)*pow4(mU3)
+        - 15*mU32*pow6(mQ3) - 319*mQ32*pow6(mU3) + 90*msq2*pow6(mU3) + 3*pow8(
+        mQ3) + 302*pow8(mU3)) + pow4(m3)*(90*pow4(msq)*pow4(mU3) + pow4(mQ3)*(
+        120*msq2*mU32 - 90*pow4(msq) + 222*pow4(mU3)) + 24*mU32*pow6(mQ3) +
+        2344*mQ32*pow6(mU3) - 120*msq2*pow6(mU3) - 9*pow8(mQ3) + 1163*pow8(mU3)
+        ) - 4*(31*mQ32 + 289*mU32)*power10(m3))))/(pow4(m32 - mU32)*pow5(-mQ32
+        + mU32)) + (40*log(Mst12/pow2(msq))*((2*(-m32 + mQ32 + mU32)*pow2(m32 -
+        mU32)*pow2(Xt)*pow4(m3))/((-m32 + mQ32)*pow2(mQ3)*pow2(mU3)) - (12*(m32
+        - mU32)*Xt*(-2*mQ32*mU32*pow3(m3) + (mQ32 + mU32)*pow5(m3)))/pow2(m32 -
+        mQ32) + (4*(m32 - mU32)*pow5(Xt)*(-11*mQ32*mU32*pow3(m3) + 5*(mQ32 +
+        mU32)*pow5(m3) + pow7(m3)))/(pow2(m32 - mQ32)*pow2(mQ32 - mU32)) + (
+        pow4(m3)*(8*pow4(mQ3)*pow4(mU3)*(pow4(mQ3) + pow4(mU3)) - m32*mQ32*
+        mU32*(24*mU32*pow4(mQ3) + 24*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) +
+        pow6(m3)*(-11*mU32*pow4(mQ3) - 11*mQ32*pow4(mU3) + 3*pow6(mQ3) + 3*
+        pow6(mU3)) + (2*mQ32*mU32 - 3*pow4(mQ3) - 3*pow4(mU3))*pow8(m3) - pow4(
+        m3)*(-48*pow4(mQ3)*pow4(mU3) - 3*mU32*pow6(mQ3) - 3*mQ32*pow6(mU3) +
+        pow8(mQ3) + pow8(mU3)) + (mQ32 + mU32)*power10(m3)))/(pow2(mQ3)*pow2(
+        mU3)*pow3(-m32 + mQ32)) + (m32*pow4(Xt)*((mQ32 + mU32)*pow12(m3) + (
+        mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + (32*mU32*pow4(mQ3) + 32*mQ32*pow4(
+        mU3) + 3*pow6(mQ3) + 3*pow6(mU3))*pow8(m3) - pow6(m3)*(102*pow4(mQ3)*
+        pow4(mU3) + 16*mU32*pow6(mQ3) + 16*mQ32*pow6(mU3) + pow8(mQ3) + pow8(
+        mU3)) + pow4(m3)*(54*pow4(mU3)*pow6(mQ3) + 54*pow4(mQ3)*pow6(mU3) + 5*
+        mU32*pow8(mQ3) + 5*mQ32*pow8(mU3)) - m32*(6*pow6(mQ3)*pow6(mU3) + 17*
+        pow4(mU3)*pow8(mQ3) + 17*pow4(mQ3)*pow8(mU3)) - (10*mQ32*mU32 + 3*pow4(
+        mQ3) + 3*pow4(mU3))*power10(m3)))/(pow2(mQ3)*pow2(mU3)*pow2(mQ32 -
+        mU32)*pow3(-m32 + mQ32))))/pow3(m32 - mU32) - (-128*pow14(m3)*(-(mU32*
+        pow4(mQ3)) + mQ32*pow4(mU3) + pow6(mQ3) - pow6(mU3)) + (mQ32 - mU32)*(
+        228*msq2*mU32 + 7*mQ32*(24*msq2 + 137*mU32) + 24*pow4(mQ3) + 24*pow4(
+        mU3))*pow6(mU3)*pow8(mQ3) + 4*pow12(m3)*(32*pow4(mQ3)*pow4(mU3) + 247*
+        mU32*pow6(mQ3) - 311*mQ32*pow6(mU3) + 96*pow8(mQ3) - 64*pow8(mU3)) +
+        m32*pow4(mU3)*pow6(mQ3)*(-3*pow4(mQ3)*(308*msq2*mU32 + 551*pow4(mU3)) -
+        6*(6*msq2 + 497*mU32)*pow6(mQ3) + mQ32*(936*msq2*pow4(mU3) + 4165*pow6(
+        mU3)) - 48*pow8(mQ3) + 6*(4*msq2*pow6(mU3) + pow8(mU3))) + mQ32*mU32*
+        pow6(m3)*(3*(64*msq2*mU32 - 2695*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(-
+        324*msq2*pow4(mU3) + 11381*pow6(mU3)) - (324*msq2 + 9851*mU32)*pow8(
+        mQ3) + 12*(9*msq2 + mU32)*pow8(mU3) + mQ32*(348*msq2*pow6(mU3) + 4787*
+        pow8(mU3)) - 1316*power10(mQ3)) + mU32*pow4(m3)*pow4(mQ3)*((228*msq2*
+        mU32 + 9403*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(216*msq2*pow4(mU3) -
+        3847*pow6(mU3)) + (108*msq2 + 3155*mU32)*pow8(mQ3) - 18*(8*msq2 + mU32)
+        *pow8(mU3) - 3*mQ32*(136*msq2*pow6(mU3) + 2223*pow8(mU3)) + 24*power10(
+        mQ3)) + mQ32*pow8(m3)*(3*(108*msq2*mU32 + 3497*pow4(mU3))*pow6(mQ3) -
+        pow4(mQ3)*(144*msq2*pow4(mU3) + 1567*pow6(mU3)) + 3740*mU32*pow8(mQ3) +
+        4*mQ32*(9*msq2*pow6(mU3) - 2321*pow8(mU3)) - 4*(54*msq2 + 365*mU32)*
+        pow8(mU3) + 128*power10(mQ3)) + power10(m3)*(-((108*msq2*mU32 + 3691*
+        pow4(mU3))*pow6(mQ3)) + 4179*pow4(mQ3)*pow6(mU3) - 3564*mU32*pow8(mQ3)
+        + 12*mQ32*(9*msq2*pow6(mU3) + 235*pow8(mU3)) - 384*power10(mQ3) + 128*
+        power10(mU3)))/((mQ32 - mU32)*pow2(m32 - mU32)*pow3(-m32 + mQ32)*pow4(
+        mQ3)*pow4(mU3)) - (pow4(Xt)*(-128*pow14(m3)*pow3(mQ32 - mU32) + 3*pow6(
+        mU3)*((16*msq2 - 1425*mU32)*pow4(mQ3) + mQ32*(-80*msq2*mU32 + 1171*
+        pow4(mU3)) + 10*pow6(mQ3) - 2*(8*msq2*pow4(mU3) + pow6(mU3)))*pow8(mQ3)
+        + 4*pow12(m3)*(52*pow4(mQ3)*pow4(mU3) + 55*mU32*pow6(mQ3) - 183*mQ32*
+        pow6(mU3) + 96*pow8(mQ3) - 64*pow8(mU3)) + m32*pow4(mU3)*pow6(mQ3)*(
+        pow4(mQ3)*(36*msq2*mU32 + 10375*pow4(mU3)) + (-396*msq2 + 7636*mU32)*
+        pow6(mQ3) + 564*msq2*pow6(mU3) - mQ32*(204*msq2*pow4(mU3) + 11183*pow6(
+        mU3)) - 30*pow8(mQ3) + 60*pow8(mU3)) + mQ32*mU32*pow6(m3)*((-1668*msq2*
+        mU32 + 32595*pow4(mU3))*pow6(mQ3) - 3*pow4(mQ3)*(128*msq2*pow4(mU3) +
+        5325*pow6(mU3)) + (-324*msq2 + 13125*mU32)*pow8(mQ3) + mQ32*(348*msq2*
+        pow6(mU3) - 2405*pow8(mU3)) + 12*(9*msq2 + mU32)*pow8(mU3) - 1316*
+        power10(mQ3)) + mU32*pow4(m3)*pow4(mQ3)*((1008*msq2*mU32 - 30145*pow4(
+        mU3))*pow6(mQ3) + pow4(mQ3)*(1596*msq2*pow4(mU3) + 1397*pow6(mU3)) + (
+        108*msq2 - 2189*mU32)*pow8(mQ3) - 3*mQ32*(376*msq2*pow6(mU3) - 3685*
+        pow8(mU3)) - 18*(8*msq2 + mU32)*pow8(mU3) + 24*power10(mQ3)) + mQ32*
+        pow8(m3)*(27*(12*msq2*mU32 - 757*pow4(mU3))*pow6(mQ3) + 9*pow4(mQ3)*(
+        64*msq2*pow4(mU3) - 557*pow6(mU3)) + 3484*mU32*pow8(mQ3) - 4*(54*msq2 +
+        365*mU32)*pow8(mU3) + mQ32*(36*msq2*pow6(mU3) + 6938*pow8(mU3)) + 128*
+        power10(mQ3)) + power10(m3)*((-108*msq2*mU32 + 9917*pow4(mU3))*pow6(
+        mQ3) - 5171*pow4(mQ3)*pow6(mU3) - 2796*mU32*pow8(mQ3) + 4*mQ32*(27*
+        msq2*pow6(mU3) + 641*pow8(mU3)) - 384*power10(mQ3) + 128*power10(mU3)))
+        )/(pow2(m32 - mU32)*pow3(-m32 + mQ32)*pow3(mQ32 - mU32)*pow4(mQ3)*pow4(
+        mU3)) + (2*pow2(Xt)*(128*(mQ32 + mU32)*pow12(m3)*pow2(mQ32 - mU32) + 3*
+        (mQ32 - mU32)*(mQ32*(16*msq2 - 83*mU32) - 56*msq2*mU32 + 6*pow4(mQ3) -
+        6*pow4(mU3))*pow6(mQ3)*pow6(mU3) - 2*mQ32*mU32*pow6(m3)*(pow4(mQ3)*(72*
+        msq2*mU32 - 9340*pow4(mU3)) + (108*msq2 - 287*mU32)*pow6(mQ3) + 18*(6*
+        msq2 + 37*mU32)*pow6(mU3) - mQ32*(288*msq2*pow4(mU3) + 901*pow6(mU3)) +
+        646*pow8(mQ3)) - 2*m32*pow4(mQ3)*pow4(mU3)*(-6*pow4(mQ3)*(53*msq2*mU32
+        + 422*pow4(mU3)) + (198*msq2 + 329*mU32)*pow6(mQ3) + mQ32*(102*msq2*
+        pow4(mU3) + 631*pow6(mU3)) + 33*pow8(mQ3) + 3*(6*msq2*pow6(mU3) + pow8(
+        mU3))) - 4*(-1454*pow4(mQ3)*pow4(mU3) + 279*mU32*pow6(mQ3) + 279*mQ32*
+        pow6(mU3) + 64*pow8(mQ3) + 64*pow8(mU3))*power10(m3) + mQ32*mU32*pow4(
+        m3)*((516*msq2*mU32 - 8421*pow4(mU3))*pow6(mQ3) - pow4(mQ3)*(648*msq2*
+        pow4(mU3) + 8099*pow6(mU3)) + (108*msq2 + 2257*mU32)*pow8(mQ3) + 12*(9*
+        msq2 + mU32)*pow8(mU3) + mQ32*(-84*msq2*pow6(mU3) + 1939*pow8(mU3)) +
+        24*power10(mQ3)) + pow8(m3)*(9*(12*msq2*mU32 - 893*pow4(mU3))*pow6(mQ3)
+        - 3*pow4(mQ3)*(72*msq2*pow4(mU3) + 3173*pow6(mU3)) + 2448*mU32*pow8(
+        mQ3) + 4*mQ32*(27*msq2*pow6(mU3) + 641*pow8(mU3)) + 128*power10(mQ3) +
+        128*power10(mU3))))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow2(mQ32 -
+        mU32)*pow4(mQ3)*pow4(mU3)) + (2*log(Mst12/pow2(mU3))*((-640*pow2(-(m3*
+        mU32) + pow3(m3))*pow4(mU3)*pow6(Xt))/pow4(mQ32 - mU32) + (32*m3*pow2(
+        m32 - mU32)*pow3(Xt)*(-2*pow4(m3)*(-75*mQ32*mU32 + 7*pow4(mQ3) + 24*
+        pow4(mU3)) + m32*mU32*(30*msq2*mU32 - mQ32*(30*msq2 + 47*mU32) - 117*
+        pow4(mQ3) + 66*pow4(mU3)) + (7*mQ32 - 37*mU32)*pow6(m3) + mU32*((30*
+        msq2 + 82*mU32)*pow4(mQ3) - mQ32*(30*msq2*mU32 + 53*pow4(mU3)) + 3*
+        pow6(mQ3) - 3*pow6(mU3)) + 11*pow8(m3)))/((m32 - mQ32)*pow3(mQ32 -
+        mU32)) + (8*m3*(m32 - mU32)*Xt*(-((380*mQ32*mU32 + pow4(mQ3) - 397*
+        pow4(mU3))*pow6(m3)) + pow4(m3)*(311*mU32*pow4(mQ3) + 30*mU32*pow4(msq)
+        - 120*msq2*pow4(mU3) + mQ32*(120*msq2*mU32 - 30*pow4(msq) + 122*pow4(
+        mU3)) - 2*pow6(mQ3) - 479*pow6(mU3)) + 32*(mQ32 - mU32)*pow8(m3) +
+        mU32*(pow4(mQ3)*(120*msq2*mU32 - 30*pow4(msq) + 137*pow4(mU3)) + 16*
+        mU32*pow6(mQ3) + 10*mQ32*(3*mU32*pow4(msq) - 12*msq2*pow4(mU3) - 16*
+        pow6(mU3)) - 3*pow8(mQ3) - 6*pow8(mU3)) + m32*(pow4(mQ3)*(-120*msq2*
+        mU32 + 30*pow4(msq) - 367*pow4(mU3)) - 30*pow4(msq)*pow4(mU3) - 14*
+        mU32*pow6(mQ3) + 226*mQ32*pow6(mU3) + 120*msq2*pow6(mU3) + 3*pow8(mQ3)
+        + 200*pow8(mU3))))/((m32 - mQ32)*pow2(mQ32 - mU32)) - (16*m3*(m32 -
+        mU32)*pow5(Xt)*((-6*mQ32*mU32 - 35*pow4(mQ3) + 179*pow4(mU3))*pow6(m3)
+        - pow4(m3)*(5*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 90*msq2*pow4(mU3) +
+        6*mQ32*(-5*msq2*mU32 + 5*pow4(msq) + 51*pow4(mU3)) + 2*pow6(mQ3) + 437*
+        pow6(mU3)) + (34*mQ32 + 30*mU32)*pow8(m3) - mU32*(pow4(mQ3)*(-30*msq2*
+        mU32 + 30*pow4(msq) + 82*pow4(mU3)) - 7*mU32*pow6(mQ3) + mQ32*(-30*
+        mU32*pow4(msq) + 90*msq2*pow4(mU3) + 201*pow6(mU3)) + 3*pow8(mQ3) + 3*
+        pow8(mU3)) + m32*(-30*pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(-15*msq2*mU32
+        + 15*pow4(msq) + 53*pow4(mU3)) - 5*mU32*pow6(mQ3) + 90*msq2*pow6(mU3) +
+        mQ32*(60*msq2*pow4(mU3) + 511*pow6(mU3)) + 3*pow8(mQ3) + 215*pow8(mU3))
+        ))/((m32 - mQ32)*pow4(mQ32 - mU32)) - 20*(m32 - mU32)*log(Mst12/pow2(
+        msq))*((6*msq2 + 7*mU32)*pow4(m3) - 3*mU32*pow4(msq) + (4*m3*(m32 -
+        mU32)*Xt*(-3*m32*mU32 - 12*msq2*mU32 + 2*pow4(m3) + 6*pow4(msq) + pow4(
+        mU3)))/(-mQ32 + mU32) - 3*m32*(-6*msq2*mU32 + 3*pow4(msq) + 2*pow4(mU3)
+        ) + (2*pow2(Xt)*(3*msq2*(mQ32 - mU32)*(3*m32*(msq2 - 2*mU32) + msq2*
+        mU32 - 2*pow4(m3)) + (m32 - mU32)*((mQ32 - 3*mU32)*pow4(m3) + 2*(mQ32 -
+        2*mU32)*pow4(mU3) + m32*(-4*mQ32*mU32 + 8*pow4(mU3)))))/pow2(mQ32 -
+        mU32) + (4*m3*(m32 - mU32)*(mQ32 + mU32)*(m32*mU32 + 12*msq2*mU32 - 6*
+        pow4(msq) - pow4(mU3))*pow5(Xt))/pow4(mQ32 - mU32) - 3*pow6(m3) + 2*
+        pow6(mU3) + (4*m3*(m32 - mU32)*pow3(Xt)*(-((mQ32 + 5*mU32)*pow4(m3)) +
+        12*mU32*pow4(msq) - 24*msq2*pow4(mU3) + 2*m32*(2*mQ32*mU32 + pow4(mU3))
+        - 3*mQ32*(-8*msq2*mU32 + 4*pow4(msq) + pow4(mU3)) + 2*pow6(m3) + pow6(
+        mU3)))/pow3(-mQ32 + mU32) + (pow4(Xt)*(-3*msq2*(mQ32 - mU32)*(mQ32 +
+        mU32)*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)) + (m32 - mU32)*(
+        8*mQ32*mU32*pow4(m3) + 2*m32*mU32*(-5*mQ32*mU32 + pow4(mQ3) - 4*pow4(
+        mU3)) - pow4(mQ3)*pow4(mU3) - 2*(mQ32 - mU32)*pow6(m3) + 4*mQ32*pow6(
+        mU3) + 5*pow8(mU3))))/pow4(mQ32 - mU32)) - (4*(m32 - mU32)*pow2(Xt)*(
+        pow6(m3)*(1346*mU32*pow4(mQ3) - 90*msq2*pow4(mU3) + 3*mQ32*(30*msq2*
+        mU32 + 491*pow4(mU3)) - 41*pow6(mQ3) - 226*pow6(mU3)) + mQ32*pow4(mU3)*
+        (3*(10*msq2 - 59*mU32)*pow4(mQ3) + mQ32*(-30*msq2*mU32 + 151*pow4(mU3))
+        + 3*pow6(mQ3) + 3*pow6(mU3)) + mU32*pow4(m3)*(-4*(45*msq2 + 403*mU32)*
+        pow4(mQ3) - 30*msq2*pow4(mU3) + mQ32*(210*msq2*mU32 + 137*pow4(mU3)) -
+        373*pow6(mQ3) + 192*pow6(mU3)) + (-1462*mQ32*mU32 + 65*pow4(mQ3) - 383*
+        pow4(mU3))*pow8(m3) + m32*mU32*(pow4(mQ3)*(-150*msq2*mU32 + 338*pow4(
+        mU3)) + (90*msq2 + 471*mU32)*pow6(mQ3) + mQ32*(60*msq2*pow4(mU3) - 391*
+        pow6(mU3)) + 9*pow8(mQ3) + 9*pow8(mU3)) + (-24*mQ32 + 492*mU32)*
+        power10(m3)))/(pow2(m32 - mQ32)*pow2(mQ32 - mU32)) + (2*pow4(Xt)*(176*(
+        mQ32 - mU32)*pow14(m3) + pow12(m3)*(120*mQ32*mU32 - 322*pow4(mQ3) +
+        2586*pow4(mU3)) + 2*pow8(m3)*(pow4(mQ3)*(-135*msq2*mU32 + 45*pow4(msq)
+        + 3052*pow4(mU3)) + 3*(20*msq2 + 79*mU32)*pow6(mQ3) + mQ32*(-90*mU32*
+        pow4(msq) + 180*msq2*pow4(mU3) + 6811*pow6(mU3)) + 5*pow8(mQ3) + 5*(9*
+        pow4(msq)*pow4(mU3) - 21*msq2*pow6(mU3) + 403*pow8(mU3))) + 3*(-((20*
+        msq2 + 67*mU32)*pow4(mQ3)) + mQ32*(40*msq2*mU32 - 2089*pow4(mU3)) - 20*
+        msq2*pow4(mU3) + 49*pow6(mQ3) - 1893*pow6(mU3))*power10(m3) - 2*pow6(
+        m3)*((-90*msq2*mU32 + 90*pow4(msq) + 1601*pow4(mU3))*pow6(mQ3) + 2*(-
+        60*msq2*mU32 + 15*pow4(msq) + 92*pow4(mU3))*pow6(mU3) + pow4(mQ3)*(-
+        150*mU32*pow4(msq) + 210*msq2*pow4(mU3) + 5695*pow6(mU3)) + (30*msq2 +
+        89*mU32)*pow8(mQ3) + mQ32*(30*pow4(msq)*pow4(mU3) - 30*msq2*pow6(mU3) +
+        4741*pow8(mU3)) + 10*power10(mQ3)) + pow4(m3)*(9*pow12(mQ3) + mQ32*(-
+        480*msq2*mU32 + 180*pow4(msq) + 1079*pow4(mU3))*pow6(mU3) + pow6(mQ3)*(
+        -60*mU32*pow4(msq) + 4230*pow6(mU3)) + (-30*msq2*mU32 + 90*pow4(msq) +
+        692*pow4(mU3))*pow8(mQ3) - 2*(-15*msq2*mU32 + 15*pow4(msq) + 196*pow4(
+        mU3))*pow8(mU3) + pow4(mQ3)*(-180*pow4(msq)*pow4(mU3) + 480*msq2*pow6(
+        mU3) + 7123*pow8(mU3)) - 21*mU32*power10(mQ3)) - m32*mU32*(6*pow12(mQ3)
+        + 9*pow12(mU3) + pow6(mQ3)*(-180*mU32*pow4(msq) + 300*msq2*pow4(mU3) +
+        1861*pow6(mU3)) + 2*(-60*msq2*mU32 + 30*pow4(msq) + 361*pow4(mU3))*
+        pow8(mQ3) + 5*pow4(mQ3)*(36*pow4(msq)*pow4(mU3) - 48*msq2*pow6(mU3) +
+        203*pow8(mU3)) - 42*mU32*power10(mQ3) + mQ32*(-60*pow4(msq)*pow6(mU3) +
+        60*msq2*pow8(mU3) - 787*power10(mU3))) - mQ32*pow4(mU3)*(10*(3*msq2*
+        mU32 + 3*pow4(msq) - 19*pow4(mU3))*pow6(mQ3) - 4*pow4(mQ3)*(15*mU32*
+        pow4(msq) + 61*pow6(mU3)) + mU32*pow8(mQ3) + mQ32*(30*pow4(msq)*pow4(
+        mU3) - 30*msq2*pow6(mU3) + 347*pow8(mU3)) + 3*power10(mQ3) + 3*power10(
+        mU3))))/(pow2(m32 - mQ32)*pow4(mQ32 - mU32)) + (4*(63*mQ32 + 257*mU32)*
+        pow12(m3) - 128*pow14(m3) + mQ32*(mQ32 - mU32)*pow4(mU3)*(-2*mU32*pow4(
+        mQ3) + 3*mQ32*(-20*msq2*mU32 + 10*pow4(msq) + 99*pow4(mU3)) + 3*pow6(
+        mQ3) + 6*pow6(mU3)) + (-3*(40*msq2 - 949*mU32)*pow4(mQ3) + 90*mU32*
+        pow4(msq) - 300*msq2*pow4(mU3) + mQ32*(420*msq2*mU32 - 90*pow4(msq) +
+        4635*pow4(mU3)) - 115*pow6(mQ3) + 313*pow6(mU3))*pow8(m3) + 4*pow6(m3)*
+        (3*pow4(mQ3)*(-55*msq2*mU32 + 15*pow4(msq) - 401*pow4(mU3)) - 15*pow4(
+        msq)*pow4(mU3) + (15*msq2 - 191*mU32)*pow6(mQ3) + mQ32*(-30*mU32*pow4(
+        msq) + 75*msq2*pow4(mU3) - 511*pow6(mU3)) + 75*msq2*pow6(mU3) + 5*pow8(
+        mQ3) + 140*pow8(mU3)) - 4*(15*msq2*mU32 + mQ32*(-15*msq2 + 783*mU32) +
+        5*pow4(mQ3) + 332*pow4(mU3))*power10(m3) + pow4(m3)*((300*msq2*mU32 -
+        90*pow4(msq) + 1436*pow4(mU3))*pow6(mQ3) - 3*(-20*msq2*mU32 + 10*pow4(
+        msq) + 97*pow4(mU3))*pow6(mU3) + pow4(mQ3)*(-30*mU32*pow4(msq) + 300*
+        msq2*pow4(mU3) + 2968*pow6(mU3)) + 39*mU32*pow8(mQ3) + 5*mQ32*(30*pow4(
+        msq)*pow4(mU3) - 132*msq2*pow6(mU3) - 163*pow8(mU3)) - 9*power10(mQ3))
+        - 2*m32*mU32*((150*msq2*mU32 - 30*pow4(msq) + 496*pow4(mU3))*pow6(mQ3)
+        + 2*pow4(mQ3)*(30*mU32*pow4(msq) - 105*msq2*pow4(mU3) + 71*pow6(mU3)) +
+        27*mU32*pow8(mQ3) + mQ32*(-30*pow4(msq)*pow4(mU3) + 60*msq2*pow6(mU3) -
+        351*pow8(mU3)) - 3*power10(mQ3) + 9*power10(mU3)))/((mQ32 - mU32)*pow2(
+        m32 - mQ32))))/pow4(m32 - mU32) - 2*dilog(1 - m32/pow2(mU3))*((8*pow3(
+        Xt)*((2*m3*(mQ32 - mU32)*(-7*mQ32*mU32 + m32*(-37*mQ32 + mU32) + 18*
+        pow4(m3) + 22*pow4(mQ3) + 3*pow4(mU3)))/pow2(m32 - mQ32) + (m3*(-2*m32
+        + mQ32 + mU32)*(-34*m32*mU32 + pow4(m3) + 17*pow4(mU3)))/pow2(m32 -
+        mU32)))/pow3(mQ32 - mU32) - (4*pow4(m3)*(-34*m32*mU32 + pow4(m3) + 17*
+        pow4(mU3)))/pow4(m32 - mU32) + 8*Xt*(-((m3*(-7*mQ32*mU32 + m32*(-37*
+        mQ32 + mU32) + 18*pow4(m3) + 22*pow4(mQ3) + 3*pow4(mU3)))/((mQ32 -
+        mU32)*pow2(m32 - mQ32))) + (2*(17*pow3(m3)*pow4(mU3) - 50*mU32*pow5(m3)
+        + pow7(m3)))/((-mQ32 + mU32)*pow3(m32 - mU32))) + (8*m3*pow5(Xt)*(-(
+        pow4(mQ3)*pow4(mU3)) + pow4(m3)*(-26*mQ32*mU32 + 37*pow4(mQ3) + pow4(
+        mU3)) - 2*(9*mQ32 - 7*mU32)*pow6(m3) + 6*mU32*pow6(mQ3) - 4*mQ32*pow6(
+        mU3) - 2*m32*(-6*mU32*pow4(mQ3) + 11*pow6(mQ3) + pow6(mU3)) + 3*pow8(
+        mU3)))/((m32 - mU32)*pow2(m32 - mQ32)*pow4(mQ32 - mU32)) + (128*pow12(
+        m3) - pow6(m3)*(1025*mU32*pow4(mQ3) + 251*mQ32*pow4(mU3) + 13*pow6(mQ3)
+        - 9*pow6(mU3)) + mQ32*pow4(mU3)*(-19*mU32*pow4(mQ3) - mQ32*pow4(mU3) +
+        23*pow6(mQ3) - 3*pow6(mU3)) + (902*mQ32*mU32 + 280*pow4(mQ3) + 98*pow4(
+        mU3))*pow8(m3) + pow4(m3)*(417*pow4(mQ3)*pow4(mU3) + 391*mU32*pow6(mQ3)
+        - 151*mQ32*pow6(mU3) - 37*pow8(mQ3) + 20*pow8(mU3)) - 2*(173*mQ32 +
+        147*mU32)*power10(m3) + m32*(-167*pow4(mU3)*pow6(mQ3) + 41*pow4(mQ3)*
+        pow6(mU3) - 34*mU32*pow8(mQ3) + 41*mQ32*pow8(mU3) - 9*power10(mU3)))/((
+        mQ32 - mU32)*pow2(m32 - mU32)*pow3(m32 - mQ32)) - (2*pow2(Xt)*(128*
+        pow12(m3) - pow6(m3)*(2561*mU32*pow4(mQ3) + 251*mQ32*pow4(mU3) + 13*
+        pow6(mQ3) - 9*pow6(mU3)) + mQ32*pow4(mU3)*(-19*mU32*pow4(mQ3) - mQ32*
+        pow4(mU3) + 23*pow6(mQ3) - 3*pow6(mU3)) + (2438*mQ32*mU32 + 280*pow4(
+        mQ3) + 98*pow4(mU3))*pow8(m3) + pow4(m3)*(417*pow4(mQ3)*pow4(mU3) +
+        903*mU32*pow6(mQ3) - 151*mQ32*pow6(mU3) - 37*pow8(mQ3) + 20*pow8(mU3))
+        - 2*(173*mQ32 + 403*mU32)*power10(m3) + m32*(-167*pow4(mU3)*pow6(mQ3) +
+        41*pow4(mQ3)*pow6(mU3) - 34*mU32*pow8(mQ3) + 41*mQ32*pow8(mU3) - 9*
+        power10(mU3))))/(pow2(m32 - mU32)*pow2(mQ32 - mU32)*pow3(m32 - mQ32)) +
+        (pow4(Xt)*(4*(31*mQ32 + 289*mU32)*pow12(m3) + (5326*mU32*pow4(mQ3) +
+        6466*mQ32*pow4(mU3) + 262*pow6(mQ3) + 746*pow6(mU3))*pow8(m3) + mQ32*
+        pow4(mU3)*(14*pow4(mQ3)*pow4(mU3) + 4*mU32*pow6(mQ3) - 4*mQ32*pow6(mU3)
+        - 11*pow8(mQ3) - 3*pow8(mU3)) - pow6(m3)*(7596*pow4(mQ3)*pow4(mU3) +
+        2990*mU32*pow6(mQ3) + 2186*mQ32*pow6(mU3) + 3*pow8(mQ3) + 25*pow8(mU3))
+        - 4*(1025*mQ32*mU32 + 83*pow4(mQ3) + 492*pow4(mU3))*power10(m3) - m32*
+        mU32*(774*pow4(mU3)*pow6(mQ3) + 20*pow4(mQ3)*pow6(mU3) + 543*mU32*pow8(
+        mQ3) - 32*mQ32*pow8(mU3) - 34*power10(mQ3) + 9*power10(mU3)) + pow4(m3)
+        *(3712*pow4(mU3)*pow6(mQ3) + 2210*pow4(mQ3)*pow6(mU3) + 526*mU32*pow8(
+        mQ3) - 29*mQ32*pow8(mU3) - 39*power10(mQ3) + 20*power10(mU3))))/(pow2(
+        m32 - mU32)*pow3(m32 - mQ32)*pow4(mQ32 - mU32))) - (2*dilog(1 - m32/
+        pow2(mU3))*((-8*m3*(m32 - mQ32)*pow5(Xt)*(2*(7*mQ32 - 9*mU32)*pow4(m3)
+        + mU32*pow4(mQ3) + 4*mQ32*pow4(mU3) - m32*(-20*mQ32*mU32 + 11*pow4(mQ3)
+        + pow4(mU3)) - 6*pow6(mQ3) - 3*pow6(mU3)))/pow4(mQ32 - mU32) + (8*m3*(
+        m32 - mQ32)*pow3(Xt)*(-3*(201*mQ32 + 29*mU32)*pow4(m3) - 49*mU32*pow4(
+        mQ3) - 20*mQ32*pow4(mU3) + 2*m32*(69*mQ32*mU32 + 255*pow4(mQ3) + pow4(
+        mU3)) + 254*pow6(m3) - 151*pow6(mQ3) + 6*pow6(mU3)))/pow3(mQ32 - mU32)
+        - (8*m3*(m32 - mQ32)*Xt*(pow4(m3)*(633*mQ32*mU32 + 352*pow4(mQ3) - 19*
+        pow4(mU3)) - 22*pow4(mQ3)*pow4(mU3) - (679*mQ32 + 347*mU32)*pow6(m3) +
+        7*mQ32*pow6(mU3) + m32*(-306*mU32*pow4(mQ3) + 23*mQ32*pow4(mU3) + 5*
+        pow6(mU3)) + 356*pow8(m3) - 3*pow8(mU3)))/((-mQ32 + mU32)*pow2(m32 -
+        mU32)) - (pow4(Xt)*((588*mQ32 + 692*mU32)*pow12(m3) + 10*(515*mU32*
+        pow4(mQ3) + 637*mQ32*pow4(mU3) + 7*pow6(mQ3) + 121*pow6(mU3))*pow8(m3)
+        + pow6(m3)*(-7772*pow4(mQ3)*pow4(mU3) - 1630*mU32*pow6(mQ3) - 3834*
+        mQ32*pow6(mU3) + 701*pow8(mQ3) - 265*pow8(mU3)) + mQ32*pow4(mU3)*(222*
+        pow4(mQ3)*pow4(mU3) + 4*mU32*pow6(mQ3) - 4*mQ32*pow6(mU3) - 219*pow8(
+        mQ3) - 3*pow8(mU3)) - 4*(909*mQ32*mU32 + 267*pow4(mQ3) + 424*pow4(mU3))
+        *power10(m3) + m32*mU32*(-1622*pow4(mU3)*pow6(mQ3) - 644*pow4(mQ3)*
+        pow6(mU3) + 513*mU32*pow8(mQ3) + 32*mQ32*pow8(mU3) + 450*power10(mQ3) -
+        9*power10(mU3)) + pow4(m3)*(2864*pow4(mU3)*pow6(mQ3) + 4242*pow4(mQ3)*
+        pow6(mU3) - 1074*mU32*pow8(mQ3) + 627*mQ32*pow8(mU3) - 279*power10(mQ3)
+        + 20*power10(mU3))))/(pow2(m32 - mU32)*pow4(mQ32 - mU32)) + (2*pow2(Xt)
+        *(-256*(11*mQ32 + 7*mU32)*pow12(m3) + 768*pow14(m3) - pow2(-(mQ3*mU32)
+        + pow3(mQ3))*pow4(mU3)*(4*mQ32*mU32 + 23*pow4(mQ3) + 3*pow4(mU3)) - 2*(
+        4087*mU32*pow4(mQ3) + 1838*mQ32*pow4(mU3) + 1612*pow6(mQ3) + 143*pow6(
+        mU3))*pow8(m3) + pow6(m3)*(3962*pow4(mQ3)*pow4(mU3) + 5748*mU32*pow6(
+        mQ3) + 892*mQ32*pow6(mU3) + 909*pow8(mQ3) + 9*pow8(mU3)) + 6*(994*mQ32*
+        mU32 + 719*pow4(mQ3) + 207*pow4(mU3))*power10(m3) + m32*mU32*(176*pow4(
+        mU3)*pow6(mQ3) + 517*mU32*pow8(mQ3) + 50*mQ32*pow8(mU3) + 34*power10(
+        mQ3) - 9*power10(mU3)) + pow4(m3)*(-2202*pow4(mU3)*pow6(mQ3) - 584*
+        pow4(mQ3)*pow6(mU3) - 1708*mU32*pow8(mQ3) - 171*mQ32*pow8(mU3) + 37*
+        power10(mQ3) + 20*power10(mU3))))/(pow2(m32 - mU32)*pow3(-mQ32 + mU32))
+        + ((-1994*mQ32 + 202*mU32)*pow12(m3) + 384*pow14(m3) + mQ32*(-19*mU32*
+        pow4(mQ3) - mQ32*pow4(mU3) + 23*pow6(mQ3) - 3*pow6(mU3))*pow6(mU3) + (-
+        1927*mU32*pow4(mQ3) + 1997*mQ32*pow4(mU3) - 2719*pow6(mQ3) + 89*pow6(
+        mU3))*pow8(m3) + pow6(m3)*(-2222*pow4(mQ3)*pow4(mU3) + 2196*mU32*pow6(
+        mQ3) - 100*mQ32*pow6(mU3) + 777*pow8(mQ3) - 11*pow8(mU3)) + m32*pow4(
+        mU3)*(42*pow4(mQ3)*pow4(mU3) - 148*mU32*pow6(mQ3) + 44*mQ32*pow6(mU3) -
+        57*pow8(mQ3) - 9*pow8(mU3)) + 4*(94*mQ32*mU32 + 885*pow4(mQ3) - 179*
+        pow4(mU3))*power10(m3) + pow4(m3)*(818*pow4(mU3)*pow6(mQ3) + 376*pow4(
+        mQ3)*pow6(mU3) - 775*mU32*pow8(mQ3) - 192*mQ32*pow8(mU3) + 29*power10(
+        mU3)))/((-mQ32 + mU32)*pow3(m32 - mU32))))/pow3(m32 - mQ32) + (2*log(
+        Mst12/pow2(mU3))*((-640*mU32*pow2(m32 - mU32)*pow4(m3)*pow6(Xt))/((m32
+        - mQ32)*pow3(mQ32 - mU32)) - (20*(m32 - mU32)*log(Mst12/pow2(msq))*((2*
+        (m32 - mQ32)*(m32 - mU32)*Xt*pow3(m3)*(-3*(mQ32 + mU32)*pow4(m3) - 13*
+        mU32*pow4(mQ3) + m32*(4*mQ32*mU32 + 7*pow4(mQ3) - 5*pow4(mU3)) + 11*
+        mQ32*pow4(mU3) + 2*pow6(m3)))/(mQ32 - mU32) + (2*(m32 - mQ32)*(m32 -
+        mU32)*(mQ32 + mU32)*pow5(Xt)*(-11*mQ32*mU32*pow3(m3) + 5*(mQ32 + mU32)*
+        pow5(m3) + pow7(m3)))/pow3(mQ32 - mU32) + (4*(m32 - mQ32)*(m32 - mU32)*
+        pow3(m3)*pow3(Xt)*(-20*pow4(mQ3)*pow4(mU3) + pow4(m3)*(10*mQ32*mU32 +
+        pow4(mQ3) + pow4(mU3)) - 4*(mQ32 + mU32)*pow6(m3) + 11*mU32*pow6(mQ3) +
+        m32*(mU32*pow4(mQ3) + mQ32*pow4(mU3) - 5*pow6(mQ3) - 5*pow6(mU3)) + 11*
+        mQ32*pow6(mU3) + 2*pow8(m3)))/pow3(mQ32 - mU32) - (2*pow2(Xt)*pow4(m3)*
+        (7*mQ32*mU32*(pow4(mQ3) + pow4(mU3)) + 3*pow4(m3)*(14*mQ32*mU32 + pow4(
+        mQ3) + pow4(mU3)) - 10*(mQ32 + mU32)*pow6(m3) - m32*(21*mU32*pow4(mQ3)
+        + 21*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) + 2*pow8(m3)))/(mQ32 -
+        mU32) + ((mQ32 + mU32)*pow4(m3)*pow4(Xt)*(7*mQ32*mU32*(pow4(mQ3) +
+        pow4(mU3)) + 3*pow4(m3)*(14*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 10*(
+        mQ32 + mU32)*pow6(m3) - m32*(21*mU32*pow4(mQ3) + 21*mQ32*pow4(mU3) +
+        pow6(mQ3) + pow6(mU3)) + 2*pow8(m3)))/pow3(mQ32 - mU32) + pow4(m3)*(3*
+        pow4(m3)*(15*mQ32*mU32 + 2*pow4(mQ3) + pow4(mU3)) - (13*mQ32 + 11*mU32)
+        *pow6(m3) + 8*mU32*pow6(mQ3) + 7*mQ32*pow6(mU3) - m32*(24*mU32*pow4(
+        mQ3) + 21*mQ32*pow4(mU3) + 2*pow6(mQ3) + pow6(mU3)) + 3*pow8(m3))))/
+        pow3(m32 - mQ32) + (8*(m32 - mU32)*Xt*(4*(mQ32 + 4*mU32)*pow11(m3) -
+        12*m3*pow6(mQ3)*pow6(mU3) + mQ32*pow5(m3)*(-2*(15*msq2 + 34*mU32)*pow4(
+        mQ3) + 90*msq2*pow4(mU3) + mQ32*(-60*msq2*mU32 + 111*pow4(mU3)) - 3*
+        pow6(mQ3) + 86*pow6(mU3)) + mQ32*mU32*pow3(m3)*((30*msq2 + 37*mU32)*
+        pow4(mQ3) - 35*mQ32*pow4(mU3) + 3*pow6(mQ3) - 3*(10*msq2*pow4(mU3) +
+        pow6(mU3))) + (2*(30*msq2 - 53*mU32)*pow4(mQ3) - mQ32*(60*msq2*mU32 +
+        223*pow4(mU3)) + 123*pow6(mQ3) + 16*pow6(mU3))*pow7(m3) - 2*(-108*mQ32*
+        mU32 + 65*pow4(mQ3) + 16*pow4(mU3))*pow9(m3)))/((mQ32 - mU32)*pow2(-(
+        m32*mQ3) + pow3(mQ3))) + (8*(m32 - mU32)*pow5(Xt)*(4*(13*mQ32 + 4*mU32)
+        *pow11(m3) + mQ32*mU32*pow3(m3)*(3*(10*msq2 + 71*mU32)*pow4(mQ3) + 3*(
+        10*msq2 + mU32)*pow4(mU3) + mQ32*(60*msq2*mU32 + 179*pow4(mU3)) + 3*
+        pow6(mQ3)) + 12*m3*pow6(mQ3)*pow6(mU3) - mQ32*pow5(m3)*((30*msq2 + 407*
+        mU32)*pow4(mQ3) + 90*msq2*pow4(mU3) + mQ32*(120*msq2*mU32 + 737*pow4(
+        mU3)) + 3*pow6(mQ3) + 219*pow6(mU3)) + 2*(5*(6*msq2 + 77*mU32)*pow4(
+        mQ3) + 3*mQ32*(10*msq2*mU32 + 93*pow4(mU3)) + 107*pow6(mQ3) + 8*pow6(
+        mU3))*pow7(m3) - 2*(181*mQ32*mU32 + 138*pow4(mQ3) + 16*pow4(mU3))*pow9(
+        m3)))/(pow2(-(m32*mQ3) + pow3(mQ3))*pow3(mQ32 - mU32)) - (16*m3*pow2(
+        m32 - mU32)*pow3(Xt)*(6*(mQ32 + 3*mU32)*pow4(mU3)*pow6(mQ3) - pow6(m3)*
+        (-238*mU32*pow4(mQ3) + 217*mQ32*pow4(mU3) + 193*pow6(mQ3) + 16*pow6(
+        mU3)) + mQ32*pow4(m3)*((60*msq2 - 85*mU32)*pow4(mQ3) + 60*msq2*pow4(
+        mU3) - mQ32*(120*msq2*mU32 + 17*pow4(mU3)) + 153*pow6(mQ3) + 165*pow6(
+        mU3)) + 2*(3*mQ32*mU32 + 5*pow4(mQ3) + 8*pow4(mU3))*pow8(m3) - m32*
+        mQ32*(-2*pow4(mQ3)*(15*msq2*mU32 + 53*pow4(mU3)) + (30*msq2 + 91*mU32)*
+        pow6(mQ3) - 5*mQ32*(6*msq2*pow4(mU3) - 23*pow6(mU3)) + 3*(10*msq2 +
+        mU32)*pow6(mU3) + 3*pow8(mQ3)) + 22*mQ32*power10(m3)))/(pow2(-(m32*mQ3)
+        + pow3(mQ3))*pow3(mQ32 - mU32)) + (2*(m32 - mU32)*pow2(Xt)*(-2*(mQ32 -
+        mU32)*pow14(m3) + 2*pow12(m3)*(736*mQ32*mU32 + 3*pow4(mQ3) - 35*pow4(
+        mU3)) - mQ32*mU32*pow6(m3)*(9*(30*msq2 + 443*mU32)*pow4(mQ3) - 9*mQ32*(
+        20*msq2*mU32 - 391*pow4(mU3)) + 5*(54*msq2 + 79*mU32)*pow4(mU3) + 587*
+        pow6(mQ3)) + 3*m32*pow4(mQ3)*pow4(mU3)*((10*msq2 - 171*mU32)*pow4(mQ3)
+        - 163*mQ32*pow4(mU3) + 10*msq2*pow4(mU3) + pow6(mQ3) + pow6(mU3)) +
+        mQ32*mU32*pow4(m3)*(-90*(msq2 - 27*mU32)*mU32*pow4(mQ3) + 10*(9*msq2 +
+        85*mU32)*pow6(mQ3) + 9*(10*msq2 + mU32)*pow6(mU3) + mQ32*(-90*msq2*
+        pow4(mU3) + 734*pow6(mU3)) + 9*pow8(mQ3)) + 2*pow8(m3)*(8*pow4(mQ3)*(
+        15*msq2*mU32 + 356*pow4(mU3)) + 1218*mU32*pow6(mQ3) + 6*mQ32*(20*msq2*
+        pow4(mU3) + 141*pow6(mU3)) + pow8(mQ3) - 17*pow8(mU3)) + 96*pow8(mQ3)*
+        pow8(mU3) - 2*(1640*mU32*pow4(mQ3) + 10*mQ32*(9*msq2*mU32 + 133*pow4(
+        mU3)) + 3*pow6(mQ3) - 51*pow6(mU3))*power10(m3)))/((mQ32 - mU32)*pow2(
+        mQ3)*pow2(mU3)*pow3(-m32 + mQ32)) + (pow4(Xt)*(2*pow16(m3)*(40*mQ32*
+        mU32 + pow4(mQ3) - pow4(mU3)) - 2*pow14(m3)*(1076*mU32*pow4(mQ3) +
+        1589*mQ32*pow4(mU3) + 3*pow6(mQ3) - 36*pow6(mU3)) + m32*pow4(mQ3)*pow6(
+        mU3)*(6*pow4(mQ3)*(5*msq2*mU32 - 267*pow4(mU3)) + (30*msq2 - 616*mU32)*
+        pow6(mQ3) + mQ32*(30*msq2*pow4(mU3) - 884*pow6(mU3)) + 3*(10*msq2 +
+        mU32)*pow6(mU3) + 3*pow8(mQ3)) + 2*pow12(m3)*(pow4(mQ3)*(90*msq2*mU32 +
+        6481*pow4(mU3)) + 2203*mU32*pow6(mQ3) + 5*mQ32*(18*msq2*pow4(mU3) +
+        911*pow6(mU3)) + 3*pow8(mQ3) - 86*pow8(mU3)) + mQ32*pow4(m3)*pow4(mU3)*
+        ((-30*msq2*mU32 + 5474*pow4(mU3))*pow6(mQ3) - 30*pow4(mQ3)*(7*msq2*
+        pow4(mU3) - 220*pow6(mU3)) + (60*msq2 + 1723*mU32)*pow8(mQ3) + 9*(10*
+        msq2 + mU32)*pow8(mU3) + mQ32*(-30*msq2*pow6(mU3) + 1268*pow8(mU3)) +
+        6*power10(mQ3)) - mQ32*mU32*pow6(m3)*(2*(135*msq2*mU32 + 5431*pow4(mU3)
+        )*pow6(mQ3) + pow4(mQ3)*(-90*msq2*pow4(mU3) + 18070*pow6(mU3)) + 2*(45*
+        msq2 + 914*mU32)*pow8(mQ3) + 18*(20*msq2 + 39*mU32)*pow8(mU3) + mQ32*(
+        90*msq2*pow6(mU3) + 9553*pow8(mU3)) + 9*power10(mQ3)) - 2*power10(m3)*(
+        2*(60*msq2*mU32 + 4397*pow4(mU3))*pow6(mQ3) + 6*pow4(mQ3)*(55*msq2*
+        pow4(mU3) + 2132*pow6(mU3)) + 1498*mU32*pow8(mQ3) + 7*mQ32*(30*msq2*
+        pow6(mU3) + 709*pow8(mU3)) + power10(mQ3) - 68*power10(mU3)) + mU32*
+        pow8(m3)*(6*(55*msq2*mU32 + 4273*pow4(mU3))*pow6(mQ3) + 190*pow4(mQ3)*(
+        3*msq2*pow4(mU3) + 121*pow6(mU3)) + (270*msq2 + 9676*mU32)*pow8(mQ3) +
+        mQ32*(510*msq2*pow6(mU3) + 4623*pow8(mU3)) + 643*power10(mQ3) - 34*
+        power10(mU3)) + 48*(2*mQ32 + 5*mU32)*pow8(mQ3)*power10(mU3)))/(pow2(
+        mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(mQ32 - mU32)) - (-2*pow16(m3)*(-
+        64*mQ32*mU32 + pow4(mQ3) - pow4(mU3)) + 2*pow14(m3)*(380*mU32*pow4(mQ3)
+        - 731*mQ32*pow4(mU3) + 3*pow6(mQ3) - 36*pow6(mU3)) - 3*m32*(mQ32 -
+        mU32)*pow4(mQ3)*pow6(mU3)*((10*msq2 - 179*mU32)*pow4(mQ3) - 151*mQ32*
+        pow4(mU3) + 10*msq2*pow4(mU3) + pow6(mQ3) + pow6(mU3)) - 2*pow12(m3)*(
+        5*pow4(mQ3)*(18*msq2*mU32 - 61*pow4(mU3)) + 1094*mU32*pow6(mQ3) - 2*
+        mQ32*(45*msq2*pow4(mU3) + 833*pow6(mU3)) + 3*pow8(mQ3) - 86*pow8(mU3))
+        + mQ32*pow4(m3)*pow4(mU3)*(2*(75*msq2*mU32 - 761*pow4(mU3))*pow6(mQ3) +
+        pow4(mQ3)*(30*msq2*pow4(mU3) + 2026*pow6(mU3)) - (60*msq2 + 1019*mU32)*
+        pow8(mQ3) + 9*(10*msq2 + mU32)*pow8(mU3) + mQ32*(-210*msq2*pow6(mU3) +
+        640*pow8(mU3)) - 6*power10(mQ3)) + mQ32*mU32*pow6(m3)*((90*msq2*mU32 +
+        3698*pow4(mU3))*pow6(mQ3) - 2*pow4(mQ3)*(225*msq2*pow4(mU3) + 841*pow6(
+        mU3)) + 18*(5*msq2 + 54*mU32)*pow8(mQ3) + 63*mQ32*(10*msq2*pow6(mU3) -
+        53*pow8(mU3)) - 6*(60*msq2 + 71*mU32)*pow8(mU3) + 9*power10(mQ3)) + 2*
+        power10(m3)*(20*(6*msq2*mU32 + 77*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(90*
+        msq2*pow4(mU3) - 1817*pow6(mU3)) + 951*mU32*pow8(mQ3) - 3*mQ32*(70*
+        msq2*pow6(mU3) + 629*pow8(mU3)) + power10(mQ3) - 68*power10(mU3)) + 84*
+        (-mQ32 + mU32)*pow8(mQ3)*power10(mU3) + mU32*pow8(m3)*(6*(35*msq2*mU32
+        - 267*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(-450*msq2*pow4(mU3) + 5506*
+        pow6(mU3)) - 18*(15*msq2 + 196*mU32)*pow8(mQ3) + 17*mQ32*(30*msq2*pow6(
+        mU3) + 121*pow8(mU3)) - 547*power10(mQ3) + 34*power10(mU3)))/((mQ32 -
+        mU32)*pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32))))/pow4(m32 - mU32) - (4*
+        pow2(log(Mst12/pow2(mU3)))*(-160*mU32*(mQ32 + mU32)*pow2(m32 - mQ32)*
+        pow2(m32 - mU32)*pow4(m3)*pow6(Xt) - 2*(m32 - mQ32)*(m32 - mU32)*Xt*
+        pow3(mQ32 - mU32)*(18*pow11(m3) - 12*m3*pow4(mQ3)*pow6(mU3) + pow5(m3)*
+        (168*mU32*pow4(mQ3) + 263*mQ32*pow4(mU3) + 13*pow6(mU3)) - pow3(m3)*(
+        87*pow4(mQ3)*pow4(mU3) + 11*mQ32*pow6(mU3)) + (-425*mQ32*mU32 + 27*
+        pow4(mQ3) - 130*pow4(mU3))*pow7(m3) + (-19*mQ32 + 195*mU32)*pow9(m3)) +
+        2*m3*(m32 - mQ32)*(m32 - mU32)*pow5(Xt)*(12*(mQ32 + mU32)*pow4(mQ3)*
+        pow6(mU3) + pow6(m3)*(508*mU32*pow4(mQ3) + 585*mQ32*pow4(mU3) + 75*
+        pow6(mQ3) + 216*pow6(mU3)) - (392*mQ32*mU32 + 169*pow4(mQ3) + 159*pow4(
+        mU3))*pow8(m3) - pow4(m3)*(535*pow4(mQ3)*pow4(mU3) + 148*mU32*pow6(mQ3)
+        + 384*mQ32*pow6(mU3) + 61*pow8(mU3)) + m32*(93*pow4(mU3)*pow6(mQ3) +
+        152*pow4(mQ3)*pow6(mU3) + 59*mQ32*pow8(mU3)) + 4*(25*mQ32 + 9*mU32)*
+        power10(m3)) - 4*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 - mU32)*pow3(Xt)*(
+        42*pow12(m3) + pow6(m3)*(214*mU32*pow4(mQ3) - 67*mQ32*pow4(mU3) + 45*
+        pow6(mQ3) - 252*pow6(mU3)) + 18*pow6(mQ3)*pow6(mU3) + (-44*mQ32*mU32 -
+        67*pow4(mQ3) + 239*pow4(mU3))*pow8(m3) - 6*pow4(mQ3)*pow8(mU3) + pow4(
+        m3)*(-195*pow4(mQ3)*pow4(mU3) - 90*mU32*pow6(mQ3) + 268*mQ32*pow6(mU3)
+        + 59*pow8(mU3)) + m32*(59*pow4(mU3)*pow6(mQ3) - 42*pow4(mQ3)*pow6(mU3)
+        - 55*mQ32*pow8(mU3)) - 6*(mQ32 + 20*mU32)*power10(m3)) + pow3(mQ32 -
+        mU32)*((139*mQ32 + 245*mU32)*pow14(m3) - 64*pow16(m3) - 3*pow12(m3)*(
+        211*mQ32*mU32 + 29*pow4(mQ3) + 80*pow4(mU3)) + mQ32*pow4(m3)*pow4(mU3)*
+        (80*mU32*pow4(mQ3) - 101*mQ32*pow4(mU3) + 2*pow6(mQ3) - 45*pow6(mU3)) +
+        12*m32*pow4(mQ3)*(mQ32*mU32 - 4*pow4(mQ3) + 3*pow4(mU3))*pow6(mU3) + 2*
+        pow8(m3)*(-200*pow4(mQ3)*pow4(mU3) - 158*mU32*pow6(mQ3) - 81*mQ32*pow6(
+        mU3) + 14*pow8(mQ3) - 55*pow8(mU3)) + 12*(mQ32 - mU32)*pow6(mQ3)*pow8(
+        mU3) + mU32*pow6(m3)*(20*pow4(mQ3)*pow4(mU3) + 146*mU32*pow6(mQ3) +
+        157*mQ32*pow6(mU3) + 34*pow8(mQ3) + 27*pow8(mU3)) + (700*mU32*pow4(mQ3)
+        + 432*mQ32*pow4(mU3) - 22*pow6(mQ3) + 170*pow6(mU3))*power10(m3)) - 2*
+        pow2(mQ32 - mU32)*pow2(Xt)*((54*mQ32 + 502*mU32)*pow14(m3) - 64*pow16(
+        m3) + pow12(m3)*(-962*mQ32*mU32 + 72*pow4(mQ3) - 954*pow4(mU3)) + mQ32*
+        pow4(m3)*pow4(mU3)*(-61*mU32*pow4(mQ3) - 325*mQ32*pow4(mU3) + 7*pow6(
+        mQ3) - 97*pow6(mU3)) + 12*m32*pow4(mQ3)*(5*mQ32*mU32 - 4*pow4(mQ3) + 6*
+        pow4(mU3))*pow6(mU3) + pow8(m3)*(-1199*pow4(mQ3)*pow4(mU3) - 79*mU32*
+        pow6(mQ3) - 1401*mQ32*pow6(mU3) + pow8(mQ3) - 302*pow8(mU3)) + 12*(mQ32
+        - 2*mU32)*pow6(mQ3)*pow8(mU3) + mU32*pow6(m3)*(811*pow4(mQ3)*pow4(mU3)
+        + 189*mU32*pow6(mQ3) + 525*mQ32*pow6(mU3) + 24*pow8(mQ3) + 55*pow8(mU3)
+        ) + (545*mU32*pow4(mQ3) + 1897*mQ32*pow4(mU3) - 69*pow6(mQ3) + 759*
+        pow6(mU3))*power10(m3)) + pow4(Xt)*(4*(37*mQ32 - 197*mU32)*pow16(m3) -
+        4*pow14(m3)*(-449*mQ32*mU32 + 84*pow4(mQ3) - 639*pow4(mU3)) + 2*pow12(
+        m3)*(-393*mU32*pow4(mQ3) - 3683*mQ32*pow4(mU3) + 97*pow6(mQ3) - 1309*
+        pow6(mU3)) + 6*m32*pow4(mQ3)*pow6(mU3)*(15*mU32*pow4(mQ3) + 30*mQ32*
+        pow4(mU3) - 4*pow6(mQ3) + 15*pow6(mU3)) + 6*(-4*mQ32*mU32 + pow4(mQ3) -
+        5*pow4(mU3))*pow6(mQ3)*pow8(mU3) - mQ32*pow4(m3)*pow4(mU3)*(1612*pow4(
+        mQ3)*pow4(mU3) - 234*mU32*pow6(mQ3) + 238*mQ32*pow6(mU3) + 37*pow8(mQ3)
+        + 123*pow8(mU3)) + (6232*pow4(mQ3)*pow4(mU3) - 452*mU32*pow6(mQ3) +
+        8472*mQ32*pow6(mU3) + pow8(mQ3) + 835*pow8(mU3))*power10(m3) - pow8(m3)
+        *(936*pow4(mU3)*pow6(mQ3) + 8712*pow4(mQ3)*pow6(mU3) - 190*mU32*pow8(
+        mQ3) + 3031*mQ32*pow8(mU3) + 13*power10(mQ3) + 58*power10(mU3)) + mU32*
+        pow6(m3)*(2648*pow4(mU3)*pow6(mQ3) + 3742*pow4(mQ3)*pow6(mU3) - 479*
+        mU32*pow8(mQ3) + 116*mQ32*pow8(mU3) + 64*power10(mQ3) + 69*power10(mU3)
+        ))))/(pow3(m32 - mQ32)*pow4(m32 - mU32)*pow4(mQ32 - mU32)) - (2*dilog(1
+        - m32/pow2(mQ3))*(-8*m3*(m32 - mU32)*pow5(Xt)*(-2*(9*mQ32 - 7*mU32)*
+        pow4(m3) + 4*mU32*pow4(mQ3) + mQ32*pow4(mU3) - m32*(-20*mQ32*mU32 +
+        pow4(mQ3) + 11*pow4(mU3)) - 3*pow6(mQ3) - 6*pow6(mU3)) + 8*m3*(m32 -
+        mU32)*(mQ32 - mU32)*pow3(Xt)*(-((37*mQ32 + 33*mU32)*pow4(m3)) + 20*
+        mU32*pow4(mQ3) - 75*mQ32*pow4(mU3) - 2*m32*(-55*mQ32*mU32 + pow4(mQ3) +
+        3*pow4(mU3)) + 2*pow6(m3) - 6*pow6(mQ3) + 27*pow6(mU3)) + (8*m3*(m32 -
+        mU32)*Xt*pow3(mQ32 - mU32)*(22*pow4(mQ3)*pow4(mU3) + pow4(m3)*(135*
+        mQ32*mU32 + 19*pow4(mQ3) + 24*pow4(mU3)) - (37*mQ32 + 73*mU32)*pow6(m3)
+        - 7*mU32*pow6(mQ3) - m32*(23*mU32*pow4(mQ3) + 78*mQ32*pow4(mU3) + 5*
+        pow6(mQ3)) + 20*pow8(m3) + 3*pow8(mQ3)))/pow2(m32 - mQ32) + (pow3(mQ32
+        - mU32)*(-128*pow12(m3) + mU32*pow4(mQ3)*(mU32*pow4(mQ3) + 19*mQ32*
+        pow4(mU3) + 3*pow6(mQ3) - 23*pow6(mU3)) + pow6(m3)*(251*mU32*pow4(mQ3)
+        + 821*mQ32*pow4(mU3) - 9*pow6(mQ3) + 217*pow6(mU3)) - 2*(381*mQ32*mU32
+        + 49*pow4(mQ3) + 210*pow4(mU3))*pow8(m3) - pow4(m3)*(417*pow4(mQ3)*
+        pow4(mU3) - 151*mU32*pow6(mQ3) + 323*mQ32*pow6(mU3) + 20*pow8(mQ3) +
+        31*pow8(mU3)) + m32*mQ32*(-41*pow4(mQ3)*pow4(mU3) - 41*mU32*pow6(mQ3) +
+        167*mQ32*pow6(mU3) + 9*pow8(mQ3) + 34*pow8(mU3)) + 10*(29*mQ32 + 35*
+        mU32)*power10(m3)))/pow2(m32 - mQ32) - (2*pow2(mQ32 - mU32)*pow2(Xt)*(-
+        128*pow12(m3) + mU32*pow4(mQ3)*(mU32*pow4(mQ3) + 19*mQ32*pow4(mU3) + 3*
+        pow6(mQ3) - 23*pow6(mU3)) + pow6(m3)*(251*mU32*pow4(mQ3) + 2049*mQ32*
+        pow4(mU3) - 9*pow6(mQ3) + 525*pow6(mU3)) - 2*(707*mQ32*mU32 + 49*pow4(
+        mQ3) + 652*pow4(mU3))*pow8(m3) + m32*mQ32*(-41*pow4(mQ3)*pow4(mU3) -
+        41*mU32*pow6(mQ3) + 167*mQ32*pow6(mU3) + 9*pow8(mQ3) + 34*pow8(mU3)) +
+        pow4(m3)*(-417*pow4(mQ3)*pow4(mU3) + 151*mU32*pow6(mQ3) - 903*mQ32*
+        pow6(mU3) - 20*pow8(mQ3) + 37*pow8(mU3)) + 6*(49*mQ32 + 143*mU32)*
+        power10(m3)))/pow2(m32 - mQ32) - (pow4(Xt)*(4*(31*mQ32 + 289*mU32)*
+        pow12(m3) + (2702*mU32*pow4(mQ3) + 7406*mQ32*pow4(mU3) + 90*pow6(mQ3) +
+        2602*pow6(mU3))*pow8(m3) + pow6(m3)*(-5516*pow4(mQ3)*pow4(mU3) - 474*
+        mU32*pow6(mQ3) - 6126*mQ32*pow6(mU3) + 11*pow8(mQ3) - 695*pow8(mU3)) +
+        mU32*pow4(mQ3)*(-54*pow4(mQ3)*pow4(mU3) - 4*mU32*pow6(mQ3) + 4*mQ32*
+        pow6(mU3) - 3*pow8(mQ3) + 57*pow8(mU3)) - 4*(767*mQ32*mU32 + 71*pow4(
+        mQ3) + 762*pow4(mU3))*power10(m3) + pow4(m3)*(882*pow4(mU3)*pow6(mQ3) +
+        3984*pow4(mQ3)*pow6(mU3) - 201*mU32*pow8(mQ3) + 1718*mQ32*pow8(mU3) +
+        20*power10(mQ3) - 3*power10(mU3)) - m32*mQ32*(-184*pow4(mU3)*pow6(mQ3)
+        + 502*pow4(mQ3)*pow6(mU3) - 32*mU32*pow8(mQ3) + 883*mQ32*pow8(mU3) + 9*
+        power10(mQ3) + 102*power10(mU3))))/pow2(m32 - mQ32)))/(pow3(m32 - mU32)
+        *pow4(mQ32 - mU32)) - (4*pow2(log(Mst12/pow2(mQ3)))*(-160*mQ32*(mQ32 +
+        mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(m3)*pow6(Xt) + 2*(m32 -
+        mQ32)*(m32 - mU32)*Xt*pow3(mQ32 - mU32)*(306*pow11(m3) + 12*m3*pow4(
+        mU3)*pow6(mQ3) - pow5(m3)*(553*mU32*pow4(mQ3) + 108*mQ32*pow4(mU3) +
+        119*pow6(mQ3)) + pow3(m3)*(33*pow4(mQ3)*pow4(mU3) + 133*mU32*pow6(mQ3))
+        + (703*mQ32*mU32 + 458*pow4(mQ3) + 159*pow4(mU3))*pow7(m3) - (549*mQ32
+        + 475*mU32)*pow9(m3)) + 2*m3*(m32 - mQ32)*(m32 - mU32)*pow5(Xt)*(12*(
+        mQ32 + mU32)*pow4(mU3)*pow6(mQ3) + pow6(m3)*(461*mU32*pow4(mQ3) + 752*
+        mQ32*pow4(mU3) - 92*pow6(mQ3) + 263*pow6(mU3)) - (328*mQ32*mU32 + 103*
+        pow4(mQ3) + 289*pow4(mU3))*pow8(m3) + pow4(m3)*(-659*pow4(mQ3)*pow4(
+        mU3) - 68*mU32*pow6(mQ3) - 528*mQ32*pow6(mU3) + 127*pow8(mQ3)) - 19*
+        m32*(-8*pow4(mU3)*pow6(mQ3) - 15*pow4(mQ3)*pow6(mU3) + 7*mU32*pow8(mQ3)
+        ) + 4*(25*mQ32 + 9*mU32)*power10(m3)) + 4*m3*(m32 - mQ32)*(m32 - mU32)*
+        (mQ32 - mU32)*pow3(Xt)*(426*pow12(m3) + 6*(-3*mQ32 + mU32)*pow4(mU3)*
+        pow6(mQ3) - 3*pow6(m3)*(913*mU32*pow4(mQ3) + 270*mQ32*pow4(mU3) + 60*
+        pow6(mQ3) - 87*pow6(mU3)) + (2472*mQ32*mU32 + 1107*pow4(mQ3) + 77*pow4(
+        mU3))*pow8(m3) + pow4(m3)*(1405*pow4(mQ3)*pow4(mU3) + 932*mU32*pow6(
+        mQ3) - 522*mQ32*pow6(mU3) - 157*pow8(mQ3)) + m32*(-750*pow4(mU3)*pow6(
+        mQ3) + 287*pow4(mQ3)*pow6(mU3) + 161*mU32*pow8(mQ3)) - 2*(614*mQ32 +
+        365*mU32)*power10(m3)) + pow3(mQ32 - mU32)*((203*mQ32 + 181*mU32)*
+        pow14(m3) - 64*pow16(m3) - pow12(m3)*(59*mQ32*mU32 + 534*pow4(mQ3) +
+        367*pow4(mU3)) - 12*m32*(mQ32*mU32 + 3*pow4(mQ3) - 4*pow4(mU3))*pow4(
+        mU3)*pow6(mQ3) - mU32*pow4(m3)*pow4(mQ3)*(-142*mU32*pow4(mQ3) + 39*
+        mQ32*pow4(mU3) + 60*pow6(mQ3) + 107*pow6(mU3)) + 12*(mQ32 - mU32)*pow6(
+        mU3)*pow8(mQ3) - pow8(m3)*(-373*pow4(mQ3)*pow4(mU3) + 453*mU32*pow6(
+        mQ3) + 393*mQ32*pow6(mU3) + 358*pow8(mQ3) + 129*pow8(mU3)) + mQ32*pow6(
+        m3)*(-307*pow4(mQ3)*pow4(mU3) + 290*mU32*pow6(mQ3) + 155*mQ32*pow6(mU3)
+        + 74*pow8(mQ3) + 172*pow8(mU3)) + (213*mU32*pow4(mQ3) + 27*mQ32*pow4(
+        mU3) + 651*pow6(mQ3) + 389*pow6(mU3))*power10(m3)) - 2*pow4(Xt)*(2*(
+        219*mQ32 - 59*mU32)*pow16(m3) + pow14(m3)*(-854*mQ32*mU32 - 1161*pow4(
+        mQ3) + 7*pow4(mU3)) - 3*m32*pow4(mU3)*pow6(mQ3)*(34*mU32*pow4(mQ3) +
+        11*mQ32*pow4(mU3) + 15*pow6(mQ3) - 4*pow6(mU3)) + pow12(m3)*(3279*mU32*
+        pow4(mQ3) + 958*mQ32*pow4(mU3) + 708*pow6(mQ3) + 343*pow6(mU3)) + 3*(4*
+        mQ32*mU32 + 5*pow4(mQ3) - pow4(mU3))*pow6(mU3)*pow8(mQ3) + mU32*pow4(
+        m3)*pow4(mQ3)*(818*pow4(mQ3)*pow4(mU3) - 5*mU32*pow6(mQ3) - 5*mQ32*
+        pow6(mU3) + 9*pow8(mQ3) + 71*pow8(mU3)) + (-3520*pow4(mQ3)*pow4(mU3) -
+        3005*mU32*pow6(mQ3) - 1041*mQ32*pow6(mU3) + 306*pow8(mQ3) - 284*pow8(
+        mU3))*power10(m3) + mQ32*pow6(m3)*(-1376*pow4(mU3)*pow6(mQ3) - 1695*
+        pow4(mQ3)*pow6(mU3) + 420*mU32*pow8(mQ3) - 310*mQ32*pow8(mU3) + 16*
+        power10(mQ3) - 135*power10(mU3)) + pow8(m3)*(3985*pow4(mU3)*pow6(mQ3) +
+        1666*pow4(mQ3)*pow6(mU3) + 263*mU32*pow8(mQ3) + 614*mQ32*pow8(mU3) -
+        305*power10(mQ3) + 57*power10(mU3))) + 4*(mQ32 - mU32)*pow2(Xt)*(32*(
+        25*mQ32 + 17*mU32)*pow16(m3) - 192*pow18(m3) - 2*pow14(m3)*(1237*mQ32*
+        mU32 + 603*pow4(mQ3) + 176*pow4(mU3)) + 2*pow12(m3)*(2125*mU32*pow4(
+        mQ3) + 993*mQ32*pow4(mU3) + 326*pow6(mQ3) - 84*pow6(mU3)) - 6*m32*pow4(
+        mU3)*pow6(mQ3)*(-(mU32*pow4(mQ3)) - 9*mQ32*pow4(mU3) + 6*pow6(mQ3) + 4*
+        pow6(mU3)) + 6*(-3*mQ32*mU32 + 2*pow4(mQ3) + pow4(mU3))*pow6(mU3)*pow8(
+        mQ3) + mU32*pow4(m3)*pow4(mQ3)*(147*pow4(mQ3)*pow4(mU3) + 123*mU32*
+        pow6(mQ3) - 25*mQ32*pow6(mU3) - 4*pow8(mQ3) - 49*pow8(mU3)) + (-4079*
+        pow4(mQ3)*pow4(mU3) - 3065*mU32*pow6(mQ3) + 139*mQ32*pow6(mU3) + 72*
+        pow8(mQ3) + 213*pow8(mU3))*power10(m3) + pow8(m3)*(3405*pow4(mU3)*pow6(
+        mQ3) + 687*pow4(mQ3)*pow6(mU3) + 673*mU32*pow8(mQ3) - 536*mQ32*pow8(
+        mU3) - 147*power10(mQ3) - 50*power10(mU3)) + mQ32*pow6(m3)*(-1027*pow4(
+        mU3)*pow6(mQ3) - 843*pow4(mQ3)*pow6(mU3) + 66*mU32*pow8(mQ3) + 322*
+        mQ32*pow8(mU3) + 23*power10(mQ3) + 115*power10(mU3)))))/(pow3(m32 -
+        mU32)*pow4(m32 - mQ32)*pow4(mQ32 - mU32)) - (pow2(log(Mst12/pow2(mU3)))
+        *((-2*pow2(m32 - mU32)*(-34*m32*mQ32 + pow4(m3) + 17*pow4(mQ3))*(-4*
+        m32*mU32 + 3*pow4(m3) + 2*pow4(mU3)))/pow2(m32 - mQ32) + (2*(-34*m32*
+        mU32 + pow4(m3) + 17*pow4(mU3))*(4*m32*mQ32*mU32*(mQ32 + mU32) - 2*
+        pow4(mQ3)*pow4(mU3) - pow4(m3)*(8*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) +
+        2*(mQ32 + mU32)*pow6(m3)))/pow2(m32 - mQ32) + (320*(mQ32 + mU32)*pow2(-
+        (m3*mU32) + pow3(m3))*(-3*mQ32*pow4(mU3) + m32*(2*mQ32*mU32 + pow4(mU3)
+        ))*pow6(Xt))/((m32 - mQ32)*pow5(mQ32 - mU32)) + (4*(m32 - mU32)*(pow4(
+        m3)*(519*mQ32*mU32 - 263*pow4(mU3)) - (239*mQ32 + 81*mU32)*pow6(m3) +
+        138*(mQ32 - mU32)*pow6(mU3) + m32*(-414*mQ32*pow4(mU3) + 350*pow6(mU3))
+        + 128*pow8(m3)))/(-mQ32 + mU32) + (2*mQ32*(m32 - mU32)*(2*(-94*mQ32*
+        mU32 + 17*pow4(mQ3) - 39*pow4(mU3))*pow6(m3) + 4*pow4(mU3)*pow6(mQ3) +
+        19*pow4(mQ3)*pow6(mU3) + pow4(m3)*(120*mU32*pow4(mQ3) + 175*mQ32*pow4(
+        mU3) - 29*pow6(mQ3) + 26*pow6(mU3)) + (-14*mQ32 + 64*mU32)*pow8(m3) +
+        3*mU32*pow8(mQ3) + m32*(-65*pow4(mQ3)*pow4(mU3) - 35*mU32*pow6(mQ3) -
+        57*mQ32*pow6(mU3) + 9*pow8(mQ3)) + 12*power10(m3)))/pow3(m32 - mQ32) +
+        (-((-mQ32 + mU32)*pow4(mU3)*(-4*mQ32*mU32 - 3*pow4(mQ3) - 30*pow4(msq)
+        + pow4(mU3))) + (60*msq2*mU32 + mQ32*(-60*msq2 + 64*mU32) - 2*pow4(mQ3)
+        + 706*pow4(mU3))*pow6(m3) + pow4(m3)*(-33*mU32*pow4(mQ3) - 90*mU32*
+        pow4(msq) + 3*mQ32*(-40*msq2*mU32 + 30*pow4(msq) - 17*pow4(mU3)) + 120*
+        msq2*pow4(mU3) + 9*pow6(mQ3) - 437*pow6(mU3)) - 2*m32*mU32*(-18*mU32*
+        pow4(mQ3) - 30*mU32*pow4(msq) + 90*msq2*pow4(mU3) + mQ32*(-90*msq2*mU32
+        + 30*pow4(msq) + 19*pow4(mU3)) + 3*pow6(mQ3) - 68*pow6(mU3)) + (44*mQ32
+        - 556*mU32)*pow8(m3) + 128*power10(m3))/(mQ32 - mU32) + (8*m3*(m32 -
+        mU32)*Xt*(pow6(m3)*(1357*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 2*mQ32*(-
+        30*msq2*mU32 + 15*pow4(msq) - 752*pow4(mU3)) + 60*msq2*pow4(mU3) + 366*
+        pow6(mQ3) - 923*pow6(mU3)) + mU32*pow4(mQ3)*(-10*mU32*pow4(mQ3) + 30*
+        mU32*pow4(msq) - 60*msq2*pow4(mU3) - 2*mQ32*(-30*msq2*mU32 + 15*pow4(
+        msq) + 92*pow4(mU3)) + 3*pow6(mQ3) + 271*pow6(mU3)) + (-79*mQ32*mU32 -
+        700*pow4(mQ3) + 1115*pow4(mU3))*pow8(m3) + pow4(m3)*(pow4(mQ3)*(120*
+        msq2*mU32 - 60*pow4(msq) - 247*pow4(mU3)) + 6*pow4(mU3)*(-10*msq2*mU32
+        + 5*pow4(msq) + 41*pow4(mU3)) - 952*mU32*pow6(mQ3) + 2*mQ32*(15*mU32*
+        pow4(msq) - 30*msq2*pow4(mU3) + 842*pow6(mU3)) + 5*pow8(mQ3)) + m32*
+        mQ32*(-60*pow4(msq)*pow4(mU3) + pow4(mQ3)*(-60*msq2*mU32 + 30*pow4(msq)
+        + 754*pow4(mU3)) + 5*mU32*pow6(mQ3) + mQ32*(30*mU32*pow4(msq) - 60*
+        msq2*pow4(mU3) - 633*pow6(mU3)) + 120*msq2*pow6(mU3) - 3*pow8(mQ3) -
+        507*pow8(mU3)) + (358*mQ32 - 422*mU32)*power10(m3)))/(pow2(m32 - mQ32)*
+        pow2(mQ32 - mU32)) + (8*m3*(m32 - mU32)*pow3(Xt)*(254*(mQ32 - mU32)*
+        pow12(m3) + (1551*mU32*pow4(mQ3) - 2044*mQ32*pow4(mU3) + 484*pow6(mQ3)
+        - 1271*pow6(mU3))*pow8(m3) + mU32*pow4(mQ3)*(-60*pow4(msq)*pow4(mU3) +
+        pow4(mQ3)*(120*msq2*mU32 - 60*pow4(msq) + 349*pow4(mU3)) + 78*mU32*
+        pow6(mQ3) + 30*mQ32*(4*mU32*pow4(msq) - 8*msq2*pow4(mU3) - 31*pow6(mU3)
+        ) + 120*msq2*pow6(mU3) - 18*pow8(mQ3) + 265*pow8(mU3)) + pow6(m3)*(60*
+        pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(-60*msq2*mU32 + 30*pow4(msq) + 503*
+        pow4(mU3)) - 2022*mU32*pow6(mQ3) - 120*msq2*pow6(mU3) + mQ32*(-120*
+        mU32*pow4(msq) + 240*msq2*pow4(mU3) + 3418*pow6(mU3)) - 125*pow8(mQ3) +
+        283*pow8(mU3)) + (-246*mQ32*mU32 - 573*pow4(mQ3) + 1075*pow4(mU3))*
+        power10(m3) + pow4(m3)*((240*msq2*mU32 - 120*pow4(msq) + 1222*pow4(mU3)
+        )*pow6(mQ3) + 2*pow4(mQ3)*(90*mU32*pow4(msq) - 180*msq2*pow4(mU3) -
+        1979*pow6(mU3)) + 15*(8*msq2*mU32 - 4*pow4(msq) + 9*pow4(mU3))*pow6(
+        mU3) + 929*mU32*pow8(mQ3) - 858*mQ32*pow8(mU3) - 30*power10(mQ3)) +
+        m32*mQ32*(15*(-8*msq2*mU32 + 4*pow4(msq) - 79*pow4(mU3))*pow6(mQ3) +
+        1374*pow4(mQ3)*pow6(mU3) - 12*(20*msq2*mU32 - 10*pow4(msq) + 33*pow4(
+        mU3))*pow6(mU3) - 48*mU32*pow8(mQ3) + mQ32*(-180*pow4(msq)*pow4(mU3) +
+        360*msq2*pow6(mU3) + 1517*pow8(mU3)) + 18*power10(mQ3))))/(pow2(m32 -
+        mQ32)*pow4(mQ32 - mU32)) - (pow4(Xt)*(12*(59*mQ32 + 133*mU32)*pow16(m3)
+        - 4*pow14(m3)*(1979*mQ32*mU32 + 390*pow4(mQ3) + 1747*pow4(mU3)) + (mQ32
+        + mU32)*pow4(mU3)*pow6(mQ3)*(3*mU32*pow4(mQ3) + mQ32*(30*pow4(msq) +
+        131*pow4(mU3)) - 3*mU32*(10*pow4(msq) + 461*pow4(mU3)) + 9*pow6(mQ3)) +
+        2*pow12(m3)*((-30*msq2 + 6953*mU32)*pow4(mQ3) + 12317*mQ32*pow4(mU3) +
+        30*msq2*pow4(mU3) + 361*pow6(mQ3) + 4201*pow6(mU3)) + (30*pow4(mQ3)*(-
+        4*msq2*mU32 + 3*pow4(msq) - 1162*pow4(mU3)) - 90*pow4(msq)*pow4(mU3) +
+        10*(18*msq2 - 991*mU32)*pow6(mQ3) + 120*msq2*pow6(mU3) - 2*mQ32*(90*
+        msq2*pow4(mU3) + 12163*pow6(mU3)) + 329*pow8(mQ3) - 753*pow8(mU3))*
+        power10(m3) + pow8(m3)*((360*msq2*mU32 - 270*pow4(msq) + 23242*pow4(
+        mU3))*pow6(mQ3) - 4*(45*msq2*mU32 - 15*pow4(msq) + 947*pow4(mU3))*pow6(
+        mU3) + pow4(mQ3)*(-60*mU32*pow4(msq) + 360*msq2*pow4(mU3) + 27032*pow6(
+        mU3)) - 4*(45*msq2 - 632*mU32)*pow8(mQ3) + 3*mQ32*(90*pow4(msq)*pow4(
+        mU3) - 120*msq2*pow6(mU3) - 377*pow8(mU3)) - 283*power10(mQ3)) + m32*
+        mU32*pow4(mQ3)*(2*(-90*msq2*mU32 + 30*pow4(msq) - 307*pow4(mU3))*pow6(
+        mQ3) + 9*(10*pow4(msq) + 461*pow4(mU3))*pow6(mU3) + pow4(mQ3)*(-90*
+        mU32*pow4(msq) + 1316*pow6(mU3)) - 117*mU32*pow8(mQ3) + mQ32*(-60*pow4(
+        msq)*pow4(mU3) + 180*msq2*pow6(mU3) + 7744*pow8(mU3)) + 18*power10(mQ3)
+        ) + pow6(m3)*(87*pow12(mQ3) + 4*pow6(mQ3)*(45*mU32*pow4(msq) - 150*
+        msq2*pow4(mU3) - 3629*pow6(mU3)) + 12*mQ32*(45*msq2*mU32 - 15*pow4(msq)
+        + 1024*pow4(mU3))*pow6(mU3) + 5*(-72*msq2*mU32 + 54*pow4(msq) - 1391*
+        pow4(mU3))*pow8(mQ3) + 3*(10*pow4(msq) + 513*pow4(mU3))*pow8(mU3) +
+        pow4(mQ3)*(-300*pow4(msq)*pow4(mU3) + 360*msq2*pow6(mU3) + 6437*pow8(
+        mU3)) + 12*(5*msq2 - 12*mU32)*power10(mQ3)) - mQ32*pow4(m3)*(27*pow12(
+        mQ3) + 4281*pow12(mU3) + 10*pow6(mQ3)*(18*mU32*pow4(msq) - 54*msq2*
+        pow4(mU3) - 401*pow6(mU3)) + 4*mQ32*(135*msq2*mU32 - 45*pow4(msq) +
+        3772*pow4(mU3))*pow6(mU3) + 15*(-8*msq2*mU32 + 6*pow4(msq) - 61*pow4(
+        mU3))*pow8(mQ3) + 90*pow4(msq)*pow8(mU3) + pow4(mQ3)*(-180*pow4(msq)*
+        pow4(mU3) + 120*msq2*pow6(mU3) + 5883*pow8(mU3)) - 18*mU32*power10(mQ3)
+        )))/(pow3(m32 - mQ32)*pow4(mQ32 - mU32)) - (2*pow2(Xt)*(-128*(23*mQ32 +
+        25*mU32)*pow16(m3) + 768*pow18(m3) + 2*pow14(m3)*(5832*mQ32*mU32 +
+        2417*pow4(mQ3) + 2503*pow4(mU3)) - (mQ32 - mU32)*pow4(mU3)*pow6(mQ3)*(
+        3*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + mQ32*(30*pow4(msq) + 441*pow4(
+        mU3)) + 9*pow6(mQ3) - 1073*pow6(mU3)) - 2*pow12(m3)*((-30*msq2 + 9885*
+        mU32)*pow4(mQ3) - 30*msq2*pow4(mU3) + mQ32*(60*msq2*mU32 + 6928*pow4(
+        mU3)) + 1956*pow6(mQ3) + 2735*pow6(mU3)) + (-90*pow4(msq)*pow4(mU3) +
+        pow4(mQ3)*(480*msq2*mU32 - 90*pow4(msq) + 20264*pow4(mU3)) - 4*(45*msq2
+        - 4523*mU32)*pow6(mQ3) + 120*msq2*pow6(mU3) + 4*mQ32*(45*mU32*pow4(msq)
+        - 105*msq2*pow4(mU3) + 2023*pow6(mU3)) + 1301*pow8(mQ3) + 6011*pow8(
+        mU3))*power10(m3) - 3*m32*mU32*pow4(mQ3)*(4*(-15*msq2*mU32 + 5*pow4(
+        msq) - 132*pow4(mU3))*pow6(mQ3) - (30*pow4(msq) + 1073*pow4(mU3))*pow6(
+        mU3) + pow4(mQ3)*(-70*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 1036*pow6(
+        mU3)) - 51*mU32*pow8(mQ3) + mQ32*(80*pow4(msq)*pow4(mU3) - 60*msq2*
+        pow6(mU3) + 354*pow8(mU3)) + 6*power10(mQ3)) + pow8(m3)*(6*(-120*msq2*
+        mU32 + 45*pow4(msq) - 3283*pow4(mU3))*pow6(mQ3) - 4*(45*msq2*mU32 - 15*
+        pow4(msq) + 1076*pow4(mU3))*pow6(mU3) - 2*pow4(mQ3)*(240*mU32*pow4(msq)
+        - 360*msq2*pow4(mU3) + 649*pow6(mU3)) + 10*(18*msq2 - 827*mU32)*pow8(
+        mQ3) + 25*mQ32*(6*pow4(msq)*pow4(mU3) - 379*pow8(mU3)) + 37*power10(
+        mQ3)) + mQ32*pow4(m3)*(27*pow12(mQ3) - 30*mQ32*(18*msq2*mU32 - 12*pow4(
+        msq) + 203*pow4(mU3))*pow6(mU3) - 2*pow6(mQ3)*(150*msq2*pow4(mU3) +
+        1259*pow6(mU3)) + (-120*msq2*mU32 + 90*pow4(msq) - 2621*pow4(mU3))*
+        pow8(mQ3) - (90*pow4(msq) + 3319*pow4(mU3))*pow8(mU3) + pow4(mQ3)*(-
+        360*pow4(msq)*pow4(mU3) + 960*msq2*pow6(mU3) + 8449*pow8(mU3)) - 72*
+        mU32*power10(mQ3)) + pow6(m3)*(-87*pow12(mQ3) + 12*pow6(mQ3)*(30*mU32*
+        pow4(msq) - 20*msq2*pow4(mU3) - 73*pow6(mU3)) + 6*mQ32*(90*msq2*mU32 -
+        40*pow4(msq) + 1633*pow4(mU3))*pow6(mU3) + (480*msq2*mU32 - 270*pow4(
+        msq) + 11121*pow4(mU3))*pow8(mQ3) + pow4(mQ3)*(120*pow4(msq)*pow4(mU3)
+        - 720*msq2*pow6(mU3) - 1079*pow8(mU3)) + 3*(10*pow4(msq) + 399*pow4(
+        mU3))*pow8(mU3) + (-60*msq2 + 1430*mU32)*power10(mQ3))))/(pow3(m32 -
+        mQ32)*pow3(mQ32 - mU32)) + (8*m3*(m32 - mU32)*pow5(Xt)*(mU32*(mQ32 +
+        mU32)*pow4(mQ3)*(-30*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 10*mQ32*(-6*
+        msq2*mU32 + 3*pow4(msq) - 7*pow4(mU3)) + 60*msq2*pow4(mU3) + 9*pow6(
+        mQ3) + 331*pow6(mU3)) + (195*mU32*pow4(mQ3) + 118*mQ32*pow4(mU3) + 58*
+        pow6(mQ3) + 109*pow6(mU3))*pow8(m3) - pow6(m3)*(-30*pow4(msq)*pow4(mU3)
+        + pow4(mQ3)*(-60*msq2*mU32 + 30*pow4(msq) + 603*pow4(mU3)) + 65*mU32*
+        pow6(mQ3) + 767*mQ32*pow6(mU3) + 60*msq2*pow6(mU3) + 24*pow8(mQ3) +
+        461*pow8(mU3)) + (-32*mQ32*mU32 - 46*pow4(mQ3) + 78*pow4(mU3))*power10(
+        m3) + pow4(m3)*((-120*msq2*mU32 + 60*pow4(msq) + 197*pow4(mU3))*pow6(
+        mQ3) + 6*(10*msq2*mU32 - 5*pow4(msq) + 43*pow4(mU3))*pow6(mU3) + pow4(
+        mQ3)*(30*mU32*pow4(msq) - 60*msq2*pow4(mU3) + 1229*pow6(mU3)) - 111*
+        mU32*pow8(mQ3) + mQ32*(-60*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) +
+        1292*pow8(mU3)) + 15*power10(mQ3)) - m32*mQ32*((-60*msq2*mU32 + 30*
+        pow4(msq) - 251*pow4(mU3))*pow6(mQ3) - 60*pow4(msq)*pow6(mU3) + 3*pow4(
+        mQ3)*(20*mU32*pow4(msq) - 40*msq2*pow4(mU3) + 161*pow6(mU3)) - 6*mU32*
+        pow8(mQ3) + 120*msq2*pow8(mU3) + mQ32*(-30*pow4(msq)*pow4(mU3) + 60*
+        msq2*pow6(mU3) + 1106*pow8(mU3)) + 9*power10(mQ3) + 579*power10(mU3))))
+        /(pow2(m32 - mQ32)*pow5(mQ32 - mU32))))/pow4(m32 - mU32) - 2*dilog(1 -
+        m32/pow2(mQ3))*((-8*pow4(m3)*(-105*mQ32*mU32 + m32*(27*mQ32 + 101*mU32)
+        - 64*pow4(m3) + 41*pow4(mQ3)))/((mQ32 - mU32)*pow3(m32 - mQ32)) - (4*
+        pow4(m3)*(-34*m32*mQ32 + pow4(m3) + 17*pow4(mQ3)))/pow4(m32 - mQ32) + (
+        8*pow3(Xt)*(4*(31*m3*(mQ32 + mU32) - 64*pow3(m3)) + (m3*(2*m32 - mQ32 -
+        mU32)*(-34*m32*mQ32 + pow4(m3) + 17*pow4(mQ3)))/pow2(m32 - mQ32) + (2*
+        m3*(mQ32 - mU32)*(m32*(mQ32 - 37*mU32) - 7*mQ32*mU32 + 18*pow4(m3) + 3*
+        pow4(mQ3) + 22*pow4(mU3)))/pow2(m32 - mU32)))/pow3(mQ32 - mU32) + (8*
+        m3*((16*mQ32*(-2*m32 + mQ32 + mU32))/(-m32 + mQ32) - ((mQ32 + mU32)*(
+        m32*(mQ32 - 37*mU32) - 7*mQ32*mU32 + 18*pow4(m3) + 3*pow4(mQ3) + 22*
+        pow4(mU3)))/pow2(m32 - mU32))*pow5(Xt))/pow4(mQ32 - mU32) + 8*Xt*(-((
+        m3*(m32*(mQ32 - 37*mU32) - 7*mQ32*mU32 + 18*pow4(m3) + 3*pow4(mQ3) +
+        22*pow4(mU3)))/((-mQ32 + mU32)*pow2(m32 - mU32))) - (8*(-48*mQ32*pow3(
+        m3) + 47*pow5(m3)))/((mQ32 - mU32)*pow2(m32 - mQ32)) + (2*(17*pow3(m3)*
+        pow4(mQ3) - 50*mQ32*pow5(m3) + pow7(m3)))/((mQ32 - mU32)*pow3(m32 -
+        mQ32))) + (-128*pow12(m3) + mU32*pow4(mQ3)*(mU32*pow4(mQ3) + 19*mQ32*
+        pow4(mU3) + 3*pow6(mQ3) - 23*pow6(mU3)) + pow6(m3)*(251*mU32*pow4(mQ3)
+        + 1025*mQ32*pow4(mU3) - 9*pow6(mQ3) + 13*pow6(mU3)) - 2*(451*mQ32*mU32
+        + 49*pow4(mQ3) + 140*pow4(mU3))*pow8(m3) + m32*mQ32*(-41*pow4(mQ3)*
+        pow4(mU3) - 41*mU32*pow6(mQ3) + 167*mQ32*pow6(mU3) + 9*pow8(mQ3) + 34*
+        pow8(mU3)) + pow4(m3)*(-417*pow4(mQ3)*pow4(mU3) + 151*mU32*pow6(mQ3) -
+        391*mQ32*pow6(mU3) - 20*pow8(mQ3) + 37*pow8(mU3)) + (294*mQ32 + 346*
+        mU32)*power10(m3))/((mQ32 - mU32)*pow2(m32 - mQ32)*pow3(m32 - mU32)) +
+        (2*pow2(Xt)*(-512*(4*mQ32 + 5*mU32)*pow12(m3) + 768*pow14(m3) + mU32*
+        pow2(mQ32 - mU32)*pow4(mQ3)*(4*mQ32*mU32 + 3*pow4(mQ3) + 23*pow4(mU3))
+        - 2*(3666*mU32*pow4(mQ3) + 2953*mQ32*pow4(mU3) + 241*pow6(mQ3) + 820*
+        pow6(mU3))*pow8(m3) + pow6(m3)*(8070*pow4(mQ3)*pow4(mU3) + 1412*mU32*
+        pow6(mQ3) + 1676*mQ32*pow6(mU3) - 9*pow8(mQ3) + 371*pow8(mU3)) + (6068*
+        mQ32*mU32 + 2342*pow4(mQ3) + 3110*pow4(mU3))*power10(m3) + m32*mQ32*(
+        592*pow4(mQ3)*pow6(mU3) - 50*mU32*pow8(mQ3) + 251*mQ32*pow8(mU3) + 9*
+        power10(mQ3) - 34*power10(mU3)) - pow4(m3)*(1720*pow4(mU3)*pow6(mQ3) +
+        3174*pow4(mQ3)*pow6(mU3) - 171*mU32*pow8(mQ3) - 172*mQ32*pow8(mU3) +
+        20*power10(mQ3) + 37*power10(mU3))))/(pow2(m32 - mQ32)*pow3(m32 - mU32)
+        *pow3(mQ32 - mU32)) + (pow4(Xt)*((588*mQ32 + 692*mU32)*pow12(m3) + (
+        2798*mU32*pow4(mQ3) + 7582*mQ32*pow4(mU3) - 374*pow6(mQ3) + 2794*pow6(
+        mU3))*pow8(m3) + pow6(m3)*(-5340*pow4(mQ3)*pow4(mU3) + 1174*mU32*pow6(
+        mQ3) - 7486*mQ32*pow6(mU3) + 251*pow8(mQ3) - 1399*pow8(mU3)) + mU32*
+        pow4(mQ3)*(-262*pow4(mQ3)*pow4(mU3) - 4*mU32*pow6(mQ3) + 4*mQ32*pow6(
+        mU3) - 3*pow8(mQ3) + 265*pow8(mU3)) - 4*(883*mQ32*mU32 + 139*pow4(mQ3)
+        + 578*pow4(mU3))*power10(m3) + pow4(m3)*(-1150*pow4(mU3)*pow6(mQ3) +
+        4832*pow4(mQ3)*pow6(mU3) - 857*mU32*pow8(mQ3) + 3318*mQ32*pow8(mU3) +
+        20*power10(mQ3) + 237*power10(mU3)) + m32*(-9*pow12(mQ3) + 346*pow6(
+        mQ3)*pow6(mU3) + 808*pow4(mU3)*pow8(mQ3) - 1939*pow4(mQ3)*pow8(mU3) +
+        32*mU32*power10(mQ3) - 518*mQ32*power10(mU3))))/(pow2(m32 - mQ32)*pow3(
+        m32 - mU32)*pow4(mQ32 - mU32))) + (4*log(Mst12/pow2(m3))*(8*pow2(m32 -
+        mU32)*pow2(Xt)*pow4(m3)*((-28*m32)/pow2(m32 - mQ32) + (3*(m32 - mU32)*(
+        -m32 + mQ32 + mU32)*(2 + (8*pow4(m3)*(-2*m32*(mQ32 + mU32) + 2*pow4(m3)
+        + pow4(mQ3) + pow4(mU3)))/(3.*pow2(m32 - mQ32)*pow2(m32 - mU32))))/((-
+        m32 + mQ32)*pow2(mQ3)*pow2(mU3))) - (320*pow2(m32 - mU32)*pow6(m3)*
+        pow6(Xt))/(pow2(m32 - mQ32)*pow2(mQ32 - mU32)) - (256*(m32 - mQ32 -
+        mU32)*pow2(m32 - mU32)*pow3(Xt)*pow7(m3))/(pow2(mQ3)*pow2(m32 - mQ32)*
+        pow2(mU3)) - (16*(m32 - mU32)*pow3(m3)*pow5(Xt)*(-134*m32*(mQ32 + mU32)
+        *pow4(mQ3)*pow4(mU3) + 47*mQ32*mU32*pow4(m3)*(4*mQ32*mU32 + pow4(mQ3) +
+        pow4(mU3)) + 87*pow6(mQ3)*pow6(mU3) + pow6(m3)*(-54*mU32*pow4(mQ3) -
+        54*mQ32*pow4(mU3) + 8*pow6(mQ3) + 8*pow6(mU3)) + (7*mQ32*mU32 - 16*
+        pow4(mQ3) - 16*pow4(mU3))*pow8(m3) + 8*(mQ32 + mU32)*power10(m3)))/(
+        pow2(mQ3)*pow2(mU3)*pow2(mQ32 - mU32)*pow3(-m32 + mQ32)) - (8*(m32 -
+        mU32)*Xt*pow3(m3)*(130*m32*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 81*pow6(
+        mQ3)*pow6(mU3) + 2*pow6(m3)*(9*mU32*pow4(mQ3) + 9*mQ32*pow4(mU3) + 8*
+        pow6(mQ3) + 8*pow6(mU3)) - pow4(m3)*(196*pow4(mQ3)*pow4(mU3) + 25*mU32*
+        pow6(mQ3) + 25*mQ32*pow6(mU3)) + (31*mQ32*mU32 - 32*pow4(mQ3) - 32*
+        pow4(mU3))*pow8(m3) + 16*(mQ32 + mU32)*power10(m3)))/(pow2(mQ3)*pow2(
+        mU3)*pow3(-m32 + mQ32)) - (2*pow4(Xt)*(44*(mQ32 + mU32)*pow18(m3) - 2*
+        pow16(m3)*(mQ32*mU32 + 72*pow4(mQ3) + 72*pow4(mU3)) - pow4(m3)*(548*
+        mQ32*mU32 + 49*pow4(mQ3) + 49*pow4(mU3))*pow6(mQ3)*pow6(mU3) - 2*pow4(
+        mQ3)*pow4(mU3)*pow6(m3)*(44*mU32*pow4(mQ3) + 44*mQ32*pow4(mU3) + 35*
+        pow6(mQ3) + 35*pow6(mU3)) + 2*pow14(m3)*(-147*mU32*pow4(mQ3) - 147*
+        mQ32*pow4(mU3) + 92*pow6(mQ3) + 92*pow6(mU3)) + pow12(m3)*(1932*pow4(
+        mQ3)*pow4(mU3) + 277*mU32*pow6(mQ3) + 277*mQ32*pow6(mU3) - 112*pow8(
+        mQ3) - 112*pow8(mU3)) + mQ32*mU32*pow8(m3)*(1712*pow4(mQ3)*pow4(mU3) +
+        572*mU32*pow6(mQ3) + 572*mQ32*pow6(mU3) - 25*pow8(mQ3) - 25*pow8(mU3))
+        + 156*m32*(mQ32 + mU32)*pow8(mQ3)*pow8(mU3) - 36*power10(mQ3)*power10(
+        mU3) + 4*power10(m3)*(-503*pow4(mU3)*pow6(mQ3) - 503*pow4(mQ3)*pow6(
+        mU3) + mU32*pow8(mQ3) + mQ32*pow8(mU3) + 7*power10(mQ3) + 7*power10(
+        mU3))))/(pow2(mQ3)*pow2(mU3)*pow2(mQ32 - mU32)*pow4(m32 - mQ32)) + (-
+        88*(mQ32 + mU32)*pow18(m3) + pow16(m3)*(302*mQ32*mU32 + 288*pow4(mQ3) +
+        288*pow4(mU3)) - pow4(m3)*(452*mQ32*mU32 + 25*pow4(mQ3) + 25*pow4(mU3))
+        *pow6(mQ3)*pow6(mU3) - 2*pow4(mQ3)*pow4(mU3)*pow6(m3)*(136*mU32*pow4(
+        mQ3) + 136*mQ32*pow4(mU3) + 67*pow6(mQ3) + 67*pow6(mU3)) - 2*pow14(m3)*
+        (419*mU32*pow4(mQ3) + 419*mQ32*pow4(mU3) + 184*pow6(mQ3) + 184*pow6(
+        mU3)) + 144*m32*(mQ32 + mU32)*pow8(mQ3)*pow8(mU3) + mQ32*mU32*pow8(m3)*
+        (2048*pow4(mQ3)*pow4(mU3) + 908*mU32*pow6(mQ3) + 908*mQ32*pow6(mU3) +
+        39*pow8(mQ3) + 39*pow8(mU3)) + pow12(m3)*(2636*pow4(mQ3)*pow4(mU3) +
+        797*mU32*pow6(mQ3) + 797*mQ32*pow6(mU3) + 224*pow8(mQ3) + 224*pow8(mU3)
+        ) - 36*power10(mQ3)*power10(mU3) - 4*power10(m3)*(647*pow4(mU3)*pow6(
+        mQ3) + 647*pow4(mQ3)*pow6(mU3) + 70*mU32*pow8(mQ3) + 70*mQ32*pow8(mU3)
+        + 14*power10(mQ3) + 14*power10(mU3)))/(pow2(mQ3)*pow2(mU3)*pow4(m32 -
+        mQ32)) - (log(Mst12/pow2(mQ3))*(-2700*mQ32*mU32*pow12(m3) + 814*mQ32*
+        pow14(m3) + 638*mU32*pow14(m3) - 198*pow16(m3) - 877*pow12(m3)*pow4(
+        mQ3) - 565*pow12(m3)*pow4(mU3) + 368*pow4(mU3)*pow6(m3)*pow6(mQ3) +
+        272*pow4(mQ3)*pow6(m3)*pow6(mU3) + 452*pow4(m3)*pow6(mQ3)*pow6(mU3) + (
+        160*(mQ32 + mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow6(m3)*pow6(Xt))/
+        pow3(mQ32 - mU32) - 2240*pow4(mQ3)*pow4(mU3)*pow8(m3) - 1004*mU32*pow6(
+        mQ3)*pow8(m3) - 812*mQ32*pow6(mU3)*pow8(m3) - (8*(m32 - mQ32)*(m32 -
+        mU32)*pow3(m3)*pow5(Xt)*(-142*m32*mQ32*mU32*pow2(mQ32 + mU32) + 87*(
+        mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 94*pow2(mQ32 + mU32)*pow6(m3) +
+        pow4(m3)*(283*mU32*pow4(mQ3) + 283*mQ32*pow4(mU3) + 63*pow6(mQ3) + 63*
+        pow6(mU3)) + 39*(mQ32 + mU32)*pow8(m3)))/pow3(mQ32 - mU32) + pow4(m3)*
+        pow4(mU3)*pow8(mQ3) + 158*mU32*pow6(m3)*pow8(mQ3) - 144*m32*pow6(mU3)*
+        pow8(mQ3) - 55*pow8(m3)*pow8(mQ3) + 25*pow4(m3)*pow4(mQ3)*pow8(mU3) +
+        110*mQ32*pow6(m3)*pow8(mU3) - 144*m32*pow6(mQ3)*pow8(mU3) + pow8(m3)*
+        pow8(mU3) + 36*pow8(mQ3)*pow8(mU3) + 2796*mU32*pow4(mQ3)*power10(m3) +
+        2604*mQ32*pow4(mU3)*power10(m3) + 344*pow6(mQ3)*power10(m3) + 120*pow6(
+        mU3)*power10(m3) - (8*(m32 - mQ32)*(m32 - mU32)*Xt*pow3(m3)*(2*(36*
+        mQ32*mU32 + 61*pow4(mQ3) + 11*pow4(mU3))*pow6(m3) - 87*pow4(mU3)*pow6(
+        mQ3) + 75*pow4(mQ3)*pow6(mU3) + pow4(m3)*(-209*mU32*pow4(mQ3) + 101*
+        mQ32*pow4(mU3) - 63*pow6(mQ3) + 19*pow6(mU3)) + 2*m32*(18*pow4(mQ3)*
+        pow4(mU3) + 71*mU32*pow6(mQ3) - 59*mQ32*pow6(mU3)) - (79*mQ32 + 77*
+        mU32)*pow8(m3) + 44*power10(m3)))/(mQ32 - mU32) - (16*(m32 - mQ32)*(m32
+        - mU32)*pow3(m3)*pow3(Xt)*(44*pow12(m3) + 186*pow6(mQ3)*pow6(mU3) +
+        pow6(m3)*(-250*mU32*pow4(mQ3) - 250*mQ32*pow4(mU3) + 66*pow6(mQ3) + 66*
+        pow6(mU3)) + 3*(94*mQ32*mU32 + 15*pow4(mQ3) + 15*pow4(mU3))*pow8(m3) -
+        87*pow4(mU3)*pow8(mQ3) - 87*pow4(mQ3)*pow8(mU3) - pow4(m3)*(-422*pow4(
+        mQ3)*pow4(mU3) + 42*mU32*pow6(mQ3) + 42*mQ32*pow6(mU3) + 63*pow8(mQ3) +
+        63*pow8(mU3)) + 2*m32*(-89*pow4(mU3)*pow6(mQ3) - 89*pow4(mQ3)*pow6(mU3)
+        + 71*mU32*pow8(mQ3) + 71*mQ32*pow8(mU3)) - 100*(mQ32 + mU32)*power10(
+        m3)))/pow3(mQ32 - mU32) + (2*pow2(Xt)*((334*mQ32 + 238*mU32)*pow14(m3)
+        - 30*pow16(m3) + pow4(m3)*pow4(mQ3)*pow4(mU3)*(452*mQ32*mU32 + pow4(
+        mQ3) + pow4(mU3)) - pow12(m3)*(1484*mQ32*mU32 + 517*pow4(mQ3) + 325*
+        pow4(mU3)) - 144*m32*(mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + 36*pow8(mQ3)*
+        pow8(mU3) - pow8(m3)*(1648*pow4(mQ3)*pow4(mU3) + 844*mU32*pow6(mQ3) +
+        652*mQ32*pow6(mU3) + 55*pow8(mQ3) + 55*pow8(mU3)) + 2*pow6(m3)*(144*
+        pow4(mU3)*pow6(mQ3) + 96*pow4(mQ3)*pow6(mU3) + 79*mU32*pow8(mQ3) + 79*
+        mQ32*pow8(mU3)) + 4*(487*mU32*pow4(mQ3) + 415*mQ32*pow4(mU3) + 66*pow6(
+        mQ3) + 42*pow6(mU3))*power10(m3)))/(mQ32 - mU32) - (pow4(Xt)*(2786*(
+        mQ32 + mU32)*pow16(m3) - 1024*pow18(m3) - 2*pow14(m3)*(4002*mQ32*mU32 +
+        913*pow4(mQ3) + 913*pow4(mU3)) + pow12(m3)*(5903*mU32*pow4(mQ3) + 5903*
+        mQ32*pow4(mU3) - 549*pow6(mQ3) - 549*pow6(mU3)) - 144*m32*pow2(mQ32 +
+        mU32)*pow6(mQ3)*pow6(mU3) + pow4(m3)*pow4(mQ3)*pow4(mU3)*(453*mU32*
+        pow4(mQ3) + 453*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) + 36*(mQ32 +
+        mU32)*pow8(mQ3)*pow8(mU3) + 2*mQ32*mU32*pow6(m3)*(-464*pow4(mQ3)*pow4(
+        mU3) + 423*mU32*pow6(mQ3) + 423*mQ32*pow6(mU3) + 79*pow8(mQ3) + 79*
+        pow8(mU3)) + (-5224*pow4(mQ3)*pow4(mU3) + 868*mU32*pow6(mQ3) + 868*
+        mQ32*pow6(mU3) + 664*pow8(mQ3) + 664*pow8(mU3))*power10(m3) - pow8(m3)*
+        (-292*pow4(mU3)*pow6(mQ3) - 292*pow4(mQ3)*pow6(mU3) + 1699*mU32*pow8(
+        mQ3) + 1699*mQ32*pow8(mU3) + 55*power10(mQ3) + 55*power10(mU3))))/pow3(
+        mQ32 - mU32)))/pow4(m32 - mQ32) - (log(Mst12/pow2(mU3))*(-2700*mQ32*
+        mU32*pow12(m3) + 638*mQ32*pow14(m3) + 814*mU32*pow14(m3) - 198*pow16(
+        m3) - 565*pow12(m3)*pow4(mQ3) - 877*pow12(m3)*pow4(mU3) + 272*pow4(mU3)
+        *pow6(m3)*pow6(mQ3) + 368*pow4(mQ3)*pow6(m3)*pow6(mU3) + 452*pow4(m3)*
+        pow6(mQ3)*pow6(mU3) - (160*(mQ32 + mU32)*pow2(m32 - mQ32)*pow2(m32 -
+        mU32)*pow6(m3)*pow6(Xt))/pow3(mQ32 - mU32) - 2240*pow4(mQ3)*pow4(mU3)*
+        pow8(m3) - 812*mU32*pow6(mQ3)*pow8(m3) - 1004*mQ32*pow6(mU3)*pow8(m3) +
+        (8*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*pow5(Xt)*(-142*m32*mQ32*mU32*
+        pow2(mQ32 + mU32) + 87*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 94*pow2(mQ32
+        + mU32)*pow6(m3) + pow4(m3)*(283*mU32*pow4(mQ3) + 283*mQ32*pow4(mU3) +
+        63*pow6(mQ3) + 63*pow6(mU3)) + 39*(mQ32 + mU32)*pow8(m3)))/pow3(mQ32 -
+        mU32) + 25*pow4(m3)*pow4(mU3)*pow8(mQ3) + 110*mU32*pow6(m3)*pow8(mQ3) -
+        144*m32*pow6(mU3)*pow8(mQ3) + pow8(m3)*pow8(mQ3) + pow4(m3)*pow4(mQ3)*
+        pow8(mU3) + 158*mQ32*pow6(m3)*pow8(mU3) - 144*m32*pow6(mQ3)*pow8(mU3) -
+        55*pow8(m3)*pow8(mU3) + 36*pow8(mQ3)*pow8(mU3) + 2604*mU32*pow4(mQ3)*
+        power10(m3) + 2796*mQ32*pow4(mU3)*power10(m3) + 120*pow6(mQ3)*power10(
+        m3) + 344*pow6(mU3)*power10(m3) + (8*(m32 - mQ32)*(m32 - mU32)*Xt*pow3(
+        m3)*(2*(36*mQ32*mU32 + 11*pow4(mQ3) + 61*pow4(mU3))*pow6(m3) + 75*pow4(
+        mU3)*pow6(mQ3) + pow4(m3)*(101*mU32*pow4(mQ3) - 209*mQ32*pow4(mU3) +
+        19*pow6(mQ3) - 63*pow6(mU3)) - 87*pow4(mQ3)*pow6(mU3) + m32*(36*pow4(
+        mQ3)*pow4(mU3) - 118*mU32*pow6(mQ3) + 142*mQ32*pow6(mU3)) - (77*mQ32 +
+        79*mU32)*pow8(m3) + 44*power10(m3)))/(mQ32 - mU32) + (16*(m32 - mQ32)*(
+        m32 - mU32)*pow3(m3)*pow3(Xt)*(44*pow12(m3) + 186*pow6(mQ3)*pow6(mU3) +
+        pow6(m3)*(-250*mU32*pow4(mQ3) - 250*mQ32*pow4(mU3) + 66*pow6(mQ3) + 66*
+        pow6(mU3)) + 3*(94*mQ32*mU32 + 15*pow4(mQ3) + 15*pow4(mU3))*pow8(m3) -
+        87*pow4(mU3)*pow8(mQ3) - 87*pow4(mQ3)*pow8(mU3) - pow4(m3)*(-422*pow4(
+        mQ3)*pow4(mU3) + 42*mU32*pow6(mQ3) + 42*mQ32*pow6(mU3) + 63*pow8(mQ3) +
+        63*pow8(mU3)) + 2*m32*(-89*pow4(mU3)*pow6(mQ3) - 89*pow4(mQ3)*pow6(mU3)
+        + 71*mU32*pow8(mQ3) + 71*mQ32*pow8(mU3)) - 100*(mQ32 + mU32)*power10(
+        m3)))/pow3(mQ32 - mU32) - (2*pow2(Xt)*((238*mQ32 + 334*mU32)*pow14(m3)
+        - 30*pow16(m3) + pow4(m3)*pow4(mQ3)*pow4(mU3)*(452*mQ32*mU32 + pow4(
+        mQ3) + pow4(mU3)) - pow12(m3)*(1484*mQ32*mU32 + 325*pow4(mQ3) + 517*
+        pow4(mU3)) - 144*m32*(mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + 36*pow8(mQ3)*
+        pow8(mU3) - pow8(m3)*(1648*pow4(mQ3)*pow4(mU3) + 652*mU32*pow6(mQ3) +
+        844*mQ32*pow6(mU3) + 55*pow8(mQ3) + 55*pow8(mU3)) + 2*pow6(m3)*(96*
+        pow4(mU3)*pow6(mQ3) + 144*pow4(mQ3)*pow6(mU3) + 79*mU32*pow8(mQ3) + 79*
+        mQ32*pow8(mU3)) + 4*(415*mU32*pow4(mQ3) + 487*mQ32*pow4(mU3) + 42*pow6(
+        mQ3) + 66*pow6(mU3))*power10(m3)))/(mQ32 - mU32) + (pow4(Xt)*(2786*(
+        mQ32 + mU32)*pow16(m3) - 1024*pow18(m3) - 2*pow14(m3)*(4002*mQ32*mU32 +
+        913*pow4(mQ3) + 913*pow4(mU3)) + pow12(m3)*(5903*mU32*pow4(mQ3) + 5903*
+        mQ32*pow4(mU3) - 549*pow6(mQ3) - 549*pow6(mU3)) - 144*m32*pow2(mQ32 +
+        mU32)*pow6(mQ3)*pow6(mU3) + pow4(m3)*pow4(mQ3)*pow4(mU3)*(453*mU32*
+        pow4(mQ3) + 453*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) + 36*(mQ32 +
+        mU32)*pow8(mQ3)*pow8(mU3) + 2*mQ32*mU32*pow6(m3)*(-464*pow4(mQ3)*pow4(
+        mU3) + 423*mU32*pow6(mQ3) + 423*mQ32*pow6(mU3) + 79*pow8(mQ3) + 79*
+        pow8(mU3)) + (-5224*pow4(mQ3)*pow4(mU3) + 868*mU32*pow6(mQ3) + 868*
+        mQ32*pow6(mU3) + 664*pow8(mQ3) + 664*pow8(mU3))*power10(m3) - pow8(m3)*
+        (-292*pow4(mU3)*pow6(mQ3) - 292*pow4(mQ3)*pow6(mU3) + 1699*mU32*pow8(
+        mQ3) + 1699*mQ32*pow8(mU3) + 55*power10(mQ3) + 55*power10(mU3))))/pow3(
+        mQ32 - mU32)))/pow4(m32 - mQ32)))/pow4(m32 - mU32) - (4*log(Mst12/pow2(
+        m3))*(-120*m32*msq2*pow12(mU3)*pow14(mQ3) + 1408*mU32*Xt*pow13(m3)*
+        pow14(mQ3) - 1652*mU32*pow14(m3)*pow14(mQ3) + 120*m32*msq2*pow12(mQ3)*
+        pow14(mU3) - 1408*mQ32*Xt*pow13(m3)*pow14(mU3) + 1652*mQ32*pow14(m3)*
+        pow14(mU3) - 1920*mU32*Xt*pow12(mQ3)*pow15(m3) + 1920*mQ32*Xt*pow12(
+        mU3)*pow15(m3) + 824*mU32*pow12(mQ3)*pow16(m3) - 824*mQ32*pow12(mU3)*
+        pow16(m3) + 192*pow14(mQ3)*pow16(m3) - 192*pow14(mU3)*pow16(m3) - 384*
+        mU32*Xt*pow11(m3)*pow16(mQ3) + 1240*mU32*pow12(m3)*pow16(mQ3) - 1059*
+        m32*pow12(mU3)*pow16(mQ3) - 288*m32*log(Mst12/pow2(mU3))*pow12(mU3)*
+        pow16(mQ3) - 128*pow14(m3)*pow16(mQ3) + 252*pow14(mU3)*pow16(mQ3) +
+        108*log(Mst12/pow2(mU3))*pow14(mU3)*pow16(mQ3) + 384*mQ32*Xt*pow11(m3)*
+        pow16(mU3) - 1240*mQ32*pow12(m3)*pow16(mU3) + 1059*m32*pow12(mQ3)*
+        pow16(mU3) + 288*m32*log(Mst12/pow2(mU3))*pow12(mQ3)*pow16(mU3) + 128*
+        pow14(m3)*pow16(mU3) - 252*pow14(mQ3)*pow16(mU3) - 108*log(Mst12/pow2(
+        mU3))*pow14(mQ3)*pow16(mU3) - 128*pow12(mQ3)*pow18(m3) + 128*pow12(mU3)
+        *pow18(m3) + 32*pow12(m3)*pow18(mQ3) - 84*pow12(mU3)*pow18(mQ3) - 36*
+        log(Mst12/pow2(mU3))*pow12(mU3)*pow18(mQ3) - 32*pow12(m3)*pow18(mU3) +
+        84*pow12(mQ3)*pow18(mU3) + 36*log(Mst12/pow2(mU3))*pow12(mQ3)*pow18(
+        mU3) + 3176*mU32*pow12(mQ3)*pow14(m3)*pow2(Xt) - 3176*mQ32*pow12(mU3)*
+        pow14(m3)*pow2(Xt) - 2288*mU32*pow12(m3)*pow14(mQ3)*pow2(Xt) + 288*m32*
+        log(Mst12/pow2(mU3))*pow12(mU3)*pow14(mQ3)*pow2(Xt) + 256*pow14(m3)*
+        pow14(mQ3)*pow2(Xt) + 2288*mQ32*pow12(m3)*pow14(mU3)*pow2(Xt) + 288*
+        m32*log(Mst12/pow2(mU3))*pow12(mQ3)*pow14(mU3)*pow2(Xt) - 256*pow14(m3)
+        *pow14(mU3)*pow2(Xt) - 144*log(Mst12/pow2(mU3))*pow14(mQ3)*pow14(mU3)*
+        pow2(Xt) - 384*pow12(mQ3)*pow16(m3)*pow2(Xt) + 384*pow12(mU3)*pow16(m3)
+        *pow2(Xt) - 64*pow12(m3)*pow16(mQ3)*pow2(Xt) + 72*log(Mst12/pow2(mU3))*
+        pow12(mU3)*pow16(mQ3)*pow2(Xt) + 64*pow12(m3)*pow16(mU3)*pow2(Xt) + 72*
+        log(Mst12/pow2(mU3))*pow12(mQ3)*pow16(mU3)*pow2(Xt) + 24*Xt*pow12(mU3)*
+        pow14(mQ3)*pow3(m3) + 2064*Xt*log(Mst12/pow2(mU3))*pow12(mU3)*pow14(
+        mQ3)*pow3(m3) - 24*Xt*pow12(mQ3)*pow14(mU3)*pow3(m3) - 2160*Xt*log(
+        Mst12/pow2(mU3))*pow12(mQ3)*pow14(mU3)*pow3(m3) - 1792*mU32*pow12(mQ3)*
+        pow13(m3)*pow3(Xt) + 1792*mQ32*pow12(mU3)*pow13(m3)*pow3(Xt) + 512*
+        mU32*pow11(m3)*pow14(mQ3)*pow3(Xt) - 512*mQ32*pow11(m3)*pow14(mU3)*
+        pow3(Xt) - 4064*log(Mst12/pow2(mU3))*pow12(mQ3)*pow12(mU3)*pow3(m3)*
+        pow3(Xt) + 5006*pow12(mU3)*pow14(mQ3)*pow4(m3) + 1362*log(Mst12/pow2(
+        mU3))*pow12(mU3)*pow14(mQ3)*pow4(m3) - 5006*pow12(mQ3)*pow14(mU3)*pow4(
+        m3) - 1446*log(Mst12/pow2(mU3))*pow12(mQ3)*pow14(mU3)*pow4(m3) - 652*
+        log(Mst12/pow2(mU3))*pow12(mQ3)*pow12(mU3)*pow2(Xt)*pow4(m3) - 1200*
+        msq2*Xt*pow11(m3)*pow12(mU3)*pow4(mQ3) + 420*msq2*pow12(m3)*pow12(mU3)*
+        pow4(mQ3) + 528*Xt*pow12(mU3)*pow13(m3)*pow4(mQ3) - 1720*Xt*log(Mst12/
+        pow2(mU3))*pow12(mU3)*pow13(m3)*pow4(mQ3) - 6242*pow12(mU3)*pow14(m3)*
+        pow4(mQ3) + 764*log(Mst12/pow2(mU3))*pow12(mU3)*pow14(m3)*pow4(mQ3) +
+        880*Xt*pow11(m3)*pow14(mU3)*pow4(mQ3) + 1424*Xt*log(Mst12/pow2(mU3))*
+        pow11(m3)*pow14(mU3)*pow4(mQ3) + 4449*pow12(m3)*pow14(mU3)*pow4(mQ3) -
+        976*log(Mst12/pow2(mU3))*pow12(m3)*pow14(mU3)*pow4(mQ3) + 2404*pow12(
+        m3)*pow12(mU3)*pow2(Xt)*pow4(mQ3) - 650*log(Mst12/pow2(mU3))*pow12(m3)*
+        pow12(mU3)*pow2(Xt)*pow4(mQ3) - 5200*pow11(m3)*pow12(mU3)*pow3(Xt)*
+        pow4(mQ3) + 976*log(Mst12/pow2(mU3))*pow11(m3)*pow12(mU3)*pow3(Xt)*
+        pow4(mQ3) + 1200*msq2*Xt*pow11(m3)*pow12(mQ3)*pow4(mU3) - 420*msq2*
+        pow12(m3)*pow12(mQ3)*pow4(mU3) - 528*Xt*pow12(mQ3)*pow13(m3)*pow4(mU3)
+        - 2280*Xt*log(Mst12/pow2(mU3))*pow12(mQ3)*pow13(m3)*pow4(mU3) + 6242*
+        pow12(mQ3)*pow14(m3)*pow4(mU3) - 168*log(Mst12/pow2(mU3))*pow12(mQ3)*
+        pow14(m3)*pow4(mU3) - 880*Xt*pow11(m3)*pow14(mQ3)*pow4(mU3) + 976*Xt*
+        log(Mst12/pow2(mU3))*pow11(m3)*pow14(mQ3)*pow4(mU3) - 4449*pow12(m3)*
+        pow14(mQ3)*pow4(mU3) - 146*log(Mst12/pow2(mU3))*pow12(m3)*pow14(mQ3)*
+        pow4(mU3) - 2404*pow12(m3)*pow12(mQ3)*pow2(Xt)*pow4(mU3) + 118*log(
+        Mst12/pow2(mU3))*pow12(m3)*pow12(mQ3)*pow2(Xt)*pow4(mU3) + 5200*pow11(
+        m3)*pow12(mQ3)*pow3(Xt)*pow4(mU3) + 976*log(Mst12/pow2(mU3))*pow11(m3)*
+        pow12(mQ3)*pow3(Xt)*pow4(mU3) + 768*log(Mst12/pow2(mU3))*pow2(Xt)*
+        pow20(m3)*pow4(mQ3)*pow4(mU3) - 1792*log(Mst12/pow2(mU3))*pow19(m3)*
+        pow3(Xt)*pow4(mQ3)*pow4(mU3) + 984*mU32*pow12(m3)*pow12(mQ3)*pow4(Xt) -
+        984*mQ32*pow12(m3)*pow12(mU3)*pow4(Xt) + 288*m32*log(Mst12/pow2(mU3))*
+        pow12(mQ3)*pow12(mU3)*pow4(Xt) - 128*pow12(mQ3)*pow14(m3)*pow4(Xt) +
+        128*pow12(mU3)*pow14(m3)*pow4(Xt) + 32*pow12(m3)*pow14(mQ3)*pow4(Xt) +
+        72*pow12(mU3)*pow14(mQ3)*pow4(Xt) - 36*log(Mst12/pow2(mU3))*pow12(mU3)*
+        pow14(mQ3)*pow4(Xt) - 32*pow12(m3)*pow14(mU3)*pow4(Xt) - 72*pow12(mQ3)*
+        pow14(mU3)*pow4(Xt) - 36*log(Mst12/pow2(mU3))*pow12(mQ3)*pow14(mU3)*
+        pow4(Xt) - 96*mU32*pow20(m3)*pow4(mQ3)*pow4(Xt) + 96*mQ32*pow20(m3)*
+        pow4(mU3)*pow4(Xt) + 1024*log(Mst12/pow2(mU3))*pow18(m3)*pow4(mQ3)*
+        pow4(mU3)*pow4(Xt) + 544*Xt*log(Mst12/pow2(mU3))*pow12(mQ3)*pow12(mU3)*
+        pow5(m3) - 128*mU32*pow11(m3)*pow12(mQ3)*pow5(Xt) + 128*mQ32*pow11(m3)*
+        pow12(mU3)*pow5(Xt) + 324*log(Mst12/pow2(mU3))*pow12(mQ3)*pow12(mU3)*
+        pow6(m3) - 90*msq2*pow18(mU3)*pow4(mQ3)*pow6(m3) - 9*pow20(mU3)*pow4(
+        mQ3)*pow6(m3) + 90*msq2*pow18(mQ3)*pow4(mU3)*pow6(m3) + 9*pow20(mQ3)*
+        pow4(mU3)*pow6(m3) - 2376*Xt*pow11(m3)*pow12(mU3)*pow6(mQ3) + 1664*Xt*
+        log(Mst12/pow2(mU3))*pow11(m3)*pow12(mU3)*pow6(mQ3) + 773*pow12(m3)*
+        pow12(mU3)*pow6(mQ3) + 456*log(Mst12/pow2(mU3))*pow12(m3)*pow12(mU3)*
+        pow6(mQ3) + 128*mU32*pow2(Xt)*pow20(m3)*pow6(mQ3) + 256*mU32*pow19(m3)*
+        pow3(Xt)*pow6(mQ3) + 60*msq2*pow18(mU3)*pow4(m3)*pow6(mQ3) + 6*pow20(
+        mU3)*pow4(m3)*pow6(mQ3) + 768*Xt*pow19(m3)*pow4(mU3)*pow6(mQ3) - 1748*
+        pow18(m3)*pow2(Xt)*pow4(mU3)*pow6(mQ3) - 3072*log(Mst12/pow2(mU3))*
+        pow18(m3)*pow2(Xt)*pow4(mU3)*pow6(mQ3) + 128*pow20(m3)*pow4(mU3)*pow6(
+        mQ3) - 288*pow17(m3)*pow3(Xt)*pow4(mU3)*pow6(mQ3) + 6656*log(Mst12/
+        pow2(mU3))*pow17(m3)*pow3(Xt)*pow4(mU3)*pow6(mQ3) + 82*mU32*pow18(m3)*
+        pow4(Xt)*pow6(mQ3) + 32*pow20(m3)*pow4(Xt)*pow6(mQ3) - 716*pow16(m3)*
+        pow4(mU3)*pow4(Xt)*pow6(mQ3) - 2786*log(Mst12/pow2(mU3))*pow16(m3)*
+        pow4(mU3)*pow4(Xt)*pow6(mQ3) + 480*msq2*Xt*pow16(mU3)*pow5(m3)*pow6(
+        mQ3) + 48*Xt*pow18(mU3)*pow5(m3)*pow6(mQ3) + 128*mU32*pow17(m3)*pow5(
+        Xt)*pow6(mQ3) + 240*pow15(m3)*pow4(mU3)*pow5(Xt)*pow6(mQ3) - 312*log(
+        Mst12/pow2(mU3))*pow15(m3)*pow4(mU3)*pow5(Xt)*pow6(mQ3) + 30*msq2*
+        pow16(mU3)*pow6(m3)*pow6(mQ3) - 746*pow18(mU3)*pow6(m3)*pow6(mQ3) +
+        208*log(Mst12/pow2(mU3))*pow18(mU3)*pow6(m3)*pow6(mQ3) - 1124*pow16(
+        mU3)*pow2(Xt)*pow6(m3)*pow6(mQ3) + 316*log(Mst12/pow2(mU3))*pow16(mU3)*
+        pow2(Xt)*pow6(m3)*pow6(mQ3) + 492*pow14(mU3)*pow4(Xt)*pow6(m3)*pow6(
+        mQ3) - 158*log(Mst12/pow2(mU3))*pow14(mU3)*pow4(Xt)*pow6(m3)*pow6(mQ3)
+        + 2376*Xt*pow11(m3)*pow12(mQ3)*pow6(mU3) + 896*Xt*log(Mst12/pow2(mU3))*
+        pow11(m3)*pow12(mQ3)*pow6(mU3) - 773*pow12(m3)*pow12(mQ3)*pow6(mU3) +
+        2910*log(Mst12/pow2(mU3))*pow12(m3)*pow12(mQ3)*pow6(mU3) - 128*mQ32*
+        pow2(Xt)*pow20(m3)*pow6(mU3) - 256*mQ32*pow19(m3)*pow3(Xt)*pow6(mU3) -
+        60*msq2*pow18(mQ3)*pow4(m3)*pow6(mU3) - 6*pow20(mQ3)*pow4(m3)*pow6(mU3)
+        - 768*Xt*pow19(m3)*pow4(mQ3)*pow6(mU3) + 1748*pow18(m3)*pow2(Xt)*pow4(
+        mQ3)*pow6(mU3) - 3072*log(Mst12/pow2(mU3))*pow18(m3)*pow2(Xt)*pow4(mQ3)
+        *pow6(mU3) - 128*pow20(m3)*pow4(mQ3)*pow6(mU3) + 288*pow17(m3)*pow3(Xt)
+        *pow4(mQ3)*pow6(mU3) + 6656*log(Mst12/pow2(mU3))*pow17(m3)*pow3(Xt)*
+        pow4(mQ3)*pow6(mU3) - 82*mQ32*pow18(m3)*pow4(Xt)*pow6(mU3) - 32*pow20(
+        m3)*pow4(Xt)*pow6(mU3) + 716*pow16(m3)*pow4(mQ3)*pow4(Xt)*pow6(mU3) -
+        2786*log(Mst12/pow2(mU3))*pow16(m3)*pow4(mQ3)*pow4(Xt)*pow6(mU3) - 480*
+        msq2*Xt*pow16(mQ3)*pow5(m3)*pow6(mU3) - 48*Xt*pow18(mQ3)*pow5(m3)*pow6(
+        mU3) - 128*mQ32*pow17(m3)*pow5(Xt)*pow6(mU3) - 240*pow15(m3)*pow4(mQ3)*
+        pow5(Xt)*pow6(mU3) - 312*log(Mst12/pow2(mU3))*pow15(m3)*pow4(mQ3)*pow5(
+        Xt)*pow6(mU3) - 30*msq2*pow16(mQ3)*pow6(m3)*pow6(mU3) + 746*pow18(mQ3)*
+        pow6(m3)*pow6(mU3) - 28*log(Mst12/pow2(mU3))*pow18(mQ3)*pow6(m3)*pow6(
+        mU3) + 1124*pow16(mQ3)*pow2(Xt)*pow6(m3)*pow6(mU3) + 316*log(Mst12/
+        pow2(mU3))*pow16(mQ3)*pow2(Xt)*pow6(m3)*pow6(mU3) - 492*pow14(mQ3)*
+        pow4(Xt)*pow6(m3)*pow6(mU3) - 158*log(Mst12/pow2(mU3))*pow14(mQ3)*pow4(
+        Xt)*pow6(m3)*pow6(mU3) + 1216*Xt*log(Mst12/pow2(mU3))*pow17(m3)*pow6(
+        mQ3)*pow6(mU3) + 12408*log(Mst12/pow2(mU3))*pow16(m3)*pow2(Xt)*pow6(
+        mQ3)*pow6(mU3) - 25824*log(Mst12/pow2(mU3))*pow15(m3)*pow3(Xt)*pow6(
+        mQ3)*pow6(mU3) + 8004*log(Mst12/pow2(mU3))*pow14(m3)*pow4(Xt)*pow6(mQ3)
+        *pow6(mU3) + 2128*log(Mst12/pow2(mU3))*pow13(m3)*pow5(Xt)*pow6(mQ3)*
+        pow6(mU3) - 320*pow14(m3)*pow4(mU3)*pow6(mQ3)*pow6(Xt) + 160*log(Mst12/
+        pow2(mU3))*pow14(m3)*pow4(mU3)*pow6(mQ3)*pow6(Xt) + 320*pow14(m3)*pow4(
+        mQ3)*pow6(mU3)*pow6(Xt) + 160*log(Mst12/pow2(mU3))*pow14(m3)*pow4(mQ3)*
+        pow6(mU3)*pow6(Xt) - 640*log(Mst12/pow2(mU3))*pow12(m3)*pow6(mQ3)*pow6(
+        mU3)*pow6(Xt) - 240*msq2*Xt*pow16(mU3)*pow4(mQ3)*pow7(m3) - 24*Xt*
+        pow18(mU3)*pow4(mQ3)*pow7(m3) + 240*msq2*Xt*pow16(mQ3)*pow4(mU3)*pow7(
+        m3) + 24*Xt*pow18(mQ3)*pow4(mU3)*pow7(m3) - 1440*msq2*Xt*pow14(mU3)*
+        pow6(mQ3)*pow7(m3) - 48*Xt*pow16(mU3)*pow6(mQ3)*pow7(m3) + 1632*Xt*log(
+        Mst12/pow2(mU3))*pow16(mU3)*pow6(mQ3)*pow7(m3) - 1840*pow14(mU3)*pow3(
+        Xt)*pow6(mQ3)*pow7(m3) + 3280*log(Mst12/pow2(mU3))*pow14(mU3)*pow3(Xt)*
+        pow6(mQ3)*pow7(m3) - 2896*pow12(mU3)*pow5(Xt)*pow6(mQ3)*pow7(m3) -
+        1640*log(Mst12/pow2(mU3))*pow12(mU3)*pow5(Xt)*pow6(mQ3)*pow7(m3) +
+        1440*msq2*Xt*pow14(mQ3)*pow6(mU3)*pow7(m3) + 48*Xt*pow16(mQ3)*pow6(mU3)
+        *pow7(m3) - 832*Xt*log(Mst12/pow2(mU3))*pow16(mQ3)*pow6(mU3)*pow7(m3) +
+        1840*pow14(mQ3)*pow3(Xt)*pow6(mU3)*pow7(m3) + 3280*log(Mst12/pow2(mU3))
+        *pow14(mQ3)*pow3(Xt)*pow6(mU3)*pow7(m3) + 2896*pow12(mQ3)*pow5(Xt)*
+        pow6(mU3)*pow7(m3) - 1640*log(Mst12/pow2(mU3))*pow12(mQ3)*pow5(Xt)*
+        pow6(mU3)*pow7(m3) + 360*msq2*pow16(mU3)*pow4(mQ3)*pow8(m3) - 59*pow18(
+        mU3)*pow4(mQ3)*pow8(m3) - 74*log(Mst12/pow2(mU3))*pow18(mU3)*pow4(mQ3)*
+        pow8(m3) + 1308*pow16(mU3)*pow2(Xt)*pow4(mQ3)*pow8(m3) - 110*log(Mst12/
+        pow2(mU3))*pow16(mU3)*pow2(Xt)*pow4(mQ3)*pow8(m3) - 360*msq2*pow16(mQ3)
+        *pow4(mU3)*pow8(m3) + 59*pow18(mQ3)*pow4(mU3)*pow8(m3) - 120*log(Mst12/
+        pow2(mU3))*pow18(mQ3)*pow4(mU3)*pow8(m3) - 1308*pow16(mQ3)*pow2(Xt)*
+        pow4(mU3)*pow8(m3) - 110*log(Mst12/pow2(mU3))*pow16(mQ3)*pow2(Xt)*pow4(
+        mU3)*pow8(m3) - 582*pow14(mU3)*pow4(mQ3)*pow4(Xt)*pow8(m3) + 55*log(
+        Mst12/pow2(mU3))*pow14(mU3)*pow4(mQ3)*pow4(Xt)*pow8(m3) + 582*pow14(
+        mQ3)*pow4(mU3)*pow4(Xt)*pow8(m3) + 55*log(Mst12/pow2(mU3))*pow14(mQ3)*
+        pow4(mU3)*pow4(Xt)*pow8(m3) - 840*msq2*pow14(mU3)*pow6(mQ3)*pow8(m3) +
+        4521*pow16(mU3)*pow6(mQ3)*pow8(m3) - 970*log(Mst12/pow2(mU3))*pow16(
+        mU3)*pow6(mQ3)*pow8(m3) + 1432*pow14(mU3)*pow2(Xt)*pow6(mQ3)*pow8(m3) -
+        2044*log(Mst12/pow2(mU3))*pow14(mU3)*pow2(Xt)*pow6(mQ3)*pow8(m3) - 746*
+        pow12(mU3)*pow4(Xt)*pow6(mQ3)*pow8(m3) + 1699*log(Mst12/pow2(mU3))*
+        pow12(mU3)*pow4(Xt)*pow6(mQ3)*pow8(m3) + 840*msq2*pow14(mQ3)*pow6(mU3)*
+        pow8(m3) - 4521*pow16(mQ3)*pow6(mU3)*pow8(m3) + 832*log(Mst12/pow2(mU3)
+        )*pow16(mQ3)*pow6(mU3)*pow8(m3) - 1432*pow14(mQ3)*pow2(Xt)*pow6(mU3)*
+        pow8(m3) - 1276*log(Mst12/pow2(mU3))*pow14(mQ3)*pow2(Xt)*pow6(mU3)*
+        pow8(m3) + 746*pow12(mQ3)*pow4(Xt)*pow6(mU3)*pow8(m3) + 1699*log(Mst12/
+        pow2(mU3))*pow12(mQ3)*pow4(Xt)*pow6(mU3)*pow8(m3) + 30*m32*msq2*pow18(
+        mU3)*pow8(mQ3) - 256*mU32*Xt*pow19(m3)*pow8(mQ3) + 156*mU32*pow18(m3)*
+        pow2(Xt)*pow8(mQ3) - 96*mU32*pow20(m3)*pow8(mQ3) - 64*pow2(Xt)*pow20(
+        m3)*pow8(mQ3) + 3*m32*pow20(mU3)*pow8(mQ3) - 240*msq2*Xt*pow16(mU3)*
+        pow3(m3)*pow8(mQ3) - 24*Xt*pow18(mU3)*pow3(m3)*pow8(mQ3) - 1280*mU32*
+        pow17(m3)*pow3(Xt)*pow8(mQ3) - 300*msq2*pow16(mU3)*pow4(m3)*pow8(mQ3) +
+        1021*pow18(mU3)*pow4(m3)*pow8(mQ3) - 30*log(Mst12/pow2(mU3))*pow18(mU3)
+        *pow4(m3)*pow8(mQ3) + 356*pow16(mU3)*pow2(Xt)*pow4(m3)*pow8(mQ3) + 2*
+        log(Mst12/pow2(mU3))*pow16(mU3)*pow2(Xt)*pow4(m3)*pow8(mQ3) - 2304*Xt*
+        pow17(m3)*pow4(mU3)*pow8(mQ3) - 608*Xt*log(Mst12/pow2(mU3))*pow17(m3)*
+        pow4(mU3)*pow8(mQ3) + 348*pow18(m3)*pow4(mU3)*pow8(mQ3) + 4704*pow16(
+        m3)*pow2(Xt)*pow4(mU3)*pow8(mQ3) + 4548*log(Mst12/pow2(mU3))*pow16(m3)*
+        pow2(Xt)*pow4(mU3)*pow8(mQ3) + 2672*pow15(m3)*pow3(Xt)*pow4(mU3)*pow8(
+        mQ3) - 8848*log(Mst12/pow2(mU3))*pow15(m3)*pow3(Xt)*pow4(mU3)*pow8(mQ3)
+        + 568*mU32*pow16(m3)*pow4(Xt)*pow8(mQ3) - 128*pow18(m3)*pow4(Xt)*pow8(
+        mQ3) - 462*pow14(mU3)*pow4(m3)*pow4(Xt)*pow8(mQ3) - log(Mst12/pow2(mU3)
+        )*pow14(mU3)*pow4(m3)*pow4(Xt)*pow8(mQ3) + 760*pow14(m3)*pow4(mU3)*
+        pow4(Xt)*pow8(mQ3) + 1826*log(Mst12/pow2(mU3))*pow14(m3)*pow4(mU3)*
+        pow4(Xt)*pow8(mQ3) - 16*Xt*pow16(mU3)*pow5(m3)*pow8(mQ3) - 1912*Xt*log(
+        Mst12/pow2(mU3))*pow16(mU3)*pow5(m3)*pow8(mQ3) + 1072*pow14(mU3)*pow3(
+        Xt)*pow5(m3)*pow8(mQ3) - 3664*log(Mst12/pow2(mU3))*pow14(mU3)*pow3(Xt)*
+        pow5(m3)*pow8(mQ3) - 384*mU32*pow15(m3)*pow5(Xt)*pow8(mQ3) - 976*pow13(
+        m3)*pow4(mU3)*pow5(Xt)*pow8(mQ3) + 1064*log(Mst12/pow2(mU3))*pow13(m3)*
+        pow4(mU3)*pow5(Xt)*pow8(mQ3) + 3536*pow12(mU3)*pow5(m3)*pow5(Xt)*pow8(
+        mQ3) + 1832*log(Mst12/pow2(mU3))*pow12(mU3)*pow5(m3)*pow5(Xt)*pow8(mQ3)
+        + 810*msq2*pow14(mU3)*pow6(m3)*pow8(mQ3) - 3600*pow16(mU3)*pow6(m3)*
+        pow8(mQ3) - 144*log(Mst12/pow2(mU3))*pow16(mU3)*pow6(m3)*pow8(mQ3) +
+        1048*pow14(mU3)*pow2(Xt)*pow6(m3)*pow8(mQ3) + 520*log(Mst12/pow2(mU3))*
+        pow14(mU3)*pow2(Xt)*pow6(m3)*pow8(mQ3) + 1024*pow12(mU3)*pow4(Xt)*pow6(
+        m3)*pow8(mQ3) - 846*log(Mst12/pow2(mU3))*pow12(mU3)*pow4(Xt)*pow6(m3)*
+        pow8(mQ3) + 1440*msq2*Xt*pow13(m3)*pow6(mU3)*pow8(mQ3) - 540*msq2*
+        pow14(m3)*pow6(mU3)*pow8(mQ3) + 1944*Xt*pow15(m3)*pow6(mU3)*pow8(mQ3) -
+        2592*Xt*log(Mst12/pow2(mU3))*pow15(m3)*pow6(mU3)*pow8(mQ3) + 4886*
+        pow16(m3)*pow6(mU3)*pow8(mQ3) - 234*log(Mst12/pow2(mU3))*pow16(m3)*
+        pow6(mU3)*pow8(mQ3) - 8540*pow14(m3)*pow2(Xt)*pow6(mU3)*pow8(mQ3) -
+        18524*log(Mst12/pow2(mU3))*pow14(m3)*pow2(Xt)*pow6(mU3)*pow8(mQ3) -
+        2288*pow13(m3)*pow3(Xt)*pow6(mU3)*pow8(mQ3) + 36944*log(Mst12/pow2(mU3)
+        )*pow13(m3)*pow3(Xt)*pow6(mU3)*pow8(mQ3) - 3090*pow12(m3)*pow4(Xt)*
+        pow6(mU3)*pow8(mQ3) - 5903*log(Mst12/pow2(mU3))*pow12(m3)*pow4(Xt)*
+        pow6(mU3)*pow8(mQ3) + 3616*pow11(m3)*pow5(Xt)*pow6(mU3)*pow8(mQ3) -
+        4832*log(Mst12/pow2(mU3))*pow11(m3)*pow5(Xt)*pow6(mU3)*pow8(mQ3) + 640*
+        pow12(m3)*pow4(mU3)*pow6(Xt)*pow8(mQ3) - 320*log(Mst12/pow2(mU3))*
+        pow12(m3)*pow4(mU3)*pow6(Xt)*pow8(mQ3) + 3600*msq2*Xt*pow12(mU3)*pow7(
+        m3)*pow8(mQ3) + 280*Xt*pow14(mU3)*pow7(m3)*pow8(mQ3) + 768*Xt*log(
+        Mst12/pow2(mU3))*pow14(mU3)*pow7(m3)*pow8(mQ3) - 3824*pow12(mU3)*pow3(
+        Xt)*pow7(m3)*pow8(mQ3) - 5040*log(Mst12/pow2(mU3))*pow12(mU3)*pow3(Xt)*
+        pow7(m3)*pow8(mQ3) + 600*msq2*pow12(mU3)*pow8(m3)*pow8(mQ3) - 1913*
+        pow14(mU3)*pow8(m3)*pow8(mQ3) + 902*log(Mst12/pow2(mU3))*pow14(mU3)*
+        pow8(m3)*pow8(mQ3) - 6788*pow12(mU3)*pow2(Xt)*pow8(m3)*pow8(mQ3) +
+        4578*log(Mst12/pow2(mU3))*pow12(mU3)*pow2(Xt)*pow8(m3)*pow8(mQ3) - 30*
+        m32*msq2*pow18(mQ3)*pow8(mU3) + 256*mQ32*Xt*pow19(m3)*pow8(mU3) - 156*
+        mQ32*pow18(m3)*pow2(Xt)*pow8(mU3) + 96*mQ32*pow20(m3)*pow8(mU3) + 64*
+        pow2(Xt)*pow20(m3)*pow8(mU3) - 3*m32*pow20(mQ3)*pow8(mU3) + 240*msq2*
+        Xt*pow16(mQ3)*pow3(m3)*pow8(mU3) + 24*Xt*pow18(mQ3)*pow3(m3)*pow8(mU3)
+        + 1280*mQ32*pow17(m3)*pow3(Xt)*pow8(mU3) + 300*msq2*pow16(mQ3)*pow4(m3)
+        *pow8(mU3) - 1021*pow18(mQ3)*pow4(m3)*pow8(mU3) - 12*log(Mst12/pow2(
+        mU3))*pow18(mQ3)*pow4(m3)*pow8(mU3) - 356*pow16(mQ3)*pow2(Xt)*pow4(m3)*
+        pow8(mU3) + 2*log(Mst12/pow2(mU3))*pow16(mQ3)*pow2(Xt)*pow4(m3)*pow8(
+        mU3) + 2304*Xt*pow17(m3)*pow4(mQ3)*pow8(mU3) - 608*Xt*log(Mst12/pow2(
+        mU3))*pow17(m3)*pow4(mQ3)*pow8(mU3) - 348*pow18(m3)*pow4(mQ3)*pow8(mU3)
+        - 4704*pow16(m3)*pow2(Xt)*pow4(mQ3)*pow8(mU3) + 4548*log(Mst12/pow2(
+        mU3))*pow16(m3)*pow2(Xt)*pow4(mQ3)*pow8(mU3) - 2672*pow15(m3)*pow3(Xt)*
+        pow4(mQ3)*pow8(mU3) - 8848*log(Mst12/pow2(mU3))*pow15(m3)*pow3(Xt)*
+        pow4(mQ3)*pow8(mU3) - 568*mQ32*pow16(m3)*pow4(Xt)*pow8(mU3) + 128*
+        pow18(m3)*pow4(Xt)*pow8(mU3) + 462*pow14(mQ3)*pow4(m3)*pow4(Xt)*pow8(
+        mU3) - log(Mst12/pow2(mU3))*pow14(mQ3)*pow4(m3)*pow4(Xt)*pow8(mU3) -
+        760*pow14(m3)*pow4(mQ3)*pow4(Xt)*pow8(mU3) + 1826*log(Mst12/pow2(mU3))*
+        pow14(m3)*pow4(mQ3)*pow4(Xt)*pow8(mU3) + 16*Xt*pow16(mQ3)*pow5(m3)*
+        pow8(mU3) + 1560*Xt*log(Mst12/pow2(mU3))*pow16(mQ3)*pow5(m3)*pow8(mU3)
+        - 1072*pow14(mQ3)*pow3(Xt)*pow5(m3)*pow8(mU3) - 3664*log(Mst12/pow2(
+        mU3))*pow14(mQ3)*pow3(Xt)*pow5(m3)*pow8(mU3) + 384*mQ32*pow15(m3)*pow5(
+        Xt)*pow8(mU3) + 976*pow13(m3)*pow4(mQ3)*pow5(Xt)*pow8(mU3) + 1064*log(
+        Mst12/pow2(mU3))*pow13(m3)*pow4(mQ3)*pow5(Xt)*pow8(mU3) - 3536*pow12(
+        mQ3)*pow5(m3)*pow5(Xt)*pow8(mU3) + 1832*log(Mst12/pow2(mU3))*pow12(mQ3)
+        *pow5(m3)*pow5(Xt)*pow8(mU3) - 810*msq2*pow14(mQ3)*pow6(m3)*pow8(mU3) +
+        3600*pow16(mQ3)*pow6(m3)*pow8(mU3) - 228*log(Mst12/pow2(mU3))*pow16(
+        mQ3)*pow6(m3)*pow8(mU3) - 1048*pow14(mQ3)*pow2(Xt)*pow6(m3)*pow8(mU3) +
+        136*log(Mst12/pow2(mU3))*pow14(mQ3)*pow2(Xt)*pow6(m3)*pow8(mU3) - 1024*
+        pow12(mQ3)*pow4(Xt)*pow6(m3)*pow8(mU3) - 846*log(Mst12/pow2(mU3))*
+        pow12(mQ3)*pow4(Xt)*pow6(m3)*pow8(mU3) - 1440*msq2*Xt*pow13(m3)*pow6(
+        mQ3)*pow8(mU3) + 540*msq2*pow14(m3)*pow6(mQ3)*pow8(mU3) - 1944*Xt*
+        pow15(m3)*pow6(mQ3)*pow8(mU3) - 768*Xt*log(Mst12/pow2(mU3))*pow15(m3)*
+        pow6(mQ3)*pow8(mU3) - 4886*pow16(m3)*pow6(mQ3)*pow8(mU3) + 234*log(
+        Mst12/pow2(mU3))*pow16(m3)*pow6(mQ3)*pow8(mU3) + 8540*pow14(m3)*pow2(
+        Xt)*pow6(mQ3)*pow8(mU3) - 19676*log(Mst12/pow2(mU3))*pow14(m3)*pow2(Xt)
+        *pow6(mQ3)*pow8(mU3) + 2288*pow13(m3)*pow3(Xt)*pow6(mQ3)*pow8(mU3) +
+        36944*log(Mst12/pow2(mU3))*pow13(m3)*pow3(Xt)*pow6(mQ3)*pow8(mU3) +
+        3090*pow12(m3)*pow4(Xt)*pow6(mQ3)*pow8(mU3) - 5903*log(Mst12/pow2(mU3))
+        *pow12(m3)*pow4(Xt)*pow6(mQ3)*pow8(mU3) - 3616*pow11(m3)*pow5(Xt)*pow6(
+        mQ3)*pow8(mU3) - 4832*log(Mst12/pow2(mU3))*pow11(m3)*pow5(Xt)*pow6(mQ3)
+        *pow8(mU3) - 640*pow12(m3)*pow4(mQ3)*pow6(Xt)*pow8(mU3) - 320*log(
+        Mst12/pow2(mU3))*pow12(m3)*pow4(mQ3)*pow6(Xt)*pow8(mU3) - 3600*msq2*Xt*
+        pow12(mQ3)*pow7(m3)*pow8(mU3) - 280*Xt*pow14(mQ3)*pow7(m3)*pow8(mU3) +
+        3824*pow12(mQ3)*pow3(Xt)*pow7(m3)*pow8(mU3) - 5040*log(Mst12/pow2(mU3))
+        *pow12(mQ3)*pow3(Xt)*pow7(m3)*pow8(mU3) - 600*msq2*pow12(mQ3)*pow8(m3)*
+        pow8(mU3) + 1913*pow14(mQ3)*pow8(m3)*pow8(mU3) + 676*log(Mst12/pow2(
+        mU3))*pow14(mQ3)*pow8(m3)*pow8(mU3) + 6788*pow12(mQ3)*pow2(Xt)*pow8(m3)
+        *pow8(mU3) + 3042*log(Mst12/pow2(mU3))*pow12(mQ3)*pow2(Xt)*pow8(m3)*
+        pow8(mU3) + 3552*Xt*log(Mst12/pow2(mU3))*pow13(m3)*pow8(mQ3)*pow8(mU3)
+        + 1788*log(Mst12/pow2(mU3))*pow14(m3)*pow8(mQ3)*pow8(mU3) + 32668*log(
+        Mst12/pow2(mU3))*pow12(m3)*pow2(Xt)*pow8(mQ3)*pow8(mU3) - 58432*log(
+        Mst12/pow2(mU3))*pow11(m3)*pow3(Xt)*pow8(mQ3)*pow8(mU3) - 640*log(
+        Mst12/pow2(mU3))*pow6(Xt)*pow8(m3)*pow8(mQ3)*pow8(mU3) + 960*msq2*Xt*
+        pow14(mU3)*pow4(mQ3)*pow9(m3) - 368*Xt*pow16(mU3)*pow4(mQ3)*pow9(m3) -
+        472*Xt*log(Mst12/pow2(mU3))*pow16(mU3)*pow4(mQ3)*pow9(m3) + 1552*pow14(
+        mU3)*pow3(Xt)*pow4(mQ3)*pow9(m3) - 1008*log(Mst12/pow2(mU3))*pow14(mU3)
+        *pow3(Xt)*pow4(mQ3)*pow9(m3) - 960*msq2*Xt*pow14(mQ3)*pow4(mU3)*pow9(
+        m3) + 368*Xt*pow16(mQ3)*pow4(mU3)*pow9(m3) - 72*Xt*log(Mst12/pow2(mU3))
+        *pow16(mQ3)*pow4(mU3)*pow9(m3) - 1552*pow14(mQ3)*pow3(Xt)*pow4(mU3)*
+        pow9(m3) - 1008*log(Mst12/pow2(mU3))*pow14(mQ3)*pow3(Xt)*pow4(mU3)*
+        pow9(m3) + 624*pow12(mU3)*pow4(mQ3)*pow5(Xt)*pow9(m3) + 504*log(Mst12/
+        pow2(mU3))*pow12(mU3)*pow4(mQ3)*pow5(Xt)*pow9(m3) - 624*pow12(mQ3)*
+        pow4(mU3)*pow5(Xt)*pow9(m3) + 504*log(Mst12/pow2(mU3))*pow12(mQ3)*pow4(
+        mU3)*pow5(Xt)*pow9(m3) + 384*Xt*pow14(mU3)*pow6(mQ3)*pow9(m3) - 3408*
+        Xt*log(Mst12/pow2(mU3))*pow14(mU3)*pow6(mQ3)*pow9(m3) + 6128*pow12(mU3)
+        *pow3(Xt)*pow6(mQ3)*pow9(m3) - 656*log(Mst12/pow2(mU3))*pow12(mU3)*
+        pow3(Xt)*pow6(mQ3)*pow9(m3) - 384*Xt*pow14(mQ3)*pow6(mU3)*pow9(m3) +
+        528*Xt*log(Mst12/pow2(mU3))*pow14(mQ3)*pow6(mU3)*pow9(m3) - 6128*pow12(
+        mQ3)*pow3(Xt)*pow6(mU3)*pow9(m3) - 656*log(Mst12/pow2(mU3))*pow12(mQ3)*
+        pow3(Xt)*pow6(mU3)*pow9(m3) + 336*Xt*pow12(mU3)*pow8(mQ3)*pow9(m3) +
+        5544*Xt*log(Mst12/pow2(mU3))*pow12(mU3)*pow8(mQ3)*pow9(m3) - 336*Xt*
+        pow12(mQ3)*pow8(mU3)*pow9(m3) - 3528*Xt*log(Mst12/pow2(mU3))*pow12(mQ3)
+        *pow8(mU3)*pow9(m3) + 8304*log(Mst12/pow2(mU3))*pow5(Xt)*pow8(mQ3)*
+        pow8(mU3)*pow9(m3) + 30*(m32 - mQ32)*(m32 - mU32)*log(Mst12/pow2(msq))*
+        pow3(m3)*pow3(mQ32 - mU32)*pow4(mQ3)*pow4(mU3)*(24*m32*mQ32*mU32*(mQ32
+        + mU32)*Xt - 16*Xt*pow4(mQ3)*pow4(mU3) + 5*m3*mQ32*mU32*(pow4(mQ3) +
+        pow4(mU3)) - 8*Xt*pow4(m3)*(4*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) + 3*(
+        10*mQ32*mU32 + pow4(mQ3) + pow4(mU3))*pow5(m3) + 8*(mQ32 + mU32)*Xt*
+        pow6(m3) - pow3(m3)*(15*mU32*pow4(mQ3) + 15*mQ32*pow4(mU3) + pow6(mQ3)
+        + pow6(mU3)) - 8*(mQ32 + mU32)*pow7(m3) + 2*pow9(m3)) - 334*mU32*pow18(
+        mQ3)*power10(m3) + 334*mQ32*pow18(mU3)*power10(m3) + 604*mU32*pow16(
+        mQ3)*pow2(Xt)*power10(m3) - 604*mQ32*pow16(mU3)*pow2(Xt)*power10(m3) -
+        510*msq2*pow14(mU3)*pow4(mQ3)*power10(m3) - 1045*pow16(mU3)*pow4(mQ3)*
+        power10(m3) + 416*log(Mst12/pow2(mU3))*pow16(mU3)*pow4(mQ3)*power10(m3)
+        - 3800*pow14(mU3)*pow2(Xt)*pow4(mQ3)*power10(m3) + 720*log(Mst12/pow2(
+        mU3))*pow14(mU3)*pow2(Xt)*pow4(mQ3)*power10(m3) + 510*msq2*pow14(mQ3)*
+        pow4(mU3)*power10(m3) + 1045*pow16(mQ3)*pow4(mU3)*power10(m3) + 360*
+        log(Mst12/pow2(mU3))*pow16(mQ3)*pow4(mU3)*power10(m3) + 3800*pow14(mQ3)
+        *pow2(Xt)*pow4(mU3)*power10(m3) + 336*log(Mst12/pow2(mU3))*pow14(mQ3)*
+        pow2(Xt)*pow4(mU3)*power10(m3) - 270*mU32*pow14(mQ3)*pow4(Xt)*power10(
+        m3) + 270*mQ32*pow14(mU3)*pow4(Xt)*power10(m3) + 1692*pow12(mU3)*pow4(
+        mQ3)*pow4(Xt)*power10(m3) - 664*log(Mst12/pow2(mU3))*pow12(mU3)*pow4(
+        mQ3)*pow4(Xt)*power10(m3) - 1692*pow12(mQ3)*pow4(mU3)*pow4(Xt)*power10(
+        m3) - 664*log(Mst12/pow2(mU3))*pow12(mQ3)*pow4(mU3)*pow4(Xt)*power10(
+        m3) + 1050*msq2*pow12(mU3)*pow6(mQ3)*power10(m3) - 7288*pow14(mU3)*
+        pow6(mQ3)*power10(m3) + 1832*log(Mst12/pow2(mU3))*pow14(mU3)*pow6(mQ3)*
+        power10(m3) + 4700*pow12(mU3)*pow2(Xt)*pow6(mQ3)*power10(m3) + 536*log(
+        Mst12/pow2(mU3))*pow12(mU3)*pow2(Xt)*pow6(mQ3)*power10(m3) - 1050*msq2*
+        pow12(mQ3)*pow6(mU3)*power10(m3) + 7288*pow14(mQ3)*pow6(mU3)*power10(
+        m3) - 3248*log(Mst12/pow2(mU3))*pow14(mQ3)*pow6(mU3)*power10(m3) -
+        4700*pow12(mQ3)*pow2(Xt)*pow6(mU3)*power10(m3) + 152*log(Mst12/pow2(
+        mU3))*pow12(mQ3)*pow2(Xt)*pow6(mU3)*power10(m3) + 16375*pow12(mU3)*
+        pow8(mQ3)*power10(m3) - 5824*log(Mst12/pow2(mU3))*pow12(mU3)*pow8(mQ3)*
+        power10(m3) - 960*pow6(mU3)*pow6(Xt)*pow8(mQ3)*power10(m3) + 800*log(
+        Mst12/pow2(mU3))*pow6(mU3)*pow6(Xt)*pow8(mQ3)*power10(m3) - 16375*
+        pow12(mQ3)*pow8(mU3)*power10(m3) + 4504*log(Mst12/pow2(mU3))*pow12(mQ3)
+        *pow8(mU3)*power10(m3) + 960*pow6(mQ3)*pow6(Xt)*pow8(mU3)*power10(m3) +
+        800*log(Mst12/pow2(mU3))*pow6(mQ3)*pow6(Xt)*pow8(mU3)*power10(m3) +
+        5224*log(Mst12/pow2(mU3))*pow4(Xt)*pow8(mQ3)*pow8(mU3)*power10(m3) -
+        90*m32*msq2*pow16(mU3)*power10(mQ3) + 1152*mU32*Xt*pow17(m3)*power10(
+        mQ3) + 18*mU32*pow18(m3)*power10(mQ3) - 534*m32*pow18(mU3)*power10(mQ3)
+        - 144*m32*log(Mst12/pow2(mU3))*pow18(mU3)*power10(mQ3) - 1776*mU32*
+        pow16(m3)*pow2(Xt)*power10(mQ3) - 288*m32*log(Mst12/pow2(mU3))*pow16(
+        mU3)*pow2(Xt)*power10(mQ3) + 256*pow18(m3)*pow2(Xt)*power10(mQ3) + 32*
+        pow20(m3)*power10(mQ3) + 480*msq2*Xt*pow14(mU3)*pow3(m3)*power10(mQ3) +
+        48*Xt*pow16(mU3)*pow3(m3)*power10(mQ3) + 752*Xt*log(Mst12/pow2(mU3))*
+        pow16(mU3)*pow3(m3)*power10(mQ3) + 2304*mU32*pow15(m3)*pow3(Xt)*
+        power10(mQ3) - 272*pow14(mU3)*pow3(m3)*pow3(Xt)*power10(mQ3) + 1392*
+        log(Mst12/pow2(mU3))*pow14(mU3)*pow3(m3)*pow3(Xt)*power10(mQ3) + 420*
+        msq2*pow14(mU3)*pow4(m3)*power10(mQ3) - 47*pow16(mU3)*pow4(m3)*power10(
+        mQ3) + 546*log(Mst12/pow2(mU3))*pow16(mU3)*pow4(m3)*power10(mQ3) - 712*
+        pow14(mU3)*pow2(Xt)*pow4(m3)*power10(mQ3) + 708*log(Mst12/pow2(mU3))*
+        pow14(mU3)*pow2(Xt)*pow4(m3)*power10(mQ3) - 480*msq2*Xt*pow13(m3)*pow4(
+        mU3)*power10(mQ3) + 180*msq2*pow14(m3)*pow4(mU3)*power10(mQ3) + 2552*
+        Xt*pow15(m3)*pow4(mU3)*power10(mQ3) + 1984*Xt*log(Mst12/pow2(mU3))*
+        pow15(m3)*pow4(mU3)*power10(mQ3) - 3450*pow16(m3)*pow4(mU3)*power10(
+        mQ3) + 78*log(Mst12/pow2(mU3))*pow16(m3)*pow4(mU3)*power10(mQ3) - 3044*
+        pow14(m3)*pow2(Xt)*pow4(mU3)*power10(mQ3) - 2596*log(Mst12/pow2(mU3))*
+        pow14(m3)*pow2(Xt)*pow4(mU3)*power10(mQ3) - 6032*pow13(m3)*pow3(Xt)*
+        pow4(mU3)*power10(mQ3) + 4016*log(Mst12/pow2(mU3))*pow13(m3)*pow3(Xt)*
+        pow4(mU3)*power10(mQ3) - 1268*mU32*pow14(m3)*pow4(Xt)*power10(mQ3) +
+        394*m32*pow14(mU3)*pow4(Xt)*power10(mQ3) + 144*m32*log(Mst12/pow2(mU3))
+        *pow14(mU3)*pow4(Xt)*power10(mQ3) + 192*pow16(m3)*pow4(Xt)*power10(mQ3)
+        - 1226*pow12(mU3)*pow4(m3)*pow4(Xt)*power10(mQ3) - 453*log(Mst12/pow2(
+        mU3))*pow12(mU3)*pow4(m3)*pow4(Xt)*power10(mQ3) + 962*pow12(m3)*pow4(
+        mU3)*pow4(Xt)*power10(mQ3) + 549*log(Mst12/pow2(mU3))*pow12(m3)*pow4(
+        mU3)*pow4(Xt)*power10(mQ3) - 2400*msq2*Xt*pow12(mU3)*pow5(m3)*power10(
+        mQ3) - 112*Xt*pow14(mU3)*pow5(m3)*power10(mQ3) + 3376*Xt*log(Mst12/
+        pow2(mU3))*pow14(mU3)*pow5(m3)*power10(mQ3) + 1104*pow12(mU3)*pow3(Xt)*
+        pow5(m3)*power10(mQ3) + 8784*log(Mst12/pow2(mU3))*pow12(mU3)*pow3(Xt)*
+        pow5(m3)*power10(mQ3) + 384*mU32*pow13(m3)*pow5(Xt)*power10(mQ3) -
+        1392*pow12(mU3)*pow3(m3)*pow5(Xt)*power10(mQ3) - 696*log(Mst12/pow2(
+        mU3))*pow12(mU3)*pow3(m3)*pow5(Xt)*power10(mQ3) + 1360*pow11(m3)*pow4(
+        mU3)*pow5(Xt)*power10(mQ3) - 1256*log(Mst12/pow2(mU3))*pow11(m3)*pow4(
+        mU3)*pow5(Xt)*power10(mQ3) - 1950*msq2*pow12(mU3)*pow6(m3)*power10(mQ3)
+        + 9474*pow14(mU3)*pow6(m3)*power10(mQ3) - 504*log(Mst12/pow2(mU3))*
+        pow14(mU3)*pow6(m3)*power10(mQ3) + 2476*pow12(mU3)*pow2(Xt)*pow6(m3)*
+        power10(mQ3) - 4292*log(Mst12/pow2(mU3))*pow12(mU3)*pow2(Xt)*pow6(m3)*
+        power10(mQ3) - 2400*msq2*Xt*pow11(m3)*pow6(mU3)*power10(mQ3) + 840*
+        msq2*pow12(m3)*pow6(mU3)*power10(mQ3) - 3168*Xt*pow13(m3)*pow6(mU3)*
+        power10(mQ3) + 784*Xt*log(Mst12/pow2(mU3))*pow13(m3)*pow6(mU3)*power10(
+        mQ3) - 7016*pow14(m3)*pow6(mU3)*power10(mQ3) - 260*log(Mst12/pow2(mU3))
+        *pow14(m3)*pow6(mU3)*power10(mQ3) + 11928*pow12(m3)*pow2(Xt)*pow6(mU3)*
+        power10(mQ3) + 10044*log(Mst12/pow2(mU3))*pow12(m3)*pow2(Xt)*pow6(mU3)*
+        power10(mQ3) + 6544*pow11(m3)*pow3(Xt)*pow6(mU3)*power10(mQ3) - 20400*
+        log(Mst12/pow2(mU3))*pow11(m3)*pow3(Xt)*pow6(mU3)*power10(mQ3) - 432*
+        Xt*pow12(mU3)*pow7(m3)*power10(mQ3) - 8096*Xt*log(Mst12/pow2(mU3))*
+        pow12(mU3)*pow7(m3)*power10(mQ3) - 16453*pow12(mU3)*pow8(m3)*power10(
+        mQ3) + 3382*log(Mst12/pow2(mU3))*pow12(mU3)*pow8(m3)*power10(mQ3) +
+        640*pow6(mU3)*pow6(Xt)*pow8(m3)*power10(mQ3) - 320*log(Mst12/pow2(mU3))
+        *pow6(mU3)*pow6(Xt)*pow8(m3)*power10(mQ3) - 40*Xt*pow11(m3)*pow8(mU3)*
+        power10(mQ3) - 208*Xt*log(Mst12/pow2(mU3))*pow11(m3)*pow8(mU3)*power10(
+        mQ3) + 15596*pow12(m3)*pow8(mU3)*power10(mQ3) - 6878*log(Mst12/pow2(
+        mU3))*pow12(m3)*pow8(mU3)*power10(mQ3) - 320*pow6(m3)*pow6(Xt)*pow8(
+        mU3)*power10(mQ3) + 160*log(Mst12/pow2(mU3))*pow6(m3)*pow6(Xt)*pow8(
+        mU3)*power10(mQ3) + 5792*pow5(Xt)*pow7(m3)*pow8(mU3)*power10(mQ3) -
+        6368*log(Mst12/pow2(mU3))*pow5(Xt)*pow7(m3)*pow8(mU3)*power10(mQ3) -
+        1408*pow4(Xt)*pow8(m3)*pow8(mU3)*power10(mQ3) - 292*log(Mst12/pow2(mU3)
+        )*pow4(Xt)*pow8(m3)*pow8(mU3)*power10(mQ3) - 6144*pow5(Xt)*pow6(mU3)*
+        pow9(m3)*power10(mQ3) + 4656*log(Mst12/pow2(mU3))*pow5(Xt)*pow6(mU3)*
+        pow9(m3)*power10(mQ3) + 4800*msq2*Xt*pow8(mU3)*pow9(m3)*power10(mQ3) -
+        3648*pow3(Xt)*pow8(mU3)*pow9(m3)*power10(mQ3) + 39040*log(Mst12/pow2(
+        mU3))*pow3(Xt)*pow8(mU3)*pow9(m3)*power10(mQ3) + 2274*pow4(Xt)*pow6(
+        mU3)*power10(m3)*power10(mQ3) - 868*log(Mst12/pow2(mU3))*pow4(Xt)*pow6(
+        mU3)*power10(m3)*power10(mQ3) - 320*pow4(mU3)*pow6(Xt)*power10(m3)*
+        power10(mQ3) + 160*log(Mst12/pow2(mU3))*pow4(mU3)*pow6(Xt)*power10(m3)*
+        power10(mQ3) + 600*msq2*pow8(mU3)*power10(m3)*power10(mQ3) - 9128*pow2(
+        Xt)*pow8(mU3)*power10(m3)*power10(mQ3) - 20840*log(Mst12/pow2(mU3))*
+        pow2(Xt)*pow8(mU3)*power10(m3)*power10(mQ3) + 90*m32*msq2*pow16(mQ3)*
+        power10(mU3) - 1152*mQ32*Xt*pow17(m3)*power10(mU3) - 18*mQ32*pow18(m3)*
+        power10(mU3) + 534*m32*pow18(mQ3)*power10(mU3) + 144*m32*log(Mst12/
+        pow2(mU3))*pow18(mQ3)*power10(mU3) + 1776*mQ32*pow16(m3)*pow2(Xt)*
+        power10(mU3) - 288*m32*log(Mst12/pow2(mU3))*pow16(mQ3)*pow2(Xt)*
+        power10(mU3) - 256*pow18(m3)*pow2(Xt)*power10(mU3) - 32*pow20(m3)*
+        power10(mU3) - 480*msq2*Xt*pow14(mQ3)*pow3(m3)*power10(mU3) - 48*Xt*
+        pow16(mQ3)*pow3(m3)*power10(mU3) - 656*Xt*log(Mst12/pow2(mU3))*pow16(
+        mQ3)*pow3(m3)*power10(mU3) - 2304*mQ32*pow15(m3)*pow3(Xt)*power10(mU3)
+        + 272*pow14(mQ3)*pow3(m3)*pow3(Xt)*power10(mU3) + 1392*log(Mst12/pow2(
+        mU3))*pow14(mQ3)*pow3(m3)*pow3(Xt)*power10(mU3) - 420*msq2*pow14(mQ3)*
+        pow4(m3)*power10(mU3) + 47*pow16(mQ3)*pow4(m3)*power10(mU3) - 420*log(
+        Mst12/pow2(mU3))*pow16(mQ3)*pow4(m3)*power10(mU3) + 712*pow14(mQ3)*
+        pow2(Xt)*pow4(m3)*power10(mU3) + 708*log(Mst12/pow2(mU3))*pow14(mQ3)*
+        pow2(Xt)*pow4(m3)*power10(mU3) + 480*msq2*Xt*pow13(m3)*pow4(mQ3)*
+        power10(mU3) - 180*msq2*pow14(m3)*pow4(mQ3)*power10(mU3) - 2552*Xt*
+        pow15(m3)*pow4(mQ3)*power10(mU3) + 1376*Xt*log(Mst12/pow2(mU3))*pow15(
+        m3)*pow4(mQ3)*power10(mU3) + 3450*pow16(m3)*pow4(mQ3)*power10(mU3) -
+        78*log(Mst12/pow2(mU3))*pow16(m3)*pow4(mQ3)*power10(mU3) + 3044*pow14(
+        m3)*pow2(Xt)*pow4(mQ3)*power10(mU3) - 2212*log(Mst12/pow2(mU3))*pow14(
+        m3)*pow2(Xt)*pow4(mQ3)*power10(mU3) + 6032*pow13(m3)*pow3(Xt)*pow4(mQ3)
+        *power10(mU3) + 4016*log(Mst12/pow2(mU3))*pow13(m3)*pow3(Xt)*pow4(mQ3)*
+        power10(mU3) + 1268*mQ32*pow14(m3)*pow4(Xt)*power10(mU3) - 394*m32*
+        pow14(mQ3)*pow4(Xt)*power10(mU3) + 144*m32*log(Mst12/pow2(mU3))*pow14(
+        mQ3)*pow4(Xt)*power10(mU3) - 192*pow16(m3)*pow4(Xt)*power10(mU3) +
+        1226*pow12(mQ3)*pow4(m3)*pow4(Xt)*power10(mU3) - 453*log(Mst12/pow2(
+        mU3))*pow12(mQ3)*pow4(m3)*pow4(Xt)*power10(mU3) - 962*pow12(m3)*pow4(
+        mQ3)*pow4(Xt)*power10(mU3) + 549*log(Mst12/pow2(mU3))*pow12(m3)*pow4(
+        mQ3)*pow4(Xt)*power10(mU3) + 2400*msq2*Xt*pow12(mQ3)*pow5(m3)*power10(
+        mU3) + 112*Xt*pow14(mQ3)*pow5(m3)*power10(mU3) - 3568*Xt*log(Mst12/
+        pow2(mU3))*pow14(mQ3)*pow5(m3)*power10(mU3) - 1104*pow12(mQ3)*pow3(Xt)*
+        pow5(m3)*power10(mU3) + 8784*log(Mst12/pow2(mU3))*pow12(mQ3)*pow3(Xt)*
+        pow5(m3)*power10(mU3) - 384*mQ32*pow13(m3)*pow5(Xt)*power10(mU3) +
+        1392*pow12(mQ3)*pow3(m3)*pow5(Xt)*power10(mU3) - 696*log(Mst12/pow2(
+        mU3))*pow12(mQ3)*pow3(m3)*pow5(Xt)*power10(mU3) - 1360*pow11(m3)*pow4(
+        mQ3)*pow5(Xt)*power10(mU3) - 1256*log(Mst12/pow2(mU3))*pow11(m3)*pow4(
+        mQ3)*pow5(Xt)*power10(mU3) + 1950*msq2*pow12(mQ3)*pow6(m3)*power10(mU3)
+        - 9474*pow14(mQ3)*pow6(m3)*power10(mU3) + 372*log(Mst12/pow2(mU3))*
+        pow14(mQ3)*pow6(m3)*power10(mU3) - 2476*pow12(mQ3)*pow2(Xt)*pow6(m3)*
+        power10(mU3) - 3140*log(Mst12/pow2(mU3))*pow12(mQ3)*pow2(Xt)*pow6(m3)*
+        power10(mU3) + 2400*msq2*Xt*pow11(m3)*pow6(mQ3)*power10(mU3) - 840*
+        msq2*pow12(m3)*pow6(mQ3)*power10(mU3) + 3168*Xt*pow13(m3)*pow6(mQ3)*
+        power10(mU3) - 336*Xt*log(Mst12/pow2(mU3))*pow13(m3)*pow6(mQ3)*power10(
+        mU3) + 7016*pow14(m3)*pow6(mQ3)*power10(mU3) - 2124*log(Mst12/pow2(mU3)
+        )*pow14(m3)*pow6(mQ3)*power10(mU3) - 11928*pow12(m3)*pow2(Xt)*pow6(mQ3)
+        *power10(mU3) + 11580*log(Mst12/pow2(mU3))*pow12(m3)*pow2(Xt)*pow6(mQ3)
+        *power10(mU3) - 6544*pow11(m3)*pow3(Xt)*pow6(mQ3)*power10(mU3) - 20400*
+        log(Mst12/pow2(mU3))*pow11(m3)*pow3(Xt)*pow6(mQ3)*power10(mU3) + 432*
+        Xt*pow12(mQ3)*pow7(m3)*power10(mU3) + 6528*Xt*log(Mst12/pow2(mU3))*
+        pow12(mQ3)*pow7(m3)*power10(mU3) + 16453*pow12(mQ3)*pow8(m3)*power10(
+        mU3) - 4628*log(Mst12/pow2(mU3))*pow12(mQ3)*pow8(m3)*power10(mU3) -
+        640*pow6(mQ3)*pow6(Xt)*pow8(m3)*power10(mU3) - 320*log(Mst12/pow2(mU3))
+        *pow6(mQ3)*pow6(Xt)*pow8(m3)*power10(mU3) + 40*Xt*pow11(m3)*pow8(mQ3)*
+        power10(mU3) - 4752*Xt*log(Mst12/pow2(mU3))*pow11(m3)*pow8(mQ3)*
+        power10(mU3) - 15596*pow12(m3)*pow8(mQ3)*power10(mU3) + 4634*log(Mst12/
+        pow2(mU3))*pow12(m3)*pow8(mQ3)*power10(mU3) + 320*pow6(m3)*pow6(Xt)*
+        pow8(mQ3)*power10(mU3) + 160*log(Mst12/pow2(mU3))*pow6(m3)*pow6(Xt)*
+        pow8(mQ3)*power10(mU3) - 5792*pow5(Xt)*pow7(m3)*pow8(mQ3)*power10(mU3)
+        - 6368*log(Mst12/pow2(mU3))*pow5(Xt)*pow7(m3)*pow8(mQ3)*power10(mU3) +
+        1408*pow4(Xt)*pow8(m3)*pow8(mQ3)*power10(mU3) - 292*log(Mst12/pow2(mU3)
+        )*pow4(Xt)*pow8(m3)*pow8(mQ3)*power10(mU3) + 6144*pow5(Xt)*pow6(mQ3)*
+        pow9(m3)*power10(mU3) + 4656*log(Mst12/pow2(mU3))*pow5(Xt)*pow6(mQ3)*
+        pow9(m3)*power10(mU3) - 4800*msq2*Xt*pow8(mQ3)*pow9(m3)*power10(mU3) +
+        3648*pow3(Xt)*pow8(mQ3)*pow9(m3)*power10(mU3) + 39040*log(Mst12/pow2(
+        mU3))*pow3(Xt)*pow8(mQ3)*pow9(m3)*power10(mU3) - 2274*pow4(Xt)*pow6(
+        mQ3)*power10(m3)*power10(mU3) - 868*log(Mst12/pow2(mU3))*pow4(Xt)*pow6(
+        mQ3)*power10(m3)*power10(mU3) + 320*pow4(mQ3)*pow6(Xt)*power10(m3)*
+        power10(mU3) + 160*log(Mst12/pow2(mU3))*pow4(mQ3)*pow6(Xt)*power10(m3)*
+        power10(mU3) - 600*msq2*pow8(mQ3)*power10(m3)*power10(mU3) + 9128*pow2(
+        Xt)*pow8(mQ3)*power10(m3)*power10(mU3) - 23912*log(Mst12/pow2(mU3))*
+        pow2(Xt)*pow8(mQ3)*power10(m3)*power10(mU3) + 3664*log(Mst12/pow2(mU3))
+        *pow5(m3)*pow5(Xt)*power10(mQ3)*power10(mU3) + 928*log(Mst12/pow2(mU3))
+        *pow4(Xt)*pow6(m3)*power10(mQ3)*power10(mU3) - 32832*log(Mst12/pow2(
+        mU3))*pow3(Xt)*pow7(m3)*power10(mQ3)*power10(mU3) + 17424*log(Mst12/
+        pow2(mU3))*pow2(Xt)*pow8(m3)*power10(mQ3)*power10(mU3) + 1408*Xt*log(
+        Mst12/pow2(mU3))*pow9(m3)*power10(mQ3)*power10(mU3) + 1960*log(Mst12/
+        pow2(mU3))*power10(m3)*power10(mQ3)*power10(mU3) + log(Mst12/pow2(mQ3))
+        *pow4(mQ3)*pow4(mU3)*(-1024*pow18(m3)*pow2(Xt)*(-3*mQ32 - 3*mU32 +
+        pow2(Xt)) - 768*pow2(Xt)*pow20(m3) + 1792*pow19(m3)*pow3(Xt) - 32*Xt*
+        pow17(m3)*(208*mU32*pow2(Xt) + mQ32*(38*mU32 + 208*pow2(Xt)) - 19*pow4(
+        mQ3) - 19*pow4(mU3)) + 8*Xt*pow15(m3)*(2*(48*mU32 + 553*pow2(Xt))*pow4(
+        mQ3) + 1106*pow2(Xt)*pow4(mU3) + 39*mU32*pow4(Xt) + mQ32*(3228*mU32*
+        pow2(Xt) + 324*pow4(mU3) + 39*pow4(Xt)) - 172*pow6(mQ3) - 248*pow6(mU3)
+        ) + 2*pow16(m3)*(-3*(39*mU32 + 758*pow2(Xt))*pow4(mQ3) - 2274*pow2(Xt)*
+        pow4(mU3) + 1393*mU32*pow4(Xt) + mQ32*(-6204*mU32*pow2(Xt) + 117*pow4(
+        mU3) + 1393*pow4(Xt)) + 39*pow6(mQ3) - 39*pow6(mU3)) + 144*m32*(mQ32 +
+        mU32)*pow6(mQ3)*(-pow2(-(mU3*pow2(Xt)) + pow3(mU3)) + (-3*mU32 + 2*
+        pow2(Xt))*pow4(mQ3) + mQ32*(-4*mU32*pow2(Xt) + 3*pow4(mU3) - pow4(Xt))
+        + pow6(mQ3))*pow6(mU3) - 8*Xt*pow3(m3)*pow6(mQ3)*(-6*(45*mU32 - 29*
+        pow2(Xt))*pow4(mQ3) + 174*pow2(Xt)*pow4(mU3) + mQ32*(-508*mU32*pow2(Xt)
+        + 258*pow4(mU3) - 87*pow4(Xt)) - 87*mU32*pow4(Xt) + 94*pow6(mQ3) - 82*
+        pow6(mU3))*pow6(mU3) - 8*Xt*pow13(m3)*(133*pow4(mU3)*pow4(Xt) + pow4(
+        mQ3)*(4618*mU32*pow2(Xt) + 444*pow4(mU3) + 133*pow4(Xt)) + (-42*mU32 +
+        502*pow2(Xt))*pow6(mQ3) + 502*pow2(Xt)*pow6(mU3) + mQ32*(4618*pow2(Xt)*
+        pow4(mU3) + 266*mU32*pow4(Xt) + 98*pow6(mU3)) - 215*pow8(mQ3) - 285*
+        pow8(mU3)) + 8*Xt*pow4(mQ3)*pow4(mU3)*pow5(m3)*(-229*pow4(mU3)*pow4(Xt)
+        - pow4(mQ3)*(1098*mU32*pow2(Xt) + 68*pow4(mU3) + 229*pow4(Xt)) + (-422*
+        mU32 + 458*pow2(Xt))*pow6(mQ3) + 458*pow2(Xt)*pow6(mU3) + 2*mQ32*(-549*
+        pow2(Xt)*pow4(mU3) - 229*mU32*pow4(Xt) + 223*pow6(mU3)) + 239*pow8(mQ3)
+        - 195*pow8(mU3)) - 2*pow14(m3)*(913*pow4(mU3)*pow4(Xt) + pow4(mQ3)*(-
+        9838*mU32*pow2(Xt) + 894*pow4(mU3) + 913*pow4(Xt)) - 2*(531*mU32 + 553*
+        pow2(Xt))*pow6(mQ3) - 1298*pow2(Xt)*pow6(mU3) + 80*mU32*pow6(Xt) +
+        mQ32*(-9262*pow2(Xt)*pow4(mU3) + 4002*mU32*pow4(Xt) - 130*pow6(mU3) +
+        80*pow6(Xt)) + 382*pow8(mQ3) - 84*pow8(mU3)) - 36*(-pow2(-(mU3*pow2(Xt)
+        ) + pow3(mU3)) + (-3*mU32 + 2*pow2(Xt))*pow4(mQ3) + mQ32*(-4*mU32*pow2(
+        Xt) + 3*pow4(mU3) - pow4(Xt)) + pow6(mQ3))*pow8(mQ3)*pow8(mU3) + pow4(
+        m3)*pow4(mQ3)*pow4(mU3)*((-708*mU32*pow2(Xt) + 1446*pow4(mU3) + pow4(
+        Xt))*pow6(mQ3) + pow4(mQ3)*(652*pow2(Xt)*pow4(mU3) + 453*mU32*pow4(Xt)
+        - 1362*pow6(mU3)) + (-2*mU32*pow2(Xt) + 12*pow4(mU3) + pow4(Xt))*pow6(
+        mU3) - 2*(273*mU32 + pow2(Xt))*pow8(mQ3) + mQ32*(453*pow4(mU3)*pow4(Xt)
+        - 708*pow2(Xt)*pow6(mU3) + 420*pow8(mU3)) + 30*power10(mQ3)) + pow12(
+        m3)*(-((11580*mU32*pow2(Xt) + 4634*pow4(mU3) + 549*pow4(Xt))*pow6(mQ3))
+        + pow4(mU3)*(-118*pow2(Xt)*pow4(mU3) - 549*mU32*pow4(Xt) + 146*pow6(
+        mU3) + 320*pow6(Xt)) + pow4(mQ3)*(-32668*pow2(Xt)*pow4(mU3) + 5903*
+        mU32*pow4(Xt) + 6878*pow6(mU3) + 320*pow6(Xt)) + (-456*mU32 + 650*pow2(
+        Xt))*pow8(mQ3) + mQ32*(5903*pow4(mU3)*pow4(Xt) - 10044*pow2(Xt)*pow6(
+        mU3) + 640*mU32*pow6(Xt) - 2910*pow8(mU3)) + 976*power10(mQ3)) - 4*
+        power10(m3)*(104*pow12(mQ3) + 2*pow6(mU3)*(42*pow2(Xt)*pow4(mU3) - 83*
+        mU32*pow4(Xt) + 45*pow6(mU3) + 20*pow6(Xt)) + pow6(mQ3)*(-5978*pow2(Xt)
+        *pow4(mU3) - 217*mU32*pow4(Xt) + 490*pow6(mU3) + 40*pow6(Xt)) - 2*(-67*
+        mU32*pow2(Xt) + 728*pow4(mU3) + 83*pow4(Xt))*pow8(mQ3) + 2*pow4(mQ3)*(
+        653*pow4(mU3)*pow4(Xt) - 2605*pow2(Xt)*pow6(mU3) + 100*mU32*pow6(Xt) +
+        563*pow8(mU3)) + 2*(229*mU32 + 90*pow2(Xt))*power10(mQ3) + mQ32*(-217*
+        pow4(Xt)*pow6(mU3) + 200*pow4(mU3)*pow6(Xt) + 38*pow2(Xt)*pow8(mU3) -
+        812*power10(mU3))) - 2*mQ32*mU32*pow6(m3)*(104*pow12(mQ3) + pow6(mQ3)*(
+        -2146*pow2(Xt)*pow4(mU3) - 423*mU32*pow4(Xt) + 162*pow6(mU3)) + (260*
+        mU32*pow2(Xt) - 252*pow4(mU3) - 79*pow4(Xt))*pow8(mQ3) + (158*mU32*
+        pow2(Xt) - 14*pow4(mU3) - 79*pow4(Xt))*pow8(mU3) + 2*pow4(mQ3)*(232*
+        pow4(mU3)*pow4(Xt) - 785*pow2(Xt)*pow6(mU3) + 40*mU32*pow6(Xt) + 93*
+        pow8(mU3)) + (-72*mU32 + 158*pow2(Xt))*power10(mQ3) + mQ32*(-423*pow4(
+        Xt)*pow6(mU3) + 80*pow4(mU3)*pow6(Xt) + 68*pow2(Xt)*pow8(mU3) - 114*
+        power10(mU3))) + 8*Xt*pow11(m3)*((2550*mU32*pow2(Xt) + 594*pow4(mU3) +
+        157*pow4(Xt))*pow6(mQ3) + 157*pow4(Xt)*pow6(mU3) + pow4(mQ3)*(7304*
+        pow2(Xt)*pow4(mU3) + 604*mU32*pow4(Xt) + 26*pow6(mU3)) - 2*(104*mU32 +
+        61*pow2(Xt))*pow8(mQ3) + mQ32*(604*pow4(mU3)*pow4(Xt) + 2550*pow2(Xt)*
+        pow6(mU3) - 112*pow8(mU3)) - 122*pow2(Xt)*pow8(mU3) - 178*power10(mQ3)
+        - 122*power10(mU3)) - 8*mQ32*mU32*Xt*pow7(m3)*(-((630*mU32*pow2(Xt) +
+        1012*pow4(mU3) + 205*pow4(Xt))*pow6(mQ3)) - 205*pow4(Xt)*pow6(mU3) +
+        pow4(mQ3)*(-4104*pow2(Xt)*pow4(mU3) - 796*mU32*pow4(Xt) + 816*pow6(mU3)
+        ) - 2*mQ32*(398*pow4(mU3)*pow4(Xt) + 315*pow2(Xt)*pow6(mU3)) + (96*mU32
+        + 410*pow2(Xt))*pow8(mQ3) + 410*pow2(Xt)*pow8(mU3) + 204*power10(mQ3) -
+        104*power10(mU3)) + pow8(m3)*(74*pow14(mQ3) + 10*pow12(mQ3)*(97*mU32 +
+        11*pow2(Xt)) + mQ32*pow6(mU3)*(1276*pow2(Xt)*pow4(mU3) - 1699*mU32*
+        pow4(Xt) - 832*pow6(mU3) + 320*pow6(Xt)) - (4578*pow2(Xt)*pow4(mU3) +
+        1699*mU32*pow4(Xt) + 3382*pow6(mU3))*pow8(mQ3) + 4*pow6(mQ3)*(73*pow4(
+        mU3)*pow4(Xt) - 4356*pow2(Xt)*pow6(mU3) + 80*mU32*pow6(Xt) + 1157*pow8(
+        mU3)) + (2044*mU32*pow2(Xt) - 902*pow4(mU3) - 55*pow4(Xt))*power10(mQ3)
+        + pow4(mQ3)*(292*pow4(Xt)*pow6(mU3) + 640*pow4(mU3)*pow6(Xt) - 3042*
+        pow2(Xt)*pow8(mU3) - 676*power10(mU3)) + 5*(22*mU32*pow2(Xt) + 24*pow4(
+        mU3) - 11*pow4(Xt))*power10(mU3)) - 8*Xt*pow9(m3)*(-59*pow12(mQ3) + 2*
+        pow6(mQ3)*(2440*pow2(Xt)*pow4(mU3) + 291*mU32*pow4(Xt) + 88*pow6(mU3))
+        + (-82*mU32*pow2(Xt) + 693*pow4(mU3) + 63*pow4(Xt))*pow8(mQ3) + pow4(
+        mQ3)*(1038*pow4(mU3)*pow4(Xt) + 4880*pow2(Xt)*pow6(mU3) - 441*pow8(mU3)
+        ) - 9*(14*mU32*pow2(Xt) + pow4(mU3) - 7*pow4(Xt))*pow8(mU3) - 6*(71*
+        mU32 + 21*pow2(Xt))*power10(mQ3) + mQ32*(582*pow4(Xt)*pow6(mU3) - 82*
+        pow2(Xt)*pow8(mU3) + 66*power10(mU3))))))/(pow3(mQ32 - mU32)*pow4(mQ3)*
+        pow4(m32 - mQ32)*pow4(mU3)*pow4(m32 - mU32)) + 2*log(Mst12/pow2(mU3))*(
+        (640*m32*mQ32*mU32*pow6(Xt))/((m32 - mQ32)*(m32 - mU32)*pow4(mQ32 -
+        mU32)) - 10*log(Mst12/pow2(msq))*(4*m3*Xt*(-(m32/((m32 - mQ32)*(m32 -
+        mU32))) + 2/(mQ32 - mU32) + (6*msq2*(-2*mQ32 + msq2))/((mQ32 - mU32)*
+        pow2(m32 - mQ32)) + (6*msq2*(msq2 - 2*mU32))/((-mQ32 + mU32)*pow2(m32 -
+        mU32))) + (8*(-(m3*(mQ32 + mU32)) - (6*m3*msq2*(-2*mQ32 + msq2)*(mQ32 -
+        mU32))/pow2(m32 - mQ32) + (6*m3*msq2*(msq2 - 2*mU32)*(-mQ32 + mU32))/
+        pow2(m32 - mU32) + ((mQ32 - mU32)*(-2*m3*mQ32*mU32 + (mQ32 + mU32)*
+        pow3(m3)))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(mQ32 - mU32) - (
+        3*msq2*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)))/pow3(m32 -
+        mU32) + (3*msq2*(m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*pow4(m3)))/pow3(
+        m32 - mQ32) + (4*m3*(mQ32 + mU32)*((2*mQ32*mU32 - m32*(mQ32 + mU32))/((
+        m32 - mQ32)*(m32 - mU32)) + (6*msq2*(-2*mQ32 + msq2))/pow2(m32 - mQ32)
+        + (6*msq2*(msq2 - 2*mU32))/pow2(m32 - mU32))*pow5(Xt))/pow4(mQ32 -
+        mU32) + (4*m32*mQ32*mU32*(mQ32 + mU32) - 2*pow4(mQ3)*pow4(mU3) - pow4(
+        m3)*(8*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) + 2*(mQ32 + mU32)*pow6(m3))/(
+        pow2(m32 - mQ32)*pow2(m32 - mU32)) + 2*pow2(Xt)*((3*msq2*(mQ32*msq2 +
+        m32*(-6*mQ32 + 3*msq2) - 2*pow4(m3)))/((mQ32 - mU32)*pow3(m32 - mQ32))
+        + (3*msq2*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)))/((-mQ32 +
+        mU32)*pow3(m32 - mU32)) + (-4*m32*mQ32*mU32*pow2(mQ32 + mU32) + 3*pow3(
+        mQ32 + mU32)*pow4(m3) + 2*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 2*(2*
+        mQ32*mU32 + 3*pow4(mQ3) + 3*pow4(mU3))*pow6(m3) + 2*(mQ32 + mU32)*pow8(
+        m3))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow2(mQ32 - mU32))) + pow4(Xt)*
+        ((4*m32)/pow3(mQ32 - mU32) - (3*msq2*(mQ32 + mU32)*(3*m32*(msq2 - 2*
+        mU32) + msq2*mU32 - 2*pow4(m3)))/(pow3(m32 - mU32)*pow3(-mQ32 + mU32))
+        + (3*msq2*(mQ32 + mU32)*(m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*pow4(m3)
+        ))/(pow3(m32 - mQ32)*pow3(mQ32 - mU32)) - ((mQ32 + mU32)*(-8*m32*mQ32*
+        mU32*pow2(mQ32 + mU32) + 4*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) - 2*(6*
+        mQ32*mU32 + 5*pow4(mQ3) + 5*pow4(mU3))*pow6(m3) + pow4(m3)*(19*mU32*
+        pow4(mQ3) + 19*mQ32*pow4(mU3) + 5*pow6(mQ3) + 5*pow6(mU3)) + 4*(mQ32 +
+        mU32)*pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(mQ32 - mU32)))
+        ) - (8*m3*Xt*(mQ32*pow4(m3)*((30*msq2 + 677*mU32)*pow4(mQ3) + 5*(6*msq2
+        - 31*mU32)*pow4(mU3) - 6*mQ32*(10*msq2*mU32 + 163*pow4(mU3)) + 408*
+        pow6(mQ3)) + pow6(m3)*(266*mU32*pow4(mQ3) + 469*mQ32*pow4(mU3) - 735*
+        pow6(mQ3) + 16*pow6(mU3)) + 2*(-153*mQ32*mU32 + 161*pow4(mQ3) - 8*pow4(
+        mU3))*pow8(m3) + pow4(mQ3)*(pow4(mQ3)*(-30*msq2*mU32 + 195*pow4(mU3)) +
+        10*mU32*pow6(mQ3) + mQ32*(60*msq2*pow4(mU3) - 218*pow6(mU3)) - 30*msq2*
+        pow6(mU3) - 3*pow8(mQ3)) + m32*mQ32*(223*pow4(mQ3)*pow4(mU3) - 586*
+        mU32*pow6(mQ3) + 412*mQ32*pow6(mU3) + 2*pow8(mQ3) - 3*pow8(mU3))))/(
+        pow2(mQ3)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow2(mQ32 - mU32)) + (8*m3*
+        pow5(Xt)*(2*pow6(m3)*(10*mU32*pow4(mQ3) + 67*mQ32*pow4(mU3) + 69*pow6(
+        mQ3) - 8*pow6(mU3)) - 2*mQ32*pow4(m3)*(3*(5*msq2 + 66*mU32)*pow4(mQ3) +
+        15*msq2*pow4(mU3) + mQ32*(30*msq2*mU32 + 369*pow4(mU3)) + 74*pow6(mQ3)
+        + 109*pow6(mU3)) + 16*(6*mQ32*mU32 + pow4(mQ3) + pow4(mU3))*pow8(m3) +
+        m32*mQ32*(8*pow4(mQ3)*(15*msq2*mU32 + 91*pow4(mU3)) + 246*mU32*pow6(
+        mQ3) + 10*mQ32*(12*msq2*pow4(mU3) + 67*pow6(mU3)) + 13*pow8(mQ3) + 3*
+        pow8(mU3)) - 2*pow4(mQ3)*(pow4(mQ3)*(15*msq2*mU32 + 71*pow4(mU3)) - 7*
+        mU32*pow6(mQ3) + mQ32*(30*msq2*pow4(mU3) + 212*pow6(mU3)) + 3*pow8(mQ3)
+        + 3*(5*msq2*pow6(mU3) + pow8(mU3)))))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(
+        m32 - mU32)*pow4(mQ32 - mU32)) + (16*m3*pow3(Xt)*(-(pow6(m3)*(650*mU32*
+        pow4(mQ3) + 617*mQ32*pow4(mU3) + 293*pow6(mQ3) + 16*pow6(mU3))) + 2*
+        mQ32*pow4(m3)*((15*msq2 + 509*mU32)*pow4(mQ3) + 539*mQ32*pow4(mU3) -
+        15*msq2*pow4(mU3) + 114*pow6(mQ3) + 156*pow6(mU3)) + mU32*pow4(mQ3)*(5*
+        (6*msq2 + 55*mU32)*pow4(mQ3) + 191*mQ32*pow4(mU3) + 6*pow6(mQ3) - 6*(5*
+        msq2*pow4(mU3) + pow6(mU3))) + (233*mQ32*mU32 - 7*pow4(mQ3) + 16*pow4(
+        mU3))*pow8(m3) - m32*mQ32*(6*pow4(mQ3)*(20*msq2*mU32 + 143*pow4(mU3)) +
+        539*mU32*pow6(mQ3) - 15*mQ32*(8*msq2*pow4(mU3) - 29*pow6(mU3)) + 3*
+        pow8(mQ3) - 3*pow8(mU3)) + 64*mQ32*power10(m3)))/(pow2(mQ3)*pow2(m32 -
+        mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32)) + (-2*pow14(m3)*(96*mQ32*mU32
+        + 33*pow4(mQ3) - pow4(mU3)) + (mQ32 - mU32)*pow4(mU3)*pow6(mQ3)*(4*
+        mU32*pow4(mQ3) + 30*msq2*pow4(mU3) + mQ32*(30*msq2*mU32 + 463*pow4(mU3)
+        ) + 3*pow6(mQ3)) + 2*pow12(m3)*(1503*mU32*pow4(mQ3) - 799*mQ32*pow4(
+        mU3) + 99*pow6(mQ3) - 35*pow6(mU3)) + 2*mQ32*mU32*pow6(m3)*(3*pow4(mQ3)
+        *(95*msq2*mU32 + 44*pow4(mU3)) - 3*(5*msq2 + 1554*mU32)*pow6(mQ3) + 15*
+        msq2*pow6(mU3) + mQ32*(-285*msq2*pow4(mU3) + 3004*pow6(mU3)) - 846*
+        pow8(mQ3) + 452*pow8(mU3)) - 2*(372*pow4(mQ3)*pow4(mU3) + 3448*mU32*
+        pow6(mQ3) - 1948*mQ32*pow6(mU3) + 99*pow8(mQ3) - 51*pow8(mU3))*power10(
+        m3) + m32*mU32*pow4(mQ3)*(2*(45*msq2*mU32 - 869*pow4(mU3))*pow6(mQ3) -
+        2*pow4(mQ3)*(135*msq2*pow4(mU3) + 92*pow6(mU3)) - 41*mU32*pow8(mQ3) -
+        3*(30*msq2 + mU32)*pow8(mU3) + 27*mQ32*(10*msq2*pow6(mU3) + 63*pow8(
+        mU3)) + 9*power10(mQ3)) + pow8(m3)*((-90*msq2*mU32 + 8421*pow4(mU3))*
+        pow6(mQ3) - 6169*pow4(mQ3)*pow6(mU3) + 5849*mU32*pow8(mQ3) + mQ32*(90*
+        msq2*pow6(mU3) - 3013*pow8(mU3)) + 66*power10(mQ3) - 34*power10(mU3)) -
+        mQ32*mU32*pow4(m3)*(36*(5*msq2*mU32 - 118*pow4(mU3))*pow6(mQ3) + 3700*
+        pow4(mQ3)*pow6(mU3) - 3013*mU32*pow8(mQ3) - 4*mQ32*(45*msq2*pow6(mU3) -
+        499*pow8(mU3)) + 20*power10(mQ3) + 9*power10(mU3)))/((mQ32 - mU32)*
+        pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(m32 - mU32)) - (pow4(Xt)*(2*
+        pow14(m3)*(-817*mU32*pow4(mQ3) + 719*mQ32*pow4(mU3) + 33*pow6(mQ3) +
+        65*pow6(mU3)) - 2*pow12(m3)*(pow4(mQ3)*(-54*msq2*mU32 + 1024*pow4(mU3))
+        - 1038*mU32*pow6(mQ3) + mQ32*(54*msq2*pow4(mU3) + 2072*pow6(mU3)) + 99*
+        pow8(mQ3) + 227*pow8(mU3)) + 2*pow4(mU3)*pow6(mQ3)*(3*(5*msq2*mU32 -
+        182*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(39*msq2*pow4(mU3) - 710*pow6(mU3)
+        ) + mU32*pow8(mQ3) + 3*(5*msq2 + mU32)*pow8(mU3) + mQ32*(-69*msq2*pow6(
+        mU3) + 1169*pow8(mU3)) + 3*power10(mQ3)) + mQ32*mU32*pow6(m3)*((-864*
+        msq2*mU32 + 24692*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(-60*msq2*pow4(mU3)
+        + 24556*pow6(mU3)) + (-78*msq2 + 10593*mU32)*pow8(mQ3) + mQ32*(864*
+        msq2*pow6(mU3) - 9583*pow8(mU3)) + (138*msq2 - 2525*mU32)*pow8(mU3) +
+        1547*power10(mQ3)) - 2*pow8(m3)*(33*pow12(mQ3) + 81*pow12(mU3) - 9*
+        pow6(mQ3)*(31*msq2*pow4(mU3) - 1542*pow6(mU3)) + (-207*msq2*mU32 +
+        4979*pow4(mU3))*pow8(mQ3) + 3*mQ32*(39*msq2 - 725*mU32)*pow8(mU3) +
+        pow4(mQ3)*(369*msq2*pow6(mU3) + 5493*pow8(mU3)) + 1951*mU32*power10(
+        mQ3)) - mQ32*mU32*pow4(m3)*(67*pow12(mQ3) + 9*pow12(mU3) - 4*pow6(mQ3)*
+        (252*msq2*pow4(mU3) - 5125*pow6(mU3)) + (36*msq2*mU32 + 13231*pow4(mU3)
+        )*pow8(mQ3) + pow4(mQ3)*(288*msq2*pow6(mU3) - 4415*pow8(mU3)) + 3528*
+        mU32*power10(mQ3) + mQ32*(684*msq2*pow8(mU3) - 7480*power10(mU3))) + 2*
+        power10(m3)*(-18*(9*msq2*mU32 - 101*pow4(mU3))*pow6(mQ3) + 8446*pow4(
+        mQ3)*pow6(mU3) + 967*mU32*pow8(mQ3) + mQ32*(162*msq2*pow6(mU3) + 427*
+        pow8(mU3)) + 99*power10(mQ3) + 243*power10(mU3)) + m32*mU32*pow4(mQ3)*(
+        18*pow12(mQ3) + pow6(mQ3)*(-324*msq2*pow4(mU3) + 7302*pow6(mU3)) + 5*(
+        18*msq2*mU32 + 703*pow4(mU3))*pow8(mQ3) - 36*pow4(mQ3)*(5*msq2*pow6(
+        mU3) - 57*pow8(mU3)) + mQ32*(324*msq2 - 7243*mU32)*pow8(mU3) - 91*mU32*
+        power10(mQ3) + 15*(6*msq2 + mU32)*power10(mU3))))/(pow2(mQ3)*pow2(mU3)*
+        pow3(-m32 + mQ32)*pow3(m32 - mU32)*pow4(mQ32 - mU32)) - (2*pow2(Xt)*(-
+        6*pow14(m3)*(31*mU32*pow4(mQ3) + 225*mQ32*pow4(mU3) + 11*pow6(mQ3) -
+        11*pow6(mU3)) - 2*(mQ32 - mU32)*pow6(mQ3)*pow6(mU3)*((15*msq2 - 463*
+        mU32)*pow4(mQ3) + mQ32*(-30*msq2*mU32 + 437*pow4(mU3)) + 3*pow6(mQ3) +
+        3*(5*msq2*pow4(mU3) + pow6(mU3))) + 2*pow12(m3)*(572*pow4(mQ3)*pow4(
+        mU3) + 1462*mU32*pow6(mQ3) + 2606*mQ32*pow6(mU3) + 99*pow8(mQ3) - 131*
+        pow8(mU3)) + m32*pow4(mQ3)*pow4(mU3)*(4*(45*msq2*mU32 + 551*pow4(mU3))*
+        pow6(mQ3) + 2420*pow4(mQ3)*pow6(mU3) - 45*(2*msq2 + 71*mU32)*pow8(mQ3)
+        + 15*(6*msq2 + mU32)*pow8(mU3) - 5*mQ32*(36*msq2*pow6(mU3) + 593*pow8(
+        mU3)) - 15*power10(mQ3)) + 2*pow8(m3)*(33*pow12(mQ3) - 49*pow12(mU3) +
+        135*(msq2 - 12*mU32)*pow4(mU3)*pow6(mQ3) + (-45*msq2*mU32 + 5897*pow4(
+        mU3))*pow8(mQ3) - 9*pow4(mQ3)*(15*msq2*pow6(mU3) - 683*pow8(mU3)) + 3*
+        mQ32*(15*msq2 + 784*mU32)*pow8(mU3) + 2600*mU32*power10(mQ3)) - 2*
+        power10(m3)*(1841*pow4(mU3)*pow6(mQ3) + 2727*pow4(mQ3)*pow6(mU3) +
+        3232*mU32*pow8(mQ3) + 3768*mQ32*pow8(mU3) + 99*power10(mQ3) - 147*
+        power10(mU3)) - mQ32*mU32*pow6(m3)*(-60*mU32*(msq2 + 18*mU32)*pow6(mQ3)
+        - 984*pow4(mQ3)*pow6(mU3) + (30*msq2 + 11903*mU32)*pow8(mQ3) - 30*msq2*
+        pow8(mU3) + mQ32*(60*msq2*pow6(mU3) + 10697*pow8(mU3)) + 1431*power10(
+        mQ3) + 1073*power10(mU3)) + mQ32*mU32*pow4(m3)*(9*pow12(mQ3) - 9*pow12(
+        mU3) - 8*pow6(mQ3)*(135*msq2*pow4(mU3) + 1157*pow6(mU3)) + (360*msq2*
+        mU32 + 6117*pow4(mU3))*pow8(mQ3) + pow4(mQ3)*(1080*msq2*pow6(mU3) +
+        5459*pow8(mU3)) + 3740*mU32*power10(mQ3) + mQ32*(-360*msq2*pow8(mU3) +
+        3156*power10(mU3)))))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(m32 -
+        mU32)*pow3(mQ32 - mU32))) - 2*log(Mst12/pow2(mQ3))*((-20*m32)/pow2(mQ3)
+        - (20*m32*mQ32)/pow2(m32 - mQ32) - (20*m32)/pow2(mU3) - (80*m3*(mQ32 +
+        3*mU32 - (6*msq2*pow2(mQ32 - mU32))/((m32 - mQ32)*(m32 - mU32)))*pow3(
+        Xt))/pow3(mQ32 - mU32) + (10*pow4(mQ3))/pow2(m32 - mQ32) + (80*m3*(-9*
+        mQ32*msq2*mU32 + mQ32*pow4(m3) + (3*msq2 + mU32)*pow4(mQ3) - m32*(mQ32*
+        (-9*msq2 + mU32) + 3*msq2*(2*msq2 + mU32) + pow4(mQ3)) + 6*mU32*pow4(
+        msq))*pow5(Xt))/((m32 - mU32)*pow2(m32 - mQ32)*pow3(mQ32 - mU32)) + 30*
+        log(Mst12/pow2(msq))*((-8*m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) + msq2*
+        mU32 + m32*(mQ32 - 2*msq2 + mU32))*Xt)/(pow2(m32 - mQ32)*pow2(m32 -
+        mU32)) - (16*m3*(m32 - msq2)*(mQ32*(msq2 - 2*mU32) + msq2*mU32 + m32*(
+        mQ32 - 2*msq2 + mU32))*pow3(Xt))/((mQ32 - mU32)*pow2(m32 - mQ32)*pow2(
+        m32 - mU32)) - (2*pow2(Xt)*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2) +
+        mQ32*(mQ32 + msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(3*
+        m32*(msq2 - mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 + mU32)
+        ))/(mQ32 - mU32) - ((mQ32 - msq2)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 +
+        msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(3*m32*(msq2 -
+        mU32) + mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(m32 - mU32) + ((mQ32 +
+        mU32)*(((mQ32 - msq2)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) - 2*
+        pow4(m3)))/pow3(m32 - mQ32) + ((msq2 - mU32)*(3*m32*(msq2 - mU32) +
+        mU32*(msq2 + mU32) - 2*pow4(m3)))/pow3(-m32 + mU32))*pow4(Xt))/pow3(
+        mQ32 - mU32) + (8*m3*(m32 - msq2)*(mQ32 + mU32)*(mQ32*(msq2 - 2*mU32) +
+        msq2*mU32 + m32*(mQ32 - 2*msq2 + mU32))*pow5(Xt))/(pow2(m32 - mQ32)*
+        pow2(m32 - mU32)*pow3(mQ32 - mU32))) + (80*m3*Xt*(9*mQ32*msq2*mU32 - (
+        2*mQ32 + mU32)*pow4(m3) - (3*msq2 + mU32)*pow4(mQ3) + m32*(3*msq2*(msq2
+        - mU32) + mQ32*(-3*msq2 + 2*mU32) + pow4(mQ3)) - 3*mU32*pow4(msq) +
+        pow6(m3)))/((m32 - mU32)*(mQ32 - mU32)*pow2(m32 - mQ32)) - (10*(-((7*
+        mQ32 + 6*mU32)*pow4(m3)) - 2*mU32*pow4(mQ3) + m32*(5*mQ32*mU32 + 3*
+        pow4(mQ3)) + 7*pow6(m3)))/((m32 - mU32)*pow2(m32 - mQ32)) + (10*(2*(
+        mQ32 + 3*msq2)*pow4(m3) - 3*mQ32*pow4(msq) - 3*m32*(-6*mQ32*msq2 +
+        pow4(mQ3) + 3*pow4(msq)) + pow6(mQ3)))/pow3(m32 - mQ32) - (640*m32*
+        mQ32*mU32*pow6(Xt))/((m32 - mQ32)*(m32 - mU32)*pow4(mQ32 - mU32)) - (
+        10*(3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 11*pow4(mU3)) +
+        pow4(m3)*(-15*msq2*mU32 + mQ32*(-15*msq2 + 44*mU32) + 11*pow4(mQ3) +
+        11*pow4(mU3)) + m32*((9*msq2 - 22*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) -
+        2*mQ32*(6*msq2*mU32 + 11*pow4(mU3))) - 2*(11*mQ32 - 9*msq2 + 11*mU32)*
+        pow6(m3) + 11*pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 - mU32)) - (10*
+        pow4(Xt)*((2*m32*(mQ32 - mU32))/pow2(mQ3) + (2*m32*(mQ32 - mU32))/pow2(
+        mU3) + (6*msq2*(mQ32 - mU32)*(m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*
+        pow4(m3)))/pow3(m32 - mQ32) - (-3*mU32*(5*mQ32 + mU32)*pow4(mQ3) -
+        pow4(m3)*(15*mQ32*mU32 + 29*pow4(mQ3) + 6*pow4(mU3)) + (7*mQ32 + 3*
+        mU32)*pow6(m3) + m32*(31*mU32*pow4(mQ3) + 7*mQ32*pow4(mU3) + 16*pow6(
+        mQ3)) + 4*pow8(m3))/((m32 - mU32)*pow2(m32 - mQ32)) - ((mQ32 + mU32)*(
+        3*mQ32*msq2*pow4(mU3) + pow4(mQ3)*(3*msq2*mU32 + 11*pow4(mU3)) + pow4(
+        m3)*(-15*msq2*mU32 + mQ32*(-15*msq2 + 44*mU32) + 11*pow4(mQ3) + 11*
+        pow4(mU3)) + m32*((9*msq2 - 22*mU32)*pow4(mQ3) + 9*msq2*pow4(mU3) - 2*
+        mQ32*(6*msq2*mU32 + 11*pow4(mU3))) - 2*(11*mQ32 - 9*msq2 + 11*mU32)*
+        pow6(m3) + 11*pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 - mU32))))/pow3(
+        mQ32 - mU32) - 10*log(Mst12/pow2(mU3))*(-4*m3*Xt*(-(m32/((m32 - mQ32)*(
+        m32 - mU32))) + 2/(mQ32 - mU32) + (6*msq2*(-2*mQ32 + msq2))/((mQ32 -
+        mU32)*pow2(m32 - mQ32)) + (6*msq2*(msq2 - 2*mU32))/((-mQ32 + mU32)*
+        pow2(m32 - mU32))) - (8*(-(m3*(mQ32 + mU32)) - (6*m3*msq2*(-2*mQ32 +
+        msq2)*(mQ32 - mU32))/pow2(m32 - mQ32) + (6*m3*msq2*(msq2 - 2*mU32)*(-
+        mQ32 + mU32))/pow2(m32 - mU32) + ((mQ32 - mU32)*(-2*m3*mQ32*mU32 + (
+        mQ32 + mU32)*pow3(m3)))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/pow3(
+        mQ32 - mU32) + (3*msq2*(mQ32*msq2 + m32*(-6*mQ32 + 3*msq2) - 2*pow4(m3)
+        ))/pow3(m32 - mQ32) + (3*msq2*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*
+        pow4(m3)))/pow3(m32 - mU32) - (4*m3*(mQ32 + mU32)*((2*mQ32*mU32 - m32*(
+        mQ32 + mU32))/((m32 - mQ32)*(m32 - mU32)) + (6*msq2*(-2*mQ32 + msq2))/
+        pow2(m32 - mQ32) + (6*msq2*(msq2 - 2*mU32))/pow2(m32 - mU32))*pow5(Xt))
+        /pow4(mQ32 - mU32) + (-4*m32*mQ32*mU32*(mQ32 + mU32) + 2*pow4(mQ3)*
+        pow4(mU3) + pow4(m3)*(8*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 2*(mQ32 +
+        mU32)*pow6(m3))/(pow2(m32 - mQ32)*pow2(m32 - mU32)) - 2*pow2(Xt)*((3*
+        msq2*(mQ32*msq2 + m32*(-6*mQ32 + 3*msq2) - 2*pow4(m3)))/((mQ32 - mU32)*
+        pow3(m32 - mQ32)) + (3*msq2*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*
+        pow4(m3)))/((-mQ32 + mU32)*pow3(m32 - mU32)) + (-4*m32*mQ32*mU32*pow2(
+        mQ32 + mU32) + 3*pow3(mQ32 + mU32)*pow4(m3) + 2*(mQ32 + mU32)*pow4(mQ3)
+        *pow4(mU3) - 2*(2*mQ32*mU32 + 3*pow4(mQ3) + 3*pow4(mU3))*pow6(m3) + 2*(
+        mQ32 + mU32)*pow8(m3))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*pow2(mQ32 -
+        mU32))) - pow4(Xt)*((4*m32)/pow3(mQ32 - mU32) - (3*msq2*(mQ32 + mU32)*(
+        3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)))/(pow3(m32 - mU32)*
+        pow3(-mQ32 + mU32)) + (3*msq2*(mQ32 + mU32)*(m32*(6*mQ32 - 3*msq2) -
+        mQ32*msq2 + 2*pow4(m3)))/(pow3(m32 - mQ32)*pow3(mQ32 - mU32)) - ((mQ32
+        + mU32)*(-8*m32*mQ32*mU32*pow2(mQ32 + mU32) + 4*(mQ32 + mU32)*pow4(mQ3)
+        *pow4(mU3) - 2*(6*mQ32*mU32 + 5*pow4(mQ3) + 5*pow4(mU3))*pow6(m3) +
+        pow4(m3)*(19*mU32*pow4(mQ3) + 19*mQ32*pow4(mU3) + 5*pow6(mQ3) + 5*pow6(
+        mU3)) + 4*(mQ32 + mU32)*pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 - mU32)*
+        pow4(mQ32 - mU32)))) + 10*log(Mst12/pow2(msq))*(4*m3*Xt*(-(m32/((m32 -
+        mQ32)*(m32 - mU32))) + 2/(mQ32 - mU32) + (6*msq2*(-2*mQ32 + msq2))/((
+        mQ32 - mU32)*pow2(m32 - mQ32)) + (6*msq2*(msq2 - 2*mU32))/((-mQ32 +
+        mU32)*pow2(m32 - mU32))) + (8*(-(m3*(mQ32 + mU32)) - (6*m3*msq2*(-2*
+        mQ32 + msq2)*(mQ32 - mU32))/pow2(m32 - mQ32) + (6*m3*msq2*(msq2 - 2*
+        mU32)*(-mQ32 + mU32))/pow2(m32 - mU32) + ((mQ32 - mU32)*(-2*m3*mQ32*
+        mU32 + (mQ32 + mU32)*pow3(m3)))/((m32 - mQ32)*(m32 - mU32)))*pow3(Xt))/
+        pow3(mQ32 - mU32) - (3*msq2*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*
+        pow4(m3)))/pow3(m32 - mU32) + (3*msq2*(m32*(6*mQ32 - 3*msq2) - mQ32*
+        msq2 + 2*pow4(m3)))/pow3(m32 - mQ32) + (4*m3*(mQ32 + mU32)*((2*mQ32*
+        mU32 - m32*(mQ32 + mU32))/((m32 - mQ32)*(m32 - mU32)) + (6*msq2*(-2*
+        mQ32 + msq2))/pow2(m32 - mQ32) + (6*msq2*(msq2 - 2*mU32))/pow2(m32 -
+        mU32))*pow5(Xt))/pow4(mQ32 - mU32) + (4*m32*mQ32*mU32*(mQ32 + mU32) -
+        2*pow4(mQ3)*pow4(mU3) - pow4(m3)*(8*mQ32*mU32 + pow4(mQ3) + pow4(mU3))
+        + 2*(mQ32 + mU32)*pow6(m3))/(pow2(m32 - mQ32)*pow2(m32 - mU32)) + 2*
+        pow2(Xt)*((3*msq2*(mQ32*msq2 + m32*(-6*mQ32 + 3*msq2) - 2*pow4(m3)))/((
+        mQ32 - mU32)*pow3(m32 - mQ32)) + (3*msq2*(3*m32*(msq2 - 2*mU32) + msq2*
+        mU32 - 2*pow4(m3)))/((-mQ32 + mU32)*pow3(m32 - mU32)) + (-4*m32*mQ32*
+        mU32*pow2(mQ32 + mU32) + 3*pow3(mQ32 + mU32)*pow4(m3) + 2*(mQ32 + mU32)
+        *pow4(mQ3)*pow4(mU3) - 2*(2*mQ32*mU32 + 3*pow4(mQ3) + 3*pow4(mU3))*
+        pow6(m3) + 2*(mQ32 + mU32)*pow8(m3))/(pow2(m32 - mQ32)*pow2(m32 - mU32)
+        *pow2(mQ32 - mU32))) + pow4(Xt)*((4*m32)/pow3(mQ32 - mU32) - (3*msq2*(
+        mQ32 + mU32)*(3*m32*(msq2 - 2*mU32) + msq2*mU32 - 2*pow4(m3)))/(pow3(
+        m32 - mU32)*pow3(-mQ32 + mU32)) + (3*msq2*(mQ32 + mU32)*(m32*(6*mQ32 -
+        3*msq2) - mQ32*msq2 + 2*pow4(m3)))/(pow3(m32 - mQ32)*pow3(mQ32 - mU32))
+        - ((mQ32 + mU32)*(-8*m32*mQ32*mU32*pow2(mQ32 + mU32) + 4*(mQ32 + mU32)*
+        pow4(mQ3)*pow4(mU3) - 2*(6*mQ32*mU32 + 5*pow4(mQ3) + 5*pow4(mU3))*pow6(
+        m3) + pow4(m3)*(19*mU32*pow4(mQ3) + 19*mQ32*pow4(mU3) + 5*pow6(mQ3) +
+        5*pow6(mU3)) + 4*(mQ32 + mU32)*pow8(m3)))/(pow2(m32 - mQ32)*pow2(m32 -
+        mU32)*pow4(mQ32 - mU32)))) + (8*m3*Xt*(mQ32*pow4(m3)*((30*msq2 + 677*
+        mU32)*pow4(mQ3) + 5*(6*msq2 - 31*mU32)*pow4(mU3) - 6*mQ32*(10*msq2*mU32
+        + 163*pow4(mU3)) + 408*pow6(mQ3)) + pow6(m3)*(266*mU32*pow4(mQ3) + 469*
+        mQ32*pow4(mU3) - 735*pow6(mQ3) + 16*pow6(mU3)) + 2*(-153*mQ32*mU32 +
+        161*pow4(mQ3) - 8*pow4(mU3))*pow8(m3) + pow4(mQ3)*(pow4(mQ3)*(-30*msq2*
+        mU32 + 195*pow4(mU3)) + 10*mU32*pow6(mQ3) + mQ32*(60*msq2*pow4(mU3) -
+        218*pow6(mU3)) - 30*msq2*pow6(mU3) - 3*pow8(mQ3)) + m32*mQ32*(223*pow4(
+        mQ3)*pow4(mU3) - 586*mU32*pow6(mQ3) + 412*mQ32*pow6(mU3) + 2*pow8(mQ3)
+        - 3*pow8(mU3))))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow2(mQ32
+        - mU32)) - (8*m3*pow5(Xt)*(2*pow6(m3)*(10*mU32*pow4(mQ3) + 67*mQ32*
+        pow4(mU3) + 69*pow6(mQ3) - 8*pow6(mU3)) - 2*mQ32*pow4(m3)*(3*(5*msq2 +
+        66*mU32)*pow4(mQ3) + 15*msq2*pow4(mU3) + mQ32*(30*msq2*mU32 + 369*pow4(
+        mU3)) + 74*pow6(mQ3) + 109*pow6(mU3)) + 16*(6*mQ32*mU32 + pow4(mQ3) +
+        pow4(mU3))*pow8(m3) + m32*mQ32*(8*pow4(mQ3)*(15*msq2*mU32 + 91*pow4(
+        mU3)) + 246*mU32*pow6(mQ3) + 10*mQ32*(12*msq2*pow4(mU3) + 67*pow6(mU3))
+        + 13*pow8(mQ3) + 3*pow8(mU3)) - 2*pow4(mQ3)*(pow4(mQ3)*(15*msq2*mU32 +
+        71*pow4(mU3)) - 7*mU32*pow6(mQ3) + mQ32*(30*msq2*pow4(mU3) + 212*pow6(
+        mU3)) + 3*pow8(mQ3) + 3*(5*msq2*pow6(mU3) + pow8(mU3)))))/(pow2(mQ3)*
+        pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(mQ32 - mU32)) - (16*m3*pow3(Xt)*
+        (-(pow6(m3)*(650*mU32*pow4(mQ3) + 617*mQ32*pow4(mU3) + 293*pow6(mQ3) +
+        16*pow6(mU3))) + 2*mQ32*pow4(m3)*((15*msq2 + 509*mU32)*pow4(mQ3) + 539*
+        mQ32*pow4(mU3) - 15*msq2*pow4(mU3) + 114*pow6(mQ3) + 156*pow6(mU3)) +
+        mU32*pow4(mQ3)*(5*(6*msq2 + 55*mU32)*pow4(mQ3) + 191*mQ32*pow4(mU3) +
+        6*pow6(mQ3) - 6*(5*msq2*pow4(mU3) + pow6(mU3))) + (233*mQ32*mU32 - 7*
+        pow4(mQ3) + 16*pow4(mU3))*pow8(m3) - m32*mQ32*(6*pow4(mQ3)*(20*msq2*
+        mU32 + 143*pow4(mU3)) + 539*mU32*pow6(mQ3) - 15*mQ32*(8*msq2*pow4(mU3)
+        - 29*pow6(mU3)) + 3*pow8(mQ3) - 3*pow8(mU3)) + 64*mQ32*power10(m3)))/(
+        pow2(mQ3)*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow3(mQ32 - mU32)) + (20*
+        pow2(Xt)*(mQ32*mU32*pow4(m3)*(mQ32*(15*msq2 - 64*mU32) + 15*msq2*mU32 -
+        19*pow4(mQ3) - 13*pow4(mU3)) - (3*msq2*mU32 + mQ32*(3*msq2 + 14*mU32))*
+        pow4(mQ3)*pow4(mU3) + pow6(m3)*(39*mU32*pow4(mQ3) + mQ32*(-18*msq2*mU32
+        + 29*pow4(mU3)) + 2*pow6(mQ3) - 2*pow6(mU3)) + m32*((-9*msq2*mU32 + 31*
+        pow4(mU3))*pow6(mQ3) - 9*mQ32*msq2*pow6(mU3) + pow4(mQ3)*(12*msq2*pow4(
+        mU3) + 29*pow6(mU3))) - 2*(9*mQ32*mU32 + 2*pow4(mQ3) - 2*pow4(mU3))*
+        pow8(m3) + 2*(mQ32 - mU32)*power10(m3)))/((mQ32 - mU32)*pow2(mQ3)*pow2(
+        m32 - mQ32)*pow2(mU3)*pow2(m32 - mU32)) + (2*pow14(m3)*(96*mQ32*mU32 +
+        33*pow4(mQ3) - pow4(mU3)) - (mQ32 - mU32)*pow4(mU3)*pow6(mQ3)*(4*mU32*
+        pow4(mQ3) + 30*msq2*pow4(mU3) + mQ32*(30*msq2*mU32 + 463*pow4(mU3)) +
+        3*pow6(mQ3)) - 2*pow12(m3)*(1503*mU32*pow4(mQ3) - 799*mQ32*pow4(mU3) +
+        99*pow6(mQ3) - 35*pow6(mU3)) + 2*mQ32*mU32*pow6(m3)*(-3*pow4(mQ3)*(95*
+        msq2*mU32 + 44*pow4(mU3)) + 3*(5*msq2 + 1554*mU32)*pow6(mQ3) + mQ32*(
+        285*msq2*pow4(mU3) - 3004*pow6(mU3)) - 15*msq2*pow6(mU3) + 846*pow8(
+        mQ3) - 452*pow8(mU3)) + 2*(372*pow4(mQ3)*pow4(mU3) + 3448*mU32*pow6(
+        mQ3) - 1948*mQ32*pow6(mU3) + 99*pow8(mQ3) - 51*pow8(mU3))*power10(m3) +
+        m32*mU32*pow4(mQ3)*((-90*msq2*mU32 + 1738*pow4(mU3))*pow6(mQ3) + 2*
+        pow4(mQ3)*(135*msq2*pow4(mU3) + 92*pow6(mU3)) + 41*mU32*pow8(mQ3) + 3*(
+        30*msq2 + mU32)*pow8(mU3) - 27*mQ32*(10*msq2*pow6(mU3) + 63*pow8(mU3))
+        - 9*power10(mQ3)) + mQ32*mU32*pow4(m3)*(36*(5*msq2*mU32 - 118*pow4(mU3)
+        )*pow6(mQ3) + 3700*pow4(mQ3)*pow6(mU3) - 3013*mU32*pow8(mQ3) - 4*mQ32*(
+        45*msq2*pow6(mU3) - 499*pow8(mU3)) + 20*power10(mQ3) + 9*power10(mU3))
+        + pow8(m3)*((90*msq2*mU32 - 8421*pow4(mU3))*pow6(mQ3) + 6169*pow4(mQ3)*
+        pow6(mU3) - 5849*mU32*pow8(mQ3) + mQ32*(-90*msq2*pow6(mU3) + 3013*pow8(
+        mU3)) - 66*power10(mQ3) + 34*power10(mU3)))/((mQ32 - mU32)*pow2(mQ3)*
+        pow2(mU3)*pow3(-m32 + mQ32)*pow3(m32 - mU32)) + (pow4(Xt)*(2*pow14(m3)*
+        (-817*mU32*pow4(mQ3) + 719*mQ32*pow4(mU3) + 33*pow6(mQ3) + 65*pow6(mU3)
+        ) - 2*pow12(m3)*(pow4(mQ3)*(-54*msq2*mU32 + 1024*pow4(mU3)) - 1038*
+        mU32*pow6(mQ3) + mQ32*(54*msq2*pow4(mU3) + 2072*pow6(mU3)) + 99*pow8(
+        mQ3) + 227*pow8(mU3)) + 2*pow4(mU3)*pow6(mQ3)*(3*(5*msq2*mU32 - 182*
+        pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(39*msq2*pow4(mU3) - 710*pow6(mU3)) +
+        mU32*pow8(mQ3) + 3*(5*msq2 + mU32)*pow8(mU3) + mQ32*(-69*msq2*pow6(mU3)
+        + 1169*pow8(mU3)) + 3*power10(mQ3)) + mQ32*mU32*pow6(m3)*((-864*msq2*
+        mU32 + 24692*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(-60*msq2*pow4(mU3) +
+        24556*pow6(mU3)) + (-78*msq2 + 10593*mU32)*pow8(mQ3) + mQ32*(864*msq2*
+        pow6(mU3) - 9583*pow8(mU3)) + (138*msq2 - 2525*mU32)*pow8(mU3) + 1547*
+        power10(mQ3)) - 2*pow8(m3)*(33*pow12(mQ3) + 81*pow12(mU3) - 9*pow6(mQ3)
+        *(31*msq2*pow4(mU3) - 1542*pow6(mU3)) + (-207*msq2*mU32 + 4979*pow4(
+        mU3))*pow8(mQ3) + 3*mQ32*(39*msq2 - 725*mU32)*pow8(mU3) + pow4(mQ3)*(
+        369*msq2*pow6(mU3) + 5493*pow8(mU3)) + 1951*mU32*power10(mQ3)) - mQ32*
+        mU32*pow4(m3)*(67*pow12(mQ3) + 9*pow12(mU3) - 4*pow6(mQ3)*(252*msq2*
+        pow4(mU3) - 5125*pow6(mU3)) + (36*msq2*mU32 + 13231*pow4(mU3))*pow8(
+        mQ3) + pow4(mQ3)*(288*msq2*pow6(mU3) - 4415*pow8(mU3)) + 3528*mU32*
+        power10(mQ3) + mQ32*(684*msq2*pow8(mU3) - 7480*power10(mU3))) + 2*
+        power10(m3)*(-18*(9*msq2*mU32 - 101*pow4(mU3))*pow6(mQ3) + 8446*pow4(
+        mQ3)*pow6(mU3) + 967*mU32*pow8(mQ3) + mQ32*(162*msq2*pow6(mU3) + 427*
+        pow8(mU3)) + 99*power10(mQ3) + 243*power10(mU3)) + m32*mU32*pow4(mQ3)*(
+        18*pow12(mQ3) + pow6(mQ3)*(-324*msq2*pow4(mU3) + 7302*pow6(mU3)) + 5*(
+        18*msq2*mU32 + 703*pow4(mU3))*pow8(mQ3) - 36*pow4(mQ3)*(5*msq2*pow6(
+        mU3) - 57*pow8(mU3)) + mQ32*(324*msq2 - 7243*mU32)*pow8(mU3) - 91*mU32*
+        power10(mQ3) + 15*(6*msq2 + mU32)*power10(mU3))))/(pow2(mQ3)*pow2(mU3)*
+        pow3(-m32 + mQ32)*pow3(m32 - mU32)*pow4(mQ32 - mU32)) + (log(Mst12/
+        pow2(mU3))*((-2*pow2(m32 - mU32)*(-34*m32*mQ32 + pow4(m3) + 17*pow4(
+        mQ3))*(-4*m32*mU32 + 3*pow4(m3) + 2*pow4(mU3)))/pow2(m32 - mQ32) + (2*(
+        -34*m32*mU32 + pow4(m3) + 17*pow4(mU3))*(4*m32*mQ32*mU32*(mQ32 + mU32)
+        - 2*pow4(mQ3)*pow4(mU3) - pow4(m3)*(8*mQ32*mU32 + pow4(mQ3) + pow4(mU3)
+        ) + 2*(mQ32 + mU32)*pow6(m3)))/pow2(m32 - mQ32) + (320*(mQ32 + mU32)*
+        pow2(-(m3*mU32) + pow3(m3))*(-3*mQ32*pow4(mU3) + m32*(2*mQ32*mU32 +
+        pow4(mU3)))*pow6(Xt))/((m32 - mQ32)*pow5(mQ32 - mU32)) + (4*(m32 -
+        mU32)*(pow4(m3)*(519*mQ32*mU32 - 263*pow4(mU3)) - (239*mQ32 + 81*mU32)*
+        pow6(m3) + 138*(mQ32 - mU32)*pow6(mU3) + m32*(-414*mQ32*pow4(mU3) +
+        350*pow6(mU3)) + 128*pow8(m3)))/(-mQ32 + mU32) + (2*mQ32*(m32 - mU32)*(
+        2*(-94*mQ32*mU32 + 17*pow4(mQ3) - 39*pow4(mU3))*pow6(m3) + 4*pow4(mU3)*
+        pow6(mQ3) + 19*pow4(mQ3)*pow6(mU3) + pow4(m3)*(120*mU32*pow4(mQ3) +
+        175*mQ32*pow4(mU3) - 29*pow6(mQ3) + 26*pow6(mU3)) + (-14*mQ32 + 64*
+        mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + m32*(-65*pow4(mQ3)*pow4(mU3) - 35*
+        mU32*pow6(mQ3) - 57*mQ32*pow6(mU3) + 9*pow8(mQ3)) + 12*power10(m3)))/
+        pow3(m32 - mQ32) + (-((-mQ32 + mU32)*pow4(mU3)*(-4*mQ32*mU32 - 3*pow4(
+        mQ3) - 30*pow4(msq) + pow4(mU3))) + (60*msq2*mU32 + mQ32*(-60*msq2 +
+        64*mU32) - 2*pow4(mQ3) + 706*pow4(mU3))*pow6(m3) + pow4(m3)*(-33*mU32*
+        pow4(mQ3) - 90*mU32*pow4(msq) + 3*mQ32*(-40*msq2*mU32 + 30*pow4(msq) -
+        17*pow4(mU3)) + 120*msq2*pow4(mU3) + 9*pow6(mQ3) - 437*pow6(mU3)) - 2*
+        m32*mU32*(-18*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 90*msq2*pow4(mU3) +
+        mQ32*(-90*msq2*mU32 + 30*pow4(msq) + 19*pow4(mU3)) + 3*pow6(mQ3) - 68*
+        pow6(mU3)) + (44*mQ32 - 556*mU32)*pow8(m3) + 128*power10(m3))/(mQ32 -
+        mU32) + (8*m3*(m32 - mU32)*Xt*(pow6(m3)*(1357*mU32*pow4(mQ3) - 30*mU32*
+        pow4(msq) + 2*mQ32*(-30*msq2*mU32 + 15*pow4(msq) - 752*pow4(mU3)) + 60*
+        msq2*pow4(mU3) + 366*pow6(mQ3) - 923*pow6(mU3)) + mU32*pow4(mQ3)*(-10*
+        mU32*pow4(mQ3) + 30*mU32*pow4(msq) - 60*msq2*pow4(mU3) - 2*mQ32*(-30*
+        msq2*mU32 + 15*pow4(msq) + 92*pow4(mU3)) + 3*pow6(mQ3) + 271*pow6(mU3))
+        + (-79*mQ32*mU32 - 700*pow4(mQ3) + 1115*pow4(mU3))*pow8(m3) + pow4(m3)*
+        (pow4(mQ3)*(120*msq2*mU32 - 60*pow4(msq) - 247*pow4(mU3)) + 6*pow4(mU3)
+        *(-10*msq2*mU32 + 5*pow4(msq) + 41*pow4(mU3)) - 952*mU32*pow6(mQ3) + 2*
+        mQ32*(15*mU32*pow4(msq) - 30*msq2*pow4(mU3) + 842*pow6(mU3)) + 5*pow8(
+        mQ3)) + m32*mQ32*(-60*pow4(msq)*pow4(mU3) + pow4(mQ3)*(-60*msq2*mU32 +
+        30*pow4(msq) + 754*pow4(mU3)) + 5*mU32*pow6(mQ3) + mQ32*(30*mU32*pow4(
+        msq) - 60*msq2*pow4(mU3) - 633*pow6(mU3)) + 120*msq2*pow6(mU3) - 3*
+        pow8(mQ3) - 507*pow8(mU3)) + (358*mQ32 - 422*mU32)*power10(m3)))/(pow2(
+        m32 - mQ32)*pow2(mQ32 - mU32)) + (8*m3*(m32 - mU32)*pow3(Xt)*(254*(mQ32
+        - mU32)*pow12(m3) + (1551*mU32*pow4(mQ3) - 2044*mQ32*pow4(mU3) + 484*
+        pow6(mQ3) - 1271*pow6(mU3))*pow8(m3) + mU32*pow4(mQ3)*(-60*pow4(msq)*
+        pow4(mU3) + pow4(mQ3)*(120*msq2*mU32 - 60*pow4(msq) + 349*pow4(mU3)) +
+        78*mU32*pow6(mQ3) + 30*mQ32*(4*mU32*pow4(msq) - 8*msq2*pow4(mU3) - 31*
+        pow6(mU3)) + 120*msq2*pow6(mU3) - 18*pow8(mQ3) + 265*pow8(mU3)) + pow6(
+        m3)*(60*pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(-60*msq2*mU32 + 30*pow4(msq)
+        + 503*pow4(mU3)) - 2022*mU32*pow6(mQ3) - 120*msq2*pow6(mU3) + mQ32*(-
+        120*mU32*pow4(msq) + 240*msq2*pow4(mU3) + 3418*pow6(mU3)) - 125*pow8(
+        mQ3) + 283*pow8(mU3)) + (-246*mQ32*mU32 - 573*pow4(mQ3) + 1075*pow4(
+        mU3))*power10(m3) + pow4(m3)*((240*msq2*mU32 - 120*pow4(msq) + 1222*
+        pow4(mU3))*pow6(mQ3) + 2*pow4(mQ3)*(90*mU32*pow4(msq) - 180*msq2*pow4(
+        mU3) - 1979*pow6(mU3)) + 15*(8*msq2*mU32 - 4*pow4(msq) + 9*pow4(mU3))*
+        pow6(mU3) + 929*mU32*pow8(mQ3) - 858*mQ32*pow8(mU3) - 30*power10(mQ3))
+        + m32*mQ32*(15*(-8*msq2*mU32 + 4*pow4(msq) - 79*pow4(mU3))*pow6(mQ3) +
+        1374*pow4(mQ3)*pow6(mU3) - 12*(20*msq2*mU32 - 10*pow4(msq) + 33*pow4(
+        mU3))*pow6(mU3) - 48*mU32*pow8(mQ3) + mQ32*(-180*pow4(msq)*pow4(mU3) +
+        360*msq2*pow6(mU3) + 1517*pow8(mU3)) + 18*power10(mQ3))))/(pow2(m32 -
+        mQ32)*pow4(mQ32 - mU32)) - (pow4(Xt)*(12*(59*mQ32 + 133*mU32)*pow16(m3)
+        - 4*pow14(m3)*(1979*mQ32*mU32 + 390*pow4(mQ3) + 1747*pow4(mU3)) + (mQ32
+        + mU32)*pow4(mU3)*pow6(mQ3)*(3*mU32*pow4(mQ3) + mQ32*(30*pow4(msq) +
+        131*pow4(mU3)) - 3*mU32*(10*pow4(msq) + 461*pow4(mU3)) + 9*pow6(mQ3)) +
+        2*pow12(m3)*((-30*msq2 + 6953*mU32)*pow4(mQ3) + 12317*mQ32*pow4(mU3) +
+        30*msq2*pow4(mU3) + 361*pow6(mQ3) + 4201*pow6(mU3)) + (30*pow4(mQ3)*(-
+        4*msq2*mU32 + 3*pow4(msq) - 1162*pow4(mU3)) - 90*pow4(msq)*pow4(mU3) +
+        10*(18*msq2 - 991*mU32)*pow6(mQ3) + 120*msq2*pow6(mU3) - 2*mQ32*(90*
+        msq2*pow4(mU3) + 12163*pow6(mU3)) + 329*pow8(mQ3) - 753*pow8(mU3))*
+        power10(m3) + pow8(m3)*((360*msq2*mU32 - 270*pow4(msq) + 23242*pow4(
+        mU3))*pow6(mQ3) - 4*(45*msq2*mU32 - 15*pow4(msq) + 947*pow4(mU3))*pow6(
+        mU3) + pow4(mQ3)*(-60*mU32*pow4(msq) + 360*msq2*pow4(mU3) + 27032*pow6(
+        mU3)) - 4*(45*msq2 - 632*mU32)*pow8(mQ3) + 3*mQ32*(90*pow4(msq)*pow4(
+        mU3) - 120*msq2*pow6(mU3) - 377*pow8(mU3)) - 283*power10(mQ3)) + m32*
+        mU32*pow4(mQ3)*(2*(-90*msq2*mU32 + 30*pow4(msq) - 307*pow4(mU3))*pow6(
+        mQ3) + 9*(10*pow4(msq) + 461*pow4(mU3))*pow6(mU3) + pow4(mQ3)*(-90*
+        mU32*pow4(msq) + 1316*pow6(mU3)) - 117*mU32*pow8(mQ3) + mQ32*(-60*pow4(
+        msq)*pow4(mU3) + 180*msq2*pow6(mU3) + 7744*pow8(mU3)) + 18*power10(mQ3)
+        ) + pow6(m3)*(87*pow12(mQ3) + 4*pow6(mQ3)*(45*mU32*pow4(msq) - 150*
+        msq2*pow4(mU3) - 3629*pow6(mU3)) + 12*mQ32*(45*msq2*mU32 - 15*pow4(msq)
+        + 1024*pow4(mU3))*pow6(mU3) + 5*(-72*msq2*mU32 + 54*pow4(msq) - 1391*
+        pow4(mU3))*pow8(mQ3) + 3*(10*pow4(msq) + 513*pow4(mU3))*pow8(mU3) +
+        pow4(mQ3)*(-300*pow4(msq)*pow4(mU3) + 360*msq2*pow6(mU3) + 6437*pow8(
+        mU3)) + 12*(5*msq2 - 12*mU32)*power10(mQ3)) - mQ32*pow4(m3)*(27*pow12(
+        mQ3) + 4281*pow12(mU3) + 10*pow6(mQ3)*(18*mU32*pow4(msq) - 54*msq2*
+        pow4(mU3) - 401*pow6(mU3)) + 4*mQ32*(135*msq2*mU32 - 45*pow4(msq) +
+        3772*pow4(mU3))*pow6(mU3) + 15*(-8*msq2*mU32 + 6*pow4(msq) - 61*pow4(
+        mU3))*pow8(mQ3) + 90*pow4(msq)*pow8(mU3) + pow4(mQ3)*(-180*pow4(msq)*
+        pow4(mU3) + 120*msq2*pow6(mU3) + 5883*pow8(mU3)) - 18*mU32*power10(mQ3)
+        )))/(pow3(m32 - mQ32)*pow4(mQ32 - mU32)) - (2*pow2(Xt)*(-128*(23*mQ32 +
+        25*mU32)*pow16(m3) + 768*pow18(m3) + 2*pow14(m3)*(5832*mQ32*mU32 +
+        2417*pow4(mQ3) + 2503*pow4(mU3)) - (mQ32 - mU32)*pow4(mU3)*pow6(mQ3)*(
+        3*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + mQ32*(30*pow4(msq) + 441*pow4(
+        mU3)) + 9*pow6(mQ3) - 1073*pow6(mU3)) - 2*pow12(m3)*((-30*msq2 + 9885*
+        mU32)*pow4(mQ3) - 30*msq2*pow4(mU3) + mQ32*(60*msq2*mU32 + 6928*pow4(
+        mU3)) + 1956*pow6(mQ3) + 2735*pow6(mU3)) + (-90*pow4(msq)*pow4(mU3) +
+        pow4(mQ3)*(480*msq2*mU32 - 90*pow4(msq) + 20264*pow4(mU3)) - 4*(45*msq2
+        - 4523*mU32)*pow6(mQ3) + 120*msq2*pow6(mU3) + 4*mQ32*(45*mU32*pow4(msq)
+        - 105*msq2*pow4(mU3) + 2023*pow6(mU3)) + 1301*pow8(mQ3) + 6011*pow8(
+        mU3))*power10(m3) - 3*m32*mU32*pow4(mQ3)*(4*(-15*msq2*mU32 + 5*pow4(
+        msq) - 132*pow4(mU3))*pow6(mQ3) - (30*pow4(msq) + 1073*pow4(mU3))*pow6(
+        mU3) + pow4(mQ3)*(-70*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 1036*pow6(
+        mU3)) - 51*mU32*pow8(mQ3) + mQ32*(80*pow4(msq)*pow4(mU3) - 60*msq2*
+        pow6(mU3) + 354*pow8(mU3)) + 6*power10(mQ3)) + pow8(m3)*(6*(-120*msq2*
+        mU32 + 45*pow4(msq) - 3283*pow4(mU3))*pow6(mQ3) - 4*(45*msq2*mU32 - 15*
+        pow4(msq) + 1076*pow4(mU3))*pow6(mU3) - 2*pow4(mQ3)*(240*mU32*pow4(msq)
+        - 360*msq2*pow4(mU3) + 649*pow6(mU3)) + 10*(18*msq2 - 827*mU32)*pow8(
+        mQ3) + 25*mQ32*(6*pow4(msq)*pow4(mU3) - 379*pow8(mU3)) + 37*power10(
+        mQ3)) + mQ32*pow4(m3)*(27*pow12(mQ3) - 30*mQ32*(18*msq2*mU32 - 12*pow4(
+        msq) + 203*pow4(mU3))*pow6(mU3) - 2*pow6(mQ3)*(150*msq2*pow4(mU3) +
+        1259*pow6(mU3)) + (-120*msq2*mU32 + 90*pow4(msq) - 2621*pow4(mU3))*
+        pow8(mQ3) - (90*pow4(msq) + 3319*pow4(mU3))*pow8(mU3) + pow4(mQ3)*(-
+        360*pow4(msq)*pow4(mU3) + 960*msq2*pow6(mU3) + 8449*pow8(mU3)) - 72*
+        mU32*power10(mQ3)) + pow6(m3)*(-87*pow12(mQ3) + 12*pow6(mQ3)*(30*mU32*
+        pow4(msq) - 20*msq2*pow4(mU3) - 73*pow6(mU3)) + 6*mQ32*(90*msq2*mU32 -
+        40*pow4(msq) + 1633*pow4(mU3))*pow6(mU3) + (480*msq2*mU32 - 270*pow4(
+        msq) + 11121*pow4(mU3))*pow8(mQ3) + pow4(mQ3)*(120*pow4(msq)*pow4(mU3)
+        - 720*msq2*pow6(mU3) - 1079*pow8(mU3)) + 3*(10*pow4(msq) + 399*pow4(
+        mU3))*pow8(mU3) + (-60*msq2 + 1430*mU32)*power10(mQ3))))/(pow3(m32 -
+        mQ32)*pow3(mQ32 - mU32)) + (8*m3*(m32 - mU32)*pow5(Xt)*(mU32*(mQ32 +
+        mU32)*pow4(mQ3)*(-30*mU32*pow4(mQ3) - 30*mU32*pow4(msq) + 10*mQ32*(-6*
+        msq2*mU32 + 3*pow4(msq) - 7*pow4(mU3)) + 60*msq2*pow4(mU3) + 9*pow6(
+        mQ3) + 331*pow6(mU3)) + (195*mU32*pow4(mQ3) + 118*mQ32*pow4(mU3) + 58*
+        pow6(mQ3) + 109*pow6(mU3))*pow8(m3) - pow6(m3)*(-30*pow4(msq)*pow4(mU3)
+        + pow4(mQ3)*(-60*msq2*mU32 + 30*pow4(msq) + 603*pow4(mU3)) + 65*mU32*
+        pow6(mQ3) + 767*mQ32*pow6(mU3) + 60*msq2*pow6(mU3) + 24*pow8(mQ3) +
+        461*pow8(mU3)) + (-32*mQ32*mU32 - 46*pow4(mQ3) + 78*pow4(mU3))*power10(
+        m3) + pow4(m3)*((-120*msq2*mU32 + 60*pow4(msq) + 197*pow4(mU3))*pow6(
+        mQ3) + 6*(10*msq2*mU32 - 5*pow4(msq) + 43*pow4(mU3))*pow6(mU3) + pow4(
+        mQ3)*(30*mU32*pow4(msq) - 60*msq2*pow4(mU3) + 1229*pow6(mU3)) - 111*
+        mU32*pow8(mQ3) + mQ32*(-60*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) +
+        1292*pow8(mU3)) + 15*power10(mQ3)) - m32*mQ32*((-60*msq2*mU32 + 30*
+        pow4(msq) - 251*pow4(mU3))*pow6(mQ3) - 60*pow4(msq)*pow6(mU3) + 3*pow4(
+        mQ3)*(20*mU32*pow4(msq) - 40*msq2*pow4(mU3) + 161*pow6(mU3)) - 6*mU32*
+        pow8(mQ3) + 120*msq2*pow8(mU3) + mQ32*(-30*pow4(msq)*pow4(mU3) + 60*
+        msq2*pow6(mU3) + 1106*pow8(mU3)) + 9*power10(mQ3) + 579*power10(mU3))))
+        /(pow2(m32 - mQ32)*pow5(mQ32 - mU32))))/pow4(m32 - mU32) + (2*pow2(Xt)*
+        (-6*pow14(m3)*(31*mU32*pow4(mQ3) + 225*mQ32*pow4(mU3) + 11*pow6(mQ3) -
+        11*pow6(mU3)) - 2*(mQ32 - mU32)*pow6(mQ3)*pow6(mU3)*((15*msq2 - 463*
+        mU32)*pow4(mQ3) + mQ32*(-30*msq2*mU32 + 437*pow4(mU3)) + 3*pow6(mQ3) +
+        3*(5*msq2*pow4(mU3) + pow6(mU3))) + 2*pow12(m3)*(572*pow4(mQ3)*pow4(
+        mU3) + 1462*mU32*pow6(mQ3) + 2606*mQ32*pow6(mU3) + 99*pow8(mQ3) - 131*
+        pow8(mU3)) + m32*pow4(mQ3)*pow4(mU3)*(4*(45*msq2*mU32 + 551*pow4(mU3))*
+        pow6(mQ3) + 2420*pow4(mQ3)*pow6(mU3) - 45*(2*msq2 + 71*mU32)*pow8(mQ3)
+        + 15*(6*msq2 + mU32)*pow8(mU3) - 5*mQ32*(36*msq2*pow6(mU3) + 593*pow8(
+        mU3)) - 15*power10(mQ3)) + 2*pow8(m3)*(33*pow12(mQ3) - 49*pow12(mU3) +
+        135*(msq2 - 12*mU32)*pow4(mU3)*pow6(mQ3) + (-45*msq2*mU32 + 5897*pow4(
+        mU3))*pow8(mQ3) - 9*pow4(mQ3)*(15*msq2*pow6(mU3) - 683*pow8(mU3)) + 3*
+        mQ32*(15*msq2 + 784*mU32)*pow8(mU3) + 2600*mU32*power10(mQ3)) - 2*
+        power10(m3)*(1841*pow4(mU3)*pow6(mQ3) + 2727*pow4(mQ3)*pow6(mU3) +
+        3232*mU32*pow8(mQ3) + 3768*mQ32*pow8(mU3) + 99*power10(mQ3) - 147*
+        power10(mU3)) - mQ32*mU32*pow6(m3)*(-60*mU32*(msq2 + 18*mU32)*pow6(mQ3)
+        - 984*pow4(mQ3)*pow6(mU3) + (30*msq2 + 11903*mU32)*pow8(mQ3) - 30*msq2*
+        pow8(mU3) + mQ32*(60*msq2*pow6(mU3) + 10697*pow8(mU3)) + 1431*power10(
+        mQ3) + 1073*power10(mU3)) + mQ32*mU32*pow4(m3)*(9*pow12(mQ3) - 9*pow12(
+        mU3) - 8*pow6(mQ3)*(135*msq2*pow4(mU3) + 1157*pow6(mU3)) + (360*msq2*
+        mU32 + 6117*pow4(mU3))*pow8(mQ3) + pow4(mQ3)*(1080*msq2*pow6(mU3) +
+        5459*pow8(mU3)) + 3740*mU32*power10(mQ3) + mQ32*(-360*msq2*pow8(mU3) +
+        3156*power10(mU3)))))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*pow3(m32 -
+        mU32)*pow3(mQ32 - mU32))) + (2*log(Mst12/pow2(mQ3))*((640*mQ32*pow3(m32
+        - mU32)*pow4(m3)*pow6(Xt))/(pow2(m32 - mQ32)*pow3(mQ32 - mU32)) - (20*(
+        m32 - mU32)*log(Mst12/pow2(msq))*((-2*(m32 - mQ32)*(m32 - mU32)*Xt*
+        pow3(m3)*(-3*(mQ32 + mU32)*pow4(m3) + 11*mU32*pow4(mQ3) - 13*mQ32*pow4(
+        mU3) + m32*(4*mQ32*mU32 - 5*pow4(mQ3) + 7*pow4(mU3)) + 2*pow6(m3)))/(
+        mQ32 - mU32) - (2*(m32 - mQ32)*(m32 - mU32)*(mQ32 + mU32)*pow5(Xt)*(-
+        11*mQ32*mU32*pow3(m3) + 5*(mQ32 + mU32)*pow5(m3) + pow7(m3)))/pow3(mQ32
+        - mU32) - (4*(m32 - mQ32)*(m32 - mU32)*pow3(m3)*pow3(Xt)*(-20*pow4(mQ3)
+        *pow4(mU3) + pow4(m3)*(10*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 4*(mQ32
+        + mU32)*pow6(m3) + 11*mU32*pow6(mQ3) + m32*(mU32*pow4(mQ3) + mQ32*pow4(
+        mU3) - 5*pow6(mQ3) - 5*pow6(mU3)) + 11*mQ32*pow6(mU3) + 2*pow8(m3)))/
+        pow3(mQ32 - mU32) + (2*pow2(Xt)*pow4(m3)*(7*mQ32*mU32*(pow4(mQ3) +
+        pow4(mU3)) + 3*pow4(m3)*(14*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 10*(
+        mQ32 + mU32)*pow6(m3) - m32*(21*mU32*pow4(mQ3) + 21*mQ32*pow4(mU3) +
+        pow6(mQ3) + pow6(mU3)) + 2*pow8(m3)))/(mQ32 - mU32) - ((mQ32 + mU32)*
+        pow4(m3)*pow4(Xt)*(7*mQ32*mU32*(pow4(mQ3) + pow4(mU3)) + 3*pow4(m3)*(
+        14*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 10*(mQ32 + mU32)*pow6(m3) -
+        m32*(21*mU32*pow4(mQ3) + 21*mQ32*pow4(mU3) + pow6(mQ3) + pow6(mU3)) +
+        2*pow8(m3)))/pow3(mQ32 - mU32) + pow4(m3)*(3*pow4(m3)*(15*mQ32*mU32 +
+        pow4(mQ3) + 2*pow4(mU3)) - (11*mQ32 + 13*mU32)*pow6(m3) + 7*mU32*pow6(
+        mQ3) + 8*mQ32*pow6(mU3) - m32*(21*mU32*pow4(mQ3) + 24*mQ32*pow4(mU3) +
+        pow6(mQ3) + 2*pow6(mU3)) + 3*pow8(m3))))/pow3(m32 - mQ32) + (8*pow2(m32
+        - mU32)*pow5(Xt)*(4*pow11(m3)*(13*mQ32*mU32 + 8*pow4(mQ3) - 4*pow4(mU3)
+        ) + mU32*pow3(m3)*pow4(mQ3)*((30*msq2 - 13*mU32)*pow4(mQ3) + 3*(10*msq2
+        + mU32)*pow4(mU3) + 15*mQ32*(4*msq2*mU32 + 27*pow4(mU3)) + 3*pow6(mQ3))
+        - mQ32*mU32*pow5(m3)*((90*msq2 + 545*mU32)*pow4(mQ3) + 3*(10*msq2 +
+        mU32)*pow4(mU3) + 3*mQ32*(40*msq2*mU32 + 257*pow4(mU3)) + 47*pow6(mQ3))
+        + 2*mQ32*(109*mU32*pow4(mQ3) + 5*(6*msq2 + 37*mU32)*pow4(mU3) + mQ32*(
+        30*msq2*mU32 + 469*pow4(mU3)) + 16*pow6(mQ3))*pow7(m3) + 12*m3*pow6(
+        mU3)*pow8(mQ3) - 2*(97*mU32*pow4(mQ3) + 214*mQ32*pow4(mU3) + 32*pow6(
+        mQ3) - 8*pow6(mU3))*pow9(m3)))/(pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)*
+        pow3(mQ32 - mU32)) + (8*Xt*pow2(m32 - mU32)*(-64*(mQ32 - mU32)*pow13(
+        m3) + 4*pow11(m3)*(-15*mQ32*mU32 + 56*pow4(mQ3) - 36*pow4(mU3)) + mU32*
+        pow3(m3)*pow4(mQ3)*(-5*(6*msq2 + 7*mU32)*pow4(mQ3) + 37*mQ32*pow4(mU3)
+        + 3*(10*msq2 + mU32)*pow4(mU3) - 3*pow6(mQ3)) + mQ32*mU32*pow5(m3)*(20*
+        mQ32*mU32*(-3*msq2 + mU32) + 3*(30*msq2 + 37*mU32)*pow4(mQ3) - 2*pow6(
+        mQ3) - 3*(10*msq2*pow4(mU3) + pow6(mU3))) + mQ32*(25*mU32*pow4(mQ3) +
+        60*msq2*pow4(mU3) - 2*mQ32*(30*msq2*mU32 + 133*pow4(mU3)) + 96*pow6(
+        mQ3) - 45*pow6(mU3))*pow7(m3) - 12*m3*pow6(mU3)*pow8(mQ3) + (56*mU32*
+        pow4(mQ3) + 174*mQ32*pow4(mU3) - 256*pow6(mQ3) + 80*pow6(mU3))*pow9(m3)
+        ))/((mQ32 - mU32)*pow2(mQ3)*pow2(mU3)*pow3(-m32 + mQ32)) + (16*m3*pow2(
+        m32 - mU32)*pow3(Xt)*(6*(mQ32 + 3*mU32)*pow6(mQ3)*pow6(mU3) + 3*mQ32*
+        mU32*pow4(m3)*(5*(4*msq2 - mU32)*pow4(mQ3) + 20*msq2*pow4(mU3) - mQ32*(
+        40*msq2*mU32 + 29*pow4(mU3)) + 73*pow6(mQ3) + 33*pow6(mU3)) + 2*(-9*
+        mU32*pow4(mQ3) + 17*mQ32*pow4(mU3) + 48*pow6(mQ3) - 40*pow6(mU3))*pow8(
+        m3) - m32*mQ32*mU32*(-2*pow4(mQ3)*(15*msq2*mU32 + 53*pow4(mU3)) + 5*(6*
+        msq2 + 25*mU32)*pow6(mQ3) + 3*(10*msq2 + mU32)*pow6(mU3) + mQ32*(-30*
+        msq2*pow4(mU3) + 81*pow6(mU3)) + 3*pow8(mQ3)) + pow6(m3)*(238*pow4(mQ3)
+        *pow4(mU3) - 263*mU32*pow6(mQ3) - 147*mQ32*pow6(mU3) - 64*pow8(mQ3) +
+        48*pow8(mU3)) + (22*mQ32*mU32 - 32*pow4(mQ3) + 32*pow4(mU3))*power10(
+        m3)))/(pow2(mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow3(mQ32 - mU32)) - (2*(
+        m32 - mU32)*pow2(Xt)*(64*pow16(m3)*(pow4(mQ3) - pow4(mU3)) - pow4(mQ3)*
+        pow4(mU3)*pow6(m3)*((270*msq2 + 4891*mU32)*pow4(mQ3) - 5*mQ32*(36*msq2*
+        mU32 - 523*pow4(mU3)) + 270*msq2*pow4(mU3) + 1395*pow6(mQ3) - 413*pow6(
+        mU3)) - 2*pow14(m3)*(313*mU32*pow4(mQ3) - 313*mQ32*pow4(mU3) + 96*pow6(
+        mQ3) - 96*pow6(mU3)) + 3*m32*pow6(mQ3)*pow6(mU3)*((10*msq2 - 171*mU32)*
+        pow4(mQ3) - 163*mQ32*pow4(mU3) + 10*msq2*pow4(mU3) + pow6(mQ3) + pow6(
+        mU3)) + pow4(m3)*pow4(mQ3)*pow4(mU3)*(-90*(msq2 - 27*mU32)*mU32*pow4(
+        mQ3) + 2*(45*msq2 + 613*mU32)*pow6(mQ3) + 9*(10*msq2 + mU32)*pow6(mU3)
+        + mQ32*(-90*msq2*pow4(mU3) + 358*pow6(mU3)) + 9*pow8(mQ3)) + 2*mQ32*
+        mU32*pow8(m3)*(8*pow4(mQ3)*(15*msq2*mU32 + 356*pow4(mU3)) + 2318*mU32*
+        pow6(mQ3) + 2*mQ32*(60*msq2*pow4(mU3) - 127*pow6(mU3)) + 281*pow8(mQ3)
+        - 297*pow8(mU3)) + 2*pow12(m3)*(736*pow4(mQ3)*pow4(mU3) + 875*mU32*
+        pow6(mQ3) - 907*mQ32*pow6(mU3) + 96*pow8(mQ3) - 96*pow8(mU3)) - 2*
+        power10(m3)*(2584*pow4(mU3)*pow6(mQ3) + pow4(mQ3)*(90*msq2*pow4(mU3) +
+        386*pow6(mU3)) + 843*mU32*pow8(mQ3) - 891*mQ32*pow8(mU3) + 32*power10(
+        mQ3) - 32*power10(mU3)) + 96*power10(mQ3)*power10(mU3)))/((mQ32 - mU32)
+        *pow3(-m32 + mQ32)*pow4(mQ3)*pow4(mU3)) - ((m32 - mU32)*(64*pow18(m3)*(
+        -(mU32*pow4(mQ3)) + mQ32*pow4(mU3) + pow6(mQ3) - pow6(mU3)) + 3*m32*(
+        mQ32 - mU32)*pow6(mU3)*((10*msq2 - 143*mU32)*pow4(mQ3) - 171*mQ32*pow4(
+        mU3) + 10*msq2*pow4(mU3) + pow6(mQ3) + pow6(mU3))*pow8(mQ3) + pow16(m3)
+        *(64*pow4(mQ3)*pow4(mU3) - 434*mU32*pow6(mQ3) + 562*mQ32*pow6(mU3) -
+        256*pow8(mQ3) + 192*pow8(mU3)) + pow4(m3)*pow4(mU3)*pow6(mQ3)*((-210*
+        msq2*mU32 + 1720*pow4(mU3))*pow6(mQ3) + 10*pow4(mQ3)*(3*msq2*pow4(mU3)
+        - 124*pow6(mU3)) + (90*msq2 + 778*mU32)*pow8(mQ3) + mQ32*(150*msq2*
+        pow6(mU3) - 1133*pow8(mU3)) - 6*(10*msq2 + mU32)*pow8(mU3) + 9*power10(
+        mQ3)) + pow4(mQ3)*pow4(mU3)*pow6(m3)*(70*(9*msq2*mU32 - 20*pow4(mU3))*
+        pow6(mQ3) - 150*pow4(mQ3)*(3*msq2*pow4(mU3) - 28*pow6(mU3)) - (360*msq2
+        + 4261*mU32)*pow8(mQ3) + 9*(10*msq2 + mU32)*pow8(mU3) + mQ32*(90*msq2*
+        pow6(mU3) + 636*pow8(mU3)) + 48*power10(mQ3)) + 2*mQ32*power10(m3)*(32*
+        pow12(mQ3) - 361*pow12(mU3) - 6*pow6(mQ3)*(35*msq2*pow4(mU3) + 479*
+        pow6(mU3)) - 1730*pow4(mU3)*pow8(mQ3) + 8*mQ32*(15*msq2 - 52*mU32)*
+        pow8(mU3) + pow4(mQ3)*(90*msq2*pow6(mU3) + 2849*pow8(mU3)) + 1220*mU32*
+        power10(mQ3)) + 2*pow14(m3)*(-1167*pow4(mU3)*pow6(mQ3) + 566*pow4(mQ3)*
+        pow6(mU3) + 1124*mU32*pow8(mQ3) - 1003*mQ32*pow8(mU3) + 192*power10(
+        mQ3) - 96*power10(mU3)) + 84*(mQ32 - mU32)*pow12(mQ3)*power10(mU3) +
+        mU32*pow4(mQ3)*pow8(m3)*((510*msq2*mU32 + 8404*pow4(mU3))*pow6(mQ3) -
+        2*pow4(mQ3)*(225*msq2*pow4(mU3) + 1858*pow6(mU3)) + 765*mU32*pow8(mQ3)
+        + mQ32*(210*msq2*pow6(mU3) - 3494*pow8(mU3)) - 270*msq2*pow8(mU3) -
+        626*power10(mQ3) + 587*power10(mU3)) - 2*pow12(m3)*(128*pow12(mQ3) -
+        32*pow12(mU3) + pow6(mQ3)*(-90*msq2*pow4(mU3) + 131*pow6(mU3)) - 2354*
+        pow4(mU3)*pow8(mQ3) + pow4(mQ3)*(90*msq2*pow6(mU3) + 436*pow8(mU3)) +
+        1782*mU32*power10(mQ3) - 1051*mQ32*power10(mU3))))/((mQ32 - mU32)*pow4(
+        mQ3)*pow4(m32 - mQ32)*pow4(mU3)) + ((m32 - mU32)*pow4(Xt)*(-64*pow18(
+        m3)*pow3(mQ32 - mU32) + m32*pow6(mU3)*pow8(mQ3)*(6*pow4(mQ3)*(5*msq2*
+        mU32 - 267*pow4(mU3)) + 2*(15*msq2 - 592*mU32)*pow6(mQ3) + mQ32*(30*
+        msq2*pow4(mU3) - 316*pow6(mU3)) + 3*(10*msq2 + mU32)*pow6(mU3) + 3*
+        pow8(mQ3)) + 2*pow16(m3)*(136*pow4(mQ3)*pow4(mU3) - 103*mU32*pow6(mQ3)
+        - 25*mQ32*pow6(mU3) + 128*pow8(mQ3) - 96*pow8(mU3)) + pow4(m3)*pow4(
+        mU3)*pow6(mQ3)*((-30*msq2*mU32 + 6740*pow4(mU3))*pow6(mQ3) - 6*pow4(
+        mQ3)*(35*msq2*pow4(mU3) - 939*pow6(mU3)) + 10*(9*msq2 + 182*mU32)*pow8(
+        mQ3) + 6*(10*msq2 + mU32)*pow8(mU3) + mQ32*(-30*msq2*pow6(mU3) + 871*
+        pow8(mU3)) + 9*power10(mQ3)) + mU32*pow4(mQ3)*pow8(m3)*(2*(255*msq2*
+        mU32 + 9127*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(570*msq2*pow4(mU3) +
+        29282*pow6(mU3)) + 5703*mU32*pow8(mQ3) + 5*(54*msq2 - 125*mU32)*pow8(
+        mU3) + 2*mQ32*(165*msq2*pow6(mU3) + 5212*pow8(mU3)) + 498*power10(mQ3))
+        - pow4(mQ3)*pow4(mU3)*pow6(m3)*(90*mU32*(msq2 + 199*mU32)*pow6(mQ3) -
+        18*pow4(mQ3)*(5*msq2*pow4(mU3) - 673*pow6(mU3)) + 270*mQ32*(msq2 + 2*
+        mU32)*pow6(mU3) + (360*msq2 + 9013*mU32)*pow8(mQ3) + 9*(10*msq2 + mU32)
+        *pow8(mU3) + 1438*power10(mQ3)) - 2*mQ32*power10(m3)*(32*pow12(mQ3) -
+        297*pow12(mU3) + 10*pow6(mQ3)*(21*msq2*pow4(mU3) + 1097*pow6(mU3)) +
+        4021*pow4(mU3)*pow8(mQ3) + 24*mQ32*(5*msq2 + 26*mU32)*pow8(mU3) + 30*
+        pow4(mQ3)*(11*msq2*pow6(mU3) + 391*pow8(mU3)) + 900*mU32*power10(mQ3))
+        - 2*pow14(m3)*(583*pow4(mU3)*pow6(mQ3) + 2088*pow4(mQ3)*pow6(mU3) +
+        484*mU32*pow8(mQ3) - 619*mQ32*pow8(mU3) + 192*power10(mQ3) - 96*
+        power10(mU3)) + 48*(5*mQ32 + 2*mU32)*pow12(mQ3)*power10(mU3) + 2*pow12(
+        m3)*(128*pow12(mQ3) - 32*pow12(mU3) + pow6(mQ3)*(90*msq2*pow4(mU3) +
+        7487*pow6(mU3)) + 2435*pow4(mU3)*pow8(mQ3) + pow4(mQ3)*(90*msq2*pow6(
+        mU3) + 2791*pow8(mU3)) + 1142*mU32*power10(mQ3) - 795*mQ32*power10(mU3)
+        )))/(pow3(mQ32 - mU32)*pow4(mQ3)*pow4(m32 - mQ32)*pow4(mU3)) - (2*log(
+        Mst12/pow2(mU3))*(160*(mQ32 + mU32)*(-2*mQ32*mU32 + m32*(mQ32 + mU32))*
+        pow2(m32 - mQ32)*pow2(m32 - mU32)*pow4(m3)*pow6(Xt) - 8*(m32 - mQ32)*(
+        m32 - mU32)*Xt*pow3(mQ32 - mU32)*(-2*(83*mQ32 + 103*mU32)*pow11(m3) +
+        72*pow13(m3) + 6*(mQ32 - 11*mU32)*pow3(m3)*pow4(mQ3)*pow4(mU3) - 6*m3*
+        pow6(mQ3)*pow6(mU3) + 3*pow5(m3)*(78*pow4(mQ3)*pow4(mU3) + 7*mU32*pow6(
+        mQ3) + 39*mQ32*pow6(mU3)) - (307*mU32*pow4(mQ3) + 395*mQ32*pow4(mU3) +
+        13*pow6(mQ3) + 53*pow6(mU3))*pow7(m3) + (468*mQ32*mU32 + 115*pow4(mQ3)
+        + 179*pow4(mU3))*pow9(m3)) - 16*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32 -
+        mU32)*pow3(Xt)*(-((295*mQ32 + 259*mU32)*pow12(m3)) + 96*pow14(m3) - (
+        1026*mU32*pow4(mQ3) + 744*mQ32*pow4(mU3) + 73*pow6(mQ3) - 109*pow6(mU3)
+        )*pow8(m3) + 9*pow6(mU3)*pow8(mQ3) - 3*pow6(mQ3)*pow8(mU3) - 2*pow6(m3)
+        *(-534*pow4(mQ3)*pow4(mU3) - 177*mU32*pow6(mQ3) + 29*mQ32*pow6(mU3) +
+        14*pow8(mQ3) + 40*pow8(mU3)) + pow4(m3)*(-484*pow4(mU3)*pow6(mQ3) -
+        202*pow4(mQ3)*pow6(mU3) + 57*mU32*pow8(mQ3) + 159*mQ32*pow8(mU3)) - 6*
+        m32*(-29*pow6(mQ3)*pow6(mU3) + 5*pow4(mU3)*pow8(mQ3) + 14*pow4(mQ3)*
+        pow8(mU3)) + 2*(453*mQ32*mU32 + 146*pow4(mQ3) + 71*pow4(mU3))*power10(
+        m3)) - 8*m3*(m32 - mQ32)*(m32 - mU32)*pow5(Xt)*(2*(25*mQ32 + 9*mU32)*
+        pow12(m3) - 6*(mQ32 + mU32)*pow6(mQ3)*pow6(mU3) + 2*(183*mU32*pow4(mQ3)
+        + 228*mQ32*pow4(mU3) + 19*pow6(mQ3) + 96*pow6(mU3))*pow8(m3) + pow6(m3)
+        *(-560*pow4(mQ3)*pow4(mU3) - 158*mU32*pow6(mQ3) - 470*mQ32*pow6(mU3) +
+        13*pow8(mQ3) - 81*pow8(mU3)) + pow4(m3)*(212*pow4(mU3)*pow6(mQ3) + 370*
+        pow4(mQ3)*pow6(mU3) - 28*mU32*pow8(mQ3) + 162*mQ32*pow8(mU3)) + m32*(-
+        70*pow6(mQ3)*pow6(mU3) + 13*pow4(mU3)*pow8(mQ3) - 83*pow4(mQ3)*pow8(
+        mU3)) - (214*mQ32*mU32 + 93*pow4(mQ3) + 121*pow4(mU3))*power10(m3)) +
+        2*pow3(mQ32 - mU32)*(-((179*mQ32 + 269*mU32)*pow16(m3)) + 64*pow18(m3)
+        + 6*pow14(m3)*(95*mQ32*mU32 + 37*pow4(mQ3) + 92*pow4(mU3)) + 24*m32*(
+        pow4(mQ3) - pow4(mU3))*pow6(mQ3)*pow6(mU3) - pow4(m3)*pow4(mQ3)*pow4(
+        mU3)*(54*mU32*pow4(mQ3) - 95*mQ32*pow4(mU3) + 44*pow6(mQ3) + 61*pow6(
+        mU3)) - pow12(m3)*(289*mU32*pow4(mQ3) + 1130*mQ32*pow4(mU3) + 233*pow6(
+        mQ3) + 588*pow6(mU3)) + 6*(-mQ32 + mU32)*pow8(mQ3)*pow8(mU3) + 2*mQ32*
+        mU32*pow6(m3)*(-82*pow4(mQ3)*pow4(mU3) + 56*mU32*pow6(mQ3) + 147*mQ32*
+        pow6(mU3) + 35*pow8(mQ3) + 68*pow8(mU3)) + 2*(168*pow4(mQ3)*pow4(mU3) +
+        76*mU32*pow6(mQ3) + 642*mQ32*pow6(mU3) + 85*pow8(mQ3) + 149*pow8(mU3))*
+        power10(m3) - pow8(m3)*(-194*pow4(mU3)*pow6(mQ3) + 522*pow4(mQ3)*pow6(
+        mU3) + 244*mU32*pow8(mQ3) + 671*mQ32*pow8(mU3) + 42*power10(mQ3) + 59*
+        power10(mU3))) + pow4(Xt)*(8*(91*mQ32 + 69*mU32)*pow18(m3) - 2*pow16(
+        m3)*(2584*mQ32*mU32 + 919*pow4(mQ3) + 1153*pow4(mU3)) + 24*m32*pow6(
+        mQ3)*pow6(mU3)*(13*mU32*pow4(mQ3) + 11*mQ32*pow4(mU3) + 4*pow6(mQ3) +
+        4*pow6(mU3)) + 2*pow14(m3)*(5731*mU32*pow4(mQ3) + 6773*mQ32*pow4(mU3) +
+        443*pow6(mQ3) + 1645*pow6(mU3)) + pow12(m3)*(-27196*pow4(mQ3)*pow4(mU3)
+        - 7760*mU32*pow6(mQ3) - 15088*mQ32*pow6(mU3) + 805*pow8(mQ3) - 2089*
+        pow8(mU3)) - 24*pow2(mQ32 + mU32)*pow8(mQ3)*pow8(mU3) - pow4(m3)*pow4(
+        mQ3)*pow4(mU3)*(3404*pow4(mQ3)*pow4(mU3) - 64*mU32*pow6(mQ3) + 384*
+        mQ32*pow6(mU3) + 145*pow8(mQ3) + 355*pow8(mU3)) + 2*mQ32*mU32*pow6(m3)*
+        (3401*pow4(mU3)*pow6(mQ3) + 4367*pow4(mQ3)*pow6(mU3) - 646*mU32*pow8(
+        mQ3) + 558*mQ32*pow8(mU3) + 25*power10(mQ3) + 231*power10(mU3)) +
+        power10(m3)*(21148*pow4(mU3)*pow6(mQ3) + 27556*pow4(mQ3)*pow6(mU3) -
+        728*mU32*pow8(mQ3) + 7176*mQ32*pow8(mU3) - 596*power10(mQ3) + 740*
+        power10(mU3)) + pow8(m3)*(19*pow12(mQ3) - 183*pow12(mU3) - 22720*pow6(
+        mQ3)*pow6(mU3) - 3735*pow4(mU3)*pow8(mQ3) - 10725*pow4(mQ3)*pow8(mU3) +
+        1576*mU32*power10(mQ3) - 1672*mQ32*power10(mU3))) + 2*(mQ32 - mU32)*
+        pow2(Xt)*(-128*(13*mQ32 + 11*mU32)*pow18(m3) + 384*pow20(m3) + 2*pow16(
+        m3)*(3466*mQ32*mU32 + 1265*pow4(mQ3) + 645*pow4(mU3)) - 2*pow14(m3)*(
+        6053*mU32*pow4(mQ3) + 4349*mQ32*pow4(mU3) + 691*pow6(mQ3) - 341*pow6(
+        mU3)) - 48*m32*(mQ32 - mU32)*pow2(mQ32 + mU32)*pow6(mQ3)*pow6(mU3) +
+        pow12(m3)*(18002*pow4(mQ3)*pow4(mU3) + 8698*mU32*pow6(mQ3) + 1986*mQ32*
+        pow6(mU3) - 93*pow8(mQ3) - 1713*pow8(mU3)) + pow4(m3)*pow4(mQ3)*pow4(
+        mU3)*(558*pow4(mQ3)*pow4(mU3) + 254*mU32*pow6(mQ3) - 218*mQ32*pow6(mU3)
+        + 57*pow8(mQ3) - 267*pow8(mU3)) + 12*(pow4(mQ3) - pow4(mU3))*pow8(mQ3)*
+        pow8(mU3) + 2*mQ32*mU32*pow6(m3)*(-1375*pow4(mU3)*pow6(mQ3) - 951*pow4(
+        mQ3)*pow6(mU3) - 184*mU32*pow8(mQ3) + 768*mQ32*pow8(mU3) + 15*power10(
+        mQ3) + 191*power10(mU3)) + 4*power10(m3)*(-3661*pow4(mU3)*pow6(mQ3) -
+        2341*pow4(mQ3)*pow6(mU3) - 498*mU32*pow8(mQ3) + 826*mQ32*pow8(mU3) +
+        67*power10(mQ3) + 231*power10(mU3)) - pow8(m3)*(47*pow12(mQ3) + 155*
+        pow12(mU3) - 9320*pow6(mQ3)*pow6(mU3) - 4301*pow4(mU3)*pow8(mQ3) + 271*
+        pow4(mQ3)*pow8(mU3) + 130*mU32*power10(mQ3) + 2266*mQ32*power10(mU3))))
+        )/(pow4(m32 - mQ32)*pow4(mQ32 - mU32))))/pow4(m32 - mU32) + pow2(log(
+        Mst12/pow2(mQ3)))*((-80*m3*Xt*(m32*mQ32 - 12*mQ32*msq2 - pow4(mQ3) + 6*
+        pow4(msq)))/((mQ32 - mU32)*pow2(m32 - mQ32)) - (80*m3*(mQ32 + mU32)*(
+        m32*mQ32 + 12*mQ32*msq2 - pow4(mQ3) - 6*pow4(msq))*pow5(Xt))/(pow2(m32
+        - mQ32)*pow4(mQ32 - mU32)) + (20*(-((7*mQ32 + 6*msq2)*pow4(m3)) + 3*
+        mQ32*pow4(msq) + 3*m32*(-6*mQ32*msq2 + 2*pow4(mQ3) + 3*pow4(msq)) + 3*
+        pow6(m3) - 2*pow6(mQ3)))/pow3(m32 - mQ32) - (80*m3*pow3(Xt)*((-3*mQ32 +
+        mU32)*pow4(m3) - 2*m32*pow4(mQ3) - (24*msq2 + mU32)*pow4(mQ3) - 12*
+        mU32*pow4(msq) + 12*mQ32*(2*msq2*mU32 + pow4(msq)) + 2*pow6(m3) + 3*
+        pow6(mQ3)))/(pow2(m32 - mQ32)*pow3(mQ32 - mU32)) - (40*pow2(Xt)*(3*
+        msq2*(mQ32 - mU32)*(m32*(6*mQ32 - 3*msq2) - mQ32*msq2 + 2*pow4(m3)) - (
+        m32 - mQ32)*((3*mQ32 - mU32)*pow4(m3) + m32*(4*mQ32*mU32 - 8*pow4(mQ3))
+        - 2*mU32*pow4(mQ3) + 4*pow6(mQ3))))/(pow2(mQ32 - mU32)*pow3(m32 - mQ32)
+        ) + (320*m32*(mQ32 + mU32)*(-3*mU32*pow4(mQ3) + m32*(2*mQ32*mU32 +
+        pow4(mQ3)))*pow6(Xt))/((m32 - mU32)*pow2(m32 - mQ32)*pow5(mQ32 - mU32))
+        - (20*pow4(Xt)*(-4*m32*(mQ32 - mU32) + (3*msq2*(mQ32 - mU32)*(mQ32 +
+        mU32)*(mQ32*msq2 + m32*(-6*mQ32 + 3*msq2) - 2*pow4(m3)))/pow3(m32 -
+        mQ32) + (8*mQ32*mU32*pow4(m3) - pow4(mQ3)*pow4(mU3) + 2*(mQ32 - mU32)*
+        pow6(m3) + 4*mU32*pow6(mQ3) - 2*m32*(5*mU32*pow4(mQ3) - mQ32*pow4(mU3)
+        + 4*pow6(mQ3)) + 5*pow8(mQ3))/pow2(m32 - mQ32)))/pow4(mQ32 - mU32) + (
+        8*m3*Xt*(-3*pow12(mQ3) - 30*msq2*(msq2 + 2*mU32)*pow4(mQ3)*pow4(mU3) +
+        pow6(m3)*(-((60*msq2 + 209*mU32)*pow4(mQ3)) + 30*mQ32*(2*msq2*mU32 +
+        pow4(msq) - 54*pow4(mU3)) - 3*mU32*(10*pow4(msq) + 59*pow4(mU3)) + 790*
+        pow6(mQ3)) + 30*mQ32*pow4(msq)*pow6(mU3) + pow6(mQ3)*(60*msq2*pow4(mU3)
+        + 317*pow6(mU3)) + (785*mQ32*mU32 - 665*pow4(mQ3) + 504*pow4(mU3))*
+        pow8(m3) + pow4(m3)*(60*pow4(msq)*pow4(mU3) + pow4(mQ3)*(60*msq2*mU32 -
+        30*pow4(msq) + 1666*pow4(mU3)) + (60*msq2 - 749*mU32)*pow6(mQ3) - 5*
+        mQ32*(6*mU32*pow4(msq) + 24*msq2*pow4(mU3) - 121*pow6(mU3)) - 338*pow8(
+        mQ3)) - 212*pow4(mU3)*pow8(mQ3) + 64*(3*mQ32 - 5*mU32)*power10(m3) +
+        10*mU32*power10(mQ3) + m32*(-30*mQ32*msq2*(msq2 - 2*mU32)*pow4(mU3) -
+        2*(60*msq2*mU32 + 193*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(60*mU32*pow4(
+        msq) + 60*msq2*pow4(mU3) - 729*pow6(mU3)) - 30*pow4(msq)*pow6(mU3) +
+        531*mU32*pow8(mQ3) + 8*power10(mQ3))))/(pow2(m32 - mU32)*pow2(mQ32 -
+        mU32)*pow3(m32 - mQ32)) - (8*m3*pow5(Xt)*((-318*mU32*pow4(mQ3) + 109*
+        mQ32*pow4(mU3) - 285*pow6(mQ3) + 14*pow6(mU3))*pow8(m3) + pow6(m3)*(30*
+        pow4(msq)*pow4(mU3) + pow4(mQ3)*(-30*pow4(msq) + 583*pow4(mU3)) + (60*
+        msq2 + 601*mU32)*pow6(mQ3) + mQ32*(-60*msq2*pow4(mU3) + 487*pow6(mU3))
+        + 148*pow8(mQ3) + 101*pow8(mU3)) + 2*(-16*mQ32*mU32 + 73*pow4(mQ3) -
+        57*pow4(mU3))*power10(m3) - pow4(m3)*((120*msq2*mU32 - 30*pow4(msq) +
+        963*pow4(mU3))*pow6(mQ3) + 60*pow4(msq)*pow6(mU3) + pow4(mQ3)*(-60*
+        mU32*pow4(msq) - 60*msq2*pow4(mU3) + 1273*pow6(mU3)) + (60*msq2 + 103*
+        mU32)*pow8(mQ3) + mQ32*(30*pow4(msq)*pow4(mU3) - 120*msq2*pow6(mU3) +
+        533*pow8(mU3)) + 8*power10(mQ3)) - mQ32*(mQ32 + mU32)*(-30*mQ32*msq2*(
+        msq2 + 2*mU32)*pow4(mU3) - 92*pow4(mU3)*pow6(mQ3) + 30*pow4(msq)*pow6(
+        mU3) + pow4(mQ3)*(60*msq2*pow4(mU3) + 353*pow6(mU3)) - 30*mU32*pow8(
+        mQ3) + 9*power10(mQ3)) + m32*(24*pow12(mQ3) - 15*pow6(mQ3)*(4*mU32*
+        pow4(msq) - 4*msq2*pow4(mU3) - 71*pow6(mU3)) + 60*mQ32*msq2*(msq2 -
+        mU32)*pow6(mU3) + (120*msq2*mU32 + 263*pow4(mU3))*pow8(mQ3) + 30*pow4(
+        msq)*pow8(mU3) + pow4(mQ3)*(-30*pow4(msq)*pow4(mU3) - 120*msq2*pow6(
+        mU3) + 769*pow8(mU3)) - 201*mU32*power10(mQ3))))/(pow2(m32 - mU32)*
+        pow3(m32 - mQ32)*pow5(mQ32 - mU32)) + (2*(907*mQ32 - 459*mU32)*pow14(
+        m3) - 128*pow16(m3) - 2*pow12(m3)*(30*msq2*mU32 + mQ32*(-30*msq2 + 95*
+        mU32) + 2589*pow4(mQ3) - 1340*pow4(mU3)) + pow8(m3)*(3*pow4(mU3)*(-60*
+        msq2*mU32 - 90*pow4(msq) + 247*pow4(mU3)) + pow4(mQ3)*(-180*msq2*mU32 +
+        60*pow4(msq) + 1709*pow4(mU3)) - (180*msq2 + 10181*mU32)*pow6(mQ3) +
+        mQ32*(210*mU32*pow4(msq) + 540*msq2*pow4(mU3) + 6547*pow6(mU3)) - 3296*
+        pow8(mQ3)) + (mQ32 - mU32)*mU32*pow4(mQ3)*(-373*pow4(mQ3)*pow4(mU3) -
+        30*pow4(msq)*pow4(mU3) + 4*mU32*pow6(mQ3) + 3*pow8(mQ3)) + ((120*msq2 +
+        6721*mU32)*pow4(mQ3) + 90*mU32*pow4(msq) + 180*msq2*pow4(mU3) - mQ32*(
+        300*msq2*mU32 + 90*pow4(msq) + 5939*pow4(mU3)) + 6045*pow6(mQ3) - 2347*
+        pow6(mU3))*power10(m3) + 2*pow6(m3)*((270*msq2*mU32 + 15*pow4(msq) +
+        2089*pow4(mU3))*pow6(mQ3) + 15*msq2*(9*msq2 + 2*mU32)*pow6(mU3) - 3*
+        pow4(mQ3)*(35*mU32*pow4(msq) + 30*msq2*pow4(mU3) + 973*pow6(mU3)) +
+        2958*mU32*pow8(mQ3) - mQ32*(45*pow4(msq)*pow4(mU3) + 210*msq2*pow6(mU3)
+        + 1174*pow8(mU3)) + 390*power10(mQ3)) + m32*mQ32*(9*pow12(mQ3) + 513*
+        pow6(mQ3)*pow6(mU3) + 1145*pow4(mU3)*pow8(mQ3) + 2*pow4(mQ3)*(45*pow4(
+        msq)*pow4(mU3) + 90*msq2*pow6(mU3) - 746*pow8(mU3)) + 60*pow4(msq)*
+        pow8(mU3) - 30*mQ32*(5*pow4(msq)*pow6(mU3) + 6*msq2*pow8(mU3)) - 47*
+        mU32*power10(mQ3)) - 2*pow4(m3)*(19*pow12(mQ3) + 15*pow6(mQ3)*(3*mU32*
+        pow4(msq) + 18*msq2*pow4(mU3) - 49*pow6(mU3)) + 1863*pow4(mU3)*pow8(
+        mQ3) + 45*pow4(msq)*pow8(mU3) - pow4(mQ3)*(135*pow4(msq)*pow4(mU3) +
+        210*msq2*pow6(mU3) + 1367*pow8(mU3)) + 15*mQ32*(3*pow4(msq)*pow6(mU3) -
+        4*msq2*pow8(mU3)) + 668*mU32*power10(mQ3)))/((mQ32 - mU32)*pow3(m32 -
+        mU32)*pow4(m32 - mQ32)) - (8*m3*pow3(Xt)*(130*(mQ32 - mU32)*pow12(m3) +
+        (808*mU32*pow4(mQ3) + 817*mQ32*pow4(mU3) + 263*pow6(mQ3) + 672*pow6(
+        mU3))*pow8(m3) + pow6(m3)*(30*pow4(mQ3)*(8*msq2*mU32 + 2*pow4(msq) -
+        91*pow4(mU3)) + 60*pow4(msq)*pow4(mU3) - 2*(60*msq2 + 413*mU32)*pow6(
+        mQ3) - 10*mQ32*(12*mU32*pow4(msq) + 12*msq2*pow4(mU3) + 149*pow6(mU3))
+        + 175*pow8(mQ3) - 249*pow8(mU3)) + (138*mQ32*mU32 - 407*pow4(mQ3) -
+        243*pow4(mU3))*power10(m3) + pow4(m3)*((-60*pow4(msq) + 3606*pow4(mU3))
+        *pow6(mQ3) - 6*pow4(mQ3)*(60*msq2*pow4(mU3) - 349*pow6(mU3)) - 120*
+        pow4(msq)*pow6(mU3) + 8*(15*msq2 - 88*mU32)*pow8(mQ3) + mQ32*(180*pow4(
+        msq)*pow4(mU3) + 240*msq2*pow6(mU3) + 287*pow8(mU3)) - 163*power10(mQ3)
+        ) + mQ32*(18*pow12(mQ3) + 120*mQ32*msq2*(msq2 + mU32)*pow6(mU3) + 6*
+        pow6(mQ3)*(20*msq2*pow4(mU3) + 191*pow6(mU3)) - 351*pow4(mU3)*pow8(mQ3)
+        - 60*pow4(msq)*pow8(mU3) - pow4(mQ3)*(60*pow4(msq)*pow4(mU3) + 240*
+        msq2*pow6(mU3) + 223*pow8(mU3)) - 78*mU32*power10(mQ3)) + m32*(-48*
+        pow12(mQ3) + 2*pow6(mQ3)*(60*mU32*pow4(msq) + 180*msq2*pow4(mU3) -
+        1147*pow6(mU3)) - (240*msq2*mU32 + 1291*pow4(mU3))*pow8(mQ3) - 9*pow4(
+        mQ3)*(20*pow4(msq)*pow4(mU3) - 17*pow8(mU3)) - 120*mQ32*msq2*pow8(mU3)
+        + 60*pow4(msq)*pow8(mU3) + 920*mU32*power10(mQ3))))/(pow2(m32 - mU32)*
+        pow3(m32 - mQ32)*pow4(mQ32 - mU32)) + (2*pow2(Xt)*(256*(2*mQ32 + mU32)*
+        pow16(m3) - 2*pow14(m3)*(244*mQ32*mU32 + 1523*pow4(mQ3) + 921*pow4(mU3)
+        ) + 2*pow12(m3)*((-30*msq2 + 2486*mU32)*pow4(mQ3) - 30*(msq2 - 83*mU32)
+        *pow4(mU3) + mQ32*(60*msq2*mU32 + 91*pow4(mU3)) + 2997*pow6(mQ3)) - (-
+        90*pow4(msq)*pow4(mU3) - 2*pow4(mQ3)*(210*msq2*mU32 + 45*pow4(msq) +
+        3428*pow4(mU3)) + 4*(30*msq2 + 3691*mU32)*pow6(mQ3) - 180*msq2*pow6(
+        mU3) + 4*mQ32*(45*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 2279*pow6(mU3))
+        + 4757*pow8(mQ3) + 5099*pow8(mU3))*power10(m3) + (mQ32 - mU32)*mU32*
+        pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) + 233*pow4(mU3)*pow6(mQ3) -
+        1281*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + 3*mU32*pow8(mQ3) +
+        9*power10(mQ3)) + pow8(m3)*(-6*(10*pow4(msq) + 643*pow4(mU3))*pow6(mQ3)
+        + 9*(-20*msq2*mU32 - 30*pow4(msq) + 189*pow4(mU3))*pow6(mU3) - 2*pow4(
+        mQ3)*(75*mU32*pow4(msq) + 360*msq2*pow4(mU3) + 1357*pow6(mU3)) + (180*
+        msq2 + 15701*mU32)*pow8(mQ3) + 6*mQ32*(80*pow4(msq)*pow4(mU3) + 120*
+        msq2*pow6(mU3) + 2483*pow8(mU3)) + 1152*power10(mQ3)) + 2*pow6(m3)*(
+        112*pow12(mQ3) - 6*mQ32*(40*msq2*mU32 + 30*pow4(msq) + 503*pow4(mU3))*
+        pow6(mU3) + 20*pow6(mQ3)*(6*mU32*pow4(msq) + 18*msq2*pow4(mU3) + 359*
+        pow6(mU3)) - (270*msq2*mU32 + 15*pow4(msq) + 2161*pow4(mU3))*pow8(mQ3)
+        + pow4(mQ3)*(-60*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 6923*pow8(
+        mU3)) + 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) - 3254*mU32*power10(mQ3)) +
+        2*pow4(m3)*(515*mU32*pow12(mQ3) - 57*pow14(mQ3) + pow4(mQ3)*(150*msq2*
+        mU32 + 180*pow4(msq) + 4093*pow4(mU3))*pow6(mU3) + (45*mU32*pow4(msq) +
+        270*msq2*pow4(mU3) - 4664*pow6(mU3))*pow8(mQ3) - 4*pow6(mQ3)*(45*pow4(
+        msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 272*pow8(mU3)) + 1713*pow4(mU3)*
+        power10(mQ3) + 60*mQ32*msq2*power10(mU3) - 45*pow4(msq)*power10(mU3)) +
+        3*m32*mQ32*(-56*mU32*pow12(mQ3) + 9*pow14(mQ3) + 4*pow4(mQ3)*(30*msq2*
+        mU32 + 20*pow4(msq) - 427*pow4(mU3))*pow6(mU3) + 556*pow6(mU3)*pow8(
+        mQ3) - 5*pow6(mQ3)*(6*pow4(msq)*pow4(mU3) + 12*msq2*pow6(mU3) - 223*
+        pow8(mU3)) - 10*mQ32*msq2*(7*msq2 + 6*mU32)*pow8(mU3) - 172*pow4(mU3)*
+        power10(mQ3) + 20*pow4(msq)*power10(mU3))))/(pow3(m32 - mU32)*pow3(mQ32
+        - mU32)*pow4(m32 - mQ32)) + (pow4(Xt)*(12*(23*mQ32 - 87*mU32)*pow16(m3)
+        + 4*pow14(m3)*(703*mQ32*mU32 + 28*pow4(mQ3) + 793*pow4(mU3)) - 2*pow12(
+        m3)*((-30*msq2 + 2627*mU32)*pow4(mQ3) + 4493*mQ32*pow4(mU3) + 5*(6*msq2
+        + 47*mU32)*pow4(mU3) + 925*pow6(mQ3)) + (-2*pow4(mQ3)*(90*msq2*mU32 +
+        45*pow4(msq) - 4166*pow4(mU3)) + 15*(12*msq2*mU32 + 6*pow4(msq) - 263*
+        pow4(mU3))*pow4(mU3) + 6*(20*msq2 + 1613*mU32)*pow6(mQ3) - 6*mQ32*(20*
+        msq2*pow4(mU3) + 267*pow6(mU3)) + 1633*pow8(mQ3))*power10(m3) - mU32*(
+        mQ32 + mU32)*pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) - 285*pow4(mU3)*
+        pow6(mQ3) - 1799*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + 3*mU32*
+        pow8(mQ3) + 9*power10(mQ3)) + pow8(m3)*(12*(-30*msq2*mU32 + 5*pow4(msq)
+        - 342*pow4(mU3))*pow6(mQ3) + 3*(-60*msq2*mU32 - 90*pow4(msq) + 761*
+        pow4(mU3))*pow6(mU3) + 90*pow4(mQ3)*(3*mU32*pow4(msq) + 4*msq2*pow4(
+        mU3) + 139*pow6(mU3)) - (180*msq2 + 8509*mU32)*pow8(mQ3) - 20*mQ32*(3*
+        pow4(msq)*pow4(mU3) - 18*msq2*pow6(mU3) - 784*pow8(mU3)) + 460*power10(
+        mQ3)) - 2*pow6(m3)*(355*pow12(mQ3) + 2*pow6(mQ3)*(45*mU32*pow4(msq) -
+        90*msq2*pow4(mU3) + 5383*pow6(mU3)) - (270*msq2*mU32 + 15*pow4(msq) +
+        1186*pow4(mU3))*pow8(mQ3) - 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) + 3*
+        pow4(mQ3)*(50*pow4(msq)*pow4(mU3) + 100*msq2*pow6(mU3) + 4459*pow8(mU3)
+        ) - 734*mU32*power10(mQ3) + mQ32*(-90*pow4(msq)*pow6(mU3) + 180*msq2*
+        pow8(mU3) + 4118*power10(mU3))) - m32*mQ32*(-114*mU32*pow12(mQ3) + 27*
+        pow14(mQ3) + 3666*pow6(mU3)*pow8(mQ3) - 3*pow6(mQ3)*(30*pow4(msq)*pow4(
+        mU3) + 60*msq2*pow6(mU3) - 3863*pow8(mU3)) + 90*mQ32*msq2*(msq2 + 2*
+        mU32)*pow8(mU3) + 756*pow4(mU3)*power10(mQ3) - 60*pow4(msq)*power10(
+        mU3) + pow4(mQ3)*(60*pow4(msq)*pow6(mU3) + 7196*power10(mU3))) + 2*
+        pow4(m3)*(360*mU32*pow12(mQ3) + 57*pow14(mQ3) + 9*pow4(mQ3)*(30*msq2*
+        mU32 + 10*pow4(msq) + 631*pow4(mU3))*pow6(mU3) + (-45*mU32*pow4(msq) -
+        270*msq2*pow4(mU3) + 7247*pow6(mU3))*pow8(mQ3) + 10*pow6(mQ3)*(9*pow4(
+        msq)*pow4(mU3) - 6*msq2*pow6(mU3) + 1225*pow8(mU3)) - pow4(mU3)*
+        power10(mQ3) - 45*pow4(msq)*power10(mU3) + mQ32*(-90*pow4(msq)*pow8(
+        mU3) + 60*msq2*power10(mU3)))))/(pow3(m32 - mU32)*pow4(m32 - mQ32)*
+        pow4(mQ32 - mU32))) - (3*pow2(log(Mst12/pow2(mQ3)))*(320*(mQ32 + mU32)*
+        pow2(-(m3*mQ32) + pow3(m3))*pow4(mQ3)*pow6(Xt) - (8*m3*(m32 - mQ32)*Xt*
+        pow3(mQ32 - mU32)*(2*pow6(m3)*((-30*msq2 + 243*mU32)*pow4(mQ3) - 3*
+        mU32*(5*pow4(msq) + 13*pow4(mU3)) + 5*mQ32*(6*msq2*mU32 + 3*pow4(msq) +
+        14*pow4(mU3)) + 14*pow6(mQ3)) + (-291*mQ32*mU32 - 176*pow4(mQ3) + 163*
+        pow4(mU3))*pow8(m3) + pow4(m3)*(pow4(mQ3)*(60*msq2*mU32 - 30*pow4(msq)
+        - 409*pow4(mU3)) + 60*pow4(msq)*pow4(mU3) + 3*(20*msq2 - 59*mU32)*pow6(
+        mQ3) - mQ32*(30*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 13*pow6(mU3)) +
+        55*pow8(mQ3)) + 2*(73*mQ32 - 41*mU32)*power10(m3) + mQ32*(-30*mQ32*
+        msq2*(msq2 + 2*mU32)*pow4(mU3) + 60*pow4(mU3)*pow6(mQ3) + pow4(mQ3)*(
+        60*msq2*pow4(mU3) - 101*pow6(mU3)) + 30*pow4(msq)*pow6(mU3) - 10*mU32*
+        pow8(mQ3) + 3*power10(mQ3)) - 2*m32*(15*mQ32*msq2*(msq2 - 2*mU32)*pow4(
+        mU3) + (60*msq2*mU32 - 95*pow4(mU3))*pow6(mQ3) + 15*pow4(msq)*pow6(mU3)
+        - 6*pow4(mQ3)*(5*mU32*pow4(msq) + 5*msq2*pow4(mU3) + 12*pow6(mU3)) +
+        35*mU32*pow8(mQ3) + 4*power10(mQ3))))/pow2(m32 - mU32) - (8*m3*(m32 -
+        mQ32)*pow5(Xt)*((-181*mU32*pow4(mQ3) + 46*mQ32*pow4(mU3) - 126*pow6(
+        mQ3) + 101*pow6(mU3))*pow8(m3) + 2*pow6(m3)*(3*(5*pow4(msq) - 9*pow4(
+        mU3))*pow4(mU3) + pow4(mQ3)*(-15*pow4(msq) + 149*pow4(mU3)) + 3*(10*
+        msq2 + 63*mU32)*pow6(mQ3) + mQ32*(-30*msq2*pow4(mU3) + 3*pow6(mU3)) +
+        6*pow8(mQ3)) + (mQ32 + mU32)*pow4(m3)*(pow4(mQ3)*(-60*msq2*mU32 + 30*
+        pow4(msq) - 389*pow4(mU3)) - 60*pow4(msq)*pow4(mU3) - 3*(20*msq2 + 43*
+        mU32)*pow6(mQ3) + 5*mQ32*(6*mU32*pow4(msq) + 24*msq2*pow4(mU3) - pow6(
+        mU3)) + 43*pow8(mQ3)) + (-32*mQ32*mU32 + 82*pow4(mQ3) - 50*pow4(mU3))*
+        power10(m3) - mQ32*(mQ32 + mU32)*(-30*mQ32*msq2*(msq2 + 2*mU32)*pow4(
+        mU3) - 38*pow4(mU3)*pow6(mQ3) + 30*pow4(msq)*pow6(mU3) + 5*pow4(mQ3)*(
+        12*msq2*pow4(mU3) + 25*pow6(mU3)) - 10*mU32*pow8(mQ3) + 3*power10(mQ3))
+        + 2*m32*(4*pow12(mQ3) + 30*mQ32*msq2*(msq2 - mU32)*pow6(mU3) + pow6(
+        mQ3)*(-30*mU32*pow4(msq) + 30*msq2*pow4(mU3) + 203*pow6(mU3)) + (60*
+        msq2*mU32 + 88*pow4(mU3))*pow8(mQ3) - 3*pow4(mQ3)*(5*pow4(msq)*pow4(
+        mU3) + 20*msq2*pow6(mU3) - 28*pow8(mU3)) + 15*pow4(msq)*pow8(mU3) - 59*
+        mU32*power10(mQ3))))/pow2(m32 - mU32) - (8*m3*(m32 - mQ32)*(mQ32 -
+        mU32)*pow3(Xt)*(382*(mQ32 - mU32)*pow12(m3) + (1630*mU32*pow4(mQ3) -
+        1609*mQ32*pow4(mU3) + 1201*pow6(mQ3) + 58*pow6(mU3))*pow8(m3) + pow6(
+        m3)*(60*pow4(msq)*pow4(mU3) + 12*pow4(mQ3)*(20*msq2*mU32 + 5*pow4(msq)
+        + 24*pow4(mU3)) - 24*(5*msq2 + 118*mU32)*pow6(mQ3) - 4*mQ32*(30*mU32*
+        pow4(msq) + 30*msq2*pow4(mU3) - 133*pow6(mU3)) - 321*pow8(mQ3) - 227*
+        pow8(mU3)) + (390*mQ32*mU32 - 1191*pow4(mQ3) + 545*pow4(mU3))*power10(
+        m3) + pow4(m3)*((-60*pow4(msq) + 2056*pow4(mU3))*pow6(mQ3) - 120*pow4(
+        msq)*pow6(mU3) - 24*pow4(mQ3)*(15*msq2*pow4(mU3) + 34*pow6(mU3)) + 2*(
+        60*msq2 + 533*mU32)*pow8(mQ3) + mQ32*(180*pow4(msq)*pow4(mU3) + 240*
+        msq2*pow6(mU3) + 347*pow8(mU3)) - 93*power10(mQ3)) - m32*(16*pow12(mQ3)
+        - 20*pow6(mQ3)*(6*mU32*pow4(msq) + 18*msq2*pow4(mU3) - 5*pow6(mU3)) + (
+        240*msq2*mU32 + 1409*pow4(mU3))*pow8(mQ3) + 120*mQ32*msq2*pow8(mU3) -
+        60*pow4(msq)*pow8(mU3) + pow4(mQ3)*(180*pow4(msq)*pow4(mU3) + 37*pow8(
+        mU3)) - 282*mU32*power10(mQ3)) + mQ32*(6*pow12(mQ3) + 120*mQ32*msq2*(
+        msq2 + mU32)*pow6(mU3) + 2*pow6(mQ3)*(60*msq2*pow4(mU3) + 227*pow6(mU3)
+        ) - 63*pow4(mU3)*pow8(mQ3) - 60*pow4(msq)*pow8(mU3) - 5*pow4(mQ3)*(12*
+        pow4(msq)*pow4(mU3) + 48*msq2*pow6(mU3) + 23*pow8(mU3)) - 26*mU32*
+        power10(mQ3))))/pow2(m32 - mU32) + (pow4(mQ32 - mU32)*(2*(231*mQ32 -
+        551*mU32)*pow14(m3) + 128*pow16(m3) + pow12(m3)*(60*msq2*mU32 + mQ32*(-
+        60*msq2 + 290*mU32) - 1666*pow4(mQ3) + 2528*pow4(mU3)) + pow8(m3)*(
+        pow4(mQ3)*(180*msq2*mU32 - 60*pow4(msq) - 263*pow4(mU3)) + 3*pow4(mU3)*
+        (60*msq2*mU32 + 90*pow4(msq) + 239*pow4(mU3)) + (180*msq2 - 4609*mU32)*
+        pow6(mQ3) + mQ32*(-210*mU32*pow4(msq) - 540*msq2*pow4(mU3) + 4531*pow6(
+        mU3)) - 1016*pow8(mQ3)) + (mQ32 - mU32)*mU32*pow4(mQ3)*(-209*pow4(mQ3)*
+        pow4(mU3) + 30*pow4(msq)*pow4(mU3) + 4*mU32*pow6(mQ3) + 3*pow8(mQ3)) +
+        ((-120*msq2 + 3277*mU32)*pow4(mQ3) + mQ32*(300*msq2*mU32 + 90*pow4(msq)
+        - 3539*pow4(mU3)) + 1905*pow6(mQ3) - 3*(30*mU32*pow4(msq) + 60*msq2*
+        pow4(mU3) + 761*pow6(mU3)))*power10(m3) + 2*pow6(m3)*(-3*(90*msq2*mU32
+        + 5*pow4(msq) - 557*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(105*mU32*pow4(
+        msq) + 90*msq2*pow4(mU3) - 1613*pow6(mU3)) + 1212*mU32*pow8(mQ3) + 5*
+        mQ32*(9*pow4(msq)*pow4(mU3) + 42*msq2*pow6(mU3) - 166*pow8(mU3)) - 15*(
+        9*pow4(msq)*pow6(mU3) + 2*msq2*pow8(mU3)) + 136*power10(mQ3)) + m32*
+        mQ32*(9*pow12(mQ3) + 349*pow6(mQ3)*pow6(mU3) + 653*pow4(mU3)*pow8(mQ3)
+        - 60*pow4(msq)*pow8(mU3) - 2*pow4(mQ3)*(45*pow4(msq)*pow4(mU3) + 90*
+        msq2*pow6(mU3) + 418*pow8(mU3)) + 30*mQ32*(5*pow4(msq)*pow6(mU3) + 6*
+        msq2*pow8(mU3)) - 47*mU32*power10(mQ3)) - 2*pow4(m3)*(19*pow12(mQ3) -
+        3*pow6(mQ3)*(15*mU32*pow4(msq) + 90*msq2*pow4(mU3) + 103*pow6(mU3)) +
+        1193*pow4(mU3)*pow8(mQ3) + 3*pow4(mQ3)*(45*pow4(msq)*pow4(mU3) + 70*
+        msq2*pow6(mU3) - 271*pow8(mU3)) - 45*pow4(msq)*pow8(mU3) + mQ32*(-45*
+        pow4(msq)*pow6(mU3) + 60*msq2*pow8(mU3)) + 230*mU32*power10(mQ3))))/
+        pow3(m32 - mU32) + (2*pow2(mQ32 - mU32)*pow2(Xt)*(-768*(4*mQ32 + 3*
+        mU32)*pow16(m3) + 768*pow18(m3) + 2*pow14(m3)*(5100*mQ32*mU32 + 2131*
+        pow4(mQ3) + 833*pow4(mU3)) - 2*pow12(m3)*(10*(3*msq2 + 797*mU32)*pow4(
+        mQ3) + 30*msq2*pow4(mU3) + mQ32*(-60*msq2*mU32 + 5067*pow4(mU3)) + 981*
+        pow6(mQ3) - 578*pow6(mU3)) + (90*pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(
+        210*msq2*mU32 + 45*pow4(msq) + 9994*pow4(mU3)) + (-120*msq2 + 9188*
+        mU32)*pow6(mQ3) + 180*msq2*pow6(mU3) - 4*mQ32*(45*mU32*pow4(msq) + 120*
+        msq2*pow4(mU3) + 53*pow6(mU3)) - 171*pow8(mQ3) - 1913*pow8(mU3))*
+        power10(m3) + (mQ32 - mU32)*mU32*pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3)
+        - 145*pow4(mU3)*pow6(mQ3) - 343*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*
+        pow6(mU3) + mU32*pow8(mQ3) + 3*power10(mQ3)) - pow8(m3)*(2*(30*pow4(
+        msq) + 7559*pow4(mU3))*pow6(mQ3) + 9*(20*msq2*mU32 + 30*pow4(msq) - 71*
+        pow4(mU3))*pow6(mU3) + 2*pow4(mQ3)*(75*mU32*pow4(msq) + 360*msq2*pow4(
+        mU3) + 3121*pow6(mU3)) + (-180*msq2 + 581*mU32)*pow8(mQ3) - 2*mQ32*(
+        240*pow4(msq)*pow4(mU3) + 360*msq2*pow6(mU3) + 2591*pow8(mU3)) + 8*
+        power10(mQ3)) + 2*pow6(m3)*(102*pow12(mQ3) - 10*mQ32*(24*msq2*mU32 +
+        18*pow4(msq) + 103*pow4(mU3))*pow6(mU3) + 8*pow6(mQ3)*(15*mU32*pow4(
+        msq) + 45*msq2*pow4(mU3) + 493*pow6(mU3)) - 3*(90*msq2*mU32 + 5*pow4(
+        msq) - 631*pow4(mU3))*pow8(mQ3) + 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) -
+        5*pow4(mQ3)*(12*pow4(msq)*pow4(mU3) - 24*msq2*pow6(mU3) + 419*pow8(mU3)
+        ) - 126*mU32*power10(mQ3)) + m32*mQ32*(mQ32 - mU32)*(9*pow12(mQ3) +
+        997*pow6(mQ3)*pow6(mU3) + 449*pow4(mU3)*pow8(mQ3) - 2*pow4(mQ3)*(45*
+        pow4(msq)*pow4(mU3) + 90*msq2*pow6(mU3) - 686*pow8(mU3)) - 60*pow4(msq)
+        *pow8(mU3) + 30*mQ32*(5*pow4(msq)*pow6(mU3) + 6*msq2*pow8(mU3)) - 47*
+        mU32*power10(mQ3)) + pow4(m3)*(-218*mU32*pow12(mQ3) - 38*pow14(mQ3) + (
+        90*mU32*pow4(msq) + 540*msq2*pow4(mU3) - 2912*pow6(mU3))*pow8(mQ3) - 8*
+        pow6(mQ3)*(45*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 88*pow8(mU3))
+        - 762*pow4(mU3)*power10(mQ3) + 120*mQ32*msq2*power10(mU3) - 90*pow4(
+        msq)*power10(mU3) + pow4(mQ3)*(360*pow4(msq)*pow6(mU3) + 300*msq2*pow8(
+        mU3) + 2458*power10(mU3)))))/pow3(m32 - mU32) + ((-mQ32 + mU32)*pow4(
+        Xt)*((-860*mQ32 + 604*mU32)*pow16(m3) + 4*pow14(m3)*(155*mQ32*mU32 +
+        426*pow4(mQ3) - 225*pow4(mU3)) + 2*pow12(m3)*(-((30*msq2 + 2131*mU32)*
+        pow4(mQ3)) + 107*mQ32*pow4(mU3) + 30*msq2*pow4(mU3) + 67*pow6(mQ3) -
+        467*pow6(mU3)) + (-90*pow4(msq)*pow4(mU3) + 2*pow4(mQ3)*(90*msq2*mU32 +
+        45*pow4(msq) + 3256*pow4(mU3)) + (-120*msq2 + 2278*mU32)*pow6(mQ3) -
+        180*msq2*pow6(mU3) + 10*mQ32*(12*msq2*pow4(mU3) + 431*pow6(mU3)) -
+        1455*pow8(mQ3) + 2131*pow8(mU3))*power10(m3) + mU32*(mQ32 + mU32)*pow4(
+        mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) - 387*pow4(mU3)*pow6(mQ3) - 585*pow4(
+        mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + mU32*pow8(mQ3) + 3*power10(
+        mQ3)) + pow8(m3)*(-4*(-90*msq2*mU32 + 15*pow4(msq) + 2534*pow4(mU3))*
+        pow6(mQ3) + (180*msq2*mU32 + 270*pow4(msq) - 913*pow4(mU3))*pow6(mU3) -
+        2*pow4(mQ3)*(135*mU32*pow4(msq) + 180*msq2*pow4(mU3) + 5579*pow6(mU3))
+        + (180*msq2 + 1379*mU32)*pow8(mQ3) + 4*mQ32*(15*pow4(msq)*pow4(mU3) -
+        90*msq2*pow6(mU3) - 1826*pow8(mU3)) + 52*power10(mQ3)) + 2*pow6(m3)*(
+        223*pow12(mQ3) + 2*mQ32*(90*msq2*mU32 - 45*pow4(msq) + 773*pow4(mU3))*
+        pow6(mU3) + 2*pow6(mQ3)*(45*mU32*pow4(msq) - 90*msq2*pow4(mU3) + 3833*
+        pow6(mU3)) + (-270*msq2*mU32 - 15*pow4(msq) + 2854*pow4(mU3))*pow8(mQ3)
+        - 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) + pow4(mQ3)*(150*pow4(msq)*pow4(
+        mU3) + 300*msq2*pow6(mU3) + 5489*pow8(mU3)) + 230*mU32*power10(mQ3)) +
+        m32*mQ32*(-38*mU32*pow12(mQ3) + 9*pow14(mQ3) + 60*pow4(mQ3)*(pow4(msq)
+        + 39*pow4(mU3))*pow6(mU3) + 2838*pow6(mU3)*pow8(mQ3) - 3*pow6(mQ3)*(30*
+        pow4(msq)*pow4(mU3) + 60*msq2*pow6(mU3) - 1657*pow8(mU3)) + 90*mQ32*
+        msq2*(msq2 + 2*mU32)*pow8(mU3) + 1128*pow4(mU3)*power10(mQ3) - 60*pow4(
+        msq)*power10(mU3)) - 2*pow4(m3)*(510*mU32*pow12(mQ3) + 19*pow14(mQ3) +
+        9*pow4(mQ3)*(30*msq2*mU32 + 10*pow4(msq) + 219*pow4(mU3))*pow6(mU3) + (
+        -45*mU32*pow4(msq) - 270*msq2*pow4(mU3) + 5009*pow6(mU3))*pow8(mQ3) +
+        30*pow6(mQ3)*(3*pow4(msq)*pow4(mU3) - 2*msq2*pow6(mU3) + 163*pow8(mU3))
+        + 1273*pow4(mU3)*power10(mQ3) - 45*pow4(msq)*power10(mU3) + mQ32*(-90*
+        pow4(msq)*pow8(mU3) + 60*msq2*power10(mU3)))))/pow3(m32 - mU32)))/(
+        pow4(m32 - mQ32)*pow5(mQ32 - mU32)) + 2*log(Mst12/pow2(mQ3))*((-640*
+        m32*pow4(mQ3)*pow6(Xt))/(pow2(m32 - mQ32)*pow4(mQ32 - mU32)) + (32*m3*
+        pow3(Xt)*(-(m32*mU32*pow4(mQ3)*(-30*msq2*mU32 + mQ32*(30*msq2 + 567*
+        mU32) + 326*pow4(mQ3) + 375*pow4(mU3))) - pow6(m3)*(43*mU32*pow4(mQ3) +
+        201*mQ32*pow4(mU3) + 48*pow6(mQ3) - 16*pow6(mU3)) + mU32*pow4(mQ3)*(
+        275*mU32*pow4(mQ3) + 6*mQ32*(5*msq2*mU32 + 27*pow4(mU3)) + 3*pow6(mQ3)
+        - 3*(10*msq2*pow4(mU3) + pow6(mU3))) + (-75*mQ32*mU32 + 16*pow4(mQ3) -
+        16*pow4(mU3))*pow8(m3) + pow4(m3)*(420*pow4(mQ3)*pow4(mU3) + 468*mU32*
+        pow6(mQ3) + 262*mQ32*pow6(mU3) + 32*pow8(mQ3))))/((m32 - mU32)*pow2(
+        mQ3)*pow2(m32 - mQ32)*pow2(mU3)*pow3(mQ32 - mU32)) - 20*log(Mst12/pow2(
+        msq))*((4*m3*Xt*(m32*mQ32 - 12*mQ32*msq2 - pow4(mQ3) + 6*pow4(msq)))/((
+        mQ32 - mU32)*pow2(m32 - mQ32)) + (4*m3*(mQ32 + mU32)*(m32*mQ32 + 12*
+        mQ32*msq2 - pow4(mQ3) - 6*pow4(msq))*pow5(Xt))/(pow2(m32 - mQ32)*pow4(
+        mQ32 - mU32)) + ((7*mQ32 + 6*msq2)*pow4(m3) - 3*mQ32*pow4(msq) - 3*m32*
+        (-6*mQ32*msq2 + 2*pow4(mQ3) + 3*pow4(msq)) - 3*pow6(m3) + 2*pow6(mQ3))/
+        pow3(m32 - mQ32) + (4*m3*pow3(Xt)*((-3*mQ32 + mU32)*pow4(m3) - 2*m32*
+        pow4(mQ3) - (24*msq2 + mU32)*pow4(mQ3) - 12*mU32*pow4(msq) + 12*mQ32*(
+        2*msq2*mU32 + pow4(msq)) + 2*pow6(m3) + 3*pow6(mQ3)))/(pow2(m32 - mQ32)
+        *pow3(mQ32 - mU32)) + (2*pow2(Xt)*(3*msq2*(mQ32 - mU32)*(m32*(6*mQ32 -
+        3*msq2) - mQ32*msq2 + 2*pow4(m3)) - (m32 - mQ32)*((3*mQ32 - mU32)*pow4(
+        m3) + m32*(4*mQ32*mU32 - 8*pow4(mQ3)) - 2*mU32*pow4(mQ3) + 4*pow6(mQ3))
+        ))/(pow2(mQ32 - mU32)*pow3(m32 - mQ32)) + (pow4(Xt)*(-4*m32*(mQ32 -
+        mU32) + (3*msq2*(mQ32 - mU32)*(mQ32 + mU32)*(mQ32*msq2 + m32*(-6*mQ32 +
+        3*msq2) - 2*pow4(m3)))/pow3(m32 - mQ32) + (8*mQ32*mU32*pow4(m3) - pow4(
+        mQ3)*pow4(mU3) + 2*(mQ32 - mU32)*pow6(m3) + 4*mU32*pow6(mQ3) - 2*m32*(
+        5*mU32*pow4(mQ3) - mQ32*pow4(mU3) + 4*pow6(mQ3)) + 5*pow8(mQ3))/pow2(
+        m32 - mQ32)))/pow4(mQ32 - mU32)) + (8*m3*Xt*(64*pow12(m3)*pow2(mQ32 -
+        mU32) + 2*mQ32*mU32*pow4(m3)*(3*pow4(mQ3)*(-20*msq2*mU32 + 5*pow4(msq)
+        - 209*pow4(mU3)) - 30*pow4(msq)*pow4(mU3) + (-60*msq2 + 930*mU32)*pow6(
+        mQ3) + mQ32*(15*mU32*pow4(msq) + 120*msq2*pow4(mU3) - 574*pow6(mU3)) +
+        223*pow8(mQ3)) - 2*mQ32*pow6(m3)*(-15*pow4(msq)*pow4(mU3) + pow4(mQ3)*(
+        -60*msq2*mU32 + 486*pow4(mU3)) + 728*mU32*pow6(mQ3) + mQ32*(15*mU32*
+        pow4(msq) + 60*msq2*pow4(mU3) - 1088*pow6(mU3)) + 48*pow8(mQ3) - 206*
+        pow8(mU3)) + pow8(m3)*(-744*pow4(mQ3)*pow4(mU3) + 1371*mU32*pow6(mQ3) -
+        963*mQ32*pow6(mU3) + 256*pow8(mQ3) + 64*pow8(mU3)) - 4*(81*mU32*pow4(
+        mQ3) - 169*mQ32*pow4(mU3) + 56*pow6(mQ3) + 32*pow6(mU3))*power10(m3) +
+        mU32*pow4(mQ3)*(253*pow4(mU3)*pow6(mQ3) - 30*pow4(msq)*pow6(mU3) - 12*
+        pow4(mQ3)*(10*msq2*pow4(mU3) + 23*pow6(mU3)) + 4*mU32*pow8(mQ3) + 6*
+        mQ32*(5*pow4(msq)*pow4(mU3) + 20*msq2*pow6(mU3) + pow8(mU3)) - 3*
+        power10(mQ3)) + 2*m32*mQ32*mU32*(6*(20*msq2*mU32 - 27*pow4(mU3))*pow6(
+        mQ3) + 15*pow4(msq)*pow6(mU3) + pow4(mQ3)*(-30*mU32*pow4(msq) - 60*
+        msq2*pow4(mU3) + 514*pow6(mU3)) - 324*mU32*pow8(mQ3) + 3*mQ32*(5*pow4(
+        msq)*pow4(mU3) - 20*msq2*pow6(mU3) - pow8(mU3)) + 7*power10(mQ3))))/(
+        pow2(mQ3)*pow2(mU3)*pow2(m32 - mU32)*pow2(mQ32 - mU32)*pow3(-m32 +
+        mQ32)) + (16*m3*pow5(Xt)*(-((121*mU32*pow4(mQ3) + 84*mQ32*pow4(mU3) +
+        32*pow6(mQ3) - 163*pow6(mU3))*pow8(m3)) - mU32*pow4(m3)*(60*pow4(msq)*
+        pow4(mU3) + pow4(mQ3)*(150*msq2*mU32 - 30*pow4(msq) + 861*pow4(mU3)) +
+        15*(6*msq2 + 37*mU32)*pow6(mQ3) - 5*mQ32*(6*mU32*pow4(msq) + 12*msq2*
+        pow4(mU3) - 13*pow6(mU3)) + 99*pow8(mQ3)) + 2*pow6(m3)*(15*pow4(msq)*
+        pow4(mU3) + pow4(mQ3)*(45*msq2*mU32 + 284*pow4(mU3)) + 113*mU32*pow6(
+        mQ3) - 3*mQ32*(5*mU32*pow4(msq) + 5*msq2*pow4(mU3) - 27*pow6(mU3)) + 8*
+        pow8(mQ3) - 42*pow8(mU3)) + 2*(mQ32*mU32 + 8*pow4(mQ3) - 41*pow4(mU3))*
+        power10(m3) - mQ32*mU32*(60*pow4(mU3)*pow6(mQ3) + 30*pow4(msq)*pow6(
+        mU3) + pow4(mQ3)*(90*msq2*pow4(mU3) + 223*pow6(mU3)) - 7*mU32*pow8(mQ3)
+        + mQ32*(-30*pow4(msq)*pow4(mU3) - 30*msq2*pow6(mU3) + 3*pow8(mU3)) + 3*
+        power10(mQ3)) + m32*mU32*(4*(45*msq2*mU32 + 161*pow4(mU3))*pow6(mQ3) +
+        30*pow4(msq)*pow6(mU3) + pow4(mQ3)*(-60*mU32*pow4(msq) + 30*msq2*pow4(
+        mU3) + 356*pow6(mU3)) + 98*mU32*pow8(mQ3) + 3*mQ32*(10*pow4(msq)*pow4(
+        mU3) - 10*msq2*pow6(mU3) + pow8(mU3)) + 11*power10(mQ3))))/(pow2(mU3)*
+        pow2(m32 - mU32)*pow3(m32 - mQ32)*pow4(mQ32 - mU32)) + (4*pow2(Xt)*(32*
+        (mQ32 + mU32)*pow14(m3)*pow3(mQ32 - mU32) + (mQ32 - mU32)*(-749*mU32*
+        pow4(mQ3) + 3*(10*msq2 + mU32)*pow4(mU3) + mQ32*(-30*msq2*mU32 + 723*
+        pow4(mU3)) + 3*pow6(mQ3))*pow6(mU3)*pow8(mQ3) - pow4(m3)*pow4(mU3)*
+        pow6(mQ3)*(-(pow4(mQ3)*(240*msq2*mU32 + 4361*pow4(mU3))) + (30*msq2 +
+        5869*mU32)*pow6(mQ3) - 180*msq2*pow6(mU3) + 3*mQ32*(130*msq2*pow4(mU3)
+        + 681*pow6(mU3)) + 1330*pow8(mQ3) + 2799*pow8(mU3)) + m32*pow4(mU3)*
+        pow6(mQ3)*((60*msq2*mU32 + 151*pow4(mU3))*pow6(mQ3) - pow4(mQ3)*(210*
+        msq2*pow4(mU3) + 3013*pow6(mU3)) + 1802*mU32*pow8(mQ3) - 9*(10*msq2 +
+        mU32)*pow8(mU3) + 4*mQ32*(60*msq2*pow6(mU3) + 649*pow8(mU3)) + 9*
+        power10(mQ3)) - 4*pow12(m3)*(-11*pow4(mU3)*pow6(mQ3) + 411*pow4(mQ3)*
+        pow6(mU3) + 25*mU32*pow8(mQ3) - 49*mQ32*pow8(mU3) + 24*power10(mQ3) -
+        16*power10(mU3)) + mU32*pow4(mQ3)*pow6(m3)*((-90*msq2*mU32 + 5069*pow4(
+        mU3))*pow6(mQ3) + 3*pow4(mQ3)*(60*msq2*pow4(mU3) - 911*pow6(mU3)) +
+        4946*mU32*pow8(mQ3) + mQ32*(-90*msq2*pow6(mU3) + 7055*pow8(mU3)) + 260*
+        power10(mQ3) + 763*power10(mU3)) + 4*power10(m3)*(24*pow12(mQ3) - 8*
+        pow12(mU3) + 168*pow6(mQ3)*pow6(mU3) + 669*pow4(mU3)*pow8(mQ3) + 1058*
+        pow4(mQ3)*pow8(mU3) + 155*mU32*power10(mQ3) - 146*mQ32*power10(mU3)) -
+        mQ32*pow8(m3)*(32*pow12(mQ3) - 324*pow12(mU3) + 445*pow6(mQ3)*pow6(mU3)
+        + 6261*pow4(mU3)*pow8(mQ3) + 4871*pow4(mQ3)*pow8(mU3) + 716*mU32*
+        power10(mQ3) + 3359*mQ32*power10(mU3))))/(pow2(m32 - mU32)*pow3(-m32 +
+        mQ32)*pow3(mQ32 - mU32)*pow4(mQ3)*pow4(mU3)) - (-64*pow18(m3)*(-(mU32*
+        pow4(mQ3)) + mQ32*pow4(mU3) + pow6(mQ3) - pow6(mU3)) + (mQ32 - mU32)*
+        pow6(mU3)*pow8(mQ3)*(297*pow4(mQ3)*pow4(mU3) + 30*pow4(msq)*pow4(mU3) +
+        10*mU32*pow6(mQ3) - 6*mQ32*(10*msq2*pow4(mU3) + pow6(mU3)) + 3*pow8(
+        mQ3)) + 8*pow16(m3)*(40*pow4(mQ3)*pow4(mU3) + 65*mU32*pow6(mQ3) - 65*
+        mQ32*pow6(mU3) + 32*pow8(mQ3) - 24*pow8(mU3)) + mU32*pow4(mQ3)*pow8(m3)
+        *((300*msq2*mU32 + 653*pow4(mU3))*pow6(mQ3) + pow4(mQ3)*(-60*mU32*pow4(
+        msq) + 600*msq2*pow4(mU3) - 5769*pow6(mU3)) + (180*msq2*mU32 + 270*
+        pow4(msq) - 259*pow4(mU3))*pow6(mU3) + 5716*mU32*pow8(mQ3) + mQ32*(-
+        210*pow4(msq)*pow4(mU3) - 1080*msq2*pow6(mU3) + 2147*pow8(mU3)) + 712*
+        power10(mQ3)) - 2*pow4(mQ3)*pow4(mU3)*pow6(m3)*(15*(32*msq2*mU32 +
+        pow4(msq) - 155*pow4(mU3))*pow6(mQ3) + 15*msq2*(9*msq2 + 2*mU32)*pow6(
+        mU3) - pow4(mQ3)*(105*mU32*pow4(msq) + 1061*pow6(mU3)) + (-30*msq2 +
+        2513*mU32)*pow8(mQ3) - 3*mQ32*(15*pow4(msq)*pow4(mU3) + 160*msq2*pow6(
+        mU3) - 91*pow8(mU3)) + 792*power10(mQ3)) + m32*pow4(mU3)*pow6(mQ3)*(9*
+        pow12(mQ3) + 6*mQ32*(50*msq2*mU32 + 25*pow4(msq) + 2*pow4(mU3))*pow6(
+        mU3) + 3*pow6(mQ3)*(60*msq2*pow4(mU3) + 73*pow6(mU3)) - 1075*pow4(mU3)*
+        pow8(mQ3) - 60*pow4(msq)*pow8(mU3) + pow4(mQ3)*(-90*pow4(msq)*pow4(mU3)
+        - 480*msq2*pow6(mU3) + 998*pow8(mU3)) - 35*mU32*power10(mQ3)) - mQ32*
+        power10(m3)*(64*pow12(mQ3) - 712*pow12(mU3) + pow6(mQ3)*(300*msq2*pow4(
+        mU3) - 4177*pow6(mU3)) + mQ32*(180*msq2*mU32 + 90*pow4(msq) + 53*pow4(
+        mU3))*pow6(mU3) + 6197*pow4(mU3)*pow8(mQ3) - 3*pow4(mQ3)*(30*pow4(msq)*
+        pow4(mU3) + 160*msq2*pow6(mU3) - 517*pow8(mU3)) + 2784*mU32*power10(
+        mQ3)) - 8*pow14(m3)*(-6*pow4(mU3)*pow6(mQ3) + 173*pow4(mQ3)*pow6(mU3) +
+        324*mU32*pow8(mQ3) - 243*mQ32*pow8(mU3) + 48*power10(mQ3) - 24*power10(
+        mU3)) + 4*pow12(m3)*(64*pow12(mQ3) - 16*pow12(mU3) - pow6(mQ3)*(15*
+        msq2*pow4(mU3) + 113*pow6(mU3)) + 486*pow4(mU3)*pow8(mQ3) + 5*pow4(mQ3)
+        *(3*msq2*pow6(mU3) + 65*pow8(mU3)) + 1020*mU32*power10(mQ3) - 518*mQ32*
+        power10(mU3)) - 2*pow4(m3)*pow4(mQ3)*pow4(mU3)*(28*pow12(mQ3) + pow6(
+        mQ3)*(-45*mU32*pow4(msq) - 540*msq2*pow4(mU3) + 1693*pow6(mU3)) + (90*
+        msq2*mU32 - 751*pow4(mU3))*pow8(mQ3) - 45*pow4(msq)*pow8(mU3) + 3*pow4(
+        mQ3)*(45*pow4(msq)*pow4(mU3) + 100*msq2*pow6(mU3) + 67*pow8(mU3)) -
+        988*mU32*power10(mQ3) + mQ32*(-45*pow4(msq)*pow6(mU3) + 150*msq2*pow8(
+        mU3) + 9*power10(mU3))))/((mQ32 - mU32)*pow3(m32 - mU32)*pow4(mQ3)*
+        pow4(m32 - mQ32)*pow4(mU3)) + (2*pow4(Xt)*(32*pow18(m3)*pow4(mQ32 -
+        mU32) + pow6(mU3)*pow8(mQ3)*(3*pow12(mQ3) + pow6(mQ3)*(78*msq2*pow4(
+        mU3) - 256*pow6(mU3)) + 3*mQ32*(10*msq2*mU32 - 20*pow4(msq) + pow4(mU3)
+        )*pow6(mU3) - 1362*pow4(mU3)*pow8(mQ3) + 30*pow4(msq)*pow8(mU3) + pow4(
+        mQ3)*(30*pow4(msq)*pow4(mU3) - 108*msq2*pow6(mU3) + 1531*pow8(mU3)) +
+        mU32*power10(mQ3)) - 2*mU32*pow4(mQ3)*pow8(m3)*(114*pow12(mQ3) - 3*
+        mQ32*(-123*msq2*mU32 + 80*pow4(msq) + 2415*pow4(mU3))*pow6(mU3) + pow6(
+        mQ3)*(30*mU32*pow4(msq) - 891*msq2*pow4(mU3) + 14570*pow6(mU3)) - 4*(
+        84*msq2*mU32 - 2521*pow4(mU3))*pow8(mQ3) + 3*(48*msq2*mU32 + 45*pow4(
+        msq) - 215*pow4(mU3))*pow8(mU3) + pow4(mQ3)*(75*pow4(msq)*pow4(mU3) +
+        714*msq2*pow6(mU3) + 4117*pow8(mU3)) + 3445*mU32*power10(mQ3)) - pow12(
+        m3)*(888*mU32*pow12(mQ3) + 940*mQ32*pow12(mU3) + 128*pow14(mQ3) + 32*
+        pow14(mU3) + (-372*msq2*pow4(mU3) + 5231*pow6(mU3))*pow8(mQ3) + (384*
+        msq2 - 2195*mU32)*pow4(mQ3)*pow8(mU3) + pow6(mQ3)*(-12*msq2*pow6(mU3) +
+        9563*pow8(mU3)) - 203*pow4(mU3)*power10(mQ3)) + mQ32*power10(m3)*(784*
+        mU32*pow12(mQ3) + 32*pow14(mQ3) + 356*pow14(mU3) - 3*pow4(mQ3)*(-194*
+        msq2*mU32 + 60*pow4(msq) + 1049*pow4(mU3))*pow6(mU3) + (-858*msq2*pow4(
+        mU3) + 11179*pow6(mU3))*pow8(mQ3) + mQ32*(504*msq2*mU32 + 90*pow4(msq)
+        - 3451*pow4(mU3))*pow8(mU3) + pow6(mQ3)*(90*pow4(msq)*pow4(mU3) - 228*
+        msq2*pow6(mU3) + 23597*pow8(mU3)) + 6890*pow4(mU3)*power10(mQ3)) +
+        pow4(mQ3)*pow4(mU3)*pow6(m3)*(2065*pow12(mQ3) + 4*pow6(mQ3)*(60*mU32*
+        pow4(msq) - 57*msq2*pow4(mU3) + 4057*pow6(mU3)) - 6*(318*msq2*mU32 + 5*
+        pow4(msq) - 4271*pow4(mU3))*pow8(mQ3) + 30*msq2*(9*msq2 + 2*mU32)*pow8(
+        mU3) - 3*pow4(mQ3)*(40*pow4(msq)*pow4(mU3) - 644*msq2*pow6(mU3) + 5429*
+        pow8(mU3)) + (-78*msq2 + 16431*mU32)*power10(mQ3) + mQ32*(-360*pow4(
+        msq)*pow6(mU3) + 222*msq2*pow8(mU3) - 6703*power10(mU3))) - 4*pow16(m3)
+        *(-293*pow4(mU3)*pow6(mQ3) + 307*pow4(mQ3)*pow6(mU3) - 63*mU32*pow8(
+        mQ3) - 7*mQ32*pow8(mU3) + 32*power10(mQ3) + 24*power10(mU3)) + 2*pow14(
+        m3)*(96*pow12(mQ3) + 48*pow12(mU3) - 6*pow6(mQ3)*(9*msq2*pow4(mU3) -
+        316*pow6(mU3)) - 1801*pow4(mU3)*pow8(mQ3) + pow4(mQ3)*(54*msq2*pow6(
+        mU3) + 507*pow8(mU3)) + 104*mU32*power10(mQ3) + 342*mQ32*power10(mU3))
+        + m32*pow4(mU3)*pow6(mQ3)*(-50*mU32*pow12(mQ3) + 9*pow14(mQ3) + 3*pow4(
+        mQ3)*(234*msq2*mU32 + 80*pow4(msq) - 2079*pow4(mU3))*pow6(mU3) + (-234*
+        msq2*pow4(mU3) + 5451*pow6(mU3))*pow8(mQ3) + 6*mQ32*(-20*msq2*mU32 -
+        35*pow4(msq) + pow4(mU3))*pow8(mU3) - 2*pow6(mQ3)*(45*pow4(msq)*pow4(
+        mU3) + 174*msq2*pow6(mU3) + 352*pow8(mU3)) + 4389*pow4(mU3)*power10(
+        mQ3) + 60*pow4(msq)*power10(mU3)) - pow4(m3)*pow4(mQ3)*pow4(mU3)*(4560*
+        mU32*pow12(mQ3) + 47*pow14(mQ3) + (-90*mU32*pow4(msq) - 1692*msq2*pow4(
+        mU3) + 11639*pow6(mU3))*pow8(mQ3) + 4*pow6(mQ3)*(90*pow4(msq)*pow4(mU3)
+        + 357*msq2*pow6(mU3) - 1753*pow8(mU3)) + (-234*msq2*mU32 + 16064*pow4(
+        mU3))*power10(mQ3) + pow4(mQ3)*(-360*pow4(msq)*pow6(mU3) + 528*msq2*
+        pow8(mU3) - 9803*power10(mU3)) + 90*pow4(msq)*power10(mU3) + mQ32*(9*
+        pow12(mU3) - 30*msq2*power10(mU3)))))/(pow3(m32 - mU32)*pow4(mQ3)*pow4(
+        m32 - mQ32)*pow4(mU3)*pow4(mQ32 - mU32)) - (log(Mst12/pow2(mU3))*(-320*
+        m32*(mQ32 + mU32)*pow2(m32 - mQ32)*pow2(m32 - mU32)*(-3*mU32*pow4(mQ3)
+        + m32*(2*mQ32*mU32 + pow4(mQ3)))*pow6(Xt) - 8*m3*(m32 - mQ32)*(m32 -
+        mU32)*Xt*pow3(mQ32 - mU32)*(-3*pow12(mQ3) - 30*msq2*(msq2 + 2*mU32)*
+        pow4(mQ3)*pow4(mU3) + pow6(m3)*(-((60*msq2 + 209*mU32)*pow4(mQ3)) + 30*
+        mQ32*(2*msq2*mU32 + pow4(msq) - 54*pow4(mU3)) - 3*mU32*(10*pow4(msq) +
+        59*pow4(mU3)) + 790*pow6(mQ3)) + 30*mQ32*pow4(msq)*pow6(mU3) + pow6(
+        mQ3)*(60*msq2*pow4(mU3) + 317*pow6(mU3)) + (785*mQ32*mU32 - 665*pow4(
+        mQ3) + 504*pow4(mU3))*pow8(m3) + pow4(m3)*(60*pow4(msq)*pow4(mU3) +
+        pow4(mQ3)*(60*msq2*mU32 - 30*pow4(msq) + 1666*pow4(mU3)) + (60*msq2 -
+        749*mU32)*pow6(mQ3) - 5*mQ32*(6*mU32*pow4(msq) + 24*msq2*pow4(mU3) -
+        121*pow6(mU3)) - 338*pow8(mQ3)) - 212*pow4(mU3)*pow8(mQ3) + 64*(3*mQ32
+        - 5*mU32)*power10(m3) + 10*mU32*power10(mQ3) + m32*(-30*mQ32*msq2*(msq2
+        - 2*mU32)*pow4(mU3) - 2*(60*msq2*mU32 + 193*pow4(mU3))*pow6(mQ3) +
+        pow4(mQ3)*(60*mU32*pow4(msq) + 60*msq2*pow4(mU3) - 729*pow6(mU3)) - 30*
+        pow4(msq)*pow6(mU3) + 531*mU32*pow8(mQ3) + 8*power10(mQ3))) + 8*m3*(m32
+        - mQ32)*(m32 - mU32)*pow5(Xt)*((-318*mU32*pow4(mQ3) + 109*mQ32*pow4(
+        mU3) - 285*pow6(mQ3) + 14*pow6(mU3))*pow8(m3) + pow6(m3)*(30*pow4(msq)*
+        pow4(mU3) + pow4(mQ3)*(-30*pow4(msq) + 583*pow4(mU3)) + (60*msq2 + 601*
+        mU32)*pow6(mQ3) + mQ32*(-60*msq2*pow4(mU3) + 487*pow6(mU3)) + 148*pow8(
+        mQ3) + 101*pow8(mU3)) + 2*(-16*mQ32*mU32 + 73*pow4(mQ3) - 57*pow4(mU3))
+        *power10(m3) - pow4(m3)*((120*msq2*mU32 - 30*pow4(msq) + 963*pow4(mU3))
+        *pow6(mQ3) + 60*pow4(msq)*pow6(mU3) + pow4(mQ3)*(-60*mU32*pow4(msq) -
+        60*msq2*pow4(mU3) + 1273*pow6(mU3)) + (60*msq2 + 103*mU32)*pow8(mQ3) +
+        mQ32*(30*pow4(msq)*pow4(mU3) - 120*msq2*pow6(mU3) + 533*pow8(mU3)) + 8*
+        power10(mQ3)) - mQ32*(mQ32 + mU32)*(-30*mQ32*msq2*(msq2 + 2*mU32)*pow4(
+        mU3) - 92*pow4(mU3)*pow6(mQ3) + 30*pow4(msq)*pow6(mU3) + pow4(mQ3)*(60*
+        msq2*pow4(mU3) + 353*pow6(mU3)) - 30*mU32*pow8(mQ3) + 9*power10(mQ3)) +
+        m32*(24*pow12(mQ3) - 15*pow6(mQ3)*(4*mU32*pow4(msq) - 4*msq2*pow4(mU3)
+        - 71*pow6(mU3)) + 60*mQ32*msq2*(msq2 - mU32)*pow6(mU3) + (120*msq2*mU32
+        + 263*pow4(mU3))*pow8(mQ3) + 30*pow4(msq)*pow8(mU3) + pow4(mQ3)*(-30*
+        pow4(msq)*pow4(mU3) - 120*msq2*pow6(mU3) + 769*pow8(mU3)) - 201*mU32*
+        power10(mQ3))) - pow4(mQ32 - mU32)*(2*(907*mQ32 - 459*mU32)*pow14(m3) -
+        128*pow16(m3) - 2*pow12(m3)*(30*msq2*mU32 + mQ32*(-30*msq2 + 95*mU32) +
+        2589*pow4(mQ3) - 1340*pow4(mU3)) + pow8(m3)*(3*pow4(mU3)*(-60*msq2*mU32
+        - 90*pow4(msq) + 247*pow4(mU3)) + pow4(mQ3)*(-180*msq2*mU32 + 60*pow4(
+        msq) + 1709*pow4(mU3)) - (180*msq2 + 10181*mU32)*pow6(mQ3) + mQ32*(210*
+        mU32*pow4(msq) + 540*msq2*pow4(mU3) + 6547*pow6(mU3)) - 3296*pow8(mQ3))
+        + (mQ32 - mU32)*mU32*pow4(mQ3)*(-373*pow4(mQ3)*pow4(mU3) - 30*pow4(msq)
+        *pow4(mU3) + 4*mU32*pow6(mQ3) + 3*pow8(mQ3)) + ((120*msq2 + 6721*mU32)*
+        pow4(mQ3) + 90*mU32*pow4(msq) + 180*msq2*pow4(mU3) - mQ32*(300*msq2*
+        mU32 + 90*pow4(msq) + 5939*pow4(mU3)) + 6045*pow6(mQ3) - 2347*pow6(mU3)
+        )*power10(m3) + 2*pow6(m3)*((270*msq2*mU32 + 15*pow4(msq) + 2089*pow4(
+        mU3))*pow6(mQ3) + 15*msq2*(9*msq2 + 2*mU32)*pow6(mU3) - 3*pow4(mQ3)*(
+        35*mU32*pow4(msq) + 30*msq2*pow4(mU3) + 973*pow6(mU3)) + 2958*mU32*
+        pow8(mQ3) - mQ32*(45*pow4(msq)*pow4(mU3) + 210*msq2*pow6(mU3) + 1174*
+        pow8(mU3)) + 390*power10(mQ3)) + m32*mQ32*(9*pow12(mQ3) + 513*pow6(mQ3)
+        *pow6(mU3) + 1145*pow4(mU3)*pow8(mQ3) + 2*pow4(mQ3)*(45*pow4(msq)*pow4(
+        mU3) + 90*msq2*pow6(mU3) - 746*pow8(mU3)) + 60*pow4(msq)*pow8(mU3) -
+        30*mQ32*(5*pow4(msq)*pow6(mU3) + 6*msq2*pow8(mU3)) - 47*mU32*power10(
+        mQ3)) - 2*pow4(m3)*(19*pow12(mQ3) + 15*pow6(mQ3)*(3*mU32*pow4(msq) +
+        18*msq2*pow4(mU3) - 49*pow6(mU3)) + 1863*pow4(mU3)*pow8(mQ3) + 45*pow4(
+        msq)*pow8(mU3) - pow4(mQ3)*(135*pow4(msq)*pow4(mU3) + 210*msq2*pow6(
+        mU3) + 1367*pow8(mU3)) + 15*mQ32*(3*pow4(msq)*pow6(mU3) - 4*msq2*pow8(
+        mU3)) + 668*mU32*power10(mQ3))) + 8*m3*(m32 - mQ32)*(m32 - mU32)*(mQ32
+        - mU32)*pow3(Xt)*(130*(mQ32 - mU32)*pow12(m3) + (808*mU32*pow4(mQ3) +
+        817*mQ32*pow4(mU3) + 263*pow6(mQ3) + 672*pow6(mU3))*pow8(m3) + pow6(m3)
+        *(30*pow4(mQ3)*(8*msq2*mU32 + 2*pow4(msq) - 91*pow4(mU3)) + 60*pow4(
+        msq)*pow4(mU3) - 2*(60*msq2 + 413*mU32)*pow6(mQ3) - 10*mQ32*(12*mU32*
+        pow4(msq) + 12*msq2*pow4(mU3) + 149*pow6(mU3)) + 175*pow8(mQ3) - 249*
+        pow8(mU3)) + (138*mQ32*mU32 - 407*pow4(mQ3) - 243*pow4(mU3))*power10(
+        m3) + pow4(m3)*((-60*pow4(msq) + 3606*pow4(mU3))*pow6(mQ3) - 6*pow4(
+        mQ3)*(60*msq2*pow4(mU3) - 349*pow6(mU3)) - 120*pow4(msq)*pow6(mU3) + 8*
+        (15*msq2 - 88*mU32)*pow8(mQ3) + mQ32*(180*pow4(msq)*pow4(mU3) + 240*
+        msq2*pow6(mU3) + 287*pow8(mU3)) - 163*power10(mQ3)) + mQ32*(18*pow12(
+        mQ3) + 120*mQ32*msq2*(msq2 + mU32)*pow6(mU3) + 6*pow6(mQ3)*(20*msq2*
+        pow4(mU3) + 191*pow6(mU3)) - 351*pow4(mU3)*pow8(mQ3) - 60*pow4(msq)*
+        pow8(mU3) - pow4(mQ3)*(60*pow4(msq)*pow4(mU3) + 240*msq2*pow6(mU3) +
+        223*pow8(mU3)) - 78*mU32*power10(mQ3)) + m32*(-48*pow12(mQ3) + 2*pow6(
+        mQ3)*(60*mU32*pow4(msq) + 180*msq2*pow4(mU3) - 1147*pow6(mU3)) - (240*
+        msq2*mU32 + 1291*pow4(mU3))*pow8(mQ3) - 9*pow4(mQ3)*(20*pow4(msq)*pow4(
+        mU3) - 17*pow8(mU3)) - 120*mQ32*msq2*pow8(mU3) + 60*pow4(msq)*pow8(mU3)
+        + 920*mU32*power10(mQ3))) - 2*pow2(mQ32 - mU32)*pow2(Xt)*(256*(2*mQ32 +
+        mU32)*pow16(m3) - 2*pow14(m3)*(244*mQ32*mU32 + 1523*pow4(mQ3) + 921*
+        pow4(mU3)) + 2*pow12(m3)*((-30*msq2 + 2486*mU32)*pow4(mQ3) - 30*(msq2 -
+        83*mU32)*pow4(mU3) + mQ32*(60*msq2*mU32 + 91*pow4(mU3)) + 2997*pow6(
+        mQ3)) - (-90*pow4(msq)*pow4(mU3) - 2*pow4(mQ3)*(210*msq2*mU32 + 45*
+        pow4(msq) + 3428*pow4(mU3)) + 4*(30*msq2 + 3691*mU32)*pow6(mQ3) - 180*
+        msq2*pow6(mU3) + 4*mQ32*(45*mU32*pow4(msq) + 120*msq2*pow4(mU3) + 2279*
+        pow6(mU3)) + 4757*pow8(mQ3) + 5099*pow8(mU3))*power10(m3) + (mQ32 -
+        mU32)*mU32*pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) + 233*pow4(mU3)*pow6(
+        mQ3) - 1281*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + 3*mU32*pow8(
+        mQ3) + 9*power10(mQ3)) + pow8(m3)*(-6*(10*pow4(msq) + 643*pow4(mU3))*
+        pow6(mQ3) + 9*(-20*msq2*mU32 - 30*pow4(msq) + 189*pow4(mU3))*pow6(mU3)
+        - 2*pow4(mQ3)*(75*mU32*pow4(msq) + 360*msq2*pow4(mU3) + 1357*pow6(mU3))
+        + (180*msq2 + 15701*mU32)*pow8(mQ3) + 6*mQ32*(80*pow4(msq)*pow4(mU3) +
+        120*msq2*pow6(mU3) + 2483*pow8(mU3)) + 1152*power10(mQ3)) + 2*pow6(m3)*
+        (112*pow12(mQ3) - 6*mQ32*(40*msq2*mU32 + 30*pow4(msq) + 503*pow4(mU3))*
+        pow6(mU3) + 20*pow6(mQ3)*(6*mU32*pow4(msq) + 18*msq2*pow4(mU3) + 359*
+        pow6(mU3)) - (270*msq2*mU32 + 15*pow4(msq) + 2161*pow4(mU3))*pow8(mQ3)
+        + pow4(mQ3)*(-60*pow4(msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 6923*pow8(
+        mU3)) + 15*msq2*(9*msq2 + 2*mU32)*pow8(mU3) - 3254*mU32*power10(mQ3)) +
+        2*pow4(m3)*(515*mU32*pow12(mQ3) - 57*pow14(mQ3) + pow4(mQ3)*(150*msq2*
+        mU32 + 180*pow4(msq) + 4093*pow4(mU3))*pow6(mU3) + (45*mU32*pow4(msq) +
+        270*msq2*pow4(mU3) - 4664*pow6(mU3))*pow8(mQ3) - 4*pow6(mQ3)*(45*pow4(
+        msq)*pow4(mU3) + 120*msq2*pow6(mU3) - 272*pow8(mU3)) + 1713*pow4(mU3)*
+        power10(mQ3) + 60*mQ32*msq2*power10(mU3) - 45*pow4(msq)*power10(mU3)) +
+        3*m32*mQ32*(-56*mU32*pow12(mQ3) + 9*pow14(mQ3) + 4*pow4(mQ3)*(30*msq2*
+        mU32 + 20*pow4(msq) - 427*pow4(mU3))*pow6(mU3) + 556*pow6(mU3)*pow8(
+        mQ3) - 5*pow6(mQ3)*(6*pow4(msq)*pow4(mU3) + 12*msq2*pow6(mU3) - 223*
+        pow8(mU3)) - 10*mQ32*msq2*(7*msq2 + 6*mU32)*pow8(mU3) - 172*pow4(mU3)*
+        power10(mQ3) + 20*pow4(msq)*power10(mU3))) + (mQ32 - mU32)*pow4(Xt)*(-
+        12*(23*mQ32 - 87*mU32)*pow16(m3) - 4*pow14(m3)*(703*mQ32*mU32 + 28*
+        pow4(mQ3) + 793*pow4(mU3)) + 2*pow12(m3)*((-30*msq2 + 2627*mU32)*pow4(
+        mQ3) + 4493*mQ32*pow4(mU3) + 5*(6*msq2 + 47*mU32)*pow4(mU3) + 925*pow6(
+        mQ3)) + (2*pow4(mQ3)*(90*msq2*mU32 + 45*pow4(msq) - 4166*pow4(mU3)) +
+        15*pow4(mU3)*(-12*msq2*mU32 - 6*pow4(msq) + 263*pow4(mU3)) - 6*(20*msq2
+        + 1613*mU32)*pow6(mQ3) + 6*mQ32*(20*msq2*pow4(mU3) + 267*pow6(mU3)) -
+        1633*pow8(mQ3))*power10(m3) + pow8(m3)*((360*msq2*mU32 - 60*pow4(msq) +
+        4104*pow4(mU3))*pow6(mQ3) + 3*(60*msq2*mU32 + 90*pow4(msq) - 761*pow4(
+        mU3))*pow6(mU3) - 90*pow4(mQ3)*(3*mU32*pow4(msq) + 4*msq2*pow4(mU3) +
+        139*pow6(mU3)) + (180*msq2 + 8509*mU32)*pow8(mQ3) + 20*mQ32*(3*pow4(
+        msq)*pow4(mU3) - 18*msq2*pow6(mU3) - 784*pow8(mU3)) - 460*power10(mQ3))
+        + mU32*(mQ32 + mU32)*pow4(mQ3)*(30*mQ32*pow4(msq)*pow4(mU3) - 285*pow4(
+        mU3)*pow6(mQ3) - 1799*pow4(mQ3)*pow6(mU3) - 30*pow4(msq)*pow6(mU3) + 3*
+        mU32*pow8(mQ3) + 9*power10(mQ3)) + 2*pow6(m3)*(355*pow12(mQ3) + 2*pow6(
+        mQ3)*(45*mU32*pow4(msq) - 90*msq2*pow4(mU3) + 5383*pow6(mU3)) - (270*
+        msq2*mU32 + 15*pow4(msq) + 1186*pow4(mU3))*pow8(mQ3) - 15*msq2*(9*msq2
+        + 2*mU32)*pow8(mU3) + 3*pow4(mQ3)*(50*pow4(msq)*pow4(mU3) + 100*msq2*
+        pow6(mU3) + 4459*pow8(mU3)) - 734*mU32*power10(mQ3) + mQ32*(-90*pow4(
+        msq)*pow6(mU3) + 180*msq2*pow8(mU3) + 4118*power10(mU3))) + m32*mQ32*(-
+        114*mU32*pow12(mQ3) + 27*pow14(mQ3) + 3666*pow6(mU3)*pow8(mQ3) - 3*
+        pow6(mQ3)*(30*pow4(msq)*pow4(mU3) + 60*msq2*pow6(mU3) - 3863*pow8(mU3))
+        + 90*mQ32*msq2*(msq2 + 2*mU32)*pow8(mU3) + 756*pow4(mU3)*power10(mQ3) -
+        60*pow4(msq)*power10(mU3) + pow4(mQ3)*(60*pow4(msq)*pow6(mU3) + 7196*
+        power10(mU3))) - 2*pow4(m3)*(360*mU32*pow12(mQ3) + 57*pow14(mQ3) + 9*
+        pow4(mQ3)*(30*msq2*mU32 + 10*pow4(msq) + 631*pow4(mU3))*pow6(mU3) + (-
+        45*mU32*pow4(msq) - 270*msq2*pow4(mU3) + 7247*pow6(mU3))*pow8(mQ3) +
+        10*pow6(mQ3)*(9*pow4(msq)*pow4(mU3) - 6*msq2*pow6(mU3) + 1225*pow8(mU3)
+        ) - pow4(mU3)*power10(mQ3) - 45*pow4(msq)*power10(mU3) + mQ32*(-90*
+        pow4(msq)*pow8(mU3) + 60*msq2*power10(mU3))))))/(pow3(m32 - mU32)*pow4(
+        m32 - mQ32)*pow5(mQ32 - mU32)))))/3.;
+ 
+   return result;				     
+}
+
+double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log22(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt){
+
+   using std::log;
+   using gm2calc::dilog;
+   
+   const double mQ32 = pow2(mQ3);
+   const double mU32 = pow2(mU3);
+   const double m32 = pow2(m3);
+   const double Mst12 = pow2(Mst1);
+   
+   const double result =
+      (16*(log(Mst12/pow2(mQ3))*pow3(-m32 + mU32)*pow4(mQ3)*pow4(mU3)*(8*Xt*
+        pow3(m3)*pow4(mQ3)*(-123*mU32*pow2(Xt) - mQ32*(178*mU32 + 91*pow2(Xt))
+        + 89*pow4(mQ3) + 89*pow4(mU3)) - 8*mQ32*Xt*(-123*mU32*pow2(Xt) - mQ32*(
+        262*mU32 + 27*pow2(Xt)) + 131*pow4(mQ3) + 131*pow4(mU3))*pow5(m3) +
+        m32*pow4(mQ3)*((587*mU32 - 684*pow2(Xt))*pow4(mQ3) + mQ32*(792*mU32*
+        pow2(Xt) - 523*pow4(mU3) + 64*pow4(Xt)) + 3*mU32*(-164*mU32*pow2(Xt) +
+        51*pow4(mU3) + 82*pow4(Xt)) - 217*pow6(mQ3)) - 8*m3*Xt*(-41*mU32*pow2(
+        Xt) - mQ32*(30*mU32 + 41*pow2(Xt)) + 15*pow4(mQ3) + 15*pow4(mU3))*pow6(
+        mQ3) + mQ32*pow4(m3)*((-905*mU32 + 1068*pow2(Xt))*pow4(mQ3) + 492*pow2(
+        Xt)*pow4(mU3) - 246*mU32*pow4(Xt) + mQ32*(-408*mU32*pow2(Xt) + 841*
+        pow4(mU3) + 300*pow4(Xt)) + 323*pow6(mQ3) - 259*pow6(mU3)) - pow6(m3)*(
+        (-319*mU32 + 740*pow2(Xt))*pow4(mQ3) + 164*pow2(Xt)*pow4(mU3) - 82*
+        mU32*pow4(Xt) + mQ32*(248*mU32*pow2(Xt) + 383*pow4(mU3) + 464*pow4(Xt))
+        + 85*pow6(mQ3) - 149*pow6(mU3)) + pow6(mQ3)*((-153*mU32 + 164*pow2(Xt))
+        *pow4(mQ3) + 164*pow2(Xt)*pow4(mU3) + mQ32*(-328*mU32*pow2(Xt) + 153*
+        pow4(mU3) - 82*pow4(Xt)) - 82*mU32*pow4(Xt) + 51*pow6(mQ3) - 51*pow6(
+        mU3)) + 8*Xt*(-41*mU32*pow2(Xt) + mQ32*(-114*mU32 + 55*pow2(Xt)) + 57*
+        pow4(mQ3) + 57*pow4(mU3))*pow7(m3) - 2*(-96*mU32*pow2(Xt) - 32*mQ32*(2*
+        mU32 + 3*pow2(Xt)) + 32*pow4(mQ3) + 32*pow4(mU3) - 91*pow4(Xt))*pow8(
+        m3) - 256*pow3(Xt)*pow9(m3)) + 2*log(Mst12/pow2(m3))*pow3(mQ32 - mU32)*
+        pow4(mQ3)*pow4(mU3)*(160*Xt*pow11(m3) - 144*pow12(m3) - 54*m32*(mQ32 +
+        mU32)*pow4(mQ3)*pow4(mU3) + 176*Xt*pow3(m3)*pow4(mQ3)*pow4(mU3) + mQ32*
+        mU32*pow4(m3)*(98*mQ32*mU32 + pow4(mQ3) + pow4(mU3)) - 344*mQ32*mU32*(
+        mQ32 + mU32)*Xt*pow5(m3) + 18*pow6(mQ3)*pow6(mU3) + pow6(m3)*(125*mU32*
+        pow4(mQ3) + 125*mQ32*pow4(mU3) + 31*pow6(mQ3) + 31*pow6(mU3)) + 168*Xt*
+        (4*mQ32*mU32 + pow4(mQ3) + pow4(mU3))*pow7(m3) - (412*mQ32*mU32 + 157*
+        pow4(mQ3) + 157*pow4(mU3))*pow8(m3) - 328*(mQ32 + mU32)*Xt*pow9(m3) +
+        274*(mQ32 + mU32)*power10(m3)) + (m32 - mQ32)*(30*log(Mst12/pow2(msq))*
+        pow2(m32 - mQ32)*pow3(m32 - mU32)*pow3(mQ32 - mU32)*pow4(mQ3)*pow4(mU3)
+        + log(Mst12/pow2(mU3))*pow2(m32 - mQ32)*pow4(mQ3)*pow4(mU3)*(8*Xt*pow3(
+        m3)*pow4(mU3)*(-91*mU32*pow2(Xt) - mQ32*(178*mU32 + 123*pow2(Xt)) + 89*
+        pow4(mQ3) + 89*pow4(mU3)) - 8*mU32*Xt*(-27*mU32*pow2(Xt) - mQ32*(262*
+        mU32 + 123*pow2(Xt)) + 131*pow4(mQ3) + 131*pow4(mU3))*pow5(m3) + pow6(
+        m3)*(-((383*mU32 + 164*pow2(Xt))*pow4(mQ3)) + mQ32*(-248*mU32*pow2(Xt)
+        + 319*pow4(mU3) + 82*pow4(Xt)) - mU32*(740*mU32*pow2(Xt) + 85*pow4(mU3)
+        + 464*pow4(Xt)) + 149*pow6(mQ3)) + m32*pow4(mU3)*(-((523*mU32 + 492*
+        pow2(Xt))*pow4(mQ3)) - 684*pow2(Xt)*pow4(mU3) + 64*mU32*pow4(Xt) +
+        mQ32*(792*mU32*pow2(Xt) + 587*pow4(mU3) + 246*pow4(Xt)) + 153*pow6(mQ3)
+        - 217*pow6(mU3)) - 8*m3*Xt*(-41*mU32*pow2(Xt) - mQ32*(30*mU32 + 41*
+        pow2(Xt)) + 15*pow4(mQ3) + 15*pow4(mU3))*pow6(mU3) + pow6(mU3)*((153*
+        mU32 + 164*pow2(Xt))*pow4(mQ3) + 164*pow2(Xt)*pow4(mU3) - 82*mU32*pow4(
+        Xt) - mQ32*(328*mU32*pow2(Xt) + 153*pow4(mU3) + 82*pow4(Xt)) - 51*pow6(
+        mQ3) + 51*pow6(mU3)) + mU32*pow4(m3)*((841*mU32 + 492*pow2(Xt))*pow4(
+        mQ3) + 1068*pow2(Xt)*pow4(mU3) + 300*mU32*pow4(Xt) - mQ32*(408*mU32*
+        pow2(Xt) + 905*pow4(mU3) + 246*pow4(Xt)) - 259*pow6(mQ3) + 323*pow6(
+        mU3)) + 8*Xt*(55*mU32*pow2(Xt) - mQ32*(114*mU32 + 41*pow2(Xt)) + 57*
+        pow4(mQ3) + 57*pow4(mU3))*pow7(m3) - 2*(-96*mU32*pow2(Xt) - 32*mQ32*(2*
+        mU32 + 3*pow2(Xt)) + 32*pow4(mQ3) + 32*pow4(mU3) - 91*pow4(Xt))*pow8(
+        m3) - 256*pow3(Xt)*pow9(m3)) + (m32 - mU32)*(mQ32 - mU32)*(16*pow12(m3)
+        *pow2(mQ32 - mU32)*(-2*mQ32*pow2(Xt) + pow2(mU32 - pow2(Xt)) + pow4(
+        mQ3)) - 128*mQ32*mU32*Xt*pow11(m3)*(-(mU32*pow2(Xt)) - mQ32*(2*mU32 +
+        pow2(Xt)) + pow4(mQ3) + pow4(mU3)) - 16*Xt*pow3(m3)*(74*mU32*pow2(Xt) +
+        mQ32*(-18*mU32 + 74*pow2(Xt)) + 9*pow4(mQ3) + 9*pow4(mU3))*pow6(mQ3)*
+        pow6(mU3) + 16*Xt*pow4(mQ3)*pow4(mU3)*pow5(m3)*((-17*mU32 + 25*pow2(Xt)
+        )*pow4(mQ3) + mQ32*(132*mU32*pow2(Xt) - 17*pow4(mU3)) + 25*pow2(Xt)*
+        pow4(mU3) + 17*pow6(mQ3) + 17*pow6(mU3)) + m32*pow6(mQ3)*pow6(mU3)*((-
+        207*mU32 + 182*pow2(Xt))*pow4(mQ3) + 182*pow2(Xt)*pow4(mU3) + 237*mU32*
+        pow4(Xt) + mQ32*(-748*mU32*pow2(Xt) - 207*pow4(mU3) + 237*pow4(Xt)) +
+        207*pow6(mQ3) + 207*pow6(mU3)) - 16*mQ32*mU32*Xt*pow7(m3)*(pow4(mQ3)*(
+        42*mU32*pow2(Xt) - 50*pow4(mU3)) + (17*mU32 - 8*pow2(Xt))*pow6(mQ3) +
+        8*(mU32 - pow2(Xt))*pow6(mU3) + mQ32*(42*pow2(Xt)*pow4(mU3) + 17*pow6(
+        mU3)) + 8*pow8(mQ3)) + 656*m3*pow3(Xt)*pow8(mQ3)*pow8(mU3) - 2*(-98*
+        mQ32*mU32 + 49*pow4(mQ3) + 49*pow4(mU3) + 82*pow4(Xt))*pow8(mQ3)*pow8(
+        mU3) + 2*pow4(m3)*pow4(mQ3)*pow4(mU3)*(17*pow4(mU3)*pow4(Xt) + pow4(
+        mQ3)*(582*mU32*pow2(Xt) + 442*pow4(mU3) + 17*pow4(Xt)) - 2*(112*mU32 +
+        99*pow2(Xt))*pow6(mQ3) - 198*pow2(Xt)*pow6(mU3) - 2*mQ32*(-291*pow2(Xt)
+        *pow4(mU3) + 81*mU32*pow4(Xt) + 112*pow6(mU3)) + 3*pow8(mQ3) + 3*pow8(
+        mU3)) + 16*mQ32*mU32*Xt*(-16*(mU32 + pow2(Xt))*pow4(mQ3) + mQ32*(9*
+        mU32*pow2(Xt) - 16*pow4(mU3)) + 16*pow6(mQ3) + 16*(-(pow2(Xt)*pow4(mU3)
+        ) + pow6(mU3)))*pow9(m3) - power10(m3)*((-182*mU32*pow2(Xt) - 91*pow4(
+        mU3) + 32*pow4(Xt))*pow6(mQ3) + pow4(mQ3)*(876*pow2(Xt)*pow4(mU3) + 59*
+        mU32*pow4(Xt) - 91*pow6(mU3)) + 32*pow2(mU32 - pow2(Xt))*pow6(mU3) + (
+        59*mU32 - 64*pow2(Xt))*pow8(mQ3) + mQ32*(59*pow4(mU3)*pow4(Xt) - 182*
+        pow2(Xt)*pow6(mU3) + 59*pow8(mU3)) + 32*power10(mQ3)) - mQ32*mU32*pow6(
+        m3)*((20*mU32*pow2(Xt) + 122*pow4(mU3) + 123*pow4(Xt))*pow6(mQ3) + 123*
+        pow2(mU32 - pow2(Xt))*pow6(mU3) + pow4(mQ3)*(2756*pow2(Xt)*pow4(mU3) +
+        95*mU32*pow4(Xt) + 122*pow6(mU3)) - (245*mU32 + 246*pow2(Xt))*pow8(mQ3)
+        + mQ32*(95*pow4(mU3)*pow4(Xt) + 20*pow2(Xt)*pow6(mU3) - 245*pow8(mU3))
+        + 123*power10(mQ3)) + 2*pow8(m3)*(8*pow12(mQ3) + mQ32*(-230*mU32*pow2(
+        Xt) + 107*pow4(mU3) + 107*pow4(Xt))*pow6(mU3) + pow6(mQ3)*(630*pow2(Xt)
+        *pow4(mU3) + 107*mU32*pow4(Xt) + 136*pow6(mU3)) + (-230*mU32*pow2(Xt) -
+        183*pow4(mU3) + 8*pow4(Xt))*pow8(mQ3) + pow4(mQ3)*(52*pow4(mU3)*pow4(
+        Xt) + 630*pow2(Xt)*pow6(mU3) - 183*pow8(mU3)) + 8*pow2(mU32 - pow2(Xt))
+        *pow8(mU3) + (107*mU32 - 16*pow2(Xt))*power10(mQ3))))))/(3.*pow3(-m32 +
+        mQ32)*pow3(m32 - mU32)*pow3(mQ32 - mU32)*pow4(mQ3)*pow4(mU3));
+ 
+   return result;				     
+}
+
+double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log32(){
+
+   const double result =
+      -298.6666666666667;
+ 
+   return result;				     
+}
+
+
+
+/******************************SUSY Logs 2*************************************/
+
+
 /// 1-loop correction O(at), at = yt^2 Sin[beta]^2/(4 Pi)
 double himalaya::mh2_eft::Mh2EFTCalculator::Mh2_EFT_1loop(
    double at, double mt, double mQ32, double mU32,

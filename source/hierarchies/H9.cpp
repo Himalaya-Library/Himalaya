@@ -94,7 +94,7 @@ double himalaya::H9::getS12() const {
 double himalaya::H9::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
-      ((Mt*pow2(Sbeta)*(-5760*Mt*pow3(Dmsqst1)*pow4(Mst1)*pow6(Mst2) - 432*pow2(
+      ((Mt*(-5760*Mt*pow3(Dmsqst1)*pow4(Mst1)*pow6(Mst2) - 432*pow2(
         log(pow2(Mgl)/pow2(Mst1)))*pow4(Mst1)*(-2*Mt*pow2(Dmst12)*pow2(Mst2)*(-
         72*Mt*s2t*pow2(Mst1) + 202*Mgl*pow2(Mt) + 111*Mgl*pow2(Mst1)*pow2(s2t))
         *pow3(Mgl) + pow3(Dmst12)*pow3(Mgl)*(-48*s2t*pow2(Mst1)*pow2(Mt) + 111*
@@ -176,7 +176,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log0() const {
         )) + 12*Dmst12*pow2(Mgl)*(18*Mt*(37 + 6*z2)*pow2(Mgl) + 9*Mt*pow2(Mst1)
         - 476*Mgl*s2t*pow2(Mst1))*pow2(Mt)*pow4(Mst2) + 12*pow3(Mt)*(18*pow2(
         Mgl)*pow2(Mst1) + 3*(215 + 36*z2)*pow4(Mgl) - 52*pow4(Mst1))*pow6(Mst2)
-        ))))/(1296.*pow6(Mst2)*pow8(Mst1)))/pow4(Mt)/pow2(Sbeta)*12.;
+        ))))/(1296.*pow6(Mst2)*pow8(Mst1)))/pow4(Mt)*12.;
 
    return result;
 }
@@ -187,7 +187,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log0() const {
 double himalaya::H9::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
-      ((2*Mt*pow2(Sbeta)*(-6*pow2(Mt)*pow2(log(pow2(Mgl)/pow2(Mst1)))*pow4(Mst1)
+      ((2*Mt*(-6*pow2(Mt)*pow2(log(pow2(Mgl)/pow2(Mst1)))*pow4(Mst1)
         *(-203*Mt*pow2(Dmst12)*pow2(Mst2)*pow4(Mgl) + 936*Mt*pow3(Dmst12)*pow4(
         Mgl) + 2*Dmst12*(-265*Mgl*Mt + 162*s2t*pow2(Mst1))*pow3(Mgl)*pow4(Mst2)
         + 2*Mt*(-265*pow4(Mgl) + 18*pow4(Mst1))*pow6(Mst2)) + 15*pow2(Dmsqst1)*
@@ -238,8 +238,8 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log1() const {
         s2t) + 8*pow3(Mt)) + 68*pow3(s2t)*pow4(Mst1)) + 12*Dmst12*pow2(Mgl)*(
         167*Mt*pow2(Mgl) - 54*Mt*pow2(Mst1) - 170*Mgl*s2t*pow2(Mst1))*pow2(Mt)*
         pow4(Mst2) + 36*pow3(Mt)*(-36*pow2(Mgl)*pow2(Mst1) + 59*pow4(Mgl) + 4*
-        pow4(Mst1))*pow6(Mst2)))))/(27.*pow6(Mst2)*pow8(Mst1)))/pow4(Mt)/
-        pow2(Sbeta)*12.; 
+        pow4(Mst1))*pow6(Mst2)))))/(27.*pow6(Mst2)*pow8(Mst1)))/pow4(Mt)*
+        12.; 
 
    return result;
 }
@@ -250,7 +250,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log1() const {
 double himalaya::H9::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
-      ((2*Mt*pow2(Sbeta)*(Mt*pow2(Dmst12)*pow2(Mst2)*(528*Mt*s2t*pow2(Mst1)*
+      ((2*Mt*(Mt*pow2(Dmst12)*pow2(Mst2)*(528*Mt*s2t*pow2(Mst1)*
         pow3(Mgl) + (-1966*pow2(Mt) + 96*pow2(Mst1)*pow2(s2t))*pow4(Mgl) + 180*
         Mgl*Mt*s2t*pow4(Mst1) + 3*(51*pow2(Mt) + 82*pow2(Mst1)*pow2(s2t))*pow4(
         Mst1) + pow2(Mgl)*(64*pow2(Mst1)*pow2(Mt) - 321*pow2(s2t)*pow4(Mst1)))
@@ -266,7 +266,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log2() const {
         pow2(Mst1))*pow2(Mt)*(-53*Mt*pow2(Dmst12)*pow2(Mst2)*pow4(Mgl) + 276*
         Mt*pow3(Dmst12)*pow4(Mgl) + 2*Dmst12*(-85*Mgl*Mt + 44*s2t*pow2(Mst1))*
         pow3(Mgl)*pow4(Mst2) + 2*Mt*(-85*pow4(Mgl) + 9*pow4(Mst1))*pow6(Mst2)))
-        )/(27.*pow4(Mst1)*pow6(Mst2)))/pow4(Mt)/pow2(Sbeta)*12.; 
+        )/(27.*pow4(Mst1)*pow6(Mst2)))/pow4(Mt)*12.; 
 
    return result;
 }
@@ -277,7 +277,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log2() const {
 double himalaya::H9::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
-      ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 
+      ((-224*pow4(Mt))/9.)/pow4(Mt)*12.; 
 
    return result;
 }
