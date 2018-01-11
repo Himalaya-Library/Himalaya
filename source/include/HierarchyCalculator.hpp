@@ -136,6 +136,15 @@ namespace himalaya{
        * 	@return A matrix which corresponds to the difference of the DR and MDR scheme.
        */
       Eigen::Matrix2d getShift(const HierarchyObject& ho);
+      /**
+       *      A function to check for a degenerated mass case and shifting the masses to avoid huge contributions
+       *      @param mQ3 the left-handed third generation soft-breaking parameter
+       *      @param mU3 the right-handed third generation soft-breaking parameters
+       *      @param m3 the gluino mass
+       *      @param msq the average squark mass
+       *      @param Xt the stop mixing parameters
+       */
+      void checkForDegenerateCase(double &mQ3, double &mU3, double &m3, double &msq, double &Xt);
       std::map<unsigned int, unsigned int> flagMap{};	/** A map which holds all hierarchy key value pairs. */
       /**
        * 	A function which maps a boolean to a string.

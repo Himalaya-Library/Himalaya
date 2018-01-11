@@ -156,47 +156,43 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // set the uncertainty of the expansion at 1-loop level to 0 by convention, if the user needs this value getExpansionUncertainty should be called
    ho.setExpUncertainty(1, 0.);
 
-   // convert mQ3 and mU3 to MDR scheme
-   const double mst12 = pow2(p.MSt(0));
-   const double mst22 = pow2(p.MSt(1));
-   const double mt2 = pow2(p.Mt);
-   const double Xtt = p.At - p.mu * p.vd / p.vu;
-   const double mU3 = std::sqrt((1 / 2. * (mst12 + mst22 - 2 * mt2 - std::sqrt(pow2((mst22 - mst12)) - 4 * pow2(Xtt) * mt2))));
-   const double mQ3 = std::sqrt((1 / 2. * (mst12 + mst22 - 2 * mt2 + std::sqrt(pow2((mst22 - mst12)) - 4 * pow2(Xtt) * mt2))));
-   //const double mU32 = p.mq2(2,2);
-   //const double mQ32 = p.mu2(2,2);
+   double Xt = p.At - p.mu * p.vd / p.vu;
+   double mQ3 = sqrt(p.mq2(2,2));
+   double mU3 = sqrt(p.mu2(2,2));
+   double m3 = p.MG;
+   double msq = Msq;
+   
+   // take care of degenerated masses
+   checkForDegenerateCase(mQ3, mU3, m3, msq, Xt);
+   
    // calc the delta zeta
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
-   //      const double mU3 = p.MSt(0);
-   //      const double mQ3 = p.MSt(1);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
    //const double lmMQ3 = log(pow2(p.scale / mQ3));
    const double lmMst1 = log(pow2(p.scale / p.MSt(0)));
-   
-   // subtract the constant SM part from zeta himalaya to avoid double counting
+
    // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
    //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    // M_X is a susy mass
    ho.setZetaHimalaya(ho.getZetaHimalaya() 
-      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt));
+      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt));
    // add the EFT logs and subtract constant part twice to avoid double counting
    // Factorization: Himalaya_const - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    //	+ Log(mu^2/mQ3^2)^1 EFT_coeff_log^1  + Log(mu^2/mQ3^2)^2 EFT_coeff_log^2 + Log(mu^2/mQ3^2)^3 EFT_coeff_log^3
    //const double part = ho.getZetaEFT();
    ho.setZetaEFT(ho.getZetaEFT()
-      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
-      + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
-      + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt)
+      + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, m3, msq, p.MSt(0), Xt)
+      + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, m3, msq, p.MSt(0), Xt)
       + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32());
-   
-   /*   std::cout << "zeta 1 " << part 
-      - mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq)
+
+   /*std::cout << "zeta 1 " <<  
+      + mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq)
       + lmMQ3 * mh2EFTCalculator.coeff_as2_susy_log1(mQ3, mU3, Xt, p.MG, Msq)
       + pow2(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log2(mQ3, mU3, Xt, p.MG, Msq)
       + pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3()<< "\n";
       
-   std::cout << "zeta 2 " << part 
-      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
+   std::cout << "zeta 2 " << 
+       mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
       + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
       + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
       + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32() << "\n";*/
@@ -1349,6 +1345,34 @@ void himalaya::HierarchyCalculator::checkTerms(){
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
    mh2EFTCalculator.checkTerms(mQ32, mU32, Xt, MR2, m3, msq2);
 }
+
+/**
+ *      A function to check for a degenerated mass case and shifting the masses to avoid huge contributions
+ *      @param mQ3 the left-handed third generation soft-breaking parameter
+ *      @param mU3 the right-handed third generation soft-breaking parameters
+ *      @param m3 the gluino mass
+ *      @param msq the average squark mass
+ *      @param Xt the stop mixing parameters
+ */
+void himalaya::HierarchyCalculator::checkForDegenerateCase(double &mQ3, double &mU3, double &m3, double &msq, double &Xt){
+   const double eps = 0.01;
+   mQ3 = mQ3;
+   mU3 = mU3;
+   m3 = m3;
+   msq = msq;
+   Xt = Xt;
+   if(abs(mQ3 - mU3) < mQ3 * eps) mQ3 = mQ3 + mQ3 * eps;
+   if(abs(mU3 - m3) < m3 * eps) m3 = m3 + m3 * eps;
+   if(abs(mU3 - msq) < msq * eps) msq = msq + msq * eps;
+   if(abs(mU3 - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
+   if(abs(mQ3 - m3) < m3 * eps) m3 = m3 + m3 * eps;
+   if(abs(mQ3 - msq) < msq * eps) msq = msq + msq * eps;
+   if(abs(mQ3 - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
+   if(abs(m3 - msq) < msq * eps) msq = msq + msq * eps;
+   if(abs(m3 - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
+   if(abs(msq - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
+}
+
 
 /**
  * 	A function which maps a boolean to a string.
