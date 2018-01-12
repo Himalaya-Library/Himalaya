@@ -154,32 +154,12 @@ int main() {
 	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
-	 //top and DR
+	 // top and DR
 	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
 
-	 const std::string renSchemeString = hoTop.getMDRFlag() == 0 ? "DR" : "MDR";
-	 std::cout << "Hierarchy: " << hoTop.getSuitableHierarchy() << " (" << hoTop.getH3mHierarchyNotation(hoTop.getSuitableHierarchy()) << ")\n";
-	 std::cout << "Ren. scheme: " << renSchemeString << "\n";
-	 std::cout << "Rel. difference 2L: " << hoTop.getRelDiff2L()*100 << " %\n";
-	 std::cout << "Abs. difference 2L: " << hoTop.getAbsDiff2L() << " GeV\n"; 
-	 std::cout << "MDR masses: Mstop_1 = " << hoTop.getMDRMasses()(0) << " GeV, Mstop_2 = " << hoTop.getMDRMasses()(1) << " GeV\n";
-	 std::cout << "Mh^2_tree: {{" << hoTop.getDMh(0).row(0)(0) << ", " << hoTop.getDMh(0).row(0)(1)
-		   << "}, {" << hoTop.getDMh(0).row(1)(0) << ", " << hoTop.getDMh(0).row(1)(1) << "}} GeV^2\n";
-	 std::cout << "Mh^2_1L: {{" << hoTop.getDMh(1).row(0)(0) << ", " << hoTop.getDMh(1).row(0)(1)
-		   << "}, {" << hoTop.getDMh(1).row(1)(0) << ", " << hoTop.getDMh(1).row(1)(1) << "}} GeV^2\n";
-	 std::cout << "Mh^2_2L: {{" << hoTop.getDMh(2).row(0)(0) << ", " << hoTop.getDMh(2).row(0)(1)
-		   <<"}, {" << hoTop.getDMh(2).row(1)(0) << ", " << hoTop.getDMh(2).row(1)(1) << "}} GeV^2\n";
-	 std::cout << "Mh^2_3L: {{" << hoTop.getDMh(3).row(0)(0) << ", " << hoTop.getDMh(3).row(0)(1)
-		   << "}, {" << hoTop.getDMh(3).row(1)(0) << ", " << hoTop.getDMh(3).row(1)(1) << "}} GeV^2\n";
-	 std::cout << "Expansion uncert. 1L: " << hierarchyCalculator.getExpansionUncertainty(hoTop, hoTop.getDMh(0), 1, 0, 0) << " GeV\n";
-	 std::cout << "Expansion uncert. 2L: " << hoTop.getExpUncertainty(2) << " GeV\n";
-	 std::cout << "Expansion uncert. 3L: " << hoTop.getExpUncertainty(3) << " GeV\n";
-	 std::cout << "DR -> MDR shift: {{" << hoTop.getDRToMDRShift().row(0)(0) << ", " << hoTop.getDRToMDRShift().row(0)(1)
-		   << "}, {" << hoTop.getDRToMDRShift().row(1)(0) << ", " << hoTop.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n";
-	 std::cout << "Zeta 3L Himalaya: " << hoTop.getZetaHimalaya() << "\n";
-	 std::cout << "Zeta 3L EFT: " << hoTop.getZetaEFT() << "\n";
+	 std::cout << hoTop << "\n";
 
-	 //bottom and MDR
+	 // bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
 	 
 	 // check terms

@@ -1330,7 +1330,6 @@ void himalaya::HierarchyCalculator::checkTerms(){
    const double MR2 = 500;
    const double m3 = 300;
    const double msq2 = 400;
-   //const double lmMQ3 = log(MR2/mQ32);
    
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
    mh2EFTCalculator.checkTerms(mQ32, mU32, Xt, MR2, m3, msq2);
@@ -1399,9 +1398,7 @@ void himalaya::HierarchyCalculator::checkForDegenerateCase(double &mQ3, double &
    if(changedM3) std::cout << "\033[1;34mHimalaya info:\033[0m Changed MG to " << m3 << " GeV to avoid poles in the EFT result!\n";
    if(changedMsq) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Msq to " << msq << " GeV to avoid poles in the EFT result!\n";
    if(changedXt) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Xt to " << Xt << " GeV to avoid poles in the EFT result!\n";
-
 }
-
 
 /**
  * 	A function which maps a boolean to a string.

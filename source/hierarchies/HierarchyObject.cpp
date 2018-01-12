@@ -213,7 +213,7 @@ Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::sortVector(Eigen::Matrix<
  *      @param hierarchy An integer of a Himalaya hierarchy.
  *      @return Returns the corresponding H3m notation of the given hierarchy as a string.
  */
-std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy){
+std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) const{
    //todo: merge these numbers with the ones of HierarcyCalcultor !
    const int h3 = 0;
    const int h32q2g = 1;
@@ -262,3 +262,38 @@ std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy){
 	 return "Hierarchy " + std::to_string(hierarchy) + " not included";
    }
 }
+
+/**
+ * 	Prints out all information of the HierarchyObject
+ */
+std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject const &ho){
+   const std::string renSchemeString = ho.getMDRFlag() == 0 ? "DR" : "MDR";
+   const int suitableHierarchy = ho.getSuitableHierarchy();
+   ostr << "===================\n"
+	<< "Himalaya HierarchyObject parameters\n"
+        << "===================\n"
+	<< "Ren. scheme         = " << renSchemeString << "\n"
+        << "Hierarchy           = " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
+	<< "Mstop_1             = " << ho.getMDRMasses()(0) << " GeV (" << renSchemeString << ")\n"
+	<< "Mstop_2             = " << ho.getMDRMasses()(1) << " GeV (" << renSchemeString << ")\n"
+        << "Abs. diff 2L        = " << ho.getAbsDiff2L() << " GeV\n"
+        << "Rel. diff 2L        = " << ho.getRelDiff2L()*100 << " %\n"
+        << "Mh^2_tree:          = {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
+		   << "}, {" << ho.getDMh(0).row(1)(0) << ", " << ho.getDMh(0).row(1)(1) << "}} GeV^2\n"
+        << "Mh^2_1L:            = {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
+		   << "}, {" << ho.getDMh(1).row(1)(0) << ", " << ho.getDMh(1).row(1)(1) << "}} GeV^2\n"
+        << "Mh^2_2L:            = {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
+		   << "}, {" << ho.getDMh(2).row(1)(0) << ", " << ho.getDMh(2).row(1)(1) << "}} GeV^2\n"
+        << "Mh^2_3L:            = {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
+		   << "}, {" << ho.getDMh(3).row(1)(0) << ", " << ho.getDMh(3).row(1)(1) << "}} GeV^2\n"
+        << "Exp. uncert. 1L     = " << ho.getExpUncertainty(1) << " GeV\n"
+        << "Exp. uncert. 2L     = " << ho.getExpUncertainty(2) << " GeV\n"
+        << "Exp. uncert. 3L     = " << ho.getExpUncertainty(3) << " GeV\n"
+	<< "DR -> MDR shift     = {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
+		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
+	<< "Zeta 3L Himalaya    = " << ho.getZetaHimalaya() << "\n"
+        << "Zeta 3L EFT         = " << ho.getZetaEFT();
+
+   return ostr;
+}
+

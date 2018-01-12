@@ -1,6 +1,7 @@
 #pragma once
 
 #include "version.hpp"
+#include <iosfwd>
 #include <Eigen/Eigenvalues>
 #include <vector>
 #include <map>
@@ -120,10 +121,7 @@ namespace himalaya{
        *	@param hierarchy An integer of a Himalaya hierarchy.
        *	@return Returns the corresponding H3m notation of the given hierarchy as a string.
        */
-      std::string getH3mHierarchyNotation(int hierarchy);
-      /**
-       * 	
-       */
+      std::string getH3mHierarchyNotation(int hierarchy) const;
    private:
       bool isAlphab{false};								/**< the bool isAlphab */
       int hierarchy{};									/**< the suitable hierarchy */
@@ -143,4 +141,8 @@ namespace himalaya{
        */
       Eigen::Matrix<double, 2, 1> sortVector(Eigen::Matrix<double, 2, 1>& vector);
    };
+   /**
+    * 	Prints out all information of the HierarchyObject
+    */
+   std::ostream& operator<<(std::ostream&, const HierarchyObject&);
 }	// himalaya
