@@ -269,9 +269,9 @@ std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) co
 std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject const &ho){
    const std::string renSchemeString = ho.getMDRFlag() == 0 ? "DR" : "MDR";
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   ostr << "===================\n"
+   ostr << "===================================\n"
 	<< "Himalaya HierarchyObject parameters\n"
-        << "===================\n"
+        << "===================================\n"
 	<< "Ren. scheme         = " << renSchemeString << "\n"
         << "Hierarchy           = " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
 	<< "Mstop_1             = " << ho.getMDRMasses()(0) << " GeV (" << renSchemeString << ")\n"
