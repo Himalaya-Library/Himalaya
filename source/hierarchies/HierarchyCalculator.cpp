@@ -1322,16 +1322,6 @@ void himalaya::HierarchyCalculator::checkTerms(){
 	 break;
       }
       std::cout << "Hierarchy " << i << " (" << ho.getH3mHierarchyNotation(i) << ")" << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
-      double tbeta = p.vu/p.vd;
-      double s2b = std::sin(2*std::atan(tbeta));
-      Eigen::Matrix2d treelvl;
-      treelvl (0,0) = s2b/2.*(pow2(p.MZ) / tbeta + pow2(p.MA) * tbeta);
-      treelvl (1,0) = s2b/2.*(-pow2(p.MZ) - pow2(p.MA));
-      treelvl (0,1) = treelvl (1,0);
-      treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tbeta + pow2(p.MA) / tbeta);
-      ho.setDMh(0, treelvl);
-      Eigen::EigenSolver<Eigen::Matrix2d> estree (ho.getDMh(0) + oloMat + twloMat + thloMat);
-      //std::cout << "Mh^2 = " << estree.eigenvalues()(0) << " " << estree.eigenvalues()(1) << "\n";
    }
    // check EFT coefficients
    const double mQ32 = 10000;
@@ -1361,16 +1351,55 @@ void himalaya::HierarchyCalculator::checkForDegenerateCase(double &mQ3, double &
    m3 = m3;
    msq = msq;
    Xt = Xt;
-   if(abs(mQ3 - mU3) < mQ3 * eps) mQ3 = mQ3 + mQ3 * eps;
-   if(abs(mU3 - m3) < m3 * eps) m3 = m3 + m3 * eps;
-   if(abs(mU3 - msq) < msq * eps) msq = msq + msq * eps;
-   if(abs(mU3 - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
-   if(abs(mQ3 - m3) < m3 * eps) m3 = m3 + m3 * eps;
-   if(abs(mQ3 - msq) < msq * eps) msq = msq + msq * eps;
-   if(abs(mQ3 - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
-   if(abs(m3 - msq) < msq * eps) msq = msq + msq * eps;
-   if(abs(m3 - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
-   if(abs(msq - Xt) < abs(Xt) * eps) Xt = Xt + Xt * eps;
+   bool changedMQ3 = false;
+   bool changedM3 = false;
+   bool changedMsq = false;
+   bool changedXt = false;
+   if(abs(mU3 - m3) < m3 * eps){ 
+      m3 = m3 + m3 * eps;
+      changedM3 = true;
+   }
+   if(abs(mU3 - msq) < msq * eps){
+      msq = msq + msq * eps;
+      changedMsq = true;
+   }
+   if(abs(mU3 - Xt) < abs(Xt) * eps){
+      Xt = Xt + Xt * eps;
+      changedXt = true;
+   }
+   if(abs(mQ3 - m3) < m3 * eps){
+      m3 = m3 + m3 * eps;
+      changedM3 = true;
+   }
+   if(abs(mQ3 - msq) < msq * eps){
+      msq = msq + msq * eps;
+      changedMsq = true;
+   }
+   if(abs(mQ3 - Xt) < abs(Xt) * eps){
+      Xt = Xt + Xt * eps;
+      changedXt = true;
+   }
+   if(abs(mQ3 - mU3) < mQ3 * eps){
+      mQ3 = mQ3 + mQ3 * eps;
+      changedMQ3 = true;
+   }
+   if(abs(m3 - msq) < msq * eps){
+      msq = msq + msq * eps;
+      changedMsq = true;
+   }
+   if(abs(m3 - Xt) < abs(Xt) * eps){
+      Xt = Xt + Xt * eps;
+      changedXt = true;
+   }
+   if(abs(msq - Xt) < abs(Xt) * eps){
+      Xt = Xt + Xt * eps;
+      changedXt = true;
+   }
+   if(changedMQ3) std::cout << "\033[1;34mHimalaya info:\033[0m Changed mQ3 to " << mQ3 << " GeV to avoid poles in the EFT result!\n";
+   if(changedM3) std::cout << "\033[1;34mHimalaya info:\033[0m Changed MG to " << m3 << " GeV to avoid poles in the EFT result!\n";
+   if(changedMsq) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Msq to " << msq << " GeV to avoid poles in the EFT result!\n";
+   if(changedXt) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Xt to " << Xt << " GeV to avoid poles in the EFT result!\n";
+
 }
 
 
@@ -1380,7 +1409,7 @@ void himalaya::HierarchyCalculator::checkForDegenerateCase(double &mQ3, double &
  * 	@return A string which is 'true' if tf is true or 'false' if tf is false.
  */
 std::string himalaya::HierarchyCalculator::tf(const bool tf){
-   return tf ? "true" : "false";
+   return tf ? "\033[1;32mtrue\033[0m" : "\033[1;31mfalse\033[0m";
 }
 
 /**

@@ -90,7 +90,7 @@ void Parameters::validate(bool verbose)
       std::tie(MSt, s2t) = calculate_MSf_s2f(stopMatrix);
 
       if (verbose) {
-         std::cout << "\033[1;34m Info:\033[0m Stop masses or mixing angle not provided. Calculated values:\n" <<
+         std::cout << "\033[1;34m Himalaya info:\033[0m Stop masses or mixing angle not provided. Calculated values:\n" <<
             "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" <<
             "\tmixing angle sin(2*theta): " << s2t << "\n";
       }
@@ -109,7 +109,7 @@ void Parameters::validate(bool verbose)
       std::tie(MSb, s2b) = calculate_MSf_s2f(sbottomMatrix);
 
       if (verbose) {
-         std::cout << "\033[1;34m Info:\033[0m Sbottom masses or mixing angle not provided. Calculated values:\n" <<
+         std::cout << "\033[1;34m Himalaya info:\033[0m Sbottom masses or mixing angle not provided. Calculated values:\n" <<
             "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" <<
             "\tmixing angle sin(2*theta): " << s2b << ".\n";
       }

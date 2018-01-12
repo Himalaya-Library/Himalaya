@@ -8375,7 +8375,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log02(double mQ3, dou
         pow4(msq)*pow8(mU3) + 60*msq2*power10(mU3))))))/(pow3(m32 - mU32)*pow4(
         m32 - mQ32)*pow5(mQ32 - mU32))))/3.;
  
-   return result;				     
+   return result;
 }
 
 double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log12(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt){
@@ -11472,7 +11472,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log12(double mQ3, dou
         pow4(msq)*pow8(mU3) + 60*msq2*power10(mU3))))))/(pow3(m32 - mU32)*pow4(
         m32 - mQ32)*pow5(mQ32 - mU32)))))/3.;
  
-   return result;				     
+   return result;
 }
 
 double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log22(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt){
@@ -11572,7 +11572,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log22(double mQ3, dou
         *pow8(mU3) + (107*mU32 - 16*pow2(Xt))*power10(mQ3))))))/(3.*pow3(-m32 +
         mQ32)*pow3(m32 - mU32)*pow3(mQ32 - mU32)*pow4(mQ3)*pow4(mU3));
  
-   return result;				     
+   return result;
 }
 
 double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log32(){
@@ -11580,7 +11580,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log32(){
    const double result =
       -298.6666666666667;
  
-   return result;				     
+   return result;
 }
 
 
@@ -11646,7 +11646,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::Mh2_EFT_3loop(
  * 	@return A string which is 'true' if tf is true or 'false' if tf is false.
  */
 std::string himalaya::mh2_eft::Mh2EFTCalculator::tf(const bool tf){
-   return tf ? "true" : "false";
+   return tf ? "\033[1;32mtrue\033[0m" : "\033[1;31mfalse\033[0m";
 }
 
 /**
