@@ -1,5 +1,3 @@
-#define Pi M_PI
-
 #include "HierarchyCalculator.hpp"
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
