@@ -108,6 +108,7 @@ void himalaya::HierarchyCalculator::init(){
       // sbottom
       + sqrt(p.mq2(2, 2) + pow2(p.Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(p.MZ) * cos(2 * beta))
       + sqrt(p.md2(2, 2) + pow2(p.Mb) - 1 / 3. * sw2 * pow2(p.MZ) * cos(2 * beta))) / 10.;
+   
    // lmMsq, checked
    lmMsq = log(pow2(p.scale / Msq));
 
@@ -174,29 +175,18 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
    //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    // M_X is a susy mass
-   ho.setZetaHimalaya(ho.getZetaHimalaya() 
-      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt));
+   ho.setZetaHimalaya((ho.getZetaHimalaya() 
+		      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt))/16.);
+   
    // add the EFT logs and subtract constant part twice to avoid double counting
    // Factorization: Himalaya_const - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
-   //	+ Log(mu^2/mQ3^2)^1 EFT_coeff_log^1  + Log(mu^2/mQ3^2)^2 EFT_coeff_log^2 + Log(mu^2/mQ3^2)^3 EFT_coeff_log^3
-   //const double part = ho.getZetaEFT();
-   ho.setZetaEFT(ho.getZetaEFT()
+   //	+ Log(mu^2/mst1^2)^1 EFT_coeff_log^1  + Log(mu^2/mst1^2)^2 EFT_coeff_log^2 + Log(mu^2/mst1^2)^3 EFT_coeff_log^3
+   ho.setZetaEFT((ho.getZetaEFT()
       - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt)
       + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, m3, msq, p.MSt(0), Xt)
       + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, m3, msq, p.MSt(0), Xt)
-      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32());
+      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32())/16.);
 
-   /*std::cout << "zeta 1 " <<  
-      + mh2EFTCalculator.coeff_as2_susy_log0(mQ3, mU3, Xt, p.MG, Msq)
-      + lmMQ3 * mh2EFTCalculator.coeff_as2_susy_log1(mQ3, mU3, Xt, p.MG, Msq)
-      + pow2(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log2(mQ3, mU3, Xt, p.MG, Msq)
-      + pow3(lmMQ3) * mh2EFTCalculator.coeff_as2_susy_log3()<< "\n";
-      
-   std::cout << "zeta 2 " << 
-       mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
-      + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
-      + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, p.MG, Msq, p.MSt(0), Xt)
-      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32() << "\n";*/
    return ho;
 }
 
@@ -856,48 +846,48 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::Hierarch
       Mt = p.Mb;
    }
    Mt41L (0,0) = (-3*GF*pow2(Mt)*pow2(p.mu)*pow2(1/sin(beta))*
-      (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
-        pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
-        pow2(Mst2)*log(Mst2))*pow2(s2t))/
-    (4.*sqrt(2)*(pow2(Mst1) - pow2(Mst2))*pow2(Pi));
+		  (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+		   pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+		   pow2(Mst2)*log(Mst2))*pow2(s2t))/
+     (4.*sqrt(2)*(pow2(Mst1) - pow2(Mst2))*pow2(Pi));
    Mt41L (0,1) = (3*GF*pow2(1/sin(beta))*
-      (-(pow3(Mt)*p.mu*(log(Mst1) - log(Mst2))*s2t)/2. + 
-        (pow2(Mt)*pow2(p.mu)*1/tan(beta)*
-           (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
-             pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
-             pow2(Mst2)*log(Mst2))*pow2(s2t))/
-         (4.*(pow2(Mst1) - pow2(Mst2))) + 
-        (Mt*p.mu*(-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
-             pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
-             pow2(Mst2)*log(Mst2))*pow3(s2t))/8.))/
-    (sqrt(2)*pow2(Pi));
+		  (-(pow3(Mt)*p.mu*(log(Mst1) - log(Mst2))*s2t)/2. + 
+		   (pow2(Mt)*pow2(p.mu)*1/tan(beta)*
+		    (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+		     pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+		     pow2(Mst2)*log(Mst2))*pow2(s2t))/
+		   (4.*(pow2(Mst1) - pow2(Mst2))) + 
+		   (Mt*p.mu*(-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+			     pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+			     pow2(Mst2)*log(Mst2))*pow3(s2t))/8.))/
+     (sqrt(2)*pow2(Pi));
    Mt41L (1,0) = Mt41L(0,1);
    Mt41L (1,1) =  (3*GF*pow2(1/sin(beta))*
-      (pow4(Mt)*(log(Mst1) + log(Mst2) - 2*log(Mt)) + 
-        pow3(Mt)*p.mu*1/tan(beta)*(log(Mst1) - log(Mst2))*s2t + 
-        (pow2(Mt)*pow2(1/sin(beta))*
-           (pow2(Mst1)*pow2(p.mu)*pow2(cos(beta)) - 
-             pow2(Mst2)*pow2(p.mu)*pow2(cos(beta)) - 
-             pow2(Mst1)*pow2(p.mu)*pow2(cos(beta))*log(Mst1) - 
-             pow2(Mst2)*pow2(p.mu)*pow2(cos(beta))*log(Mst1) + 
-             pow2(Mst1)*pow2(p.mu)*pow2(cos(beta))*log(Mst2) + 
-             pow2(Mst2)*pow2(p.mu)*pow2(cos(beta))*log(Mst2) + 
-             2*pow4(Mst1)*log(Mst1)*pow2(sin(beta)) - 
-             4*pow2(Mst1)*pow2(Mst2)*log(Mst1)*pow2(sin(beta)) + 
-             2*pow4(Mst2)*log(Mst1)*pow2(sin(beta)) - 
-             2*pow4(Mst1)*log(Mst2)*pow2(sin(beta)) + 
-             4*pow2(Mst1)*pow2(Mst2)*log(Mst2)*pow2(sin(beta)) - 
-             2*pow4(Mst2)*log(Mst2)*pow2(sin(beta)))*pow2(s2t))/
-         (4.*(pow2(Mst1) - pow2(Mst2))) - 
-        (Mt*p.mu*1/tan(beta)*(-pow2(Mst1) + pow2(Mst2) + 
-             pow2(Mst1)*log(Mst1) + pow2(Mst2)*log(Mst1) - 
-             pow2(Mst1)*log(Mst2) - pow2(Mst2)*log(Mst2))*
-           pow3(s2t))/4. - 
-        ((pow2(Mst1) - pow2(Mst2))*
-           (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
-             pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
-             pow2(Mst2)*log(Mst2))*pow4(s2t))/16.))/
-    (sqrt(2)*pow2(Pi));
+		   (pow4(Mt)*(log(Mst1) + log(Mst2) - 2*log(Mt)) + 
+		    pow3(Mt)*p.mu*1/tan(beta)*(log(Mst1) - log(Mst2))*s2t + 
+		    (pow2(Mt)*pow2(1/sin(beta))*
+		     (pow2(Mst1)*pow2(p.mu)*pow2(cos(beta)) - 
+		      pow2(Mst2)*pow2(p.mu)*pow2(cos(beta)) - 
+		      pow2(Mst1)*pow2(p.mu)*pow2(cos(beta))*log(Mst1) - 
+		      pow2(Mst2)*pow2(p.mu)*pow2(cos(beta))*log(Mst1) + 
+		      pow2(Mst1)*pow2(p.mu)*pow2(cos(beta))*log(Mst2) + 
+		      pow2(Mst2)*pow2(p.mu)*pow2(cos(beta))*log(Mst2) + 
+		      2*pow4(Mst1)*log(Mst1)*pow2(sin(beta)) - 
+		      4*pow2(Mst1)*pow2(Mst2)*log(Mst1)*pow2(sin(beta)) + 
+		      2*pow4(Mst2)*log(Mst1)*pow2(sin(beta)) - 
+		      2*pow4(Mst1)*log(Mst2)*pow2(sin(beta)) + 
+		      4*pow2(Mst1)*pow2(Mst2)*log(Mst2)*pow2(sin(beta)) - 
+		      2*pow4(Mst2)*log(Mst2)*pow2(sin(beta)))*pow2(s2t))/
+		    (4.*(pow2(Mst1) - pow2(Mst2))) - 
+		    (Mt*p.mu*1/tan(beta)*(-pow2(Mst1) + pow2(Mst2) + 
+					  pow2(Mst1)*log(Mst1) + pow2(Mst2)*log(Mst1) - 
+					  pow2(Mst1)*log(Mst2) - pow2(Mst2)*log(Mst2))*
+		     pow3(s2t))/4. - 
+		    ((pow2(Mst1) - pow2(Mst2))*
+		     (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1)*log(Mst1) + 
+		      pow2(Mst2)*log(Mst1) - pow2(Mst1)*log(Mst2) - 
+		      pow2(Mst2)*log(Mst2))*pow4(s2t))/16.))/
+     (sqrt(2)*pow2(Pi));
     return Mt41L;
 }
 
