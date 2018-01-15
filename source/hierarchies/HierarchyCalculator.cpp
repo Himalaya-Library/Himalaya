@@ -1346,11 +1346,6 @@ void himalaya::HierarchyCalculator::checkTerms(){
  */
 void himalaya::HierarchyCalculator::checkForDegenerateCase(double &mQ3, double &mU3, double &m3, double &msq, double &Xt){
    const double eps = 0.01;
-   mQ3 = mQ3;
-   mU3 = mU3;
-   m3 = m3;
-   msq = msq;
-   Xt = Xt;
    bool changedMQ3 = false;
    bool changedM3 = false;
    bool changedMsq = false;
