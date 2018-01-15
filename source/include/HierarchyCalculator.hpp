@@ -113,6 +113,7 @@ namespace himalaya{
    private:
       Parameters p{};	/** The HimalayaInterface struct. */
       double Al4p{}, lmMgl{}, lmMsq{}, Mgl{}, Msq{}, prefac{};/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix */
+      bool verbose{true};
       /**
        * 	Initializes all common variables.
        */

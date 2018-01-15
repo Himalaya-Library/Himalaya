@@ -66,8 +66,9 @@ namespace himalaya {
  * 	@param p_ a HimalayaInterface struct
  * 	@param verbose a bool which suppresses the information of the calculation if set to flase
  */
-himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_, const bool verbose)
+himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_, const bool verbose_)
    : p(p_)
+   , verbose(verbose_)
 {
    if(!isInfoPrinted && verbose){
       printInfo();
@@ -1394,10 +1395,10 @@ void himalaya::HierarchyCalculator::checkForDegenerateCase(double &mQ3, double &
       Xt = Xt + Xt * eps;
       changedXt = true;
    }
-   if(changedMQ3) std::cout << "\033[1;34mHimalaya info:\033[0m Changed mQ3 to " << mQ3 << " GeV to avoid poles in the EFT result!\n";
-   if(changedM3) std::cout << "\033[1;34mHimalaya info:\033[0m Changed MG to " << m3 << " GeV to avoid poles in the EFT result!\n";
-   if(changedMsq) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Msq to " << msq << " GeV to avoid poles in the EFT result!\n";
-   if(changedXt) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Xt to " << Xt << " GeV to avoid poles in the EFT result!\n";
+   if(verbose && changedMQ3) std::cout << "\033[1;34mHimalaya info:\033[0m Changed mQ3 to " << mQ3 << " GeV to avoid poles in the EFT result!\n";
+   if(verbose && changedM3) std::cout << "\033[1;34mHimalaya info:\033[0m Changed MG to " << m3 << " GeV to avoid poles in the EFT result!\n";
+   if(verbose && changedMsq) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Msq to " << msq << " GeV to avoid poles in the EFT result!\n";
+   if(verbose && changedXt) std::cout << "\033[1;34mHimalaya info:\033[0m Changed Xt to " << Xt << " GeV to avoid poles in the EFT result!\n";
 }
 
 /**
