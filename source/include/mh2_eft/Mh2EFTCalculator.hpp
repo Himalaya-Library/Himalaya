@@ -97,6 +97,13 @@ namespace mh2_eft{
       double coeff_as2_susy_log12(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt);
       double coeff_as2_susy_log22(double mQ3, double mU3, double m3, double msq, double Mst1, double Xt);
       double coeff_as2_susy_log32();
+      /**
+       *   Returns the matching relation of zeta_lambda^(2) for the degenerated mass case
+       *   @param scale the renormalization scale
+       *   @param mst1 the mass of the light stop quark
+       *   @return zeta_lambda^(2)
+       */
+     double getZetaDegenerated(double scale, double mst1, double Xt) const;
    private:
       /**
        * 	fin[] function from arXiv:hep-ph/0507139 .

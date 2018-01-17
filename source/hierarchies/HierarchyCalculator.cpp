@@ -187,6 +187,9 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, m3, msq, p.MSt(0), Xt)
       + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32())/16.);
 
+   // Set zeta for degenerated mass case, where MS = mst1
+   ho.setZetaDegenerated(mh2EFTCalculator.getZetaDegenerated(p.scale, p.MSt(0), Xt));
+
    return ho;
 }
 

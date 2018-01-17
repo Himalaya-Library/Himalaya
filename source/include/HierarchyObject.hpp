@@ -64,6 +64,10 @@ namespace himalaya{
        */
       double getZetaEFT() const;
       /**
+       *        @return 3-loop zeta for the degenerated mass case with EFT logs
+       */
+      double getZetaDegenerated() const;
+      /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
        */
@@ -117,6 +121,11 @@ namespace himalaya{
        */
       void setZetaEFT(double zeta);
       /**
+       *        Sets the zeta at 3-loop order for the degenerated mass case
+       *        @param zeta zeta at 3-loop order
+       */
+      void setZetaDegenerated(double zeta);
+      /**
        *	Returns the H3m notation of a given hierarchy.
        *	@param hierarchy An integer of a Himalaya hierarchy.
        *	@return Returns the corresponding H3m notation of the given hierarchy as a string.
@@ -134,6 +143,7 @@ namespace himalaya{
       Eigen::Matrix<double, 2, 1> mdrMasses{};						/**< the 'vector' which holds the MDR masses */
       double zetaHimalaya{};								/**< zeta lambda 3-loop from Himalaya only */
       double zetaEFT{};									/**< zeta lambda 3-loop from EFT and Himalaya */
+      double zetaDegenerated{};                                                          /**< zeta lambda 3-loop for the degenerated mass case */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

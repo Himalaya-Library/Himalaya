@@ -196,6 +196,21 @@ double himalaya::HierarchyObject::getZetaEFT() const{
 }
 
 /**
+ *      Sets the zeta at 3-loop order for the degenerated mass case with EFT logs.
+ *      @param zeta zeta at 3-loop order.
+ */
+void himalaya::HierarchyObject::setZetaDegenerated(double zeta){
+   this -> zetaDegenerated = zeta;
+}
+
+/**
+ *      @return 3-loop zeta for the degenerated mass case with EFT logs
+ */
+double himalaya::HierarchyObject::getZetaDegenerated() const{
+   return zetaDegenerated;
+}
+
+/**
  * 	Sorts a vector.
  * 	@param vector The vector which should be sorted.
  * 	@return Returns a vector the lightest entry at position 0.
@@ -292,7 +307,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 	<< "DR -> MDR shift   =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
 		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
 	<< "Zeta 3L Himalaya  =  " << ho.getZetaHimalaya() << "\n"
-        << "Zeta 3L EFT       =  " << ho.getZetaEFT();
+        << "Zeta 3L EFT       =  " << ho.getZetaEFT() << "\n"
+        << "Zeta 3L Degen.    =  " << ho.getZetaDegenerated();
 
    return ostr;
 }
