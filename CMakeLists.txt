@@ -74,3 +74,9 @@ install(
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
 )
+
+# test
+if(EXISTS test)
+  enable_testing()
+  add_subdirectory(test)
+endif()
