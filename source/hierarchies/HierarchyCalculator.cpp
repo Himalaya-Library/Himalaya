@@ -174,6 +174,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 
    // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
    //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
+   // the factor 1/16 is a partial loop factor which gets factorized into zeta
    // M_X is a susy mass
    ho.setZetaHimalaya((ho.getZetaHimalaya() 
 		      - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt))/16.);
@@ -187,9 +188,12 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, m3, msq, p.MSt(0), Xt)
       + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32())/16.);
 
-   // Set zeta for degenerated mass case, where MS = mst1
-   ho.setZetaDegenerated(mh2EFTCalculator.getZetaDegenerated(p.scale, p.MSt(0), Xt));
-
+   // Set zeta for degenerated mass case, where MS = mQ3, the argument Xt is here suppressed by the SUSY scale (named xt)
+   ho.setZetaDegenerated(mh2EFTCalculator.getZetaDegenerated(p.scale, mQ3, Xt / mQ3));
+   /*   std::cout << "xt " << Xt/mQ3 << " do const " << mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt) << " logs " <<
+      lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, m3, msq, p.MSt(0), Xt)
+     + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, m3, msq, p.MSt(0), Xt)
+     + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32() << "\n";*/
    return ho;
 }
 
@@ -391,7 +395,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0());
-		     }
+		     }		  
 		  }
 		  break;
 		  case h3q22g:{
@@ -1338,7 +1342,7 @@ void himalaya::HierarchyCalculator::checkTerms(){
  *      @param Xt the stop mixing parameters
  */
 void himalaya::HierarchyCalculator::checkForDegenerateCase(double &mQ3, double &mU3, double &m3, double &msq, double &Xt){
-   const double eps = 0.01;
+   const double eps = 0.00;
    bool changedMQ3 = false;
    bool changedM3 = false;
    bool changedMsq = false;
