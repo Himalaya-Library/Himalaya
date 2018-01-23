@@ -169,8 +169,8 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const double zeta_Himalaya = ho.getZetaHimalaya();
-   const double zeta_EFT      = ho.getZetaEFT();
+   // non-logarithmic part of zeta_lambda 3L
+   const double zeta_3L_const = ho.getZetaConst();
 
    const auto DMh_0L = ho.getDMh(0);
    const auto DMh_1L = ho.getDMh(1);
@@ -199,13 +199,6 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    BOOST_CHECK_CLOSE_FRACTION(Mh2_3L, calc_Mh2_EFT_0L(pars)
                                     + calc_Mh2_EFT_1L(pars)
                                     + calc_Mh2_EFT_2L(pars)
-                                    + calc_Mh2_EFT_3L(pars,zeta_Himalaya),
+                                    + calc_Mh2_EFT_3L(pars,zeta_3L_const),
                               1e-6);
-
-   BOOST_CHECK_CLOSE_FRACTION(Mh2_3L, calc_Mh2_EFT_0L(pars)
-                                    + calc_Mh2_EFT_1L(pars)
-                                    + calc_Mh2_EFT_2L(pars)
-                                    + calc_Mh2_EFT_3L(pars,zeta_EFT),
-                              1e-6);
-
 }
