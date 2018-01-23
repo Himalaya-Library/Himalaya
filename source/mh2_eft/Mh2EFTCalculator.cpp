@@ -11648,7 +11648,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::Mh2_EFT_2loop(
 }
 
 /// 3-loop correction O(at*as^2), without \[CapitalDelta]\[Lambda]^(3L),
-/// at = yt^2 Sin[beta]^2/(4 Pi), as = g3^2/(4 Pi), 
+/// at = yt^2 Sin[beta]^2/(4 Pi)
 double himalaya::mh2_eft::Mh2EFTCalculator::Mh2_EFT_3loop(
    double at, double mt, double mQ32, double mU32,
    double Xt, double MR2, double g3, double m3, double msq2)
