@@ -194,6 +194,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, m3, msq, p.MSt(0), Xt)
      + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, m3, msq, p.MSt(0), Xt)
      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32() << "\n";*/
+
+   // set zeta (non-logarithmic part)
+   ho.setZetaConst((ho.getZetaConst()
+                    - mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt))/16.);
+
    return ho;
 }
 
@@ -377,6 +382,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy3.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy3.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -395,6 +401,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0());
 		     }		  
 		  }
 		  break;
@@ -413,6 +420,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -434,6 +442,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     + pow2(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
 		     + pow3(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
 		  ho.setZetaEFT(hierarchy4.calc_coef_at_as2_no_sm_logs_log0());
+                  ho.setZetaConst(hierarchy4.calc_coef_at_as2_no_sm_logs_log0());
 	       }
 	    }
 	    break;
@@ -457,6 +466,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy5.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy5.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -475,6 +485,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -501,6 +512,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy6.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy6.calc_coef_at_as2_no_sm_logs_log0());
 		     };
 		  }
 		  break;
@@ -519,6 +531,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -546,6 +559,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -564,6 +578,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -582,6 +597,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -600,6 +616,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -626,6 +643,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy9.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy9.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;
@@ -644,6 +662,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0());
+                        ho.setZetaConst(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0());
 		     }
 		  }
 		  break;

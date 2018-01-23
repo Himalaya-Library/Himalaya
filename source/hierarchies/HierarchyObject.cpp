@@ -211,6 +211,21 @@ double himalaya::HierarchyObject::getZetaDegenerated() const{
 }
 
 /**
+ *      Sets the zeta at 3-loop order (non-logarithmic part).
+ *      @param zeta zeta at 3-loop order.
+ */
+void himalaya::HierarchyObject::setZetaConst(double zeta){
+   zetaConst = zeta;
+}
+
+/**
+ *      @return 3-loop zeta (non-logarithmic part)
+ */
+double himalaya::HierarchyObject::getZetaConst() const{
+   return zetaConst;
+}
+
+/**
  * 	Sorts a vector.
  * 	@param vector The vector which should be sorted.
  * 	@return Returns a vector the lightest entry at position 0.

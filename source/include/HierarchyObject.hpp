@@ -68,6 +68,10 @@ namespace himalaya{
        */
       double getZetaDegenerated() const;
       /**
+       * 	@return 3-loop zeta (non-logarithmic part)
+       */
+      double getZetaConst() const;
+      /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
        */
@@ -126,6 +130,11 @@ namespace himalaya{
        */
       void setZetaDegenerated(double zeta);
       /**
+       * 	Sets the zeta at 3-loop order (non-logarithmic part).
+       * 	@param zeta zeta at 3-loop order.
+       */
+      void setZetaConst(double zeta);
+      /**
        *	Returns the H3m notation of a given hierarchy.
        *	@param hierarchy An integer of a Himalaya hierarchy.
        *	@return Returns the corresponding H3m notation of the given hierarchy as a string.
@@ -144,6 +153,7 @@ namespace himalaya{
       double zetaHimalaya{};								/**< zeta lambda 3-loop from Himalaya only */
       double zetaEFT{};									/**< zeta lambda 3-loop from EFT and Himalaya */
       double zetaDegenerated{};                                                          /**< zeta lambda 3-loop for the degenerated mass case */
+      double zetaConst{};                                                               /**< zeta lambda 3-loop, non-logarithmic part */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.
