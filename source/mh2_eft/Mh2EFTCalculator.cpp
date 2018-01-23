@@ -11630,7 +11630,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::Mh2_EFT_1loop(
 }
 
 /// 2-loop correction O(at*as)
-/// at = yt^2 Sin[beta]^2/(4 Pi), as = g3^2/(4 Pi), 
+/// at = yt^2 Sin[beta]^2/(4 Pi)
 double himalaya::mh2_eft::Mh2EFTCalculator::Mh2_EFT_2loop(
    double at, double mt, double mQ32, double mU32,
    double Xt, double MR2, double g3, double m3)
