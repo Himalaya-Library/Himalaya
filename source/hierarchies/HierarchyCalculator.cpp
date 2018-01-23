@@ -377,12 +377,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy3.getS2();
 		     curSig12 = hierarchy3.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy3.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy3.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy3.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy3.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy3.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -396,12 +397,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy32q2g.getS2();
 		     curSig12 = hierarchy32q2g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }		  
 		  }
 		  break;
@@ -415,12 +417,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy3q22g.getS2();
 		     curSig12 = hierarchy3q22g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -437,12 +440,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	       curSig2 = hierarchy4.getS2();
 	       curSig12 = hierarchy4.getS12();
 	       if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-		  ho.setZetaHimalaya(hierarchy4.calc_coef_at_as2_no_sm_logs_log0()
+                  const double c = hierarchy4.calc_coef_at_as2_no_sm_logs_log0();
+		  ho.setZetaHimalaya(c
 		     + lmMsusy * hierarchy4.calc_coef_at_as2_no_sm_logs_log1()
 		     + pow2(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
 		     + pow3(lmMsusy) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
-		  ho.setZetaEFT(hierarchy4.calc_coef_at_as2_no_sm_logs_log0());
-                  ho.setZetaConst(hierarchy4.calc_coef_at_as2_no_sm_logs_log0());
+		  ho.setZetaEFT(c);
+                  ho.setZetaConst(c);
 	       }
 	    }
 	    break;
@@ -461,12 +465,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy5.getS2();
 		     curSig12 = hierarchy5.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy5.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy5.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy5.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy5.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy5.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -480,12 +485,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy5g1.getS2();
 		     curSig12 = hierarchy5g1.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -507,12 +513,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy6.getS2();
 		     curSig12 = hierarchy6.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy6.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy6.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy6.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy6.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     };
 		  }
 		  break;
@@ -526,12 +533,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy6g2.getS2();
 		     curSig12 = hierarchy6g2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -554,12 +562,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy6b.getS2();
 		     curSig12 = hierarchy6b.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy6b.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy6b.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy6b.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -573,12 +582,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy6b2qg2.getS2();
 		     curSig12 = hierarchy6b2qg2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -592,12 +602,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy6bq22g.getS2();
 		     curSig12 = hierarchy6bq22g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -611,12 +622,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy6bq2g2.getS2();
 		     curSig12 = hierarchy6bq2g2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -638,12 +650,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy9.getS2();
 		     curSig12 = hierarchy9.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy9.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy9.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy9.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy9.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy9.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
@@ -657,12 +670,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig2 = hierarchy9q2.getS2();
 		     curSig12 = hierarchy9q2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-			ho.setZetaHimalaya(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0()
+                        const double c = hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0();
+			ho.setZetaHimalaya(c
 			   + lmMst1 * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0());
-                        ho.setZetaConst(hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0());
+			ho.setZetaEFT(c);
+                        ho.setZetaConst(c);
 		     }
 		  }
 		  break;
