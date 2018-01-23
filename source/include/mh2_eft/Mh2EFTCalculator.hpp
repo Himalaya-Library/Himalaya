@@ -193,7 +193,6 @@ namespace mh2_eft{
        */
       double coeff_as_2_log_3();
       std::string tf(const bool tf);
-      Parameters p;
    };
 }	// mh2_eft
 }	// himalaya
