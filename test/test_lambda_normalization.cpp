@@ -6,6 +6,8 @@
 
 namespace {
 
+const double Pi = 3.141592653589793;
+
 double pow2(double x) { return x*x; }
 double pow4(double x) { return x*x*x*x; }
 double pow6(double x) { return x*x*x*x*x*x; }
@@ -18,7 +20,11 @@ himalaya::Parameters make_point()
    const double beta = std::atan(tb);
    const double v = 245.;
 
-   const double eps = 0.01;
+   const double msq2 = MS/2;
+   const double msu2 = MS*2;
+   const double mg   = MS*3;
+
+   const double Xt = xt * std::sqrt(std::sqrt(msq2 * msu2));
 
    himalaya::Parameters pars;
    pars.scale = MS;
@@ -26,12 +32,12 @@ himalaya::Parameters make_point()
    pars.g3    = 1.05733;
    pars.vu    = v*std::sin(beta);
    pars.vd    = v*std::cos(beta);
-   pars.mq2   << pow2(MS), 0, 0, 0, pow2(MS), 0, 0, 0, pow2(MS)*(1 + eps);
+   pars.mq2   << pow2(msq2), 0, 0, 0, pow2(msq2), 0, 0, 0, pow2(msq2);
    pars.md2   << pow2(MS), 0, 0, 0, pow2(MS), 0, 0, 0, pow2(MS);
-   pars.mu2   << pow2(MS), 0, 0, 0, pow2(MS), 0, 0, 0, pow2(MS)*(1 - eps);
-   pars.At    = xt*MS + pars.mu/tb;
+   pars.mu2   << pow2(msu2), 0, 0, 0, pow2(msu2), 0, 0, 0, pow2(msu2);
+   pars.At    = Xt + pars.mu/tb;
    pars.Ab    = 0;
-   pars.MG    = MS*(1 - eps);
+   pars.MG    = mg;
    pars.MW    = 74.597;
    pars.MZ    = 85.7704;
    pars.Mt    = 144.337;
@@ -57,7 +63,6 @@ double calc_gt(const himalaya::Parameters& pars)
 // calculates a_t
 double calc_at(const himalaya::Parameters& pars)
 {
-   const double Pi = 3.141592653589793;
    const double yt = calc_yt(pars);
    const double tb = pars.vu/pars.vd;
    const double beta = std::atan(tb);
@@ -143,7 +148,6 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
       mhc.Mh2_EFT_3loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3, msq2);
 
    const double zeta_lambda_3L = ho.getZetaDegenerated();
-   const double Pi = 3.141592653589793;
    const double as = pow2(g3)/(4*pow2(Pi));
    // prefactor from paper
    const double pref = pow4(mt)/pow2(4*Pi*vDO)*pow2(as);
@@ -193,5 +197,5 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    BOOST_CHECK_CLOSE_FRACTION(Mh2_3L, calc_Mh2_EFT_0L(pars)
                                     + calc_Mh2_EFT_1L(pars)
                                     + calc_Mh2_EFT_2L(pars)
-                                    + calc_Mh2_EFT_3L(pars,ho), 0.005);
+                                    + calc_Mh2_EFT_3L(pars,ho), 0.002);
 }
