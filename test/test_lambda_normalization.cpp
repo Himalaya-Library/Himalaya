@@ -200,12 +200,12 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
                                     + calc_Mh2_EFT_1L(pars)
                                     + calc_Mh2_EFT_2L(pars)
                                     + calc_Mh2_EFT_3L(pars,zeta_Himalaya),
-                              0.002);
+                              1e-6);
 
    BOOST_CHECK_CLOSE_FRACTION(Mh2_3L, calc_Mh2_EFT_0L(pars)
                                     + calc_Mh2_EFT_1L(pars)
                                     + calc_Mh2_EFT_2L(pars)
                                     + calc_Mh2_EFT_3L(pars,zeta_EFT),
-                              0.03);
+                              1e-6);
 
 }
