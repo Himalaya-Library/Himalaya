@@ -82,6 +82,24 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
    return mhc.Mh2_EFT_1loop(at, mt, mQ32, mU32, Xt, MR2);
 }
 
+/// calculates Mh^2 in the EFT at 2-loop level
+double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
+{
+   const double at = calc_at(pars);
+   const double tb = pars.vu/pars.vd;
+   const double mt = pars.Mt;
+   const double mQ32 = pars.mq2(2,2);
+   const double mU32 = pars.mu2(2,2);
+   const double Xt = pars.At - pars.mu/tb;
+   const double MR2 = pow2(pars.scale);
+   const double g3 = pars.g3;
+   const double m3 = pars.MG;
+
+   himalaya::mh2_eft::Mh2EFTCalculator mhc;
+
+   return mhc.Mh2_EFT_2loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3);
+}
+
 } // anonymous namespace
 
 BOOST_AUTO_TEST_CASE(test_lambda_normalization)
@@ -110,5 +128,8 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    BOOST_CHECK_CLOSE_FRACTION(Mh2_0L, calc_Mh2_EFT_0L(pars), 1e-5);
    BOOST_CHECK_CLOSE_FRACTION(Mh2_1L, calc_Mh2_EFT_0L(pars)
                                     + calc_Mh2_EFT_1L(pars), 1e-6);
+   BOOST_CHECK_CLOSE_FRACTION(Mh2_2L, calc_Mh2_EFT_0L(pars)
+                                    + calc_Mh2_EFT_1L(pars)
+                                    + calc_Mh2_EFT_2L(pars), 1e-6);
 
 }
