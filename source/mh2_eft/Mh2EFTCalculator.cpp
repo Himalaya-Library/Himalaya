@@ -11595,16 +11595,17 @@ double himalaya::mh2_eft::Mh2EFTCalculator::coeff_as2_susy_log32(){
  *   @return zeta_lambda^(2)
  */
 double himalaya::mh2_eft::Mh2EFTCalculator::getZetaDegenerated(double scale, double mst1, double Xt) const{
+   using std::log;
+   const double zt2 = 1.644934066848226;
+   const double zt3 = 1.202056903159594;
+   const double li2 = 0.5822405264650125; // Li2(1/2)
+   const double li3 = 0.5372131936080402; // Li3(1/2)
+   const double li4 = 0.5174790616738994; // Li4(1/2)
 
-   const double zt3 = 1.20206;
-   const double zt2 = 1.64493;
-   const double li2 = 0.582241;
-   const double li3 = 0.537213;
-   const double li4 = 0.517479;
    const double LS = log(pow2(scale / mst1));
    const double c02 = 5983/36. + 44*zt3 - 128/9.*li2*zt2 - 64/9.*pow2(li2)
       - 32*li3 + 8*zt2 + 928/45.*pow2(zt2)
-      -128/3.*li4 + 16/3.*pow3(log(2));
+      -128/3.*li4 + 16/3.*pow3(log(2.));
    const double zt2lam = -c02 + 1745 / 108. - 214 / 3. * zt3 - (2132 / 27. - 8 * zt3) * LS
       + 442 / 9. * pow2(LS) - 56 / 3. * pow3(LS)
       + Xt*(-3292/27. + 212/3. * zt3 + 400 / 27. * LS - 488 / 9. * pow2(LS))
