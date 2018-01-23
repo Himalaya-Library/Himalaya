@@ -122,7 +122,7 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 
 /// calculates Mh^2 in the EFT at 3-loop level
 double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
-                       const himalaya::HierarchyObject& ho)
+                       double zeta_lambda_3L)
 {
    const double at = calc_at(pars);
    const double tb = pars.vu/pars.vd;
@@ -147,7 +147,6 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
    const double DMh2_EFT_3L_logs =
       mhc.Mh2_EFT_3loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3, msq2);
 
-   const double zeta_lambda_3L = ho.getZetaDegenerated();
    const double as = pow2(g3)/(4*pow2(Pi));
    // prefactor from paper
    const double pref = pow4(mt)/pow2(4*Pi*vDO)*pow2(as);
@@ -169,6 +168,9 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    const auto pars = make_point();
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
+
+   const double zeta_Himalaya = ho.getZetaHimalaya();
+   const double zeta_EFT      = ho.getZetaEFT();
 
    const auto DMh_0L = ho.getDMh(0);
    const auto DMh_1L = ho.getDMh(1);
@@ -197,5 +199,13 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    BOOST_CHECK_CLOSE_FRACTION(Mh2_3L, calc_Mh2_EFT_0L(pars)
                                     + calc_Mh2_EFT_1L(pars)
                                     + calc_Mh2_EFT_2L(pars)
-                                    + calc_Mh2_EFT_3L(pars,ho), 0.002);
+                                    + calc_Mh2_EFT_3L(pars,zeta_Himalaya),
+                              0.002);
+
+   BOOST_CHECK_CLOSE_FRACTION(Mh2_3L, calc_Mh2_EFT_0L(pars)
+                                    + calc_Mh2_EFT_1L(pars)
+                                    + calc_Mh2_EFT_2L(pars)
+                                    + calc_Mh2_EFT_3L(pars,zeta_EFT),
+                              0.03);
+
 }
