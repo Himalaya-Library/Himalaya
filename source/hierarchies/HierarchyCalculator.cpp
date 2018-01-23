@@ -173,20 +173,21 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    const double lmMst1 = log(pow2(p.scale / p.MSt(0)));
    const double zeta_3L_const =
       mh2EFTCalculator.coeff_as2_susy_log02(mQ3, mU3, m3, msq, p.MSt(0), Xt);
+   const double prefactor = 1./16.;
 
    // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
    //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    // the factor 1/16 is a partial loop factor which gets factorized into zeta
    // M_X is a susy mass
-   ho.setZetaHimalaya((ho.getZetaHimalaya() - zeta_3L_const)/16.);
+   ho.setZetaHimalaya(prefactor * (ho.getZetaHimalaya() - zeta_3L_const));
    
    // add the EFT logs and subtract constant part twice to avoid double counting
    // Factorization: Himalaya_const - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    //	+ Log(mu^2/mst1^2)^1 EFT_coeff_log^1  + Log(mu^2/mst1^2)^2 EFT_coeff_log^2 + Log(mu^2/mst1^2)^3 EFT_coeff_log^3
-   ho.setZetaEFT((ho.getZetaEFT() - zeta_3L_const
+   ho.setZetaEFT(prefactor * (ho.getZetaEFT() - zeta_3L_const
       + lmMst1 * mh2EFTCalculator.coeff_as2_susy_log12(mQ3, mU3, m3, msq, p.MSt(0), Xt)
       + pow2(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log22(mQ3, mU3, m3, msq, p.MSt(0), Xt)
-      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32())/16.);
+      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32()));
 
    // Set zeta for degenerated mass case, where MS = mQ3, the argument Xt is here suppressed by the SUSY scale (named xt)
    ho.setZetaDegenerated(mh2EFTCalculator.getZetaDegenerated(p.scale, mQ3, Xt / mQ3));
@@ -196,7 +197,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
      + pow3(lmMst1) * mh2EFTCalculator.coeff_as2_susy_log32() << "\n";*/
 
    // set zeta (non-logarithmic part)
-   ho.setZetaConst((ho.getZetaConst() - zeta_3L_const)/16.);
+   ho.setZetaConst(prefactor * (ho.getZetaConst() - zeta_3L_const));
 
    return ho;
 }
