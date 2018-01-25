@@ -182,10 +182,16 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    const auto Mh2_2L = calc_Mh2(DMh_0L + DMh_1L + DMh_2L);
    const auto Mh2_3L = calc_Mh2(DMh_0L + DMh_1L + DMh_2L + DMh_3L);
 
-   BOOST_TEST_MESSAGE("Mh(0L) = " << std::sqrt(Mh2_0L));
-   BOOST_TEST_MESSAGE("Mh(1L) = " << std::sqrt(Mh2_1L));
-   BOOST_TEST_MESSAGE("Mh(2L) = " << std::sqrt(Mh2_2L));
-   BOOST_TEST_MESSAGE("Mh(3L) = " << std::sqrt(Mh2_3L));
+   // 3L expansion uncertainty
+   const double Mh2_3L_uncert = ho.getExpUncertainty(3);
+   const double Mh2_3L_uncert_rel = Mh2_3L_uncert / Mh2_3L;
+
+   BOOST_TEST_MESSAGE("Mh(0L) = " << std::sqrt(Mh2_0L) << " GeV");
+   BOOST_TEST_MESSAGE("Mh(1L) = " << std::sqrt(Mh2_1L) << " GeV");
+   BOOST_TEST_MESSAGE("Mh(2L) = " << std::sqrt(Mh2_2L) << " GeV");
+   BOOST_TEST_MESSAGE("Mh(3L) = (" << std::sqrt(Mh2_3L)
+                      << " +- " << Mh2_3L_uncert << ") GeV"
+                      << " (" << Mh2_3L_uncert_rel*100 << "%)");
 
    BOOST_CHECK_CLOSE_FRACTION(Mh2_0L, calc_Mh2_EFT_0L(pars), 1e-5);
 
@@ -200,5 +206,5 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
                                     + calc_Mh2_EFT_1L(pars)
                                     + calc_Mh2_EFT_2L(pars)
                                     + calc_Mh2_EFT_3L(pars,zeta_3L_const),
-                              1e-6);
+                              Mh2_3L_uncert_rel);
 }
