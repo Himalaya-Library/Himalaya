@@ -94,10 +94,6 @@ namespace himalaya{
        */
       double getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, const unsigned int oneLoopFlag, 
 				     const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);
-      /**
-       * 	Performs a sanity check of the implemented expansion terms by comparing them to their numerical value at a given parameter point.
-       */
-      void checkTerms();
       // expansion depth flags
       const static unsigned int xx;		/**< This flag can truncate the two loop expansion at the three loop expansion depth */
       const static unsigned int xxMst;		/**< This flag can truncate the expansion depth of the stop/sbottom masses by one order */
