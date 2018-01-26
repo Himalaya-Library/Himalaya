@@ -1354,16 +1354,6 @@ void himalaya::HierarchyCalculator::checkTerms(){
       }
       std::cout << "Hierarchy " << i << " (" << ho.getH3mHierarchyNotation(i) << ")" << " passed checks 1L: " << tf(ck1LPassed) << " 2L: " << tf(ck2LPassed) << " 3L: "<< tf(ck3LPassed) << "." << "\n";
    }
-   // check EFT coefficients
-   const double mQ32 = 10000;
-   const double mU32 = 20000;
-   const double Xt = 2 * 100.;
-   const double MR2 = 500;
-   const double m3 = 300;
-   const double msq2 = 400;
-   
-   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator;
-   mh2EFTCalculator.checkTerms(mQ32, mU32, Xt, MR2, m3, msq2);
 }
 
 /**

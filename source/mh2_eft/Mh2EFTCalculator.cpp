@@ -11674,37 +11674,3 @@ double himalaya::mh2_eft::Mh2EFTCalculator::Mh2_EFT_3loop(
 std::string himalaya::mh2_eft::Mh2EFTCalculator::tf(const bool tf){
    return tf ? "\033[1;32mtrue\033[0m" : "\033[1;31mfalse\033[0m";
 }
-
-/**
- * 	Function to check terms
- */
-void himalaya::mh2_eft::Mh2EFTCalculator::checkTerms(double mQ32, double mU32, double Xt, double MR2, double m3, double msq2){
-   bool checkPassed = false;
-   double dum = coeff_as_0_log_0(mQ32, mU32, Xt, MR2);
-   checkPassed = std::abs(dum - 65.75234703) < 1e-03;
-   std::cout << "Check as^0 log^0 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_0_log_1();
-   checkPassed = std::abs(dum - 12.) < 1e-03;
-   std::cout << "Check as^0 log^1 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_1_log_0(mQ32, mU32, Xt, m3, MR2);
-   checkPassed = std::abs(dum - 977.1683309) < 1e-03;
-   std::cout << "Check as^1 log^0 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_1_log_1(mQ32, mU32, Xt, m3, MR2);
-   checkPassed = std::abs(dum - 186.2109432) < 1e-03;
-   std::cout << "Check as^1 log^1 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_1_log_2();
-   checkPassed = std::abs(dum - 96.) < 1e-03;
-   std::cout << "Check as^1 log^2 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_2_log_0(mQ32, mU32, Xt, m3, msq2, MR2);
-   checkPassed = std::abs(dum - (-14454.64603)) < 1e-03;
-   std::cout << "Check as^2 log^0 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_2_log_1(mQ32, mU32, Xt, m3, msq2, MR2);
-   checkPassed = std::abs(dum - (-5680.883822)) < 1e-03;
-   std::cout << "Check as^2 log^1 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_2_log_2(mQ32, mU32, Xt, m3, msq2, MR2);
-   checkPassed = std::abs(dum - 2877.986080) < 1e-03;
-   std::cout << "Check as^2 log^2 passed: " << tf(checkPassed) << ".\n";
-   dum = coeff_as_2_log_3();
-   checkPassed = std::abs(dum - 736.) < 1e-03;
-   std::cout << "Check as^2 log^3 passed: " << tf(checkPassed) << ".\n";
-}

@@ -53,11 +53,6 @@ namespace mh2_eft{
        */
       double Mh2_EFT_3loop(double at, double mt, double mQ32, double mU32,
 			   double Xt, double MR2, double g3, double m3, double msq2);
-
-      /**
-       * 	Function to check terms
-       */
-      void checkTerms(double mQ32, double mU32, double Xt, double MR2, double m3, double msq2);
       
       /**
        * 	@param mQ3 the left-handed soft-breaking mass term of the third generation.
