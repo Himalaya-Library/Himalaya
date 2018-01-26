@@ -1,7 +1,6 @@
 #define BOOST_TEST_MODULE test_EFT_expressions
 
 #include <boost/test/unit_test.hpp>
-#include "HierarchyCalculator.hpp"
 
 #define private public
 #include "Mh2EFTCalculator.hpp"
