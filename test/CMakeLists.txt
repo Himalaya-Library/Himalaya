@@ -16,5 +16,6 @@ function(add_himalaya_test name)
   add_test(NAME ${name} COMMAND ${name})
 endfunction()
 
+add_himalaya_test(test_EFT_expressions)
 add_himalaya_test(test_lambda_limits)
 add_himalaya_test(test_lambda_normalization)
