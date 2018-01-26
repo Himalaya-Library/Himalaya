@@ -1,4 +1,5 @@
 #include "HierarchyObject.hpp"
+#include "Hierarchies.hpp"
 
 /**
  * 	A constructor.
@@ -244,21 +245,6 @@ Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::sortVector(Eigen::Matrix<
  *      @return Returns the corresponding H3m notation of the given hierarchy as a string.
  */
 std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) const{
-   //todo: merge these numbers with the ones of HierarcyCalcultor !
-   const int h3 = 0;
-   const int h32q2g = 1;
-   const int h3q22g = 2;
-   const int h4 = 3;
-   const int h5 = 4;
-   const int h5g1 = 5;
-   const int h6 = 6;
-   const int h6b = 7;
-   const int h6b2qg2 = 8;
-   const int h6bq22g = 9;
-   const int h6bq2g2 = 10;
-   const int h6g2 = 11;
-   const int h9 = 12;
-   const int h9q2 = 13;
    switch (hierarchy){
       case h3:
 	 return "h3";

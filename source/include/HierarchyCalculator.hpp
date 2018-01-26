@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Himalaya_interface.hpp"
+#include "Hierarchies.hpp"
 #include "HierarchyObject.hpp"
 #include "version.hpp"
 #include <map>
@@ -164,21 +165,6 @@ namespace himalaya{
        * 	Prints out some information about Himalaya.
        */
       void printInfo();
-      //hierarchy keys TODO: use an enum instead?
-      static const int h3;	/**< The key to hierarchy h3 */
-      static const int h32q2g;	/**< The key to hierarchy h32q2g */
-      static const int h3q22g;	/**< The key to hierarchy h3q22g */
-      static const int h4;	/**< The key to hierarchy h4 */
-      static const int h5;	/**< The key to hierarchy h5 */
-      static const int h5g1;	/**< The key to hierarchy h5g1 */
-      static const int h6;	/**< The key to hierarchy h6 */
-      static const int h6b;	/**< The key to hierarchy h6b */
-      static const int h6b2qg2;	/**< The key to hierarchy h6b2qg2 */
-      static const int h6bq22g;	/**< The key to hierarchy h6bq22g */
-      static const int h6bq2g2;	/**< The key to hierarchy h6bq2g2 */
-      static const int h6g2;	/**< The key to hierarchy h6g2 */
-      static const int h9;	/**< The key to hierarchy h9 */
-      static const int h9q2;	/**< The key to hierarchy h9q2 */
       const std::map<int, int> hierarchyMap = {{h3, h3}, {h32q2g, h3}, {h3q22g, h3}, {h4, h4}, {h5, h5}, {h5g1, h5},
 	 {h6, h6}, {h6g2, h6}, {h6b, h6b}, {h6b2qg2, h6b}, {h6bq22g, h6b}, {h6bq2g2, h6b}, {h9, h9}, {h9q2, h9}}; /** The hierarchy map which maps all hierarchies to their mother hierarchies */
   };

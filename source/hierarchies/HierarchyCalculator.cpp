@@ -30,21 +30,6 @@ static bool isInfoPrinted; /**< If this bool is true, than no info will be print
  * 	Define static variables
  */
 namespace himalaya {
-   // Hierarchy keys
-   const int HierarchyCalculator::h3 		= 0;	/**< The key to hierarchy h3 */
-   const int HierarchyCalculator::h32q2g 	= 1;	/**< The key to hierarchy h32q2g */
-   const int HierarchyCalculator::h3q22g 	= 2;	/**< The key to hierarchy h3q22g */
-   const int HierarchyCalculator::h4 		= 3;	/**< The key to hierarchy h4 */
-   const int HierarchyCalculator::h5 		= 4;	/**< The key to hierarchy h5 */
-   const int HierarchyCalculator::h5g1 		= 5;	/**< The key to hierarchy h5g1 */
-   const int HierarchyCalculator::h6 		= 6;	/**< The key to hierarchy h6 */
-   const int HierarchyCalculator::h6b 		= 7;	/**< The key to hierarchy h6b */
-   const int HierarchyCalculator::h6b2qg2 	= 8;	/**< The key to hierarchy h6b2qg2 */
-   const int HierarchyCalculator::h6bq22g	= 9;	/**< The key to hierarchy h6bq22g */
-   const int HierarchyCalculator::h6bq2g2	= 10;	/**< The key to hierarchy h6bq2g2 */
-   const int HierarchyCalculator::h6g2		= 11;	/**< The key to hierarchy h6g2 */
-   const int HierarchyCalculator::h9 		= 12;	/**< The key to hierarchy h9 */
-   const int HierarchyCalculator::h9q2		= 13;	/**< The key to hierarchy h9q2 */
    // expansion depth flags
    const unsigned int HierarchyCalculator::xx				= 14;	/**< This flag can truncate the two loop expansion at the three loop expansion depth */
    const unsigned int HierarchyCalculator::xxMst			= 15;	/**< This flag can truncate the expansion depth of the stop/sbottom masses by one order */
@@ -226,7 +211,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    ho.setDMh(0, treelvl);
 
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
-   for(int hierarchy = h3; hierarchy <= h9q2; hierarchy ++){
+   for(int hierarchy = 0; hierarchy < NUMBER_OF_HIERARCHIES; hierarchy++){
       // first, check if the hierarchy is suitable to the mass spectrum
       ho.setSuitableHierarchy(hierarchy);
       if(isHierarchySuitable(ho)){
