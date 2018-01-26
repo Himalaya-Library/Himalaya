@@ -159,9 +159,6 @@ int main() {
 
 	 // bottom and MDR
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, 1);
-	 
-	 // check terms
-	 //hierarchyCalculator.checkTerms();
       }
    }
    catch (std::exception& e){
