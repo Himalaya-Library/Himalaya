@@ -18,6 +18,7 @@
 #include "Utils.hpp"
 #include <iomanip>
 #include <iostream>
+#include <numeric>
 #include <stdexcept>
 #include <type_traits>
 
@@ -1201,14 +1202,15 @@ double himalaya::HierarchyCalculator::getExpansionUncertainty(himalaya::Hierarch
       break;
    }
    // evalue the sqrt of the squared errors
-   double squaredErrorSum = 0.;
-   for(auto const& error: errors){
-      squaredErrorSum = squaredErrorSum + pow2(error);
-   }
+   const double squaredErrorSum =
+      std::accumulate(errors.cbegin(), errors.cend(), 0.,
+                      [](double l, double r) { return l + r*r; });
+
    // set the expansion depth for the next comparison
    flagMap.at(xxMst) = 0;
    flagMap.at(xx) = 0;
-   return sqrt(squaredErrorSum);
+
+   return std::sqrt(squaredErrorSum);
 }
 
 /**
