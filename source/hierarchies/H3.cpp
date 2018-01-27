@@ -1,5 +1,6 @@
 #include "H3.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <iomanip>      // std::setprecision
@@ -51,9 +52,9 @@ himalaya::H3::H3 (const std::map<unsigned int, unsigned int>& flagMap, double Al
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   xDmglst1 = flagMap.at (HierarchyCalculator::xxDmglst1);
-   xDmst12 = flagMap.at (HierarchyCalculator::xxDmglst1);
-   xDmsqst1 = flagMap.at (HierarchyCalculator::xxDmsqst1);
+   xDmglst1 = flagMap.at(ExpansionDepth::xxDmglst1);
+   xDmst12 = flagMap.at(ExpansionDepth::xxDmglst1);
+   xDmsqst1 = flagMap.at(ExpansionDepth::xxDmsqst1);
    
    s1 = oneLoopFlag * calc_coeff_as_0_log_0_s1() 
       + twoLoopFlag * Al4p * calc_coeff_as_1_log_0_s1() 

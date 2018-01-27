@@ -1,5 +1,6 @@
 #include "H5.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
@@ -52,8 +53,8 @@ himalaya::H5::H5(const std::map<unsigned int, unsigned int>& flagMap, double Al4
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   xDmglst1 = flagMap.at(HierarchyCalculator::xxDmglst1);
-   xMsq = flagMap.at(HierarchyCalculator::xxMsq);
+   xDmglst1 = flagMap.at(ExpansionDepth::xxDmglst1);
+   xMsq = flagMap.at(ExpansionDepth::xxMsq);
    
    s1 = 
    #include "../hierarchies/h5/sigS1Full.inc"

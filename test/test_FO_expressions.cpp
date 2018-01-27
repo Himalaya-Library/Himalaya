@@ -4,6 +4,7 @@
 #define private public
 #include "HierarchyCalculator.hpp"
 #undef private
+#include "Hierarchies.hpp"
 
 himalaya::Parameters make_point()
 {
@@ -51,7 +52,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
 
    const double eps = 1e-13;
 
-   for (int i = 0; i < NUMBER_OF_HIERARCHIES; i++) {
+   for (int i = 0; i < Hierarchies::NUMBER_OF_HIERARCHIES; i++) {
       himalaya::HierarchyCalculator hc(make_point());
       hc.init();
 
@@ -66,7 +67,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
       BOOST_TEST_MESSAGE("Checking hierarchy " << i << " (" << ho.getH3mHierarchyNotation(i) << ")");
 
       switch(i){
-      case h3:
+      case Hierarchies::h3:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.3521101999062, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
@@ -79,7 +80,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 9.986750150481939, 2e-6);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 370.2505433664134, 2e-6);
 	 break;
-      case h32q2g:
+      case Hierarchies::h32q2g:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.3521101999062, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
@@ -92,7 +93,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 9.903809573970422, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 369.7408109643386, eps);
          break;
-      case h3q22g:
+      case Hierarchies::h3q22g:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.3521101999062, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
@@ -105,7 +106,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 10.0141272838662, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 370.3301180635573, eps);
          break;
-      case h4:
+      case Hierarchies::h4:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),                  0, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0),                  0, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1), 6685.123085628641, eps);
@@ -118,7 +119,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 326.0219627343553, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 431.6926278454841, eps);
          break;
-      case h5:
+      case Hierarchies::h5:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  15921.69462848581, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -388569.2043081555, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7874.401574063407, eps);
@@ -131,7 +132,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), -3859.942907446577, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1),  60593.055768119  , eps);
          break;
-      case h5g1:
+      case Hierarchies::h5g1:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  15921.69462848581, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -388569.2043081556, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7874.401574063407, eps);
@@ -144,7 +145,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), -3766.750163753644, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1),  59380.34497121828, eps);
          break;
-      case h6:
+      case Hierarchies::h6:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832763, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
@@ -157,7 +158,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 573.1296253278389, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 8448.4582538127  , eps);
          break;
-      case h6b:
+      case Hierarchies::h6b:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702311, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832763, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
@@ -170,7 +171,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 566.2182257407396, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10093.33785879814, eps);
          break;
-      case h6b2qg2:
+      case Hierarchies::h6b2qg2:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702311, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832759, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
@@ -183,7 +184,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 544.3654284413091, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10336.22756889787, eps);
          break;
-      case h6bq22g:
+      case Hierarchies::h6bq22g:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832763, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
@@ -196,7 +197,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 566.2190953470737, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10093.33986048966, eps);
          break;
-      case h6bq2g2:
+      case Hierarchies::h6bq2g2:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832759, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
@@ -209,7 +210,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 544.3662758149513, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10336.23012077387, eps);
          break;
-      case h6g2:
+      case Hierarchies::h6g2:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832761, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
@@ -222,7 +223,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 557.451210096066 , eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 8628.076480526881, eps);
          break;
-      case h9:
+      case Hierarchies::h9:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.352110199906 , eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
@@ -235,7 +236,7 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), -171.9326869339159, eps);
          BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), -800.8408283898472, eps);
          break;
-      case h9q2:
+      case Hierarchies::h9q2:
          BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.352110199906 , eps);
          BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);

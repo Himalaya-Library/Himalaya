@@ -1,10 +1,12 @@
 #pragma once
 
 namespace himalaya {
+namespace Hierarchies {
 
 /// Hierarchy numbers
 enum Hierarchies : int {
-   h3      =  0,            ///< The key to hierarchy h3
+   FIRST   =  0,
+   h3      =  FIRST,        ///< The key to hierarchy h3
    h32q2g  =  1,            ///< The key to hierarchy h32q2g
    h3q22g  =  2,            ///< The key to hierarchy h3q22g
    h4      =  3,            ///< The key to hierarchy h4
@@ -20,4 +22,28 @@ enum Hierarchies : int {
    h9q2    = 13,            ///< The key to hierarchy h9q2
    NUMBER_OF_HIERARCHIES    ///< Number of hierarchies
 };
+
+} // namespace Hierarchies
+
+namespace ExpansionDepth {
+
+/// expansion depth flags
+enum ExpansionDepth : int {
+   FIRST     = 14,
+   xx        = FIRST,   ///< This flag can truncate the two loop expansion at the three loop expansion depth
+   xxMst     = 15,      ///< This flag can truncate the expansion depth of the stop/sbottom masses by one order
+   xxDmglst1 = 16,      ///< This flag can truncate the expansion depth of the difference of stop/sbottom 1 mass and the gluino mass by one order
+   xxDmsqst1 = 17,      ///< This flag can truncate the expansion depth of the difference of the stop/sbottom 1 mass and the average squark mass by one order
+   xxDmst12  = 18,      ///< This flag can truncate the expansion depth of the difference of the stop/sbottom masses by one order
+   xxAt      = 19,      ///< This flag can truncate the expansion depth of At/Ab by one order
+   xxlmMsusy = 20,      ///< This flag can truncate the expansion depth of log(Msusy) by one order
+   xxMsq     = 21,      ///< This flag can truncate the expansion depth of the average squark mass by one order
+   xxMsusy   = 22,      ///< This flag can truncate the expansion depth of the average SUSY mass by one order
+   xxDmglst2 = 23,      ///< This flag can truncate the expansion depth of the difference of the stop/sbottom 2 mass and the gluino mass by one order
+   xxDmsqst2 = 24,      ///< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order
+   xxMgl     = 25,      ///< This flag can truncate the expansion depth of the gluino mass by one order
+   NUMBER_OF_EXPANSIONS ///< Number of expansions
+};
+
+} // namespace ExpansionDepth
 } // namespace himalaya

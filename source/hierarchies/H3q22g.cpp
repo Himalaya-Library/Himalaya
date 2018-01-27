@@ -1,5 +1,6 @@
 #include "H3q22g.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
@@ -49,9 +50,9 @@ himalaya::H3q22g::H3q22g(const std::map<unsigned int, unsigned int>& flagMap, do
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   xDmglst1 = flagMap.at (HierarchyCalculator::xxDmglst1);
-   xDmst12 = flagMap.at (HierarchyCalculator::xxDmglst1);
-   xDmsqst1 = flagMap.at (HierarchyCalculator::xxDmsqst1);
+   xDmglst1 = flagMap.at(ExpansionDepth::xxDmglst1);
+   xDmst12 = flagMap.at(ExpansionDepth::xxDmglst1);
+   xDmsqst1 = flagMap.at(ExpansionDepth::xxDmsqst1);
    
    
    s1 = 

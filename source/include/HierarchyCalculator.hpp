@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Himalaya_interface.hpp"
-#include "Hierarchies.hpp"
 #include "HierarchyObject.hpp"
 #include "version.hpp"
 #include <map>
@@ -94,19 +93,6 @@ namespace himalaya{
        */
       double getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, const unsigned int oneLoopFlag, 
 				     const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);
-      // expansion depth flags
-      const static unsigned int xx;		/**< This flag can truncate the two loop expansion at the three loop expansion depth */
-      const static unsigned int xxMst;		/**< This flag can truncate the expansion depth of the stop/sbottom masses by one order */
-      const static unsigned int xxDmglst1;	/**< This flag can truncate the expansion depth of the difference of stop/sbottom 1 mass and the gluino mass by one order*/
-      const static unsigned int xxDmsqst1;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 1 mass and the average squark mass by one order*/
-      const static unsigned int xxDmst12; 	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom masses by one order*/
-      const static unsigned int xxAt;		/**< This flag can truncate the expansion depth of At/Ab by one order*/
-      const static unsigned int xxlmMsusy;	/**< This flag can truncate the expansion depth of log(Msusy) by one order*/
-      const static unsigned int xxMsq;		/**< This flag can truncate the expansion depth of the average squark mass by one order*/
-      const static unsigned int xxMsusy;	/**< This flag can truncate the expansion depth of the average SUSY mass by one order*/
-      const static unsigned int xxDmglst2;	/**< This flag can truncate the expansion depth of the difference of the stop/sbottom 2 mass and the gluino mass by one order*/
-      const static unsigned int xxDmsqst2;	/**< This flag can truncate the expansion depth of the difference of the average squark mass and the stop/sbottom 2 mass by one order*/
-      const static unsigned int xxMgl;		/**< This flag can truncate the expansion depth of the gluino mass by one order*/
    private:
       Parameters p{};	/** The HimalayaInterface struct. */
       double Al4p{}, lmMgl{}, lmMsq{}, Mgl{}, Msq{}, prefac{};/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix */
@@ -161,7 +147,5 @@ namespace himalaya{
        * 	Prints out some information about Himalaya.
        */
       void printInfo();
-      const std::map<int, int> hierarchyMap = {{h3, h3}, {h32q2g, h3}, {h3q22g, h3}, {h4, h4}, {h5, h5}, {h5g1, h5},
-	 {h6, h6}, {h6g2, h6}, {h6b, h6b}, {h6b2qg2, h6b}, {h6bq22g, h6b}, {h6bq2g2, h6b}, {h9, h9}, {h9q2, h9}}; /** The hierarchy map which maps all hierarchies to their mother hierarchies */
   };
 }	// himalaya

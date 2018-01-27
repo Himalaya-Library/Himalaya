@@ -1,5 +1,6 @@
 #include "H6b2qg2.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
@@ -52,9 +53,9 @@ himalaya::H6b2qg2::H6b2qg2(const std::map<unsigned int, unsigned int>& flagMap, 
    shiftst3 = mdrFlag;
    xDR2DRMOD = mdrFlag;
    // expansion flags
-   xDmglst2 = flagMap.at(HierarchyCalculator::xxDmglst2);
-   xDmsqst2 = flagMap.at(HierarchyCalculator::xxDmsqst2);
-   xMst = flagMap.at(HierarchyCalculator::xxMst);
+   xDmglst2 = flagMap.at(ExpansionDepth::xxDmglst2);
+   xDmsqst2 = flagMap.at(ExpansionDepth::xxDmsqst2);
+   xMst = flagMap.at(ExpansionDepth::xxMst);
    
    s1 = 
    #include "../hierarchies/h6b2qg2/sigS1Full.inc"

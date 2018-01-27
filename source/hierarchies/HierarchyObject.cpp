@@ -246,33 +246,33 @@ Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::sortVector(Eigen::Matrix<
  */
 std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) const{
    switch (hierarchy){
-      case h3:
+      case Hierarchies::h3:
 	 return "h3";
-      case h32q2g:
+      case Hierarchies::h32q2g:
 	 return "h32q2g";
-      case h3q22g:
+      case Hierarchies::h3q22g:
 	 return "h3q22g";
-      case h4:
+      case Hierarchies::h4:
 	 return "h4";
-      case h5:
+      case Hierarchies::h5:
 	 return "h5";
-      case h5g1:
+      case Hierarchies::h5g1:
 	 return "h5g1";
-      case h6:
+      case Hierarchies::h6:
 	 return "h6";
-      case h6b:
+      case Hierarchies::h6b:
 	 return "h6b";
-      case h6b2qg2:
+      case Hierarchies::h6b2qg2:
 	 return "h6b2qg2";
-      case h6bq22g:
+      case Hierarchies::h6bq22g:
 	 return "h6bq22g";
-      case h6bq2g2:
+      case Hierarchies::h6bq2g2:
 	 return "h6bq2g2";
-      case h6g2:
+      case Hierarchies::h6g2:
 	 return "h6g2";
-      case h9:
+      case Hierarchies::h9:
 	 return "h9";
-      case h9q2:
+      case Hierarchies::h9q2:
 	 return "h9q2";
       default:
 	 return "Hierarchy " + std::to_string(hierarchy) + " not included";

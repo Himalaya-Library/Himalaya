@@ -1,5 +1,6 @@
 #include "H6.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
@@ -52,9 +53,9 @@ himalaya::H6::H6(const std::map<unsigned int, unsigned int>& flagMap, double Al4
    shiftst3 = mdrFlag;
    xDR2DRMOD = mdrFlag;
    // expansion flags
-   xDmglst2 = flagMap.at(HierarchyCalculator::xxDmglst2);
-   xMsq = flagMap.at(HierarchyCalculator::xxMsq);
-   xMst = flagMap.at(HierarchyCalculator::xxMst);
+   xDmglst2 = flagMap.at(ExpansionDepth::xxDmglst2);
+   xMsq = flagMap.at(ExpansionDepth::xxMsq);
+   xMst = flagMap.at(ExpansionDepth::xxMst);
    
    s1 = 
    #include "../hierarchies/h6/sigS1Full.inc"

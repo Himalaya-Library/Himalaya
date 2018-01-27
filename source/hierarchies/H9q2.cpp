@@ -1,5 +1,6 @@
 #include "H9q2.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
@@ -53,10 +54,10 @@ himalaya::H9q2::H9q2(const std::map<unsigned int, unsigned int>& flagMap, double
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   x = flagMap.at(HierarchyCalculator::xx);
-   xDmst12 = flagMap.at(HierarchyCalculator::xxDmglst1);
-   xDmsqst1 = flagMap.at(HierarchyCalculator::xxDmsqst1);
-   xMgl = flagMap.at(HierarchyCalculator::xxMgl);
+   x = flagMap.at(ExpansionDepth::xx);
+   xDmst12 = flagMap.at(ExpansionDepth::xxDmglst1);
+   xDmsqst1 = flagMap.at(ExpansionDepth::xxDmsqst1);
+   xMgl = flagMap.at(ExpansionDepth::xxMgl);
    
    s1 = 
    #include "../hierarchies/h9q2/sigS1Full.inc"

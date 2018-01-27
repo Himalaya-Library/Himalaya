@@ -1,5 +1,6 @@
 #include "H4.hpp"
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
@@ -40,10 +41,10 @@ himalaya::H4::H4(const std::map<unsigned int, unsigned int>& flagMap, double Al4
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   xAt = flagMap.at(HierarchyCalculator::xxAt);
-   xMsq = flagMap.at(HierarchyCalculator::xxMsq);
-   xlmMsusy = flagMap.at(HierarchyCalculator::xxlmMsusy);
-   xMsusy = flagMap.at(HierarchyCalculator::xxMsusy);
+   xAt = flagMap.at(ExpansionDepth::xxAt);
+   xMsq = flagMap.at(ExpansionDepth::xxMsq);
+   xlmMsusy = flagMap.at(ExpansionDepth::xxlmMsusy);
+   xMsusy = flagMap.at(ExpansionDepth::xxMsusy);
    
    s1 = 
    #include "../hierarchies/h4/sigS1Full.inc"
