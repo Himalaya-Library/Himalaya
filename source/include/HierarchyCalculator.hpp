@@ -131,12 +131,6 @@ namespace himalaya{
       void checkForDegenerateCase(double &mQ3, double &mU3, double &m3, double &msq, double &Xt);
       std::map<unsigned int, unsigned int> flagMap{};	/** A map which holds all hierarchy key value pairs. */
       /**
-       * 	A function which maps a boolean to a string.
-       * 	@param tf a boolean.
-       * 	@return A string which is 'true' if tf is true or 'false' if tf is false.
-       */
-      std::string tf(const bool tf);
-      /**
        * 	Maps a hierarchy to it's mother hierarchy.
        * 	@param hierarchy the key to a hierarchy.
        * 	@throws runtime_error Throws a runtime_error if the given hierarchy is not included.
