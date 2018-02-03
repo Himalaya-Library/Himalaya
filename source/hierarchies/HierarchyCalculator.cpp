@@ -225,10 +225,10 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
       ho.setSuitableHierarchy(hierarchy);
       if(isHierarchySuitable(ho)){
 	 // calculate the exact 1-loop result (only alpha_t/b)
-	 Eigen::Matrix2d Mt41L = getMt41L(ho, ho.getMDRFlag(), 0);
+	 const Eigen::Matrix2d Mt41L = getMt41L(ho, ho.getMDRFlag(), 0);
 	 
 	 // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
-	 Eigen::Matrix2d Mt42L = getMt42L(ho, ho.getMDRFlag(), 0);
+	 const Eigen::Matrix2d Mt42L = getMt42L(ho, ho.getMDRFlag(), 0);
 	 
 	 // Note: spurious poles are handled by the validate method
 	 // of the Himalaya_Interface struct
@@ -240,23 +240,23 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 //Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isAlphab);
 	 
 	 //calculate the exact Higgs mass at 2-loop (only up to alpha_s alpha_t/b)
-	 Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
-	 double Mh2l = sortEigenvalues(es2L).at(0);
+	 const Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
+	 const double Mh2l = sortEigenvalues(es2L).at(0);
 
 	 // calculate the expanded 2-loop expression with the specific hierarchy
-	 Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L + calculateHierarchy(ho, 0, 1, 0));
+	 const Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L + calculateHierarchy(ho, 0, 1, 0));
 	 
 	 // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
-	 double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
+	 const double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
 
 	 // estimate the error
-	 double twoLoopError = fabs((Mh2l - Mh2LExpanded));
+	 const double twoLoopError = fabs((Mh2l - Mh2LExpanded));
 
 	 // estimate the uncertainty of the expansion
-	 double expUncertainty = getExpansionUncertainty(ho, treelvl + Mt41L, 0, 1, 0);
+	 const double expUncertainty = getExpansionUncertainty(ho, treelvl + Mt41L, 0, 1, 0);
 	 
 	 // add these errors to include the error of the expansion in the comparison
-	 double currError = sqrt(pow2(twoLoopError) + pow2(expUncertainty));
+	 const double currError = sqrt(pow2(twoLoopError) + pow2(expUncertainty));
 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
@@ -356,13 +356,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	 // select the suitable hierarchy for the specific hierarchy and set variables
 	 switch(getCorrectHierarchy(hierarchy)){
 	    case Hierarchies::h3:{
-	       double Dmglst1 = Mgl - Mst1;
-	       double Dmsqst1 = pow2(Msq) - pow2(Mst1);
-	       double Dmst12 = pow2(Mst1) - pow2(Mst2);
-	       double lmMst1 = log(pow2(p.scale / Mst1));
+	       const double Dmglst1 = Mgl - Mst1;
+	       const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
+	       const double Dmst12 = pow2(Mst1) - pow2(Mst2);
+	       const double lmMst1 = log(pow2(p.scale / Mst1));
 	       switch(hierarchy){
 		  case Hierarchies::h3:{
-		     H3 hierarchy3(flagMap, Al4p, beta,
+		     const H3 hierarchy3(flagMap, Al4p, beta,
 			Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
 			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
 			s2t, 
@@ -382,7 +382,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  }
 		  break;
 		  case Hierarchies::h32q2g:{
-		     H32q2g hierarchy32q2g(flagMap, Al4p, beta,
+		     const H32q2g hierarchy32q2g(flagMap, Al4p, beta,
 			Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
 			Mt, Mst1, Mst2, p.mu,
 			s2t,
@@ -398,11 +398,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
 			ho.setZetaEFT(c);
                         ho.setZetaConst(c);
-		     }		  
+		     }
 		  }
 		  break;
 		  case Hierarchies::h3q22g:{
-		     H3q22g hierarchy3q22g(flagMap, Al4p, beta,
+		     const H3q22g hierarchy3q22g(flagMap, Al4p, beta,
 			Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
 			Mt, Mst1, Mst2, Msq, p.mu,
 			s2t,
@@ -425,9 +425,9 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	    }
 	    break;
 	    case Hierarchies::h4:{
-	       double Msusy = (Mst1 + Mst2 + Mgl) / 3.;
-	       double lmMsusy = log(pow2(p.scale / Msusy));
-	       H4 hierarchy4(flagMap, Al4p, At, beta,
+	       const double Msusy = (Mst1 + Mst2 + Mgl) / 3.;
+	       const double lmMsusy = log(pow2(p.scale / Msusy));
+	       const H4 hierarchy4(flagMap, Al4p, At, beta,
 		  lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
 		  ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
 	       curSig1 = hierarchy4.getS1();
@@ -445,12 +445,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	    }
 	    break;
 	    case Hierarchies::h5:{
-	       double Dmglst1 = Mgl - Mst1;
-	       double lmMst1 = log(pow2(p.scale / Mst1));
-	       double lmMst2 = log(pow2(p.scale / Mst2));
+	       const double Dmglst1 = Mgl - Mst1;
+	       const double lmMst1 = log(pow2(p.scale / Mst1));
+	       const double lmMst2 = log(pow2(p.scale / Mst2));
 	       switch(hierarchy){
 		  case Hierarchies::h5:{
-		     H5 hierarchy5(flagMap, Al4p, beta, Dmglst1,
+		     const H5 hierarchy5(flagMap, Al4p, beta, Dmglst1,
 			lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
 			Mst2, Msq, p.mu,
 			s2t,
@@ -470,7 +470,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  }
 		  break;
 		  case Hierarchies::h5g1:{
-		     H5g1 hierarchy5g1(flagMap, Al4p, beta, Dmglst1,
+		     const H5g1 hierarchy5g1(flagMap, Al4p, beta, Dmglst1,
 			lmMt, lmMst1, lmMst2, lmMsq, Mgl, Mt, Mst1,
 			Mst2, Msq, p.mu,
 			s2t,
@@ -493,12 +493,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	    }
 	    break;
 	    case Hierarchies::h6:{
-	       double Dmglst2 = Mgl - Mst2;
-	       double lmMst1 = log(pow2(p.scale / Mst1));
-	       double lmMst2 = log(pow2(p.scale / Mst2));
+	       const double Dmglst2 = Mgl - Mst2;
+	       const double lmMst1 = log(pow2(p.scale / Mst1));
+	       const double lmMst2 = log(pow2(p.scale / Mst2));
 	       switch(hierarchy){
 		  case Hierarchies::h6:{
-		     H6 hierarchy6(flagMap, Al4p, beta, Dmglst2,
+		     const H6 hierarchy6(flagMap, Al4p, beta, Dmglst2,
 			lmMt, lmMst1, lmMst2, lmMsq,
 			Mt, Mst1, Mst2, Msq, p.mu,
 			s2t,
@@ -518,7 +518,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  }
 		  break;
 		  case Hierarchies::h6g2:{
-		     H6g2 hierarchy6g2(flagMap, Al4p, beta, Dmglst2,
+		     const H6g2 hierarchy6g2(flagMap, Al4p, beta, Dmglst2,
 			lmMt, lmMst1, lmMst2, lmMsq,
 			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
 			s2t,
@@ -541,13 +541,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	    }
 	    break;
 	    case Hierarchies::h6b:{
-	       double Dmglst2 = Mgl - Mst2;
-	       double Dmsqst2 = Msq - Mst2;
-	       double lmMst1 = log(pow2(p.scale / Mst1));
-	       double lmMst2 = log(pow2(p.scale / Mst2));
+	       const double Dmglst2 = Mgl - Mst2;
+	       const double Dmsqst2 = Msq - Mst2;
+	       const double lmMst1 = log(pow2(p.scale / Mst1));
+	       const double lmMst2 = log(pow2(p.scale / Mst2));
 	       switch(hierarchy){
 		  case Hierarchies::h6b:{
-		     H6b hierarchy6b(flagMap, Al4p, beta, Dmglst2,
+		     const H6b hierarchy6b(flagMap, Al4p, beta, Dmglst2,
 			Dmsqst2, lmMt, lmMst1, lmMst2,
 			Mt, Mst1, Mst2, p.mu,
 			s2t,
@@ -567,7 +567,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  }
 		  break;
 		  case Hierarchies::h6b2qg2:{
-		     H6b2qg2 hierarchy6b2qg2(flagMap, Al4p, beta, Dmglst2,
+		     const H6b2qg2 hierarchy6b2qg2(flagMap, Al4p, beta, Dmglst2,
 			Dmsqst2, lmMt, lmMst1, lmMst2,
 			Mgl, Mt, Mst1, Mst2, p.mu,
 			s2t,
@@ -587,7 +587,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  }
 		  break;
 		  case Hierarchies::h6bq22g:{
-		     H6bq22g hierarchy6bq22g(flagMap, Al4p, beta, Dmglst2,
+		     const H6bq22g hierarchy6bq22g(flagMap, Al4p, beta, Dmglst2,
 			Dmsqst2, lmMt, lmMst1, lmMst2,
 			Mt, Mst1, Mst2, Msq, p.mu,
 			s2t,
@@ -607,7 +607,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  }
 		  break;
 		  case Hierarchies::h6bq2g2:{
-		     H6bq2g2 hierarchy6bq2g2(flagMap, Al4p, beta, Dmglst2,
+		     const H6bq2g2 hierarchy6bq2g2(flagMap, Al4p, beta, Dmglst2,
 			Dmsqst2, lmMt, lmMst1, lmMst2,
 			Mgl, Mt, Mst1,Mst2, Msq, p.mu,
 			s2t,
@@ -630,12 +630,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	    }
 	    break;
 	    case Hierarchies::h9:{
-	       double lmMst1 = log(pow2(p.scale / Mst1));
-	       double Dmst12 = pow2(Mst1) - pow2(Mst2);
-	       double Dmsqst1 = pow2(Msq) - pow2(Mst1);
+	       const double lmMst1 = log(pow2(p.scale / Mst1));
+	       const double Dmst12 = pow2(Mst1) - pow2(Mst2);
+	       const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
 	       switch(hierarchy){
 		  case Hierarchies::h9:{
-		     H9 hierarchy9(flagMap, Al4p, beta, Dmst12, Dmsqst1,
+		     const H9 hierarchy9(flagMap, Al4p, beta, Dmst12, Dmsqst1,
 			lmMt, lmMgl, lmMst1,
 			Mgl, Mt, Mst1, Mst2, p.mu,
 			s2t,
@@ -655,7 +655,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		  }
 		  break;
 		  case Hierarchies::h9q2:{
-		     H9q2 hierarchy9q2(flagMap, Al4p, beta, Dmst12, Dmsqst1,
+		     const H9q2 hierarchy9q2(flagMap, Al4p, beta, Dmst12, Dmsqst1,
 			lmMt, lmMgl, lmMst1,
 			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
 			s2t,
@@ -764,9 +764,9 @@ double himalaya::HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyOb
       Mst1 = p.MSb(0);
       Mst2 = p.MSb(1);
    }
-   double lmMst2 = log(pow2(p.scale) / pow2(Mst2));
-   double Dmglst2 = Mgl - Mst2;
-   double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p) * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2) * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
+   const double lmMst2 = log(pow2(p.scale) / pow2(Mst2));
+   const double Dmglst2 = Mgl - Mst2;
+   const double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p) * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2) * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
    switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
       Mst1mod = (1 + mdr2mst1ka);
@@ -811,8 +811,8 @@ double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyOb
    else{
       Mst2 = p.MSb(1);
    }
-   double Dmglst2 = Mgl - Mst2;
-   double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p) * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
+   const double Dmglst2 = Mgl - Mst2;
+   const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p) * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
    switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
       Mst2mod = (1 + mdr2mst2ka);
@@ -863,14 +863,12 @@ std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
    Eigen::Matrix2d Mt41L;
-   double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
-   double Mst1;
-   double Mst2;
+   const double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
+   const double beta = atan(p.vu/p.vd);
+   const double Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
+   const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    double Mt;
    double s2t;
-   const double beta = atan(p.vu/p.vd);
-   Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
-   Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    if(!ho.getIsAlphab()){
       s2t = p.s2t;
       Mt = p.Mt;
@@ -933,7 +931,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::Hierarch
  */
 Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::HierarchyObject& ho){
    Eigen::Matrix2d shift;
-   double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
+   const double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
    double Mst1;
    double Mst2;
    double Mt;
@@ -1029,12 +1027,10 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::Hierarch
    double S11, S12, S22;
    double Mt2;
    double MG = p.MG;
-   double Mst12;
-   double Mst22;
    double st;
    double ct;
-   Mst12 = pow2(shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop));
-   Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop));
+   double Mst12 = pow2(shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop));
+   double Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop));
    if(!ho.getIsAlphab()){
       const double theta = asin(p.s2t)/2.;
       Mt2 = pow2(p.Mt);
