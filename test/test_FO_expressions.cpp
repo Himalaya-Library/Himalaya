@@ -1,10 +1,10 @@
-#define BOOST_TEST_MODULE test_FO_expressions
-
-#include <boost/test/unit_test.hpp>
+#include "doctest.h"
 #define private public
 #include "HierarchyCalculator.hpp"
 #undef private
 #include "Hierarchies.hpp"
+
+#define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
 himalaya::Parameters make_point()
 {
@@ -46,7 +46,7 @@ himalaya::Parameters make_point()
  * Performs a sanity check of the implemented expansion terms by
  * comparing them to their numerical value at a given parameter point.
  */
-BOOST_AUTO_TEST_CASE(test_FO_expansions)
+TEST_CASE("test_FO_expansions")
 {
    using namespace himalaya;
 
@@ -63,194 +63,195 @@ BOOST_AUTO_TEST_CASE(test_FO_expansions)
       const auto oloMat  = hc.calculateHierarchy(ho, 1, 0, 0);
       const auto twloMat = hc.calculateHierarchy(ho, 0, 1, 0);
       const auto thloMat = hc.calculateHierarchy(ho, 0, 0, 1);
+      const auto hier_str = ho.getH3mHierarchyNotation(i);
 
-      BOOST_TEST_MESSAGE("Checking hierarchy " << i << " (" << ho.getH3mHierarchyNotation(i) << ")");
+      INFO("Checking hierarchy " << i << " (" << hier_str << ")");
 
       switch(i){
       case Hierarchies::h3:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.3521101999062, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
+         CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
+         CHECK_CLOSE(oloMat(1,0), -394.3521101999062, eps);
+         CHECK_CLOSE(oloMat(1,1),  17633.47392819223, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -13.48340821650015, 1e-5);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  11.12436787252288, 1e-5);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1),  1476.660068002361, 1e-5);
+         CHECK_CLOSE(twloMat(0,0), -13.48340821650015, 1e-5);
+         CHECK_CLOSE(twloMat(1,0),  11.12436787252288, 1e-5);
+         CHECK_CLOSE(twloMat(1,1),  1476.660068002361, 1e-5);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 1.096612614742133, 2e-6);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 9.986750150481939, 2e-6);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 370.2505433664134, 2e-6);
+         CHECK_CLOSE(thloMat(0,0), 1.096612614742133, 2e-6);
+         CHECK_CLOSE(thloMat(1,0), 9.986750150481939, 2e-6);
+         CHECK_CLOSE(thloMat(1,1), 370.2505433664134, 2e-6);
 	 break;
       case Hierarchies::h32q2g:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.3521101999062, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
+         CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
+         CHECK_CLOSE(oloMat(1,0), -394.3521101999062, eps);
+         CHECK_CLOSE(oloMat(1,1),  17633.47392819223, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -13.66052379180129, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  11.26755617866339, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1),  1477.465656153518, eps);
+         CHECK_CLOSE(twloMat(0,0), -13.66052379180129, eps);
+         CHECK_CLOSE(twloMat(1,0),  11.26755617866339, eps);
+         CHECK_CLOSE(twloMat(1,1),  1477.465656153518, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 1.113051431370291, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 9.903809573970422, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 369.7408109643386, eps);
+         CHECK_CLOSE(thloMat(0,0), 1.113051431370291, eps);
+         CHECK_CLOSE(thloMat(1,0), 9.903809573970422, eps);
+         CHECK_CLOSE(thloMat(1,1), 369.7408109643386, eps);
          break;
       case Hierarchies::h3q22g:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.3521101999062, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
+         CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
+         CHECK_CLOSE(oloMat(1,0), -394.3521101999062, eps);
+         CHECK_CLOSE(oloMat(1,1),  17633.47392819223, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -13.66052379180129, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  11.26755617866339, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1),  1477.465656153518, eps);
+         CHECK_CLOSE(twloMat(0,0), -13.66052379180129, eps);
+         CHECK_CLOSE(twloMat(1,0),  11.26755617866339, eps);
+         CHECK_CLOSE(twloMat(1,1),  1477.465656153518, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 1.058450932536496, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 10.0141272838662, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 370.3301180635573, eps);
+         CHECK_CLOSE(thloMat(0,0), 1.058450932536496, eps);
+         CHECK_CLOSE(thloMat(1,0), 10.0141272838662, eps);
+         CHECK_CLOSE(thloMat(1,1), 370.3301180635573, eps);
          break;
       case Hierarchies::h4:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),                  0, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0),                  0, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1), 6685.123085628641, eps);
+         CHECK_CLOSE(oloMat(0,0),                 0, eps);
+         CHECK_CLOSE(oloMat(1,0),                 0, eps);
+         CHECK_CLOSE(oloMat(1,1), 6685.123085628641, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0),                 0, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0), 1183.325484493686, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), 1458.970501474495, eps);
+         CHECK_CLOSE(twloMat(0,0),                 0, eps);
+         CHECK_CLOSE(twloMat(1,0), 1183.325484493686, eps);
+         CHECK_CLOSE(twloMat(1,1), 1458.970501474495, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 162.1379208650191, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 326.0219627343553, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 431.6926278454841, eps);
+         CHECK_CLOSE(thloMat(0,0), 162.1379208650191, eps);
+         CHECK_CLOSE(thloMat(1,0), 326.0219627343553, eps);
+         CHECK_CLOSE(thloMat(1,1), 431.6926278454841, eps);
          break;
       case Hierarchies::h5:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  15921.69462848581, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -388569.2043081555, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7874.401574063407, eps);
+         CHECK_CLOSE(oloMat(0,0),  15921.69462848581, eps);
+         CHECK_CLOSE(oloMat(1,0), -388569.2043081555, eps);
+         CHECK_CLOSE(oloMat(1,1),  7874.401574063407, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -86.77887344841422, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0), -20625.63783863484, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -42446.62009872038, eps);
+         CHECK_CLOSE(twloMat(0,0), -86.77887344841422, eps);
+         CHECK_CLOSE(twloMat(1,0), -20625.63783863484, eps);
+         CHECK_CLOSE(twloMat(1,1), -42446.62009872038, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0),  2442.115080578889, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), -3859.942907446577, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1),  60593.055768119  , eps);
+         CHECK_CLOSE(thloMat(0,0),  2442.115080578889, eps);
+         CHECK_CLOSE(thloMat(1,0), -3859.942907446577, eps);
+         CHECK_CLOSE(thloMat(1,1),  60593.055768119  , eps);
          break;
       case Hierarchies::h5g1:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  15921.69462848581, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -388569.2043081556, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7874.401574063407, eps);
+         CHECK_CLOSE(oloMat(0,0),  15921.69462848581, eps);
+         CHECK_CLOSE(oloMat(1,0), -388569.2043081556, eps);
+         CHECK_CLOSE(oloMat(1,1),  7874.401574063407, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -114.6037388932203, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0), -20341.84471909946, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -42843.48046642416, eps);
+         CHECK_CLOSE(twloMat(0,0), -114.6037388932203, eps);
+         CHECK_CLOSE(twloMat(1,0), -20341.84471909946, eps);
+         CHECK_CLOSE(twloMat(1,1), -42843.48046642416, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0),  2415.507513838155, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), -3766.750163753644, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1),  59380.34497121828, eps);
+         CHECK_CLOSE(thloMat(0,0),  2415.507513838155, eps);
+         CHECK_CLOSE(thloMat(1,0), -3766.750163753644, eps);
+         CHECK_CLOSE(thloMat(1,1),  59380.34497121828, eps);
          break;
       case Hierarchies::h6:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832763, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
+         CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
+         CHECK_CLOSE(oloMat(1,0), -184.7601614832763, eps);
+         CHECK_CLOSE(oloMat(1,1),  7581.278122072418, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -1078.578574572312, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  7096.529601647042, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -1927.791631086123, eps);
+         CHECK_CLOSE(twloMat(0,0), -1078.578574572312, eps);
+         CHECK_CLOSE(twloMat(1,0),  7096.529601647042, eps);
+         CHECK_CLOSE(twloMat(1,1), -1927.791631086123, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 245.4412216221288, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 573.1296253278389, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 8448.4582538127  , eps);
+         CHECK_CLOSE(thloMat(0,0), 245.4412216221288, eps);
+         CHECK_CLOSE(thloMat(1,0), 573.1296253278389, eps);
+         CHECK_CLOSE(thloMat(1,1), 8448.4582538127  , eps);
          break;
       case Hierarchies::h6b:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702311, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832763, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
+         CHECK_CLOSE(oloMat(0,0),  9272.477351702311, eps);
+         CHECK_CLOSE(oloMat(1,0), -184.7601614832763, eps);
+         CHECK_CLOSE(oloMat(1,1),  7581.278122072418, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -1078.578574572312, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  7096.52960164704 , eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -1900.197036824461, eps);
+         CHECK_CLOSE(twloMat(0,0), -1078.578574572312, eps);
+         CHECK_CLOSE(twloMat(1,0),  7096.52960164704 , eps);
+         CHECK_CLOSE(twloMat(1,1), -1900.197036824461, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 283.0253770519464, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 566.2182257407396, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10093.33785879814, eps);
+         CHECK_CLOSE(thloMat(0,0), 283.0253770519464, eps);
+         CHECK_CLOSE(thloMat(1,0), 566.2182257407396, eps);
+         CHECK_CLOSE(thloMat(1,1), 10093.33785879814, eps);
          break;
       case Hierarchies::h6b2qg2:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702311, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832759, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
+         CHECK_CLOSE(oloMat(0,0),  9272.477351702311, eps);
+         CHECK_CLOSE(oloMat(1,0), -184.7601614832759, eps);
+         CHECK_CLOSE(oloMat(1,1),  7581.278122072418, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -1089.201418061661, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  7145.267026465748, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -2077.345120153528, eps);
+         CHECK_CLOSE(twloMat(0,0), -1089.201418061661, eps);
+         CHECK_CLOSE(twloMat(1,0),  7145.267026465748, eps);
+         CHECK_CLOSE(twloMat(1,1), -2077.345120153528, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 285.3154791763894, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 544.3654284413091, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10336.22756889787, eps);
+         CHECK_CLOSE(thloMat(0,0), 285.3154791763894, eps);
+         CHECK_CLOSE(thloMat(1,0), 544.3654284413091, eps);
+         CHECK_CLOSE(thloMat(1,1), 10336.22756889787, eps);
          break;
       case Hierarchies::h6bq22g:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832763, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
+         CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
+         CHECK_CLOSE(oloMat(1,0), -184.7601614832763, eps);
+         CHECK_CLOSE(oloMat(1,1),  7581.278122072418, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -1078.578574572311, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  7096.529601647042, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -1900.197036824461, eps);
+         CHECK_CLOSE(twloMat(0,0), -1078.578574572311, eps);
+         CHECK_CLOSE(twloMat(1,0),  7096.529601647042, eps);
+         CHECK_CLOSE(twloMat(1,1), -1900.197036824461, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 283.0220052455883, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 566.2190953470737, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10093.33986048966, eps);
+         CHECK_CLOSE(thloMat(0,0), 283.0220052455883, eps);
+         CHECK_CLOSE(thloMat(1,0), 566.2190953470737, eps);
+         CHECK_CLOSE(thloMat(1,1), 10093.33986048966, eps);
          break;
       case Hierarchies::h6bq2g2:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832759, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
+         CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
+         CHECK_CLOSE(oloMat(1,0), -184.7601614832759, eps);
+         CHECK_CLOSE(oloMat(1,1),  7581.278122072418, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -1089.201418061661, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  7145.267026465748, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -2077.345120153528, eps);
+         CHECK_CLOSE(twloMat(0,0), -1089.201418061661, eps);
+         CHECK_CLOSE(twloMat(1,0),  7145.267026465748, eps);
+         CHECK_CLOSE(twloMat(1,1), -2077.345120153528, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 285.3120881213721, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 544.3662758149513, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 10336.23012077387, eps);
+         CHECK_CLOSE(thloMat(0,0), 285.3120881213721, eps);
+         CHECK_CLOSE(thloMat(1,0), 544.3662758149513, eps);
+         CHECK_CLOSE(thloMat(1,1), 10336.23012077387, eps);
          break;
       case Hierarchies::h6g2:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0),  9272.477351702315, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -184.7601614832761, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  7581.278122072418, eps);
+         CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
+         CHECK_CLOSE(oloMat(1,0), -184.7601614832761, eps);
+         CHECK_CLOSE(oloMat(1,1),  7581.278122072418, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0), -1089.201418061661, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0),  7145.267026465748, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -2112.642999123034, eps);
+         CHECK_CLOSE(twloMat(0,0), -1089.201418061661, eps);
+         CHECK_CLOSE(twloMat(1,0),  7145.267026465748, eps);
+         CHECK_CLOSE(twloMat(1,1), -2112.642999123034, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0), 246.0217489966267, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), 557.451210096066 , eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), 8628.076480526881, eps);
+         CHECK_CLOSE(thloMat(0,0), 246.0217489966267, eps);
+         CHECK_CLOSE(thloMat(1,0), 557.451210096066 , eps);
+         CHECK_CLOSE(thloMat(1,1), 8628.076480526881, eps);
          break;
       case Hierarchies::h9:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.352110199906 , eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
+         CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
+         CHECK_CLOSE(oloMat(1,0), -394.352110199906 , eps);
+         CHECK_CLOSE(oloMat(1,1),  17633.47392819223, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0),  420.2050380976995, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0), -554.6021924866435, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -797.8089039452509, eps);
+         CHECK_CLOSE(twloMat(0,0),  420.2050380976995, eps);
+         CHECK_CLOSE(twloMat(1,0), -554.6021924866435, eps);
+         CHECK_CLOSE(twloMat(1,1), -797.8089039452509, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0),  132.8584579769461, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), -171.9326869339159, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), -800.8408283898472, eps);
+         CHECK_CLOSE(thloMat(0,0),  132.8584579769461, eps);
+         CHECK_CLOSE(thloMat(1,0), -171.9326869339159, eps);
+         CHECK_CLOSE(thloMat(1,1), -800.8408283898472, eps);
          break;
       case Hierarchies::h9q2:
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(0,0), -1033.437882123761, eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,0), -394.352110199906 , eps);
-         BOOST_CHECK_CLOSE_FRACTION(oloMat(1,1),  17633.47392819223, eps);
+         CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
+         CHECK_CLOSE(oloMat(1,0), -394.352110199906 , eps);
+         CHECK_CLOSE(oloMat(1,1),  17633.47392819223, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(0,0),  420.2050380976995, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,0), -554.6021924866435, eps);
-         BOOST_CHECK_CLOSE_FRACTION(twloMat(1,1), -797.8089039452509, eps);
+         CHECK_CLOSE(twloMat(0,0),  420.2050380976995, eps);
+         CHECK_CLOSE(twloMat(1,0), -554.6021924866435, eps);
+         CHECK_CLOSE(twloMat(1,1), -797.8089039452509, eps);
 
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(0,0),  132.6358855624267, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,0), -171.4711818838455, eps);
-         BOOST_CHECK_CLOSE_FRACTION(thloMat(1,1), -800.9569014303727, eps);
+         CHECK_CLOSE(thloMat(0,0),  132.6358855624267, eps);
+         CHECK_CLOSE(thloMat(1,0), -171.4711818838455, eps);
+         CHECK_CLOSE(thloMat(1,1), -800.9569014303727, eps);
          break;
       default:
-         BOOST_FAIL("unknown hierarchy!");
+         REQUIRE_FALSE_MESSAGE(false, "unknown hierarchy!");
          break;
       }
    }

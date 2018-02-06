@@ -1,8 +1,8 @@
-#define BOOST_TEST_MODULE test_lambda_normalization
-
-#include <boost/test/unit_test.hpp>
+#include "doctest.h"
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
+
+#define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
 namespace {
 
@@ -154,14 +154,14 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
    const double pref2 = 8*pow4(gt*g3)/pow6(4*Pi) * v2;
    const double DMh2_EFT_3L_const = pref * zeta_lambda_3L;
 
-   BOOST_CHECK_CLOSE_FRACTION(pref, pref2, 1e-10);
+   CHECK_CLOSE(pref, pref2, 1e-10);
 
    return DMh2_EFT_3L_logs + DMh2_EFT_3L_const;
 }
 
 } // anonymous namespace
 
-BOOST_AUTO_TEST_CASE(test_lambda_normalization)
+TEST_CASE("test_lambda_normalization")
 {
    using namespace himalaya;
 
@@ -186,25 +186,30 @@ BOOST_AUTO_TEST_CASE(test_lambda_normalization)
    const double Mh2_3L_uncert = ho.getExpUncertainty(3);
    const double Mh2_3L_uncert_rel = Mh2_3L_uncert / Mh2_3L;
 
-   BOOST_TEST_MESSAGE("Mh(0L) = " << std::sqrt(Mh2_0L) << " GeV");
-   BOOST_TEST_MESSAGE("Mh(1L) = " << std::sqrt(Mh2_1L) << " GeV");
-   BOOST_TEST_MESSAGE("Mh(2L) = " << std::sqrt(Mh2_2L) << " GeV");
-   BOOST_TEST_MESSAGE("Mh(3L) = (" << std::sqrt(Mh2_3L)
-                      << " +- " << Mh2_3L_uncert << ") GeV"
-                      << " (" << Mh2_3L_uncert_rel*100 << "%)");
+   const double Mh_0L = std::sqrt(Mh2_0L);
+   const double Mh_1L = std::sqrt(Mh2_1L);
+   const double Mh_2L = std::sqrt(Mh2_2L);
+   const double Mh_3L = std::sqrt(Mh2_3L);
+   const double Mh_3L_uncert_percent = Mh2_3L_uncert_rel*100;
 
-   BOOST_CHECK_CLOSE_FRACTION(Mh2_0L, calc_Mh2_EFT_0L(pars), 1e-5);
+   INFO("Mh(0L) = " << Mh_0L << " GeV");
+   INFO("Mh(1L) = " << Mh_1L << " GeV");
+   INFO("Mh(2L) = " << Mh_2L << " GeV");
+   INFO("Mh(3L) = (" << Mh_3L << " +- " << Mh2_3L_uncert << ") GeV"
+        << " (" << Mh_3L_uncert_percent << "%)");
 
-   BOOST_CHECK_CLOSE_FRACTION(Mh2_1L, calc_Mh2_EFT_0L(pars)
-                                    + calc_Mh2_EFT_1L(pars), 1e-6);
+   CHECK_CLOSE(Mh2_0L, calc_Mh2_EFT_0L(pars), 1e-5);
 
-   BOOST_CHECK_CLOSE_FRACTION(Mh2_2L, calc_Mh2_EFT_0L(pars)
-                                    + calc_Mh2_EFT_1L(pars)
-                                    + calc_Mh2_EFT_2L(pars), 1e-6);
+   CHECK_CLOSE(Mh2_1L, calc_Mh2_EFT_0L(pars)
+                     + calc_Mh2_EFT_1L(pars), 1e-6);
 
-   BOOST_CHECK_CLOSE_FRACTION(Mh2_3L, calc_Mh2_EFT_0L(pars)
-                                    + calc_Mh2_EFT_1L(pars)
-                                    + calc_Mh2_EFT_2L(pars)
-                                    + calc_Mh2_EFT_3L(pars,zeta_3L_const),
-                              Mh2_3L_uncert_rel);
+   CHECK_CLOSE(Mh2_2L, calc_Mh2_EFT_0L(pars)
+                     + calc_Mh2_EFT_1L(pars)
+                     + calc_Mh2_EFT_2L(pars), 1e-6);
+
+   CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
+                     + calc_Mh2_EFT_1L(pars)
+                     + calc_Mh2_EFT_2L(pars)
+                     + calc_Mh2_EFT_3L(pars,zeta_3L_const),
+               Mh2_3L_uncert_rel);
 }

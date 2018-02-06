@@ -1,7 +1,7 @@
-#define BOOST_TEST_MODULE test_lambda_limits
-
-#include <boost/test/unit_test.hpp>
+#include "doctest.h"
 #include "HierarchyCalculator.hpp"
+
+#define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
 namespace {
 
@@ -31,7 +31,7 @@ himalaya::Parameters make_point(double eps = 0.)
 
 } // anonymous namespace
 
-BOOST_AUTO_TEST_CASE(test_lambda_limit_degenerate)
+TEST_CASE("test_lambda_limit_degenerate")
 {
    using namespace himalaya;
 
@@ -43,6 +43,6 @@ BOOST_AUTO_TEST_CASE(test_lambda_limit_degenerate)
    const auto z2_gen_Himalaya = ho.getZetaHimalaya();
    const auto z2_gen_EFT      = ho.getZetaEFT();
 
-   BOOST_CHECK_CLOSE_FRACTION(z2_gen_Himalaya, z2_deg, 1e-5);
-   BOOST_CHECK_CLOSE_FRACTION(z2_gen_EFT     , z2_deg, 1e-5);
+   CHECK_CLOSE(z2_gen_Himalaya, z2_deg, 1e-5);
+   CHECK_CLOSE(z2_gen_EFT     , z2_deg, 1e-5);
 }
