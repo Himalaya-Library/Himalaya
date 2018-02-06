@@ -16,7 +16,7 @@ The program requires:
 
 ## Installation
 CMake is used to generate build files.
-To create these build files, you should create a separate build directory inside Himalaya's top directory.
+To create these build files, one should create a separate build directory inside Himalaya's top directory.
 Run:
 ```
 cd $HIMALAY_PATH
@@ -25,21 +25,21 @@ cd build
 cmake ..
 ```
 
-After calling `cmake` the build directory contains all required build files. Assuming that Makefiles are used, you can now run:
+After calling `cmake` the build directory contains all required build files. Assuming that Makefiles are used, one can now run:
 ```
 make
 ```
 By default the code is compiled optimized.
 
 ## Running the code
-After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to your program. `libDSZ.a` is optional and has to be linked, if your program does not incorporate the associated Fortran code of G. Degrassi, P. Slavich and F. Zwirner ([arXiv:hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)).
+After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to the program. `libDSZ.a` is optional and has to be linked, if the program does not incorporate the associated Fortran code of G. Degrassi, P. Slavich and F. Zwirner ([arXiv:hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)).
 
 ### Example
-We present a brief step by step guide how to run Himalaya and obtain the three-loop results. First you have to include the headers
+We present a brief step by step guide how to run Himalaya and obtain the three-loop corrections to the CP-even Higgs mass matrix in the MSSM in the DR-bar scheme. First one has to include the header
 ```cpp
 #include "HierarchyCalculator.hpp"
 ```
-to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`. Note that the input has to be provided in the **DR-bar** scheme. Here, an example for a SPS2 benchmark point is given:
+in the C++ file. The DR-bar parameters which define the MSSM parameter must be stored in a `Parameters` object. Note that the input has to be provided in the **DR-bar** scheme. Here, an example for the SPS2 benchmark point is given:
 ```cpp
 himalaya::Parameters pars;                      // DR-bar parameters struct
 pars.scale = 1.11090135E+03;                    // renormalization scale
@@ -71,21 +71,23 @@ pars.s2b = sin(2*asin(-9.99883015E-01));        // 2 times the sine of the sbott
 ```
 The input values of `MSt`, `MSb`, `s2t` and `s2b` are optional. If they are not provided, they will get calculated internally.
 
-Now you can create a `HierarchyCalculator` object with the given `struct`:
+Afterwards one can create a `HierarchyCalculator` object for the chosen parameter set:
 ```
 himalaya::HierarchyCalculator hc(pars);
 ```
-To calculate the DR-bar results you just have to call:
+To calculate the DR-bar loop corrections one needs to call:
 ```cpp
-himalaya::HierarchyObject ho = hc.calculateDMh3L(false); // the bool argument switches between corrections proportional to alpha_t (false) or alpha_b (true).
+// the boolean argument switches between corrections proportional to alpha_t (false) or alpha_b (true)
+himalaya::HierarchyObject ho = hc.calculateDMh3L(false);
 ```
-All information which has been gathered during the calculation will be stored in a `HierarchyObject` and can be accessed by member functions. To obtain the three-loop correction to the Higgs mass matrix you have to call:
+All information which has been gathered during the calculation will be stored in the returned `HierarchyObject` and can be accessed by member functions. To obtain the three-loop correction to the Higgs mass matrix one needs to call:
 ```cpp
-auto dMh3L = ho.getDMh(3); // this returns a 2x2 matrix which contains the alpha_t*alpha_s^2 corrections for the given parameter point
+// returns a 2x2 matrix with the alpha_t*alpha_s^2 correction for the given parameter point
+auto dMh3L = ho.getDMh(3);
 ```
-The returned matrix should be added to your two-loop results **before** diagonalization.
+The returned matrix should be added to the two-loop mass matrix **before** diagonalization.
 
-A full and detailed example can be found in `source/example.cpp` with its executable `example`.
+A full and detailed example can be found in `source/example.cpp`.
 
 ## Code Documentation
 Doxygen can be used to generate code documentation. Go to the `doc` directory
