@@ -145,9 +145,15 @@ std::ostream& operator<<(std::ostream& ostr, const Parameters& pars)
         << "g3    = " << pars.g3 << '\n'
         << "vd    = " << pars.vd << '\n'
         << "vu    = " << pars.vu << '\n'
-        << "mq2   = {{" << pars.mq2.row(0) << "}, {" << pars.mq2.row(1) << "}, {" << pars.mq2.row(2) << "}}\n"
-        << "md2   = {{" << pars.md2.row(0) << "}, {" << pars.md2.row(1) << "}, {" << pars.md2.row(2) << "}}\n"
-        << "mu2   = {{" << pars.mu2.row(0) << "}, {" << pars.mu2.row(1) << "}, {" << pars.mu2.row(2) << "}}\n"
+        << "mq2   = {{" << pars.mq2(0,0) << ", " << pars.mq2(0,1) << ", " << pars.mq2(0,2) << "}, "
+                    "{" << pars.mq2(1,0) << ", " << pars.mq2(1,1) << ", " << pars.mq2(1,2) << "}, "
+                    "{" << pars.mq2(2,0) << ", " << pars.mq2(2,1) << ", " << pars.mq2(2,2) << "}}\n"
+        << "md2   = {{" << pars.md2(0,0) << ", " << pars.md2(0,1) << ", " << pars.md2(0,2) << "}, "
+                    "{" << pars.md2(1,0) << ", " << pars.md2(1,1) << ", " << pars.md2(1,2) << "}, "
+                    "{" << pars.md2(2,0) << ", " << pars.md2(2,1) << ", " << pars.md2(2,2) << "}}\n"
+        << "mu2   = {{" << pars.mu2(0,0) << ", " << pars.mu2(0,1) << ", " << pars.mu2(0,2) << "}, "
+                    "{" << pars.mu2(1,0) << ", " << pars.mu2(1,1) << ", " << pars.mu2(1,2) << "}, "
+                    "{" << pars.mu2(2,0) << ", " << pars.mu2(2,1) << ", " << pars.mu2(2,2) << "}}\n"
         << "At    = " << pars.At << '\n'
         << "Ab    = " << pars.Ab << '\n'
         << "MG    = " << pars.MG << '\n'
