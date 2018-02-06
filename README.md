@@ -38,8 +38,6 @@ After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have b
 We present a brief step by step guide how to run Himalaya and obtain the three-loop results. First you have to include the headers
 ```cpp
 #include "HierarchyCalculator.hpp"
-#include "Himalaya_interface.hpp"
-#include "HierarchyObject.hpp"
 ```
 to your file. In the next step you have to initialize all needed parameters in the `Parameters` `struct`. Note that the input has to be provided in the **DR-bar** scheme. Here, an example for a SPS2 benchmark point is given:
 ```cpp
