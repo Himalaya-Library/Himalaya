@@ -20,11 +20,14 @@ set(Himalaya_VERSION_MAJOR 1)
 set(Himalaya_VERSION_MINOR 0)
 set(Himalaya_VERSION_RELEASE 1)
 
-# set the CXX flags
-set(CMAKE_CXX_FLAGS "-fPIC -std=c++11 -Wall -Wextra -pedantic")
-set(CMAKE_CXX_FLAGS_DEBUG "-g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+# set the C++ standard
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# set the CXX flags
+if(CMAKE_COMPILER_IS_GNUCXX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
+endif()
 
 # set paths
 set(INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/include)
