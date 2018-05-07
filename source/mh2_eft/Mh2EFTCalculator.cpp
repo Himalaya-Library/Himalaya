@@ -6,7 +6,6 @@
 namespace himalaya {
 namespace mh2_eft {
 namespace {
-   const double zt2 = 1.6449340668482264364724151666460;
    const double zt3 = 1.2020569031595942853997381615114;
    const double Pi  = 3.1415926535897932384626433832795;
    const double log2 = std::log(2.);
