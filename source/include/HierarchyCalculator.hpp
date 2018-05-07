@@ -21,10 +21,10 @@ namespace himalaya{
       /**
        * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
        * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
-       *        @param mdrFlag an integer to choose among DR and MDR scheme. Set to DR by default.
+       *        @param renScheme an integer to choose among renormalization schemes. DR' is default.
        * 	@return A HierarchyObject which holds all information of the calculation.
        */
-      HierarchyObject calculateDMh3L(bool isAlphab, const int mdrFlag = 0);
+      HierarchyObject calculateDMh3L(bool isAlphab, const int renScheme = RenSchemes::DRBARPRIME);
       /**
        * 	Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
        * 	@param ho a HierarchyObject with constant isAlphab.
@@ -121,14 +121,20 @@ namespace himalaya{
        */
       Eigen::Matrix2d getShift(const HierarchyObject& ho);
       /**
-       *      A function to check for a degenerated mass case and shifting the masses to avoid huge contributions
-       *      @param mQ3 the left-handed third generation soft-breaking parameter
-       *      @param mU3 the right-handed third generation soft-breaking parameters
-       *      @param m3 the gluino mass
-       *      @param msq the average squark mass
-       *      @param Xt the stop mixing parameters
+       * 	Shifts the H3m renormalization scheme to DR' scheme
+       * 	@param ho a HierarchyObject with constant isAlphab
+       * 	@return A matrix which shifts the H3m scheme to the DR' scheme at three-loop level
+       *
        */
-      void checkForDegenerateCase(double &mQ3, double &mU3, double &m3, double &msq, double &Xt);
+      Eigen::Matrix2d shiftH3mToDRbarPrime(const HierarchyObject& ho);
+      /**
+       * 	Shifts the H3m renormalization scheme to DR' scheme
+       * 	@param ho a HierarchyObject with constant isAlphab
+       * 	@param omitLogs a flag to omit logarithmic contributions: (0) omit logs, (1) add them
+       * 	@return A double which shifts the H3m scheme to the DR' scheme at three-loop level
+       *
+       */
+      double shiftH3mToDRbarPrimeMh2(const himalaya::HierarchyObject& ho, int omitLogs);
       std::map<unsigned int, unsigned int> flagMap{};	/** A map which holds all hierarchy key value pairs. */
       /**
        * 	Maps a hierarchy to it's mother hierarchy.

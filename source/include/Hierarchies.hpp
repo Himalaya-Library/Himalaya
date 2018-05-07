@@ -46,4 +46,50 @@ enum ExpansionDepth : int {
 };
 
 } // namespace ExpansionDepth
+
+/// Limit numbers
+namespace Limits{
+   
+   /// limit flags
+   enum Limits : int{
+      FIRST                   = 0,
+      GENERAL                 = FIRST,  ///< Flag for general mass case
+      MQ3_EQ_MU3              = 1,      ///< Flag for mQ3 = mU3
+      MQ3_EQ_M3               = 2,      ///< Flag for mQ3 = m3
+      MU3_EQ_M3               = 3,      ///< Flag for mU3 = m3
+      MQ3_EQ_MU3_EQ_M3        = 4,      ///< Flag for mQ3 = mU3 = m3
+      DEGENERATE              = 5,	///< Flag for mQ3 = mU3 = m3 = msq
+      NUMBER_OF_LIMITS                  ///< Number of limits
+   };
+} // namespace Limits
+
+/// Renormalization scheme numbers
+namespace RenSchemes{
+   
+   /// renormalization scheme falgs
+   enum RenSchems : int {
+      FIRST         = 0,
+      H3m           = FIRST,	///< H3m flag
+      DRBARPRIME    = 1,	///< DRbar' flag
+      H3mMDRBAR     = 2,	///< MDRbar flag with H3m renormalization
+      MDRBARPRIME   = 3,	///< MDRbar flag with DRbar' renormalization
+      TEST          = 4,	///< A non-physical scheme to test implemented expressions
+      NUMBER_OF_REN_SCHEMES	///< Number of renormalization schemes
+   };
+} // namespace RenSchemes
+
+namespace ThresholdVariables{
+   
+   /// Threshold variable flags
+   enum ThresholdVariables : int{
+      FIRST         = 0,
+      G3_AS         = FIRST,        ///< Flag for g3_as threshold correction
+      YT_AS         = 1,            ///< Flag for yt_as threshold correction
+      YT_AS2        = 2,            ///< Flag for yt_as^2 threshold correction
+      LAMBDA_AT     = 3,            ///< Flag for lambga_at threshold correction
+      LAMBDA_AT_AS  = 4,            ///< Flag for lambda_atas threshold correction
+      LAMBDA_AT_AS2 = 5,            ///< Flag for lambda_atas2 threshold correction
+      NUMBER_OF_THRESHOLD_VARIALES  ///< Number of threshold variables
+   };
+} // namespace ThresholdVariables
 } // namespace himalaya

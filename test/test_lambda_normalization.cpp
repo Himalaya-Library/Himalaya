@@ -99,7 +99,7 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc;
 
-   return mhc.Mh2_EFT_1loop(at, mt, mQ32, mU32, Xt, MR2);
+   return 0.;//mhc.Mh2_EFT_1loop(at, mt, mQ32, mU32, Xt, MR2);
 }
 
 /// calculates Mh^2 in the EFT at 2-loop level
@@ -117,7 +117,7 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc;
 
-   return mhc.Mh2_EFT_2loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3);
+   return 0.;//mhc.Mh2_EFT_2loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3);
 }
 
 /// calculates Mh^2 in the EFT at 3-loop level
@@ -144,8 +144,8 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc;
 
-   const double DMh2_EFT_3L_logs =
-      mhc.Mh2_EFT_3loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3, msq2);
+   const double DMh2_EFT_3L_logs = 0.;
+      //mhc.Mh2_EFT_3loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3, msq2);
 
    const double as = pow2(g3)/(4*pow2(Pi));
    // prefactor from paper

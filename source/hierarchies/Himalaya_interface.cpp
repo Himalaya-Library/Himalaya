@@ -85,7 +85,7 @@ void Parameters::validate(bool verbose)
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 stopMatrix;
       stopMatrix << mq2(2, 2) + sqr(Mt) + (1/2. - 2/3. * sw2) * sqr(MZ) * cos_2beta, Xt,
-         Xt, mu2(2, 2) + sqr(Mt) + 2 / 3. * sw2 * sqr(MZ) * cos_2beta;
+	Xt, mu2(2, 2) + sqr(Mt) + 2 / 3. * sw2 * sqr(MZ) * cos_2beta;
 
       std::tie(MSt, s2t) = calculate_MSf_s2f(stopMatrix);
 
@@ -123,7 +123,7 @@ void Parameters::validate(bool verbose)
    // case one could get spurious poles in Pietro's code. To avoid
    // this numerical issue we shift the stop/bottom 1 mass by a
    // relative (but small) value.
-   const double eps = 1e-5;
+   const double eps = 1e-8;
 
    if (std::abs(MSt(0) - MSt(1)) < eps) {
       MSt(0) = MSt(1) / (1. + eps);

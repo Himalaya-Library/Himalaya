@@ -57,12 +57,16 @@ TEST_CASE("test_FO_expansions")
       hc.init();
 
       himalaya::HierarchyObject ho(false);
+      ho.setRenormalizationScheme(RenSchemes::H3m);
       ho.setMDRFlag(1);
       ho.setSuitableHierarchy(i);
 
       const auto oloMat  = hc.calculateHierarchy(ho, 1, 0, 0);
       const auto twloMat = hc.calculateHierarchy(ho, 0, 1, 0);
       const auto thloMat = hc.calculateHierarchy(ho, 0, 0, 1);
+      ho.setMDRFlag(0);
+      hc.calculateHierarchy(ho, 0, 0, 1);
+      const auto thlomh2 = ho.getZetaHimalaya();
       const auto hier_str = ho.getH3mHierarchyNotation(i);
 
       INFO("Checking hierarchy " << i << " (" << hier_str << ")");
@@ -80,6 +84,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 1.096612614742133, 2e-6);
          CHECK_CLOSE(thloMat(1,0), 9.986750150481939, 2e-6);
          CHECK_CLOSE(thloMat(1,1), 370.2505433664134, 2e-6);
+	 CHECK_CLOSE(thlomh2, 7795.3852300944, eps);
 	 break;
       case Hierarchies::h32q2g:
          CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
@@ -93,6 +98,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 1.113051431370291, eps);
          CHECK_CLOSE(thloMat(1,0), 9.903809573970422, eps);
          CHECK_CLOSE(thloMat(1,1), 369.7408109643386, eps);
+	 CHECK_CLOSE(thlomh2, 7669.5076452224, eps);
          break;
       case Hierarchies::h3q22g:
          CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
@@ -106,6 +112,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 1.058450932536496, eps);
          CHECK_CLOSE(thloMat(1,0), 10.0141272838662, eps);
          CHECK_CLOSE(thloMat(1,1), 370.3301180635573, eps);
+	 CHECK_CLOSE(thlomh2, 7823.8598939601, eps);
          break;
       case Hierarchies::h4:
          CHECK_CLOSE(oloMat(0,0),                 0, eps);
@@ -119,6 +126,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 162.1379208650191, eps);
          CHECK_CLOSE(thloMat(1,0), 326.0219627343553, eps);
          CHECK_CLOSE(thloMat(1,1), 431.6926278454841, eps);
+	 CHECK_CLOSE(thlomh2, -1422.6632313926, eps);
          break;
       case Hierarchies::h5:
          CHECK_CLOSE(oloMat(0,0),  15921.69462848581, eps);
@@ -132,6 +140,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0),  2442.115080578889, eps);
          CHECK_CLOSE(thloMat(1,0), -3859.942907446577, eps);
          CHECK_CLOSE(thloMat(1,1),  60593.055768119  , eps);
+	 CHECK_CLOSE(thlomh2, 12162367.7903137561, eps);
          break;
       case Hierarchies::h5g1:
          CHECK_CLOSE(oloMat(0,0),  15921.69462848581, eps);
@@ -145,6 +154,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0),  2415.507513838155, eps);
          CHECK_CLOSE(thloMat(1,0), -3766.750163753644, eps);
          CHECK_CLOSE(thloMat(1,1),  59380.34497121828, eps);
+	 CHECK_CLOSE(thlomh2, 11936978.6994632017, eps);
          break;
       case Hierarchies::h6:
          CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
@@ -158,6 +168,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 245.4412216221288, eps);
          CHECK_CLOSE(thloMat(1,0), 573.1296253278389, eps);
          CHECK_CLOSE(thloMat(1,1), 8448.4582538127  , eps);
+	 CHECK_CLOSE(thlomh2, 3575581.6748945541, eps);
          break;
       case Hierarchies::h6b:
          CHECK_CLOSE(oloMat(0,0),  9272.477351702311, eps);
@@ -171,6 +182,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 283.0253770519464, eps);
          CHECK_CLOSE(thloMat(1,0), 566.2182257407396, eps);
          CHECK_CLOSE(thloMat(1,1), 10093.33785879814, eps);
+	 CHECK_CLOSE(thlomh2, 2307049.0303978394, eps);
          break;
       case Hierarchies::h6b2qg2:
          CHECK_CLOSE(oloMat(0,0),  9272.477351702311, eps);
@@ -184,6 +196,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 285.3154791763894, eps);
          CHECK_CLOSE(thloMat(1,0), 544.3654284413091, eps);
          CHECK_CLOSE(thloMat(1,1), 10336.22756889787, eps);
+	 CHECK_CLOSE(thlomh2, 2335302.18014229, eps);
          break;
       case Hierarchies::h6bq22g:
          CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
@@ -197,6 +210,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 283.0220052455883, eps);
          CHECK_CLOSE(thloMat(1,0), 566.2190953470737, eps);
          CHECK_CLOSE(thloMat(1,1), 10093.33986048966, eps);
+	 CHECK_CLOSE(thlomh2, 2307049.804974461, eps);
          break;
       case Hierarchies::h6bq2g2:
          CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
@@ -210,6 +224,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 285.3120881213721, eps);
          CHECK_CLOSE(thloMat(1,0), 544.3662758149513, eps);
          CHECK_CLOSE(thloMat(1,1), 10336.23012077387, eps);
+	 CHECK_CLOSE(thlomh2, 2335302.968936102, eps);
          break;
       case Hierarchies::h6g2:
          CHECK_CLOSE(oloMat(0,0),  9272.477351702315, eps);
@@ -223,6 +238,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0), 246.0217489966267, eps);
          CHECK_CLOSE(thloMat(1,0), 557.451210096066 , eps);
          CHECK_CLOSE(thloMat(1,1), 8628.076480526881, eps);
+	 CHECK_CLOSE(thlomh2, 3604063.952735181, eps);
          break;
       case Hierarchies::h9:
          CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
@@ -236,6 +252,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0),  132.8584579769461, eps);
          CHECK_CLOSE(thloMat(1,0), -171.9326869339159, eps);
          CHECK_CLOSE(thloMat(1,1), -800.8408283898472, eps);
+	 CHECK_CLOSE(thlomh2, -75580.1241347659, eps);
          break;
       case Hierarchies::h9q2:
          CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
@@ -249,6 +266,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0),  132.6358855624267, eps);
          CHECK_CLOSE(thloMat(1,0), -171.4711818838455, eps);
          CHECK_CLOSE(thloMat(1,1), -800.9569014303727, eps);
+	 CHECK_CLOSE(thlomh2, -74922.1023601382, eps);
          break;
       default:
          REQUIRE_FALSE_MESSAGE(false, "unknown hierarchy!");

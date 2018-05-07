@@ -40,6 +40,9 @@ struct Parameters {
    double s2t = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the stop mixing angle */
    double s2b = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the sbottom mixing angle */
 
+   // integer flag to set mass limit
+   int massLimit3LThreshold{}; 			/**< an integer flag to set the mass limit */
+
    void validate(bool verbose);                 /** validates the parameter set */
 };
 

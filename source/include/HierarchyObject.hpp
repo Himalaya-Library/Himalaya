@@ -1,6 +1,7 @@
 #pragma once
 
 #include "version.hpp"
+#include "Hierarchies.hpp"
 #include <iosfwd>
 #include <Eigen/Eigenvalues>
 #include <vector>
@@ -56,6 +57,10 @@ namespace himalaya{
        */
       int getMDRFlag() const;
       /**
+       * 	@return Renormalization scheme key
+       */
+      int getRenormalizationScheme() const;
+      /**
        * 	@return 3-loop zeta with Himalaya logs
        */
       double getZetaHimalaya() const;
@@ -65,10 +70,6 @@ namespace himalaya{
       double getZetaEFT() const;
       /**
        *        @return 3-loop zeta for the degenerated mass case with EFT logs
-       */
-      double getZetaDegenerated() const;
-      /**
-       * 	@return 3-loop zeta (non-logarithmic part)
        */
       double getZetaConst() const;
       /**
@@ -109,11 +110,17 @@ namespace himalaya{
        */
       void setDMh(int loops, const Eigen::Matrix2d& dMh);
       /**
-       * 	Sets the mdrFlag to calculate the corretions in the DR (0) or MDR (1) scheme
-       * 	@param mdrFlag an int. (0) for DR- and (1) for MDR-scheme.
+       * 	Sets the mdrFlag to calculate the corretions in the without MDR (0) or with MDR (1) shifts
+       * 	@param mdrFlag an int. (0) for H3m (DR')- and (1) for MDR-scheme.
        * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
        */
       void setMDRFlag(int mdrFlag);
+      /**
+       * 	Sets the renormalization scheme accodring to the RenScheme enum
+       * 	@param renScheme an int according to the RenScheme enum.
+       * 	@throws runtime_exception if the flag is not in {0,1,2,3} an exception is thrown
+       */
+      void setRenormalizationScheme(int renScheme);
       /**
        * 	Sets the zeta at 3-loop order with Himalaya logs.
        * 	@param zeta zeta at 3-loop order.
@@ -125,13 +132,8 @@ namespace himalaya{
        */
       void setZetaEFT(double zeta);
       /**
-       *        Sets the zeta at 3-loop order for the degenerated mass case
-       *        @param zeta zeta at 3-loop order
-       */
-      void setZetaDegenerated(double zeta);
-      /**
-       * 	Sets the zeta at 3-loop order (non-logarithmic part).
-       * 	@param zeta zeta at 3-loop order.
+       * 	Sets the constant part of zeta at 3-loop order.
+       * 	@param zeta constant part of zeta at 3-loop order.
        */
       void setZetaConst(double zeta);
       /**
@@ -144,6 +146,7 @@ namespace himalaya{
       bool isAlphab{false};								/**< the bool isAlphab */
       int hierarchy{};									/**< the suitable hierarchy */
       int mdrFlag{0};									/**< the MDR-scheme flag */
+      int renormalizationScheme{RenSchemes::DRBARPRIME};				/**< the renormalization scheme flag */
       double absDiff2L{};								/**< the absolute difference of the two loop Higgs masses */
       double relDiff2L{};								/**< the relative difference of the two loop Higgs masses */
       std::map<int, double> expUncertainties{};						/**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
@@ -152,7 +155,6 @@ namespace himalaya{
       Eigen::Matrix<double, 2, 1> mdrMasses{};						/**< the 'vector' which holds the MDR masses */
       double zetaHimalaya{};								/**< zeta lambda 3-loop from Himalaya only */
       double zetaEFT{};									/**< zeta lambda 3-loop from EFT and Himalaya */
-      double zetaDegenerated{};                                                          /**< zeta lambda 3-loop for the degenerated mass case */
       double zetaConst{};                                                               /**< zeta lambda 3-loop, non-logarithmic part */
       /**
        * 	Sorts a vector.

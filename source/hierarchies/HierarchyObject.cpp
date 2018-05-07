@@ -1,5 +1,6 @@
 #include "HierarchyObject.hpp"
 #include "Hierarchies.hpp"
+#include <iostream>
 
 /**
  * 	A constructor.
@@ -148,8 +149,8 @@ Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::getMDRMasses() const{
 }
 
 /**
- * 	Sets the mdrFlag to calculate the corretions in the DR (0) or MDR (1) scheme
- * 	@param mdrFlag an int. (0) for DR- and (1) for MDR-scheme
+ * 	Sets the mdrFlag to calculate the corretions in without MDR (0) or with MDR (1) shifts.
+ * 	@param mdrFlag an int. (0) for H3m (DR')- and (1) for MDR-scheme.
  * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
  */
 void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
@@ -159,12 +160,33 @@ void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
    this -> mdrFlag = mdrFlag;
 }
 
+
 /**
  * 	@return the MDRFlag integer.
  */
 int himalaya::HierarchyObject::getMDRFlag() const{
    return mdrFlag;
 }
+
+/**
+ * 	Sets the renormalization scheme accodring to the RenScheme enum
+ * 	@param renScheme an int according to the RenScheme enum.
+ * 	@throws runtime_exception if the flag is not in {0,1,2,3} an exception is thrown
+ */
+void himalaya::HierarchyObject::setRenormalizationScheme(int renScheme){
+   if(renScheme < 0 || renScheme > 3) {
+      throw std::runtime_error("The renormalization scheme has to be 0 (H3m), 1 (DR'), 2 (H3m with MDR), 3 (MDR'). Input: " + std::to_string(renScheme) + ".");
+   }
+   renormalizationScheme = renScheme;
+}
+
+/**
+ * 	@return Renormalization scheme key
+ */
+int himalaya::HierarchyObject::getRenormalizationScheme() const{
+   return renormalizationScheme;
+}
+
 
 /**
  * 	Sets the zeta at 3-loop order with Himalaya logs.
@@ -197,30 +219,15 @@ double himalaya::HierarchyObject::getZetaEFT() const{
 }
 
 /**
- *      Sets the zeta at 3-loop order for the degenerated mass case with EFT logs.
- *      @param zeta zeta at 3-loop order.
- */
-void himalaya::HierarchyObject::setZetaDegenerated(double zeta){
-   this -> zetaDegenerated = zeta;
-}
-
-/**
- *      @return 3-loop zeta for the degenerated mass case with EFT logs
- */
-double himalaya::HierarchyObject::getZetaDegenerated() const{
-   return zetaDegenerated;
-}
-
-/**
- *      Sets the zeta at 3-loop order (non-logarithmic part).
- *      @param zeta zeta at 3-loop order.
+ * 	Sets the constant part of zeta at 3-loop order.
+ * 	@param zeta constant part of zeta at 3-loop order.
  */
 void himalaya::HierarchyObject::setZetaConst(double zeta){
    zetaConst = zeta;
 }
 
 /**
- *      @return 3-loop zeta (non-logarithmic part)
+ *        @return 3-loop zeta for the degenerated mass case with EFT logs
  */
 double himalaya::HierarchyObject::getZetaConst() const{
    return zetaConst;
@@ -238,6 +245,7 @@ Eigen::Matrix<double, 2, 1> himalaya::HierarchyObject::sortVector(Eigen::Matrix<
    }
    return vector;
 }
+
 
 /**
  *      Returns the H3m notation of a given hierarchy.
@@ -283,12 +291,15 @@ std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) co
  * 	Prints out all information of the HierarchyObject
  */
 std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject const &ho){
-   const std::string renSchemeString = ho.getMDRFlag() == 0 ? "DR" : "MDR";
+   const std::string mdrString = ho.getMDRFlag() == 0 ? "No MDR shifts applied." : "MDR shifts applied.";
    const int suitableHierarchy = ho.getSuitableHierarchy();
+   std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
+      || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
    ostr << "===================================\n"
 	<< "Himalaya HierarchyObject parameters\n"
         << "===================================\n"
 	<< "Ren. scheme       =  " << renSchemeString << "\n"
+	<< "MDR shifts?       =  " << mdrString << "\n"
         << "Hierarchy         =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
 	<< "Mstop_1           =  " << ho.getMDRMasses()(0) << " GeV (" << renSchemeString << ")\n"
 	<< "Mstop_2           =  " << ho.getMDRMasses()(1) << " GeV (" << renSchemeString << ")\n"
@@ -307,9 +318,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
         << "Exp. uncert. 3L   =  " << ho.getExpUncertainty(3) << " GeV\n"
 	<< "DR -> MDR shift   =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
 		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
-	<< "Zeta 3L Himalaya  =  " << ho.getZetaHimalaya() << "\n"
-        << "Zeta 3L EFT       =  " << ho.getZetaEFT() << "\n"
-        << "Zeta 3L Degen.    =  " << ho.getZetaDegenerated();
+	<< "Zeta 3L Himalaya  =  " << ho.getZetaHimalaya() << " (expanded coefficients of logarithms)\n"
+        << "Zeta 3L EFT       =  " << ho.getZetaEFT() << " (exact mass dependence of coefficients of logarithms)";
 
    return ostr;
 }
