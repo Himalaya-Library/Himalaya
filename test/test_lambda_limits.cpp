@@ -5,9 +5,10 @@
 
 namespace {
 
+// point with small Xt, because of missing higher order Xt terms in H3m
 himalaya::Parameters make_point(double eps = 0.)
 {
-   // MS = 1 TeV, Xt = -2 MS, TB = 5
+   // MS = 1 TeV, Xt = 0.1 MS, TB = 5
    himalaya::Parameters pars;
    pars.scale = 1000;
    pars.mu    = 1000;
@@ -17,7 +18,7 @@ himalaya::Parameters make_point(double eps = 0.)
    pars.mq2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06*(1 + eps);
    pars.md2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06;
    pars.mu2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06*(1 - eps);
-   pars.At    = -1800;
+   pars.At    = 300;
    pars.Ab    = 5000;
    pars.MG    = 1000*(1 - eps);
    pars.MW    = 74.597;
@@ -39,10 +40,11 @@ TEST_CASE("test_lambda_limit_degenerate")
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const auto z2_deg          = 0;//ho.getZetaDegenerated();
    const auto z2_gen_Himalaya = ho.getZetaHimalaya();
    const auto z2_gen_EFT      = ho.getZetaEFT();
+   const auto uncertainty     = ho.getExpUncertainty(3);
 
-   CHECK_CLOSE(z2_gen_Himalaya, z2_deg, 1e-5);
-   CHECK_CLOSE(z2_gen_EFT     , z2_deg, 1e-5);
+   INFO("uncertainty: " << uncertainty);
+
+   CHECK_CLOSE(z2_gen_Himalaya, z2_gen_EFT, uncertainty);
 }
