@@ -117,7 +117,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
 
    CHECK_CLOSE(pref, pref2, 1e-10);
 
-   return DMh2_EFT_3L_logs + 0* DMh2_EFT_3L_const;
+   return DMh2_EFT_3L_logs + DMh2_EFT_3L_const;
 }
 
 } // anonymous namespace
