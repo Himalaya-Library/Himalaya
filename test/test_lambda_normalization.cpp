@@ -47,27 +47,11 @@ himalaya::Parameters make_point()
    return pars;
 }
 
-// calculates y_t in the MSSM
-double calc_yt(const himalaya::Parameters& pars)
-{
-   return std::sqrt(2.)*pars.Mt/pars.vu;
-}
-
 // calculates y_t in the SM
 double calc_gt(const himalaya::Parameters& pars)
 {
    const double v = std::sqrt(pow2(pars.vu) + pow2(pars.vd));
    return std::sqrt(2.)*pars.Mt/v;
-}
-
-// calculates a_t
-double calc_at(const himalaya::Parameters& pars)
-{
-   const double yt = calc_yt(pars);
-   const double tb = pars.vu/pars.vd;
-   const double beta = std::atan(tb);
-
-   return pow2(yt*std::sin(beta))/(4*Pi);
 }
 
 /// calculates lightest mass eigenvalue of given mass matrix
@@ -89,63 +73,40 @@ double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 /// calculates Mh^2 in the EFT at 1-loop level
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
-   const double at = calc_at(pars);
-   const double tb = pars.vu/pars.vd;
-   const double mt = pars.Mt;
-   const double mQ32 = pars.mq2(2,2);
-   const double mU32 = pars.mu2(2,2);
-   const double Xt = pars.At - pars.mu/tb;
    const double MR2 = pow2(pars.scale);
 
-   himalaya::mh2_eft::Mh2EFTCalculator mhc;
+   himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   return 0.;//mhc.Mh2_EFT_1loop(at, mt, mQ32, mU32, Xt, MR2);
+   return mhc.getDeltaMh2EFT1Loop(1,1);
 }
 
 /// calculates Mh^2 in the EFT at 2-loop level
 double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 {
-   const double at = calc_at(pars);
-   const double tb = pars.vu/pars.vd;
-   const double mt = pars.Mt;
-   const double mQ32 = pars.mq2(2,2);
-   const double mU32 = pars.mu2(2,2);
-   const double Xt = pars.At - pars.mu/tb;
    const double MR2 = pow2(pars.scale);
-   const double g3 = pars.g3;
-   const double m3 = pars.MG;
 
-   himalaya::mh2_eft::Mh2EFTCalculator mhc;
+   himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   return 0.;//mhc.Mh2_EFT_2loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3);
+   return mhc.getDeltaMh2EFT2Loop(1,1);
 }
 
 /// calculates Mh^2 in the EFT at 3-loop level
 double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
                        double zeta_lambda_3L)
 {
-   const double at = calc_at(pars);
-   const double tb = pars.vu/pars.vd;
    const double mt = pars.Mt;
-   const double mQ32 = pars.mq2(2,2);
-   const double mU32 = pars.mu2(2,2);
-   const double Xt = pars.At - pars.mu/tb;
    const double MR2 = pow2(pars.scale);
    const double g3 = pars.g3;
-   const double m3 = pars.MG;
-   const double msq2 = std::pow(
-      pars.mq2(0,0) * pars.mq2(1,1) *
-      pars.mu2(0,0) * pars.mu2(1,1) *
-      pars.md2(0,0) * pars.md2(1,1), 1./6.);
    const double gt  = calc_gt(pars);
    const double v2  = pow2(pars.vu) + pow2(pars.vd);
    const double v   = std::sqrt(v2);   // ~ 245 GeV
    const double vDO = v/std::sqrt(2.); // ~ 173 GeV
 
-   himalaya::mh2_eft::Mh2EFTCalculator mhc;
+   himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   const double DMh2_EFT_3L_logs = 0.;
-      //mhc.Mh2_EFT_3loop(at, mt, mQ32, mU32, Xt, MR2, g3, m3, msq2);
+   // only logs
+   const double DMh2_EFT_3L_logs =
+      mhc.getDeltaMh2EFT3Loop(1,1) - mhc.getDeltaMh2EFT3Loop(0,0);
 
    const double as = pow2(g3)/(4*pow2(Pi));
    // prefactor from paper
@@ -156,7 +117,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
 
    CHECK_CLOSE(pref, pref2, 1e-10);
 
-   return DMh2_EFT_3L_logs + DMh2_EFT_3L_const;
+   return DMh2_EFT_3L_logs + 0* DMh2_EFT_3L_const;
 }
 
 } // anonymous namespace
