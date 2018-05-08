@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Hierarchies.hpp"
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
 #include "version.hpp"
