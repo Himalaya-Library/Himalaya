@@ -142,33 +142,33 @@ himalaya::Parameters setup_HSSUSY_minmix(){
 
 himalaya::Parameters test(){
   himalaya::Parameters pars;
-  pars.scale = 1000.;
+  pars.scale = 10000.;
   pars.mu = 1000.;
   pars.g3 = 1.05733;
   pars.vd    = 45.8309;
   pars.vu    = 229.155;
-  pars.mq2   << 1e+06, 0, 0,
-    0, 1e+06, 0,
-    0, 0, 1e+06;
-  pars.md2   << 1e+06, 0, 0,
-    0, 1e+06, 0,
-    0, 0, 1e+06;
-  pars.mu2   << 1e+06, 0, 0,
-    0, 1e+06, 0,
-    0, 0, 1e+06;
+  pars.mq2   << 1e+08, 0, 0,
+    0, 1e+08, 0,
+    0, 0, 1e+08;
+  pars.md2   << 1e+08, 0, 0,
+    0, 1e+08, 0,
+    0, 0, 1e+08;
+  pars.mu2   << 1e+08, 0, 0,
+    0, 1e+08, 0,
+    0, 0, 1e+08;
   //pars.At    = -1800.;
-  pars.At = 200.;
+  pars.At = 199.9995636141476;
   pars.Ab    = 5000.;
-  pars.MG    = 1000.;
+  pars.MG    = 10000.;
   pars.MW    = 74.59;
   pars.MZ    = 85.7704;
-  pars.Mt    = 144.337;
-  //pars.Mt = 0.1;
+  //pars.Mt    = 144.337;
+  pars.Mt = 120.;
   //  pars.Mb    = 2.37054;
   pars.Mb = 0.0001;
   pars.MA    = 1000.;
-  pars.MSt << 1000., 1000.;
-  pars.MSb << 1000., 1000.;
+  pars.MSt << 10000., 10000.;
+  pars.MSb << 10000., 10000.;
   //  pars.s2t = 0.;
   return pars;
 }
@@ -179,21 +179,21 @@ int main() {
 	 setup_SPS1a(),
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
-	 setup_HSSUSY_minmix()//,
-	 //test()
+	 setup_HSSUSY_minmix(),
+	 test()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator
-	himalaya::HierarchyCalculator hierarchyCalculator(point);
+	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 // top and DR'
-	himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, himalaya::RenSchemes::DRBARPRIME);
+	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, himalaya::RenSchemes::DRBARPRIME);
 
 	 std::cout << hoTop << "\n";
 
 	 // bottom and MDR'
-	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::MDRBARPRIME);
+	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::DRBARPRIME);
       }
    }
    catch (std::exception& e){
