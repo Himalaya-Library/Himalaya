@@ -30,9 +30,13 @@ namespace {
 /**
  * 	Constructor
  * 	@param p a HimalayaInterface struct
+ * 	@param msq2 the averaged squark mass of the first two generations squared
+ * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
+ * 	@param check a boolean which indicates if the threshold corrections should be tested
  */
 himalaya::ThresholdCalculator::ThresholdCalculator(const Parameters& p_, const double msq2_,
-						   const bool check) : p(p_), msq2(msq2_){
+						   const bool verbose, const bool check) : p(p_), msq2(msq2_){
+   p.validate(verbose);
    if(!check){
       // Set mass limit for threshold corrections
       const double mQ3 = sqrt(p.mq2(2,2));
@@ -216,7 +220,7 @@ double himalaya::ThresholdCalculator::getDeltaG3Alphas(int omitLogs){
    const double lm3MR = omitLogs * log(Mst12 / MR2) + log(m32 / Mst12);
    const double lmU3MR = omitLogs * log(Mst12 / MR2) + log(mU32 / Mst12);
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
-   
+
    return 1 / 2. - lm3MR - (lmQ3MR + 10 * lmsqMR + lmU3MR) / 12.;
 }
 

@@ -179,8 +179,7 @@ int main() {
 	 setup_SPS1a(),
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
-	 setup_HSSUSY_minmix(),
-	 test()
+	 setup_HSSUSY_minmix()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator

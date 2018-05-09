@@ -10,9 +10,10 @@ namespace himalaya{
        * 	Constructor
        * 	@param p a HimalayaInterface struct
        * 	@param msq2 the averaged squark mass of the first two generations squared
+       * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
        * 	@param check a boolean which indicates if the threshold corrections should be tested
        */
-      ThresholdCalculator(const Parameters& p, const double msq2, const bool check = false);
+      ThresholdCalculator(const Parameters& p, const double msq2, const bool verbose = true, const bool check = false);
       /**
        * 	Returns a specific threshold corrections for a given mass limit
        * 	@param variable an integer key for a threshold correctionn

@@ -17,12 +17,9 @@ namespace mh2_eft{
        *	Constructor
        * 	@param p a HimalayaInterface struct
        * 	@param msq2 the averaged squark mass of the first two generations squared
+       * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
        */
-      Mh2EFTCalculator(const Parameters& p, const double msq2);
-      /**
-       * 	Constructor
-       */
-      Mh2EFTCalculator();
+      Mh2EFTCalculator(const Parameters& p, const double msq2, const bool verbose = true);
       /**
        * 	Returns the 1-loop EFT contribution to the Higgs mass
        * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms

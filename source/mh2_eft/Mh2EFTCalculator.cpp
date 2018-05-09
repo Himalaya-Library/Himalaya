@@ -33,14 +33,15 @@ namespace {
 } // namespace mh2_eft
 } // namespace himalaya
 
-
+/**
+ *	Constructor
+ * 	@param p a HimalayaInterface struct
+ * 	@param msq2 the averaged squark mass of the first two generations squared
+ * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
+ */
 himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(const himalaya::Parameters& p_,
-						      const double msq2_) : p(p_), msq2(msq2_){
-
-}
-
-himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(){
-
+						      const double msq2_, bool verbose) : p(p_), msq2(msq2_){
+   p.validate(verbose);
 }
 
 /**
