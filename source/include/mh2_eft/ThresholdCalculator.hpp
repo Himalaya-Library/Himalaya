@@ -29,6 +29,12 @@ namespace himalaya{
        */
       double getXtTerms(int xtOrder, int omitLogs);
       /**
+       * 	Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
+       * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
+       * 	@param omitLogs an integer key to omit all log mu terms
+       */
+      double getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs);
+      /**
        * 	Sets the mass limit to check terms
        * 	@param limit an integer key for a mass limit
        */
@@ -91,6 +97,13 @@ namespace himalaya{
        * 	@param limit an integer key for a mass limit
        */
       double getXt6Terms(int limit);
+      /**
+       * 	Returns the DRbarPrime to MSbar shift of delta lambda 3L at a given xtOrder
+       * 	@param limit an integer key for a mass limit
+       * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
+       * 	@param omitLogs an integer key to omit all log mu terms
+       */
+      double getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs);
       Parameters p{};	/** The HimalayaInterface struct. */
       double msq2{};	/** the average squark mass of the first two generations squared **/
    };

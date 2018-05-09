@@ -73,6 +73,10 @@ namespace himalaya{
        */
       double getZetaConst() const;
       /**
+       * 	@return the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
+       */
+      double getDRbarPrimeToMSbarShift() const;
+      /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
        */
@@ -137,6 +141,11 @@ namespace himalaya{
        */
       void setZetaConst(double zeta);
       /**
+       * 	Sets the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
+       * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
+       */
+      void setDRbarPrimeToMSbarShift(double shift);
+      /**
        *	Returns the H3m notation of a given hierarchy.
        *	@param hierarchy An integer of a Himalaya hierarchy.
        *	@return Returns the corresponding H3m notation of the given hierarchy as a string.
@@ -156,6 +165,7 @@ namespace himalaya{
       double zetaHimalaya{};								/**< zeta lambda 3-loop from Himalaya only */
       double zetaEFT{};									/**< zeta lambda 3-loop from EFT and Himalaya */
       double zetaConst{};                                                               /**< zeta lambda 3-loop, non-logarithmic part */
+      double drBarPrimeToMSbarShift{};							/**< The shift to convert the DR' 3-loop threshold correction to the MS scheme */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

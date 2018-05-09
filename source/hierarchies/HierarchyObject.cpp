@@ -234,6 +234,23 @@ double himalaya::HierarchyObject::getZetaConst() const{
 }
 
 /**
+ * 	Sets the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
+ * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
+ */
+void himalaya::HierarchyObject::setDRbarPrimeToMSbarShift(double shift){
+   drBarPrimeToMSbarShift = shift;
+}
+
+/**
+ * 	@return the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
+ */
+double himalaya::HierarchyObject::getDRbarPrimeToMSbarShift() const{
+   return drBarPrimeToMSbarShift;
+}
+
+
+
+/**
  * 	Sorts a vector.
  * 	@param vector The vector which should be sorted.
  * 	@return Returns a vector the lightest entry at position 0.
@@ -319,7 +336,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 	<< "DR -> MDR shift   =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
 		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
 	<< "Zeta 3L Himalaya  =  " << ho.getZetaHimalaya() << " (expanded coefficients of logarithms)\n"
-        << "Zeta 3L EFT       =  " << ho.getZetaEFT() << " (exact mass dependence of coefficients of logarithms)";
+        << "Zeta 3L EFT       =  " << ho.getZetaEFT() << " (exact mass dependence of coefficients of logarithms)\n"
+	<< "DR' -> MS shift   =  " << ho.getDRbarPrimeToMSbarShift();
 
    return ostr;
 }

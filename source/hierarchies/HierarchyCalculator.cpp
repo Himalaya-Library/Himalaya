@@ -176,8 +176,8 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    const double prefactor = 1./16.;
    // calculate the full 3L corretion to Mh2 and subtract the constant parts to obtain the logarithmic contributions
    const double eftConstant = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0, xtOrder);
-   const double eftConstantFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
-   const double eftConstantXt = 0*(eftConstantFull - eftConstant); // TODO should one add these terms to the constant?!
+   //const double eftConstantFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
+   //const double eftConstantXt = 0*(eftConstantFull - eftConstant); // TODO should one add these terms to the constant?!
    const double eftLogs = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 1) - eftConstant;
    // calculate the constant part of zeta at 3L truncated at the same order of Xt as H3m
    const double zeta3LConst = ho.getZetaConst() - eftConstant;
@@ -195,8 +195,12 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    //const double Xt = (p.At - p.mu * p.vd / p.vu);
    //const double mQ3 = sqrt(p.mq2(2,2));
    //const double degenconst = mh2EFTCalculator.getZetaDegenerate(p.scale, mQ3, Xt/mQ3,0);
-   ho.setZetaEFT(prefactor * (zeta3LConst + eftConstantXt + eftLogs - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 0)));
+   ho.setZetaEFT(prefactor * (zeta3LConst /*+ eftConstantXt*/ + eftLogs - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 0)));
    //std::cout << "const " << (zeta3LConst - shiftH3mToDRbarPrimeMh2(ho,0))/16. << " degen const " << degenconst << "\n";
+
+   // calculate DR' -> MS shift
+   himalaya::ThresholdCalculator tc (p, pow2(Msq));
+   ho.setDRbarPrimeToMSbarShift(prefactor*tc.getDRbarPrimeToMSbarShift(xtOrder, 1));
    
    if(verbose && drPrimeFlag == 0) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent in the H3m renormalization scheme!\n";
    if(mdrFlag == 1) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent with MDR mass shifts!\n";
