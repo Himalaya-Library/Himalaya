@@ -99,9 +99,18 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 }
 
 /// calculates Mh^2 in the EFT at 3-loop level
-double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
-                       double zeta_lambda_3L)
+/// zeta_switch == 0: all logs (SM + MSSM) + zeta w/o any logs
+/// zeta_switch == 1: SM logs + zeta w/ MSSM logs from H3m
+/// zeta_switch == 2: SM logs + zeta w/ MSSM logs from EFT
+double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
 {
+   auto hc = himalaya::HierarchyCalculator(pars);
+   const auto ho = hc.calculateDMh3L(false);
+
+   const double zeta_3L_const    = ho.getZetaConst();
+   const double zeta_3L_eft      = ho.getZetaEFT();
+   const double zeta_3L_himalaya = ho.getZetaHimalaya();
+
    const double mt = pars.Mt;
    const double MR2 = pow2(pars.scale);
    const double g3 = pars.g3;
@@ -118,19 +127,28 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
    const double pref = pow4(mt)/pow2(4*Pi*vDO)*pow2(as);
    // prefactor from HSSUSY
    const double pref2 = 8*pow4(gt*g3)/pow6(4*Pi) * v2;
-
+   // prefactor for Daniel's EFT expression
    const double pref_DO =
       1./pow6(4*Pi) * pow2(pars.Mt * calc_gt(pars) * pow2(pars.g3));
 
    // calculate only logs
-   const double DMh2_EFT_3L_logs =
+   const double DMh2_EFT_3L_logs_SM =
+      pref_DO*(mhc.getDeltaMh2EFT3Loop(1,0,4) - mhc.getDeltaMh2EFT3Loop(0,0,4));
+   const double DMh2_EFT_3L_logs_all =
       pref_DO*(mhc.getDeltaMh2EFT3Loop(1,1,4) - mhc.getDeltaMh2EFT3Loop(0,0,4));
-
-   const double DMh2_EFT_3L_const = pref * zeta_lambda_3L;
 
    CHECK_CLOSE(pref, pref2, 1e-10);
 
-   return DMh2_EFT_3L_logs + DMh2_EFT_3L_const;
+   double DMh2_3L = 0.;
+
+   switch (zeta_switch) {
+   case 0: DMh2_3L = DMh2_EFT_3L_logs_all + pref * zeta_3L_const   ; break;
+   case 1: DMh2_3L = DMh2_EFT_3L_logs_SM  + pref * zeta_3L_himalaya; break;
+   case 2: DMh2_3L = DMh2_EFT_3L_logs_SM  + pref * zeta_3L_eft     ; break;
+   default: INFO("Error: unknow switch value : " << zeta_switch);
+   }
+
+   return DMh2_3L;
 }
 
 } // anonymous namespace
@@ -142,9 +160,6 @@ TEST_CASE("test_lambda_normalization")
    const auto pars = make_point();
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
-
-   // non-logarithmic part of zeta_lambda 3L
-   const double zeta_3L_const = ho.getZetaConst();
 
    const auto DMh_0L = ho.getDMh(0);
    const auto DMh_1L = ho.getDMh(1);
@@ -184,6 +199,18 @@ TEST_CASE("test_lambda_normalization")
    CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
                      + calc_Mh2_EFT_1L(pars)
                      + calc_Mh2_EFT_2L(pars)
-                     + calc_Mh2_EFT_3L(pars,zeta_3L_const),
+                     + calc_Mh2_EFT_3L(pars, 0),
+               Mh2_3L_uncert_rel);
+
+   CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
+                     + calc_Mh2_EFT_1L(pars)
+                     + calc_Mh2_EFT_2L(pars)
+                     + calc_Mh2_EFT_3L(pars, 1),
+               Mh2_3L_uncert_rel);
+
+   CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
+                     + calc_Mh2_EFT_1L(pars)
+                     + calc_Mh2_EFT_2L(pars)
+                     + calc_Mh2_EFT_3L(pars, 2),
                Mh2_3L_uncert_rel);
 }
