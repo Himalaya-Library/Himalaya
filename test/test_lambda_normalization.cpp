@@ -120,7 +120,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
    const double pref2 = 8*pow4(gt*g3)/pow6(4*Pi) * v2;
 
    const double pref_DO =
-      1./pow6(4*Pi) * pow2(pars.Mt * calc_gt(pars) * pow4(pars.g3));
+      1./pow6(4*Pi) * pow2(pars.Mt * calc_gt(pars) * pow2(pars.g3));
 
    // calculate only logs
    const double DMh2_EFT_3L_logs =
