@@ -44,6 +44,8 @@ himalaya::Parameters make_point()
    pars.Mb    = 2.37054;
    pars.MA    = MS;
 
+   pars.validate(false);
+
    return pars;
 }
 
@@ -77,7 +79,10 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   return mhc.getDeltaMh2EFT1Loop(1,1);
+   const double pref =
+      1./pow2(4*Pi) * pow2(pars.Mt * calc_gt(pars));
+
+   return pref * mhc.getDeltaMh2EFT1Loop(1,1);
 }
 
 /// calculates Mh^2 in the EFT at 2-loop level
@@ -87,7 +92,10 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   return mhc.getDeltaMh2EFT2Loop(1,1);
+   const double pref =
+      1./pow4(4*Pi) * pow2(pars.Mt * calc_gt(pars) * pars.g3);
+
+   return pref * mhc.getDeltaMh2EFT2Loop(1,1);
 }
 
 /// calculates Mh^2 in the EFT at 3-loop level
@@ -104,15 +112,20 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars,
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   // only logs
-   const double DMh2_EFT_3L_logs =
-      mhc.getDeltaMh2EFT3Loop(1,1) - mhc.getDeltaMh2EFT3Loop(0,0);
-
+   // calculate prefactors
    const double as = pow2(g3)/(4*pow2(Pi));
    // prefactor from paper
    const double pref = pow4(mt)/pow2(4*Pi*vDO)*pow2(as);
    // prefactor from HSSUSY
    const double pref2 = 8*pow4(gt*g3)/pow6(4*Pi) * v2;
+
+   const double pref_DO =
+      1./pow6(4*Pi) * pow2(pars.Mt * calc_gt(pars) * pow2(pars.g3));
+
+   // calculate only logs
+   const double DMh2_EFT_3L_logs =
+      pref_DO*(mhc.getDeltaMh2EFT3Loop(1,1,4) - mhc.getDeltaMh2EFT3Loop(0,0,4));
+
    const double DMh2_EFT_3L_const = pref * zeta_lambda_3L;
 
    CHECK_CLOSE(pref, pref2, 1e-10);
