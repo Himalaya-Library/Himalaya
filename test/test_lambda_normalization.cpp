@@ -136,15 +136,24 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
       pref_DO*(mhc.getDeltaMh2EFT3Loop(1,0,4) - mhc.getDeltaMh2EFT3Loop(0,0,4));
    const double DMh2_EFT_3L_logs_all =
       pref_DO*(mhc.getDeltaMh2EFT3Loop(1,1,4) - mhc.getDeltaMh2EFT3Loop(0,0,4));
+   const double DMh2_EFT_3L_logs_mixed =
+      pref_DO*(+ mhc.getDeltaMh2EFT3Loop(1,1,4) // all logs + const
+               - mhc.getDeltaMh2EFT3Loop(1,0,4) // subtract SM logs + const
+               - mhc.getDeltaMh2EFT3Loop(0,1,4) // subtract MSSM logs + const
+               + mhc.getDeltaMh2EFT3Loop(0,0,4) // add constant
+              );
 
    CHECK_CLOSE(pref, pref2, 1e-10);
 
    double DMh2_3L = 0.;
 
    switch (zeta_switch) {
-   case 0: DMh2_3L = DMh2_EFT_3L_logs_all + pref * zeta_3L_const   ; break;
-   case 1: DMh2_3L = DMh2_EFT_3L_logs_SM  + pref * zeta_3L_himalaya; break;
-   case 2: DMh2_3L = DMh2_EFT_3L_logs_SM  + pref * zeta_3L_eft     ; break;
+   case 0: DMh2_3L = DMh2_EFT_3L_logs_all + pref * zeta_3L_const;
+      break;
+   case 1: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + pref * zeta_3L_himalaya;
+      break;
+   case 2: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + pref * zeta_3L_eft;
+      break;
    default: INFO("Error: unknow switch value : " << zeta_switch);
    }
 
