@@ -147,12 +147,12 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs, 
 }
 
 /**
- *   Returns the matching relation of zeta_lambda^(2) for the degenerate mass case
+ *   Returns the matching relation of delta_Lambda 3L for the degenerate mass case
  *   @param scale the renormalization scale
  *   @param mst1 the mass of the light stop quark
- *   @return zeta_lambda^(2)
+ *   @return delta_Lambda 3L
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getZetaDegenerate(double scale, double mst1, double Xt, int omitlogs) const{
+double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const{
    using std::log;
    
    const double li4 = 0.5174790616738993; // Li4(1/2)

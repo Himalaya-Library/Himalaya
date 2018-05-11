@@ -40,12 +40,12 @@ namespace mh2_eft{
        */
       double getDeltaMh2EFT3Loop(int omitSMLogs, int omitMSSMLogs, int xtOrder = 7);
       /**
-       *   Returns the matching relation of zeta_lambda^(2) for the degenerate mass case
+       *   Returns the matching relation of delta_lambda 3L for the degenerate mass case
        *   @param scale the renormalization scale
        *   @param mst1 the mass of the light stop quark
-       *   @return zeta_lambda^(2)
+       *   @return delta_Lambda 3L
        */
-     double getZetaDegenerate(double scale, double mst1, double Xt, int omitlogs) const;
+     double getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const;
    private:
       /**
        * 	Returns a string of "true" or "false" corresponding to the argument
