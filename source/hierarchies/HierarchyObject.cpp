@@ -308,7 +308,7 @@ std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) co
  * 	Prints out all information of the HierarchyObject
  */
 std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject const &ho){
-   const std::string mdrString = ho.getMDRFlag() == 0 ? "No MDR shifts applied." : "MDR shifts applied.";
+   const std::string mdrString = ho.getMDRFlag() == 0 ? "No MDR shifts applied" : "MDR shifts applied";
    const int suitableHierarchy = ho.getSuitableHierarchy();
    std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
       || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
