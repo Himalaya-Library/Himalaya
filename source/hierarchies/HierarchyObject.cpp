@@ -335,8 +335,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
         << "Exp. uncert. 3L   =  " << ho.getExpUncertainty(3) << " GeV\n"
 	<< "DR -> MDR shift   =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
 		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
-	<< "Δ_λ 3L Himalaya   =  " << ho.getDeltaLambdaHimalaya() << " (expanded coefficients of logarithms)\n"
-        << "Δ_λ 3L EFT        =  " << ho.getDeltaLambdaEFT() << " (exact mass dependence of coefficients of logarithms)\n"
+	<< "Δλ 3L Himalaya    =  " << ho.getDeltaLambdaHimalaya() << " (expanded coefficients of logarithms)\n"
+        << "Δλ 3L EFT         =  " << ho.getDeltaLambdaEFT() << " (exact mass dependence of coefficients of logarithms)\n"
 	<< "DR' -> MS shift   =  " << ho.getDRbarPrimeToMSbarShift();
 
    return ostr;
