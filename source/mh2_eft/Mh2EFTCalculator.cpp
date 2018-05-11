@@ -39,9 +39,14 @@ namespace {
  * 	@param msq2 the averaged squark mass of the first two generations squared
  * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
  */
-himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(const himalaya::Parameters& p_,
-						      const double msq2_, bool verbose) : p(p_), msq2(msq2_){
+himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(
+   const himalaya::Parameters& p_, double msq2_, bool verbose)
+   : p(p_), msq2(msq2_)
+{
    p.validate(verbose);
+
+   if (!std::isfinite(msq2_))
+      msq2 = p.calculateMsq2();
 }
 
 /**

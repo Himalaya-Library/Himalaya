@@ -98,18 +98,6 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
    return pref * mhc.getDeltaMh2EFT2Loop(1,1);
 }
 
-double calc_msq2(const himalaya::Parameters& p)
-{
-   const double beta = atan(p.vu / p.vd);
-   const double sw2 = 1 - pow2(p.MW / p.MZ);
-
-   return (2 * sqrt(p.mq2(0, 0)) + sqrt(p.mu2(0, 0)) + sqrt(p.md2(0, 0))	// sup and sdown
-           + 2 * sqrt(p.mq2(1, 1)) + sqrt(p.mu2(1, 1)) + sqrt(p.md2(1, 1))	// scharm and sstrange
-           // sbottom
-           + sqrt(p.mq2(2, 2) + pow2(p.Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(p.MZ) * cos(2 * beta))
-           + sqrt(p.md2(2, 2) + pow2(p.Mb) - 1 / 3. * sw2 * pow2(p.MZ) * cos(2 * beta))) / 10.;
-}
-
 /// calculates Mh^2 in the EFT at 3-loop level
 /// zeta_switch == 0: all logs (SM + MSSM) + zeta w/o any logs
 /// zeta_switch == 1: SM logs + zeta w/ MSSM logs from H3m
@@ -124,7 +112,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
    const double zeta_3L_himalaya = ho.getZetaHimalaya();
 
    const double mt = pars.Mt;
-   const double MR2 = calc_msq2(pars);
+   const double MR2 = pars.calculateMsq2();
    const double g3 = pars.g3;
    const double gt  = calc_gt(pars);
    const double v2  = pow2(pars.vu) + pow2(pars.vd);

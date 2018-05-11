@@ -1,4 +1,5 @@
 #include "Himalaya_interface.hpp"
+#include "Utils.hpp"
 #include <Eigen/Eigenvalues>
 #include <cmath>
 #include <iostream>
@@ -66,6 +67,23 @@ std::pair<V2,double> calculate_MSf_s2f(const RM22& M)
 }
 
 } // anonymous namespace
+
+double Parameters::calculateMsq2() const
+{
+   using std::sqrt;
+
+   const double beta = std::atan(vu / vd);
+   const double cos_2beta = std::cos(2 * beta);
+   const double sw2 = 1 - pow2(MW / MZ);
+   const double msq =
+      (+ 2 * sqrt(mq2(0, 0)) + sqrt(mu2(0, 0)) + sqrt(md2(0, 0))  // sup and sdown
+       + 2 * sqrt(mq2(1, 1)) + sqrt(mu2(1, 1)) + sqrt(md2(1, 1))  // scharm and sstrange
+       // sbottom
+       + sqrt(mq2(2, 2) + pow2(Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(MZ) * cos_2beta)
+       + sqrt(md2(2, 2) + pow2(Mb) - 1 / 3. * sw2 * pow2(MZ) * cos_2beta)) / 10.;
+
+   return pow2(msq);
+}
 
 /**
  * 	Checks if the stop/sbottom masses and mixing angles are provided. Otherwise calculate them.

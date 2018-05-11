@@ -3,7 +3,7 @@
 #include "Himalaya_interface.hpp"
 #include "dilog.h"
 #include <cmath>
-//#include <limits>
+#include <limits>
 
 namespace himalaya{
 namespace mh2_eft{
@@ -19,7 +19,7 @@ namespace mh2_eft{
        * 	@param msq2 the averaged squark mass of the first two generations squared
        * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
        */
-      Mh2EFTCalculator(const Parameters& p, const double msq2, const bool verbose = true);
+      Mh2EFTCalculator(const Parameters& p, double msq2 = std::numeric_limits<double>::quiet_NaN(), bool verbose = true);
       /**
        * 	Returns the 1-loop EFT contribution to the Higgs mass
        * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
@@ -53,7 +53,7 @@ namespace mh2_eft{
        */
       std::string tf(const bool tf);
       Parameters p{};
-      double msq2{};
+      double msq2{std::numeric_limits<double>::quiet_NaN()};
    };
 }	// mh2_eft
 }	// himalaya

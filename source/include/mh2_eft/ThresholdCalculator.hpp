@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Himalaya_interface.hpp"
+#include <limits>
 
 namespace himalaya{
    
@@ -13,7 +14,7 @@ namespace himalaya{
        * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
        * 	@param check a boolean which indicates if the threshold corrections should be tested
        */
-      ThresholdCalculator(const Parameters& p, const double msq2, const bool verbose = true, const bool check = false);
+      ThresholdCalculator(const Parameters& p, double msq2 = std::numeric_limits<double>::quiet_NaN(), bool verbose = true, bool check = false);
       /**
        * 	Returns a specific threshold corrections for a given mass limit
        * 	@param variable an integer key for a threshold correctionn
@@ -105,7 +106,7 @@ namespace himalaya{
        */
       double getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs);
       Parameters p{};	/** The HimalayaInterface struct. */
-      double msq2{};	/** the average squark mass of the first two generations squared **/
+      double msq2{std::numeric_limits<double>::quiet_NaN()}; /** the average squark mass of the first two generations squared **/
    };
    
 }	// himalaya

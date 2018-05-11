@@ -34,9 +34,15 @@ namespace {
  * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
  * 	@param check a boolean which indicates if the threshold corrections should be tested
  */
-himalaya::ThresholdCalculator::ThresholdCalculator(const Parameters& p_, const double msq2_,
-						   const bool verbose, const bool check) : p(p_), msq2(msq2_){
+himalaya::ThresholdCalculator::ThresholdCalculator(
+   const Parameters& p_, double msq2_, bool verbose, bool check)
+   : p(p_), msq2(msq2_)
+{
    p.validate(verbose);
+
+   if (!std::isfinite(msq2_))
+      msq2 = p.calculateMsq2();
+
    if(!check){
       // Set mass limit for threshold corrections
       const double mQ3 = sqrt(p.mq2(2,2));

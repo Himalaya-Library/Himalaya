@@ -87,9 +87,6 @@ void himalaya::HierarchyCalculator::init(){
    // beta
    const double beta = atan(p.vu / p.vd);
 
-   //sw2
-   const double sw2 = 1 - pow2(p.MW / p.MZ);
-
    // Al4p
    Al4p = pow2(p.g3 / (4 * Pi));
 
@@ -97,11 +94,7 @@ void himalaya::HierarchyCalculator::init(){
    Mgl = p.MG;
 
    // Msq, checked
-   Msq = (2 * sqrt(p.mq2(0, 0)) + sqrt(p.mu2(0, 0)) + sqrt(p.md2(0, 0))	// sup and sdown
-      + 2 * sqrt(p.mq2(1, 1)) + sqrt(p.mu2(1, 1)) + sqrt(p.md2(1, 1))	// scharm and sstrange
-      // sbottom
-      + sqrt(p.mq2(2, 2) + pow2(p.Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(p.MZ) * cos(2 * beta))
-      + sqrt(p.md2(2, 2) + pow2(p.Mb) - 1 / 3. * sw2 * pow2(p.MZ) * cos(2 * beta))) / 10.;
+   Msq = std::sqrt(std::abs(p.calculateMsq2()));
 
    // lmMsq, checked
    lmMsq = log(pow2(p.scale / Msq));
@@ -171,7 +164,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setExpUncertainty(1, 0.);
 
    // calculate delta zeta
-   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p, pow2(Msq));
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p);
 
    const double prefactor = 1./16.;
    // calculate the full 3L corretion to Mh2 and subtract the constant parts to obtain the logarithmic contributions
@@ -197,7 +190,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setZetaConst(prefactor * (zeta3LConst - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 0)));
    
    // calculate DR' -> MS shift
-   himalaya::ThresholdCalculator tc (p, pow2(Msq));
+   himalaya::ThresholdCalculator tc (p);
    ho.setDRbarPrimeToMSbarShift(prefactor*tc.getDRbarPrimeToMSbarShift(xtOrder, 1));
    
    if(verbose && drPrimeFlag == 0) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent in the H3m renormalization scheme!\n";

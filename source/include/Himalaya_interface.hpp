@@ -43,6 +43,7 @@ struct Parameters {
    // integer flag to set mass limit
    int massLimit3LThreshold{}; 			/**< an integer flag to set the mass limit */
 
+   double calculateMsq2() const;                /** calculates average light squark mass squared */
    void validate(bool verbose);                 /** validates the parameter set */
 };
 
