@@ -79,6 +79,8 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(xt5_lim_gen, 2.741433435, eps);
       const double xt6_lim_gen = tc.getXtTerms(6, 1)*1e15/Xt6;
       CHECK_CLOSE(xt6_lim_gen, 2.094602505, eps);
+      const double drToMsShift_gen = tc.getDRbarPrimeToMSbarShift(3, 1);
+      CHECK_CLOSE(drToMsShift_gen, -4573.690622, eps);
       
       // mQ3 = m3
       tc.setLimit(himalaya::Limits::MQ3_EQ_M3);
@@ -100,6 +102,8 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(xt5_lim_mq3_m3, 2.552971369, eps);
       const double xt6_lim_mq3_m3 = tc.getXtTerms(6, 1)*1e15/Xt6;
       CHECK_CLOSE(xt6_lim_mq3_m3, 1.922855926, eps);
+      const double drToMsShift_mq3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
+      CHECK_CLOSE(drToMsShift_mq3_m3, -4475.7762695112, eps);
       
       // mQ3 = mU3
       tc.setLimit(himalaya::Limits::MQ3_EQ_MU3);
@@ -124,6 +128,8 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(xt5_lim_mq3_mu3, 1.595070724, eps);
       const double xt6_lim_mq3_mu3 = tc.getXtTerms(6, 1)*1e15/Xt6;
       CHECK_CLOSE(xt6_lim_mq3_mu3, 1.264126661, eps);
+      const double drToMsShift_mq3_mu3 = tc.getDRbarPrimeToMSbarShift(3, 1);
+      CHECK_CLOSE(drToMsShift_mq3_mu3, -4044.8611888293, eps);
       
       // mq3 = mu3 = m3
       tc.setLimit(himalaya::Limits::MQ3_EQ_MU3_EQ_M3);
@@ -145,6 +151,8 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(xt5_lim_mq3_mu3_m3, 1.509254564, eps);
       const double xt6_lim_mq3_mu3_m3 = tc.getXtTerms(6, 1)*1e15/Xt6;
       CHECK_CLOSE(xt6_lim_mq3_mu3_m3, 1.147009210, eps);
+      const double drToMsShift_mq3_mu3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
+      CHECK_CLOSE(drToMsShift_mq3_mu3_m3, -3975.459527439, eps);
       
       // mU3 = m3
       tc.setLimit(himalaya::Limits::MU3_EQ_M3);
@@ -166,6 +174,8 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(xt5_lim_mu3_m3, 2.854004720, eps);
       const double xt6_lim_mu3_m3 = tc.getXtTerms(6, 1)*1e15/Xt6;
       CHECK_CLOSE(xt6_lim_mu3_m3, 1.726207002, eps);
+      const double drToMsShift_mu3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
+      CHECK_CLOSE(drToMsShift_mu3_m3, -4323.5912100943, eps);
       
       // degenerate mass case
       tc.setLimit(himalaya::Limits::DEGENERATE);
@@ -176,6 +186,8 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(xt4_lim_degen, -6.758025736, eps);
       const double xt5_lim_degen = tc.getXtTerms(5, 1)*1e12/Xt5;
       CHECK_CLOSE(xt5_lim_degen, 1.470013998, eps);
+      const double drToMsShift_degen = tc.getDRbarPrimeToMSbarShift(3, 1);
+      CHECK_CLOSE(drToMsShift_degen, -3900.8233462395, eps);
    }
 }
 

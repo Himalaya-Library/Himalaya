@@ -738,7 +738,6 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLo
    if(limit == Limits::DEGENERATE) limit = Limits::MQ3_EQ_MU3_EQ_M3;
    if(limit == Limits::MQ3_EQ_M3 || limit == Limits::MU3_EQ_M3) limit = Limits::GENERAL;
    if(limit == Limits::MQ3_EQ_MU3_EQ_M3) limit = Limits::MQ3_EQ_MU3;
-
    
    switch (limit){
       case(Limits::GENERAL):{
@@ -2747,7 +2746,7 @@ double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int
    const double ytas2 = getDeltaYtAlphas2(p.massLimit3LThreshold, omitLogs);
    const double lambdaat = getDeltaLambdaAlphat(p.massLimit3LThreshold, omitLogs);
    const double lambdaatas = getDeltaLambdaAlphatAlphas(p.massLimit3LThreshold, omitLogs);
-
+   
    return -(-2.*(lambdaat*(3*pow2(ytas) + 2*ytas2) + (lambdaatas - 4*ytas*lambdaat)
       *(g3as + 2*ytas)) - xtTerms);
 }
@@ -4202,7 +4201,8 @@ double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int
       }
       case(Limits::DEGENERATE):{
 	 return (2*Xt4*(-5735 + 148*lmQ3MR + 156*pow2(lmQ3MR)))/(27.*pow4(mQ3))+
-	 (-176*(-7 + 8*lmQ3MR)*Xt5)/(27.*pow5(mQ3));
+	 (-176*(-7 + 8*lmQ3MR)*Xt5)/(27.*pow5(mQ3))
+	 +160/(9.*pow6(mQ3))*Xt6;
       }
    };
    
