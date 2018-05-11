@@ -1,11 +1,25 @@
 # Himalaya
 
-Himalaya can calculate corrections of order O((alpha_t + alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR-bar scheme using the results of:
-* R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs boson mass in supersymmetry to three loops*, [*Phys. Rev. Lett.* **100** (2008) 191602](https://doi.org/10.1103/PhysRevLett.100.191602), [[0803.0672](https://arxiv.org/abs/0803.0672)],
-* P. Kant, R. V. Harlander, L. Mihaila and M. Steinhauser, *Light MSSM Higgs boson mass to three-loop accuracy*, [*JHEP* **08** (2010) 104](https://doi.org/10.1007/JHEP08(2010)104), [[1005.5709](https://arxiv.org/abs/1005.5709)].
+Himalaya can calculate corrections of order O((alpha_t +
+alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR'-bar
+scheme using the results of:
+
+* R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs
+  boson mass in supersymmetry to three loops*, [*Phys. Rev. Lett.*
+  **100** (2008)
+  191602](https://doi.org/10.1103/PhysRevLett.100.191602),
+  [[0803.0672](https://arxiv.org/abs/0803.0672)],
+
+* P. Kant, R. V. Harlander, L. Mihaila and M. Steinhauser, *Light MSSM
+  Higgs boson mass to three-loop accuracy*, [*JHEP* **08** (2010)
+  104](https://doi.org/10.1007/JHEP08(2010)104),
+  [[1005.5709](https://arxiv.org/abs/1005.5709)].
 
 Please refer to these papers as well as
-* R. V. Harlander, J. Klappert and A. Voigt, *Higgs mass prediction in the MSSM at three-loop level in a pure DR context*, [[1708.05720](https://arxiv.org/abs/1708.05720)]
+
+* R. V. Harlander, J. Klappert and A. Voigt, *Higgs mass prediction in
+  the MSSM at three-loop level in a pure DR context*,
+  [[1708.05720](https://arxiv.org/abs/1708.05720)]
 
 when using Himalaya.
 
@@ -35,13 +49,24 @@ By default the code is compiled optimized.
 After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to the program. `libDSZ.a` is optional and has to be linked, if the program does not incorporate the associated Fortran code of G. Degrassi, P. Slavich and F. Zwirner ([arXiv:hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)).
 
 ### Example
-We present a brief step by step guide how to run Himalaya and obtain the three-loop corrections to the CP-even Higgs mass matrix in the MSSM in the DR-bar scheme. First one has to include the header
+
+We present a brief step by step guide how to run Himalaya and obtain
+the three-loop corrections to the CP-even Higgs mass matrix in the
+MSSM in the DR'-bar scheme or to the quartic Higgs coupling of the
+Standard Model in the MS-bar scheme.
+
+First one has to include the header
+
 ```cpp
 #include "HierarchyCalculator.hpp"
 ```
-in the C++ file. The DR-bar parameters which define the MSSM parameter must be stored in a `Parameters` object. Note that the input has to be provided in the **DR-bar** scheme. Here, an example for the SPS2 benchmark point is given:
+
+in the C++ file. The DR'-bar parameters which define the MSSM
+parameter must be stored in a `Parameters` object.  Here, an example
+for the SPS2 benchmark point is given:
+
 ```cpp
-himalaya::Parameters pars;                      // DR-bar parameters struct
+himalaya::Parameters pars;                      // DR'-bar parameters struct
 pars.scale = 1.11090135E+03;                    // renormalization scale
 pars.mu = 3.73337018E+02;                       // mu parameter
 pars.g3 = 1.06187116E+00;                       // gauge coupling g3 SU(3)
@@ -69,30 +94,68 @@ pars.MSb << 1.27884964E+03, 1.52314587E+03;	// Masses of the sbottom quarks
 pars.s2t = sin(2*asin(1.13197339E-01));         // 2 times the sine of the stop mixing angle
 pars.s2b = sin(2*asin(-9.99883015E-01));        // 2 times the sine of the sbottom mixing angle
 ```
-The input values of `MSt`, `MSb`, `s2t` and `s2b` are optional. If they are not provided, they will get calculated internally.
 
-Afterwards one can create a `HierarchyCalculator` object for the chosen parameter set:
-```
+The input values of `MSt`, `MSb`, `s2t` and `s2b` are optional. If
+they are not provided, they will get calculated internally.
+
+Afterwards one can create a `HierarchyCalculator` object for the
+chosen parameter set:
+
+```cpp
 himalaya::HierarchyCalculator hc(pars);
 ```
-To calculate the DR-bar loop corrections one needs to call:
+
+To calculate the DR'-bar loop corrections one needs to call:
+
 ```cpp
 // the boolean argument switches between corrections proportional to alpha_t (false) or alpha_b (true)
 himalaya::HierarchyObject ho = hc.calculateDMh3L(false);
 ```
-All information which has been gathered during the calculation will be stored in the returned `HierarchyObject` and can be accessed by member functions. To obtain the three-loop correction to the Higgs mass matrix one needs to call:
+
+All information which has been gathered during the calculation will be
+stored in the returned `HierarchyObject` and can be accessed by member
+functions.  The function `calculateDMh3L` can take an optional second
+argument where the renormalization scheme can be specified (the
+default is DR'-bar).
+
+To obtain the three-loop correction to the Higgs mass matrix one needs
+to call:
+
 ```cpp
 // returns a 2x2 matrix with the alpha_t*alpha_s^2 correction for the given parameter point
 auto dMh3L = ho.getDMh(3);
 ```
-The returned matrix should be added to the two-loop mass matrix **before** diagonalization.
+
+The returned matrix should be added to the two-loop mass matrix
+**before** diagonalization.
+
+To obtain the three-loop correction to the quartic Higgs coupling λ of
+the Standard Model in the MS-bar scheme in the convention of
+[[arXiv:hep-ph/0701051](https://arxiv.org/abs/hep-ph/0701051)] one
+needs to call
+
+```cpp
+double delta_lambda_3L = ho.getDeltaLambdaEFT() + ho.getDRbarPrimeToMSbarShift();
+```
+
+The function `getDeltaLambdaEFT` returns the three-loop correction in
+the renormalization scheme defined when calling `calculateDMh3L`, see
+above.  Here, `getDeltaLambdaEFT()` returns the three-loop correction
+in the DR'-bar scheme.  The three-loop shift to the MS-bar scheme is
+added in order to express the result in terms of the Standard Model
+MS-bar top Yukawa and strong gauge coupling.
 
 A full and detailed example can be found in `source/example.cpp`.
 
+##
+
 ## Code Documentation
-Doxygen can be used to generate code documentation. Go to the `doc` directory
-and run
+
+Doxygen can be used to generate code documentation. Go to the `doc`
+directory and run
+
 ```
 doxygen himalaya.conf
 ```
+
 to generate `html/index.html` and a LaTeX version.
