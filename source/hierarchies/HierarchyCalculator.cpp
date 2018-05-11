@@ -176,12 +176,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    const double prefactor = 1./16.;
    // calculate the full 3L corretion to Mh2 and subtract the constant parts to obtain the logarithmic contributions
    const double eftConstant = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0, xtOrder);
-   //const double eftConstantFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
+   const double eftConstantFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
    //const double eftConstantXt = 0*(eftConstantFull - eftConstant); // TODO should one add these terms to the constant?!
-   const double eftLogs = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 1) - eftConstant;
+   const double eftLogs = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 1) - eftConstantFull;
    // calculate the constant part of zeta at 3L truncated at the same order of Xt as H3m
    const double zeta3LConst = ho.getZetaConst() - eftConstant;
-   ho.setZetaConst(zeta3LConst);
    
    // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
    //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
@@ -192,12 +191,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // add the EFT logs and subtract constant part twice to avoid double counting
    // Factorization: Himalaya_const - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    //	+ Log(mu^2/mst1^2)^1 EFT_coeff_log^1  + Log(mu^2/mst1^2)^2 EFT_coeff_log^2 + Log(mu^2/mst1^2)^3 EFT_coeff_log^3
-   //const double Xt = (p.At - p.mu * p.vd / p.vu);
-   //const double mQ3 = sqrt(p.mq2(2,2));
-   //const double degenconst = mh2EFTCalculator.getZetaDegenerate(p.scale, mQ3, Xt/mQ3,0);
    ho.setZetaEFT(prefactor * (zeta3LConst /*+ eftConstantXt*/ + eftLogs - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 0)));
-   //std::cout << "const " << (zeta3LConst - shiftH3mToDRbarPrimeMh2(ho,0))/16. << " degen const " << degenconst << "\n";
 
+   // save the non-logarithmic part of zeta
+   ho.setZetaConst(prefactor * (zeta3LConst - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 0)));
+   
    // calculate DR' -> MS shift
    himalaya::ThresholdCalculator tc (p, pow2(Msq));
    ho.setDRbarPrimeToMSbarShift(prefactor*tc.getDRbarPrimeToMSbarShift(xtOrder, 1));
