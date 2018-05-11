@@ -61,17 +61,17 @@ namespace himalaya{
        */
       int getRenormalizationScheme() const;
       /**
-       * 	@return 3-loop zeta with Himalaya logs
+       * 	@return 3-loop delta_lambda with Himalaya logs
        */
-      double getZetaHimalaya() const;
+      double getDeltaLambdaHimalaya() const;
       /**
-       * 	@return 3-loop zeta with EFT logs
+       * 	@return 3-loop delta_lambda with EFT logs
        */
-      double getZetaEFT() const;
+      double getDeltaLambdaEFT() const;
       /**
-       *        @return 3-loop zeta for the degenerated mass case with EFT logs
+       *        @return 3-loop non-logarithmic part of delta_lambda
        */
-      double getZetaConst() const;
+      double getDeltaLambdaNonLog() const;
       /**
        * 	@return the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
        */
@@ -126,20 +126,20 @@ namespace himalaya{
        */
       void setRenormalizationScheme(int renScheme);
       /**
-       * 	Sets the zeta at 3-loop order with Himalaya logs.
-       * 	@param zeta zeta at 3-loop order.
+       * 	Sets the delta_lambda at 3-loop order with Himalaya logs.
+       * 	@param deltaLambda delta_lambda at 3-loop order.
        */
-      void setZetaHimalaya(double zeta);
+      void setDeltaLambdaHimalaya(double deltaLambda);
       /**
-       * 	Sets the zeta at 3-loop order with EFT logs
-       * 	@param zeta zeta at 3-loop order.
+       * 	Sets the delta_lambda at 3-loop order with EFT logs
+       * 	@param deltaLambda delta_lambda at 3-loop order.
        */
-      void setZetaEFT(double zeta);
+      void setDeltaLambdaEFT(double deltaLambda);
       /**
-       * 	Sets the constant part of zeta at 3-loop order.
-       * 	@param zeta constant part of zeta at 3-loop order.
+       * 	Sets the non-logarithmic part of delta_lambda at 3-loop order.
+       * 	@param deltaLambda constant part of delta_lambda at 3-loop order.
        */
-      void setZetaConst(double zeta);
+      void setDeltaLambdaNonLog(double deltaLambda);
       /**
        * 	Sets the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
        * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
@@ -162,9 +162,9 @@ namespace himalaya{
       std::map<int, Eigen::Matrix2d> dMhMap{};						/**< the map which holds all mass matrices at the given loop order */
       Eigen::Matrix2d mdrShift{};							/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
       Eigen::Matrix<double, 2, 1> mdrMasses{};						/**< the 'vector' which holds the MDR masses */
-      double zetaHimalaya{};								/**< zeta lambda 3-loop from Himalaya only */
-      double zetaEFT{};									/**< zeta lambda 3-loop from EFT and Himalaya */
-      double zetaConst{};                                                               /**< zeta lambda 3-loop, non-logarithmic part */
+      double deltaLambdaHimalaya{};							/**< delta_lambda 3-loop with Himalaya logs */
+      double deltaLambdaEFT{};								/**< delta_lambda 3-loop with EFT logs */
+      double deltaLambdaNonLog{};                                                       /**< delta_lambda 3-loop, non-logarithmic part */
       double drBarPrimeToMSbarShift{};							/**< The shift to convert the DR' 3-loop threshold correction to the MS scheme */
       /**
        * 	Sorts a vector.

@@ -163,35 +163,38 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // if the user needs this value getExpansionUncertainty should be called
    ho.setExpUncertainty(1, 0.);
 
-   // calculate delta zeta
+   // calculate delta_lambda
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p);
 
-   const double prefactor = 1./16.;
-   // calculate the full 3L corretion to Mh2 and subtract the constant parts to obtain the logarithmic contributions
-   const double eftConstant = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0, xtOrder);
-   const double eftConstantFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
-   //const double eftConstantXt = 0*(eftConstantFull - eftConstant); // TODO should one add these terms to the constant?!
-   const double eftLogs = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 1) - eftConstantFull;
-   // calculate the constant part of zeta at 3L truncated at the same order of Xt as H3m
-   const double zeta3LConst = ho.getZetaConst() - eftConstant;
+   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
-   // Factorization: Himalaya_const + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
-   //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
-   // the factor 1/16 is a partial loop factor which gets factorized into zeta
-   // M_X is a susy mass
-   ho.setZetaHimalaya(prefactor * (ho.getZetaHimalaya() - eftConstant - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 1)));
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
    
-   // add the EFT logs and subtract constant part twice to avoid double counting
-   // Factorization: Himalaya_const - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
-   //	+ Log(mu^2/mst1^2)^1 EFT_coeff_log^1  + Log(mu^2/mst1^2)^2 EFT_coeff_log^2 + Log(mu^2/mst1^2)^3 EFT_coeff_log^3
-   ho.setZetaEFT(prefactor * (zeta3LConst /*+ eftConstantXt*/ + eftLogs - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 0)));
+   // calculate the full 3L corretion to Mh2 and subtract the non-logarithmic parts to obtain the logarithmic contributions
+   const double eftNonLog = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0, xtOrder);
+   const double eftNonLogFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
+   //const double eftConstantXt = 0*(eftConstantFull - eftConstant); // TODO should one add these terms to the non-logarithmic part?!
+   const double eftLogs = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 1) - eftNonLogFull;
 
-   // save the non-logarithmic part of zeta
-   ho.setZetaConst(prefactor * (zeta3LConst - drPrimeFlag * shiftH3mToDRbarPrimeMh2(ho, 0)));
+   // calculate the non-logarithmic part of delta_lambda at 3L truncated at the same order of Xt as H3m
+   const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,0)) - eftNonLog;
    
-   // calculate DR' -> MS shift
+   // Factorization: Himalaya_non-logarithmic + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
+   //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
+   // M_X is a susy mass
+   ho.setDeltaLambdaHimalaya(pref*(ho.getDeltaLambdaHimalaya() - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,1)) - eftNonLog);
+   
+   // add the EFT logs and subtract non-logarithmic part twice to avoid double counting
+   // Factorization: Himalaya_non-logarithmic - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
+   //	+ Log(mu^2/mst1^2)^1 EFT_coeff_log^1  + Log(mu^2/mst1^2)^2 EFT_coeff_log^2 + Log(mu^2/mst1^2)^3 EFT_coeff_log^3
+   ho.setDeltaLambdaEFT(deltaLambda3LNonLog /*+ eftConstantXt*/ + eftLogs);
+
+   // save the non-logarithmic part of delta_lambda 3L
+   ho.setDeltaLambdaNonLog(deltaLambda3LNonLog);
+   
+   // calculate DR' -> MS shift for delta_lambda 3L
    himalaya::ThresholdCalculator tc (p);
-   ho.setDRbarPrimeToMSbarShift(prefactor*tc.getDRbarPrimeToMSbarShift(xtOrder, 1));
+   ho.setDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder, 1));
    
    if(verbose && drPrimeFlag == 0) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent in the H3m renormalization scheme!\n";
    if(mdrFlag == 1) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent with MDR mass shifts!\n";
@@ -378,12 +381,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy3.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy3.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy3.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -398,12 +400,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy32q2g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -418,12 +419,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy3q22g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -442,12 +442,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	       curSig12 = hierarchy4.getS12();
 	       if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                   const double c = hierarchy4.calc_coef_at_as2_no_sm_logs_log0();
-		  ho.setZetaHimalaya(c
+		  ho.setDeltaLambdaHimalaya(c
 		     + lmMst1 * hierarchy4.calc_coef_at_as2_no_sm_logs_log1()
 		     + pow2(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
 		     + pow3(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
-		  ho.setZetaEFT(c);
-                  ho.setZetaConst(c);
+                  ho.setDeltaLambdaNonLog(c);
 	       }
 	    }
 	    break;
@@ -467,12 +466,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy5.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy5.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy5.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -487,12 +485,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy5g1.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -515,12 +512,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy6.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     };
 		  }
 		  break;
@@ -535,12 +531,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6g2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -564,12 +559,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6b.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6b.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy6b.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -584,12 +578,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6b2qg2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -604,12 +597,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6bq22g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -624,12 +616,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6bq2g2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -652,12 +643,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy9.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy9.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy9.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -672,12 +662,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy9q2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setZetaHimalaya(c
+			ho.setDeltaLambdaHimalaya(c
 			   + lmMst1 * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
-			ho.setZetaEFT(c);
-                        ho.setZetaConst(c);
+                        ho.setDeltaLambdaNonLog(c);
 		     }
 		  }
 		  break;

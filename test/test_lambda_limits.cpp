@@ -40,8 +40,8 @@ TEST_CASE("test_lambda_limit_degenerate")
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const auto z2_gen_Himalaya = ho.getZetaHimalaya();
-   const auto z2_gen_EFT      = ho.getZetaEFT();
+   const auto z2_gen_Himalaya = ho.getDeltaLambdaHimalaya();
+   const auto z2_gen_EFT      = ho.getDeltaLambdaEFT();
    const auto uncertainty     = ho.getExpUncertainty(3);
 
    INFO("uncertainty: " << uncertainty);

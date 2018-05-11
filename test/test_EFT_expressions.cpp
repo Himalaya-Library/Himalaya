@@ -5,38 +5,45 @@
 #include "ThresholdCalculator.hpp"
 #include "Hierarchies.hpp"
 #include <iostream>
-#include <iomanip>
 #undef private
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
 namespace {
-
+   const double Pi  = 3.1415926535897932384626433832795;
+   template <typename T> T pow2(T x)  { return x*x; }
+   template <typename T> T pow4(T x)  { return x*x*x*x; }
+   template <typename T> T pow6(T x)  { return x*x*x*x*x*x; }
+   
 void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 {
    himalaya::mh2_eft::Mh2EFTCalculator mhc(p, msq2);
    himalaya::ThresholdCalculator tc(p, msq2, true);
    const double eps = 1e-5;
+   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
    {
       const double delta_mh_1l = mhc.getDeltaMh2EFT1Loop(1, 1);
       const double susy_logs_1l = mhc.getDeltaMh2EFT1Loop(0, 1);
-      CHECK_CLOSE(delta_mh_1l, 41.26267451, eps);
-      CHECK_CLOSE(susy_logs_1l, 14.31721183, eps);
+      const double pref = 1./pow2(4*Pi) * pow2(p.Mt * yt);
+      CHECK_CLOSE(delta_mh_1l, pref*41.26267451, eps);
+      CHECK_CLOSE(susy_logs_1l, pref*14.31721183, eps);
    }
    
    {
       const double delta_mh_2l = mhc.getDeltaMh2EFT2Loop(1, 1);
       const double susy_logs_2l = mhc.getDeltaMh2EFT2Loop(0, 1);
-      CHECK_CLOSE(delta_mh_2l, 778.7287955, eps);
-      CHECK_CLOSE(susy_logs_2l, 19.92610215, eps);
+      const double pref = 1./pow4(4*Pi) * pow2(p.Mt * yt * p.g3);
+      CHECK_CLOSE(delta_mh_2l, pref*778.7287955, eps);
+      CHECK_CLOSE(susy_logs_2l, pref*19.92610215, eps);
    }
    
    {
       const double delta_mh_3l = mhc.getDeltaMh2EFT3Loop(1, 1);
       const double susy_logs_3l = mhc.getDeltaMh2EFT3Loop(0, 1);
-      CHECK_CLOSE(delta_mh_3l, 20632.69911, eps);
-      CHECK_CLOSE(susy_logs_3l, 1772.341613, eps);
+      const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
+      CHECK_CLOSE(delta_mh_3l, pref*20632.69911, eps);
+      CHECK_CLOSE(susy_logs_3l, pref*1772.341613, eps);
    }
    
    // check threshold corrections

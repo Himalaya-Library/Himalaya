@@ -189,48 +189,48 @@ int himalaya::HierarchyObject::getRenormalizationScheme() const{
 
 
 /**
- * 	Sets the zeta at 3-loop order with Himalaya logs.
- * 	@param zeta zeta at 3-loop order.
+ * 	Sets the delta_lambda at 3-loop order with Himalaya logs.
+ * 	@param deltaLambda delta_lambda at 3-loop order.
  */
-void himalaya::HierarchyObject::setZetaHimalaya(double zeta){
-   this -> zetaHimalaya = zeta;
+void himalaya::HierarchyObject::setDeltaLambdaHimalaya(double deltaLambda){
+   this -> deltaLambdaHimalaya = deltaLambda;
 }
 
 /**
- * 	@return 3-loop zeta with Himalaya logs
+ * 	@return 3-loop delta_lambda with Himalaya logs
  */
-double himalaya::HierarchyObject::getZetaHimalaya() const{
-   return zetaHimalaya;
+double himalaya::HierarchyObject::getDeltaLambdaHimalaya() const{
+   return deltaLambdaHimalaya;
 }
 
 /**
- * 	Sets the zeta at 3-loop order with EFT logs.
- * 	@param zeta zeta at 3-loop order.
+ * 	Sets the delta_lambda at 3-loop order with EFT logs.
+ * 	@param zeta delta_lambda at 3-loop order.
  */
-void himalaya::HierarchyObject::setZetaEFT(double zeta){
-   this -> zetaEFT = zeta;
+void himalaya::HierarchyObject::setDeltaLambdaEFT(double deltaLambda){
+   this -> deltaLambdaEFT = deltaLambda;
 }
 
 /**
- * 	@return 3-loop zeta with EFT logs
+ * 	@return 3-loop delta_lambda with EFT logs
  */
-double himalaya::HierarchyObject::getZetaEFT() const{
-   return zetaEFT;
+double himalaya::HierarchyObject::getDeltaLambdaEFT() const{
+   return deltaLambdaEFT;
 }
 
 /**
- * 	Sets the constant part of zeta at 3-loop order.
- * 	@param zeta constant part of zeta at 3-loop order.
+ * 	Sets the constant part of delta_lambda at 3-loop order.
+ * 	@param zeta constant part of delta_lambda at 3-loop order.
  */
-void himalaya::HierarchyObject::setZetaConst(double zeta){
-   zetaConst = zeta;
+void himalaya::HierarchyObject::setDeltaLambdaNonLog(double deltaLambda){
+   deltaLambdaNonLog = deltaLambda;
 }
 
 /**
- *        @return 3-loop zeta for the degenerated mass case with EFT logs
+ *        @return 3-loop delta_lambda for the degenerated mass case with EFT logs
  */
-double himalaya::HierarchyObject::getZetaConst() const{
-   return zetaConst;
+double himalaya::HierarchyObject::getDeltaLambdaNonLog() const{
+   return deltaLambdaNonLog;
 }
 
 /**
@@ -335,8 +335,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
         << "Exp. uncert. 3L   =  " << ho.getExpUncertainty(3) << " GeV\n"
 	<< "DR -> MDR shift   =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
 		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
-	<< "Zeta 3L Himalaya  =  " << ho.getZetaHimalaya() << " (expanded coefficients of logarithms)\n"
-        << "Zeta 3L EFT       =  " << ho.getZetaEFT() << " (exact mass dependence of coefficients of logarithms)\n"
+	<< "Δ_λ 3L Himalaya   =  " << ho.getDeltaLambdaHimalaya() << " (expanded coefficients of logarithms)\n"
+        << "Δ_λ 3L EFT        =  " << ho.getDeltaLambdaEFT() << " (exact mass dependence of coefficients of logarithms)\n"
 	<< "DR' -> MS shift   =  " << ho.getDRbarPrimeToMSbarShift();
 
    return ostr;

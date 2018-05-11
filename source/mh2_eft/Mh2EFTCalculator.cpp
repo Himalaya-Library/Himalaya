@@ -60,9 +60,13 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, 
    using std::log;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    
-   return 12 * lmMt + 
+   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   
+   // 3-Loop prefactor
+   const double pref = 1./pow2(4*Pi) * pow2(p.Mt * yt);
+   return pref*(12 * lmMt + 
       thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs);
+	 RenSchemes::DRBARPRIME, omitMSSMLogs));
 }
 
 /**
@@ -78,9 +82,14 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, 
    const double dytas = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
 
-   return 96 * pow2(lmMt) + (-32 + 48 * dytas) * lmMt - 24 * dytas
+   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   
+   // 2-Loop prefactor
+   const double pref = 1./pow4(4*Pi) * pow2(p.Mt * yt * p.g3);
+   
+   return pref*(96 * pow2(lmMt) + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs);
+	 RenSchemes::DRBARPRIME, omitMSSMLogs));
 }
 
 /**
@@ -124,12 +133,17 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs, 
 	 break;
    }
 
-   return 736 * pow3(lmMt) + (160 + 192 * dg3as + 384 * dytas) * pow2(lmMt)
+   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   
+   // 3-Loop prefactor
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
+   
+   return pref*(736 * pow3(lmMt) + (160 + 192 * dg3as + 384 * dytas) * pow2(lmMt)
       + (-128 * zt3 - 2056 / 3. + -64 * dg3as - 512 * dytas + 72 * pow2(dytas)
       + 48 * dytas2) * lmMt + 64 * dytas - 84 * pow2(dytas) - 24 * dytas2
       + catas2
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS2,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs) - xtSubtraction;
+	 RenSchemes::DRBARPRIME, omitMSSMLogs) - xtSubtraction);
 }
 
 /**
@@ -145,12 +159,17 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getZetaDegenerate(double scale, doub
    
    const double LS = omitlogs*log(pow2(scale / p.MSt(0))) + log(pow2(p.MSt(0) / mst1));
    
-   const double zt2lam = (29365 + 23040*li4 - 49320*zt3 + 160*LS*(-226 + 27*zt3) + 26520*pow2(LS) -
-        80*Xt*(823 - 100*LS - 477*zt3 + 366*pow2(LS)) + 30*(-67 - 220*LS - 990*
-        zt3 + 84*pow2(LS))*pow2(Xt) - 960*pow2(Pi)*pow2(log2) - 10080*pow3(LS)
-        + 20*(3568 + 20*LS - 2259*zt3 + 108*pow2(LS))*pow3(Xt) - 176*pow4(Pi) +
-        960*pow4(log2))/540.;
-   return zt2lam;
+   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   
+   // 3-Loop prefactor
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
+   
+   const double deltaLambda3L = pref*((29365 + 23040*li4 - 49320*zt3 + 160*LS*
+	(-226 + 27*zt3) + 26520*pow2(LS) - 80*Xt*(823 - 100*LS - 477*zt3 + 366*
+	pow2(LS)) + 30*(-67 - 220*LS - 990*zt3 + 84*pow2(LS))*pow2(Xt) - 960*
+	pow2(Pi)*pow2(log2) - 10080*pow3(LS)+ 20*(3568 + 20*LS - 2259*zt3 + 108*
+	pow2(LS))*pow3(Xt) - 176*pow4(Pi) + 960*pow4(log2))/540.);
+   return deltaLambda3L;
 }
 
 /**

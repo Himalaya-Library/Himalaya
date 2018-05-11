@@ -2,6 +2,7 @@
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
 
+
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
 namespace {
@@ -79,10 +80,7 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   const double pref =
-      1./pow2(4*Pi) * pow2(pars.Mt * calc_gt(pars));
-
-   return pref * mhc.getDeltaMh2EFT1Loop(1,1);
+   return mhc.getDeltaMh2EFT1Loop(1,1);
 }
 
 /// calculates Mh^2 in the EFT at 2-loop level
@@ -92,10 +90,7 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars, MR2);
 
-   const double pref =
-      1./pow4(4*Pi) * pow2(pars.Mt * calc_gt(pars) * pars.g3);
-
-   return pref * mhc.getDeltaMh2EFT2Loop(1,1);
+   return mhc.getDeltaMh2EFT2Loop(1,1);
 }
 
 /// calculates Mh^2 in the EFT at 3-loop level
@@ -107,9 +102,9 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
    auto hc = himalaya::HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const double zeta_3L_const    = ho.getZetaConst();
-   const double zeta_3L_eft      = ho.getZetaEFT();
-   const double zeta_3L_himalaya = ho.getZetaHimalaya();
+   const double zeta_3L_const    = ho.getDeltaLambdaNonLog();
+   const double zeta_3L_eft      = ho.getDeltaLambdaEFT();
+   const double zeta_3L_himalaya = ho.getDeltaLambdaHimalaya();
 
    const double mt = pars.Mt;
    const double MR2 = pars.calculateMsq2();
@@ -127,32 +122,28 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
    const double pref = pow4(mt)/pow2(4*Pi*vDO)*pow2(as);
    // prefactor from HSSUSY
    const double pref2 = 8*pow4(gt*g3)/pow6(4*Pi) * v2;
-   // prefactor for Daniel's EFT expression
-   const double pref_DO =
-      1./pow6(4*Pi) * pow2(pars.Mt * calc_gt(pars) * pow2(pars.g3));
 
    // calculate only logs
    const double DMh2_EFT_3L_logs_SM =
-      pref_DO*(mhc.getDeltaMh2EFT3Loop(1,0,4) - mhc.getDeltaMh2EFT3Loop(0,0,4));
+      mhc.getDeltaMh2EFT3Loop(1,0,4) - mhc.getDeltaMh2EFT3Loop(0,0,4);
    const double DMh2_EFT_3L_logs_all =
-      pref_DO*(mhc.getDeltaMh2EFT3Loop(1,1,4) - mhc.getDeltaMh2EFT3Loop(0,0,4));
+      mhc.getDeltaMh2EFT3Loop(1,1,4) - mhc.getDeltaMh2EFT3Loop(0,0,4);
    const double DMh2_EFT_3L_logs_mixed =
-      pref_DO*(+ mhc.getDeltaMh2EFT3Loop(1,1,4) // all logs + const
-               - mhc.getDeltaMh2EFT3Loop(1,0,4) // subtract SM logs + const
-               - mhc.getDeltaMh2EFT3Loop(0,1,4) // subtract MSSM logs + const
-               + mhc.getDeltaMh2EFT3Loop(0,0,4) // add constant
-              );
+      + mhc.getDeltaMh2EFT3Loop(1,1,4) // all logs + const
+      - mhc.getDeltaMh2EFT3Loop(1,0,4) // subtract SM logs + const
+      - mhc.getDeltaMh2EFT3Loop(0,1,4) // subtract MSSM logs + const
+      + mhc.getDeltaMh2EFT3Loop(0,0,4); // add constant
 
    CHECK_CLOSE(pref, pref2, 1e-10);
 
    double DMh2_3L = 0.;
 
    switch (zeta_switch) {
-   case 0: DMh2_3L = DMh2_EFT_3L_logs_all + pref * zeta_3L_const;
+   case 0: DMh2_3L = DMh2_EFT_3L_logs_all + zeta_3L_const;
       break;
-   case 1: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + pref * zeta_3L_himalaya;
+   case 1: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + zeta_3L_himalaya;
       break;
-   case 2: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + pref * zeta_3L_eft;
+   case 2: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + zeta_3L_eft;
       break;
    default: INFO("Error: unknow switch value : " << zeta_switch);
    }
