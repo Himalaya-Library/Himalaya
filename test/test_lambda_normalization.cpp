@@ -20,9 +20,9 @@ himalaya::Parameters make_point()
    const double beta = std::atan(tb);
    const double v = 245.;
 
-   const double msq2 = MS/2;
-   const double msu2 = MS*2;
-   const double mg   = MS*3;
+   const double msq2 = MS;
+   const double msu2 = MS;
+   const double mg   = MS;
 
    const double Xt = xt * std::sqrt(std::sqrt(msq2 * msu2));
 
@@ -208,18 +208,15 @@ TEST_CASE("test_lambda_normalization")
    CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
                      + calc_Mh2_EFT_1L(pars)
                      + calc_Mh2_EFT_2L(pars)
-                     + calc_Mh2_EFT_3L(pars, 0),
-               Mh2_3L_uncert_rel);
+                     + calc_Mh2_EFT_3L(pars, 0), 1e-4);
 
    CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
                      + calc_Mh2_EFT_1L(pars)
                      + calc_Mh2_EFT_2L(pars)
-                     + calc_Mh2_EFT_3L(pars, 1),
-               Mh2_3L_uncert_rel);
+                     + calc_Mh2_EFT_3L(pars, 1), 1e-4);
 
    CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
                      + calc_Mh2_EFT_1L(pars)
                      + calc_Mh2_EFT_2L(pars)
-                     + calc_Mh2_EFT_3L(pars, 2),
-               Mh2_3L_uncert_rel);
+                     + calc_Mh2_EFT_3L(pars, 2), 1e-4);
 }
