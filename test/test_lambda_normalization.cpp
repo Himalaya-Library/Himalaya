@@ -7,8 +7,6 @@
 
 namespace {
 
-const double Pi = 3.141592653589793;
-
 double pow2(double x) { return x*x; }
 
 himalaya::Parameters make_point()
