@@ -1,5 +1,7 @@
 # Himalaya
 
+[![Build Status](https://travis-ci.org/Himalaya-Library/Himalaya.svg?branch=master)](https://travis-ci.org/Himalaya-Library/Himalaya)
+
 Himalaya can calculate corrections of order O((alpha_t +
 alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR'-bar
 scheme using the results of:
