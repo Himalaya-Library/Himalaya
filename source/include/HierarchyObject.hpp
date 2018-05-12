@@ -73,6 +73,10 @@ namespace himalaya{
        */
       double getDeltaLambdaNonLog() const;
       /**
+       *        @return uncertainty of 3-loop delta_lambda
+       */
+      double getDeltaLambdaUncertainty() const;
+      /**
        * 	@return the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
        */
       double getDRbarPrimeToMSbarShift() const;

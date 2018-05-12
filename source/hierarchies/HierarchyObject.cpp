@@ -1,5 +1,6 @@
 #include "HierarchyObject.hpp"
 #include "Hierarchies.hpp"
+#include <cmath>
 #include <iostream>
 
 /**
@@ -231,6 +232,10 @@ void himalaya::HierarchyObject::setDeltaLambdaNonLog(double deltaLambda){
  */
 double himalaya::HierarchyObject::getDeltaLambdaNonLog() const{
    return deltaLambdaNonLog;
+}
+
+double himalaya::HierarchyObject::getDeltaLambdaUncertainty() const {
+   return std::abs(getDeltaLambdaEFT() - getDeltaLambdaHimalaya());
 }
 
 /**
