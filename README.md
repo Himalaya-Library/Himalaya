@@ -147,9 +147,18 @@ in the DR'-bar scheme.  The three-loop shift to the MS-bar scheme is
 added in order to express the result in terms of the Standard Model
 MS-bar top Yukawa and strong gauge coupling.
 
-A full and detailed example can be found in `source/example.cpp`.
+An an uncertainty estimate of the calculated three-loop λ can be
+obtained by calling
 
-##
+```cpp
+double delta_lambda_3L_uncertainty = ho.getDeltaLambdaUncertainty();
+```
+
+The function `getDeltaLambdaUncertainty` returns an uncertainty
+estimate by taking into account the missing logarithmic higher order
+Xt^n terms missing in some hierarcy expansions.
+
+A full and detailed example can be found in `source/example.cpp`.
 
 ## Code Documentation
 
