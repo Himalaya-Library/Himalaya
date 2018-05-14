@@ -20,7 +20,8 @@ scheme using the results of:
 Please refer to these papers as well as
 
 * R. V. Harlander, J. Klappert and A. Voigt, *Higgs mass prediction in
-  the MSSM at three-loop level in a pure DR context*,
+  the MSSM at three-loop level in a pure DR context*, [*Eur.Phys.J.* **C77** (2017) no.12, 814]
+  (https://doi.org/10.1140/epjc/s10052-017-5368-6),
   [[1708.05720](https://arxiv.org/abs/1708.05720)]
 
 when using Himalaya.
