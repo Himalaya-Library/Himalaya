@@ -60,10 +60,10 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, 
    using std::log;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    
-   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
    // 3-Loop prefactor
-   const double pref = 1./pow2(4*Pi) * pow2(p.Mt * yt);
+   const double pref = 1./pow2(4*Pi) * pow2(p.Mt * gt);
    return pref*(12 * lmMt + 
       thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
 	 RenSchemes::DRBARPRIME, omitMSSMLogs));
@@ -82,10 +82,10 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, 
    const double dytas = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
 
-   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
    // 2-Loop prefactor
-   const double pref = 1./pow4(4*Pi) * pow2(p.Mt * yt * p.g3);
+   const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
    
    return pref*(96 * pow2(lmMt) + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
@@ -132,11 +132,11 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs, 
 	 xtSubtraction = 0;
 	 break;
    }
-
-   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   
+   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
    // 3-Loop prefactor
-   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
    
    return pref*(736 * pow3(lmMt) + (160 + 192 * dg3as + 384 * dytas) * pow2(lmMt)
       + (-128 * zt3 - 2056 / 3. + -64 * dg3as - 512 * dytas + 72 * pow2(dytas)
@@ -164,11 +164,15 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scal
    // 3-Loop prefactor
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
    
-   const double deltaLambda3L = pref*((29365 + 23040*li4 - 49320*zt3 + 160*LS*
+   // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
+   const double v2 = pow2(p.vd) + pow2(p.vu);
+   
+   // the first 16 is a relict due to the zeta parameterization in the first draft
+   const double deltaLambda3L = 16.*pref*((29365 + 23040*li4 - 49320*zt3 + 160*LS*
 	(-226 + 27*zt3) + 26520*pow2(LS) - 80*Xt*(823 - 100*LS - 477*zt3 + 366*
 	pow2(LS)) + 30*(-67 - 220*LS - 990*zt3 + 84*pow2(LS))*pow2(Xt) - 960*
 	pow2(Pi)*pow2(log2) - 10080*pow3(LS)+ 20*(3568 + 20*LS - 2259*zt3 + 108*
-	pow2(LS))*pow3(Xt) - 176*pow4(Pi) + 960*pow4(log2))/540.);
+	pow2(LS))*pow3(Xt) - 176*pow4(Pi) + 960*pow4(log2))/540.)/v2;
    return deltaLambda3L;
 }
 

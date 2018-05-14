@@ -165,36 +165,41 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 
    // calculate delta_lambda
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p);
-
-   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
-   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
+   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
+   
+   // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
+   const double v2 = pow2(p.vu) + pow2(p.vd);
    
    // calculate the full 3L corretion to Mh2 and subtract the non-logarithmic parts to obtain the logarithmic contributions
    const double eftNonLog = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0, xtOrder);
+   
    const double eftNonLogFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
    //const double eftConstantXt = 0*(eftConstantFull - eftConstant); // TODO should one add these terms to the non-logarithmic part?!
    const double eftLogs = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 1) - eftNonLogFull;
-
+   
    // calculate the non-logarithmic part of delta_lambda at 3L truncated at the same order of Xt as H3m
    const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,0)) - eftNonLog;
    
    // Factorization: Himalaya_non-logarithmic + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
    //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    // M_X is a susy mass
-   ho.setDeltaLambdaHimalaya(pref*(ho.getDeltaLambdaHimalaya() - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,1)) - eftNonLog);
+   ho.setDeltaLambdaHimalaya((pref*(ho.getDeltaLambdaHimalaya() 
+      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,1)) - eftNonLog)/v2);
    
    // add the EFT logs and subtract non-logarithmic part twice to avoid double counting
    // Factorization: Himalaya_non-logarithmic - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
    //	+ Log(mu^2/mst1^2)^1 EFT_coeff_log^1  + Log(mu^2/mst1^2)^2 EFT_coeff_log^2 + Log(mu^2/mst1^2)^3 EFT_coeff_log^3
-   ho.setDeltaLambdaEFT(deltaLambda3LNonLog /*+ eftConstantXt*/ + eftLogs);
+   ho.setDeltaLambdaEFT((deltaLambda3LNonLog /*+ eftConstantXt*/ + eftLogs)/v2);
 
    // save the non-logarithmic part of delta_lambda 3L
    ho.setDeltaLambdaNonLog(deltaLambda3LNonLog);
-   
+
    // calculate DR' -> MS shift for delta_lambda 3L
    himalaya::ThresholdCalculator tc (p);
-   ho.setDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder, 1));
+   ho.setDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder, 1)/v2);
    
    if(verbose && drPrimeFlag == 0) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent in the H3m renormalization scheme!\n";
    if(mdrFlag == 1) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent with MDR mass shifts!\n";
