@@ -1075,7 +1075,6 @@ std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::
  * 	@param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
  * 	@return The loop corrected Higgs mass matrix at the order O(alpha_x).
  */
-//TODO replace sin(beta) with a symbol!
 Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::HierarchyObject& ho, const unsigned int shiftOneLoop, const unsigned int shiftTwoLoop){
    Eigen::Matrix2d Mt41L;
    const double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
@@ -1235,7 +1234,6 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::Hierarch
       1/tan(beta) * pow3(Mt) * s2t)) / sqrt(2);
    return shift;
 }
-
 
 /**
  * 	Calculates the loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s). Here, x can be t or b.

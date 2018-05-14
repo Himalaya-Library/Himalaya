@@ -67,7 +67,6 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
 	 p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
 	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
 	 const double exactShifted = getDeltaYtAlphas(Limits::GENERAL, 1);
-	 std::cout << getDeltaYtAlphas2(Limits::MQ3_EQ_MU3_EQ_M3, 1) << "\n";
 	 if(std::abs(exactShifted - lim) >= std::abs(exact - lim) 
 	    || std::isnan(exact) || std::isinf(exact)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3_EQ_M3;
       } else if(std::abs(mQ3 - mU3) < eps){
