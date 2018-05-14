@@ -195,7 +195,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setDeltaLambdaEFT((deltaLambda3LNonLog /*+ eftConstantXt*/ + eftLogs)/v2);
 
    // save the non-logarithmic part of delta_lambda 3L
-   ho.setDeltaLambdaNonLog(deltaLambda3LNonLog);
+   ho.setDeltaLambdaNonLog(deltaLambda3LNonLog/v2);
 
    // calculate DR' -> MS shift for delta_lambda 3L
    himalaya::ThresholdCalculator tc (p);

@@ -90,6 +90,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
    const double zeta_3L_const    = ho.getDeltaLambdaNonLog();
    const double zeta_3L_eft      = ho.getDeltaLambdaEFT();
    const double zeta_3L_himalaya = ho.getDeltaLambdaHimalaya();
+   const double v2 = pow2(pars.vu) + pow2(pars.vd);
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
 
@@ -107,11 +108,11 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
    double DMh2_3L = 0.;
 
    switch (zeta_switch) {
-   case 0: DMh2_3L = DMh2_EFT_3L_logs_all + zeta_3L_const;
+   case 0: DMh2_3L = DMh2_EFT_3L_logs_all + zeta_3L_const*v2;
       break;
-   case 1: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + zeta_3L_himalaya;
+   case 1: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + zeta_3L_himalaya*v2;
       break;
-   case 2: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + zeta_3L_eft;
+   case 2: DMh2_3L = DMh2_EFT_3L_logs_SM + DMh2_EFT_3L_logs_mixed + zeta_3L_eft*v2;
       break;
    default: INFO("Error: unknow switch value : " << zeta_switch);
    }
