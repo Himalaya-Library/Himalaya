@@ -57,10 +57,10 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
 	 const double exact = getDeltaYtAlphas2(Limits::GENERAL, 1);
 	 p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
 	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
-	 msq2 = pow2(mQ3 + std::abs(sqrt(msq2) - mQ3))/2.;
+	 msq2 = pow2(mQ3 + std::abs(sqrt(msq2) - mQ3)/2.);
 	 const double exactShifted = getDeltaYtAlphas2(Limits::GENERAL, 1);
 	 if(std::abs(exactShifted - lim) >= std::abs(exact - lim) 
-	    || std::isnan(exact) || std::isinf(exact)) p.massLimit3LThreshold = Limits::DEGENERATE;
+	    || !std::isfinite(exact) || !std::isfinite(exactShifted)) p.massLimit3LThreshold = Limits::DEGENERATE;
       } else if(std::abs(mQ3 - mU3) < eps && std::abs(mU3 - m3) < eps){
 	 const double lim = getDeltaYtAlphas(Limits::MQ3_EQ_MU3_EQ_M3, 1);
 	 const double exact = getDeltaYtAlphas(Limits::GENERAL, 1);
@@ -68,7 +68,7 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
 	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
 	 const double exactShifted = getDeltaYtAlphas(Limits::GENERAL, 1);
 	 if(std::abs(exactShifted - lim) >= std::abs(exact - lim) 
-	    || std::isnan(exact) || std::isinf(exact)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3_EQ_M3;
+	    || !std::isfinite(exact) || !std::isfinite(exactShifted)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3_EQ_M3;
       } else if(std::abs(mQ3 - mU3) < eps){
 	 const double lim = getDeltaYtAlphas(Limits::MQ3_EQ_MU3, 1);
 	 const double exact = getDeltaYtAlphas(Limits::GENERAL, 1);
@@ -76,7 +76,7 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
 	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
 	 const double exactShifted = getDeltaYtAlphas(Limits::GENERAL, 1);
 	 if(std::abs(exactShifted - lim) >= std::abs(exact - lim) 
-	    || std::isnan(exact) || std::isinf(exact)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3;
+	    || !std::isfinite(exact) || !std::isfinite(exactShifted)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3;
       } else if(std::abs(mQ3 - m3) < eps){
 	 const double lim = getDeltaYtAlphas(Limits::MQ3_EQ_M3, 1);
 	 const double exact = getDeltaYtAlphas(Limits::GENERAL, 1);
@@ -84,7 +84,7 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
 	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
 	 const double exactShifted = getDeltaYtAlphas(Limits::GENERAL, 1);
 	 if(std::abs(exactShifted - lim) >= std::abs(exact - lim) 
-	    || std::isnan(exact) || std::isinf(exact)) p.massLimit3LThreshold = Limits::MQ3_EQ_M3;
+	    || !std::isfinite(exact) || !std::isfinite(exactShifted)) p.massLimit3LThreshold = Limits::MQ3_EQ_M3;
       } else if(std::abs(mU3 - m3) < eps2){
 	 const double lim = getDeltaYtAlphas(Limits::MU3_EQ_M3, 1);
 	 const double exact = getDeltaYtAlphas(Limits::GENERAL, 1);
@@ -92,7 +92,7 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
 	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
 	 const double exactShifted = getDeltaYtAlphas(Limits::GENERAL, 1);
 	 if(std::abs(exactShifted - lim) >= std::abs(exact - lim) 
-	    || std::isnan(exact) || std::isinf(exact)) p.massLimit3LThreshold = Limits::MU3_EQ_M3;
+	    || !std::isfinite(exact) || !std::isfinite(exactShifted)) p.massLimit3LThreshold = Limits::MU3_EQ_M3;
       }
 
       // reset possible parameter shifts
