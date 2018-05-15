@@ -33,8 +33,9 @@ namespace himalaya{
        * 	Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
        * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
        * 	@param omitLogs an integer key to omit all log mu terms
+       * 	@param omitXtLogs an integer key to omit all Xt^4*Log[mu] and Xt^5*Log[mu] terms
        */
-      double getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs);
+      double getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs = 1);
       /**
        * 	Sets the mass limit to check terms
        * 	@param limit an integer key for a mass limit

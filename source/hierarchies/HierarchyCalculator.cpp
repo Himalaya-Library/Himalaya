@@ -199,7 +199,16 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 
    // calculate DR' -> MS shift for delta_lambda 3L
    himalaya::ThresholdCalculator tc (p);
-   ho.setDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder, 1)/v2);
+   ho.setDRbarPrimeToMSbarShiftHimalaya(pref*tc.getDRbarPrimeToMSbarShift(xtOrder, 1, 1)/v2);
+   // this shift generates Xt^5*Log(mu) terms for the EFT expression
+   ho.setDRbarPrimeToMSbarShiftEFT(pref*tc.getDRbarPrimeToMSbarShift(4, 1, 0)/v2);
+   
+   // set the uncertainty of delta_lambda due to missing Xt terms
+   const int xt4Flag = xtOrder == 3 ? 1 : 0;
+   ho.setDeltaLambdaXtUncertaintyHimalaya(pref*(xt4Flag*tc.getXtTerms(4, 0) + tc.getXtTerms(5, 0) 
+      + tc.getXtTerms(6, 0))/v2);
+   ho.setDeltaLambdaXtUncertaintyEFT(pref*(xt4Flag*tc.getXtTerms(4, 0) + tc.getXtTerms(5, 0) 
+      + tc.getXtTerms(6, 0))/v2);
    
    if(verbose && drPrimeFlag == 0) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent in the H3m renormalization scheme!\n";
    if(mdrFlag == 1) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent with MDR mass shifts!\n";

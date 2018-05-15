@@ -67,7 +67,7 @@ TEST_CASE("test_example")
       CHECK(std::isfinite(Mh2(1)));
 
       const double lam_3L  = ho.getDeltaLambdaEFT();
-      const double Dlam_3L = ho.getDeltaLambdaUncertainty();
+      const double Dlam_3L = ho.getDeltaLambdaUncertaintyEFT();
 
       INFO("lambda = " << lam_3L << " +-" << Dlam_3L);
       CHECK(std::isfinite(lam_3L));

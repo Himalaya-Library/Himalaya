@@ -73,13 +73,21 @@ namespace himalaya{
        */
       double getDeltaLambdaNonLog() const;
       /**
-       *        @return uncertainty of 3-loop delta_lambda
+       *        @return uncertainty of 3-loop delta_lambda_Himalaya
        */
-      double getDeltaLambdaUncertainty() const;
+      double getDeltaLambdaUncertaintyHimalaya() const;
       /**
-       * 	@return the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
+       *        @return uncertainty of 3-loop delta_lambda_EFT
        */
-      double getDRbarPrimeToMSbarShift() const;
+      double getDeltaLambdaUncertaintyEFT() const;
+      /**
+       * 	@return the DR' -> MS shift for delta_lambda_Himalaya which should be added to the DR' result
+       */
+      double getDRbarPrimeToMSbarShiftHimalaya() const;
+      /**
+       * 	@return the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
+       */
+      double getDRbarPrimeToMSbarShiftEFT() const;
       /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
@@ -145,10 +153,25 @@ namespace himalaya{
        */
       void setDeltaLambdaNonLog(double deltaLambda);
       /**
-       * 	Sets the DR' -> MS shift for the 3-loop threshold correction which should be added to the DR' result
+       * 	Sets the Xt parts of the uncertainty of delta_lambda_Himalaya
+       *        @param uncertainty of 3-loop delta_lambda
+       */
+      void setDeltaLambdaXtUncertaintyHimalaya(double uncertainty);
+      /**
+       * 	Sets the Xt parts of the uncertainty of delta_lambda_EFT
+       *        @param uncertainty of 3-loop delta_lambda
+       */
+      void setDeltaLambdaXtUncertaintyEFT(double uncertainty);
+      /**
+       * 	Sets the DR' -> MS shift for delta_lambda_Himalaya which should be added to the DR' result
        * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
        */
-      void setDRbarPrimeToMSbarShift(double shift);
+      void setDRbarPrimeToMSbarShiftHimalaya(double shift);
+      /**
+       * 	Sets the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
+       * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
+       */
+      void setDRbarPrimeToMSbarShiftEFT(double shift);
       /**
        *	Returns the H3m notation of a given hierarchy.
        *	@param hierarchy An integer of a Himalaya hierarchy.
@@ -169,7 +192,10 @@ namespace himalaya{
       double deltaLambdaHimalaya{};							/**< delta_lambda 3-loop with Himalaya logs */
       double deltaLambdaEFT{};								/**< delta_lambda 3-loop with EFT logs */
       double deltaLambdaNonLog{};                                                       /**< delta_lambda 3-loop, non-logarithmic part */
-      double drBarPrimeToMSbarShift{};							/**< The shift to convert the DR' 3-loop threshold correction to the MS scheme */
+      double drBarPrimeToMSbarShiftHimalaya{};						/**< The shift to convert the DR' delta_lambda_Himalaya to the MS scheme */
+      double drBarPrimeToMSbarShiftEFT{};						/**< The shift to convert the DR' delta_lambda_EFT to the MS scheme */
+      double deltaLambdaXtUncertaintyHimalaya{};					/**< The uncertainty of delta_lambda_Himalaya due to mising Xt terms */
+      double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

@@ -2746,9 +2746,10 @@ double himalaya::ThresholdCalculator::getXt6Terms(int limit){
  * 	Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
  * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
  * 	@param omitLogs an integer key to omit all log mu terms
+ * 	@param omitXtLogs an integer key to omit all Xt^4*Log[mu] and Xt^5*Log[mu] terms
  */
-double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs){
-   const double xtTerms = getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, xtOrder, omitLogs);
+double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs){
+   const double xtTerms = getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, xtOrder, omitXtLogs);
    
    const double g3as = getDeltaG3Alphas(omitLogs);
    const double ytas = getDeltaYtAlphas(p.massLimit3LThreshold, omitLogs);

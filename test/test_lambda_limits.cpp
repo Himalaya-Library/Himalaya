@@ -42,7 +42,7 @@ TEST_CASE("test_lambda_limit_degenerate")
 
    const auto z2_gen_Himalaya = ho.getDeltaLambdaHimalaya();
    const auto z2_gen_EFT      = ho.getDeltaLambdaEFT();
-   const auto uncertainty     = ho.getDeltaLambdaUncertainty();
+   const auto uncertainty     = ho.getDeltaLambdaUncertaintyHimalaya();
 
    INFO("uncertainty: " << uncertainty);
 
