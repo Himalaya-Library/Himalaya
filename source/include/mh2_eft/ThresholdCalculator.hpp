@@ -105,6 +105,14 @@ namespace himalaya{
        * 	@param omitLogs an integer key to omit all log mu terms
        */
       double getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs);
+      /**
+       * 	Checks if a threshold correction can be used in the general mass case
+       * 	@param exact the threshold correction in the general mass case
+       * 	@param shifted the threshold correction in the general mass case with shifted masses
+       * 	@param limit the threshold correction in a mass limit
+       * 	@returns a bool which is true if the general mass case can be used or false if the limit should be used
+       */
+      bool isfinite(double exact, double shifted, double limit);
       Parameters p{};	/** The HimalayaInterface struct. */
       double msq2{std::numeric_limits<double>::quiet_NaN()}; /** the average squark mass of the first two generations squared **/
    };
