@@ -66,11 +66,14 @@ TEST_CASE("test_example")
       CHECK(std::isfinite(Mh2(0)));
       CHECK(std::isfinite(Mh2(1)));
 
-      const double lam_3L  = ho.getDeltaLambdaEFT();
-      const double Dlam_3L = ho.getDeltaLambdaUncertaintyEFT();
+      const double lam_3L_DRp = ho.getDeltaLambdaEFT();
+      const double Dlam_3L    = ho.getDeltaLambdaUncertaintyEFT();
+      const double lam_3L_MS  = lam_3L_DRp + ho.getDRbarPrimeToMSbarShiftEFT();
 
-      INFO("lambda = " << lam_3L << " +-" << Dlam_3L);
-      CHECK(std::isfinite(lam_3L));
+      INFO("Δλ(3L,DR'-bar) = " << lam_3L_DRp << " +- " << Dlam_3L);
+      INFO("Δλ(3L,MS-bar)  = " << lam_3L_MS  << " +- " << Dlam_3L);
+      CHECK(std::isfinite(lam_3L_DRp));
+      CHECK(std::isfinite(lam_3L_MS));
       CHECK(std::isfinite(Dlam_3L));
    } catch (const std::exception& e) {
       MESSAGE(e.what());

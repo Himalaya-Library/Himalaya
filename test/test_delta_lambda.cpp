@@ -46,6 +46,31 @@ himalaya::Parameters make_point()
    return pars;
 }
 
+// point with small Xt, because of missing higher order Xt terms in H3m
+himalaya::Parameters make_degenerate_point(double eps = 0.)
+{
+   // MS = 1 TeV, Xt = 0.1 MS, TB = 5
+   himalaya::Parameters pars;
+   pars.scale = 1000;
+   pars.mu    = 1000;
+   pars.g3    = 1.05733;
+   pars.vd    = 45.8309;
+   pars.vu    = 229.155;
+   pars.mq2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06*(1 + eps);
+   pars.md2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06;
+   pars.mu2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06*(1 - eps);
+   pars.At    = 300;
+   pars.Ab    = 5000;
+   pars.MG    = 1000*(1 - eps);
+   pars.MW    = 74.597;
+   pars.MZ    = 85.7704;
+   pars.Mt    = 144.337;
+   pars.Mb    = 2.37054;
+   pars.MA    = 1000;
+
+   return pars;
+}
+
 /// calculates lightest mass eigenvalue of given mass matrix
 double calc_Mh2(const Eigen::Matrix2d& Mh_mat)
 {
@@ -122,7 +147,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
 
 } // anonymous namespace
 
-TEST_CASE("test_lambda_normalization")
+TEST_CASE("test_delta_lambda")
 {
    using namespace himalaya;
 
@@ -179,4 +204,21 @@ TEST_CASE("test_lambda_normalization")
                      + calc_Mh2_EFT_1L(pars)
                      + calc_Mh2_EFT_2L(pars)
                      + calc_Mh2_EFT_3L(pars, 2), 1e-4);
+}
+
+TEST_CASE("test_lambda_limit_degenerate")
+{
+   using namespace himalaya;
+
+   const auto pars = make_degenerate_point(0.03);
+   auto hc = HierarchyCalculator(pars);
+   const auto ho = hc.calculateDMh3L(false);
+
+   const auto z2_gen_Himalaya = ho.getDeltaLambdaHimalaya();
+   const auto z2_gen_EFT      = ho.getDeltaLambdaEFT();
+   const auto uncertainty     = ho.getDeltaLambdaUncertaintyHimalaya();
+
+   INFO("uncertainty: " << uncertainty);
+
+   CHECK_CLOSE(z2_gen_Himalaya, z2_gen_EFT, uncertainty);
 }
