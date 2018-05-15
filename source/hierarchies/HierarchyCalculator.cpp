@@ -916,8 +916,8 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::shiftH3mToDRbarPrime(const himala
 	 + (1 + lmMst1) * Mst12 + (1 + lmMst2shift) * Mst22shift) / (Mst12 * Mst22shift * pow3(Dmst12shift))
 	 * pow2(p.mu) * Xt2 * (pow2(Mst12) - pow2(Mst22shift)  + 4 * Mst12 * Mst22shift * (log(Mst2shift) - log(Mst1)));
       
-      isDegen = (std::abs(exactShifted - lim) >= std::abs(exact - lim) 
-	 || !std::isfinite(exact) || !std::isfinite(exactShifted)) ? true : false;
+      isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
+	 || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
 
    if(isDegen){
@@ -1035,8 +1035,8 @@ double himalaya::HierarchyCalculator::shiftH3mToDRbarPrimeMh2(const himalaya::Hi
 	 + 4 * Mst12 * Mst22shift * truncateXt * pow2(Xt2)
 	 * (log(Mst2shift) - log(Mst1)))) / (Mst12 * pow3(Dmst12shift) * Mst22shift);
 
-	 isDegen = (std::abs(exactShifted - lim) >= std::abs(exact - lim) 
-	    || !std::isfinite(exact) || !std::isfinite(exactShifted)) ? true : false;
+      isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
+         || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
    
    if(isDegen){
