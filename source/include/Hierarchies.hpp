@@ -55,7 +55,7 @@ namespace MassSchemes{
       FIRST        = 0,
       DEFAULT      = FIRST,
       MASSEIGEN    = 1,
-      SOFTBREAKING = 2,
+      //SOFTBREAKING = 2,
       NUMBER_OF_SCHEMES
    };
 }

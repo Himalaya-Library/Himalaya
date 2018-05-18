@@ -252,17 +252,18 @@ double himalaya::HierarchyObject::getDeltaLambdaUncertaintyHimalaya() const {
 
 /**
  * 	Sets the Xt parts of the uncertainty of delta_lambda_EFT
- *        @param uncertainty of 3-loop delta_lambda
+ *      @param uncertainty of 3-loop delta_lambda
  */
 void himalaya::HierarchyObject::setDeltaLambdaXtUncertaintyEFT(double uncertainty){
    deltaLambdaXtUncertaintyEFT = uncertainty;
 }
 
 /**
- *        @return uncertainty of 3-loop delta_lambda_EFT
+ *	@return uncertainty of 3-loop delta_lambda_EFT
+ *	TODO: the difference should only be taken up to O(Xt^3/Xt^4) depending on the chosen hierarchy
  */
 double himalaya::HierarchyObject::getDeltaLambdaUncertaintyEFT() const {
-   return std::abs(getDeltaLambdaEFT() - getDeltaLambdaHimalaya())*0 
+   return std::abs(getDeltaLambdaEFT() - getDeltaLambdaHimalaya())
       + std::abs(deltaLambdaXtUncertaintyEFT);
 }
 

@@ -82,7 +82,7 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 	 << " Changed Xt to " << Xt << " GeV and At to " << p.At << " GeV using the stop mixing angle." <<"\n";
 	 break;
       }
-      case (MassSchemes::SOFTBREAKING):{
+      /*case (MassSchemes::SOFTBREAKING):{
 	 p.MSt(0) = sqrt(p.mu2(2,2));
 	 p.MSt(1) = sqrt(p.mq2(2,2));
 	 const double Xt = p.At - p.mu*p.vd/p.vu;
@@ -90,7 +90,7 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"soft-breaking parameters\" chosen. Only valid for Δλ calculations."
 	 << " Changed s2t to " << p.s2t << " At, with Xt = At - mu*Cot[beta], defined in the parameters struct." <<"\n";
 	 break;
-      }
+      }*/
       default:
 	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"default\" chosen. Only valid for fixed-order calculations.\n";
 	 break;
