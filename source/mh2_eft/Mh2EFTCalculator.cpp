@@ -43,7 +43,7 @@ himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(
    const himalaya::Parameters& p_, double msq2_, bool verbose)
    : p(p_), msq2(msq2_)
 {
-   p.validate(verbose);
+   p.validate(verbose);;
 
    if (!std::isfinite(msq2_))
       msq2 = p.calculateMsq2();
@@ -96,9 +96,11 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, 
  * 	Returns the 3-loop EFT contribution to the Higgs mass
  * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
- * 	@param xtOrder an integer to subtract all Xt contributions starting at Xt^4 up to Xt^6 (e.g. xtOrder = 4 will subtract O(Xt^5 + Xt^6) terms). By default no Xt terms are subtracted. SM logs are set to 0 by default.
+ * 	@param omitDeltaLambda3L an integer flag to disable the MSSM contribution to delta_lambda_3L
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs, int omitMSSMLogs, int xtOrder){
+double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
+								int omitMSSMLogs,
+								int omitDeltaLambda3L){
    ThresholdCalculator thresholdCalculator(p, msq2);
    
    using std::log;
@@ -114,36 +116,19 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs, 
    // threshold correction of g3_as DRbar'
    const double dg3as = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::G3_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   double xtSubtraction;
-   switch(xtOrder){
-      case 5:
-	 xtSubtraction = thresholdCalculator.getXtTerms(6, omitMSSMLogs);
-	 break;
-      case 4:
-	 xtSubtraction = thresholdCalculator.getXtTerms(6, omitMSSMLogs)
-	    + thresholdCalculator.getXtTerms(5, omitMSSMLogs);
-	 break;
-      case 3:
-	 xtSubtraction = thresholdCalculator.getXtTerms(6, omitMSSMLogs)
-	    + thresholdCalculator.getXtTerms(5, omitMSSMLogs)
-	    + thresholdCalculator.getXtTerms(4, omitMSSMLogs);
-	 break;
-      default:
-	 xtSubtraction = 0;
-	 break;
-   }
    
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
    // 3-Loop prefactor
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
-   
+
    return pref*(736 * pow3(lmMt) + (160 + 192 * dg3as + 384 * dytas) * pow2(lmMt)
       + (-128 * zt3 - 2056 / 3. + -64 * dg3as - 512 * dytas + 72 * pow2(dytas)
       + 48 * dytas2) * lmMt + 64 * dytas - 84 * pow2(dytas) - 24 * dytas2
       + catas2
-      + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS2,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs) - xtSubtraction);
+      + omitDeltaLambda3L*thresholdCalculator.getThresholdCorrection(
+	 ThresholdVariables::LAMBDA_AT_AS2,
+	 RenSchemes::DRBARPRIME, omitMSSMLogs));
 }
 
 /**
@@ -159,10 +144,10 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scal
    
    const double LS = omitlogs*log(pow2(scale / p.MSt(0))) + log(pow2(p.MSt(0) / mst1));
    
-   const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
    // 3-Loop prefactor
-   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
    
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vd) + pow2(p.vu);

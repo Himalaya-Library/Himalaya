@@ -24,12 +24,6 @@ namespace himalaya{
        */
       double getThresholdCorrection(int variable, int scheme, int omitLogs);
       /**
-       * 	Returns the O(Xt^n) contribution to Mh^2 without any prefactors at 3-loop level
-       * 	@param xtOrder an integer key to get the Xt contributions at the given order starting at Xt^4 for xtOrder = 4
-       * 	@param omitLogs an integer key to omit all log mu terms
-       */
-      double getXtTerms(int xtOrder, int omitLogs);
-      /**
        * 	Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
        * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
        * 	@param omitLogs an integer key to omit all log mu terms
@@ -37,10 +31,22 @@ namespace himalaya{
        */
       double getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs = 1);
       /**
+       * 	Returns the DRbarPrime to MSbar shift of delta lambda 3L at a given xtOrder
+       * 	@param limit an integer key for a mass limit
+       * 	@param xtOrder an integer key to get a specific Xt order starting at 4
+       * 	@param omitLogs an integer key to omit all log mu terms
+       */
+      double getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs);
+      /**
        * 	Sets the mass limit to check terms
        * 	@param limit an integer key for a mass limit
        */
       void setLimit(int limit);
+      /**
+       * 	Get the mass limit determined by ThresholdCalculator
+       * 	@return The determined mass limit
+       */
+      int getLimit();
    private:
       /**
        * 	Returns delta g3_as in the MSbar scheme for a given mass limit
@@ -83,29 +89,6 @@ namespace himalaya{
        * 	@return delta lambda_atas2 in the MSbar scheme for a given mass limit
        */
       double getDeltaLambdaAlphatAlphas2(int limit, int omitLogs);
-      /**
-       * 	Returns the Xt^4 terms for Mh^2 at 3-loop level
-       * 	@param limit an integer key for a mass limit
-       * 	@param omitLogs an integer key to omit all mu terms
-       */
-      double getXt4Terms(int limit, int omitLogs);
-      /**
-       * 	Returns the Xt^5 terms for Mh^2 at 3-loop level
-       * 	@param limit an integer key for a mass limit
-       */
-      double getXt5Terms(int limit);
-      /**
-       * 	Returns the Xt^6 terms for Mh^2 at 3-loop level
-       * 	@param limit an integer key for a mass limit
-       */
-      double getXt6Terms(int limit);
-      /**
-       * 	Returns the DRbarPrime to MSbar shift of delta lambda 3L at a given xtOrder
-       * 	@param limit an integer key for a mass limit
-       * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
-       * 	@param omitLogs an integer key to omit all log mu terms
-       */
-      double getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs);
       /**
        * 	Checks if a threshold correction can be used in the general mass case
        * 	@param exact the threshold correction in the general mass case

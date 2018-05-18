@@ -542,7 +542,7 @@ double himalaya::H6b::calc_coef_at_as2_no_sm_logs_log2() const {
 double himalaya::H6b::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
-      ((-224*pow2(Sbeta)*pow4(Mt))/9.)/pow4(Mt)/pow2(Sbeta)*12.; 
+      -896/3.; 
 
    return result;
 }

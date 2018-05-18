@@ -47,6 +47,19 @@ enum ExpansionDepth : int {
 
 } // namespace ExpansionDepth
 
+/// Mass schemes
+namespace MassSchemes{
+   
+   /// mass scheme flags
+   enum MassSchemes : int{
+      FIRST        = 0,
+      DEFAULT      = FIRST,
+      MASSEIGEN    = 1,
+      SOFTBREAKING = 2,
+      NUMBER_OF_SCHEMES
+   };
+}
+
 /// Limit numbers
 namespace Limits{
    

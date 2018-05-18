@@ -16,9 +16,10 @@ namespace himalaya{
       /**
        * 	Constructor 
        * 	@param p a HimalayaInterface struct
+       * 	@param massScheme a mass scheme choice for delta_lambda_3L
        * 	@param verbose a bool which suppresses the information of the calculation if set to flase
        */
-      HierarchyCalculator(const Parameters& p, const bool verbose = true);
+      HierarchyCalculator(const Parameters& p, const int massScheme = himalaya::MassSchemes::DEFAULT ,const bool verbose = true);
       /**
        * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
        * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.

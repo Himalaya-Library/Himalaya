@@ -59,7 +59,9 @@ const std::map<int, int> hierarchyMap = {
  * 	@param p_ a HimalayaInterface struct
  * 	@param verbose a bool which suppresses the information of the calculation if set to flase
  */
-himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_, const bool verbose_)
+himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
+						   const int massScheme,
+						   const bool verbose_)
    : p(p_)
    , verbose(verbose_)
 {
@@ -70,6 +72,29 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_, const b
 
    p.validate(verbose);
    
+   switch (massScheme){
+      case (MassSchemes::MASSEIGEN):{
+	 p.mu2(2,2) = pow2(p.MSt(0));
+	 p.mq2(2,2) = pow2(p.MSt(1));
+	 const double Xt = p.s2t/2./p.Mt*(pow2(p.MSt(0)) - pow2(p.MSt(1)));
+	 p.At = Xt + p.mu*p.vd/p.vu;
+	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"mass eigenstates\" chosen. Only valid for Δλ calculations."
+	 << " Changed Xt to " << Xt << " GeV and At to " << p.At << " GeV using the stop mixing angle." <<"\n";
+	 break;
+      }
+      case (MassSchemes::SOFTBREAKING):{
+	 p.MSt(0) = sqrt(p.mu2(2,2));
+	 p.MSt(1) = sqrt(p.mq2(2,2));
+	 const double Xt = p.At - p.mu*p.vd/p.vu;
+	 p.s2t = 2*p.Mt*Xt/(pow2(p.MSt(0)) - pow2(p.MSt(1)));
+	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"soft-breaking parameters\" chosen. Only valid for Δλ calculations."
+	 << " Changed s2t to " << p.s2t << " At, with Xt = At - mu*Cot[beta], defined in the parameters struct." <<"\n";
+	 break;
+      }
+      default:
+	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"default\" chosen. Only valid for fixed-order calculations.\n";
+	 break;
+   }
    // init common variables
    init();
 }
@@ -120,15 +145,6 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    const int mdrFlag = (renScheme == RenSchemes::DRBARPRIME || renScheme == RenSchemes::H3m) ? 0 : 1;
    const int drPrimeFlag = (renScheme == RenSchemes::DRBARPRIME || renScheme == RenSchemes::MDRBARPRIME) ? 1 : 0;
    
-   // set Xt order truncation for EFT contribution to be consistent with H3m
-   int xtOrder = 4;
-   const int suitableHierarchy = ho.getSuitableHierarchy();
-   if(suitableHierarchy == himalaya::Hierarchies::h3
-      || suitableHierarchy == himalaya::Hierarchies::h32q2g 
-      || suitableHierarchy == himalaya::Hierarchies::h3q22g
-      || suitableHierarchy == himalaya::Hierarchies::h9
-      || suitableHierarchy == himalaya::Hierarchies::h9q2) xtOrder = 3;
-   
    // set renormalization scheme
    ho.setRenormalizationScheme(renScheme);
    
@@ -137,6 +153,15 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 
    // compare hierarchies and get the best fitting hierarchy
    compareHierarchies(ho);
+   
+   // set Xt order truncation for EFT contribution to be consistent with H3m
+   int xtOrder = 4;
+   const int suitableHierarchy = ho.getSuitableHierarchy();
+   if(suitableHierarchy == himalaya::Hierarchies::h3
+      || suitableHierarchy == himalaya::Hierarchies::h32q2g 
+      || suitableHierarchy == himalaya::Hierarchies::h3q22g
+      || suitableHierarchy == himalaya::Hierarchies::h9
+      || suitableHierarchy == himalaya::Hierarchies::h9q2) xtOrder = 3;
    
    // calculate the DR to MDR shift with the obtained hierarchy
    if(mdrFlag == 1){
@@ -165,6 +190,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 
    // calculate delta_lambda
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p);
+   himalaya::ThresholdCalculator tc (p);
    
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
@@ -173,42 +199,50 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
    
-   // calculate the full 3L corretion to Mh2 and subtract the non-logarithmic parts to obtain the logarithmic contributions
-   const double eftNonLog = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0, xtOrder);
+   // calculate the (non-)logarithmic part of Mh2 without delta_lambda_3L
+   // the first line is equivalent to  64 * dytas - 84 * pow2(dytas) - 24 * dytas2 + catas2 including all log(mu^2/Mst1^2)
+   // which are also included in the H3m result, and the second line omits these log(mu^2/Mst1^2) terms since they originate
+   // from SM contributions. The non-logarithmic part contains only Xt orders up to O(Xt^2) which are also included in H3m
+   // so no subtraction is needed. Checked.
+   const double subtractionTermHimalaya = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,1,0);
+   const double subtrationTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
+
+   // calculate the EFT logs. In the first call we calculate the full reconstructed contribution to delta_lambda_3L
+   // including all logarithmic contributions. In the second line we subtract all non-logarithmic contributions
+   // to isolate the logarithmic ones. Checked.
+   const double eftLogs = pref*(
+      tc.getThresholdCorrection(
+	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 1)
+      - tc.getThresholdCorrection(
+	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
    
-   const double eftNonLogFull = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 0);
-   //const double eftConstantXt = 0*(eftConstantFull - eftConstant); // TODO should one add these terms to the non-logarithmic part?!
-   const double eftLogs = mh2EFTCalculator.getDeltaMh2EFT3Loop(0, 1) - eftNonLogFull;
+   // calculate the non-logarithmic part of delta_lambda at 3L
+   const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() 
+      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,0)) - subtrationTermEFT;
    
-   // calculate the non-logarithmic part of delta_lambda at 3L truncated at the same order of Xt as H3m
-   const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,0)) - eftNonLog;
-   
-   // Factorization: Himalaya_non-logarithmic + Log(mu^2/M_X^2) * Himalaya_coeff_log^1 + Log(mu^2/M_X^2)^2 Himalaya_coeff_log^2 
-   //	+ Log(mu^2/M_X^2)^3 Himalaya_coeff_log^3 - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
-   // M_X is a susy mass
+   // calculate delta_lambda_Himalaya
    ho.setDeltaLambdaHimalaya((pref*(ho.getDeltaLambdaHimalaya() 
-      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,1)) - eftNonLog)/v2);
+      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermHimalaya)/v2);
    
-   // add the EFT logs and subtract non-logarithmic part twice to avoid double counting
-   // Factorization: Himalaya_non-logarithmic - EFT_const_w/o_dlatas2_and_Log(M_X^2/M_Y^2)
-   //	+ Log(mu^2/mst1^2)^1 EFT_coeff_log^1  + Log(mu^2/mst1^2)^2 EFT_coeff_log^2 + Log(mu^2/mst1^2)^3 EFT_coeff_log^3
-   ho.setDeltaLambdaEFT((deltaLambda3LNonLog /*+ eftConstantXt*/ + eftLogs)/v2);
+   // caluclate delta_lambda_EFT
+   ho.setDeltaLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
 
    // save the non-logarithmic part of delta_lambda 3L
    ho.setDeltaLambdaNonLog(deltaLambda3LNonLog/v2);
-
+   
    // calculate DR' -> MS shift for delta_lambda 3L
-   himalaya::ThresholdCalculator tc (p);
-   ho.setDRbarPrimeToMSbarShiftHimalaya(pref*tc.getDRbarPrimeToMSbarShift(xtOrder, 1, 1)/v2);
+   ho.setDRbarPrimeToMSbarShiftHimalaya(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
    // this shift generates Xt^5*Log(mu) terms for the EFT expression
-   ho.setDRbarPrimeToMSbarShiftEFT(pref*tc.getDRbarPrimeToMSbarShift(4, 1, 0)/v2);
+   ho.setDRbarPrimeToMSbarShiftEFT(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
    
    // set the uncertainty of delta_lambda due to missing Xt terms
    const int xt4Flag = xtOrder == 3 ? 1 : 0;
-   ho.setDeltaLambdaXtUncertaintyHimalaya(pref*(xt4Flag*tc.getXtTerms(4, 0) + tc.getXtTerms(5, 0) 
-      + tc.getXtTerms(6, 0))/v2);
-   ho.setDeltaLambdaXtUncertaintyEFT(pref*(xt4Flag*tc.getXtTerms(4, 0) + tc.getXtTerms(5, 0) 
-      + tc.getXtTerms(6, 0))/v2);
+   ho.setDeltaLambdaXtUncertaintyHimalaya(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0) 
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0) 
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
+   ho.setDeltaLambdaXtUncertaintyEFT(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1) 
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1) 
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
    
    if(verbose && drPrimeFlag == 0) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent in the H3m renormalization scheme!\n";
    if(mdrFlag == 1) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent with MDR mass shifts!\n";
@@ -1061,7 +1095,7 @@ double himalaya::HierarchyCalculator::shiftH3mToDRbarPrimeMh2(const himalaya::Hi
 	 + 4 * Mst12 * Mst22 * truncateXt * pow2(Xt2)
 	 * (log(Mst2) - log(Mst1)))) / (Mst12 * pow3(Dmst12) * Mst22);
    }
-   
+
    return shift;
 }
 

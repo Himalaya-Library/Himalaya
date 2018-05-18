@@ -173,23 +173,60 @@ himalaya::Parameters test(){
   return pars;
 }
 
+himalaya::Parameters setup_low_MS_large_xt() {
+   himalaya::Parameters pars;
+
+   const double MS = 460;
+   const double MS2 = MS*MS;
+   const double Xt = -sqrt(6.)*MS;
+   
+   pars.scale = MS;
+   pars.mu = MS;
+   pars.g3 = 1.10073;
+   pars.vd = 48.1728;
+   pars.vu = 240.864;
+   pars.mq2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.md2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.mu2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.Ab = 2300;
+   pars.At = Xt+pars.mu*pars.vd/pars.vu;
+   pars.MA = MS;
+   pars.MG = MS;
+   pars.MW = 78.9441;
+   pars.MZ = 90.5119;
+   pars.Mt = 154.682;
+   pars.Mb = 2.50901;
+
+   return pars;
+}
+
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
 	 setup_SPS1a(),
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
-	 setup_HSSUSY_minmix()
+	 setup_HSSUSY_minmix(),
+	 setup_low_MS_large_xt()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator
-	 himalaya::HierarchyCalculator hierarchyCalculator(point);
+	 himalaya::HierarchyCalculator hierarchyCalculator(point, himalaya::MassSchemes::SOFTBREAKING);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 // top and DR'
 	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, himalaya::RenSchemes::DRBARPRIME);
 
 	 std::cout << hoTop << "\n";
+	 
+	 /*std::cout << hoTop.getDeltaLambdaHimalaya() + hoTop.getDRbarPrimeToMSbarShiftHimalaya() << " " <<
+	    hoTop.getDeltaLambdaEFT() + hoTop.getDRbarPrimeToMSbarShiftEFT()<< "\n";*/
 
 	 // bottom and MDR'
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::DRBARPRIME);
