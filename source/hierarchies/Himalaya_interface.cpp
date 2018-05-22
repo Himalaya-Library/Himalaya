@@ -1,4 +1,5 @@
 #include "Himalaya_interface.hpp"
+#include "Logger.hpp"
 #include "Utils.hpp"
 #include <Eigen/Eigenvalues>
 #include <cmath>
@@ -108,9 +109,9 @@ void Parameters::validate(bool verbose)
       std::tie(MSt, s2t) = calculate_MSf_s2f(stopMatrix);
 
       if (verbose) {
-         std::cout << "\033[1;34mHimalaya info:\033[0m Stop masses or mixing angle not provided. Calculated values:\n" <<
-            "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" <<
-            "\tmixing angle sin(2*theta): " << s2t << "\n";
+         INFO_MSG("Stop masses or mixing angle not provided. Calculated values:\n" <<
+                  "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" <<
+                  "\tmixing angle sin(2*theta): " << s2t);
       }
    }
 
@@ -127,9 +128,9 @@ void Parameters::validate(bool verbose)
       std::tie(MSb, s2b) = calculate_MSf_s2f(sbottomMatrix);
 
       if (verbose) {
-         std::cout << "\033[1;34mHimalaya info:\033[0m Sbottom masses or mixing angle not provided. Calculated values:\n" <<
-            "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" <<
-            "\tmixing angle sin(2*theta): " << s2b << ".\n";
+         INFO_MSG("Sbottom masses or mixing angle not provided. Calculated values:\n" <<
+                  "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" <<
+                  "\tmixing angle sin(2*theta): " << s2b << ".");
       }
    }
 

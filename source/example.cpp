@@ -2,6 +2,7 @@
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
 #include "Hierarchies.hpp"
+#include "Logger.hpp"
 #include <iostream>
 
 himalaya::Parameters setup_SPS1a(){
@@ -232,8 +233,8 @@ int main() {
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::DRBARPRIME);
       }
    }
-   catch (std::exception& e){
-      std::cout << e.what() << "\n";
+   catch (const std::exception& e){
+      FATAL_MSG(e.what());
       return EXIT_FAILURE;
    }
    return 0;

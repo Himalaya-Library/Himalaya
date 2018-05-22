@@ -1,5 +1,6 @@
 #include "ThresholdCalculator.hpp"
 #include "Hierarchies.hpp"
+#include "Logger.hpp"
 #include "dilog.h"
 #include <iostream>
 #include <cmath>
@@ -124,7 +125,8 @@ double himalaya::ThresholdCalculator::getThresholdCorrection(int variable, int s
    const double limit = p.massLimit3LThreshold;
    
    if(scheme != RenSchemes::TEST && scheme != RenSchemes::DRBARPRIME){
-      std::cout << "\033[1;34mHimalaya info:\033[0m Your renormalization scheme is not compatible with the implemented threshold corrections!\n";
+      INFO_MSG("Your renormalization scheme is not compatible with the"
+               " implemented threshold corrections!");
    }
       
    switch(variable){

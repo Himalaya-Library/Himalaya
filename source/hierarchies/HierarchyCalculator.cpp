@@ -15,6 +15,7 @@
 #include "H9.hpp"
 #include "H9q2.hpp"
 #include "Constants.hpp"
+#include "Logger.hpp"
 #include "Utils.hpp"
 #include "ThresholdCalculator.hpp"
 #include <iostream>
@@ -78,21 +79,24 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 	 p.mq2(2,2) = pow2(p.MSt(1));
 	 const double Xt = p.s2t/2./p.Mt*(pow2(p.MSt(0)) - pow2(p.MSt(1)));
 	 p.At = Xt + p.mu*p.vd/p.vu;
-	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"mass eigenstates\" chosen. Only valid for Δλ calculations."
-	 << " Changed Xt to " << Xt << " GeV and At to " << p.At << " GeV using the stop mixing angle." <<"\n";
+	 INFO_MSG("Mass scheme \"mass eigenstates\" chosen. Only valid for Δλ calculations."
+                  " Changed Xt to " << Xt << " GeV and At to " << p.At <<
+                  " GeV using the stop mixing angle.");
 	 break;
       }
-      /*case (MassSchemes::SOFTBREAKING):{
+     /*case (MassSchemes::SOFTBREAKING):{
 	 p.MSt(0) = sqrt(p.mu2(2,2));
 	 p.MSt(1) = sqrt(p.mq2(2,2));
 	 const double Xt = p.At - p.mu*p.vd/p.vu;
 	 p.s2t = 2*p.Mt*Xt/(pow2(p.MSt(0)) - pow2(p.MSt(1)));
-	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"soft-breaking parameters\" chosen. Only valid for Δλ calculations."
-	 << " Changed s2t to " << p.s2t << " At, with Xt = At - mu*Cot[beta], defined in the parameters struct." <<"\n";
+	 INFO_MSG("Mass scheme \"soft-breaking parameters\" chosen. "
+                  "Only valid for Δλ calculations. Changed s2t to "
+                  << p.s2t << " At, with Xt = At - mu*Cot[beta], defined "
+                  "in the parameters struct.");
 	 break;
       }*/
       default:
-	 std::cout << "\033[1;34mHimalaya info:\033[0m Mass scheme \"default\" chosen. Only valid for fixed-order calculations.\n";
+	 INFO_MSG("Mass scheme \"default\" chosen. Only valid for fixed-order calculations.");
 	 break;
    }
    // init common variables
@@ -140,7 +144,8 @@ void himalaya::HierarchyCalculator::init(){
 himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab, const int renScheme){
    HierarchyObject ho (isAlphab);
    
-   if(isAlphab) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not available for O(ab*as^2)!\n";
+   if (isAlphab)
+      INFO_MSG("3-loop threshold correction Δλ not available for O(ab*as^2)!");
    
    const int mdrFlag = (renScheme == RenSchemes::DRBARPRIME || renScheme == RenSchemes::H3m) ? 0 : 1;
    const int drPrimeFlag = (renScheme == RenSchemes::DRBARPRIME || renScheme == RenSchemes::MDRBARPRIME) ? 1 : 0;
@@ -244,8 +249,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1) 
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
    
-   if(verbose && drPrimeFlag == 0) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent in the H3m renormalization scheme!\n";
-   if(mdrFlag == 1) std::cout << "\033[1;34mHimalaya info:\033[0m 3-loop threshold correction not consistent with MDR mass shifts!\n";
+   if (verbose && drPrimeFlag == 0)
+      INFO_MSG("3-loop threshold correction Δλ not consistent in the H3m renormalization scheme!");
+
+   if (mdrFlag == 1)
+      INFO_MSG("3-loop threshold correction Δλ not consistent with MDR mass shifts!");
    
    return ho;
 }
