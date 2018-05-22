@@ -234,7 +234,7 @@ int main() {
       }
    }
    catch (const std::exception& e){
-      FATAL_MSG(e.what());
+      ERROR_MSG(e.what());
       return EXIT_FAILURE;
    }
    return 0;
