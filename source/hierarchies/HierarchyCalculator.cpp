@@ -226,10 +226,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1) 
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
    
+   //TODO always calculate delta_lambda in the DR' scheme?
    if (verbose && drPrimeFlag == 0)
       INFO_MSG("3-loop threshold correction Δλ not consistent in the H3m renormalization scheme!");
 
-   if (mdrFlag == 1)
+   if (verbose && mdrFlag == 1)
       INFO_MSG("3-loop threshold correction Δλ not consistent with MDR mass shifts!");
    
    return ho;
@@ -275,12 +276,6 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 // Note: spurious poles are handled by the validate method
 	 // of the Himalaya_Interface struct
 	 
-	 //DEPRECATED calc 1-loop shift for DRbar -> MDRbar
-	 //calc difference of Mt41L or Mt41L in the MDRbar scheme directly
-	 //it seems that in H3m the sign of the function getShift is wrong (Mt4LDRbar - Mt4LMDRbar)????
-	 //to be consistent in the MDRbar-scheme we should subtract Mt4LDRbar, shouldn't we?
-	 //Eigen::Matrix2d shift = getShift(hierarchyMap.at(hierarchy), isAlphab);
-	 
 	 //calculate the exact Higgs mass at 2-loop (only up to alpha_s alpha_t/b)
 	 const Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
 	 const double Mh2l = sortEigenvalues(es2L).at(0);
@@ -296,7 +291,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 
 	 // estimate the uncertainty of the expansion
 	 const double expUncertainty = getExpansionUncertainty(ho, treelvl + Mt41L, 0, 1, 0);
-	 
+
 	 // add these errors to include the error of the expansion in the comparison
 	 const double currError = sqrt(pow2(twoLoopError) + pow2(expUncertainty));
 
@@ -323,6 +318,54 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    flagMap.at(ExpansionDepth::xx) = 1;
    flagMap.at(ExpansionDepth::xxMst) = 1;
    return suitableHierarchy;
+}
+
+/**
+ * 	Checks if a hierarchy is suitable to the given mass spectrum.
+ * 	@param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
+ * 	@returns A bool if the hierarchy candidate is suitable to the given mass spectrum.
+ */
+bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& ho){
+   double Mst1, Mst2;
+   if(!ho.getIsAlphab()){
+      Mst1 = p.MSt(0);
+      Mst2 = p.MSt(1);
+   }
+   else{
+      Mst1 = p.MSb(0);
+      Mst2 = p.MSb(1);
+   }
+   switch (ho.getSuitableHierarchy()){
+      case Hierarchies::h3:
+	 return Mgl > Mst2;
+      case Hierarchies::h32q2g:
+	 return (Mst2 >= Msq) && (Mst2 > Mgl);
+      case Hierarchies::h3q22g:
+	 return (Msq > Mst2) && (Mst2 > Mgl);
+      case Hierarchies::h4:
+	 return (Mst1 < Msq) && (Mst1 >= Mgl);
+      case Hierarchies::h5:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < std::abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mst1 >= Mgl);
+      case Hierarchies::h5g1:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < std::abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mgl > Mst1);
+      case Hierarchies::h6:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mst2 >= Mgl);
+      case Hierarchies::h6g2:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mgl > Mst2);
+      case Hierarchies::h6b:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mst2 >= Mgl);
+      case Hierarchies::h6b2qg2:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mgl > Mst2);
+      case Hierarchies::h6bq22g:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Msq > Mst2) && (Mst2 >= Mgl);
+      case Hierarchies::h6bq2g2:
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Msq > Mst2) && (Mgl > Mst2);
+      case Hierarchies::h9:
+	 return (Mst2 >= Msq) && ((Mst2 - Mst1) < (Mst1 - Mgl));
+      case Hierarchies::h9q2:
+	 return (Msq > Mst2) && ((Mst1 - Mst1) < (Mst1 - Mgl));
+   }
+   return false;
 }
 
 // TODO(avoigt): if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
@@ -730,54 +773,6 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 }
 
 /**
- * 	Checks if a hierarchy is suitable to the given mass spectrum.
- * 	@param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
- * 	@returns A bool if the hierarchy candidate is suitable to the given mass spectrum.
- */
-bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& ho){
-   double Mst1, Mst2;
-   if(!ho.getIsAlphab()){
-      Mst1 = p.MSt(0);
-      Mst2 = p.MSt(1);
-   }
-   else{
-      Mst1 = p.MSb(0);
-      Mst2 = p.MSb(1);
-   }
-   switch (ho.getSuitableHierarchy()){
-      case Hierarchies::h3:
-	 return Mgl > Mst2;
-      case Hierarchies::h32q2g:
-	 return (Mst2 >= Msq) && (Mst2 > Mgl);
-      case Hierarchies::h3q22g:
-	 return (Msq > Mst2) && (Mst2 > Mgl);
-      case Hierarchies::h4:
-	 return (Mst1 < Msq) && (Mst1 >= Mgl);
-      case Hierarchies::h5:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < std::abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mst1 >= Mgl);
-      case Hierarchies::h5g1:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < std::abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mgl > Mst1);
-      case Hierarchies::h6:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mst2 >= Mgl);
-      case Hierarchies::h6g2:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mgl > Mst2);
-      case Hierarchies::h6b:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mst2 >= Mgl);
-      case Hierarchies::h6b2qg2:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mgl > Mst2);
-      case Hierarchies::h6bq22g:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Msq > Mst2) && (Mst2 >= Mgl);
-      case Hierarchies::h6bq2g2:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Msq > Mst2) && (Mgl > Mst2);
-      case Hierarchies::h9:
-	 return (Mst2 >= Msq) && ((Mst2 - Mst1) < (Mst1 - Mgl));
-      case Hierarchies::h9q2:
-	 return (Msq > Mst2) && ((Mst1 - Mst1) < (Mst1 - Mgl));
-   }
-   return false;
-}
-
-/**
  * 	Shifts Msx1 according to the hierarchy to the MDR scheme.
  * 	@param ho a HierarchyObject with constant isAlphab.
  * 	@param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
@@ -1170,97 +1165,6 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt41L(const himalaya::Hierarch
       (sqrt(2) * pow2(Pi));
    
     return Mt41L;
-}
-
-/**
- * 	@deprecated
- * 	Shifts the 1-loop terms to the MDRbar scheme.
- * 	@param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
- * 	@return A matrix which corresponds to the difference of the DR and MDR scheme.
- */
-Eigen::Matrix2d himalaya::HierarchyCalculator::getShift(const himalaya::HierarchyObject& ho){
-   Eigen::Matrix2d shift;
-   const double GF = 1/(sqrt(2) * (pow2(p.vu) + pow2(p.vd)));
-   double Mst1;
-   double Mst2;
-   double Mt;
-   double s2t;
-   const double beta = atan(p.vu/p.vd);
-   double deltamst1, deltamst2;
-   if(!ho.getIsAlphab()){
-      Mst1 = p.MSt(0);
-      Mst2 = p.MSt(1);
-      s2t = p.s2t;
-      Mt = p.Mt;
-      deltamst1 = -(Mst1 - shiftMst1ToMDR(ho, 1, 0));
-      deltamst2 = -(Mst2 - shiftMst2ToMDR(ho, 1, 0));
-   }
-   else{
-      Mst1 = p.MSb(0);
-      Mst2 = p.MSb(1);
-      s2t = p.s2b;
-      Mt = p.Mb;
-      deltamst1 = -(Mst1 - shiftMst1ToMDR(ho, 1, 0));
-      deltamst2 = -(Mst2 - shiftMst2ToMDR(ho, 1, 0));
-   }
-   shift(0, 0) = (3 * GF * (deltamst2 * Mst1 - deltamst1 * Mst2) * pow2(Mt) * pow2(p.mu) * pow2(1 / Pi) *
-      pow2(1/sin(beta)) * pow2(1 / (pow2(Mst1) - pow2(Mst2))) * pow2(s2t) *
-      (4 * (log(Mst1) - log(Mst2)) * pow2(Mst1) * pow2(Mst2) - pow4(Mst1) +
-      pow4(Mst2))) / (4. * sqrt(2) * Mst1 * Mst2);
-   shift(0, 1) = (-3 * GF * Mt * p.mu * pow2(1 / Pi) * pow2(1/sin(beta)) *
-      pow2(1 / (pow2(Mst1) - pow2(Mst2))) * s2t *
-      (-(pow2(pow2(Mst1) - pow2(Mst2)) *
-      (4 * (-(deltamst2 * Mst1) + deltamst1 * Mst2) * pow2(Mt) +
-      (-2 * Mst1 * Mst2 * (deltamst1 * Mst1 + deltamst2 * Mst2) *
-      (log(Mst1) - log(Mst2)) +
-      (deltamst2 * Mst1 + deltamst1 * Mst2) * pow2(Mst1) -
-      (deltamst2 * Mst1 + deltamst1 * Mst2) * pow2(Mst2)) * pow2(s2t))) 
-      + 2 * (deltamst2 * Mst1 - deltamst1 * Mst2) * Mt * p.mu * 1/tan(beta) *
-      (4 * (log(Mst1) - log(Mst2)) * pow2(Mst1) * pow2(Mst2) - pow4(Mst1) +
-      pow4(Mst2)) * s2t)) / (8. * sqrt(2) * Mst1 * Mst2);
-   shift(1, 0) = shift(0, 1);
-   shift(1, 1) = (3 * GF * pow2(1 / Pi) * pow2(1/sin(beta)) *
-      ((Mt * p.mu * 1/tan(beta) * (-(deltamst1 * Mst1) + deltamst2 * Mst2 +
-      2 * deltamst1 * Mst1 * log(Mst1) + 2 * deltamst2 * Mst2 * log(Mst1) -
-      2 * deltamst1 * Mst1 * log(Mst2) - 2 * deltamst2 * Mst2 * log(Mst2) -
-      (deltamst2 * pow2(Mst1)) / Mst2 + (deltamst1 * pow2(Mst2)) / Mst1) *
-      pow3(s2t)) / 4. + (pow2(Mt) * pow2(1 / (pow2(Mst1) - pow2(Mst2))) *
-      pow2(s2t) * (2 * deltamst2 * pow7(Mst1) -
-      2 * deltamst1 * pow6(Mst1) * Mst2 -
-      2 * deltamst2 * Mst1 * pow6(Mst2) + 2 * deltamst1 * pow7(Mst2) -
-      4 * deltamst1 * pow6(Mst1) * Mst2 * log(Mst1) +
-      4 * deltamst2 * Mst1 * pow6(Mst2) * log(Mst1) +
-      4 * deltamst1 * pow6(Mst1) * Mst2 * log(Mst2) -
-      4 * deltamst2 * Mst1 * pow6(Mst2) * log(Mst2) -
-      deltamst2 * pow5(Mst1) * pow2(p.mu) * pow2(1/tan(beta)) -
-      deltamst1 * pow5(Mst2) * pow2(p.mu) * pow2(1/tan(beta)) +
-      2 * deltamst2 * pow2(Mst2) *
-      (pow5(Mst1) * (-3 + 2 * log(Mst1) - 2 * log(Mst2)) +
-      2 * (log(Mst1) - log(Mst2)) * pow2(p.mu) * pow2(1/tan(beta)) *
-      pow3(Mst1)) - 2 * deltamst1 * pow2(Mst1) *
-      (pow5(Mst2) * (3 + 2 * log(Mst1) - 2 * log(Mst2)) +
-      2 * (log(Mst1) - log(Mst2)) * pow2(p.mu) * pow2(1/tan(beta)) *
-      pow3(Mst2)) + deltamst1 * Mst2 * pow2(p.mu) * pow2(1/tan(beta)) *
-      pow4(Mst1) + 6 * deltamst1 * pow3(Mst2) * pow4(Mst1) +
-      8 * deltamst1 * log(Mst1) * pow3(Mst2) * pow4(Mst1) -
-      8 * deltamst1 * log(Mst2) * pow3(Mst2) * pow4(Mst1) +
-      deltamst2 * Mst1 * pow2(p.mu) * pow2(1/tan(beta)) * pow4(Mst2) +
-      6 * deltamst2 * pow3(Mst1) * pow4(Mst2) -
-      8 * deltamst2 * log(Mst1) * pow3(Mst1) * pow4(Mst2) +
-      8 * deltamst2 * log(Mst2) * pow3(Mst1) * pow4(Mst2))) / (4. * Mst1 * Mst2) -
-      ((deltamst2 * Mst1 + deltamst1 * Mst2) * pow4(Mt)) / (Mst1 * Mst2) -
-      ((deltamst2 * pow5(Mst1) + deltamst1 * pow5(Mst2) -
-      4 * deltamst2 * pow2(Mst2) * pow3(Mst1) -
-      4 * deltamst1 * pow2(Mst1) * pow3(Mst2) +
-      3 * deltamst1 * Mst2 * pow4(Mst1) -
-      4 * deltamst1 * Mst2 * log(Mst1) * pow4(Mst1) +
-      4 * deltamst1 * Mst2 * log(Mst2) * pow4(Mst1) +
-      3 * deltamst2 * Mst1 * pow4(Mst2) +
-      4 * deltamst2 * Mst1 * log(Mst1) * pow4(Mst2) -
-      4 * deltamst2 * Mst1 * log(Mst2) * pow4(Mst2)) * pow4(s2t)) /
-      (16. * Mst1 * Mst2) + (-(deltamst1 / Mst1) + deltamst2 / Mst2) * p.mu *
-      1/tan(beta) * pow3(Mt) * s2t)) / sqrt(2);
-   return shift;
 }
 
 /**

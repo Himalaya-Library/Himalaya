@@ -71,8 +71,10 @@ double himalaya::HierarchyObject::getRelDiff2L() const{
  * 	@param uncertainty the expansion untertainty at the given loop order as a double.
  */
 void himalaya::HierarchyObject::setExpUncertainty(int loops, double uncertainty){
-   if(loops > 0 && loops <=3){
+   if(loops > 0 && loops <= 3){
+      // emplace does not work here since we have to replace the entry. Is there a more elegant way?
       expUncertainties.emplace(loops, uncertainty);
+      expUncertainties.at(loops) = uncertainty;
    }
    else {
       throw std::runtime_error("Expansion uncertainty for " + std::to_string(loops) + " loop(s) is not available.");
@@ -84,7 +86,7 @@ void himalaya::HierarchyObject::setExpUncertainty(int loops, double uncertainty)
  * 	@return A double which is the expansion uncertainty for the given loop order.
  */
 double himalaya::HierarchyObject::getExpUncertainty(int loops) const{
-   if(loops > 0 && loops <=3){
+   if(loops > 0 && loops <= 3){
       return expUncertainties.at(loops);
    }
    
@@ -98,8 +100,10 @@ double himalaya::HierarchyObject::getExpUncertainty(int loops) const{
  * 	@param dMh the delta of the mass matrix.
  */
 void himalaya::HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh){
-   if(loops >= 0 && loops <=3){
+   if(loops >= 0 && loops <= 3){
+      // emplace does not work here since we have to replace the entry. Is there a more elegant way?
       dMhMap.emplace(loops, dMh);
+      dMhMap.at(loops) = dMh;
    }
    else {
       throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops) + " loop(s) is not available.");
@@ -111,7 +115,7 @@ void himalaya::HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh){
  * 	@return The CP-even Higgs mass matrix at the given loop order.
  */
 Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
-   if(loops >= 0 && loops <=3){
+   if(loops >= 0 && loops <= 3){
       return dMhMap.at(loops);
    }
    

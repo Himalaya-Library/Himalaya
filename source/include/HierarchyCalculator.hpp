@@ -115,13 +115,6 @@ namespace himalaya{
        */
       std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es);
       /**
-       * 	@deprecated
-       * 	Shifts the 1-loop terms to the MDRbar scheme.
-       * 	@param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
-       * 	@return A matrix which corresponds to the difference of the DR and MDR scheme.
-       */
-      Eigen::Matrix2d getShift(const HierarchyObject& ho);
-      /**
        * 	Shifts the H3m renormalization scheme to DR' scheme
        * 	@param ho a HierarchyObject with constant isAlphab
        * 	@return A matrix which shifts the H3m scheme to the DR' scheme at three-loop level
