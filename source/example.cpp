@@ -218,7 +218,7 @@ int main() {
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator
-	 himalaya::HierarchyCalculator hierarchyCalculator(point, himalaya::MassSchemes::SOFTBREAKING);
+	 himalaya::HierarchyCalculator hierarchyCalculator(point);
 
 	 // calculate the 3-loop corrections with the suiatble hierarchy
 	 // top and DR'

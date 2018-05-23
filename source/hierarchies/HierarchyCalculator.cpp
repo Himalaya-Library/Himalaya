@@ -61,7 +61,6 @@ const std::map<int, int> hierarchyMap = {
  * 	@param verbose a bool which suppresses the information of the calculation if set to flase
  */
 himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
-						   const int massScheme,
 						   const bool verbose_)
    : p(p_)
    , verbose(verbose_)
@@ -72,33 +71,7 @@ himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
    }
 
    p.validate(verbose);
-   
-   switch (massScheme){
-      case (MassSchemes::MASSEIGEN):{
-	 p.mu2(2,2) = pow2(p.MSt(0));
-	 p.mq2(2,2) = pow2(p.MSt(1));
-	 const double Xt = p.s2t/2./p.Mt*(pow2(p.MSt(0)) - pow2(p.MSt(1)));
-	 p.At = Xt + p.mu*p.vd/p.vu;
-	 INFO_MSG("Mass scheme \"mass eigenstates\" chosen. Only valid for Δλ calculations."
-                  " Changed Xt to " << Xt << " GeV and At to " << p.At <<
-                  " GeV using the stop mixing angle.");
-	 break;
-      }
-     /*case (MassSchemes::SOFTBREAKING):{
-	 p.MSt(0) = sqrt(p.mu2(2,2));
-	 p.MSt(1) = sqrt(p.mq2(2,2));
-	 const double Xt = p.At - p.mu*p.vd/p.vu;
-	 p.s2t = 2*p.Mt*Xt/(pow2(p.MSt(0)) - pow2(p.MSt(1)));
-	 INFO_MSG("Mass scheme \"soft-breaking parameters\" chosen. "
-                  "Only valid for Δλ calculations. Changed s2t to "
-                  << p.s2t << " At, with Xt = At - mu*Cot[beta], defined "
-                  "in the parameters struct.");
-	 break;
-      }*/
-      default:
-	 INFO_MSG("Mass scheme \"default\" chosen. Only valid for fixed-order calculations.");
-	 break;
-   }
+
    // init common variables
    init();
 }
@@ -194,8 +167,12 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setExpUncertainty(1, 0.);
 
    // calculate delta_lambda
-   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p);
-   himalaya::ThresholdCalculator tc (p);
+   // create a modified parameters struct and construct Mh2EFTCalculator and ThresholdCalculator
+   auto p_mass_ES = p;
+   p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
+   p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
+   himalaya::ThresholdCalculator tc (p_mass_ES);
    
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
@@ -210,7 +187,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // from SM contributions. The non-logarithmic part contains only Xt orders up to O(Xt^2) which are also included in H3m
    // so no subtraction is needed. Checked.
    const double subtractionTermHimalaya = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,1,0);
-   const double subtrationTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
+   const double subtractionTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
 
    // calculate the EFT logs. In the first call we calculate the full reconstructed contribution to delta_lambda_3L
    // including all logarithmic contributions. In the second line we subtract all non-logarithmic contributions
@@ -223,7 +200,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    
    // calculate the non-logarithmic part of delta_lambda at 3L
    const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() 
-      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,0)) - subtrationTermEFT;
+      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
    
    // calculate delta_lambda_Himalaya
    ho.setDeltaLambdaHimalaya((pref*(ho.getDeltaLambdaHimalaya() 

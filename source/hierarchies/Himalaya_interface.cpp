@@ -76,12 +76,15 @@ double Parameters::calculateMsq2() const
    const double beta = std::atan(vu / vd);
    const double cos_2beta = std::cos(2 * beta);
    const double sw2 = 1 - pow2(MW / MZ);
-   const double msq =
-      (+ 2 * sqrt(mq2(0, 0)) + sqrt(mu2(0, 0)) + sqrt(md2(0, 0))  // sup and sdown
+   const double msq = pow(sqrt(pow2(mq2(0,0))*pow2(mq2(1,1))
+      *mq2(0,0)*md2(0,0)*mu2(1,1)*md2(1,1)
+      *(mq2(2, 2) + pow2(Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(MZ) * cos_2beta)
+      *(md2(2, 2) + pow2(Mb) - 1 / 3. * sw2 * pow2(MZ) * cos_2beta)), 0.1);
+      /*(+ 2 * sqrt(mq2(0, 0)) + sqrt(mu2(0, 0)) + sqrt(md2(0, 0))  // sup and sdown
        + 2 * sqrt(mq2(1, 1)) + sqrt(mu2(1, 1)) + sqrt(md2(1, 1))  // scharm and sstrange
        // sbottom
        + sqrt(mq2(2, 2) + pow2(Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(MZ) * cos_2beta)
-       + sqrt(md2(2, 2) + pow2(Mb) - 1 / 3. * sw2 * pow2(MZ) * cos_2beta)) / 10.;
+       + sqrt(md2(2, 2) + pow2(Mb) - 1 / 3. * sw2 * pow2(MZ) * cos_2beta)) / 10.;*/
 
    return pow2(msq);
 }

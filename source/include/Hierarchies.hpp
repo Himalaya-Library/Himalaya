@@ -55,7 +55,7 @@ namespace MassSchemes{
       FIRST        = 0,
       DEFAULT      = FIRST,
       MASSEIGEN    = 1,
-      //SOFTBREAKING = 2,
+      SOFTBREAKING = 2,
       NUMBER_OF_SCHEMES
    };
 }
@@ -105,4 +105,36 @@ namespace ThresholdVariables{
       NUMBER_OF_THRESHOLD_VARIALES  ///< Number of threshold variables
    };
 } // namespace ThresholdVariables
+
+namespace EFTOrders{
+   
+   /// Order flags
+   enum EFTOrders : int{
+      FIRST    = 0,
+      G12G22   = FIRST,
+      G14      = 1,
+      G24      = 2,
+      G12YB2   = 3,
+      G22YB2   = 4,
+      YB4      = 5,
+      G12YTAU2 = 6,
+      G22YTAU2 = 7,
+      YTAU4    = 8,
+      G12YT2   = 9,
+      G22YT2   = 10,
+      YT4      = 11,
+      G32YB4   = 12,
+      YB6      = 13,
+      YT6      = 14,
+      YTAU2YB4 = 15,
+      YTAU2YT4 = 16,//??
+      YTAU6    = 17,
+      YT2YB4   = 18,
+      G32YT4   = 19,
+      YB2YT4   = 20,
+      ALL      = 21,
+      NUMBER_OF_EFT_ORDERS
+   };
+}
+
 } // namespace himalaya
