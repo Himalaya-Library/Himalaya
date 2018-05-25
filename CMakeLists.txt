@@ -45,12 +45,15 @@ configure_file (
   "${INCLUDE_PATH}/version.hpp"
   )
 
-# himalaya files
-file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+# Himalaya library files
+file(GLOB SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/hierarchies/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/mh2_eft/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/misc/*.cpp)
 set(LIBSOURCES ${SOURCES})
 
-# mh2l files
-file(GLOB_RECURSE FSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/include/mh2l/*.f)
+# DSZ library files
+file(GLOB FSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/include/mh2l/*.f)
 
 # build the himalaya and DSZ library
 file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.hpp)
