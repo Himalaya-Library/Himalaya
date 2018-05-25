@@ -26,12 +26,13 @@ TestClose[a_, b_, eps_:10^-15] :=
       ];
 
 (* load LibrayLink *)
-(* TODO: use better path *)
-Get[FileNameJoin[{"..", "..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
+
 InitializeHimalaya[libPath];
 
 Off[General::stop];
 
+(* SPS2 *)
 output = HimalayaCalculateDMh3L[
     settings -> {
         bottom -> False,
