@@ -21,6 +21,41 @@ Usage:
 
   output = HimalayaCalculateDMh3L[settings -> {...}, parameters -> {...}];
 
+Arguments:
+
+ - settings - List of replacement rules with calculational settings.
+   Allowed settings are:
+
+    - bottom -> (True | False): calculate alpha_bottom (True) or
+      alpha_top (False) corrections.  Default: False
+
+    - verbose -> (True | False): print verbose output.  Default: True
+
+ - parameters - List of replacement rules for the running MSSM input
+   parameters.  Same definition as in Himalaya_interface.hpp.
+   Allowed parameters are:
+
+    - scale: renormalization scale
+    - mu: superpotential mu parameter
+    - g3: strong gauge coupling
+    - vd: neutral down-type Higgs VEV (Sqrt[vu^2 + vd^2] ~ 246 GeV)
+    - vu: neutral up-type Higgs VEV (Sqrt[vu^2 + vd^2] ~ 246 GeV)
+    - mq2: 3x3 matrix of soft-breaking left-handed squark squared mass parameters
+    - md2: 3x3 matrix of soft-breaking right-handed down-type squark squared mass parameters
+    - mu2: 3x3 matrix of soft-breaking right-handed up-type squark squared mass parameters
+    - Ab: trilinear sbottom coupling
+    - At: trilinear stop coupling
+    - MA: CP-odd Higgs boson mass
+    - MG: gluino mass
+    - MW: W boson mass
+    - MZ: Z boson mass
+    - Mt: top quark mass
+    - Mb: bottom quark mass
+    - MSt: (optional) 2-vector with stop masses
+    - MSb: (optional) 2-vector with sbottom masses
+    - s2t: (optional) sine of 2 times stop mixing angle
+    - s2b: (optional) sine of 2 times sbottom mixing angle
+
 Example:
 
 MS = 2000;
@@ -53,7 +88,30 @@ output = HimalayaCalculateDMh3L[
 ];
 ";
 
+(* function arguments *)
 { parameters, settings };
+
+(* settings *)
+{ bottom, verbose };
+
+(* input parameters *)
+{ scale, mu, g3, vd, vu, mq2, md2, mu2, Ab, At, MA, MG, MW, MZ, Mt,
+  Mb, MSt, MSb, s2t, s2b };
+
+(* output parameters *)
+{ renormalizationScheme, hierarchyID, hierarchyName, Mstop, Mh2Tree,
+  Mh21Loop, Mh22Loop, Mh23Loop, expansionUncertainty,
+  deltaLambda3LoopHimalayaDRbarPrime,
+  deltaLambda3LoopHimalayaShiftDRbarPrimeToMSbar,
+  deltaLambda3LoopHimalayaUncertainty, deltaLambda3LoopEFTDRbarPrime,
+  deltaLambda3LoopEFTShiftDRbarPrimeToMSbar,
+  deltaLambda3LoopEFTUncertainty };
+
+Himalaya::nonum = "Error: `1` is not a numeric input value!";
+Himalaya::error = "`1`";
+Himalaya::info  = "`1`";
+HimalayaErrorMessage[s_] := Message[Himalaya::error, s];
+HimalayaInfoMessage[s_]  := Message[Himalaya::info, s];
 
 Begin["`Private`"];
 
@@ -94,12 +152,6 @@ Options[HimalayaCalculateDMh3L] = {
     Sequence @@ himalayaDefaultSettings,
     Sequence @@ himalayaDefaultParameters
 };
-
-Himalaya::nonum = "Error: `1` is not a numeric input value!";
-Himalaya::error = "`1`";
-Himalaya::info  = "`1`";
-HimalayaInfoMessage[s_]  := Message[Himalaya::info, s];
-HimalayaErrorMessage[s_] := Message[Himalaya::error, s];
 
 HimalayaNumericQ[a_?NumericQ] := N[a];
 HimalayaNumericQ[a_] := (Message[Himalaya::nonum, a]; Abort[]);
