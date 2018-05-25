@@ -9,8 +9,6 @@
 
 namespace himalaya {
 
-const int N_parameters = 48; ///< number of Himalaya input parameters
-
 /********************* put types *********************/
 
 inline void MLPut(MLINK link, const std::string& s)
@@ -281,9 +279,11 @@ struct Data {
 
 Data make_data(const std::vector<double>& parsvec)
 {
-   if (parsvec.size() != N_parameters) {
+   const int N_input_parameters = 48; // number of Himalaya input parameters
+
+   if (parsvec.size() != N_input_parameters) {
       throw std::runtime_error("HimalayaCalculateDMh3L expects "
-                               + std::to_string(N_parameters) + ", but "
+                               + std::to_string(N_input_parameters) + ", but "
                                + std::to_string(parsvec.size()) + " given!");
    }
 
@@ -333,6 +333,14 @@ Data make_data(const std::vector<double>& parsvec)
    if (MSb.minCoeff() > 0. && std::abs(s2b) <= 1.) {
       pars.MSb = MSb;
       pars.s2b = s2b;
+   }
+
+   if (c != N_input_parameters) {
+      throw std::runtime_error(
+         "Bug: Expecting to read " + std::to_string(N_input_parameters) +
+         " input parameters from input vector of size " +
+         std::to_string(parsvec.size()) + ", but only " + std::to_string(c) +
+         " parameters have been read.");
    }
 
    return Data(pars, bottom, verbose);
