@@ -90,6 +90,214 @@ namespace himalaya{
        */
       double getDeltaLambdaAlphatAlphas2(int limit, int omitLogs);
       /**
+       * 	Returns delta_lambda_yb^2_g1^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yb^2_g1^2
+       */
+      double getDeltaLambdaYb2G12(int omitLogs);
+      /**
+       * 	Returns delta_lambda_g1^4
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_g1^4
+       */
+      double getDeltaLambdaG14(int omitLogs);
+      /**
+       * 	Returns delta_lambda_reg_g1^4
+       * 	@return delta_lambda_reg_g1^4
+       */
+      double getDeltaLambdaRegG14();
+      /**
+       * 	Returns delta_lambda_chi_g1^4
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_chi_g1^4
+       */
+      double getDeltaLambdaChiG14(int omitLogs);
+      /**
+       * 	Returns delta_lambda_chi_g2^4
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_chi_g2^4
+       */
+      double getDeltaLambdaChiG24(int omitLogs);
+      /**
+       * 	Returns delta_lambda_g2^4
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_g2^4
+       */
+      double getDeltaLambdaG24(int omitLogs);
+      /**
+       * 	Returns delta_lambda_reg_g2^4
+       * 	@return delta_lambda_reg_g2^4
+       */
+      double getDeltaLambdaRegG24();
+      /**
+       * 	Returns delta_lambda_g1^2_g2^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_g1^2_g2^2
+       */
+      double getDeltaLambdaG12G22(int omitLogs);
+      /**
+       * 	Returns delta_lambda_reg_g1^2_g2^2
+       * 	@return delta_lambda_reg_g1^2_g2^2
+       */
+      double getDeltaLambdaRegG12G22();
+      /**
+       * 	Returns delta_lambda_chi_g1^2_g2^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_chi_g1^2_g2^2
+       */
+      double getDeltaLambdaChiG12G22();
+      /**
+       * 	Returns delta_lambda_yb^2_g2^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yb^2_g2^2
+       */
+      double getDeltaLambdaYb2G22(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yb^4
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yb^4
+       */
+      double getDeltaLambdaYb4(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yt^2_g1^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yt^2_g1^2
+       */
+      double getDeltaLambdaYt2G12(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yt^2_g2^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yt^2_g2^2
+       */
+      double getDeltaLambdaYt2G22(int omitLogs);
+      /**
+       * 	Returns delta_lambda_ytau^2_g1^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_ytau^2_g1^2
+       */
+      double getDeltaLambdaYtau2G12(int omitLogs);
+      /**
+       * 	Returns delta_lambda_ytau^2_g2^2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_ytau^2_g2^2
+       */
+      double getDeltaLambdaYtau2G22(int omitLogs);
+      /**
+       * 	Returns delta_lambda_ytau^4
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_ytau^4
+       */
+      double getDeltaLambdaYtau4(int omitLogs);
+      /**
+       * 	Returns delta_g1_g1
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_g1_g1
+       */
+      double getDeltaG1G1(int omitLogs);
+      /**
+       * 	Returns delta_g2_g2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_g2_g2
+       */
+      double getDeltaG2G2(int omitLogs);
+      /**
+       * 	Returns delta_lambda_v_yt^2
+       * 	@param limit an integer key for a mass limit
+       * 	@return delta_lambda_v_yt^2
+       */
+      double getDeltaVevYt2(int limit);
+      /**
+       * 	One-loop function F1 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double F1(double x);
+      /**
+       * 	One-loop function F2 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double F2(double x);
+      /**
+       * 	One-loop function F3 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double F3(double x);
+      /**
+       * 	One-loop function F4 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double F4(double x);
+      /**
+       * 	One-loop function F5 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double F5(double x);
+      /**
+       * 	One-loop function F6 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double F6(double x);
+      /**
+       * 	One-loop function F7 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double F7(double x);
+      /**
+       * 	One-loop function F8 of arxiv:1407.4081
+       * 	@param x1 a mass ratio
+       * 	@param x2 a mass ratio
+       */
+      double F8(double x1, double x2);
+      /**
+       * 	One-loop function F9 of arxiv:1407.4081
+       * 	@param x1 a mass ratio
+       * 	@param x2 a mass ratio
+       */
+      double F9(double x1, double x2);
+      /**
+       * 	One-loop function f1 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double f1(double x);
+      /**
+       * 	One-loop function f2 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double f2(double x);
+      /**
+       * 	One-loop function f3 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double f3(double x);
+      /**
+       * 	One-loop function f4 of arxiv:1407.4081
+       * 	@param x a mass ratio
+       */
+      double f4(double x);
+      /**
+       * 	One-loop function f5 of arxiv:1407.4081
+       * 	@param x1 a mass ratio
+       * 	@param x2 a mass ratio
+       */
+      double f5(double x1, double x2);
+      /**
+       * 	One-loop function f6 of arxiv:1407.4081
+       * 	@param x1 a mass ratio
+       * 	@param x2 a mass ratio
+       */
+      double f6(double x1, double x2);
+      /**
+       * 	One-loop function f7 of arxiv:1407.4081
+       * 	@param x1 a mass ratio
+       * 	@param x2 a mass ratio
+       */
+      double f7(double x1, double x2);
+      /**
+       * 	One-loop function f8 of arxiv:1407.4081
+       * 	@param x1 a mass ratio
+       * 	@param x2 a mass ratio
+       */
+      double f8(double x1, double x2);
+      /**
        * 	Checks if a threshold correction can be used in the general mass case
        * 	@param exact the threshold correction in the general mass case
        * 	@param shifted the threshold correction in the general mass case with shifted masses

@@ -20,25 +20,35 @@ himalaya::Parameters make_point()
    const double msq2 = MS;
    const double msu2 = MS;
    const double mg   = MS;
+   const double msl2 = MS;
+   const double mse2 = MS;
 
    const double Xt = xt * std::sqrt(std::sqrt(msq2 * msu2));
 
    himalaya::Parameters pars;
    pars.scale = MS;
    pars.mu    = MS;
+   pars.g1    = 0.448494;
+   pars.g2    = 0.607902;
    pars.g3    = 1.05733;
    pars.vu    = v*std::sin(beta);
    pars.vd    = v*std::cos(beta);
    pars.mq2   << pow2(msq2), 0, 0, 0, pow2(msq2), 0, 0, 0, pow2(msq2);
    pars.md2   << pow2(MS), 0, 0, 0, pow2(MS), 0, 0, 0, pow2(MS);
    pars.mu2   << pow2(msu2), 0, 0, 0, pow2(msu2), 0, 0, 0, pow2(msu2);
+   pars.ml2   << pow2(msl2), 0, 0, 0, pow2(msl2), 0, 0, 0, pow2(msl2);
+   pars.me2   << pow2(mse2), 0, 0, 0, pow2(mse2), 0, 0, 0, pow2(mse2);
    pars.At    = Xt + pars.mu/tb;
+   pars.Atau  = 0;
    pars.Ab    = 0;
+   pars.M1    = MS;
+   pars.M2    = MS;
    pars.MG    = mg;
    pars.MW    = 74.597;
    pars.MZ    = 85.7704;
    pars.Mt    = 144.337;
    pars.Mb    = 2.37054;
+   pars.Mtau  = 1.2;
    pars.MA    = MS;
 
    pars.validate(false);
@@ -91,6 +101,18 @@ double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G14, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G24, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YT2, 0);
 
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }

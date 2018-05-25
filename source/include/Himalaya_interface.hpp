@@ -17,21 +17,29 @@ struct Parameters {
    // DR-bar parameters
    double scale{};				/**< renormalization scale */
    double mu{};					/**< mu parameter */
+   double g1{};					/**< gauge coupling g1 */
+   double g2{};					/**< gauge coupling g2 */
    double g3{};					/**< gauge coupling g3 SU(3) */
    double vd{};					/**< VEV of down Higgs */
    double vu{};					/**< VEV of up Higgs */
    RM33 mq2{RM33::Zero()};			/**< soft-breaking squared left-handed squark mass parameters */
    RM33 md2{RM33::Zero()};			/**< soft-breaking squared right-handed down-squark mass parameters */
    RM33 mu2{RM33::Zero()};			/**< soft-breaking squared right-handed up-squark mass parameters */
+   RM33 ml2{RM33::Zero()};			/**< soft-breaking squared left-handed slepton mass parameters */
+   RM33 me2{RM33::Zero()};			/**< soft-breaking squared right-handed slepton mass parameters */
    double At{};					/**< trilinear stop-Higgs coupling */
    double Ab{};					/**< trilinear sbottom-Higgs coupling */
+   double Atau{};				/**< trilinear stau-Higgs coupling */
 
    // DR-bar masses
+   double M1{};					/**< bino */
+   double M2{};					/**< wino */
    double MG{};					/**< gluino */
    double MW{};					/**< W */
    double MZ{};					/**< Z */
    double Mt{};					/**< top-quark */
    double Mb{};					/**< down-quark */
+   double Mtau{};				/**< tau lepton */
    double MA{};					/**< CP-odd Higgs */
    V2 MSt{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< stops */
    V2 MSb{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< sbottoms */

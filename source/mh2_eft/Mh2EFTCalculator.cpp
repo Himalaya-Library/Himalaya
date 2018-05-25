@@ -1,6 +1,7 @@
 #include "Mh2EFTCalculator.hpp"
 #include "ThresholdCalculator.hpp"
 #include "Hierarchies.hpp"
+#include "Logger.hpp"
 #include <iostream>
 
 namespace himalaya {
@@ -47,14 +48,28 @@ himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(
 
    if (!std::isfinite(msq2_))
       msq2 = p.calculateMsq2();
+   
+   // fill order map
+   orderMap.clear();
+   for (int i = EFTOrders::FIRST; i < EFTOrders::NUMBER_OF_EFT_ORDERS; i++) {
+      orderMap.emplace(i, 1u);
+   }
 }
+
+void himalaya::mh2_eft::Mh2EFTCalculator::setCorrectionFlag(int variable, int enable){
+   if(enable < 0 || enable > 1) INFO_MSG("You can only enable (1) or disable (0) corrections!");
+   if(orderMap.find(variable) == orderMap.end()) INFO_MSG("Your variable is not defined in the EFTOrders enum!");
+   orderMap.at(variable) = enable;
+}
+
 
 /**
  * 	Returns the 1-loop EFT contribution to the Higgs mass
  * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs){
+double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, 
+								int omitMSSMLogs){
    ThresholdCalculator thresholdCalculator(p, msq2);
    
    using std::log;
@@ -62,11 +77,116 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, 
    
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
-   // 3-Loop prefactor
-   const double pref = 1./pow2(4*Pi) * pow2(p.Mt * gt);
-   return pref*(12 * lmMt + 
+   // 1-Loop prefactor at
+   const double pref_at = 1./pow2(4*Pi) * pow2(p.Mt * gt);
+   
+   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double c2beta = cos(2*beta);
+   const double sbeta = sin(beta);
+   const double mhtree = std::abs(c2beta*p.MZ);
+   const double yt = sqrt(2.)*p.Mt/p.vu;
+   const double yb = sqrt(2.)*p.Mb/p.vd;
+   const double ytau = sqrt(2.)*p.Mtau/p.vd;
+   const double lmhtreeMt = log(pow2(mhtree / p.Mt));
+   const double lmwMt = log(pow2(p.MW / p.Mt));
+   const double lmzMt = log(pow2(p.MZ / p.Mt));
+   const int Xi = 1;	// gauge parameter
+   
+   // Threshold corrections
+   const double dlambdayb2g12 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdag14 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_G14, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaregg14 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_REG_G14, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdachig14 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_CHI_G14, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dg1g1 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::G1_G1, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdachig24 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_CHI_G24, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdag24 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_G24, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dg2g2 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::G2_G2, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaregg24 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_REG_G24, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdag12g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaregg12g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_REG_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdachig12g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_CHI_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb2g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb4 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt2g12 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dvyt2 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt2g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaytau2g12 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaytau2g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaytau4 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs);
+
+   // corrections to Mh2
+   const double dmh2g12g22 = orderMap.at(EFTOrders::G12G22)*(pow2(cbeta)*v2*(10
+      *dlambdayb2g12 - 9*pow2(c2beta)*(2 + lmMt - lmhtreeMt))/20.);
+   const double dmh2g14 = orderMap.at(EFTOrders::G14)*((v2*(20*(-36 
+      + 100*dlambdag14 + 100*dlambdaregg14 + 100*
+      dlambdachig14 - 27*lmMt + 27*lmzMt) - 30*(40*dg1g1 + 6*(-2 + lmzMt) +
+      3*lmMt*(-3 + Xi))*pow2(c2beta) + 9*(-126 + 45*lmhtreeMt - 60*lmMt + 10*
+      lmwMt + 5*lmzMt + 15*sqrt(3)*Pi)*pow4(c2beta) + 180*asin(mhtree/(2*p.MW)
+      )*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree))*pow4(c2beta) + 90*asin(c2beta/
+      2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) + pow4(c2beta))))/4000.);
+   const double dmh2g24 = orderMap.at(EFTOrders::G24)*((v2*(20*(-12 
+      + 4*dlambdachig24 + 4*dlambdag24 + 4*
+      dlambdaregg24 - 9*lmMt + 6*lmwMt + 3*lmzMt) - 10*(8*dg2g2 + 2*(-6 + 
+      2*lmwMt + lmzMt) + 3*lmMt*(-3 + Xi))*pow2(c2beta) + (-126 + 45*lmhtreeMt -
+      60*lmMt + 10*lmwMt + 5*lmzMt + 15*sqrt(3.)*Pi)*pow4(c2beta) + 10*asin(
+      c2beta/2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) + pow4(c2beta))
+      + 20*asin(mhtree/(2*p.MW))*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree))*(12 - 4*
+      pow2(c2beta) + pow4(c2beta))))/160.);
+   const double dmh2g12yb2 = orderMap.at(EFTOrders::G12YB2)*((v2*(20*(-12 
+      + 10*dlambdag12g22 + 10*dlambdaregg12g22 + 10*
+      dlambdachig12g22 - 9*lmMt + 9*lmzMt) - 60*(-4 + lmwMt + lmzMt + lmMt*(-
+      3 + Xi))*pow2(c2beta) + 60*asin(mhtree/(2*p.MW))*(-2 + pow2(c2beta))*
+      pow2(c2beta)*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree)) + 3*(-126 + 45*
+      lmhtreeMt - 60*lmMt + 10*lmwMt + 5*lmzMt + 15*sqrt(3.)*Pi)*pow4(c2beta)
+      + 30*asin(c2beta/2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) +
+      pow4(c2beta))))/400.);
+   const double dmh2g22yb2 = orderMap.at(EFTOrders::G22YB2)*(pow2(cbeta)*v2*(2
+      *dlambdayb2g22 + 3*pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/4.);
+   const double dmh2yb4 = orderMap.at(EFTOrders::YB4)*(pow4(cbeta)*v2
+      *(dlambdayb4 + 12*(2 - lmhtreeMt + lmMt))/2.);
+   const double dmh2g12yt2 = orderMap.at(EFTOrders::G12YT2)*(pow2(sbeta)*v2*(10
+      *dlambdayt2g12 + pow2(c2beta)*(6 + 6*dvyt2 - 9*lmMt))/20.);
+   const double dmh2g22yt2 = orderMap.at(EFTOrders::G22YT2)*(pow2(sbeta)*v2*(2
+      *dlambdayt2g22 + pow2(c2beta)*(2 + 2*dvyt2 - 3*lmMt))/4.);
+   const double dmh2yt4 = orderMap.at(EFTOrders::YT4)*(pref_at*(12 * lmMt +
       thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs));
+	 RenSchemes::DRBARPRIME, omitMSSMLogs)));
+   const double dmh2g12ytau2 = orderMap.at(EFTOrders::G12YTAU2)*(pow2(cbeta)*v2*(
+      10*dlambdaytau2g12 + 3*pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/20.);
+   const double dmh2g22ytau2 = orderMap.at(EFTOrders::G22YTAU2)*(pow2(cbeta)*v2*(2
+      *dlambdaytau2g22 + pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/4.);
+   const double dmh2ytau4 = orderMap.at(EFTOrders::YTAU4)*(pow4(cbeta)*v2*(8
+      + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt)/2.);
+
+   // Loop factor
+   const double k = 1/pow2(4.*Pi);
+   
+   return dmh2yt4 + k*(pow2(p.g1*p.g2)*dmh2g12g22 + pow4(p.g1)*dmh2g14 + pow4(p.g2)*
+      dmh2g24 + pow2(p.g1*yb)*dmh2g12yb2 + pow2(p.g2*yb)*dmh2g22yb2 + pow4(yb)*
+      dmh2yb4 + pow2(p.g1*ytau)*dmh2g12ytau2 + pow2(p.g2*ytau)*dmh2g22ytau2 + 
+      pow4(ytau)*dmh2ytau4 + pow2(p.g1*yt)*dmh2g12yt2 + pow2(p.g2*yt)*dmh2g22yt2);
 }
 
 /**
@@ -74,7 +194,8 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, 
  * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs){
+double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
+								int omitMSSMLogs){
    ThresholdCalculator thresholdCalculator(p, msq2);
    
    using std::log;
@@ -84,7 +205,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, 
 
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
-   // 2-Loop prefactor
+   // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
    
    return pref*(96 * pow2(lmMt) + (-32 + 48 * dytas) * lmMt - 24 * dytas
@@ -119,7 +240,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
    
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    
-   // 3-Loop prefactor
+   // 3-Loop prefactor at*as^2
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
 
    return pref*(736 * pow3(lmMt) + (160 + 192 * dg3as + 384 * dytas) * pow2(lmMt)

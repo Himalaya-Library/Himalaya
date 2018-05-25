@@ -128,7 +128,7 @@ double himalaya::ThresholdCalculator::getThresholdCorrection(int variable, int s
       INFO_MSG("Your renormalization scheme is not compatible with the"
                " implemented threshold corrections!");
    }
-      
+
    switch(variable){
       case(ThresholdVariables::G3_AS):{
 	 thresholdCorrection = getDeltaG3Alphas(omitLogs);
@@ -193,11 +193,589 @@ double himalaya::ThresholdCalculator::getThresholdCorrection(int variable, int s
 	 }
       }
       break;
+      case(ThresholdVariables::LAMBDA_YB2_G12):{
+	 return getDeltaLambdaYb2G12(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_G14):{
+	 return getDeltaLambdaG14(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_REG_G14):{
+	 return getDeltaLambdaRegG14();
+      }
+      case(ThresholdVariables::LAMBDA_CHI_G14):{
+	 return getDeltaLambdaChiG14(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_CHI_G24):{
+	 return getDeltaLambdaChiG24(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_G24):{
+	 return getDeltaLambdaG24(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_REG_G24):{
+	 return getDeltaLambdaRegG24();
+      }
+      case(ThresholdVariables::LAMBDA_G12_G22):{
+	 return getDeltaLambdaG12G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_REG_G12_G22):{
+	 return getDeltaLambdaRegG12G22();
+      }
+      case(ThresholdVariables::LAMBDA_CHI_G12_G22):{
+	 return getDeltaLambdaChiG12G22();
+      }
+      case(ThresholdVariables::LAMBDA_YB2_G22):{
+	 return getDeltaLambdaYb2G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YB4):{
+	 return getDeltaLambdaYb4(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YT2_G12):{
+	 return getDeltaLambdaYt2G12(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YT2_G22):{
+	 return getDeltaLambdaYt2G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YTAU2_G12):{
+	 return getDeltaLambdaYtau2G12(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YTAU2_G22):{
+	 return getDeltaLambdaYtau2G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YTAU4):{
+	 return getDeltaLambdaYtau4(omitLogs);
+      }
+      case(ThresholdVariables::G1_G1):{
+	 return getDeltaG1G1(omitLogs);
+      }
+      case(ThresholdVariables::G2_G2):{
+	 return getDeltaG2G2(omitLogs);
+      }
+      case(ThresholdVariables::VEV_YT2):{
+	 return getDeltaVevYt2(limit);
+      }
    };
    
    return thresholdCorrection;
 }
 
+double himalaya::ThresholdCalculator::getDeltaLambdaYb2G12(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mD3 = sqrt(mD32);
+   const double Xb2 = pow2(p.Ab - p.mu*p.vu/p.vd);
+   const double c2beta = cos(2*atan(p.vu/p.vd));
+   const double lmD3MR = omitLogs*log(mD32 / MR2);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   
+   return -3*c2beta*(Xb2*(3*(F3(mQ3/mD3) + F4(mQ3/mD3)) + 2*c2beta*F5(mQ3/mD3)) +
+      4*mD3*mQ3*(2*lmD3MR + lmQ3MR))/(20.*mD3*mQ3);
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaG14(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double c8beta = cos(8*beta);
+   const double s4beta2 = pow2(sin(4*beta));
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmD1MR = omitLogs*log(p.md2(0,0) / MR2);
+   const double lmD2MR = omitLogs*log(p.md2(1,1) / MR2);
+   const double lmD3MR = omitLogs*log(p.md2(2,2) / MR2);
+   const double lmE1MR = omitLogs*log(p.me2(0,0) / MR2);
+   const double lmE2MR = omitLogs*log(p.me2(1,1) / MR2);
+   const double lmE3MR = omitLogs*log(p.me2(2,2) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+   const double lmU1MR = omitLogs*log(p.mu2(0,0) / MR2);
+   const double lmU2MR = omitLogs*log(p.mu2(1,1) / MR2);
+   const double lmU3MR = omitLogs*log(p.mu2(2,2) / MR2);
+   
+   return (-108*s4beta2 - 3*(-29 + 4*c4beta + 9*c8beta)*lmAMR + 16*pow2(c2beta)*
+      (2*(lmD1MR + lmD2MR + lmD3MR + 3*(lmE1MR + lmE2MR + lmE3MR)) + 3*(lmL1MR +
+      lmL2MR + lmL3MR) + lmQ1MR + lmQ2MR + lmQ3MR + 8*(lmU1MR + lmU2MR + lmU3MR)
+      ))/800.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG14(){
+   return -9/50.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG14(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta2 = pow2(cos(2*beta));
+   const double c4beta = cos(4*beta);
+   const double s2beta = sin(2*beta);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   
+   return 3*(-7*(3 + c4beta)*f1(p.M1/p.mu) + 9*(c4beta -1)*f3(p.M1/p.mu) + 4*
+      c2beta2*(F7(p.M1/p.mu) - 2*lmUMR) + 4*(c2beta2 - 8)*F5(p.M1/p.mu)*s2beta)
+      /200.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG24(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double sbeta = sin(beta);
+   const double lm2MR = omitLogs*log(pow2(p.M2) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   
+   return -9*(3 + c4beta)*f2(p.M2/p.mu)/8. + cbeta*sbeta*(-7*cbeta*sbeta*
+      f4(p.M2/p.mu) + (-8 + pow2(c2beta))*F5(p.M2/p.mu)) + pow2(c2beta)/2.*
+      F7(p.M2/p.mu) - pow2(c2beta)*(2*lm2MR + lmUMR)/3.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaG24(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double c8beta = cos(8*beta);
+   const double s4beta = sin(4*beta);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+   
+   return (-36*pow2(s4beta) + (53 - 28*c4beta - 9*c8beta)*lmAMR + 16*pow2(c2beta)
+      *(lmL1MR + lmL2MR + lmL3MR + 3*(lmQ1MR + lmQ2MR + lmQ3MR)))/96.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG24(){
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   
+   return (-9 + 2*pow2(c2beta))/6.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaG12G22(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c4beta = cos(4*beta);
+   const double c8beta = cos(8*beta);
+   const double s4beta = sin(4*beta);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   
+   return -3*(12*pow2(s4beta) + (-7 + 4*c4beta + 3*c8beta)*lmAMR)/80.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG12G22(){
+   return -3/5.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG12G22(){
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double s2beta = sin(2*beta);
+   const double m1mu = p.M1/p.mu;
+   const double m2mu = p.M2/p.mu;
+   
+   return (-14*(3 + c4beta)*f6(m1mu,m2mu) - 4*pow2(s2beta)*(8*f5(m1mu,m2mu) + 
+      f7(m1mu,m2mu)) + 4*pow2(c2beta)*(F7(m1mu) + 3*F7(m2mu)) + 4*s2beta
+      *(pow2(c2beta)*(F5(m1mu) + 3*F5(m2mu)) - 16*f8(m1mu,m2mu)))/40.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYb2G22(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double Xb2 = pow2(p.Ab - p.mu*p.vu/p.vd);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mD3 = sqrt(mD32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   
+   return -(c2beta*Xb2*(3*F4(mQ3/mD3) + c2beta*F5(mQ3/mD3)))/(2.*mD3*mQ3)
+      - 3*c2beta*lmQ3MR;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYb4(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double Xb2 = pow2(p.Ab - p.mu*p.vu/p.vd);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mD3 = sqrt(mD32);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   const double lmD3MR = omitLogs*log(mD32 / MR2);
+   
+   return (12*mD3*mQ3*Xb2*F1(mQ3/mD3) - pow2(Xb2)*F2(mQ3/mD3))/(mD32*mQ32) 
+      + 6*(lmD3MR + lmQ3MR);
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double Xt2 = pow2(p.At - p.mu*p.vd/p.vu);
+   const double mQ32 = p.mq2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mU3 = sqrt(mU32);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double c2beta = cos(2*beta);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   const double lmU3MR = omitLogs*log(mU32 / MR2);
+   
+   return 3*((c2beta*Xt2*(3*F3(mQ3/mU3) - c2beta*F5(mQ3/mU3)))/(mQ3*mU3) - 2*
+      c2beta*lmQ3MR + 8*cbeta*lmU3MR)/10.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double Xt2 = pow2(p.At - p.mu*p.vd/p.vu);
+   const double mQ32 = p.mq2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mU3 = sqrt(mU32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   
+   return -c2beta*Xt2*(-3*F4(mQ3/mU3) + c2beta*F5(mQ3/mU3))/(2.*mQ3*mU3) + 3*
+   c2beta*lmQ3MR;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double Xtau2 = pow2(p.Atau - p.mu*p.vu/p.vd);
+   const double mL32 = p.ml2(2,2);
+   const double mE32 = p.me2(2,2);
+   const double mL3 = sqrt(mL32);
+   const double mE3 = sqrt(mE32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmE3MR = omitLogs*log(mE32 / MR2);
+   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   
+   return c2beta*((Xtau2*(-9*F3(mL3/mE3) + 3*F4(mL3/mE3) - 2*c2beta*F5(mL3/mE3))
+   )/(mE3*mL3) + 12*(-2*lmE3MR + lmL3MR))/20.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double Xtau2 = pow2(p.Atau - p.mu*p.vu/p.vd);
+   const double mL32 = p.ml2(2,2);
+   const double mE32 = p.me2(2,2);
+   const double mL3 = sqrt(mL32);
+   const double mE3 = sqrt(mE32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   
+   return -c2beta*Xtau2*(3*F4(mL3/mE3) + c2beta*F5(mL3/mE3))/(6.*mE3*mL3) 
+   - c2beta*lmL3MR;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau4(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double Xtau2 = pow2(p.Atau - p.mu*p.vu/p.vd);
+   const double mL32 = p.ml2(2,2);
+   const double mE32 = p.me2(2,2);
+   const double mL3 = sqrt(mL32);
+   const double mE3 = sqrt(mE32);
+   const double lmE3MR = omitLogs*log(mE32 / MR2);
+   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   
+   return (12*mE3*mL3*Xtau2*F1(mL3/mE3) - pow2(Xtau2)*F2(mL3/mE3))/(3.*mE32*mL32)
+   + 2*(lmE3MR + lmL3MR);
+}
+
+double himalaya::ThresholdCalculator::getDeltaG1G1(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmD1MR = omitLogs*log(p.md2(0,0) / MR2);
+   const double lmD2MR = omitLogs*log(p.md2(1,1) / MR2);
+   const double lmD3MR = omitLogs*log(p.md2(2,2) / MR2);
+   const double lmE1MR = omitLogs*log(p.me2(0,0) / MR2);
+   const double lmE2MR = omitLogs*log(p.me2(1,1) / MR2);
+   const double lmE3MR = omitLogs*log(p.me2(2,2) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+   const double lmU1MR = omitLogs*log(p.mu2(0,0) / MR2);
+   const double lmU2MR = omitLogs*log(p.mu2(1,1) / MR2);
+   const double lmU3MR = omitLogs*log(p.mu2(2,2) / MR2);
+   
+   return (-3*lmAMR - 2*(lmD1MR + lmD2MR + lmD3MR + 3*(lmE1MR + lmE2MR + lmE3MR)
+      ) - 3*(lmL1MR + lmL2MR + lmL3MR) - lmQ1MR - lmQ2MR - lmQ3MR - 12*lmUMR - 8
+      *(lmU1MR + lmU2MR + lmU3MR))/60.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaG2G2(int omitLogs){
+   const double MR2 = pow2(p.scale);
+   const double lm2MR = omitLogs*log(pow2(p.M2) / MR2);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+
+   return (4 - 8*lm2MR - lmAMR - lmL1MR - lmL2MR - lmL3MR - 3*(lmQ1MR + lmQ2MR 
+      + lmQ3MR) - 4*lmUMR)/12.;
+}
+
+
+double himalaya::ThresholdCalculator::getDeltaVevYt2(int limit){
+   const double Xt2 = pow2(p.At - p.mu*p.vd/p.vu);
+   const double mQ32 = p.mq2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double theta = asin(p.s2t)/2.;
+   const double c2t = cos(2*theta);
+   
+   if(limit == Limits::MQ3_EQ_M3 || limit == Limits::MU3_EQ_M3) limit = Limits::GENERAL;
+   
+   switch (limit){
+      case himalaya::Limits::GENERAL:
+	 return (-2*pow5(mQ32 - mU32)*pow2(p.s2t) + Xt2*((pow2(mQ32) - pow2(mU32))
+	    *(6*mQ32*mU32 + (pow2(mQ32) - 8*mQ32*mU32 + pow2(mU32))*pow2(p.s2t))
+	    - 12*pow2(c2t)*pow2(mQ32)*pow2(mU32)*log(mQ32/mU32)))/(8*mQ32*mU32*
+	    pow3(mQ32 - mU32));
+      default:
+	 return Xt2/(4.*mQ32);
+   }
+}
+
+
+//	one-loop functions from arxiv:1407.4081. Checked.	//
+
+double himalaya::ThresholdCalculator::F1(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return x*log(x2)/(x2 - 1);
+}
+
+double himalaya::ThresholdCalculator::F2(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 6*x2*(2 - 2*x2 + (1 + x2)*log(x2))/pow3(x2 - 1);
+}
+
+double himalaya::ThresholdCalculator::F3(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*x*(5*(1-x2) + (1 + 4*x2)*log(x2))/(3*pow2(x2-1));
+}
+
+double himalaya::ThresholdCalculator::F4(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*x*(x2 - 1 - log(x2))/pow2(x2 -1);
+}
+
+double himalaya::ThresholdCalculator::F5(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 3*x*(1 - pow2(x2) + 2*x2*log(x2))/pow3(1 - x2);
+}
+
+double himalaya::ThresholdCalculator::F6(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return (x2 - 3)/(4.*(1-x2)) + x2*(x2 - 2)*log(x2)/(2*pow2(1 - x2));
+}
+
+double himalaya::ThresholdCalculator::F7(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return -3*(1 - 6*x2 + pow2(x2))/(2*pow2(x2 - 1)) + 3*pow2(x2)*(x2 - 3)
+      *log(x2)/pow3(x2 - 1);
+}
+
+double himalaya::ThresholdCalculator::F8(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 2*(x12 - pow2(x12) + pow2(x12)*log(x12))/pow2(x12 - 1);
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 2*(-1 + x12 + x12*(x12 - 2)*log(x12))/pow2(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return -2 + 2*(pow2(x12)*log(x12)/(x12 -1) - pow2(x22)*log(x22)/(x22 - 1))
+	 /(x12 - x22);
+   }
+}
+
+double himalaya::ThresholdCalculator::F9(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 2*(1 - x12 + x12*log(x12))/pow2(x12 - 1);
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 2*(-1 + x12 - log(x12))/pow2(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
+   }
+}
+
+double himalaya::ThresholdCalculator::f1(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 6*x2*(3+x2)/(7*pow2(x2 - 1)) + 6*pow2(x2)*(x2 - 5)*log(x2)/(7
+      *pow3(x2-1));
+}
+
+double himalaya::ThresholdCalculator::f2(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*x2*(11 + x2)/(9*pow2(x2 - 1)) + 2*pow2(x2)*(5*x2 - 17)*log(x2)/(9*
+      pow3(x2 - 1));
+}
+
+double himalaya::ThresholdCalculator::f3(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*(2 + 9*x2 + pow2(x2))/(3*pow2(x2 - 1)) + 2*x2*(-6 - 7*x2 + pow2(x2))
+      *log(x2)/(3*pow3(x2 - 1));
+}
+
+double himalaya::ThresholdCalculator::f4(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*(6 + 25*x2 + 5*pow2(x2))/(7*pow2(x2 - 1)) + 2*x2*(-18 - 19*x2 
+      + pow2(x2))*log(x2)/(7*pow3(x2 - 1));
+}
+
+double himalaya::ThresholdCalculator::f5(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 3*(-1 + x1 + 2*x12 - pow2(x12) - pow5(x1) + (pow3(x1) + pow5(x1))
+	 *log(x12))/(4*pow3(x1 - 1)*pow2(1 + x1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 3/4.*(-1 - 5*x12 + 5*pow2(x12) + pow3(x12) + x12*(-3 - 6*x12 + pow2(x12))
+	 *log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 3/4.*((1 - x12*x22 + pow2(x1 + x2))/((x12 - 1)*(x22 - 1))
+	 + pow3(x1)*(1 + x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+	 - pow3(x2)*(1 + x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+double himalaya::ThresholdCalculator::f6(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return -3*(1 - 2*x12 - 2*pow3(x1) + pow2(x12) + 2*pow5(x1) - 2*pow5(x1)
+	 *log(x12))/(7*pow3(x1 - 1)*pow2(x1 + 1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 6/7.*x12*(-3 + 2*x12 + pow2(x12) + x12*(x12 - 5)*log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 6/7.*((x12 + x1*x2 + x22 - x12*x22)/((x12 - 1)*(x22 - 1)) 
+	 + pow5(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2)) 
+	 - pow5(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+double himalaya::ThresholdCalculator::f7(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return -3*(1 - 2*x1 - 2*x12 + 2*pow3(x1) + pow2(x12) - 2*pow3(x1)*log(x12))
+	 /(pow3(x1 - 1)*pow2(x1 + 1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return -6*(1 + 2*x12 -3*pow2(x12) + x12*(3 + x12)*log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 6*((1 + x1*x2)/((x12 - 1)*(x22 - 1))
+	 + pow3(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+	 - pow3(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+double himalaya::ThresholdCalculator::f8(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 3*(-1 + 4*x12 - 3*pow2(x12) + 2*pow2(x12)*log(x12))
+	 /(4*pow3(x1 - 1)*pow2(1 + x1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 3*x1*(-1 + pow2(x12) - 2*x12*log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 3/2.*((x1 + x2)/((x12 - 1)*(x22 - 1))
+	 + pow2(x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+	 - pow2(x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+//	at*as^n threshold corrections with limits and DR' -> MS shifts		//
 /**
  * 	Returns delta g3_as in the MSbar scheme for a given mass limit
  * 	@param omitLogs an intiger to omit all log mu terms

@@ -4,6 +4,7 @@
 #include "dilog.h"
 #include <cmath>
 #include <limits>
+#include <map>
 
 namespace himalaya{
 namespace mh2_eft{
@@ -45,7 +46,13 @@ namespace mh2_eft{
        *   @param mst1 the mass of the light stop quark
        *   @return delta_Lambda 3L
        */
-     double getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const;
+      double getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const;
+      /**
+       * 	Sets the flag to enable or disable a correction of a given variable
+       * 	@param variable an integer taken from the EFTOrders enum
+       * 	@param enable set to 1 to enable and to 0 to disable the chosen correction
+       */
+      void setCorrectionFlag(int variable, int enable);
    private:
       /**
        * 	Returns a string of "true" or "false" corresponding to the argument
@@ -54,6 +61,7 @@ namespace mh2_eft{
       std::string tf(const bool tf);
       Parameters p{};
       double msq2{std::numeric_limits<double>::quiet_NaN()};
+      std::map<unsigned int, unsigned int> orderMap{};	/** A map which holds all EFTOrders key value pairs to enable/disable certain corrections. */
    };
 }	// mh2_eft
 }	// himalaya
