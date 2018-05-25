@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.1)
 project(Himalaya CXX Fortran)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
+
 # require an Eigen installation
-find_package(Eigen3 REQUIRED)
+find_package(Eigen3 3.0 REQUIRED)
+find_package(Mathematica 8.0)
 
 # if needed, set your Fortran and C++ compiler
 #set (CMAKE_Fortran_COMPILER gfortran)
@@ -70,6 +73,18 @@ add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
 
 # link mh2l and himalaya to the executable
 target_link_libraries(example Himalaya_static DSZ_static)
+
+# create LibrayLink executable
+if(Mathematica_FOUND)
+  set(LL_SRC ${CMAKE_CURRENT_SOURCE_DIR}/source/LibraryLink/Himalaya_LibraryLink.cpp)
+  set(LL_LIB Himalaya_LibraryLink)
+  include_directories(${Mathematica_INCLUDE_DIR})
+  include_directories(${Mathematica_MathLink_INCLUDE_DIR})
+  Mathematica_ADD_LIBRARY(${LL_LIB} ${LL_SRC})
+  target_link_libraries(${LL_LIB} PRIVATE Himalaya_shared DSZ_shared ${Mathematica_MathLink_LIBRARIES})
+  set_target_properties(${LL_LIB} PROPERTIES LINK_FLAGS "${Mathematica_MathLink_LINKER_FLAGS}")
+  Mathematica_ABSOLUTIZE_LIBRARY_DEPENDENCIES(${LL_LIB})
+endif()
 
 # install
 install(
