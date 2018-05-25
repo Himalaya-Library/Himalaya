@@ -1,5 +1,3 @@
-BeginPackage["Himalaya`"];
-
 InitializeHimalaya::usage = "Loads the Himalaya LibraryLink.  After
  InitializeHimalaya[] has been called, the function
  HimalayaCalculateDMh3L[] is available.
@@ -216,5 +214,3 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
     ];
 
 End[];
-
-EndPackage[];
