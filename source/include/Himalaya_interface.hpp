@@ -16,12 +16,12 @@ typedef Eigen::Matrix<double,3,3> RM33;
 struct Parameters {
    // DR-bar parameters
    double scale{};				/**< renormalization scale */
-   double mu{};					/**< mu parameter */
-   double g1{};					/**< gauge coupling g1 */
+   double mu{};					/**< mu parameter, convention of [Phys.Rept. 117 (1985) 75-263] */
+   double g1{};					/**< GUT-normalized gauge coupling g1, with gY = g1*Sqrt[3/5] */
    double g2{};					/**< gauge coupling g2 */
    double g3{};					/**< gauge coupling g3 SU(3) */
-   double vd{};					/**< VEV of down Higgs */
-   double vu{};					/**< VEV of up Higgs */
+   double vd{};					/**< VEV of down Higgs, with v = Sqrt[vu^2 + vd^2] ~ 246 GeV */
+   double vu{};					/**< VEV of up Higgs, with v = Sqrt[vu^2 + vd^2] ~ 246 GeV */
    RM33 mq2{RM33::Zero()};			/**< soft-breaking squared left-handed squark mass parameters */
    RM33 md2{RM33::Zero()};			/**< soft-breaking squared right-handed down-squark mass parameters */
    RM33 mu2{RM33::Zero()};			/**< soft-breaking squared right-handed up-squark mass parameters */
