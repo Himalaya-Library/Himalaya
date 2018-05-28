@@ -178,6 +178,11 @@ namespace himalaya{
        *	@return Returns the corresponding H3m notation of the given hierarchy as a string.
        */
       std::string getH3mHierarchyNotation(int hierarchy) const;
+      /**
+       * 	Set the expasion uncertainty for delta_lambda
+       * 	@param expUncertLambda the expansion uncertainty for delta_lambda
+       */
+      void setExpUncertaintyDeltaLambda(double expUncertLambda);
    private:
       bool isAlphab{false};								/**< the bool isAlphab */
       int hierarchy{};									/**< the suitable hierarchy */
@@ -196,6 +201,7 @@ namespace himalaya{
       double drBarPrimeToMSbarShiftEFT{};						/**< The shift to convert the DR' delta_lambda_EFT to the MS scheme */
       double deltaLambdaXtUncertaintyHimalaya{};					/**< The uncertainty of delta_lambda_Himalaya due to mising Xt terms */
       double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
+      double expansionUncertaintyDeltaLambda{};						/**< The expansion uncertainty of delta_lambda */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

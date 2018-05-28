@@ -226,6 +226,9 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1) 
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
    
+   // set uncertainty of delta_lambda
+   ho.setExpUncertaintyDeltaLambda(ho.getExpUncertainty(3)/sqrt(v2));
+   
    //TODO always calculate delta_lambda in the DR' scheme?
    if (verbose && drPrimeFlag == 0)
       INFO_MSG("3-loop threshold correction Δλ not consistent in the H3m renormalization scheme!");

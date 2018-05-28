@@ -247,7 +247,8 @@ void himalaya::HierarchyObject::setDeltaLambdaXtUncertaintyHimalaya(double uncer
  */
 double himalaya::HierarchyObject::getDeltaLambdaUncertaintyHimalaya() const {
    return std::abs(getDeltaLambdaEFT() - getDeltaLambdaHimalaya()) 
-      + std::abs(deltaLambdaXtUncertaintyHimalaya);
+      + std::abs(deltaLambdaXtUncertaintyHimalaya)
+      + std::abs(expansionUncertaintyDeltaLambda);
 }
 
 /**
@@ -263,8 +264,8 @@ void himalaya::HierarchyObject::setDeltaLambdaXtUncertaintyEFT(double uncertaint
  *	TODO: the difference should only be taken up to O(Xt^3/Xt^4) depending on the chosen hierarchy
  */
 double himalaya::HierarchyObject::getDeltaLambdaUncertaintyEFT() const {
-   return std::abs(getDeltaLambdaEFT() - getDeltaLambdaHimalaya())
-      + std::abs(deltaLambdaXtUncertaintyEFT);
+   return std::abs(deltaLambdaXtUncertaintyEFT)
+      + std::abs(expansionUncertaintyDeltaLambda);
 }
 
 /**
@@ -296,6 +297,15 @@ void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftEFT(double shift){
 double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftEFT() const{
    return drBarPrimeToMSbarShiftEFT;
 }
+
+/**
+ * 	Set the expasion uncertainty for delta_lambda
+ * 	@param expUncertLambda the expansion uncertainty for delta_lambda
+ */
+void himalaya::HierarchyObject::setExpUncertaintyDeltaLambda(double expUncertLambda){
+   expansionUncertaintyDeltaLambda = expUncertLambda;
+}
+
 
 /**
  * 	Sorts a vector.
