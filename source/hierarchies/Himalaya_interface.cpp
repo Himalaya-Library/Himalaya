@@ -93,6 +93,14 @@ double Parameters::calculateMsq2() const
  */
 void Parameters::validate(bool verbose)
 {
+   // check if soft-breaking parameters are greater than zero
+   if (mq2.minCoeff() < 0. || md2.minCoeff() < 0. || mu2.minCoeff() < 0. ||
+       ml2.minCoeff() < 0. || me2.minCoeff() < 0.) {
+      throw std::runtime_error(
+         "Soft-breaking squared sfermion mass parameters "
+         "must be greater than zero!");
+   }
+
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)) {
       const double tan_beta = vu / vd;
