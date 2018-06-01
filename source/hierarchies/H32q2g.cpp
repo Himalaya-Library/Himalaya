@@ -53,13 +53,13 @@ himalaya::H32q2g::H32q2g(const std::map<unsigned int, unsigned int>& flagMap, do
    xDmsqst1 = flagMap.at(ExpansionDepth::xxDmsqst1);
    
    s1 = 
-   #include "../hierarchies/h32q2g/sigS1Full.inc"
+   #include "h32q2g/sigS1Full.inc"
    ;
    s2 = 
-   #include "../hierarchies/h32q2g/sigS2Full.inc"
+   #include "h32q2g/sigS2Full.inc"
    ;
    s12 = 
-   #include "../hierarchies/h32q2g/sigS12Full.inc"
+   #include "h32q2g/sigS12Full.inc"
    ;
 }
 
