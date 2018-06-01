@@ -58,13 +58,13 @@ himalaya::H9::H9(const std::map<unsigned int, unsigned int>& flagMap, double Al4
    xMgl = flagMap.at(ExpansionDepth::xxMgl);
    
    s1 = 
-   #include "h9/sigS1Full.inc"
+   #include "../hierarchies/h9/sigS1Full.inc"
    ;
    s2 = 
-   #include "h9/sigS2Full.inc"
+   #include "../hierarchies/h9/sigS2Full.inc"
    ;
    s12 = 
-   #include "h9/sigS12Full.inc"
+   #include "../hierarchies/h9/sigS12Full.inc"
    ;
 }
 

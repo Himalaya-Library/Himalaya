@@ -59,13 +59,13 @@ himalaya::H5g1::H5g1(const std::map<unsigned int, unsigned int>& flagMap, double
    xMsq = flagMap.at(ExpansionDepth::xxMsq);
    
    s1 = 
-   #include "h5g1/sigS1Full.inc"
+   #include "../hierarchies/h5g1/sigS1Full.inc"
    ;
    s2 = 
-   #include "h5g1/sigS2Full.inc"
+   #include "../hierarchies/h5g1/sigS2Full.inc"
    ;
    s12 = 
-   #include "h5g1/sigS12Full.inc"
+   #include "../hierarchies/h5g1/sigS12Full.inc"
    ;
 }
 

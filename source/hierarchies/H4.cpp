@@ -47,13 +47,13 @@ himalaya::H4::H4(const std::map<unsigned int, unsigned int>& flagMap, double Al4
    xMsusy = flagMap.at(ExpansionDepth::xxMsusy);
    
    s1 = 
-   #include "h4/sigS1Full.inc"
+   #include "../hierarchies/h4/sigS1Full.inc"
    ;
    s2 = 
-   #include "h4/sigS2Full.inc"
+   #include "../hierarchies/h4/sigS2Full.inc"
    ;
    s12 = 
-   #include "h4/sigS12Full.inc"
+   #include "../hierarchies/h4/sigS12Full.inc"
    ;
 }
 
