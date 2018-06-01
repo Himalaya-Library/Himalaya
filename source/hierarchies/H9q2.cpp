@@ -60,13 +60,13 @@ himalaya::H9q2::H9q2(const std::map<unsigned int, unsigned int>& flagMap, double
    xMgl = flagMap.at(ExpansionDepth::xxMgl);
    
    s1 = 
-   #include "../hierarchies/h9q2/sigS1Full.inc"
+   #include "hierarchies/h9q2/sigS1Full.inc"
    ;
    s2 = 
-   #include "../hierarchies/h9q2/sigS2Full.inc"
+   #include "hierarchies/h9q2/sigS2Full.inc"
    ;
    s12 = 
-   #include "../hierarchies/h9q2/sigS12Full.inc"
+   #include "hierarchies/h9q2/sigS12Full.inc"
    ;
 }
 

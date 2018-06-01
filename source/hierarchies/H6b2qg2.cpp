@@ -58,13 +58,13 @@ himalaya::H6b2qg2::H6b2qg2(const std::map<unsigned int, unsigned int>& flagMap, 
    xMst = flagMap.at(ExpansionDepth::xxMst);
    
    s1 = 
-   #include "../hierarchies/h6b2qg2/sigS1Full.inc"
+   #include "hierarchies/h6b2qg2/sigS1Full.inc"
    ;
    s2 = 
-   #include "../hierarchies/h6b2qg2/sigS2Full.inc"
+   #include "hierarchies/h6b2qg2/sigS2Full.inc"
    ;
    s12 = 
-   #include "../hierarchies/h6b2qg2/sigS12Full.inc"
+   #include "hierarchies/h6b2qg2/sigS12Full.inc"
    ;
 }
 

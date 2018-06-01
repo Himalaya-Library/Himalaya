@@ -56,13 +56,13 @@ himalaya::H3q22g::H3q22g(const std::map<unsigned int, unsigned int>& flagMap, do
    
    
    s1 = 
-   #include "../hierarchies/h3q22g/sigS1Full.inc"
+   #include "hierarchies/h3q22g/sigS1Full.inc"
    ;
    s2 = 
-   #include "../hierarchies/h3q22g/sigS2Full.inc"
+   #include "hierarchies/h3q22g/sigS2Full.inc"
    ;
    s12 = 
-   #include "../hierarchies/h3q22g/sigS12Full.inc"
+   #include "hierarchies/h3q22g/sigS12Full.inc"
    ;
 }
 
