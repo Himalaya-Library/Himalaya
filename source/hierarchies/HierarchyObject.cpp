@@ -206,7 +206,7 @@ double himalaya::HierarchyObject::getDeltaLambdaHimalaya() const{
 
 /**
  * 	Sets the delta_lambda at 3-loop order with EFT logs.
- * 	@param zeta delta_lambda at 3-loop order.
+ * 	@param deltaLambda delta_lambda at 3-loop order.
  */
 void himalaya::HierarchyObject::setDeltaLambdaEFT(double deltaLambda){
    this -> deltaLambdaEFT = deltaLambda;
@@ -221,7 +221,7 @@ double himalaya::HierarchyObject::getDeltaLambdaEFT() const{
 
 /**
  * 	Sets the constant part of delta_lambda at 3-loop order.
- * 	@param zeta constant part of delta_lambda at 3-loop order.
+ * 	@param deltaLambda constant part of delta_lambda at 3-loop order.
  */
 void himalaya::HierarchyObject::setDeltaLambdaNonLog(double deltaLambda){
    deltaLambdaNonLog = deltaLambda;

@@ -6,9 +6,9 @@
 
 namespace himalaya {
 
-typedef Eigen::Matrix<double,2,1> V2;
-typedef Eigen::Matrix<double,2,2> RM22;
-typedef Eigen::Matrix<double,3,3> RM33;
+typedef Eigen::Matrix<double,2,1> V2;   ///< real 2-vector
+typedef Eigen::Matrix<double,2,2> RM22; ///< real 2x2 matrix
+typedef Eigen::Matrix<double,3,3> RM33; ///< real 3x3 matrix
 
 /**
  * 	The Himalaya interface struct
@@ -51,10 +51,11 @@ struct Parameters {
    // integer flag to set mass limit
    int massLimit3LThreshold{}; 			/**< an integer flag to set the mass limit */
 
-   double calculateMsq2() const;                /** calculates average light squark mass squared */
-   void validate(bool verbose);                 /** validates the parameter set */
+   double calculateMsq2() const;                /**< calculates average light squark mass squared */
+   void validate(bool verbose);                 /**< validates the parameter set */
 };
 
+/// prints the Parameters struct to a stream
 std::ostream& operator<<(std::ostream&, const Parameters&);
 
 }	//	himalaya

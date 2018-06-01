@@ -58,7 +58,7 @@ const std::map<int, int> hierarchyMap = {
 /**
  * 	Constructor 
  * 	@param p_ a HimalayaInterface struct
- * 	@param verbose a bool which suppresses the information of the calculation if set to flase
+ * 	@param verbose_ suppress informative output during the calculation, if set to false
  */
 himalaya::HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 						   const bool verbose_)
