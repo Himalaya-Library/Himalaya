@@ -101,6 +101,9 @@ void Parameters::validate(bool verbose)
          "must be greater than zero!");
    }
 
+   // force gluino mass to be positive
+   MG = std::abs(MG);
+
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)) {
       const double tan_beta = vu / vd;
