@@ -182,7 +182,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs,
 
    // Loop factor
    const double k = 1/pow2(4.*Pi);
-   
+
    return dmh2yt4 + k*(pow2(p.g1*p.g2)*dmh2g12g22 + pow4(p.g1)*dmh2g14 + pow4(p.g2)*
       dmh2g24 + pow2(p.g1*yb)*dmh2g12yb2 + pow2(p.g2*yb)*dmh2g22yb2 + pow4(yb)*
       dmh2yb4 + pow2(p.g1*ytau)*dmh2g12ytau2 + pow2(p.g2*ytau)*dmh2g22ytau2 + 
@@ -304,7 +304,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    
    // Loop factor
    const double k2 = 1/pow4(4.*Pi);
-   
+
    return k2*(g32*yb4*dmh2yb4g32 + yb6*dmh2yb6 + yt6*dmh2yt6 + yb4*ytau2
       *dmh2yb4ytau2 + yt4*ytau2*dmh2yt4ytau2 + ytau6*dmh2ytau6 + yt2*yb4
       *dmh2yt2yb4 + yt4*yb2*dmh2yt4yb2) + dmh2yt4g32;

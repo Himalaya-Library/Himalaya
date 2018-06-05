@@ -1420,8 +1420,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs){
    
    const double MR2 = pow2(p.scale);
    const double lMR = omitLogs*log(MR2);
-   const double mL32 = p.ml2(2,2);
-   const double mE32 = p.me2(2,2);
+   const double mL32 = p.ml2(2,2)*(1+0.02);
+   const double mE32 = p.me2(2,2)*(1-0.02);
    const double mL3 = sqrt(mL32);
    const double mE3 = sqrt(mE32);
    const double mA = p.MA;
