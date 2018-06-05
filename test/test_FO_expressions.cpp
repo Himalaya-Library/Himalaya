@@ -66,7 +66,7 @@ TEST_CASE("test_FO_expansions")
       const auto thloMat = hc.calculateHierarchy(ho, 0, 0, 1);
       ho.setMDRFlag(0);
       hc.calculateHierarchy(ho, 0, 0, 1);
-      const auto thlomh2 = ho.getDeltaLambdaHimalaya();
+      const auto thlomh2 = ho.getDeltaLambdaH3m();
       const auto hier_str = ho.getH3mHierarchyNotation(i);
 
       INFO("Checking hierarchy " << i << " (" << hier_str << ")");
@@ -81,10 +81,10 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(twloMat(1,0),  11.12436787252288, 1e-5);
          CHECK_CLOSE(twloMat(1,1),  1476.660068002361, 1e-5);
 
-         CHECK_CLOSE(thloMat(0,0), 1.0968567486, 2e-6);
-         CHECK_CLOSE(thloMat(1,0), 9.9863988373, 2e-6);
-         CHECK_CLOSE(thloMat(1,1), 370.2497376245, 2e-6);
-	 CHECK_CLOSE(thlomh2, 7795.2648812663, eps);
+         CHECK_CLOSE(thloMat(0,0), 0.9259290788, 2e-6);
+         CHECK_CLOSE(thloMat(1,0), 10.2799042295, 2e-6);
+         CHECK_CLOSE(thloMat(1,1), 370.7163915042, 2e-6);
+	 CHECK_CLOSE(thlomh2, 7971.492926307, eps);
 	 break;
       case Hierarchies::h32q2g:
          CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
@@ -97,8 +97,8 @@ TEST_CASE("test_FO_expansions")
 
          CHECK_CLOSE(thloMat(0,0), 1.1133090886, eps);
          CHECK_CLOSE(thloMat(1,0), 9.9034479467, eps);
-         CHECK_CLOSE(thloMat(1,1), 369.7403848369, eps);
-	 CHECK_CLOSE(thlomh2, 7669.3503432717, eps);
+         CHECK_CLOSE(thloMat(1,1), 370.8935498384, eps);
+	 CHECK_CLOSE(thlomh2, 7902.0277533642, eps);
          break;
       case Hierarchies::h3q22g:
          CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
@@ -109,10 +109,10 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(twloMat(1,0),  11.26755617866339, eps);
          CHECK_CLOSE(twloMat(1,1),  1477.465656153518, eps);
 
-         CHECK_CLOSE(thloMat(0,0), 1.0586966107, eps);
-         CHECK_CLOSE(thloMat(1,0), 10.0137901285, eps);
-         CHECK_CLOSE(thloMat(1,1), 370.3298328917, eps);
-	 CHECK_CLOSE(thlomh2, 7823.7394599611, eps);
+         CHECK_CLOSE(thloMat(0,0), 0.8877658852, eps);
+         CHECK_CLOSE(thloMat(1,0), 10.3072252597, eps);
+         CHECK_CLOSE(thloMat(1,1), 370.7968728561, eps);
+	 CHECK_CLOSE(thlomh2, 8000.0243821962, eps);
          break;
       case Hierarchies::h4:
          CHECK_CLOSE(oloMat(0,0),                 0, eps);
@@ -140,7 +140,7 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(thloMat(0,0),  2442.1147633261, eps);
          CHECK_CLOSE(thloMat(1,0), -3859.9417043341, eps);
          CHECK_CLOSE(thloMat(1,1),  60592.9761507541  , eps);
-	 CHECK_CLOSE(thlomh2, 12162348.7576116472, eps);
+	 CHECK_CLOSE(thlomh2, 11229598.8300867677, eps);
          break;
       case Hierarchies::h5g1:
          CHECK_CLOSE(oloMat(0,0),  15921.69462848581, eps);
@@ -250,9 +250,9 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(twloMat(1,1), -797.8089039452509, eps);
 
          CHECK_CLOSE(thloMat(0,0),  132.8596207671, eps);
-         CHECK_CLOSE(thloMat(1,0), -171.9336292282, eps);
-         CHECK_CLOSE(thloMat(1,1), -800.8490813068, eps);
-	 CHECK_CLOSE(thlomh2, -75581.3803478469, eps);
+         CHECK_CLOSE(thloMat(1,0), -171.9677397533, eps);
+         CHECK_CLOSE(thloMat(1,1), -799.518525656, eps);
+	 CHECK_CLOSE(thlomh2, -75348.7029377545, eps);
          break;
       case Hierarchies::h9q2:
          CHECK_CLOSE(oloMat(0,0), -1033.437882123761, eps);
@@ -263,10 +263,10 @@ TEST_CASE("test_FO_expansions")
          CHECK_CLOSE(twloMat(1,0), -554.6021924866435, eps);
          CHECK_CLOSE(twloMat(1,1), -797.8089039452509, eps);
 
-         CHECK_CLOSE(thloMat(0,0),  132.636999704, eps);
-         CHECK_CLOSE(thloMat(1,0), -171.4720210516, eps);
-         CHECK_CLOSE(thloMat(1,1), -800.965185815, eps);
-	 CHECK_CLOSE(thlomh2, -74923.2073454201, eps);
+         CHECK_CLOSE(thloMat(0,0),  131.9045772644, eps);
+         CHECK_CLOSE(thloMat(1,0), -170.414374683, eps);
+         CHECK_CLOSE(thloMat(1,1), -799.1630905316, eps);
+	 CHECK_CLOSE(thlomh2, -73583.5048616582, eps);
          break;
       default:
          REQUIRE_FALSE_MESSAGE(false, "unknown hierarchy!");

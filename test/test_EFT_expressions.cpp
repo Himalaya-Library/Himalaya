@@ -28,11 +28,16 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
    }
    
    {
+      mhc.setCorrectionFlag(himalaya::EFTOrders::G32YB4, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YB6, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YT6, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU2YB4, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
       const double delta_mh_2l = mhc.getDeltaMh2EFT2Loop(1, 1);
-      const double susy_logs_2l = mhc.getDeltaMh2EFT2Loop(0, 1);
       const double pref = 1./pow4(4*Pi) * pow2(p.Mt * yt * p.g3);
       CHECK_CLOSE(delta_mh_2l, pref*778.7287955, eps);
-      CHECK_CLOSE(susy_logs_2l, pref*19.92610215, eps);
    }
    
    {

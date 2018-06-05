@@ -207,6 +207,60 @@ namespace himalaya{
        */
       double getDeltaVevYt2(int limit);
       /**
+       * 	Returns delta_yt_yt
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_yt_yt
+       */
+      double getDeltaYtYt(int omitLogs);
+      /**
+       * 	Returns delta_ytau_ytau
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_ytau_ytau
+       */
+      double getDeltaYtauYtau(int omitLogs);
+      /**
+       * 	Returns delta_yt_yb
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_yt_yb
+       */
+      double getDeltaYtYb(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yb4_g32
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yb4_g32
+       */
+      double getDeltaLambdaYb4G32(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yb6
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yb6
+       */
+      double getDeltaLambdaYb6(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yt6
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yt6
+       */
+      double getDeltaLambdaYt6(int omitLogs);
+      /**
+       * 	Returns delta_lambda_ytau6
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_ytau6
+       */
+      double getDeltaLambdaYtau6(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yt2_yb4
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yt2_yb4
+       */
+      double getDeltaLambdaYt2Yb4(int omitLogs);
+      /**
+       * 	Returns delta_lambda_yt4_yb2
+       * 	@param omitLogs an integer key to omit all mu terms
+       * 	@return delta_lambda_yt4_yb2
+       */
+      double getDeltaLambdaYt4Yb2(int omitLogs);
+      /**
        * 	One-loop function F1 of arxiv:1407.4081
        * 	@param x a mass ratio
        */
@@ -297,6 +351,26 @@ namespace himalaya{
        * 	@param x2 a mass ratio
        */
       double f8(double x1, double x2);
+      /**
+       * 	Delta function from hep-ph/0907.47682v1
+       * 	@param x a mass ratio
+       * 	@param y a mass ratio
+       * 	@param z a mass ratio
+       */
+      double deltaxyz(double x, double y, double z);
+      /**
+      * \f$\Phi(x,y,z)\f$ function.  The arguments x, y and z are
+      * interpreted as squared masses.
+      *
+      * Davydychev and Tausk, Nucl. Phys. B397 (1993) 23
+      *
+      * @param x squared mass
+      * @param y squared mass
+      * @param z squared mass
+      *
+      * @return \f$\Phi(x,y,z)\f$
+      */
+      double phixyz(double x, double y, double z);
       /**
        * 	Checks if a threshold correction can be used in the general mass case
        * 	@param exact the threshold correction in the general mass case

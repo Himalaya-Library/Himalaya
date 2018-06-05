@@ -207,6 +207,52 @@ himalaya::Parameters setup_low_MS_large_xt() {
    return pars;
 }
 
+himalaya::Parameters test_large_delta(){
+   himalaya::Parameters p;
+   
+   p.scale = 1000;
+   p.mu    = 500;
+   p.g3    = 1.05687;
+   p.vd    = 24.2549;
+   p.vu    = 242.549;
+   p.mq2   << 250000, 0, 0, 0, 250000, 0, 0, 0, 250000;
+   p.md2   << 250000, 0, 0, 0, 250000, 0, 0, 0, 250000;
+   p.mu2   << 250000, 0, 0, 0, 250000, 0, 0, 0, 250000;
+   p.At    = 1274.74;
+   p.Ab    = 0;
+   p.MG    = 2000;
+   p.MW    = 77.7865;
+   p.MZ    = 89.4409;
+   p.Mt    = 146.885;
+   p.Mb    = 2.37645;
+   p.MA    = 500;
+   
+   return p;
+}
+
+himalaya::Parameters test_largest_delta(){
+   himalaya::Parameters p;
+   
+   p.scale = 100000;
+   p.mu    = 50000;
+   p.g3    = 0.873023;
+   p.vd    = 23.845;
+   p.vu    = 238.45;
+   p.mq2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 4e+10;
+   p.md2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 2.5e+09;
+   p.mu2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 4e+10;
+   p.At    = 494898;
+   p.Ab    = 0;
+   p.MG    = 50000;
+   p.MW    = 73.8172;
+   p.MZ    = 86.2444;
+   p.Mt    = 120.68;
+   p.Mb    = 1.85638;
+   p.MA    = 50000;
+
+return p;
+}
+
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
@@ -214,7 +260,9 @@ int main() {
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
 	 setup_HSSUSY_minmix(),
-	 setup_low_MS_large_xt()
+	 setup_low_MS_large_xt(),
+	 test_large_delta(),
+	 test_largest_delta()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator
@@ -225,9 +273,6 @@ int main() {
 	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, himalaya::RenSchemes::DRBARPRIME);
 
 	 std::cout << hoTop << "\n";
-	 
-	 /*std::cout << hoTop.getDeltaLambdaHimalaya() + hoTop.getDRbarPrimeToMSbarShiftHimalaya() << " " <<
-	    hoTop.getDeltaLambdaEFT() + hoTop.getDRbarPrimeToMSbarShiftEFT()<< "\n";*/
 
 	 // bottom and MDR'
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::DRBARPRIME);

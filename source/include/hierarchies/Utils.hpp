@@ -46,5 +46,7 @@ template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
 template <typename T> T power10(T x) { return x*x*x*x*x*x*x*x*x*x; }
 template <typename T> T pow11(T x) { return x*x*x*x*x*x*x*x*x*x*x; }
 template <typename T> T pow12(T x) { return x*x*x*x*x*x*x*x*x*x*x*x; }
+template <typename T> T pow13(T x) { return x*x*x*x*x*x*x*x*x*x*x*x*x; }
+template <typename T> T pow14(T x) { return x*x*x*x*x*x*x*x*x*x*x*x*x*x; }
 
 } // namespace himalaya

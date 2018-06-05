@@ -40,42 +40,87 @@ himalaya::H4::H4(const std::map<unsigned int, unsigned int>& flagMap, double Al4
    shiftst1 = mdrFlag;
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
+   this -> oneLoopFlag = oneLoopFlag;
+   this -> twoLoopFlag = twoLoopFlag;
+   this -> threeLoopFlag = threeLoopFlag;
+   this -> Al4p = Al4p;
    // expansion flags
    xAt = flagMap.at(ExpansionDepth::xxAt);
    xMsq = flagMap.at(ExpansionDepth::xxMsq);
    xlmMsusy = flagMap.at(ExpansionDepth::xxlmMsusy);
    xMsusy = flagMap.at(ExpansionDepth::xxMsusy);
-   
-   s1 = 
-   #include "hierarchies/h4/sigS1Full.inc"
-   ;
-   s2 = 
-   #include "hierarchies/h4/sigS2Full.inc"
-   ;
-   s12 = 
-   #include "hierarchies/h4/sigS12Full.inc"
-   ;
 }
 
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H4'
  */
 double himalaya::H4::getS1() const {
-   return s1;
+   return (2*threeLoopFlag*xAt*pow2(Al4p)*pow2(At)*(349 - 56*lmMsusy + 24*lmMt -
+        282*z3 - 32*pow2(lmMsusy))*pow4(Mt)*(pow12(Sbeta) + pow2(Cbeta)*(pow2(
+        Sbeta) + pow4(Sbeta) + pow6(Sbeta) + pow8(Sbeta) + power10(Sbeta))))/(
+        27.*pow2(Cbeta)*pow2(Msusy));
 }
 
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H4'
  */
 double himalaya::H4::getS2() const {
-   return s2;
+   return -(pow4(Mt)*((lmMsusy - lmMt)*oneLoopFlag + (8*Al4p*twoLoopFlag*(At*(1 +
+        lmMsusy + lmMt) + Msusy*(1 + lmMsusy - lmMt + 2*lmMsusy*lmMt + pow2(
+        lmMsusy) - 3*pow2(lmMt))))/(3.*Msusy) + threeLoopFlag*pow2(Al4p)*(
+        204.74074074074073 + (800*lmMsq)/9. + (4*(1 - 2*lmMsusy)*shiftst3)/3. -
+        (400*pow2(lmMsq))/9. + (8*lmMsusy*(-554 + 270*lmMsq + 135*pow2(lmMsq)))
+        /81. - (1288*pow2(lmMsusy))/27. - (8*lmMt*(125 - 71*lmMsusy + 30*lmMsq*
+        (-7 + 3*lmMsusy) + 39*pow2(lmMsusy)))/27. + (8*(-18 + 5*lmMsq + 23*
+        lmMsusy)*pow2(lmMt))/3. + (8*(10589 + lmMsusy*(4910 - 3750*lmMt) -
+        2250*lmMt + 10*lmMsq*(-266 + 285*lmMsusy + 375*lmMt) - 3300*pow2(lmMsq)
+        + 450*pow2(lmMsusy))*pow2(Msusy))/(675.*pow2(Msq)) + (2*(-636*At*Msusy*
+        z3 + xAt*pow2(At)*(-349 + 56*lmMsusy - 24*lmMt + 282*z3 + 32*pow2(
+        lmMsusy)) - 180*(-1 + 2*lmMsq)*(-2 + shiftst1 + shiftst2)*xMsq*pow2(
+        Msq) - 24*(-1 + 6*lmMsusy - 6*lmMt)*z3*pow2(Msusy)))/(27.*pow2(Msusy))
+        - (40*pow3(lmMsq))/9. + 16*xlmMsusy*pow3(lmMsusy) - (184*pow3(lmMt))/3.
+         - (4*(-85750*At*(-33 + 2*lmMsusy*(-11 + 6*lmMt) - 2*lmMsq*(-11 + 6*
+        lmMsusy + 6*lmMt) + 12*pow2(lmMsq)) + Msusy*(-5638838 + 385875*lmMt -
+        70*lmMsq*(-47521 + 20685*lmMsusy + 25725*lmMt) + 35*lmMsusy*(-106067 +
+        51450*lmMt) + 1624350*pow2(lmMsq) - 176400*pow2(lmMsusy)))*pow3(Msusy))
+        /(231525.*pow4(Msq)) - (10*(-222264*At*(-17 + 2*lmMsusy*(-7 + 3*lmMt) -
+        2*lmMsq*(-7 + 3*lmMsusy + 3*lmMt) + 6*pow2(lmMsq)) + Msusy*(-6262157 +
+        222264*lmMt + 252*lmMsusy*(-20233 + 7938*lmMt) - 252*lmMsq*(-19351 +
+        6678*lmMsusy + 7938*lmMt) + 1841616*pow2(lmMsq) - 158760*pow2(lmMsusy))
+        )*pow5(Msusy))/(750141.*pow6(Msq)) + (xMsusy*(76.53372960293683 - (
+        687056*lmMsq)/9801. + (71.76726864605652 + (700*lmMsq)/33.)*lmMsusy + (
+        5*(-3 + 44*lmMsq - 44*lmMsusy)*lmMt)/9. - (2260*pow2(lmMsq))/99. + (
+        160*pow2(lmMsusy))/99.)*pow8(Msusy) + (2*At*(240*(-9 + lmMsq*(4 - 3*
+        lmMsusy - 3*lmMt) + lmMsusy*(-4 + 3*lmMt) + 3*pow2(lmMsq))*pow2(Msusy)*
+        pow6(Msq) + 8*(104 + 157*lmMsusy + 84*lmMt + 24*lmMsusy*lmMt - 30*
+        lmMsq*(5 + 6*lmMsusy + 3*lmMt) + 135*pow2(lmMsq) + 228*pow2(lmMsusy) +
+        108*pow2(lmMt))*pow8(Msq) + 5*(-419 + 36*lmMsusy*(-11 + 4*lmMt) - 36*
+        lmMsq*(-11 + 4*lmMsusy + 4*lmMt) + 144*pow2(lmMsq))*pow8(Msusy)))/(81.*
+        Msusy) - (8*z2*(100*pow4(Msusy)*pow6(Msq) + 70*pow4(Msq)*pow6(Msusy) +
+        3*(30 + 20*lmMsq - 10*(lmMsusy + lmMt) + shiftst3)*pow2(Msusy)*pow8(
+        Msq) - 20*At*(2*pow3(Msusy)*(pow2(Msusy)*pow4(Msq) + pow2(Msq)*pow4(
+        Msusy) + pow6(Msq) + pow6(Msusy)) + 3*Msusy*pow8(Msq)) + 60*pow2(Msq)*
+        pow8(Msusy) + 30*(-2 + shiftst1 + shiftst2)*xMsq*power10(Msq) + 55*
+        xMsusy*power10(Msusy)))/(9.*pow2(Msusy)))/pow8(Msq))));
 }
 
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H4'
  */
 double himalaya::H4::getS12() const {
-   return s12;
+   return (Al4p*At*Sbeta*pow4(Mt)*(108*(1 + lmMsusy + lmMt)*Msusy*twoLoopFlag*pow8(
+        Msq) - Al4p*threeLoopFlag*(60*(33 - 22*lmMsq + 2*lmMsusy*(11 - 6*lmMt)
+        + 12*lmMsq*(lmMsusy + lmMt) - 24*z2 - 12*pow2(lmMsq))*pow4(Msq)*pow5(
+        Msusy) + 240*(9 - 4*lmMsq + lmMsusy*(4 - 3*lmMt) + 3*lmMsq*(lmMsusy +
+        lmMt) - 6*z2 - 3*pow2(lmMsq))*pow3(Msusy)*pow6(Msq) + 120*(17 - 14*
+        lmMsq + 2*lmMsusy*(7 - 3*lmMt) + 6*lmMsq*(lmMsusy + lmMt) - 12*z2 - 6*
+        pow2(lmMsq))*pow2(Msq)*pow7(Msusy) - 2*(3*At*xAt*(-349 + 56*lmMsusy -
+        24*lmMt + 282*z3 + 32*pow2(lmMsusy)) + 2*Msusy*(208 + 314*lmMsusy + 24*
+        (7 + 2*lmMsusy)*lmMt - 60*lmMsq*(5 + 6*lmMsusy + 3*lmMt) + 540*z2 -
+        477*z3 + 270*pow2(lmMsq) + 456*pow2(lmMsusy) + 216*pow2(lmMt)))*pow8(
+        Msq) + 5*(419 + 36*lmMsusy*(11 - 4*lmMt) + 36*lmMsq*(-11 + 4*lmMsusy +
+        4*lmMt) - 288*z2 - 144*pow2(lmMsq))*pow9(Msusy))))/(81.*Cbeta*pow2(
+        Msusy)*pow8(Msq));
 }
 
 /**

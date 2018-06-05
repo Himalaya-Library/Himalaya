@@ -121,6 +121,13 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 {
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YB6, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YT6, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
 
    return mhc.getDeltaMh2EFT2Loop(1,1);
 }
@@ -136,7 +143,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
 
    const double zeta_3L_const    = ho.getDeltaLambdaNonLog();
    const double zeta_3L_eft      = ho.getDeltaLambdaEFT();
-   const double zeta_3L_himalaya = ho.getDeltaLambdaHimalaya();
+   const double zeta_3L_himalaya = ho.getDeltaLambdaH3m();
    const double v2 = pow2(pars.vu) + pow2(pars.vd);
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
@@ -236,9 +243,9 @@ TEST_CASE("test_lambda_limit_degenerate")
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const auto z2_gen_Himalaya = ho.getDeltaLambdaHimalaya();
+   const auto z2_gen_Himalaya = ho.getDeltaLambdaH3m();
    const auto z2_gen_EFT      = ho.getDeltaLambdaEFT();
-   const auto uncertainty     = ho.getDeltaLambdaUncertaintyHimalaya();
+   const auto uncertainty     = ho.getDeltaLambdaUncertaintyH3m();
 
    INFO("uncertainty: " << uncertainty);
 

@@ -122,6 +122,15 @@ namespace ThresholdVariables{
       G1_G1              = 23,           ///< Flag for g1_g1 threshold correction
       G2_G2              = 24,           ///< Flag for g2_g2 threshold correction
       VEV_YT2            = 25,           ///< Flag for vev_yt2 threshold correction
+      YT_YB              = 26,           ///< Flag for yt_yb threshold correction
+      YT_YT              = 27,           ///< Flag for yt_yt threshold correction
+      YTAU_YTAU          = 28,           ///< Flag for ytau_ytau threshold correction
+      LAMBDA_YB4_G32     = 29,           ///< Flag for yb4_g32 threshold correction
+      LAMBDA_YB6         = 30,           ///< Flag for yb6s threshold correction
+      LAMBDA_YT6         = 31,           ///< Flag for yt6 threshold correction
+      LAMBDA_YTAU6       = 32,           ///< Flag for ytau6 threshold correction
+      LAMBDA_YT2_YB4     = 33,           ///< Flag for yt2_yb4 threshold correction
+      LAMBDA_YT4_YB2     = 34,           ///< Flag for yt4_yb2 threshold correction
       NUMBER_OF_THRESHOLD_VARIALES  ///< Number of threshold variables
    };
 } // namespace ThresholdVariables

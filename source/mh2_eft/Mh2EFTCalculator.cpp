@@ -200,17 +200,114 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    
    using std::log;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
-   const double dytas = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
-
+   // couplings
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   const double g32 = pow2(p.g3);
+   const double yt2 = pow2(sqrt(2.)*p.Mt/p.vu);
+   const double yb2 = pow2(sqrt(2.)*p.Mb/p.vd);
+   const double ytau2 = pow2(sqrt(2.)*p.Mtau/p.vd);
+   const double yt4 = pow2(yt2);
+   const double yb4 = pow2(yb2);
+   const double yt6 = pow3(yt2);
+   const double yb6 = pow3(yb2);
+   const double ytau6 = pow3(ytau2);
+   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double c2beta = cos(2*beta);
+   const double sbeta = sin(beta);
+   const double mhtree = std::abs(c2beta*p.MZ);
+   const double lmhtreeMt = log(pow2(mhtree / p.Mt));
+   const double lmbMt = log(pow2(p.Mb / p.Mt));
+   const double lmtauMt = log(pow2(p.Mtau / p.Mt));
    
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
    
-   return pref*(96 * pow2(lmMt) + (-32 + 48 * dytas) * lmMt - 24 * dytas
+   // Threshold corrections
+   const double dytas = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb4g32 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB4_G32, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb4 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb6 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB6, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb2g12 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb2g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt4 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_AT, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dytyt = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YT_YT, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt6 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT6, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dvyt2 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaytau2g12 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaytau2g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dytauytau = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YTAU_YTAU, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaytau4 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdaytau6 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU6, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt2yb4 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt2g12 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt2g22 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayt4yb2 = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dytyb = thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   
+   // Corrections to Mh
+   const double dmh2yt4g32 = orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
+      + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs));
+	 RenSchemes::DRBARPRIME, omitMSSMLogs)));
+   const double dmh2yb4g32 = orderMap.at(EFTOrders::G32YB4)*(pow4(cbeta)
+      *(dlambdayb4g32 + 32*lmMt*(47 - 24*lmhtreeMt + 12*lmMt))*v2/2.);
+   const double dmh2yb6 = orderMap.at(EFTOrders::YB6)*(pow6(cbeta)*v2*(29 + 2
+      *dlambdayb6 + 4*lmbMt*(-38 + 9*lmbMt) + 6*dlambdayb4*(-1 + lmhtreeMt - lmMt)
+      + 12*(-257 + 72*lmhtreeMt - 36*lmMt)*lmMt - 6*pow2(Pi) - 12*(dlambdayb2g12
+      *pow2(p.g1) + dlambdayb2g22*pow2(p.g2))*v2/pow2(mhtree))/4.);
+   const double dmh2yt6= orderMap.at(EFTOrders::YT6)*(pow4(sbeta)*(24*dytyt*(-6
+      + dlambdayt4 + 12*lmMt) + 113*pow2(sbeta) + 6*(dlambdayt6 + dlambdayt4*(2
+      + 2*dvyt2 - 3*lmMt) - 3*(-2*pow2(lmbMt) - 8*dvyt2*(lmMt - 1) + 6*lmMt*(1
+      + 3*lmMt) + pow2(Pi))*pow2(sbeta))*v2)/12.);
+   const double dmh2yb4ytau2 = orderMap.at(EFTOrders::YTAU2YB4)*(pow6(cbeta)*v2
+      *(dlambdayb4*(lmhtreeMt - 1 - lmMt)*pow2(mhtree) - 48*lmMt*(4 - 2*lmhtreeMt
+      + lmMt)*pow2(mhtree) - 6*(dlambdaytau2g12*pow2(p.g1) + dlambdaytau2g22
+      *pow2(p.g2)))*v2/(2*pow2(mhtree)));
+   const double dmh2yt4ytau2 = 0.;	//??
+   const double dmh2ytau6 = orderMap.at(EFTOrders::YTAU6)*(pow4(cbeta)*v2*(12
+      *dytauytau*(8 + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt) + pow2(cbeta)*(3
+      *dlambdaytau6 + 3*dlambdaytau4*(lmhtreeMt - 1 - lmMt) - 2*(6 + 15*lmMt
+      *(6 - 2*lmhtreeMt + lmMt) + 3*lmtauMt*(3*lmtauMt - 7) + pow2(Pi)) - 6
+      *(dlambdaytau2g12*pow2(p.g1) + dlambdaytau2g22*pow2(p.g2))*v2
+      /pow2(mhtree)))/6.);
+   const double dmh2yt2yb4 = orderMap.at(EFTOrders::YT2YB4)*(pow4(cbeta)*pow2(
+      sbeta)*v2*(pow2(mhtree)*(dlambdayt2yb4 + dlambdayb4*(2 + 2*dvyt2 - 3*lmMt)
+      + 6*(-2*lmbMt + 3*(-9 + 6*lmhtreeMt - 4*lmMt)*lmMt + 4*dvyt2*(1 - lmMt
+      - lmMt) + 2*(5 + pow2(Pi)))) - 6*(dlambdayt2g12*pow2(p.g1) + dlambdayt2g22
+      *pow2(p.g2)*v2))/(2.*pow2(mhtree)));
+   const double dmh2yt4yb2 = orderMap.at(EFTOrders::YB2YT4)*(pow4(sbeta)*v2*(4
+      *dytyb*(-6 + dlambdayt4 + 12*lmMt) + pow2(cbeta)*(dlambdayt4yb2 + 3
+      *dlambdayt4*(lmhtreeMt - 1 - lmMt) - 6*(5 + lmMt*(13 - 6*lmhtreeMt + 3
+      *lmMt) + 2*pow2(Pi))))/2.);
+   
+   // Loop factor
+   const double k2 = 1/pow4(4.*Pi);
+   
+   return k2*(g32*yb4*dmh2yb4g32 + yb6*dmh2yb6 + yt6*dmh2yt6 + yb4*ytau2
+      *dmh2yb4ytau2 + yt4*ytau2*dmh2yt4ytau2 + ytau6*dmh2ytau6 + yt2*yb4
+      *dmh2yt2yb4 + yt4*yb2*dmh2yt4yb2) + dmh2yt4g32;
 }
 
 /**
