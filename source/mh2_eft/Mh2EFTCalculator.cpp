@@ -202,7 +202,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    // couplings
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
-   const double g32 = pow2(p.g3);
+   /*const double g32 = pow2(p.g3);
    const double yt2 = pow2(sqrt(2.)*p.Mt/p.vu);
    const double yb2 = pow2(sqrt(2.)*p.Mb/p.vd);
    const double ytau2 = pow2(sqrt(2.)*p.Mtau/p.vd);
@@ -219,7 +219,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double mhtree = std::abs(c2beta*p.MZ);
    const double lmhtreeMt = log(pow2(mhtree / p.Mt));
    const double lmbMt = log(pow2(p.Mb / p.Mt));
-   const double lmtauMt = log(pow2(p.Mtau / p.Mt));
+   const double lmtauMt = log(pow2(p.Mtau / p.Mt));*/
    
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
@@ -227,7 +227,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    // Threshold corrections
    const double dytas = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb4g32 = thresholdCalculator.getThresholdCorrection(
+   /*const double dlambdayb4g32 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::LAMBDA_YB4_G32, RenSchemes::DRBARPRIME, omitMSSMLogs);
    const double dlambdayb4 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
@@ -264,14 +264,14 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double dlambdayt4yb2 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::LAMBDA_YT4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
    const double dytyb = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);
+      ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);*/
    
    // Corrections to Mh
    const double dmh2yt4g32 = orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
       + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
 	 RenSchemes::DRBARPRIME, omitMSSMLogs)));
-   const double dmh2yb4g32 = orderMap.at(EFTOrders::G32YB4)*(pow4(cbeta)
+   /*const double dmh2yb4g32 = orderMap.at(EFTOrders::G32YB4)*(pow4(cbeta)
       *(dlambdayb4g32 + 32*lmMt*(47 - 24*lmhtreeMt + 12*lmMt))*v2/2.);
    const double dmh2yb6 = orderMap.at(EFTOrders::YB6)*(pow6(cbeta)*v2*(29 + 2
       *dlambdayb6 + 4*lmbMt*(-38 + 9*lmbMt) + 6*dlambdayb4*(-1 + lmhtreeMt - lmMt)
@@ -300,14 +300,14 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double dmh2yt4yb2 = orderMap.at(EFTOrders::YB2YT4)*(pow4(sbeta)*v2*(4
       *dytyb*(-6 + dlambdayt4 + 12*lmMt) + pow2(cbeta)*(dlambdayt4yb2 + 3
       *dlambdayt4*(lmhtreeMt - 1 - lmMt) - 6*(5 + lmMt*(13 - 6*lmhtreeMt + 3
-      *lmMt) + 2*pow2(Pi))))/2.);
+      *lmMt) + 2*pow2(Pi))))/2.);*/
    
    // Loop factor
-   const double k2 = 1/pow4(4.*Pi);
+   //const double k2 = 1/pow4(4.*Pi);
 
-   return k2*(g32*yb4*dmh2yb4g32 + yb6*dmh2yb6 + yt6*dmh2yt6 + yb4*ytau2
+   return /*k2*(g32*yb4*dmh2yb4g32 + yb6*dmh2yb6 + yt6*dmh2yt6 + yb4*ytau2
       *dmh2yb4ytau2 + yt4*ytau2*dmh2yt4ytau2 + ytau6*dmh2ytau6 + yt2*yb4
-      *dmh2yt2yb4 + yt4*yb2*dmh2yt4yb2) + dmh2yt4g32;
+      *dmh2yt2yb4 + yt4*yb2*dmh2yt4yb2)*/ + dmh2yt4g32;
 }
 
 /**
