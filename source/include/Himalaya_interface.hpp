@@ -14,7 +14,7 @@ typedef Eigen::Matrix<double,3,3> RM33; ///< real 3x3 matrix
  * 	The Himalaya interface struct
  */
 struct Parameters {
-   // DR-bar parameters
+   // DR-bar-prime parameters
    double scale{};				/**< renormalization scale */
    double mu{};					/**< mu parameter, convention of [Phys.Rept. 117 (1985) 75-263] */
    double g1{};					/**< GUT-normalized gauge coupling g1, with gY = g1*Sqrt[3/5] */
@@ -27,24 +27,27 @@ struct Parameters {
    RM33 mu2{RM33::Zero()};			/**< soft-breaking squared right-handed up-squark mass parameters */
    RM33 ml2{RM33::Zero()};			/**< soft-breaking squared left-handed slepton mass parameters */
    RM33 me2{RM33::Zero()};			/**< soft-breaking squared right-handed slepton mass parameters */
-   double At{};					/**< trilinear stop-Higgs coupling */
-   double Ab{};					/**< trilinear sbottom-Higgs coupling */
-   double Atau{};				/**< trilinear stau-Higgs coupling */
+   RM33 Au{RM33::Zero()};			/**< trilinear up type squark-Higgs coupling matrix */
+   RM33 Ad{RM33::Zero()};			/**< trilinear down type squark-Higgs coupling matrix */
+   RM33 Ae{RM33::Zero()};			/**< trilinear electron type squark-Higgs coupling matrix */
+   RM33 yu{RM33::Zero()};			/**< up-type yukawa coupling matrix */
+   RM33 yd{RM33::Zero()};			/**< down-type yukawa coupling matrix */
+   RM33 ye{RM33::Zero()};			/**< electron-type yukawa coupling matrix */
 
-   // DR-bar masses
+   // DR-bar-prime masses
    double M1{};					/**< bino */
    double M2{};					/**< wino */
    double MG{};					/**< gluino */
-   double MW{};					/**< W */
-   double MZ{};					/**< Z */
-   double Mt{};					/**< top-quark */
-   double Mb{};					/**< down-quark */
-   double Mtau{};				/**< tau lepton */
+   double MW{std::numeric_limits<double>::quiet_NaN()};		/**< W */
+   double MZ{std::numeric_limits<double>::quiet_NaN()};		/**< Z */
+   double Mt{std::numeric_limits<double>::quiet_NaN()};		/**< top-quark */
+   double Mb{std::numeric_limits<double>::quiet_NaN()};		/**< down-quark */
+   double Mtau{std::numeric_limits<double>::quiet_NaN()};	/**< tau lepton */
    double MA{};					/**< CP-odd Higgs */
    V2 MSt{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< stops */
    V2 MSb{std::numeric_limits<double>::quiet_NaN(), std::numeric_limits<double>::quiet_NaN()};	/**< sbottoms */
 
-   // DR-bar mixing angles
+   // DR-bar-prime mixing angles
    double s2t = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the stop mixing angle */
    double s2b = std::numeric_limits<double>::quiet_NaN();		/**< sine of 2 times the sbottom mixing angle */
 
@@ -53,6 +56,7 @@ struct Parameters {
 
    double calculateMsq2() const;                /**< calculates average light squark mass squared */
    void validate(bool verbose);                 /**< validates the parameter set */
+   RM33 h_svd(RM33 M);				/**< diagonalizes 3x3 matrixes and sorts them */
 };
 
 /// prints the Parameters struct to a stream

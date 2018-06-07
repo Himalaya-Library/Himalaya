@@ -24,8 +24,8 @@ himalaya::Parameters make_point()
    pars.mu2 << 4.00363e+06 , 0, 0,
                0, 4.00363e+06, 0,
                0, 0, 3.99067e+06;
-   pars.Ab = 9996.81;
-   pars.At = 6992.34;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  9996.81;
+   pars.Au << 0, 0, 0, 0, 0, 0, 0, 0,  6992.34;
 
    pars.MA = 1992.14;
    pars.MG = 2000.96;

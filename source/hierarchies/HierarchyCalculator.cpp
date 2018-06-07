@@ -284,7 +284,8 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 const double Mh2l = sortEigenvalues(es2L).at(0);
 
 	 // calculate the expanded 2-loop expression with the specific hierarchy
-	 const Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L + calculateHierarchy(ho, 0, 1, 0));
+	 const Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L 
+	    + calculateHierarchy(ho, 0, 1, 0));
 	 
 	 // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
 	 const double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
@@ -292,11 +293,17 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 // estimate the error
 	 const double twoLoopError = std::abs((Mh2l - Mh2LExpanded));
 
-	 // estimate the uncertainty of the expansion
-	 const double expUncertainty = getExpansionUncertainty(ho, treelvl + Mt41L, 0, 1, 0);
+	 // estimate the uncertainty of the expansion at 2L
+	 const double expUncertainty2L = getExpansionUncertainty(ho, treelvl 
+	    + Mt41L, 0, 1, 0);
+	 
+	 // estimate the uncertainty of the expansion at 3L
+	 const double expUncertainty3L = getExpansionUncertainty(ho, treelvl
+	    + Mt41L + Mt42L, 0, 0, 1); 
 
 	 // add these errors to include the error of the expansion in the comparison
-	 const double currError = sqrt(pow2(twoLoopError) + pow2(expUncertainty));
+	 const double currError = sqrt(pow2(twoLoopError) 
+	    + pow2(expUncertainty2L) + pow2(expUncertainty3L));
 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
@@ -304,7 +311,8 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	    suitableHierarchy = hierarchy;
 	    ho.setAbsDiff2L(twoLoopError);
 	    ho.setRelDiff2L(twoLoopError/Mh2l);
-	    ho.setExpUncertainty(2, expUncertainty);
+	    ho.setExpUncertainty(2, expUncertainty2L);
+	    ho.setExpUncertainty(3, expUncertainty3L);
 	 }
 	 // compare the current error with the last error and choose the hierarchy which fits best (lowest error)
 	 else if(currError < error){
@@ -312,7 +320,8 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	    suitableHierarchy = hierarchy;
 	    ho.setAbsDiff2L(twoLoopError);
 	    ho.setRelDiff2L(twoLoopError/Mh2l);
-	    ho.setExpUncertainty(2, expUncertainty);
+	    ho.setExpUncertainty(2, expUncertainty2L);
+	    ho.setExpUncertainty(3, expUncertainty3L);
 	 }
       }
    }
@@ -392,12 +401,12 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
    // common variables
    double At, Mt, s2t, Mst1 = 0., Mst2 = 0.;
    if (!ho.getIsAlphab()) {
-      At = p.At;
+      At = p.Au(2,2);
       Mt = p.Mt;
       s2t = p.s2t;
    }
    else {
-      At = p.Ab;
+      At = p.Ad(2,2);
       Mt = p.Mb;
       s2t = p.s2b;
    }
@@ -906,7 +915,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::shiftH3mToDRbarPrime(const himala
    // stop masses
    const double Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    const double Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
-   double Xt = p.At - p.mu / Tbeta;
+   double Xt = p.Au(2,2) - p.mu / Tbeta;
    // Hierarchy h4 only covers O(Xt^0)
    if(suitableHierarchy == himalaya::Hierarchies::h4) Xt = 0;
    
@@ -1019,7 +1028,7 @@ double himalaya::HierarchyCalculator::shiftH3mToDRbarPrimeMh2(const himalaya::Hi
    const double Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    const double Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    
-   double Xt = p.At - p.mu / Tbeta;
+   double Xt = p.Au(2,2) - p.mu / Tbeta;
    // Hierarchy h4 only covers O(Xt^0)
    if(suitableHierarchy == himalaya::Hierarchies::h4) Xt = 0;
 
