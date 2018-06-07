@@ -16,9 +16,9 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 #set version number
-set(Himalaya_VERSION_MAJOR 1)
+set(Himalaya_VERSION_MAJOR 2)
 set(Himalaya_VERSION_MINOR 0)
-set(Himalaya_VERSION_RELEASE 1)
+set(Himalaya_VERSION_RELEASE 0)
 
 # set the C++ standard
 set(CMAKE_CXX_STANDARD 11)
