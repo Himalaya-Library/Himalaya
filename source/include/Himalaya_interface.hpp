@@ -30,9 +30,9 @@ struct Parameters {
    RM33 Au{RM33::Zero()};			/**< trilinear up type squark-Higgs coupling matrix */
    RM33 Ad{RM33::Zero()};			/**< trilinear down type squark-Higgs coupling matrix */
    RM33 Ae{RM33::Zero()};			/**< trilinear electron type squark-Higgs coupling matrix */
-   RM33 yu{RM33::Zero()};			/**< up-type yukawa coupling matrix */
-   RM33 yd{RM33::Zero()};			/**< down-type yukawa coupling matrix */
-   RM33 ye{RM33::Zero()};			/**< electron-type yukawa coupling matrix */
+   RM33 Yu{RM33::Zero()};			/**< up-type yukawa coupling matrix */
+   RM33 Yd{RM33::Zero()};			/**< down-type yukawa coupling matrix */
+   RM33 Ye{RM33::Zero()};			/**< electron-type yukawa coupling matrix */
 
    // DR-bar-prime masses
    double M1{};					/**< bino */
