@@ -165,9 +165,9 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    MLPutRuleTo(link, ho.getDMh(2), "Mh22Loop");
    MLPutRuleTo(link, ho.getDMh(3), "Mh23Loop");
    MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
-   MLPutRuleTo(link, ho.getDeltaLambdaHimalaya(), "deltaLambda3LoopHimalayaDRbarPrime");
-   MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftHimalaya(), "deltaLambda3LoopHimalayaShiftDRbarPrimeToMSbar");
-   MLPutRuleTo(link, ho.getDeltaLambdaUncertaintyHimalaya(), "deltaLambda3LoopHimalayaUncertainty");
+   MLPutRuleTo(link, ho.getDeltaLambdaH3m(), "deltaLambda3LoopH3mDRbarPrime");
+   MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftH3m(), "deltaLambda3LoopH3mShiftDRbarPrimeToMSbar");
+   MLPutRuleTo(link, ho.getDeltaLambdaUncertaintyH3m(), "deltaLambda3LoopH3mUncertainty");
    MLPutRuleTo(link, ho.getDeltaLambdaEFT(), "deltaLambda3LoopEFTDRbarPrime");
    MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftEFT(), "deltaLambda3LoopEFTShiftDRbarPrimeToMSbar");
    MLPutRuleTo(link, ho.getDeltaLambdaUncertaintyEFT(), "deltaLambda3LoopEFTUncertainty");
@@ -307,8 +307,8 @@ Data make_data(const std::vector<double>& parsvec)
    for (int i = 0; i < 3; i++)
       for (int k = 0; k < 3; k++)
          pars.mu2(i,k) = parsvec.at(c++);
-   pars.Ab = parsvec.at(c++);
-   pars.At = parsvec.at(c++);
+   pars.Ad(2,2) = parsvec.at(c++);
+   pars.Au(2,2) = parsvec.at(c++);
    pars.MA = parsvec.at(c++);
    pars.MG = parsvec.at(c++);
    pars.MW = parsvec.at(c++);

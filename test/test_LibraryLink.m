@@ -43,9 +43,9 @@ TestPoint[point_, name_] :=
            TestClose[Mh22Loop                                       /. output, Mh22Loop                                       /. (expectedOutput /. point), eps];
            TestClose[Mh23Loop                                       /. output, Mh23Loop                                       /. (expectedOutput /. point), eps];
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
-           TestClose[deltaLambda3LoopHimalayaDRbarPrime             /. output, deltaLambda3LoopHimalayaDRbarPrime             /. (expectedOutput /. point), eps];
-           TestClose[deltaLambda3LoopHimalayaShiftDRbarPrimeToMSbar /. output, deltaLambda3LoopHimalayaShiftDRbarPrimeToMSbar /. (expectedOutput /. point), eps];
-           TestClose[deltaLambda3LoopHimalayaUncertainty            /. output, deltaLambda3LoopHimalayaUncertainty            /. (expectedOutput /. point), eps];
+           TestClose[deltaLambda3LoopH3mDRbarPrime                  /. output, deltaLambda3LoopH3mDRbarPrime                  /. (expectedOutput /. point), eps];
+           TestClose[deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. output, deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. (expectedOutput /. point), eps];
+           TestClose[deltaLambda3LoopH3mUncertainty                 /. output, deltaLambda3LoopH3mUncertainty                 /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopEFTDRbarPrime                  /. output, deltaLambda3LoopEFTDRbarPrime                  /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      /. output, deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopEFTUncertainty                 /. output, deltaLambda3LoopEFTUncertainty                 /. (expectedOutput /. point), eps];
@@ -105,14 +105,14 @@ pointSPS2 = {
         Mh2Tree                                        -> {{2.18023*^06, -227080}, {-227080, 31451.3}},
         Mh21Loop                                       -> {{-2.92153, 100.252}, {100.252, 5277.06}},
         Mh22Loop                                       -> {{-0.307806, 17.7881}, {17.7881, 1256.76}},
-        Mh23Loop                                       -> {{-0.0213027, 5.63268}, {5.63268, 299.769}},
-        expansionUncertainty                           -> {0, 0, 0.0378711, 0.0121494},
-        deltaLambda3LoopHimalayaDRbarPrime             -> -2.3901*^-05,
-        deltaLambda3LoopHimalayaShiftDRbarPrimeToMSbar -> -4.62215*^-05,
-        deltaLambda3LoopHimalayaUncertainty            -> 1.85817*^-05,
-        deltaLambda3LoopEFTDRbarPrime                  -> -4.04954*^-05,
+        Mh23Loop                                       -> {{-0.0143744, 5.62494}, {5.62494, 300.795}},
+        expansionUncertainty                           -> {0, 0, 0.0378711, 0.0243905},
+        deltaLambda3LoopH3mDRbarPrime                  -> 8.33505*^-06,
+        deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      -> -4.62215*^-05,
+        deltaLambda3LoopH3mUncertainty                 -> 0.00012236,
+        deltaLambda3LoopEFTDRbarPrime                  -> -1.17351*^-05,
         deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      -> -4.62254*^-05,
-        deltaLambda3LoopEFTUncertainty                 -> 1.85778*^-05
+        deltaLambda3LoopEFTUncertainty                 -> 0.000102286
     },
     precision -> 1*^-5
 };
