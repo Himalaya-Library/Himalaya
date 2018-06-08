@@ -29,6 +29,9 @@
 
 namespace himalaya {
 
+/**
+ * Enum representing the kind of output.
+ */
 enum ELogLevel { kVerbose, kDebug, kInfo, kWarning, kError, kFatal };
 
 } // namespace himalaya

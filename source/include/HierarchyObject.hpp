@@ -61,9 +61,9 @@ namespace himalaya{
        */
       int getRenormalizationScheme() const;
       /**
-       * 	@return 3-loop delta_lambda with Himalaya logs
+       * 	@return 3-loop delta_lambda with H3m logs
        */
-      double getDeltaLambdaHimalaya() const;
+      double getDeltaLambdaH3m() const;
       /**
        * 	@return 3-loop delta_lambda with EFT logs
        */
@@ -73,17 +73,17 @@ namespace himalaya{
        */
       double getDeltaLambdaNonLog() const;
       /**
-       *        @return uncertainty of 3-loop delta_lambda_Himalaya
+       *        @return uncertainty of 3-loop delta_lambda_H3m
        */
-      double getDeltaLambdaUncertaintyHimalaya() const;
+      double getDeltaLambdaUncertaintyH3m() const;
       /**
        *        @return uncertainty of 3-loop delta_lambda_EFT
        */
       double getDeltaLambdaUncertaintyEFT() const;
       /**
-       * 	@return the DR' -> MS shift for delta_lambda_Himalaya which should be added to the DR' result
+       * 	@return the DR' -> MS shift for delta_lambda_H3m which should be added to the DR' result
        */
-      double getDRbarPrimeToMSbarShiftHimalaya() const;
+      double getDRbarPrimeToMSbarShiftH3m() const;
       /**
        * 	@return the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
        */
@@ -138,10 +138,10 @@ namespace himalaya{
        */
       void setRenormalizationScheme(int renScheme);
       /**
-       * 	Sets the delta_lambda at 3-loop order with Himalaya logs.
+       * 	Sets the delta_lambda at 3-loop order with H3m logs.
        * 	@param deltaLambda delta_lambda at 3-loop order.
        */
-      void setDeltaLambdaHimalaya(double deltaLambda);
+      void setDeltaLambdaH3m(double deltaLambda);
       /**
        * 	Sets the delta_lambda at 3-loop order with EFT logs
        * 	@param deltaLambda delta_lambda at 3-loop order.
@@ -153,20 +153,20 @@ namespace himalaya{
        */
       void setDeltaLambdaNonLog(double deltaLambda);
       /**
-       * 	Sets the Xt parts of the uncertainty of delta_lambda_Himalaya
+       * 	Sets the Xt parts of the uncertainty of delta_lambda_H3m
        *        @param uncertainty of 3-loop delta_lambda
        */
-      void setDeltaLambdaXtUncertaintyHimalaya(double uncertainty);
+      void setDeltaLambdaXtUncertaintyH3m(double uncertainty);
       /**
        * 	Sets the Xt parts of the uncertainty of delta_lambda_EFT
        *        @param uncertainty of 3-loop delta_lambda
        */
       void setDeltaLambdaXtUncertaintyEFT(double uncertainty);
       /**
-       * 	Sets the DR' -> MS shift for delta_lambda_Himalaya which should be added to the DR' result
+       * 	Sets the DR' -> MS shift for delta_lambda_H3m which should be added to the DR' result
        * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
        */
-      void setDRbarPrimeToMSbarShiftHimalaya(double shift);
+      void setDRbarPrimeToMSbarShiftH3m(double shift);
       /**
        * 	Sets the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
        * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
@@ -178,6 +178,11 @@ namespace himalaya{
        *	@return Returns the corresponding H3m notation of the given hierarchy as a string.
        */
       std::string getH3mHierarchyNotation(int hierarchy) const;
+      /**
+       * 	Set the expasion uncertainty for delta_lambda
+       * 	@param expUncertLambda the expansion uncertainty for delta_lambda
+       */
+      void setExpUncertaintyDeltaLambda(double expUncertLambda);
    private:
       bool isAlphab{false};								/**< the bool isAlphab */
       int hierarchy{};									/**< the suitable hierarchy */
@@ -189,13 +194,14 @@ namespace himalaya{
       std::map<int, Eigen::Matrix2d> dMhMap{};						/**< the map which holds all mass matrices at the given loop order */
       Eigen::Matrix2d mdrShift{};							/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
       Eigen::Matrix<double, 2, 1> mdrMasses{};						/**< the 'vector' which holds the MDR masses */
-      double deltaLambdaHimalaya{};							/**< delta_lambda 3-loop with Himalaya logs */
+      double deltaLambdaH3m{};								/**< delta_lambda 3-loop with H3m logs */
       double deltaLambdaEFT{};								/**< delta_lambda 3-loop with EFT logs */
       double deltaLambdaNonLog{};                                                       /**< delta_lambda 3-loop, non-logarithmic part */
-      double drBarPrimeToMSbarShiftHimalaya{};						/**< The shift to convert the DR' delta_lambda_Himalaya to the MS scheme */
+      double drBarPrimeToMSbarShiftH3m{};						/**< The shift to convert the DR' delta_lambda_H3m to the MS scheme */
       double drBarPrimeToMSbarShiftEFT{};						/**< The shift to convert the DR' delta_lambda_EFT to the MS scheme */
-      double deltaLambdaXtUncertaintyHimalaya{};					/**< The uncertainty of delta_lambda_Himalaya due to mising Xt terms */
+      double deltaLambdaXtUncertaintyH3m{};						/**< The uncertainty of delta_lambda_H3m due to mising Xt terms */
       double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
+      double expansionUncertaintyDeltaLambda{};						/**< The expansion uncertainty of delta_lambda */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

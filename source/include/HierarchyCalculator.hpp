@@ -15,10 +15,10 @@ namespace himalaya{
    public:
       /**
        * 	Constructor 
-       * 	@param p a HimalayaInterface struct
-       * 	@param verbose a bool which suppresses the information of the calculation if set to flase
+       * 	@param p_ Himalaya input parameters
+       * 	@param verbose_ suppress informative output during the calculation, if set to false
        */
-      HierarchyCalculator(const Parameters& p, const bool verbose = true);
+      HierarchyCalculator(const Parameters& p_, const bool verbose_ = true);
       /**
        * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
        * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
@@ -95,9 +95,14 @@ namespace himalaya{
       double getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, const unsigned int oneLoopFlag, 
 				     const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);
    private:
-      Parameters p{};	/** The HimalayaInterface struct. */
-      double Al4p{}, lmMgl{}, lmMsq{}, Mgl{}, Msq{}, prefac{};/** alpha_s/(4*Pi), log(pow2(p.scale / Mgl)), log(pow2(p.scale / Msq)), Gluino mass, mean Squark mass, prefactor of the Higgs mass matrix */
-      bool verbose{true};
+      Parameters p{};     ///< Himalaya input parameters
+      double Al4p{};      ///< alpha_s/(4*Pi)
+      double lmMgl{};     ///< log(pow2(p.scale / Mgl))
+      double lmMsq{};     ///< log(pow2(p.scale / Msq))
+      double Mgl{};       ///< Gluino mass
+      double Msq{};       ///< mean light squark mass
+      double prefac{};    ///< prefactor of the Higgs mass matrix
+      bool verbose{true}; ///< enable/disable verbose output
       /**
        * 	Initializes all common variables.
        */
@@ -129,7 +134,7 @@ namespace himalaya{
        *
        */
       double shiftH3mToDRbarPrimeMh2(const himalaya::HierarchyObject& ho, int omitLogs);
-      std::map<unsigned int, unsigned int> flagMap{};	/** A map which holds all hierarchy key value pairs. */
+      std::map<unsigned int, unsigned int> flagMap{}; ///< A map which holds all hierarchy key value pairs.
       /**
        * 	Maps a hierarchy to it's mother hierarchy.
        * 	@param hierarchy the key to a hierarchy.

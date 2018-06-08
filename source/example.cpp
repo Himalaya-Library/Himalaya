@@ -22,8 +22,8 @@ himalaya::Parameters setup_SPS1a(){
    pars.mu2 << 2.80477426E+05, 0, 0,
                0, 2.80475621E+05, 0,
                0, 0, 1.80478484E+05;
-   pars.Ab = -798.8142296644842;
-   pars.At = -506.4162662374052;
+   pars.Ad  << 0, 0, 0, 0, 0, 0, 0, 0, -798.8142296644842;
+   pars.Au  << 0, 0, 0, 0, 0, 0, 0, 0, -506.4162662374052;
 
    pars.MA = 3.92960954E+02;
    pars.MG = 5.88220143E+02;
@@ -56,8 +56,8 @@ himalaya::Parameters setup_SPS2(){
    pars.mu2 << 2.35685097E+06, 0, 0,
                0, 2.35682945E+06, 0,
                0, 0, 9.05923409E+05;
-   pars.Ab = -784.3356416708631;
-   pars.At = -527.8746242245387;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  -784.3356416708631;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  -527.8746242245387;
    
    pars.MA = 1.48446235E+03;
    pars.MG = 6.69045022E+02;
@@ -90,8 +90,8 @@ himalaya::Parameters setup_CMSSM_large_m0(){
    pars.mu2 << 3.39785780E+07, 0, 0,
                0, 3.39783229E+07, 0,
                0, 0, 1.95557229E+07;
-   pars.Ab = -8205.625751354333;
-   pars.At = -5328.586025475935;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  -8205.625751354333;
+   pars.Au << 0, 0, 0, 0, 0, 0, 0, 0,  -5328.586025475935;
 
    pars.MA = 4.76241507E+03;
    pars.MG = 5.95227200E+03;
@@ -124,8 +124,8 @@ himalaya::Parameters setup_HSSUSY_minmix(){
    pars.mu2 << 9.99990230E+09, 0, 0,
                0, 9.99990230E+09, 0,
                0, 0, 9.99961778E+09;
-   pars.Ab = 50002.75311060441;
-   pars.At = 19962.33330614816;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  50002.75311060441;
+   pars.Au << 0, 0, 0, 0, 0, 0, 0, 0,  19962.33330614816;
 
    pars.MA = 9.99320898E+04;
    pars.MG = 9.99989249E+04;
@@ -158,8 +158,8 @@ himalaya::Parameters test(){
     0, 1e+08, 0,
     0, 0, 1e+08;
   //pars.At    = -1800.;
-  pars.At = 199.9995636141476;
-  pars.Ab    = 5000.;
+  pars.Au << 0, 0, 0, 0, 0, 0, 0, 0,  199.9995636141476;
+  pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  5000.;
   pars.MG    = 10000.;
   pars.MW    = 74.59;
   pars.MZ    = 85.7704;
@@ -195,8 +195,8 @@ himalaya::Parameters setup_low_MS_large_xt() {
    pars.mu2 << MS2, 0, 0,
                0, MS2, 0,
                0, 0, MS2;
-   pars.Ab = 2300;
-   pars.At = Xt+pars.mu*pars.vd/pars.vu;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  2300;
+   pars.Au << 0, 0, 0, 0, 0, 0, 0, 0,  Xt+pars.mu*pars.vd/pars.vu;
    pars.MA = MS;
    pars.MG = MS;
    pars.MW = 78.9441;
@@ -207,6 +207,52 @@ himalaya::Parameters setup_low_MS_large_xt() {
    return pars;
 }
 
+himalaya::Parameters test_large_delta(){
+   himalaya::Parameters p;
+   
+   p.scale = 1000;
+   p.mu    = 500;
+   p.g3    = 1.05687;
+   p.vd    = 24.2549;
+   p.vu    = 242.549;
+   p.mq2   << 250000, 0, 0, 0, 250000, 0, 0, 0, 250000;
+   p.md2   << 250000, 0, 0, 0, 250000, 0, 0, 0, 250000;
+   p.mu2   << 250000, 0, 0, 0, 250000, 0, 0, 0, 250000;
+   p.Au    << 0, 0, 0, 0, 0, 0, 0, 0,  1274.74;
+   p.Ad    << 0, 0, 0, 0, 0, 0, 0, 0,  0;
+   p.MG    = 2000;
+   p.MW    = 77.7865;
+   p.MZ    = 89.4409;
+   p.Mt    = 146.885;
+   p.Mb    = 2.37645;
+   p.MA    = 500;
+   
+   return p;
+}
+
+himalaya::Parameters test_largest_delta(){
+   himalaya::Parameters p;
+   
+   p.scale = 100000;
+   p.mu    = 50000;
+   p.g3    = 0.873023;
+   p.vd    = 23.845;
+   p.vu    = 238.45;
+   p.mq2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 4e+10;
+   p.md2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 2.5e+09;
+   p.mu2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 4e+10;
+   p.Au    << 0, 0, 0, 0, 0, 0, 0, 0,  494898;
+   p.Ad    << 0, 0, 0, 0, 0, 0, 0, 0,  0;
+   p.MG    = 50000;
+   p.MW    = 73.8172;
+   p.MZ    = 86.2444;
+   p.Mt    = 120.68;
+   p.Mb    = 1.85638;
+   p.MA    = 50000;
+
+return p;
+}
+
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
@@ -214,7 +260,9 @@ int main() {
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
 	 setup_HSSUSY_minmix(),
-	 setup_low_MS_large_xt()
+	 setup_low_MS_large_xt(),
+	 test_large_delta(),
+	 test_largest_delta()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator
@@ -225,9 +273,6 @@ int main() {
 	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, himalaya::RenSchemes::DRBARPRIME);
 
 	 std::cout << hoTop << "\n";
-	 
-	 /*std::cout << hoTop.getDeltaLambdaHimalaya() + hoTop.getDRbarPrimeToMSbarShiftHimalaya() << " " <<
-	    hoTop.getDeltaLambdaEFT() + hoTop.getDRbarPrimeToMSbarShiftEFT()<< "\n";*/
 
 	 // bottom and MDR'
 	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::DRBARPRIME);

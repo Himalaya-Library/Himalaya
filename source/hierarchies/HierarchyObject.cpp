@@ -190,23 +190,23 @@ int himalaya::HierarchyObject::getRenormalizationScheme() const{
 
 
 /**
- * 	Sets the delta_lambda at 3-loop order with Himalaya logs.
+ * 	Sets the delta_lambda at 3-loop order with H3m logs.
  * 	@param deltaLambda delta_lambda at 3-loop order.
  */
-void himalaya::HierarchyObject::setDeltaLambdaHimalaya(double deltaLambda){
-   this -> deltaLambdaHimalaya = deltaLambda;
+void himalaya::HierarchyObject::setDeltaLambdaH3m(double deltaLambda){
+   this -> deltaLambdaH3m = deltaLambda;
 }
 
 /**
- * 	@return 3-loop delta_lambda with Himalaya logs
+ * 	@return 3-loop delta_lambda with H3m logs
  */
-double himalaya::HierarchyObject::getDeltaLambdaHimalaya() const{
-   return deltaLambdaHimalaya;
+double himalaya::HierarchyObject::getDeltaLambdaH3m() const{
+   return deltaLambdaH3m;
 }
 
 /**
  * 	Sets the delta_lambda at 3-loop order with EFT logs.
- * 	@param zeta delta_lambda at 3-loop order.
+ * 	@param deltaLambda delta_lambda at 3-loop order.
  */
 void himalaya::HierarchyObject::setDeltaLambdaEFT(double deltaLambda){
    this -> deltaLambdaEFT = deltaLambda;
@@ -221,7 +221,7 @@ double himalaya::HierarchyObject::getDeltaLambdaEFT() const{
 
 /**
  * 	Sets the constant part of delta_lambda at 3-loop order.
- * 	@param zeta constant part of delta_lambda at 3-loop order.
+ * 	@param deltaLambda constant part of delta_lambda at 3-loop order.
  */
 void himalaya::HierarchyObject::setDeltaLambdaNonLog(double deltaLambda){
    deltaLambdaNonLog = deltaLambda;
@@ -235,19 +235,20 @@ double himalaya::HierarchyObject::getDeltaLambdaNonLog() const{
 }
 
 /**
- * 	Sets the Xt parts of the uncertainty of delta_lambda_Himalaya
+ * 	Sets the Xt parts of the uncertainty of delta_lambda_H3m
  *        @param uncertainty of 3-loop delta_lambda
  */
-void himalaya::HierarchyObject::setDeltaLambdaXtUncertaintyHimalaya(double uncertainty){
-   deltaLambdaXtUncertaintyHimalaya = uncertainty;
+void himalaya::HierarchyObject::setDeltaLambdaXtUncertaintyH3m(double uncertainty){
+   deltaLambdaXtUncertaintyH3m = uncertainty;
 }
 
 /**
- *        @return uncertainty of 3-loop delta_lambda_Himalaya
+ *        @return uncertainty of 3-loop delta_lambda_H3m
  */
-double himalaya::HierarchyObject::getDeltaLambdaUncertaintyHimalaya() const {
-   return std::abs(getDeltaLambdaEFT() - getDeltaLambdaHimalaya()) 
-      + std::abs(deltaLambdaXtUncertaintyHimalaya);
+double himalaya::HierarchyObject::getDeltaLambdaUncertaintyH3m() const {
+   return std::abs(getDeltaLambdaEFT() - getDeltaLambdaH3m()) 
+      + std::abs(deltaLambdaXtUncertaintyH3m)
+      + std::abs(expansionUncertaintyDeltaLambda);
 }
 
 /**
@@ -263,23 +264,23 @@ void himalaya::HierarchyObject::setDeltaLambdaXtUncertaintyEFT(double uncertaint
  *	TODO: the difference should only be taken up to O(Xt^3/Xt^4) depending on the chosen hierarchy
  */
 double himalaya::HierarchyObject::getDeltaLambdaUncertaintyEFT() const {
-   return std::abs(getDeltaLambdaEFT() - getDeltaLambdaHimalaya())
-      + std::abs(deltaLambdaXtUncertaintyEFT);
+   return std::abs(deltaLambdaXtUncertaintyEFT)
+      + std::abs(expansionUncertaintyDeltaLambda);
 }
 
 /**
  * 	Sets the DR' -> MS shift for delta_lambda_himalaya which should be added to the DR' result
  * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
  */
-void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftHimalaya(double shift){
-   drBarPrimeToMSbarShiftHimalaya = shift;
+void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftH3m(double shift){
+   drBarPrimeToMSbarShiftH3m = shift;
 }
 
 /**
  * 	@return the DR' -> MS shift for delta_lambda_himalaya which should be added to the DR' result
  */
-double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftHimalaya() const{
-   return drBarPrimeToMSbarShiftHimalaya;
+double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftH3m() const{
+   return drBarPrimeToMSbarShiftH3m;
 }
 
 /**
@@ -296,6 +297,15 @@ void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftEFT(double shift){
 double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftEFT() const{
    return drBarPrimeToMSbarShiftEFT;
 }
+
+/**
+ * 	Set the expasion uncertainty for delta_lambda
+ * 	@param expUncertLambda the expansion uncertainty for delta_lambda
+ */
+void himalaya::HierarchyObject::setExpUncertaintyDeltaLambda(double expUncertLambda){
+   expansionUncertaintyDeltaLambda = expUncertLambda;
+}
+
 
 /**
  * 	Sorts a vector.
@@ -362,30 +372,30 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
    ostr << "===================================\n"
 	<< "Himalaya HierarchyObject parameters\n"
         << "===================================\n"
-	<< "Ren. scheme                 =  " << renSchemeString << "\n"
-	<< "MDR shifts?                 =  " << mdrString << "\n"
-        << "Hierarchy                   =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
-	<< "Mstop_1                     =  " << ho.getMDRMasses()(0) << " GeV (" << renSchemeString << ")\n"
-	<< "Mstop_2                     =  " << ho.getMDRMasses()(1) << " GeV (" << renSchemeString << ")\n"
-        << "Abs. diff 2L                =  " << ho.getAbsDiff2L() << " GeV\n"
-        << "Rel. diff 2L                =  " << ho.getRelDiff2L()*100 << " %\n"
-        << "Mh^2_tree                   =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
+	<< "Ren. scheme            =  " << renSchemeString << "\n"
+	<< "MDR shifts?            =  " << mdrString << "\n"
+        << "Hierarchy              =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
+	<< "Mstop_1                =  " << ho.getMDRMasses()(0) << " GeV (" << renSchemeString << ")\n"
+	<< "Mstop_2                =  " << ho.getMDRMasses()(1) << " GeV (" << renSchemeString << ")\n"
+        << "Abs. diff 2L           =  " << ho.getAbsDiff2L() << " GeV\n"
+        << "Rel. diff 2L           =  " << ho.getRelDiff2L()*100 << " %\n"
+        << "Mh^2_tree              =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
 		   << "}, {" << ho.getDMh(0).row(1)(0) << ", " << ho.getDMh(0).row(1)(1) << "}} GeV^2\n"
-        << "Mh^2_1L                     =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
+        << "Mh^2_1L                =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
 		   << "}, {" << ho.getDMh(1).row(1)(0) << ", " << ho.getDMh(1).row(1)(1) << "}} GeV^2\n"
-        << "Mh^2_2L                     =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
+        << "Mh^2_2L                =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
 		   << "}, {" << ho.getDMh(2).row(1)(0) << ", " << ho.getDMh(2).row(1)(1) << "}} GeV^2\n"
-        << "Mh^2_3L                     =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
+        << "Mh^2_3L                =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
 		   << "}, {" << ho.getDMh(3).row(1)(0) << ", " << ho.getDMh(3).row(1)(1) << "}} GeV^2\n"
-        << "Exp. uncert. 1L             =  " << ho.getExpUncertainty(1) << " GeV\n"
-        << "Exp. uncert. 2L             =  " << ho.getExpUncertainty(2) << " GeV\n"
-        << "Exp. uncert. 3L             =  " << ho.getExpUncertainty(3) << " GeV\n"
-	<< "DR -> MDR shift             =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
+        << "Exp. uncert. 1L        =  " << ho.getExpUncertainty(1) << " GeV\n"
+        << "Exp. uncert. 2L        =  " << ho.getExpUncertainty(2) << " GeV\n"
+        << "Exp. uncert. 3L        =  " << ho.getExpUncertainty(3) << " GeV\n"
+	<< "DR -> MDR shift        =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
 		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
-	<< "Δλ_Himalaya                 =  " << ho.getDeltaLambdaHimalaya() << " +/- " << ho.getDeltaLambdaUncertaintyHimalaya() << " (expanded coefficients of logarithms)\n"
-	<< "Δλ_Himalaya DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftHimalaya() << " (should be added to Δλ to convert it to MS)\n"
-        << "Δλ_EFT                      =  " << ho.getDeltaLambdaEFT() << " +/- " << ho.getDeltaLambdaUncertaintyEFT() << " (exact mass dependence of coefficients of logarithms)\n"
-	<< "Δλ_EFT DR' -> MS shift      =  " << ho.getDRbarPrimeToMSbarShiftEFT() << " (should be added to Δλ to convert it to MS)";
+	<< "Δλ_H3m                 =  " << ho.getDeltaLambdaH3m() << " +/- " << ho.getDeltaLambdaUncertaintyH3m() << " (expanded coefficients of logarithms)\n"
+	<< "Δλ_H3m DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftH3m() << " (should be added to Δλ to convert it to MS)\n"
+        << "Δλ_EFT                 =  " << ho.getDeltaLambdaEFT() << " +/- " << ho.getDeltaLambdaUncertaintyEFT() << " (exact mass dependence of coefficients of logarithms)\n"
+	<< "Δλ_EFT DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftEFT() << " (should be added to Δλ to convert it to MS)";
 
    return ostr;
 }

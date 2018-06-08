@@ -20,25 +20,35 @@ himalaya::Parameters make_point()
    const double msq2 = MS;
    const double msu2 = MS;
    const double mg   = MS;
+   const double msl2 = MS;
+   const double mse2 = MS;
 
    const double Xt = xt * std::sqrt(std::sqrt(msq2 * msu2));
 
    himalaya::Parameters pars;
    pars.scale = MS;
    pars.mu    = MS;
+   pars.g1    = 0.448494;
+   pars.g2    = 0.607902;
    pars.g3    = 1.05733;
    pars.vu    = v*std::sin(beta);
    pars.vd    = v*std::cos(beta);
    pars.mq2   << pow2(msq2), 0, 0, 0, pow2(msq2), 0, 0, 0, pow2(msq2);
    pars.md2   << pow2(MS), 0, 0, 0, pow2(MS), 0, 0, 0, pow2(MS);
    pars.mu2   << pow2(msu2), 0, 0, 0, pow2(msu2), 0, 0, 0, pow2(msu2);
-   pars.At    = Xt + pars.mu/tb;
-   pars.Ab    = 0;
+   pars.ml2   << pow2(msl2), 0, 0, 0, pow2(msl2), 0, 0, 0, pow2(msl2);
+   pars.me2   << pow2(mse2), 0, 0, 0, pow2(mse2), 0, 0, 0, pow2(mse2);
+   pars.Au    << 0, 0, 0, 0, 0, 0, 0, 0, Xt + pars.mu/tb;
+   pars.Ae    << 0, 0, 0, 0, 0, 0, 0, 0, 0;
+   pars.Ad    << 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0;
+   pars.M1    = MS;
+   pars.M2    = MS;
    pars.MG    = mg;
    pars.MW    = 74.597;
    pars.MZ    = 85.7704;
    pars.Mt    = 144.337;
    pars.Mb    = 2.37054;
+   pars.Mtau  = 1.2;
    pars.MA    = MS;
 
    pars.validate(false);
@@ -59,8 +69,8 @@ himalaya::Parameters make_degenerate_point(double eps = 0.)
    pars.mq2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06*(1 + eps);
    pars.md2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06;
    pars.mu2   << 1e+06, 0, 0, 0, 1e+06, 0, 0, 0, 1e+06*(1 - eps);
-   pars.At    = 300;
-   pars.Ab    = 5000;
+   pars.Au    << 0, 0, 0, 0, 0, 0, 0, 0, 300;
+   pars.Ad    << 0, 0, 0, 0, 0, 0, 0, 0, 5000;
    pars.MG    = 1000*(1 - eps);
    pars.MW    = 74.597;
    pars.MZ    = 85.7704;
@@ -91,6 +101,18 @@ double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G14, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G24, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YT2, 0);
 
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
@@ -99,6 +121,13 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 {
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YB6, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YT6, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
 
    return mhc.getDeltaMh2EFT2Loop(1,1);
 }
@@ -114,7 +143,7 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
 
    const double zeta_3L_const    = ho.getDeltaLambdaNonLog();
    const double zeta_3L_eft      = ho.getDeltaLambdaEFT();
-   const double zeta_3L_himalaya = ho.getDeltaLambdaHimalaya();
+   const double zeta_3L_himalaya = ho.getDeltaLambdaH3m();
    const double v2 = pow2(pars.vu) + pow2(pars.vd);
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
@@ -214,9 +243,9 @@ TEST_CASE("test_lambda_limit_degenerate")
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const auto z2_gen_Himalaya = ho.getDeltaLambdaHimalaya();
+   const auto z2_gen_Himalaya = ho.getDeltaLambdaH3m();
    const auto z2_gen_EFT      = ho.getDeltaLambdaEFT();
-   const auto uncertainty     = ho.getDeltaLambdaUncertaintyHimalaya();
+   const auto uncertainty     = ho.getDeltaLambdaUncertaintyH3m();
 
    INFO("uncertainty: " << uncertainty);
 

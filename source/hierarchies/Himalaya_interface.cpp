@@ -76,15 +76,10 @@ double Parameters::calculateMsq2() const
    const double beta = std::atan(vu / vd);
    const double cos_2beta = std::cos(2 * beta);
    const double sw2 = 1 - pow2(MW / MZ);
-   const double msq = pow(sqrt(pow2(mq2(0,0))*pow2(mq2(1,1))
+   const double msq = pow(pow2(mq2(0,0))*pow2(mq2(1,1))
       *mq2(0,0)*md2(0,0)*mu2(1,1)*md2(1,1)
       *(mq2(2, 2) + pow2(Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(MZ) * cos_2beta)
-      *(md2(2, 2) + pow2(Mb) - 1 / 3. * sw2 * pow2(MZ) * cos_2beta)), 0.1);
-      /*(+ 2 * sqrt(mq2(0, 0)) + sqrt(mu2(0, 0)) + sqrt(md2(0, 0))  // sup and sdown
-       + 2 * sqrt(mq2(1, 1)) + sqrt(mu2(1, 1)) + sqrt(md2(1, 1))  // scharm and sstrange
-       // sbottom
-       + sqrt(mq2(2, 2) + pow2(Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(MZ) * cos_2beta)
-       + sqrt(md2(2, 2) + pow2(Mb) - 1 / 3. * sw2 * pow2(MZ) * cos_2beta)) / 10.;*/
+      *(md2(2, 2) + pow2(Mb) - 1 / 3. * sw2 * pow2(MZ) * cos_2beta), 0.05);
 
    return pow2(msq);
 }
@@ -98,12 +93,35 @@ double Parameters::calculateMsq2() const
  */
 void Parameters::validate(bool verbose)
 {
+   // check if soft-breaking parameters are greater than zero
+   if (mq2.minCoeff() < 0. || md2.minCoeff() < 0. || mu2.minCoeff() < 0. ||
+       ml2.minCoeff() < 0. || me2.minCoeff() < 0.) {
+      throw std::runtime_error(
+         "Soft-breaking squared sfermion mass parameters "
+         "must be greater than zero!");
+   }
+
+   // force gluino mass to be positive
+   MG = std::abs(MG);
+
+   // diagonalize all yukawa matrices
+   h_svd(yu);
+   h_svd(yd);
+   h_svd(ye);
+   
+   // calculate all other masses
+   if(std::isnan(MW)) MW = std::sqrt(1/4.*pow2(g2)*(pow2(vu) + pow2(vd)));
+   if(std::isnan(MZ)) MZ = std::sqrt(1/4.*(0.6*pow2(g1) + pow2(g2))*(pow2(vu) + pow2(vd)));
+   if(std::isnan(Mt)) Mt = 0.7071067811865475*yu(2,2)*vu;
+   if(std::isnan(Mb)) Mb = 0.7071067811865475*yd(2,2)*vd;
+   if(std::isnan(Mtau)) Mtau = 0.7071067811865475*ye(2,2)*vd;
+   
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)) {
       const double tan_beta = vu / vd;
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
-      const double Xt = Mt * (At - mu / tan_beta);
+      const double Xt = Mt * (Au(2,2) - mu / tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 stopMatrix;
       stopMatrix << mq2(2, 2) + sqr(Mt) + (1/2. - 2/3. * sw2) * sqr(MZ) * cos_2beta, Xt,
@@ -122,7 +140,7 @@ void Parameters::validate(bool verbose)
       const double tan_beta = vu / vd;
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
-      const double Xb = Mb * (Ab - mu * tan_beta);
+      const double Xb = Mb * (Ad(2,2) - mu * tan_beta);
       const double sw2 = 1 - MW * MW / MZ / MZ;
       RM22 sbottomMatrix;
       sbottomMatrix << mq2(2, 2) + sqr(Mb) - (1/2. - 1/3. * sw2) * sqr(MZ) * cos_2beta, Xb,
@@ -160,12 +178,26 @@ void Parameters::validate(bool verbose)
    }
 }
 
+RM33 Parameters::h_svd(RM33 M){
+   Eigen::JacobiSVD<RM33> svd(M);
+   svd.singularValues().reverse();
+   const auto m = svd.singularValues().reverse();
+   RM33 M_diag;
+   M_diag << m(0), 0, 0,
+      0, m(1), 0,
+      0, 0, m(2);
+   return M_diag;
+}
+
+
 std::ostream& operator<<(std::ostream& ostr, const Parameters& pars)
 {
    ostr << "Himalaya parameters\n"
         << "===================\n"
         << "scale = " << pars.scale << '\n'
         << "mu    = " << pars.mu << '\n'
+        << "g1    = " << pars.g1 << '\n'
+        << "g2    = " << pars.g2 << '\n'
         << "g3    = " << pars.g3 << '\n'
         << "vd    = " << pars.vd << '\n'
         << "vu    = " << pars.vu << '\n'
@@ -178,13 +210,38 @@ std::ostream& operator<<(std::ostream& ostr, const Parameters& pars)
         << "mu2   = {{" << pars.mu2(0,0) << ", " << pars.mu2(0,1) << ", " << pars.mu2(0,2) << "}, "
                     "{" << pars.mu2(1,0) << ", " << pars.mu2(1,1) << ", " << pars.mu2(1,2) << "}, "
                     "{" << pars.mu2(2,0) << ", " << pars.mu2(2,1) << ", " << pars.mu2(2,2) << "}}\n"
-        << "At    = " << pars.At << '\n'
-        << "Ab    = " << pars.Ab << '\n'
+        << "ml2   = {{" << pars.mu2(0,0) << ", " << pars.mu2(0,1) << ", " << pars.mu2(0,2) << "}, "
+                    "{" << pars.mu2(1,0) << ", " << pars.mu2(1,1) << ", " << pars.mu2(1,2) << "}, "
+                    "{" << pars.mu2(2,0) << ", " << pars.mu2(2,1) << ", " << pars.mu2(2,2) << "}}\n"
+        << "me2   = {{" << pars.mu2(0,0) << ", " << pars.mu2(0,1) << ", " << pars.mu2(0,2) << "}, "
+                    "{" << pars.mu2(1,0) << ", " << pars.mu2(1,1) << ", " << pars.mu2(1,2) << "}, "
+                    "{" << pars.mu2(2,0) << ", " << pars.mu2(2,1) << ", " << pars.mu2(2,2) << "}}\n"
+        << "Au    = {{" << pars.Au(0,0) << ", " << pars.Au(0,1) << ", " << pars.Au(0,2) << "}, "
+                    "{" << pars.Au(1,0) << ", " << pars.Au(1,1) << ", " << pars.Au(1,2) << "}, "
+                    "{" << pars.Au(2,0) << ", " << pars.Au(2,1) << ", " << pars.Au(2,2) << "}}\n"
+        << "Ad    = {{" << pars.Ad(0,0) << ", " << pars.Ad(0,1) << ", " << pars.Ad(0,2) << "}, "
+                    "{" << pars.Ad(1,0) << ", " << pars.Ad(1,1) << ", " << pars.Ad(1,2) << "}, "
+                    "{" << pars.Ad(2,0) << ", " << pars.Ad(2,1) << ", " << pars.Ad(2,2) << "}}\n"
+        << "Ae    = {{" << pars.Ae(0,0) << ", " << pars.Ae(0,1) << ", " << pars.Ae(0,2) << "}, "
+                    "{" << pars.Ae(1,0) << ", " << pars.Ae(1,1) << ", " << pars.Ae(1,2) << "}, "
+                    "{" << pars.Ae(2,0) << ", " << pars.Ae(2,1) << ", " << pars.Ae(2,2) << "}}\n"
+        << "Yu    = {{" << pars.yu(0,0) << ", " << pars.yu(0,1) << ", " << pars.yu(0,2) << "}, "
+                    "{" << pars.yu(1,0) << ", " << pars.yu(1,1) << ", " << pars.yu(1,2) << "}, "
+                    "{" << pars.yu(2,0) << ", " << pars.yu(2,1) << ", " << pars.yu(2,2) << "}}\n"
+        << "Yd    = {{" << pars.yd(0,0) << ", " << pars.yd(0,1) << ", " << pars.yd(0,2) << "}, "
+                    "{" << pars.yd(1,0) << ", " << pars.yd(1,1) << ", " << pars.yd(1,2) << "}, "
+                    "{" << pars.yd(2,0) << ", " << pars.yd(2,1) << ", " << pars.yd(2,2) << "}}\n"
+        << "Ye    = {{" << pars.ye(0,0) << ", " << pars.ye(0,1) << ", " << pars.ye(0,2) << "}, "
+                    "{" << pars.ye(1,0) << ", " << pars.ye(1,1) << ", " << pars.ye(1,2) << "}, "
+                    "{" << pars.ye(2,0) << ", " << pars.ye(2,1) << ", " << pars.ye(2,2) << "}}\n"
+        << "M1    = " << pars.M1 << '\n'
+        << "M2    = " << pars.M2 << '\n'
         << "MG    = " << pars.MG << '\n'
         << "MW    = " << pars.MW << '\n'
         << "MZ    = " << pars.MZ << '\n'
         << "Mt    = " << pars.Mt << '\n'
         << "Mb    = " << pars.Mb << '\n'
+        << "Mtau  = " << pars.Mtau << '\n'
         << "MA    = " << pars.MA << '\n'
         << "MSt   = {" << pars.MSt(0) << ", " << pars.MSt(1) << "}\n"
         << "MSb   = {" << pars.MSb(0) << ", " << pars.MSb(1) << "}\n"

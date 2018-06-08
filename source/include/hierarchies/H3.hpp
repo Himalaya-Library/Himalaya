@@ -61,84 +61,8 @@ namespace himalaya{
        */
       double calc_coef_at_as2_no_sm_logs_log3() const;
    private:
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^0 s1 term
-       */
-      double calc_coeff_as_0_log_0_s1() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^1 s1 term
-       */
-      double calc_coeff_as_1_log_0_s1() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^2 s1 term
-       */
-      double calc_coeff_as_2_log_0_s1() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^1 s1 term
-       */
-      double calc_coeff_as_2_log_1_s1() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^0 s2 term
-       */
-      double calc_coeff_as_0_log_0_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^0 s2 term
-       */
-      double calc_coeff_as_0_log_1_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^1 s2 term
-       */
-      double calc_coeff_as_1_log_0_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^1 s2 term
-       */
-      double calc_coeff_as_1_log_1_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^2 as^1 s2 term
-       */
-      double calc_coeff_as_1_log_2_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^2 s2 term
-       */
-      double calc_coeff_as_2_log_0_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^2 s2 term
-       */
-      double calc_coeff_as_2_log_1_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^2 as^2 s2 term
-       */
-      double calc_coeff_as_2_log_2_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^3 as^2 s2 term
-       */
-      double calc_coeff_as_2_log_3_s2() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^0 s12 term
-       */
-      double calc_coeff_as_0_log_0_s12() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^1 s12 term
-       */
-      double calc_coeff_as_1_log_0_s12() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^1 s12 term
-       */
-      double calc_coeff_as_1_log_1_s12() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^0 as^2 s12 term
-       */
-      double calc_coeff_as_2_log_0_s12() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^1 as^2 s12 term
-       */
-      double calc_coeff_as_2_log_1_s12() const;
-      /**
-       * 	@return The coefficient of the log(mu^2/mt^2)^2 as^2 s12 term
-       */
-      double calc_coeff_as_2_log_2_s12() const;
-      double Dmglst1{}, Dmst12{}, Dmsqst1{}, lmMst1{}, Mgl{}, Mt{}, Mst1{}, Mst2{}, Msq{}, MuSUSY{}, s2t{}, Tbeta{}, Sbeta{}; /**< common variables */
+      double Dmglst1{}, Dmst12{}, Dmsqst1{}, lmMst1{}, Mgl{}, Mt{}, Mst1{}, Mst2{}, Msq{}, MuSUSY{}, s2t{}, Tbeta{}, Sbeta{}, Al4p{}, lmMt{}; /**< common variables */
       int shiftst1{}, shiftst2{}, shiftst3{}, xDmst12{}, xDmglst1{}, xDmsqst1{}; /**< MDR and truncation flags */
-      double s1{}, s2{}, s12{};	/**< The Higgs mass matrix elements s1 = (1, 1), s2 = (2, 2), s12 = (1, 2) = (2, 1) */
+      int oneLoopFlag{}, twoLoopFlag{}, threeLoopFlag{}; /**< loop flags */
    };
 }	// himalaya

@@ -25,6 +25,64 @@ namespace {
    template <typename T> T pow18(T x) { return pow2(pow9(x)); }
    template <typename T> T pow19(T x) { return pow18(x)*x; }
    template <typename T> T pow20(T x) { return pow19(x)*x; }
+   
+   const double Pi  = 3.1415926535897932384626433832795;
+   
+   // The parts below are taken from FlexibleSUSY
+   /// lambda^2(u,v)
+   double lambda_2(double u, double v)
+   {
+      return pow2(1 - u - v) - 4*u*v;
+   }
+
+   /// u < 1 && v < 1, lambda^2(u,v) > 0
+   double phi_pos(double u, double v)
+   {
+      using std::log;
+      using gm2calc::dilog;
+      const auto lambda = std::sqrt(lambda_2(u,v));
+
+      return (-(log(u)*log(v))
+              + 2*log((1 - lambda + u - v)/2.)*log((1 - lambda - u + v)/2.)
+              - 2*dilog((1 - lambda + u - v)/2.)
+              - 2*dilog((1 - lambda - u + v)/2.)
+              + pow2(Pi)/3.)/lambda;
+   }
+
+   /// lambda^2(u,v) < 0
+   double phi_neg(double u, double v)
+   {
+      using std::acos;
+      using std::sqrt;
+      using gm2calc::clausen_2;
+      const auto lambda = std::sqrt(-lambda_2(u,v));
+
+      return 2*(+ clausen_2(2*acos((1 + u - v)/(2.*sqrt(u))))
+                + clausen_2(2*acos((1 - u + v)/(2.*sqrt(v))))
+                + clausen_2(2*acos((-1 + u + v)/(2.*sqrt(u*v)))))/lambda;
+   }
+
+   /**
+    * Phi(u,v) with u = x/z, v = y/z.
+    *
+    * The following identities hold:
+    * Phi(u,v) = Phi(v,u) = Phi(1/u,v/u)/u = Phi(1/v,u/v)/v
+    */
+   double phi_uv(double u, double v)
+   {
+      const auto lambda = lambda_2(u,v);
+
+      if (lambda > 0.) {
+         if (u <= 1 && v <= 1)
+            return phi_pos(u,v);
+         if (u >= 1 && v/u <= 1)
+            return phi_pos(1./u,v/u)/u;
+         // v >= 1 && u/v <= 1
+         return phi_pos(1./v,u/v)/v;
+      }
+
+      return phi_neg(u,v);
+   }
 
 } // anonymous namespace
 
@@ -55,7 +113,7 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
       const double Pi  = 3.1415926535897932384626433832795;
       const double v = sqrt(pow2(p.vu) + pow2(p.vd));
       const double pref = sqrt(2.)*p.Mt*pow4(p.g3/(4*Pi))/v;
-   
+
       if(std::abs(mQ3-mU3) < eps && std::abs(mU3 - m3) < eps && std::abs(m3 - sqrt(msq2)) < eps){
 	 const double lim = pref*getDeltaYtAlphas2(Limits::DEGENERATE, 1);
 	 const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
@@ -128,7 +186,7 @@ double himalaya::ThresholdCalculator::getThresholdCorrection(int variable, int s
       INFO_MSG("Your renormalization scheme is not compatible with the"
                " implemented threshold corrections!");
    }
-      
+
    switch(variable){
       case(ThresholdVariables::G3_AS):{
 	 thresholdCorrection = getDeltaG3Alphas(omitLogs);
@@ -193,11 +251,2870 @@ double himalaya::ThresholdCalculator::getThresholdCorrection(int variable, int s
 	 }
       }
       break;
+      case(ThresholdVariables::LAMBDA_YB2_G12):{
+	 return getDeltaLambdaYb2G12(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_G14):{
+	 return getDeltaLambdaG14(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_REG_G14):{
+	 return getDeltaLambdaRegG14();
+      }
+      case(ThresholdVariables::LAMBDA_CHI_G14):{
+	 return getDeltaLambdaChiG14(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_CHI_G24):{
+	 return getDeltaLambdaChiG24(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_G24):{
+	 return getDeltaLambdaG24(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_REG_G24):{
+	 return getDeltaLambdaRegG24();
+      }
+      case(ThresholdVariables::LAMBDA_G12_G22):{
+	 return getDeltaLambdaG12G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_REG_G12_G22):{
+	 return getDeltaLambdaRegG12G22();
+      }
+      case(ThresholdVariables::LAMBDA_CHI_G12_G22):{
+	 return getDeltaLambdaChiG12G22();
+      }
+      case(ThresholdVariables::LAMBDA_YB2_G22):{
+	 return getDeltaLambdaYb2G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YB4):{
+	 return getDeltaLambdaYb4(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YT2_G12):{
+	 return getDeltaLambdaYt2G12(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YT2_G22):{
+	 return getDeltaLambdaYt2G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YTAU2_G12):{
+	 return getDeltaLambdaYtau2G12(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YTAU2_G22):{
+	 return getDeltaLambdaYtau2G22(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YTAU4):{
+	 return getDeltaLambdaYtau4(omitLogs);
+      }
+      case(ThresholdVariables::G1_G1):{
+	 return getDeltaG1G1(omitLogs);
+      }
+      case(ThresholdVariables::G2_G2):{
+	 return getDeltaG2G2(omitLogs);
+      }
+      case(ThresholdVariables::VEV_YT2):{
+	 return getDeltaVevYt2(limit);
+      }
+      case(ThresholdVariables::YT_YB):{
+	 return getDeltaYtYb(omitLogs);
+      }
+      case(ThresholdVariables::YT_YT):{
+	 return getDeltaYtYt(omitLogs);
+      }
+      case(ThresholdVariables::YTAU_YTAU):{
+	 return getDeltaYtauYtau(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YB4_G32):{
+	 return getDeltaLambdaYb4G32(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YB6):{
+	 return getDeltaLambdaYb6(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YT6):{
+	 return getDeltaLambdaYt6(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YTAU6):{
+	 return getDeltaLambdaYtau6(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YT2_YB4):{
+	 return getDeltaLambdaYt2Yb4(omitLogs);
+      }
+      case(ThresholdVariables::LAMBDA_YT4_YB2):{
+	 return getDeltaLambdaYt4Yb2(omitLogs);
+      }
    };
    
    return thresholdCorrection;
 }
 
+double himalaya::ThresholdCalculator::getDeltaLambdaYb2G12(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mD3 = sqrt(mD32);
+   const double Xb2 = pow2(p.Ad(2,2) - p.mu*p.vu/p.vd);
+   const double c2beta = cos(2*atan(p.vu/p.vd));
+   const double lmD3MR = omitLogs*log(mD32 / MR2);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   
+   return -3*c2beta*(Xb2*(3*(F3(mQ3/mD3) + F4(mQ3/mD3)) + 2*c2beta*F5(mQ3/mD3)) +
+      4*mD3*mQ3*(2*lmD3MR + lmQ3MR))/(20.*mD3*mQ3);
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaG14(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double c8beta = cos(8*beta);
+   const double s4beta2 = pow2(sin(4*beta));
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmD1MR = omitLogs*log(p.md2(0,0) / MR2);
+   const double lmD2MR = omitLogs*log(p.md2(1,1) / MR2);
+   const double lmD3MR = omitLogs*log(p.md2(2,2) / MR2);
+   const double lmE1MR = omitLogs*log(p.me2(0,0) / MR2);
+   const double lmE2MR = omitLogs*log(p.me2(1,1) / MR2);
+   const double lmE3MR = omitLogs*log(p.me2(2,2) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+   const double lmU1MR = omitLogs*log(p.mu2(0,0) / MR2);
+   const double lmU2MR = omitLogs*log(p.mu2(1,1) / MR2);
+   const double lmU3MR = omitLogs*log(p.mu2(2,2) / MR2);
+   
+   return (-108*s4beta2 - 3*(-29 + 4*c4beta + 9*c8beta)*lmAMR + 16*pow2(c2beta)*
+      (2*(lmD1MR + lmD2MR + lmD3MR + 3*(lmE1MR + lmE2MR + lmE3MR)) + 3*(lmL1MR +
+      lmL2MR + lmL3MR) + lmQ1MR + lmQ2MR + lmQ3MR + 8*(lmU1MR + lmU2MR + lmU3MR)
+      ))/800.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG14(){
+   return -9/50.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG14(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta2 = pow2(cos(2*beta));
+   const double c4beta = cos(4*beta);
+   const double s2beta = sin(2*beta);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   
+   return 3*(-7*(3 + c4beta)*f1(p.M1/p.mu) + 9*(c4beta -1)*f3(p.M1/p.mu) + 4*
+      c2beta2*(F7(p.M1/p.mu) - 2*lmUMR) + 4*(c2beta2 - 8)*F5(p.M1/p.mu)*s2beta)
+      /200.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG24(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double sbeta = sin(beta);
+   const double lm2MR = omitLogs*log(pow2(p.M2) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   
+   return -9*(3 + c4beta)*f2(p.M2/p.mu)/8. + cbeta*sbeta*(-7*cbeta*sbeta*
+      f4(p.M2/p.mu) + (-8 + pow2(c2beta))*F5(p.M2/p.mu)) + pow2(c2beta)/2.*
+      F7(p.M2/p.mu) - pow2(c2beta)*(2*lm2MR + lmUMR)/3.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaG24(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double c8beta = cos(8*beta);
+   const double s4beta = sin(4*beta);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+   
+   return (-36*pow2(s4beta) + (53 - 28*c4beta - 9*c8beta)*lmAMR + 16*pow2(c2beta)
+      *(lmL1MR + lmL2MR + lmL3MR + 3*(lmQ1MR + lmQ2MR + lmQ3MR)))/96.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG24(){
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   
+   return (-9 + 2*pow2(c2beta))/6.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaG12G22(int omitLogs){
+   using std::log;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double c4beta = cos(4*beta);
+   const double c8beta = cos(8*beta);
+   const double s4beta = sin(4*beta);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   
+   return -3*(12*pow2(s4beta) + (-7 + 4*c4beta + 3*c8beta)*lmAMR)/80.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG12G22(){
+   return -3/5.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG12G22(){
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double c4beta = cos(4*beta);
+   const double s2beta = sin(2*beta);
+   const double m1mu = p.M1/p.mu;
+   const double m2mu = p.M2/p.mu;
+   
+   return (-14*(3 + c4beta)*f6(m1mu,m2mu) - 4*pow2(s2beta)*(8*f5(m1mu,m2mu) + 
+      f7(m1mu,m2mu)) + 4*pow2(c2beta)*(F7(m1mu) + 3*F7(m2mu)) + 4*s2beta
+      *(pow2(c2beta)*(F5(m1mu) + 3*F5(m2mu)) - 16*f8(m1mu,m2mu)))/40.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYb2G22(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double Xb2 = pow2(p.Ad(2,2) - p.mu*p.vu/p.vd);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mD3 = sqrt(mD32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   
+   return -(c2beta*Xb2*(3*F4(mQ3/mD3) + c2beta*F5(mQ3/mD3)))/(2.*mD3*mQ3)
+      - 3*c2beta*lmQ3MR;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYb4(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double Xb2 = pow2(p.Ad(2,2) - p.mu*p.vu/p.vd);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mD3 = sqrt(mD32);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   const double lmD3MR = omitLogs*log(mD32 / MR2);
+   
+   return (12*mD3*mQ3*Xb2*F1(mQ3/mD3) - pow2(Xb2)*F2(mQ3/mD3))/(mD32*mQ32) 
+      + 6*(lmD3MR + lmQ3MR);
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
+   const double mQ32 = p.mq2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mU3 = sqrt(mU32);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double c2beta = cos(2*beta);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   const double lmU3MR = omitLogs*log(mU32 / MR2);
+   
+   return 3*((c2beta*Xt2*(3*F3(mQ3/mU3) - c2beta*F5(mQ3/mU3)))/(mQ3*mU3) - 2*
+      c2beta*lmQ3MR + 8*cbeta*lmU3MR)/10.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
+   const double mQ32 = p.mq2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mU3 = sqrt(mU32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   
+   return -c2beta*Xt2*(-3*F4(mQ3/mU3) + c2beta*F5(mQ3/mU3))/(2.*mQ3*mU3) + 3*
+   c2beta*lmQ3MR;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
+   const double mL32 = p.ml2(2,2);
+   const double mE32 = p.me2(2,2);
+   const double mL3 = sqrt(mL32);
+   const double mE3 = sqrt(mE32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmE3MR = omitLogs*log(mE32 / MR2);
+   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   
+   return c2beta*((Xtau2*(-9*F3(mL3/mE3) + 3*F4(mL3/mE3) - 2*c2beta*F5(mL3/mE3))
+   )/(mE3*mL3) + 12*(-2*lmE3MR + lmL3MR))/20.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
+   const double mL32 = p.ml2(2,2);
+   const double mE32 = p.me2(2,2);
+   const double mL3 = sqrt(mL32);
+   const double mE3 = sqrt(mE32);
+   const double beta = atan(p.vu/p.vd);
+   const double c2beta = cos(2*beta);
+   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   
+   return -c2beta*Xtau2*(3*F4(mL3/mE3) + c2beta*F5(mL3/mE3))/(6.*mE3*mL3) 
+   - c2beta*lmL3MR;
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau4(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
+   const double mL32 = p.ml2(2,2);
+   const double mE32 = p.me2(2,2);
+   const double mL3 = sqrt(mL32);
+   const double mE3 = sqrt(mE32);
+   const double lmE3MR = omitLogs*log(mE32 / MR2);
+   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   
+   return (12*mE3*mL3*Xtau2*F1(mL3/mE3) - pow2(Xtau2)*F2(mL3/mE3))/(3.*mE32*mL32)
+   + 2*(lmE3MR + lmL3MR);
+}
+
+double himalaya::ThresholdCalculator::getDeltaG1G1(int omitLogs){
+   using std::log;
+   
+   const double MR2 = pow2(p.scale);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmD1MR = omitLogs*log(p.md2(0,0) / MR2);
+   const double lmD2MR = omitLogs*log(p.md2(1,1) / MR2);
+   const double lmD3MR = omitLogs*log(p.md2(2,2) / MR2);
+   const double lmE1MR = omitLogs*log(p.me2(0,0) / MR2);
+   const double lmE2MR = omitLogs*log(p.me2(1,1) / MR2);
+   const double lmE3MR = omitLogs*log(p.me2(2,2) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+   const double lmU1MR = omitLogs*log(p.mu2(0,0) / MR2);
+   const double lmU2MR = omitLogs*log(p.mu2(1,1) / MR2);
+   const double lmU3MR = omitLogs*log(p.mu2(2,2) / MR2);
+   
+   return (-3*lmAMR - 2*(lmD1MR + lmD2MR + lmD3MR + 3*(lmE1MR + lmE2MR + lmE3MR)
+      ) - 3*(lmL1MR + lmL2MR + lmL3MR) - lmQ1MR - lmQ2MR - lmQ3MR - 12*lmUMR - 8
+      *(lmU1MR + lmU2MR + lmU3MR))/60.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaG2G2(int omitLogs){
+   using std::log;
+   
+   const double MR2 = pow2(p.scale);
+   const double lm2MR = omitLogs*log(pow2(p.M2) / MR2);
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+
+   return (4 - 8*lm2MR - lmAMR - lmL1MR - lmL2MR - lmL3MR - 3*(lmQ1MR + lmQ2MR 
+      + lmQ3MR) - 4*lmUMR)/12.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaYtYt(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double sbeta = sin(beta);
+   const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
+   const double mQ3 = sqrt(p.mq2(2,2));
+   const double mU3 = sqrt(p.mu2(2,2));
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   
+   return (-2*pow2(sbeta)*Xt2*F5(mQ3/mU3)/(mQ3*mU3) + 8*F6(mQ3/p.mu) + 4
+      *F6(mU3/p.mu) + pow2(cbeta)*(-3 + 6*lmAMR) + 6*lmUMR)/8.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaYtauYtau(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double sbeta = sin(beta);
+   const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
+   const double mL3 = sqrt(p.ml2(2,2));
+   const double mE3 = sqrt(p.me2(2,2));
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   
+   return - pow2(cbeta)*Xtau2*F5(mL3/mE3)/(12.*mE3*mL3) + (4*F6(mE3/p.mu) + 8
+      *F6(mL3/p.mu) + pow2(sbeta)*(-3 + 6*lmAMR) + 6*lmUMR)/8.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaYtYb(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   
+   const double MR2 = pow2(p.scale);
+   const double beta = atan(p.vu/p.vd);
+   const double cbeta = cos(beta);
+   const double c2beta = cos(2*beta);
+   const double tbeta = tan(beta);
+   const double mD3 = sqrt(p.md2(2,2));
+   const double mQ3 = sqrt(p.mq2(2,2));
+   const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
+   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   
+   return (- (9 + 7*c2beta)/2. - 2*pow2(cbeta)*pow2(Xb)*F5(mQ3/mD3)/(mD3*mQ3) 
+      + 4*F6(mD3/p.mu) + 4*Xb*F9(mQ3/p.mu, mD3/p.mu)/(p.mu*tbeta) + (5 + 3*c2beta)
+      *lmAMR + 2*lmUMR)/8.;
+}
+
+double himalaya::ThresholdCalculator::getDeltaVevYt2(int limit){
+   const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
+   const double mQ32 = p.mq2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double theta = asin(p.s2t)/2.;
+   const double c2t = cos(2*theta);
+   
+   if(limit == Limits::MQ3_EQ_M3 || limit == Limits::MU3_EQ_M3) limit = Limits::GENERAL;
+   
+   switch (limit){
+      case himalaya::Limits::GENERAL:
+	 return (-2*pow5(mQ32 - mU32)*pow2(p.s2t) + Xt2*((pow2(mQ32) - pow2(mU32))
+	    *(6*mQ32*mU32 + (pow2(mQ32) - 8*mQ32*mU32 + pow2(mU32))*pow2(p.s2t))
+	    - 12*pow2(c2t)*pow2(mQ32)*pow2(mU32)*log(mQ32/mU32)))/(8*mQ32*mU32*
+	    pow3(mQ32 - mU32));
+      default:
+	 return Xt2/(4.*mQ32);
+   }
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   using gm2calc::dilog;
+   
+   const double MR2 = pow2(p.scale);
+   const double lMR = omitLogs*log(MR2);
+   double mQ32 = p.mq2(2,2);
+   double mD32 = p.md2(2,2);
+   const double m32 = pow2(p.MG);
+   double mQ3 = sqrt(mQ32);
+   double mD3 = sqrt(mD32);
+   const double m3 = sqrt(m32);
+   const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
+   const double eps = 0.01*mQ3;
+   
+   if(std::abs(mQ3 - m3) < eps && std::abs(mD3 - m3) < eps && std::abs(mQ3 - mD3)){
+      return (-8*(Xb*(-12*mQ32*Xb + 4*mQ3*pow2(Xb) - 24*pow3(mQ3) + pow3(Xb)) + 8*mQ3*
+        lMR*(-3*mQ32*Xb - 3*mQ3*pow2(Xb) + 3*pow3(mQ3) + pow3(Xb)) -
+        16*mQ3*log(mQ3)*(-3*mQ32*Xb - 3*mQ3*pow2(Xb) + 3*pow3(mQ3) + 3*lMR
+        *pow3(mQ3) + pow3(Xb)) + 48*pow2(log(mQ3))*pow4(mQ3) + 12*
+        pow2(lMR)*pow4(mQ3)))/(3.*pow4(mQ3));
+   } else{
+      mQ32 = p.mq2(2,2)*(1 + 0.02);
+      mD32 = p.md2(2,2)*(1 - 0.015);
+      mQ3 = sqrt(mQ32);
+      mD3 = sqrt(mD32);
+      return 16*(-2*pow2(lMR) + (16*Xb*(m3*(m32 - mD32)*(m32 - mQ32)*log(mD3) - (m32 -
+        mQ32)*dilog(1 - m32/mD32)*pow3(m3) + (m32 - mD32)*dilog(1 - m32/mQ32)*
+        pow3(m3) + lMR*(m32 - mQ32)*log(mD3)*pow3(m3) + log(m3)*(lMR*(-mD32 +
+        mQ32) + 2*(m32 - mQ32)*log(mD3) - 2*(m32 - mD32)*log(mQ3))*pow3(m3) -
+        2*(m32 - mQ32)*pow2(log(mD3))*pow3(m3) + 2*(m32 - mD32)*pow2(log(mQ3))*
+        pow3(m3) - (m32 - mD32)*log(mQ3)*(-(m3*mQ32) + (1 + lMR)*pow3(m3))))/((
+        m32 - mD32)*(m32 - mQ32)*(mD32 - mQ32)) - (8*m3*((2*m32 - mD32 - mQ32)*
+        dilog(1 - m32/mD32) + (-2*m32 + mD32 + mQ32)*dilog(1 - m32/mQ32) + 2*(-
+        ((2 + lMR)*(mD32 - mQ32)) + ((3 + lMR)*mD32 + (1 + lMR)*mQ32 - 4*m32*
+        log(m3))*log(mD3) - ((1 + lMR)*mD32 + (3 + lMR)*mQ32 - 4*m32*log(m3))*
+        log(mQ3) + (2*m32 - mD32 - mQ32)*pow2(log(mD3)) + (-2*m32 + mD32 +
+        mQ32)*pow2(log(mQ3))))*pow3(Xb))/pow3(mD32 - mQ32) - (4*dilog(1 - m32/
+        mD32)*pow4(m3))/pow2(m32 - mD32) - (4*dilog(1 - m32/mQ32)*pow4(m3))/
+        pow2(m32 - mQ32) + 2*pow2(Xb)*((-2*m32)/(mD32*mQ32) - (2*lMR*m32)/(
+        mD32*mQ32) + (8*lMR*log(mD3))/(mD32 - mQ32) + (4*(3*m32 - 2*mD32)*log(
+        mD3))/((m32 - mD32)*(mD32 - mQ32)) - (8*lMR*log(mQ3))/(mD32 - mQ32) + (
+        4*(3*m32 - 2*mQ32)*log(mQ3))/((m32 - mQ32)*(-mD32 + mQ32)) + (8*(mD32 +
+        mQ32)*log(mD3)*log(mQ3))/pow2(mD32 - mQ32) - (4*(3*mD32 - mQ32)*pow2(
+        log(mD3)))/pow2(mD32 - mQ32) + (4*(mD32 - 3*mQ32)*pow2(log(mQ3)))/pow2(
+        mD32 - mQ32) + (4*(m32 - mD32 - mQ32)*log(m3)*pow4(m3))/((m32 - mD32)*
+        mD32*(m32 - mQ32)*mQ32)) + (6*log(mD3)*(-2*m32*mD32 + 2*pow4(m3) +
+        pow4(mD3)))/pow2(m32 - mD32) - (4*pow2(log(mD3))*(-2*m32*mD32 + 3*pow4(
+        m3) + pow4(mD3)))/pow2(m32 - mD32) + (2*(3 + 2*lMR)*log(mQ3)*(-2*m32*
+        mQ32 + 2*pow4(m3) + pow4(mQ3)))/pow2(m32 - mQ32) - (4*pow2(log(mQ3))*(-
+        2*m32*mQ32 + 3*pow4(m3) + pow4(mQ3)))/pow2(m32 - mQ32) + (2*(-(mD32*(
+        mD32 - mQ32)*mQ32*(-2*m32 + mD32 + mQ32)*dilog(1 - m32/mD32)) + mD32*(
+        mD32 - mQ32)*mQ32*(-2*m32 + mD32 + mQ32)*dilog(1 - m32/mQ32) - 2*mD32*(
+        mD32 - mQ32)*mQ32*(2*m32 + 7*mD32 + 3*mQ32)*log(mD3) + lMR*(mD32 -
+        mQ32)*((mD32 - mQ32)*(4*mD32*mQ32 + m32*(mD32 + mQ32)) - 4*mD32*mQ32*(
+        m32 + mD32 + mQ32)*log(mD3)) + (6*mD32*mQ32 + m32*(mD32 + mQ32))*pow2(
+        mD32 - mQ32) - 2*m32*(mD32 + mQ32)*log(m3)*pow2(mD32 - mQ32) + 2*mD32*
+        mQ32*log(mQ3)*((mD32 - mQ32)*(2*(1 + lMR)*m32 + (3 + 2*lMR)*mD32 + (7 +
+        2*lMR)*mQ32) - 4*log(mD3)*pow2(mD32 + mQ32)) + 4*mD32*mQ32*(m32*(mD32 -
+        mQ32) + 2*mD32*(mD32 + mQ32))*pow2(log(mD3)) + 4*mD32*mQ32*(m32*(-mD32
+        + mQ32) + 2*mQ32*(mD32 + mQ32))*pow2(log(mQ3)))*pow4(Xb))/(mD32*mQ32*
+        pow4(mD32 - mQ32)) + (-6*m32*mD32*mQ32*(mD32 + mQ32) + 3*pow4(mD3)*
+        pow4(mQ3) + pow4(m3)*(9*mD32*mQ32 + 2*pow4(mD3) + 2*pow4(mQ3)) - 2*(
+        mD32 + mQ32)*pow6(m3))/(mD32*(-m32 + mD32)*(m32 - mQ32)*mQ32) - (2*log(
+        m3)*pow4(m3)*(-4*mD32*mQ32*log(mQ3)*pow2(m32 - mD32) - 4*mD32*mQ32*log(
+        mD3)*pow2(m32 - mQ32) + 2*m32*(mD32 + mQ32)*pow2(mD32 - mQ32) + pow4(
+        m3)*(2*mD32*mQ32 - 4*pow4(mD3) - 4*pow4(mQ3)) + mD32*mQ32*(pow4(mD3) +
+        pow4(mQ3)) + 2*lMR*mD32*mQ32*(-2*m32*(mD32 + mQ32) + 2*pow4(m3) + pow4(
+        mD3) + pow4(mQ3)) + 2*(mD32 + mQ32)*pow6(m3)))/(mD32*mQ32*pow2(m32 -
+        mD32)*pow2(m32 - mQ32)) + (2*lMR*(2*log(mD3)*(-2*m32*mD32 + 2*pow4(m3)
+        + pow4(mD3)) + ((m32 - mD32)*(3*m32*mD32*mQ32*(mD32 + mQ32) - 3*pow4(
+        mD3)*pow4(mQ3) - pow4(m3)*(3*mD32*mQ32 + pow4(mD3) + pow4(mQ3)) + (mD32
+        + mQ32)*pow6(m3)))/(mD32*(m32 - mQ32)*mQ32)))/pow2(m32 - mD32));
+   }
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYb6(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   using gm2calc::dilog;
+
+   
+   const double MR2 = pow2(p.scale);
+   const double lMR = omitLogs*log(MR2);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mD3 = sqrt(mD32);
+   const double mA = p.MA;
+   const double beta = atan(p.vu/p.vd);
+   const double sbeta = sin(beta);
+   const double cbeta = cos(beta);
+   const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
+   const double Yb = p.Ad(2,2) + p.mu*p.vd/p.vu;
+   const double Mu = p.mu;
+   
+   return 6*(-8*(1 + lMR)*log(mD3) - 12*(1 + lMR)*log(mQ3) + 5*pow2(1 + lMR) + 8*
+        pow2(log(mD3)) + 12*pow2(log(mQ3))) + (3*pow2(sbeta)*(2*(1.5 - 8*(1 +
+        lMR)*log(mD3) - 12*(1 + lMR)*log(mQ3) + 8*pow2(lMR) - (2*pow2(mA))/mD32
+        - pow2(mA)/mQ32 + lMR*(3 - (2/mD32 + 1/mQ32)*pow2(mA)) + 2*log(mA)*(7 -
+        6*lMR + (2/mD32 + 1/mQ32)*pow2(mA)) + pow2(Pi) + 12*pow2(log(mA)) + 8*
+        pow2(log(mD3)) + 12*pow2(log(mQ3)) + (phixyz(pow2(mA),mD32,mD32)*(-
+        deltaxyz(pow2(mA),mD32,mD32) - 6*mD32*pow2(mA) + pow4(mA)))/pow4(mD3) +
+        (phixyz(pow2(mA),mQ32,mQ32)*(-2*deltaxyz(pow2(mA),mQ32,mQ32) - 11*mQ32*
+        pow2(mA) + 2*pow4(mA)))/pow4(mQ3)) + (4*Xb*Yb*(phixyz(pow2(mA),mD32,
+        mD32)*(-deltaxyz(pow2(mA),mD32,mD32) - 6*mD32*pow2(mA) + pow4(mA))*
+        pow4(mQ3) + phixyz(pow2(mA),mQ32,mD32)*pow4(mQ3)*(-3*mD32*mQ32 -
+        deltaxyz(pow2(mA),mQ32,mD32) - (3*mD32 + 2*mQ32)*pow2(mA) + pow4(mA) +
+        2*pow4(mD3) + pow4(mQ3)) + pow4(mD3)*(phixyz(pow2(mA),mQ32,mQ32)*(2*
+        deltaxyz(pow2(mA),mQ32,mQ32) + 11*mQ32*pow2(mA) - 2*pow4(mA)) + 4*log(
+        mD3/mQ3)*(-3 - 3*lMR + log(mA) + 2*log(mD3) + 3*log(mQ3))*pow4(mQ3))))/
+        ((mD32 - mQ32)*pow4(mD3)*pow4(mQ3)) + (4*Yb*pow3(Xb)*(phixyz(pow2(mA),
+        mD32,mD32)*((-3*mD32 + mQ32)*deltaxyz(pow2(mA),mD32,mD32) + (mD32 -
+        mQ32)*pow2(mA)*(-6*mD32 + pow2(mA)))*pow4(mQ3) + pow4(mD3)*(phixyz(
+        pow2(mA),mQ32,mQ32)*(-2*(mD32 - 3*mQ32)*deltaxyz(pow2(mA),mQ32,mQ32) +
+        (mD32 - mQ32)*pow2(mA)*(-11*mQ32 + 2*pow2(mA))) + 4*(-3*(2 + lMR)*(mD32
+        - mQ32) - log(mQ3)*(3*(1 + lMR)*mD32 + 3*(3 + lMR)*mQ32 + log(mA)*(-
+        mD32 + mQ32 - 6*pow2(mA))) + log(mD3)*(3*(3 + lMR)*mD32 + 3*(1 + lMR)*
+        mQ32 + log(mA)*(-mD32 + mQ32 - 6*pow2(mA)) + log(mQ3)*(-mD32 - 3*mQ32 +
+        2*pow2(mA))) + 2*(-mD32 - mQ32 + pow2(mA))*pow2(log(mD3)) + (3*mD32 +
+        5*mQ32 - 4*pow2(mA))*pow2(log(mQ3)))*pow4(mQ3)) + phixyz(pow2(mA),mQ32,
+        mD32)*pow4(mQ3)*((-3*mD32 + mQ32)*deltaxyz(pow2(mA),mQ32,mD32) + (mD32
+        - mQ32)*(-3*mD32*mQ32 - (3*mD32 + 2*mQ32)*pow2(mA) + pow4(mA) + 2*pow4(
+        mD3) + pow4(mQ3)))))/(pow3(mD32 - mQ32)*pow4(mD3)*pow4(mQ3)) + (pow2(
+        Yb)*(4*mQ32*phixyz(pow2(mA),mQ32,mD32)*pow2(deltaxyz(pow2(mA),mQ32,
+        mD32)) - deltaxyz(pow2(mA),mQ32,mD32)*(mQ32*phixyz(pow2(mA),mQ32,mD32)*
+        (-12*mD32*mQ32 - 12*(mD32 + mQ32)*pow2(mA) + 6*pow4(mA) + 5*pow4(mD3) +
+        6*pow4(mQ3)) + 2*mD32*(2*mD32*mQ32 + 2*lMR*mD32*mQ32 - 3*mD32*mQ32*log(
+        mQ3) + 2*mQ32*log(mQ3)*pow2(mA) + mD32*log(mD3)*(-3*mD32 + 3*mQ32 +
+        pow2(mA)) + pow4(mD3) + lMR*pow4(mD3) - 2*log(mQ3)*pow4(mQ3) + log(mA)*
+        (-4*mD32*mQ32 - (mD32 + 2*mQ32)*pow2(mA) + pow4(mD3) + 2*pow4(mQ3)))) +
+        2*mD32*(log(mA)*(pow2(mD32 - mQ32)*(-4*mD32*mQ32 + pow4(mD3) + 2*pow4(
+        mQ3)) + pow4(mA)*(6*mD32*mQ32 + 5*pow4(mD3) + 6*pow4(mQ3)) - (mD32 + 2*
+        mQ32)*pow6(mA) + pow2(mA)*(8*mQ32*pow4(mD3) + 3*mD32*pow4(mQ3) - 5*
+        pow6(mD3) - 6*pow6(mQ3))) - mQ32*log(mQ3)*((7*mD32 + 6*mQ32)*pow4(mA) +
+        2*mQ32*pow4(mD3) - 5*mD32*pow4(mQ3) - 2*pow2(mA)*(mD32*mQ32 + pow4(mD3)
+        + 3*pow4(mQ3)) - 2*pow6(mA) + pow6(mD3) + 2*pow6(mQ3)) + mD32*log(mD3)*
+        ((-5*mD32 + mQ32)*pow4(mA) + 7*mQ32*pow4(mD3) + 5*pow2(mA)*(-2*mD32*
+        mQ32 + pow4(mD3) - pow4(mQ3)) - 9*mD32*pow4(mQ3) + pow6(mA) - pow6(mD3)
+        + 3*pow6(mQ3))) + mQ32*phixyz(pow2(mA),mQ32,mD32)*(pow2(mD32 - mQ32)*(-
+        4*mD32*mQ32 + pow4(mD3) + 2*pow4(mQ3)) + pow4(mA)*(8*mD32*mQ32 + 7*
+        pow4(mD3) + 12*pow4(mQ3)) - 8*(mD32 + mQ32)*pow6(mA) + pow2(mA)*(6*
+        mQ32*pow4(mD3) + 8*mD32*pow4(mQ3) - 6*pow6(mD3) - 8*pow6(mQ3)) + 2*
+        pow8(mA))))/(mQ32*deltaxyz(pow2(mA),mQ32,mD32)*pow6(mD3)) + (pow4(Xb)*(
+        -24*(1 + lMR)*mQ32*log(mD3)*pow2(mA) + 48*mQ32*log(mA)*log(mD3)*pow2(
+        mA) + 24*(1 + lMR)*mQ32*log(mQ3)*pow2(mA) - 48*mQ32*log(mA)*log(mQ3)*
+        pow2(mA) + 16*(-3*mD32 - mQ32 + 2*pow2(mA))*pow2(Yb)*pow2(log(mD3)) +
+        8*(-3*mD32 - 11*mQ32 + 7*pow2(mA))*pow2(Yb)*pow2(log(mQ3)) + (2*phixyz(
+        pow2(mA),mD32,mD32)*((-5*mD32 + mQ32)*deltaxyz(pow2(mA),mD32,mD32) + (
+        mD32 - mQ32)*pow2(mA)*(-6*mD32 + pow2(mA)))*pow2(Yb))/pow4(mD3) - (2*(
+        mD32 - mQ32)*pow2(Yb)*(-11*mD32*mQ32 + pow4(mD3) - 2*pow4(mQ3)))/(mD32*
+        mQ32) - (2*(mD32 - mQ32)*pow2(mA)*(-5*mD32*mQ32 + pow4(mD3) - 2*pow4(
+        mQ3)))/(mD32*mQ32) - (2*lMR*(mD32 - mQ32)*pow2(mA)*(-5*mD32*mQ32 +
+        pow4(mD3) - 2*pow4(mQ3)))/(mD32*mQ32) + (4*(mD32 - mQ32)*log(mA)*pow2(
+        mA)*(-5*mD32*mQ32 + pow4(mD3) - 2*pow4(mQ3)))/(mD32*mQ32) - (2*lMR*(
+        mD32 - mQ32)*pow2(Yb)*(-5*mD32*mQ32 + pow4(mD3) - 2*pow4(mQ3)))/(mD32*
+        mQ32) + (2*phixyz(pow2(mA),mQ32,mQ32)*((2*mD32 - 9*mQ32)*deltaxyz(pow2(
+        mA),mQ32,mQ32) + (-mD32 + mQ32)*pow2(mA)*(-11*mQ32 + 2*pow2(mA)))*pow2(
+        Yb))/pow4(mQ3) + 2*log(mA)*pow2(Yb)*(12*log(mD3)*(mD32 - mQ32 + pow2(
+        mA)) - 12*log(mQ3)*(mD32 - mQ32 + pow2(mA)) + (pow2(mD32 - mQ32)*(-(
+        pow2(mD32 - mQ32)*(4*mD32*mQ32 + 3*pow4(mD3) - 2*pow4(mQ3))) +
+        deltaxyz(pow2(mA),mQ32,mD32)*(4*mD32*mQ32 - (mD32 - 2*mQ32)*pow2(mA) +
+        3*pow4(mD3) - 2*pow4(mQ3)) + pow4(mA)*(2*mD32*mQ32 - 3*pow4(mD3) + 6*
+        pow4(mQ3)) + (mD32 - mQ32)*pow2(mA)*(mD32*mQ32 + 5*pow4(mD3) + 6*pow4(
+        mQ3)) + (mD32 - 2*mQ32)*pow6(mA)))/(mQ32*deltaxyz(pow2(mA),mQ32,mD32)*
+        pow4(mD3))) + (2*log(mQ3)*pow2(Yb)*(-2*pow2(mA)*pow2(mD32 - mQ32) + 4*(
+        4 + 3*lMR)*mQ32*pow4(mD3) + mD32*pow4(mQ3) + 5*pow6(mD3) + (pow2(mD32 -
+        mQ32)*(-3*(3*mD32 + 2*mQ32)*pow4(mA) + 10*mQ32*pow4(mD3) + 3*mD32*pow4(
+        mQ3) + 2*pow2(mA)*(3*mD32*mQ32 + 7*pow4(mD3) + 3*pow4(mQ3)) + 2*pow6(
+        mA) - 11*pow6(mD3) - 2*pow6(mQ3)))/deltaxyz(pow2(mA),mQ32,mD32) + 2*
+        pow6(mQ3)))/pow4(mD3) + (2*log(mD3)*pow2(Yb)*(deltaxyz(pow2(mA),mQ32,
+        mD32)*(4*mD32*mQ32*log(mQ3)*(9*mD32 + 13*mQ32 - 11*pow2(mA)) + pow2(mA)
+        *pow2(mD32 - mQ32) - 15*mQ32*pow4(mD3) - 3*mD32*pow4(mQ3) - 12*lMR*
+        mD32*pow4(mQ3) - pow6(mD3) - 5*pow6(mQ3)) + pow2(mD32 - mQ32)*((3*mD32
+        + 7*mQ32)*pow4(mA) + 9*mQ32*pow4(mD3) - 17*mD32*pow4(mQ3) - pow2(mA)*(
+        10*mD32*mQ32 + 5*pow4(mD3) + 11*pow4(mQ3)) - pow6(mA) + 3*pow6(mD3) +
+        5*pow6(mQ3))))/(mD32*mQ32*deltaxyz(pow2(mA),mQ32,mD32)) + (phixyz(pow2(
+        mA),mQ32,mD32)*pow2(Yb)*(2*pow2(deltaxyz(pow2(mA),mQ32,mD32))*(-9*mD32*
+        mQ32 + 18*pow4(mD3) + 2*pow4(mQ3)) - (mD32 - mQ32)*deltaxyz(pow2(mA),
+        mQ32,mD32)*(2*(8*mD32 - 3*mQ32)*pow4(mA) - 49*mQ32*pow4(mD3) - 4*pow2(
+        mA)*(5*mD32*mQ32 + 9*pow4(mD3) - 3*pow4(mQ3)) + 28*mD32*pow4(mQ3) + 27*
+        pow6(mD3) - 6*pow6(mQ3)) + pow2(mD32 - mQ32)*(-2*(mD32 - mQ32)*pow2(mA)
+        *(3*pow4(mD3) - 4*pow4(mQ3)) - pow2(mD32 - mQ32)*(4*mD32*mQ32 + 3*pow4(
+        mD3) - 2*pow4(mQ3)) + pow4(mA)*(8*mD32*mQ32 + 11*pow4(mD3) + 12*pow4(
+        mQ3)) - 8*(mD32 + mQ32)*pow6(mA) + 2*pow8(mA))))/(deltaxyz(pow2(mA),
+        mQ32,mD32)*pow6(mD3))))/pow4(mD32 - mQ32) + 2*pow2(Xb)*((2*lMR*(mD32*
+        mQ32 + (mD32 - 2*mQ32)*pow2(mA)))/(mD32*(mD32 - mQ32)*mQ32) + (4*mD32*
+        mQ32 + 2*(mD32 - 2*mQ32)*pow2(mA))/(mD32*(mD32 - mQ32)*mQ32) - (4*log(
+        mQ3)*(-3*(1 + lMR)*mD32 + (1 + 2*lMR)*mQ32 + (1 + lMR)*pow2(mA)))/pow2(
+        mD32 - mQ32) + (4*log(mD3)*(-4*mD32 - 3*lMR*mD32 + 2*mQ32 + 2*lMR*mQ32
+        + log(mQ3)*(mD32 + mQ32 - pow2(mA)) + (1 + lMR)*pow2(mA)))/pow2(mD32 -
+        mQ32) + (8*pow2(log(mD3)))/(mD32 - mQ32) + (4*(-3*mD32 + mQ32 + pow2(
+        mA))*pow2(log(mQ3)))/pow2(mD32 - mQ32) + (deltaxyz(pow2(mA),mQ32,mD32)*
+        phixyz(pow2(mA),mQ32,mD32))/pow2(-(mD3*mQ32) + pow3(mD3)) + (phixyz(
+        pow2(mA),mQ32,mQ32)*((2*mD32 - 3*mQ32)*deltaxyz(pow2(mA),mQ32,mQ32) + (
+        -mD32 + mQ32)*pow2(mA)*(-11*mQ32 + 2*pow2(mA))))/(pow2(mD32 - mQ32)*
+        pow4(mQ3)) - (4*log(mA)*(mD32*mQ32*log(mD3)*(-mD32 + mQ32 + pow2(mA)) -
+        mD32*mQ32*log(mQ3)*(-mD32 + mQ32 + pow2(mA)) + pow2(mA)*(-3*mD32*mQ32 +
+        pow4(mD3) + 2*pow4(mQ3))))/(mD32*mQ32*pow2(mD32 - mQ32)) + (phixyz(
+        pow2(mA),mD32,mD32)*(-deltaxyz(pow2(mA),mD32,mD32) - 6*mD32*pow2(mA) +
+        pow4(mA)))/(-(mQ32*pow4(mD3)) + pow6(mD3)) + pow2(Yb)*((2*lMR*(mD32 -
+        2*mQ32))/(mD32*(mD32 - mQ32)*mQ32) + (8*pow2(log(mD3)))/pow2(mD32 -
+        mQ32) + (12*pow2(log(mQ3)))/pow2(mD32 - mQ32) + (phixyz(pow2(mA),mD32,
+        mD32)*(-deltaxyz(pow2(mA),mD32,mD32) - 6*mD32*pow2(mA) + pow4(mA)))/(
+        pow2(mD32 - mQ32)*pow4(mD3)) + (phixyz(pow2(mA),mQ32,mQ32)*(-2*
+        deltaxyz(pow2(mA),mQ32,mQ32) - 11*mQ32*pow2(mA) + 2*pow4(mA)))/(pow2(
+        mD32 - mQ32)*pow4(mQ3)) + (2*mD32 - 4*mQ32)/(mQ32*pow4(mD3) - mD32*
+        pow4(mQ3)) - (2*log(mD3)*(deltaxyz(pow2(mA),mQ32,mD32)*((1 - 2*lMR)*
+        mD32*mQ32 + 10*mD32*mQ32*log(mQ3) + pow4(mD3) - 4*pow4(mQ3)) + (mD32 -
+        mQ32)*(-((mD32 + 4*mQ32)*pow4(mA)) - 8*mQ32*pow4(mD3) + 11*mD32*pow4(
+        mQ3) + 2*pow2(mA)*(7*mD32*mQ32 + 4*pow4(mQ3)) + pow6(mD3) - 4*pow6(mQ3)
+        )))/(mD32*mQ32*deltaxyz(pow2(mA),mQ32,mD32)*pow2(mD32 - mQ32)) + (4*
+        log(mQ3)*(-(mD32*mQ32) - (mD32 - mQ32)*pow2(mA) - (-1 + lMR)*pow4(mD3)
+        - pow4(mQ3) + ((mD32 - mQ32)*(-((4*mD32 + 3*mQ32)*pow4(mA)) + 2*mD32*
+        pow4(mQ3) + pow2(mA)*(2*mD32*mQ32 + 6*pow4(mD3) + 3*pow4(mQ3)) + pow6(
+        mA) - pow6(mD3) - pow6(mQ3)))/deltaxyz(pow2(mA),mQ32,mD32)))/(pow2(mD32
+        - mQ32)*pow4(mD3)) + (2*log(mA)*(log(mQ32/mD32) - ((mD32 - mQ32)*(
+        deltaxyz(pow2(mA),mQ32,mD32)*(-4*mD32*mQ32 - 2*mQ32*pow2(mA) + pow4(
+        mD3) + 2*pow4(mQ3)) + (mD32 - mQ32 + pow2(mA))*(2*mQ32*pow4(mA) + 5*
+        mQ32*pow4(mD3) + pow2(mA)*(-6*mD32*mQ32 + pow4(mD3) - 4*pow4(mQ3)) - 6*
+        mD32*pow4(mQ3) - pow6(mD3) + 2*pow6(mQ3))))/(mQ32*deltaxyz(pow2(mA),
+        mQ32,mD32)*pow4(mD3))))/pow2(mD32 - mQ32) + (phixyz(pow2(mA),mQ32,mD32)
+        *(deltaxyz(pow2(mA),mQ32,mD32)*((7*mD32 - 4*mQ32)*deltaxyz(pow2(mA),
+        mQ32,mD32) - 3*(3*mD32 - 2*mQ32)*pow2(mD32 - mQ32) + (-9*mD32 + 6*mQ32)
+        *pow4(mA) + pow2(mA)*(6*mD32*mQ32 + 23*pow4(mD3) - 12*pow4(mQ3))) + (
+        mD32 - mQ32)*(pow2(mD32 - mQ32)*(-4*mD32*mQ32 + pow4(mD3) + 2*pow4(mQ3)
+        ) + pow4(mA)*(8*mD32*mQ32 + 11*pow4(mD3) + 12*pow4(mQ3)) - 8*(mD32 +
+        mQ32)*pow6(mA) - 2*pow2(mA)*(-(mQ32*pow4(mD3)) - 4*mD32*pow4(mQ3) +
+        pow6(mD3) + 4*pow6(mQ3)) + 2*pow8(mA))))/(deltaxyz(pow2(mA),mQ32,mD32)*
+        pow2(mD32 - mQ32)*pow6(mD3))))))/pow2(cbeta) + (12*pow4(Xb)*(3*mD32*
+        mQ32*dilog(1 - mD32/mQ32)*pow2(mD32 - mQ32) - 4*mD32*mQ32*pow2(log(mD3)
+        )*(-4*mD32*mQ32 + pow4(mD3) - 3*pow4(mQ3)) + 57*pow4(mD3)*pow4(mQ3) +
+        33*lMR*pow4(mD3)*pow4(mQ3) - 28*log(mQ3)*pow4(mD3)*pow4(mQ3) + 4*lMR*
+        log(mQ3)*pow4(mD3)*pow4(mQ3) + 8*pow2(log(mQ3))*pow4(mD3)*pow4(mQ3) -
+        29*mQ32*pow6(mD3) - 17*lMR*mQ32*pow6(mD3) - 6*mQ32*log(mQ3)*pow6(mD3) -
+        14*lMR*mQ32*log(mQ3)*pow6(mD3) + 24*mQ32*pow2(log(mQ3))*pow6(mD3) - 31*
+        mD32*pow6(mQ3) - 19*lMR*mD32*pow6(mQ3) + 38*mD32*log(mQ3)*pow6(mQ3) +
+        10*lMR*mD32*log(mQ3)*pow6(mQ3) - 8*mD32*pow2(log(mQ3))*pow6(mQ3) - 2*
+        mD32*log(mD3)*((mD32 - mQ32)*(-((19 + 7*lMR)*mD32*mQ32) + pow4(mD3) -
+        5*lMR*pow4(mQ3)) + 2*log(mQ3)*(5*mQ32*pow4(mD3) + 6*mD32*pow4(mQ3) +
+        pow6(mQ3))) + pow8(mD3) + lMR*pow8(mD3) + 2*pow8(mQ3) + 2*lMR*pow8(mQ3)
+        - 4*log(mQ3)*pow8(mQ3)))/(mD32*mQ32*pow4(mD32 - mQ32)) - (6*pow2(Xb)*(
+        6*mD32*mQ32*dilog(1 - mD32/mQ32)*pow2(mD32 - mQ32) + 5*pow4(mD3)*pow4(
+        mQ3) + lMR*pow4(mD3)*pow4(mQ3) + 72*log(mQ3)*pow4(mD3)*pow4(mQ3) + 44*
+        lMR*log(mQ3)*pow4(mD3)*pow4(mQ3) - 64*pow2(log(mQ3))*pow4(mD3)*pow4(
+        mQ3) - 24*mD32*mQ32*pow2(log(mD3))*(-(mD32*mQ32) + pow4(mD3) + pow4(
+        mQ3)) - 5*mQ32*pow6(mD3) - 9*lMR*mQ32*pow6(mD3) - 32*mQ32*log(mQ3)*
+        pow6(mD3) - 36*lMR*mQ32*log(mQ3)*pow6(mD3) + 48*mQ32*pow2(log(mQ3))*
+        pow6(mD3) + mD32*pow6(mQ3) + 9*lMR*mD32*pow6(mQ3) - 44*mD32*log(mQ3)*
+        pow6(mQ3) - 32*lMR*mD32*log(mQ3)*pow6(mQ3) + 40*mD32*pow2(log(mQ3))*
+        pow6(mQ3) - 2*mD32*log(mD3)*(-((25 + 18*lMR)*mQ32*pow4(mD3)) + (37 +
+        22*lMR)*mD32*pow4(mQ3) + pow6(mD3) - (13 + 16*lMR)*pow6(mQ3) + 4*log(
+        mQ3)*(3*mQ32*pow4(mD3) - 5*mD32*pow4(mQ3) + 2*pow6(mQ3))) + pow8(mD3) +
+        lMR*pow8(mD3) - 2*pow8(mQ3) - 2*lMR*pow8(mQ3) + 4*log(mQ3)*pow8(mQ3)))/
+        (mD32*mQ32*pow3(mD32 - mQ32)) + (6*(-2.5 + 4*pow2(lMR) + mD32*(-(1/
+        mQ32) + 1/(mD32 - pow2(Mu))) - (2*(mQ32 - 2*pow2(Mu)))/mD32 + 2*(1/mQ32
+        + 1/(mQ32 - pow2(Mu)))*pow2(Mu) + lMR*(2 - (2*(mQ32 - 2*pow2(Mu)))/mD32
+        + (2*pow2(Mu))/mQ32 + (4*pow2(Mu))/(-mQ32 + pow2(Mu)) + mD32*(-(1/mQ32)
+        + 2/(-mD32 + pow2(Mu)))) + log(pow2(Mu))*pow2(Mu)*(-2/mQ32 + 2*lMR*
+        pow2(Mu)*(-(1/pow2(mD32 - pow2(Mu))) - 2/pow2(mQ32 - pow2(Mu))) - (6*
+        pow2(Mu))/pow2(mQ32 - pow2(Mu)) + (8*log(mQ3)*pow2(Mu))/pow2(mQ32 -
+        pow2(Mu)) + (3*mD32*pow2(Mu) - 2*pow4(mD3) - 4*pow4(Mu))/pow2(-(mD3*
+        pow2(Mu)) + pow3(mD3))) + (2*dilog(1 - pow2(Mu)/mD32)*(-2*mD32*pow2(Mu)
+        + pow4(mD3) - pow4(Mu)))/pow2(mD32 - pow2(Mu)) + (4*pow2(log(mD3))*(-2*
+        mD32*pow2(Mu) + pow4(mD3) - pow4(Mu)))/pow2(mD32 - pow2(Mu)) + dilog(1
+        - pow2(Mu)/mQ32)*(2 - (8*pow4(Mu))/pow2(mQ32 - pow2(Mu))) + 4*pow2(log(
+        mQ3))*(1 - (4*pow4(Mu))/pow2(mQ32 - pow2(Mu))) + 2*log(mD3)*(mD32/mQ32
+        + 4*log(mQ3) + (2*log(pow2(Mu))*pow4(Mu))/pow2(mD32 - pow2(Mu)) - (2*
+        lMR*(-4*mD32*pow2(Mu) + 2*pow4(mD3) + pow4(Mu)))/pow2(mD32 - pow2(Mu))
+        + (2*mD32*pow2(Mu) - pow4(mD3) + 2*pow4(Mu))/pow2(mD32 - pow2(Mu))) +
+        2*log(mQ3)*((2*mQ32)/mD32 + (2*mQ32*pow2(Mu) + pow4(mQ3) + 3*pow4(Mu))/
+        pow2(mQ32 - pow2(Mu)) + lMR*(-4 + (4*pow4(Mu))/pow2(mQ32 - pow2(Mu))))
+        + 2*pow2(Xb)*((-6*((1 + lMR)*(mD32 - mQ32) - 2*mD32*log(mD3) + 2*mQ32*
+        log(mQ3))*log(mD32/mQ32))/pow2(mD32 - mQ32) + (2*dilog(1 - pow2(Mu)/
+        mQ32)*(mQ32 - pow2(Mu)))/pow2(mD32 - mQ32) + (2*dilog(1 - pow2(Mu)/
+        mD32)*(-mQ32 + pow2(Mu)))/pow2(mD32 - mQ32) + 2*log(pow2(Mu))*pow2(Mu)*
+        ((1/mQ32 + 1/(-mD32 + mQ32))/mD32 + 1/((mD32 - pow2(Mu))*(-mQ32 + pow2(
+        Mu)))) + (4*(2*mD32 - mQ32 + pow2(Mu))*pow2(log(mD3)))/pow2(mD32 -
+        mQ32) + (4*(4*mQ32 - pow2(Mu))*pow2(log(mQ3)))/pow2(mD32 - mQ32) + (
+        lMR*(4*mQ32*pow2(Mu) - 2*mD32*(mQ32 + pow2(Mu)) + pow4(mD3) - 2*pow4(
+        mQ3)))/(mD32*(mD32 - mQ32)*mQ32) + (-3*mD32*mQ32 - 2*mD32*pow2(Mu) + 4*
+        mQ32*pow2(Mu) + pow4(mD3) - 2*pow4(mQ3))/(mQ32*pow4(mD3) - mD32*pow4(
+        mQ3)) - (2*log(mD3)*(2*mQ32*(2*mD32 + 3*mQ32)*log(mQ3)*(mD32 - pow2(Mu)
+        ) + (2*lMR*mQ32 - pow2(Mu))*pow4(mD3) + (3 + 5*lMR)*pow2(Mu)*pow4(mQ3)
+        + mD32*(4*mQ32*pow2(Mu) - 5*(1 + lMR)*pow4(mQ3)) - 2*(1 + lMR)*mQ32*
+        pow4(Mu) + pow6(mD3)))/((mD32 - pow2(Mu))*pow2(-(mD32*mQ3) + pow3(mQ3))
+        ) + (2*log(mQ3)*(((3 + 2*lMR)*mQ32 - (1 + 2*lMR)*pow2(Mu))*pow4(mD3) +
+        2*pow2(Mu)*pow4(mQ3) - mD32*(-((5 + 7*lMR)*mQ32*pow2(Mu)) + 5*(1 + lMR)
+        *pow4(mQ3) + 2*(1 + lMR)*pow4(Mu)) - 2*pow6(mQ3)))/((mQ32 - pow2(Mu))*
+        pow2(-(mD3*mQ32) + pow3(mD3)))) - (pow4(Xb)*(18*mQ32*pow2(Mu)*pow4(mD3)
+        + 12*lMR*mQ32*pow2(Mu)*pow4(mD3) - 12*mQ32*log(mD3)*pow2(Mu)*pow4(mD3)
+        - 6*mQ32*log(pow2(Mu))*pow2(Mu)*pow4(mD3) - 12*mD32*pow2(Mu)*pow4(mQ3)
+        - 6*lMR*mD32*pow2(Mu)*pow4(mQ3) - 24*mD32*log(mD3)*pow2(Mu)*pow4(mQ3) -
+        24*lMR*mD32*log(mD3)*pow2(Mu)*pow4(mQ3) + 36*mD32*log(mQ3)*pow2(Mu)*
+        pow4(mQ3) + 24*lMR*mD32*log(mQ3)*pow2(Mu)*pow4(mQ3) + 24*mD32*pow2(Mu)*
+        pow2(log(mD3))*pow4(mQ3) - 24*mD32*pow2(Mu)*pow2(log(mQ3))*pow4(mQ3) -
+        85*pow4(mD3)*pow4(mQ3) - 75*lMR*pow4(mD3)*pow4(mQ3) + 90*log(mD3)*pow4(
+        mD3)*pow4(mQ3) + 12*lMR*log(mD3)*pow4(mD3)*pow4(mQ3) + 60*log(mQ3)*
+        pow4(mD3)*pow4(mQ3) - 12*lMR*log(mQ3)*pow4(mD3)*pow4(mQ3) - 136*log(
+        mD3)*log(mQ3)*pow4(mD3)*pow4(mQ3) + 56*pow2(log(mD3))*pow4(mD3)*pow4(
+        mQ3) + 80*pow2(log(mQ3))*pow4(mD3)*pow4(mQ3) + 2*mD32*mQ32*dilog(1 -
+        pow2(Mu)/mD32)*(-2*mD32*mQ32 + 6*mQ32*pow2(Mu) + pow4(mD3) - 2*pow4(
+        mQ3) - 3*pow4(Mu)) - 2*mD32*mQ32*dilog(1 - pow2(Mu)/mQ32)*(-2*mD32*mQ32
+        + 6*mQ32*pow2(Mu) + pow4(mD3) - 2*pow4(mQ3) - 3*pow4(Mu)) + 12*mD32*
+        mQ32*log(mD3)*log(pow2(Mu))*pow4(Mu) - 12*mD32*mQ32*log(mQ3)*log(pow2(
+        Mu))*pow4(Mu) - 12*mD32*mQ32*pow2(log(mD3))*pow4(Mu) + 12*mD32*mQ32*
+        pow2(log(mQ3))*pow4(Mu) + 33*mQ32*pow6(mD3) + 31*lMR*mQ32*pow6(mD3) -
+        100*mQ32*log(mD3)*pow6(mD3) - 36*lMR*mQ32*log(mD3)*pow6(mD3) + 38*mQ32*
+        log(mQ3)*pow6(mD3) + 36*lMR*mQ32*log(mQ3)*pow6(mD3) - 64*mQ32*log(mD3)*
+        log(mQ3)*pow6(mD3) - 2*pow2(Mu)*pow6(mD3) - 2*lMR*pow2(Mu)*pow6(mD3) +
+        2*log(pow2(Mu))*pow2(Mu)*pow6(mD3) + 68*mQ32*pow2(log(mD3))*pow6(mD3) -
+        4*mQ32*pow2(log(mQ3))*pow6(mD3) + 49*mD32*pow6(mQ3) + 41*lMR*mD32*pow6(
+        mQ3) + 48*mD32*log(mD3)*pow6(mQ3) + 48*lMR*mD32*log(mD3)*pow6(mQ3) -
+        130*mD32*log(mQ3)*pow6(mQ3) - 48*lMR*mD32*log(mQ3)*pow6(mQ3) - 80*mD32*
+        log(mD3)*log(mQ3)*pow6(mQ3) - 4*pow2(Mu)*pow6(mQ3) - 4*lMR*pow2(Mu)*
+        pow6(mQ3) + 4*log(pow2(Mu))*pow2(Mu)*pow6(mQ3) - 8*mD32*pow2(log(mD3))*
+        pow6(mQ3) + 88*mD32*pow2(log(mQ3))*pow6(mQ3) + pow8(mD3) + lMR*pow8(
+        mD3) - 2*log(mD3)*pow8(mD3) + 2*pow8(mQ3) + 2*lMR*pow8(mQ3) - 4*log(
+        mQ3)*pow8(mQ3)))/(mD32*mQ32*pow4(mD32 - mQ32))))/pow2(cbeta) - (6*pow6(
+        Xb)*(6*mD32*mQ32*dilog(1 - mD32/mQ32)*pow3(mD32 - mQ32) + 28*pow4(mQ3)*
+        pow6(mD3) + 16*lMR*pow4(mQ3)*pow6(mD3) - 8*log(mQ3)*pow4(mQ3)*pow6(mD3)
+        - 12*lMR*log(mQ3)*pow4(mQ3)*pow6(mD3) + 8*pow2(log(mQ3))*pow4(mQ3)*
+        pow6(mD3) - 34*pow4(mD3)*pow6(mQ3) - 10*lMR*pow4(mD3)*pow6(mQ3) + 24*
+        log(mQ3)*pow4(mD3)*pow6(mQ3) + 24*lMR*log(mQ3)*pow4(mD3)*pow6(mQ3) -
+        16*pow2(log(mQ3))*pow4(mD3)*pow6(mQ3) + 8*mD32*mQ32*pow2(log(mD3))*(-2*
+        mQ32*pow4(mD3) + 4*mD32*pow4(mQ3) + 3*pow6(mD3) + pow6(mQ3)) - 8*mQ32*
+        pow8(mD3) - 8*lMR*mQ32*pow8(mD3) + 12*mQ32*log(mQ3)*pow8(mD3) + 24*
+        mQ32*pow2(log(mQ3))*pow8(mD3) + 11*mD32*pow8(mQ3) - lMR*mD32*pow8(mQ3)
+        - 24*mD32*log(mQ3)*pow8(mQ3) - 12*lMR*mD32*log(mQ3)*pow8(mQ3) + 32*
+        mD32*pow2(log(mQ3))*pow8(mQ3) - 2*mD32*log(mD3)*((mD32 - mQ32)*(-(mQ32*
+        pow4(mD3)) + (11 - 6*lMR)*mD32*pow4(mQ3) + pow6(mD3) + (13 + 6*lMR)*
+        pow6(mQ3)) + 4*log(mQ3)*(-(pow4(mD3)*pow4(mQ3)) + 6*mQ32*pow6(mD3) + 2*
+        mD32*pow6(mQ3) + 5*pow8(mQ3))) + power10(mD3) + lMR*power10(mD3) + 2*
+        power10(mQ3) + 2*lMR*power10(mQ3) - 4*log(mQ3)*power10(mQ3)))/(mD32*
+        mQ32*pow6(mD32 - mQ32));
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYt6(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   using gm2calc::dilog;
+   
+   const double MR2 = pow2(p.scale);
+   const double lMR = omitLogs*log(MR2);
+   double mQ32 = p.mq2(2,2);
+   double mU32 = p.mu2(2,2);
+   double mQ3 = sqrt(mQ32);
+   double mU3 = sqrt(mU32);
+   double mA = p.MA;
+   const double beta = atan(p.vu/p.vd);
+   const double sbeta = sin(beta);
+   const double cbeta = cos(beta);
+   const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
+   const double Yt = p.Au(2,2) + p.mu*p.vu/p.vd;
+   const double Xt4 = pow4(Xt);
+   const double Xt6 = pow6(Xt);
+   double Mu = p.mu;
+   
+   return 6*(-12*(1 + lMR)*log(mQ3) - 8*(1 + lMR)*log(mU3) + 5*pow2(1 + lMR) + 12*
+        pow2(log(mQ3)) + 8*pow2(log(mU3))) - (6*pow2(Xt)*(6*mQ32*(mQ32 - mU32)*
+        mU32*dilog(1 - mQ32/mU32) + mU32*pow4(mQ3) - lMR*mU32*pow4(mQ3) - 32*
+        mU32*log(mU3)*pow4(mQ3) - 32*lMR*mU32*log(mU3)*pow4(mQ3) + 36*mU32*
+        pow2(log(mU3))*pow4(mQ3) - 4*mQ32*pow4(mU3) - 2*lMR*mQ32*pow4(mU3) +
+        42*mQ32*log(mU3)*pow4(mU3) + 36*lMR*mQ32*log(mU3)*pow4(mU3) - 36*mQ32*
+        pow2(log(mU3))*pow4(mU3) - 2*mQ32*log(mQ3)*(-((17 + 16*lMR)*mQ32*mU32)
+        + 4*mQ32*mU32*log(mU3) + 2*pow4(mQ3) + (19 + 18*lMR)*pow4(mU3)) - 4*
+        pow2(log(mQ3))*(7*mU32*pow4(mQ3) - 9*mQ32*pow4(mU3)) + 2*pow6(mQ3) + 2*
+        lMR*pow6(mQ3) + pow6(mU3) + lMR*pow6(mU3) - 2*log(mU3)*pow6(mU3)))/(
+        mQ32*mU32*pow2(mQ32 - mU32)) - (6*Xt6*(2*mQ32*(mQ32 - mU32)*mU32*dilog(
+        1 - mQ32/mU32) + 9*mU32*pow4(mQ3) + 3*lMR*mU32*pow4(mQ3) - 26*mU32*log(
+        mQ3)*pow4(mQ3) - 12*lMR*mU32*log(mQ3)*pow4(mQ3) + 20*mU32*log(mU3)*
+        pow4(mQ3) + 12*lMR*mU32*log(mU3)*pow4(mQ3) - 48*mU32*log(mQ3)*log(mU3)*
+        pow4(mQ3) + 36*mU32*pow2(log(mQ3))*pow4(mQ3) + 12*mU32*pow2(log(mU3))*
+        pow4(mQ3) - 12*mQ32*pow4(mU3) - 6*lMR*mQ32*pow4(mU3) + 6*mQ32*log(mQ3)*
+        pow4(mU3) + 6*mQ32*log(mU3)*pow4(mU3) - 40*mQ32*log(mQ3)*log(mU3)*pow4(
+        mU3) + 20*mQ32*pow2(log(mQ3))*pow4(mU3) + 20*mQ32*pow2(log(mU3))*pow4(
+        mU3) + dilog(1 - mU32/mQ32)*(-4*mU32*pow4(mQ3) + 4*mQ32*pow4(mU3)) + 2*
+        pow6(mQ3) + 2*lMR*pow6(mQ3) - 4*log(mQ3)*pow6(mQ3) + pow6(mU3) + lMR*
+        pow6(mU3) - 2*log(mU3)*pow6(mU3)))/(mQ32*mU32*pow4(mQ32 - mU32)) + (12*
+        Xt4*(-29*mU32*pow4(mQ3) - 17*lMR*mU32*pow4(mQ3) - 6*mU32*log(mU3)*pow4(
+        mQ3) - 10*lMR*mU32*log(mU3)*pow4(mQ3) + 6*mU32*pow2(log(mU3))*pow4(mQ3)
+        + 28*mQ32*pow4(mU3) + 16*lMR*mQ32*pow4(mU3) - 44*mQ32*log(mU3)*pow4(
+        mU3) - 14*lMR*mQ32*log(mU3)*pow4(mU3) + 10*mQ32*pow2(log(mU3))*pow4(
+        mU3) + 2*mQ32*log(mQ3)*(5*(4 + lMR)*mQ32*mU32 + 4*mU32*(mQ32 + mU32)*
+        log(mU3) - 2*pow4(mQ3) + (6 + 7*lMR)*pow4(mU3)) + dilog(1 - mQ32/mU32)*
+        (-3*mU32*pow4(mQ3) + 3*mQ32*pow4(mU3)) - 2*pow2(log(mQ3))*(7*mU32*pow4(
+        mQ3) + 9*mQ32*pow4(mU3)) + 2*pow6(mQ3) + 2*lMR*pow6(mQ3) - pow6(mU3) -
+        lMR*pow6(mU3) + 2*log(mU3)*pow6(mU3)))/(mQ32*mU32*pow3(mQ32 - mU32)) +
+        (2*(pow2(cbeta)*(3*(1.5 - 3*(3 + 2*lMR)*log(mQ3) - 5*log(mU3) + 2*pow2(
+        lMR) - pow2(mA)/mQ32 - (2*pow2(mA))/mU32 + lMR*(-2*log(mU3) + (-(1/
+        mQ32) - 2/mU32)*pow2(mA)) + 2*log(mA)*(7 - 6*log(mQ3) - 6*log(mU3) + (
+        1/mQ32 + 2/mU32)*pow2(mA)) + pow2(Pi) + 12*pow2(log(mA)) + 12*pow2(log(
+        mQ3)) + 8*pow2(log(mU3)) + (phixyz(pow2(mA),mQ32,mQ32)*(-deltaxyz(pow2(
+        mA),mQ32,mQ32) - 7*mQ32*pow2(mA) + pow4(mA)))/pow4(mQ3) + (phixyz(pow2(
+        mA),mU32,mU32)*(-deltaxyz(pow2(mA),mU32,mU32) - 6*mU32*pow2(mA) + pow4(
+        mA)))/pow4(mU3)) + (6*Xt*Yt*(mQ32*phixyz(pow2(mA),mU32,mQ32)*(mQ32 -
+        mU32 + pow2(mA))*pow4(mU3) + phixyz(pow2(mA),mQ32,mQ32)*(-deltaxyz(
+        pow2(mA),mQ32,mQ32) - 7*mQ32*pow2(mA) + pow4(mA))*pow4(mU3) + pow4(mQ3)
+        *(phixyz(pow2(mA),mU32,mU32)*(deltaxyz(pow2(mA),mU32,mU32) + 6*mU32*
+        pow2(mA) - pow4(mA)) + 4*log(mQ3/mU3)*(-3 - 3*lMR + log(mA) + 3*log(
+        mQ3) + 2*log(mU3))*pow4(mU3))))/((mQ32 - mU32)*pow4(mQ3)*pow4(mU3)) + (
+        6*Yt*pow3(Xt)*(phixyz(pow2(mA),mQ32,mQ32)*((-5*mQ32 + mU32)*deltaxyz(
+        pow2(mA),mQ32,mQ32) + (mQ32 - mU32)*pow2(mA)*(-7*mQ32 + pow2(mA)))*
+        pow4(mU3) - mQ32*phixyz(pow2(mA),mU32,mQ32)*(-2*deltaxyz(pow2(mA),mU32,
+        mQ32) + (mQ32 - mU32)*(mQ32 - mU32 + pow2(mA)))*pow4(mU3) + pow4(mQ3)*(
+        phixyz(pow2(mA),mU32,mU32)*(-((mQ32 - 3*mU32)*deltaxyz(pow2(mA),mU32,
+        mU32)) + (mQ32 - mU32)*pow2(mA)*(-6*mU32 + pow2(mA))) + 4*(-3*(2 + lMR)
+        *(mQ32 - mU32) - log(mU3)*(3*(1 + lMR)*mQ32 + 3*(3 + lMR)*mU32 + log(
+        mA)*(mQ32 - mU32 - 6*pow2(mA))) + log(mQ3)*(3*(3 + lMR)*mQ32 + 3*(1 +
+        lMR)*mU32 + log(mA)*(mQ32 - mU32 - 6*pow2(mA)) + log(mU3)*(3*mQ32 +
+        mU32 - 2*pow2(mA))) + (-5*mQ32 - 3*mU32 + 4*pow2(mA))*pow2(log(mQ3)) +
+        2*(mQ32 + mU32 - pow2(mA))*pow2(log(mU3)))*pow4(mU3))))/(pow3(mQ32 -
+        mU32)*pow4(mQ3)*pow4(mU3)) + (3*pow2(Yt)*(-2/mQ32 + lMR*(-2/mQ32 - 4/
+        mU32) - 4/mU32 + (phixyz(pow2(mA),mU32,mQ32)*(deltaxyz(pow2(mA),mU32,
+        mQ32) - pow2(mQ32 - mU32 + pow2(mA))))/(mQ32*deltaxyz(pow2(mA),mU32,
+        mQ32)) + (2*log(mU3)*(-mQ32 + 3*mU32 - pow2(mA) - (2*mQ32*mU32*(mQ32 -
+        mU32 + pow2(mA)))/deltaxyz(pow2(mA),mU32,mQ32) + (pow3(mQ32 - mU32) - (
+        mQ32 + 5*mU32)*pow4(mA) - pow2(mA)*(4*mQ32*mU32 + pow4(mQ3) - 5*pow4(
+        mU3)) + pow6(mA))/deltaxyz(pow2(mA),mQ32,mU32)))/(mQ32*mU32) + (2*log(
+        mQ3)*(mQ32 + 2*mU32 - pow2(mA) - (mU32*(-2*mU32*pow2(mA) + pow4(mA) -
+        pow4(mQ3) + pow4(mU3)))/deltaxyz(pow2(mA),mU32,mQ32) + (-pow3(mQ32 -
+        mU32) - 3*(mQ32 + mU32)*pow4(mA) + 3*pow2(mA)*(pow4(mQ3) - pow4(mU3)) +
+        pow6(mA))/deltaxyz(pow2(mA),mQ32,mU32)))/pow4(mU3) + (2*log(mA)*(3*
+        mQ32*mU32 + (mQ32 + mU32)*pow2(mA) - (mQ32*mU32*(pow2(mQ32 - mU32) -
+        pow4(mA)))/deltaxyz(pow2(mA),mU32,mQ32) - pow4(mQ3) - pow4(mU3) + (-((
+        3*mQ32 + 5*mU32)*pow2(mA)*pow2(mQ32 - mU32)) + pow4(mA)*(4*mQ32*mU32 +
+        3*pow4(mQ3) + 5*pow4(mU3)) + pow4(mQ32 - mU32) - (mQ32 + mU32)*pow6(mA)
+        )/deltaxyz(pow2(mA),mQ32,mU32)))/(mQ32*pow4(mU3)) + (phixyz(pow2(mA),
+        mQ32,mU32)*(-4*(mQ32 + mU32)*pow2(mA)*pow2(mQ32 - mU32) + 2*pow2(
+        deltaxyz(pow2(mA),mQ32,mU32)) - 3*deltaxyz(pow2(mA),mQ32,mU32)*(-2*(
+        mQ32 + mU32)*pow2(mA) + pow2(mQ32 - mU32) + pow4(mA)) + 2*pow4(mA)*(2*
+        mQ32*mU32 + 3*pow4(mQ3) + pow4(mU3)) + pow4(mQ32 - mU32) - 4*(mQ32 +
+        mU32)*pow6(mA) + pow8(mA)))/(deltaxyz(pow2(mA),mQ32,mU32)*pow6(mU3))))/
+        2. + 3*Xt4*((3*(mQ32 - mU32) + (-5 - (2*mQ32)/mU32 + mU32/mQ32)*pow2(
+        mA))/pow3(mQ32 - mU32) + (3*log(mQ3)*(4*(1 + lMR)*mQ32*pow2(mA) - (1 +
+        2*lMR)*(pow4(mQ3) - pow4(mU3))))/pow4(mQ32 - mU32) + (3*log(mU3)*(-4*
+        mQ32*pow2(mA) + pow4(mQ3) - pow4(mU3)))/pow4(mQ32 - mU32) + (2*log(mA)*
+        (6*mQ32*mU32*log(mQ3)*(-2*mQ32*pow2(mA) + pow4(mQ3) - pow4(mU3)) + 6*
+        mQ32*mU32*log(mU3)*(2*mQ32*pow2(mA) - pow4(mQ3) + pow4(mU3)) + (mQ32 -
+        mU32)*(-6*mU32*pow4(mQ3) + pow2(mA)*(5*mQ32*mU32 + 2*pow4(mQ3) - pow4(
+        mU3)) + 6*mQ32*pow4(mU3))))/(mQ32*mU32*pow4(mQ32 - mU32)) + (lMR*(-6*
+        log(mU3)*(2*mQ32*pow2(mA) - pow4(mQ3) + pow4(mU3)) + ((mQ32 - mU32)*(6*
+        mQ32*(mQ32 - mU32)*mU32 + pow2(mA)*(-5*mQ32*mU32 - 2*pow4(mQ3) + pow4(
+        mU3))))/(mQ32*mU32)))/pow4(mQ32 - mU32) + pow2(Yt)*((-11*mQ32*mU32 - 2*
+        pow4(mQ3) + pow4(mU3))/(mQ32*mU32*pow3(mQ32 - mU32)) + (4*(-11*mQ32 -
+        3*mU32 + 7*pow2(mA))*pow2(log(mQ3)))/pow4(mQ32 - mU32) - (8*(mQ32 + 3*
+        mU32 - 2*pow2(mA))*pow2(log(mU3)))/pow4(mQ32 - mU32) - (phixyz(pow2(mA)
+        ,mU32,mQ32)*((mQ32 - mU32)*deltaxyz(pow2(mA),mU32,mQ32)*(3*mQ32 - 3*
+        mU32 + 4*pow2(mA)) - 6*pow2(deltaxyz(pow2(mA),mU32,mQ32)) + pow2(mQ32 -
+        mU32)*pow2(mQ32 - mU32 + pow2(mA))))/(2.*mQ32*deltaxyz(pow2(mA),mU32,
+        mQ32)*pow4(mQ32 - mU32)) + (phixyz(pow2(mA),mU32,mU32)*((mQ32 - 5*mU32)
+        *deltaxyz(pow2(mA),mU32,mU32) + (-mQ32 + mU32)*pow2(mA)*(-6*mU32 +
+        pow2(mA))))/(pow4(mU3)*pow4(mQ32 - mU32)) + (phixyz(pow2(mA),mQ32,mQ32)
+        *((-8*mQ32 + mU32)*deltaxyz(pow2(mA),mQ32,mQ32) + (mQ32 - mU32)*pow2(
+        mA)*(-7*mQ32 + pow2(mA))))/pow4(-(mQ3*mU32) + pow3(mQ3)) - (lMR*(3*
+        mU32*pow4(mQ3) + 12*mU32*log(mU3)*pow4(mQ3) - 6*mQ32*pow4(mU3) + 2*
+        pow6(mQ3) + pow6(mU3)))/(mQ32*mU32*pow4(mQ32 - mU32)) + (log(mA)*(-12*
+        log(mQ3)*(-mQ32 + mU32 + pow2(mA)) + 12*log(mU3)*(-mQ32 + mU32 + pow2(
+        mA)) - (pow2(mQ32 - mU32)*(mQ32*mU32*(pow2(mQ32 - mU32) - pow4(mA)) +
+        deltaxyz(pow2(mA),mU32,mQ32)*(-3*mQ32*mU32 + (-mQ32 + mU32)*pow2(mA) +
+        pow4(mQ3) - 3*pow4(mU3))))/(mQ32*deltaxyz(pow2(mA),mU32,mQ32)*pow4(mU3)
+        ) + (pow3(mQ32 - mU32)*(3*(mQ32 + mU32)*pow4(mA) - 3*mU32*pow4(mQ3) -
+        mQ32*pow4(mU3) - pow2(mA)*(3*pow4(mQ3) + 5*pow4(mU3)) - pow6(mA) +
+        pow6(mQ3) + 3*pow6(mU3)))/(mQ32*deltaxyz(pow2(mA),mQ32,mU32)*pow4(mU3))
+        ))/pow4(mQ32 - mU32) + (log(mU3)*(pow2(mA)*pow2(mQ32 - mU32) - (2*mQ32*
+        mU32*(mQ32 - mU32 + pow2(mA))*pow2(mQ32 - mU32))/deltaxyz(pow2(mA),
+        mU32,mQ32) - 7*mU32*pow4(mQ3) - 13*mQ32*pow4(mU3) - 3*pow6(mQ3) - pow6(
+        mU3) + (pow2(mQ32 - mU32)*((5*mQ32 + 3*mU32)*pow4(mA) - 11*mU32*pow4(
+        mQ3) + 5*mQ32*pow4(mU3) - pow2(mA)*(4*mQ32*mU32 + 7*pow4(mQ3) + 5*pow4(
+        mU3)) - pow6(mA) + 3*pow6(mQ3) + 3*pow6(mU3)))/deltaxyz(pow2(mA),mQ32,
+        mU32)))/(mQ32*mU32*pow4(mQ32 - mU32)) + (log(mQ3)*(12*lMR*mQ32 + 4*log(
+        mU3)*(13*mQ32 + 9*mU32 - 11*pow2(mA)) + (pow2(mQ32 - mU32)*(-((3*mQ32 +
+        5*mU32)*pow4(mA)) + mU32*pow4(mQ3) + 9*mQ32*pow4(mU3) + pow2(mA)*(4*
+        mQ32*mU32 + 3*pow4(mQ3) + 9*pow4(mU3)) + pow6(mA) - pow6(mQ3) - 9*pow6(
+        mU3)))/(deltaxyz(pow2(mA),mQ32,mU32)*pow4(mU3)) + (-(pow2(mA)*pow2(mQ32
+        - mU32)) + 2*mU32*pow4(mQ3) + 17*mQ32*pow4(mU3) - (pow2(-(mQ32*mU3) +
+        pow3(mU3))*(-2*mU32*pow2(mA) + pow4(mA) - pow4(mQ3) + pow4(mU3)))/
+        deltaxyz(pow2(mA),mU32,mQ32) + pow6(mQ3) + 4*pow6(mU3))/pow4(mU3)))/
+        pow4(mQ32 - mU32) + (phixyz(pow2(mA),mQ32,mU32)*(2*pow2(deltaxyz(pow2(
+        mA),mQ32,mU32))*(-5*mQ32*mU32 + pow4(mQ3) + 12*pow4(mU3)) - (mQ32 -
+        mU32)*deltaxyz(pow2(mA),mQ32,mU32)*(3*(mQ32 - 3*mU32)*pow4(mA) - 15*
+        mU32*pow4(mQ3) - 6*pow2(mA)*(-2*mQ32*mU32 + pow4(mQ3) - 3*pow4(mU3)) +
+        29*mQ32*pow4(mU3) + 3*pow6(mQ3) - 17*pow6(mU3)) + pow2(mQ32 - mU32)*(-
+        4*(mQ32 + mU32)*pow2(mA)*pow2(mQ32 - mU32) + pow2(mQ32 - mU32)*(-2*
+        mQ32*mU32 + pow4(mQ3) - 3*pow4(mU3)) + pow4(mA)*(4*mQ32*mU32 + 6*pow4(
+        mQ3) + 6*pow4(mU3)) - 4*(mQ32 + mU32)*pow6(mA) + pow8(mA))))/(2.*
+        deltaxyz(pow2(mA),mQ32,mU32)*pow4(mQ32 - mU32)*pow6(mU3)))) + 3*pow2(
+        Xt)*((2*log(mU3)*(mQ32 - 5*mU32 + 2*pow2(mA)))/pow2(mQ32 - mU32) + (2*
+        log(mQ3)*(mQ32 + 2*lMR*mQ32 + 3*mU32 + 2*log(mU3)*(mQ32 + mU32 - pow2(
+        mA)) - 2*(1 + lMR)*pow2(mA)))/pow2(mQ32 - mU32) + (2*lMR*(-mQ32 + mU32
+        + (-3 + (2*mQ32)/mU32 + mU32/mQ32)*pow2(mA) + 2*log(mU3)*(-mQ32 + pow2(
+        mA))))/pow2(mQ32 - mU32) + (4*(mQ32 - 3*mU32 + pow2(mA))*pow2(log(mQ3))
+        )/pow2(mQ32 - mU32) - (8*pow2(log(mU3)))/(mQ32 - mU32) + (deltaxyz(
+        pow2(mA),mU32,mQ32)*phixyz(pow2(mA),mU32,mQ32))/pow2(-(mQ3*mU32) +
+        pow3(mQ3)) + (phixyz(pow2(mA),mQ32,mQ32)*((-2*mQ32 + mU32)*deltaxyz(
+        pow2(mA),mQ32,mQ32) + (mQ32 - mU32)*pow2(mA)*(-7*mQ32 + pow2(mA))))/(
+        pow2(mQ32 - mU32)*pow4(mQ3)) + (phixyz(pow2(mA),mU32,mU32)*(deltaxyz(
+        pow2(mA),mU32,mU32) + 6*mU32*pow2(mA) - pow4(mA)))/((mQ32 - mU32)*pow4(
+        mU3)) + (-4*mQ32*mU32 + 4*mQ32*pow2(mA) - 2*mU32*pow2(mA))/(mU32*pow4(
+        mQ3) - mQ32*pow4(mU3)) - (4*log(mA)*(-(mQ32*mU32*log(mQ3)*(-5*mQ32 + 5*
+        mU32 + pow2(mA))) + mQ32*mU32*log(mU3)*(-5*mQ32 + 5*mU32 + pow2(mA)) +
+        pow2(mA)*(-3*mQ32*mU32 + 2*pow4(mQ3) + pow4(mU3))))/(mQ32*mU32*pow2(
+        mQ32 - mU32)) + pow2(Yt)*((12*pow2(log(mQ3)))/pow2(mQ32 - mU32) + (8*
+        pow2(log(mU3)))/pow2(mQ32 - mU32) + (phixyz(pow2(mA),mU32,mQ32)*(
+        deltaxyz(pow2(mA),mU32,mQ32)*pow2(mA) + (mQ32 - mU32)*pow2(mQ32 - mU32
+        + pow2(mA))))/(deltaxyz(pow2(mA),mU32,mQ32)*pow2(-(mQ3*mU32) + pow3(
+        mQ3))) + (phixyz(pow2(mA),mQ32,mQ32)*(-deltaxyz(pow2(mA),mQ32,mQ32) -
+        7*mQ32*pow2(mA) + pow4(mA)))/(pow2(mQ32 - mU32)*pow4(mQ3)) + (2*log(
+        mU3)*((-mQ32 + mU32)*deltaxyz(pow2(mA),mU32,mQ32)*((2*mQ32 - mU32)*
+        pow2(mQ32 - mU32) + (2*mQ32 + mU32)*pow4(mA) - 4*pow2(mA)*(2*mQ32*mU32
+        + pow4(mQ3))) + deltaxyz(pow2(mA),mQ32,mU32)*(2*mQ32*(mQ32 - mU32)*
+        mU32*(mQ32 - mU32 + pow2(mA)) + deltaxyz(pow2(mA),mU32,mQ32)*(mQ32*mU32
+        + 2*pow4(mQ3) - pow4(mU3)))))/(mQ32*mU32*deltaxyz(pow2(mA),mQ32,mU32)*
+        deltaxyz(pow2(mA),mU32,mQ32)*pow2(mQ32 - mU32)) + (phixyz(pow2(mA),
+        mU32,mU32)*(-deltaxyz(pow2(mA),mU32,mU32) - 6*mU32*pow2(mA) + pow4(mA))
+        )/(pow2(mQ32 - mU32)*pow4(mU3)) + (2*lMR*(-3*mQ32*mU32 + 2*mQ32*mU32*
+        log(mU3) + 2*pow4(mQ3) + pow4(mU3)))/(mQ32*mU32*pow2(mQ32 - mU32)) + (
+        4*mQ32 - 2*mU32)/(mU32*pow4(mQ3) - mQ32*pow4(mU3)) + (2*log(mQ3)*(-2*
+        lMR - 10*log(mU3) + (-2*mQ32*mU32 + (mQ32 - mU32)*pow2(mA) - pow4(mQ3)
+        + pow4(mU3) - (mU32*(-mQ32 + mU32)*(-2*mU32*pow2(mA) + pow4(mA) - pow4(
+        mQ3) + pow4(mU3)))/deltaxyz(pow2(mA),mU32,mQ32))/pow4(mU3) + ((mQ32 -
+        mU32)*(pow2(-(mQ3*mU32) + pow3(mQ3)) + (3*mQ32 + 4*mU32)*pow4(mA) -
+        pow2(mA)*(2*mQ32*mU32 + 3*pow4(mQ3) + 7*pow4(mU3)) - pow6(mA)))/(
+        deltaxyz(pow2(mA),mQ32,mU32)*pow4(mU3))))/pow2(mQ32 - mU32) + (2*log(
+        mA)*(log(mQ32/mU32) + ((mQ32 - mU32)*(deltaxyz(pow2(mA),mQ32,mU32)*(
+        mQ32*mU32*(pow2(mQ32 - mU32) - pow4(mA)) + deltaxyz(pow2(mA),mU32,mQ32)
+        *(-3*mQ32*mU32 - mQ32*pow2(mA) + pow4(mQ3) + pow4(mU3))) + deltaxyz(
+        pow2(mA),mU32,mQ32)*(pow4(mA)*(-2*mQ32*mU32 - 3*pow4(mQ3) + pow4(mU3))
+        - pow4(mQ32 - mU32) + mQ32*pow6(mA) + pow2(mA)*(-2*mU32*pow4(mQ3) -
+        mQ32*pow4(mU3) + 3*pow6(mQ3)))))/(mQ32*deltaxyz(pow2(mA),mQ32,mU32)*
+        deltaxyz(pow2(mA),mU32,mQ32)*pow4(mU3))))/pow2(mQ32 - mU32) + (phixyz(
+        pow2(mA),mQ32,mU32)*(-2*(mQ32 - 2*mU32)*pow2(deltaxyz(pow2(mA),mQ32,
+        mU32)) + deltaxyz(pow2(mA),mQ32,mU32)*((3*mQ32 - 5*mU32)*pow2(mQ32 -
+        mU32) + (3*mQ32 - 5*mU32)*pow4(mA) + pow2(mA)*(4*mQ32*mU32 - 6*pow4(
+        mQ3) + 14*pow4(mU3))) + (-mQ32 + mU32)*(pow4(mA)*(4*mQ32*mU32 + 6*pow4(
+        mQ3) + 6*pow4(mU3)) + pow4(mQ32 - mU32) - 4*(mQ32 + mU32)*pow6(mA) - 4*
+        pow2(mA)*(-(mU32*pow4(mQ3)) + pow6(mQ3)) + pow8(mA))))/(deltaxyz(pow2(
+        mA),mQ32,mU32)*pow2(mQ32 - mU32)*pow6(mU3))))) + (3*(-4*mQ32*mU32*pow2(
+        lMR)*pow2(mQ32 - pow2(Mu))*pow2(-mU32 + pow2(Mu)) - 2*lMR*(-2*mQ32*
+        mU32*log(mU3) + (2*mQ32 + mU32)*(mQ32 + mU32 - 2*pow2(Mu)))*pow2(mQ32 -
+        pow2(Mu))*pow2(-mU32 + pow2(Mu)) - 16*mU32*(mQ32 - 2*pow2(Mu))*pow2(
+        log(mQ3))*pow2(-mU32 + pow2(Mu))*pow4(mQ3) - 4*mQ32*mU32*dilog(1 -
+        mQ32/pow2(Mu))*pow2(-mU32 + pow2(Mu))*(-2*mQ32*pow2(Mu) + pow4(mQ3) -
+        pow4(Mu)) + 8*mQ32*mU32*dilog(1 - mQ32/pow2(Mu))*pow2(-mU32 + pow2(Mu))
+        *pow4(Mu) + 4*mQ32*mU32*dilog(1 - mU32/pow2(Mu))*pow2(mQ32 - pow2(Mu))*
+        (2*mU32*pow2(Mu) + pow4(Mu) - pow4(mU3)) + 8*mQ32*(-mU32 + 2*pow2(Mu))*
+        pow2(log(mU3))*pow2(mQ32 - pow2(Mu))*pow4(mU3) - (mQ32 - pow2(Mu))*(-
+        mU32 + pow2(Mu))*(-(mQ32*mU32*(3*mQ32*mU32 + 4*pow4(mQ3) + 2*pow4(mU3))
+        ) - 3*pow4(Mu)*(7*mQ32*mU32 + 4*pow4(mQ3) + 2*pow4(mU3)) + 4*(2*mQ32 +
+        mU32)*pow6(Mu) + pow2(Mu)*(17*mU32*pow4(mQ3) + 13*mQ32*pow4(mU3) + 4*
+        pow6(mQ3) + 2*pow6(mU3))) + 2*mU32*log(mU3)*(mQ32 - pow2(Mu))*(-2*mU32*
+        pow2(Mu)*pow2(-mU32 + pow2(Mu)) + pow4(mQ3)*(-4*mU32*pow2(Mu) + 9*pow4(
+        Mu) + pow4(mU3)) + mQ32*(14*mU32*pow4(Mu) - 9*pow2(Mu)*pow4(mU3) - 13*
+        pow6(Mu) + 2*pow6(mU3))) + 2*mQ32*mU32*pow2(log(pow2(Mu)))*(4*mQ32*
+        mU32*(mQ32 + mU32)*pow2(Mu) + 2*mU32*(-4*mQ32 + mU32)*pow4(Mu) - 2*
+        pow4(mQ3)*pow4(mU3) - 4*mU32*pow6(Mu) + 4*pow8(Mu)) + 2*mQ32*log(mQ3)*(
+        (-mU32 + pow2(Mu))*(-((13 + 6*lMR)*pow4(Mu)*pow4(mU3)) + 2*mQ32*pow2(
+        Mu)*(-((7 + 6*lMR)*mU32*pow2(Mu)) + 2*pow4(Mu) + 3*(1 + 2*lMR)*pow4(
+        mU3)) + pow4(mQ3)*(3*(5 + 2*lMR)*mU32*pow2(Mu) - 8*pow4(Mu) - (5 + 6*
+        lMR)*pow4(mU3)) + 4*(-mU32 + pow2(Mu))*pow6(mQ3) + 3*(5 + 2*lMR)*mU32*
+        pow6(Mu)) + 4*log(mU3)*(2*mQ32*(mQ32 + mU32)*pow2(Mu)*pow4(mU3) - 2*
+        pow4(mU3)*pow6(Mu) - pow4(mQ3)*pow6(mU3) + pow4(Mu)*(-4*mQ32*pow4(mU3)
+        + pow6(mU3)) + 2*mU32*pow8(Mu))) - 2*log(pow2(Mu))*(-2*mQ32*mU32*log(
+        mQ3)*(-4*pow4(Mu)*pow4(mU3) + pow4(mQ3)*(-4*mU32*pow2(Mu) + pow4(Mu) +
+        2*pow4(mU3)) + 8*mU32*pow6(Mu) - 2*mQ32*(-4*mU32*pow4(Mu) + 2*pow2(Mu)*
+        pow4(mU3) + pow6(Mu)) - 5*pow8(Mu)) + 2*mQ32*mU32*log(mU3)*(pow4(mQ3)*(
+        4*mU32*pow2(Mu) + pow4(Mu) - 2*pow4(mU3)) - 2*mQ32*(4*mU32*pow4(Mu) -
+        2*pow2(Mu)*pow4(mU3) + pow6(Mu)) + 3*pow8(Mu)) + pow2(Mu)*(2*mU32*pow2(
+        -mU32 + pow2(Mu))*pow4(Mu) + (-3*mU32*pow2(Mu) + 4*pow4(Mu) + 2*pow4(
+        mU3))*pow6(mQ3) + pow4(mQ3)*(8*mU32*pow4(Mu) - 8*pow2(Mu)*pow4(mU3) -
+        8*pow6(Mu) + 2*pow6(mU3)) + mQ32*(-2*pow4(Mu)*pow4(mU3) - mU32*pow6(Mu)
+        + 2*pow2(Mu)*pow6(mU3) + 4*pow8(Mu))))))/(2.*mQ32*mU32*pow2(mQ32 -
+        pow2(Mu))*pow2(-mU32 + pow2(Mu))) - (3*Xt4*(24*mQ32*mU32*(-((1 + lMR)*(
+        mQ32 - mU32)) + 2*mQ32*log(mQ3) - 2*mU32*log(mU3))*(-mQ32 + mU32 + (
+        mQ32 + mU32)*log(mQ3) - (mQ32 + mU32)*log(mU3))*pow2(mQ32 - pow2(Mu))*
+        pow2(-mU32 + pow2(Mu)) - 2*mQ32*mU32*dilog(1 - mQ32/pow2(Mu))*pow2(mQ32
+        - pow2(Mu))*pow2(-mU32 + pow2(Mu))*(mQ32*(2*mU32 - 6*pow2(Mu)) + 2*
+        pow4(mQ3) + 3*pow4(Mu) - pow4(mU3)) + 2*mQ32*mU32*dilog(1 - mU32/pow2(
+        Mu))*pow2(mQ32 - pow2(Mu))*pow2(-mU32 + pow2(Mu))*(mQ32*(2*mU32 - 6*
+        pow2(Mu)) + 2*pow4(mQ3) + 3*pow4(Mu) - pow4(mU3)) + 4*mQ32*(mQ32 +
+        mU32)*pow2(log(mU3))*pow2(mQ32 - pow2(Mu))*pow4(mU3)*(mQ32*(mU32 - 2*
+        pow2(Mu)) - 6*mU32*pow2(Mu) + 4*pow4(Mu) + 3*pow4(mU3)) + 8*mU32*pow2(
+        log(mQ3))*pow2(-mU32 + pow2(Mu))*pow4(mQ3)*((4*mQ32 + 3*mU32)*pow4(Mu)
+        + mQ32*(3*mQ32*mU32 + 3*pow4(mQ3) + pow4(mU3)) - 2*pow2(Mu)*(3*mQ32*
+        mU32 + 3*pow4(mQ3) + pow4(mU3))) + lMR*pow2(mQ32 - pow2(Mu))*pow2(-mU32
+        + pow2(Mu))*(6*mQ32*mU32*log(mU3)*(mQ32*(2*mU32 - 4*pow2(Mu)) + 3*pow4(
+        mQ3) - pow4(mU3)) + (mQ32 - mU32)*((13*mU32 - 4*pow2(Mu))*pow4(mQ3) +
+        2*pow2(Mu)*pow4(mU3) - 2*mQ32*(5*mU32*pow2(Mu) + pow4(mU3)) + 2*pow6(
+        mQ3) - pow6(mU3))) + mU32*log(mU3)*(mQ32 - pow2(Mu))*(2*pow2(-(Mu*mU32)
+        + pow3(Mu))*pow6(mU3) + pow6(mQ3)*(130*mU32*pow4(Mu) - 113*pow2(Mu)*
+        pow4(mU3) - 39*pow6(Mu) + 34*pow6(mU3)) + (-48*mU32*pow2(Mu) + 19*pow4(
+        Mu) + 25*pow4(mU3))*pow8(mQ3) + 3*pow4(mQ3)*(31*pow4(Mu)*pow4(mU3) -
+        34*mU32*pow6(Mu) - 2*pow2(Mu)*pow6(mU3) + 8*pow8(Mu) - 7*pow8(mU3)) +
+        mQ32*mU32*(-22*pow4(Mu)*pow4(mU3) - 5*mU32*pow6(Mu) + 21*pow2(Mu)*pow6(
+        mU3) + 12*pow8(Mu) - 2*pow8(mU3))) + (mQ32 - mU32)*(mQ32 - pow2(Mu))*(-
+        mU32 + pow2(Mu))*(-(pow2(Mu)*pow4(mU3)*(-3*mU32*pow2(Mu) + 2*pow4(Mu) +
+        pow4(mU3))) + (28*mU32*pow2(Mu) - 6*pow4(Mu) - 24*pow4(mU3))*pow6(mQ3)
+        + pow4(mQ3)*(-38*mU32*pow4(Mu) + 31*pow2(Mu)*pow4(mU3) + 4*pow6(Mu) +
+        7*pow6(mU3)) + 2*(-mU32 + pow2(Mu))*pow8(mQ3) + mQ32*(-13*pow4(Mu)*
+        pow4(mU3) + 16*mU32*pow6(Mu) - 6*pow2(Mu)*pow6(mU3) + pow8(mU3))) -
+        log(pow2(Mu))*(2*(mQ32 - mU32)*pow2(Mu)*(pow2(-mU32 + pow2(Mu))*pow4(
+        Mu)*pow4(mU3) + pow6(mQ3)*(-8*mU32*pow4(Mu) + 9*pow2(Mu)*pow4(mU3) + 4*
+        pow6(Mu) - 2*pow6(mU3)) + (3*mU32*pow2(Mu) - 2*pow4(Mu) - 2*pow4(mU3))*
+        pow8(mQ3) + mQ32*(5*pow4(mU3)*pow6(Mu) - 2*pow4(Mu)*pow6(mU3) - 2*mU32*
+        pow8(Mu)) + pow4(mQ3)*(-7*pow4(Mu)*pow4(mU3) + 5*mU32*pow6(Mu) - 2*
+        pow8(Mu) + pow8(mU3))) + 2*mQ32*mU32*log(mQ3)*(2*pow6(mQ3)*(-22*mU32*
+        pow4(Mu) + 14*pow2(Mu)*pow4(mU3) + 9*pow6(Mu) - 2*pow6(mU3)) + (8*mU32*
+        pow2(Mu) - 3*pow4(Mu) - 4*pow4(mU3))*pow8(mQ3) - pow4(mU3)*pow8(Mu) +
+        2*mQ32*pow2(Mu)*(9*pow4(Mu)*pow4(mU3) - 14*mU32*pow6(Mu) + 2*pow2(Mu)*
+        pow6(mU3) + 6*pow8(Mu) - 2*pow8(mU3)) + pow4(mQ3)*(-41*pow4(Mu)*pow4(
+        mU3) + 60*mU32*pow6(Mu) + 4*pow2(Mu)*pow6(mU3) - 25*pow8(Mu) + 2*pow8(
+        mU3))) - 2*mQ32*mU32*log(mU3)*(2*pow6(mQ3)*(-22*mU32*pow4(Mu) + 14*
+        pow2(Mu)*pow4(mU3) + 9*pow6(Mu) - 2*pow6(mU3)) + (8*mU32*pow2(Mu) - 3*
+        pow4(Mu) - 4*pow4(mU3))*pow8(mQ3) - pow4(mU3)*pow8(Mu) + 2*mQ32*pow2(
+        Mu)*(9*pow4(Mu)*pow4(mU3) - 14*mU32*pow6(Mu) + 2*pow2(Mu)*pow6(mU3) +
+        6*pow8(Mu) - 2*pow8(mU3)) + pow4(mQ3)*(-41*pow4(Mu)*pow4(mU3) + 60*
+        mU32*pow6(Mu) + 4*pow2(Mu)*pow6(mU3) - 25*pow8(Mu) + 2*pow8(mU3)))) -
+        mQ32*log(mQ3)*(6*lMR*mU32*pow2(mQ32 - pow2(Mu))*pow2(-mU32 + pow2(Mu))*
+        (mQ32*(2*mU32 - 4*pow2(Mu)) + 3*pow4(mQ3) - pow4(mU3)) + 4*mU32*log(
+        mU3)*(-2*pow6(mQ3)*(-19*mU32*pow4(Mu) + 17*pow2(Mu)*pow4(mU3) + 6*pow6(
+        Mu) - 5*pow6(mU3)) - 6*pow6(Mu)*pow6(mU3) + (-14*mU32*pow2(Mu) + 6*
+        pow4(Mu) + 7*pow4(mU3))*pow8(mQ3) + 4*pow4(mU3)*pow8(Mu) + 3*pow4(Mu)*
+        pow8(mU3) + pow4(mQ3)*(55*pow4(Mu)*pow4(mU3) - 38*mU32*pow6(Mu) - 30*
+        pow2(Mu)*pow6(mU3) + 8*pow8(Mu) + 5*pow8(mU3)) + 2*mQ32*(-16*pow4(mU3)*
+        pow6(Mu) + 15*pow4(Mu)*pow6(mU3) + 5*mU32*pow8(Mu) - 5*pow2(Mu)*pow8(
+        mU3))) - (-mU32 + pow2(Mu))*(-2*pow6(mQ3)*(-63*mU32*pow4(Mu) + 65*pow2(
+        Mu)*pow4(mU3) + 2*pow6(Mu) - 2*pow6(mU3)) + 5*pow6(Mu)*pow6(mU3) + (-
+        53*mU32*pow2(Mu) + 8*pow4(Mu) + 47*pow4(mU3))*pow8(mQ3) + pow4(mQ3)*(
+        131*pow4(Mu)*pow4(mU3) - 121*mU32*pow6(Mu) + 9*pow2(Mu)*pow6(mU3) - 19*
+        pow8(mU3)) - 7*pow4(Mu)*pow8(mU3) + mQ32*(-24*pow4(mU3)*pow6(Mu) - 42*
+        pow4(Mu)*pow6(mU3) + 36*mU32*pow8(Mu) + 34*pow2(Mu)*pow8(mU3)) - 4*(-
+        mU32 + pow2(Mu))*power10(mQ3)))))/(mQ32*mU32*pow2(mQ32 - pow2(Mu))*
+        pow2(-mU32 + pow2(Mu))*pow4(mQ32 - mU32)) + (3*pow2(Xt)*(12*mQ32*mU32*(
+        -((1 + lMR)*(mQ32 - mU32)) + 2*mQ32*log(mQ3) - 2*mU32*log(mU3))*log(
+        mQ32/mU32)*pow2(mQ32 - pow2(Mu))*pow2(-mU32 + pow2(Mu)) - 4*mQ32*mU32*
+        dilog(1 - mQ32/pow2(Mu))*pow2(-mU32 + pow2(Mu))*pow3(mQ32 - pow2(Mu)) +
+        4*mQ32*mU32*dilog(1 - mU32/pow2(Mu))*pow2(-mU32 + pow2(Mu))*pow3(mQ32 -
+        pow2(Mu)) + 8*mU32*pow2(log(mQ3))*pow2(-mU32 + pow2(Mu))*pow4(mQ3)*(2*
+        mQ32*mU32 - 2*(mQ32 + 2*mU32)*pow2(Mu) + pow4(mQ3) + 3*pow4(Mu)) + lMR*
+        pow2(mQ32 - pow2(Mu))*pow2(-mU32 + pow2(Mu))*(4*mQ32*mU32*log(mU3)*(2*
+        mQ32 + mU32 - 2*pow2(Mu)) + (mQ32 - mU32)*(mQ32*(4*mU32 - 8*pow2(Mu)) +
+        4*mU32*pow2(Mu) + 4*pow4(mQ3) - 2*pow4(mU3))) + (mQ32 - mU32)*pow2(mQ32
+        - pow2(Mu))*pow2(-mU32 + pow2(Mu))*(mQ32*(6*mU32 - 8*pow2(Mu)) + 4*
+        mU32*pow2(Mu) + 4*pow4(mQ3) - 2*pow4(mU3)) + 8*mQ32*pow2(log(mU3))*
+        pow2(mQ32 - pow2(Mu))*(mU32*(mQ32 + mU32) - 2*(mQ32 + mU32)*pow2(Mu) +
+        2*pow4(Mu))*pow4(mU3) + 2*mU32*log(mU3)*(mQ32 - pow2(Mu))*(-mU32 +
+        pow2(Mu))*(2*pow2(Mu)*(-mU32 + pow2(Mu))*pow4(mU3) - pow4(mQ3)*(-16*
+        mU32*pow2(Mu) + pow4(Mu) + 3*pow4(mU3)) + (-7*mU32 + pow2(Mu))*pow6(
+        mQ3) + mQ32*(-17*mU32*pow4(Mu) + 5*pow2(Mu)*pow4(mU3) + 4*pow6(Mu) + 2*
+        pow6(mU3))) - 2*mQ32*log(mQ3)*((mQ32 - pow2(Mu))*(-mU32 + pow2(Mu))*(-(
+        (11 + 6*lMR)*pow4(Mu)*pow4(mU3)) - mQ32*mU32*(-2*(1 + 5*lMR)*mU32*pow2(
+        Mu) + (1 + 8*lMR)*pow4(Mu) + (-3 + 2*lMR)*pow4(mU3)) + pow4(mQ3)*((9 +
+        4*lMR)*mU32*pow2(Mu) - 4*pow4(Mu) - (7 + 4*lMR)*pow4(mU3)) + 4*(-mU32 +
+        pow2(Mu))*pow6(mQ3) + 4*(1 + lMR)*mU32*pow6(Mu) + (5 + 2*lMR)*pow2(Mu)*
+        pow6(mU3)) + 4*mU32*log(mU3)*(mU32*pow4(Mu)*(-2*mU32*pow2(Mu) + 2*pow4(
+        Mu) + pow4(mU3)) + (-4*mU32*pow2(Mu) + pow4(Mu) + 2*pow4(mU3))*pow6(
+        mQ3) + pow4(mQ3)*(12*mU32*pow4(Mu) - 10*pow2(Mu)*pow4(mU3) - 2*pow6(Mu)
+        + 3*pow6(mU3)) + mQ32*(16*pow4(Mu)*pow4(mU3) - 16*mU32*pow6(Mu) - 6*
+        pow2(Mu)*pow6(mU3) + 3*pow8(Mu)))) - 2*log(pow2(Mu))*(2*(mQ32 - mU32)*(
+        mQ32 - pow2(Mu))*pow2(Mu)*(-mU32 + pow2(Mu))*(mU32*pow4(mQ3) + (2*mQ32
+        - mU32)*pow4(Mu) + pow2(Mu)*(-(mQ32*mU32) - 2*pow4(mQ3) + pow4(mU3))) +
+        2*mQ32*mU32*log(mQ3)*(2*mU32*(2*mQ32 + 3*mU32)*pow2(Mu)*pow4(mQ3) - 2*
+        pow4(mU3)*pow6(mQ3) + 2*(5*mQ32*mU32 + 2*pow4(mQ3) + 3*pow4(mU3))*pow6(
+        Mu) - pow4(Mu)*(13*mU32*pow4(mQ3) + 4*mQ32*pow4(mU3) + pow6(mQ3) + 2*
+        pow6(mU3)) - (3*mQ32 + 7*mU32)*pow8(Mu) + 2*power10(Mu)) - 2*mQ32*mU32*
+        log(mU3)*(2*mU32*(2*mQ32 + 3*mU32)*pow2(Mu)*pow4(mQ3) - 2*pow4(mU3)*
+        pow6(mQ3) + 2*(5*mQ32*mU32 + 2*pow4(mQ3) + 3*pow4(mU3))*pow6(Mu) -
+        pow4(Mu)*(13*mU32*pow4(mQ3) + 4*mQ32*pow4(mU3) + pow6(mQ3) + 2*pow6(
+        mU3)) - (3*mQ32 + 7*mU32)*pow8(Mu) + 2*power10(Mu)))))/(mQ32*mU32*pow2(
+        mQ32 - mU32)*pow2(mQ32 - pow2(Mu))*pow2(-mU32 + pow2(Mu)))))/pow2(
+        sbeta);
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   using gm2calc::dilog;
+   
+   const double MR2 = pow2(p.scale);
+   const double lMR = omitLogs*log(MR2);
+   const double mL32 = p.ml2(2,2)*(1+0.02);
+   const double mE32 = p.me2(2,2)*(1-0.02);
+   const double mL3 = sqrt(mL32);
+   const double mE3 = sqrt(mE32);
+   const double mA = p.MA;
+   const double beta = atan(p.vu/p.vd);
+   const double sbeta = sin(beta);
+   const double cbeta = cos(beta);
+   const double Xtau = p.Ae(2,2) - p.mu*p.vu/p.vd;
+   const double Ytau = p.Ae(2,2) + p.mu*p.vd/p.vu;
+   const double Mu = p.mu;
+   
+   return 2*(5 + lMR*(10 - 8*log(mE3)) - 8*log(mE3) - 12*(1 + lMR)*log(mL3) + 5*
+        pow2(lMR) + 8*pow2(log(mE3)) + 12*pow2(log(mL3)) - (pow2(Xtau)*(-36*
+        pow2(mE3)*(pow2(mE3) - pow2(mL3))*pow2(mL3)*pow2(log(mE3)) - 4*pow2(
+        mL3)*pow4(mE3) - 2*lMR*pow2(mL3)*pow4(mE3) - 38*log(mL3)*pow2(mL3)*
+        pow4(mE3) - 36*lMR*log(mL3)*pow2(mL3)*pow4(mE3) + 36*pow2(mL3)*pow2(
+        log(mL3))*pow4(mE3) + pow2(mE3)*pow4(mL3) - lMR*pow2(mE3)*pow4(mL3) +
+        34*log(mL3)*pow2(mE3)*pow4(mL3) + 32*lMR*log(mL3)*pow2(mE3)*pow4(mL3) -
+        28*pow2(mE3)*pow2(log(mL3))*pow4(mL3) - 2*log(mE3)*pow2(mE3)*(-3*(7 +
+        6*lMR)*pow2(mE3)*pow2(mL3) + pow4(mE3) + 16*(1 + lMR)*pow4(mL3) + 4*
+        log(mL3)*pow4(mL3)) + dilog(1 - pow2(mL3)/pow2(mE3))*(-6*pow2(mL3)*
+        pow4(mE3) + 6*pow2(mE3)*pow4(mL3)) + pow6(mE3) + lMR*pow6(mE3) + 2*
+        pow6(mL3) + 2*lMR*pow6(mL3) - 4*log(mL3)*pow6(mL3)))/(pow2(mE3)*pow2(
+        mL3)*pow2(pow2(mE3) - pow2(mL3))) + (2*pow4(Xtau)*(-28*pow2(mL3)*pow4(
+        mE3) - 16*lMR*pow2(mL3)*pow4(mE3) - 12*log(mL3)*pow2(mL3)*pow4(mE3) -
+        14*lMR*log(mL3)*pow2(mL3)*pow4(mE3) + 18*pow2(mL3)*pow2(log(mL3))*pow4(
+        mE3) + 29*pow2(mE3)*pow4(mL3) + 17*lMR*pow2(mE3)*pow4(mL3) - 40*log(
+        mL3)*pow2(mE3)*pow4(mL3) - 10*lMR*log(mL3)*pow2(mE3)*pow4(mL3) + 14*
+        pow2(mE3)*pow2(log(mL3))*pow4(mL3) - 2*log(mE3)*pow2(mE3)*(-((22 + 7*
+        lMR)*pow2(mE3)*pow2(mL3)) + 4*log(mL3)*pow2(mL3)*(pow2(mE3) + pow2(mL3)
+        ) + pow4(mE3) - (3 + 5*lMR)*pow4(mL3)) + dilog(1 - pow2(mL3)/pow2(mE3))
+        *(-3*pow2(mL3)*pow4(mE3) + 3*pow2(mE3)*pow4(mL3)) - 2*pow2(log(mE3))*(
+        5*pow2(mL3)*pow4(mE3) + 3*pow2(mE3)*pow4(mL3)) + pow6(mE3) + lMR*pow6(
+        mE3) - 2*pow6(mL3) - 2*lMR*pow6(mL3) + 4*log(mL3)*pow6(mL3)))/(pow2(
+        mE3)*pow2(mL3)*pow3(pow2(mE3) - pow2(mL3))) - ((4*dilog(1 - pow2(mE3)/
+        pow2(mL3))*pow2(mE3)*(pow2(mE3) - pow2(mL3))*pow2(mL3) - 12*pow2(mL3)*
+        pow4(mE3) - 6*lMR*pow2(mL3)*pow4(mE3) + 6*log(mE3)*pow2(mL3)*pow4(mE3)
+        + 6*log(mL3)*pow2(mL3)*pow4(mE3) - 40*log(mE3)*log(mL3)*pow2(mL3)*pow4(
+        mE3) + 20*pow2(mL3)*pow2(log(mE3))*pow4(mE3) + 20*pow2(mL3)*pow2(log(
+        mL3))*pow4(mE3) + 9*pow2(mE3)*pow4(mL3) + 3*lMR*pow2(mE3)*pow4(mL3) +
+        20*log(mE3)*pow2(mE3)*pow4(mL3) + 12*lMR*log(mE3)*pow2(mE3)*pow4(mL3) -
+        26*log(mL3)*pow2(mE3)*pow4(mL3) - 12*lMR*log(mL3)*pow2(mE3)*pow4(mL3) -
+        48*log(mE3)*log(mL3)*pow2(mE3)*pow4(mL3) + 12*pow2(mE3)*pow2(log(mE3))*
+        pow4(mL3) + 36*pow2(mE3)*pow2(log(mL3))*pow4(mL3) + dilog(1 - pow2(mL3)
+        /pow2(mE3))*(-2*pow2(mL3)*pow4(mE3) + 2*pow2(mE3)*pow4(mL3)) + pow6(
+        mE3) + lMR*pow6(mE3) - 2*log(mE3)*pow6(mE3) + 2*pow6(mL3) + 2*lMR*pow6(
+        mL3) - 4*log(mL3)*pow6(mL3))*pow6(Xtau))/(pow2(mE3)*pow2(mL3)*pow4(
+        pow2(mE3) - pow2(mL3))) + (pow2(sbeta)*(1.5 - 5*log(mE3) - 3*(3 + 2*
+        lMR)*log(mL3) + 2*pow2(lMR) - (2*pow2(mA))/pow2(mE3) + lMR*(-2*log(mE3)
+        + pow2(mA)*(-2/pow2(mE3) - 1/pow2(mL3))) + 2*log(mA)*(7 - 6*log(mE3) -
+        6*log(mL3) + pow2(mA)*(2/pow2(mE3) + 1/pow2(mL3))) - pow2(mA)/pow2(mL3)
+        + pow2(Pi) + 12*pow2(log(mA)) + 8*pow2(log(mE3)) + 12*pow2(log(mL3)) +
+        (phixyz(pow2(mA),pow2(mE3),pow2(mE3))*(-deltaxyz(pow2(mA),pow2(mE3),
+        pow2(mE3)) - 6*pow2(mA)*pow2(mE3) + pow4(mA)))/pow4(mE3) + (phixyz(
+        pow2(mA),pow2(mL3),pow2(mL3))*(-deltaxyz(pow2(mA),pow2(mL3),pow2(mL3))
+        - 7*pow2(mA)*pow2(mL3) + pow4(mA)))/pow4(mL3) + (2*Xtau*Ytau*(phixyz(
+        pow2(mA),pow2(mE3),pow2(mE3))*(-deltaxyz(pow2(mA),pow2(mE3),pow2(mE3))
+        - 6*pow2(mA)*pow2(mE3) + pow4(mA))*pow4(mL3) + pow4(mE3)*(-(phixyz(
+        pow2(mA),pow2(mE3),pow2(mL3))*pow2(mL3)*(pow2(mA) - pow2(mE3) + pow2(
+        mL3))) + phixyz(pow2(mA),pow2(mL3),pow2(mL3))*(deltaxyz(pow2(mA),pow2(
+        mL3),pow2(mL3)) + 7*pow2(mA)*pow2(mL3) - pow4(mA)) + 4*log(mE3/mL3)*(-3
+        - 3*lMR + log(mA) + 2*log(mE3) + 3*log(mL3))*pow4(mL3))))/((pow2(mE3) -
+        pow2(mL3))*pow4(mE3)*pow4(mL3)) + (2*Ytau*pow3(Xtau)*(phixyz(pow2(mA),
+        pow2(mE3),pow2(mE3))*(pow2(mA)*(pow2(mA) - 6*pow2(mE3))*(pow2(mE3) -
+        pow2(mL3)) + deltaxyz(pow2(mA),pow2(mE3),pow2(mE3))*(-3*pow2(mE3) +
+        pow2(mL3)))*pow4(mL3) + pow4(mE3)*(phixyz(pow2(mA),pow2(mL3),pow2(mL3))
+        *(-(deltaxyz(pow2(mA),pow2(mL3),pow2(mL3))*(pow2(mE3) - 5*pow2(mL3))) +
+        pow2(mA)*(pow2(mA) - 7*pow2(mL3))*(pow2(mE3) - pow2(mL3))) + phixyz(
+        pow2(mA),pow2(mE3),pow2(mL3))*pow2(mL3)*(-2*deltaxyz(pow2(mA),pow2(mE3)
+        ,pow2(mL3)) - (pow2(mE3) - pow2(mL3))*(pow2(mA) - pow2(mE3) + pow2(mL3)
+        )) + 4*(-3*(2 + lMR)*(pow2(mE3) - pow2(mL3)) + log(mE3)*(3*(3 + lMR)*
+        pow2(mE3) + log(mL3)*(2*pow2(mA) - pow2(mE3) - 3*pow2(mL3)) + 3*(1 +
+        lMR)*pow2(mL3) + log(mA)*(-6*pow2(mA) - pow2(mE3) + pow2(mL3))) - log(
+        mL3)*(3*(1 + lMR)*pow2(mE3) + 3*(3 + lMR)*pow2(mL3) + log(mA)*(-6*pow2(
+        mA) - pow2(mE3) + pow2(mL3))) + 2*(pow2(mA) - pow2(mE3) - pow2(mL3))*
+        pow2(log(mE3)) + (-4*pow2(mA) + 3*pow2(mE3) + 5*pow2(mL3))*pow2(log(
+        mL3)))*pow4(mL3))))/(pow3(pow2(mE3) - pow2(mL3))*pow4(mE3)*pow4(mL3)) +
+        (pow2(Ytau)*(-4/pow2(mE3) + lMR*(-4/pow2(mE3) - 2/pow2(mL3)) - 2/pow2(
+        mL3) + (phixyz(pow2(mA),pow2(mE3),pow2(mL3))*(deltaxyz(pow2(mA),pow2(
+        mE3),pow2(mL3)) - pow2(pow2(mA) - pow2(mE3) + pow2(mL3))))/(deltaxyz(
+        pow2(mA),pow2(mE3),pow2(mL3))*pow2(mL3)) + (2*log(mL3)*(-pow2(mA) + 2*
+        pow2(mE3) + pow2(mL3) - (pow2(mE3)*(-2*pow2(mA)*pow2(mE3) + pow4(mA) +
+        pow4(mE3) - pow4(mL3)))/deltaxyz(pow2(mA),pow2(mE3),pow2(mL3)) + (pow3(
+        pow2(mE3) - pow2(mL3)) - 3*(pow2(mE3) + pow2(mL3))*pow4(mA) - 3*pow2(
+        mA)*(pow4(mE3) - pow4(mL3)) + pow6(mA))/deltaxyz(pow2(mA),pow2(mL3),
+        pow2(mE3))))/pow4(mE3) + (2*log(mE3)*(-pow2(mA) + 3*pow2(mE3) - pow2(
+        mL3) - (2*pow2(mE3)*pow2(mL3)*(pow2(mA) - pow2(mE3) + pow2(mL3)))/
+        deltaxyz(pow2(mA),pow2(mE3),pow2(mL3)) + (pow3(-pow2(mE3) + pow2(mL3))
+        - (5*pow2(mE3) + pow2(mL3))*pow4(mA) - pow2(mA)*(4*pow2(mE3)*pow2(mL3)
+        - 5*pow4(mE3) + pow4(mL3)) + pow6(mA))/deltaxyz(pow2(mA),pow2(mL3),
+        pow2(mE3))))/(pow2(mE3)*pow2(mL3)) + (2*log(mA)*(3*pow2(mE3)*pow2(mL3)
+        + pow2(mA)*(pow2(mE3) + pow2(mL3)) - (pow2(mE3)*pow2(mL3)*(pow2(pow2(
+        mE3) - pow2(mL3)) - pow4(mA)))/deltaxyz(pow2(mA),pow2(mE3),pow2(mL3)) -
+        pow4(mE3) - pow4(mL3) + (-(pow2(mA)*(5*pow2(mE3) + 3*pow2(mL3))*pow2(
+        pow2(mE3) - pow2(mL3))) + pow4(mA)*(4*pow2(mE3)*pow2(mL3) + 5*pow4(mE3)
+        + 3*pow4(mL3)) + pow4(pow2(mE3) - pow2(mL3)) - (pow2(mE3) + pow2(mL3))*
+        pow6(mA))/deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))))/(pow2(mL3)*pow4(mE3)
+        ) + (phixyz(pow2(mA),pow2(mL3),pow2(mE3))*(2*pow2(deltaxyz(pow2(mA),
+        pow2(mL3),pow2(mE3))) - 4*pow2(mA)*(pow2(mE3) + pow2(mL3))*pow2(pow2(
+        mE3) - pow2(mL3)) - 3*deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))*(-2*pow2(
+        mA)*(pow2(mE3) + pow2(mL3)) + pow2(pow2(mE3) - pow2(mL3)) + pow4(mA)) +
+        2*pow4(mA)*(2*pow2(mE3)*pow2(mL3) + pow4(mE3) + 3*pow4(mL3)) + pow4(
+        pow2(mE3) - pow2(mL3)) - 4*(pow2(mE3) + pow2(mL3))*pow6(mA) + pow8(mA))
+        )/(deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))*pow6(mE3))))/2. + pow4(Xtau)*
+        ((-3*pow2(mE3) + 3*pow2(mL3) + pow2(mA)*(-5 + pow2(mE3)/pow2(mL3) - (2*
+        pow2(mL3))/pow2(mE3)))/pow3(-pow2(mE3) + pow2(mL3)) - (3*log(mE3)*(4*
+        pow2(mA)*pow2(mL3) + pow4(mE3) - pow4(mL3)))/pow4(pow2(mE3) - pow2(mL3)
+        ) + (3*log(mL3)*(4*(1 + lMR)*pow2(mA)*pow2(mL3) + (1 + 2*lMR)*pow4(mE3)
+        - (1 + 2*lMR)*pow4(mL3)))/pow4(pow2(mE3) - pow2(mL3)) + (2*log(mA)*(6*
+        log(mE3)*pow2(mE3)*pow2(mL3)*(2*pow2(mA)*pow2(mL3) + pow4(mE3) - pow4(
+        mL3)) - 6*log(mL3)*pow2(mE3)*pow2(mL3)*(2*pow2(mA)*pow2(mL3) + pow4(
+        mE3) - pow4(mL3)) + (pow2(mE3) - pow2(mL3))*(-6*pow2(mL3)*pow4(mE3) +
+        pow2(mA)*(-5*pow2(mE3)*pow2(mL3) + pow4(mE3) - 2*pow4(mL3)) + 6*pow2(
+        mE3)*pow4(mL3))))/(pow2(mE3)*pow2(mL3)*pow4(pow2(mE3) - pow2(mL3))) + (
+        lMR*(-6*log(mE3)*(2*pow2(mA)*pow2(mL3) + pow4(mE3) - pow4(mL3)) + ((-
+        pow2(mE3) + pow2(mL3))*(-6*pow2(mL3)*pow4(mE3) + pow2(mA)*(-5*pow2(mE3)
+        *pow2(mL3) + pow4(mE3) - 2*pow4(mL3)) + 6*pow2(mE3)*pow4(mL3)))/(pow2(
+        mE3)*pow2(mL3))))/pow4(pow2(mE3) - pow2(mL3)) + pow2(Ytau)*((-11*pow2(
+        mE3)*pow2(mL3) + pow4(mE3) - 2*pow4(mL3))/(pow2(mE3)*pow2(mL3)*pow3(-
+        pow2(mE3) + pow2(mL3))) - (8*(-2*pow2(mA) + 3*pow2(mE3) + pow2(mL3))*
+        pow2(log(mE3)))/pow4(pow2(mE3) - pow2(mL3)) + (4*(7*pow2(mA) - 3*pow2(
+        mE3) - 11*pow2(mL3))*pow2(log(mL3)))/pow4(pow2(mE3) - pow2(mL3)) - (
+        phixyz(pow2(mA),pow2(mE3),pow2(mL3))*(deltaxyz(pow2(mA),pow2(mE3),pow2(
+        mL3))*(-pow2(mE3) + pow2(mL3))*(4*pow2(mA) - 3*pow2(mE3) + 3*pow2(mL3))
+        - 6*pow2(deltaxyz(pow2(mA),pow2(mE3),pow2(mL3))) + pow2(pow2(mE3) -
+        pow2(mL3))*pow2(pow2(mA) - pow2(mE3) + pow2(mL3))))/(2.*deltaxyz(pow2(
+        mA),pow2(mE3),pow2(mL3))*pow2(mL3)*pow4(pow2(mE3) - pow2(mL3))) + (
+        phixyz(pow2(mA),pow2(mE3),pow2(mE3))*(pow2(mA)*(pow2(mA) - 6*pow2(mE3))
+        *(pow2(mE3) - pow2(mL3)) + deltaxyz(pow2(mA),pow2(mE3),pow2(mE3))*(-5*
+        pow2(mE3) + pow2(mL3))))/pow4(-(mE3*pow2(mL3)) + pow3(mE3)) + (phixyz(
+        pow2(mA),pow2(mL3),pow2(mL3))*(deltaxyz(pow2(mA),pow2(mL3),pow2(mL3))*(
+        pow2(mE3) - 8*pow2(mL3)) + pow2(mA)*(pow2(mA) - 7*pow2(mL3))*(-pow2(
+        mE3) + pow2(mL3))))/pow4(-(mL3*pow2(mE3)) + pow3(mL3)) - (lMR*(-6*pow2(
+        mL3)*pow4(mE3) + 3*pow2(mE3)*pow4(mL3) + 12*log(mE3)*pow2(mE3)*pow4(
+        mL3) + pow6(mE3) + 2*pow6(mL3)))/(pow2(mE3)*pow2(mL3)*pow4(pow2(mE3) -
+        pow2(mL3))) + (log(mA)*(12*log(mE3)*(pow2(mA) + pow2(mE3) - pow2(mL3))
+        - 12*log(mL3)*(pow2(mA) + pow2(mE3) - pow2(mL3)) - (pow2(pow2(mE3) -
+        pow2(mL3))*(pow2(mE3)*pow2(mL3)*(pow2(pow2(mE3) - pow2(mL3)) - pow4(mA)
+        ) + deltaxyz(pow2(mA),pow2(mE3),pow2(mL3))*(pow2(mA)*(pow2(mE3) - pow2(
+        mL3)) - 3*pow2(mE3)*pow2(mL3) - 3*pow4(mE3) + pow4(mL3))))/(deltaxyz(
+        pow2(mA),pow2(mE3),pow2(mL3))*pow2(mL3)*pow4(mE3)) + (pow3(-pow2(mE3) +
+        pow2(mL3))*(3*(pow2(mE3) + pow2(mL3))*pow4(mA) - pow2(mL3)*pow4(mE3) -
+        3*pow2(mE3)*pow4(mL3) - pow2(mA)*(5*pow4(mE3) + 3*pow4(mL3)) - pow6(mA)
+        + 3*pow6(mE3) + pow6(mL3)))/(deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))*
+        pow2(mL3)*pow4(mE3))))/pow4(pow2(mE3) - pow2(mL3)) + (log(mL3)*(12*lMR*
+        pow2(mL3) + 4*log(mE3)*(-11*pow2(mA) + 9*pow2(mE3) + 13*pow2(mL3)) + (
+        pow2(pow2(mE3) - pow2(mL3))*(-((5*pow2(mE3) + 3*pow2(mL3))*pow4(mA)) +
+        9*pow2(mL3)*pow4(mE3) + pow2(mE3)*pow4(mL3) + pow2(mA)*(4*pow2(mE3)*
+        pow2(mL3) + 9*pow4(mE3) + 3*pow4(mL3)) + pow6(mA) - 9*pow6(mE3) - pow6(
+        mL3)))/(deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))*pow4(mE3)) + (-(pow2(mA)
+        *pow2(pow2(mE3) - pow2(mL3))) + 17*pow2(mL3)*pow4(mE3) - (pow2(-(mE3*
+        pow2(mL3)) + pow3(mE3))*(-2*pow2(mA)*pow2(mE3) + pow4(mA) + pow4(mE3) -
+        pow4(mL3)))/deltaxyz(pow2(mA),pow2(mE3),pow2(mL3)) + 2*pow2(mE3)*pow4(
+        mL3) + 4*pow6(mE3) + pow6(mL3))/pow4(mE3)))/pow4(pow2(mE3) - pow2(mL3))
+        + (log(mE3)*(pow2(mA)*pow2(pow2(mE3) - pow2(mL3)) - (2*pow2(mE3)*pow2(
+        mL3)*(pow2(mA) - pow2(mE3) + pow2(mL3))*pow2(pow2(mE3) - pow2(mL3)))/
+        deltaxyz(pow2(mA),pow2(mE3),pow2(mL3)) - 13*pow2(mL3)*pow4(mE3) - 7*
+        pow2(mE3)*pow4(mL3) - pow6(mE3) - 3*pow6(mL3) + (pow2(pow2(mE3) - pow2(
+        mL3))*((3*pow2(mE3) + 5*pow2(mL3))*pow4(mA) + 5*pow2(mL3)*pow4(mE3) -
+        11*pow2(mE3)*pow4(mL3) - pow2(mA)*(4*pow2(mE3)*pow2(mL3) + 5*pow4(mE3)
+        + 7*pow4(mL3)) - pow6(mA) + 3*pow6(mE3) + 3*pow6(mL3)))/deltaxyz(pow2(
+        mA),pow2(mL3),pow2(mE3))))/(pow2(mE3)*pow2(mL3)*pow4(pow2(mE3) - pow2(
+        mL3))) + (phixyz(pow2(mA),pow2(mL3),pow2(mE3))*(2*pow2(deltaxyz(pow2(
+        mA),pow2(mL3),pow2(mE3)))*(-5*pow2(mE3)*pow2(mL3) + 12*pow4(mE3) +
+        pow4(mL3)) - deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))*(-pow2(mE3) + pow2(
+        mL3))*(3*(-3*pow2(mE3) + pow2(mL3))*pow4(mA) + 29*pow2(mL3)*pow4(mE3) +
+        6*pow2(mA)*(2*pow2(mE3)*pow2(mL3) + 3*pow4(mE3) - pow4(mL3)) - 15*pow2(
+        mE3)*pow4(mL3) - 17*pow6(mE3) + 3*pow6(mL3)) + pow2(pow2(mE3) - pow2(
+        mL3))*(-4*pow2(mA)*(pow2(mE3) + pow2(mL3))*pow2(pow2(mE3) - pow2(mL3))
+        + pow2(pow2(mE3) - pow2(mL3))*(-2*pow2(mE3)*pow2(mL3) - 3*pow4(mE3) +
+        pow4(mL3)) + pow4(mA)*(4*pow2(mE3)*pow2(mL3) + 6*pow4(mE3) + 6*pow4(
+        mL3)) - 4*(pow2(mE3) + pow2(mL3))*pow6(mA) + pow8(mA))))/(2.*deltaxyz(
+        pow2(mA),pow2(mL3),pow2(mE3))*pow4(pow2(mE3) - pow2(mL3))*pow6(mE3))))
+        + pow2(Xtau)*((2*pow2(mA)*(pow2(mE3) - 2*pow2(mL3)) + 4*pow2(mE3)*pow2(
+        mL3))/(pow2(mE3)*(pow2(mE3) - pow2(mL3))*pow2(mL3)) + (8*pow2(log(mE3))
+        )/(pow2(mE3) - pow2(mL3)) + (2*log(mE3)*(2*pow2(mA) - 5*pow2(mE3) +
+        pow2(mL3)))/pow2(pow2(mE3) - pow2(mL3)) + (2*log(mL3)*(-2*(1 + lMR)*
+        pow2(mA) + 3*pow2(mE3) + pow2(mL3) + 2*lMR*pow2(mL3) + 2*log(mE3)*(-
+        pow2(mA) + pow2(mE3) + pow2(mL3))))/pow2(pow2(mE3) - pow2(mL3)) + (2*
+        lMR*(pow2(mE3) + 2*log(mE3)*(pow2(mA) - pow2(mL3)) - pow2(mL3) + pow2(
+        mA)*(-3 + pow2(mE3)/pow2(mL3) + (2*pow2(mL3))/pow2(mE3))))/pow2(pow2(
+        mE3) - pow2(mL3)) + (4*(pow2(mA) - 3*pow2(mE3) + pow2(mL3))*pow2(log(
+        mL3)))/pow2(pow2(mE3) - pow2(mL3)) + (deltaxyz(pow2(mA),pow2(mE3),pow2(
+        mL3))*phixyz(pow2(mA),pow2(mE3),pow2(mL3)))/pow2(-(mL3*pow2(mE3)) +
+        pow3(mL3)) + (phixyz(pow2(mA),pow2(mL3),pow2(mL3))*(deltaxyz(pow2(mA),
+        pow2(mL3),pow2(mL3))*(pow2(mE3) - 2*pow2(mL3)) + pow2(mA)*(pow2(mA) -
+        7*pow2(mL3))*(-pow2(mE3) + pow2(mL3))))/(pow2(pow2(mE3) - pow2(mL3))*
+        pow4(mL3)) - (4*log(mA)*(log(mE3)*pow2(mE3)*(pow2(mA) + 5*pow2(mE3) -
+        5*pow2(mL3))*pow2(mL3) - log(mL3)*pow2(mE3)*(pow2(mA) + 5*pow2(mE3) -
+        5*pow2(mL3))*pow2(mL3) + pow2(mA)*(-3*pow2(mE3)*pow2(mL3) + pow4(mE3) +
+        2*pow4(mL3))))/(pow2(mE3)*pow2(mL3)*pow2(pow2(mE3) - pow2(mL3))) + (
+        phixyz(pow2(mA),pow2(mE3),pow2(mE3))*(-deltaxyz(pow2(mA),pow2(mE3),
+        pow2(mE3)) - 6*pow2(mA)*pow2(mE3) + pow4(mA)))/(-(pow2(mL3)*pow4(mE3))
+        + pow6(mE3)) + pow2(Ytau)*((8*pow2(log(mE3)))/pow2(pow2(mE3) - pow2(
+        mL3)) + (12*pow2(log(mL3)))/pow2(pow2(mE3) - pow2(mL3)) + (phixyz(pow2(
+        mA),pow2(mE3),pow2(mL3))*(deltaxyz(pow2(mA),pow2(mE3),pow2(mL3))*pow2(
+        mA) - (pow2(mE3) - pow2(mL3))*pow2(pow2(mA) - pow2(mE3) + pow2(mL3))))/
+        (deltaxyz(pow2(mA),pow2(mE3),pow2(mL3))*pow2(-(mL3*pow2(mE3)) + pow3(
+        mL3))) + (phixyz(pow2(mA),pow2(mE3),pow2(mE3))*(-deltaxyz(pow2(mA),
+        pow2(mE3),pow2(mE3)) - 6*pow2(mA)*pow2(mE3) + pow4(mA)))/(pow2(pow2(
+        mE3) - pow2(mL3))*pow4(mE3)) + (phixyz(pow2(mA),pow2(mL3),pow2(mL3))*(-
+        deltaxyz(pow2(mA),pow2(mL3),pow2(mL3)) - 7*pow2(mA)*pow2(mL3) + pow4(
+        mA)))/(pow2(pow2(mE3) - pow2(mL3))*pow4(mL3)) + (2*lMR*(-3*pow2(mE3)*
+        pow2(mL3) + 2*log(mE3)*pow2(mE3)*pow2(mL3) + pow4(mE3) + 2*pow4(mL3)))/
+        (pow2(mE3)*pow2(mL3)*pow2(pow2(mE3) - pow2(mL3))) + (2*pow2(mE3) - 4*
+        pow2(mL3))/(pow2(mL3)*pow4(mE3) - pow2(mE3)*pow4(mL3)) + (2*log(mE3)*(
+        pow2(mE3)*pow2(mL3) + (2*pow2(mE3)*pow2(mL3)*(-pow2(mE3) + pow2(mL3))*(
+        pow2(mA) - pow2(mE3) + pow2(mL3)))/deltaxyz(pow2(mA),pow2(mE3),pow2(
+        mL3)) - pow4(mE3) + 2*pow4(mL3) + ((pow2(mE3) - pow2(mL3))*(-((pow2(
+        mE3) - 2*pow2(mL3))*pow2(pow2(mE3) - pow2(mL3))) + (pow2(mE3) + 2*pow2(
+        mL3))*pow4(mA) - 4*pow2(mA)*(2*pow2(mE3)*pow2(mL3) + pow4(mL3))))/
+        deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))))/(pow2(mE3)*pow2(mL3)*pow2(
+        pow2(mE3) - pow2(mL3))) + (2*log(mL3)*(-2*lMR - 10*log(mE3) + (-2*pow2(
+        mE3)*pow2(mL3) + pow2(mA)*(-pow2(mE3) + pow2(mL3)) + pow4(mE3) - (pow2(
+        mE3)*(pow2(mE3) - pow2(mL3))*(-2*pow2(mA)*pow2(mE3) + pow4(mA) + pow4(
+        mE3) - pow4(mL3)))/deltaxyz(pow2(mA),pow2(mE3),pow2(mL3)) - pow4(mL3))/
+        pow4(mE3) - ((pow2(mE3) - pow2(mL3))*(pow2(-(mL3*pow2(mE3)) + pow3(mL3)
+        ) + (4*pow2(mE3) + 3*pow2(mL3))*pow4(mA) - pow2(mA)*(2*pow2(mE3)*pow2(
+        mL3) + 7*pow4(mE3) + 3*pow4(mL3)) - pow6(mA)))/(deltaxyz(pow2(mA),pow2(
+        mL3),pow2(mE3))*pow4(mE3))))/pow2(pow2(mE3) - pow2(mL3)) + (2*log(mA)*(
+        log(pow2(mL3)/pow2(mE3)) + ((-pow2(mE3) + pow2(mL3))*(deltaxyz(pow2(mA)
+        ,pow2(mL3),pow2(mE3))*(pow2(mE3)*pow2(mL3)*(pow2(pow2(mE3) - pow2(mL3))
+        - pow4(mA)) + deltaxyz(pow2(mA),pow2(mE3),pow2(mL3))*(-(pow2(mA)*pow2(
+        mL3)) - 3*pow2(mE3)*pow2(mL3) + pow4(mE3) + pow4(mL3))) + deltaxyz(
+        pow2(mA),pow2(mE3),pow2(mL3))*(pow4(mA)*(-2*pow2(mE3)*pow2(mL3) + pow4(
+        mE3) - 3*pow4(mL3)) - pow2(mA)*pow2(mL3)*(2*pow2(mE3)*pow2(mL3) + pow4(
+        mE3) - 3*pow4(mL3)) - pow4(pow2(mE3) - pow2(mL3)) + pow2(mL3)*pow6(mA))
+        ))/(deltaxyz(pow2(mA),pow2(mE3),pow2(mL3))*deltaxyz(pow2(mA),pow2(mL3),
+        pow2(mE3))*pow2(mL3)*pow4(mE3))))/pow2(pow2(mE3) - pow2(mL3)) + (
+        phixyz(pow2(mA),pow2(mL3),pow2(mE3))*(-2*(-2*pow2(mE3) + pow2(mL3))*
+        pow2(deltaxyz(pow2(mA),pow2(mL3),pow2(mE3))) + deltaxyz(pow2(mA),pow2(
+        mL3),pow2(mE3))*((-5*pow2(mE3) + 3*pow2(mL3))*pow2(pow2(mE3) - pow2(
+        mL3)) + (-5*pow2(mE3) + 3*pow2(mL3))*pow4(mA) + 2*pow2(mA)*(2*pow2(mE3)
+        *pow2(mL3) + 7*pow4(mE3) - 3*pow4(mL3))) + (pow2(mE3) - pow2(mL3))*(4*
+        pow2(mA)*(pow2(mE3) - pow2(mL3))*pow4(mL3) + pow4(mA)*(4*pow2(mE3)*
+        pow2(mL3) + 6*pow4(mE3) + 6*pow4(mL3)) + pow4(pow2(mE3) - pow2(mL3)) -
+        4*(pow2(mE3) + pow2(mL3))*pow6(mA) + pow8(mA))))/(deltaxyz(pow2(mA),
+        pow2(mL3),pow2(mE3))*pow2(pow2(mE3) - pow2(mL3))*pow6(mE3))))))/pow2(
+        cbeta) + (-2*pow2(lMR) + lMR*(2*log(mE3) - ((pow2(mE3) + 2*pow2(mL3))*(
+        pow2(mE3) + pow2(mL3) - 2*pow2(Mu)))/(pow2(mE3)*pow2(mL3))) - (4*pow2(
+        mE3)*(pow2(mE3) - 2*pow2(Mu))*pow2(log(mE3)))/pow2(pow2(mE3) - pow2(Mu)
+        ) - (8*pow2(mL3)*(pow2(mL3) - 2*pow2(Mu))*pow2(log(mL3)))/pow2(pow2(
+        mL3) - pow2(Mu)) + (4*dilog(1 - pow2(mL3)/pow2(Mu))*pow4(Mu))/pow2(
+        pow2(mL3) - pow2(Mu)) + (2*dilog(1 - pow2(mE3)/pow2(Mu))*(2*pow2(mE3)*
+        pow2(Mu) - pow4(mE3) + pow4(Mu)))/pow2(pow2(mE3) - pow2(Mu)) + (2*
+        dilog(1 - pow2(mL3)/pow2(Mu))*(2*pow2(mL3)*pow2(Mu) - pow4(mL3) + pow4(
+        Mu)))/pow2(pow2(mL3) - pow2(Mu)) + (-(pow2(mE3)*pow2(mL3)*(3*pow2(mE3)*
+        pow2(mL3) + 2*pow4(mE3) + 4*pow4(mL3))) - 3*(7*pow2(mE3)*pow2(mL3) + 2*
+        pow4(mE3) + 4*pow4(mL3))*pow4(Mu) + pow2(Mu)*(13*pow2(mL3)*pow4(mE3) +
+        17*pow2(mE3)*pow4(mL3) + 2*pow6(mE3) + 4*pow6(mL3)) + 4*(pow2(mE3) + 2*
+        pow2(mL3))*pow6(Mu))/(2.*pow2(mE3)*pow2(mL3)*(-pow2(mE3) + pow2(Mu))*(-
+        pow2(mL3) + pow2(Mu))) + (log(mE3)*(9*pow4(mL3)*pow4(Mu) + pow4(mE3)*(-
+        9*pow2(mL3)*pow2(Mu) + pow4(mL3) + 4*pow4(Mu)) + 2*(pow2(mL3) - pow2(
+        Mu))*pow6(mE3) - 13*pow2(mL3)*pow6(Mu) - 2*pow2(mE3)*(2*pow2(Mu)*pow4(
+        mL3) - 7*pow2(mL3)*pow4(Mu) + pow6(Mu))))/(pow2(mL3)*(pow2(mL3) - pow2(
+        Mu))*pow2(pow2(mE3) - pow2(Mu))) + (log(pow2(Mu))*(2*log(mE3)*pow2(mE3)
+        *pow2(mL3)*(2*pow4(mE3)*(-2*pow2(mL3)*pow2(Mu) + pow4(mL3)) - pow4(Mu)*
+        (-2*pow2(mL3)*pow2(Mu) + pow4(mL3) + 3*pow4(Mu)) + pow2(mE3)*(-4*pow2(
+        Mu)*pow4(mL3) + 8*pow2(mL3)*pow4(Mu))) + pow2(Mu)*(-4*pow2(-(mL3*pow2(
+        Mu)) + pow3(mL3))*pow4(Mu) - 2*(pow2(mL3)*pow2(Mu) + pow4(mL3) + pow4(
+        Mu))*pow6(mE3) + pow4(mE3)*(8*pow2(Mu)*pow4(mL3) + 2*pow2(mL3)*pow4(Mu)
+        - 2*pow6(mL3) + 4*pow6(Mu)) + pow2(mE3)*(-8*pow4(mL3)*pow4(Mu) + 3*
+        pow2(Mu)*pow6(mL3) + pow2(mL3)*pow6(Mu) - 2*pow8(Mu)))))/(pow2(mE3)*
+        pow2(mL3)*pow2(pow2(mE3) - pow2(Mu))*pow2(pow2(mL3) - pow2(Mu))) + (2*
+        pow2(log(pow2(Mu)))*(-2*pow2(mE3)*pow2(Mu)*(2*pow2(mL3)*pow2(Mu) -
+        pow4(mL3) + pow4(Mu)) + pow4(mE3)*(2*pow2(mL3)*pow2(Mu) - pow4(mL3) +
+        pow4(Mu)) + 2*pow8(Mu)))/(pow2(pow2(mE3) - pow2(Mu))*pow2(pow2(mL3) -
+        pow2(Mu))) + (log(mL3)*(2*log(pow2(Mu))*pow2(mE3)*(2*pow4(mE3)*(-2*
+        pow2(mL3)*pow2(Mu) + pow4(mL3) - 2*pow4(Mu)) + (-2*pow2(mL3)*pow2(Mu) +
+        pow4(mL3) - 5*pow4(Mu))*pow4(Mu) + pow2(mE3)*(-4*pow2(Mu)*pow4(mL3) +
+        8*pow2(mL3)*pow4(Mu) + 8*pow6(Mu))) + (pow2(mE3) - pow2(Mu))*(-4*pow2(
+        mL3)*pow2(Mu)*pow2(pow2(mL3) - pow2(Mu)) + pow4(mE3)*(-6*(1 + 2*lMR)*
+        pow2(mL3)*pow2(Mu) + (5 + 6*lMR)*pow4(mL3) + (13 + 6*lMR)*pow4(Mu)) +
+        pow2(mE3)*(-3*(5 + 2*lMR)*pow2(Mu)*pow4(mL3) + 2*(7 + 6*lMR)*pow2(mL3)*
+        pow4(Mu) + 4*pow6(mL3) - 3*(5 + 2*lMR)*pow6(Mu))) + log(mE3)*(-8*pow2(
+        Mu)*pow4(mE3)*(2*pow2(mL3)*pow2(Mu) - pow4(mL3) + pow4(Mu)) + (8*pow2(
+        mL3)*pow2(Mu) - 4*pow4(mL3) + 4*pow4(Mu))*pow6(mE3) + 8*pow2(mE3)*pow8(
+        Mu))))/(pow2(mE3)*pow2(pow2(mE3) - pow2(Mu))*pow2(pow2(mL3) - pow2(Mu))
+        ) + pow2(Xtau)*((4*dilog(1 - pow2(mE3)/pow2(Mu))*(pow2(mL3) - pow2(Mu))
+        )/pow2(pow2(mE3) - pow2(mL3)) - (4*dilog(1 - pow2(mL3)/pow2(Mu))*(pow2(
+        mL3) - pow2(Mu)))/pow2(pow2(mE3) - pow2(mL3)) + (2*lMR*(-2*log(mE3)*(
+        pow2(mE3) - 4*pow2(mL3) + 2*pow2(Mu)) + ((pow2(mE3) - pow2(mL3))*(4*
+        pow2(mL3)*pow2(Mu) - 2*pow2(mE3)*(pow2(mL3) + pow2(Mu)) + pow4(mE3) -
+        2*pow4(mL3)))/(pow2(mE3)*pow2(mL3))))/pow2(pow2(mE3) - pow2(mL3)) + (4*
+        pow2(mL3)*(pow2(mL3) - 2*pow2(Mu)) + pow2(mE3)*(6*pow2(mL3) + 4*pow2(
+        Mu)) - 2*pow4(mE3))/(-(pow2(mL3)*pow4(mE3)) + pow2(mE3)*pow4(mL3)) + (
+        8*pow2(mE3)*pow2(log(mE3))*(pow2(mE3)*(pow2(mL3) - 6*pow2(Mu)) - 2*
+        pow2(mL3)*pow2(Mu) + 3*pow4(mE3) + 4*pow4(Mu)))/(pow2(pow2(mE3) - pow2(
+        mL3))*pow2(pow2(mE3) - pow2(Mu))) + (8*pow2(mL3)*pow2(log(mL3))*(2*
+        pow2(mE3)*(pow2(mL3) - 2*pow2(Mu)) - 6*pow2(mL3)*pow2(Mu) + 3*pow4(mL3)
+        + 5*pow4(Mu)))/(pow2(pow2(mE3) - pow2(mL3))*pow2(pow2(mL3) - pow2(Mu)))
+        - (2*log(mE3)*(-5*pow4(mL3)*pow4(Mu) + pow4(mE3)*(pow2(mL3)*pow2(Mu) +
+        pow4(mL3) + 2*pow4(Mu)) + 2*(pow2(mL3) - pow2(Mu))*pow6(mE3) + pow2(
+        mE3)*(16*pow2(Mu)*pow4(mL3) - 13*pow2(mL3)*pow4(Mu) - 11*pow6(mL3)) +
+        5*pow2(Mu)*pow6(mL3) + 4*pow2(mL3)*pow6(Mu)))/((pow2(mE3) - pow2(Mu))*(
+        pow2(mL3) - pow2(Mu))*pow2(-(mL3*pow2(mE3)) + pow3(mL3))) + (2*log(mL3)
+        *((pow2(mE3) - pow2(Mu))*(pow2(mL3) - pow2(Mu))*(4*(pow2(mL3) - pow2(
+        Mu))*pow2(Mu)*pow4(mL3) - pow4(mE3)*(-2*(1 + 5*lMR)*pow2(mL3)*pow2(Mu)
+        + (11 + 8*lMR)*pow4(mL3) + (7 + 2*lMR)*pow4(Mu)) + ((7 + 2*lMR)*pow2(
+        mL3) + (1 - 2*lMR)*pow2(Mu))*pow6(mE3) + pow2(mE3)*((13 + 8*lMR)*pow2(
+        Mu)*pow4(mL3) - (5 + 12*lMR)*pow2(mL3)*pow4(Mu) - 4*pow6(mL3) + 4*(1 +
+        lMR)*pow6(Mu))) - 4*log(mE3)*pow2(mE3)*((-10*pow2(mL3)*pow2(Mu) + 5*
+        pow4(mL3) + 3*pow4(Mu))*pow6(mE3) + 3*pow4(Mu)*pow6(mL3) + 2*pow4(mE3)*
+        (-9*pow2(Mu)*pow4(mL3) + 13*pow2(mL3)*pow4(Mu) + 2*pow6(mL3) - 3*pow6(
+        Mu)) - 6*pow4(mL3)*pow6(Mu) + 5*pow2(mL3)*pow8(Mu) + pow2(mE3)*(22*
+        pow4(mL3)*pow4(Mu) - 8*pow2(Mu)*pow6(mL3) - 24*pow2(mL3)*pow6(Mu) + 4*
+        pow8(Mu))) + 2*log(pow2(Mu))*pow2(mE3)*(2*pow4(Mu)*pow6(mE3) + 2*pow4(
+        mE3)*(-3*pow2(Mu)*pow4(mL3) + 2*pow2(mL3)*pow4(Mu) + pow6(mL3) - 3*
+        pow6(Mu)) + pow4(Mu)*(-4*pow2(Mu)*pow4(mL3) + 3*pow2(mL3)*pow4(Mu) +
+        pow6(mL3) - 2*pow6(Mu)) + pow2(mE3)*(13*pow4(mL3)*pow4(Mu) - 4*pow2(Mu)
+        *pow6(mL3) - 10*pow2(mL3)*pow6(Mu) + 7*pow8(Mu)))))/(pow2(mE3)*pow2(
+        pow2(mE3) - pow2(mL3))*pow2(pow2(mE3) - pow2(Mu))*pow2(pow2(mL3) -
+        pow2(Mu))) - (4*log(pow2(Mu))*((pow2(mE3) - pow2(mL3))*(pow2(mE3) -
+        pow2(Mu))*(pow2(mL3) - pow2(Mu))*pow2(Mu)*(pow2(Mu)*pow4(mE3) - 2*pow2(
+        Mu)*pow4(mL3) + pow2(mE3)*(-(pow2(mL3)*pow2(Mu)) + pow4(mL3) - pow4(Mu)
+        ) + 2*pow2(mL3)*pow4(Mu)) + log(mE3)*pow2(mE3)*pow2(mL3)*(2*pow4(Mu)*
+        pow6(mE3) + 2*pow4(mE3)*(-3*pow2(Mu)*pow4(mL3) + 2*pow2(mL3)*pow4(Mu) +
+        pow6(mL3) - 3*pow6(Mu)) + pow4(Mu)*(-4*pow2(Mu)*pow4(mL3) + 3*pow2(mL3)
+        *pow4(Mu) + pow6(mL3) - 2*pow6(Mu)) + pow2(mE3)*(13*pow4(mL3)*pow4(Mu)
+        - 4*pow2(Mu)*pow6(mL3) - 10*pow2(mL3)*pow6(Mu) + 7*pow8(Mu)))))/(pow2(
+        mE3)*pow2(mL3)*pow2(pow2(mE3) - pow2(mL3))*pow2(pow2(mE3) - pow2(Mu))*
+        pow2(pow2(mL3) - pow2(Mu)))) + (pow4(Xtau)*(2*dilog(1 - pow2(mE3)/pow2(
+        Mu))*(-2*pow2(mE3)*pow2(mL3) + 6*pow2(mL3)*pow2(Mu) + pow4(mE3) - 2*
+        pow4(mL3) - 3*pow4(Mu)) + dilog(1 - pow2(mL3)/pow2(Mu))*(4*pow2(mL3)*(
+        pow2(mE3) - 3*pow2(Mu)) - 2*pow4(mE3) + 4*pow4(mL3) + 6*pow4(Mu)) - (4*
+        pow2(mE3)*(pow2(mE3) + pow2(mL3))*pow2(log(mE3))*(pow2(mE3)*(pow2(mL3)
+        - 14*pow2(Mu)) - 2*pow2(mL3)*pow2(Mu) + 7*pow4(mE3) + 8*pow4(Mu)))/
+        pow2(pow2(mE3) - pow2(Mu)) + lMR*(2*log(mE3)*(-6*pow2(mE3)*pow2(mL3) +
+        12*pow2(mL3)*pow2(Mu) + 7*pow4(mE3) - 13*pow4(mL3)) + ((-pow2(mE3) +
+        pow2(mL3))*(10*pow2(mE3)*pow2(mL3)*(pow2(mE3) + pow2(Mu)) - 2*pow2(Mu)*
+        pow4(mE3) + (-21*pow2(mE3) + 4*pow2(Mu))*pow4(mL3) + pow6(mE3) - 2*
+        pow6(mL3)))/(pow2(mE3)*pow2(mL3))) - (8*pow2(mL3)*pow2(log(mL3))*(5*
+        pow2(mE3)*pow2(pow2(mL3) - pow2(Mu)) + (pow2(mL3) - 2*pow2(Mu))*pow4(
+        mE3) - 10*pow2(Mu)*pow4(mL3) + 6*pow2(mL3)*pow4(Mu) + 5*pow6(mL3)))/
+        pow2(pow2(mL3) - pow2(Mu)) + ((pow2(mE3) - pow2(mL3))*(-2*pow2(Mu)*
+        pow4(mL3)*(-3*pow2(mL3)*pow2(Mu) + pow4(mL3) + 2*pow4(Mu)) + (14*pow2(
+        mL3)*pow2(Mu) - 15*pow4(mL3) - 3*pow4(Mu))*pow6(mE3) + pow4(mE3)*(-31*
+        pow2(Mu)*pow4(mL3) + 5*pow2(mL3)*pow4(Mu) + 32*pow6(mL3) + 2*pow6(Mu))
+        + (-pow2(mL3) + pow2(Mu))*pow8(mE3) + 2*pow2(mE3)*(23*pow4(mL3)*pow4(
+        Mu) - 18*pow2(Mu)*pow6(mL3) - 8*pow2(mL3)*pow6(Mu) + pow8(mL3))))/(
+        pow2(mE3)*pow2(mL3)*(pow2(mE3) - pow2(Mu))*(pow2(mL3) - pow2(Mu))) + (
+        log(mE3)*(-2*pow2(Mu)*pow2(pow2(mE3) - pow2(Mu))*pow6(mE3) + pow6(mL3)*
+        (153*pow2(Mu)*pow4(mE3) - 162*pow2(mE3)*pow4(Mu) - 50*pow6(mE3) + 47*
+        pow6(Mu)) + (64*pow2(mE3)*pow2(Mu) - 33*pow4(mE3) - 27*pow4(Mu))*pow8(
+        mL3) + pow4(mL3)*(-101*pow4(mE3)*pow4(Mu) - 26*pow2(Mu)*pow6(mE3) +
+        118*pow2(mE3)*pow6(Mu) + 45*pow8(mE3) - 24*pow8(Mu)) + pow2(mE3)*pow2(
+        mL3)*(70*pow4(mE3)*pow4(Mu) - 45*pow2(Mu)*pow6(mE3) - 19*pow2(mE3)*
+        pow6(Mu) + 2*pow8(mE3) - 12*pow8(Mu))))/(pow2(mL3)*(pow2(mL3) - pow2(
+        Mu))*pow2(pow2(mE3) - pow2(Mu))) - (log(mL3)*((pow2(mE3) - pow2(Mu))*(
+        4*pow2(Mu)*pow2(pow2(mL3) - pow2(Mu))*pow6(mL3) + pow2(mL3)*pow4(mE3)*(
+        2*(81 + 44*lMR)*pow2(Mu)*pow4(mL3) - (123 + 98*lMR)*pow2(mL3)*pow4(Mu)
+        - (71 + 26*lMR)*pow6(mL3) + 4*(2 + 9*lMR)*pow6(Mu)) + pow6(mE3)*((-49 +
+        10*lMR)*pow2(Mu)*pow4(mL3) + 2*(37 + 8*lMR)*pow2(mL3)*pow4(Mu) - 12*(-1
+        + lMR)*pow6(mL3) - (13 + 14*lMR)*pow6(Mu)) + (-2*(25 + 14*lMR)*pow2(
+        mL3)*pow2(Mu) + (27 + 14*lMR)*pow4(mL3) + (15 + 14*lMR)*pow4(Mu))*pow8(
+        mE3) + pow2(mE3)*pow2(mL3)*(-2*(87 + 38*lMR)*pow4(mL3)*pow4(Mu) + (77 +
+        26*lMR)*pow2(Mu)*pow6(mL3) + (145 + 74*lMR)*pow2(mL3)*pow6(Mu) - 4*
+        pow8(mL3) - 12*(3 + 2*lMR)*pow8(Mu))) - 4*log(mE3)*pow2(mE3)*(2*pow4(
+        mL3)*pow4(Mu)*(-10*pow2(mL3)*pow2(Mu) + 5*pow4(mL3) + 6*pow4(Mu)) + 2*
+        pow6(mE3)*(-27*pow2(Mu)*pow4(mL3) + 27*pow2(mL3)*pow4(Mu) + 9*pow6(mL3)
+        - 7*pow6(Mu)) + (-18*pow2(mL3)*pow2(Mu) + 9*pow4(mL3) + 7*pow4(Mu))*
+        pow8(mE3) + pow4(mE3)*(95*pow4(mL3)*pow4(Mu) - 58*pow2(Mu)*pow6(mL3) -
+        56*pow2(mL3)*pow6(Mu) + 11*pow8(mL3) + 8*pow8(Mu)) + pow2(mE3)*(62*
+        pow4(Mu)*pow6(mL3) - 62*pow4(mL3)*pow6(Mu) - 22*pow2(Mu)*pow8(mL3) +
+        18*pow2(mL3)*pow8(Mu))) - 2*log(pow2(Mu))*pow2(mE3)*(4*pow2(mL3)*(pow2(
+        mL3)*pow2(Mu) - pow4(mL3) + pow4(Mu))*pow6(mE3) + 18*pow6(mL3)*pow6(Mu)
+        + 2*(-2*pow2(mL3)*pow2(Mu) + pow4(mL3))*pow8(mE3) - 3*pow4(Mu)*pow8(
+        mL3) - 25*pow4(mL3)*pow8(Mu) - pow4(mE3)*(41*pow4(mL3)*pow4(Mu) - 28*
+        pow2(Mu)*pow6(mL3) - 18*pow2(mL3)*pow6(Mu) + 4*pow8(mL3) + pow8(Mu)) +
+        4*pow2(mE3)*(-11*pow4(Mu)*pow6(mL3) + 15*pow4(mL3)*pow6(Mu) + 2*pow2(
+        Mu)*pow8(mL3) - 7*pow2(mL3)*pow8(Mu)) + 12*pow2(mL3)*power10(Mu))))/(
+        pow2(mE3)*pow2(pow2(mE3) - pow2(Mu))*pow2(pow2(mL3) - pow2(Mu))) - (2*
+        log(pow2(Mu))*((pow2(mE3) - pow2(mL3))*pow2(Mu)*(-2*pow2(pow2(mL3) -
+        pow2(Mu))*pow4(mL3)*pow4(Mu) - 2*pow6(mE3)*(pow2(mL3)*pow4(Mu) + pow6(
+        mL3) + pow6(Mu)) + (pow4(mL3) + pow4(Mu))*pow8(mE3) + pow4(mE3)*(-7*
+        pow4(mL3)*pow4(Mu) + 9*pow2(Mu)*pow6(mL3) + 5*pow2(mL3)*pow6(Mu) - 2*
+        pow8(mL3) + pow8(Mu)) + pow2(mE3)*(-8*pow4(Mu)*pow6(mL3) + 5*pow4(mL3)*
+        pow6(Mu) + 3*pow2(Mu)*pow8(mL3) - 2*pow2(mL3)*pow8(Mu))) + log(mE3)*
+        pow2(mE3)*pow2(mL3)*(4*pow2(mL3)*(pow2(mL3)*pow2(Mu) - pow4(mL3) +
+        pow4(Mu))*pow6(mE3) + 18*pow6(mL3)*pow6(Mu) + 2*(-2*pow2(mL3)*pow2(Mu)
+        + pow4(mL3))*pow8(mE3) - 3*pow4(Mu)*pow8(mL3) - 25*pow4(mL3)*pow8(Mu) -
+        pow4(mE3)*(41*pow4(mL3)*pow4(Mu) - 28*pow2(Mu)*pow6(mL3) - 18*pow2(mL3)
+        *pow6(Mu) + 4*pow8(mL3) + pow8(Mu)) + 4*pow2(mE3)*(-11*pow4(Mu)*pow6(
+        mL3) + 15*pow4(mL3)*pow6(Mu) + 2*pow2(Mu)*pow8(mL3) - 7*pow2(mL3)*pow8(
+        Mu)) + 12*pow2(mL3)*power10(Mu))))/(pow2(mE3)*pow2(mL3)*pow2(pow2(mE3)
+        - pow2(Mu))*pow2(pow2(mL3) - pow2(Mu)))))/pow4(pow2(mE3) - pow2(mL3)))/
+        pow2(cbeta));
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2Yb4(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   using gm2calc::dilog;
+   
+   const double MR2 = pow2(p.scale);
+   const double lMR = omitLogs*log(MR2);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mU3 = sqrt(mU32);
+   const double mD3 = sqrt(mD32);
+   const double mA = p.MA;
+   const double beta = atan(p.vu/p.vd);
+   const double sbeta = sin(beta);
+   const double cbeta = cos(beta);
+   const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
+   const double Yt = p.Au(2,2) + p.mu*p.vu/p.vd;
+   const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
+   const double Yb = p.Ad(2,2) + p.mu*p.vd/p.vu;
+   const double Mu = p.mu;
+   
+   return 2*(-3 + 18*lMR - (6*Xb*Yb*log(mD32)*(2 + 2*lMR - log(mQ32)))/(mD32 -
+        mQ32) - 6*(1 + lMR)*log(mQ32) + (12*(1 + lMR)*Xb*Yb*log(mQ32))/(mD32 -
+        mQ32) - 6*log(mD32)*(2 + 2*lMR - log(mU32)) + (6*Xb*Yb*(log(mD32) -
+        log(mQ32))*log(pow2(mA)))/(mD32 - mQ32) - 6*(4*lMR - log(mD32) + log(
+        mU32))*log(pow2(mA)) + 21*pow2(lMR) + (12*Xb*(2*dilog(1 - pow2(Mu)/
+        mD32) - 2*dilog(1 - pow2(Mu)/mQ32) + (log(mD32) - log(mQ32))*(-2 - 2*
+        lMR + log(mD32) + log(mQ32)))*Mu)/(cbeta*(mD32 - mQ32)*
+        sbeta) + 4*pow2(Pi) - (6*Xb*Yb*(mQ32*phixyz(pow2(mA),mQ32,mD32)*(mD32 -
+        mQ32 + pow2(mA)) + mD32*(mQ32*(log(mD32) - log(mQ32))*(-log(mQ32) +
+        log(pow2(mA))) - phixyz(pow2(mA),mQ32,mQ32)*pow2(mA)))*pow2(sbeta))/(
+        mD32*(mD32 - mQ32)*mQ32*pow2(cbeta)) - (24*pow2(Xb))/(mD32 - mQ32) - (
+        12*lMR*pow2(Xb))/(mD32 - mQ32) + (36*dilog(1 - mD32/mQ32)*pow2(Xb))/(
+        mD32 - mQ32) + (6*(mD32 - 2*mQ32 + mU32)*(log(mD32) - log(mQ32))*log(
+        pow2(mA))*pow2(Xb))/pow2(mD32 - mQ32) - (6*log(mQ32)*((1 + 2*lMR)*mD32
+        + 3*mQ32 + log(mU32)*(-mQ32 - mU32 + pow2(mA)))*pow2(Xb))/pow2(mD32 -
+        mQ32) + (6*log(mD32)*(3*mD32 + 2*lMR*mD32 + mQ32 - log(mQ32)*(3*mD32 -
+        3*mQ32 + pow2(mA)) + log(mU32)*(-mQ32 - mU32 + pow2(mA)))*pow2(Xb))/
+        pow2(mD32 - mQ32) + (6*(-2*dilog(1 - pow2(Mu)/mD32) - 2*dilog(1 - pow2(
+        Mu)/mQ32) + lMR*log(mD32) + lMR*log(mQ32) + log(mD32)*log(mQ32) - pow2(
+        lMR) + (2*log(pow2(Mu))*(mD32 + mQ32 - 2*pow2(Mu))*pow2(Mu))/((mD32 -
+        pow2(Mu))*(mQ32 - pow2(Mu))) + (2*log(mD32)*pow2(Mu))/(-mD32 + pow2(Mu)
+        ) + (2*log(mQ32)*pow2(Mu))/(-mQ32 + pow2(Mu)) - pow2(log(mD32)) - pow2(
+        log(mQ32))))/pow2(cbeta) + 3*pow2(log(mQ32)) - (6*Xb*Yb*pow2(log(mQ32))
+        )/(mD32 - mQ32) + (6*(3*mD32 - 3*mQ32 + pow2(mA))*pow2(Xb)*pow2(log(
+        mQ32)))/pow2(mD32 - mQ32) + (12*Xt*Mu*(2*lMR*mU32*log(mU32)
+        *(mQ32 - pow2(Mu)) + 2*lMR*mQ32*log(mQ32)*(-mU32 + pow2(Mu)) - 2*dilog(
+        1 - pow2(Mu)/mQ32)*(mQ32 + pow2(Mu))*(-mU32 + pow2(Mu)) - 2*dilog(1 -
+        pow2(Mu)/mU32)*(mQ32 - pow2(Mu))*(mU32 + pow2(Mu)) - 2*log(pow2(Mu))*
+        pow2(Mu)*(lMR*(mQ32 - mU32) + log(mQ32)*(mU32 - pow2(Mu)) + log(mU32)*(
+        -mQ32 + pow2(Mu))) - (mQ32 + pow2(Mu))*(-mU32 + pow2(Mu))*pow2(log(
+        mQ32)) - (mQ32 - pow2(Mu))*(mU32 + pow2(Mu))*pow2(log(mU32))))/(cbeta*(
+        mQ32 - mU32)*sbeta*(mQ32 - pow2(Mu))*(-mU32 + pow2(Mu))) + 12*pow2(log(
+        pow2(mA))) + (6*deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32)
+        *pow2(Xb))/pow2(-(mD3*mQ32) + pow3(mD3)) + (6*deltaxyz(pow2(mA),mU32,
+        mQ32)*phixyz(pow2(mA),mU32,mQ32)*pow2(Xb))/pow2(-(mD32*mQ3) + pow3(mQ3)
+        ) - (48*Yb*pow3(Xb))/pow2(mD32 - mQ32) - (24*lMR*Yb*pow3(Xb))/pow2(mD32
+        - mQ32) - (12*((1 + lMR)*mD32 + (3 + lMR)*mQ32)*Yb*log(mQ32)*pow3(Xb))/
+        pow3(mD32 - mQ32) - (6*Yb*(log(mD32) - log(mQ32))*log(pow2(mA))*(mD32 -
+        mQ32 + 2*pow2(mA))*pow3(Xb))/pow3(mD32 - mQ32) + (6*Yb*log(mD32)*(2*(3
+        + lMR)*mD32 + 2*(1 + lMR)*mQ32 + log(mQ32)*(-mD32 - 3*mQ32 + 2*pow2(mA)
+        ))*pow3(Xb))/pow3(mD32 - mQ32) - (6*Yb*(-mD32 - 3*mQ32 + 2*pow2(mA))*
+        pow2(log(mQ32))*pow3(Xb))/pow3(mD32 - mQ32) + (12*Mu*(-8*
+        mD32 - 4*lMR*mD32 + 8*mQ32 + 4*lMR*mQ32 + 6*mD32*log(mD32) + 2*lMR*
+        mD32*log(mD32) + 2*mQ32*log(mD32) + 2*lMR*mQ32*log(mD32) - 2*mD32*log(
+        mQ32) - 2*lMR*mD32*log(mQ32) - 6*mQ32*log(mQ32) - 2*lMR*mQ32*log(mQ32)
+        - 2*dilog(1 - pow2(Mu)/mD32)*(mD32 + mQ32 - 2*pow2(Mu)) + 2*dilog(1 -
+        pow2(Mu)/mQ32)*(mD32 + mQ32 - 2*pow2(Mu)) - 4*log(mD32)*log(pow2(Mu))*
+        pow2(Mu) + 4*log(mQ32)*log(pow2(Mu))*pow2(Mu) - mD32*pow2(log(mD32)) -
+        mQ32*pow2(log(mD32)) + 2*pow2(Mu)*pow2(log(mD32)) + mD32*pow2(log(mQ32)
+        ) + mQ32*pow2(log(mQ32)) - 2*pow2(Mu)*pow2(log(mQ32)))*pow3(Xb))/(
+        cbeta*sbeta*pow3(mD32 - mQ32)) + (6*Xb*Xt*((mD32 - mQ32)*mQ32*deltaxyz(
+        pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32) + mQ32*(-mD32 + mQ32)*
+        deltaxyz(pow2(mA),mU32,mD32)*phixyz(pow2(mA),mU32,mD32) - mQ32*log(
+        mQ32)*log(mU32)*(mQ32 + mU32 - pow2(mA))*(mD32*mQ32 - pow4(mD3)) -
+        mQ32*((mQ32 - mU32)*log(mD32) + (mD32 - 2*mQ32 + mU32)*log(mQ32) + (-
+        mD32 + mQ32)*log(mU32))*log(pow2(mA))*(-(mD32*mQ32) + pow4(mD3)) -
+        deltaxyz(pow2(mA),mQ32,mQ32)*phixyz(pow2(mA),mQ32,mQ32)*(-(mD32*mQ32) +
+        pow4(mD3)) + deltaxyz(pow2(mA),mU32,mQ32)*phixyz(pow2(mA),mU32,mQ32)*(-
+        (mD32*mQ32) + pow4(mD3)) - mQ32*log(mD32)*(log(mU32)*(mD32 + mU32 -
+        pow2(mA)) + log(mQ32)*(-mD32 - mQ32 + pow2(mA)))*(-(mD32*mQ32) + pow4(
+        mD3)) + mQ32*(-2*mQ32 + pow2(mA))*pow2(log(mQ32))*(-(mD32*mQ32) + pow4(
+        mD3))))/((mD32 - mQ32)*mQ32*(mQ32 - mU32)*(-(mD32*mQ32) + pow4(mD3))) +
+        (6*pow2(Xb)*(2*(mD32 - mQ32)*(mD32 - pow2(Mu)) + lMR*(mD32 - mQ32)*(
+        mD32 - pow2(Mu)) + 2*mQ32*dilog(1 - pow2(Mu)/mD32)*(mD32 - pow2(Mu)) -
+        2*mQ32*dilog(1 - pow2(Mu)/mQ32)*(mD32 - pow2(Mu)) + (mD32 + (1 + lMR)*
+        mQ32)*log(mQ32)*(mD32 - pow2(Mu)) + 2*(mD32 - mQ32)*log(pow2(Mu))*pow2(
+        Mu) + mQ32*(mD32 - pow2(Mu))*pow2(log(mD32)) - log(mD32)*(lMR*mD32*mQ32
+        + mQ32*log(mQ32)*(mD32 - pow2(Mu)) - (2 + lMR)*mQ32*pow2(Mu) + 2*pow4(
+        mD3))))/(pow2(cbeta)*pow2(mD32 - mQ32)*(mD32 - pow2(Mu))) + (6*phixyz(
+        pow2(mA),mQ32,mQ32)*((mD32 - 2*mQ32)*deltaxyz(pow2(mA),mQ32,mQ32) + (-
+        mD32 + mQ32)*pow2(mA)*(-5*mQ32 + pow2(mA)))*pow2(Xb))/(pow2(mD32 -
+        mQ32)*pow4(mQ3)) + (6*Yb*phixyz(pow2(mA),mQ32,mQ32)*(-((mD32 - 3*mQ32)*
+        deltaxyz(pow2(mA),mQ32,mQ32)) + (mD32 - mQ32)*pow2(mA)*(-5*mQ32 + pow2(
+        mA)))*pow3(Xb))/(pow3(mD32 - mQ32)*pow4(mQ3)) - (6*phixyz(pow2(mA),
+        mQ32,mQ32)*(deltaxyz(pow2(mA),mQ32,mQ32) + 5*mQ32*pow2(mA) - pow4(mA)))
+        /pow4(mQ3) + (6*Xb*Yb*phixyz(pow2(mA),mQ32,mQ32)*(deltaxyz(pow2(mA),
+        mQ32,mQ32) + 5*mQ32*pow2(mA) - pow4(mA)))/((mD32 - mQ32)*pow4(mQ3)) + (
+        6*pow2(Xb)*((lMR*(2*mQ32 + mU32 - 2*pow2(Mu)))/((mD32 - mQ32)*mQ32) + (
+        log(mQ32)*(mD32 + 2*mQ32 + mU32 - mU32*log(mU32) + lMR*(2*mD32 + mU32 -
+        2*pow2(Mu)) - 2*pow2(Mu)))/pow2(mD32 - mQ32) + (2*dilog(1 - pow2(Mu)/
+        mD32)*(mD32 - pow2(Mu)))/pow2(mD32 - mQ32) - (2*dilog(1 - pow2(Mu)/
+        mQ32)*(mD32 - pow2(Mu)))/pow2(mD32 - mQ32) - (log(mD32)*((3 + 2*lMR)*
+        mD32 - mU32*log(mU32) - (1 + lMR)*(-mU32 + 2*pow2(Mu))))/pow2(mD32 -
+        mQ32) + ((mD32 - pow2(Mu))*pow2(log(mD32)))/pow2(mD32 - mQ32) - ((mD32
+        - pow2(Mu))*pow2(log(mQ32)))/pow2(mD32 - mQ32) + (3*mQ32 + mU32 - 2*
+        pow2(Mu))/(mD32*mQ32 - pow4(mQ3)) + (2*log(pow2(Mu))*pow2(Mu))/(mD32*
+        mQ32 - pow4(mQ3)) + (mU32*log(mU32))/(-(mD32*mQ32) + pow4(mQ3))))/pow2(
+        sbeta) + (6*Yb*phixyz(pow2(mA),mQ32,mD32)*pow3(Xb)*((-3*mD32 + mQ32)*
+        deltaxyz(pow2(mA),mQ32,mD32) + (mD32 - mQ32)*(-3*mD32*mQ32 - (3*mD32 +
+        2*mQ32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mQ3))))/(pow3(mD32 -
+        mQ32)*pow4(mD3)) + (6*pow2(Xt)*(2*(mQ32 - mU32) + 2*mU32*dilog(1 -
+        pow2(Mu)/mQ32) - 2*mU32*dilog(1 - pow2(Mu)/mU32) + 2*mU32*log(mU32) +
+        lMR*(mQ32 - mU32 + mU32*log(mU32)) + log(mD32)*(mQ32 - mU32 - mU32*log(
+        mQ32) + mU32*log(mU32)) + (2*(mQ32 - mU32)*log(pow2(Mu))*pow2(Mu))/(
+        mQ32 - pow2(Mu)) + ((mQ32 - mU32)*pow2(Xb))/(mD32 - mQ32) + (mU32*log(
+        mU32)*pow2(Xb))/(mD32 - mQ32) - (mQ32*log(mD32)*(mQ32 - mU32 - mU32*
+        log(mQ32) + mU32*log(mU32))*pow2(Xb))/pow2(mD32 - mQ32) + mU32*pow2(
+        log(mQ32)) - (mQ32*mU32*pow2(Xb)*pow2(log(mQ32)))/pow2(mD32 - mQ32) -
+        mU32*pow2(log(mU32)) + (log(mQ32)*pow2(Xb)*(-(mD32*mU32) + mQ32*mU32*
+        log(mU32) + pow4(mQ3)))/pow2(mD32 - mQ32) - (log(mQ32)*(lMR*mQ32*mU32 -
+        (2 + lMR)*mU32*pow2(Mu) + 2*pow4(mQ3)))/(mQ32 - pow2(Mu))))/(pow2(
+        cbeta)*pow2(mQ32 - mU32)) - (3*pow2(sbeta)*pow2(Yb)*(deltaxyz(pow2(mA),
+        mQ32,mD32)*(mD32*(-log(mQ32) + log(pow2(mA))) + phixyz(pow2(mA),mQ32,
+        mD32)*(mQ32 - pow2(mA))) + (mD32 - mQ32 + pow2(mA))*(-(mD32*(-2*mD32*
+        log(mD32) + log(mQ32)*(mD32 + mQ32 - pow2(mA)) + log(pow2(mA))*(mD32 -
+        mQ32 + pow2(mA)))) + phixyz(pow2(mA),mQ32,mD32)*(-(mD32*mQ32) - (mD32 +
+        2*mQ32)*pow2(mA) + pow4(mA) + pow4(mQ3)))))/(deltaxyz(pow2(mA),mQ32,
+        mD32)*pow2(cbeta)*pow4(mD3)) + (9*(2*lMR - log(mD32) - log(mQ32))*pow2(
+        Xt)*(-2*mQ32*mU32*log(mQ32) + 2*mQ32*mU32*log(mU32) + pow4(mQ3) - pow4(
+        mU3)))/pow3(mQ32 - mU32) + (6*phixyz(pow2(mA),mU32,mD32)*(-3*mD32*mU32
+        - deltaxyz(pow2(mA),mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA)
+        + 2*pow4(mD3) + pow4(mU3)))/pow4(mD3) - (3*pow2(Xt)*(-6*mQ32*mU32 - 4*
+        lMR*mQ32*mU32 + 5*mQ32*mU32*log(mU32) + 2*lMR*mQ32*mU32*log(mU32) -
+        mQ32*log(mQ32)*(3*mQ32 + mU32 + 2*lMR*mU32 + (6*mQ32 - 4*mU32)*log(
+        mU32)) - 3*mQ32*mU32*pow2(log(mU32)) + 5*pow4(mQ3) + 3*lMR*pow4(mQ3) +
+        3*pow2(log(mU32))*pow4(mQ3) + 6*dilog(1 - mQ32/mU32)*(-(mQ32*mU32) +
+        pow4(mQ3)) + pow2(log(mQ32))*(-(mQ32*mU32) + 3*pow4(mQ3)) + pow4(mU3) +
+        lMR*pow4(mU3) - log(mU32)*pow4(mU3)))/pow2(-(mQ3*mU32) + pow3(mQ3)) + (
+        6*phixyz(pow2(mA),mU32,mD32)*pow2(Xb)*((-2*mD32 + mQ32)*deltaxyz(pow2(
+        mA),mU32,mD32) + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(
+        mA) + pow4(mA) + 2*pow4(mD3) + pow4(mU3))))/(pow2(mD32 - mQ32)*pow4(
+        mD3)) - (6*Xt*Yb*((log(mQ32) - log(mU32))*(-log(mD32) + log(pow2(mA)))*
+        pow4(mD3) + phixyz(pow2(mA),mQ32,mD32)*(3*mD32*mQ32 + deltaxyz(pow2(mA)
+        ,mQ32,mD32) + (3*mD32 + 2*mQ32)*pow2(mA) - pow4(mA) - 2*pow4(mD3) -
+        pow4(mQ3)) + phixyz(pow2(mA),mU32,mD32)*(-3*mD32*mU32 - deltaxyz(pow2(
+        mA),mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) +
+        pow4(mU3))))/((mQ32 - mU32)*pow4(mD3)) + (6*Xb*Yt*(pow4(mD3)*(-((log(
+        mD32) - log(mQ32))*(2 + 2*lMR - log(mU32) - log(pow2(mA)))*pow4(mQ3)) +
+        phixyz(pow2(mA),mU32,mQ32)*(3*mQ32*mU32 + deltaxyz(pow2(mA),mU32,mQ32)
+        + (3*mQ32 + 2*mU32)*pow2(mA) - pow4(mA) - 2*pow4(mQ3) - pow4(mU3))) +
+        phixyz(pow2(mA),mU32,mD32)*pow4(mQ3)*(-3*mD32*mU32 - deltaxyz(pow2(mA),
+        mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) +
+        pow4(mU3))))/((mD32 - mQ32)*pow4(mD3)*pow4(mQ3)) - (3*(4*lMR*mQ32*mU32*
+        log(mU32)*(mU32 - 2*pow2(Mu)) + 2*(mQ32 + 2*mU32 - 2*pow2(Mu))*pow2(Mu)
+        *(-mU32 + pow2(Mu)) + mQ32*pow2(-mU32 + pow2(Mu)) - 4*mQ32*dilog(1 -
+        pow2(Mu)/mQ32)*pow2(-mU32 + pow2(Mu)) + 2*(1 + 2*lMR)*mQ32*log(mQ32)*
+        pow2(-mU32 + pow2(Mu)) - 4*mQ32*pow2(lMR)*pow2(-mU32 + pow2(Mu)) - 2*
+        mQ32*pow2(log(mQ32))*pow2(-mU32 + pow2(Mu)) - 2*mU32*log(mU32)*(mQ32*(
+        mU32 + 2*pow2(Mu)) + pow2(-mU32 + pow2(Mu))) + 2*log(pow2(Mu))*pow2(Mu)
+        *(-2*mQ32*log(mU32)*pow2(Mu) + mQ32*(2*mU32 + pow2(Mu) + 2*lMR*pow2(Mu)
+        ) + 2*pow2(-mU32 + pow2(Mu))) + 2*pow2(-(mU3*pow2(Mu)) + pow3(mU3)) +
+        4*mQ32*dilog(1 - pow2(Mu)/mU32)*(2*mU32*pow2(Mu) + pow4(Mu) - pow4(mU3)
+        ) + 2*mQ32*pow2(log(mU32))*(2*mU32*pow2(Mu) + pow4(Mu) - pow4(mU3)) -
+        2*lMR*(-mU32 + pow2(Mu))*(2*mQ32*pow2(Mu) - 3*mU32*pow2(Mu) + 2*pow4(
+        Mu) + pow4(mU3))))/(2.*mQ32*pow2(sbeta)*pow2(-mU32 + pow2(Mu))) + (6*
+        Xt*Yb*pow2(Xb)*(mQ32*(mQ32 - mU32)*(log(mD32) - log(mQ32))*log(pow2(mA)
+        )*pow4(mD3) + deltaxyz(pow2(mA),mQ32,mQ32)*phixyz(pow2(mA),mQ32,mQ32)*
+        pow4(mD3) - deltaxyz(pow2(mA),mU32,mQ32)*phixyz(pow2(mA),mU32,mQ32)*
+        pow4(mD3) - mQ32*log(mQ32)*log(mU32)*(mQ32 + mU32 - pow2(mA))*pow4(mD3)
+        + mQ32*log(mD32)*(log(mU32)*(mQ32 + mU32 - pow2(mA)) + log(mQ32)*(-2*
+        mQ32 + pow2(mA)))*pow4(mD3) + mQ32*(2*mQ32 - pow2(mA))*pow2(log(mQ32))*
+        pow4(mD3) + mQ32*phixyz(pow2(mA),mQ32,mD32)*((-2*mD32 + mQ32)*deltaxyz(
+        pow2(mA),mQ32,mD32) + (mD32 - mQ32)*(-3*mD32*mQ32 - (3*mD32 + 2*mQ32)*
+        pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mQ3))) - mQ32*phixyz(pow2(mA),
+        mU32,mD32)*((-2*mD32 + mQ32)*deltaxyz(pow2(mA),mU32,mD32) + (mD32 -
+        mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(
+        mD3) + pow4(mU3)))))/(mQ32*(mQ32 - mU32)*pow2(mD32 - mQ32)*pow4(mD3)) +
+        (3*pow2(sbeta)*(-(phixyz(pow2(mA),mQ32,mQ32)*pow2(mA)*pow4(mD3)) +
+        mQ32*((-2*log(mQ32) - 2*lMR*log(mQ32) + log(mD32)*(-2 - 2*lMR + log(
+        mU32)) + (4 + log(mD32) - log(mU32))*log(pow2(mA)) + 2*pow2(lMR) +
+        pow2(log(mQ32)))*pow4(mD3) + phixyz(pow2(mA),mU32,mD32)*(-3*mD32*mU32 -
+        deltaxyz(pow2(mA),mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) +
+        2*pow4(mD3) + pow4(mU3)))))/(mQ32*pow2(cbeta)*pow4(mD3)) - (6*Yt*pow3(
+        Xb)*(8*(mD32 - mQ32)*pow4(mD3)*pow4(mQ3) + 4*lMR*(mD32 - mQ32)*pow4(
+        mD3)*pow4(mQ3) + (log(mD32) - log(mQ32))*log(pow2(mA))*(mD32 + mQ32 -
+        2*mU32 + 2*pow2(mA))*pow4(mD3)*pow4(mQ3) - log(mD32)*(2*(3 + lMR)*mD32
+        + 2*(1 + lMR)*mQ32 + log(mU32)*(-mD32 - mQ32 - 2*mU32 + 2*pow2(mA)))*
+        pow4(mD3)*pow4(mQ3) + log(mQ32)*(2*(1 + lMR)*mD32 + 2*(3 + lMR)*mQ32 +
+        log(mU32)*(-mD32 - mQ32 - 2*mU32 + 2*pow2(mA)))*pow4(mD3)*pow4(mQ3) -
+        phixyz(pow2(mA),mU32,mD32)*pow4(mQ3)*((-3*mD32 + mQ32)*deltaxyz(pow2(
+        mA),mU32,mD32) + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(
+        mA) + pow4(mA) + 2*pow4(mD3) + pow4(mU3))) - phixyz(pow2(mA),mU32,mQ32)
+        *pow4(mD3)*(-((mD32 - 3*mQ32)*deltaxyz(pow2(mA),mU32,mQ32)) + (mD32 -
+        mQ32)*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(
+        mQ3) + pow4(mU3)))))/(pow3(mD32 - mQ32)*pow4(mD3)*pow4(mQ3)) - (3*pow2(
+        sbeta)*pow2(Xb)*(pow2(Yb)*(-(mD32*mQ32*log(pow2(mA))*(deltaxyz(pow2(mA)
+        ,mQ32,mD32)*(-mD32 + mQ32 + mD32*log(mD32) - mD32*log(mQ32)) + (mD32 -
+        mQ32)*pow2(mD32 - mQ32 + pow2(mA)))) - mQ32*phixyz(pow2(mA),mQ32,mD32)*
+        (deltaxyz(pow2(mA),mQ32,mD32)*((2*mD32 - mQ32)*pow2(mA) + pow2(mD32 -
+        mQ32)) + (mD32 - mQ32)*(mD32 - mQ32 + pow2(mA))*((mD32 - mQ32)*mQ32 + (
+        mD32 + 2*mQ32)*pow2(mA) - pow4(mA))) + deltaxyz(pow2(mA),mQ32,mD32)*
+        phixyz(pow2(mA),mQ32,mQ32)*pow2(mA)*pow4(mD3) + mQ32*log(mD32)*(
+        deltaxyz(pow2(mA),mQ32,mD32)*log(mQ32) + 2*(mD32 - mQ32)*(mD32 - mQ32 +
+        pow2(mA)))*pow4(mD3) - mQ32*deltaxyz(pow2(mA),mQ32,mD32)*pow2(log(mQ32)
+        )*pow4(mD3) + mD32*(mD32 - mQ32)*mQ32*log(mQ32)*(-deltaxyz(pow2(mA),
+        mQ32,mD32) - 2*mQ32*pow2(mA) + pow4(mA) - pow4(mD3) + pow4(mQ3))) +
+        deltaxyz(pow2(mA),mQ32,mD32)*(4*(mD32 - mQ32)*mQ32*pow4(mD3) + 2*lMR*(
+        mD32 - mQ32)*mQ32*pow4(mD3) - deltaxyz(pow2(mA),mU32,mQ32)*phixyz(pow2(
+        mA),mU32,mQ32)*pow4(mD3) + mQ32*(log(mD32) - log(mQ32))*log(pow2(mA))*(
+        mQ32 - mU32 + pow2(mA))*pow4(mD3) + mQ32*log(mQ32)*(2*(2 + lMR)*mQ32 +
+        log(mU32)*(-mQ32 - mU32 + pow2(mA)))*pow4(mD3) - mQ32*log(mD32)*(2*(
+        mD32 + (1 + lMR)*mQ32) + log(mU32)*(-mQ32 - mU32 + pow2(mA)))*pow4(mD3)
+        - mQ32*phixyz(pow2(mA),mU32,mD32)*((-2*mD32 + mQ32)*deltaxyz(pow2(mA),
+        mU32,mD32) + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(mA) +
+        pow4(mA) + 2*pow4(mD3) + pow4(mU3))))))/(mQ32*deltaxyz(pow2(mA),mQ32,
+        mD32)*pow2(cbeta)*pow2(mD32 - mQ32)*pow4(mD3)) - (3*Xt*pow2(sbeta)*(-2*
+        (mD32 - mQ32)*Xb*pow4(mD3)*((mD32 - mQ32)*mQ32*deltaxyz(pow2(mA),mQ32,
+        mD32)*phixyz(pow2(mA),mQ32,mD32) + mQ32*(-mD32 + mQ32)*deltaxyz(pow2(
+        mA),mU32,mD32)*phixyz(pow2(mA),mU32,mD32) - mQ32*log(mQ32)*log(mU32)*(
+        mQ32 + mU32 - pow2(mA))*(mD32*mQ32 - pow4(mD3)) - mQ32*((mQ32 - mU32)*
+        log(mD32) + (mD32 - 2*mQ32 + mU32)*log(mQ32) + (-mD32 + mQ32)*log(mU32)
+        )*log(pow2(mA))*(-(mD32*mQ32) + pow4(mD3)) - deltaxyz(pow2(mA),mQ32,
+        mQ32)*phixyz(pow2(mA),mQ32,mQ32)*(-(mD32*mQ32) + pow4(mD3)) + deltaxyz(
+        pow2(mA),mU32,mQ32)*phixyz(pow2(mA),mU32,mQ32)*(-(mD32*mQ32) + pow4(
+        mD3)) - mQ32*log(mD32)*(log(mU32)*(mD32 + mU32 - pow2(mA)) + log(mQ32)*
+        (-mD32 - mQ32 + pow2(mA)))*(-(mD32*mQ32) + pow4(mD3)) + mQ32*(-2*mQ32 +
+        pow2(mA))*pow2(log(mQ32))*(-(mD32*mQ32) + pow4(mD3))) + 2*mQ32*Yb*pow2(
+        mD32 - mQ32)*(-(mD32*mQ32) + pow4(mD3))*((log(mQ32) - log(mU32))*(-log(
+        mD32) + log(pow2(mA)))*pow4(mD3) + phixyz(pow2(mA),mQ32,mD32)*(3*mD32*
+        mQ32 + deltaxyz(pow2(mA),mQ32,mD32) + (3*mD32 + 2*mQ32)*pow2(mA) -
+        pow4(mA) - 2*pow4(mD3) - pow4(mQ3)) + phixyz(pow2(mA),mU32,mD32)*(-3*
+        mD32*mU32 - deltaxyz(pow2(mA),mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) +
+        pow4(mA) + 2*pow4(mD3) + pow4(mU3))) - 2*Yb*pow2(Xb)*(-(mD32*mQ32) +
+        pow4(mD3))*(mQ32*(mQ32 - mU32)*(log(mD32) - log(mQ32))*log(pow2(mA))*
+        pow4(mD3) + deltaxyz(pow2(mA),mQ32,mQ32)*phixyz(pow2(mA),mQ32,mQ32)*
+        pow4(mD3) - deltaxyz(pow2(mA),mU32,mQ32)*phixyz(pow2(mA),mU32,mQ32)*
+        pow4(mD3) - mQ32*log(mQ32)*log(mU32)*(mQ32 + mU32 - pow2(mA))*pow4(mD3)
+        + mQ32*log(mD32)*(log(mU32)*(mQ32 + mU32 - pow2(mA)) + log(mQ32)*(-2*
+        mQ32 + pow2(mA)))*pow4(mD3) + mQ32*(2*mQ32 - pow2(mA))*pow2(log(mQ32))*
+        pow4(mD3) + mQ32*phixyz(pow2(mA),mQ32,mD32)*((-2*mD32 + mQ32)*deltaxyz(
+        pow2(mA),mQ32,mD32) + (mD32 - mQ32)*(-3*mD32*mQ32 - (3*mD32 + 2*mQ32)*
+        pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mQ3))) - mQ32*phixyz(pow2(mA),
+        mU32,mD32)*((-2*mD32 + mQ32)*deltaxyz(pow2(mA),mU32,mD32) + (mD32 -
+        mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(
+        mD3) + pow4(mU3))))))/(mQ32*(mQ32 - mU32)*pow2(cbeta)*pow2(mD32 - mQ32)
+        *pow4(mD3)*(-(mD32*mQ32) + pow4(mD3))) - (3*pow2(sbeta)*pow2(Xt)*(2*
+        mD32*(mD32 - mQ32)*Xb*Yb*deltaxyz(pow2(mA),mQ32,mD32)*(-(mD32*(mD32 -
+        mQ32)*mQ32*(log(mQ32) - log(mU32))*log(pow2(mA))) - mQ32*deltaxyz(pow2(
+        mA),mU32,mD32)*phixyz(pow2(mA),mU32,mD32) + mD32*deltaxyz(pow2(mA),
+        mU32,mQ32)*phixyz(pow2(mA),mU32,mQ32) + mD32*mQ32*log(mD32)*(log(mQ32)
+        - log(mU32))*(mD32 + mU32 - pow2(mA)) + mD32*mQ32*log(mQ32)*log(mU32)*(
+        mQ32 + mU32 - pow2(mA)) - mD32*phixyz(pow2(mA),mQ32,mQ32)*(deltaxyz(
+        pow2(mA),mQ32,mQ32) + (mQ32 - mU32)*pow2(mA)) + mQ32*phixyz(pow2(mA),
+        mQ32,mD32)*(deltaxyz(pow2(mA),mQ32,mD32) + (mQ32 - mU32)*(mD32 - mQ32 +
+        pow2(mA))) - mD32*mQ32*(mQ32 + mU32 - pow2(mA))*pow2(log(mQ32)))*(-(
+        mD32*mQ32) + pow4(mD3)) + deltaxyz(pow2(mA),mQ32,mD32)*pow2(mD32 -
+        mQ32)*(4*mQ32*(mQ32 - mU32) + 4*mQ32*mU32*log(mU32) + 2*lMR*mQ32*(mQ32
+        - mU32 + mU32*log(mU32)) - deltaxyz(pow2(mA),mU32,mQ32)*phixyz(pow2(mA)
+        ,mU32,mQ32) - mQ32*log(mQ32)*(2*(mQ32 + (1 + lMR)*mU32) + log(mU32)*(
+        mQ32 + mU32 - pow2(mA))) + mQ32*(log(mQ32) - log(mU32))*log(pow2(mA))*(
+        -mQ32 + mU32 + pow2(mA)) + phixyz(pow2(mA),mQ32,mQ32)*(deltaxyz(pow2(
+        mA),mQ32,mQ32) + (mQ32 - mU32)*pow2(mA)) + mQ32*(mQ32 + mU32 - pow2(mA)
+        )*pow2(log(mQ32)))*pow4(mD3)*(-(mD32*mQ32) + pow4(mD3)) + mQ32*pow2(
+        mD32 - mQ32)*pow2(Yb)*(-(mD32*mQ32) + pow4(mD3))*(-(mD32*log(pow2(mA))*
+        (mD32*deltaxyz(pow2(mA),mQ32,mD32)*log(mQ32) - mD32*deltaxyz(pow2(mA),
+        mQ32,mD32)*log(mU32) + (mQ32 - mU32)*(-deltaxyz(pow2(mA),mQ32,mD32) +
+        pow2(mD32 - mQ32 + pow2(mA))))) + log(mD32)*(deltaxyz(pow2(mA),mQ32,
+        mD32)*(log(mQ32) - log(mU32)) + 2*(mQ32 - mU32)*(mD32 - mQ32 + pow2(mA)
+        ))*pow4(mD3) + mD32*(mQ32 - mU32)*log(mQ32)*(-deltaxyz(pow2(mA),mQ32,
+        mD32) - 2*mQ32*pow2(mA) + pow4(mA) - pow4(mD3) + pow4(mQ3)) - phixyz(
+        pow2(mA),mQ32,mD32)*(deltaxyz(pow2(mA),mQ32,mD32)*(3*mD32*mQ32 + mQ32*
+        mU32 + deltaxyz(pow2(mA),mQ32,mD32) + (3*mD32 + 3*mQ32 - mU32)*pow2(mA)
+        - pow4(mA) - 2*pow4(mD3) - 2*pow4(mQ3)) - (mQ32 - mU32)*(mD32 - mQ32 +
+        pow2(mA))*(-(mD32*mQ32) - (mD32 + 2*mQ32)*pow2(mA) + pow4(mA) + pow4(
+        mQ3))) - deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mU32,mD32)*(-3*
+        mD32*mU32 - deltaxyz(pow2(mA),mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) +
+        pow4(mA) + 2*pow4(mD3) + pow4(mU3))) - pow2(Xb)*pow2(Yb)*(mD32*(mD32 -
+        mQ32)*mQ32*(mQ32 - mU32)*log(pow2(mA))*(-deltaxyz(pow2(mA),mQ32,mD32) +
+        pow2(mD32 - mQ32 + pow2(mA)))*(-(mD32*mQ32) + pow4(mD3)) + deltaxyz(
+        pow2(mA),mQ32,mD32)*deltaxyz(pow2(mA),mU32,mQ32)*phixyz(pow2(mA),mU32,
+        mQ32)*pow4(mD3)*(-(mD32*mQ32) + pow4(mD3)) - deltaxyz(pow2(mA),mQ32,
+        mD32)*phixyz(pow2(mA),mQ32,mQ32)*(deltaxyz(pow2(mA),mQ32,mQ32) + (mQ32
+        - mU32)*pow2(mA))*pow4(mD3)*(-(mD32*mQ32) + pow4(mD3)) - mQ32*log(mD32)
+        *(2*(mD32 - mQ32)*(mQ32 - mU32)*(mD32 - mQ32 + pow2(mA)) + deltaxyz(
+        pow2(mA),mQ32,mD32)*log(mQ32)*(-mQ32 - mU32 + pow2(mA)) - deltaxyz(
+        pow2(mA),mQ32,mD32)*log(mU32)*(-mQ32 - mU32 + pow2(mA)))*pow4(mD3)*(-(
+        mD32*mQ32) + pow4(mD3)) - mQ32*deltaxyz(pow2(mA),mQ32,mD32)*(mQ32 +
+        mU32 - pow2(mA))*pow2(log(mQ32))*pow4(mD3)*(-(mD32*mQ32) + pow4(mD3)) +
+        mQ32*phixyz(pow2(mA),mQ32,mD32)*(-(mD32*mQ32) + pow4(mD3))*((mD32 -
+        mQ32)*(mQ32 - mU32)*(mD32 - mQ32 + pow2(mA))*((mD32 - mQ32)*mQ32 + (
+        mD32 + 2*mQ32)*pow2(mA) - pow4(mA)) + deltaxyz(pow2(mA),mQ32,mD32)*((2*
+        mD32 - mQ32)*deltaxyz(pow2(mA),mQ32,mD32) - (2*mD32 - 2*mQ32 + mU32)*
+        pow2(mD32 - mQ32) + (-mD32 + mQ32)*pow4(mA) + pow2(mA)*(mD32*(mQ32 - 2*
+        mU32) + mQ32*mU32 + 3*pow4(mD3) - 3*pow4(mQ3)))) - mQ32*log(mQ32)*pow4(
+        mD3)*(-(deltaxyz(pow2(mA),mQ32,mD32)*log(mU32)*(mQ32 + mU32 - pow2(mA))
+        *(-(mD32*mQ32) + pow4(mD3))) + (mQ32 - mU32)*pow2(mD32 - mQ32)*(-
+        deltaxyz(pow2(mA),mQ32,mD32) - 2*mQ32*pow2(mA) + pow4(mA) - pow4(mD3) +
+        pow4(mQ3))) + mQ32*deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mU32,
+        mD32)*(-(mD32*mQ32) + pow4(mD3))*((-2*mD32 + mQ32)*deltaxyz(pow2(mA),
+        mU32,mD32) + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(mA) +
+        pow4(mA) + 2*pow4(mD3) + pow4(mU3))))))/(mQ32*deltaxyz(pow2(mA),mQ32,
+        mD32)*pow2(cbeta)*pow2(mD32 - mQ32)*pow2(mQ32 - mU32)*pow4(mD3)*(-(
+        mD32*mQ32) + pow4(mD3))) + (3*pow2(Xb)*pow2(Xt)*(6*(log(mD32) - log(
+        mQ32))*pow2(mD32 - mQ32)*(2*mQ32*mU32*log(mQ32) - 2*mQ32*mU32*log(mU32)
+        - pow4(mQ3) + pow4(mU3)) + ((mQ32 - mU32)*(2*(mQ32 - mU32)*mU32*log(
+        mU32)*pow2(mD32 - mQ32) + 2*pow2(mD32 - mQ32)*pow2(mQ32 - mU32) + 2*
+        lMR*pow2(mD32 - mQ32)*pow2(mQ32 - mU32) + 6*(-mD32 + mQ32)*(mD32 + mQ32
+        - 2*mU32)*dilog(1 - mD32/mQ32)*(-(mD32*mQ32) + pow4(mQ3)) + 6*(mQ32 -
+        mU32)*(-2*mD32 + mQ32 + mU32)*dilog(1 - mQ32/mU32)*(-(mD32*mQ32) +
+        pow4(mQ3)) + 6*dilog(1 - mD32/mU32)*pow2(mD32 - mU32)*(-(mD32*mQ32) +
+        pow4(mQ3)) + 3*pow2(mD32 - mQ32)*pow2(log(mU32))*(-(mD32*mQ32) + pow4(
+        mQ3)) + pow2(log(mQ32))*(-(mD32*mQ32) + pow4(mQ3))*(-4*mQ32*mU32 +
+        mD32*(-6*mQ32 + 8*mU32) - 3*pow4(mD3) + 5*pow4(mQ3)) - 2*(mD32 - mQ32)*
+        mQ32*log(mD32)*((mQ32 - mU32)*(mD32 + lMR*mQ32 - mU32 - lMR*mU32) +
+        log(mQ32)*(-4*mD32*mU32 + 2*mQ32*mU32 + 3*pow4(mD3) - pow4(mQ3)) - log(
+        mU32)*(-4*mD32*mU32 + 3*pow4(mD3) + pow4(mU3))) + 2*(mD32 - mQ32)*mQ32*
+        log(mQ32)*((1 + lMR)*pow2(mQ32 - mU32) - log(mU32)*(mD32*(6*mQ32 - 4*
+        mU32) - 3*pow4(mQ3) + pow4(mU3)))))/mQ32))/(pow3(mD32 - mQ32)*pow3(mQ32
+        - mU32)) + (6*Xt*Yt*(pow3(mD32 - mQ32)*pow4(mD3)*(phixyz(pow2(mA),mQ32,
+        mQ32)*(-deltaxyz(pow2(mA),mQ32,mQ32) - 5*mQ32*pow2(mA) + pow4(mA)) - (
+        log(mQ32) - log(mU32))*(-log(mQ32) + log(pow2(mA)))*pow4(mQ3) + phixyz(
+        pow2(mA),mU32,mQ32)*(3*mQ32*mU32 + deltaxyz(pow2(mA),mU32,mQ32) + (3*
+        mQ32 + 2*mU32)*pow2(mA) - pow4(mA) - 2*pow4(mQ3) - pow4(mU3))) - Xb*Yb*
+        pow2(mD32 - mQ32)*(phixyz(pow2(mA),mQ32,mQ32)*(-deltaxyz(pow2(mA),mQ32,
+        mQ32) - 5*mQ32*pow2(mA) + pow4(mA))*pow4(mD3) - log(mD32)*(log(mQ32) -
+        log(mU32))*pow4(mD3)*pow4(mQ3) - log(mQ32)*log(mU32)*pow4(mD3)*pow4(
+        mQ3) + pow2(log(mQ32))*pow4(mD3)*pow4(mQ3) - phixyz(pow2(mA),mQ32,mD32)
+        *pow4(mQ3)*(-3*mD32*mQ32 - deltaxyz(pow2(mA),mQ32,mD32) - (3*mD32 + 2*
+        mQ32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mQ3)) + phixyz(pow2(mA),
+        mU32,mD32)*pow4(mQ3)*(-3*mD32*mU32 - deltaxyz(pow2(mA),mU32,mD32) - (3*
+        mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mU3)) - phixyz(
+        pow2(mA),mU32,mQ32)*pow4(mD3)*(-3*mQ32*mU32 - deltaxyz(pow2(mA),mU32,
+        mQ32) - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) + pow4(mU3)
+        )) - mD32*(mD32 - mQ32)*pow2(Xb)*(-(mD32*phixyz(pow2(mA),mQ32,mQ32)*((
+        mD32 - 2*mQ32)*deltaxyz(pow2(mA),mQ32,mQ32) + (-mD32 + mQ32)*pow2(mA)*(
+        -5*mQ32 + pow2(mA)))) + mD32*(mQ32 - mU32)*(log(mD32) - log(mQ32))*log(
+        pow2(mA))*pow4(mQ3) - deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),
+        mQ32,mD32)*pow4(mQ3) + deltaxyz(pow2(mA),mU32,mD32)*phixyz(pow2(mA),
+        mU32,mD32)*pow4(mQ3) - mD32*log(mQ32)*log(mU32)*(mD32 + mU32 - pow2(mA)
+        )*pow4(mQ3) + mD32*log(mD32)*(log(mU32)*(mD32 + mU32 - pow2(mA)) + log(
+        mQ32)*(-mD32 - mQ32 + pow2(mA)))*pow4(mQ3) + mD32*(mD32 + mQ32 - pow2(
+        mA))*pow2(log(mQ32))*pow4(mQ3) - mD32*phixyz(pow2(mA),mU32,mQ32)*(-((
+        mD32 - 2*mQ32)*deltaxyz(pow2(mA),mU32,mQ32)) + (mD32 - mQ32)*(-3*mQ32*
+        mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) + pow4(mU3))
+        )) + Yb*pow3(Xb)*(phixyz(pow2(mA),mQ32,mQ32)*(-((mD32 - 3*mQ32)*
+        deltaxyz(pow2(mA),mQ32,mQ32)) + (mD32 - mQ32)*pow2(mA)*(-5*mQ32 + pow2(
+        mA)))*pow4(mD3) + 2*(mQ32 - mU32)*(log(mD32) - log(mQ32))*log(pow2(mA))
+        *pow4(mD3)*pow4(mQ3) - log(mQ32)*log(mU32)*(mD32 + mQ32 + 2*mU32 - 2*
+        pow2(mA))*pow4(mD3)*pow4(mQ3) + log(mD32)*(log(mU32)*(mD32 + mQ32 + 2*
+        mU32 - 2*pow2(mA)) + log(mQ32)*(-mD32 - 3*mQ32 + 2*pow2(mA)))*pow4(mD3)
+        *pow4(mQ3) + (mD32 + 3*mQ32 - 2*pow2(mA))*pow2(log(mQ32))*pow4(mD3)*
+        pow4(mQ3) + phixyz(pow2(mA),mQ32,mD32)*pow4(mQ3)*((-3*mD32 + mQ32)*
+        deltaxyz(pow2(mA),mQ32,mD32) + (mD32 - mQ32)*(-3*mD32*mQ32 - (3*mD32 +
+        2*mQ32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mQ3))) - phixyz(pow2(
+        mA),mU32,mD32)*pow4(mQ3)*((-3*mD32 + mQ32)*deltaxyz(pow2(mA),mU32,mD32)
+        + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) +
+        2*pow4(mD3) + pow4(mU3))) + phixyz(pow2(mA),mU32,mQ32)*pow4(mD3)*((mD32
+        - 3*mQ32)*deltaxyz(pow2(mA),mU32,mQ32) + (-mD32 + mQ32)*(-3*mQ32*mU32 -
+        (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) + pow4(mU3))))))/((
+        mQ32 - mU32)*pow3(mD32 - mQ32)*pow4(mD3)*pow4(mQ3)) + (48*pow4(Xb))/
+        pow2(mD32 - mQ32) + (24*lMR*pow4(Xb))/pow2(mD32 - mQ32) - (18*dilog(1 -
+        mD32/mQ32)*pow4(Xb))/pow2(mD32 - mQ32) + (6*((3 + 2*lMR)*mD32 + (5 + 2*
+        lMR)*mQ32)*log(mQ32)*pow4(Xb))/pow3(mD32 - mQ32) - (6*log(mD32)*((7 +
+        2*lMR)*mD32 + (1 + 2*lMR)*mQ32 - 2*(mD32 + mQ32)*log(mQ32))*pow4(Xb))/
+        pow3(mD32 - mQ32) - (12*(mD32 + mQ32)*pow2(log(mQ32))*pow4(Xb))/pow3(
+        mD32 - mQ32) - (3*(-((mD32 - mQ32)*(mD32 + 5*mQ32)*mU32*log(mU32)) + (
+        mD32 - mQ32)*(mQ32*(3*mQ32 + 5*mU32 - 16*pow2(Mu)) + mD32*(9*mQ32 +
+        mU32 - 2*pow2(Mu))) + 2*mQ32*dilog(1 - pow2(Mu)/mD32)*(mD32 + 2*mQ32 -
+        3*pow2(Mu))*(mD32 - pow2(Mu)) - 2*mQ32*dilog(1 - pow2(Mu)/mQ32)*(mD32 +
+        2*mQ32 - 3*pow2(Mu))*(mD32 - pow2(Mu)) + mQ32*(mD32 + 2*mQ32 - 3*pow2(
+        Mu))*(mD32 - pow2(Mu))*pow2(log(mD32)) - mQ32*(mD32 + 2*mQ32 - 3*pow2(
+        Mu))*(mD32 - pow2(Mu))*pow2(log(mQ32)) + mQ32*log(mQ32)*(-2*(2*mD32 +
+        mQ32)*mU32*log(mU32) + mQ32*(mQ32 + 2*(1 + lMR)*mU32 - 2*(5 + 2*lMR)*
+        pow2(Mu)) + 2*mD32*((5 + 2*lMR)*mQ32 - 2*(1 + lMR)*(-mU32 + 2*pow2(Mu))
+        ) + (1 + 2*lMR)*pow4(mD3)) + 2*log(pow2(Mu))*pow2(Mu)*(mD32*mQ32 + 3*
+        mQ32*log(mQ32)*pow2(Mu) + pow4(mD3) - 2*pow4(mQ3)) + lMR*(mD32 - mQ32)*
+        (5*mQ32*(mU32 - 2*pow2(Mu)) + mD32*(5*mQ32 + mU32 - 2*pow2(Mu)) + pow4(
+        mQ3)) - 2*mQ32*log(mD32)*(-((2*mD32 + mQ32)*mU32*log(mU32)) + mD32*(3*
+        mQ32 + 2*mU32 - 7*pow2(Mu)) + mQ32*(mU32 - 2*pow2(Mu)) + 3*pow4(mD3) +
+        lMR*(mQ32*(mU32 - 2*pow2(Mu)) + 2*mD32*(mQ32 + mU32 - 2*pow2(Mu)) +
+        pow4(mD3)) + 3*log(pow2(Mu))*pow4(Mu)))*pow4(Xb))/(mQ32*pow2(sbeta)*
+        pow4(mD32 - mQ32)) + (6*Xb*Yb*phixyz(pow2(mA),mQ32,mD32)*(-3*mD32*mQ32
+        - deltaxyz(pow2(mA),mQ32,mD32) - (3*mD32 + 2*mQ32)*pow2(mA) + pow4(mA)
+        + 2*pow4(mD3) + pow4(mQ3)))/(-(mQ32*pow4(mD3)) + pow6(mD3)) - (3*pow2(
+        Xt)*pow4(Xb)*(3*(mD32 - mQ32)*mQ32*(2*(mD32 - mQ32) - (mD32 + mQ32)*
+        log(mD32) + (mD32 + mQ32)*log(mQ32))*(-2*mQ32*mU32*log(mQ32) + 2*mQ32*
+        mU32*log(mU32) + pow4(mQ3) - pow4(mU3)) + (mQ32 - mU32)*((mQ32 - mU32)*
+        mU32*log(mU32)*pow2(mD32 - mQ32) - 6*mQ32*(mQ32 - mU32)*dilog(1 - mD32/
+        mU32)*pow2(mD32 - mU32) + 6*mQ32*(mQ32 - mU32)*dilog(1 - mQ32/mU32)*
+        pow2(mD32 - mU32) + lMR*(mD32 - mQ32)*(mD32 + 5*mQ32)*pow2(mQ32 - mU32)
+        + (mD32 - mQ32)*(mD32 + 11*mQ32)*pow2(mQ32 - mU32) + (mD32 - mQ32)*
+        mQ32*(2*mQ32*(3*mD32 + mQ32) - 4*(mD32 + mQ32)*mU32)*pow2(log(mQ32)) +
+        6*(mQ32 - mU32)*dilog(1 - mD32/mQ32)*pow2(-(mD32*mQ3) + pow3(mQ3)) -
+        mQ32*log(mQ32)*(-2*(mD32 - mU32)*(mQ32*mU32 + mD32*(-3*mQ32 + 2*mU32))*
+        log(mU32) + (mQ32 - mU32)*(2*(4 + lMR)*mQ32*mU32 + mD32*(-2*(5 + 2*lMR)
+        *mQ32 + 4*(1 + lMR)*mU32) + 3*pow4(mD3) - (5 + 2*lMR)*pow4(mQ3))) -
+        mQ32*log(mD32)*(2*(mD32 - mU32)*(mQ32*mU32 + mD32*(-3*mQ32 + 2*mU32))*
+        log(mU32) - 2*(mQ32 - mU32)*(mD32*(-((7 + 2*lMR)*mQ32) + (5 + 2*lMR)*
+        mU32) + mQ32*(mU32 + lMR*(-mQ32 + mU32)) + pow4(mD3)) + log(mQ32)*((6*
+        mQ32 - 4*mU32)*pow4(mD3) - 4*mD32*pow4(mQ3) + 4*mU32*pow4(mQ3) - 2*
+        pow6(mQ3))))))/(mQ32*pow3(mQ32 - mU32)*pow4(mD32 - mQ32)) + (pow2(
+        cbeta)*(pow4(mQ3)*(3*mQ32 + 6*lMR*mQ32 - 6*mQ32*log(mD32)*(2 + 2*lMR -
+        log(mU32)) + 12*mQ32*pow2(lMR) - 6*pow2(mA) - 6*lMR*pow2(mA) + 6*log(
+        pow2(mA))*(mQ32 - 2*lMR*mQ32 + mQ32*log(mD32) - mQ32*log(mU32) + pow2(
+        mA)) + 2*mQ32*pow2(Pi) + 6*mQ32*pow2(log(pow2(mA))) + (6*mQ32*phixyz(
+        pow2(mA),mU32,mD32)*(-3*mD32*mU32 - deltaxyz(pow2(mA),mU32,mD32) - (3*
+        mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mU3)))/pow4(
+        mD3)) + (6*pow2(Xb)*pow4(mQ3)*(deltaxyz(pow2(mA),mU32,mQ32)*phixyz(
+        pow2(mA),mU32,mQ32)*pow4(mD3) + 2*(mD32 - mQ32)*(-2*mQ32 + pow2(mA))*
+        pow4(mD3) + 2*lMR*(mD32 - mQ32)*(-mQ32 + pow2(mA))*pow4(mD3) + mQ32*
+        log(mQ32)*(-2*(2 + lMR)*mQ32 + log(mU32)*(mQ32 + mU32 - pow2(mA)) + 2*(
+        1 + lMR)*pow2(mA))*pow4(mD3) - mQ32*log(mD32)*(-2*(mD32 + (1 + lMR)*
+        mQ32) + log(mU32)*(mQ32 + mU32 - pow2(mA)) + 2*(1 + lMR)*pow2(mA))*
+        pow4(mD3) - log(pow2(mA))*(2*(mD32 - mQ32)*pow2(mA) - mQ32*log(mD32)*(-
+        mQ32 + mU32 + pow2(mA)) + mQ32*log(mQ32)*(-mQ32 + mU32 + pow2(mA)))*
+        pow4(mD3) + mQ32*phixyz(pow2(mA),mU32,mD32)*((-2*mD32 + mQ32)*deltaxyz(
+        pow2(mA),mU32,mD32) + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*
+        pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mU3)))))/(pow2(mD32 - mQ32)*
+        pow4(mD3)) + (12*mQ32*Yt*(Xb*pow2(mD32 - mQ32)*(pow4(mD3)*(-((log(mD32)
+        - log(mQ32))*(2 + 2*lMR - log(mU32) - log(pow2(mA)))*pow4(mQ3)) +
+        phixyz(pow2(mA),mU32,mQ32)*(3*mQ32*mU32 + deltaxyz(pow2(mA),mU32,mQ32)
+        + (3*mQ32 + 2*mU32)*pow2(mA) - pow4(mA) - 2*pow4(mQ3) - pow4(mU3))) +
+        phixyz(pow2(mA),mU32,mD32)*pow4(mQ3)*(-3*mD32*mU32 - deltaxyz(pow2(mA),
+        mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) +
+        pow4(mU3))) - pow3(Xb)*(8*(mD32 - mQ32)*pow4(mD3)*pow4(mQ3) + 4*lMR*(
+        mD32 - mQ32)*pow4(mD3)*pow4(mQ3) + (log(mD32) - log(mQ32))*log(pow2(mA)
+        )*(mD32 + mQ32 - 2*mU32 + 2*pow2(mA))*pow4(mD3)*pow4(mQ3) - log(mD32)*(
+        2*(3 + lMR)*mD32 + 2*(1 + lMR)*mQ32 + log(mU32)*(-mD32 - mQ32 - 2*mU32
+        + 2*pow2(mA)))*pow4(mD3)*pow4(mQ3) + log(mQ32)*(2*(1 + lMR)*mD32 + 2*(3
+        + lMR)*mQ32 + log(mU32)*(-mD32 - mQ32 - 2*mU32 + 2*pow2(mA)))*pow4(mD3)
+        *pow4(mQ3) - phixyz(pow2(mA),mU32,mD32)*pow4(mQ3)*((-3*mD32 + mQ32)*
+        deltaxyz(pow2(mA),mU32,mD32) + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 +
+        2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) + pow4(mU3))) + phixyz(pow2(
+        mA),mU32,mQ32)*pow4(mD3)*((mD32 - 3*mQ32)*deltaxyz(pow2(mA),mU32,mQ32)
+        + (-mD32 + mQ32)*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA)
+        + 2*pow4(mQ3) + pow4(mU3))))))/(pow3(mD32 - mQ32)*pow4(mD3)) - (6*(1 +
+        lMR - log(pow2(mA)))*pow2(mA)*pow4(mQ3)*(4*mD32*mQ32 + pow4(mD3) - 5*
+        pow4(mQ3) - 2*log(mD32)*(2*mD32*mQ32 + pow4(mQ3)) + 2*log(mQ32)*(2*
+        mD32*mQ32 + pow4(mQ3)))*pow4(Xb))/pow4(mD32 - mQ32) + (3*pow2(Yt)*(-2*
+        deltaxyz(pow2(mA),mU32,mQ32)*pow4(mQ3) - 2*lMR*deltaxyz(pow2(mA),mU32,
+        mQ32)*pow4(mQ3) + 2*log(mQ32)*pow4(mQ3)*(-3*mQ32*mU32 - deltaxyz(pow2(
+        mA),mU32,mQ32) - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) +
+        pow4(mU3)) + mQ32*log(mU32)*(deltaxyz(pow2(mA),mU32,mQ32)*(2*mQ32 +
+        mU32 - pow2(mA)) + (-mQ32 - mU32 + pow2(mA))*(-3*mQ32*mU32 - (3*mQ32 +
+        2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) + pow4(mU3))) + mQ32*log(
+        pow2(mA))*(deltaxyz(pow2(mA),mU32,mQ32)*(2*mQ32 - mU32 + pow2(mA)) - (
+        mQ32 - mU32 + pow2(mA))*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) +
+        pow4(mA) + 2*pow4(mQ3) + pow4(mU3))) + phixyz(pow2(mA),mU32,mQ32)*(
+        deltaxyz(pow2(mA),mU32,mQ32)*(6*mQ32*mU32 + 2*deltaxyz(pow2(mA),mU32,
+        mQ32) + 6*(mQ32 + mU32)*pow2(mA) - 3*pow4(mA) - 2*pow4(mQ3) - 3*pow4(
+        mU3)) + (-(mQ32*mU32) - (mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + pow4(mU3)
+        )*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) +
+        pow4(mU3))) + (2*pow2(Xb)*(2*(mD32 - mQ32)*deltaxyz(pow2(mA),mU32,mQ32)
+        *pow4(mQ3) + 2*lMR*(mD32 - mQ32)*deltaxyz(pow2(mA),mU32,mQ32)*pow4(mQ3)
+        + log(mQ32)*pow4(mQ3)*(deltaxyz(pow2(mA),mU32,mQ32)*(2*(mD32 + lMR*
+        mQ32) - mQ32*log(mU32)) - 2*(mD32 - mQ32)*(-3*mQ32*mU32 - (3*mQ32 + 2*
+        mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) + pow4(mU3))) + (mD32 - mQ32)*
+        mQ32*log(mU32)*(deltaxyz(pow2(mA),mU32,mQ32)*(-2*mQ32 - mU32 + pow2(mA)
+        ) + (mQ32 + mU32 - pow2(mA))*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA)
+        + pow4(mA) + 2*pow4(mQ3) + pow4(mU3))) + mQ32*log(pow2(mA))*(deltaxyz(
+        pow2(mA),mU32,mQ32)*log(mD32)*pow4(mQ3) - deltaxyz(pow2(mA),mU32,mQ32)*
+        log(mQ32)*pow4(mQ3) + (mD32 - mQ32)*(deltaxyz(pow2(mA),mU32,mQ32)*(-2*
+        mQ32 + mU32 - pow2(mA)) + (mQ32 - mU32 + pow2(mA))*(-3*mQ32*mU32 - (3*
+        mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mQ3) + pow4(mU3)))) +
+        phixyz(pow2(mA),mU32,mQ32)*((mD32 - mQ32)*((mQ32 - mU32)*mU32 + (mQ32 +
+        2*mU32)*pow2(mA) - pow4(mA))*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA)
+        + pow4(mA) + 2*pow4(mQ3) + pow4(mU3)) + deltaxyz(pow2(mA),mU32,mQ32)*(-
+        6*mD32*mQ32*mU32 + (-2*mD32 + 3*mQ32)*deltaxyz(pow2(mA),mU32,mQ32) + (
+        3*mD32 - 4*mQ32)*pow4(mA) + 2*mD32*pow4(mQ3) + 9*mU32*pow4(mQ3) + pow2(
+        mA)*(8*mQ32*mU32 - 6*mD32*(mQ32 + mU32) + 9*pow4(mQ3)) + 3*mD32*pow4(
+        mU3) - 4*mQ32*pow4(mU3) - 4*pow6(mQ3))) - deltaxyz(pow2(mA),mU32,mQ32)*
+        log(mD32)*(2 + 2*lMR - log(mU32))*pow6(mQ3) + (deltaxyz(pow2(mA),mU32,
+        mQ32)*phixyz(pow2(mA),mU32,mD32)*(-3*mD32*mU32 - deltaxyz(pow2(mA),
+        mU32,mD32) - (3*mD32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(mD3) +
+        pow4(mU3))*pow6(mQ3))/pow4(mD3)))/pow2(mD32 - mQ32) - (pow4(Xb)*(2*lMR*
+        (mD32 - mQ32)*(mD32 + 5*mQ32)*deltaxyz(pow2(mA),mU32,mQ32)*pow4(mD3)*
+        pow4(mQ3) + 2*(mD32 - mQ32)*(mD32 + 11*mQ32)*deltaxyz(pow2(mA),mU32,
+        mQ32)*pow4(mD3)*pow4(mQ3) - mQ32*log(mU32)*pow2(mD32 - mQ32)*pow4(mD3)*
+        (deltaxyz(pow2(mA),mU32,mQ32)*(2*mQ32 + mU32 - pow2(mA)) + (-mQ32 -
+        mU32 + pow2(mA))*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA)
+        + 2*pow4(mQ3) + pow4(mU3))) - 2*log(mQ32)*pow4(mD3)*pow4(mQ3)*(-2*mD32*
+        mQ32*deltaxyz(pow2(mA),mU32,mQ32) - 2*lMR*mQ32*(2*mD32 + mQ32)*
+        deltaxyz(pow2(mA),mU32,mQ32) + mQ32*deltaxyz(pow2(mA),mU32,mQ32)*log(
+        mU32)*(2*mD32 + mQ32 + 3*mU32 - 3*pow2(mA)) - deltaxyz(pow2(mA),mU32,
+        mQ32)*pow4(mD3) - 9*deltaxyz(pow2(mA),mU32,mQ32)*pow4(mQ3) + pow2(mD32
+        - mQ32)*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*pow4(
+        mQ3) + pow4(mU3))) - phixyz(pow2(mA),mU32,mQ32)*pow4(mD3)*(2*pow2(
+        deltaxyz(pow2(mA),mU32,mQ32))*(-4*mD32*mQ32 + pow4(mD3) + 6*pow4(mQ3))
+        + pow2(mD32 - mQ32)*(-(mQ32*mU32) - (mQ32 + 2*mU32)*pow2(mA) + pow4(mA)
+        + pow4(mU3))*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*
+        pow4(mQ3) + pow4(mU3)) - (mD32 - mQ32)*deltaxyz(pow2(mA),mU32,mQ32)*(-
+        6*(mD32 - 3*mQ32)*mQ32*mU32 + (3*mD32 - 7*mQ32)*pow4(mA) + 2*(mD32 - 5*
+        mQ32)*pow4(mQ3) + 2*pow2(mA)*(7*mQ32*mU32 - 3*mD32*(mQ32 + mU32) + 9*
+        pow4(mQ3)) + (3*mD32 - 7*mQ32)*pow4(mU3))) + mQ32*log(pow2(mA))*pow4(
+        mD3)*(2*deltaxyz(pow2(mA),mU32,mQ32)*log(mD32)*(2*mD32 + mQ32 - 3*mU32
+        + 3*pow2(mA))*pow4(mQ3) - 2*deltaxyz(pow2(mA),mU32,mQ32)*log(mQ32)*(2*
+        mD32 + mQ32 - 3*mU32 + 3*pow2(mA))*pow4(mQ3) - pow2(mD32 - mQ32)*(
+        deltaxyz(pow2(mA),mU32,mQ32)*(2*mQ32 - mU32 + pow2(mA)) - (mQ32 - mU32
+        + pow2(mA))*(-3*mQ32*mU32 - (3*mQ32 + 2*mU32)*pow2(mA) + pow4(mA) + 2*
+        pow4(mQ3) + pow4(mU3)))) - 2*deltaxyz(pow2(mA),mU32,mQ32)*log(mD32)*(2*
+        (5 + 2*lMR)*mD32 + 2*(1 + lMR)*mQ32 + log(mU32)*(-2*mD32 - mQ32 - 3*
+        mU32 + 3*pow2(mA)))*pow4(mD3)*pow6(mQ3) - 2*deltaxyz(pow2(mA),mU32,
+        mQ32)*phixyz(pow2(mA),mU32,mD32)*((-4*mD32 + mQ32)*deltaxyz(pow2(mA),
+        mU32,mD32) + (mD32 - mQ32)*(-3*mD32*mU32 - (3*mD32 + 2*mU32)*pow2(mA) +
+        pow4(mA) + 2*pow4(mD3) + pow4(mU3)))*pow6(mQ3)))/pow4(-(mD3*mQ32) +
+        pow3(mD3))))/deltaxyz(pow2(mA),mU32,mQ32)))/(2.*pow2(sbeta)*pow6(mQ3)));
+}
+
+double himalaya::ThresholdCalculator::getDeltaLambdaYt4Yb2(int omitLogs){
+   using std::log;
+   using std::sqrt;
+   using gm2calc::dilog;
+   
+   const double MR2 = pow2(p.scale);
+   const double lMR = omitLogs*log(MR2);
+   const double mQ32 = p.mq2(2,2);
+   const double mD32 = p.md2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double mQ3 = sqrt(mQ32);
+   const double mU3 = sqrt(mU32);
+   const double mD3 = sqrt(mD32);
+   const double mA = p.MA;
+   const double beta = atan(p.vu/p.vd);
+   const double sbeta = sin(beta);
+   const double cbeta = cos(beta);
+   const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
+   const double Yt = p.Au(2,2) + p.mu*p.vu/p.vd;
+   const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
+   const double Yb = p.Ad(2,2) + p.mu*p.vd/p.vu;
+   const double Mu = p.mu;
+   
+   return 2*(3*Xb*Yt*((2*log(mD32)*log(mU32))/(mD32 - mQ32) + (2*log(mQ32)*log(
+        mU32))/(-mD32 + mQ32) + ((2*log(mD32))/(-mD32 + mQ32) + (2*log(mQ32))/(
+        mD32 - mQ32))*log(pow2(mA)) - (2*phixyz(pow2(mA),mU32,mD32)*(mD32 -
+        mU32 + pow2(mA)))/(mD32*(mD32 - mQ32)) + (2*phixyz(pow2(mA),mU32,mQ32)*
+        (mQ32 - mU32 + pow2(mA)))/((mD32 - mQ32)*mQ32)) + 3*Xb*Yb*((2*log(mD32)
+        *log(mQ32))/(mD32 - mQ32) + ((2*log(mD32))/(-mD32 + mQ32) + (2*log(
+        mQ32))/(mD32 - mQ32))*log(pow2(mA)) + (2*phixyz(pow2(mA),mQ32,mQ32)*
+        pow2(mA))/((mD32 - mQ32)*mQ32) - (2*phixyz(pow2(mA),mQ32,mD32)*(mD32 -
+        mQ32 + pow2(mA)))/(mD32*(mD32 - mQ32)) + (2*pow2(log(mQ32)))/(-mD32 +
+        mQ32)) + 3*pow2(Xb)*((mD32 - 5*mQ32)/(mQ32*(-mD32 + mQ32)) + (lMR*(mD32
+        - 3*mQ32))/(mQ32*(-mD32 + mQ32)) + (6*dilog(1 - mD32/mQ32))/(-mD32 +
+        mQ32) + log(mQ32)*((2*lMR*mD32)/pow2(mD32 - mQ32) + (mD32 + 3*mQ32)/
+        pow2(mD32 - mQ32)) + log(mD32)*((-2*lMR*mD32)/pow2(mD32 - mQ32) + (
+        mD32*(mD32 - 5*mQ32))/(mQ32*pow2(mD32 - mQ32)) + (2*mD32*log(mQ32))/
+        pow2(mD32 - mQ32)) - (2*mD32*pow2(log(mQ32)))/pow2(mD32 - mQ32)) + 3*(-
+        1 - 2*lMR + (2 + 2*lMR)*log(mQ32) + 2*log(mD32)*log(mU32) + (-2*log(
+        mD32) - 4*log(mQ32) - 2*log(mU32))*log(pow2(mA)) - pow2(lMR) - (2*
+        phixyz(pow2(mA),mQ32,mQ32)*pow2(mA))/mQ32 - (2*phixyz(pow2(mA),mU32,
+        mD32)*(mD32 - mU32 + pow2(mA)))/mD32 + (4*pow2(Pi))/3. + pow2(log(mQ32)
+        ) + 4*pow2(log(pow2(mA)))) + (3*Yb*(-16/pow2(mQ32 - mU32) + log(mQ32)*(
+        (4*lMR*(mQ32 + mU32))/pow3(mQ32 - mU32) + (4*(3*mQ32 + mU32))/pow3(mQ32
+        - mU32)) + lMR*(-8/pow2(mQ32 - mU32) - (4*(mQ32 + mU32)*log(mU32))/
+        pow3(mQ32 - mU32)) + log(mD32)*((-2*log(mQ32)*(2*mD32 + mQ32 + mU32 -
+        2*pow2(mA)))/pow3(mQ32 - mU32) + (2*log(mU32)*(2*mD32 + mQ32 + mU32 -
+        2*pow2(mA)))/pow3(mQ32 - mU32)) + log(pow2(mA))*((-2*log(mQ32)*(-2*mD32
+        + mQ32 + mU32 + 2*pow2(mA)))/pow3(mQ32 - mU32) + (2*log(mU32)*(-2*mD32
+        + mQ32 + mU32 + 2*pow2(mA)))/pow3(mQ32 - mU32)) - (4*(mQ32 + 3*mU32)*
+        log(mU32))/pow3(mQ32 - mU32) - (2*phixyz(pow2(mA),mQ32,mD32)*(2*
+        deltaxyz(pow2(mA),mQ32,mD32) + (mQ32 - mU32)*(mD32 - mQ32 + pow2(mA))))
+        /(mD32*pow3(mQ32 - mU32)) + (phixyz(pow2(mA),mU32,mD32)*(4*deltaxyz(
+        pow2(mA),mU32,mD32) + 2*(-mQ32 + mU32)*(mD32 - mU32 + pow2(mA))))/(
+        mD32*pow3(mQ32 - mU32))) + Yt*(3*(-16/pow2(mQ32 - mU32) + lMR*(-8/pow2(
+        mQ32 - mU32) - (4*(mQ32 + mU32)*log(mU32))/pow3(mQ32 - mU32)) + log(
+        mQ32)*((4*lMR*(mQ32 + mU32))/pow3(mQ32 - mU32) + (4*(3*mQ32 + mU32))/
+        pow3(mQ32 - mU32) + (2*log(mU32)*(3*mQ32 + mU32 - 2*pow2(mA)))/pow3(
+        mQ32 - mU32)) + log(pow2(mA))*((2*log(mQ32)*(mQ32 - mU32 - 2*pow2(mA)))
+        /pow3(mQ32 - mU32) + (2*log(mU32)*(-mQ32 + mU32 + 2*pow2(mA)))/pow3(
+        mQ32 - mU32)) - (4*(mQ32 + 3*mU32)*log(mU32))/pow3(mQ32 - mU32) - (2*
+        phixyz(pow2(mA),mQ32,mQ32)*(2*deltaxyz(pow2(mA),mQ32,mQ32) + (mQ32 -
+        mU32)*pow2(mA)))/(mQ32*pow3(mQ32 - mU32)) + (phixyz(pow2(mA),mU32,mQ32)
+        *(4*deltaxyz(pow2(mA),mU32,mQ32) - 2*(mQ32 - mU32)*(mQ32 - mU32 + pow2(
+        mA))))/(mQ32*pow3(mQ32 - mU32)) - (2*(3*mQ32 + mU32 - 2*pow2(mA))*pow2(
+        log(mQ32)))/pow3(mQ32 - mU32)) + 3*Xb*Yb*(log(mD32)*((-2*log(mQ32)*(2*
+        mD32 + mQ32 + mU32 - 2*pow2(mA)))/((mD32 - mQ32)*pow3(mQ32 - mU32)) + (
+        2*log(mU32)*(2*mD32 + mQ32 + mU32 - 2*pow2(mA)))/((mD32 - mQ32)*pow3(
+        mQ32 - mU32))) - (2*log(mQ32)*log(mU32)*(3*mQ32 + mU32 - 2*pow2(mA)))/(
+        (mD32 - mQ32)*pow3(mQ32 - mU32)) + (2*phixyz(pow2(mA),mQ32,mQ32)*(2*
+        deltaxyz(pow2(mA),mQ32,mQ32) + (mQ32 - mU32)*pow2(mA)))/((mD32 - mQ32)*
+        mQ32*pow3(mQ32 - mU32)) - (2*phixyz(pow2(mA),mQ32,mD32)*(2*deltaxyz(
+        pow2(mA),mQ32,mD32) + (mQ32 - mU32)*(mD32 - mQ32 + pow2(mA))))/(mD32*(
+        mD32 - mQ32)*pow3(mQ32 - mU32)) + (phixyz(pow2(mA),mU32,mD32)*(4*
+        deltaxyz(pow2(mA),mU32,mD32) + 2*(-mQ32 + mU32)*(mD32 - mU32 + pow2(mA)
+        )))/(mD32*(mD32 - mQ32)*pow3(mQ32 - mU32)) + (2*phixyz(pow2(mA),mU32,
+        mQ32)*(-2*deltaxyz(pow2(mA),mU32,mQ32) + (mQ32 - mU32)*(mQ32 - mU32 +
+        pow2(mA))))/((mD32 - mQ32)*mQ32*pow3(mQ32 - mU32)) + (2*(3*mQ32 + mU32
+        - 2*pow2(mA))*pow2(log(mQ32)))/((mD32 - mQ32)*pow3(mQ32 - mU32)) + log(
+        pow2(mA))*((4*log(mQ32))/pow3(mQ32 - mU32) + (4*log(mU32))/pow3(-mQ32 +
+        mU32)))))*pow3(Xt) + pow2(Xt)*(3*Xb*Yb*(log(pow2(mA))*((2*log(mQ32))/
+        pow2(mQ32 - mU32) - (2*log(mU32))/pow2(mQ32 - mU32)) + log(mD32)*((-2*
+        log(mQ32)*(mD32 + mU32 - pow2(mA)))/((mD32 - mQ32)*pow2(mQ32 - mU32)) +
+        (2*log(mU32)*(mD32 + mU32 - pow2(mA)))/((mD32 - mQ32)*pow2(mQ32 - mU32)
+        )) + (2*deltaxyz(pow2(mA),mU32,mD32)*phixyz(pow2(mA),mU32,mD32))/(mD32*
+        (mD32 - mQ32)*pow2(mQ32 - mU32)) - (2*deltaxyz(pow2(mA),mU32,mQ32)*
+        phixyz(pow2(mA),mU32,mQ32))/((mD32 - mQ32)*mQ32*pow2(mQ32 - mU32)) - (
+        2*log(mQ32)*log(mU32)*(mQ32 + mU32 - pow2(mA)))/((mD32 - mQ32)*pow2(
+        mQ32 - mU32)) + (2*phixyz(pow2(mA),mQ32,mQ32)*(deltaxyz(pow2(mA),mQ32,
+        mQ32) + (mQ32 - mU32)*pow2(mA)))/((mD32 - mQ32)*mQ32*pow2(mQ32 - mU32))
+        - (2*phixyz(pow2(mA),mQ32,mD32)*(deltaxyz(pow2(mA),mQ32,mD32) + (mQ32 -
+        mU32)*(mD32 - mQ32 + pow2(mA))))/(mD32*(mD32 - mQ32)*pow2(mQ32 - mU32))
+        + (2*(mQ32 + mU32 - pow2(mA))*pow2(log(mQ32)))/((mD32 - mQ32)*pow2(mQ32
+        - mU32))) + 3*Xb*Yt*(log(pow2(mA))*((-2*log(mQ32))/pow2(mQ32 - mU32) +
+        (2*log(mU32))/pow2(mQ32 - mU32)) + log(mD32)*((2*log(mQ32)*(mD32 + mQ32
+        - pow2(mA)))/((mD32 - mQ32)*pow2(mQ32 - mU32)) + (2*log(mU32)*(-mD32 -
+        mQ32 + pow2(mA)))/((mD32 - mQ32)*pow2(mQ32 - mU32))) + (2*deltaxyz(
+        pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32))/(mD32*(mD32 - mQ32)*
+        pow2(mQ32 - mU32)) - (2*deltaxyz(pow2(mA),mQ32,mQ32)*phixyz(pow2(mA),
+        mQ32,mQ32))/((mD32 - mQ32)*mQ32*pow2(mQ32 - mU32)) + (2*log(mQ32)*log(
+        mU32)*(-2*mQ32 + pow2(mA)))/((-mD32 + mQ32)*pow2(mQ32 - mU32)) + (2*
+        phixyz(pow2(mA),mU32,mD32)*(-deltaxyz(pow2(mA),mU32,mD32) + (mQ32 -
+        mU32)*(mD32 - mU32 + pow2(mA))))/(mD32*(mD32 - mQ32)*pow2(mQ32 - mU32))
+        + (phixyz(pow2(mA),mU32,mQ32)*(2*deltaxyz(pow2(mA),mU32,mQ32) - 2*(mQ32
+        - mU32)*(mQ32 - mU32 + pow2(mA))))/((mD32 - mQ32)*mQ32*pow2(mQ32 -
+        mU32)) + (2*(-2*mQ32 + pow2(mA))*pow2(log(mQ32)))/((mD32 - mQ32)*pow2(
+        mQ32 - mU32))) + 3*(8/(mQ32 - mU32) + (12*dilog(1 - mQ32/mU32))/(mQ32 -
+        mU32) + log(pow2(mA))*((-2*(mD32 + 2*mQ32 - 3*mU32)*log(mQ32))/pow2(
+        mQ32 - mU32) + (2*(mD32 + 2*mQ32 - 3*mU32)*log(mU32))/pow2(mQ32 - mU32)
+        ) + lMR*(4/(mQ32 - mU32) + ((-8*mQ32 + 12*mU32)*log(mU32))/pow2(mQ32 -
+        mU32)) + log(mD32)*((2*log(mQ32)*(mD32 + mQ32 - pow2(mA)))/pow2(mQ32 -
+        mU32) + (2*log(mU32)*(-mD32 - mQ32 + pow2(mA)))/pow2(mQ32 - mU32)) +
+        log(mQ32)*((2*(mQ32 - 5*mU32))/pow2(mQ32 - mU32) + (4*lMR*(2*mQ32 - 3*
+        mU32))/pow2(mQ32 - mU32) - (2*log(mU32)*(3*mQ32 - 3*mU32 + pow2(mA)))/
+        pow2(mQ32 - mU32)) + ((-6*mQ32 + 14*mU32)*log(mU32))/pow2(mQ32 - mU32)
+        + (2*deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32))/(mD32*
+        pow2(mQ32 - mU32)) + (2*deltaxyz(pow2(mA),mU32,mQ32)*phixyz(pow2(mA),
+        mU32,mQ32))/(mQ32*pow2(mQ32 - mU32)) - (2*phixyz(pow2(mA),mQ32,mQ32)*(
+        deltaxyz(pow2(mA),mQ32,mQ32) + (mQ32 - mU32)*pow2(mA)))/(mQ32*pow2(mQ32
+        - mU32)) + (2*phixyz(pow2(mA),mU32,mD32)*(-deltaxyz(pow2(mA),mU32,mD32)
+        + (mQ32 - mU32)*(mD32 - mU32 + pow2(mA))))/(mD32*pow2(mQ32 - mU32)) + (
+        2*pow2(mA)*pow2(log(mQ32)))/pow2(mQ32 - mU32) + (6*pow2(log(mU32)))/(
+        mQ32 - mU32)) + 3*pow2(Xb)*((6*(-2*mD32 + mQ32 + mU32)*dilog(1 - mQ32/
+        mU32))/((mQ32 - mU32)*pow2(mD32 - mQ32)) + log(mD32)*((2*mD32)/((mD32 -
+        mQ32)*mQ32*(mQ32 - mU32)) + (4*mD32*(mD32 - mU32)*log(mQ32))/(pow2(mD32
+        - mQ32)*pow2(mQ32 - mU32)) + (4*mD32*(-mD32 + mU32)*log(mU32))/(pow2(
+        mD32 - mQ32)*pow2(mQ32 - mU32))) + (6*(mD32 + mQ32 - 2*mU32)*dilog(1 -
+        mD32/mQ32))/((-mD32 + mQ32)*pow2(mQ32 - mU32)) - (2*(mD32 - mU32)*log(
+        mU32))/((mD32 - mQ32)*pow2(mQ32 - mU32)) + (6*dilog(1 - mD32/mU32)*
+        pow2(mD32 - mU32))/(pow2(mD32 - mQ32)*pow2(mQ32 - mU32)) + (3*pow2(log(
+        mU32)))/pow2(mQ32 - mU32) + log(mQ32)*(2/pow2(mQ32 - mU32) + (2*lMR)/
+        pow2(mQ32 - mU32) + (log(mU32)*(8*mD32*mQ32 - 4*mD32*mU32 - 4*pow4(mQ3)
+        ))/(pow2(mD32 - mQ32)*pow2(mQ32 - mU32))) - 2/(-(mQ32*mU32) + pow4(mQ3)
+        ) + (pow2(log(mQ32))*(-2*mD32*mQ32 + 4*mD32*mU32 - 3*pow4(mD3) + pow4(
+        mQ3)))/(pow2(mD32 - mQ32)*pow2(mQ32 - mU32)) + lMR*((-2*log(mU32))/
+        pow2(mQ32 - mU32) - 2/(-(mQ32*mU32) + pow4(mQ3))))) + Xt*(3*Yb*((4/(-
+        mQ32 + mU32) + (4*lMR)/(-mQ32 + mU32))*log(mQ32) + (4*log(mU32))/(mQ32
+        - mU32) + (4*lMR*log(mU32))/(mQ32 - mU32) + log(mD32)*((2*log(mQ32))/(
+        mQ32 - mU32) + (2*log(mU32))/(-mQ32 + mU32)) + ((2*log(mQ32))/(mQ32 -
+        mU32) + (2*log(mU32))/(-mQ32 + mU32))*log(pow2(mA)) + (2*phixyz(pow2(
+        mA),mQ32,mD32)*(mD32 - mQ32 + pow2(mA)))/(mD32*(-mQ32 + mU32)) + (2*
+        phixyz(pow2(mA),mU32,mD32)*(mD32 - mU32 + pow2(mA)))/(mD32*(mQ32 -
+        mU32))) + 3*Xb*(((2*log(mD32))/(-mD32 + mQ32) + 2*(1/(mD32 - mQ32) + 1/
+        (-mQ32 + mU32))*log(mQ32) + (2*log(mU32))/(mQ32 - mU32))*log(pow2(mA))
+        - (2*deltaxyz(pow2(mA),mQ32,mQ32)*phixyz(pow2(mA),mQ32,mQ32))/((mD32 -
+        mQ32)*mQ32*(mQ32 - mU32)) + (2*deltaxyz(pow2(mA),mU32,mQ32)*phixyz(
+        pow2(mA),mU32,mQ32))/((mD32 - mQ32)*mQ32*(mQ32 - mU32)) + log(mD32)*((
+        2*log(mQ32)*(mD32 + mQ32 - pow2(mA)))/((mD32 - mQ32)*(mQ32 - mU32)) - (
+        2*log(mU32)*(mD32 + mU32 - pow2(mA)))/((mD32 - mQ32)*(mQ32 - mU32))) +
+        (2*log(mQ32)*log(mU32)*(mQ32 + mU32 - pow2(mA)))/((mD32 - mQ32)*(mQ32 -
+        mU32)) + (2*(-2*mQ32 + pow2(mA))*pow2(log(mQ32)))/((mD32 - mQ32)*(mQ32
+        - mU32)) + (2*deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32))/
+        ((mQ32 - mU32)*(-(mD32*mQ32) + pow4(mD3))) - (2*deltaxyz(pow2(mA),mU32,
+        mD32)*phixyz(pow2(mA),mU32,mD32))/((mQ32 - mU32)*(-(mD32*mQ32) + pow4(
+        mD3)))) + Yt*(3*Xb*Yb*((2*log(mQ32)*log(mU32))/((mD32 - mQ32)*(mQ32 -
+        mU32)) + log(mD32)*((2*log(mQ32))/((mD32 - mQ32)*(mQ32 - mU32)) + (2*
+        log(mU32))/((mD32 - mQ32)*(-mQ32 + mU32))) + (2*phixyz(pow2(mA),mQ32,
+        mQ32)*pow2(mA))/((mD32 - mQ32)*mQ32*(mQ32 - mU32)) + (2*phixyz(pow2(mA)
+        ,mU32,mD32)*(mD32 - mU32 + pow2(mA)))/(mD32*(mD32 - mQ32)*(mQ32 - mU32)
+        ) + (2*phixyz(pow2(mA),mU32,mQ32)*(mQ32 - mU32 + pow2(mA)))/(mQ32*(-
+        mD32 + mQ32)*(mQ32 - mU32)) + (2*pow2(log(mQ32)))/((mD32 - mQ32)*(-mQ32
+        + mU32)) - (2*phixyz(pow2(mA),mQ32,mD32)*(mD32 - mQ32 + pow2(mA)))/((
+        mQ32 - mU32)*(-(mD32*mQ32) + pow4(mD3)))) + 3*((4*log(mU32))/(mQ32 -
+        mU32) + (4*lMR*log(mU32))/(mQ32 - mU32) + log(mQ32)*(4/(-mQ32 + mU32) +
+        (4*lMR)/(-mQ32 + mU32) + (2*log(mU32))/(-mQ32 + mU32)) + ((2*log(mQ32))
+        /(mQ32 - mU32) + (2*log(mU32))/(-mQ32 + mU32))*log(pow2(mA)) + (2*
+        phixyz(pow2(mA),mU32,mQ32)*(mQ32 - mU32 + pow2(mA)))/(mQ32*(mQ32 -
+        mU32)) + (2*pow2(log(mQ32)))/(mQ32 - mU32) - (2*phixyz(pow2(mA),mQ32,
+        mQ32)*pow2(mA))/(-(mQ32*mU32) + pow4(mQ3))))) + (3*(-4*dilog(1 - pow2(
+        Mu)/mQ32) - 4*dilog(1 - pow2(Mu)/mU32) + 2*lMR*log(mU32) - 2*pow2(lMR)
+        + 4*log(pow2(Mu))*(1/(mQ32 - pow2(Mu)) + 1/(mU32 - pow2(Mu)))*pow2(Mu)
+        + (4*log(mU32)*pow2(Mu))/(-mU32 + pow2(Mu)) + log(mQ32)*(2*lMR + 2*log(
+        mU32) + (4*pow2(Mu))/(-mQ32 + pow2(Mu))) - 2*pow2(log(mQ32)) - 2*pow2(
+        log(mU32))) + 3*pow2(Xb)*(4/(-mD32 + mQ32) + (2*lMR)/(-mD32 + mQ32) + (
+        2*log(mU32))/(-mD32 + mQ32) + log(mD32)*((4*mD32)/pow2(mD32 - mQ32) + (
+        2*lMR*mD32)/pow2(mD32 - mQ32) + (2*mD32*log(mU32))/pow2(mD32 - mQ32)) -
+        (4*mD32*dilog(1 - pow2(Mu)/mD32))/pow2(mD32 - mQ32) + (4*mD32*dilog(1 -
+        pow2(Mu)/mQ32))/pow2(mD32 - mQ32) + (4*log(pow2(Mu))*pow2(Mu))/((mD32 -
+        mQ32)*(-mQ32 + pow2(Mu))) - (2*mD32*pow2(log(mD32)))/pow2(mD32 - mQ32)
+        + (2*mD32*pow2(log(mQ32)))/pow2(mD32 - mQ32) + log(mQ32)*((-2*lMR*mD32)
+        /pow2(mD32 - mQ32) - (2*mD32*log(mU32))/pow2(mD32 - mQ32) + (4*(mD32*
+        pow2(Mu) - pow4(mQ3)))/(pow2(mD32 - mQ32)*(mQ32 - pow2(Mu))))) + pow2(
+        Xt)*(3*pow2(Xb)*(2/((mD32 - mQ32)*(mQ32 - mU32)) + log(mD32)*((2*mD32)/
+        ((-mQ32 + mU32)*pow2(mD32 - mQ32)) + (2*mD32*mQ32*log(mQ32))/(pow2(mD32
+        - mQ32)*pow2(mQ32 - mU32)) - (2*mD32*mQ32*log(mU32))/(pow2(mD32 - mQ32)
+        *pow2(mQ32 - mU32))) + (2*mQ32*log(mU32))/((mD32 - mQ32)*pow2(mQ32 -
+        mU32)) - (2*mD32*mQ32*pow2(log(mQ32)))/(pow2(mD32 - mQ32)*pow2(mQ32 -
+        mU32)) + log(mQ32)*((2*mD32*mQ32*log(mU32))/(pow2(mD32 - mQ32)*pow2(
+        mQ32 - mU32)) + (2*(-(mD32*mU32) + pow4(mQ3)))/(pow2(mD32 - mQ32)*pow2(
+        mQ32 - mU32)))) + 3*(4/(-mQ32 + mU32) + (4*log(pow2(Mu))*pow2(Mu))/((
+        mQ32 - mU32)*(-mU32 + pow2(Mu))) + lMR*(2/(-mQ32 + mU32) - (2*mQ32*log(
+        mU32))/pow2(mQ32 - mU32)) + log(mQ32)*((2*lMR*mQ32)/pow2(mQ32 - mU32) +
+        (2*(mQ32 + mU32))/pow2(mQ32 - mU32) - (2*mQ32*log(mU32))/pow2(mQ32 -
+        mU32)) - (4*mQ32*dilog(1 - pow2(Mu)/mQ32))/pow2(mQ32 - mU32) + (4*mQ32*
+        dilog(1 - pow2(Mu)/mU32))/pow2(mQ32 - mU32) + (2*mQ32*pow2(log(mU32)))/
+        pow2(mQ32 - mU32) + (log(mU32)*(-4*mQ32*pow2(Mu) + 4*pow4(mU3)))/((-
+        mU32 + pow2(Mu))*pow2(mQ32 - mU32)))) + pow2(cbeta)*(3*Xb*Yt*((2*log(
+        mD32)*log(mU32))/(mD32 - mQ32) + (2*log(mQ32)*log(mU32))/(-mD32 + mQ32)
+        + ((2*log(mD32))/(-mD32 + mQ32) + (2*log(mQ32))/(mD32 - mQ32))*log(
+        pow2(mA)) - (2*phixyz(pow2(mA),mU32,mD32)*(mD32 - mU32 + pow2(mA)))/(
+        mD32*(mD32 - mQ32)) + (2*phixyz(pow2(mA),mU32,mQ32)*(mQ32 - mU32 +
+        pow2(mA)))/((mD32 - mQ32)*mQ32)) + 3*pow2(Xb)*(4/(mD32 - mQ32) + (2*
+        lMR)/(mD32 - mQ32) + log(mQ32)*((2*lMR*mD32)/pow2(mD32 - mQ32) + (2*(
+        mD32 + mQ32))/pow2(mD32 - mQ32)) + log(mD32)*((-4*mD32)/pow2(mD32 -
+        mQ32) - (2*lMR*mD32)/pow2(mD32 - mQ32) + (log(mQ32)*(mD32 + mQ32 -
+        pow2(mA)))/pow2(mD32 - mQ32)) + log(pow2(mA))*((log(mD32)*(mD32 - mQ32
+        + pow2(mA)))/pow2(mD32 - mQ32) - (log(mQ32)*(mD32 - mQ32 + pow2(mA)))/
+        pow2(mD32 - mQ32)) + (deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),
+        mQ32,mD32))/(mD32*pow2(mD32 - mQ32)) - ((mD32 + mQ32 - pow2(mA))*pow2(
+        log(mQ32)))/pow2(mD32 - mQ32) + (phixyz(pow2(mA),mQ32,mQ32)*((mD32 - 2*
+        mQ32)*deltaxyz(pow2(mA),mQ32,mQ32) + (-mD32 + mQ32)*pow2(mA)*(-5*mQ32 +
+        pow2(mA))))/(pow2(mD32 - mQ32)*pow4(mQ3))) + 3*((-2 - 2*lMR)*log(mQ32)
+        - 2*log(mU32) - 2*lMR*log(mU32) + log(mD32)*log(mU32) + (4 - log(mD32)
+        + log(mU32))*log(pow2(mA)) + 2*pow2(lMR) - (phixyz(pow2(mA),mU32,mD32)*
+        (mD32 - mU32 + pow2(mA)))/mD32 + pow2(log(mQ32)) + (phixyz(pow2(mA),
+        mQ32,mQ32)*(-deltaxyz(pow2(mA),mQ32,mQ32) - 5*mQ32*pow2(mA) + pow4(mA))
+        )/pow4(mQ3)) + pow2(Yt)*(3*((-2*log(mQ32)*(mQ32 - mU32 + pow2(mA)))/
+        deltaxyz(pow2(mA),mU32,mQ32) + (log(pow2(mA))*(-deltaxyz(pow2(mA),mU32,
+        mQ32) + pow2(mQ32 - mU32 + pow2(mA))))/(mQ32*deltaxyz(pow2(mA),mU32,
+        mQ32)) + (phixyz(pow2(mA),mU32,mQ32)*(-mU32 + pow2(mA) + ((mQ32 - mU32
+        + pow2(mA))*((mQ32 - mU32)*mU32 + (mQ32 + 2*mU32)*pow2(mA) - pow4(mA)))
+        /deltaxyz(pow2(mA),mU32,mQ32)))/pow4(mQ3) + (log(mU32)*(deltaxyz(pow2(
+        mA),mU32,mQ32) + 2*mU32*pow2(mA) - pow4(mA) + pow4(mQ3) - pow4(mU3)))/(
+        mQ32*deltaxyz(pow2(mA),mU32,mQ32))) + 3*pow2(Xb)*(log(mQ32)*((2*(mQ32 -
+        mU32 + pow2(mA)))/((mD32 - mQ32)*deltaxyz(pow2(mA),mU32,mQ32)) - log(
+        mU32)/pow2(mD32 - mQ32)) + (log(mD32)*log(mU32))/pow2(mD32 - mQ32) - (
+        phixyz(pow2(mA),mU32,mD32)*(mD32 - mU32 + pow2(mA)))/(mD32*pow2(mD32 -
+        mQ32)) + log(pow2(mA))*(-(log(mD32)/pow2(mD32 - mQ32)) + log(mQ32)/
+        pow2(mD32 - mQ32) + (deltaxyz(pow2(mA),mU32,mQ32) - pow2(mQ32 - mU32 +
+        pow2(mA)))/((mD32 - mQ32)*mQ32*deltaxyz(pow2(mA),mU32,mQ32))) + (
+        phixyz(pow2(mA),mU32,mQ32)*((mD32 - mQ32)*(mQ32 - mU32 + pow2(mA))*(
+        mU32*(-mQ32 + mU32) - (mQ32 + 2*mU32)*pow2(mA) + pow4(mA)) + deltaxyz(
+        pow2(mA),mU32,mQ32)*(mD32*mU32 - 2*mQ32*mU32 - mD32*pow2(mA) + 2*mQ32*
+        pow2(mA) + pow4(mQ3))))/(deltaxyz(pow2(mA),mU32,mQ32)*pow2(mD32 - mQ32)
+        *pow4(mQ3)) + (log(mU32)*(deltaxyz(pow2(mA),mU32,mQ32) + 2*mU32*pow2(
+        mA) - pow4(mA) + pow4(mQ3) - pow4(mU3)))/(mQ32*(-mD32 + mQ32)*deltaxyz(
+        pow2(mA),mU32,mQ32)))) + pow2(Xt)*(3*(4/(mQ32 - mU32) + log(mQ32)*((-4*
+        mQ32)/pow2(mQ32 - mU32) - (2*lMR*mQ32)/pow2(mQ32 - mU32)) + lMR*(2/(
+        mQ32 - mU32) + (2*mQ32*log(mU32))/pow2(mQ32 - mU32)) + log(mD32)*((log(
+        mQ32)*(mD32 + mQ32 - pow2(mA)))/pow2(mQ32 - mU32) - (log(mU32)*(mD32 +
+        mQ32 - pow2(mA)))/pow2(mQ32 - mU32)) + log(pow2(mA))*((log(mQ32)*(-mD32
+        + mQ32 + pow2(mA)))/pow2(mQ32 - mU32) - (log(mU32)*(-mD32 + mQ32 +
+        pow2(mA)))/pow2(mQ32 - mU32)) + (2*(mQ32 + mU32)*log(mU32))/pow2(mQ32 -
+        mU32) + (deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32))/(
+        mD32*pow2(mQ32 - mU32)) + (phixyz(pow2(mA),mU32,mD32)*(-deltaxyz(pow2(
+        mA),mU32,mD32) + (mQ32 - mU32)*(mD32 - mU32 + pow2(mA))))/(mD32*pow2(
+        mQ32 - mU32))) + 3*Xb*Yt*(log(pow2(mA))*((-2*log(mQ32))/pow2(mQ32 -
+        mU32) + (2*log(mU32))/pow2(mQ32 - mU32)) + log(mD32)*((2*log(mQ32)*(
+        mD32 + mQ32 - pow2(mA)))/((mD32 - mQ32)*pow2(mQ32 - mU32)) + (2*log(
+        mU32)*(-mD32 - mQ32 + pow2(mA)))/((mD32 - mQ32)*pow2(mQ32 - mU32))) + (
+        2*deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32))/(mD32*(mD32
+        - mQ32)*pow2(mQ32 - mU32)) - (2*deltaxyz(pow2(mA),mQ32,mQ32)*phixyz(
+        pow2(mA),mQ32,mQ32))/((mD32 - mQ32)*mQ32*pow2(mQ32 - mU32)) + (2*log(
+        mQ32)*log(mU32)*(-2*mQ32 + pow2(mA)))/((-mD32 + mQ32)*pow2(mQ32 - mU32)
+        ) + (2*phixyz(pow2(mA),mU32,mD32)*(-deltaxyz(pow2(mA),mU32,mD32) + (
+        mQ32 - mU32)*(mD32 - mU32 + pow2(mA))))/(mD32*(mD32 - mQ32)*pow2(mQ32 -
+        mU32)) + (phixyz(pow2(mA),mU32,mQ32)*(2*deltaxyz(pow2(mA),mU32,mQ32) -
+        2*(mQ32 - mU32)*(mQ32 - mU32 + pow2(mA))))/((mD32 - mQ32)*mQ32*pow2(
+        mQ32 - mU32)) + (2*(-2*mQ32 + pow2(mA))*pow2(log(mQ32)))/((mD32 - mQ32)
+        *pow2(mQ32 - mU32))) + pow2(Yt)*(3*(log(mQ32)*((2*(mQ32 - mU32 + pow2(
+        mA)))/((mQ32 - mU32)*deltaxyz(pow2(mA),mU32,mQ32)) - log(mU32)/pow2(
+        mQ32 - mU32)) + pow2(log(mQ32))/pow2(mQ32 - mU32) + log(pow2(mA))*(-(
+        log(mQ32)/pow2(mQ32 - mU32)) + log(mU32)/pow2(mQ32 - mU32) + (deltaxyz(
+        pow2(mA),mU32,mQ32) - pow2(mQ32 - mU32 + pow2(mA)))/(mQ32*(mQ32 - mU32)
+        *deltaxyz(pow2(mA),mU32,mQ32))) + (phixyz(pow2(mA),mQ32,mQ32)*(-
+        deltaxyz(pow2(mA),mQ32,mQ32) + pow2(mA)*(-5*mQ32 + pow2(mA))))/(pow2(
+        mQ32 - mU32)*pow4(mQ3)) + (phixyz(pow2(mA),mU32,mQ32)*(deltaxyz(pow2(
+        mA),mU32,mQ32)*(deltaxyz(pow2(mA),mU32,mQ32) + (2*mQ32 + 3*mU32)*pow2(
+        mA) - 2*pow2(mQ32 - mU32) - pow4(mA)) + (mQ32 - mU32)*(mQ32 - mU32 +
+        pow2(mA))*(mU32*(-mQ32 + mU32) - (mQ32 + 2*mU32)*pow2(mA) + pow4(mA))))
+        /(deltaxyz(pow2(mA),mU32,mQ32)*pow2(mQ32 - mU32)*pow4(mQ3)) + (log(
+        mU32)*(-deltaxyz(pow2(mA),mU32,mQ32) - 2*mU32*pow2(mA) + pow4(mA) -
+        pow4(mQ3) + pow4(mU3)))/(mQ32*(mQ32 - mU32)*deltaxyz(pow2(mA),mU32,
+        mQ32))) + 3*pow2(Xb)*(log(mD32)*((log(mQ32)*(mD32 + mQ32 - pow2(mA)))/(
+        pow2(mD32 - mQ32)*pow2(mQ32 - mU32)) - (log(mU32)*(mD32 + mQ32 - pow2(
+        mA)))/(pow2(mD32 - mQ32)*pow2(mQ32 - mU32))) + log(mQ32)*((2*(mQ32 -
+        mU32 + pow2(mA)))/((-mD32 + mQ32)*(mQ32 - mU32)*deltaxyz(pow2(mA),mU32,
+        mQ32)) + (log(mU32)*(mD32 + mQ32 - pow2(mA)))/(pow2(mD32 - mQ32)*pow2(
+        mQ32 - mU32))) + (deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,
+        mD32))/(mD32*pow2(mD32 - mQ32)*pow2(mQ32 - mU32)) + (phixyz(pow2(mA),
+        mU32,mD32)*(-deltaxyz(pow2(mA),mU32,mD32) + (mQ32 - mU32)*(mD32 - mU32
+        + pow2(mA))))/(mD32*pow2(mD32 - mQ32)*pow2(mQ32 - mU32)) - ((mD32 +
+        mQ32 - pow2(mA))*pow2(log(mQ32)))/(pow2(mD32 - mQ32)*pow2(mQ32 - mU32))
+        + (log(pow2(mA))*(deltaxyz(pow2(mA),mU32,mQ32) - pow2(mQ32 - mU32 +
+        pow2(mA))))/(mQ32*(-mD32 + mQ32)*(mQ32 - mU32)*deltaxyz(pow2(mA),mU32,
+        mQ32)) + (phixyz(pow2(mA),mQ32,mQ32)*((mD32 - 2*mQ32)*deltaxyz(pow2(mA)
+        ,mQ32,mQ32) + (-mD32 + mQ32)*pow2(mA)*(-5*mQ32 + pow2(mA))))/(pow2(mD32
+        - mQ32)*pow2(mQ32 - mU32)*pow4(mQ3)) + (phixyz(pow2(mA),mU32,mQ32)*((
+        mD32 - mQ32)*(mQ32 - mU32)*(mQ32 - mU32 + pow2(mA))*((mQ32 - mU32)*mU32
+        + (mQ32 + 2*mU32)*pow2(mA) - pow4(mA)) + deltaxyz(pow2(mA),mU32,mQ32)*(
+        -((mD32 - 2*mQ32)*deltaxyz(pow2(mA),mU32,mQ32)) + (2*mD32 - 3*mQ32)*
+        pow2(mQ32 - mU32) + (mD32 - mQ32)*pow4(mA) + pow2(mA)*(-2*mD32*mQ32 -
+        3*mD32*mU32 + 4*mQ32*mU32 + pow4(mQ3)))))/(deltaxyz(pow2(mA),mU32,mQ32)
+        *pow2(mD32 - mQ32)*pow2(mQ32 - mU32)*pow4(mQ3)) + (log(mU32)*(-
+        deltaxyz(pow2(mA),mU32,mQ32) - 2*mU32*pow2(mA) + pow4(mA) - pow4(mQ3) +
+        pow4(mU3)))/(mQ32*(-mD32 + mQ32)*(mQ32 - mU32)*deltaxyz(pow2(mA),mU32,
+        mQ32))))) + Xt*(3*Xb*(((2*log(mD32))/(-mD32 + mQ32) + 2*(1/(mD32 -
+        mQ32) + 1/(-mQ32 + mU32))*log(mQ32) + (2*log(mU32))/(mQ32 - mU32))*log(
+        pow2(mA)) - (2*deltaxyz(pow2(mA),mQ32,mQ32)*phixyz(pow2(mA),mQ32,mQ32))
+        /((mD32 - mQ32)*mQ32*(mQ32 - mU32)) + (2*deltaxyz(pow2(mA),mU32,mQ32)*
+        phixyz(pow2(mA),mU32,mQ32))/((mD32 - mQ32)*mQ32*(mQ32 - mU32)) + log(
+        mD32)*((2*log(mQ32)*(mD32 + mQ32 - pow2(mA)))/((mD32 - mQ32)*(mQ32 -
+        mU32)) - (2*log(mU32)*(mD32 + mU32 - pow2(mA)))/((mD32 - mQ32)*(mQ32 -
+        mU32))) + (2*log(mQ32)*log(mU32)*(mQ32 + mU32 - pow2(mA)))/((mD32 -
+        mQ32)*(mQ32 - mU32)) + (2*(-2*mQ32 + pow2(mA))*pow2(log(mQ32)))/((mD32
+        - mQ32)*(mQ32 - mU32)) + (2*deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(
+        mA),mQ32,mD32))/((mQ32 - mU32)*(-(mD32*mQ32) + pow4(mD3))) - (2*
+        deltaxyz(pow2(mA),mU32,mD32)*phixyz(pow2(mA),mU32,mD32))/((mQ32 - mU32)
+        *(-(mD32*mQ32) + pow4(mD3)))) + Yt*(3*((2*log(mQ32)*log(mU32))/(-mQ32 +
+        mU32) + ((2*log(mQ32))/(-mQ32 + mU32) + (2*log(mU32))/(mQ32 - mU32))*
+        log(pow2(mA)) + (2*pow2(log(mQ32)))/(mQ32 - mU32) - (2*phixyz(pow2(mA),
+        mQ32,mQ32)*(deltaxyz(pow2(mA),mQ32,mQ32) - pow2(mA)*(-5*mQ32 + pow2(mA)
+        )))/((mQ32 - mU32)*pow4(mQ3)) - (2*phixyz(pow2(mA),mU32,mQ32)*(-3*mQ32*
+        mU32 - deltaxyz(pow2(mA),mU32,mQ32) - 3*mQ32*pow2(mA) - 2*mU32*pow2(mA)
+        + pow4(mA) + 2*pow4(mQ3) + pow4(mU3)))/((mQ32 - mU32)*pow4(mQ3))) + 3*
+        pow2(Xb)*(log(pow2(mA))*((-2*log(mD32))/pow2(mD32 - mQ32) + (2*log(
+        mQ32))/pow2(mD32 - mQ32)) + log(mD32)*((2*log(mQ32)*(mD32 + mQ32 -
+        pow2(mA)))/((mQ32 - mU32)*pow2(mD32 - mQ32)) - (2*log(mU32)*(mD32 +
+        mU32 - pow2(mA)))/((mQ32 - mU32)*pow2(mD32 - mQ32))) + (2*deltaxyz(
+        pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32))/(mD32*(mQ32 - mU32)*
+        pow2(mD32 - mQ32)) - (2*deltaxyz(pow2(mA),mU32,mD32)*phixyz(pow2(mA),
+        mU32,mD32))/(mD32*(mQ32 - mU32)*pow2(mD32 - mQ32)) + (2*log(mQ32)*log(
+        mU32)*(mD32 + mU32 - pow2(mA)))/((mQ32 - mU32)*pow2(mD32 - mQ32)) + (2*
+        (-mD32 - mQ32 + pow2(mA))*pow2(log(mQ32)))/((mQ32 - mU32)*pow2(mD32 -
+        mQ32)) + (2*phixyz(pow2(mA),mQ32,mQ32)*((mD32 - 2*mQ32)*deltaxyz(pow2(
+        mA),mQ32,mQ32) + (-mD32 + mQ32)*pow2(mA)*(-5*mQ32 + pow2(mA))))/((mQ32
+        - mU32)*pow2(mD32 - mQ32)*pow4(mQ3)) + (2*phixyz(pow2(mA),mU32,mQ32)*(-
+        ((mD32 - 2*mQ32)*deltaxyz(pow2(mA),mU32,mQ32)) + (mD32 - mQ32)*(-3*
+        mQ32*mU32 - 3*mQ32*pow2(mA) - 2*mU32*pow2(mA) + pow4(mA) + 2*pow4(mQ3)
+        + pow4(mU3))))/((mQ32 - mU32)*pow2(mD32 - mQ32)*pow4(mQ3)))))))/pow2(
+        sbeta) + (3*(24/pow2(mQ32 - mU32) + (6*dilog(1 - mQ32/mU32))/pow2(mQ32
+        - mU32) + (3*pow2(log(mU32)))/pow2(mQ32 - mU32) + log(mQ32)*((-8*lMR*(
+        mQ32 + mU32))/pow3(mQ32 - mU32) - (2*(7*mQ32 + 5*mU32))/pow3(mQ32 -
+        mU32) + (2*(-5*mQ32 + mU32)*log(mU32))/pow3(mQ32 - mU32)) + log(pow2(
+        mA))*(-8/pow2(mQ32 - mU32) + (4*(mQ32 + mU32)*log(mQ32))/pow3(mQ32 -
+        mU32) - (4*(mQ32 + mU32)*log(mU32))/pow3(mQ32 - mU32)) + lMR*(16/pow2(
+        mQ32 - mU32) + (8*(mQ32 + mU32)*log(mU32))/pow3(mQ32 - mU32)) + (6*(
+        mQ32 + 3*mU32)*log(mU32))/pow3(mQ32 - mU32) + ((7*mQ32 + mU32)*pow2(
+        log(mQ32)))/pow3(mQ32 - mU32)) + 3*pow2(Xb)*((-6*dilog(1 - mQ32/mU32))/
+        ((mD32 - mQ32)*pow2(mQ32 - mU32)) + (11*mQ32 + mU32)/(mQ32*pow3(mQ32 -
+        mU32)) + lMR*((5*mQ32 + mU32)/(mQ32*pow3(mQ32 - mU32)) + (2*(mQ32 + 2*
+        mU32)*log(mU32))/pow4(mQ32 - mU32)) + log(mD32)*(mD32/((mD32 - mQ32)*
+        mQ32*pow2(mQ32 - mU32)) + (2*mD32*(mD32 - mU32)*(3*mD32 - 2*mQ32 -
+        mU32)*log(mQ32))/(pow2(mD32 - mQ32)*pow4(mQ32 - mU32)) - (2*mD32*(mD32
+        - mU32)*(3*mD32 - 2*mQ32 - mU32)*log(mU32))/(pow2(mD32 - mQ32)*pow4(
+        mQ32 - mU32))) + log(mQ32)*((2*log(mU32)*(5*mD32*mQ32 - mD32*mU32 - 4*
+        pow4(mQ3)))/(pow2(mD32 - mQ32)*pow3(mQ32 - mU32)) - (2*lMR*(mQ32 + 2*
+        mU32))/pow4(mQ32 - mU32) + (10*mQ32*mU32 - 4*mD32*(2*mQ32 + mU32) + 5*
+        pow4(mQ3) - 3*pow4(mU3))/((mD32 - mQ32)*pow4(mQ32 - mU32))) + (2*(mU32*
+        (-7*mQ32 + mU32) + mD32*(mQ32 + 5*mU32))*log(mU32))/((mD32 - mQ32)*
+        pow4(mQ32 - mU32)) - (6*dilog(1 - mD32/mQ32)*pow2(mD32 - mU32))/((mD32
+        - mQ32)*pow4(mQ32 - mU32)) + (6*dilog(1 - mD32/mU32)*pow2(mD32 - mU32))
+        /((mD32 - mQ32)*pow4(mQ32 - mU32)) + (3*(mD32 + mQ32 - 2*mU32)*pow2(
+        log(mU32)))/pow4(mQ32 - mU32) + (pow2(log(mQ32))*(-3*(mD32 + mQ32 - 2*
+        mU32) + (2*(mQ32 - mU32)*(mD32*(-5*mQ32 + mU32) + 4*pow4(mQ3)))/pow2(
+        mD32 - mQ32)))/pow4(mQ32 - mU32)))*pow4(Xt) + (3*Xb*pow2(Xt)*(log(mD32)
+        *((-8*mD32*Mu*log(mQ32))/((mD32 - mQ32)*(-mQ32 + mU32)*(mD32 - pow2(Mu)
+        )) - (8*mD32*Mu*log(mU32))/((mD32 - mQ32)*(mQ32 - mU32)*(mD32 - pow2(
+        Mu)))) - (8*mQ32*Mu*log(mQ32)*log(mU32))/((-mD32 + mQ32)*(-mQ32 + mU32)
+        *(-mQ32 + pow2(Mu))) + log(pow2(Mu))*((-8*log(mQ32)*pow3(Mu)
+        )/((mQ32 - mU32)*(mD32 - pow2(Mu))*(-mQ32 + pow2(Mu))) - (8*log(mU32)*
+        pow3(Mu))/((mQ32 - mU32)*(-mD32 + pow2(Mu))*(-mQ32 + pow2(
+        Mu)))) - (8*mQ32*Mu*pow2(log(mQ32)))/((-mD32 + mQ32)*(mQ32 - mU32)*(-
+        mQ32 + pow2(Mu)))) + 3*Xb*((-8*Mu*dilog(1 - pow2(Mu)/mD32)*(mD32 +
+        pow2(Mu)))/((mD32 - mQ32)*(mD32 - pow2(Mu))) - (4*mQ32*Mu*log(mQ32)*
+        log(mU32))/((-mD32 + mQ32)*(-mQ32 + pow2(Mu))) + (8*Mu*dilog(1 - pow2(
+        Mu)/mQ32)*(mQ32 + pow2(Mu)))/((-mD32 + mQ32)*(-mQ32 + pow2(Mu))) + log(
+        mD32)*((-4*mD32*Mu*log(mQ32))/((-mD32 + mQ32)*(mD32 - pow2(Mu))) - (4*
+        mD32*Mu*log(mU32))/((-mD32 + mQ32)*(mD32 - pow2(Mu))) - (8*log(pow2(Mu)
+        )*pow3(Mu))/((mD32 - mQ32)*(-mD32 + pow2(Mu)))) + log(pow2(
+        Mu))*((-4*log(mU32)*pow3(Mu))/((mD32 - pow2(Mu))*(-mQ32 +
+        pow2(Mu))) + (4*log(mQ32)*(mD32 + mQ32 - 2*pow2(Mu))*pow3(Mu)
+        )/((mD32 - mQ32)*(mD32 - pow2(Mu))*(-mQ32 + pow2(Mu)))) - (4*Mu*(mD32
+        + pow2(Mu))*pow2(log(mD32)))/((mD32 - mQ32)*(mD32 - pow2(Mu))) - (4*
+        pow3(Mu)*pow2(log(mQ32)))/((mD32 - mQ32)*(-mQ32 + pow2(Mu)))
+        ) + 3*Xt*((-8*Mu*dilog(1 - pow2(Mu)/mQ32))/(-mQ32 + mU32) - (8*Mu*
+        dilog(1 - pow2(Mu)/mU32))/(mQ32 - mU32) + ((-8*Mu)/(mQ32 - mU32) - (8*
+        lMR*Mu)/(mQ32 - mU32))*log(mQ32) - (8*Mu*log(mU32))/(-mQ32 + mU32) - (
+        8*lMR*Mu*log(mU32))/(-mQ32 + mU32) - (4*Mu*pow2(log(mQ32)))/(-mQ32 +
+        mU32) - (4*Mu*pow2(log(mU32)))/(mQ32 - mU32)) + 3*((-32*Mu)/pow2(mQ32 -
+        mU32) + log(mQ32)*((8*lMR*Mu*(mQ32 + mU32))/pow3(mQ32 - mU32) + (8*Mu*(
+        3*mQ32 + mU32))/pow3(mQ32 - mU32)) + lMR*((-16*Mu)/pow2(mQ32 - mU32) -
+        (8*Mu*(mQ32 + mU32)*log(mU32))/pow3(mQ32 - mU32)) - (8*Mu*(mQ32 + 3*
+        mU32)*log(mU32))/pow3(mQ32 - mU32) - (8*Mu*dilog(1 - pow2(Mu)/mQ32)*(
+        mQ32 + mU32 - 2*pow2(Mu)))/pow3(mQ32 - mU32) + (8*Mu*dilog(1 - pow2(Mu)
+        /mU32)*(mQ32 + mU32 - 2*pow2(Mu)))/pow3(mQ32 - mU32) - (4*Mu*(mQ32 +
+        mU32 - 2*pow2(Mu))*pow2(log(mQ32)))/pow3(mQ32 - mU32) + (4*Mu*(mQ32 +
+        mU32 - 2*pow2(Mu))*pow2(log(mU32)))/pow3(mQ32 - mU32) + log(pow2(Mu))*(
+        (-16*log(mQ32)*pow3(Mu))/pow3(mQ32 - mU32) - (16*log(mU32)*
+        pow3(Mu))/pow3(-mQ32 + mU32)))*pow3(Xt) + 3*Xb*(log(mD32)*((
+        8*mD32*Mu)/((mD32 - mQ32)*(mD32 - pow2(Mu))*pow2(mQ32 - mU32)) - (4*
+        mD32*Mu*(mQ32 + mU32)*log(mQ32))/((mD32 - mQ32)*(mD32 - pow2(Mu))*pow3(
+        mQ32 - mU32)) + (4*mD32*Mu*(mQ32 + mU32)*log(mU32))/((mD32 - mQ32)*(
+        mD32 - pow2(Mu))*pow3(mQ32 - mU32))) + log(mQ32)*((-8*mQ32*Mu)/((-mD32
+        + mQ32)*(-mQ32 + pow2(Mu))*pow2(mQ32 - mU32)) - (4*mQ32*Mu*(mQ32 +
+        mU32)*log(mU32))/((-mD32 + mQ32)*(-mQ32 + pow2(Mu))*pow3(mQ32 - mU32)))
+        + log(pow2(Mu))*((-8*pow3(Mu))/((mD32 - pow2(Mu))*(-mQ32 +
+        pow2(Mu))*pow2(mQ32 - mU32)) + (4*(mQ32 + mU32)*log(mQ32)*pow3(Mu)
+        )/((mD32 - pow2(Mu))*(-mQ32 + pow2(Mu))*pow3(mQ32 - mU32)) - (
+        4*(mQ32 + mU32)*log(mU32)*pow3(Mu))/((mD32 - pow2(Mu))*(-
+        mQ32 + pow2(Mu))*pow3(mQ32 - mU32))) + (4*mQ32*Mu*(mQ32 + mU32)*pow2(
+        log(mQ32)))/((-mD32 + mQ32)*(-mQ32 + pow2(Mu))*pow3(mQ32 - mU32)))*
+        pow4(Xt))/(cbeta*sbeta) + (pow2(sbeta)*(3*Xt*Yb*((4/(-mQ32 + mU32) + (
+        4*lMR)/(-mQ32 + mU32))*log(mQ32) + (4*log(mU32))/(mQ32 - mU32) + (4*
+        lMR*log(mU32))/(mQ32 - mU32) + log(mD32)*((2*log(mQ32))/(mQ32 - mU32) +
+        (2*log(mU32))/(-mQ32 + mU32)) + ((2*log(mQ32))/(mQ32 - mU32) + (2*log(
+        mU32))/(-mQ32 + mU32))*log(pow2(mA)) + (2*phixyz(pow2(mA),mQ32,mD32)*(
+        mD32 - mQ32 + pow2(mA)))/(mD32*(-mQ32 + mU32)) + (2*phixyz(pow2(mA),
+        mU32,mD32)*(mD32 - mU32 + pow2(mA)))/(mD32*(mQ32 - mU32))) + 3*(0.5 + (
+        0.5 + lMR)*log(mQ32) - (3*log(mU32))/2. + log(mD32)*log(mU32) - pow2(
+        mA)/mQ32 - (phixyz(pow2(mA),mU32,mD32)*(mD32 - mU32 + pow2(mA)))/mD32 +
+        lMR*(-log(mU32) - pow2(mA)/mQ32) + log(pow2(mA))*(-log(mD32) - log(
+        mQ32) + (mQ32 + pow2(mA))/mQ32) + pow2(Pi)/3. + pow2(log(pow2(mA)))) +
+        3*Yb*(-16/pow2(mQ32 - mU32) + log(mQ32)*((4*lMR*(mQ32 + mU32))/pow3(
+        mQ32 - mU32) + (4*(3*mQ32 + mU32))/pow3(mQ32 - mU32)) + lMR*(-8/pow2(
+        mQ32 - mU32) - (4*(mQ32 + mU32)*log(mU32))/pow3(mQ32 - mU32)) + log(
+        mD32)*((-2*log(mQ32)*(2*mD32 + mQ32 + mU32 - 2*pow2(mA)))/pow3(mQ32 -
+        mU32) + (2*log(mU32)*(2*mD32 + mQ32 + mU32 - 2*pow2(mA)))/pow3(mQ32 -
+        mU32)) + log(pow2(mA))*((-2*log(mQ32)*(-2*mD32 + mQ32 + mU32 + 2*pow2(
+        mA)))/pow3(mQ32 - mU32) + (2*log(mU32)*(-2*mD32 + mQ32 + mU32 + 2*pow2(
+        mA)))/pow3(mQ32 - mU32)) - (4*(mQ32 + 3*mU32)*log(mU32))/pow3(mQ32 -
+        mU32) - (2*phixyz(pow2(mA),mQ32,mD32)*(2*deltaxyz(pow2(mA),mQ32,mD32) +
+        (mQ32 - mU32)*(mD32 - mQ32 + pow2(mA))))/(mD32*pow3(mQ32 - mU32)) + (
+        phixyz(pow2(mA),mU32,mD32)*(4*deltaxyz(pow2(mA),mU32,mD32) + 2*(-mQ32 +
+        mU32)*(mD32 - mU32 + pow2(mA))))/(mD32*pow3(mQ32 - mU32)))*pow3(Xt) +
+        3*pow2(Yb)*(-(1/mQ32) - lMR/mQ32 - (log(mQ32)*(mD32 - mQ32 + pow2(mA)))
+        /deltaxyz(pow2(mA),mQ32,mD32) + (phixyz(pow2(mA),mQ32,mD32)*(deltaxyz(
+        pow2(mA),mQ32,mD32) - pow2(mD32 - mQ32 + pow2(mA))))/(2.*mD32*deltaxyz(
+        pow2(mA),mQ32,mD32)) + (log(pow2(mA))*(deltaxyz(pow2(mA),mQ32,mD32) -
+        pow2(mD32 - mQ32) + pow4(mA)))/(2.*mQ32*deltaxyz(pow2(mA),mQ32,mD32)) +
+        (log(mD32)*(deltaxyz(pow2(mA),mQ32,mD32) + 2*mQ32*pow2(mA) - pow4(mA) +
+        pow4(mD3) - pow4(mQ3)))/(2.*mQ32*deltaxyz(pow2(mA),mQ32,mD32))) + pow2(
+        Xt)*(3*pow2(Yb)*(log(mQ32)*((2*lMR)/pow2(mQ32 - mU32) + (2*(deltaxyz(
+        pow2(mA),mQ32,mD32) + (-mQ32 + mU32)*(mD32 - mQ32 + pow2(mA))))/(
+        deltaxyz(pow2(mA),mQ32,mD32)*pow2(mQ32 - mU32))) - (2*log(mU32))/pow2(
+        mQ32 - mU32) - (phixyz(pow2(mA),mU32,mD32)*(mD32 - mU32 + pow2(mA)))/(
+        mD32*pow2(mQ32 - mU32)) + (phixyz(pow2(mA),mQ32,mD32)*(deltaxyz(pow2(
+        mA),mQ32,mD32)*(mD32 - mU32 + pow2(mA)) - (mQ32 - mU32)*pow2(mD32 -
+        mQ32 + pow2(mA))))/(mD32*deltaxyz(pow2(mA),mQ32,mD32)*pow2(mQ32 - mU32)
+        ) + log(pow2(mA))*(-(log(mQ32)/pow2(mQ32 - mU32)) + log(mU32)/pow2(mQ32
+        - mU32) + (deltaxyz(pow2(mA),mQ32,mD32) - pow2(mD32 - mQ32) + pow4(mA))
+        /(mQ32*(mQ32 - mU32)*deltaxyz(pow2(mA),mQ32,mD32))) + log(mD32)*(-(log(
+        mQ32)/pow2(mQ32 - mU32)) + log(mU32)/pow2(mQ32 - mU32) + (deltaxyz(
+        pow2(mA),mQ32,mD32) + 2*mQ32*pow2(mA) - pow4(mA) + pow4(mD3) - pow4(
+        mQ3))/(mQ32*(mQ32 - mU32)*deltaxyz(pow2(mA),mQ32,mD32))) - 2/(-(mQ32*
+        mU32) + pow4(mQ3)) + lMR*((-2*log(mU32))/pow2(mQ32 - mU32) - 2/(-(mQ32*
+        mU32) + pow4(mQ3)))) + 3*((4*mQ32 - 2*pow2(mA))/(mQ32*(mQ32 - mU32)) +
+        log(mD32)*((log(mQ32)*(mD32 + mQ32 - pow2(mA)))/pow2(mQ32 - mU32) - (
+        log(mU32)*(mD32 + mQ32 - pow2(mA)))/pow2(mQ32 - mU32)) + log(mQ32)*(-((
+        3*mQ32 + mU32 - 2*pow2(mA))/pow2(mQ32 - mU32)) + (2*lMR*(-mU32 + pow2(
+        mA)))/pow2(mQ32 - mU32)) + lMR*((2*(mQ32 - pow2(mA)))/(mQ32*(mQ32 -
+        mU32)) - (2*log(mU32)*(-mU32 + pow2(mA)))/pow2(mQ32 - mU32)) + (
+        deltaxyz(pow2(mA),mQ32,mD32)*phixyz(pow2(mA),mQ32,mD32))/(mD32*pow2(
+        mQ32 - mU32)) + (log(mU32)*(mQ32 + 3*mU32 - 2*pow2(mA)))/pow2(mQ32 -
+        mU32) + (phixyz(pow2(mA),mU32,mD32)*(-deltaxyz(pow2(mA),mU32,mD32) + (
+        mQ32 - mU32)*(mD32 - mU32 + pow2(mA))))/(mD32*pow2(mQ32 - mU32)) + log(
+        pow2(mA))*(-((log(mQ32)*(mD32 + mQ32 - 2*mU32 + pow2(mA)))/pow2(mQ32 -
+        mU32)) + (log(mU32)*(mD32 + mQ32 - 2*mU32 + pow2(mA)))/pow2(mQ32 -
+        mU32) + (2*pow2(mA))/(-(mQ32*mU32) + pow4(mQ3))))) + (3*pow2(Yb)*((11*
+        mQ32 + mU32)/(mQ32*pow3(mQ32 - mU32)) + log(mQ32)*(-((mD32 - mQ32 +
+        pow2(mA))/(deltaxyz(pow2(mA),mQ32,mD32)*pow2(mQ32 - mU32))) - (4*(2*
+        mQ32 + mU32))/pow4(mQ32 - mU32) - (2*lMR*(mQ32 + 2*mU32))/pow4(mQ32 -
+        mU32)) + lMR*((5*mQ32 + mU32)/(mQ32*pow3(mQ32 - mU32)) + (2*(mQ32 + 2*
+        mU32)*log(mU32))/pow4(mQ32 - mU32)) + log(mD32)*((deltaxyz(pow2(mA),
+        mQ32,mD32) + 2*mQ32*pow2(mA) - pow4(mA) + pow4(mD3) - pow4(mQ3))/(2.*
+        mQ32*deltaxyz(pow2(mA),mQ32,mD32)*pow2(mQ32 - mU32)) + (log(mQ32)*(3*
+        mD32 + mQ32 + 2*mU32 - 3*pow2(mA)))/pow4(mQ32 - mU32) - (log(mU32)*(3*
+        mD32 + mQ32 + 2*mU32 - 3*pow2(mA)))/pow4(mQ32 - mU32)) + log(pow2(mA))*
+        ((deltaxyz(pow2(mA),mQ32,mD32) - pow2(mD32 - mQ32) + pow4(mA))/(2.*
+        mQ32*deltaxyz(pow2(mA),mQ32,mD32)*pow2(mQ32 - mU32)) + (log(mQ32)*(-3*
+        mD32 + mQ32 + 2*mU32 + 3*pow2(mA)))/pow4(mQ32 - mU32) - (log(mU32)*(-3*
+        mD32 + mQ32 + 2*mU32 + 3*pow2(mA)))/pow4(mQ32 - mU32)) + (2*(mQ32 + 5*
+        mU32)*log(mU32))/pow4(mQ32 - mU32) + (phixyz(pow2(mA),mU32,mD32)*(-3*
+        deltaxyz(pow2(mA),mU32,mD32) + (mQ32 - mU32)*(mD32 - mU32 + pow2(mA))))
+        /(mD32*pow4(mQ32 - mU32)) + (phixyz(pow2(mA),mQ32,mD32)*((mQ32 - mU32)*
+        deltaxyz(pow2(mA),mQ32,mD32)*(4*mD32 - 3*mQ32 - mU32 + 4*pow2(mA)) + 6*
+        pow2(deltaxyz(pow2(mA),mQ32,mD32)) - pow2(mQ32 - mU32)*pow2(mD32 - mQ32
+        + pow2(mA))))/(2.*mD32*deltaxyz(pow2(mA),mQ32,mD32)*pow4(mQ32 - mU32)))
+        + 3*((mQ32*(mQ32 - mU32) + (5*mQ32 + mU32)*pow2(mA))/(mQ32*pow3(mQ32 -
+        mU32)) + lMR*((2*mQ32*(mQ32 - mU32) + (5*mQ32 + mU32)*pow2(mA))/(mQ32*
+        pow3(mQ32 - mU32)) + (log(mU32)*(2*mQ32*pow2(mA) + 4*mU32*pow2(mA) +
+        pow4(mQ3) - pow4(mU3)))/pow4(mQ32 - mU32)) + log(pow2(mA))*((2*mQ32*(-
+        mQ32 + mU32) - (5*mQ32 + mU32)*pow2(mA))/(mQ32*pow3(mQ32 - mU32)) + (
+        log(mQ32)*(2*mQ32*pow2(mA) + 4*mU32*pow2(mA) + pow4(mQ3) - pow4(mU3)))/
+        pow4(mQ32 - mU32) + (log(mU32)*(-4*mU32*pow2(mA) - mQ32*(mQ32 + 2*pow2(
+        mA)) + pow4(mU3)))/pow4(mQ32 - mU32)) + log(mQ32)*((lMR*(-4*mU32*pow2(
+        mA) - mQ32*(mQ32 + 2*pow2(mA)) + pow4(mU3)))/pow4(mQ32 - mU32) + (-8*
+        mU32*pow2(mA) - mQ32*(mQ32 + 4*pow2(mA)) + pow4(mU3))/(2.*pow4(mQ32 -
+        mU32))) + (log(mU32)*(4*mQ32*pow2(mA) + 8*mU32*pow2(mA) + pow4(mQ3) -
+        pow4(mU3)))/(2.*pow4(mQ32 - mU32))))*pow4(Xt)))/pow2(cbeta) + (3*pow2(
+        Xt)*((2*(mD32 + 3*mQ32 - 2*pow2(Mu)))/(mQ32*(-mQ32 + mU32)) + lMR*((2*(
+        mD32 + 2*mQ32 - 2*pow2(Mu)))/(mQ32*(-mQ32 + mU32)) - (2*log(mU32)*(mD32
+        + mQ32 + mU32 - 2*pow2(Mu)))/pow2(mQ32 - mU32)) + log(mQ32)*((2*lMR*(
+        mD32 + mQ32 + mU32 - 2*pow2(Mu)))/pow2(mQ32 - mU32) + (2*(mD32 + 3*mQ32
+        - 2*pow2(Mu)) + ((-mQ32 + mU32)*(mD32 + pow2(Mu)))/(mD32 - pow2(Mu)))/
+        pow2(mQ32 - mU32)) + (log(mU32)*(-2*(mD32 + 3*mQ32 - 2*pow2(Mu)) + ((
+        mQ32 - mU32)*(5*mD32 - 3*pow2(Mu)))/(mD32 - pow2(Mu))))/pow2(mQ32 -
+        mU32) + (4*dilog(1 - pow2(Mu)/mQ32)*(-mU32 + pow2(Mu)))/pow2(mQ32 -
+        mU32) - (4*dilog(1 - pow2(Mu)/mU32)*(-mU32 + pow2(Mu)))/pow2(mQ32 -
+        mU32) + (2*(-mU32 + pow2(Mu))*pow2(log(mQ32)))/pow2(mQ32 - mU32) - (2*(
+        -mU32 + pow2(Mu))*pow2(log(mU32)))/pow2(mQ32 - mU32) + log(mD32)*((2*
+        log(mU32)*(mD32 + (mD32*(mQ32 - mU32)*(mD32 - 2*pow2(Mu)))/pow2(mD32 -
+        pow2(Mu))))/pow2(mQ32 - mU32) + (2*mD32*log(mQ32)*(-1 + ((-mQ32 + mU32)
+        *(mD32 - 2*pow2(Mu)))/pow2(mD32 - pow2(Mu))))/pow2(mQ32 - mU32) + (2*
+        mD32)/(-(mQ32*mU32) + pow4(mQ3))) + log(pow2(Mu))*((-4*pow2(Mu))/(-(
+        mQ32*mU32) + pow4(mQ3)) + (2*log(mQ32)*pow4(Mu))/((-mQ32 + mU32)*pow2(
+        mD32 - pow2(Mu))) + (2*log(mU32)*pow4(Mu))/((mQ32 - mU32)*pow2(mD32 -
+        pow2(Mu))))) + 3*(-1.5 + 2*dilog(1 - pow2(Mu)/mQ32) + lMR*(log(mU32) -
+        (mD32 + mQ32 - 2*pow2(Mu))/mQ32) - (mD32 - 2*pow2(Mu))/mQ32 + mD32/(
+        mD32 - pow2(Mu)) + log(mU32)*(1.5 + mD32/(-mD32 + pow2(Mu))) + log(
+        mQ32)*(0.5 - lMR + mD32/(-mD32 + pow2(Mu))) + pow2(log(mQ32)) + (2*
+        dilog(1 - pow2(Mu)/mD32)*(-2*mD32*pow2(Mu) + pow4(mD3) - pow4(Mu)))/
+        pow2(mD32 - pow2(Mu)) + (pow2(log(mD32))*(-2*mD32*pow2(Mu) + pow4(mD3)
+        - pow4(Mu)))/pow2(mD32 - pow2(Mu)) + log(pow2(Mu))*((-2*pow2(Mu))/mQ32
+        - (pow2(Mu)*(2*mD32 + pow2(Mu)))/pow2(mD32 - pow2(Mu)) - (log(mQ32)*
+        pow4(Mu))/pow2(mD32 - pow2(Mu)) - (log(mU32)*pow4(Mu))/pow2(mD32 -
+        pow2(Mu))) + log(mD32)*(mD32*(1/mQ32 + (mD32 + 2*pow2(Mu))/pow2(mD32 -
+        pow2(Mu))) - (mD32*log(mQ32)*(mD32 - 2*pow2(Mu)))/pow2(mD32 - pow2(Mu))
+        - (mD32*log(mU32)*(mD32 - 2*pow2(Mu)))/pow2(mD32 - pow2(Mu)) + (2*log(
+        pow2(Mu))*pow4(Mu))/pow2(mD32 - pow2(Mu)))) + 3*((mD32*(4*mQ32*(mQ32 +
+        2*mU32) - 3*(7*mQ32 + mU32)*pow2(Mu)) + 2*pow2(Mu)*(-3*mQ32*(mQ32 +
+        mU32) + (8*mQ32 + mU32)*pow2(Mu)) + (5*mQ32 + mU32)*pow4(mD3))/(mQ32*(
+        mD32 - pow2(Mu))*pow3(mQ32 - mU32)) + lMR*((3*mQ32*(mQ32 + mU32) +
+        mD32*(5*mQ32 + mU32) - 2*(5*mQ32 + mU32)*pow2(Mu))/(mQ32*pow3(mQ32 -
+        mU32)) + (log(mU32)*(mQ32*(2*mD32 + mQ32 - 4*pow2(Mu)) + 4*mU32*(mD32 +
+        mQ32 - 2*pow2(Mu)) + pow4(mU3)))/pow4(mQ32 - mU32)) + log(pow2(Mu))*((
+        2*pow2(Mu)*(-3 + ((mQ32 - mU32)*(mQ32*pow2(Mu) + pow2(mD32 - pow2(Mu)))
+        )/(mQ32*pow2(mD32 - pow2(Mu)))))/pow3(-mQ32 + mU32) + (log(mQ32)*((mQ32
+        - mU32)*(mQ32 + mU32) - 6*pow2(mD32 - pow2(Mu)))*pow4(Mu))/(pow2(mD32 -
+        pow2(Mu))*pow4(mQ32 - mU32)) + (log(mU32)*pow4(Mu)*(6*pow2(mD32 - pow2(
+        Mu)) - pow4(mQ3) + pow4(mU3)))/(pow2(mD32 - pow2(Mu))*pow4(mQ32 - mU32)
+        )) + log(mD32)*((mD32*(6 - ((mQ32 - mU32)*(-2*mD32*(mQ32 + pow2(Mu)) +
+        pow2(Mu)*(4*mQ32 + pow2(Mu)) + pow4(mD3)))/(mQ32*pow2(mD32 - pow2(Mu)))
+        ))/pow3(-mQ32 + mU32) + (mD32*log(mQ32)*(4*mU32*pow2(mD32 - pow2(Mu)) +
+        mQ32*(mQ32*(mD32 - 2*pow2(Mu)) + 2*pow2(mD32 - pow2(Mu))) - (mD32 - 2*
+        pow2(Mu))*pow4(mU3)))/(pow2(mD32 - pow2(Mu))*pow4(mQ32 - mU32)) + (
+        mD32*log(mU32)*(mQ32*(-(mQ32*(mD32 - 2*pow2(Mu))) - 2*pow2(mD32 - pow2(
+        Mu))) - 4*mU32*pow2(mD32 - pow2(Mu)) + (mD32 - 2*pow2(Mu))*pow4(mU3)))/
+        (pow2(mD32 - pow2(Mu))*pow4(mQ32 - mU32))) + log(mQ32)*(-((lMR*(mQ32*(
+        2*mD32 + mQ32 - 4*pow2(Mu)) + 4*mU32*(mD32 + mQ32 - 2*pow2(Mu)) + pow4(
+        mU3)))/pow4(mQ32 - mU32)) + (-4*mU32*(2*mD32 + 5*mQ32 - 4*pow2(Mu))*(
+        mD32 - pow2(Mu)) + mQ32*(5*(mQ32 - 4*pow2(Mu))*pow2(Mu) + 3*mD32*(-mQ32
+        + 8*pow2(Mu)) - 4*pow4(mD3)) - (mD32 + pow2(Mu))*pow4(mU3))/(2.*(mD32 -
+        pow2(Mu))*pow4(mQ32 - mU32))) - (2*dilog(1 - pow2(Mu)/mU32)*(2*mQ32 +
+        mU32 - 3*pow2(Mu))*(mU32 - pow2(Mu)))/pow4(mQ32 - mU32) + (2*dilog(1 -
+        pow2(Mu)/mQ32)*(-mU32 + pow2(Mu))*(-2*mQ32 - mU32 + 3*pow2(Mu)))/pow4(
+        mQ32 - mU32) + ((-mU32 + pow2(Mu))*(-2*mQ32 - mU32 + 3*pow2(Mu))*pow2(
+        log(mQ32)))/pow4(mQ32 - mU32) + ((mU32 - pow2(Mu))*(-2*mQ32 - mU32 + 3*
+        pow2(Mu))*pow2(log(mU32)))/pow4(mQ32 - mU32) + (log(mU32)*(mD32*((mQ32
+        + mU32)*(mQ32 + 11*mU32) - 12*(mQ32 + 3*mU32)*pow2(Mu)) + pow2(Mu)*(-3*
+        (mQ32 + mU32)*(mQ32 + 3*mU32) + 4*(2*mQ32 + 7*mU32)*pow2(Mu)) + 4*(mQ32
+        + 2*mU32)*pow4(mD3)))/(2.*(mD32 - pow2(Mu))*pow4(mQ32 - mU32)))*pow4(
+        Xt))/pow2(cbeta));
+}
+
+//	one-loop functions from arxiv:1407.4081. Checked.	//
+
+double himalaya::ThresholdCalculator::F1(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return x*log(x2)/(x2 - 1);
+}
+
+double himalaya::ThresholdCalculator::F2(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 6*x2*(2 - 2*x2 + (1 + x2)*log(x2))/pow3(x2 - 1);
+}
+
+double himalaya::ThresholdCalculator::F3(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*x*(5*(1-x2) + (1 + 4*x2)*log(x2))/(3*pow2(x2-1));
+}
+
+double himalaya::ThresholdCalculator::F4(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*x*(x2 - 1 - log(x2))/pow2(x2 -1);
+}
+
+double himalaya::ThresholdCalculator::F5(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return 3*x*(1 - pow2(x2) + 2*x2*log(x2))/pow3(1 - x2);
+}
+
+double himalaya::ThresholdCalculator::F6(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return (x2 - 3)/(4.*(1-x2)) + x2*(x2 - 2)*log(x2)/(2*pow2(1 - x2));
+}
+
+double himalaya::ThresholdCalculator::F7(double x){
+   if(x == 1.) return 1.;
+   
+   const double x2 = pow2(x);
+   
+   return -3*(1 - 6*x2 + pow2(x2))/(2*pow2(x2 - 1)) + 3*pow2(x2)*(x2 - 3)
+      *log(x2)/pow3(x2 - 1);
+}
+
+double himalaya::ThresholdCalculator::F8(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 2*(x12 - pow2(x12) + pow2(x12)*log(x12))/pow2(x12 - 1);
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 2*(-1 + x12 + x12*(x12 - 2)*log(x12))/pow2(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return -2 + 2*(pow2(x12)*log(x12)/(x12 -1) - pow2(x22)*log(x22)/(x22 - 1))
+	 /(x12 - x22);
+   }
+}
+
+double himalaya::ThresholdCalculator::F9(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 2*(1 - x12 + x12*log(x12))/pow2(x12 - 1);
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 2*(-1 + x12 - log(x12))/pow2(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
+   }
+}
+
+double himalaya::ThresholdCalculator::f1(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 6*x2*(3+x2)/(7*pow2(x2 - 1)) + 6*pow2(x2)*(x2 - 5)*log(x2)/(7
+      *pow3(x2-1));
+}
+
+double himalaya::ThresholdCalculator::f2(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*x2*(11 + x2)/(9*pow2(x2 - 1)) + 2*pow2(x2)*(5*x2 - 17)*log(x2)/(9*
+      pow3(x2 - 1));
+}
+
+double himalaya::ThresholdCalculator::f3(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*(2 + 9*x2 + pow2(x2))/(3*pow2(x2 - 1)) + 2*x2*(-6 - 7*x2 + pow2(x2))
+      *log(x2)/(3*pow3(x2 - 1));
+}
+
+double himalaya::ThresholdCalculator::f4(double x){
+   if(x == 1.) return 0.;
+   
+   const double x2 = pow2(x);
+   
+   return 2*(6 + 25*x2 + 5*pow2(x2))/(7*pow2(x2 - 1)) + 2*x2*(-18 - 19*x2 
+      + pow2(x2))*log(x2)/(7*pow3(x2 - 1));
+}
+
+double himalaya::ThresholdCalculator::f5(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 3*(-1 + x1 + 2*x12 - pow2(x12) - pow5(x1) + (pow3(x1) + pow5(x1))
+	 *log(x12))/(4*pow3(x1 - 1)*pow2(1 + x1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 3/4.*(-1 - 5*x12 + 5*pow2(x12) + pow3(x12) + x12*(-3 - 6*x12 + pow2(x12))
+	 *log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 3/4.*((1 - x12*x22 + pow2(x1 + x2))/((x12 - 1)*(x22 - 1))
+	 + pow3(x1)*(1 + x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+	 - pow3(x2)*(1 + x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+double himalaya::ThresholdCalculator::f6(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return -3*(1 - 2*x12 - 2*pow3(x1) + pow2(x12) + 2*pow5(x1) - 2*pow5(x1)
+	 *log(x12))/(7*pow3(x1 - 1)*pow2(x1 + 1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 6/7.*x12*(-3 + 2*x12 + pow2(x12) + x12*(x12 - 5)*log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 6/7.*((x12 + x1*x2 + x22 - x12*x22)/((x12 - 1)*(x22 - 1)) 
+	 + pow5(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2)) 
+	 - pow5(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+double himalaya::ThresholdCalculator::f7(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return -3*(1 - 2*x1 - 2*x12 + 2*pow3(x1) + pow2(x12) - 2*pow3(x1)*log(x12))
+	 /(pow3(x1 - 1)*pow2(x1 + 1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return -6*(1 + 2*x12 -3*pow2(x12) + x12*(3 + x12)*log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 6*((1 + x1*x2)/((x12 - 1)*(x22 - 1))
+	 + pow3(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+	 - pow3(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+double himalaya::ThresholdCalculator::f8(double x1, double x2){
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } else if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+      
+      const double x12 = pow2(x1);
+      return 3*(-1 + 4*x12 - 3*pow2(x12) + 2*pow2(x12)*log(x12))
+	 /(4*pow3(x1 - 1)*pow2(1 + x1));
+   } else if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 3*x1*(-1 + pow2(x12) - 2*x12*log(x12))/pow3(x12 - 1);
+   } else{
+      const double x12 = pow2(x1);
+      const double x22 = pow2(x2);
+      return 3/2.*((x1 + x2)/((x12 - 1)*(x22 - 1))
+	 + pow2(x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+	 - pow2(x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+   }
+}
+
+double himalaya::ThresholdCalculator::deltaxyz(double x, double y, double z){
+   return pow2(x) + pow2(y) + pow2(z) - 2*(x*y+x*z+y*z);
+}
+
+/**
+ * \f$\Phi(x,y,z)\f$ function.  The arguments x, y and z are
+ * interpreted as squared masses. Taken from FlexibleSUSY.
+ *
+ * Davydychev and Tausk, Nucl. Phys. B397 (1993) 23
+ *
+ * @param x squared mass
+ * @param y squared mass
+ * @param z squared mass
+ *
+ * @return \f$\Phi(x,y,z)\f$
+ */
+double himalaya::ThresholdCalculator::phixyz(double x, double y, double z){
+   const auto u = x/z, v = y/z;
+   return phi_uv(u,v);
+}
+
+//	at*as^n threshold corrections with limits and DR' -> MS shifts		//
 /**
  * 	Returns delta g3_as in the MSbar scheme for a given mass limit
  * 	@param omitLogs an intiger to omit all log mu terms
@@ -239,7 +3156,7 @@ double himalaya::ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs){
    const double m3 = sqrt(m32);
    const double mU3 = sqrt(mU32);
    const double mQ3 = sqrt(mQ32);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
    
    if(limit == Limits::DEGENERATE) limit = Limits::MQ3_EQ_MU3_EQ_M3;
@@ -295,7 +3212,7 @@ double himalaya::ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs)
    const double mU3 = sqrt(mU32);
    const double mQ3 = sqrt(mQ32);
    const double msq = sqrt(msq2);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
    
    switch (limit){
@@ -721,7 +3638,7 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLo
    const double MR2 = pow2(p.scale);
    const double mU32 = p.mu2(2,2);
    const double mQ32 = p.mq2(2,2);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
    
    // Translate limits to occurring ones
@@ -731,7 +3648,7 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLo
    
    switch (limit){
       case(Limits::GENERAL):{
-	 return 12*pow4(Xt)/pow2(mQ32 - mU32) + 12*lmQ3MR +(6 - 12*pow2(Xt)/(mQ32 - mU32)
+	 return 12*pow4(Xt)/pow2(mQ32 - mU32) + 12*lmQ3MR + (6 - 12*pow2(Xt)/(mQ32 - mU32)
 	    + (6*(mQ32 + mU32)/pow3(mQ32 - mU32))*pow4(Xt))*log(mU32/mQ32);
       }
       case(Limits::MQ3_EQ_MU3):{
@@ -761,7 +3678,7 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int 
    const double m3 = sqrt(m32);
    const double mU3 = sqrt(mU32);
    const double mQ3 = sqrt(mQ32);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
 
    if(limit == Limits::DEGENERATE) limit = Limits::MQ3_EQ_MU3_EQ_M3;
@@ -932,7 +3849,7 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int
    const double m3 = sqrt(m32);
    const double mU3 = sqrt(mU32);
    const double mQ3 = sqrt(mQ32);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
    const double dlatas2Const = 0.;
    const double z3 = 1.202056903159594;
@@ -1404,7 +4321,7 @@ double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int
    const double mU3 = sqrt(mU32);
    const double mQ3 = sqrt(mQ32);
    const double msq = sqrt(msq2);
-   const double Xt = p.At - p.mu * p.vd / p.vu;
+   const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double Xt4 = omitXt4*pow4(Xt);
    const double Xt5 = omitXt5*pow5(Xt);
    const double Xt6 = omitXt6*pow6(Xt);

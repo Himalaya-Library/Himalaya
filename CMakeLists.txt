@@ -19,9 +19,9 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 #set version number
-set(Himalaya_VERSION_MAJOR 1)
+set(Himalaya_VERSION_MAJOR 2)
 set(Himalaya_VERSION_MINOR 0)
-set(Himalaya_VERSION_RELEASE 1)
+set(Himalaya_VERSION_RELEASE 0)
 
 # set the C++ standard
 set(CMAKE_CXX_STANDARD 11)
@@ -48,12 +48,15 @@ configure_file (
   "${INCLUDE_PATH}/version.hpp"
   )
 
-# himalaya files
-file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+# Himalaya library files
+file(GLOB SOURCES
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/hierarchies/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/mh2_eft/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/misc/*.cpp)
 set(LIBSOURCES ${SOURCES})
 
-# mh2l files
-file(GLOB_RECURSE FSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/include/mh2l/*.f)
+# DSZ library files
+file(GLOB FSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/include/mh2l/*.f)
 
 # build the himalaya and DSZ library
 file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.hpp)

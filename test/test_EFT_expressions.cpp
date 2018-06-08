@@ -24,18 +24,20 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
    
    {
       const double delta_mh_1l = mhc.getDeltaMh2EFT1Loop(1, 1);
-      const double susy_logs_1l = mhc.getDeltaMh2EFT1Loop(0, 1);
-      const double pref = 1./pow2(4*Pi) * pow2(p.Mt * yt);
-      CHECK_CLOSE(delta_mh_1l, pref*41.26267451, eps);
-      CHECK_CLOSE(susy_logs_1l, pref*14.31721183, eps);
+      CHECK_CLOSE(delta_mh_1l, 3665.091362110566, eps);
    }
    
    {
+      mhc.setCorrectionFlag(himalaya::EFTOrders::G32YB4, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YB6, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YT6, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU2YB4, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
+      mhc.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
       const double delta_mh_2l = mhc.getDeltaMh2EFT2Loop(1, 1);
-      const double susy_logs_2l = mhc.getDeltaMh2EFT2Loop(0, 1);
       const double pref = 1./pow4(4*Pi) * pow2(p.Mt * yt * p.g3);
       CHECK_CLOSE(delta_mh_2l, pref*778.7287955, eps);
-      CHECK_CLOSE(susy_logs_2l, pref*19.92610215, eps);
    }
    
    {
@@ -161,6 +163,8 @@ himalaya::Parameters test_point(){
 
    pars.scale = 4.67491329E+02;
    pars.mu = 3.52600579E+02;
+   pars.g1 = 0.441854;
+   pars.g2 = 0.656631;
    pars.g3 = 1.09949966E+00;
    pars.vd = 2.49832484E+01;
    pars.vu = 2.43650538E+02;
@@ -173,15 +177,26 @@ himalaya::Parameters test_point(){
    pars.mu2 << 2.80477426E+05, 0, 0,
                0, 2.80475621E+05, 0,
                0, 0, 1.80478484E+05;
-   pars.Ab = -798.8142296644842;
-   pars.At = -506.4162662374052;
-
+   pars.ml2 << 2.99793928E+05, 0, 0,
+               0, 2.99792102E+05, 0,
+               0, 0, 2.49327504E+05;
+   pars.me2 << 2.99793928E+05, 0, 0,
+               0, 2.99792102E+05, 0,
+               0, 0, 2.49327504E+05;
+	       
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0,  -798.8142296644842;
+   pars.Au << 0, 0, 0, 0, 0, 0, 0, 0,  -506.4162662374052;
+   pars.Ae << 0, 0, 0, 0, 0, 0, 0, 0,   -850.;
+   
+   pars.M1 = 500.;
+   pars.M2 = 600.;
    pars.MA = 3.92960954E+02;
    pars.MG = 5.88220143E+02;
    pars.MW = 8.04136643E+01;
    pars.MZ = 9.06817306E+01;
    pars.Mt = 1.52117491E+02;
    pars.Mb = 2.42010269E+00;
+   pars.Mtau = 1.2;
    pars.MSt << 3.83255677E+02, 5.70240743E+02;
    pars.MSb << 4.98792475E+02, 5.28677648E+02;
    pars.s2t = sin(2*asin(5.57720315E-01));

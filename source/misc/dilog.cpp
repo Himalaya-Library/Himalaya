@@ -194,4 +194,18 @@ std::complex<double> dilog(const std::complex<double>& z) {
    return result;
 }
 
+/**
+ * @brief Clausen function \f$\mathrm{Cl}_2(\theta)\f$
+ * @param x real angle
+ * @return \f$\mathrm{Cl}_2(\theta)\f$
+ */
+double clausen_2(double x)
+{
+   using std::exp;
+   using gm2calc::dilog;
+   const std::complex<double> img(0.,1.);
+
+   return std::imag(dilog(exp(img*x)));
+}
+
 } // namespace gm2calc
