@@ -67,6 +67,12 @@ std::pair<V2,double> calculate_MSf_s2f(const RM22& M)
    return std::make_pair(ew, s2t);
 }
 
+RM33 h_svd(const RM33& M)
+{
+   Eigen::JacobiSVD<RM33> svd(M);
+   return svd.singularValues().reverse().asDiagonal();
+}
+
 } // anonymous namespace
 
 double Parameters::calculateMsq2() const
@@ -105,9 +111,9 @@ void Parameters::validate(bool verbose)
    MG = std::abs(MG);
 
    // diagonalize all yukawa matrices
-   h_svd(yu);
-   h_svd(yd);
-   h_svd(ye);
+   yu = h_svd(yu);
+   yd = h_svd(yd);
+   ye = h_svd(ye);
    
    // calculate all other masses
    if(std::isnan(MW)) MW = std::sqrt(1/4.*pow2(g2)*(pow2(vu) + pow2(vd)));
@@ -177,18 +183,6 @@ void Parameters::validate(bool verbose)
       mq2(2,2) = mu2(2,2) / (1. + eps);
    }
 }
-
-RM33 Parameters::h_svd(RM33 M){
-   Eigen::JacobiSVD<RM33> svd(M);
-   svd.singularValues().reverse();
-   const auto m = svd.singularValues().reverse();
-   RM33 M_diag;
-   M_diag << m(0), 0, 0,
-      0, m(1), 0,
-      0, 0, m(2);
-   return M_diag;
-}
-
 
 std::ostream& operator<<(std::ostream& ostr, const Parameters& pars)
 {
