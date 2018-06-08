@@ -279,7 +279,7 @@ struct Data {
 
 Data make_data(const std::vector<double>& parsvec)
 {
-   const int N_input_parameters = 48; // number of Himalaya input parameters
+   const int N_input_parameters = 94; // number of Himalaya input parameters
 
    if (parsvec.size() != N_input_parameters) {
       throw std::runtime_error("HimalayaCalculateDMh3L expects "
@@ -295,6 +295,8 @@ Data make_data(const std::vector<double>& parsvec)
    himalaya::Parameters pars;
    pars.scale = parsvec.at(c++);
    pars.mu = parsvec.at(c++);
+   pars.g1 = parsvec.at(c++);
+   pars.g2 = parsvec.at(c++);
    pars.g3 = parsvec.at(c++);
    pars.vd = parsvec.at(c++);
    pars.vu = parsvec.at(c++);
@@ -307,14 +309,28 @@ Data make_data(const std::vector<double>& parsvec)
    for (int i = 0; i < 3; i++)
       for (int k = 0; k < 3; k++)
          pars.mu2(i,k) = parsvec.at(c++);
-   pars.Ad(2,2) = parsvec.at(c++);
-   pars.Au(2,2) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.ml2(i,k) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.me2(i,k) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.Au(i,k) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.Ad(i,k) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.Ae(i,k) = parsvec.at(c++);
    pars.MA = parsvec.at(c++);
    pars.MG = parsvec.at(c++);
    pars.MW = parsvec.at(c++);
    pars.MZ = parsvec.at(c++);
    pars.Mt = parsvec.at(c++);
    pars.Mb = parsvec.at(c++);
+   pars.Mtau = parsvec.at(c++);
 
    Eigen::Matrix<double,2,1> MSt, MSb;
    double s2t, s2b;

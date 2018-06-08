@@ -93,8 +93,9 @@ output = HimalayaCalculateDMh3L[
 { bottom, verbose };
 
 (* input parameters *)
-{ scale, mu, g3, vd, vu, mq2, md2, mu2, Ab, At, MA, MG, MW, MZ, Mt,
-  Mb, MSt, MSb, s2t, s2b };
+{ scale, mu, g1, g2, g3, vd, vu,
+  mq2, md2, mu2, ml2, me2, Au, Ad, Ae,
+  MA, MG, MW, MZ, Mt, Mb, Mtau, MSt, MSb, s2t, s2b };
 
 (* output parameters *)
 { renormalizationScheme, hierarchyID, hierarchyName, Mstop, Mh2Tree,
@@ -126,20 +127,26 @@ himalayaDefaultSettings = {
 himalayaDefaultParameters = {
         scale -> 0,
         mu -> 0,
+        g1 -> 0,
+        g2 -> 0,
         g3 -> 0,
         vd -> 0,
         vu -> 0,
         mq2 -> {{0,0,0},{0,0,0},{0,0,0}},
         md2 -> {{0,0,0},{0,0,0},{0,0,0}},
         mu2 -> {{0,0,0},{0,0,0},{0,0,0}},
-        Ab -> 0,
-        At -> 0,
+        ml2 -> {{0,0,0},{0,0,0},{0,0,0}},
+        me2 -> {{0,0,0},{0,0,0},{0,0,0}},
+        Ad -> {{0,0,0},{0,0,0},{0,0,0}},
+        Au -> {{0,0,0},{0,0,0},{0,0,0}},
+        Ae -> {{0,0,0},{0,0,0},{0,0,0}},
         MA -> 0,
         MG -> 0,
         MW -> 0,
         MZ -> 0,
         Mt -> 0,
         Mb -> 0,
+        Mtau -> 0,
         MSt -> {-1, -1}, (* invalid input *)
         MSb -> {-1, -1}, (* invalid input *)
         s2t -> -2,       (* invalid input *)
@@ -166,9 +173,12 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
             (* parameters *)
             OptionValue[scale],
             OptionValue[mu],
+            OptionValue[g1],
+            OptionValue[g2],
             OptionValue[g3],
             OptionValue[vd],
             OptionValue[vu],
+
             OptionValue[mq2][[1,1]],
             OptionValue[mq2][[1,2]],
             OptionValue[mq2][[1,3]],
@@ -178,6 +188,7 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
             OptionValue[mq2][[3,1]],
             OptionValue[mq2][[3,2]],
             OptionValue[mq2][[3,3]],
+
             OptionValue[md2][[1,1]],
             OptionValue[md2][[1,2]],
             OptionValue[md2][[1,3]],
@@ -187,6 +198,7 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
             OptionValue[md2][[3,1]],
             OptionValue[md2][[3,2]],
             OptionValue[md2][[3,3]],
+
             OptionValue[mu2][[1,1]],
             OptionValue[mu2][[1,2]],
             OptionValue[mu2][[1,3]],
@@ -196,14 +208,64 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
             OptionValue[mu2][[3,1]],
             OptionValue[mu2][[3,2]],
             OptionValue[mu2][[3,3]],
-            OptionValue[Ab],
-            OptionValue[At],
+
+            OptionValue[ml2][[1,1]],
+            OptionValue[ml2][[1,2]],
+            OptionValue[ml2][[1,3]],
+            OptionValue[ml2][[2,1]],
+            OptionValue[ml2][[2,2]],
+            OptionValue[ml2][[2,3]],
+            OptionValue[ml2][[3,1]],
+            OptionValue[ml2][[3,2]],
+            OptionValue[ml2][[3,3]],
+
+            OptionValue[me2][[1,1]],
+            OptionValue[me2][[1,2]],
+            OptionValue[me2][[1,3]],
+            OptionValue[me2][[2,1]],
+            OptionValue[me2][[2,2]],
+            OptionValue[me2][[2,3]],
+            OptionValue[me2][[3,1]],
+            OptionValue[me2][[3,2]],
+            OptionValue[me2][[3,3]],
+
+            OptionValue[Au][[1,1]],
+            OptionValue[Au][[1,2]],
+            OptionValue[Au][[1,3]],
+            OptionValue[Au][[2,1]],
+            OptionValue[Au][[2,2]],
+            OptionValue[Au][[2,3]],
+            OptionValue[Au][[3,1]],
+            OptionValue[Au][[3,2]],
+            OptionValue[Au][[3,3]],
+
+            OptionValue[Ad][[1,1]],
+            OptionValue[Ad][[1,2]],
+            OptionValue[Ad][[1,3]],
+            OptionValue[Ad][[2,1]],
+            OptionValue[Ad][[2,2]],
+            OptionValue[Ad][[2,3]],
+            OptionValue[Ad][[3,1]],
+            OptionValue[Ad][[3,2]],
+            OptionValue[Ad][[3,3]],
+
+            OptionValue[Ae][[1,1]],
+            OptionValue[Ae][[1,2]],
+            OptionValue[Ae][[1,3]],
+            OptionValue[Ae][[2,1]],
+            OptionValue[Ae][[2,2]],
+            OptionValue[Ae][[2,3]],
+            OptionValue[Ae][[3,1]],
+            OptionValue[Ae][[3,2]],
+            OptionValue[Ae][[3,3]],
+
             OptionValue[MA],
             OptionValue[MG],
             OptionValue[MW],
             OptionValue[MZ],
             OptionValue[Mt],
             OptionValue[Mb],
+            OptionValue[Mtau],
             OptionValue[MSt][[1]],
             OptionValue[MSt][[2]],
             OptionValue[MSb][[1]],
