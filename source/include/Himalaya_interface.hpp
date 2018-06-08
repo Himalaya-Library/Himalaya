@@ -56,7 +56,6 @@ struct Parameters {
 
    double calculateMsq2() const;                /**< calculates average light squark mass squared */
    void validate(bool verbose);                 /**< validates the parameter set */
-   RM33 h_svd(RM33 M);				/**< diagonalizes 3x3 matrixes and sorts them */
 };
 
 /// prints the Parameters struct to a stream
