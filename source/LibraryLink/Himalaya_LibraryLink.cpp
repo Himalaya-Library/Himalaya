@@ -326,13 +326,13 @@ Data make_data(const std::vector<double>& parsvec)
          pars.Ae(i,k) = parsvec.at(c++);
    for (int i = 0; i < 3; i++)
       for (int k = 0; k < 3; k++)
-         pars.yu(i,k) = parsvec.at(c++);
+         pars.Yu(i,k) = parsvec.at(c++);
    for (int i = 0; i < 3; i++)
       for (int k = 0; k < 3; k++)
-         pars.yd(i,k) = parsvec.at(c++);
+         pars.Yd(i,k) = parsvec.at(c++);
    for (int i = 0; i < 3; i++)
       for (int k = 0; k < 3; k++)
-         pars.ye(i,k) = parsvec.at(c++);
+         pars.Ye(i,k) = parsvec.at(c++);
    pars.MA = parsvec.at(c++);
    pars.M1 = parsvec.at(c++);
    pars.M2 = parsvec.at(c++);
