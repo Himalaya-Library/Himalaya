@@ -98,8 +98,6 @@ output = HimalayaCalculateDMh3L[
         M1 -> MS,
         M2 -> MS,
         M3 -> MS,
-        MW -> 80.384,
-        MZ -> 91.1876,
         Mt -> 160,
         Mb -> 2.4,
         Mtau -> 1.777
@@ -168,11 +166,11 @@ himalayaDefaultParameters = {
         M1 -> 0,
         M2 -> 0,
         M3 -> 0,
-        MW -> 0,
-        MZ -> 0,
-        Mt -> 0,
-        Mb -> 0,
-        Mtau -> 0,
+        MW -> -1,        (* invalid input *)
+        MZ -> -1,        (* invalid input *)
+        Mt -> -1,        (* invalid input *)
+        Mb -> -1,        (* invalid input *)
+        Mtau -> -1,      (* invalid input *)
         MSt -> {-1, -1}, (* invalid input *)
         MSb -> {-1, -1}, (* invalid input *)
         s2t -> -2,       (* invalid input *)

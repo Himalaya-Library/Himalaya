@@ -337,20 +337,26 @@ Data make_data(const std::vector<double>& parsvec)
    pars.M1 = parsvec.at(c++);
    pars.M2 = parsvec.at(c++);
    pars.MG = parsvec.at(c++);
-   pars.MW = parsvec.at(c++);
-   pars.MZ = parsvec.at(c++);
-   pars.Mt = parsvec.at(c++);
-   pars.Mb = parsvec.at(c++);
-   pars.Mtau = parsvec.at(c++);
+
+   const double MW = parsvec.at(c++);
+   const double MZ = parsvec.at(c++);
+   const double Mt = parsvec.at(c++);
+   const double Mb = parsvec.at(c++);
+   const double Mtau = parsvec.at(c++);
+
+   if (MW > 0) pars.MW = MW;
+   if (MZ > 0) pars.MZ = MZ;
+   if (Mt > 0) pars.Mt = Mt;
+   if (Mb > 0) pars.Mb = Mb;
+   if (Mtau > 0) pars.Mtau = Mtau;
 
    Eigen::Matrix<double,2,1> MSt, MSb;
-   double s2t, s2b;
    MSt(0) = parsvec.at(c++);
    MSt(1) = parsvec.at(c++);
    MSb(0) = parsvec.at(c++);
    MSb(1) = parsvec.at(c++);
-   s2t = parsvec.at(c++);
-   s2b = parsvec.at(c++);
+   const double s2t = parsvec.at(c++);
+   const double s2b = parsvec.at(c++);
 
    if (MSt.minCoeff() > 0. && std::abs(s2t) <= 1.) {
       pars.MSt = MSt;
