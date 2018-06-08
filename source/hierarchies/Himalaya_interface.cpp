@@ -111,16 +111,16 @@ void Parameters::validate(bool verbose)
    MG = std::abs(MG);
 
    // diagonalize all yukawa matrices
-   yu = h_svd(yu);
-   yd = h_svd(yd);
-   ye = h_svd(ye);
+   Yu = h_svd(Yu);
+   Yd = h_svd(Yd);
+   Ye = h_svd(Ye);
    
    // calculate all other masses
    if(std::isnan(MW)) MW = std::sqrt(1/4.*pow2(g2)*(pow2(vu) + pow2(vd)));
    if(std::isnan(MZ)) MZ = std::sqrt(1/4.*(0.6*pow2(g1) + pow2(g2))*(pow2(vu) + pow2(vd)));
-   if(std::isnan(Mt)) Mt = 0.7071067811865475*yu(2,2)*vu;
-   if(std::isnan(Mb)) Mb = 0.7071067811865475*yd(2,2)*vd;
-   if(std::isnan(Mtau)) Mtau = 0.7071067811865475*ye(2,2)*vd;
+   if(std::isnan(Mt)) Mt = 0.7071067811865475*Yu(2,2)*vu;
+   if(std::isnan(Mb)) Mb = 0.7071067811865475*Yd(2,2)*vd;
+   if(std::isnan(Mtau)) Mtau = 0.7071067811865475*Ye(2,2)*vd;
    
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)) {
@@ -219,15 +219,15 @@ std::ostream& operator<<(std::ostream& ostr, const Parameters& pars)
         << "Ae    = {{" << pars.Ae(0,0) << ", " << pars.Ae(0,1) << ", " << pars.Ae(0,2) << "}, "
                     "{" << pars.Ae(1,0) << ", " << pars.Ae(1,1) << ", " << pars.Ae(1,2) << "}, "
                     "{" << pars.Ae(2,0) << ", " << pars.Ae(2,1) << ", " << pars.Ae(2,2) << "}}\n"
-        << "Yu    = {{" << pars.yu(0,0) << ", " << pars.yu(0,1) << ", " << pars.yu(0,2) << "}, "
-                    "{" << pars.yu(1,0) << ", " << pars.yu(1,1) << ", " << pars.yu(1,2) << "}, "
-                    "{" << pars.yu(2,0) << ", " << pars.yu(2,1) << ", " << pars.yu(2,2) << "}}\n"
-        << "Yd    = {{" << pars.yd(0,0) << ", " << pars.yd(0,1) << ", " << pars.yd(0,2) << "}, "
-                    "{" << pars.yd(1,0) << ", " << pars.yd(1,1) << ", " << pars.yd(1,2) << "}, "
-                    "{" << pars.yd(2,0) << ", " << pars.yd(2,1) << ", " << pars.yd(2,2) << "}}\n"
-        << "Ye    = {{" << pars.ye(0,0) << ", " << pars.ye(0,1) << ", " << pars.ye(0,2) << "}, "
-                    "{" << pars.ye(1,0) << ", " << pars.ye(1,1) << ", " << pars.ye(1,2) << "}, "
-                    "{" << pars.ye(2,0) << ", " << pars.ye(2,1) << ", " << pars.ye(2,2) << "}}\n"
+        << "Yu    = {{" << pars.Yu(0,0) << ", " << pars.Yu(0,1) << ", " << pars.Yu(0,2) << "}, "
+                    "{" << pars.Yu(1,0) << ", " << pars.Yu(1,1) << ", " << pars.Yu(1,2) << "}, "
+                    "{" << pars.Yu(2,0) << ", " << pars.Yu(2,1) << ", " << pars.Yu(2,2) << "}}\n"
+        << "Yd    = {{" << pars.Yd(0,0) << ", " << pars.Yd(0,1) << ", " << pars.Yd(0,2) << "}, "
+                    "{" << pars.Yd(1,0) << ", " << pars.Yd(1,1) << ", " << pars.Yd(1,2) << "}, "
+                    "{" << pars.Yd(2,0) << ", " << pars.Yd(2,1) << ", " << pars.Yd(2,2) << "}}\n"
+        << "Ye    = {{" << pars.Ye(0,0) << ", " << pars.Ye(0,1) << ", " << pars.Ye(0,2) << "}, "
+                    "{" << pars.Ye(1,0) << ", " << pars.Ye(1,1) << ", " << pars.Ye(1,2) << "}, "
+                    "{" << pars.Ye(2,0) << ", " << pars.Ye(2,1) << ", " << pars.Ye(2,2) << "}}\n"
         << "M1    = " << pars.M1 << '\n'
         << "M2    = " << pars.M2 << '\n'
         << "MG    = " << pars.MG << '\n'
