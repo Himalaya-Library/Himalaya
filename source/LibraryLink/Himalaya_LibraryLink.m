@@ -48,6 +48,9 @@ Arguments:
     - Au: trilinear up-type squark coupling
     - Ad: trilinear down-type squark coupling
     - Ae: trilinear down-type slepton coupling
+    - Yu: up-type quark Yukawa coupling
+    - Yd: down-type quark Yukawa coupling
+    - Ye: down-type lepton Yukawa coupling
     - MA: CP-odd Higgs boson mass
     - M1: bino mass
     - M2: wino mass
@@ -112,7 +115,7 @@ output = HimalayaCalculateDMh3L[
 
 (* input parameters *)
 { scale, mu, g1, g2, g3, vd, vu,
-  mq2, md2, mu2, ml2, me2, Au, Ad, Ae,
+  mq2, md2, mu2, ml2, me2, Au, Ad, Ae, Yu, Yd, Ye,
   MA, M1, M2, M3, MW, MZ, Mt, Mb, Mtau, MSt, MSb, s2t, s2b };
 
 (* output parameters *)
@@ -158,6 +161,9 @@ himalayaDefaultParameters = {
         Ad -> {{0,0,0},{0,0,0},{0,0,0}},
         Au -> {{0,0,0},{0,0,0},{0,0,0}},
         Ae -> {{0,0,0},{0,0,0},{0,0,0}},
+        Yd -> {{0,0,0},{0,0,0},{0,0,0}},
+        Yu -> {{0,0,0},{0,0,0},{0,0,0}},
+        Ye -> {{0,0,0},{0,0,0},{0,0,0}},
         MA -> 0,
         M1 -> 0,
         M2 -> 0,
@@ -278,6 +284,36 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
             OptionValue[Ae][[3,1]],
             OptionValue[Ae][[3,2]],
             OptionValue[Ae][[3,3]],
+
+            OptionValue[Yu][[1,1]],
+            OptionValue[Yu][[1,2]],
+            OptionValue[Yu][[1,3]],
+            OptionValue[Yu][[2,1]],
+            OptionValue[Yu][[2,2]],
+            OptionValue[Yu][[2,3]],
+            OptionValue[Yu][[3,1]],
+            OptionValue[Yu][[3,2]],
+            OptionValue[Yu][[3,3]],
+
+            OptionValue[Yd][[1,1]],
+            OptionValue[Yd][[1,2]],
+            OptionValue[Yd][[1,3]],
+            OptionValue[Yd][[2,1]],
+            OptionValue[Yd][[2,2]],
+            OptionValue[Yd][[2,3]],
+            OptionValue[Yd][[3,1]],
+            OptionValue[Yd][[3,2]],
+            OptionValue[Yd][[3,3]],
+
+            OptionValue[Ye][[1,1]],
+            OptionValue[Ye][[1,2]],
+            OptionValue[Ye][[1,3]],
+            OptionValue[Ye][[2,1]],
+            OptionValue[Ye][[2,2]],
+            OptionValue[Ye][[2,3]],
+            OptionValue[Ye][[3,1]],
+            OptionValue[Ye][[3,2]],
+            OptionValue[Ye][[3,3]],
 
             OptionValue[MA],
             OptionValue[M1],

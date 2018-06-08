@@ -279,7 +279,7 @@ struct Data {
 
 Data make_data(const std::vector<double>& parsvec)
 {
-   const int N_input_parameters = 96; // number of Himalaya input parameters
+   const int N_input_parameters = 123; // number of Himalaya input parameters
 
    if (parsvec.size() != N_input_parameters) {
       throw std::runtime_error("HimalayaCalculateDMh3L expects "
@@ -324,6 +324,15 @@ Data make_data(const std::vector<double>& parsvec)
    for (int i = 0; i < 3; i++)
       for (int k = 0; k < 3; k++)
          pars.Ae(i,k) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.yu(i,k) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.yd(i,k) = parsvec.at(c++);
+   for (int i = 0; i < 3; i++)
+      for (int k = 0; k < 3; k++)
+         pars.ye(i,k) = parsvec.at(c++);
    pars.MA = parsvec.at(c++);
    pars.M1 = parsvec.at(c++);
    pars.M2 = parsvec.at(c++);
