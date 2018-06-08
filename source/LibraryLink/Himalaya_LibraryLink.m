@@ -35,20 +35,28 @@ Arguments:
 
     - scale: renormalization scale
     - mu: superpotential mu parameter
+    - g1: GUT-normalized Hypercharge gauge coupling (gY = Sqrt[3/5] g1)
+    - g2: SU(2)_L gauge coupling
     - g3: strong gauge coupling
     - vd: neutral down-type Higgs VEV (Sqrt[vu^2 + vd^2] ~ 246 GeV)
     - vu: neutral up-type Higgs VEV (Sqrt[vu^2 + vd^2] ~ 246 GeV)
     - mq2: 3x3 matrix of soft-breaking left-handed squark squared mass parameters
     - md2: 3x3 matrix of soft-breaking right-handed down-type squark squared mass parameters
     - mu2: 3x3 matrix of soft-breaking right-handed up-type squark squared mass parameters
-    - Ab: trilinear sbottom coupling
-    - At: trilinear stop coupling
+    - ml2: 3x3 matrix of soft-breaking left-handed slepton squared mass parameters
+    - me2: 3x3 matrix of soft-breaking right-handed down-type slepton squared mass parameters
+    - Au: trilinear up-type squark coupling
+    - Ad: trilinear down-type squark coupling
+    - Ae: trilinear down-type slepton coupling
     - MA: CP-odd Higgs boson mass
-    - MG: gluino mass
+    - M1: bino mass
+    - M2: wino mass
+    - M3: gluino mass
     - MW: W boson mass
     - MZ: Z boson mass
     - Mt: top quark mass
     - Mb: bottom quark mass
+    - Mtau: tau lepton mass
     - MSt: (optional) 2-vector with stop masses
     - MSb: (optional) 2-vector with sbottom masses
     - s2t: (optional) sine of 2 times stop mixing angle
@@ -68,20 +76,30 @@ output = HimalayaCalculateDMh3L[
     parameters -> {
         scale -> MS,
         mu -> MS,
-        g3 -> 0.1184,
+        g1 -> 0.46,
+        g2 -> 0.65,
+        g3 -> 1.166,
         vd -> 246*Cos[ArcTan[TB]],
         vu -> 246*Sin[ArcTan[TB]],
         mq2 -> MS^2 IdentityMatrix[3],
         md2 -> MS^2 IdentityMatrix[3],
         mu2 -> MS^2 IdentityMatrix[3],
-        Ab -> 0,
-        At -> Xt + MS/TB,
+        ml2 -> MS^2 IdentityMatrix[3],
+        me2 -> MS^2 IdentityMatrix[3],
+        Au -> {{0,0,0},
+               {0,0,0},
+               {0,0, Xt + MS/TB }},
+        Ad -> 0 IdentityMatrix[3],
+        Ae -> 0 IdentityMatrix[3],
         MA -> MS,
-        MG -> MS,
+        M1 -> MS,
+        M2 -> MS,
+        M3 -> MS,
         MW -> 80.384,
         MZ -> 91.1876,
         Mt -> 160,
-        Mb -> 2.4
+        Mb -> 2.4,
+        Mtau -> 1.777
     }
 ];
 ";
@@ -95,7 +113,7 @@ output = HimalayaCalculateDMh3L[
 (* input parameters *)
 { scale, mu, g1, g2, g3, vd, vu,
   mq2, md2, mu2, ml2, me2, Au, Ad, Ae,
-  MA, MG, MW, MZ, Mt, Mb, Mtau, MSt, MSb, s2t, s2b };
+  MA, M1, M2, M3, MW, MZ, Mt, Mb, Mtau, MSt, MSb, s2t, s2b };
 
 (* output parameters *)
 { renormalizationScheme, hierarchyID, hierarchyName, Mstop, Mh2Tree,
@@ -141,7 +159,9 @@ himalayaDefaultParameters = {
         Au -> {{0,0,0},{0,0,0},{0,0,0}},
         Ae -> {{0,0,0},{0,0,0},{0,0,0}},
         MA -> 0,
-        MG -> 0,
+        M1 -> 0,
+        M2 -> 0,
+        M3 -> 0,
         MW -> 0,
         MZ -> 0,
         Mt -> 0,
@@ -260,7 +280,9 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
             OptionValue[Ae][[3,3]],
 
             OptionValue[MA],
-            OptionValue[MG],
+            OptionValue[M1],
+            OptionValue[M2],
+            OptionValue[M3],
             OptionValue[MW],
             OptionValue[MZ],
             OptionValue[Mt],
