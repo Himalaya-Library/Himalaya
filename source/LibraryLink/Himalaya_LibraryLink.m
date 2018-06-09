@@ -45,21 +45,21 @@ Arguments:
     - mu2: 3x3 matrix of soft-breaking right-handed up-type squark squared mass parameters
     - ml2: 3x3 matrix of soft-breaking left-handed slepton squared mass parameters
     - me2: 3x3 matrix of soft-breaking right-handed down-type slepton squared mass parameters
-    - Au: trilinear up-type squark coupling
-    - Ad: trilinear down-type squark coupling
-    - Ae: trilinear down-type slepton coupling
-    - Yu: up-type quark Yukawa coupling
-    - Yd: down-type quark Yukawa coupling
-    - Ye: down-type lepton Yukawa coupling
+    - Au: 3x3 matrix of trilinear up-type squark coupling
+    - Ad: 3x3 matrix of trilinear down-type squark coupling
+    - Ae: 3x3 matrix of trilinear down-type slepton coupling
+    - Yu: 3x3 matrix of up-type quark Yukawa coupling
+    - Yd: 3x3 matrix of down-type quark Yukawa coupling
+    - Ye: 3x3 matrix of down-type lepton Yukawa coupling
     - MA: CP-odd Higgs boson mass
     - M1: bino mass
     - M2: wino mass
     - M3: gluino mass
-    - MW: W boson mass
-    - MZ: Z boson mass
-    - Mt: top quark mass
-    - Mb: bottom quark mass
-    - Mtau: tau lepton mass
+    - MW: (optional) W boson mass
+    - MZ: (optional) Z boson mass
+    - Mt: (optional) top quark mass
+    - Mb: (optional) bottom quark mass
+    - Mtau: (optional) tau lepton mass
     - MSt: (optional) 2-vector with stop masses
     - MSb: (optional) 2-vector with sbottom masses
     - s2t: (optional) sine of 2 times stop mixing angle
@@ -94,13 +94,19 @@ output = HimalayaCalculateDMh3L[
                {0,0, Xt + MS/TB }},
         Ad -> 0 IdentityMatrix[3],
         Ae -> 0 IdentityMatrix[3],
+        Yu -> {{0,0,0},
+               {0,0,0},
+               {0,0, 0.862 }},
+        Yd -> {{0,0,0},
+               {0,0,0},
+               {0,0, 0.133 }},
+        Ye -> {{0,0,0},
+               {0,0,0},
+               {0,0, 0.101 }},
         MA -> MS,
         M1 -> MS,
         M2 -> MS,
-        M3 -> MS,
-        Mt -> 160,
-        Mb -> 2.4,
-        Mtau -> 1.777
+        M3 -> MS
     }
 ];
 ";
