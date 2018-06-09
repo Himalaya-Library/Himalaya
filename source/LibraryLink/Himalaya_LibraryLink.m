@@ -65,6 +65,23 @@ Arguments:
     - s2t: (optional) sine of 2 times stop mixing angle
     - s2b: (optional) sine of 2 times sbottom mixing angle
 
+Output: A list of replacement rules with
+
+ - renormalizationScheme: renormalization scheme of ???
+ - hierarchyID: ID of the used (best fitting) mass hierarchy
+ - hierarchyName: Name of the used (best fitting) mass hierarchy
+ - Mstop: used stop masses, defined in the 'renormalizationScheme'
+ - Mh2Tree: tree-level mass matrix (??? scheme)
+ - Mh21Loop: 1-loop correction to the mass matrix (??? scheme)
+ - Mh22Loop: 2-loop correction to the mass matrix (??? scheme)
+ - Mh23Loop: 3-loop correction to the mass matrix (??? scheme)
+ - Mh23LoopShiftDRbarPrimeToMDRPrime: shift from DR' -> MDR' scheme
+ - expansionUncertainty: uncertainty from mass expansion for 0-, 1-, 2- and 3-loop correction
+ - deltaLambda3LoopH3mDRbarPrime: 3-loop Delta lambda, in DR' scheme, w/ H3m logarithms
+ - deltaLambda3LoopH3mShiftDRbarPrimeToMSbar: shift of 3-loop Delta lambda (H3m logarithms) from DR' -> MS scheme
+ - deltaLambda3LoopEFTDRbarPrime: 3-loop Delta lambda, in DR' scheme, w/ full logarithms
+ - deltaLambda3LoopEFTShiftDRbarPrimeToMSbar: shift of 3-loop Delta lambda (full logarithms) from DR' -> MS scheme
+
 Example:
 
 MS = 2000;
