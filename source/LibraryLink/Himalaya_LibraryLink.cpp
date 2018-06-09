@@ -393,6 +393,9 @@ DLLEXPORT int HimalayaCalculateDMh3L(
    } catch (const std::exception& e) {
       put_message(link, "HimalayaErrorMessage", e.what());
       MLPutSymbol(link, "$Failed");
+   } catch (...) {
+      put_message(link, "HimalayaErrorMessage", "An unknown exception has been thrown.");
+      MLPutSymbol(link, "$Failed");
    }
 
    return LIBRARY_NO_ERROR;
