@@ -130,14 +130,14 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
       ren_scheme == himalaya::RenSchemes::H3m ||
       ren_scheme == himalaya::RenSchemes::H3mMDRBAR ? "H3m" : "DRbarPrime";
 
-   Eigen::Matrix<double,4,1> expansion_uncertainty;
+   Eigen::Vector4d expansion_uncertainty;
    expansion_uncertainty << 0., ho.getExpUncertainty(1),
       ho.getExpUncertainty(2), ho.getExpUncertainty(3);
 
-   Eigen::Matrix<double,2,1> delta_lambda_eft;
+   Eigen::Vector2d delta_lambda_eft;
    delta_lambda_eft << ho.getDeltaLambdaEFT(), ho.getDeltaLambdaUncertaintyEFT();
 
-   Eigen::Matrix<double,2,1> delta_lambda_h3m;
+   Eigen::Vector2d delta_lambda_h3m;
    delta_lambda_h3m << ho.getDeltaLambdaH3m(), ho.getDeltaLambdaUncertaintyH3m();
 
    MLPutRuleTo(link, ren_scheme_str, "renormalizationScheme");
@@ -335,7 +335,7 @@ Data make_data(const std::vector<double>& parsvec)
    if (Mb > 0) pars.Mb = Mb;
    if (Mtau > 0) pars.Mtau = Mtau;
 
-   Eigen::Matrix<double,2,1> MSt, MSb;
+   Eigen::Vector2d MSt, MSb;
    MSt(0) = parsvec.at(c++);
    MSt(1) = parsvec.at(c++);
    MSb(0) = parsvec.at(c++);
