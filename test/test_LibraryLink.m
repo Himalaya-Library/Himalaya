@@ -45,10 +45,8 @@ TestPoint[point_, name_] :=
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopH3mDRbarPrime                  /. output, deltaLambda3LoopH3mDRbarPrime                  /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. output, deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. (expectedOutput /. point), eps];
-           TestClose[deltaLambda3LoopH3mUncertainty                 /. output, deltaLambda3LoopH3mUncertainty                 /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopEFTDRbarPrime                  /. output, deltaLambda3LoopEFTDRbarPrime                  /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      /. output, deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      /. (expectedOutput /. point), eps];
-           TestClose[deltaLambda3LoopEFTUncertainty                 /. output, deltaLambda3LoopEFTUncertainty                 /. (expectedOutput /. point), eps];
           ];
 
 (* load LibrayLink *)
@@ -111,12 +109,10 @@ pointSPS2 = {
         Mh22Loop                                       -> {{-0.307806, 17.7881}, {17.7881, 1256.76}},
         Mh23Loop                                       -> {{-0.0143744, 5.62494}, {5.62494, 300.795}},
         expansionUncertainty                           -> {0, 0, 0.0378711, 0.0243905},
-        deltaLambda3LoopH3mDRbarPrime                  -> 8.33505*^-06,
+        deltaLambda3LoopH3mDRbarPrime                  -> {8.33505*^-06, 0.00012236},
         deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      -> -4.62215*^-05,
-        deltaLambda3LoopH3mUncertainty                 -> 0.00012236,
-        deltaLambda3LoopEFTDRbarPrime                  -> -1.17351*^-05,
-        deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      -> -4.62254*^-05,
-        deltaLambda3LoopEFTUncertainty                 -> 0.000102286
+        deltaLambda3LoopEFTDRbarPrime                  -> {-1.17351*^-05, 0.000102286},
+        deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      -> -4.62254*^-05
     },
     precision -> 1*^-5
 };

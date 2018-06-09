@@ -144,7 +144,7 @@ void put_message(MLINK link,
 
 void put_result(const himalaya::HierarchyObject& ho, MLINK link)
 {
-   MLPutFunction(link, "List", 15);
+   MLPutFunction(link, "List", 13);
 
    const auto hierarchy = ho.getSuitableHierarchy();
    const auto ren_scheme = ho.getRenormalizationScheme();
@@ -156,6 +156,12 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    expansion_uncertainty << 0., ho.getExpUncertainty(1),
       ho.getExpUncertainty(2), ho.getExpUncertainty(3);
 
+   Eigen::Matrix<double,2,1> delta_lambda_eft;
+   delta_lambda_eft << ho.getDeltaLambdaEFT(), ho.getDeltaLambdaUncertaintyEFT();
+
+   Eigen::Matrix<double,2,1> delta_lambda_h3m;
+   delta_lambda_h3m << ho.getDeltaLambdaH3m(), ho.getDeltaLambdaUncertaintyH3m();
+
    MLPutRuleTo(link, ren_scheme_str, "renormalizationScheme");
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
@@ -165,12 +171,10 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    MLPutRuleTo(link, ho.getDMh(2), "Mh22Loop");
    MLPutRuleTo(link, ho.getDMh(3), "Mh23Loop");
    MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
-   MLPutRuleTo(link, ho.getDeltaLambdaH3m(), "deltaLambda3LoopH3mDRbarPrime");
+   MLPutRuleTo(link, delta_lambda_h3m, "deltaLambda3LoopH3mDRbarPrime");
    MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftH3m(), "deltaLambda3LoopH3mShiftDRbarPrimeToMSbar");
-   MLPutRuleTo(link, ho.getDeltaLambdaUncertaintyH3m(), "deltaLambda3LoopH3mUncertainty");
-   MLPutRuleTo(link, ho.getDeltaLambdaEFT(), "deltaLambda3LoopEFTDRbarPrime");
+   MLPutRuleTo(link, delta_lambda_eft, "deltaLambda3LoopEFTDRbarPrime");
    MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftEFT(), "deltaLambda3LoopEFTShiftDRbarPrimeToMSbar");
-   MLPutRuleTo(link, ho.getDeltaLambdaUncertaintyEFT(), "deltaLambda3LoopEFTUncertainty");
 
    MLEndPacket(link);
 }

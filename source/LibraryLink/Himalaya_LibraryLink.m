@@ -121,9 +121,8 @@ output = HimalayaCalculateDMh3L[
   Mh21Loop, Mh22Loop, Mh23Loop, expansionUncertainty,
   deltaLambda3LoopH3mDRbarPrime,
   deltaLambda3LoopH3mShiftDRbarPrimeToMSbar,
-  deltaLambda3LoopH3mUncertainty, deltaLambda3LoopEFTDRbarPrime,
-  deltaLambda3LoopEFTShiftDRbarPrimeToMSbar,
-  deltaLambda3LoopEFTUncertainty };
+  deltaLambda3LoopEFTDRbarPrime,
+  deltaLambda3LoopEFTShiftDRbarPrimeToMSbar };
 
 Himalaya::nonum = "Error: `1` is not a numeric input value!";
 Himalaya::error = "`1`";
