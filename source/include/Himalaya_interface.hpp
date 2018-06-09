@@ -6,9 +6,9 @@
 
 namespace himalaya {
 
-typedef Eigen::Matrix<double,2,1> V2;   ///< real 2-vector
-typedef Eigen::Matrix<double,2,2> RM22; ///< real 2x2 matrix
-typedef Eigen::Matrix<double,3,3> RM33; ///< real 3x3 matrix
+typedef Eigen::Vector2d V2;   ///< real 2-vector
+typedef Eigen::Matrix2d RM22; ///< real 2x2 matrix
+typedef Eigen::Matrix3d RM33; ///< real 3x3 matrix
 
 /**
  * 	The Himalaya interface struct
