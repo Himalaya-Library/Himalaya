@@ -8,6 +8,7 @@
 #include <WolframLibrary.h>
 
 namespace himalaya {
+namespace {
 
 /********************* put types *********************/
 
@@ -91,41 +92,18 @@ void MLPut(MLINK link, const Eigen::Matrix<std::complex<double>,M,N>& m)
    }
 }
 
-/********************* put single heads *********************/
-
-void MLPutHeads(MLINK link, const std::vector<std::string>& heads)
-{
-   for (const auto& h: heads)
-      MLPutFunction(link, h.c_str(), 1);
-}
-
 /********************* put rules to types *********************/
 
-void MLPutRule(MLINK link, const std::string& name, const std::vector<std::string>& heads = {})
+void MLPutRule(MLINK link, const std::string& name)
 {
    MLPutFunction(link, "Rule", 2);
-   MLPutHeads(link, heads);
    MLPutUTF8Symbol(link, reinterpret_cast<const unsigned char*>(name.c_str()), name.size());
 }
 
-void MLPutRule(MLINK link, int number, const std::vector<std::string>& heads = {})
-{
-   MLPutFunction(link, "Rule", 2);
-   MLPutHeads(link, heads);
-   MLPutInteger(link, number);
-}
-
-void MLPutRule(MLINK link, long number, const std::vector<std::string>& heads = {})
-{
-   MLPutFunction(link, "Rule", 2);
-   MLPutHeads(link, heads);
-   MLPutLongInteger(link, number);
-}
-
 template <class T1, class T2>
-void MLPutRuleTo(MLINK link, T1 t, const T2& name, const std::vector<std::string>& heads = {})
+void MLPutRuleTo(MLINK link, T1 t, const T2& name)
 {
-   MLPutRule(link, name, heads);
+   MLPutRule(link, name);
    MLPut(link, t);
 }
 
@@ -282,6 +260,8 @@ struct Data {
    bool verbose{true};
 };
 
+/******************************************************************/
+
 Data make_data(const std::vector<double>& parsvec)
 {
    const int N_input_parameters = 123; // number of Himalaya input parameters
@@ -384,6 +364,7 @@ Data make_data(const std::vector<double>& parsvec)
    return Data(pars, bottom, verbose);
 }
 
+} // anonymous namespace
 } // namespace himalaya
 
 extern "C" {
