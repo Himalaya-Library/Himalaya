@@ -118,7 +118,8 @@ output = HimalayaCalculateDMh3L[
 
 (* output parameters *)
 { renormalizationScheme, hierarchyID, hierarchyName, Mstop, Mh2Tree,
-  Mh21Loop, Mh22Loop, Mh23Loop, expansionUncertainty,
+  Mh21Loop, Mh22Loop, Mh23Loop, Mh23LoopShiftDRbarPrimeToMDRPrime,
+  expansionUncertainty,
   deltaLambda3LoopH3mDRbarPrime,
   deltaLambda3LoopH3mShiftDRbarPrimeToMSbar,
   deltaLambda3LoopEFTDRbarPrime,

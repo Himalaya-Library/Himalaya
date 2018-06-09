@@ -144,7 +144,7 @@ void put_message(MLINK link,
 
 void put_result(const himalaya::HierarchyObject& ho, MLINK link)
 {
-   MLPutFunction(link, "List", 13);
+   MLPutFunction(link, "List", 14);
 
    const auto hierarchy = ho.getSuitableHierarchy();
    const auto ren_scheme = ho.getRenormalizationScheme();
@@ -170,6 +170,7 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    MLPutRuleTo(link, ho.getDMh(1), "Mh21Loop");
    MLPutRuleTo(link, ho.getDMh(2), "Mh22Loop");
    MLPutRuleTo(link, ho.getDMh(3), "Mh23Loop");
+   MLPutRuleTo(link, ho.getDRToMDRShift(), "Mh23LoopShiftDRbarPrimeToMDRPrime");
    MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
    MLPutRuleTo(link, delta_lambda_h3m, "deltaLambda3LoopH3mDRbarPrime");
    MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftH3m(), "deltaLambda3LoopH3mShiftDRbarPrimeToMSbar");

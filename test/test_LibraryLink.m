@@ -108,6 +108,7 @@ pointSPS2 = {
         Mh21Loop                                       -> {{-2.92153, 100.252}, {100.252, 5277.06}},
         Mh22Loop                                       -> {{-0.307806, 17.7881}, {17.7881, 1256.76}},
         Mh23Loop                                       -> {{-0.0143744, 5.62494}, {5.62494, 300.795}},
+        Mh23LoopShiftDRbarPrimeToMDRPrime              -> {{0, 0}, {0, 0}},
         expansionUncertainty                           -> {0, 0, 0.0378711, 0.0243905},
         deltaLambda3LoopH3mDRbarPrime                  -> {8.33505*^-06, 0.00012236},
         deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      -> -4.62215*^-05,
