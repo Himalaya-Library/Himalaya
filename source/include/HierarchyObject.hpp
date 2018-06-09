@@ -51,7 +51,7 @@ namespace himalaya{
       /**
        * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
        */
-      Eigen::Matrix<double, 2, 1> getMDRMasses() const;
+      Eigen::Vector2d getMDRMasses() const;
       /**
        * 	@return the MDRFlag integer.
        */
@@ -118,7 +118,7 @@ namespace himalaya{
        * 	Sets the MDR masses
        * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
        */
-      void setMDRMasses(Eigen::Matrix<double, 2, 1>& mdrMasses);
+      void setMDRMasses(Eigen::Vector2d& mdrMasses);
       /**
        * 	Sets the delta of the CP-even Higgs mass matrix
        * 	@param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
@@ -193,7 +193,7 @@ namespace himalaya{
       std::map<int, double> expUncertainties{};						/**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
       std::map<int, Eigen::Matrix2d> dMhMap{};						/**< the map which holds all mass matrices at the given loop order */
       Eigen::Matrix2d mdrShift{};							/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
-      Eigen::Matrix<double, 2, 1> mdrMasses{};						/**< the 'vector' which holds the MDR masses */
+      Eigen::Vector2d mdrMasses{};							/**< the 'vector' which holds the MDR masses */
       double deltaLambdaH3m{};								/**< delta_lambda 3-loop with H3m logs */
       double deltaLambdaEFT{};								/**< delta_lambda 3-loop with EFT logs */
       double deltaLambdaNonLog{};                                                       /**< delta_lambda 3-loop, non-logarithmic part */
@@ -207,7 +207,7 @@ namespace himalaya{
        * 	@param vector The vector which should be sorted.
        *	@return Returns a vector the lightest entry at position 0.
        */
-      Eigen::Matrix<double, 2, 1> sortVector(Eigen::Matrix<double, 2, 1>& vector);
+      Eigen::Vector2d sortVector(Eigen::Vector2d& vector);
    };
    /**
     * 	Prints out all information of the HierarchyObject

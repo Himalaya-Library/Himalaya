@@ -770,7 +770,7 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
    
    // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
    if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-      Eigen::Matrix<double, 2, 1> mdrMasses;
+      Eigen::Vector2d mdrMasses;
       mdrMasses(0) = Mst1;
       mdrMasses(1) = Mst2;
       ho.setMDRMasses(mdrMasses);
