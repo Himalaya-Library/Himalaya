@@ -111,20 +111,15 @@ void himalaya::HierarchyCalculator::init(){
 /**
  * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
  * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
- * 	@param renScheme an integer to choose among renormalization schemes. DR' is default.
  * 	@return A HierarchyObject which holds all information of the calculation.
  */
-himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab, const int renScheme){
+himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isAlphab){
    HierarchyObject ho (isAlphab);
    
    if (isAlphab)
       INFO_MSG("3-loop threshold correction Δλ not available for O(ab*as^2)!");
    
-   const int mdrFlag = (renScheme == RenSchemes::DRBARPRIME || renScheme == RenSchemes::H3m) ? 0 : 1;
-   const int drPrimeFlag = (renScheme == RenSchemes::DRBARPRIME || renScheme == RenSchemes::MDRBARPRIME) ? 1 : 0;
-   
-   // set renormalization scheme
-   ho.setRenormalizationScheme(renScheme);
+   const int mdrFlag = 0;
    
    // set mdrFlag
    ho.setMDRFlag(mdrFlag);
@@ -141,16 +136,8 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       || suitableHierarchy == himalaya::Hierarchies::h9
       || suitableHierarchy == himalaya::Hierarchies::h9q2) xtOrder = 3;
    
-   // calculate the DR to MDR shift with the obtained hierarchy
-   if(mdrFlag == 1){
-      ho.setDRToMDRShift(calcDRbarToMDRbarShift(ho, true, true));
-   }
-   else{
-      ho.setDRToMDRShift(calcDRbarToMDRbarShift(ho, false, false));
-   }
-   
    // calculate the 3-loop Higgs mass matrix for the obtained hierachy in the (M)DRbar' scheme
-   ho.setDMh(3, calculateHierarchy(ho, 0, 0, 1) - drPrimeFlag * shiftH3mToDRbarPrime(ho));
+   ho.setDMh(3, calculateHierarchy(ho, 0, 0, 1) - shiftH3mToDRbarPrime(ho));
    
    // set the alpha_x contributions
    ho.setDMh(1, getMt41L(ho, mdrFlag, mdrFlag));
@@ -200,11 +187,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    
    // calculate the non-logarithmic part of delta_lambda at 3L
    const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() 
-      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
+      - shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
    
    // calculate delta_lambda_H3m
    ho.setDeltaLambdaH3m((pref*(ho.getDeltaLambdaH3m() 
-      - drPrimeFlag*shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
+      - shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
    
    // caluclate delta_lambda_EFT
    ho.setDeltaLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
@@ -215,26 +202,30 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // calculate DR' -> MS shift for delta_lambda 3L
    ho.setDRbarPrimeToMSbarShiftH3m(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
    // this shift generates Xt^5*Log(mu) terms for the EFT expression
-   ho.setDRbarPrimeToMSbarShiftEFT(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
+   ho.setDRbarPrimeToMSbarShiftEFT(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
    
    // set the uncertainty of delta_lambda due to missing Xt terms
    const int xt4Flag = xtOrder == 3 ? 1 : 0;
-   ho.setDeltaLambdaXtUncertaintyH3m(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0) 
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0) 
+   ho.setDeltaLambdaXtUncertaintyH3m(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0)
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
-   ho.setDeltaLambdaXtUncertaintyEFT(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1) 
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1) 
+   ho.setDeltaLambdaXtUncertaintyEFT(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
    
    // set uncertainty of delta_lambda
    ho.setExpUncertaintyDeltaLambda(ho.getExpUncertainty(3)/sqrt(v2));
    
-   //TODO always calculate delta_lambda in the DR' scheme?
-   if (verbose && drPrimeFlag == 0)
-      INFO_MSG("3-loop threshold correction Δλ not consistent in the H3m renormalization scheme!");
-
-   if (verbose && mdrFlag == 1)
-      INFO_MSG("3-loop threshold correction Δλ not consistent with MDR mass shifts!");
+   // calculate shifts needed to convert DR' to other renormalization schemes,
+   // here one needs it without the minus sign to convert DR -> H3m
+   ho.setDRbarPrimeToH3mShift(shiftH3mToDRbarPrime(ho));
+   
+   auto ho_mdr = ho;
+   ho_mdr.setMDRFlag(1);
+   // calculate the DR to MDR shift with the obtained hierarchy
+   ho_mdr.setDRToMDRShift(calcDRbarToMDRbarShift(ho_mdr, true, true));
+   ho_mdr.setDMh(3, calculateHierarchy(ho_mdr, 0, 0, 1) - shiftH3mToDRbarPrime(ho_mdr));
+   ho.setDRToMDRShift(ho_mdr.getDRToMDRShift() + ho_mdr.getDMh(3) - ho.getDMh(3));
    
    return ho;
 }

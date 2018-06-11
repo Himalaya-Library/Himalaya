@@ -179,6 +179,16 @@ namespace himalaya{
        */
       std::string getH3mHierarchyNotation(int hierarchy) const;
       /**
+       * 	Sets the DR' -> H3m shift which should be added to the DR' result
+       * 	@param shift the DR' -> H3m shift
+       */
+      void setDRbarPrimeToH3mShift(const Eigen::Matrix2d shift);
+      /**
+       * 	Returns the DR' -> H3m shift which should be added to the DR' result
+       * 	@return Returns the DR' -> H3m shift
+       */
+      Eigen::Matrix2d getDRbarPrimeToH3mShift() const;
+      /**
        * 	Set the expasion uncertainty for delta_lambda
        * 	@param expUncertLambda the expansion uncertainty for delta_lambda
        */
@@ -202,6 +212,7 @@ namespace himalaya{
       double deltaLambdaXtUncertaintyH3m{};						/**< The uncertainty of delta_lambda_H3m due to mising Xt terms */
       double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
       double expansionUncertaintyDeltaLambda{};						/**< The expansion uncertainty of delta_lambda */
+      Eigen::Matrix2d h3mShift{};							/**< The DR' -> H3m shift which should be added to the DR' result */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

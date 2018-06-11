@@ -290,11 +290,11 @@ himalaya::Parameters test_gigantic_delta() {
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
-	 setup_SPS1a(),
+	 /*setup_SPS1a(),
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
 	 setup_HSSUSY_minmix(),
-	 setup_low_MS_large_xt(),
+	 setup_low_MS_large_xt(),*/
 	 test_large_delta(),
 	 test_largest_delta(),
          test_gigantic_delta()
@@ -302,15 +302,15 @@ int main() {
       for (const auto& point: points) {
 	 // init hierarchy calculator
 	 himalaya::HierarchyCalculator hierarchyCalculator(point);
-
+;
 	 // calculate the 3-loop corrections with the suiatble hierarchy
-	 // top and DR'
-	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, himalaya::RenSchemes::DRBARPRIME);
+	 // top
+	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
 
 	 std::cout << hoTop << "\n";
-
-	 // bottom and MDR'
-	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::DRBARPRIME);
+   
+	 // bottom
+	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true);
       }
    }
    catch (const std::exception& e){
