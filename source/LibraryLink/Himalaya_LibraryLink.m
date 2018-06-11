@@ -67,14 +67,13 @@ Arguments:
 
 Output: A list of replacement rules with
 
- - renormalizationScheme: renormalization scheme of ???
  - hierarchyID: ID of the used (best fitting) mass hierarchy
- - hierarchyName: Name of the used (best fitting) mass hierarchy
- - Mstop: used stop masses, defined in the 'renormalizationScheme'
- - Mh2Tree: tree-level mass matrix (??? scheme)
- - Mh21Loop: 1-loop correction to the mass matrix (??? scheme)
- - Mh22Loop: 2-loop correction to the mass matrix (??? scheme)
- - Mh23Loop: 3-loop correction to the mass matrix (??? scheme)
+ - hierarchyName: name of the used (best fitting) mass hierarchy
+ - Mstop: used stop masses, defined in the DR' scheme
+ - Mh2Tree: tree-level mass matrix (DR' scheme)
+ - Mh21Loop: 1-loop correction to the mass matrix (DR' scheme)
+ - Mh22Loop: 2-loop correction to the mass matrix (DR' scheme)
+ - Mh23Loop: 3-loop correction to the mass matrix (DR' scheme)
  - Mh23LoopShiftDRbarPrimeToMDRPrime: shift from DR' -> MDR' scheme
  - Mh23LoopShiftDRbarPrimeToH3m: shift from DR' -> H3m scheme
  - expansionUncertainty: uncertainty from mass expansion for 0-, 1-, 2- and 3-loop correction
@@ -141,9 +140,8 @@ output = HimalayaCalculateDMh3L[
   MA, M1, M2, M3, MW, MZ, Mt, Mb, Mtau, MSt, MSb, s2t, s2b };
 
 (* output parameters *)
-{ renormalizationScheme, DRbarPrime, H3m,
-  hierarchyID, hierarchyName, Mstop, Mh2Tree,
-  Mh21Loop, Mh22Loop, Mh23Loop,
+{ hierarchyID, hierarchyName,
+  Mstop, Mh2Tree, Mh21Loop, Mh22Loop, Mh23Loop,
   Mh23LoopShiftDRbarPrimeToMDRPrime,
   Mh23LoopShiftDRbarPrimeToH3m,
   expansionUncertainty,

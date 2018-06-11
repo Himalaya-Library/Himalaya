@@ -122,13 +122,9 @@ void put_message(MLINK link,
 
 void put_result(const himalaya::HierarchyObject& ho, MLINK link)
 {
-   MLPutFunction(link, "List", 15);
+   MLPutFunction(link, "List", 14);
 
    const auto hierarchy = ho.getSuitableHierarchy();
-   const auto ren_scheme = ho.getRenormalizationScheme();
-   const auto ren_scheme_str =
-      ren_scheme == himalaya::RenSchemes::H3m ||
-      ren_scheme == himalaya::RenSchemes::H3mMDRBAR ? "H3m" : "DRbarPrime";
 
    Eigen::Vector4d expansion_uncertainty;
    expansion_uncertainty << 0., ho.getExpUncertainty(1),
@@ -140,7 +136,6 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    Eigen::Vector2d delta_lambda_h3m;
    delta_lambda_h3m << ho.getDeltaLambdaH3m(), ho.getDeltaLambdaUncertaintyH3m();
 
-   MLPutRuleTo(link, ren_scheme_str, "renormalizationScheme");
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
    MLPutRuleTo(link, ho.getMDRMasses(), "Mstop");

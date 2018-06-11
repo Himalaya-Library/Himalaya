@@ -34,7 +34,6 @@ TestPoint[point_, name_] :=
            Print["==== Testing Point ", name, " ================================"];
            Print[];
 
-           TestEqual[renormalizationScheme                          /. output, renormalizationScheme                          /. (expectedOutput /. point)];
            TestEqual[hierarchyID                                    /. output, hierarchyID                                    /. (expectedOutput /. point)];
            TestEqual[hierarchyName                                  /. output, hierarchyName                                  /. (expectedOutput /. point)];
            TestClose[Mstop                                          /. output, Mstop                                          /. (expectedOutput /. point), eps];
@@ -102,7 +101,6 @@ pointSPS2 = {
         }
     },
     expectedOutput -> {
-        renormalizationScheme                          -> DRbarPrime,
         hierarchyID                                    -> 2,
         hierarchyName                                  -> h3q22g,
         Mstop                                          -> {957.567, 1288.79},
