@@ -253,29 +253,64 @@ himalaya::Parameters test_largest_delta(){
 return p;
 }
 
+himalaya::Parameters test_gigantic_delta() {
+   himalaya::Parameters pars;
+
+   const double MS = 500.;
+   const double MS2 = MS*MS;
+   const double Xt = 3*MS;
+   const double tb = 10.;
+
+   pars.scale = MS;
+   pars.mu = MS;
+   pars.g3 = 1.10073;
+   pars.vd = 246*std::cos(std::atan(tb));
+   pars.vu = 246*std::sin(std::atan(tb));
+   pars.mq2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.md2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.mu2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0, 0;
+   pars.Au << 0, 0, 0, 0, 0, 0, 0, 0, Xt + pars.mu/tb;
+   pars.MA = MS;
+   pars.MG = 4*MS;
+   pars.MW = 78.9441;
+   pars.MZ = 90.5119;
+   pars.Mt = 154.682;
+   pars.Mb = 2.50901;
+
+   return pars;
+}
+
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
-	 setup_SPS1a(),
+	 /*setup_SPS1a(),
 	 setup_SPS2(),
 	 setup_CMSSM_large_m0(),
 	 setup_HSSUSY_minmix(),
-	 setup_low_MS_large_xt(),
+	 setup_low_MS_large_xt(),*/
 	 test_large_delta(),
-	 test_largest_delta()
+	 test_largest_delta(),
+         test_gigantic_delta()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator
 	 himalaya::HierarchyCalculator hierarchyCalculator(point);
-
+;
 	 // calculate the 3-loop corrections with the suiatble hierarchy
-	 // top and DR'
-	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false, himalaya::RenSchemes::DRBARPRIME);
+	 // top
+	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
 
 	 std::cout << hoTop << "\n";
-
-	 // bottom and MDR'
-	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true, himalaya::RenSchemes::DRBARPRIME);
+   
+	 // bottom
+	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true);
       }
    }
    catch (const std::exception& e){

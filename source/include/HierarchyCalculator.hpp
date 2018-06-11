@@ -22,10 +22,9 @@ namespace himalaya{
       /**
        * 	Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
        * 	@param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
-       *        @param renScheme an integer to choose among renormalization schemes. DR' is default.
        * 	@return A HierarchyObject which holds all information of the calculation.
        */
-      HierarchyObject calculateDMh3L(bool isAlphab, const int renScheme = RenSchemes::DRBARPRIME);
+      HierarchyObject calculateDMh3L(bool isAlphab);
       /**
        * 	Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
        * 	@param ho a HierarchyObject with constant isAlphab.

@@ -45,9 +45,9 @@ namespace himalaya{
        */
       Eigen::Matrix2d getDMh(int loops) const;
       /**
-       * 	@return The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s)
+       * 	@return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
        */
-      Eigen::Matrix2d getDRToMDRShift() const;
+      Eigen::Matrix2d getDRbarPrimeToMDRbarPrimeShift() const;
       /**
        * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
        */
@@ -110,10 +110,10 @@ namespace himalaya{
        */
       void setExpUncertainty(int loops, double uncertainty);
       /**
-       * 	Sets the DR -> MDR shift
-       * 	@param mdrShift the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+       * 	Sets the DR' -> MDR' shift
+       * 	@param mdrShift the DR' -> MDR' shiftet matrix of the form M(MDR') - M(DR').
        */
-      void setDRToMDRShift(const Eigen::Matrix2d& mdrShift);
+      void setDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift);
       /**
        * 	Sets the MDR masses
        * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
@@ -179,6 +179,16 @@ namespace himalaya{
        */
       std::string getH3mHierarchyNotation(int hierarchy) const;
       /**
+       * 	Sets the DR' -> H3m shift which should be added to the DR' result
+       * 	@param shift the DR' -> H3m shift
+       */
+      void setDRbarPrimeToH3mShift(const Eigen::Matrix2d shift);
+      /**
+       * 	Returns the DR' -> H3m shift which should be added to the DR' result
+       * 	@return Returns the DR' -> H3m shift
+       */
+      Eigen::Matrix2d getDRbarPrimeToH3mShift() const;
+      /**
        * 	Set the expasion uncertainty for delta_lambda
        * 	@param expUncertLambda the expansion uncertainty for delta_lambda
        */
@@ -202,6 +212,7 @@ namespace himalaya{
       double deltaLambdaXtUncertaintyH3m{};						/**< The uncertainty of delta_lambda_H3m due to mising Xt terms */
       double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
       double expansionUncertaintyDeltaLambda{};						/**< The expansion uncertainty of delta_lambda */
+      Eigen::Matrix2d h3mShift{};							/**< The DR' -> H3m shift which should be added to the DR' result */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.
