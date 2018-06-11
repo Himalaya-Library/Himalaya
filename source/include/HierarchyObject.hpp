@@ -45,9 +45,9 @@ namespace himalaya{
        */
       Eigen::Matrix2d getDMh(int loops) const;
       /**
-       * 	@return The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s)
+       * 	@return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
        */
-      Eigen::Matrix2d getDRToMDRShift() const;
+      Eigen::Matrix2d getDRbarPrimeToMDRbarPrimeShift() const;
       /**
        * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
        */
@@ -110,10 +110,10 @@ namespace himalaya{
        */
       void setExpUncertainty(int loops, double uncertainty);
       /**
-       * 	Sets the DR -> MDR shift
-       * 	@param mdrShift the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+       * 	Sets the DR' -> MDR' shift
+       * 	@param mdrShift the DR' -> MDR' shiftet matrix of the form M(MDR') - M(DR').
        */
-      void setDRToMDRShift(const Eigen::Matrix2d& mdrShift);
+      void setDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift);
       /**
        * 	Sets the MDR masses
        * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.

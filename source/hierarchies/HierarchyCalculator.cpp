@@ -223,9 +223,10 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    auto ho_mdr = ho;
    ho_mdr.setMDRFlag(1);
    // calculate the DR to MDR shift with the obtained hierarchy
-   ho_mdr.setDRToMDRShift(calcDRbarToMDRbarShift(ho_mdr, true, true));
+   ho_mdr.setDRbarPrimeToMDRbarPrimeShift(calcDRbarToMDRbarShift(ho_mdr, true, true));
    ho_mdr.setDMh(3, calculateHierarchy(ho_mdr, 0, 0, 1) - shiftH3mToDRbarPrime(ho_mdr));
-   ho.setDRToMDRShift(ho_mdr.getDRToMDRShift() + ho_mdr.getDMh(3) - ho.getDMh(3));
+   ho.setDRbarPrimeToMDRbarPrimeShift(
+      ho_mdr.getDRbarPrimeToMDRbarPrimeShift() + ho_mdr.getDMh(3) - ho.getDMh(3));
    
    return ho;
 }

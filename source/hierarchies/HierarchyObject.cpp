@@ -120,17 +120,17 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
 }
 
 /**
- * 	Sets the DR -> MDR shift
- * 	@param mdrShift the DR -> MDR shiftet matrix of the form M(MDR) - M(DR).
+ * 	Sets the DR' -> MDR' shift
+ * 	@param mdrShift the DR' -> MDR' shiftet matrix of the form M(MDR') - M(DR').
  */
-void himalaya::HierarchyObject::setDRToMDRShift(const Eigen::Matrix2d& mdrShift){
+void himalaya::HierarchyObject::setDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift){
    this -> mdrShift = mdrShift;
 }
 
 /**
- * 	@return The matrix M(MDR) - M(DR) at the order O(alpha_x + alpha_x*alpha_s)
+ * 	@return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
  */
-Eigen::Matrix2d himalaya::HierarchyObject::getDRToMDRShift() const{
+Eigen::Matrix2d himalaya::HierarchyObject::getDRbarPrimeToMDRbarPrimeShift() const{
    return mdrShift;
 }
 
@@ -397,8 +397,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
         << "Exp. uncert. 1L        =  " << ho.getExpUncertainty(1) << " GeV\n"
         << "Exp. uncert. 2L        =  " << ho.getExpUncertainty(2) << " GeV\n"
         << "Exp. uncert. 3L        =  " << ho.getExpUncertainty(3) << " GeV\n"
-	<< "DR' -> MDR shift       =  {{" << ho.getDRToMDRShift().row(0)(0) << ", " << ho.getDRToMDRShift().row(0)(1)
-		   << "}, {" << ho.getDRToMDRShift().row(1)(0) << ", " << ho.getDRToMDRShift().row(1)(1)  << "}} GeV^2\n"
+	<< "DR' -> MDR shift       =  {{" << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(1)
+		   << "}, {" << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(1)  << "}} GeV^2\n"
 	<< "DR' -> H3m shift       =  {{" << ho.getDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(0)(1)
 		   << "}, {" << ho.getDRbarPrimeToH3mShift().row(1)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(1)(1) << "}} GeV^2\n"
 	<< "Δλ_H3m                 =  " << ho.getDeltaLambdaH3m() << " +/- " << ho.getDeltaLambdaUncertaintyH3m() << " (expanded coefficients of logarithms)\n"
