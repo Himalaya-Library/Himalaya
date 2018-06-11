@@ -397,7 +397,7 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
         << "Exp. uncert. 1L        =  " << ho.getExpUncertainty(1) << " GeV\n"
         << "Exp. uncert. 2L        =  " << ho.getExpUncertainty(2) << " GeV\n"
         << "Exp. uncert. 3L        =  " << ho.getExpUncertainty(3) << " GeV\n"
-	<< "DR' -> MDR shift       =  {{" << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(1)
+	<< "DR' -> MDR' shift      =  {{" << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(1)
 		   << "}, {" << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(1)  << "}} GeV^2\n"
 	<< "DR' -> H3m shift       =  {{" << ho.getDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(0)(1)
 		   << "}, {" << ho.getDRbarPrimeToH3mShift().row(1)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(1)(1) << "}} GeV^2\n"
