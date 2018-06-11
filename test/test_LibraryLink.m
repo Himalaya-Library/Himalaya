@@ -42,6 +42,8 @@ TestPoint[point_, name_] :=
            TestClose[Mh21Loop                                       /. output, Mh21Loop                                       /. (expectedOutput /. point), eps];
            TestClose[Mh22Loop                                       /. output, Mh22Loop                                       /. (expectedOutput /. point), eps];
            TestClose[Mh23Loop                                       /. output, Mh23Loop                                       /. (expectedOutput /. point), eps];
+           TestClose[Mh23LoopShiftDRbarPrimeToMDRPrime              /. output, Mh23LoopShiftDRbarPrimeToMDRPrime              /. (expectedOutput /. point), eps];
+           TestClose[Mh23LoopShiftDRbarPrimeToH3m                   /. output, Mh23LoopShiftDRbarPrimeToH3m                   /. (expectedOutput /. point), eps];
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopH3mDRbarPrime                  /. output, deltaLambda3LoopH3mDRbarPrime                  /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. output, deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. (expectedOutput /. point), eps];
@@ -108,7 +110,8 @@ pointSPS2 = {
         Mh21Loop                                       -> {{-2.92153, 100.252}, {100.252, 5277.06}},
         Mh22Loop                                       -> {{-0.307806, 17.7881}, {17.7881, 1256.76}},
         Mh23Loop                                       -> {{-0.0143744, 5.62494}, {5.62494, 300.795}},
-        Mh23LoopShiftDRbarPrimeToMDRPrime              -> {{0, 0}, {0, 0}},
+        Mh23LoopShiftDRbarPrimeToMDRPrime              -> {{0.00487318, 0.0179684}, {0.0179684, 0.738644}},
+        Mh23LoopShiftDRbarPrimeToH3m                   -> {{-0.0037627, 0.0622916}, {0.0622916, -0.631601}},
         expansionUncertainty                           -> {0, 0, 0.0378711, 0.0243905},
         deltaLambda3LoopH3mDRbarPrime                  -> {8.33505*^-06, 0.00012236},
         deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      -> -4.62215*^-05,

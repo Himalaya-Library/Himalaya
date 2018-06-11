@@ -76,6 +76,7 @@ Output: A list of replacement rules with
  - Mh22Loop: 2-loop correction to the mass matrix (??? scheme)
  - Mh23Loop: 3-loop correction to the mass matrix (??? scheme)
  - Mh23LoopShiftDRbarPrimeToMDRPrime: shift from DR' -> MDR' scheme
+ - Mh23LoopShiftDRbarPrimeToH3m: shift from DR' -> H3m scheme
  - expansionUncertainty: uncertainty from mass expansion for 0-, 1-, 2- and 3-loop correction
  - deltaLambda3LoopH3mDRbarPrime: 3-loop Delta lambda, in DR' scheme, w/ H3m logarithms
  - deltaLambda3LoopH3mShiftDRbarPrimeToMSbar: shift of 3-loop Delta lambda (H3m logarithms) from DR' -> MS scheme
@@ -142,7 +143,9 @@ output = HimalayaCalculateDMh3L[
 (* output parameters *)
 { renormalizationScheme, DRbarPrime, H3m,
   hierarchyID, hierarchyName, Mstop, Mh2Tree,
-  Mh21Loop, Mh22Loop, Mh23Loop, Mh23LoopShiftDRbarPrimeToMDRPrime,
+  Mh21Loop, Mh22Loop, Mh23Loop,
+  Mh23LoopShiftDRbarPrimeToMDRPrime,
+  Mh23LoopShiftDRbarPrimeToH3m,
   expansionUncertainty,
   deltaLambda3LoopH3mDRbarPrime,
   deltaLambda3LoopH3mShiftDRbarPrimeToMSbar,
