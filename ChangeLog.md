@@ -5,20 +5,19 @@ New features
 ------------
 
  * The 3-loop O(at*as^2) contribution to the CP-even Higgs mass matrix
-   in the MSSM can now also be calulated in the DR'-bar scheme, given
-   a set of MSSM DR'-bar input parameters.  This is the new default.
+   in the MSSM is now calulated in the DR'-bar scheme by default.
+   Shifts to the MDR'-bar and H3m schemes are provided separately.
 
  * The 3-loop O(at*as^2) contribution to quartic Higgs coupling λ of
-   the Standard Model can be calculated in the DR'-bar and MS-bar
-   scheme.
+   the Standard Model is calculated in the DR'-bar scheme.  A shift to
+   the MS-bar scheme is provided separately.
 
 
 Changes
 -------
 
- * The default renormalization scheme has been changed to DR'-bar.
-   The used renormalization scheme is specified by the second
-   (optional) parameter of the `calculateDMh3L()` function.
+ * The default renormalization scheme for the input parameters has
+   been changed to DR'-bar.
 
 
 Himalaya 1.0.1
