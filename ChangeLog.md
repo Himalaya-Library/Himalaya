@@ -12,6 +12,9 @@ New features
    the Standard Model is calculated in the DR'-bar scheme.  A shift to
    the MS-bar scheme is provided separately.
 
+ * A Mathematica interface for Himalaya has been added.  See README.md
+   for a usage example.
+
 
 Changes
 -------
