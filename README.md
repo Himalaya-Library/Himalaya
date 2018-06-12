@@ -51,12 +51,12 @@ By default the code is compiled optimized.
 ## Running the code
 After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to the program. `libDSZ.a` is optional and has to be linked, if the program does not incorporate the associated Fortran code of G. Degrassi, P. Slavich and F. Zwirner ([arXiv:hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)).
 
-### Example
+### C++ interface
 
-We present a brief step by step guide how to run Himalaya and obtain
-the three-loop corrections to the CP-even Higgs mass matrix in the
-MSSM in the DR'-bar scheme or to the quartic Higgs coupling of the
-Standard Model in the MS-bar scheme.
+We present a brief step by step guide how to run Himalaya at the C++
+level and obtain the three-loop corrections to the CP-even Higgs mass
+matrix in the MSSM in the DR'-bar scheme and the quartic Higgs
+coupling of the Standard Model in the MS-bar scheme.
 
 First one has to include the header
 
@@ -117,9 +117,7 @@ himalaya::HierarchyObject ho = hc.calculateDMh3L(false);
 
 All information which has been gathered during the calculation will be
 stored in the returned `HierarchyObject` and can be accessed by member
-functions.  The function `calculateDMh3L` can take an optional second
-argument where the renormalization scheme can be specified (the
-default is DR'-bar).
+functions.
 
 To obtain the three-loop correction to the Higgs mass matrix one needs
 to call:
@@ -133,31 +131,29 @@ The returned matrix should be added to the two-loop mass matrix
 **before** diagonalization.
 
 To obtain the three-loop correction to the quartic Higgs coupling λ of
-the Standard Model in the MS-bar scheme in the convention of
-[[arXiv:hep-ph/0701051](https://arxiv.org/abs/hep-ph/0701051)] one
-needs to call
+the Standard Model in the DR'-bar scheme in the convention of
+[[arXiv:1407.4081](https://arxiv.org/abs/1407.4081)] one needs to call
 
 ```cpp
-double delta_lambda_3L = ho.getDeltaLambdaEFT() + ho.getDRbarPrimeToMSbarShift();
+double delta_lambda_3L = ho.getDeltaLambdaEFT();
 ```
 
 The function `getDeltaLambdaEFT` returns the three-loop correction in
-the renormalization scheme defined when calling `calculateDMh3L`, see
-above.  Here, `getDeltaLambdaEFT()` returns the three-loop correction
-in the DR'-bar scheme.  The three-loop shift to the MS-bar scheme is
-added in order to express the result in terms of the Standard Model
-MS-bar top Yukawa and strong gauge coupling.
+the DR'-bar scheme.  The three-loop shift to the MS-bar scheme,
+ocurring when the one- and two-loop corrections are expressed in terms
+of the Standard Model MS-bar strong gauge and top Yukawa couplings can
+be obtained by calling `ho.getDRbarPrimeToMSbarShiftEFT()`.
 
-An an uncertainty estimate of the calculated three-loop λ can be
-obtained by calling
+An uncertainty estimate of the calculated three-loop λ can be obtained
+by calling
 
 ```cpp
-double delta_lambda_3L_uncertainty = ho.getDeltaLambdaUncertainty();
+double delta_lambda_3L_uncertainty = ho.getDeltaLambdaUncertaintyEFT();
 ```
 
 The function `getDeltaLambdaUncertainty` returns an uncertainty
-estimate by taking into account the missing logarithmic higher order
-Xt^n terms missing in some hierarcy expansions.
+estimate by taking into account logarithmic higher order Xt^n terms
+missing in some hierarcy expansions.
 
 A full and detailed example can be found in `source/example.cpp`.
 
