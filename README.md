@@ -161,6 +161,98 @@ Xt^n terms missing in some hierarcy expansions.
 
 A full and detailed example can be found in `source/example.cpp`.
 
+### Mathematica interface
+
+Since version 2.0 Himalaya can be run from within Mathematica using
+the LibraryLink interface.  To load Himalaya into Mathematica, first,
+the file `source/LibraryLink/Himalaya_LibraryLink.m` must be loaded,
+which defines the Himalaya's Mathematica functions.  Assuming the
+current directory is in the `build/` sub-directory of Himalaya, this
+can be done with:
+
+```.m
+Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
+```
+
+Afterwards, the LibraryLink `Himalaya_LibraryLink.so` must be loaded
+using the `InitializeHimalaya[]` function:
+
+```.m
+InitializeHimalaya["Himalaya_LibraryLink.so"];
+```
+
+Now, the `HimalayaCalculateDMh3L[]` function is available, which
+calculates the loop corrections available by Himalaya.
+
+**Example**:
+
+```.m
+MS = 1000;
+TB = 10;
+Xt = Sqrt[6] MS;
+
+result = HimalayaCalculateDMh3L[
+   settings -> {
+       bottom -> False,
+       verbose -> True
+   },
+   parameters -> {
+       scale -> MS,
+       mu -> MS,
+       g1 -> 0.46,
+       g2 -> 0.65,
+       g3 -> 1.166,
+       vd -> 246*Cos[ArcTan[TB]],
+       vu -> 246*Sin[ArcTan[TB]],
+       mq2 -> MS^2 IdentityMatrix[3],
+       md2 -> MS^2 IdentityMatrix[3],
+       mu2 -> MS^2 IdentityMatrix[3],
+       ml2 -> MS^2 IdentityMatrix[3],
+       me2 -> MS^2 IdentityMatrix[3],
+       Au -> {{0,0,0},
+              {0,0,0},
+              {0,0, Xt + MS/TB }},
+       Ad -> 0 IdentityMatrix[3],
+       Ae -> 0 IdentityMatrix[3],
+       Yu -> {{0,0,0},
+              {0,0,0},
+              {0,0, 0.862 }},
+       Yd -> {{0,0,0},
+              {0,0,0},
+              {0,0, 0.133 }},
+       Ye -> {{0,0,0},
+              {0,0,0},
+              {0,0, 0.101 }},
+       MA -> MS,
+       M1 -> MS,
+       M2 -> MS,
+       M3 -> MS
+   }
+]
+```
+
+The `result` contains a list with replacement rules for all loop
+corrections:
+
+```.m
+{ hierarchyID -> 1, hierarchyName -> h32q2g,
+  Mstop -> {809.173, 1177.15},
+  Mh2Tree -> {{990181., -99832.9}, {-99832.9, 18131.5}},
+  Mh21Loop -> {{-655.018, 91.0476}, {91.0476, 8514.69}},
+  Mh22Loop -> {{0.313712, 26.7548}, {26.7548, 928.429}},
+  Mh23Loop -> {{-5.04054, 10.3797}, {10.3797, 262.451}},
+  Mh23LoopShiftDRbarPrimeToMDRPrime -> {{0.427722, 9.94589}, {9.94589, -38.3268}},
+  Mh23LoopShiftDRbarPrimeToH3m -> {{-1.61719, 2.15579}, {2.15579, 7.58367}},
+  expansionUncertainty -> {0., 0., 0.2247, 0.0198037},
+  deltaLambda3LoopH3mDRbarPrime -> {0.0000516811, 0.00132572},
+  deltaLambda3LoopH3mShiftDRbarPrimeToMSbar -> -0.000677801,
+  deltaLambda3LoopEFTDRbarPrime -> {0.0000120296, 0.00108097},
+  deltaLambda3LoopEFTShiftDRbarPrimeToMSbar -> -0.000882901 }
+```
+
+See `?HimalayaCalculateDMh3L` for a detailed documentation of the
+input and output.
+
 ## Code Documentation
 
 Doxygen can be used to generate code documentation. Go to the `doc`
