@@ -69,7 +69,8 @@ Output: A list of replacement rules with
 
  - hierarchyID: ID of the used (best fitting) mass hierarchy
  - hierarchyName: name of the used (best fitting) mass hierarchy
- - Mstop: used stop masses, defined in the DR' scheme
+ - MstopMDRPrime: used stop masses, defined in the MDR' scheme [only available if bottom == False]
+ - MsbottomMDRPrime: used sbottom masses, defined in the MDR' scheme [only available if bottom == True]
  - Mh2Tree: tree-level mass matrix (DR' scheme)
  - Mh21Loop: 1-loop correction to the mass matrix (DR' scheme)
  - Mh22Loop: 2-loop correction to the mass matrix (DR' scheme)
@@ -141,7 +142,8 @@ output = HimalayaCalculateDMh3L[
 
 (* output parameters *)
 { hierarchyID, hierarchyName,
-  Mstop, Mh2Tree, Mh21Loop, Mh22Loop, Mh23Loop,
+  MstopMDRPrime, MsbottomMDRPrime,
+  Mh2Tree, Mh21Loop, Mh22Loop, Mh23Loop,
   Mh23LoopShiftDRbarPrimeToMDRPrime,
   Mh23LoopShiftDRbarPrimeToH3m,
   expansionUncertainty,

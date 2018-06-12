@@ -36,7 +36,8 @@ TestPoint[point_, name_] :=
 
            TestEqual[hierarchyID                                    /. output, hierarchyID                                    /. (expectedOutput /. point)];
            TestEqual[hierarchyName                                  /. output, hierarchyName                                  /. (expectedOutput /. point)];
-           TestClose[Mstop                                          /. output, Mstop                                          /. (expectedOutput /. point), eps];
+           TestClose[MstopMDRPrime                                  /. output, MstopMDRPrime                                  /. (expectedOutput /. point), eps];
+           TestClose[MsbottomMDRPrime                               /. output, MsbottomMDRPrime                               /. (expectedOutput /. point), eps];
            TestClose[Mh2Tree                                        /. output, Mh2Tree                                        /. (expectedOutput /. point), eps];
            TestClose[Mh21Loop                                       /. output, Mh21Loop                                       /. (expectedOutput /. point), eps];
            TestClose[Mh22Loop                                       /. output, Mh22Loop                                       /. (expectedOutput /. point), eps];
@@ -103,7 +104,7 @@ pointSPS2 = {
     expectedOutput -> {
         hierarchyID                                    -> 2,
         hierarchyName                                  -> h3q22g,
-        Mstop                                          -> {957.567, 1288.79},
+        MstopMDRPrime                                  -> {955.6409734756253, 1287.5049731244299},
         Mh2Tree                                        -> {{2.18023*^06, -227080}, {-227080, 31451.3}},
         Mh21Loop                                       -> {{-2.92153, 100.252}, {100.252, 5277.06}},
         Mh22Loop                                       -> {{-0.307806, 17.7881}, {17.7881, 1256.76}},
@@ -161,7 +162,7 @@ MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
     expectedOutput -> {
         hierarchyID                                    -> 1,
         hierarchyName                                  -> h32q2g,
-        Mstop                                          -> {849.602, 1148.31},
+        MstopMDRPrime                                  -> {846.6668357369557, 1146.3404818402344},
         Mh2Tree                                        -> {{990181., -99832.9}, {-99832.9, 18131.5}},
         Mh21Loop                                       -> {{-424.543, -377.522}, {-377.522, 8209.32}},
         Mh22Loop                                       -> {{1.10262, 34.8983}, {34.8983, 970.394}},

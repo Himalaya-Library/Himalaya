@@ -125,6 +125,7 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    MLPutFunction(link, "List", 14);
 
    const auto hierarchy = ho.getSuitableHierarchy();
+   const std::string msf = ho.getIsAlphab() ? "MsbottomMDRPrime" : "MstopMDRPrime";
 
    Eigen::Vector4d expansion_uncertainty;
    expansion_uncertainty << 0., ho.getExpUncertainty(1),
@@ -138,7 +139,7 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
 
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
-   MLPutRuleTo(link, ho.getMDRMasses(), "Mstop");
+   MLPutRuleTo(link, ho.getMDRMasses(), msf);
    MLPutRuleTo(link, ho.getDMh(0), "Mh2Tree");
    MLPutRuleTo(link, ho.getDMh(1), "Mh21Loop");
    MLPutRuleTo(link, ho.getDMh(2), "Mh22Loop");
