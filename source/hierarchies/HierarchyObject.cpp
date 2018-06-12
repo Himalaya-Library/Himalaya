@@ -375,15 +375,17 @@ std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) co
  */
 std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject const &ho){
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
+   const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
       || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
+   const std::string massString = ho.getIsAlphab() == true ? "Msbottom" : "Mstop";
+   const std::string spaces = ho.getIsAlphab() == true ? "             " : "                ";
    ostr << "===================================\n"
 	<< "Himalaya HierarchyObject parameters\n"
         << "===================================\n"
 	<< "Ren. scheme            =  " << renSchemeString << "\n"
         << "Hierarchy              =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
-	<< "Mstop_1                =  " << ho.getMDRMasses()(0) << " GeV (MDR')\n"
-	<< "Mstop_2                =  " << ho.getMDRMasses()(1) << " GeV (MDR')\n"
+	<< massString << "_1" << spaces << "=  " << ho.getMDRMasses()(0) << " GeV (MDR')\n"
+	<< massString << "_2" << spaces << "=  " << ho.getMDRMasses()(1) << " GeV (MDR')\n"
         << "Abs. diff 2L           =  " << ho.getAbsDiff2L() << " GeV\n"
         << "Rel. diff 2L           =  " << ho.getRelDiff2L()*100 << " %\n"
         << "Mh^2_tree              =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
