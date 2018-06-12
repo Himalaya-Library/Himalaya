@@ -119,7 +119,66 @@ pointSPS2 = {
     precision -> 1*^-5
 };
 
+MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
+    input -> {
+        settings -> {
+            bottom -> False,
+            verbose -> True
+        },
+        parameters -> {
+            scale -> MS,
+            mu -> MS,
+            g1 -> 0.46,
+            g2 -> 0.65,
+            g3 -> 1.166,
+            vd -> 246*Cos[ArcTan[TB]],
+            vu -> 246*Sin[ArcTan[TB]],
+            mq2 -> MS^2 IdentityMatrix[3],
+            md2 -> MS^2 IdentityMatrix[3],
+            mu2 -> MS^2 IdentityMatrix[3],
+            ml2 -> MS^2 IdentityMatrix[3],
+            me2 -> MS^2 IdentityMatrix[3],
+            Au -> {{0,0,0},
+                   {0,0,0},
+                   {0,0, Xt + MS/TB }},
+            Ad -> 0 IdentityMatrix[3],
+            Ae -> 0 IdentityMatrix[3],
+            Yu -> {{0,0,0},
+                   {0,0,0},
+                   {0,0, 0.862 }},
+            Yd -> {{0,0,0},
+                   {0,0,0},
+                   {0,0, 0.133 }},
+            Ye -> {{0,0,0},
+                   {0,0,0},
+                   {0,0, 0.101 }},
+            MA -> MS,
+            M1 -> MS,
+            M2 -> MS,
+            M3 -> MS
+        }
+    },
+    expectedOutput -> {
+        hierarchyID                                    -> 1,
+        hierarchyName                                  -> h32q2g,
+        Mstop                                          -> {849.602, 1148.31},
+        Mh2Tree                                        -> {{990181., -99832.9}, {-99832.9, 18131.5}},
+        Mh21Loop                                       -> {{-424.543, -377.522}, {-377.522, 8209.32}},
+        Mh22Loop                                       -> {{1.10262, 34.8983}, {34.8983, 970.394}},
+        Mh23Loop                                       -> {{-2.75451, 12.2219}, {12.2219, 277.77}},
+        Mh23LoopShiftDRbarPrimeToMDRPrime              -> {{0.131543, 4.53586}, {4.53586, -17.2929}},
+        Mh23LoopShiftDRbarPrimeToH3m                   -> {{-1.02614, 0.611971}, {0.611971, 4.48543}},
+        expansionUncertainty                           -> {0., 0., 0.130815, 0.0150322},
+        deltaLambda3LoopH3mDRbarPrime                  -> {-3.23781*^-6, 0.000668701},
+        deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      -> -0.000549855,
+        deltaLambda3LoopEFTDRbarPrime                  -> {-7.72544*^-6, 0.000607585},
+        deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      -> -0.000606484
+    },
+    precision -> 1*^-5
+};
+
 TestPoint[pointSPS2, "SPS2"];
+TestPoint[MakePoint[1000,10,2*1000], "MS=1000, TB=10, Xt=2*MS"];
 
 Print["Number of passed tests: ", passedTests];
 Print["Number of failed tests: ", failedTests];
