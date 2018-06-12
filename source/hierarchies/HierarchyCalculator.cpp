@@ -184,7 +184,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 1)
       - tc.getThresholdCorrection(
 	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
-   
+
    // calculate the non-logarithmic part of delta_lambda at 3L
    const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() 
       - shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
@@ -225,8 +225,12 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // calculate the DR to MDR shift with the obtained hierarchy
    ho_mdr.setDRbarPrimeToMDRbarPrimeShift(calcDRbarToMDRbarShift(ho_mdr, true, true));
    ho_mdr.setDMh(3, calculateHierarchy(ho_mdr, 0, 0, 1) - shiftH3mToDRbarPrime(ho_mdr));
-   ho.setDRbarPrimeToMDRbarPrimeShift(
-      ho_mdr.getDRbarPrimeToMDRbarPrimeShift() + ho_mdr.getDMh(3) - ho.getDMh(3));
+   Eigen::Vector2d mdrMasses;
+   mdrMasses(0) = ho_mdr.getMDRMasses()(0);
+   mdrMasses(1) = ho_mdr.getMDRMasses()(1);
+   ho.setMDRMasses(mdrMasses);
+   ho.setDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDRbarPrimeToMDRbarPrimeShift() 
+      + ho_mdr.getDMh(3) - ho.getDMh(3));
    
    return ho;
 }
@@ -288,7 +292,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 // estimate the uncertainty of the expansion at 2L
 	 const double expUncertainty2L = getExpansionUncertainty(ho, treelvl 
 	    + Mt41L, 0, 1, 0);
-	 
+
 	 // estimate the uncertainty of the expansion at 3L
 	 const double expUncertainty3L = getExpansionUncertainty(ho, treelvl
 	    + Mt41L + Mt42L, 0, 0, 1); 

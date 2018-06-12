@@ -382,8 +382,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
         << "===================================\n"
 	<< "Ren. scheme            =  " << renSchemeString << "\n"
         << "Hierarchy              =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
-	<< "Mstop_1                =  " << ho.getMDRMasses()(0) << " GeV (" << renSchemeString << ")\n"
-	<< "Mstop_2                =  " << ho.getMDRMasses()(1) << " GeV (" << renSchemeString << ")\n"
+	<< "Mstop_1                =  " << ho.getMDRMasses()(0) << " GeV (MDR')\n"
+	<< "Mstop_2                =  " << ho.getMDRMasses()(1) << " GeV (MDR')\n"
         << "Abs. diff 2L           =  " << ho.getAbsDiff2L() << " GeV\n"
         << "Rel. diff 2L           =  " << ho.getRelDiff2L()*100 << " %\n"
         << "Mh^2_tree              =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
