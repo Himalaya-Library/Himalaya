@@ -16,11 +16,11 @@ namespace mh2_eft{
    public:
       /**
        *	Constructor
-       * 	@param p a HimalayaInterface struct
-       * 	@param msq2 the averaged squark mass of the first two generations squared
+       * 	@param p_ a HimalayaInterface struct
+       * 	@param msq2_ the averaged squark mass of the first two generations squared
        * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
        */
-      Mh2EFTCalculator(const Parameters& p, double msq2 = std::numeric_limits<double>::quiet_NaN(), bool verbose = true);
+      Mh2EFTCalculator(const Parameters& p_, double msq2_ = std::numeric_limits<double>::quiet_NaN(), bool verbose = true);
       /**
        * 	Returns the 1-loop EFT contribution to the Higgs mass
        * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
@@ -44,6 +44,8 @@ namespace mh2_eft{
        *   Returns the matching relation of delta_lambda 3L for the degenerate mass case
        *   @param scale the renormalization scale
        *   @param mst1 the mass of the light stop quark
+       *   @param Xt stop mixing parameter
+       *   @param omitlogs an integer flag to remove all logarithmic terms
        *   @return delta_Lambda 3L
        */
       double getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const;
@@ -59,9 +61,9 @@ namespace mh2_eft{
        * 	@param tf a boolean
        */
       std::string tf(const bool tf);
-      Parameters p{};
-      double msq2{std::numeric_limits<double>::quiet_NaN()};
-      std::map<unsigned int, unsigned int> orderMap{};	/** A map which holds all EFTOrders key value pairs to enable/disable certain corrections. */
+      Parameters p{}; ///< The HimalayaInterface struct
+      double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
+      std::map<unsigned int, unsigned int> orderMap{}; ///< A map which holds all EFTOrders key value pairs to enable/disable certain corrections
    };
 }	// mh2_eft
 }	// himalaya

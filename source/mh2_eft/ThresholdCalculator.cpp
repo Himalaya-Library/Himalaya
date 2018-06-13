@@ -88,8 +88,8 @@ namespace {
 
 /**
  * 	Constructor
- * 	@param p a HimalayaInterface struct
- * 	@param msq2 the averaged squark mass of the first two generations squared
+ * 	@param p_ a HimalayaInterface struct
+ * 	@param msq2_ the averaged squark mass of the first two generations squared
  * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
  * 	@param check a boolean which indicates if the threshold corrections should be tested
  */

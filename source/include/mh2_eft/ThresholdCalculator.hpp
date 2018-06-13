@@ -9,12 +9,12 @@ namespace himalaya{
    public:
       /**
        * 	Constructor
-       * 	@param p a HimalayaInterface struct
-       * 	@param msq2 the averaged squark mass of the first two generations squared
+       * 	@param p_ a HimalayaInterface struct
+       * 	@param msq2_ the averaged squark mass of the first two generations squared
        * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
        * 	@param check a boolean which indicates if the threshold corrections should be tested
        */
-      ThresholdCalculator(const Parameters& p, double msq2 = std::numeric_limits<double>::quiet_NaN(), bool verbose = true, bool check = false);
+      ThresholdCalculator(const Parameters& p_, double msq2_ = std::numeric_limits<double>::quiet_NaN(), bool verbose = true, bool check = false);
       /**
        * 	Returns a specific threshold corrections for a given mass limit
        * 	@param variable an integer key for a threshold correctionn
@@ -142,7 +142,6 @@ namespace himalaya{
       double getDeltaLambdaRegG12G22();
       /**
        * 	Returns delta_lambda_chi_g1^2_g2^2
-       * 	@param omitLogs an integer key to omit all mu terms
        * 	@return delta_lambda_chi_g1^2_g2^2
        */
       double getDeltaLambdaChiG12G22();
@@ -379,8 +378,8 @@ namespace himalaya{
        * 	@returns a bool which is true if the general mass case can be used or false if the limit should be used
        */
       bool isfinite(double exact, double shifted, double limit);
-      Parameters p{};	/** The HimalayaInterface struct. */
-      double msq2{std::numeric_limits<double>::quiet_NaN()}; /** the average squark mass of the first two generations squared **/
+      Parameters p{}; ///< The HimalayaInterface struct
+      double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
    };
    
 }	// himalaya

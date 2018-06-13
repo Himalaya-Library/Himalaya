@@ -251,11 +251,11 @@ input and output.
 
 ## Code Documentation
 
-Doxygen can be used to generate code documentation. Go to the `doc`
-directory and run
+Doxygen can be used to generate code documentation.
+To generate the documentation, run
 
 ```
-doxygen himalaya.conf
+make doc
 ```
 
-to generate `html/index.html` and a LaTeX version.
+The generated documentation can be found in `doc/html/index.html`.
