@@ -35,7 +35,8 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 endif()
 
 # set paths
-set(INCLUDE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/include)
+set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source)
+set(INCLUDE_PATH ${SOURCE_PATH}/include)
 
 #include c++ header files
 include_directories(${INCLUDE_PATH})
@@ -52,18 +53,18 @@ configure_file (
 
 # Himalaya library files
 file(GLOB SOURCES
-  ${CMAKE_CURRENT_SOURCE_DIR}/source/hierarchies/*.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/source/mh2_eft/*.cpp
-  ${CMAKE_CURRENT_SOURCE_DIR}/source/misc/*.cpp)
+  ${SOURCE_PATH}/hierarchies/*.cpp
+  ${SOURCE_PATH}/mh2_eft/*.cpp
+  ${SOURCE_PATH}/misc/*.cpp)
 set(LIBSOURCES ${SOURCES})
 
 # DSZ library files
-file(GLOB FSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/include/mh2l/*.f)
+file(GLOB FSOURCES ${SOURCE_PATH}/include/mh2l/*.f)
 
 # build the himalaya and DSZ library
-file(GLOB_RECURSE HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.hpp)
+file(GLOB_RECURSE HEADERS ${SOURCE_PATH}/*.hpp)
 file(GLOB LIBSOURCES ${SOURCES} ${HEADERS})
-list(REMOVE_ITEM LIBSOURCES ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
+list(REMOVE_ITEM LIBSOURCES ${SOURCE_PATH}/example.cpp)
 add_library(DSZ_static STATIC ${FSOURCES})
 set_target_properties(DSZ_static PROPERTIES OUTPUT_NAME DSZ)
 add_library(DSZ_shared SHARED ${FSOURCES})
@@ -74,14 +75,14 @@ add_library(Himalaya_shared SHARED ${LIBSOURCES})
 set_target_properties(Himalaya_shared PROPERTIES OUTPUT_NAME Himalaya)
 
 # set the executable
-add_executable(example ${CMAKE_CURRENT_SOURCE_DIR}/source/example.cpp)
+add_executable(example ${SOURCE_PATH}/example.cpp)
 
 # link mh2l and himalaya to the executable
 target_link_libraries(example Himalaya_static DSZ_static)
 
 # create LibrayLink executable
 if(Mathematica_FOUND)
-  set(LL_SRC ${CMAKE_CURRENT_SOURCE_DIR}/source/LibraryLink/Himalaya_LibraryLink.cpp)
+  set(LL_SRC ${SOURCE_PATH}/LibraryLink/Himalaya_LibraryLink.cpp)
   set(LL_LIB Himalaya_LibraryLink)
   include_directories(${Mathematica_INCLUDE_DIR})
   include_directories(${Mathematica_MathLink_INCLUDE_DIR})
