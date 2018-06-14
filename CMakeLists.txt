@@ -52,19 +52,15 @@ configure_file (
   )
 
 # Himalaya library files
-file(GLOB SOURCES
+file(GLOB LIBSOURCES
   ${SOURCE_PATH}/hierarchies/*.cpp
   ${SOURCE_PATH}/mh2_eft/*.cpp
   ${SOURCE_PATH}/misc/*.cpp)
-set(LIBSOURCES ${SOURCES})
 
 # DSZ library files
-file(GLOB FSOURCES ${SOURCE_PATH}/include/mh2l/*.f)
+file(GLOB FSOURCES ${INCLUDE_PATH}/mh2l/*.f)
 
 # build the himalaya and DSZ library
-file(GLOB_RECURSE HEADERS ${SOURCE_PATH}/*.hpp)
-file(GLOB LIBSOURCES ${SOURCES} ${HEADERS})
-list(REMOVE_ITEM LIBSOURCES ${SOURCE_PATH}/example.cpp)
 add_library(DSZ_static STATIC ${FSOURCES})
 set_target_properties(DSZ_static PROPERTIES OUTPUT_NAME DSZ)
 add_library(DSZ_shared SHARED ${FSOURCES})
