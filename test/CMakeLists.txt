@@ -17,6 +17,7 @@ endfunction()
 add_himalaya_test(test_example)
 add_himalaya_test(test_EFT_expressions)
 add_himalaya_test(test_FO_expressions)
+add_himalaya_test(test_Himalaya_interface)
 add_himalaya_test(test_delta_lambda)
 
 if(Mathematica_FOUND)
