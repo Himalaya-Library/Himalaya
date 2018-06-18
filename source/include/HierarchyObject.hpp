@@ -89,6 +89,34 @@ namespace himalaya{
        */
       double getDRbarPrimeToMSbarShiftEFT() const;
       /**
+       * 	@return delta_lambda @ 1-loop order
+       */
+      double getDeltaLambda1L() const;
+      /**
+       * 	@return delta_lambda @ 2-loop order
+       */
+      double getDeltaLambda2L() const;
+      /**
+       * 	@return shift to convert 1L delta_lambda from DR' to MS scheme. This shift has to be added to the 1L result
+       */
+      double getDRbarPrimeToMSbarShiftDeltaLambda1L() const;
+      /**
+       * 	@return shift to voncert 2L delta_lambda from DR' to MS scheme. This shift has to be added to the 2L result
+       */
+      double getDRbarPrimeToMSbarShiftDeltaLambda2L() const;
+      /**
+       * 	@return Delta_Mh2_EFT @ 1L
+       */
+      double getDeltaMh2EFT1L() const;
+      /**
+       * 	@return Delta_Mh2_EFT @ 2L
+       */
+      double getDeltaMh2EFT2L() const;
+      /**
+       * 	@return Delta_Mh2_EFT @ 3L
+       */
+      double getDeltaMh2EFT3L() const;
+      /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
        */
@@ -137,6 +165,26 @@ namespace himalaya{
        * 	@throws runtime_exception if the flag is not in {0,1,2,3} an exception is thrown
        */
       void setRenormalizationScheme(int renScheme);
+      /**
+       * 	Sets the delta_lambda at 1-loop order
+       * 	@param deltaLambda delta_lambda at 1-loop order.
+       */
+      void setDeltaLambda1L(double deltaLambda);
+      /**
+       * 	Sets the delta_lambda at 2-loop order
+       * 	@param deltaLambda delta_lambda at 2-loop order
+       */
+      void setDeltaLambda2L(double deltaLambda);
+      /**
+       * 	Sets the DR' to MS shift for 1L delta_lambda
+       * 	@param shift the shift
+       */
+      void setDRbarPrimeToMSbarShiftDeltaLambda1L(double shift);
+      /**
+       * 	Sets the DR' to MS shift for 2L delta_lambda
+       * 	@param shift the shift
+       */
+      void setDRbarPrimeToMSbarShiftDeltaLambda2L(double shift);
       /**
        * 	Sets the delta_lambda at 3-loop order with H3m logs.
        * 	@param deltaLambda delta_lambda at 3-loop order.
@@ -189,6 +237,21 @@ namespace himalaya{
        */
       Eigen::Matrix2d getDRbarPrimeToH3mShift() const;
       /**
+       * 	Sets Delta_Mh2_EFT @ 1L O(at)
+       * 	@param deltaMh2 delta_Mh^2
+       */
+      void setDeltaMh2EFT1L(double deltaMh2);
+      /**
+       * 	Sets Delta_Mh2_EFT @ 2L O(at*as)
+       * 	@param deltaMh2 delta_Mh^2
+       */
+      void setDeltaMh2EFT2L(double deltaMh2);
+      /**
+       * 	Sets Delta_Mh2_EFT @ 3L O(at*as^2)
+       * 	@param deltaMh2 delta_Mh^2
+       */
+      void setDeltaMh2EFT3L(double deltaMh2);
+      /**
        * 	Set the expasion uncertainty for delta_lambda
        * 	@param expUncertLambda the expansion uncertainty for delta_lambda
        */
@@ -213,6 +276,13 @@ namespace himalaya{
       double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
       double expansionUncertaintyDeltaLambda{};						/**< The expansion uncertainty of delta_lambda */
       Eigen::Matrix2d h3mShift{};							/**< The DR' -> H3m shift which should be added to the DR' result */
+      double deltaLambda1L{};								/**< Delta_lambda @ 1L O(at) */
+      double deltaLambda2L{};								/**< Delta_lambda @ 2L O(at*as) */
+      double drToMSDL1L{};								/**< The shift to convert delta_lambda from DR' to MS @ 1L */
+      double drToMSDL2L{};								/**< The shift to convert delta_lambda from DR' to MS @ 2L */
+      double mh2EFT1L{};								/**< Mh2_EFT @ 1L O(at) */
+      double mh2EFT2L{};								/**< Mh2_EFT @ 2L O(at*as) */
+      double mh2EFT3L{};								/**< Mh2_EFT @ 3L O(at*as^2) */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

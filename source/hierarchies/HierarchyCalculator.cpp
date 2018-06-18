@@ -220,6 +220,44 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // here one needs it without the minus sign to convert DR -> H3m
    ho.setDRbarPrimeToH3mShift(shiftH3mToDRbarPrime(ho));
    
+   // set flags to omit all but O(at*as^n)
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G14, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G24, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G22YB2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YTAU2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G22YTAU2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YTAU4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YT2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G22YT2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G32YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YB6, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YT6, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YTAU2YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
+   // 1-Loop prefactor at
+   const double pref_1L = 1./pow2(4*Pi) * pow2(p.Mt * gt);
+   // 2-Loop prefactor at*as
+   const double pref_2L = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
+   // fill in results of EFT calculation
+   ho.setDeltaMh2EFT1L(mh2EFTCalculator.getDeltaMh2EFT1Loop(1, 1));
+   ho.setDeltaMh2EFT2L(mh2EFTCalculator.getDeltaMh2EFT2Loop(1, 1));
+   ho.setDeltaMh2EFT3L(mh2EFTCalculator.getDeltaMh2EFT3Loop(1, 1, 0) 
+      + ho.getDeltaLambdaEFT()*v2);
+   ho.setDeltaLambda1L(pref_1L*(tc.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_AT,RenSchemes::DRBARPRIME, 1))/v2);
+   ho.setDeltaLambda2L(pref_2L*(tc.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_AT_AS, RenSchemes::DRBARPRIME, 1))/v2);
+   ho.setDRbarPrimeToMSbarShiftDeltaLambda1L(0.);
+   ho.setDRbarPrimeToMSbarShiftDeltaLambda2L(pref_2L*(-4*ho.getDeltaLambda1L()
+      *tc.getThresholdCorrection(ThresholdVariables::YT_AS,
+				 RenSchemes::DRBARPRIME, 1))/v2);
+   
    auto ho_mdr = ho;
    ho_mdr.setMDRFlag(1);
    // calculate the DR to MDR shift with the obtained hierarchy

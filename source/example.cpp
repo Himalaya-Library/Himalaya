@@ -290,14 +290,14 @@ himalaya::Parameters test_gigantic_delta() {
 int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
-	 /*setup_SPS1a(),
-	 setup_SPS2(),
+	 setup_SPS1a(),
+	 /*setup_SPS2(),
 	 setup_CMSSM_large_m0(),
 	 setup_HSSUSY_minmix(),
 	 setup_low_MS_large_xt(),*/
-	 test_large_delta(),
+	 /*test_large_delta(),
 	 test_largest_delta(),
-         test_gigantic_delta()
+         test_gigantic_delta()*/
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator

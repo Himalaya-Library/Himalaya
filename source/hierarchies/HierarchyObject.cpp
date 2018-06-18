@@ -329,6 +329,61 @@ Eigen::Vector2d himalaya::HierarchyObject::sortVector(Eigen::Vector2d& vector){
    return vector;
 }
 
+double himalaya::HierarchyObject::getDeltaLambda1L() const{
+   return deltaLambda1L;
+}
+
+void himalaya::HierarchyObject::setDeltaLambda1L(double deltaLambda){
+   deltaLambda1L = deltaLambda;
+}
+
+double himalaya::HierarchyObject::getDeltaLambda2L() const{
+   return deltaLambda2L;
+}
+
+void himalaya::HierarchyObject::setDeltaLambda2L(double deltaLambda){
+   deltaLambda2L = deltaLambda;
+}
+
+double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftDeltaLambda1L() const{
+   return drToMSDL1L;
+}
+
+void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftDeltaLambda1L(double shift){
+   drToMSDL1L = shift;
+}
+
+double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftDeltaLambda2L() const{
+   return drToMSDL2L;
+}
+
+void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftDeltaLambda2L(double shift){
+   drToMSDL2L = shift;
+}
+
+double himalaya::HierarchyObject::getDeltaMh2EFT1L() const{
+   return mh2EFT1L;
+}
+
+void himalaya::HierarchyObject::setDeltaMh2EFT1L(double deltaMh2){
+   mh2EFT1L = deltaMh2;
+}
+
+double himalaya::HierarchyObject::getDeltaMh2EFT2L() const{
+   return mh2EFT2L;
+}
+
+void himalaya::HierarchyObject::setDeltaMh2EFT2L(double deltaMh2){
+   mh2EFT2L = deltaMh2;
+}
+
+double himalaya::HierarchyObject::getDeltaMh2EFT3L() const{
+   return mh2EFT3L;
+}
+
+void himalaya::HierarchyObject::setDeltaMh2EFT3L(double deltaMh2){
+   mh2EFT3L = deltaMh2;
+}
 
 /**
  *      Returns the H3m notation of a given hierarchy.
@@ -403,10 +458,17 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 		   << "}, {" << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(1)  << "}} GeV^2\n"
 	<< "DR' -> H3m shift       =  {{" << ho.getDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(0)(1)
 		   << "}, {" << ho.getDRbarPrimeToH3mShift().row(1)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(1)(1) << "}} GeV^2\n"
+	<< "Δλ_1L                  =  " << ho.getDeltaLambda1L() << "\n"
+	<< "Δλ_1L DR' -> MS shift  =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda1L() << "\n"
+	<< "Δλ_2L                  =  " << ho.getDeltaLambda2L() << "\n"
+	<< "Δλ_2L DR' -> MS shift  =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda2L() << "\n"
 	<< "Δλ_H3m                 =  " << ho.getDeltaLambdaH3m() << " +/- " << ho.getDeltaLambdaUncertaintyH3m() << " (expanded coefficients of logarithms)\n"
 	<< "Δλ_H3m DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftH3m() << " (should be added to Δλ to convert it to MS)\n"
         << "Δλ_EFT                 =  " << ho.getDeltaLambdaEFT() << " +/- " << ho.getDeltaLambdaUncertaintyEFT() << " (exact mass dependence of coefficients of logarithms)\n"
-	<< "Δλ_EFT DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftEFT() << " (should be added to Δλ to convert it to MS)";
+	<< "Δλ_EFT DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftEFT() << " (should be added to Δλ to convert it to MS)\n"
+	<< "ΔMh^2_EFT_1L            =  " << ho.getDeltaMh2EFT1L() << " GeV^2\n"
+	<< "ΔMh^2_EFT_2L            =  " << ho.getDeltaMh2EFT2L() << " GeV^2\n"
+	<< "ΔMh^2_EFT_3L            =  " << ho.getDeltaMh2EFT3L() << " GeV^2";
 
    return ostr;
 }

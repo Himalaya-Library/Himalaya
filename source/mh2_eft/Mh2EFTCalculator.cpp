@@ -44,7 +44,7 @@ himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(
    const himalaya::Parameters& p_, double msq2_, bool verbose)
    : p(p_), msq2(msq2_)
 {
-   p.validate(verbose);;
+   p.validate(verbose);
 
    if (!std::isfinite(msq2_))
       msq2 = p.calculateMsq2();
@@ -137,48 +137,48 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs,
       ThresholdVariables::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs);
 
    // corrections to Mh2
-   const double dmh2g12g22 = orderMap.at(EFTOrders::G12G22)*(pow2(cbeta)*v2*(10
-      *dlambdayb2g12 - 9*pow2(c2beta)*(2 + lmMt - lmhtreeMt))/20.);
-   const double dmh2g14 = orderMap.at(EFTOrders::G14)*((v2*(20*(-36 
+   const double dmh2g12g22 = isNaN(orderMap.at(EFTOrders::G12G22)*(pow2(cbeta)*v2*(10
+      *dlambdayb2g12 - 9*pow2(c2beta)*(2 + lmMt - lmhtreeMt))/20.));
+   const double dmh2g14 = isNaN(orderMap.at(EFTOrders::G14)*((v2*(20*(-36 
       + 100*dlambdag14 + 100*dlambdaregg14 + 100*
       dlambdachig14 - 27*lmMt + 27*lmzMt) - 30*(40*dg1g1 + 6*(-2 + lmzMt) +
       3*lmMt*(-3 + Xi))*pow2(c2beta) + 9*(-126 + 45*lmhtreeMt - 60*lmMt + 10*
       lmwMt + 5*lmzMt + 15*sqrt(3)*Pi)*pow4(c2beta) + 180*asin(mhtree/(2*p.MW)
       )*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree))*pow4(c2beta) + 90*asin(c2beta/
-      2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) + pow4(c2beta))))/4000.);
-   const double dmh2g24 = orderMap.at(EFTOrders::G24)*((v2*(20*(-12 
+      2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) + pow4(c2beta))))/4000.));
+   const double dmh2g24 = isNaN(orderMap.at(EFTOrders::G24)*((v2*(20*(-12 
       + 4*dlambdachig24 + 4*dlambdag24 + 4*
       dlambdaregg24 - 9*lmMt + 6*lmwMt + 3*lmzMt) - 10*(8*dg2g2 + 2*(-6 + 
       2*lmwMt + lmzMt) + 3*lmMt*(-3 + Xi))*pow2(c2beta) + (-126 + 45*lmhtreeMt -
       60*lmMt + 10*lmwMt + 5*lmzMt + 15*sqrt(3.)*Pi)*pow4(c2beta) + 10*asin(
       c2beta/2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) + pow4(c2beta))
       + 20*asin(mhtree/(2*p.MW))*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree))*(12 - 4*
-      pow2(c2beta) + pow4(c2beta))))/160.);
-   const double dmh2g12yb2 = orderMap.at(EFTOrders::G12YB2)*((v2*(20*(-12 
+      pow2(c2beta) + pow4(c2beta))))/160.));
+   const double dmh2g12yb2 = isNaN(orderMap.at(EFTOrders::G12YB2)*((v2*(20*(-12 
       + 10*dlambdag12g22 + 10*dlambdaregg12g22 + 10*
       dlambdachig12g22 - 9*lmMt + 9*lmzMt) - 60*(-4 + lmwMt + lmzMt + lmMt*(-
       3 + Xi))*pow2(c2beta) + 60*asin(mhtree/(2*p.MW))*(-2 + pow2(c2beta))*
       pow2(c2beta)*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree)) + 3*(-126 + 45*
       lmhtreeMt - 60*lmMt + 10*lmwMt + 5*lmzMt + 15*sqrt(3.)*Pi)*pow4(c2beta)
       + 30*asin(c2beta/2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) +
-      pow4(c2beta))))/400.);
-   const double dmh2g22yb2 = orderMap.at(EFTOrders::G22YB2)*(pow2(cbeta)*v2*(2
-      *dlambdayb2g22 + 3*pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/4.);
-   const double dmh2yb4 = orderMap.at(EFTOrders::YB4)*(pow4(cbeta)*v2
-      *(dlambdayb4 + 12*(2 - lmhtreeMt + lmMt))/2.);
-   const double dmh2g12yt2 = orderMap.at(EFTOrders::G12YT2)*(pow2(sbeta)*v2*(10
-      *dlambdayt2g12 + pow2(c2beta)*(6 + 6*dvyt2 - 9*lmMt))/20.);
-   const double dmh2g22yt2 = orderMap.at(EFTOrders::G22YT2)*(pow2(sbeta)*v2*(2
-      *dlambdayt2g22 + pow2(c2beta)*(2 + 2*dvyt2 - 3*lmMt))/4.);
-   const double dmh2yt4 = orderMap.at(EFTOrders::YT4)*(pref_at*(12 * lmMt +
+      pow4(c2beta))))/400.));
+   const double dmh2g22yb2 = isNaN(orderMap.at(EFTOrders::G22YB2)*(pow2(cbeta)*v2*(2
+      *dlambdayb2g22 + 3*pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/4.));
+   const double dmh2yb4 = isNaN(orderMap.at(EFTOrders::YB4)*(pow4(cbeta)*v2
+      *(dlambdayb4 + 12*(2 - lmhtreeMt + lmMt))/2.));
+   const double dmh2g12yt2 = isNaN(orderMap.at(EFTOrders::G12YT2)*(pow2(sbeta)*v2*(10
+      *dlambdayt2g12 + pow2(c2beta)*(6 + 6*dvyt2 - 9*lmMt))/20.));
+   const double dmh2g22yt2 = isNaN(orderMap.at(EFTOrders::G22YT2)*(pow2(sbeta)*v2*(2
+      *dlambdayt2g22 + pow2(c2beta)*(2 + 2*dvyt2 - 3*lmMt))/4.));
+   const double dmh2yt4 = isNaN(orderMap.at(EFTOrders::YT4)*(pref_at*(12 * lmMt +
       thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs)));
-   const double dmh2g12ytau2 = orderMap.at(EFTOrders::G12YTAU2)*(pow2(cbeta)*v2*(
-      10*dlambdaytau2g12 + 3*pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/20.);
-   const double dmh2g22ytau2 = orderMap.at(EFTOrders::G22YTAU2)*(pow2(cbeta)*v2*(2
-      *dlambdaytau2g22 + pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/4.);
-   const double dmh2ytau4 = orderMap.at(EFTOrders::YTAU4)*(pow4(cbeta)*v2*(8
-      + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt)/2.);
+	 RenSchemes::DRBARPRIME, omitMSSMLogs))));
+   const double dmh2g12ytau2 = isNaN(orderMap.at(EFTOrders::G12YTAU2)*(pow2(cbeta)*v2*(
+      10*dlambdaytau2g12 + 3*pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/20.));
+   const double dmh2g22ytau2 = isNaN(orderMap.at(EFTOrders::G22YTAU2)*(pow2(cbeta)*v2*(2
+      *dlambdaytau2g22 + pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/4.));
+   const double dmh2ytau4 = isNaN(orderMap.at(EFTOrders::YTAU4)*(pow4(cbeta)*v2*(8
+      + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt)/2.));
 
    // Loop factor
    const double k = 1/pow2(4.*Pi);
@@ -202,7 +202,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    // couplings
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
-   /*const double g32 = pow2(p.g3);
+   const double g32 = pow2(p.g3);
    const double yt2 = pow2(sqrt(2.)*p.Mt/p.vu);
    const double yb2 = pow2(sqrt(2.)*p.Mb/p.vd);
    const double ytau2 = pow2(sqrt(2.)*p.Mtau/p.vd);
@@ -219,7 +219,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double mhtree = std::abs(c2beta*p.MZ);
    const double lmhtreeMt = log(pow2(mhtree / p.Mt));
    const double lmbMt = log(pow2(p.Mb / p.Mt));
-   const double lmtauMt = log(pow2(p.Mtau / p.Mt));*/
+   const double lmtauMt = log(pow2(p.Mtau / p.Mt));
    
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
@@ -227,7 +227,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    // Threshold corrections
    const double dytas = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   /*const double dlambdayb4g32 = thresholdCalculator.getThresholdCorrection(
+   const double dlambdayb4g32 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::LAMBDA_YB4_G32, RenSchemes::DRBARPRIME, omitMSSMLogs);
    const double dlambdayb4 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
@@ -264,50 +264,50 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double dlambdayt4yb2 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::LAMBDA_YT4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
    const double dytyb = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);*/
+      ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);
    
    // Corrections to Mh
-   const double dmh2yt4g32 = orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
+   const double dmh2yt4g32 = isNaN(orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
       + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs)));
-   /*const double dmh2yb4g32 = orderMap.at(EFTOrders::G32YB4)*(pow4(cbeta)
-      *(dlambdayb4g32 + 32*lmMt*(47 - 24*lmhtreeMt + 12*lmMt))*v2/2.);
-   const double dmh2yb6 = orderMap.at(EFTOrders::YB6)*(pow6(cbeta)*v2*(29 + 2
+	 RenSchemes::DRBARPRIME, omitMSSMLogs))));
+   const double dmh2yb4g32 = isNaN(orderMap.at(EFTOrders::G32YB4)*(pow4(cbeta)
+      *(dlambdayb4g32 + 32*lmMt*(47 - 24*lmhtreeMt + 12*lmMt))*v2/2.));
+   const double dmh2yb6 = isNaN(orderMap.at(EFTOrders::YB6)*(pow6(cbeta)*v2*(29 + 2
       *dlambdayb6 + 4*lmbMt*(-38 + 9*lmbMt) + 6*dlambdayb4*(-1 + lmhtreeMt - lmMt)
       + 12*(-257 + 72*lmhtreeMt - 36*lmMt)*lmMt - 6*pow2(Pi) - 12*(dlambdayb2g12
-      *pow2(p.g1) + dlambdayb2g22*pow2(p.g2))*v2/pow2(mhtree))/4.);
-   const double dmh2yt6= orderMap.at(EFTOrders::YT6)*(pow4(sbeta)*(24*dytyt*(-6
+      *pow2(p.g1) + dlambdayb2g22*pow2(p.g2))*v2/pow2(mhtree))/4.));
+   const double dmh2yt6= isNaN(orderMap.at(EFTOrders::YT6)*(pow4(sbeta)*(24*dytyt*(-6
       + dlambdayt4 + 12*lmMt) + 113*pow2(sbeta) + 6*(dlambdayt6 + dlambdayt4*(2
       + 2*dvyt2 - 3*lmMt) - 3*(-2*pow2(lmbMt) - 8*dvyt2*(lmMt - 1) + 6*lmMt*(1
-      + 3*lmMt) + pow2(Pi))*pow2(sbeta))*v2)/12.);
-   const double dmh2yb4ytau2 = orderMap.at(EFTOrders::YTAU2YB4)*(pow6(cbeta)*v2
+      + 3*lmMt) + pow2(Pi))*pow2(sbeta))*v2)/12.));
+   const double dmh2yb4ytau2 = isNaN(orderMap.at(EFTOrders::YTAU2YB4)*(pow6(cbeta)*v2
       *(dlambdayb4*(lmhtreeMt - 1 - lmMt)*pow2(mhtree) - 48*lmMt*(4 - 2*lmhtreeMt
       + lmMt)*pow2(mhtree) - 6*(dlambdaytau2g12*pow2(p.g1) + dlambdaytau2g22
-      *pow2(p.g2)))*v2/(2*pow2(mhtree)));
+      *pow2(p.g2)))*v2/(2*pow2(mhtree))));
    const double dmh2yt4ytau2 = 0.;	//??
-   const double dmh2ytau6 = orderMap.at(EFTOrders::YTAU6)*(pow4(cbeta)*v2*(12
+   const double dmh2ytau6 = isNaN(orderMap.at(EFTOrders::YTAU6)*(pow4(cbeta)*v2*(12
       *dytauytau*(8 + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt) + pow2(cbeta)*(3
       *dlambdaytau6 + 3*dlambdaytau4*(lmhtreeMt - 1 - lmMt) - 2*(6 + 15*lmMt
       *(6 - 2*lmhtreeMt + lmMt) + 3*lmtauMt*(3*lmtauMt - 7) + pow2(Pi)) - 6
       *(dlambdaytau2g12*pow2(p.g1) + dlambdaytau2g22*pow2(p.g2))*v2
-      /pow2(mhtree)))/6.);
-   const double dmh2yt2yb4 = orderMap.at(EFTOrders::YT2YB4)*(pow4(cbeta)*pow2(
+      /pow2(mhtree)))/6.));
+   const double dmh2yt2yb4 = isNaN(orderMap.at(EFTOrders::YT2YB4)*(pow4(cbeta)*pow2(
       sbeta)*v2*(pow2(mhtree)*(dlambdayt2yb4 + dlambdayb4*(2 + 2*dvyt2 - 3*lmMt)
       + 6*(-2*lmbMt + 3*(-9 + 6*lmhtreeMt - 4*lmMt)*lmMt + 4*dvyt2*(1 - lmMt
       - lmMt) + 2*(5 + pow2(Pi)))) - 6*(dlambdayt2g12*pow2(p.g1) + dlambdayt2g22
-      *pow2(p.g2)*v2))/(2.*pow2(mhtree)));
-   const double dmh2yt4yb2 = orderMap.at(EFTOrders::YB2YT4)*(pow4(sbeta)*v2*(4
+      *pow2(p.g2)*v2))/(2.*pow2(mhtree))));
+   const double dmh2yt4yb2 = isNaN(orderMap.at(EFTOrders::YB2YT4)*(pow4(sbeta)*v2*(4
       *dytyb*(-6 + dlambdayt4 + 12*lmMt) + pow2(cbeta)*(dlambdayt4yb2 + 3
       *dlambdayt4*(lmhtreeMt - 1 - lmMt) - 6*(5 + lmMt*(13 - 6*lmhtreeMt + 3
-      *lmMt) + 2*pow2(Pi))))/2.);*/
+      *lmMt) + 2*pow2(Pi))))/2.));
    
    // Loop factor
-   //const double k2 = 1/pow4(4.*Pi);
+   const double k2 = 1/pow4(4.*Pi);
 
-   return /*k2*(g32*yb4*dmh2yb4g32 + yb6*dmh2yb6 + yt6*dmh2yt6 + yb4*ytau2
+   return k2*(g32*yb4*dmh2yb4g32 + yb6*dmh2yb6 + yt6*dmh2yt6 + yb4*ytau2
       *dmh2yb4ytau2 + yt4*ytau2*dmh2yt4ytau2 + ytau6*dmh2ytau6 + yt2*yb4
-      *dmh2yt2yb4 + yt4*yb2*dmh2yt4yb2)*/ + dmh2yt4g32;
+      *dmh2yt2yb4 + yt4*yb2*dmh2yt4yb2) + dmh2yt4g32;
 }
 
 /**
@@ -387,3 +387,9 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scal
 std::string himalaya::mh2_eft::Mh2EFTCalculator::tf(const bool tf){
    return tf ? "\033[1;32mtrue\033[0m" : "\033[1;31mfalse\033[0m";
 }
+
+double himalaya::mh2_eft::Mh2EFTCalculator::isNaN(double var){
+   if(std::isnan(var)) return 0.;
+   return var;
+}
+

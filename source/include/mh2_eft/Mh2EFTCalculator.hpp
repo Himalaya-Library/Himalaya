@@ -56,6 +56,11 @@ namespace mh2_eft{
        */
       void setCorrectionFlag(int variable, int enable);
    private:
+      /** 
+       * 	Checks whether a variable is nan and returns 0 in this case
+       *	@param var a variable which should be checked for nan
+       */
+      double isNaN(double var);
       /**
        * 	Returns a string of "true" or "false" corresponding to the argument
        * 	@param tf a boolean
