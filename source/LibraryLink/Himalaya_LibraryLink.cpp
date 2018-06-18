@@ -122,7 +122,7 @@ void put_message(MLINK link,
 
 void put_result(const himalaya::HierarchyObject& ho, MLINK link)
 {
-   MLPutFunction(link, "List", 14);
+   MLPutFunction(link, "List", 17);
 
    const auto hierarchy = ho.getSuitableHierarchy();
    const std::string msf = ho.getIsAlphab() ? "MsbottomMDRPrime" : "MstopMDRPrime";
@@ -137,6 +137,19 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    Eigen::Vector2d delta_lambda_h3m;
    delta_lambda_h3m << ho.getDeltaLambdaH3m(), ho.getDeltaLambdaUncertaintyH3m();
 
+   Eigen::Vector4d lambda;
+   lambda << ho.getDeltaLambda0L(), ho.getDeltaLambda1L(),
+             ho.getDeltaLambda2L(), ho.getDeltaLambdaEFT();
+
+   Eigen::Vector4d lambda_uncertainty;
+   lambda_uncertainty << 0., 0., 0., ho.getDeltaLambdaUncertaintyEFT();
+
+   Eigen::Vector4d lambda_shift_DRp_to_MS;
+   lambda_shift_DRp_to_MS << 0.,
+      ho.getDRbarPrimeToMSbarShiftDeltaLambda1L(),
+      ho.getDRbarPrimeToMSbarShiftDeltaLambda2L(),
+      ho.getDRbarPrimeToMSbarShiftEFT();
+
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
    MLPutRuleTo(link, ho.getMDRMasses(), msf);
@@ -147,9 +160,12 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    MLPutRuleTo(link, ho.getDRbarPrimeToMDRbarPrimeShift(), "Mh23LoopShiftDRbarPrimeToMDRPrime");
    MLPutRuleTo(link, ho.getDRbarPrimeToH3mShift(), "Mh23LoopShiftDRbarPrimeToH3m");
    MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
-   MLPutRuleTo(link, delta_lambda_h3m, "deltaLambda3LoopH3mDRbarPrime");
+   MLPutRuleTo(link, lambda, "lambda");
+   MLPutRuleTo(link, lambda_uncertainty, "lambdaUncertainty");
+   MLPutRuleTo(link, lambda_shift_DRp_to_MS, "lambdaShiftDRbarPrimeToMSbar");
+   MLPutRuleTo(link, delta_lambda_h3m, "deltaLambda3LoopH3m");
    MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftH3m(), "deltaLambda3LoopH3mShiftDRbarPrimeToMSbar");
-   MLPutRuleTo(link, delta_lambda_eft, "deltaLambda3LoopEFTDRbarPrime");
+   MLPutRuleTo(link, delta_lambda_eft, "deltaLambda3LoopEFT");
    MLPutRuleTo(link, ho.getDRbarPrimeToMSbarShiftEFT(), "deltaLambda3LoopEFTShiftDRbarPrimeToMSbar");
 
    MLEndPacket(link);

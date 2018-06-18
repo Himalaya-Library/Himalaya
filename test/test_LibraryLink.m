@@ -45,9 +45,12 @@ TestPoint[point_, name_] :=
            TestClose[Mh23LoopShiftDRbarPrimeToMDRPrime              /. output, Mh23LoopShiftDRbarPrimeToMDRPrime              /. (expectedOutput /. point), eps];
            TestClose[Mh23LoopShiftDRbarPrimeToH3m                   /. output, Mh23LoopShiftDRbarPrimeToH3m                   /. (expectedOutput /. point), eps];
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
-           TestClose[deltaLambda3LoopH3mDRbarPrime                  /. output, deltaLambda3LoopH3mDRbarPrime                  /. (expectedOutput /. point), eps];
+           TestClose[lambda                                         /. output, lambda                                         /. (expectedOutput /. point), eps];
+           TestClose[lambdaUncertainty                              /. output, lambdaUncertainty                              /. (expectedOutput /. point), eps];
+           TestClose[lambdaShiftDRbarPrimeToMSbar                   /. output, lambdaShiftDRbarPrimeToMSbar                   /. (expectedOutput /. point), eps];
+           TestClose[deltaLambda3LoopH3m                            /. output, deltaLambda3LoopH3m                            /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. output, deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      /. (expectedOutput /. point), eps];
-           TestClose[deltaLambda3LoopEFTDRbarPrime                  /. output, deltaLambda3LoopEFTDRbarPrime                  /. (expectedOutput /. point), eps];
+           TestClose[deltaLambda3LoopEFT                            /. output, deltaLambda3LoopEFT                            /. (expectedOutput /. point), eps];
            TestClose[deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      /. output, deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      /. (expectedOutput /. point), eps];
           ];
 
@@ -112,13 +115,60 @@ pointSPS2 = {
         Mh23LoopShiftDRbarPrimeToMDRPrime              -> {{0.00487318, 0.0179684}, {0.0179684, 0.738644}},
         Mh23LoopShiftDRbarPrimeToH3m                   -> {{-0.0037627, 0.0622916}, {0.0622916, -0.631601}},
         expansionUncertainty                           -> {0, 0, 0.0378711, 0.0243905},
-        deltaLambda3LoopH3mDRbarPrime                  -> {8.33505*^-06, 0.00012236},
+        lambda                                         -> {0.136257, 0.00518866, 0.000211537, -1.17351*^-05},
+        lambdaUncertainty                              -> {0, 0, 0, 0.000102286},
+        lambdaShiftDRbarPrimeToMSbar                   -> {0, 0, -3.9067*^-07, -4.62254*^-05},
+        deltaLambda3LoopH3m                            -> {8.33505*^-06, 0.00012236},
         deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      -> -4.62215*^-05,
-        deltaLambda3LoopEFTDRbarPrime                  -> {-1.17351*^-05, 0.000102286},
+        deltaLambda3LoopEFT                            -> {-1.17351*^-05, 0.000102286},
         deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      -> -4.62254*^-05
     },
     precision -> 1*^-5
 };
+
+(*
+himalaya::Parameters test_point() {
+   himalaya::Parameters pars;
+
+   const double MS = 2000.;
+   const double MS2 = MS*MS;
+   const double Xt = sqrt(6.)*MS;
+   const double tb = 20.;
+
+   pars.scale = MS;
+   pars.mu = MS;
+   pars.g1 = 0.46;
+   pars.g2 = 0.65;
+   pars.g3 = 1.166;
+   pars.vd = 246*std::cos(std::atan(tb));
+   pars.vu = 246*std::sin(std::atan(tb));
+   pars.mq2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.md2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.mu2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.ml2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.me2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.Au(2,2) = Xt + pars.mu/tb;
+   pars.Yu(2,2) = 0.862;
+   pars.Yd(2,2) = 0.133;
+   pars.Ye(2,2) = 0.101;
+   pars.MA = MS;
+   pars.M1 = MS;
+   pars.M2 = MS;
+   pars.MG = MS;
+
+   return pars;
+}
+*)
 
 MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
     input -> {
@@ -160,26 +210,28 @@ MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
         }
     },
     expectedOutput -> {
-        hierarchyID                                    -> 1,
-        hierarchyName                                  -> h32q2g,
-        MstopMDRPrime                                  -> {846.6668357369557, 1146.3404818402344},
-        Mh2Tree                                        -> {{990181., -99832.9}, {-99832.9, 18131.5}},
-        Mh21Loop                                       -> {{-424.543, -377.522}, {-377.522, 8209.32}},
-        Mh22Loop                                       -> {{1.10262, 34.8983}, {34.8983, 970.394}},
-        Mh23Loop                                       -> {{-2.75451, 12.2219}, {12.2219, 277.77}},
-        Mh23LoopShiftDRbarPrimeToMDRPrime              -> {{0.131543, 4.53586}, {4.53586, -17.2929}},
-        Mh23LoopShiftDRbarPrimeToH3m                   -> {{-1.02614, 0.611971}, {0.611971, 4.48543}},
-        expansionUncertainty                           -> {0., 0., 0.130815, 0.0150322},
-        deltaLambda3LoopH3mDRbarPrime                  -> {-3.23781*^-6, 0.000668701},
-        deltaLambda3LoopH3mShiftDRbarPrimeToMSbar      -> -0.000549855,
-        deltaLambda3LoopEFTDRbarPrime                  -> {-7.72544*^-6, 0.000607585},
-        deltaLambda3LoopEFTShiftDRbarPrimeToMSbar      -> -0.000606484
+        hierarchyID -> 1, hierarchyName -> h32q2g, 
+        MstopMDRPrime -> {1807.421718155926, 2176.2140733830706}, 
+        Mh2Tree -> {{3.9900456677813977*^6, -199915.84939351628}, {-199915.84939351628, 18267.112558603498}}, 
+        Mh21Loop -> {{-639.5967086048405, 38.1108098347363}, {38.1108098347363, 10354.694221748936}}, 
+        Mh22Loop -> {{-2.067756466175066, 47.44906816768487}, {47.44906816768487, 1872.6875317790061}}, 
+        Mh23Loop -> {{-4.186285565859146, 26.440305208276936}, {26.440305208276936, 695.9601307370843}}, 
+        Mh23LoopShiftDRbarPrimeToMDRPrime -> {{-0.06556209414766911, 6.451828360749449}, {6.451828360749449, -47.47567025934484}}, 
+        Mh23LoopShiftDRbarPrimeToH3m ->  {{-1.5317742384518245, 1.9557280682757228}, {1.9557280682757228, 7.446661229467915}}, 
+        expansionUncertainty -> {0., 0., 0.29936990221850124, 0.029834152694507742}, 
+        lambda -> {0.13736500000000001, 0.06251358668613667, 0.0014909887921878413, 0.00021462203207113314}, 
+        lambdaUncertainty -> {0., 0., 0., 0.0010928804743410628},
+        lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.2898259577239126*^-6, -0.000771028340668861}, 
+        deltaLambda3LoopH3m -> {0.000226477371058642, 0.0012078034614150654}, 
+        deltaLambda3LoopH3mShiftDRbarPrimeToMSbar -> -0.0006679606925823672, 
+        deltaLambda3LoopEFT -> {0.00021462203207113314, 0.0010928804743410628}, 
+        deltaLambda3LoopEFTShiftDRbarPrimeToMSbar -> -0.000771028340668861
     },
     precision -> 1*^-5
 };
 
 TestPoint[pointSPS2, "SPS2"];
-TestPoint[MakePoint[1000,10,2*1000], "MS=1000, TB=10, Xt=2*MS"];
+TestPoint[MakePoint[2000, 20, Sqrt[6]*2000], "MS=2000, TB=20, Xt=Sqrt[6]*MS"];
 
 Print["Number of passed tests: ", passedTests];
 Print["Number of failed tests: ", failedTests];

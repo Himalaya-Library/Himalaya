@@ -183,8 +183,12 @@ calculates the loop corrections available by Himalaya.
 **Example**:
 
 ```.m
-MS = 1000;
-TB = 10;
+Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
+
+InitializeHimalaya["Himalaya_LibraryLink.so"];
+
+MS = 2000;
+TB = 20;
 Xt = Sqrt[6] MS;
 
 result = HimalayaCalculateDMh3L[
@@ -232,18 +236,21 @@ corrections:
 
 ```.m
 { hierarchyID -> 1, hierarchyName -> h32q2g,
-  MstopMDRPrime -> {806.093, 1175.23},
-  Mh2Tree -> {{990181., -99832.9}, {-99832.9, 18131.5}},
-  Mh21Loop -> {{-655.018, 91.0476}, {91.0476, 8514.69}},
-  Mh22Loop -> {{0.313712, 26.7548}, {26.7548, 928.429}},
-  Mh23Loop -> {{-5.04054, 10.3797}, {10.3797, 262.451}},
-  Mh23LoopShiftDRbarPrimeToMDRPrime -> {{0.427722, 9.94589}, {9.94589, -38.3268}},
-  Mh23LoopShiftDRbarPrimeToH3m -> {{-1.61719, 2.15579}, {2.15579, 7.58367}},
-  expansionUncertainty -> {0., 0., 0.2247, 0.0198037},
-  deltaLambda3LoopH3mDRbarPrime -> {0.0000516811, 0.00132572},
-  deltaLambda3LoopH3mShiftDRbarPrimeToMSbar -> -0.000677801,
-  deltaLambda3LoopEFTDRbarPrime -> {0.0000120296, 0.00108097},
-  deltaLambda3LoopEFTShiftDRbarPrimeToMSbar -> -0.000882901 }
+  MstopMDRPrime -> {1807.42, 2176.21},
+  Mh2Tree -> {{3.99005*10^6, -199916.}, {-199916., 18267.1}},
+  Mh21Loop -> {{-639.597, 38.1108}, {38.1108, 10354.7}},
+  Mh22Loop -> {{-2.06776, 47.4491}, {47.4491, 1872.69}},
+  Mh23Loop -> {{-4.18629, 26.4403}, {26.4403, 695.96}},
+  Mh23LoopShiftDRbarPrimeToMDRPrime -> {{-0.0655621, 6.45183}, {6.45183, -47.4757}},
+  Mh23LoopShiftDRbarPrimeToH3m -> {{-1.53177, 1.95573}, {1.95573, 7.44666}},
+  expansionUncertainty -> {0., 0., 0.29937, 0.0298342},
+  lambda -> {0.137365, 0.0625136, 0.00149099, 0.000214622},
+  lambdaUncertainty -> {0., 0., 0., 0.00109288},
+  lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.28983*10^-6, -0.000771028},
+  deltaLambda3LoopH3m -> {0.000226477, 0.0012078},
+  deltaLambda3LoopH3mShiftDRbarPrimeToMSbar -> -0.000667961,
+  deltaLambda3LoopEFT -> {0.000214622, 0.00109288},
+  deltaLambda3LoopEFTShiftDRbarPrimeToMSbar -> -0.000771028 }
 ```
 
 See `?HimalayaCalculateDMh3L` for a detailed documentation of the
