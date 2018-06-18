@@ -249,6 +249,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setDeltaMh2EFT2L(mh2EFTCalculator.getDeltaMh2EFT2Loop(1, 1));
    ho.setDeltaMh2EFT3L(mh2EFTCalculator.getDeltaMh2EFT3Loop(1, 1, 0) 
       + ho.getDeltaLambdaEFT()*v2);
+   ho.setDeltaLambda0L(pow2(p.MZ)/v2);
    ho.setDeltaLambda1L(pref_1L*(tc.getThresholdCorrection(
       ThresholdVariables::LAMBDA_AT,RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDeltaLambda2L(pref_2L*(tc.getThresholdCorrection(

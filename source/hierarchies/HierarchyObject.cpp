@@ -329,8 +329,16 @@ Eigen::Vector2d himalaya::HierarchyObject::sortVector(Eigen::Vector2d& vector){
    return vector;
 }
 
+double himalaya::HierarchyObject::getDeltaLambda0L() const{
+   return deltaLambda0L;
+}
+
 double himalaya::HierarchyObject::getDeltaLambda1L() const{
    return deltaLambda1L;
+}
+
+void himalaya::HierarchyObject::setDeltaLambda0L(double deltaLambda){
+   deltaLambda0L = deltaLambda;
 }
 
 void himalaya::HierarchyObject::setDeltaLambda1L(double deltaLambda){
@@ -458,9 +466,11 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 		   << "}, {" << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(1)  << "}} GeV^2\n"
 	<< "DR' -> H3m shift       =  {{" << ho.getDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(0)(1)
 		   << "}, {" << ho.getDRbarPrimeToH3mShift().row(1)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(1)(1) << "}} GeV^2\n"
-	<< "Δλ_1L                  =  " << ho.getDeltaLambda1L() << "\n"
+	<< "Δλ_0L                  =  " << ho.getDeltaLambda0L() << " O(g_1^2, g_2^2)\n"
+	<< "Δλ_0L DR' -> MS shift  =  " << 0. << "\n"
+	<< "Δλ_1L                  =  " << ho.getDeltaLambda1L() << " O(α_t)\n"
 	<< "Δλ_1L DR' -> MS shift  =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda1L() << "\n"
-	<< "Δλ_2L                  =  " << ho.getDeltaLambda2L() << "\n"
+	<< "Δλ_2L                  =  " << ho.getDeltaLambda2L() << " O(α_t*α_s)\n"
 	<< "Δλ_2L DR' -> MS shift  =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda2L() << "\n"
 	<< "Δλ_H3m                 =  " << ho.getDeltaLambdaH3m() << " +/- " << ho.getDeltaLambdaUncertaintyH3m() << " (expanded coefficients of logarithms)\n"
 	<< "Δλ_H3m DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftH3m() << " (should be added to Δλ to convert it to MS)\n"

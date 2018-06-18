@@ -89,6 +89,10 @@ namespace himalaya{
        */
       double getDRbarPrimeToMSbarShiftEFT() const;
       /**
+       * 	@return delta_lambda @ tree-level
+       */
+      double getDeltaLambda0L() const;
+      /**
        * 	@return delta_lambda @ 1-loop order
        */
       double getDeltaLambda1L() const;
@@ -165,6 +169,11 @@ namespace himalaya{
        * 	@throws runtime_exception if the flag is not in {0,1,2,3} an exception is thrown
        */
       void setRenormalizationScheme(int renScheme);
+      /**
+       * 	Sets the delta_lambda at tree-level
+       * 	@param deltaLambda delta_lambda at tree-level
+       */
+      void setDeltaLambda0L(double deltaLambda);
       /**
        * 	Sets the delta_lambda at 1-loop order
        * 	@param deltaLambda delta_lambda at 1-loop order.
@@ -276,6 +285,7 @@ namespace himalaya{
       double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
       double expansionUncertaintyDeltaLambda{};						/**< The expansion uncertainty of delta_lambda */
       Eigen::Matrix2d h3mShift{};							/**< The DR' -> H3m shift which should be added to the DR' result */
+      double deltaLambda0L{};								/**< Delta_lambda @ 0L */
       double deltaLambda1L{};								/**< Delta_lambda @ 1L O(at) */
       double deltaLambda2L{};								/**< Delta_lambda @ 2L O(at*as) */
       double drToMSDL1L{};								/**< The shift to convert delta_lambda from DR' to MS @ 1L */
