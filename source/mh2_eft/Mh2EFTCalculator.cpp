@@ -86,12 +86,12 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs,
    using std::log;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    
-   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
    
    // 1-Loop prefactor at
    const double pref_at = 1./pow2(4*Pi) * pow2(p.Mt * gt);
    
-   const double v2 = pow2(p.vu) + pow2(p.vd);
    const double beta = atan(p.vu/p.vd);
    const double cbeta = cos(beta);
    const double c2beta = cos(2*beta);
@@ -212,7 +212,8 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    using std::log;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    // couplings
-   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
    const double g32 = pow2(p.g3);
    const double yt2 = pow2(sqrt(2.)*p.Mt/p.vu);
    const double yb2 = pow2(sqrt(2.)*p.Mb/p.vd);
@@ -222,7 +223,6 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double yt6 = pow3(yt2);
    const double yb6 = pow3(yb2);
    const double ytau6 = pow3(ytau2);
-   const double v2 = pow2(p.vu) + pow2(p.vd);
    const double beta = atan(p.vu/p.vd);
    const double cbeta = cos(beta);
    const double c2beta = cos(2*beta);

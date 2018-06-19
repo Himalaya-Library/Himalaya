@@ -144,7 +144,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       || suitableHierarchy == himalaya::Hierarchies::h9q2) xtOrder = 3;
    
    // calculate the 3-loop Higgs mass matrix for the obtained hierachy in the (M)DRbar' scheme
-   ho.setDMh(3, calculateHierarchy(ho, 0, 0, 1) - shiftH3mToDRbarPrime(ho));
+   ho.setDMh(3, calculateHierarchy(ho, 0, 0, 1) + shiftH3mToDRbarPrime(ho));
    
    // set the alpha_x contributions
    ho.setDMh(1, getMt41L(ho, mdrFlag, mdrFlag));
@@ -168,12 +168,12 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
    himalaya::ThresholdCalculator tc (p_mass_ES);
    
-   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
-   
-   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
-   
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
+   
+   const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
+   
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
    
    // calculate the (non-)logarithmic part of Mh2 without delta_lambda_3L
    // the first line is equivalent to  64 * dytas - 84 * pow2(dytas) - 24 * dytas2 + catas2 including all log(mu^2/Mst1^2)
@@ -194,11 +194,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 
    // calculate the non-logarithmic part of delta_lambda at 3L
    const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() 
-      - shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
+      + shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
    
    // calculate delta_lambda_H3m
    ho.setDeltaLambdaH3m((pref*(ho.getDeltaLambdaH3m() 
-      - shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
+      + shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
    
    // caluclate delta_lambda_EFT
    ho.setDeltaLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
@@ -224,8 +224,8 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setExpUncertaintyDeltaLambda(ho.getExpUncertainty(3)/sqrt(v2));
    
    // calculate shifts needed to convert DR' to other renormalization schemes,
-   // here one needs it without the minus sign to convert DR -> H3m
-   ho.setDRbarPrimeToH3mShift(shiftH3mToDRbarPrime(ho));
+   // here one needs it with the minus sign to convert DR -> H3m
+   ho.setDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
    
    // set flags to omit all but O(at*as^n)
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
@@ -273,7 +273,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho_mdr.setMDRFlag(1);
    // calculate the DR to MDR shift with the obtained hierarchy
    ho_mdr.setDRbarPrimeToMDRbarPrimeShift(calcDRbarToMDRbarShift(ho_mdr, true, true));
-   ho_mdr.setDMh(3, calculateHierarchy(ho_mdr, 0, 0, 1) - shiftH3mToDRbarPrime(ho_mdr));
+   ho_mdr.setDMh(3, calculateHierarchy(ho_mdr, 0, 0, 1) + shiftH3mToDRbarPrime(ho_mdr));
    Eigen::Vector2d mdrMasses;
    mdrMasses(0) = ho_mdr.getMDRMasses()(0);
    mdrMasses(1) = ho_mdr.getMDRMasses()(1);
@@ -932,7 +932,7 @@ double himalaya::HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyOb
 }
 
 /**
- * 	Shifts the H3m renormalization scheme to DR' scheme. This shift has to be subtracted from the H3m result!
+ * 	Shifts the H3m renormalization scheme to DR' scheme. This shift has to be added to the H3m result!
  * 	@param ho a HierarchyObject with constant isAlphab.
  * 	@return A matrix which shifts the H3m scheme to the DR' scheme at three-loop level
  *
@@ -988,67 +988,67 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::shiftH3mToDRbarPrime(const himala
    // check for degenerate squark masses
    if(std::abs(Mst1 - Mst2) < eps){
       const double Mst2shift = Mst1 + sqrt(std::abs(Dmst12))/2.;
-      const double Mst22shift = pow2(Mst2shift);
-      const double Dmst12shift = Mst12 - Mst22shift;
-      const double lmMst2shift = log(scale2 / Mst22shift);
+      const double lmMst2shift = log(scale2 / pow2(Mst2shift));
       // limit
-      const double lim = -32 * (-3 * (1 + lmMgl) * Mgl2  + 5 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12) / (3 * pow3(Mst12)) * Xt2 * pow2(p.mu);
+      const double lim = (32*Xt2*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 +
+        lmMst1)*pow2(Mst1))*pow2(p.mu))/(3.*pow6(Mst1));
       // exact result
-      const double exact = -16 * (-6 * (1 + lmMgl) * Mgl2  + 10 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12 + (1 + lmMst2) * Mst22) / (Mst12 * Mst22 * pow3(Dmst12))
-	 * pow2(p.mu) * Xt2 * (pow2(Mst12) - pow2(Mst22) + 4 * Mst12 * Mst22 *(log(Mst2) - log(Mst1)));
+      const double exact = (16*Xt2*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
+        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*pow2(p.mu)*(-4*log(Mst1/
+        Mst2)*pow2(Mst1)*pow2(Mst2) + pow4(Mst1) - pow4(Mst2)))/(pow2(Mst1)*
+        pow2(Mst2)*pow3(pow2(Mst1) - pow2(Mst2)));
       // exact result with shifted stop_2 mass
-      const double exactShifted = -16 * (-6 * (1 + lmMgl) * Mgl2  + 10 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12 + (1 + lmMst2shift) * Mst22shift) / (Mst12 * Mst22shift * pow3(Dmst12shift))
-	 * pow2(p.mu) * Xt2 * (pow2(Mst12) - pow2(Mst22shift)  + 4 * Mst12 * Mst22shift * (log(Mst2shift) - log(Mst1)));
+      const double exactShifted = (16*Xt2*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
+        lmMst1)*pow2(Mst1) + (1 + lmMst2shift)*pow2(Mst2shift))*pow2(p.mu)*(-4*log(Mst1/
+        Mst2shift)*pow2(Mst1)*pow2(Mst2shift) + pow4(Mst1) - pow4(Mst2shift)))/(pow2(Mst1)*
+        pow2(Mst2shift)*pow3(pow2(Mst1) - pow2(Mst2shift)));
       
       isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
 	 || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
 
    if(isDegen){
-      // common pre-factor
-      const double fac = -32 * (-3 * (1 + lmMgl) * Mgl2  + 5 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12) / (3 * pow3(Mst12));
-
       // matrix elements
-      shift(0, 0) = fac * Xt2 * pow2(p.mu);
-      shift(1, 0) = fac * p.mu  * Xt * (3*Mst12 - Xt2 - p.mu*Xt/Tbeta);
+      shift(0, 0) = (32*Xt2*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 +
+        lmMst1)*pow2(Mst1))*pow2(p.mu))/(3.*pow6(Mst1));
+      shift(1, 0) = (-32*p.mu*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 +
+        lmMst1)*pow2(Mst1))*(p.mu*Xt2 - 3*Tbeta*Xt*pow2(Mst1) + Tbeta*pow3(Xt)))/
+        (3.*Tbeta*pow6(Mst1));
       shift(0, 1) = shift(1,0);
-      shift(1, 1) = fac * (6*pow2(Mst12) - 6*Mst12*Xt*(p.mu + Tbeta*Xt)/Tbeta
-	 +Xt2*(pow2(p.mu) + 2*p.mu*Tbeta*Xt + pow2(Tbeta)*truncateXt*Xt2)/pow2(Tbeta));
+      shift(1, 1) = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
+        pow2(Mst1))*(-6*Tbeta*(p.mu*Xt + Tbeta*Xt2)*pow2(Mst1) + Xt2*pow2(p.mu) +
+        truncateXt*pow2(Tbeta)*pow2(Xt2) + 2*p.mu*Tbeta*pow3(Xt) + 6*pow2(Tbeta)*
+        pow4(Mst1)))/(3.*pow2(Tbeta)*pow6(Mst1));
    }
    else{
-      // common pre-factor
-      const double fac = -16 * (-6 * (1 + lmMgl) * Mgl2  + 10 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12 + (1 + lmMst2) * Mst22) / (Mst12 * Mst22 * pow3(Dmst12));
-
       // matrix elements
-      shift(0, 0) = fac * pow2(p.mu) * Xt2 * (pow2(Mst12) - pow2(Mst22) 
-	 + 4 * Mst12 * Mst22 *(log(Mst2) - log(Mst1)));
-      shift(1, 0) = fac * p.mu * Xt * (pow3(Dmst12) 
-	 + (pow2(Mst22) - pow2(Mst12)) * Xt2
-	 + p.mu * Xt / Tbeta * (pow2(Mst22) - pow2(Mst12)
-	 + 4 * Mst12 * Mst22 * (log(Mst1) - log(Mst2)))
-	 + 4 * Mst12 * Mst22 * Xt2 * (log(Mst1) - log(Mst2)));
+      shift(0, 0) = (16*Xt2*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
+        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*pow2(p.mu)*(-4*log(Mst1/
+        Mst2)*pow2(Mst1)*pow2(Mst2) + pow4(Mst1) - pow4(Mst2)))/(pow2(Mst1)*
+        pow2(Mst2)*pow3(pow2(Mst1) - pow2(Mst2)));
+      shift(1, 0) = (16*p.mu*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
+        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*log(Mst1/Mst2)*pow2(
+        Mst1)*pow2(Mst2)*(p.mu*Xt2 + Tbeta*pow3(Xt)) + p.mu*Xt2*(-pow4(Mst1) +
+        pow4(Mst2)) + Tbeta*Xt*(pow3(pow2(Mst1) - pow2(Mst2)) + pow2(Xt)*(-
+        pow4(Mst1) + pow4(Mst2)))))/(Tbeta*pow2(Mst1)*pow2(Mst2)*pow3(pow2(
+        Mst1) - pow2(Mst2)));
       shift(0, 1) = shift(1,0);
-      shift(1, 1) = (fac*(pow3(Dmst12) * (Mst12 + Mst22) * pow2(Tbeta)
-	 - 2 * pow3(Dmst12) * p.mu * Tbeta * Xt
-	 + ((pow2(Mst12) - pow2(Mst22)) * pow2(p.mu)
-	 - 2 * pow3(Dmst12) * pow2(Tbeta)) * Xt2
-	 + 2 * (pow2(Mst12) - pow2(Mst22)) * p.mu * Tbeta * pow3(Xt)
-	 + (pow2(Mst12) - pow2(Mst22)) * pow2(Tbeta) * truncateXt * pow2(Xt2) 
-	 + 4 * pow2(Mst1) * pow2(Mst2) * Xt2 * (pow2(p.mu) 
-	 + 2 * p.mu * Tbeta * Xt + pow2(Tbeta) * truncateXt * Xt2)
-	 *log(Mst2/Mst1))) / pow2(Tbeta);
+      shift(1, 1) = (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
+        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(-4*log(Mst1/Mst2)*pow2(Mst1)*
+        pow2(Mst2)*(Xt2*pow2(p.mu) + truncateXt*pow2(Tbeta)*pow2(Xt2) + 2*p.mu*
+        Tbeta*pow3(Xt)) + Xt2*(-2*pow2(Tbeta)*pow3(pow2(Mst1) - pow2(Mst2)) +
+        pow2(p.mu)*(pow4(Mst1) - pow4(Mst2))) + Tbeta*(-2*p.mu*Xt*pow3(pow2(Mst1) -
+        pow2(Mst2)) + Tbeta*(pow2(Mst1) + pow2(Mst2))*pow3(pow2(Mst1) - pow2(
+        Mst2)) + 2*p.mu*pow3(Xt)*(pow4(Mst1) - pow4(Mst2))) + truncateXt*pow2(
+        Tbeta)*pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*
+        pow2(Tbeta)*pow3(pow2(Mst1) - pow2(Mst2)));
    }
 
    return prefac * shift;
 }
 
 /**
- * 	Shifts the H3m renormalization scheme to DR' scheme. This shift has to be subtracted from the H3m result!
+ * 	Shifts the H3m renormalization scheme to DR' scheme. This shift has to be added to the H3m result!
  * 	Note: This shift is WITHOUT the three-loop pre-factor g3^4*k^3*Mt^2*yt^2*Sin[beta]^2 with k = 1 / (16 Pi^2)
  * 	@param ho a HierarchyObject with constant isAlphab.
  * 	@return A double which shifts the H3m scheme to the DR' scheme at three-loop level
@@ -1070,8 +1070,8 @@ double himalaya::HierarchyCalculator::shiftH3mToDRbarPrimeMh2(const himalaya::Hi
    const double Tbeta = p.vu / p.vd;
    
    // stop masses
-   const double Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
-   const double Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
+   const double Mst1 = p.MSt(0);
+   const double Mst2 = p.MSt(1);
    
    double Xt = p.Au(2,2) - p.mu / Tbeta;
    // Hierarchy h4 only covers O(Xt^0)
@@ -1101,43 +1101,42 @@ double himalaya::HierarchyCalculator::shiftH3mToDRbarPrimeMh2(const himalaya::Hi
    // check for degenerate squark masses
    if(std::abs(Mst1 - Mst2) < eps){
       const double Mst2shift = Mst1 + sqrt(std::abs(Dmst12))/2.;
-      const double Mst22shift = pow2(Mst2shift);
-      const double Dmst12shift = Mst12 - Mst22shift;
-      const double lmMst2shift = log(scale2 / Mst22shift);
+      const double lmMst2shift = log(scale2 / pow2(Mst2shift));
       // limit
-      const double lim = -32 * (-3 * (1 + lmMgl) * Mgl2 + 5 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12) * (6 * pow2(Mst12) - 6 * Mst12 * Xt2 + truncateXt * pow2(Xt2));
+      const double lim = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
+        pow2(Mst1))*(-6*Xt2*pow2(Mst1) + truncateXt*pow2(Xt2) + 6*pow4(Mst1)))/
+        (3.*pow6(Mst1));
       // exact result
-      const double exact = (-32 * (-6 * (1 + lmMgl) * Mgl2 + 10 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12 + (1 + lmMst2) * Mst22) * (pow3(Dmst12)
-	 * (Mst12 + Mst22) -  2 * pow3(Dmst12) * Xt2
-	 + (pow2(Mst12) - pow2(Mst22)) * truncateXt * pow2(Xt2)
-	 + 4 * Mst12 * Mst22 * truncateXt * pow2(Xt2)
-	 * (log(Mst2) - log(Mst1)))) / (Mst12 * pow3(Dmst12) * Mst22);
+      const double exact =  (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
+        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*truncateXt*log(Mst2/Mst1)*
+        pow2(Mst1)*pow2(Mst2)*pow2(Xt2) - 2*Xt2*pow3(pow2(Mst1) - pow2(Mst2)) +
+        (pow2(Mst1) + pow2(Mst2))*pow3(pow2(Mst1) - pow2(Mst2)) + truncateXt*
+        pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*pow3(pow2(
+        Mst1) - pow2(Mst2)));
       // exact result with shifted stop_2 mass
-      const double exactShifted = (-32 * (-6 * (1 + lmMgl) * Mgl2 + 10 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12 + (1 + lmMst2shift) * Mst22shift) * (pow3(Dmst12shift)
-	 * (Mst12 + Mst22shift) -  2 * pow3(Dmst12shift) * Xt2
-	 + (pow2(Mst12) - pow2(Mst22shift)) * truncateXt * pow2(Xt2)
-	 + 4 * Mst12 * Mst22shift * truncateXt * pow2(Xt2)
-	 * (log(Mst2shift) - log(Mst1)))) / (Mst12 * pow3(Dmst12shift) * Mst22shift);
+      const double exactShifted =  (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
+        pow2(Mst1) + (1 + lmMst2shift)*pow2(Mst2shift))*(4*truncateXt*log(Mst2shift/Mst1)*
+        pow2(Mst1)*pow2(Mst2shift)*pow2(Xt2) - 2*Xt2*pow3(pow2(Mst1) - pow2(Mst2shift)) +
+        (pow2(Mst1) + pow2(Mst2shift))*pow3(pow2(Mst1) - pow2(Mst2shift)) + truncateXt*
+        pow2(Xt2)*(pow4(Mst1) - pow4(Mst2shift))))/(pow2(Mst1)*pow2(Mst2shift)*pow3(pow2(
+        Mst1) - pow2(Mst2shift)));
 
       isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
          || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
    
    if(isDegen){
-      shift = (-32 * (-3 * (1 + lmMgl) * Mgl2 + 5 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12) * (6 * pow2(Mst12) - 6 * Mst12 * Xt2
-	 + truncateXt * pow2(Xt2)))/(3 * pow3(Mst12));
+      shift = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
+        pow2(Mst1))*(-6*Xt2*pow2(Mst1) + truncateXt*pow2(Xt2) + 6*pow4(Mst1)))/
+        (3.*pow6(Mst1));
    }
    else{
-      shift = (-32 * (-6 * (1 + lmMgl) * Mgl2 + 10 * (1 + lmMsq) * Msq2
-	 + (1 + lmMst1) * Mst12 + (1 + lmMst2) * Mst22) * (pow3(Dmst12)
-	 * (Mst12 + Mst22) -  2 * pow3(Dmst12) * Xt2
-	 + (pow2(Mst12) - pow2(Mst22)) * truncateXt * pow2(Xt2)
-	 + 4 * Mst12 * Mst22 * truncateXt * pow2(Xt2)
-	 * (log(Mst2) - log(Mst1)))) / (Mst12 * pow3(Dmst12) * Mst22);
+      shift = (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
+        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*truncateXt*log(Mst2/Mst1)*
+        pow2(Mst1)*pow2(Mst2)*pow2(Xt2) - 2*Xt2*pow3(pow2(Mst1) - pow2(Mst2)) +
+        (pow2(Mst1) + pow2(Mst2))*pow3(pow2(Mst1) - pow2(Mst2)) + truncateXt*
+        pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*pow3(pow2(
+        Mst1) - pow2(Mst2)));
    }
 
    return shift;
