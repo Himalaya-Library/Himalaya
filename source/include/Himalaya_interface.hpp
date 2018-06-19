@@ -13,9 +13,11 @@ const double NaN = std::numeric_limits<double>::quiet_NaN();
 
 /**
  * 	The Himalaya interface struct
+ *
+ * All input parameters are expected to be provided in the DR'-bar scheme.
  */
 struct Parameters {
-   // DR-bar-prime parameters
+   // DR'-bar parameters
    double scale{};		  ///< renormalization scale
    double mu{};			  ///< mu parameter, convention of [Phys.Rept. 117 (1985) 75-263]
    double g1{};			  ///< GUT-normalized gauge coupling g1, with gY = g1*Sqrt[3/5]
@@ -35,7 +37,7 @@ struct Parameters {
    RM33 Yd{RM33::Zero()};	  ///< down-type yukawa coupling matrix
    RM33 Ye{RM33::Zero()};	  ///< electron-type yukawa coupling matrix
 
-   // DR-bar-prime masses
+   // DR'-bar masses
    double M1{};			  ///< bino
    double M2{};			  ///< wino
    double MG{};			  ///< gluino
@@ -48,7 +50,7 @@ struct Parameters {
    V2 MSt{NaN, NaN};              ///< stops
    V2 MSb{NaN, NaN};              ///< sbottoms
 
-   // DR-bar-prime mixing angles
+   // DR'-bar mixing angles
    double s2t{NaN};               ///< sine of 2 times the stop mixing angle
    double s2b{NaN};               ///< sine of 2 times the sbottom mixing angle
 
