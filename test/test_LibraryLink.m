@@ -42,6 +42,7 @@ TestPoint[point_, name_] :=
            TestClose[Mh2ShiftDRbarPrimeToMDRPrime                   /. output, Mh2ShiftDRbarPrimeToMDRPrime                   /. (expectedOutput /. point), eps];
            TestClose[Mh2ShiftDRbarPrimeToH3m                        /. output, Mh2ShiftDRbarPrimeToH3m                        /. (expectedOutput /. point), eps];
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
+           TestClose[Mh2EFT                                         /. output, Mh2EFT                                         /. (expectedOutput /. point), eps];
            TestClose[lambda                                         /. output, lambda                                         /. (expectedOutput /. point), eps];
            TestClose[lambdaUncertainty                              /. output, lambdaUncertainty                              /. (expectedOutput /. point), eps];
            TestClose[lambdaShiftDRbarPrimeToMSbar                   /. output, lambdaShiftDRbarPrimeToMSbar                   /. (expectedOutput /. point), eps];
@@ -124,6 +125,7 @@ pointSPS2 = {
             {{-0.0037627, 0.0622916}, {0.0622916, -0.631601}}
         },
         expansionUncertainty                           -> {0, 0, 0.0378711, 0.0243905},
+        Mh2EFT                                         -> {7717.27, 5241.38, 1245.02, 303.339},
         lambda                                         -> {0.13051177168737485, 0.00518866, 0.000211537, -1.17351*^-05},
         lambdaUncertainty                              -> {0, 0, 0, 0.000102286},
         lambdaShiftDRbarPrimeToMSbar                   -> {0, 0, -3.9067*^-07, -4.62254*^-05},
@@ -240,6 +242,7 @@ MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
             {{-1.5317742384518245, 1.9557280682757228}, {1.9557280682757228, 7.446661229467915}}
         },
         expansionUncertainty -> {0., 0., 0.29936990221850124, 0.029834152694507742}, 
+        Mh2EFT -> {8230.066622149989, 10331.078614427297, 1881.1471720931024, 689.1169793778004},
         lambda -> {0.13599819257964818, 0.06251358668613667, 0.0014909887921878413, 0.00021462203207113314}, 
         lambdaUncertainty -> {0., 0., 0., 0.0010928804743410628},
         lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.2898259577239126*^-6, -0.000771028340668861}, 
