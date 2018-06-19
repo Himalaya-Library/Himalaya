@@ -1,3 +1,10 @@
+// ====================================================================
+// This file is part of Himalaya.
+//
+// Himalaya is licenced under the GNU General Public License (GNU GPL)
+// version 3.
+// ====================================================================
+
 #include "H4.hpp"
 #include "HierarchyCalculator.hpp"
 #include "Hierarchies.hpp"

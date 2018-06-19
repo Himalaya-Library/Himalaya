@@ -1,3 +1,10 @@
+// ====================================================================
+// This file is part of Himalaya.
+//
+// Himalaya is licenced under the GNU General Public License (GNU GPL)
+// version 3.
+// ====================================================================
+
 #include "ThresholdCalculator.hpp"
 #include "Hierarchies.hpp"
 #include "Logger.hpp"
