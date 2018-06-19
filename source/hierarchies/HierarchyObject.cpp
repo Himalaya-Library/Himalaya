@@ -369,6 +369,14 @@ void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftDeltaLambda2L(double sh
    drToMSDL2L = shift;
 }
 
+double himalaya::HierarchyObject::getDeltaMh2EFT0L() const{
+   return mh2EFT0L;
+}
+
+void himalaya::HierarchyObject::setDeltaMh2EFT0L(double deltaMh2){
+   mh2EFT0L = deltaMh2;
+}
+
 double himalaya::HierarchyObject::getDeltaMh2EFT1L() const{
    return mh2EFT1L;
 }
@@ -451,13 +459,13 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 	<< massString << "_2" << spaces << "=  " << ho.getMDRMasses()(1) << " GeV (MDR')\n"
         << "Abs. diff 2L           =  " << ho.getAbsDiff2L() << " GeV\n"
         << "Rel. diff 2L           =  " << ho.getRelDiff2L()*100 << " %\n"
-        << "Mh^2_tree              =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
+        << "Mh^2_0L                =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
 		   << "}, {" << ho.getDMh(0).row(1)(0) << ", " << ho.getDMh(0).row(1)(1) << "}} GeV^2\n"
-        << "Mh^2_1L                =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
+        << "ΔMh^2_1L               =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
 		   << "}, {" << ho.getDMh(1).row(1)(0) << ", " << ho.getDMh(1).row(1)(1) << "}} GeV^2\n"
-        << "Mh^2_2L                =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
+        << "ΔMh^2_2L               =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
 		   << "}, {" << ho.getDMh(2).row(1)(0) << ", " << ho.getDMh(2).row(1)(1) << "}} GeV^2\n"
-        << "Mh^2_3L                =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
+        << "ΔMh^2_3L               =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
 		   << "}, {" << ho.getDMh(3).row(1)(0) << ", " << ho.getDMh(3).row(1)(1) << "}} GeV^2\n"
         << "Exp. uncert. 1L        =  " << ho.getExpUncertainty(1) << " GeV\n"
         << "Exp. uncert. 2L        =  " << ho.getExpUncertainty(2) << " GeV\n"
@@ -476,9 +484,10 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 	<< "Δλ_H3m DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftH3m() << " (should be added to Δλ to convert it to MS)\n"
         << "Δλ_EFT                 =  " << ho.getDeltaLambdaEFT() << " +/- " << ho.getDeltaLambdaUncertaintyEFT() << " (exact mass dependence of coefficients of logarithms)\n"
 	<< "Δλ_EFT DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftEFT() << " (should be added to Δλ to convert it to MS)\n"
-	<< "ΔMh^2_EFT_1L            =  " << ho.getDeltaMh2EFT1L() << " GeV^2\n"
-	<< "ΔMh^2_EFT_2L            =  " << ho.getDeltaMh2EFT2L() << " GeV^2\n"
-	<< "ΔMh^2_EFT_3L            =  " << ho.getDeltaMh2EFT3L() << " GeV^2";
+	<< "Mh^2_EFT_0L            =  " << ho.getDeltaMh2EFT0L() << " GeV^2\n"
+	<< "ΔMh^2_EFT_1L           =  " << ho.getDeltaMh2EFT1L() << " GeV^2\n"
+	<< "ΔMh^2_EFT_2L           =  " << ho.getDeltaMh2EFT2L() << " GeV^2\n"
+	<< "ΔMh^2_EFT_3L           =  " << ho.getDeltaMh2EFT3L() << " GeV^2";
 
    return ostr;
 }

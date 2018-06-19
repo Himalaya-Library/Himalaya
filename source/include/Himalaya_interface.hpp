@@ -40,6 +40,7 @@ struct Parameters {
    double MG{};					/**< gluino */
    double MW{std::numeric_limits<double>::quiet_NaN()};		/**< W */
    double MZ{std::numeric_limits<double>::quiet_NaN()};		/**< Z */
+   double Mh{std::numeric_limits<double>::quiet_NaN()};		/**< light CP-even Higgs */
    double Mt{std::numeric_limits<double>::quiet_NaN()};		/**< top-quark */
    double Mb{std::numeric_limits<double>::quiet_NaN()};		/**< down-quark */
    double Mtau{std::numeric_limits<double>::quiet_NaN()};	/**< tau lepton */

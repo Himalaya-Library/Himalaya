@@ -109,6 +109,10 @@ namespace himalaya{
        */
       double getDRbarPrimeToMSbarShiftDeltaLambda2L() const;
       /**
+       * 	@return Delta_Mh2_EFT @ 0L
+       */
+      double getDeltaMh2EFT0L() const;
+      /**
        * 	@return Delta_Mh2_EFT @ 1L
        */
       double getDeltaMh2EFT1L() const;
@@ -246,6 +250,11 @@ namespace himalaya{
        */
       Eigen::Matrix2d getDRbarPrimeToH3mShift() const;
       /**
+       * 	Sets Delta_Mh2_EFT @ 0L
+       * 	@param deltaMh2 delta_Mh^2
+       */
+      void setDeltaMh2EFT0L(double deltaMh2);
+      /**
        * 	Sets Delta_Mh2_EFT @ 1L O(at)
        * 	@param deltaMh2 delta_Mh^2
        */
@@ -290,6 +299,7 @@ namespace himalaya{
       double deltaLambda2L{};								/**< Delta_lambda @ 2L O(at*as) */
       double drToMSDL1L{};								/**< The shift to convert delta_lambda from DR' to MS @ 1L */
       double drToMSDL2L{};								/**< The shift to convert delta_lambda from DR' to MS @ 2L */
+      double mh2EFT0L{};								/**< Mh2_EFT @ 0L */
       double mh2EFT1L{};								/**< Mh2_EFT @ 1L O(at) */
       double mh2EFT2L{};								/**< Mh2_EFT @ 2L O(at*as) */
       double mh2EFT3L{};								/**< Mh2_EFT @ 3L O(at*as^2) */
