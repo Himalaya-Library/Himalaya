@@ -22,6 +22,10 @@ namespace mh2_eft{
        */
       Mh2EFTCalculator(const Parameters& p_, double msq2_ = std::numeric_limits<double>::quiet_NaN(), bool verbose = true);
       /**
+       * 	Returns the tree-level EFT contribution to the Higgs mass
+       */
+      double getDeltaMh2EFT0Loop();
+      /**
        * 	Returns the 1-loop EFT contribution to the Higgs mass
        * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
        * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms

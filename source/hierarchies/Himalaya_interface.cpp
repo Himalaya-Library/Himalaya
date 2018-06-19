@@ -118,7 +118,6 @@ void Parameters::validate(bool verbose)
    // calculate all other masses
    if(std::isnan(MW)) MW = std::sqrt(1/4.*pow2(g2)*(pow2(vu) + pow2(vd)));
    if(std::isnan(MZ)) MZ = std::sqrt(1/4.*(0.6*pow2(g1) + pow2(g2))*(pow2(vu) + pow2(vd)));
-   if(std::isnan(Mh)) Mh = MZ * std::cos(2 * std::atan(vu/vd));
    if(std::isnan(Mt)) Mt = 0.7071067811865475*Yu(2,2)*vu;
    if(std::isnan(Mb)) Mb = 0.7071067811865475*Yd(2,2)*vd;
    if(std::isnan(Mtau)) Mtau = 0.7071067811865475*Ye(2,2)*vd;

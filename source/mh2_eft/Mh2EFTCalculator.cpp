@@ -2,7 +2,7 @@
 #include "ThresholdCalculator.hpp"
 #include "Hierarchies.hpp"
 #include "Logger.hpp"
-#include <iostream>
+#include <cmath>
 
 namespace himalaya {
 namespace mh2_eft {
@@ -62,6 +62,10 @@ void himalaya::mh2_eft::Mh2EFTCalculator::setCorrectionFlag(int variable, int en
    orderMap.at(variable) = enable;
 }
 
+double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT0Loop()
+{
+   return pow2(p.MZ * std::cos(2 * std::atan(p.vu/p.vd)));
+}
 
 /**
  * 	Returns the 1-loop EFT contribution to the Higgs mass

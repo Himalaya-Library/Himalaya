@@ -4,7 +4,6 @@
 #include "Mh2EFTCalculator.hpp"
 #include "ThresholdCalculator.hpp"
 #include "Hierarchies.hpp"
-#include <iostream>
 #undef private
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))

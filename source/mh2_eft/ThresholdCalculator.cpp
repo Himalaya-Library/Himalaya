@@ -2,7 +2,6 @@
 #include "Hierarchies.hpp"
 #include "Logger.hpp"
 #include "dilog.h"
-#include <iostream>
 #include <cmath>
 
 namespace {
