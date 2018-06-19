@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <vector>
 
 #include <mathlink.h>
 #include <WolframLibrary.h>
@@ -92,6 +93,14 @@ void MLPut(MLINK link, const Eigen::Matrix<std::complex<double>,M,N>& m)
    }
 }
 
+template <class T>
+void MLPut(MLINK link, const std::vector<T>& v)
+{
+   MLPutFunction(link, "List", v.size());
+   for (int i = 0; i < v.size(); i++)
+      MLPut(link, v[i]);
+}
+
 /********************* put rules to types *********************/
 
 void MLPutRule(MLINK link, const std::string& name)
@@ -122,7 +131,7 @@ void put_message(MLINK link,
 
 void put_result(const himalaya::HierarchyObject& ho, MLINK link)
 {
-   MLPutFunction(link, "List", 17);
+   MLPutFunction(link, "List", 14);
 
    const auto hierarchy = ho.getSuitableHierarchy();
    const std::string msf = ho.getIsAlphab() ? "MsbottomMDRPrime" : "MstopMDRPrime";
@@ -150,15 +159,28 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
       ho.getDRbarPrimeToMSbarShiftDeltaLambda2L(),
       ho.getDRbarPrimeToMSbarShiftEFT();
 
+   std::vector<Eigen::Matrix2d> Mh2;
+   for (int i = 0; i < 4; i++)
+      Mh2.push_back(ho.getDMh(i));
+
+   std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_MDRp;
+   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.push_back(ho.getDRbarPrimeToMDRbarPrimeShift());
+
+   std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_H3m;
+   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.push_back(ho.getDRbarPrimeToH3mShift());
+
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
    MLPutRuleTo(link, ho.getMDRMasses(), msf);
-   MLPutRuleTo(link, ho.getDMh(0), "Mh2Tree");
-   MLPutRuleTo(link, ho.getDMh(1), "Mh21Loop");
-   MLPutRuleTo(link, ho.getDMh(2), "Mh22Loop");
-   MLPutRuleTo(link, ho.getDMh(3), "Mh23Loop");
-   MLPutRuleTo(link, ho.getDRbarPrimeToMDRbarPrimeShift(), "Mh23LoopShiftDRbarPrimeToMDRPrime");
-   MLPutRuleTo(link, ho.getDRbarPrimeToH3mShift(), "Mh23LoopShiftDRbarPrimeToH3m");
+   MLPutRuleTo(link, Mh2, "Mh2");
+   MLPutRuleTo(link, Mh2_shift_DRp_to_MDRp, "Mh2ShiftDRbarPrimeToMDRPrime");
+   MLPutRuleTo(link, Mh2_shift_DRp_to_H3m, "Mh2ShiftDRbarPrimeToH3m");
    MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
    MLPutRuleTo(link, lambda, "lambda");
    MLPutRuleTo(link, lambda_uncertainty, "lambdaUncertainty");

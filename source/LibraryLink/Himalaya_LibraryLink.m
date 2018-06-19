@@ -71,12 +71,9 @@ Output: A list of replacement rules with
  - hierarchyName: name of the used (best fitting) mass hierarchy
  - MstopMDRPrime: used stop masses, defined in the MDR' scheme [only available if bottom == False]
  - MsbottomMDRPrime: used sbottom masses, defined in the MDR' scheme [only available if bottom == True]
- - Mh2Tree: tree-level mass matrix (DR' scheme)
- - Mh21Loop: 1-loop correction to the mass matrix (DR' scheme)
- - Mh22Loop: 2-loop correction to the mass matrix (DR' scheme)
- - Mh23Loop: 3-loop correction to the mass matrix (DR' scheme)
- - Mh23LoopShiftDRbarPrimeToMDRPrime: shift from DR' -> MDR' scheme
- - Mh23LoopShiftDRbarPrimeToH3m: shift from DR' -> H3m scheme
+ - Mh2: list with {0L, 1L, 2L, 3L} CP-even Higgs mass matrix corrections (DR' scheme)
+ - Mh2ShiftDRbarPrimeToMDRPrime: list with {0L, 1L, 2L, 3L} shifts from DR' -> MDR' scheme
+ - Mh2ShiftDRbarPrimeToH3m: list with {0L, 1L, 2L, 3L} shifts from DR' -> H3m scheme
  - expansionUncertainty: uncertainty from mass expansion for 0-, 1-, 2- and 3-loop correction
  - lambda: {0L, 1L, 2L, 3L} correction to lambda, in DR' scheme, w/ full logarithms
  - lambdaUncertainty: uncertainty of lambda {0L, 1L, 2L, 3L}
@@ -146,9 +143,9 @@ output = HimalayaCalculateDMh3L[
 (* output parameters *)
 { hierarchyID, hierarchyName,
   MstopMDRPrime, MsbottomMDRPrime,
-  Mh2Tree, Mh21Loop, Mh22Loop, Mh23Loop,
-  Mh23LoopShiftDRbarPrimeToMDRPrime,
-  Mh23LoopShiftDRbarPrimeToH3m,
+  Mh2,
+  Mh2ShiftDRbarPrimeToMDRPrime,
+  Mh2ShiftDRbarPrimeToH3m,
   expansionUncertainty,
   lambda, lambdaUncertainty, lambdaShiftDRbarPrimeToMSbar,
   deltaLambda3LoopH3m,

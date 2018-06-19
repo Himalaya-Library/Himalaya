@@ -38,12 +38,9 @@ TestPoint[point_, name_] :=
            TestEqual[hierarchyName                                  /. output, hierarchyName                                  /. (expectedOutput /. point)];
            TestClose[MstopMDRPrime                                  /. output, MstopMDRPrime                                  /. (expectedOutput /. point), eps];
            TestClose[MsbottomMDRPrime                               /. output, MsbottomMDRPrime                               /. (expectedOutput /. point), eps];
-           TestClose[Mh2Tree                                        /. output, Mh2Tree                                        /. (expectedOutput /. point), eps];
-           TestClose[Mh21Loop                                       /. output, Mh21Loop                                       /. (expectedOutput /. point), eps];
-           TestClose[Mh22Loop                                       /. output, Mh22Loop                                       /. (expectedOutput /. point), eps];
-           TestClose[Mh23Loop                                       /. output, Mh23Loop                                       /. (expectedOutput /. point), eps];
-           TestClose[Mh23LoopShiftDRbarPrimeToMDRPrime              /. output, Mh23LoopShiftDRbarPrimeToMDRPrime              /. (expectedOutput /. point), eps];
-           TestClose[Mh23LoopShiftDRbarPrimeToH3m                   /. output, Mh23LoopShiftDRbarPrimeToH3m                   /. (expectedOutput /. point), eps];
+           TestClose[Mh2                                            /. output, Mh2                                            /. (expectedOutput /. point), eps];
+           TestClose[Mh2ShiftDRbarPrimeToMDRPrime                   /. output, Mh2ShiftDRbarPrimeToMDRPrime                   /. (expectedOutput /. point), eps];
+           TestClose[Mh2ShiftDRbarPrimeToH3m                        /. output, Mh2ShiftDRbarPrimeToH3m                        /. (expectedOutput /. point), eps];
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
            TestClose[lambda                                         /. output, lambda                                         /. (expectedOutput /. point), eps];
            TestClose[lambdaUncertainty                              /. output, lambdaUncertainty                              /. (expectedOutput /. point), eps];
@@ -108,12 +105,24 @@ pointSPS2 = {
         hierarchyID                                    -> 2,
         hierarchyName                                  -> h3q22g,
         MstopMDRPrime                                  -> {955.6409734756253, 1287.5049731244299},
-        Mh2Tree                                        -> {{2.18023*^06, -227080}, {-227080, 31451.3}},
-        Mh21Loop                                       -> {{-2.92153, 100.252}, {100.252, 5277.06}},
-        Mh22Loop                                       -> {{-0.307806, 17.7881}, {17.7881, 1256.76}},
-        Mh23Loop                                       -> {{-0.0143744, 5.62494}, {5.62494, 300.795}},
-        Mh23LoopShiftDRbarPrimeToMDRPrime              -> {{0.00487318, 0.0179684}, {0.0179684, 0.738644}},
-        Mh23LoopShiftDRbarPrimeToH3m                   -> {{-0.0037627, 0.0622916}, {0.0622916, -0.631601}},
+        Mh2                                            -> {
+            {{2.18023*^06, -227080}, {-227080, 31451.3}},
+            {{-2.92153, 100.252}, {100.252, 5277.06}},
+            {{-0.307806, 17.7881}, {17.7881, 1256.76}},
+            {{-0.0143744, 5.62494}, {5.62494, 300.795}}
+        },
+        Mh2ShiftDRbarPrimeToMDRPrime                   -> {
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{0.00487318, 0.0179684}, {0.0179684, 0.738644}}
+        },
+        Mh2ShiftDRbarPrimeToH3m                        -> {
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{-0.0037627, 0.0622916}, {0.0622916, -0.631601}}
+        },
         expansionUncertainty                           -> {0, 0, 0.0378711, 0.0243905},
         lambda                                         -> {0.13051177168737485, 0.00518866, 0.000211537, -1.17351*^-05},
         lambdaUncertainty                              -> {0, 0, 0, 0.000102286},
@@ -212,12 +221,24 @@ MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
     expectedOutput -> {
         hierarchyID -> 1, hierarchyName -> h32q2g, 
         MstopMDRPrime -> {1807.421718155926, 2176.2140733830706}, 
-        Mh2Tree -> {{3.9900456677813977*^6, -199915.84939351628}, {-199915.84939351628, 18267.112558603498}}, 
-        Mh21Loop -> {{-639.5967086048405, 38.1108098347363}, {38.1108098347363, 10354.694221748936}}, 
-        Mh22Loop -> {{-2.067756466175066, 47.44906816768487}, {47.44906816768487, 1872.6875317790061}}, 
-        Mh23Loop -> {{-4.186285565859146, 26.440305208276936}, {26.440305208276936, 695.9601307370843}}, 
-        Mh23LoopShiftDRbarPrimeToMDRPrime -> {{-0.06556209414766911, 6.451828360749449}, {6.451828360749449, -47.47567025934484}}, 
-        Mh23LoopShiftDRbarPrimeToH3m ->  {{-1.5317742384518245, 1.9557280682757228}, {1.9557280682757228, 7.446661229467915}}, 
+        Mh2 -> {
+            {{3.9900456677813977*^6, -199915.84939351628}, {-199915.84939351628, 18267.112558603498}},
+            {{-639.5967086048405, 38.1108098347363}, {38.1108098347363, 10354.694221748936}},
+            {{-2.067756466175066, 47.44906816768487}, {47.44906816768487, 1872.6875317790061}},
+            {{-4.186285565859146, 26.440305208276936}, {26.440305208276936, 695.9601307370843}}
+        },
+        Mh2ShiftDRbarPrimeToMDRPrime -> {
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{-0.06556209414766911, 6.451828360749449}, {6.451828360749449, -47.47567025934484}}
+        },
+        Mh2ShiftDRbarPrimeToH3m -> {
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{0, 0}, {0, 0}},
+            {{-1.5317742384518245, 1.9557280682757228}, {1.9557280682757228, 7.446661229467915}}
+        },
         expansionUncertainty -> {0., 0., 0.29936990221850124, 0.029834152694507742}, 
         lambda -> {0.13599819257964818, 0.06251358668613667, 0.0014909887921878413, 0.00021462203207113314}, 
         lambdaUncertainty -> {0., 0., 0., 0.0010928804743410628},
