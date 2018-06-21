@@ -154,17 +154,17 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    delta_lambda_h3m << ho.getDeltaLambdaH3m(), ho.getDeltaLambdaUncertaintyH3m();
 
    Eigen::Vector4d lambda;
-   lambda << ho.getDeltaLambda0L(), ho.getDeltaLambda1L(),
-             ho.getDeltaLambda2L(), ho.getDeltaLambdaEFT();
+   lambda << ho.getDeltaLambda(0), ho.getDeltaLambda(1),
+             ho.getDeltaLambda(2), ho.getDeltaLambda(3);
 
    Eigen::Vector4d lambda_uncertainty;
    lambda_uncertainty << 0., 0., 0., ho.getDeltaLambdaUncertaintyEFT();
 
    Eigen::Vector4d lambda_shift_DRp_to_MS;
    lambda_shift_DRp_to_MS << 0.,
-      ho.getDRbarPrimeToMSbarShiftDeltaLambda1L(),
-      ho.getDRbarPrimeToMSbarShiftDeltaLambda2L(),
-      ho.getDRbarPrimeToMSbarShiftEFT();
+      ho.getDRbarPrimeToMSbarShiftDeltaLambda(0),
+      ho.getDRbarPrimeToMSbarShiftDeltaLambda(2),
+      ho.getDRbarPrimeToMSbarShiftDeltaLambda(3);
 
    std::vector<Eigen::Matrix2d> Mh2;
    for (int i = 0; i < 4; i++)
@@ -183,8 +183,8 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    Mh2_shift_DRp_to_H3m.push_back(ho.getDRbarPrimeToH3mShift());
 
    Eigen::Vector4d Mh2_eft;
-   Mh2_eft << ho.getDeltaMh2EFT0L(), ho.getDeltaMh2EFT1L(),
-              ho.getDeltaMh2EFT2L(), ho.getDeltaMh2EFT3L();
+   Mh2_eft << ho.getDeltaMh2EFT(0), ho.getDeltaMh2EFT(1),
+              ho.getDeltaMh2EFT(2), ho.getDeltaMh2EFT(3);
 
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");

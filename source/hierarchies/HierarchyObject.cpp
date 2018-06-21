@@ -123,7 +123,6 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
    }
    
    throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops) + " loop(s) is not available.");
-   
 }
 
 /**
@@ -336,76 +335,82 @@ Eigen::Vector2d himalaya::HierarchyObject::sortVector(Eigen::Vector2d& vector){
    return vector;
 }
 
-double himalaya::HierarchyObject::getDeltaLambda0L() const{
-   return deltaLambda0L;
+/**
+ * 	@return delta_lambda
+ * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L Delta_lambda_EFT)
+ */
+double himalaya::HierarchyObject::getDeltaLambda(int loops) const{
+   if(loops >= 0 && loops <= 3){
+      return deltaLambdaMap.at(loops);
+   }
+   
+   throw std::runtime_error("Δλ for " + std::to_string(loops) + " loop(s) is not available.");
 }
 
-double himalaya::HierarchyObject::getDeltaLambda1L() const{
-   return deltaLambda1L;
+/**
+ * 	Sets the Delta_lambda at loops-loop
+ * 	@param loops an integer, could be 0 (tree), ..., 3 (3L Delta_lambda_EFT)
+ * 	@param deltaLambda delta_lambda at tree-level
+ */
+void himalaya::HierarchyObject::setDeltaLambda(int loops, double deltaLambda){
+   if(loops >= 0 && loops <= 3){
+      deltaLambdaMap[loops] = deltaLambda;
+   }
+   else {
+      throw std::runtime_error("Δλ for " + std::to_string(loops) + " loop(s) is not available.");
+   }
 }
 
-void himalaya::HierarchyObject::setDeltaLambda0L(double deltaLambda){
-   deltaLambda0L = deltaLambda;
+/**
+ * 	@return Delta_Mh2_EFT
+ * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L with Delta_lambda_EFT)
+ */
+double himalaya::HierarchyObject::getDeltaMh2EFT(int loops) const{
+   if(loops >= 0 && loops <= 3){
+      return deltaMh2EFTMap.at(loops);
+   }
+   
+   throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
 }
 
-void himalaya::HierarchyObject::setDeltaLambda1L(double deltaLambda){
-   deltaLambda1L = deltaLambda;
+/**
+ * 	Sets Delta_Mh2_EFT at loops-loop
+ * 	@param loops an integer, could be 0 (tree), ..., 3 (3L with Delta_lambda_EFT)
+ * 	@param deltaMh2 delta_Mh^2
+ */
+void himalaya::HierarchyObject::setDeltaMh2EFT(int loops, double deltaMh2){
+   if(loops >= 0 && loops <= 3){
+      deltaMh2EFTMap[loops] = deltaMh2;
+   }
+   else {
+      throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+   }
 }
 
-double himalaya::HierarchyObject::getDeltaLambda2L() const{
-   return deltaLambda2L;
+/**
+ * 	@return shift to convert delta_lambda from DR' to MS scheme. This shift has to be added to the 1L result
+ * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L Delta_lambda_EFT)
+ */
+double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftDeltaLambda(int loops) const{
+   if(loops >= 0 && loops <= 3){
+      return deltaLambdaDRbarPrimeToMSbarShiftMap.at(loops);
+   }
+   
+   throw std::runtime_error("Δ_DR' -> MS shift for " + std::to_string(loops) + " loop(s) is not available.");
 }
 
-void himalaya::HierarchyObject::setDeltaLambda2L(double deltaLambda){
-   deltaLambda2L = deltaLambda;
-}
-
-double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftDeltaLambda1L() const{
-   return drToMSDL1L;
-}
-
-void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftDeltaLambda1L(double shift){
-   drToMSDL1L = shift;
-}
-
-double himalaya::HierarchyObject::getDRbarPrimeToMSbarShiftDeltaLambda2L() const{
-   return drToMSDL2L;
-}
-
-void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftDeltaLambda2L(double shift){
-   drToMSDL2L = shift;
-}
-
-double himalaya::HierarchyObject::getDeltaMh2EFT0L() const{
-   return mh2EFT0L;
-}
-
-void himalaya::HierarchyObject::setDeltaMh2EFT0L(double deltaMh2){
-   mh2EFT0L = deltaMh2;
-}
-
-double himalaya::HierarchyObject::getDeltaMh2EFT1L() const{
-   return mh2EFT1L;
-}
-
-void himalaya::HierarchyObject::setDeltaMh2EFT1L(double deltaMh2){
-   mh2EFT1L = deltaMh2;
-}
-
-double himalaya::HierarchyObject::getDeltaMh2EFT2L() const{
-   return mh2EFT2L;
-}
-
-void himalaya::HierarchyObject::setDeltaMh2EFT2L(double deltaMh2){
-   mh2EFT2L = deltaMh2;
-}
-
-double himalaya::HierarchyObject::getDeltaMh2EFT3L() const{
-   return mh2EFT3L;
-}
-
-void himalaya::HierarchyObject::setDeltaMh2EFT3L(double deltaMh2){
-   mh2EFT3L = deltaMh2;
+/**
+ * 	Sets the DR' to MS shift for delta_lambda at loops-loop
+ * 	@param loops an integer, could be 0(tree), ..., 3 (3L Delta_lambda_EFT shift)
+ * 	@param shift the shift
+ */
+void himalaya::HierarchyObject::setDRbarPrimeToMSbarShiftDeltaLambda(int loops, double shift){
+   if(loops >= 0 && loops <= 3){
+      deltaLambdaDRbarPrimeToMSbarShiftMap[loops] = shift;
+   }
+   else {
+      throw std::runtime_error("Δ_DR' -> MS shift for " + std::to_string(loops) + " loop(s) is not available.");
+   }
 }
 
 /**
@@ -456,45 +461,45 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
    const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
       || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
    const std::string massString = ho.getIsAlphab() ? "Msbottom" : "Mstop";
-   const std::string spaces = ho.getIsAlphab() == true ? "             " : "                ";
+   const std::string spaces = ho.getIsAlphab() == true ? "                " : "                   ";
    ostr << "===================================\n"
 	<< "Himalaya HierarchyObject parameters\n"
         << "===================================\n"
-	<< "Ren. scheme            =  " << renSchemeString << "\n"
-        << "Hierarchy              =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
+	<< "Ren. scheme               =  " << renSchemeString << "\n"
+        << "Hierarchy                 =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
 	<< massString << "_1" << spaces << "=  " << ho.getMDRMasses()(0) << " GeV (MDR')\n"
 	<< massString << "_2" << spaces << "=  " << ho.getMDRMasses()(1) << " GeV (MDR')\n"
-        << "Abs. diff 2L           =  " << ho.getAbsDiff2L() << " GeV\n"
-        << "Rel. diff 2L           =  " << ho.getRelDiff2L()*100 << " %\n"
-        << "Mh^2_0L                =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
+        << "Abs. diff 2L              =  " << ho.getAbsDiff2L() << " GeV\n"
+        << "Rel. diff 2L              =  " << ho.getRelDiff2L()*100 << " %\n"
+        << "Mh^2_0L                   =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
 		   << "}, {" << ho.getDMh(0).row(1)(0) << ", " << ho.getDMh(0).row(1)(1) << "}} GeV^2\n"
-        << "ΔMh^2_1L               =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
+        << "ΔMh^2_1L                  =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
 		   << "}, {" << ho.getDMh(1).row(1)(0) << ", " << ho.getDMh(1).row(1)(1) << "}} GeV^2\n"
-        << "ΔMh^2_2L               =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
+        << "ΔMh^2_2L                  =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
 		   << "}, {" << ho.getDMh(2).row(1)(0) << ", " << ho.getDMh(2).row(1)(1) << "}} GeV^2\n"
-        << "ΔMh^2_3L               =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
+        << "ΔMh^2_3L                  =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
 		   << "}, {" << ho.getDMh(3).row(1)(0) << ", " << ho.getDMh(3).row(1)(1) << "}} GeV^2\n"
-        << "Exp. uncert. 1L        =  " << ho.getExpUncertainty(1) << " GeV\n"
-        << "Exp. uncert. 2L        =  " << ho.getExpUncertainty(2) << " GeV\n"
-        << "Exp. uncert. 3L        =  " << ho.getExpUncertainty(3) << " GeV\n"
-	<< "DR' -> MDR' shift      =  {{" << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(1)
+        << "Exp. uncert. 1L           =  " << ho.getExpUncertainty(1) << " GeV\n"
+        << "Exp. uncert. 2L           =  " << ho.getExpUncertainty(2) << " GeV\n"
+        << "Exp. uncert. 3L           =  " << ho.getExpUncertainty(3) << " GeV\n"
+	<< "DR' -> MDR' shift         =  {{" << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(0)(1)
 		   << "}, {" << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(0) << ", " << ho.getDRbarPrimeToMDRbarPrimeShift().row(1)(1)  << "}} GeV^2\n"
-	<< "DR' -> H3m shift       =  {{" << ho.getDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(0)(1)
+	<< "DR' -> H3m shift          =  {{" << ho.getDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(0)(1)
 		   << "}, {" << ho.getDRbarPrimeToH3mShift().row(1)(0) << ", " << ho.getDRbarPrimeToH3mShift().row(1)(1) << "}} GeV^2\n"
-	<< "Δλ_0L                  =  " << ho.getDeltaLambda0L() << " O(g_1^2, g_2^2)\n"
-	<< "Δλ_0L DR' -> MS shift  =  " << 0. << "\n"
-	<< "Δλ_1L                  =  " << ho.getDeltaLambda1L() << " O(α_t)\n"
-	<< "Δλ_1L DR' -> MS shift  =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda1L() << "\n"
-	<< "Δλ_2L                  =  " << ho.getDeltaLambda2L() << " O(α_t*α_s)\n"
-	<< "Δλ_2L DR' -> MS shift  =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda2L() << "\n"
-	<< "Δλ_H3m                 =  " << ho.getDeltaLambdaH3m() << " +/- " << ho.getDeltaLambdaUncertaintyH3m() << " (expanded coefficients of logarithms)\n"
-	<< "Δλ_H3m DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftH3m() << " (should be added to Δλ to convert it to MS)\n"
-        << "Δλ_EFT                 =  " << ho.getDeltaLambdaEFT() << " +/- " << ho.getDeltaLambdaUncertaintyEFT() << " (exact mass dependence of coefficients of logarithms)\n"
-	<< "Δλ_EFT DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftEFT() << " (should be added to Δλ to convert it to MS)\n"
-	<< "Mh^2_EFT_0L            =  " << ho.getDeltaMh2EFT0L() << " GeV^2\n"
-	<< "ΔMh^2_EFT_1L           =  " << ho.getDeltaMh2EFT1L() << " GeV^2\n"
-	<< "ΔMh^2_EFT_2L           =  " << ho.getDeltaMh2EFT2L() << " GeV^2\n"
-	<< "ΔMh^2_EFT_3L           =  " << ho.getDeltaMh2EFT3L() << " GeV^2";
+	<< "Δλ_0L                     =  " << ho.getDeltaLambda(0) << " O(g_1^2, g_2^2)\n"
+	<< "Δλ_0L DR' -> MS shift     =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda(0) << "\n"
+	<< "Δλ_1L                     =  " << ho.getDeltaLambda(1) << " O(α_t)\n"
+	<< "Δλ_1L DR' -> MS shift     =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda(1) << "\n"
+	<< "Δλ_2L                     =  " << ho.getDeltaLambda(2) << " O(α_t*α_s)\n"
+	<< "Δλ_2L DR' -> MS shift     =  " << ho.getDRbarPrimeToMSbarShiftDeltaLambda(2) << "\n"
+	<< "Δλ_H3m_3L                 =  " << ho.getDeltaLambdaH3m() << " +/- " << ho.getDeltaLambdaUncertaintyH3m() << " O(α_t*α_s^2)\n"
+	<< "Δλ_H3m_3L DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftH3m() << "\n"
+        << "Δλ_EFT_3L                 =  " << ho.getDeltaLambdaEFT() << " +/- " << ho.getDeltaLambdaUncertaintyEFT() << " O(α_t*α_s^2)\n"
+	<< "Δλ_EFT_3L DR' -> MS shift =  " << ho.getDRbarPrimeToMSbarShiftEFT() << "\n"
+	<< "Mh^2_EFT_0L               =  " << ho.getDeltaMh2EFT(0) << " GeV^2 O(g_1^2, g_2^2)\n"
+	<< "ΔMh^2_EFT_1L              =  " << ho.getDeltaMh2EFT(1) << " GeV^2 O(α_t)\n"
+	<< "ΔMh^2_EFT_2L              =  " << ho.getDeltaMh2EFT(2) << " GeV^2 O(α_t*α_s)\n"
+	<< "ΔMh^2_EFT_3L              =  " << ho.getDeltaMh2EFT(3) << " GeV^2 O(α_t*α_s^2)";
 
    return ostr;
 }

@@ -193,9 +193,9 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
 
    // calculate the non-logarithmic part of delta_lambda at 3L
-   const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog() 
+   const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog()
       + shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
-   
+
    // calculate delta_lambda_H3m
    ho.setDeltaLambdaH3m((pref*(ho.getDeltaLambdaH3m() 
       + shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
@@ -254,20 +254,23 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // 2-Loop prefactor at*as
    const double pref_2L = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
    // fill in results of EFT calculation
-   ho.setDeltaMh2EFT0L(mh2_eft);
-   ho.setDeltaMh2EFT1L(mh2EFTCalculator.getDeltaMh2EFT1Loop(1, 1));
-   ho.setDeltaMh2EFT2L(mh2EFTCalculator.getDeltaMh2EFT2Loop(1, 1));
-   ho.setDeltaMh2EFT3L(mh2EFTCalculator.getDeltaMh2EFT3Loop(1, 1, 0) 
+   ho.setDeltaMh2EFT(0, mh2_eft);
+   ho.setDeltaMh2EFT(1, mh2EFTCalculator.getDeltaMh2EFT1Loop(1, 1));
+   ho.setDeltaMh2EFT(2, mh2EFTCalculator.getDeltaMh2EFT2Loop(1, 1));
+   ho.setDeltaMh2EFT(3, mh2EFTCalculator.getDeltaMh2EFT3Loop(1, 1, 0) 
       + ho.getDeltaLambdaEFT()*v2);
-   ho.setDeltaLambda0L(mh2_eft/v2);
-   ho.setDeltaLambda1L(pref_1L*(tc.getThresholdCorrection(
+   ho.setDeltaLambda(0, mh2_eft/v2);
+   ho.setDeltaLambda(1, pref_1L*(tc.getThresholdCorrection(
       ThresholdVariables::LAMBDA_AT,RenSchemes::DRBARPRIME, 1))/v2);
-   ho.setDeltaLambda2L(pref_2L*(tc.getThresholdCorrection(
+   ho.setDeltaLambda(2, pref_2L*(tc.getThresholdCorrection(
       ThresholdVariables::LAMBDA_AT_AS, RenSchemes::DRBARPRIME, 1))/v2);
-   ho.setDRbarPrimeToMSbarShiftDeltaLambda1L(0.);
-   ho.setDRbarPrimeToMSbarShiftDeltaLambda2L(pref_2L*(-4*ho.getDeltaLambda1L()
+   ho.setDeltaLambda(3, ho.getDeltaLambdaEFT());
+   ho.setDRbarPrimeToMSbarShiftDeltaLambda(0, 0.);
+   ho.setDRbarPrimeToMSbarShiftDeltaLambda(1, 0.);
+   ho.setDRbarPrimeToMSbarShiftDeltaLambda(2, pref_2L*(-4*ho.getDeltaLambda(1)
       *tc.getThresholdCorrection(ThresholdVariables::YT_AS,
 				 RenSchemes::DRBARPRIME, 1))/v2);
+   ho.setDRbarPrimeToMSbarShiftDeltaLambda(3, ho.getDRbarPrimeToMSbarShiftEFT());
    
    auto ho_mdr = ho;
    ho_mdr.setMDRFlag(1);
@@ -1459,9 +1462,9 @@ int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
 void himalaya::HierarchyCalculator::printInfo(){
    std::cout << "............................................................................\n";
    std::cout << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\tѧѦѧ \n";
-   std::cout << "Uses code by P. Slavich et al. (2-loop at*as) [hep-ph/0105096].\n";
-   std::cout << "Uses the 3-loop at*as^2 contributions of Kant et al. [arXiv:1005.5709],\n";
-   std::cout << "  2-loop at*as contributions of Bagnaschi et.al. [arXiv:1407.4081],\n";
-   std::cout << "  2-loop as^2 contributions Bednyakov et.al. [hep-ph/0210258,hep-ph/0507139]\n";
+   std::cout << "Uses code by P. Slavich et al. (2-loop αt*αs) [hep-ph/0105096].\n";
+   std::cout << "Uses the 3-loop αt*αs^2 contributions of Kant et al. [arXiv:1005.5709],\n";
+   std::cout << "  2-loop αt*αs contributions of Bagnaschi et.al. [arXiv:1407.4081],\n";
+   std::cout << "  2-loop αs^2 contributions Bednyakov et.al. [hep-ph/0210258,hep-ph/0507139]\n";
    std::cout << "............................................................................\n";
 }
