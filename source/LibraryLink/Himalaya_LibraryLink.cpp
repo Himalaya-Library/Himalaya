@@ -161,8 +161,9 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    lambda_uncertainty << 0., 0., 0., ho.getDeltaLambdaUncertaintyEFT();
 
    Eigen::Vector4d lambda_shift_DRp_to_MS;
-   lambda_shift_DRp_to_MS << 0.,
+   lambda_shift_DRp_to_MS <<
       ho.getDRbarPrimeToMSbarShiftDeltaLambda(0),
+      ho.getDRbarPrimeToMSbarShiftDeltaLambda(1),
       ho.getDRbarPrimeToMSbarShiftDeltaLambda(2),
       ho.getDRbarPrimeToMSbarShiftDeltaLambda(3);
 
