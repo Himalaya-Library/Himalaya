@@ -80,3 +80,66 @@ TEST_CASE("test_example")
       REQUIRE_FALSE(false);
    }
 }
+
+himalaya::Parameters make_point(double MS, double xt, double tb)
+{
+   himalaya::Parameters pars;
+
+   const double MS2 = MS*MS;
+   const double Xt = xt*MS;
+   const double beta = std::atan(tb);
+
+   pars.scale = MS;
+   pars.mu = MS;
+   pars.g1 = 0.46;
+   pars.g2 = 0.65;
+   pars.g3 = 1.166;
+   pars.vd = 246*std::cos(beta);
+   pars.vu = 246*std::sin(beta);
+   pars.mq2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.md2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.mu2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.ml2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.me2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.Au(2,2) = Xt + pars.mu/tb;
+   pars.Yu(2,2) = 0.862;
+   pars.Yd(2,2) = 0.133;
+   pars.Ye(2,2) = 0.101;
+   pars.MA = MS;
+   pars.M1 = MS;
+   pars.M2 = MS;
+   pars.MG = MS;
+
+   return pars;
+}
+
+TEST_CASE("test_Himalaya_2.0_example_1")
+{
+   // create parameter point
+   const auto point = make_point(2000, std::sqrt(6.), 20);
+
+   // create calculator object
+   himalaya::HierarchyCalculator hc(point);
+
+   // calculate 3-loop corrections
+   const auto ho = hc.calculateDMh3L(false);
+
+   // get 3-loop contribution to CP-even Higgs mass matrix
+   const auto dMh_3L = ho.getDMh(3);
+
+   // get 3-loop contribution to lambda
+   const auto delta_lambda_3L = ho.getDeltaLambdaEFT();
+
+   // get uncertainty for 3-loop lambda
+   const auto delta_lambda_3L_uncertainty = ho.getDeltaLambdaUncertaintyEFT();
+}
