@@ -230,29 +230,6 @@ himalaya::Parameters test_large_delta(){
    return p;
 }
 
-himalaya::Parameters test_largest_delta(){
-   himalaya::Parameters p;
-   
-   p.scale = 100000;
-   p.mu    = 50000;
-   p.g3    = 0.873023;
-   p.vd    = 23.845;
-   p.vu    = 238.45;
-   p.mq2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 4e+10;
-   p.md2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 2.5e+09;
-   p.mu2   << 2.5e+09, 0, 0, 0, 2.5e+09, 0, 0, 0, 4e+10;
-   p.Au    << 0, 0, 0, 0, 0, 0, 0, 0,  494898;
-   p.Ad    << 0, 0, 0, 0, 0, 0, 0, 0,  0;
-   p.MG    = 50000;
-   p.MW    = 73.8172;
-   p.MZ    = 86.2444;
-   p.Mt    = 120.68;
-   p.Mb    = 1.85638;
-   p.MA    = 50000;
-
-return p;
-}
-
 himalaya::Parameters test_gigantic_delta() {
    himalaya::Parameters pars;
 
@@ -291,13 +268,12 @@ int main() {
    try{
       const std::vector<himalaya::Parameters> points = {
 	 setup_SPS1a(),
-	 /*setup_SPS2(),
-	 setup_CMSSM_large_m0(),
-	 setup_HSSUSY_minmix(),
-	 setup_low_MS_large_xt(),*/
-	 /*test_large_delta(),
-	 test_largest_delta(),
-         test_gigantic_delta()*/
+	 //setup_SPS2(),
+	 //setup_CMSSM_large_m0(),
+	 //setup_HSSUSY_minmix(),
+	 //setup_low_MS_large_xt(),
+	 //test_large_delta(),
+         //test_gigantic_delta()
       }; 
       for (const auto& point: points) {
 	 // init hierarchy calculator
