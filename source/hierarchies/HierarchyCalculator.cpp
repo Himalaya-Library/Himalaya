@@ -271,7 +271,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       *tc.getThresholdCorrection(ThresholdVariables::YT_AS,
 				 RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDLambdaDRbarPrimeToMSbarShift(3, ho.getDLambdaEFTDRbarPrimeToMSbarShift());
-   //mh2EFTCalculator.getDeltaLambdaDegenerate(p.scale, p.MSt(0), p.Au(2,2) - p.mu*p.vd/p.vu,1);
+   //mh2EFTCalculator.getDeltaLambdaDegenerate(p.scale, p.MSt(1), p.Au(2,2) - p.mu*p.vd/p.vu,1);
    auto ho_mdr = ho;
    ho_mdr.setMDRFlag(1);
    // calculate the DR to MDR shift with the obtained hierarchy
@@ -397,7 +397,7 @@ bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::Hierarch
    }
    
    // check if the squark mass is the heaviest mass
-   const double delta = Msq*0.10;	// allow for an offset of 1%
+   const double delta = Msq*0.30;	// allow for an offset of 30%
    
    if(std::abs(Msq - Mst2) > delta) return false;
    if(std::abs(Msq - p.MG) > delta) return false;
