@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Himalaya-Library/Himalaya.svg?branch=master)](https://travis-ci.org/Himalaya-Library/Himalaya)
 
-Himalaya can calculate corrections of order O((alpha_t +
-alpha_b)*alpha_s^2) to the CP-even Higgs mass matrix in the DR'-bar
+Himalaya can calculate corrections of order O((α_t +
+α_b)*α_s^2) to the CP-even Higgs mass matrix and the correction quartic Higgs coupling λ
+at three-loop order in the DR'-bar
 scheme using the results of:
 
 * R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs
@@ -23,6 +24,9 @@ Please refer to these papers as well as
   the MSSM at three-loop level in a pure DR context*, [*Eur.Phys.J.* **C77** (2017) no.12, 814]
   (https://doi.org/10.1140/epjc/s10052-017-5368-6),
   [[1708.05720](https://arxiv.org/abs/1708.05720)]
+
+* R. V. Harlander, J. Klappert, A. D. Ochoa Franco and A. Voigt,
+ *The light MSSM Higgs mass resummed to fourth logarithmic order*, [[arxivnumber](link)]
 
 when using Himalaya.
 
@@ -66,40 +70,37 @@ First one has to include the header
 
 in the C++ file. The DR'-bar parameters which define the MSSM
 parameter must be stored in a `Parameters` object.  Here, an example
-for the SPS2 benchmark point is given:
+for the SPS benchmark point is given:
 
 ```cpp
 himalaya::Parameters pars;                      // DR'-bar parameters struct
-pars.scale = 1.11090135E+03;                    // renormalization scale
-pars.mu = 3.73337018E+02;                       // mu parameter
-pars.g3 = 1.06187116E+00;                       // gauge coupling g3 SU(3)
-pars.vd = 2.51008404E+01;                       // VEV of down Higgs doublet
-pars.vu = 2.41869332E+02;                       // VEV of up Higgs doublet
-pars.mq2 << 2.36646981E+06, 0, 0,
-            0, 2.36644973E+06, 0,
-            0, 0, 1.63230152E+06;               // soft-breaking squared left-handed squark mass parameters
-pars.md2 << 2.35612778E+06, 0, 0,
-            0, 2.35610884E+06, 0,
-            0, 0, 2.31917415E+06;               // soft-breaking squared right-handed down-squark mass parameters
-pars.mu2 << 2.35685097E+06, 0, 0,
-            0, 2.35682945E+06, 0,
-            0, 0, 9.05923409E+05;               // soft-breaking squared right-handed up-squark mass parameters
-pars.Ab = -784.3356416708631;                   // trilinear sbottom-Higgs coupling
-pars.At = -527.8746242245387;                   // trilinear stop-Higgs coupling
-pars.MA = 1.48446235E+03;                       // Mass of the CP-odd Higgs
-pars.MG = 6.69045022E+02;                       // Mass of the Gluino
-pars.MW = 8.04001915E+01;                       // Mass of the W boson
-pars.MZ = 8.97608307E+01;                       // Mass of the Z boson 
-pars.Mt = 1.47685846E+02;                       // Mass of the top quark
-pars.Mb = 2.38918959E+00;                       // Mass of the bottom quark
-pars.MSt << 9.57566721E+02, 1.28878643E+03;	// Masses of the stop quarks
-pars.MSb << 1.27884964E+03, 1.52314587E+03;	// Masses of the sbottom quarks
-pars.s2t = sin(2*asin(1.13197339E-01));         // 2 times the sine of the stop mixing angle
-pars.s2b = sin(2*asin(-9.99883015E-01));        // 2 times the sine of the sbottom mixing angle
+pars.scale = 4.67491329E+02;                    // renormalization scale
+pars.mu = 3.52600579E+02;                       // mu parameter
+pars.g3 = 1.09949966E+00;                       // gauge coupling g3 SU(3)
+pars.vd = 2.49832484E+01;                       // VEV of down Higgs doublet
+pars.vu = 2.43650538E+02;                       // VEV of up Higgs doublet
+pars.mq2 << 2.99793928E+05, 0, 0,
+            0, 2.99792102E+05, 0,
+            0, 0, 2.49327504E+05;               // soft-breaking squared left-handed squark mass parameters
+pars.md2 << 2.78275669E+05, 0, 0,
+            0, 2.78273780E+05, 0,
+            0, 0, 2.74928741E+05;               // soft-breaking squared right-handed down-squark mass parameters
+pars.mu2 << 2.80477426E+05, 0, 0,
+            0, 2.80475621E+05, 0,
+            0, 0, 1.80478484E+05;               // soft-breaking squared right-handed up-squark mass parameters
+pars.Ad << 0, 0, 0,
+           0, 0, 0,
+           0, 0, -784.3356416708631;            // trilinear sbottom-Higgs coupling
+pars.Au << 0, 0, 0,
+           0, 0, 0,
+           0, 0, -527.8746242245387;            // trilinear stop-Higgs coupling
+pars.MA = 3.92960954E+02;                       // Mass of the CP-odd Higgs
+pars.MG = 5.88220143E+02;                       // Mass of the Gluino
+pars.MW = 8.04136643E+01;                       // Mass of the W boson
+pars.MZ = 9.06817306E+01;                       // Mass of the Z boson 
+pars.Mt = 1.52117491E+02;                       // Mass of the top quark
+pars.Mb = 2.42010269E+00;                       // Mass of the bottom quark
 ```
-
-The input values of `MSt`, `MSb`, `s2t` and `s2b` are optional. If
-they are not provided, they will get calculated internally.
 
 Afterwards one can create a `HierarchyCalculator` object for the
 chosen parameter set:
