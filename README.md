@@ -70,7 +70,7 @@ First one has to include the header
 
 in the C++ file. The DR'-bar parameters which define the MSSM
 parameter must be stored in a `Parameters` object.  Here, an example
-for the SPS benchmark point is given:
+for the SPS1a benchmark point is given:
 
 ```cpp
 himalaya::Parameters pars;                      // DR'-bar parameters struct
