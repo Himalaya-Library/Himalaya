@@ -141,9 +141,9 @@ double calc_Mh2_EFT_3L(const himalaya::Parameters& pars, int zeta_switch)
    auto hc = himalaya::HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const double zeta_3L_const    = ho.getDeltaLambdaNonLog();
-   const double zeta_3L_eft      = ho.getDeltaLambdaEFT();
-   const double zeta_3L_himalaya = ho.getDeltaLambdaH3m();
+   const double zeta_3L_const    = ho.getDLambdaNonLog();
+   const double zeta_3L_eft      = ho.getDLambdaEFT();
+   const double zeta_3L_himalaya = ho.getDLambdaH3m();
    const double v2 = pow2(pars.vu) + pow2(pars.vd);
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
@@ -195,7 +195,7 @@ TEST_CASE("test_delta_lambda")
    const auto Mh2_3L = calc_Mh2(DMh_0L + DMh_1L + DMh_2L + DMh_3L);
 
    // 3L expansion uncertainty
-   const double Mh2_3L_uncert = ho.getExpUncertainty(3);
+   const double Mh2_3L_uncert = ho.getDMhExpUncertainty(3);
    const double Mh2_3L_uncert_rel = Mh2_3L_uncert / Mh2_3L;
 
    const double Mh_0L = std::sqrt(Mh2_0L);
@@ -243,9 +243,9 @@ TEST_CASE("test_lambda_limit_degenerate")
    auto hc = HierarchyCalculator(pars);
    const auto ho = hc.calculateDMh3L(false);
 
-   const auto z2_gen_Himalaya = ho.getDeltaLambdaH3m();
-   const auto z2_gen_EFT      = ho.getDeltaLambdaEFT();
-   const auto uncertainty     = ho.getDeltaLambdaUncertaintyH3m();
+   const auto z2_gen_Himalaya = ho.getDLambdaH3m();
+   const auto z2_gen_EFT      = ho.getDLambdaEFT();
+   const auto uncertainty     = ho.getDLambdaH3mUncertainty();
 
    INFO("uncertainty: " << uncertainty);
 

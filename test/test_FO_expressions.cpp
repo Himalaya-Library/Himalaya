@@ -66,7 +66,7 @@ TEST_CASE("test_FO_expansions")
       const auto thloMat = hc.calculateHierarchy(ho, 0, 0, 1);
       ho.setMDRFlag(0);
       hc.calculateHierarchy(ho, 0, 0, 1);
-      const auto thlomh2 = ho.getDeltaLambdaH3m();
+      const auto thlomh2 = ho.getDLambdaH3m();
       const auto hier_str = ho.getH3mHierarchyNotation(i);
 
       INFO("Checking hierarchy " << i << " (" << hier_str << ")");

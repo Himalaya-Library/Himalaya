@@ -45,7 +45,7 @@ namespace himalaya{
        * 	@param loops an integer which can be 1, 2 or 3.
        * 	@return A double which is the expansion uncertainty for the given loop order.
        */
-      double getExpUncertainty(int loops) const;
+      double getDMhExpUncertainty(int loops) const;
       /**
        * 	@param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
        * 	@return The CP-even Higgs mass matrix at the given loop order.
@@ -54,7 +54,7 @@ namespace himalaya{
       /**
        * 	@return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
        */
-      Eigen::Matrix2d getDRbarPrimeToMDRbarPrimeShift() const;
+      Eigen::Matrix2d getDMhDRbarPrimeToMDRbarPrimeShift() const;
       /**
        * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
        */
@@ -70,46 +70,46 @@ namespace himalaya{
       /**
        * 	@return 3-loop delta_lambda with H3m logs
        */
-      double getDeltaLambdaH3m() const;
+      double getDLambdaH3m() const;
       /**
        * 	@return 3-loop delta_lambda with EFT logs
        */
-      double getDeltaLambdaEFT() const;
+      double getDLambdaEFT() const;
       /**
        *        @return 3-loop non-logarithmic part of delta_lambda
        */
-      double getDeltaLambdaNonLog() const;
+      double getDLambdaNonLog() const;
       /**
        *        @return uncertainty of 3-loop delta_lambda_H3m
        */
-      double getDeltaLambdaUncertaintyH3m() const;
+      double getDLambdaH3mUncertainty() const;
       /**
        *        @return uncertainty of 3-loop delta_lambda_EFT
        */
-      double getDeltaLambdaUncertaintyEFT() const;
+      double getDLambdaEFTUncertainty() const;
       /**
        * 	@return the DR' -> MS shift for delta_lambda_H3m which should be added to the DR' result
        */
-      double getDRbarPrimeToMSbarShiftH3m() const;
+      double getDLambdaH3mDRbarPrimeToMSbarShift() const;
       /**
        * 	@return the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
        */
-      double getDRbarPrimeToMSbarShiftEFT() const;
+      double getDLambdaEFTDRbarPrimeToMSbarShift() const;
       /**
        * 	@return delta_lambda
        * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L Delta_lambda_EFT)
        */
-      double getDeltaLambda(int loops) const;
+      double getDLambda(int loops) const;
       /**
        * 	@return shift to convert delta_lambda from DR' to MS scheme. This shift has to be added to the 1L result
        * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L Delta_lambda_EFT)
        */
-      double getDRbarPrimeToMSbarShiftDeltaLambda(int loops) const;
+      double getDLambdaDRbarPrimeToMSbarShift(int loops) const;
       /**
        * 	@return Delta_Mh2_EFT
        * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L with Delta_lambda_EFT)
        */
-      double getDeltaMh2EFT(int loops) const;
+      double getDMh2EFT(int loops) const;
       /**
        * 	Sets the suitable hierarchy
        * 	@param hierarchy the integer key of the hierarchy.
@@ -130,12 +130,12 @@ namespace himalaya{
        * 	@param loops the integer value of the corresponding loops. Can be 1, 2 or 3.
        * 	@param uncertainty the expansion untertainty at the given loop order as a double.
        */
-      void setExpUncertainty(int loops, double uncertainty);
+      void setDMhExpUncertainty(int loops, double uncertainty);
       /**
        * 	Sets the DR' -> MDR' shift
        * 	@param mdrShift the DR' -> MDR' shiftet matrix of the form M(MDR') - M(DR').
        */
-      void setDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift);
+      void setDMhDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift);
       /**
        * 	Sets the MDR masses
        * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
@@ -164,48 +164,48 @@ namespace himalaya{
        * 	@param loops an integer, could be 0 (tree), ..., 3 (3L Delta_lambda_EFT)
        * 	@param deltaLambda delta_lambda at tree-level
        */
-      void setDeltaLambda(int loops, double deltaLambda);
+      void setDLambda(int loops, double deltaLambda);
       /**
        * 	Sets the DR' to MS shift for delta_lambda at loops-loop
        * 	@param loops an integer, could be 0(tree), ..., 3 (3L Delta_lambda_EFT shift)
        * 	@param shift the shift
        */
-      void setDRbarPrimeToMSbarShiftDeltaLambda(int loops, double shift);
+      void setDLambdaDRbarPrimeToMSbarShift(int loops, double shift);
       /**
        * 	Sets the delta_lambda at 3-loop order with H3m logs.
        * 	@param deltaLambda delta_lambda at 3-loop order.
        */
-      void setDeltaLambdaH3m(double deltaLambda);
+      void setDLambdaH3m(double deltaLambda);
       /**
        * 	Sets the delta_lambda at 3-loop order with EFT logs
        * 	@param deltaLambda delta_lambda at 3-loop order.
        */
-      void setDeltaLambdaEFT(double deltaLambda);
+      void setDLambdaEFT(double deltaLambda);
       /**
        * 	Sets the non-logarithmic part of delta_lambda at 3-loop order.
        * 	@param deltaLambda constant part of delta_lambda at 3-loop order.
        */
-      void setDeltaLambdaNonLog(double deltaLambda);
+      void setDLambdaNonLog(double deltaLambda);
       /**
        * 	Sets the Xt parts of the uncertainty of delta_lambda_H3m
        *        @param uncertainty of 3-loop delta_lambda
        */
-      void setDeltaLambdaXtUncertaintyH3m(double uncertainty);
+      void setDLambdaH3mXtUncertainty(double uncertainty);
       /**
        * 	Sets the Xt parts of the uncertainty of delta_lambda_EFT
        *        @param uncertainty of 3-loop delta_lambda
        */
-      void setDeltaLambdaXtUncertaintyEFT(double uncertainty);
+      void setDLambdaEFTXtUncertainty(double uncertainty);
       /**
        * 	Sets the DR' -> MS shift for delta_lambda_H3m which should be added to the DR' result
        * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
        */
-      void setDRbarPrimeToMSbarShiftH3m(double shift);
+      void setDLambdaH3mDRbarPrimeToMSbarShift(double shift);
       /**
        * 	Sets the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
        * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
        */
-      void setDRbarPrimeToMSbarShiftEFT(double shift);
+      void setDLambdaEFTDRbarPrimeToMSbarShift(double shift);
       /**
        *	Returns the H3m notation of a given hierarchy.
        *	@param hierarchy An integer of a Himalaya hierarchy.
@@ -216,23 +216,23 @@ namespace himalaya{
        * 	Sets the DR' -> H3m shift which should be added to the DR' result
        * 	@param shift the DR' -> H3m shift
        */
-      void setDRbarPrimeToH3mShift(const Eigen::Matrix2d shift);
+      void setDMhDRbarPrimeToH3mShift(const Eigen::Matrix2d shift);
       /**
        * 	Returns the DR' -> H3m shift which should be added to the DR' result
        * 	@return Returns the DR' -> H3m shift
        */
-      Eigen::Matrix2d getDRbarPrimeToH3mShift() const;
+      Eigen::Matrix2d getDMhDRbarPrimeToH3mShift() const;
       /**
        * 	Sets Delta_Mh2_EFT at loops-loop
        * 	@param loops an integer, could be 0 (tree), ..., 3 (3L with Delta_lambda_EFT)
        * 	@param deltaMh2 delta_Mh^2
        */
-      void setDeltaMh2EFT(int loops, double deltaMh2);
+      void setDMh2EFT(int loops, double deltaMh2);
       /**
        * 	Set the expasion uncertainty for delta_lambda
        * 	@param expUncertLambda the expansion uncertainty for delta_lambda
        */
-      void setExpUncertaintyDeltaLambda(double expUncertLambda);
+      void setDLambdaExpUncertainty(double expUncertLambda);
    private:
       bool isAlphab{false};								/**< the bool isAlphab */
       int hierarchy{};									/**< the suitable hierarchy */
@@ -244,18 +244,18 @@ namespace himalaya{
       std::map<int, Eigen::Matrix2d> dMhMap{};						/**< the map which holds all mass matrices at the given loop order */
       Eigen::Matrix2d mdrShift{};							/**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
       Eigen::Vector2d mdrMasses{};							/**< the 'vector' which holds the MDR masses */
-      double deltaLambdaH3m{};								/**< delta_lambda 3-loop with H3m logs */
-      double deltaLambdaEFT{};								/**< delta_lambda 3-loop with EFT logs */
-      double deltaLambdaNonLog{};                                                       /**< delta_lambda 3-loop, non-logarithmic part */
-      double drBarPrimeToMSbarShiftH3m{};						/**< The shift to convert the DR' delta_lambda_H3m to the MS scheme */
-      double drBarPrimeToMSbarShiftEFT{};						/**< The shift to convert the DR' delta_lambda_EFT to the MS scheme */
-      double deltaLambdaXtUncertaintyH3m{};						/**< The uncertainty of delta_lambda_H3m due to mising Xt terms */
-      double deltaLambdaXtUncertaintyEFT{};						/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
-      double expansionUncertaintyDeltaLambda{};						/**< The expansion uncertainty of delta_lambda */
+      double dLambdaH3m{};								/**< delta_lambda 3-loop with H3m logs */
+      double dLambdaEFT{};								/**< delta_lambda 3-loop with EFT logs */
+      double dLambdaNonLog{};								/**< delta_lambda 3-loop, non-logarithmic part */
+      double dLambdaH3mdrBarPrimeToMSbarShift{};					/**< The shift to convert the DR' delta_lambda_H3m to the MS scheme */
+      double dLambdaEFTdrBarPrimeToMSbarShift{};					/**< The shift to convert the DR' delta_lambda_EFT to the MS scheme */
+      double dLambdaH3mXtUncertainty{};							/**< The uncertainty of delta_lambda_H3m due to mising Xt terms */
+      double dLambdaEFTXtUncertainty{};							/**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
+      double dLambdaExpansionUncertainty{};						/**< The expansion uncertainty of delta_lambda */
       Eigen::Matrix2d h3mShift{};							/**< The DR' -> H3m shift which should be added to the DR' result */
-      std::map<int, double> deltaLambdaMap{};						/**< map which holds all delta_lambda corrections multiplied with prefactors */
-      std::map<int, double> deltaLambdaDRbarPrimeToMSbarShiftMap{};			/**< map which holds all DR' -> MS shifts for delta_lambda corrections multiplied with prefactors */
-      std::map<int, double> deltaMh2EFTMap{};						/**< map which holds all delta_Mh2_EFT corrections */
+      std::map<int, double> dLambdaMap{};						/**< map which holds all delta_lambda corrections multiplied with prefactors */
+      std::map<int, double> dLambdaDRbarPrimeToMSbarShiftMap{};				/**< map which holds all DR' -> MS shifts for delta_lambda corrections multiplied with prefactors */
+      std::map<int, double> dMh2EFTMap{};						/**< map which holds all delta_Mh2_EFT corrections */
       /**
        * 	Sorts a vector.
        * 	@param vector The vector which should be sorted.

@@ -369,8 +369,6 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
 double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const{
    using std::log;
    
-   const double li4 = 0.5174790616738993; // Li4(1/2)
-   
    const double LS = omitlogs*log(pow2(scale / p.MSt(0))) + log(pow2(p.MSt(0) / mst1));
    
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
@@ -381,12 +379,15 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scal
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vd) + pow2(p.vu);
    
+   const double xt = xt/mst1;
+   const double catas2 = 248.1215180432007;
+   
    // the first 16 is a relict due to the zeta parameterization in the first draft
-   const double deltaLambda3L = 16.*pref*((29365 + 23040*li4 - 49320*zt3 + 160*LS*
-	(-226 + 27*zt3) + 26520*pow2(LS) - 80*Xt*(823 - 100*LS - 477*zt3 + 366*
-	pow2(LS)) + 30*(-67 - 220*LS - 990*zt3 + 84*pow2(LS))*pow2(Xt) - 960*
-	pow2(Pi)*pow2(log2) - 10080*pow3(LS)+ 20*(3568 + 20*LS - 2259*zt3 + 108*
-	pow2(LS))*pow3(Xt) - 176*pow4(Pi) + 960*pow4(log2))/540.)/v2;
+   const double deltaLambda3L = 2/27.*pref*(6082 - 27832*LS + 14856*pow2(LS)
+      - 4032*pow3(LS) - 15408*zt3 - catas2
+      + xt*(7616*LS - 11712*pow2(LS) + 32*(-940 + 477*zt3))
+      + pow2(xt)*(28848 - 2640*LS + 1008*pow2(LS) - 11880*zt3)
+      + pow3(xt)*(160*LS + 864*pow2(LS) + 8*(2722 - 2259*zt3)))/v2;
    return deltaLambda3L;
 }
 

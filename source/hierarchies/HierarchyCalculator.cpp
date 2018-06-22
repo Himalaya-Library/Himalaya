@@ -153,12 +153,12 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setDMh(2, getMt42L(ho, mdrFlag, mdrFlag));
    
    // estimate the uncertainty of the expansion at 3-loop level
-   ho.setExpUncertainty(3, getExpansionUncertainty(ho,
+   ho.setDMhExpUncertainty(3, getExpansionUncertainty(ho,
 						   ho.getDMh(0) + ho.getDMh(1) + ho.getDMh(2), 0, 0, 1));
    
    // set the uncertainty of the expansion at 1-loop level to 0 by default, 
    // if the user needs this value getExpansionUncertainty should be called
-   ho.setExpUncertainty(1, 0.);
+   ho.setDMhExpUncertainty(1, 0.);
 
    // calculate delta_lambda
    // create a modified parameters struct and construct Mh2EFTCalculator and ThresholdCalculator
@@ -193,39 +193,39 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
 
    // calculate the non-logarithmic part of delta_lambda at 3L
-   const double deltaLambda3LNonLog = pref*(ho.getDeltaLambdaNonLog()
+   const double deltaLambda3LNonLog = pref*(ho.getDLambdaNonLog()
       + shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
 
    // calculate delta_lambda_H3m
-   ho.setDeltaLambdaH3m((pref*(ho.getDeltaLambdaH3m() 
+   ho.setDLambdaH3m((pref*(ho.getDLambdaH3m()
       + shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
    
    // caluclate delta_lambda_EFT
-   ho.setDeltaLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
+   ho.setDLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
 
    // save the non-logarithmic part of delta_lambda 3L
-   ho.setDeltaLambdaNonLog(deltaLambda3LNonLog/v2);
+   ho.setDLambdaNonLog(deltaLambda3LNonLog/v2);
    
    // calculate DR' -> MS shift for delta_lambda 3L
-   ho.setDRbarPrimeToMSbarShiftH3m(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
+   ho.setDLambdaH3mDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
    // this shift generates Xt^5*Log(mu) terms for the EFT expression
-   ho.setDRbarPrimeToMSbarShiftEFT(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
+   ho.setDLambdaEFTDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
    
    // set the uncertainty of delta_lambda due to missing Xt terms
    const int xt4Flag = xtOrder == 3 ? 1 : 0;
-   ho.setDeltaLambdaXtUncertaintyH3m(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0)
+   ho.setDLambdaH3mXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
-   ho.setDeltaLambdaXtUncertaintyEFT(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
+   ho.setDLambdaEFTXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
    
    // set uncertainty of delta_lambda
-   ho.setExpUncertaintyDeltaLambda(ho.getExpUncertainty(3)/sqrt(v2));
+   ho.setDLambdaExpUncertainty(ho.getDMhExpUncertainty(3)/sqrt(v2));
    
    // calculate shifts needed to convert DR' to other renormalization schemes,
    // here one needs it with the minus sign to convert DR -> H3m
-   ho.setDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
+   ho.setDMhDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
    
    // set flags to omit all but O(at*as^n)
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
@@ -254,34 +254,34 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // 2-Loop prefactor at*as
    const double pref_2L = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
    // fill in results of EFT calculation
-   ho.setDeltaMh2EFT(0, mh2_eft);
-   ho.setDeltaMh2EFT(1, mh2EFTCalculator.getDeltaMh2EFT1Loop(1, 1));
-   ho.setDeltaMh2EFT(2, mh2EFTCalculator.getDeltaMh2EFT2Loop(1, 1));
-   ho.setDeltaMh2EFT(3, mh2EFTCalculator.getDeltaMh2EFT3Loop(1, 1, 0) 
-      + ho.getDeltaLambdaEFT()*v2);
-   ho.setDeltaLambda(0, mh2_eft/v2);
-   ho.setDeltaLambda(1, pref_1L*(tc.getThresholdCorrection(
+   ho.setDMh2EFT(0, mh2_eft);
+   ho.setDMh2EFT(1, mh2EFTCalculator.getDeltaMh2EFT1Loop(1, 1));
+   ho.setDMh2EFT(2, mh2EFTCalculator.getDeltaMh2EFT2Loop(1, 1));
+   ho.setDMh2EFT(3, mh2EFTCalculator.getDeltaMh2EFT3Loop(1, 1, 0) 
+      + ho.getDLambdaEFT()*v2);
+   ho.setDLambda(0, mh2_eft/v2);
+   ho.setDLambda(1, pref_1L*(tc.getThresholdCorrection(
       ThresholdVariables::LAMBDA_AT,RenSchemes::DRBARPRIME, 1))/v2);
-   ho.setDeltaLambda(2, pref_2L*(tc.getThresholdCorrection(
+   ho.setDLambda(2, pref_2L*(tc.getThresholdCorrection(
       ThresholdVariables::LAMBDA_AT_AS, RenSchemes::DRBARPRIME, 1))/v2);
-   ho.setDeltaLambda(3, ho.getDeltaLambdaEFT());
-   ho.setDRbarPrimeToMSbarShiftDeltaLambda(0, 0.);
-   ho.setDRbarPrimeToMSbarShiftDeltaLambda(1, 0.);
-   ho.setDRbarPrimeToMSbarShiftDeltaLambda(2, pref_2L*(-4*ho.getDeltaLambda(1)
+   ho.setDLambda(3, ho.getDLambdaEFT());
+   ho.setDLambdaDRbarPrimeToMSbarShift(0, 0.);
+   ho.setDLambdaDRbarPrimeToMSbarShift(1, 0.);
+   ho.setDLambdaDRbarPrimeToMSbarShift(2, pref_2L*(-4*ho.getDLambda(1)
       *tc.getThresholdCorrection(ThresholdVariables::YT_AS,
 				 RenSchemes::DRBARPRIME, 1))/v2);
-   ho.setDRbarPrimeToMSbarShiftDeltaLambda(3, ho.getDRbarPrimeToMSbarShiftEFT());
+   ho.setDLambdaDRbarPrimeToMSbarShift(3, ho.getDLambdaEFTDRbarPrimeToMSbarShift());
    
    auto ho_mdr = ho;
    ho_mdr.setMDRFlag(1);
    // calculate the DR to MDR shift with the obtained hierarchy
-   ho_mdr.setDRbarPrimeToMDRbarPrimeShift(calcDRbarToMDRbarShift(ho_mdr, true, true));
+   ho_mdr.setDMhDRbarPrimeToMDRbarPrimeShift(calcDRbarToMDRbarShift(ho_mdr, true, true));
    ho_mdr.setDMh(3, calculateHierarchy(ho_mdr, 0, 0, 1) + shiftH3mToDRbarPrime(ho_mdr));
    Eigen::Vector2d mdrMasses;
    mdrMasses(0) = ho_mdr.getMDRMasses()(0);
    mdrMasses(1) = ho_mdr.getMDRMasses()(1);
    ho.setMDRMasses(mdrMasses);
-   ho.setDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDRbarPrimeToMDRbarPrimeShift() 
+   ho.setDMhDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDMhDRbarPrimeToMDRbarPrimeShift() 
       + ho_mdr.getDMh(3) - ho.getDMh(3));
    
    return ho;
@@ -359,8 +359,8 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	    suitableHierarchy = hierarchy;
 	    ho.setAbsDiff2L(twoLoopError);
 	    ho.setRelDiff2L(twoLoopError/Mh2l);
-	    ho.setExpUncertainty(2, expUncertainty2L);
-	    ho.setExpUncertainty(3, expUncertainty3L);
+	    ho.setDMhExpUncertainty(2, expUncertainty2L);
+	    ho.setDMhExpUncertainty(3, expUncertainty3L);
 	 }
 	 // compare the current error with the last error and choose the hierarchy which fits best (lowest error)
 	 else if(currError < error){
@@ -368,8 +368,8 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	    suitableHierarchy = hierarchy;
 	    ho.setAbsDiff2L(twoLoopError);
 	    ho.setRelDiff2L(twoLoopError/Mh2l);
-	    ho.setExpUncertainty(2, expUncertainty2L);
-	    ho.setExpUncertainty(3, expUncertainty3L);
+	    ho.setDMhExpUncertainty(2, expUncertainty2L);
+	    ho.setDMhExpUncertainty(3, expUncertainty3L);
 	 }
       }
    }
@@ -517,11 +517,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy3.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy3.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy3.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -536,11 +536,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy32q2g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -555,11 +555,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy3q22g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -578,11 +578,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 	       curSig12 = hierarchy4.getS12();
 	       if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                   const double c = hierarchy4.calc_coef_at_as2_no_sm_logs_log0();
-		  ho.setDeltaLambdaH3m(c
+		  ho.setDLambdaH3m(c
 		     + lmMst1 * hierarchy4.calc_coef_at_as2_no_sm_logs_log1()
 		     + pow2(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
 		     + pow3(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
-                  ho.setDeltaLambdaNonLog(c);
+                  ho.setDLambdaNonLog(c);
 	       }
 	    }
 	    break;
@@ -602,11 +602,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy5.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy5.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy5.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -621,11 +621,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy5g1.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -648,11 +648,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy6.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     };
 		  }
 		  break;
@@ -667,11 +667,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6g2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -695,11 +695,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6b.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6b.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy6b.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -714,11 +714,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6b2qg2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -733,11 +733,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6bq22g.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -752,11 +752,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy6bq2g2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -779,11 +779,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy9.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy9.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy9.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
@@ -798,11 +798,11 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calculateHierarchy(himalaya::Hier
 		     curSig12 = hierarchy9q2.getS12();
 		     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
                         const double c = hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0();
-			ho.setDeltaLambdaH3m(c
+			ho.setDLambdaH3m(c
 			   + lmMst1 * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log1()
 			   + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
 			   + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDeltaLambdaNonLog(c);
+                        ho.setDLambdaNonLog(c);
 		     }
 		  }
 		  break;
