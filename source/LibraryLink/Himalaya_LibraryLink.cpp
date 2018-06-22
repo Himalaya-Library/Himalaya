@@ -198,10 +198,10 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    MLPutRuleTo(link, lambda, "lambda");
    MLPutRuleTo(link, lambda_uncertainty, "lambdaUncertainty");
    MLPutRuleTo(link, lambda_shift_DRp_to_MS, "lambdaShiftDRbarPrimeToMSbar");
-   MLPutRuleTo(link, delta_lambda_h3m, "deltaLambda3LoopH3m");
-   MLPutRuleTo(link, ho.getDLambdaH3mDRbarPrimeToMSbarShift(), "deltaLambda3LoopH3mShiftDRbarPrimeToMSbar");
-   MLPutRuleTo(link, delta_lambda_eft, "deltaLambda3LoopEFT");
-   MLPutRuleTo(link, ho.getDLambdaEFTDRbarPrimeToMSbarShift(), "deltaLambda3LoopEFTShiftDRbarPrimeToMSbar");
+   MLPutRuleTo(link, delta_lambda_h3m, "DLambdaH3m");
+   MLPutRuleTo(link, ho.getDLambdaH3mDRbarPrimeToMSbarShift(), "DLambdaH3mDRbarPrimeToMSbarShift");
+   MLPutRuleTo(link, delta_lambda_eft, "DLambdaEFT");
+   MLPutRuleTo(link, ho.getDLambdaEFTDRbarPrimeToMSbarShift(), "DLambdaEFTDRbarPrimeToMSbarShift");
 
    MLEndPacket(link);
 }

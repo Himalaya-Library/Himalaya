@@ -142,7 +142,7 @@ The function `getDLambdaEFT` returns the three-loop correction in
 the DR'-bar scheme.  The three-loop shift to the MS-bar scheme,
 ocurring when the one- and two-loop corrections are expressed in terms
 of the Standard Model MS-bar strong gauge and top Yukawa couplings can
-be obtained by calling `ho.getDRbarPrimeToMSbarShiftEFT()`.
+be obtained by calling `ho.getDLambdaEFTDRbarPrimeToMSbarShift()`.
 
 An uncertainty estimate of the calculated three-loop λ can be obtained
 by calling
@@ -260,10 +260,10 @@ corrections:
   lambda -> {0.135998, 0.0625136, 0.00149099, 0.000214622}, 
   lambdaUncertainty -> {0., 0., 0., 0.00109288}, 
   lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.28983*10^-6, -0.000771028}, 
-  deltaLambda3LoopH3m -> {0.000226477, 0.0012078}, 
-  deltaLambda3LoopH3mShiftDRbarPrimeToMSbar -> -0.000667961, 
-  deltaLambda3LoopEFT -> {0.000214622, 0.00109288}, 
-  deltaLambda3LoopEFTShiftDRbarPrimeToMSbar -> -0.000771028 }
+  DLambdaH3m -> {0.000226477, 0.0012078}, 
+  DLambdaH3mDRbarPrimeToMSbarShift -> -0.000667961, 
+  DLambdaEFT -> {0.000214622, 0.00109288}, 
+  DLambdaEFTDRbarPrimeToMSbarShift -> -0.000771028 }
 ```
 
 See `?HimalayaCalculateDMh3L` for a detailed documentation of the
