@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Himalaya-Library/Himalaya.svg?branch=master)](https://travis-ci.org/Himalaya-Library/Himalaya)
 
-Himalaya can calculate corrections of order O((α_t +
-α_b)*α_s^2) to the CP-even Higgs mass matrix and the correction quartic Higgs coupling λ
+Himalaya can calculate corrections of order O((αt +
+αb)*αs^2) to the CP-even Higgs mass matrix and the correction quartic Higgs coupling λ
 at three-loop order in the DR'-bar
 scheme using the results of:
 
@@ -90,10 +90,10 @@ pars.mu2 << 2.80477426E+05, 0, 0,
             0, 0, 1.80478484E+05;               // soft-breaking squared right-handed up-squark mass parameters
 pars.Ad << 0, 0, 0,
            0, 0, 0,
-           0, 0, -784.3356416708631;            // trilinear sbottom-Higgs coupling
+           0, 0, -784.3356416708631;            // trilinear down type squark-Higgs coupling matrix
 pars.Au << 0, 0, 0,
            0, 0, 0,
-           0, 0, -527.8746242245387;            // trilinear stop-Higgs coupling
+           0, 0, -527.8746242245387;            // trilinear up type squark-Higgs coupling matrix
 pars.MA = 3.92960954E+02;                       // Mass of the CP-odd Higgs
 pars.MG = 5.88220143E+02;                       // Mass of the Gluino
 pars.MW = 8.04136643E+01;                       // Mass of the W boson
