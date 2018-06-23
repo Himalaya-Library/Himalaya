@@ -22,11 +22,12 @@ Changes
  * The default renormalization scheme for the input parameters has
    been changed to DR'-bar.
 
- * We changed the name of the following member functions of the
-   HierarchyObject class:
-	* getExpUncertainty() -> getDMhExpUncertainty()
-	* getDRToMDRShift() -> getDMhDRbarPrimeToMDRbarPrimeShift()
-	
+ * The names of the following member functions of the
+   `HierarchyObject` class have been changed:
+
+    * `getExpUncertainty()` -> `getDMhExpUncertainty()`
+    * `getDRToMDRShift()` -> `getDMhDRbarPrimeToMDRbarPrimeShift()`
+
 Himalaya 1.0.1
 ==============
 
