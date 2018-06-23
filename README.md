@@ -2,10 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Himalaya-Library/Himalaya.svg?branch=master)](https://travis-ci.org/Himalaya-Library/Himalaya)
 
-Himalaya can calculate corrections of order O((αt +
-αb)*αs^2) to the CP-even Higgs mass matrix and the correction quartic Higgs coupling λ
-at three-loop order in the DR'-bar
-scheme using the results of:
+Himalaya calculates three-loop corrections of order O((αt + αb)*αs^2)
+to the MSSM CP-even Higgs mass matrix and to the quartic Higgs
+coupling λ in the DR'-bar scheme using the results of:
 
 * R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs
   boson mass in supersymmetry to three loops*, [*Phys. Rev. Lett.*
@@ -21,19 +20,22 @@ scheme using the results of:
 Please refer to these papers as well as
 
 * R. V. Harlander, J. Klappert and A. Voigt, *Higgs mass prediction in
-  the MSSM at three-loop level in a pure DR context*, [*Eur.Phys.J.* **C77** (2017) no.12, 814]
-  (https://doi.org/10.1140/epjc/s10052-017-5368-6),
+  the MSSM at three-loop level in a pure DR context*, [*Eur.Phys.J.*
+  **C77** (2017) no.12, 814](https://doi.org/10.1140/epjc/s10052-017-5368-6),
   [[1708.05720](https://arxiv.org/abs/1708.05720)]
 
 * R. V. Harlander, J. Klappert, A. D. Ochoa Franco and A. Voigt,
- *The light MSSM Higgs mass resummed to fourth logarithmic order*, [[arxivnumber](link)]
+  *The light MSSM Higgs mass resummed to fourth logarithmic order*,
+   [[1807.XXXX](https://arxiv.org/abs/1807.XXXX)]
 
 when using Himalaya.
 
 ## Requirements
 The program requires:
-* CMake >= 3.0
-* Eigen3
+* C++ compiler
+* FORTRAN compiler
+* [CMake](https://cmake.org/) >= 3.1
+* [Eigen3](http://eigen.tuxfamily.org)
 
 ## Installation
 CMake is used to generate build files.
@@ -52,8 +54,12 @@ make
 ```
 By default the code is compiled optimized.
 
-## Running the code
-After the compilation the static libraries `libDSZ.a` and `libHimalaya.a` have been created. The latter should be linked to the program. `libDSZ.a` is optional and has to be linked, if the program does not incorporate the associated Fortran code of G. Degrassi, P. Slavich and F. Zwirner ([arXiv:hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)).
+## Running the code After the compilation the static libraries
+`libDSZ.a` and `libHimalaya.a` have been created. The latter should be
+linked to the program. `libDSZ.a` is optional and has to be linked, if
+the program does not incorporate the associated FORTRAN code of
+G. Degrassi, P. Slavich and F. Zwirner
+[[hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)].
 
 ### C++ interface
 
@@ -73,33 +79,33 @@ parameter must be stored in a `Parameters` object.  Here, an example
 for the SPS1a benchmark point is given:
 
 ```cpp
-himalaya::Parameters pars;                      // DR'-bar parameters struct
-pars.scale = 4.67491329E+02;                    // renormalization scale
-pars.mu = 3.52600579E+02;                       // mu parameter
-pars.g3 = 1.09949966E+00;                       // gauge coupling g3 SU(3)
-pars.vd = 2.49832484E+01;                       // VEV of down Higgs doublet
-pars.vu = 2.43650538E+02;                       // VEV of up Higgs doublet
+himalaya::Parameters pars;           // DR'-bar parameters struct
+pars.scale = 4.67491329E+02;         // renormalization scale
+pars.mu = 3.52600579E+02;            // mu parameter
+pars.g3 = 1.09949966E+00;            // gauge coupling g3 SU(3)
+pars.vd = 2.49832484E+01;            // VEV of down Higgs doublet
+pars.vu = 2.43650538E+02;            // VEV of up Higgs doublet
 pars.mq2 << 2.99793928E+05, 0, 0,
             0, 2.99792102E+05, 0,
-            0, 0, 2.49327504E+05;               // soft-breaking squared left-handed squark mass parameters
+            0, 0, 2.49327504E+05;    // soft-breaking squared left-handed squark mass parameters
 pars.md2 << 2.78275669E+05, 0, 0,
             0, 2.78273780E+05, 0,
-            0, 0, 2.74928741E+05;               // soft-breaking squared right-handed down-squark mass parameters
+            0, 0, 2.74928741E+05;    // soft-breaking squared right-handed down-squark mass parameters
 pars.mu2 << 2.80477426E+05, 0, 0,
             0, 2.80475621E+05, 0,
-            0, 0, 1.80478484E+05;               // soft-breaking squared right-handed up-squark mass parameters
+            0, 0, 1.80478484E+05;    // soft-breaking squared right-handed up-squark mass parameters
 pars.Ad << 0, 0, 0,
            0, 0, 0,
-           0, 0, -784.3356416708631;            // trilinear down type squark-Higgs coupling matrix
+           0, 0, -784.3356416708631; // trilinear down type squark-Higgs coupling matrix
 pars.Au << 0, 0, 0,
            0, 0, 0,
-           0, 0, -527.8746242245387;            // trilinear up type squark-Higgs coupling matrix
-pars.MA = 3.92960954E+02;                       // Mass of the CP-odd Higgs
-pars.MG = 5.88220143E+02;                       // Mass of the Gluino
-pars.MW = 8.04136643E+01;                       // Mass of the W boson
-pars.MZ = 9.06817306E+01;                       // Mass of the Z boson 
-pars.Mt = 1.52117491E+02;                       // Mass of the top quark
-pars.Mb = 2.42010269E+00;                       // Mass of the bottom quark
+           0, 0, -527.8746242245387; // trilinear up type squark-Higgs coupling matrix
+pars.MA = 3.92960954E+02;            // Mass of the CP-odd Higgs
+pars.MG = 5.88220143E+02;            // Mass of the Gluino
+pars.MW = 8.04136643E+01;            // Mass of the W boson
+pars.MZ = 9.06817306E+01;            // Mass of the Z boson 
+pars.Mt = 1.52117491E+02;            // Mass of the top quark
+pars.Mb = 2.42010269E+00;            // Mass of the bottom quark
 ```
 
 Afterwards one can create a `HierarchyCalculator` object for the
@@ -112,7 +118,7 @@ himalaya::HierarchyCalculator hc(pars);
 To calculate the DR'-bar loop corrections one needs to call:
 
 ```cpp
-// the boolean argument switches between corrections proportional to alpha_t (false) or alpha_b (true)
+// the boolean argument switches between corrections proportional to αt (false) or αb (true)
 himalaya::HierarchyObject ho = hc.calculateDMh3L(false);
 ```
 
@@ -124,7 +130,7 @@ To obtain the three-loop correction to the Higgs mass matrix one needs
 to call:
 
 ```cpp
-// returns a 2x2 matrix with the alpha_t*alpha_s^2 correction for the given parameter point
+// returns a 2x2 matrix with the αt*αs^2 correction for the given parameter point
 auto dMh3L = ho.getDMh(3);
 ```
 
@@ -133,7 +139,7 @@ The returned matrix should be added to the two-loop mass matrix
 
 To obtain the three-loop correction to the quartic Higgs coupling λ of
 the Standard Model in the DR'-bar scheme in the convention of
-[[arXiv:1407.4081](https://arxiv.org/abs/1407.4081)] one needs to call
+[[1407.4081](https://arxiv.org/abs/1407.4081)] one needs to call
 
 ```cpp
 double delta_lambda_3L = ho.getDLambdaEFT();
