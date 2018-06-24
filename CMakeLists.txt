@@ -69,6 +69,7 @@ add_library(Himalaya_static STATIC ${LIBSOURCES})
 set_target_properties(Himalaya_static PROPERTIES OUTPUT_NAME Himalaya)
 add_library(Himalaya_shared SHARED ${LIBSOURCES})
 set_target_properties(Himalaya_shared PROPERTIES OUTPUT_NAME Himalaya)
+target_link_libraries(Himalaya_shared PUBLIC DSZ_shared)
 
 # set the executable
 add_executable(example ${SOURCE_PATH}/example.cpp)
@@ -83,14 +84,14 @@ if(Mathematica_FOUND)
   include_directories(${Mathematica_INCLUDE_DIR})
   include_directories(${Mathematica_MathLink_INCLUDE_DIR})
   Mathematica_ADD_LIBRARY(${LL_LIB} ${LL_SRC})
-  target_link_libraries(${LL_LIB} PRIVATE Himalaya_shared DSZ_shared ${Mathematica_MathLink_LIBRARIES})
+  target_link_libraries(${LL_LIB} PRIVATE Himalaya_shared ${Mathematica_MathLink_LIBRARIES})
   set_target_properties(${LL_LIB} PROPERTIES LINK_FLAGS "${Mathematica_MathLink_LINKER_FLAGS}")
   Mathematica_ABSOLUTIZE_LIBRARY_DEPENDENCIES(${LL_LIB})
 endif()
 
 # install
 install(
-  TARGETS Himalaya_static Himalaya_shared
+  TARGETS Himalaya_static Himalaya_shared DSZ_static DSZ_shared
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
 )
