@@ -1,6 +1,6 @@
 # Himalaya
 
-[![Build Status](https://travis-ci.org/jklappert/Himalaya.svg?branch=master)](https://travis-ci.org/jklappert/Himalaya)
+[![Build Status](https://travis-ci.org/Himalaya-Library/Himalaya.svg?branch=master)](https://travis-ci.org/Himalaya-Library/Himalaya)
 
 Himalaya calculates three-loop corrections of order O((αt + αb)*αs^2)
 to the MSSM CP-even Higgs mass matrix and to the quartic Higgs
