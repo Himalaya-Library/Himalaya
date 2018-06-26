@@ -3,8 +3,7 @@ compiler:
   - clang
   - gcc
 before_install:
-  - sudo apt-get install libeigen3-dev
-  - sudo apt-get install gfortran
+  - sudo apt-get install gfortran libeigen3-dev
 script:
   - mkdir build
   - cd build
