@@ -76,9 +76,8 @@ int main()
 
 	 // calculate the 3-loop corrections O(α_b*α_s^2)
 	 // himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
-      } catch (const std::exception& e){
+      } catch (const std::exception& e) {
          ERROR_MSG(e.what());
-         return EXIT_FAILURE;
       }
    }
 
