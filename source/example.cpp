@@ -72,7 +72,7 @@ int main()
 	 // calculate the 3-loop corrections O(α_t*α_s^2)
 	 const auto hoTop = hc.calculateDMh3L(false);
 
-	 INFO_MSG(hoTop);
+	 std::cout << hoTop;
 
 	 // calculate the 3-loop corrections O(α_b*α_s^2)
 	 // himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
