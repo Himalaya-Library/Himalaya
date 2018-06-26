@@ -31,16 +31,19 @@ Please refer to these papers as well as
 when using Himalaya.
 
 ## Requirements
-The program requires:
+
+Himalaya requires:
 * C++ compiler
 * FORTRAN compiler
 * [CMake](https://cmake.org/) >= 3.1
 * [Eigen3](http://eigen.tuxfamily.org)
 
-## Installation
-CMake is used to generate build files.
-To create these build files, one should create a separate build directory inside Himalaya's top directory.
-Run:
+## Building Himalaya
+
+Himalaya uses CMake to generate files for build automation.  To build
+Himalaya one should first create a separate `build` directory inside
+Himalaya's top directory.  Afterwards, `cmake` should be called:
+
 ```
 cd $HIMALAY_PATH
 mkdir build
@@ -48,18 +51,23 @@ cd build
 cmake ..
 ```
 
-After calling `cmake` the build directory contains all required build files. Assuming that Makefiles are used, one can now run:
+After calling `cmake` the build directory contains all required build
+files. Assuming that GNU make is used, one can start the build by running
+
 ```
 make
 ```
-By default the code is compiled optimized.
 
-## Running the code After the compilation the static libraries
-`libDSZ.a` and `libHimalaya.a` have been created. The latter should be
-linked to the program. `libDSZ.a` is optional and has to be linked, if
-the program does not incorporate the associated FORTRAN code of
-G. Degrassi, P. Slavich and F. Zwirner
-[[hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)].
+By default the code is compiled with optimizations.
+
+## Running Himalaya
+
+When the build is complete, the libraries `libDSZ` and `libHimalaya`
+have been created.  The latter must be linked to user-written programs
+to call the routines of Himalaya.  The library `libDSZ` is optional
+and has to be linked in addition, if the program does not already
+incorporate the associated FORTRAN code of G. Degrassi, P. Slavich and
+F. Zwirner [[hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)].
 
 ### C++ interface
 
@@ -166,7 +174,7 @@ A full and detailed example can be found in `source/example.cpp`.
 
 ### Mathematica interface
 
-Since version 2.0 Himalaya can be run from within Mathematica using
+Since version 2.0.0 Himalaya can be run from within Mathematica using
 the LibraryLink interface.  To load Himalaya into Mathematica, first,
 the file `source/LibraryLink/Himalaya_LibraryLink.m` must be loaded,
 which defines the Himalaya's Mathematica functions.  Assuming the
