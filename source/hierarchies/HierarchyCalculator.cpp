@@ -1474,12 +1474,12 @@ int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
 /**
  * 	Prints out some information about Himalaya.
  */
-void himalaya::HierarchyCalculator::printInfo(){
-   std::cout << "............................................................................\n";
-   std::cout << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\tѧѦѧ \n";
-   std::cout << "Uses code by P. Slavich et al. (2-loop αt*αs) [hep-ph/0105096].\n";
-   std::cout << "Uses the 3-loop αt*αs^2 contributions of Kant et al. [arXiv:1005.5709],\n";
-   std::cout << "  2-loop αt*αs contributions of Bagnaschi et.al. [arXiv:1407.4081],\n";
-   std::cout << "  2-loop αs^2 contributions Bednyakov et.al. [hep-ph/0210258,hep-ph/0507139]\n";
-   std::cout << "............................................................................\n";
+void himalaya::HierarchyCalculator::printInfo() {
+   std::cerr << "............................................................................\n";
+   std::cerr << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\tѧѦѧ \n";
+   std::cerr << "Uses code by P. Slavich et al. (2-loop αt*αs) [hep-ph/0105096].\n";
+   std::cerr << "Uses the 3-loop αt*αs^2 contributions of Kant et al. [arXiv:1005.5709],\n";
+   std::cerr << "  2-loop αt*αs contributions of Bagnaschi et.al. [arXiv:1407.4081],\n";
+   std::cerr << "  2-loop αs^2 contributions Bednyakov et.al. [hep-ph/0210258,hep-ph/0507139]\n";
+   std::cerr << "............................................................................\n";
 }
