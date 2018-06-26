@@ -212,6 +212,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setDLambdaEFTDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
    
    // set the uncertainty of delta_lambda due to missing Xt terms
+   // to summarize: delta_lambda_H3m is always of the x_t order of the suitable
+   // hierachy (h3, h9 ~ xt^3, h5, h6, h6b ~ xt^4), whereas delta_lambda_EFT
+   // the non-logarithmic term is of order of the hierarchy but the logarithmic
+   // part is of order O(xt^4) and using the shift O(xt^5). Note that the shift
+   // for delta_lambda_H3m is always of order of the hierarchy as well
    const int xt4Flag = xtOrder == 3 ? 1 : 0;
    ho.setDLambdaH3mXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0)
