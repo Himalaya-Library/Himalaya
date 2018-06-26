@@ -5,6 +5,7 @@ compiler:
 before_install:
   - sudo apt-get install libeigen3-dev
 script:
+  - cd Himalaya
   - mkdir build
   - cd build
   - cmake ..
