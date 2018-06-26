@@ -174,7 +174,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
    
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
-   
+
    // calculate the (non-)logarithmic part of Mh2 without delta_lambda_3L
    // the first line is equivalent to  64 * dytas - 84 * pow2(dytas) - 24 * dytas2 + catas2 including all log(mu^2/Mst1^2)
    // which are also included in the H3m result, and the second line omits these log(mu^2/Mst1^2) terms since they originate
@@ -226,7 +226,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // calculate shifts needed to convert DR' to other renormalization schemes,
    // here one needs it with the minus sign to convert DR -> H3m
    ho.setDMhDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
-   
+
    // set flags to omit all but O(at*as^n)
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
@@ -283,7 +283,6 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setMDRMasses(mdrMasses);
    ho.setDMhDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDMhDRbarPrimeToMDRbarPrimeShift() 
       + ho_mdr.getDMh(3) - ho.getDMh(3));
-   
    return ho;
 }
 

@@ -381,10 +381,9 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scal
    
    const double xt = Xt/mst1;
    const double catas2 = 248.1215180432007;
-   
-   // the first 16 is a relict due to the zeta parameterization in the first draft
+
    const double deltaLambda3L = 2/27.*pref*(6082 - 27832*LS + 14856*pow2(LS)
-      - 4032*pow3(LS) - 15408*zt3 + 1728*zt3*LS - catas2
+      - 4032*pow3(LS) - 15408*zt3 + 1728*zt3*LS - 27*catas2/2.
       + xt*(7616*LS - 11712*pow2(LS) + 32*(-940 + 477*zt3))
       + pow2(xt)*(28848 - 2640*LS + 1008*pow2(LS) - 11880*zt3)
       + pow3(xt)*(160*LS + 864*pow2(LS) + 8*(2722 - 2259*zt3)))/v2;
