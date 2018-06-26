@@ -499,7 +499,8 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 	<< "Mh^2_EFT_0L               =  " << ho.getDMh2EFT(0) << " GeV^2 O(g_1^2, g_2^2)\n"
 	<< "ΔMh^2_EFT_1L              =  " << ho.getDMh2EFT(1) << " GeV^2 O(α_t)\n"
 	<< "ΔMh^2_EFT_2L              =  " << ho.getDMh2EFT(2) << " GeV^2 O(α_t*α_s)\n"
-	<< "ΔMh^2_EFT_3L              =  " << ho.getDMh2EFT(3) << " GeV^2 O(α_t*α_s^2)";
+	<< "ΔMh^2_EFT_3L              =  " << ho.getDMh2EFT(3) << " GeV^2 O(α_t*α_s^2)"
+        << '\n';
 
    return ostr;
 }
