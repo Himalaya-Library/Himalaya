@@ -1,23 +1,28 @@
-#include "HierarchyCalculator.hpp"
-#include "Himalaya_interface.hpp"
-#include "HierarchyObject.hpp"
-#include "Hierarchies.hpp"
-#include "Logger.hpp"
-#include <iostream>
+// ====================================================================
+// This file is part of Himalaya.
+//
+// Himalaya is licenced under the GNU General Public License (GNU GPL)
+// version 3.
+// ====================================================================
 
-himalaya::Parameters setup_point() {
+#include "HierarchyCalculator.hpp"
+#include "Logger.hpp"
+
+himalaya::Parameters setup_point(double MS, double tb, double xt)
+{
    himalaya::Parameters pars;
 
-   const double MS = 2000.;
    const double MS2 = MS*MS;
-   const double Xt = 0.1*MS;
-   const double tb = 10.;
+   const double Xt = xt*MS;
+   const double beta = std::atan(tb);
 
    pars.scale = MS;
    pars.mu = MS;
+   pars.g1 = 0.46;
+   pars.g2 = 0.65;
    pars.g3 = 1.10073;
-   pars.vd = 246*std::cos(std::atan(tb));
-   pars.vu = 246*std::sin(std::atan(tb));
+   pars.vd = 246*std::cos(beta);
+   pars.vu = 246*std::sin(beta);
    pars.mq2 << MS2, 0, 0,
                0, MS2, 0,
                0, 0, MS2;
@@ -26,41 +31,55 @@ himalaya::Parameters setup_point() {
                0, 0, MS2;
    pars.mu2 << MS2, 0, 0,
                0, MS2, 0,
-               0, 0, MS2*0.9;
-   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0, 0;
-   pars.Au << 0, 0, 0, 0, 0, 0, 0, 0, Xt + pars.mu/tb;
+               0, 0, MS2;
+   pars.ml2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.me2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.Au << 0, 0, 0,
+              0, 0, 0, 0,
+              0, Xt + pars.mu/tb;
+   pars.Ad << 0, 0, 0,
+              0, 0, 0,
+              0, 0, 0;
+   pars.Ae << 0, 0, 0,
+              0, 0, 0,
+              0, 0, 0;
    pars.MA = MS;
+   pars.M1 = MS;
+   pars.M2 = MS;
    pars.MG = MS;
-   pars.MW = 78.9441;
-   pars.MZ = 90.5119;
    pars.Mt = 154.682;
    pars.Mb = 2.50901;
+   pars.Mtau = 1.777;
 
    return pars;
 }
 
-int main() {
-   try{
-      const std::vector<himalaya::Parameters> points = {
-	 setup_point()
-      }; 
-      for (const auto& point: points) {
+int main()
+{
+   const std::vector<himalaya::Parameters> points = {
+      setup_point(2000., 10., 0.1)
+   };
+
+   for (const auto& point: points) {
+      try {
 	 // init hierarchy calculator
-	 himalaya::HierarchyCalculator hierarchyCalculator(point);
+	 himalaya::HierarchyCalculator hc(point);
 
-	 // calculate the 3-loop corrections with the suiatble hierarchy
-	 // top
-	 himalaya::HierarchyObject hoTop = hierarchyCalculator.calculateDMh3L(false);
+	 // calculate the 3-loop corrections O(α_t*α_s^2)
+	 const auto hoTop = hc.calculateDMh3L(false);
 
-	 std::cout << hoTop << "\n";
-   
-	 // bottom
-	 //himalaya::HierarchyObject hoBot = hierarchyCalculator.calculateDMh3L(true);
+	 INFO_MSG(hoTop);
+
+	 // calculate the 3-loop corrections O(α_b*α_s^2)
+	 // himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
+      } catch (const std::exception& e) {
+         ERROR_MSG(e.what());
       }
    }
-   catch (const std::exception& e){
-      ERROR_MSG(e.what());
-      return EXIT_FAILURE;
-   }
+
    return 0;
 }
