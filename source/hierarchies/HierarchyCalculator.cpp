@@ -1463,9 +1463,9 @@ double himalaya::HierarchyCalculator::getExpansionUncertainty(himalaya::Hierarch
 int himalaya::HierarchyCalculator::getCorrectHierarchy(const int hierarchy){
    if(hierarchy < 0 || hierarchy > 13){
       if(hierarchy == -1){
-	 throw std::runtime_error("\033[1;31m Error: No suitable hierarchy found!\033[0m");
+	 throw std::runtime_error("No suitable hierarchy found!");
       } else{
-	 throw std::runtime_error("\033[1;31m Error: Hierarchy " + std::to_string(hierarchy) + " not included!\033[0m"); 
+	 throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) + " not included!"); 
       }
    }
    return hierarchyMap.at(hierarchy);
