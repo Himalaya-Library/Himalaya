@@ -403,8 +403,8 @@ bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::Hierarch
    // check if the squark mass is the heaviest mass
    const double delta = 1.3;	// allow for an offset of 30%
    
-   if(std::abs(Mst2) > delta*Msq) return false;
-   if(std::abs(p.MG) > delta*Msq) return false;
+   if(Mst2 > delta*Msq) return false;
+   if(p.MG > delta*Msq) return false;
    
    switch (ho.getSuitableHierarchy()){
       case Hierarchies::h3:
