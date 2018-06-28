@@ -286,7 +286,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    mdrMasses(0) = ho_mdr.getMDRMasses()(0);
    mdrMasses(1) = ho_mdr.getMDRMasses()(1);
    ho.setMDRMasses(mdrMasses);
-   ho.setDMhDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDMhDRbarPrimeToMDRbarPrimeShift() 
+   ho.setDMhDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDMhDRbarPrimeToMDRbarPrimeShift()
       + ho_mdr.getDMh(3) - ho.getDMh(3));
    return ho;
 }
@@ -401,10 +401,10 @@ bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::Hierarch
    }
    
    // check if the squark mass is the heaviest mass
-   const double delta = Msq*0.30;	// allow for an offset of 30%
+   const double delta = 1.3;	// allow for an offset of 30%
    
-   if(std::abs(Msq - Mst2) > delta) return false;
-   if(std::abs(Msq - p.MG) > delta) return false;
+   if(std::abs(Mst2) > delta*Msq) return false;
+   if(std::abs(p.MG) > delta*Msq) return false;
    
    switch (ho.getSuitableHierarchy()){
       case Hierarchies::h3:
