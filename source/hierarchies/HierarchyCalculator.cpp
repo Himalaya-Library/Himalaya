@@ -272,7 +272,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
    for (int hierarchy = Hierarchies::FIRST; hierarchy < Hierarchies::NUMBER_OF_HIERARCHIES; hierarchy++) {
       // first, check if the hierarchy is suitable to the mass spectrum
-      ho.setSuitableHierarchy(hierarchy);
+      ho.setSuitableHierarchy(-1*hierarchy);
       
       if(isHierarchySuitable(ho)){
 	 // calculate the exact 1-loop result (only alpha_t/b)
@@ -1312,7 +1312,7 @@ void himalaya::HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject&
       - tc.getThresholdCorrection(
 	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
 
-   // calculate the non-logarithmic part of delta_lambda at 3L
+   // calculate the non-logarithmic part of delta_lambda @ 3L
    const double deltaLambda3LNonLog = pref*(ho.getDLambdaNonLog()
       + shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
 
@@ -1323,7 +1323,7 @@ void himalaya::HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject&
    // caluclate delta_lambda_EFT
    ho.setDLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
 
-   // save the non-logarithmic part of delta_lambda 3L
+   // save the non-logarithmic part of delta_lambda @ 3L
    ho.setDLambdaNonLog(deltaLambda3LNonLog/v2);
    
    // calculate DR' -> MS shift for delta_lambda 3L
