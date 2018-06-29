@@ -288,6 +288,8 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setMDRMasses(mdrMasses);
    ho.setDMhDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDMhDRbarPrimeToMDRbarPrimeShift()
       + ho_mdr.getDMh(3) - ho.getDMh(3));
+   // final check if paramter point is governed by H3m hierarchies
+   if(std::abs((ho.getDLambdaEFT() - ho.getDLambdaH3m())/ho.getDLambdaEFT()) > 0.3) throw std::runtime_error("Difference of Δλ_H3m and Δλ_EFT > 0.3. There might be no suitable hierarchy!");
    return ho;
 }
 
