@@ -149,6 +149,11 @@ namespace himalaya{
        */
       int getCorrectHierarchy(const int hierarchy);
       /**
+       * 	Fills in delta_lambda @ 3L to the given HierarchyObject
+       * 	@param ho a HierrachyObject
+       */
+      void calcDeltaLambda3L(HierarchyObject& ho);
+      /**
        * 	Prints out some information about Himalaya.
        */
       void printInfo();

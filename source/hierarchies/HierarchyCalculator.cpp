@@ -159,8 +159,11 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    // set the uncertainty of the expansion at 1-loop level to 0 by default, 
    // if the user needs this value getExpansionUncertainty should be called
    ho.setDMhExpUncertainty(1, 0.);
+   
+   // calculate shifts needed to convert DR' to other renormalization schemes,
+   // here one needs it with the minus sign to convert DR -> H3m
+   ho.setDMhDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
 
-   // calculate delta_lambda
    // create a modified parameters struct and construct Mh2EFTCalculator and ThresholdCalculator
    auto p_mass_ES = p;
    p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
@@ -173,64 +176,10 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    
    const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
    
-   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
-
-   // calculate the (non-)logarithmic part of Mh2 without delta_lambda_3L
-   // the first line is equivalent to  64 * dytas - 84 * pow2(dytas) - 24 * dytas2 + catas2 including all log(mu^2/Mst1^2)
-   // which are also included in the H3m result, and the second line omits these log(mu^2/Mst1^2) terms since they originate
-   // from SM contributions. The non-logarithmic part contains only Xt orders up to O(Xt^2) which are also included in H3m
-   // so no subtraction is needed. Checked.
-   const double subtractionTermH3m = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,1,0);
-   const double subtractionTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
-
-   // calculate the EFT logs. In the first call we calculate the full reconstructed contribution to delta_lambda_3L
-   // including all logarithmic contributions. In the second line we subtract all non-logarithmic contributions
-   // to isolate the logarithmic ones. Checked.
-   const double eftLogs = pref*(
-      tc.getThresholdCorrection(
-	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 1)
-      - tc.getThresholdCorrection(
-	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
-
-   // calculate the non-logarithmic part of delta_lambda at 3L
-   const double deltaLambda3LNonLog = pref*(ho.getDLambdaNonLog()
-      + shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
-
-   // calculate delta_lambda_H3m
-   ho.setDLambdaH3m((pref*(ho.getDLambdaH3m()
-      + shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
-   
-   // caluclate delta_lambda_EFT
-   ho.setDLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
-
-   // save the non-logarithmic part of delta_lambda 3L
-   ho.setDLambdaNonLog(deltaLambda3LNonLog/v2);
-   
-   // calculate DR' -> MS shift for delta_lambda 3L
-   ho.setDLambdaH3mDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
-   // this shift generates Xt^5*Log(mu) terms for the EFT expression
-   ho.setDLambdaEFTDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
-   
-   // set the uncertainty of delta_lambda due to missing Xt terms
-   // to summarize: delta_lambda_H3m is always of the x_t order of the suitable
-   // hierachy (h3, h9 ~ xt^3, h5, h6, h6b ~ xt^4), whereas delta_lambda_EFT
-   // the non-logarithmic term is of order of the hierarchy but the logarithmic
-   // part is of order O(xt^4) and using the shift O(xt^5). Note that the shift
-   // for delta_lambda_H3m is always of order of the hierarchy as well
-   const int xt4Flag = xtOrder == 3 ? 1 : 0;
-   ho.setDLambdaH3mXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
-   ho.setDLambdaEFTXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
-   
+   // calculate delta_lambda @ 3-loop level
+   calcDeltaLambda3L(ho);
    // set uncertainty of delta_lambda
    ho.setDLambdaExpUncertainty(ho.getDMhExpUncertainty(3)/sqrt(v2));
-   
-   // calculate shifts needed to convert DR' to other renormalization schemes,
-   // here one needs it with the minus sign to convert DR -> H3m
-   ho.setDMhDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
 
    // set flags to omit all but O(at*as^n)
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
@@ -252,6 +201,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
+
    // mh_eft^2
    const double mh2_eft = mh2EFTCalculator.getDeltaMh2EFT0Loop();
    // 1-Loop prefactor at
@@ -276,7 +226,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
       *tc.getThresholdCorrection(ThresholdVariables::YT_AS,
 				 RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDLambdaDRbarPrimeToMSbarShift(3, ho.getDLambdaEFTDRbarPrimeToMSbarShift());
-   mh2EFTCalculator.getDeltaLambdaDegenerate(p.scale, p.MSt(1), p.Au(2,2) - p.mu*p.vd/p.vu,1);
+
    auto ho_mdr = ho;
    ho_mdr.setMDRFlag(1);
    // calculate the DR to MDR shift with the obtained hierarchy
@@ -288,6 +238,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setMDRMasses(mdrMasses);
    ho.setDMhDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDMhDRbarPrimeToMDRbarPrimeShift()
       + ho_mdr.getDMh(3) - ho.getDMh(3));
+   
    // final check if paramter point is governed by H3m hierarchies
    if(std::abs((ho.getDLambdaEFT() - ho.getDLambdaH3m())/ho.getDLambdaEFT()) > 0.3) throw std::runtime_error("Difference of Δλ_H3m and Δλ_EFT > 0.3. There might be no suitable hierarchy!");
    return ho;
@@ -355,9 +306,15 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 const double expUncertainty3L = getExpansionUncertainty(ho, treelvl
 	    + Mt41L + Mt42L, 0, 0, 1); 
 
+	 // estimate the uncertainty of the difference of delta_lambda @ 3-loop
+	 calcDeltaLambda3L(ho);
+	 const double deltaLambdaUncertainty = sqrt((pow2(p.vu) + pow2(p.vd))
+	    *std::abs((ho.getDLambdaEFT() - ho.getDLambdaH3m())));
+	 
 	 // add these errors to include the error of the expansion in the comparison
 	 const double currError = sqrt(pow2(twoLoopError) 
-	    + pow2(expUncertainty2L) + pow2(expUncertainty3L));
+	    + pow2(expUncertainty2L) + pow2(expUncertainty3L)
+	    + pow2(deltaLambdaUncertainty));
 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
@@ -1314,6 +1271,79 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calcDRbarToMDRbarShift(const hima
    else{
       return Eigen::Matrix2d::Zero();
    }
+}
+
+void himalaya::HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho){
+   // set Xt order truncation for EFT contribution to be consistent with H3m
+   int xtOrder = 4;
+   const int suitableHierarchy = ho.getSuitableHierarchy();
+   if(suitableHierarchy == himalaya::Hierarchies::h3
+      || suitableHierarchy == himalaya::Hierarchies::h32q2g 
+      || suitableHierarchy == himalaya::Hierarchies::h3q22g
+      || suitableHierarchy == himalaya::Hierarchies::h9
+      || suitableHierarchy == himalaya::Hierarchies::h9q2) xtOrder = 3;
+   
+   // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
+   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
+   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
+   
+   // create a modified parameters struct and construct Mh2EFTCalculator and ThresholdCalculator
+   auto p_mass_ES = p;
+   p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
+   p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
+   himalaya::ThresholdCalculator tc (p_mass_ES);
+
+   // calculate the (non-)logarithmic part of Mh2 without delta_lambda_3L
+   // the first line is equivalent to  64 * dytas - 84 * pow2(dytas) - 24 * dytas2 + catas2 including all log(mu^2/Mst1^2)
+   // which are also included in the H3m result, and the second line omits these log(mu^2/Mst1^2) terms since they originate
+   // from SM contributions. The non-logarithmic part contains only Xt orders up to O(Xt^2) which are also included in H3m
+   // so no subtraction is needed. Checked.
+   const double subtractionTermH3m = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,1,0);
+   const double subtractionTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
+
+   // calculate the EFT logs. In the first call we calculate the full reconstructed contribution to delta_lambda_3L
+   // including all logarithmic contributions. In the second line we subtract all non-logarithmic contributions
+   // to isolate the logarithmic ones. Checked.
+   const double eftLogs = pref*(
+      tc.getThresholdCorrection(
+	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 1)
+      - tc.getThresholdCorrection(
+	    ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
+
+   // calculate the non-logarithmic part of delta_lambda at 3L
+   const double deltaLambda3LNonLog = pref*(ho.getDLambdaNonLog()
+      + shiftH3mToDRbarPrimeMh2(ho,0)) - subtractionTermEFT;
+
+   // calculate delta_lambda_H3m
+   ho.setDLambdaH3m((pref*(ho.getDLambdaH3m()
+      + shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
+   
+   // caluclate delta_lambda_EFT
+   ho.setDLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
+
+   // save the non-logarithmic part of delta_lambda 3L
+   ho.setDLambdaNonLog(deltaLambda3LNonLog/v2);
+   
+   // calculate DR' -> MS shift for delta_lambda 3L
+   ho.setDLambdaH3mDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
+   // this shift generates Xt^5*Log(mu) terms for the EFT expression
+   ho.setDLambdaEFTDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
+   
+   // set the uncertainty of delta_lambda due to missing Xt terms
+   // to summarize: delta_lambda_H3m is always of the x_t order of the suitable
+   // hierachy (h3, h9 ~ xt^3, h5, h6, h6b ~ xt^4), whereas delta_lambda_EFT
+   // the non-logarithmic term is of order of the hierarchy but the logarithmic
+   // part is of order O(xt^4) and using the shift O(xt^5). Note that the shift
+   // for delta_lambda_H3m is always of order of the hierarchy as well
+   const int xt4Flag = xtOrder == 3 ? 1 : 0;
+   ho.setDLambdaH3mXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0)
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0)
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
+   ho.setDLambdaEFTXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1)
+      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
 }
 
 
