@@ -1273,6 +1273,10 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calcDRbarToMDRbarShift(const hima
    }
 }
 
+/**                                                                                                                                      
+ *        Fills in delta_lambda @ 3L to the given HierarchyObject                                                                        
+ *        @param ho a HierrachyObject                                                                                                    
+ */
 void himalaya::HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho){
    // set Xt order truncation for EFT contribution to be consistent with H3m
    int xtOrder = 4;
