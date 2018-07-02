@@ -79,10 +79,6 @@ Output: A list of replacement rules with
  - lambda: {0L, 1L, 2L, 3L} correction to lambda, in DR' scheme, w/ full logarithms
  - lambdaUncertainty: uncertainty of lambda {0L, 1L, 2L, 3L}
  - lambdaShiftDRbarPrimeToMSbar: shifts from DR' -> MS scheme for lambda {0L, 1L, 2L, 3L}
- - DLambdaEFT: 3-loop Delta lambda, in DR' scheme, w/ full logarithms
- - DLambdaEFTDRbarPrimeToMSbarShift: shift of 3-loop Delta lambda (full logarithms) from DR' -> MS scheme
- - DLambdaH3m: 3-loop Delta lambda, in DR' scheme, w/ H3m logarithms
- - DLambdaH3mDRbarPrimeToMSbarShift: shift of 3-loop Delta lambda (H3m logarithms) from DR' -> MS scheme
 
 Example:
 
@@ -149,11 +145,7 @@ output = HimalayaCalculateDMh3L[
   Mh2ShiftDRbarPrimeToH3m,
   expansionUncertainty,
   Mh2EFT,
-  lambda, lambdaUncertainty, lambdaShiftDRbarPrimeToMSbar,
-  DLambdaH3m,
-  DLambdaH3mDRbarPrimeToMSbarShift,
-  DLambdaEFT,
-  DLambdaEFTDRbarPrimeToMSbarShift };
+  lambda, lambdaUncertainty, lambdaShiftDRbarPrimeToMSbar };
 
 Himalaya::nonum = "Error: `1` is not a numeric input value!";
 Himalaya::error = "`1`";

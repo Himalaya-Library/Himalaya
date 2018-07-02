@@ -272,11 +272,7 @@ corrections:
   Mh2EFT -> {8230.07, 10331.1, 1881.15, 689.117}, 
   lambda -> {0.135998, 0.0625136, 0.00149099, 0.000214622}, 
   lambdaUncertainty -> {0., 0., 0., 0.00109288}, 
-  lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.28983*10^-6, -0.000771028}, 
-  DLambdaH3m -> {0.000226477, 0.0012078}, 
-  DLambdaH3mDRbarPrimeToMSbarShift -> -0.000667961, 
-  DLambdaEFT -> {0.000214622, 0.00109288}, 
-  DLambdaEFTDRbarPrimeToMSbarShift -> -0.000771028 }
+  lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.28983*10^-6, -0.000771028} }
 ```
 
 See `?HimalayaCalculateDMh3L` for a detailed documentation of the

@@ -46,10 +46,6 @@ TestPoint[point_, name_] :=
            TestClose[lambda                                         /. output, lambda                                         /. (expectedOutput /. point), eps];
            TestClose[lambdaUncertainty                              /. output, lambdaUncertainty                              /. (expectedOutput /. point), eps];
            TestClose[lambdaShiftDRbarPrimeToMSbar                   /. output, lambdaShiftDRbarPrimeToMSbar                   /. (expectedOutput /. point), eps];
-           TestClose[DLambdaH3m                            /. output, DLambdaH3m                            /. (expectedOutput /. point), eps];
-           TestClose[DLambdaH3mDRbarPrimeToMSbarShift      /. output, DLambdaH3mDRbarPrimeToMSbarShift      /. (expectedOutput /. point), eps];
-           TestClose[DLambdaEFT                            /. output, DLambdaEFT                            /. (expectedOutput /. point), eps];
-           TestClose[DLambdaEFTDRbarPrimeToMSbarShift      /. output, DLambdaEFTDRbarPrimeToMSbarShift      /. (expectedOutput /. point), eps];
           ];
 
 (* load LibrayLink *)
@@ -170,11 +166,7 @@ MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
         Mh2EFT -> {8230.066622149989, 10331.078614427297, 1881.1471720931024, 695.2285664220773},
         lambda -> {0.13599819257964818, 0.06251358668613667, 0.0014909887921878413, 0.00031561329131293657}, 
         lambdaUncertainty -> {0., 0., 0., 0.0010928804743410628},
-        lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.2898259577239126*^-6, -0.000771028340668861}, 
-        DLambdaH3m -> {0.00035238384554760335, 0.0012327186766622233}, 
-        DLambdaH3mDRbarPrimeToMSbarShift -> -0.0006679606925823672, 
-        DLambdaEFT -> {0.00031561329131293657, 0.0010928804743410628}, 
-        DLambdaEFTDRbarPrimeToMSbarShift -> -0.000771028340668861
+        lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.2898259577239126*^-6, -0.000771028340668861}
     },
     precision -> 1*^-5
 };

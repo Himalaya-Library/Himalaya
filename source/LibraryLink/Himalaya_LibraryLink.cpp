@@ -138,7 +138,7 @@ void put_message(MLINK link,
 
 void put_result(const himalaya::HierarchyObject& ho, MLINK link)
 {
-   MLPutFunction(link, "List", 15);
+   MLPutFunction(link, "List", 11);
 
    const auto hierarchy = ho.getSuitableHierarchy();
    const std::string msf = ho.getIsAlphab() ? "MsbottomMDRPrime" : "MstopMDRPrime";
@@ -146,12 +146,6 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    Eigen::Vector4d expansion_uncertainty;
    expansion_uncertainty << 0., ho.getDMhExpUncertainty(1),
       ho.getDMhExpUncertainty(2), ho.getDMhExpUncertainty(3);
-
-   Eigen::Vector2d delta_lambda_eft;
-   delta_lambda_eft << ho.getDLambdaEFT(), ho.getDLambdaEFTUncertainty();
-
-   Eigen::Vector2d delta_lambda_h3m;
-   delta_lambda_h3m << ho.getDLambdaH3m(), ho.getDLambdaH3mUncertainty();
 
    Eigen::Vector4d lambda;
    lambda << ho.getDLambda(0), ho.getDLambda(1),
@@ -198,10 +192,6 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
    MLPutRuleTo(link, lambda, "lambda");
    MLPutRuleTo(link, lambda_uncertainty, "lambdaUncertainty");
    MLPutRuleTo(link, lambda_shift_DRp_to_MS, "lambdaShiftDRbarPrimeToMSbar");
-   MLPutRuleTo(link, delta_lambda_h3m, "DLambdaH3m");
-   MLPutRuleTo(link, ho.getDLambdaH3mDRbarPrimeToMSbarShift(), "DLambdaH3mDRbarPrimeToMSbarShift");
-   MLPutRuleTo(link, delta_lambda_eft, "DLambdaEFT");
-   MLPutRuleTo(link, ho.getDLambdaEFTDRbarPrimeToMSbarShift(), "DLambdaEFTDRbarPrimeToMSbarShift");
 
    MLEndPacket(link);
 }
