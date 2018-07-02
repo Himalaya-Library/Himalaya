@@ -151,8 +151,9 @@ namespace himalaya{
       /**
        * 	Fills in delta_lambda @ 3L to the given HierarchyObject
        * 	@param ho a HierrachyObject
+       * 	@param omitXtOrders a bool to omit xtOrders of delta_lambda_EFT
        */
-      void calcDeltaLambda3L(HierarchyObject& ho);
+      void calcDeltaLambda3L(HierarchyObject& ho, bool omitXtOrders);
       /**
        * 	Prints out some information about Himalaya.
        */

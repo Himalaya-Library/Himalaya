@@ -262,8 +262,7 @@ void himalaya::HierarchyObject::setDLambdaH3mXtUncertainty(double uncertainty){
  */
 double himalaya::HierarchyObject::getDLambdaH3mUncertainty() const {
    return std::abs(getDLambdaEFT() - getDLambdaH3m()) 
-      + std::abs(dLambdaH3mXtUncertainty)
-      + std::abs(dLambdaExpansionUncertainty);
+      + std::abs(dLambdaH3mXtUncertainty);
 }
 
 /**
@@ -280,7 +279,7 @@ void himalaya::HierarchyObject::setDLambdaEFTXtUncertainty(double uncertainty){
  */
 double himalaya::HierarchyObject::getDLambdaEFTUncertainty() const {
    return std::abs(dLambdaEFTXtUncertainty)
-      + std::abs(dLambdaExpansionUncertainty);
+      + std::abs(getDLambdaEFT() - getDLambdaH3m());
 }
 
 /**
@@ -461,45 +460,43 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
    const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
       || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
    const std::string massString = ho.getIsAlphab() ? "Msbottom" : "Mstop";
-   const std::string spaces = ho.getIsAlphab() == true ? "                " : "                   ";
+   const std::string spaces = ho.getIsAlphab() == true ? "            " : "               ";
    ostr << "===================================\n"
 	<< "Himalaya HierarchyObject parameters\n"
         << "===================================\n"
-	<< "Ren. scheme               =  " << renSchemeString << "\n"
-        << "Hierarchy                 =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
+	<< "Ren. scheme           =  " << renSchemeString << "\n"
+        << "Hierarchy             =  " << suitableHierarchy << " (" << ho.getH3mHierarchyNotation(suitableHierarchy) << ")\n"
 	<< massString << "_1" << spaces << "=  " << ho.getMDRMasses()(0) << " GeV (MDR')\n"
 	<< massString << "_2" << spaces << "=  " << ho.getMDRMasses()(1) << " GeV (MDR')\n"
-        << "Abs. diff 2L              =  " << ho.getAbsDiff2L() << " GeV\n"
-        << "Rel. diff 2L              =  " << ho.getRelDiff2L()*100 << " %\n"
-        << "Mh^2_0L                   =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
+        << "Abs. diff 2L          =  " << ho.getAbsDiff2L() << " GeV\n"
+        << "Rel. diff 2L          =  " << ho.getRelDiff2L()*100 << " %\n"
+        << "Mh^2_0L               =  {{" << ho.getDMh(0).row(0)(0) << ", " << ho.getDMh(0).row(0)(1)
 		   << "}, {" << ho.getDMh(0).row(1)(0) << ", " << ho.getDMh(0).row(1)(1) << "}} GeV^2\n"
-        << "ΔMh^2_1L                  =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
+        << "ΔMh^2_1L              =  {{" << ho.getDMh(1).row(0)(0) << ", " << ho.getDMh(1).row(0)(1)
 		   << "}, {" << ho.getDMh(1).row(1)(0) << ", " << ho.getDMh(1).row(1)(1) << "}} GeV^2\n"
-        << "ΔMh^2_2L                  =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
+        << "ΔMh^2_2L              =  {{" << ho.getDMh(2).row(0)(0) << ", " << ho.getDMh(2).row(0)(1)
 		   << "}, {" << ho.getDMh(2).row(1)(0) << ", " << ho.getDMh(2).row(1)(1) << "}} GeV^2\n"
-        << "ΔMh^2_3L                  =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
+        << "ΔMh^2_3L              =  {{" << ho.getDMh(3).row(0)(0) << ", " << ho.getDMh(3).row(0)(1)
 		   << "}, {" << ho.getDMh(3).row(1)(0) << ", " << ho.getDMh(3).row(1)(1) << "}} GeV^2\n"
-        << "Exp. uncert. 1L           =  " << ho.getDMhExpUncertainty(1) << " GeV\n"
-        << "Exp. uncert. 2L           =  " << ho.getDMhExpUncertainty(2) << " GeV\n"
-        << "Exp. uncert. 3L           =  " << ho.getDMhExpUncertainty(3) << " GeV\n"
-	<< "DR' -> MDR' shift         =  {{" << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(0)(0) << ", " << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(0)(1)
+        << "Exp. uncert. 1L       =  " << ho.getDMhExpUncertainty(1) << " GeV\n"
+        << "Exp. uncert. 2L       =  " << ho.getDMhExpUncertainty(2) << " GeV\n"
+        << "Exp. uncert. 3L       =  " << ho.getDMhExpUncertainty(3) << " GeV\n"
+	<< "DR' -> MDR' shift     =  {{" << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(0)(0) << ", " << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(0)(1)
 		   << "}, {" << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(1)(0) << ", " << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(1)(1)  << "}} GeV^2\n"
-	<< "DR' -> H3m shift          =  {{" << ho.getDMhDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDMhDRbarPrimeToH3mShift().row(0)(1)
+	<< "DR' -> H3m shift      =  {{" << ho.getDMhDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDMhDRbarPrimeToH3mShift().row(0)(1)
 		   << "}, {" << ho.getDMhDRbarPrimeToH3mShift().row(1)(0) << ", " << ho.getDMhDRbarPrimeToH3mShift().row(1)(1) << "}} GeV^2\n"
-	<< "Δλ_0L                     =  " << ho.getDLambda(0) << " O(g_1^2, g_2^2)\n"
-	<< "Δλ_1L                     =  " << ho.getDLambda(1) << " O(α_t)\n"
-	<< "Δλ_2L                     =  " << ho.getDLambda(2) << " O(α_t*α_s)\n"
-        << "Δλ_EFT_3L                 =  " << ho.getDLambdaEFT() << " +/- " << ho.getDLambdaEFTUncertainty() << " O(α_t*α_s^2)\n"
-	<< "Δλ_H3m_3L                 =  " << ho.getDLambdaH3m() << " +/- " << ho.getDLambdaH3mUncertainty() << " O(α_t*α_s^2)\n"
-	<< "Δλ_0L DR' -> MS shift     =  " << ho.getDLambdaDRbarPrimeToMSbarShift(0) << "\n"
-	<< "Δλ_1L DR' -> MS shift     =  " << ho.getDLambdaDRbarPrimeToMSbarShift(1) << "\n"
-	<< "Δλ_2L DR' -> MS shift     =  " << ho.getDLambdaDRbarPrimeToMSbarShift(2) << "\n"
-	<< "Δλ_EFT_3L DR' -> MS shift =  " << ho.getDLambdaEFTDRbarPrimeToMSbarShift() << "\n"
-	<< "Δλ_H3m_3L DR' -> MS shift =  " << ho.getDLambdaH3mDRbarPrimeToMSbarShift() << "\n"
-	<< "Mh^2_EFT_0L               =  " << ho.getDMh2EFT(0) << " GeV^2 O(g_1^2, g_2^2)\n"
-	<< "ΔMh^2_EFT_1L              =  " << ho.getDMh2EFT(1) << " GeV^2 O(α_t)\n"
-	<< "ΔMh^2_EFT_2L              =  " << ho.getDMh2EFT(2) << " GeV^2 O(α_t*α_s)\n"
-	<< "ΔMh^2_EFT_3L              =  " << ho.getDMh2EFT(3) << " GeV^2 O(α_t*α_s^2)"
+	<< "Δλ_0L                 =  " << ho.getDLambda(0) << " O(g_1^2, g_2^2)\n"
+	<< "Δλ_1L                 =  " << ho.getDLambda(1) << " O(α_t)\n"
+	<< "Δλ_2L                 =  " << ho.getDLambda(2) << " O(α_t*α_s)\n"
+        << "Δλ_3L                 =  " << ho.getDLambdaEFT() << " +/- " << ho.getDLambdaEFTUncertainty() << " O(α_t*α_s^2)\n"
+	<< "Δλ_0L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(0) << "\n"
+	<< "Δλ_1L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(1) << "\n"
+	<< "Δλ_2L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(2) << "\n"
+	<< "Δλ_3L DR' -> MS shift =  " << ho.getDLambdaEFTDRbarPrimeToMSbarShift() << "\n"
+	<< "Mh^2_EFT_0L           =  " << ho.getDMh2EFT(0) << " GeV^2 O(g_1^2, g_2^2)\n"
+	<< "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFT(1) << " GeV^2 O(α_t)\n"
+	<< "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFT(2) << " GeV^2 O(α_t*α_s)\n"
+	<< "ΔMh^2_EFT_3L          =  " << ho.getDMh2EFT(3) << " GeV^2 O(α_t*α_s^2)"
         << '\n';
 
    return ostr;
