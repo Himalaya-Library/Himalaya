@@ -305,19 +305,13 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	    + Mt41L + Mt42L, 0, 0, 1); 
 
 	 // estimate the uncertainty of the difference of delta_lambda @ 3-loop
+	 // normalized to the exact logarithms
 	 calcDeltaLambda3L(ho, true);
 	 const double deltaLambdaUncertainty = std::abs((ho.getDLambdaEFT() 
-	    - ho.getDLambdaH3m())/ho.getDLambdaEFT());
-	 // delta_lambda_non_log is part of delta_lambda so one has to subtract
-	 // it twice to avoid double counting
-	 const double deltaLambdaLogNonLogUncertainty = std::abs((ho.getDLambdaEFT() 
-	    - 2*ho.getDLambdaNonLog())/ho.getDLambdaEFT());
+	    - ho.getDLambdaH3m())/(ho.getDLambdaEFT() - ho.getDLambdaNonLog()));
 	 
 	 // add these errors to include the error of the expansion in the comparison
-	 double currError = sqrt(pow2(deltaLambdaUncertainty) 
-	    + pow2(deltaLambdaLogNonLogUncertainty)*0);
-	 
-	 currError = sqrt(pow2(twoLoopError/Mh2l) + pow2(expUncertainty2L/Mh2LExpanded));
+	 const double currError = deltaLambdaUncertainty;
 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
@@ -383,9 +377,9 @@ bool himalaya::HierarchyCalculator::isHierarchySuitable(const himalaya::Hierarch
       case Hierarchies::h5g1:
 	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mgl - Mst1) < std::abs(Mgl - Mst2)) && (Mst2 < Msq) && (Mgl > Mst1);
       case Hierarchies::h6:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mst2 >= Mgl);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2*1.3 < Msq) && (Mst2 >= Mgl);
       case Hierarchies::h6g2:
-	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 < Msq) && (Mgl > Mst2);
+	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2*1.3 < Msq) && (Mgl > Mst2);
       case Hierarchies::h6b:
 	 return (Mst2 - Mst1 > 0.1*Mst1) && ((Mst2 - Mgl) < std::abs(Mgl - Mst1)) && (Mst2 >= Msq) && (Mst2 >= Mgl);
       case Hierarchies::h6b2qg2:
