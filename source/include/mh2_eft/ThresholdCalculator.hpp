@@ -54,6 +54,11 @@ namespace himalaya{
        * 	@return The determined mass limit
        */
       int getLimit();
+      /**
+       * 	Sets the order of Xt for getDeltaLambdaAlphatAlphas2
+       * 	@param xtOrder an integer key to truncate delta_lambda_at_as2 at a given Xt order starting at 4
+       */
+      void setXtOrderOfDeltaLambdaAtAs2(int xtOrder);
    private:
       /**
        * 	Returns delta g3_as in the MSbar scheme for a given mass limit
@@ -387,6 +392,7 @@ namespace himalaya{
       bool isfinite(double exact, double shifted, double limit);
       Parameters p{}; ///< The HimalayaInterface struct
       double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
+      int xtOrderLambdaAtAs2 = 6; ///< A flag to truncate the Xt order of delta_lambda_at_as2 at a given value starting at 4
    };
    
 }	// himalaya
