@@ -148,23 +148,23 @@ the Standard Model in the DR'-bar scheme in the convention of
 [[1407.4081](https://arxiv.org/abs/1407.4081)] one needs to call
 
 ```cpp
-double delta_lambda_3L = ho.getDLambdaEFT();
+double delta_lambda_3L = ho.getDLambda(3);
 ```
 
-The function `getDLambdaEFT` returns the three-loop correction in
+The function `getDLambda` returns the loop corrections in
 the DR'-bar scheme.  The three-loop shift to the MS-bar scheme,
 ocurring when the one- and two-loop corrections are expressed in terms
 of the Standard Model MS-bar strong gauge and top Yukawa couplings can
-be obtained by calling `ho.getDLambdaEFTDRbarPrimeToMSbarShift()`.
+be obtained by calling `ho.getDLambdaDRbarPrimeToMSbarShift(3)`.
 
 An uncertainty estimate of the calculated three-loop λ can be obtained
 by calling
 
 ```cpp
-double delta_lambda_3L_uncertainty = ho.getDLambdaEFTUncertainty();
+double delta_lambda_3L_uncertainty = ho.getDLambdaUncertainty(3);
 ```
 
-The function `getDLambdaEFTUncertainty` returns an uncertainty
+The function `getDLambdaUncertainty` returns an uncertainty
 estimate by taking into account higher order Xt^n terms missing in
 some hierarcy expansions.
 
