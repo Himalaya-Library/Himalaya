@@ -191,7 +191,7 @@ namespace himalaya{
        * 	Sets the DR' -> H3m shift which should be added to the DR' result
        * 	@param shift the DR' -> H3m shift
        */
-      void setDMhDRbarPrimeToH3mShift(const Eigen::Matrix2d shift);
+      void setDMhDRbarPrimeToH3mShift(const Eigen::Matrix2d& shift);
       /**
        * 	Returns the DR' -> H3m shift which should be added to the DR' result
        * 	@return Returns the DR' -> H3m shift

@@ -140,7 +140,7 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMhDRbarPrimeToMDRbarPrimeShift() 
    return mdrShift;
 }
 
-void himalaya::HierarchyObject::setDMhDRbarPrimeToH3mShift(const Eigen::Matrix2d shift){
+void himalaya::HierarchyObject::setDMhDRbarPrimeToH3mShift(const Eigen::Matrix2d& shift){
    h3mShift = shift;
 }
 
