@@ -405,7 +405,7 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
    const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
       || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
    const std::string massString = ho.getIsAlphab() ? "Msbottom" : "Mstop";
-   const std::string spaces = ho.getIsAlphab() == true ? "            " : "               ";
+   const std::string spaces = ho.getIsAlphab() ? "            " : "               ";
    ostr << "===================================\n"
 	<< "Himalaya HierarchyObject parameters\n"
         << "===================================\n"
