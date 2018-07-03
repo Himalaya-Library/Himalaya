@@ -209,7 +209,7 @@ int himalaya::HierarchyObject::getRenormalizationScheme() const{
  * 	@param deltaLambda delta_lambda at 3-loop order.
  */
 void himalaya::HierarchyObject::setDLambdaH3m(double deltaLambda){
-   this -> dLambdaH3m = deltaLambda;
+   dLambdaH3m = deltaLambda;
 }
 
 /**
@@ -224,7 +224,7 @@ double himalaya::HierarchyObject::getDLambdaH3m() const{
  * 	@param deltaLambda delta_lambda at 3-loop order.
  */
 void himalaya::HierarchyObject::setDLambdaEFT(double deltaLambda){
-   this -> dLambdaEFT = deltaLambda;
+   dLambdaEFT = deltaLambda;
 }
 
 /**
@@ -250,76 +250,21 @@ double himalaya::HierarchyObject::getDLambdaNonLog() const{
 }
 
 /**
- * 	Sets the Xt parts of the uncertainty of delta_lambda_H3m
- *        @param uncertainty of 3-loop delta_lambda
- */
-void himalaya::HierarchyObject::setDLambdaH3mXtUncertainty(double uncertainty){
-   dLambdaH3mXtUncertainty = uncertainty;
-}
-
-/**
- *        @return uncertainty of 3-loop delta_lambda_H3m
- */
-double himalaya::HierarchyObject::getDLambdaH3mUncertainty() const {
-   return std::abs(getDLambdaEFT() - getDLambdaH3m()) 
-      + std::abs(dLambdaH3mXtUncertainty);
-}
-
-/**
- * 	Sets the Xt parts of the uncertainty of delta_lambda_EFT
+ * 	Sets the Xt parts of the uncertainty of delta_lambda
  *      @param uncertainty of 3-loop delta_lambda
  */
-void himalaya::HierarchyObject::setDLambdaEFTXtUncertainty(double uncertainty){
-   dLambdaEFTXtUncertainty = uncertainty;
+void himalaya::HierarchyObject::setDLambdaXtUncertainty(double uncertainty){
+   dLambdaXtUncertainty = uncertainty;
 }
 
-/**
- *	@return uncertainty of 3-loop delta_lambda_EFT
- *	TODO: the difference should only be taken up to O(Xt^3/Xt^4) depending on the chosen hierarchy
- */
-double himalaya::HierarchyObject::getDLambdaEFTUncertainty() const {
-   return std::abs(dLambdaEFTXtUncertainty)
-      + std::abs(getDLambdaEFT() - getDLambdaH3m());
+double himalaya::HierarchyObject::getDLambdaUncertainty(int loops) const{
+   if(loops >= 0 && loops <= 3){
+      if(loops == 3) return std::abs(dLambdaXtUncertainty) + std::abs(getDLambdaEFT() - getDLambdaH3m());
+      else return 0.;
+   }
+   
+   throw std::runtime_error("Δλ uncertainty " + std::to_string(loops) + " loop(s) is not available.");
 }
-
-/**
- * 	Sets the DR' -> MS shift for delta_lambda_himalaya which should be added to the DR' result
- * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
- */
-void himalaya::HierarchyObject::setDLambdaH3mDRbarPrimeToMSbarShift(double shift){
-   dLambdaH3mdrBarPrimeToMSbarShift = shift;
-}
-
-/**
- * 	@return the DR' -> MS shift for delta_lambda_himalaya which should be added to the DR' result
- */
-double himalaya::HierarchyObject::getDLambdaH3mDRbarPrimeToMSbarShift() const{
-   return dLambdaH3mdrBarPrimeToMSbarShift;
-}
-
-/**
- * 	Sets the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
- * 	@param shift the DR' -> MS shift which should be added to the 3-loop threshold correction
- */
-void himalaya::HierarchyObject::setDLambdaEFTDRbarPrimeToMSbarShift(double shift){
-   dLambdaEFTdrBarPrimeToMSbarShift = shift;
-}
-
-/**
- * 	@return the DR' -> MS shift for delta_lambda_EFT which should be added to the DR' result
- */
-double himalaya::HierarchyObject::getDLambdaEFTDRbarPrimeToMSbarShift() const{
-   return dLambdaEFTdrBarPrimeToMSbarShift;
-}
-
-/**
- * 	Set the expasion uncertainty for delta_lambda
- * 	@param expUncertLambda the expansion uncertainty for delta_lambda
- */
-void himalaya::HierarchyObject::setDLambdaExpUncertainty(double expUncertLambda){
-   dLambdaExpansionUncertainty = expUncertLambda;
-}
-
 
 /**
  * 	Sorts a vector.
@@ -336,7 +281,7 @@ Eigen::Vector2d himalaya::HierarchyObject::sortVector(Eigen::Vector2d& vector){
 
 /**
  * 	@return delta_lambda
- * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L Delta_lambda_EFT)
+ * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
 double himalaya::HierarchyObject::getDLambda(int loops) const{
    if(loops >= 0 && loops <= 3){
@@ -348,7 +293,7 @@ double himalaya::HierarchyObject::getDLambda(int loops) const{
 
 /**
  * 	Sets the Delta_lambda at loops-loop
- * 	@param loops an integer, could be 0 (tree), ..., 3 (3L Delta_lambda_EFT)
+ * 	@param loops an integer, could be 0 (tree), ..., 3 (3L)
  * 	@param deltaLambda delta_lambda at tree-level
  */
 void himalaya::HierarchyObject::setDLambda(int loops, double deltaLambda){
@@ -362,7 +307,7 @@ void himalaya::HierarchyObject::setDLambda(int loops, double deltaLambda){
 
 /**
  * 	@return Delta_Mh2_EFT
- * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L with Delta_lambda_EFT)
+ * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
 double himalaya::HierarchyObject::getDMh2EFT(int loops) const{
    if(loops >= 0 && loops <= 3){
@@ -374,7 +319,7 @@ double himalaya::HierarchyObject::getDMh2EFT(int loops) const{
 
 /**
  * 	Sets Delta_Mh2_EFT at loops-loop
- * 	@param loops an integer, could be 0 (tree), ..., 3 (3L with Delta_lambda_EFT)
+ * 	@param loops an integer, could be 0 (tree), ..., 3 (3L)
  * 	@param deltaMh2 delta_Mh^2
  */
 void himalaya::HierarchyObject::setDMh2EFT(int loops, double deltaMh2){
@@ -388,7 +333,7 @@ void himalaya::HierarchyObject::setDMh2EFT(int loops, double deltaMh2){
 
 /**
  * 	@return shift to convert delta_lambda from DR' to MS scheme. This shift has to be added to the 1L result
- * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L Delta_lambda_EFT)
+ * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
 double himalaya::HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const{
    if(loops >= 0 && loops <= 3){
@@ -400,7 +345,7 @@ double himalaya::HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) co
 
 /**
  * 	Sets the DR' to MS shift for delta_lambda at loops-loop
- * 	@param loops an integer, could be 0(tree), ..., 3 (3L Delta_lambda_EFT shift)
+ * 	@param loops an integer, could be 0(tree), ..., 3 (3L shift)
  * 	@param shift the shift
  */
 void himalaya::HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift){
@@ -488,11 +433,11 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 	<< "Δλ_0L                 =  " << ho.getDLambda(0) << " O(g_1^2, g_2^2)\n"
 	<< "Δλ_1L                 =  " << ho.getDLambda(1) << " O(α_t)\n"
 	<< "Δλ_2L                 =  " << ho.getDLambda(2) << " O(α_t*α_s)\n"
-        << "Δλ_3L                 =  " << ho.getDLambdaEFT() << " +/- " << ho.getDLambdaEFTUncertainty() << " O(α_t*α_s^2)\n"
+        << "Δλ_3L                 =  " << ho.getDLambda(3) << " +/- " << ho.getDLambdaUncertainty(3) << " O(α_t*α_s^2)\n"
 	<< "Δλ_0L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(0) << "\n"
 	<< "Δλ_1L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(1) << "\n"
 	<< "Δλ_2L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(2) << "\n"
-	<< "Δλ_3L DR' -> MS shift =  " << ho.getDLambdaEFTDRbarPrimeToMSbarShift() << "\n"
+	<< "Δλ_3L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(3) << "\n"
 	<< "Mh^2_EFT_0L           =  " << ho.getDMh2EFT(0) << " GeV^2 O(g_1^2, g_2^2)\n"
 	<< "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFT(1) << " GeV^2 O(α_t)\n"
 	<< "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFT(2) << " GeV^2 O(α_t*α_s)\n"

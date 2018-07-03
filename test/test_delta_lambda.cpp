@@ -245,7 +245,7 @@ TEST_CASE("test_lambda_limit_degenerate")
 
    const auto z2_gen_Himalaya = ho.getDLambdaH3m();
    const auto z2_gen_EFT      = ho.getDLambdaEFT();
-   const auto uncertainty     = ho.getDLambdaH3mUncertainty();
+   const auto uncertainty     = ho.getDLambdaUncertainty(3);
 
    INFO("uncertainty: " << uncertainty);
 

@@ -152,7 +152,7 @@ void put_result(const himalaya::HierarchyObject& ho, MLINK link)
              ho.getDLambda(2), ho.getDLambda(3);
 
    Eigen::Vector4d lambda_uncertainty;
-   lambda_uncertainty << 0., 0., 0., ho.getDLambdaEFTUncertainty();
+   lambda_uncertainty << 0., 0., 0., ho.getDLambdaUncertainty(3);
 
    Eigen::Vector4d lambda_shift_DRp_to_MS;
    lambda_shift_DRp_to_MS <<

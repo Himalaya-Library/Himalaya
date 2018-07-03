@@ -66,9 +66,9 @@ TEST_CASE("test_example")
       CHECK(std::isfinite(Mh2(0)));
       CHECK(std::isfinite(Mh2(1)));
 
-      const double lam_3L_DRp = ho.getDLambdaEFT();
-      const double Dlam_3L    = ho.getDLambdaEFTUncertainty();
-      const double lam_3L_MS  = lam_3L_DRp + ho.getDLambdaEFTDRbarPrimeToMSbarShift();
+      const double lam_3L_DRp = ho.getDLambda(3);
+      const double Dlam_3L    = ho.getDLambdaUncertainty(3);
+      const double lam_3L_MS  = lam_3L_DRp + ho.getDLambdaDRbarPrimeToMSbarShift(3);
 
       INFO("Δλ(3L,DR'-bar) = " << lam_3L_DRp << " +- " << Dlam_3L);
       INFO("Δλ(3L,MS-bar)  = " << lam_3L_MS  << " +- " << Dlam_3L);
@@ -138,8 +138,8 @@ TEST_CASE("test_Himalaya_2.0_example_1")
    const auto dMh_3L = ho.getDMh(3);
 
    // get 3-loop contribution to lambda
-   const auto delta_lambda_3L = ho.getDLambdaEFT();
+   const auto delta_lambda_3L = ho.getDLambda(3);
 
    // get uncertainty for 3-loop lambda
-   const auto delta_lambda_3L_uncertainty = ho.getDLambdaEFTUncertainty();
+   const auto delta_lambda_3L_uncertainty = ho.getDLambdaUncertainty(3);
 }

@@ -178,9 +178,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    
    // calculate delta_lambda @ 3-loop level
    calcDeltaLambda3L(ho, false);
-   // set uncertainty of delta_lambda
-   ho.setDLambdaExpUncertainty(ho.getDMhExpUncertainty(3)/sqrt(v2));
-
+   
    // set flags to omit all but O(at*as^n)
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
@@ -225,7 +223,6 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    ho.setDLambdaDRbarPrimeToMSbarShift(2, pref_2L*(-4*ho.getDLambda(1)
       *tc.getThresholdCorrection(ThresholdVariables::YT_AS,
 				 RenSchemes::DRBARPRIME, 1))/v2);
-   ho.setDLambdaDRbarPrimeToMSbarShift(3, ho.getDLambdaEFTDRbarPrimeToMSbarShift());
 
    auto ho_mdr = ho;
    ho_mdr.setMDRFlag(1);
@@ -1332,9 +1329,8 @@ void himalaya::HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject&
    ho.setDLambdaNonLog(deltaLambda3LNonLog/v2);
    
    // calculate DR' -> MS shift for delta_lambda 3L
-   ho.setDLambdaH3mDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,1)/v2);
    // this shift generates Xt^5*Log(mu) terms for the EFT expression
-   ho.setDLambdaEFTDRbarPrimeToMSbarShift(pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
+   ho.setDLambdaDRbarPrimeToMSbarShift(3, pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
    // If orders of Xt are omitted, we subtract them from delta_lambda_EFT to be at the same order
    // as delta_lambda_H3m. This ensures that in the hierarchy selection process we don't compare
    // wrong orders of Xt.
@@ -1350,10 +1346,7 @@ void himalaya::HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject&
    // part is of order O(xt^4) and using the shift O(xt^5). Note that the shift
    // for delta_lambda_H3m is always of order of the hierarchy as well
    const int xt4Flag = xtOrder == 3 ? 1 : 0;
-   ho.setDLambdaH3mXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 0)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 0)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
-   ho.setDLambdaEFTXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
+   ho.setDLambdaXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1)
       + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
 }
