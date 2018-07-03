@@ -762,7 +762,7 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs){
    const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
    const double eps = 0.01*mQ3;
    
-   if(std::abs(mQ3 - m3) < eps && std::abs(mD3 - m3) < eps && std::abs(mQ3 - mD3)){
+   if(std::abs(mQ3 - m3) < eps && std::abs(mD3 - m3) < eps && std::abs(mQ3 - mD3) < eps){
       return (-8*(Xb*(-12*mQ32*Xb + 4*mQ3*pow2(Xb) - 24*pow3(mQ3) + pow3(Xb)) + 8*mQ3*
         lMR*(-3*mQ32*Xb - 3*mQ3*pow2(Xb) + 3*pow3(mQ3) + pow3(Xb)) -
         16*mQ3*log(mQ3)*(-3*mQ32*Xb - 3*mQ3*pow2(Xb) + 3*pow3(mQ3) + 3*lMR
