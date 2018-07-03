@@ -142,4 +142,7 @@ TEST_CASE("test_Himalaya_2.0_example_1")
 
    // get uncertainty for 3-loop lambda
    const auto delta_lambda_3L_uncertainty = ho.getDLambdaUncertainty(3);
+
+   INFO("dMh_3L = " << dMh_3L);
+   INFO("delta_lambda_3L = " << delta_lambda_3L << " +- " << delta_lambda_3L_uncertainty);
 }

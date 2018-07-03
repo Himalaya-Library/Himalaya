@@ -133,15 +133,6 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
 
    // compare hierarchies and get the best fitting hierarchy
    compareHierarchies(ho);
-
-   // set Xt order truncation for EFT contribution to be consistent with H3m
-   int xtOrder = 4;
-   const int suitableHierarchy = ho.getSuitableHierarchy();
-   if(suitableHierarchy == himalaya::Hierarchies::h3
-      || suitableHierarchy == himalaya::Hierarchies::h32q2g 
-      || suitableHierarchy == himalaya::Hierarchies::h3q22g
-      || suitableHierarchy == himalaya::Hierarchies::h9
-      || suitableHierarchy == himalaya::Hierarchies::h9q2) xtOrder = 3;
    
    // calculate the 3-loop Higgs mass matrix for the obtained hierachy in the (M)DRbar' scheme
    ho.setDMh(3, calculateHierarchy(ho, 0, 0, 1) + shiftH3mToDRbarPrime(ho));

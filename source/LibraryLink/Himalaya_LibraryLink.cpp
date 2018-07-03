@@ -104,7 +104,7 @@ template <class T>
 void MLPut(MLINK link, const std::vector<T>& v)
 {
    MLPutFunction(link, "List", v.size());
-   for (int i = 0; i < v.size(); i++)
+   for (std::size_t i = 0; i < v.size(); i++)
       MLPut(link, v[i]);
 }
 
