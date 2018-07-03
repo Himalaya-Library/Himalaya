@@ -21,16 +21,22 @@
 
 #include <complex>
 
+#ifdef __GNUC__
+#  define ATTR(x) __attribute__ ((x))
+#else
+#  define ATTR(x)
+#endif
+
 namespace gm2calc {
 
 /// real dilogarithm
-double dilog(double);
+double dilog(double) noexcept ATTR(const);
 
 /// complex dilogarithm
-std::complex<double> dilog(const std::complex<double>&);
+std::complex<double> dilog(const std::complex<double>&) noexcept ATTR(const);
 
 /// Clausen function Cl_2(x)
-double clausen_2(double);
+double clausen_2(double) noexcept ATTR(const);
 
 } // namespace gm2calc
 

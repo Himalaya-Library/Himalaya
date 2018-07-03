@@ -24,7 +24,7 @@ namespace gm2calc {
 
 namespace {
    template <typename T>
-   T sqr(T x) { return x*x; }
+   T sqr(T x) noexcept { return x*x; }
 }
 
 /**
@@ -33,7 +33,7 @@ namespace {
  * @note Implementation translated by R.Brun from CERNLIB DILOG function C332
  * @return \f$\mathrm{Li}_2(z)\f$
  */
-double dilog(double x) {
+double dilog(double x) noexcept {
    const double PI = M_PI;
    const double HF  = 0.5;
    const double PI2 = PI*PI;
@@ -107,7 +107,7 @@ double dilog(double x) {
  * @note Implementation translated from SPheno to C++
  * @return \f$\mathrm{Li}_2(z)\f$
  */
-std::complex<double> dilog(const std::complex<double>& z) {
+std::complex<double> dilog(const std::complex<double>& z) noexcept {
    std::complex<double> cy, cz;
    int jsgn, ipi12;
    static const int N = 20;
@@ -199,7 +199,7 @@ std::complex<double> dilog(const std::complex<double>& z) {
  * @param x real angle
  * @return \f$\mathrm{Cl}_2(\theta)\f$
  */
-double clausen_2(double x)
+double clausen_2(double x) noexcept
 {
    using std::exp;
    using gm2calc::dilog;
