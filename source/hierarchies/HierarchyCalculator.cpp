@@ -304,11 +304,12 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 // estimate the uncertainty of the difference of delta_lambda @ 3-loop
 	 // normalized to the exact logarithms
 	 calcDeltaLambda3L(ho, true);
-	 const double deltaLambdaUncertainty = std::abs((ho.getDLambdaEFT() 
-	    - ho.getDLambdaH3m())/(ho.getDLambdaEFT() - ho.getDLambdaNonLog()));
+	 /*const double deltaLambdaUncertainty = std::abs((ho.getDLambdaEFT() 
+	    - ho.getDLambdaH3m())/(ho.getDLambdaEFT() - ho.getDLambdaNonLog()));*/
 	 
 	 // add these errors to include the error of the expansion in the comparison
-	 const double currError = deltaLambdaUncertainty;
+	 const double currError = sqrt(pow2(twoLoopError/Mh2l) 
+	    + pow2(expUncertainty2L/Mh2LExpanded));
 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
 	 if(error < 0){
