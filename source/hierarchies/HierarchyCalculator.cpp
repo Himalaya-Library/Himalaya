@@ -306,7 +306,7 @@ int himalaya::HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject&
 	 calcDeltaLambda3L(ho, true);
 	 /*const double deltaLambdaUncertainty = std::abs((ho.getDLambdaEFT() 
 	    - ho.getDLambdaH3m())/(ho.getDLambdaEFT() - ho.getDLambdaNonLog()));*/
-	 
+
 	 // add these errors to include the error of the expansion in the comparison
 	 const double currError = sqrt(pow2(twoLoopError/Mh2l) 
 	    + pow2(expUncertainty2L/Mh2LExpanded));
