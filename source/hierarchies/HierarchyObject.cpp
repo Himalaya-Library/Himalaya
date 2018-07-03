@@ -260,7 +260,7 @@ void himalaya::HierarchyObject::setDLambdaXtUncertainty(double uncertainty){
 double himalaya::HierarchyObject::getDLambdaUncertainty(int loops) const{
    if(loops >= 0 && loops <= 3){
       if(loops == 3) return std::abs(dLambdaXtUncertainty) + std::abs(getDLambdaEFT() - getDLambdaH3m());
-      else return 0.;
+      return 0.;
    }
    
    throw std::runtime_error("Δλ uncertainty " + std::to_string(loops) + " loop(s) is not available.");

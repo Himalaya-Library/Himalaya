@@ -768,12 +768,14 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs){
         16*mQ3*log(mQ3)*(-3*mQ32*Xb - 3*mQ3*pow2(Xb) + 3*pow3(mQ3) + 3*lMR
         *pow3(mQ3) + pow3(Xb)) + 48*pow2(log(mQ3))*pow4(mQ3) + 12*
         pow2(lMR)*pow4(mQ3)))/(3.*pow4(mQ3));
-   } else{
-      mQ32 = p.mq2(2,2)*(1 + 0.02);
-      mD32 = p.md2(2,2)*(1 - 0.015);
-      mQ3 = sqrt(mQ32);
-      mD3 = sqrt(mD32);
-      return 16*(-2*pow2(lMR) + (16*Xb*(m3*(m32 - mD32)*(m32 - mQ32)*log(mD3) - (m32 -
+   }
+
+   mQ32 = p.mq2(2,2)*(1 + 0.02);
+   mD32 = p.md2(2,2)*(1 - 0.015);
+   mQ3 = sqrt(mQ32);
+   mD3 = sqrt(mD32);
+
+   return 16*(-2*pow2(lMR) + (16*Xb*(m3*(m32 - mD32)*(m32 - mQ32)*log(mD3) - (m32 -
         mQ32)*dilog(1 - m32/mD32)*pow3(m3) + (m32 - mD32)*dilog(1 - m32/mQ32)*
         pow3(m3) + lMR*(m32 - mQ32)*log(mD3)*pow3(m3) + log(m3)*(lMR*(-mD32 +
         mQ32) + 2*(m32 - mQ32)*log(mD3) - 2*(m32 - mD32)*log(mQ3))*pow3(m3) -
@@ -820,7 +822,6 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs){
         + pow4(mD3)) + ((m32 - mD32)*(3*m32*mD32*mQ32*(mD32 + mQ32) - 3*pow4(
         mD3)*pow4(mQ3) - pow4(m3)*(3*mD32*mQ32 + pow4(mD3) + pow4(mQ3)) + (mD32
         + mQ32)*pow6(m3)))/(mD32*(m32 - mQ32)*mQ32)))/pow2(m32 - mD32));
-   }
 }
 
 double himalaya::ThresholdCalculator::getDeltaLambdaYb6(int omitLogs){
@@ -2945,38 +2946,44 @@ double himalaya::ThresholdCalculator::F7(double x){
 double himalaya::ThresholdCalculator::F8(double x1, double x2){
    if(x1 == 1. && x2 == 1.){
       return 1.;
-   } else if(x1 == 1. || x2 == 1.){
+   }
+   if(x1 == 1. || x2 == 1.){
       if (x1 == 1.) x1 = x2;
       
       const double x12 = pow2(x1);
       return 2*(x12 - pow2(x12) + pow2(x12)*log(x12))/pow2(x12 - 1);
-   } else if(x1 == x2){
+   }
+   if(x1 == x2){
       const double x12 = pow2(x1);
       return 2*(-1 + x12 + x12*(x12 - 2)*log(x12))/pow2(x12 - 1);
-   } else{
-      const double x12 = pow2(x1);
-      const double x22 = pow2(x2);
-      return -2 + 2*(pow2(x12)*log(x12)/(x12 -1) - pow2(x22)*log(x22)/(x22 - 1))
-	 /(x12 - x22);
    }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return -2 + 2*(pow2(x12)*log(x12)/(x12 -1) - pow2(x22)*log(x22)/(x22 - 1))
+      /(x12 - x22);
 }
 
 double himalaya::ThresholdCalculator::F9(double x1, double x2){
    if(x1 == 1. && x2 == 1.){
       return 1.;
-   } else if(x1 == 1. || x2 == 1.){
+   }
+   if(x1 == 1. || x2 == 1.){
       if (x1 == 1.) x1 = x2;
       
       const double x12 = pow2(x1);
       return 2*(1 - x12 + x12*log(x12))/pow2(x12 - 1);
-   } else if(x1 == x2){
+   }
+   if(x1 == x2){
       const double x12 = pow2(x1);
       return 2*(-1 + x12 - log(x12))/pow2(x12 - 1);
-   } else{
-      const double x12 = pow2(x1);
-      const double x22 = pow2(x2);
-      return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
    }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
 }
 
 double himalaya::ThresholdCalculator::f1(double x){
@@ -3018,86 +3025,97 @@ double himalaya::ThresholdCalculator::f4(double x){
 double himalaya::ThresholdCalculator::f5(double x1, double x2){
    if(x1 == 1. && x2 == 1.){
       return 1.;
-   } else if(x1 == 1. || x2 == 1.){
+   }
+   if(x1 == 1. || x2 == 1.){
       if (x1 == 1.) x1 = x2;
       
       const double x12 = pow2(x1);
       return 3*(-1 + x1 + 2*x12 - pow2(x12) - pow5(x1) + (pow3(x1) + pow5(x1))
 	 *log(x12))/(4*pow3(x1 - 1)*pow2(1 + x1));
-   } else if(x1 == x2){
+   }
+   if(x1 == x2){
       const double x12 = pow2(x1);
       return 3/4.*(-1 - 5*x12 + 5*pow2(x12) + pow3(x12) + x12*(-3 - 6*x12 + pow2(x12))
 	 *log(x12))/pow3(x12 - 1);
-   } else{
-      const double x12 = pow2(x1);
-      const double x22 = pow2(x2);
-      return 3/4.*((1 - x12*x22 + pow2(x1 + x2))/((x12 - 1)*(x22 - 1))
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 3/4.*((1 - x12*x22 + pow2(x1 + x2))/((x12 - 1)*(x22 - 1))
 	 + pow3(x1)*(1 + x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
 	 - pow3(x2)*(1 + x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-   }
 }
 
 double himalaya::ThresholdCalculator::f6(double x1, double x2){
    if(x1 == 1. && x2 == 1.){
       return 1.;
-   } else if(x1 == 1. || x2 == 1.){
+   }
+   if(x1 == 1. || x2 == 1.){
       if (x1 == 1.) x1 = x2;
       
       const double x12 = pow2(x1);
       return -3*(1 - 2*x12 - 2*pow3(x1) + pow2(x12) + 2*pow5(x1) - 2*pow5(x1)
 	 *log(x12))/(7*pow3(x1 - 1)*pow2(x1 + 1));
-   } else if(x1 == x2){
+   }
+   if(x1 == x2){
       const double x12 = pow2(x1);
       return 6/7.*x12*(-3 + 2*x12 + pow2(x12) + x12*(x12 - 5)*log(x12))/pow3(x12 - 1);
-   } else{
-      const double x12 = pow2(x1);
-      const double x22 = pow2(x2);
-      return 6/7.*((x12 + x1*x2 + x22 - x12*x22)/((x12 - 1)*(x22 - 1)) 
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 6/7.*((x12 + x1*x2 + x22 - x12*x22)/((x12 - 1)*(x22 - 1)) 
 	 + pow5(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2)) 
 	 - pow5(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-   }
 }
 
 double himalaya::ThresholdCalculator::f7(double x1, double x2){
    if(x1 == 1. && x2 == 1.){
       return 1.;
-   } else if(x1 == 1. || x2 == 1.){
+   }
+   if(x1 == 1. || x2 == 1.){
       if (x1 == 1.) x1 = x2;
       
       const double x12 = pow2(x1);
       return -3*(1 - 2*x1 - 2*x12 + 2*pow3(x1) + pow2(x12) - 2*pow3(x1)*log(x12))
 	 /(pow3(x1 - 1)*pow2(x1 + 1));
-   } else if(x1 == x2){
+   }
+   if(x1 == x2){
       const double x12 = pow2(x1);
       return -6*(1 + 2*x12 -3*pow2(x12) + x12*(3 + x12)*log(x12))/pow3(x12 - 1);
-   } else{
-      const double x12 = pow2(x1);
-      const double x22 = pow2(x2);
-      return 6*((1 + x1*x2)/((x12 - 1)*(x22 - 1))
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 6*((1 + x1*x2)/((x12 - 1)*(x22 - 1))
 	 + pow3(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
 	 - pow3(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-   }
 }
 
 double himalaya::ThresholdCalculator::f8(double x1, double x2){
    if(x1 == 1. && x2 == 1.){
       return 1.;
-   } else if(x1 == 1. || x2 == 1.){
+   } if(x1 == 1. || x2 == 1.){
       if (x1 == 1.) x1 = x2;
       
       const double x12 = pow2(x1);
       return 3*(-1 + 4*x12 - 3*pow2(x12) + 2*pow2(x12)*log(x12))
 	 /(4*pow3(x1 - 1)*pow2(1 + x1));
-   } else if(x1 == x2){
+   }
+   if(x1 == x2){
       const double x12 = pow2(x1);
       return 3*x1*(-1 + pow2(x12) - 2*x12*log(x12))/pow3(x12 - 1);
-   } else{
-      const double x12 = pow2(x1);
-      const double x22 = pow2(x2);
-      return 3/2.*((x1 + x2)/((x12 - 1)*(x22 - 1))
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 3/2.*((x1 + x2)/((x12 - 1)*(x22 - 1))
 	 + pow2(x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
 	 - pow2(x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-   }
 }
 
 double himalaya::ThresholdCalculator::deltaxyz(double x, double y, double z){

@@ -1250,15 +1250,14 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calcDRbarToMDRbarShift(const hima
    if(shiftOneLoop && shiftTwoLoop){
       return getMt41L(ho, 1, 1) + getMt42L(ho, 1, 1) - getMt41L(ho, 0, 0) - getMt42L(ho, 0, 0);
    }
-   else if(shiftOneLoop){
+   if(shiftOneLoop){
       return getMt41L(ho, 1, 1) - getMt41L(ho, 0, 0);
    }
-   else if(shiftTwoLoop){
+   if(shiftTwoLoop){
       return getMt42L(ho, 1, 1) - getMt42L(ho, 0, 0);
    }
-   else{
-      return Eigen::Matrix2d::Zero();
-   }
+
+   return Eigen::Matrix2d::Zero();
 }
 
 /**
