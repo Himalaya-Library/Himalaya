@@ -12,37 +12,37 @@
 #include <cmath>
 
 namespace {
-   template <typename T> T pow2(T x)  { return x*x; }
-   template <typename T> T pow3(T x)  { return x*x*x; }
-   template <typename T> T pow4(T x)  { return x*x*x*x; }
-   template <typename T> T pow5(T x)  { return x*x*x*x*x; }
-   template <typename T> T pow6(T x)  { return x*x*x*x*x*x; }
-   template <typename T> T pow7(T x)  { return x*x*x*x*x*x*x; }
-   template <typename T> T pow8(T x)  { return x*x*x*x*x*x*x*x; }
-   template <typename T> T pow9(T x)  { return x*x*x*x*x*x*x*x*x; }
-   template <typename T> T power10(T x) { return pow9(x)*x; }
-   template <typename T> T pow11(T x) { return pow2(x)*pow9(x); }
-   template <typename T> T pow12(T x) { return pow2(pow6(x)); }
-   template <typename T> T pow13(T x) { return pow4(x)*pow9(x); }
-   template <typename T> T pow14(T x) { return pow2(pow7(x)); }
-   template <typename T> T pow15(T x) { return pow6(x)*pow9(x); }
-   template <typename T> T pow16(T x) { return pow2(pow8(x)); }
-   template <typename T> T pow17(T x) { return pow16(x)*x; }
-   template <typename T> T pow18(T x) { return pow2(pow9(x)); }
-   template <typename T> T pow19(T x) { return pow18(x)*x; }
-   template <typename T> T pow20(T x) { return pow19(x)*x; }
+   template <typename T> T pow2(T x)    noexcept { return x*x; }
+   template <typename T> T pow3(T x)    noexcept { return x*x*x; }
+   template <typename T> T pow4(T x)    noexcept { return x*x*x*x; }
+   template <typename T> T pow5(T x)    noexcept { return x*x*x*x*x; }
+   template <typename T> T pow6(T x)    noexcept { return x*x*x*x*x*x; }
+   template <typename T> T pow7(T x)    noexcept { return x*x*x*x*x*x*x; }
+   template <typename T> T pow8(T x)    noexcept { return x*x*x*x*x*x*x*x; }
+   template <typename T> T pow9(T x)    noexcept { return x*x*x*x*x*x*x*x*x; }
+   template <typename T> T power10(T x) noexcept { return pow9(x)*x; }
+   template <typename T> T pow11(T x)   noexcept { return pow2(x)*pow9(x); }
+   template <typename T> T pow12(T x)   noexcept { return pow2(pow6(x)); }
+   template <typename T> T pow13(T x)   noexcept { return pow4(x)*pow9(x); }
+   template <typename T> T pow14(T x)   noexcept { return pow2(pow7(x)); }
+   template <typename T> T pow15(T x)   noexcept { return pow6(x)*pow9(x); }
+   template <typename T> T pow16(T x)   noexcept { return pow2(pow8(x)); }
+   template <typename T> T pow17(T x)   noexcept { return pow16(x)*x; }
+   template <typename T> T pow18(T x)   noexcept { return pow2(pow9(x)); }
+   template <typename T> T pow19(T x)   noexcept { return pow18(x)*x; }
+   template <typename T> T pow20(T x)   noexcept { return pow19(x)*x; }
    
    const double Pi  = 3.1415926535897932384626433832795;
    
    // The parts below are taken from FlexibleSUSY
    /// lambda^2(u,v)
-   double lambda_2(double u, double v)
+   double lambda_2(double u, double v) noexcept
    {
       return pow2(1 - u - v) - 4*u*v;
    }
 
    /// u < 1 && v < 1, lambda^2(u,v) > 0
-   double phi_pos(double u, double v)
+   double phi_pos(double u, double v) noexcept
    {
       using std::log;
       using gm2calc::dilog;
@@ -56,7 +56,7 @@ namespace {
    }
 
    /// lambda^2(u,v) < 0
-   double phi_neg(double u, double v)
+   double phi_neg(double u, double v) noexcept
    {
       using std::acos;
       using std::sqrt;
@@ -74,7 +74,7 @@ namespace {
     * The following identities hold:
     * Phi(u,v) = Phi(v,u) = Phi(1/u,v/u)/u = Phi(1/v,u/v)/v
     */
-   double phi_uv(double u, double v)
+   double phi_uv(double u, double v) noexcept
    {
       const auto lambda = lambda_2(u,v);
 
