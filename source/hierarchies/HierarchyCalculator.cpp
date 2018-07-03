@@ -1267,13 +1267,13 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::calcDRbarToMDRbarShift(const hima
  */
 void himalaya::HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool omitXtOrders){
    // set Xt order truncation for EFT contribution to be consistent with H3m
-   int xtOrder = 4;
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   if(suitableHierarchy == himalaya::Hierarchies::h3
-      || suitableHierarchy == himalaya::Hierarchies::h32q2g 
-      || suitableHierarchy == himalaya::Hierarchies::h3q22g
-      || suitableHierarchy == himalaya::Hierarchies::h9
-      || suitableHierarchy == himalaya::Hierarchies::h9q2) xtOrder = 3;
+   const int xtOrder =
+      (suitableHierarchy == himalaya::Hierarchies::h3
+       || suitableHierarchy == himalaya::Hierarchies::h32q2g
+       || suitableHierarchy == himalaya::Hierarchies::h3q22g
+       || suitableHierarchy == himalaya::Hierarchies::h9
+       || suitableHierarchy == himalaya::Hierarchies::h9q2) ? 3 : 4;
    
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
