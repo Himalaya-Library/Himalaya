@@ -8,60 +8,6 @@
 #include "HierarchyCalculator.hpp"
 #include "Logger.hpp"
 
-himalaya::Parameters gigantic_correction(double MS, double tb, double xt)
-{
-   himalaya::Parameters pars;
-
-   const double MS2 = MS*MS;
-   const double Xt = xt*MS;
-   const double beta = std::atan(tb);
-   const double Msq2 = 4*MS2;
-   const double MQ32 = 0.25*MS2;
-   const double MU32 = 0.25*MS2;
-   const double MG = 2*MS;
-
-   pars.scale = MS;
-   pars.mu = MS;
-   pars.g1 = 0.46;
-   pars.g2 = 0.65;
-   pars.g3 = 1.10073;
-   pars.vd = 246*std::cos(beta);
-   pars.vu = 246*std::sin(beta);
-   pars.mq2 << Msq2, 0, 0,
-               0, Msq2, 0,
-               0, 0, MQ32;
-   pars.md2 << Msq2, 0, 0,
-               0, Msq2, 0,
-               0, 0, Msq2;
-   pars.mu2 << Msq2, 0, 0,
-               0, Msq2, 0,
-               0, 0, MU32;
-   pars.ml2 << MS2, 0, 0,
-               0, MS2, 0,
-               0, 0, MS2;
-   pars.me2 << MS2, 0, 0,
-               0, MS2, 0,
-               0, 0, MS2;
-   pars.Au << 0, 0, 0,
-              0, 0, 0, 0,
-              0, Xt + pars.mu/tb;
-   pars.Ad << 0, 0, 0,
-              0, 0, 0,
-              0, 0, 0;
-   pars.Ae << 0, 0, 0,
-              0, 0, 0,
-              0, 0, 0;
-   pars.MA = MS;
-   pars.M1 = MS;
-   pars.M2 = MS;
-   pars.MG = MG;
-   pars.Mt = 154.682;
-   pars.Mb = 2.50901;
-   pars.Mtau = 1.777;
-
-   return pars;
-}
-
 himalaya::Parameters setup_point(double MS, double tb, double xt)
 {
    himalaya::Parameters pars;
@@ -116,7 +62,6 @@ int main()
 {
    const std::vector<himalaya::Parameters> points = {
       setup_point(2000., 10., 0.1)
-      , gigantic_correction(1000., 10., -1.2)
    };
 
    for (const auto& point: points) {
