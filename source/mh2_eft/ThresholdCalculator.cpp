@@ -90,6 +90,274 @@ namespace {
       return phi_neg(u,v);
    }
 
+bool isfinite(double exact, double shifted, double limit) noexcept
+{
+   // checks if the threshold correction in the general mass case is finite and smaller than 1
+   if(!std::isfinite(exact) || !std::isfinite(shifted)
+      || (std::abs(exact) > 1. && std::abs(shifted) > 1.)) return false;
+
+   // checks if the difference of the shifted result to the limit is greater than the difference
+   // of the exact result to the limit which should indicate the divergence of the general mass case
+   if(std::abs(shifted - limit) >= std::abs(exact - limit)) return false;
+
+   return true;
+}
+
+//	one-loop functions from arxiv:1407.4081. Checked.	//
+
+double F1(double x) noexcept {
+   if(x == 1.) return 1.;
+
+   const double x2 = pow2(x);
+
+   return x*log(x2)/(x2 - 1);
+}
+
+double F2(double x) noexcept {
+   if(x == 1.) return 1.;
+
+   const double x2 = pow2(x);
+
+   return 6*x2*(2 - 2*x2 + (1 + x2)*log(x2))/pow3(x2 - 1);
+}
+
+double F3(double x) noexcept {
+   if(x == 1.) return 1.;
+
+   const double x2 = pow2(x);
+
+   return 2*x*(5*(1-x2) + (1 + 4*x2)*log(x2))/(3*pow2(x2-1));
+}
+
+double F4(double x) noexcept {
+   if(x == 1.) return 1.;
+
+   const double x2 = pow2(x);
+
+   return 2*x*(x2 - 1 - log(x2))/pow2(x2 -1);
+}
+
+double F5(double x) noexcept {
+   if(x == 1.) return 1.;
+
+   const double x2 = pow2(x);
+
+   return 3*x*(1 - pow2(x2) + 2*x2*log(x2))/pow3(1 - x2);
+}
+
+double F6(double x) noexcept {
+   if(x == 1.) return 0.;
+
+   const double x2 = pow2(x);
+
+   return (x2 - 3)/(4.*(1-x2)) + x2*(x2 - 2)*log(x2)/(2*pow2(1 - x2));
+}
+
+double F7(double x) noexcept {
+   if(x == 1.) return 1.;
+
+   const double x2 = pow2(x);
+
+   return -3*(1 - 6*x2 + pow2(x2))/(2*pow2(x2 - 1)) + 3*pow2(x2)*(x2 - 3)
+      *log(x2)/pow3(x2 - 1);
+}
+
+double F8(double x1, double x2) noexcept {
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   }
+   if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+
+      const double x12 = pow2(x1);
+      return 2*(x12 - pow2(x12) + pow2(x12)*log(x12))/pow2(x12 - 1);
+   }
+   if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 2*(-1 + x12 + x12*(x12 - 2)*log(x12))/pow2(x12 - 1);
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return -2 + 2*(pow2(x12)*log(x12)/(x12 -1) - pow2(x22)*log(x22)/(x22 - 1))
+      /(x12 - x22);
+}
+
+double F9(double x1, double x2) noexcept {
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   }
+   if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+
+      const double x12 = pow2(x1);
+      return 2*(1 - x12 + x12*log(x12))/pow2(x12 - 1);
+   }
+   if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 2*(-1 + x12 - log(x12))/pow2(x12 - 1);
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
+}
+
+double f1(double x) noexcept {
+   if(x == 1.) return 0.;
+
+   const double x2 = pow2(x);
+
+   return 6*x2*(3+x2)/(7*pow2(x2 - 1)) + 6*pow2(x2)*(x2 - 5)*log(x2)/(7
+                                                                      *pow3(x2-1));
+}
+
+double f2(double x) noexcept {
+   if(x == 1.) return 0.;
+
+   const double x2 = pow2(x);
+
+   return 2*x2*(11 + x2)/(9*pow2(x2 - 1)) + 2*pow2(x2)*(5*x2 - 17)*log(x2)/(9*
+                                                                            pow3(x2 - 1));
+}
+
+double f3(double x) noexcept {
+   if(x == 1.) return 0.;
+
+   const double x2 = pow2(x);
+
+   return 2*(2 + 9*x2 + pow2(x2))/(3*pow2(x2 - 1)) + 2*x2*(-6 - 7*x2 + pow2(x2))
+      *log(x2)/(3*pow3(x2 - 1));
+}
+
+double f4(double x) noexcept {
+   if(x == 1.) return 0.;
+
+   const double x2 = pow2(x);
+
+   return 2*(6 + 25*x2 + 5*pow2(x2))/(7*pow2(x2 - 1)) + 2*x2*(-18 - 19*x2
+                                                              + pow2(x2))*log(x2)/(7*pow3(x2 - 1));
+}
+
+double f5(double x1, double x2) noexcept {
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   }
+   if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+
+      const double x12 = pow2(x1);
+      return 3*(-1 + x1 + 2*x12 - pow2(x12) - pow5(x1) + (pow3(x1) + pow5(x1))
+                *log(x12))/(4*pow3(x1 - 1)*pow2(1 + x1));
+   }
+   if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 3/4.*(-1 - 5*x12 + 5*pow2(x12) + pow3(x12) + x12*(-3 - 6*x12 + pow2(x12))
+                   *log(x12))/pow3(x12 - 1);
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 3/4.*((1 - x12*x22 + pow2(x1 + x2))/((x12 - 1)*(x22 - 1))
+                + pow3(x1)*(1 + x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+                - pow3(x2)*(1 + x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+}
+
+double f6(double x1, double x2) noexcept {
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   }
+   if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+
+      const double x12 = pow2(x1);
+      return -3*(1 - 2*x12 - 2*pow3(x1) + pow2(x12) + 2*pow5(x1) - 2*pow5(x1)
+                 *log(x12))/(7*pow3(x1 - 1)*pow2(x1 + 1));
+   }
+   if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 6/7.*x12*(-3 + 2*x12 + pow2(x12) + x12*(x12 - 5)*log(x12))/pow3(x12 - 1);
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 6/7.*((x12 + x1*x2 + x22 - x12*x22)/((x12 - 1)*(x22 - 1))
+                + pow5(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+                - pow5(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+}
+
+double f7(double x1, double x2) noexcept {
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   }
+   if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+
+      const double x12 = pow2(x1);
+      return -3*(1 - 2*x1 - 2*x12 + 2*pow3(x1) + pow2(x12) - 2*pow3(x1)*log(x12))
+	 /(pow3(x1 - 1)*pow2(x1 + 1));
+   }
+   if(x1 == x2){
+      const double x12 = pow2(x1);
+      return -6*(1 + 2*x12 -3*pow2(x12) + x12*(3 + x12)*log(x12))/pow3(x12 - 1);
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 6*((1 + x1*x2)/((x12 - 1)*(x22 - 1))
+             + pow3(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+             - pow3(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+}
+
+double f8(double x1, double x2) noexcept {
+   if(x1 == 1. && x2 == 1.){
+      return 1.;
+   } if(x1 == 1. || x2 == 1.){
+      if (x1 == 1.) x1 = x2;
+
+      const double x12 = pow2(x1);
+      return 3*(-1 + 4*x12 - 3*pow2(x12) + 2*pow2(x12)*log(x12))
+	 /(4*pow3(x1 - 1)*pow2(1 + x1));
+   }
+   if(x1 == x2){
+      const double x12 = pow2(x1);
+      return 3*x1*(-1 + pow2(x12) - 2*x12*log(x12))/pow3(x12 - 1);
+   }
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 3/2.*((x1 + x2)/((x12 - 1)*(x22 - 1))
+                + pow2(x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
+                - pow2(x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
+}
+
+double deltaxyz(double x, double y, double z) noexcept {
+   return pow2(x) + pow2(y) + pow2(z) - 2*(x*y+x*z+y*z);
+}
+
+/**
+ * \f$\Phi(x,y,z)\f$ function.  The arguments x, y and z are
+ * interpreted as squared masses. Taken from FlexibleSUSY.
+ *
+ * Davydychev and Tausk, Nucl. Phys. B397 (1993) 23
+ *
+ * @param x squared mass
+ * @param y squared mass
+ * @param z squared mass
+ *
+ * @return \f$\Phi(x,y,z)\f$
+ */
+double phixyz(double x, double y, double z) noexcept {
+   const auto u = x/z, v = y/z;
+   return phi_uv(u,v);
+}
+
 } // anonymous namespace
 
 /**
@@ -164,18 +432,6 @@ himalaya::ThresholdCalculator::ThresholdCalculator(
       msq2 = msq2Save;
    }
 }
-
-bool himalaya::ThresholdCalculator::isfinite(double exact, double shifted, double limit){
-   // checks if the threshold correction in the general mass case is finite and smaller than 1
-   if(!std::isfinite(exact) || !std::isfinite(shifted) 
-      || (std::abs(exact) > 1. && std::abs(shifted) > 1.)) return false;
-   // checks if the difference of the shifted result to the limit is greater than the difference
-   // of the exact result to the limit which should indicate the divergence of the general mass case
-   if(std::abs(shifted - limit) >= std::abs(exact - limit)) return false;
-   
-   return true;
-}
-
 
 /**
  * 	Returns a specific threshold corrections for a given mass limit
@@ -2912,261 +3168,6 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYt4Yb2(int omitLogs) const
         (mQ32 + mU32)*(mQ32 + 3*mU32) + 4*(2*mQ32 + 7*mU32)*pow2(Mu)) + 4*(mQ32
         + 2*mU32)*pow4(mD3)))/(2.*(mD32 - pow2(Mu))*pow4(mQ32 - mU32)))*pow4(
         Xt))/pow2(cbeta));
-}
-
-//	one-loop functions from arxiv:1407.4081. Checked.	//
-
-double himalaya::ThresholdCalculator::F1(double x){
-   if(x == 1.) return 1.;
-   
-   const double x2 = pow2(x);
-   
-   return x*log(x2)/(x2 - 1);
-}
-
-double himalaya::ThresholdCalculator::F2(double x){
-   if(x == 1.) return 1.;
-   
-   const double x2 = pow2(x);
-   
-   return 6*x2*(2 - 2*x2 + (1 + x2)*log(x2))/pow3(x2 - 1);
-}
-
-double himalaya::ThresholdCalculator::F3(double x){
-   if(x == 1.) return 1.;
-   
-   const double x2 = pow2(x);
-   
-   return 2*x*(5*(1-x2) + (1 + 4*x2)*log(x2))/(3*pow2(x2-1));
-}
-
-double himalaya::ThresholdCalculator::F4(double x){
-   if(x == 1.) return 1.;
-   
-   const double x2 = pow2(x);
-   
-   return 2*x*(x2 - 1 - log(x2))/pow2(x2 -1);
-}
-
-double himalaya::ThresholdCalculator::F5(double x){
-   if(x == 1.) return 1.;
-   
-   const double x2 = pow2(x);
-   
-   return 3*x*(1 - pow2(x2) + 2*x2*log(x2))/pow3(1 - x2);
-}
-
-double himalaya::ThresholdCalculator::F6(double x){
-   if(x == 1.) return 0.;
-   
-   const double x2 = pow2(x);
-   
-   return (x2 - 3)/(4.*(1-x2)) + x2*(x2 - 2)*log(x2)/(2*pow2(1 - x2));
-}
-
-double himalaya::ThresholdCalculator::F7(double x){
-   if(x == 1.) return 1.;
-   
-   const double x2 = pow2(x);
-   
-   return -3*(1 - 6*x2 + pow2(x2))/(2*pow2(x2 - 1)) + 3*pow2(x2)*(x2 - 3)
-      *log(x2)/pow3(x2 - 1);
-}
-
-double himalaya::ThresholdCalculator::F8(double x1, double x2){
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-      
-      const double x12 = pow2(x1);
-      return 2*(x12 - pow2(x12) + pow2(x12)*log(x12))/pow2(x12 - 1);
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 2*(-1 + x12 + x12*(x12 - 2)*log(x12))/pow2(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return -2 + 2*(pow2(x12)*log(x12)/(x12 -1) - pow2(x22)*log(x22)/(x22 - 1))
-      /(x12 - x22);
-}
-
-double himalaya::ThresholdCalculator::F9(double x1, double x2){
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-      
-      const double x12 = pow2(x1);
-      return 2*(1 - x12 + x12*log(x12))/pow2(x12 - 1);
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 2*(-1 + x12 - log(x12))/pow2(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
-}
-
-double himalaya::ThresholdCalculator::f1(double x){
-   if(x == 1.) return 0.;
-   
-   const double x2 = pow2(x);
-   
-   return 6*x2*(3+x2)/(7*pow2(x2 - 1)) + 6*pow2(x2)*(x2 - 5)*log(x2)/(7
-      *pow3(x2-1));
-}
-
-double himalaya::ThresholdCalculator::f2(double x){
-   if(x == 1.) return 0.;
-   
-   const double x2 = pow2(x);
-   
-   return 2*x2*(11 + x2)/(9*pow2(x2 - 1)) + 2*pow2(x2)*(5*x2 - 17)*log(x2)/(9*
-      pow3(x2 - 1));
-}
-
-double himalaya::ThresholdCalculator::f3(double x){
-   if(x == 1.) return 0.;
-   
-   const double x2 = pow2(x);
-   
-   return 2*(2 + 9*x2 + pow2(x2))/(3*pow2(x2 - 1)) + 2*x2*(-6 - 7*x2 + pow2(x2))
-      *log(x2)/(3*pow3(x2 - 1));
-}
-
-double himalaya::ThresholdCalculator::f4(double x){
-   if(x == 1.) return 0.;
-   
-   const double x2 = pow2(x);
-   
-   return 2*(6 + 25*x2 + 5*pow2(x2))/(7*pow2(x2 - 1)) + 2*x2*(-18 - 19*x2 
-      + pow2(x2))*log(x2)/(7*pow3(x2 - 1));
-}
-
-double himalaya::ThresholdCalculator::f5(double x1, double x2){
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-      
-      const double x12 = pow2(x1);
-      return 3*(-1 + x1 + 2*x12 - pow2(x12) - pow5(x1) + (pow3(x1) + pow5(x1))
-	 *log(x12))/(4*pow3(x1 - 1)*pow2(1 + x1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 3/4.*(-1 - 5*x12 + 5*pow2(x12) + pow3(x12) + x12*(-3 - 6*x12 + pow2(x12))
-	 *log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 3/4.*((1 - x12*x22 + pow2(x1 + x2))/((x12 - 1)*(x22 - 1))
-	 + pow3(x1)*(1 + x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
-	 - pow3(x2)*(1 + x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
-
-double himalaya::ThresholdCalculator::f6(double x1, double x2){
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-      
-      const double x12 = pow2(x1);
-      return -3*(1 - 2*x12 - 2*pow3(x1) + pow2(x12) + 2*pow5(x1) - 2*pow5(x1)
-	 *log(x12))/(7*pow3(x1 - 1)*pow2(x1 + 1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 6/7.*x12*(-3 + 2*x12 + pow2(x12) + x12*(x12 - 5)*log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 6/7.*((x12 + x1*x2 + x22 - x12*x22)/((x12 - 1)*(x22 - 1)) 
-	 + pow5(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2)) 
-	 - pow5(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
-
-double himalaya::ThresholdCalculator::f7(double x1, double x2){
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-      
-      const double x12 = pow2(x1);
-      return -3*(1 - 2*x1 - 2*x12 + 2*pow3(x1) + pow2(x12) - 2*pow3(x1)*log(x12))
-	 /(pow3(x1 - 1)*pow2(x1 + 1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return -6*(1 + 2*x12 -3*pow2(x12) + x12*(3 + x12)*log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 6*((1 + x1*x2)/((x12 - 1)*(x22 - 1))
-	 + pow3(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
-	 - pow3(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
-
-double himalaya::ThresholdCalculator::f8(double x1, double x2){
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   } if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-      
-      const double x12 = pow2(x1);
-      return 3*(-1 + 4*x12 - 3*pow2(x12) + 2*pow2(x12)*log(x12))
-	 /(4*pow3(x1 - 1)*pow2(1 + x1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 3*x1*(-1 + pow2(x12) - 2*x12*log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 3/2.*((x1 + x2)/((x12 - 1)*(x22 - 1))
-	 + pow2(x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
-	 - pow2(x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
-
-double himalaya::ThresholdCalculator::deltaxyz(double x, double y, double z){
-   return pow2(x) + pow2(y) + pow2(z) - 2*(x*y+x*z+y*z);
-}
-
-/**
- * \f$\Phi(x,y,z)\f$ function.  The arguments x, y and z are
- * interpreted as squared masses. Taken from FlexibleSUSY.
- *
- * Davydychev and Tausk, Nucl. Phys. B397 (1993) 23
- *
- * @param x squared mass
- * @param y squared mass
- * @param z squared mass
- *
- * @return \f$\Phi(x,y,z)\f$
- */
-double himalaya::ThresholdCalculator::phixyz(double x, double y, double z){
-   const auto u = x/z, v = y/z;
-   return phi_uv(u,v);
 }
 
 //	at*as^n threshold corrections with limits and DR' -> MS shifts		//
