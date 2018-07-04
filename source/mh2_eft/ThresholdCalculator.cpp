@@ -185,7 +185,8 @@ bool himalaya::ThresholdCalculator::isfinite(double exact, double shifted, doubl
  * 	@return a threshold correction for a given variable in a given scheme for a suitable mass limit
  */
 double himalaya::ThresholdCalculator::getThresholdCorrection(int variable, int scheme, 
-							     int omitLogs){
+							     int omitLogs) const
+{
    double thresholdCorrection = 0.;
    const double limit = p.massLimit3LThreshold;
    
@@ -350,7 +351,8 @@ double himalaya::ThresholdCalculator::getThresholdCorrection(int variable, int s
    return thresholdCorrection;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYb2G12(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYb2G12(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -368,7 +370,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb2G12(int omitLogs){
       4*mD3*mQ3*(2*lmD3MR + lmQ3MR))/(20.*mD3*mQ3);
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaG14(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaG14(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -401,11 +404,13 @@ double himalaya::ThresholdCalculator::getDeltaLambdaG14(int omitLogs){
       ))/800.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaRegG14(){
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG14() const
+{
    return -9/50.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaChiG14(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG14(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -421,7 +426,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaChiG14(int omitLogs){
       /200.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaChiG24(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG24(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -439,7 +445,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaChiG24(int omitLogs){
       F7(p.M2/p.mu) - pow2(c2beta)*(2*lm2MR + lmUMR)/3.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaG24(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaG24(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -461,14 +468,16 @@ double himalaya::ThresholdCalculator::getDeltaLambdaG24(int omitLogs){
       *(lmL1MR + lmL2MR + lmL3MR + 3*(lmQ1MR + lmQ2MR + lmQ3MR)))/96.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaRegG24(){
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG24() const
+{
    const double beta = atan(p.vu/p.vd);
    const double c2beta = cos(2*beta);
    
    return (-9 + 2*pow2(c2beta))/6.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaG12G22(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaG12G22(int omitLogs) const
+{
    using std::log;
    
    const double MR2 = pow2(p.scale);
@@ -481,11 +490,13 @@ double himalaya::ThresholdCalculator::getDeltaLambdaG12G22(int omitLogs){
    return -3*(12*pow2(s4beta) + (-7 + 4*c4beta + 3*c8beta)*lmAMR)/80.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaRegG12G22(){
+double himalaya::ThresholdCalculator::getDeltaLambdaRegG12G22() const
+{
    return -3/5.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaChiG12G22(){
+double himalaya::ThresholdCalculator::getDeltaLambdaChiG12G22() const
+{
    const double beta = atan(p.vu/p.vd);
    const double c2beta = cos(2*beta);
    const double c4beta = cos(4*beta);
@@ -498,7 +509,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaChiG12G22(){
       *(pow2(c2beta)*(F5(m1mu) + 3*F5(m2mu)) - 16*f8(m1mu,m2mu)))/40.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYb2G22(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYb2G22(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -516,7 +528,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb2G22(int omitLogs){
       - 3*c2beta*lmQ3MR;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYb4(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYb4(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -533,7 +546,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb4(int omitLogs){
       + 6*(lmD3MR + lmQ3MR);
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -553,7 +567,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs){
       c2beta*lmQ3MR + 8*cbeta*lmU3MR)/10.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -571,7 +586,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs){
    c2beta*lmQ3MR;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -590,7 +606,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs){
    )/(mE3*mL3) + 12*(-2*lmE3MR + lmL3MR))/20.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -608,7 +625,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs){
    - c2beta*lmL3MR;
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYtau4(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau4(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -625,7 +643,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYtau4(int omitLogs){
    + 2*(lmE3MR + lmL3MR);
 }
 
-double himalaya::ThresholdCalculator::getDeltaG1G1(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaG1G1(int omitLogs) const
+{
    using std::log;
    
    const double MR2 = pow2(p.scale);
@@ -652,7 +671,8 @@ double himalaya::ThresholdCalculator::getDeltaG1G1(int omitLogs){
       *(lmU1MR + lmU2MR + lmU3MR))/60.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaG2G2(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaG2G2(int omitLogs) const
+{
    using std::log;
    
    const double MR2 = pow2(p.scale);
@@ -670,7 +690,8 @@ double himalaya::ThresholdCalculator::getDeltaG2G2(int omitLogs){
       + lmQ3MR) - 4*lmUMR)/12.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaYtYt(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaYtYt(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -688,7 +709,8 @@ double himalaya::ThresholdCalculator::getDeltaYtYt(int omitLogs){
       *F6(mU3/p.mu) + pow2(cbeta)*(-3 + 6*lmAMR) + 6*lmUMR)/8.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaYtauYtau(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaYtauYtau(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -706,7 +728,8 @@ double himalaya::ThresholdCalculator::getDeltaYtauYtau(int omitLogs){
       *F6(mL3/p.mu) + pow2(sbeta)*(-3 + 6*lmAMR) + 6*lmUMR)/8.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaYtYb(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaYtYb(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    
@@ -726,7 +749,8 @@ double himalaya::ThresholdCalculator::getDeltaYtYb(int omitLogs){
       *lmAMR + 2*lmUMR)/8.;
 }
 
-double himalaya::ThresholdCalculator::getDeltaVevYt2(int limit){
+double himalaya::ThresholdCalculator::getDeltaVevYt2(int limit) const
+{
    const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
    const double mQ32 = p.mq2(2,2);
    const double mU32 = p.mu2(2,2);
@@ -746,7 +770,8 @@ double himalaya::ThresholdCalculator::getDeltaVevYt2(int limit){
    }
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -824,7 +849,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs){
         + mQ32)*pow6(m3)))/(mD32*(m32 - mQ32)*mQ32)))/pow2(m32 - mD32));
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYb6(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -1085,7 +1111,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYb6(int omitLogs){
         mQ32*pow6(mD32 - mQ32));
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYt6(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -1421,7 +1448,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYt6(int omitLogs){
         sbeta);
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -1818,7 +1846,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs){
         pow2(cbeta));
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYt2Yb4(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYt2Yb4(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -2329,7 +2358,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaYt2Yb4(int omitLogs){
         pow3(mD3))))/deltaxyz(pow2(mA),mU32,mQ32)))/(2.*pow2(sbeta)*pow6(mQ3)));
 }
 
-double himalaya::ThresholdCalculator::getDeltaLambdaYt4Yb2(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaYt4Yb2(int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -3145,7 +3175,8 @@ double himalaya::ThresholdCalculator::phixyz(double x, double y, double z){
  * 	@param omitLogs an intiger to omit all log mu terms
  * 	@return delta g3_as in the MSbar scheme for a given mass limit
  */
-double himalaya::ThresholdCalculator::getDeltaG3Alphas(int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
+{
 
    using std::log;
    
@@ -3168,7 +3199,8 @@ double himalaya::ThresholdCalculator::getDeltaG3Alphas(int omitLogs){
  * 	@param omitLogs an integer key to omit all mu terms
  * 	@return delta yt_as in the MSbar scheme for a given mass limit
  */
-double himalaya::ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
+{
 
    using std::log;
    using std::sqrt;
@@ -3223,7 +3255,8 @@ double himalaya::ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs){
   * 	@param omitLogs an integer key to omit all mu terms
   * 	@return delta yt_as^2 in the MSbar scheme for a given mass limit
   */
-double himalaya::ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -3654,7 +3687,8 @@ double himalaya::ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs)
  * 	@param omitLogs an integer key to omit all mu terms
  * 	@return delta lambda_at in the MSbar scheme for a given mass limit
  */
-double himalaya::ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
+{
 
    using std::log;
    using std::sqrt;
@@ -3690,7 +3724,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLo
  * 	@param omitLogs an integer key to omit all mu terms
  * 	@return delta lambda_atas in the MSbar scheme for a given mass limit
  */
-double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) const
+{
    using std::log;
    using std::sqrt;
    using gm2calc::dilog;
@@ -3860,8 +3895,8 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int 
  * 	@param omitLogs an integer key to omit all mu terms
  * 	@return delta lambda_atas2 in the MSbar scheme for a given mass limit
  */
-double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, 
-								  int omitLogs){
+double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs) const
+{
 
    using std::log;
    using std::sqrt;
@@ -4321,7 +4356,7 @@ double himalaya::ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit,
  * 	@param omitLogs an integer key to omit all log mu terms
  * 	@param omitXtLogs an integer key to omit all Xt^4*Log[mu] and Xt^5*Log[mu] terms
  */
-double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs){
+double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs) const {
    double xtTerms = 0.;
    if(xtOrder <= 3){
       xtTerms = getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 4, omitXtLogs)
@@ -4348,7 +4383,7 @@ double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int
  * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
  * 	@param omitLogs an integer key to omit all log mu terms
  */
-double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs){
+double himalaya::ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs) const {
    
    using std::log;
    using std::sqrt;
@@ -5811,7 +5846,7 @@ void himalaya::ThresholdCalculator::setLimit(int limit){
  * 	Get the mass limit determined by ThresholdCalculator
  * 	@return The determined mass limit
  */
-int himalaya::ThresholdCalculator::getLimit(){
+int himalaya::ThresholdCalculator::getLimit() const {
    return p.massLimit3LThreshold;
 }
 

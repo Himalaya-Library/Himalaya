@@ -271,7 +271,7 @@ double himalaya::HierarchyObject::getDLambdaUncertainty(int loops) const{
  * 	@param vector The vector which should be sorted.
  * 	@return Returns a vector the lightest entry at position 0.
  */
-Eigen::Vector2d himalaya::HierarchyObject::sortVector(Eigen::Vector2d& vector){
+Eigen::Vector2d himalaya::HierarchyObject::sortVector(Eigen::Vector2d& vector) {
    // checks if all variables are ordered in the right way
    if (vector(0) > vector(1)) {
       std::swap(vector(0), vector(1));

@@ -227,7 +227,7 @@ namespace himalaya{
        * 	@param vector The vector which should be sorted.
        *	@return Returns a vector the lightest entry at position 0.
        */
-      Eigen::Vector2d sortVector(Eigen::Vector2d& vector);
+      static Eigen::Vector2d sortVector(Eigen::Vector2d& vector);
    };
    /**
     * 	Prints out all information of the HierarchyObject
