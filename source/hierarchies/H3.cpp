@@ -6,7 +6,6 @@
 // ====================================================================
 
 #include "H3.hpp"
-#include "HierarchyCalculator.hpp"
 #include "Hierarchies.hpp"
 #include "Constants.hpp"
 #include "Utils.hpp"

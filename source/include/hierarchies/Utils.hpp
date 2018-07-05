@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <complex>
+
 namespace himalaya {
 
 // some templates to perform operations between int's and complex<double>
