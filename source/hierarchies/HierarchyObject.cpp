@@ -430,18 +430,18 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
 		   << "}, {" << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(1)(0) << ", " << ho.getDMhDRbarPrimeToMDRbarPrimeShift().row(1)(1)  << "}} GeV^2\n"
 	<< "DR' -> H3m shift      =  {{" << ho.getDMhDRbarPrimeToH3mShift().row(0)(0) << ", " << ho.getDMhDRbarPrimeToH3mShift().row(0)(1)
 		   << "}, {" << ho.getDMhDRbarPrimeToH3mShift().row(1)(0) << ", " << ho.getDMhDRbarPrimeToH3mShift().row(1)(1) << "}} GeV^2\n"
-	<< "Δλ_0L                 =  " << ho.getDLambda(0) << " O(g_1^2, g_2^2)\n"
-	<< "Δλ_1L                 =  " << ho.getDLambda(1) << " O(α_t)\n"
-	<< "Δλ_2L                 =  " << ho.getDLambda(2) << " O(α_t*α_s)\n"
-        << "Δλ_3L                 =  " << ho.getDLambda(3) << " +/- " << ho.getDLambdaUncertainty(3) << " O(α_t*α_s^2)\n"
+	<< "Δλ_0L                 =  " << ho.getDLambda(0) << " O(g1^2, g2^2)\n"
+	<< "Δλ_1L                 =  " << ho.getDLambda(1) << " O(αt)\n"
+	<< "Δλ_2L                 =  " << ho.getDLambda(2) << " O(αt*αs)\n"
+        << "Δλ_3L                 =  " << ho.getDLambda(3) << " +/- " << ho.getDLambdaUncertainty(3) << " O(αt*αs^2)\n"
 	<< "Δλ_0L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(0) << "\n"
 	<< "Δλ_1L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(1) << "\n"
 	<< "Δλ_2L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(2) << "\n"
 	<< "Δλ_3L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(3) << "\n"
-	<< "Mh^2_EFT_0L           =  " << ho.getDMh2EFT(0) << " GeV^2 O(g_1^2, g_2^2)\n"
-	<< "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFT(1) << " GeV^2 O(α_t)\n"
-	<< "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFT(2) << " GeV^2 O(α_t*α_s)\n"
-	<< "ΔMh^2_EFT_3L          =  " << ho.getDMh2EFT(3) << " GeV^2 O(α_t*α_s^2)"
+	<< "Mh^2_EFT_0L           =  " << ho.getDMh2EFT(0) << " GeV^2 O(g1^2, g2^2)\n"
+	<< "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFT(1) << " GeV^2 O(αt)\n"
+	<< "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFT(2) << " GeV^2 O(αt*αs)\n"
+	<< "ΔMh^2_EFT_3L          =  " << ho.getDMh2EFT(3) << " GeV^2 O(αt*αs^2)"
         << '\n';
 
    return ostr;

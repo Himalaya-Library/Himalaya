@@ -111,7 +111,7 @@ void himalaya::HierarchyCalculator::init(){
    // lmMgl, checked
    lmMgl = log(pow2(p.scale / Mgl));
 
-   // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here, GF is calculated in the DRbar scheme, checked)
+   // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here, GF is calculated in the DR'-bar scheme, checked)
    prefac = (3. / (sqrt(2) * (pow2(p.vu) + pow2(p.vd)) * sqrt(2) * pow2(Pi) * pow2(sin(beta))));
 }
 
@@ -124,7 +124,7 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    HierarchyObject ho (isAlphab);
    
    if (isAlphab)
-      INFO_MSG("3-loop threshold correction Δλ not available for O(ab*as^2)!");
+      INFO_MSG("3-loop threshold correction Δλ not available for O(αb*αs^2)!");
    
    const int mdrFlag = 0;
    
@@ -145,7 +145,8 @@ himalaya::HierarchyObject himalaya::HierarchyCalculator::calculateDMh3L(bool isA
    
    // estimate the uncertainty of the expansion at 3-loop level
    ho.setDMhExpUncertainty(3, getExpansionUncertainty(ho,
-						   ho.getDMh(0) + ho.getDMh(1) + ho.getDMh(2), 0, 0, 1));
+						   ho.getDMh(0) + ho.getDMh(1) 
+						   + ho.getDMh(2), 0, 0, 1));
    
    // set the uncertainty of the expansion at 1-loop level to 0 by default, 
    // if the user needs this value getExpansionUncertainty should be called
@@ -1235,7 +1236,8 @@ Eigen::Matrix2d himalaya::HierarchyCalculator::getMt42L(const himalaya::Hierarch
    double v2 = pow2(p.vu) + pow2(p.vd);
    double gs = p.g3;
    int os = 0;
-   dszhiggs_(&Mt2, &MG, &Mst12, &Mst22, &st, &ct, &scale2, &mu, &tanb, &v2, &gs, &os, &S11, &S22, &S12);
+   dszhiggs_(&Mt2, &MG, &Mst12, &Mst22, &st, &ct, &scale2, &mu, &tanb, &v2, &gs,
+	     &os, &S11, &S22, &S12);
    Mt42L(0, 0) = S11;
    Mt42L(1, 0) = S12;
    Mt42L(0, 1) = S12;
