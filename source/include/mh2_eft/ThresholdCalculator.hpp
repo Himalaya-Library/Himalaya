@@ -11,6 +11,7 @@
 #include <limits>
 
 namespace himalaya{
+namespace mh2_eft{
 
    class ThresholdCalculator{
    public:
@@ -276,4 +277,5 @@ namespace himalaya{
       int xtOrderLambdaAtAs2 = 6; ///< A flag to truncate the Xt order of delta_lambda_at_as2 at a given value starting at 4
    };
 
+}	// mh2_eft
 }	// himalaya

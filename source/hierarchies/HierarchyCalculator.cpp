@@ -179,7 +179,7 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
    p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
-   himalaya::ThresholdCalculator tc (p_mass_ES);
+   himalaya::mh2_eft::ThresholdCalculator tc (p_mass_ES);
 
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
@@ -1312,7 +1312,7 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
    p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
-   himalaya::ThresholdCalculator tc (p_mass_ES);
+   himalaya::mh2_eft::ThresholdCalculator tc (p_mass_ES);
 
    // calculate the (non-)logarithmic part of Mh2 without delta_lambda_3L
    // the first line is equivalent to  64 * dytas - 84 * pow2(dytas) - 24 * dytas2 + catas2 including all log(mu^2/Mst1^2)

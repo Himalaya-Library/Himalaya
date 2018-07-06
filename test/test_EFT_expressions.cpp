@@ -17,7 +17,7 @@ namespace {
 void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 {
    himalaya::mh2_eft::Mh2EFTCalculator mhc(p, msq2);
-   himalaya::ThresholdCalculator tc(p, msq2, true);
+   himalaya::mh2_eft::ThresholdCalculator tc(p, msq2, true);
    const double eps = 1e-5;
    const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
    

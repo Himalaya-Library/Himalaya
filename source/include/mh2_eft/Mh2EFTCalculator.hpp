@@ -69,5 +69,6 @@ namespace mh2_eft{
       double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
       std::map<unsigned int, unsigned int> orderMap{}; ///< A map which holds all EFTOrders key value pairs to enable/disable certain corrections
    };
+
 }	// mh2_eft
 }	// himalaya

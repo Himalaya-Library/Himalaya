@@ -12,6 +12,7 @@
 #include <cmath>
 
 namespace himalaya {
+namespace mh2_eft {
 
 namespace {
    template <typename T> T pow2(T x)    noexcept { return x*x; }
@@ -5857,4 +5858,5 @@ void ThresholdCalculator::setXtOrderOfDeltaLambdaAtAs2(int xtOrder){
    xtOrderLambdaAtAs2 = xtOrder;
 }
 
+} // namespace mh2_eft
 } // namespace himalaya
