@@ -8,8 +8,7 @@ coupling λ in the DR'-bar scheme using the results of:
 
 * R. V. Harlander, P. Kant, L. Mihaila and M. Steinhauser, *Higgs
   boson mass in supersymmetry to three loops*, [*Phys. Rev. Lett.*
-  **100** (2008)
-  191602](https://doi.org/10.1103/PhysRevLett.100.191602),
+  **100** (2008) 191602](https://doi.org/10.1103/PhysRevLett.100.191602),
   [[0803.0672](https://arxiv.org/abs/0803.0672)],
 
 * P. Kant, R. V. Harlander, L. Mihaila and M. Steinhauser, *Light MSSM
