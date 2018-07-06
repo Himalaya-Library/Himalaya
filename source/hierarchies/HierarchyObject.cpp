@@ -27,13 +27,12 @@ Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
 }
 
 } // anonymous namespace
-} // namespace himalaya
 
 /**
  * 	A constructor.
  * 	@param isAlphab the boolean which determines wether the members are proportinal to alpha_b or alpha_t.
  */
-himalaya::HierarchyObject::HierarchyObject(bool isAlphab)
+HierarchyObject::HierarchyObject(bool isAlphab)
    : isAlphab(isAlphab)
 {
 }
@@ -41,7 +40,8 @@ himalaya::HierarchyObject::HierarchyObject(bool isAlphab)
 /**
  * 	@return The value of isAlphab.
  */
-bool himalaya::HierarchyObject::getIsAlphab() const{
+bool HierarchyObject::getIsAlphab() const
+{
    return isAlphab;
 }
 
@@ -49,14 +49,16 @@ bool himalaya::HierarchyObject::getIsAlphab() const{
  * 	Sets the suitable hierarchy
  * 	@param hierarchy the integer key of the hierarchy.
  */
-void himalaya::HierarchyObject::setSuitableHierarchy(int hierarchy){
+void HierarchyObject::setSuitableHierarchy(int hierarchy)
+{
    this -> hierarchy = hierarchy;
 }
 
 /**
  * 	@return The key to the suitable hierarchy
  */
-int himalaya::HierarchyObject::getSuitableHierarchy() const{
+int HierarchyObject::getSuitableHierarchy() const
+{
    return hierarchy;
 }
 
@@ -64,14 +66,16 @@ int himalaya::HierarchyObject::getSuitableHierarchy() const{
  * 	Sets the absolute difference of the Higgs masses at two-loop level
  * 	@param absDiff2L the absolute difference of the Higgs masses as a double.
  */
-void himalaya::HierarchyObject::setAbsDiff2L(double absDiff2L){
+void HierarchyObject::setAbsDiff2L(double absDiff2L)
+{
    this -> absDiff2L = absDiff2L;
 }
 
 /**
  * 	@return The absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
  */
-double himalaya::HierarchyObject::getAbsDiff2L() const{
+double HierarchyObject::getAbsDiff2L() const
+{
    return absDiff2L;
 }
 
@@ -79,14 +83,16 @@ double himalaya::HierarchyObject::getAbsDiff2L() const{
  * 	Sets the relative difference ot the Higgs masses at two-loop level
  * 	@param relDiff2L the relative difference of the Higgs masses as a double.
  */
-void himalaya::HierarchyObject::setRelDiff2L(double relDiff2L){
+void HierarchyObject::setRelDiff2L(double relDiff2L)
+{
    this -> relDiff2L = relDiff2L;
 }
 
 /**
  * 	@return The relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
  */
-double himalaya::HierarchyObject::getRelDiff2L() const{
+double HierarchyObject::getRelDiff2L() const
+{
    return relDiff2L;
 }
 
@@ -96,12 +102,14 @@ double himalaya::HierarchyObject::getRelDiff2L() const{
  * 	@param loops the integer value of the corresponding loops. Can be 1, 2 or 3.
  * 	@param uncertainty the expansion untertainty at the given loop order as a double.
  */
-void himalaya::HierarchyObject::setDMhExpUncertainty(int loops, double uncertainty){
+void HierarchyObject::setDMhExpUncertainty(int loops, double uncertainty)
+{
    if(loops > 0 && loops <= 3){
       expUncertainties[loops] = uncertainty;
    }
    else {
-      throw std::runtime_error("Expansion uncertainty for " + std::to_string(loops) + " loop(s) is not available.");
+      throw std::runtime_error("Expansion uncertainty for "
+                               + std::to_string(loops) + " loop(s) is not available.");
    }
 }
 
@@ -109,12 +117,15 @@ void himalaya::HierarchyObject::setDMhExpUncertainty(int loops, double uncertain
  * 	@param loops an integer which can be 1, 2 or 3.
  * 	@return A double which is the expansion uncertainty for the given loop order.
  */
-double himalaya::HierarchyObject::getDMhExpUncertainty(int loops) const{
+double HierarchyObject::getDMhExpUncertainty(int loops) const
+{
    if(loops > 0 && loops <= 3){
       return expUncertainties.at(loops);
    }
    
-   throw std::runtime_error("Expansion uncertainty for " + std::to_string(loops) + " loop(s) is not available.");
+   throw std::runtime_error("Expansion uncertainty for "
+                            + std::to_string(loops)
+                            + " loop(s) is not available.");
    
 }
 
@@ -123,12 +134,15 @@ double himalaya::HierarchyObject::getDMhExpUncertainty(int loops) const{
  * 	@param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
  * 	@param dMh the delta of the mass matrix.
  */
-void himalaya::HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh){
+void HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh)
+{
    if(loops >= 0 && loops <= 3){
       dMhMap[loops] = dMh;
    }
    else {
-      throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops) + " loop(s) is not available.");
+      throw std::runtime_error("Higgs mass matrix for "
+                               + std::to_string(loops)
+                               + " loop(s) is not available.");
    }
 }
 
@@ -136,34 +150,40 @@ void himalaya::HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh){
  * 	@param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
  * 	@return The CP-even Higgs mass matrix at the given loop order.
  */
-Eigen::Matrix2d himalaya::HierarchyObject::getDMh(int loops) const{
+Eigen::Matrix2d HierarchyObject::getDMh(int loops) const
+{
    if(loops >= 0 && loops <= 3){
       return dMhMap.at(loops);
    }
    
-   throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops) + " loop(s) is not available.");
+   throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops)
+                            + " loop(s) is not available.");
 }
 
 /**
  * 	Sets the DR' -> MDR' shift
  * 	@param mdrShift the DR' -> MDR' shiftet matrix of the form M(MDR') - M(DR').
  */
-void himalaya::HierarchyObject::setDMhDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift){
+void HierarchyObject::setDMhDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift)
+{
    this -> mdrShift = mdrShift;
 }
 
 /**
  * 	@return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
  */
-Eigen::Matrix2d himalaya::HierarchyObject::getDMhDRbarPrimeToMDRbarPrimeShift() const{
+Eigen::Matrix2d HierarchyObject::getDMhDRbarPrimeToMDRbarPrimeShift() const
+{
    return mdrShift;
 }
 
-void himalaya::HierarchyObject::setDMhDRbarPrimeToH3mShift(const Eigen::Matrix2d& shift){
+void HierarchyObject::setDMhDRbarPrimeToH3mShift(const Eigen::Matrix2d& shift)
+{
    h3mShift = shift;
 }
 
-Eigen::Matrix2d himalaya::HierarchyObject::getDMhDRbarPrimeToH3mShift() const{
+Eigen::Matrix2d HierarchyObject::getDMhDRbarPrimeToH3mShift() const
+{
    return h3mShift;
 }
 
@@ -172,14 +192,16 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMhDRbarPrimeToH3mShift() const{
  * 	Sets the MDR masses
  * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
  */
-void himalaya::HierarchyObject::setMDRMasses(const Eigen::Vector2d& mdrMasses){
+void HierarchyObject::setMDRMasses(const Eigen::Vector2d& mdrMasses)
+{
    this -> mdrMasses = sortVector(mdrMasses);
 }
 
 /**
  * 	@return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
  */
-Eigen::Vector2d himalaya::HierarchyObject::getMDRMasses() const{
+Eigen::Vector2d HierarchyObject::getMDRMasses() const
+{
    return mdrMasses;
 }
 
@@ -188,10 +210,13 @@ Eigen::Vector2d himalaya::HierarchyObject::getMDRMasses() const{
  * 	@param mdrFlag an int. (0) for H3m (DR')- and (1) for MDR-scheme.
  * 	@throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
  */
-void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
+void HierarchyObject::setMDRFlag(int mdrFlag)
+{
    if(mdrFlag != 0 && mdrFlag != 1) {
-      throw std::runtime_error("The MDR-flag has to be 0 (DR-scheme) or 1 (MDR-scheme). Input: " + std::to_string(mdrFlag) + ".");
-}
+      throw std::runtime_error(
+         "The MDR-flag has to be 0 (DR-scheme) or 1 (MDR-scheme). Input: "
+         + std::to_string(mdrFlag) + ".");
+   }
    this -> mdrFlag = mdrFlag;
 }
 
@@ -199,7 +224,8 @@ void himalaya::HierarchyObject::setMDRFlag(int mdrFlag){
 /**
  * 	@return the MDRFlag integer.
  */
-int himalaya::HierarchyObject::getMDRFlag() const{
+int HierarchyObject::getMDRFlag() const
+{
    return mdrFlag;
 }
 
@@ -208,9 +234,12 @@ int himalaya::HierarchyObject::getMDRFlag() const{
  * 	@param renScheme an int according to the RenScheme enum.
  * 	@throws runtime_exception if the flag is not in {0,1,2,3} an exception is thrown
  */
-void himalaya::HierarchyObject::setRenormalizationScheme(int renScheme){
+void HierarchyObject::setRenormalizationScheme(int renScheme)
+{
    if(renScheme < 0 || renScheme > 3) {
-      throw std::runtime_error("The renormalization scheme has to be 0 (H3m), 1 (DR'), 2 (H3m with MDR), 3 (MDR'). Input: " + std::to_string(renScheme) + ".");
+      throw std::runtime_error(
+         "The renormalization scheme has to be 0 (H3m), 1 (DR'), 2 (H3m"
+         " with MDR), 3 (MDR'). Input: " + std::to_string(renScheme) + ".");
    }
    renormalizationScheme = renScheme;
 }
@@ -218,7 +247,8 @@ void himalaya::HierarchyObject::setRenormalizationScheme(int renScheme){
 /**
  * 	@return Renormalization scheme key
  */
-int himalaya::HierarchyObject::getRenormalizationScheme() const{
+int HierarchyObject::getRenormalizationScheme() const
+{
    return renormalizationScheme;
 }
 
@@ -227,14 +257,16 @@ int himalaya::HierarchyObject::getRenormalizationScheme() const{
  * 	Sets the delta_lambda at 3-loop order with H3m logs.
  * 	@param deltaLambda delta_lambda at 3-loop order.
  */
-void himalaya::HierarchyObject::setDLambdaH3m(double deltaLambda){
+void HierarchyObject::setDLambdaH3m(double deltaLambda)
+{
    dLambdaH3m = deltaLambda;
 }
 
 /**
  * 	@return 3-loop delta_lambda with H3m logs
  */
-double himalaya::HierarchyObject::getDLambdaH3m() const{
+double HierarchyObject::getDLambdaH3m() const
+{
    return dLambdaH3m;
 }
 
@@ -242,14 +274,15 @@ double himalaya::HierarchyObject::getDLambdaH3m() const{
  * 	Sets the delta_lambda at 3-loop order with EFT logs.
  * 	@param deltaLambda delta_lambda at 3-loop order.
  */
-void himalaya::HierarchyObject::setDLambdaEFT(double deltaLambda){
+void HierarchyObject::setDLambdaEFT(double deltaLambda)
+{
    dLambdaEFT = deltaLambda;
 }
 
 /**
  * 	@return 3-loop delta_lambda with EFT logs
  */
-double himalaya::HierarchyObject::getDLambdaEFT() const{
+double HierarchyObject::getDLambdaEFT() const{
    return dLambdaEFT;
 }
 
@@ -257,14 +290,16 @@ double himalaya::HierarchyObject::getDLambdaEFT() const{
  * 	Sets the constant part of delta_lambda at 3-loop order.
  * 	@param deltaLambda constant part of delta_lambda at 3-loop order.
  */
-void himalaya::HierarchyObject::setDLambdaNonLog(double deltaLambda){
+void HierarchyObject::setDLambdaNonLog(double deltaLambda)
+{
    dLambdaNonLog = deltaLambda;
 }
 
 /**
  *        @return 3-loop delta_lambda for the degenerated mass case with EFT logs
  */
-double himalaya::HierarchyObject::getDLambdaNonLog() const{
+double HierarchyObject::getDLambdaNonLog() const
+{
    return dLambdaNonLog;
 }
 
@@ -272,11 +307,12 @@ double himalaya::HierarchyObject::getDLambdaNonLog() const{
  * 	Sets the Xt parts of the uncertainty of delta_lambda
  *      @param uncertainty of 3-loop delta_lambda
  */
-void himalaya::HierarchyObject::setDLambdaXtUncertainty(double uncertainty){
+void HierarchyObject::setDLambdaXtUncertainty(double uncertainty)
+{
    dLambdaXtUncertainty = uncertainty;
 }
 
-double himalaya::HierarchyObject::getDLambdaUncertainty(int loops) const{
+double HierarchyObject::getDLambdaUncertainty(int loops) const{
    if(loops >= 0 && loops <= 3){
       if(loops == 3) return std::abs(dLambdaXtUncertainty) + std::abs(getDLambdaEFT() - getDLambdaH3m());
       return 0.;
@@ -289,7 +325,8 @@ double himalaya::HierarchyObject::getDLambdaUncertainty(int loops) const{
  * 	@return delta_lambda
  * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
-double himalaya::HierarchyObject::getDLambda(int loops) const{
+double HierarchyObject::getDLambda(int loops) const
+{
    if(loops >= 0 && loops <= 3){
       return dLambdaMap.at(loops);
    }
@@ -302,7 +339,8 @@ double himalaya::HierarchyObject::getDLambda(int loops) const{
  * 	@param loops an integer, could be 0 (tree), ..., 3 (3L)
  * 	@param deltaLambda delta_lambda at tree-level
  */
-void himalaya::HierarchyObject::setDLambda(int loops, double deltaLambda){
+void HierarchyObject::setDLambda(int loops, double deltaLambda)
+{
    if(loops >= 0 && loops <= 3){
       dLambdaMap[loops] = deltaLambda;
    }
@@ -315,7 +353,8 @@ void himalaya::HierarchyObject::setDLambda(int loops, double deltaLambda){
  * 	@return Delta_Mh2_EFT
  * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
-double himalaya::HierarchyObject::getDMh2EFT(int loops) const{
+double HierarchyObject::getDMh2EFT(int loops) const
+{
    if(loops >= 0 && loops <= 3){
       return dMh2EFTMap.at(loops);
    }
@@ -328,7 +367,8 @@ double himalaya::HierarchyObject::getDMh2EFT(int loops) const{
  * 	@param loops an integer, could be 0 (tree), ..., 3 (3L)
  * 	@param deltaMh2 delta_Mh^2
  */
-void himalaya::HierarchyObject::setDMh2EFT(int loops, double deltaMh2){
+void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
+{
    if(loops >= 0 && loops <= 3){
       dMh2EFTMap[loops] = deltaMh2;
    }
@@ -341,7 +381,8 @@ void himalaya::HierarchyObject::setDMh2EFT(int loops, double deltaMh2){
  * 	@return shift to convert delta_lambda from DR' to MS scheme. This shift has to be added to the 1L result
  * 	@param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
-double himalaya::HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const{
+double HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const
+{
    if(loops >= 0 && loops <= 3){
       return dLambdaDRbarPrimeToMSbarShiftMap.at(loops);
    }
@@ -354,7 +395,8 @@ double himalaya::HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) co
  * 	@param loops an integer, could be 0(tree), ..., 3 (3L shift)
  * 	@param shift the shift
  */
-void himalaya::HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift){
+void HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift)
+{
    if(loops >= 0 && loops <= 3){
       dLambdaDRbarPrimeToMSbarShiftMap[loops] = shift;
    }
@@ -368,7 +410,8 @@ void himalaya::HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, doub
  *      @param hierarchy An integer of a Himalaya hierarchy.
  *      @return Returns the corresponding H3m notation of the given hierarchy as a string.
  */
-std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) const{
+std::string HierarchyObject::getH3mHierarchyNotation(int hierarchy) const
+{
    switch (hierarchy){
       case Hierarchies::h3:
 	 return "h3";
@@ -406,7 +449,8 @@ std::string himalaya::HierarchyObject::getH3mHierarchyNotation(int hierarchy) co
 /**
  * 	Prints out all information of the HierarchyObject
  */
-std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject const &ho){
+std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
+{
    const int suitableHierarchy = ho.getSuitableHierarchy();
    const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
       || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
@@ -453,3 +497,4 @@ std::ostream& himalaya::operator<<(std::ostream& ostr, himalaya::HierarchyObject
    return ostr;
 }
 
+} // namespace himalaya
