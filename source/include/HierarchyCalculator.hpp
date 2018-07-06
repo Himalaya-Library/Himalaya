@@ -12,7 +12,6 @@
 #include "HierarchyObject.hpp"
 #include "version.hpp"
 #include <map>
-#include <vector>
 
 namespace himalaya{
    /**
@@ -119,12 +118,6 @@ namespace himalaya{
        * 	@returns A bool if the hierarchy candidate is suitable to the given mass spectrum.
        */
       bool isHierarchySuitable(const HierarchyObject& ho) const;
-      /**
-       * 	Sorts the eigenvalues of a 2x2 matrix.
-       * 	@param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
-       * 	@return A sorted vector with the lowest eigenvalue at position 0.
-       */
-      std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es) const;
       /**
        * 	Shifts the H3m renormalization scheme to DR' scheme
        * 	@param ho a HierarchyObject with constant isAlphab

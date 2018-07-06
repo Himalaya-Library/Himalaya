@@ -29,6 +29,7 @@
 #include <numeric>
 #include <stdexcept>
 #include <type_traits>
+#include <vector>
 
 extern "C" void dszhiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
@@ -58,6 +59,19 @@ const std::map<int, int> hierarchyMap = {
    { Hierarchies::h9     , Hierarchies::h9  },
    { Hierarchies::h9q2   , Hierarchies::h9  }
 };
+
+/**
+ * Sorts the eigenvalues of a 2x2 matrix.
+ * @param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
+ * @return A sorted vector with the lowest eigenvalue at position 0.
+ */
+std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es)
+{
+  std::vector<double> sortedEigenvalues
+     = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
+  std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
+  return sortedEigenvalues;
+}
 
 } // anonymous namespace
 } // namespace himalaya
@@ -1110,18 +1124,6 @@ double himalaya::HierarchyCalculator::shiftH3mToDRbarPrimeMh2(const himalaya::Hi
    return shift;
 }
 
-
-/**
- * 	Sorts the eigenvalues of a 2x2 matrix.
- * 	@param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
- * 	@return A sorted vector with the lowest eigenvalue at position 0.
- */
-std::vector<double> himalaya::HierarchyCalculator::sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es) const
-{
-  std::vector<double> sortedEigenvalues = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
-  std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
-  return sortedEigenvalues;
-}
 
 /**
  * 	Calculates the loop corrected Higgs mass matrix at the order O(alpha_x). Here, x can be t or b.
