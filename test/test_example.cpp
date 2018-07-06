@@ -2,6 +2,9 @@
 #include "HierarchyCalculator.hpp"
 #include <cmath>
 
+#include <Eigen/Core>
+#include <Eigen/Eigenvalues>
+
 namespace {
 
 himalaya::Parameters setup_SPS1a(){

@@ -10,7 +10,7 @@
 #include "version.hpp"
 #include "Hierarchies.hpp"
 #include <iosfwd>
-#include <Eigen/Eigenvalues>
+#include <Eigen/Core>
 #include <vector>
 #include <map>
 

@@ -2,6 +2,8 @@
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
 
+#include <Eigen/Core>
+#include <Eigen/Eigenvalues>
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
