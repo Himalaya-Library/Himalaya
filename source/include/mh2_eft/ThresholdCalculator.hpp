@@ -11,7 +11,7 @@
 #include <limits>
 
 namespace himalaya{
-   
+
    class ThresholdCalculator{
    public:
       /**
@@ -275,5 +275,5 @@ namespace himalaya{
       double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
       int xtOrderLambdaAtAs2 = 6; ///< A flag to truncate the Xt order of delta_lambda_at_as2 at a given value starting at 4
    };
-   
+
 }	// himalaya

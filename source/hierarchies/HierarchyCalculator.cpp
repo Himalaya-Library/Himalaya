@@ -35,12 +35,13 @@
 extern "C" void dszhiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
       double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
 
-static bool isInfoPrinted; /**< If this bool is true, than no info will be printed in further runs */
+namespace himalaya {
+
+static bool isInfoPrinted; ///< If this bool is true, than no info will be printed in further runs
 
 /**
  * 	Define static variables
  */
-namespace himalaya {
 namespace {
 
 /** The hierarchy map which maps all hierarchies to their mother hierarchies */
@@ -77,7 +78,7 @@ std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& e
 } // anonymous namespace
 
 /**
- * 	Constructor 
+ * 	Constructor
  * 	@param p_ a HimalayaInterface struct
  * 	@param verbose_ suppress informative output during the calculation, if set to false
  */
@@ -137,36 +138,36 @@ void HierarchyCalculator::init(){
 himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
 {
    HierarchyObject ho (isAlphab);
-   
+
    if (isAlphab)
       INFO_MSG("3-loop threshold correction Δλ not available for O(αb*αs^2)!");
-   
+
    const int mdrFlag = 0;
-   
+
    // set mdrFlag
    ho.setMDRFlag(mdrFlag);
 
    // compare hierarchies and get the best fitting hierarchy
    compareHierarchies(ho);
-   
+
    // calculate the 3-loop Higgs mass matrix for the obtained hierachy in the (M)DRbar' scheme
    ho.setDMh(3, calculateHierarchy(ho, 0, 0, 1) + shiftH3mToDRbarPrime(ho));
-   
+
    // set the alpha_x contributions
    ho.setDMh(1, getMt41L(ho, mdrFlag, mdrFlag));
-   
+
    // set the alpha_x*alpha_s contributions
    ho.setDMh(2, getMt42L(ho, mdrFlag, mdrFlag));
-   
+
    // estimate the uncertainty of the expansion at 3-loop level
    ho.setDMhExpUncertainty(3, getExpansionUncertainty(ho,
-						   ho.getDMh(0) + ho.getDMh(1) 
+						   ho.getDMh(0) + ho.getDMh(1)
 						   + ho.getDMh(2), 0, 0, 1));
-   
-   // set the uncertainty of the expansion at 1-loop level to 0 by default, 
+
+   // set the uncertainty of the expansion at 1-loop level to 0 by default,
    // if the user needs this value getExpansionUncertainty should be called
    ho.setDMhExpUncertainty(1, 0.);
-   
+
    // calculate shifts needed to convert DR' to other renormalization schemes,
    // here one needs it with the minus sign to convert DR -> H3m
    ho.setDMhDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
@@ -177,15 +178,15 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
    himalaya::ThresholdCalculator tc (p_mass_ES);
-   
+
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
-   
+
    const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
-   
+
    // calculate delta_lambda @ 3-loop level
    calcDeltaLambda3L(ho, false);
-   
+
    // set flags to omit all but O(at*as^n)
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
    mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
@@ -260,43 +261,43 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
    flagMap.at(ExpansionDepth::xxMst) = 0;
    double error = -1.;
    int suitableHierarchy = -1;
-   
+
    // sine of 2 times beta
    const double s2b = sin(2*atan(p.vu/p.vd));
    const double tbeta = p.vu/p.vd;
-   
+
    // tree level Higgs mass matrix
    Eigen::Matrix2d treelvl;
    treelvl (0,0) = s2b/2.*(pow2(p.MZ) / tbeta + pow2(p.MA) * tbeta);
    treelvl (1,0) = s2b/2.*(-pow2(p.MZ) - pow2(p.MA));
    treelvl (0,1) = treelvl (1,0);
    treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tbeta + pow2(p.MA) / tbeta);
-   
+
    ho.setDMh(0, treelvl);
 
    // compare the exact higgs mass at 2-loop level with the expanded expressions to find a suitable hierarchy
    for (int hierarchy = Hierarchies::FIRST; hierarchy < Hierarchies::NUMBER_OF_HIERARCHIES; hierarchy++) {
       // first, check if the hierarchy is suitable to the mass spectrum
       ho.setSuitableHierarchy(hierarchy);
-      
+
       if(isHierarchySuitable(ho)){
 	 // calculate the exact 1-loop result (only alpha_t/b)
 	 const Eigen::Matrix2d Mt41L = getMt41L(ho, ho.getMDRFlag(), 0);
-	 
+
 	 // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
 	 const Eigen::Matrix2d Mt42L = getMt42L(ho, ho.getMDRFlag(), 0);
-	 
+
 	 // Note: spurious poles are handled by the validate method
 	 // of the Himalaya_Interface struct
-	 
+
 	 //calculate the exact Higgs mass at 2-loop (only up to alpha_s alpha_t/b)
 	 const Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
 	 const double Mh2l = sortEigenvalues(es2L).at(0);
 
 	 // calculate the expanded 2-loop expression with the specific hierarchy
-	 const Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L 
+	 const Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L
 	    + calculateHierarchy(ho, 0, 1, 0));
-	 
+
 	 // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
 	 const double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
 
@@ -304,21 +305,21 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
 	 const double twoLoopError = std::abs((Mh2l - Mh2LExpanded));
 
 	 // estimate the uncertainty of the expansion at 2L
-	 const double expUncertainty2L = getExpansionUncertainty(ho, treelvl 
+	 const double expUncertainty2L = getExpansionUncertainty(ho, treelvl
 	    + Mt41L, 0, 1, 0);
 
 	 // estimate the uncertainty of the expansion at 3L
 	 const double expUncertainty3L = getExpansionUncertainty(ho, treelvl
-	    + Mt41L + Mt42L, 0, 0, 1); 
+	    + Mt41L + Mt42L, 0, 0, 1);
 
 	 // estimate the uncertainty of the difference of delta_lambda @ 3-loop
 	 // normalized to the exact logarithms
 	 calcDeltaLambda3L(ho, true);
-	 /*const double deltaLambdaUncertainty = std::abs((ho.getDLambdaEFT() 
+	 /*const double deltaLambdaUncertainty = std::abs((ho.getDLambdaEFT()
 	    - ho.getDLambdaH3m())/(ho.getDLambdaEFT() - ho.getDLambdaNonLog()));*/
 
 	 // add these errors to include the error of the expansion in the comparison
-	 const double currError = sqrt(pow2(twoLoopError/Mh2l) 
+	 const double currError = sqrt(pow2(twoLoopError/Mh2l)
 	    + pow2(expUncertainty2L/Mh2LExpanded));
 
 	 // if the error is negative, it is the first iteration and there is no hierarchy which fits better
@@ -342,7 +343,7 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
       }
    }
    ho.setSuitableHierarchy(suitableHierarchy);
-   
+
    // reset the flags
    flagMap.at(ExpansionDepth::xx) = 1;
    flagMap.at(ExpansionDepth::xxMst) = 1;
@@ -365,13 +366,13 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
       Mst1 = p.MSb(0);
       Mst2 = p.MSb(1);
    }
-   
+
    // check if the squark mass is the heaviest mass
    const double delta = 1.3;	// allow for an offset of 30%
-   
+
    if(Mst2 > delta*Msq) return false;
    if(p.MG > delta*Msq) return false;
-   
+
    switch (ho.getSuitableHierarchy()){
       case Hierarchies::h3:
 	 return Mgl > Mst2;
@@ -489,7 +490,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 		     const H3 hierarchy3(flagMap, Al4p, beta,
 			Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
 			Mgl, Mt, Mst1, Mst2, Msq, p.mu,
-			s2t, 
+			s2t,
 			ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
 		     curSig1 = hierarchy3.getS1();
 		     curSig2 = hierarchy3.getS2();
@@ -794,7 +795,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       sigS2Full += curSig2;
       sigS12Full += curSig12;
    }
-   
+
    // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
    if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
       Eigen::Vector2d mdrMasses;
@@ -884,7 +885,7 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
       Mst2 = p.MSb(1);
    }
    const double Dmglst2 = Mgl - Mst2;
-   const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p) 
+   const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p)
       * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
    switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
@@ -925,35 +926,35 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const himalaya::HierarchyObject& ho) const
 {
    Eigen::Matrix2d shift;
-   
+
    // truncate shift at O(Xt^2) to be consistent with H3m result
    int truncateXt = 1;
-   
+
    const int suitableHierarchy = ho.getSuitableHierarchy();
    if(suitableHierarchy == himalaya::Hierarchies::h3
-      || suitableHierarchy == himalaya::Hierarchies::h32q2g 
+      || suitableHierarchy == himalaya::Hierarchies::h32q2g
       || suitableHierarchy == himalaya::Hierarchies::h3q22g
       || suitableHierarchy == himalaya::Hierarchies::h9
       || suitableHierarchy == himalaya::Hierarchies::h9q2) truncateXt = 0;
-   
+
    // pre-factor of shift -> checked normalization against H3m normalization and they coincide
    const double k = 1 / (16 * pow2(Pi));
    const double yt = sqrt(2) * p.Mt / p.vu;
    const double prefac = pow4(p.g3) * pow3(k) * pow2(p.Mt * yt);
-   
+
    // tanbeta
    const double Tbeta = p.vu / p.vd;
-   
+
    // stop masses
    const double Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    const double Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    double Xt = p.Au(2,2) - p.mu / Tbeta;
    // Hierarchy h4 only covers O(Xt^0)
    if(suitableHierarchy == himalaya::Hierarchies::h4) Xt = 0;
-   
+
    // threshold for degenerate squark mass case is 1% of the stop mass
    const double eps = Mst1 * 0.01;
-   
+
    // squared masses
    const double Mst12 = pow2(Mst1);
    const double Mgl2 = pow2(p.MG);
@@ -962,16 +963,16 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const double Xt2 = pow2(Xt);
    const double Mst22 = pow2(Mst2);
    const double Dmst12 = Mst12 - Mst22;
-   
+
    // logarithms
    const double lmMst1 = log(scale2 / Mst12);
    const double lmMst2 = log(scale2 / Mst22);
    const double lmMsq = log(scale2 / Msq2);
    const double lmMgl = log(scale2 / Mgl2);
-   
+
    // degenerate mass case flag
    bool isDegen = false;
-   
+
    // check for degenerate squark masses
    if(std::abs(Mst1 - Mst2) < eps){
       const double Mst2shift = Mst1 + sqrt(std::abs(Dmst12))/2.;
@@ -989,7 +990,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
         lmMst1)*pow2(Mst1) + (1 + lmMst2shift)*pow2(Mst2shift))*pow2(p.mu)*(-4*log(Mst1/
         Mst2shift)*pow2(Mst1)*pow2(Mst2shift) + pow4(Mst1) - pow4(Mst2shift)))/(pow2(Mst1)*
         pow2(Mst2shift)*pow3(pow2(Mst1) - pow2(Mst2shift)));
-      
+
       isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
 	 || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
@@ -1045,30 +1046,30 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    const himalaya::HierarchyObject& ho, int omitLogs) const
 {
    double shift;
-   
+
    // truncate shift at O(Xt^2) to be consistent with H3m result
    int truncateXt = 1;
    const int suitableHierarchy = ho.getSuitableHierarchy();
    if(suitableHierarchy == himalaya::Hierarchies::h3
-      || suitableHierarchy == himalaya::Hierarchies::h32q2g 
+      || suitableHierarchy == himalaya::Hierarchies::h32q2g
       || suitableHierarchy == himalaya::Hierarchies::h3q22g
       || suitableHierarchy == himalaya::Hierarchies::h9
       || suitableHierarchy == himalaya::Hierarchies::h9q2) truncateXt = 0;
-   
+
    // tanbeta
    const double Tbeta = p.vu / p.vd;
-   
+
    // stop masses
    const double Mst1 = p.MSt(0);
    const double Mst2 = p.MSt(1);
-   
+
    double Xt = p.Au(2,2) - p.mu / Tbeta;
    // Hierarchy h4 only covers O(Xt^0)
    if(suitableHierarchy == himalaya::Hierarchies::h4) Xt = 0;
 
    // threshold for degenerate squark mass case is 1% of the stop mass
    const double eps = Mst1 * 0.01;
-   
+
    // squared masses
    const double Mst12 = pow2(Mst1);
    const double Mgl2 = pow2(p.MG);
@@ -1083,10 +1084,10 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    const double lmMst2 = omitLogs * log(scale2 / Mst12) - log(Mst22 / Mst12);
    const double lmMsq = omitLogs * log(scale2 / Mst12) - log(Msq2 / Mst12);
    const double lmMgl = omitLogs * log(scale2 / Mst12) - log(Mgl2 / Mst12);
-   
+
    // degenerate mass case flag
    bool isDegen = false;
-   
+
    // check for degenerate squark masses
    if(std::abs(Mst1 - Mst2) < eps){
       const double Mst2shift = Mst1 + sqrt(std::abs(Dmst12))/2.;
@@ -1113,7 +1114,7 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
       isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
          || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
-   
+
    if(isDegen){
       shift = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
         pow2(Mst1))*(-6*Xt2*pow2(Mst1) + truncateXt*pow2(Xt2) + 6*pow4(Mst1)))/
@@ -1161,13 +1162,13 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
       s2t = p.s2b;
       Mt = p.Mb;
    }
-   
+
    Mt41L(0, 0) = (-3 * GF * pow2(Mt) * pow2(p.mu) * pow2(1 / sbeta) *
       (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1) * log(Mst1) +
       pow2(Mst2) * log(Mst1) - pow2(Mst1) * log(Mst2) -
       pow2(Mst2) * log(Mst2)) * pow2(s2t)) /
       (4. * sqrt(2) * (pow2(Mst1) - pow2(Mst2)) * pow2(Pi));
-   
+
    Mt41L(0, 1) = (3 * GF * pow2(1 / sbeta) *
       (-(pow3(Mt) * p.mu * (log(Mst1) - log(Mst2)) * s2t) / 2. +
       (pow2(Mt) * pow2(p.mu) * 1 / tan(beta) *
@@ -1179,9 +1180,9 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
       pow2(Mst2) * log(Mst1) - pow2(Mst1) * log(Mst2) -
       pow2(Mst2) * log(Mst2)) * pow3(s2t)) / 8.)) /
       (sqrt(2) * pow2(Pi));
-   
+
    Mt41L (1,0) = Mt41L(0,1);
-   
+
    Mt41L(1, 1) = (3 * GF * pow2(1 / sbeta) *
       (pow4(Mt) * (log(Mst1) + log(Mst2) - 2 * log(Mt)) +
       pow3(Mt) * p.mu * 1 / tan(beta) * (log(Mst1) - log(Mst2)) * s2t +
@@ -1208,7 +1209,7 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
       pow2(Mst2) * log(Mst1) - pow2(Mst1) * log(Mst2) -
       pow2(Mst2) * log(Mst2)) * pow4(s2t)) / 16.)) /
       (sqrt(2) * pow2(Pi));
-   
+
     return Mt41L;
 }
 
@@ -1298,12 +1299,12 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
        || suitableHierarchy == himalaya::Hierarchies::h3q22g
        || suitableHierarchy == himalaya::Hierarchies::h9
        || suitableHierarchy == himalaya::Hierarchies::h9q2) ? 3 : 4;
-   
+
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
    const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
-   
+
    // create a modified parameters struct and construct Mh2EFTCalculator and ThresholdCalculator
    auto p_mass_ES = p;
    p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
@@ -1320,7 +1321,7 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    const double subtractionTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
 
    if(omitXtOrders) tc.setXtOrderOfDeltaLambdaAtAs2(xtOrder);
-   
+
    // calculate the EFT logs. In the first call we calculate the full reconstructed contribution to delta_lambda_3L
    // including all logarithmic contributions. In the second line we subtract all non-logarithmic contributions
    // to isolate the logarithmic ones. Checked.
@@ -1337,13 +1338,13 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    // calculate delta_lambda_H3m
    ho.setDLambdaH3m((pref*(ho.getDLambdaH3m()
       + shiftH3mToDRbarPrimeMh2(ho,1)) - subtractionTermH3m)/v2);
-   
+
    // caluclate delta_lambda_EFT
    ho.setDLambdaEFT((deltaLambda3LNonLog + eftLogs)/v2);
 
    // save the non-logarithmic part of delta_lambda @ 3L
    ho.setDLambdaNonLog(deltaLambda3LNonLog/v2);
-   
+
    // calculate DR' -> MS shift for delta_lambda 3L
    // this shift generates Xt^5*Log(mu) terms for the EFT expression
    ho.setDLambdaDRbarPrimeToMSbarShift(3, pref*tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)/v2);
@@ -1354,7 +1355,7 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
       ho.setDLambdaEFT(ho.getDLambdaEFT() + pref*(tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)
 	 - tc.getDRbarPrimeToMSbarShift(xtOrder,1,1))/v2);
    }
-   
+
    // set the uncertainty of delta_lambda due to missing Xt terms
    // to summarize: delta_lambda_H3m is always of the x_t order of the suitable
    // hierachy (h3, h9 ~ xt^3, h5, h6, h6b ~ xt^4), whereas delta_lambda_EFT
@@ -1392,7 +1393,7 @@ double HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& h
    case Hierarchies::h3:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
-      // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion uncertainty 
+      // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion uncertainty
       flagMap.at(ExpansionDepth::xxDmglst1) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
@@ -1519,7 +1520,7 @@ int HierarchyCalculator::getCorrectHierarchy(const int hierarchy) const
       if(hierarchy == -1){
 	 throw std::runtime_error("No suitable hierarchy found!");
       } else{
-	 throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) + " not included!"); 
+	 throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) + " not included!");
       }
    }
    return hierarchyMap.at(hierarchy);

@@ -14,12 +14,12 @@
 
 namespace himalaya{
    /**
-    * The HierarchyCalculatur class 
+    * The HierarchyCalculatur class
     */
    class HierarchyCalculator{
    public:
       /**
-       * 	Constructor 
+       * 	Constructor
        * 	@param p_ Himalaya input parameters
        * 	@param verbose_ suppress informative output during the calculation, if set to false
        */
@@ -96,7 +96,7 @@ namespace himalaya{
        * 	@param threeLoopFlag an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-loop expansion terms.
        * 	@return A double which is the estimated uncertainty.
        */
-      double getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, const unsigned int oneLoopFlag, 
+      double getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, const unsigned int oneLoopFlag,
 				     const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);
    private:
       Parameters p{};     ///< Himalaya input parameters

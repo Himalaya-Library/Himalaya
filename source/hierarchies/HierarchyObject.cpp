@@ -122,11 +122,11 @@ double HierarchyObject::getDMhExpUncertainty(int loops) const
    if(loops > 0 && loops <= 3){
       return expUncertainties.at(loops);
    }
-   
+
    throw std::runtime_error("Expansion uncertainty for "
                             + std::to_string(loops)
                             + " loop(s) is not available.");
-   
+
 }
 
 /**
@@ -155,7 +155,7 @@ Eigen::Matrix2d HierarchyObject::getDMh(int loops) const
    if(loops >= 0 && loops <= 3){
       return dMhMap.at(loops);
    }
-   
+
    throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops)
                             + " loop(s) is not available.");
 }
@@ -317,7 +317,7 @@ double HierarchyObject::getDLambdaUncertainty(int loops) const{
       if(loops == 3) return std::abs(dLambdaXtUncertainty) + std::abs(getDLambdaEFT() - getDLambdaH3m());
       return 0.;
    }
-   
+
    throw std::runtime_error("Δλ uncertainty " + std::to_string(loops) + " loop(s) is not available.");
 }
 
@@ -330,7 +330,7 @@ double HierarchyObject::getDLambda(int loops) const
    if(loops >= 0 && loops <= 3){
       return dLambdaMap.at(loops);
    }
-   
+
    throw std::runtime_error("Δλ for " + std::to_string(loops) + " loop(s) is not available.");
 }
 
@@ -358,7 +358,7 @@ double HierarchyObject::getDMh2EFT(int loops) const
    if(loops >= 0 && loops <= 3){
       return dMh2EFTMap.at(loops);
    }
-   
+
    throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
 }
 
@@ -386,7 +386,7 @@ double HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const
    if(loops >= 0 && loops <= 3){
       return dLambdaDRbarPrimeToMSbarShiftMap.at(loops);
    }
-   
+
    throw std::runtime_error("Δ_DR' -> MS shift for " + std::to_string(loops) + " loop(s) is not available.");
 }
 
@@ -452,7 +452,7 @@ std::string HierarchyObject::getH3mHierarchyNotation(int hierarchy) const
 std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
 {
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m 
+   const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m
       || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
    const std::string massString = ho.getIsAlphab() ? "Msbottom" : "Mstop";
    const std::string spaces = ho.getIsAlphab() ? "            " : "               ";

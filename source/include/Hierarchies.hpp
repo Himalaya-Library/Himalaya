@@ -56,7 +56,7 @@ enum ExpansionDepth : int {
 
 /// Mass schemes
 namespace MassSchemes{
-   
+
    /// mass scheme flags
    enum MassSchemes : int{
       FIRST        = 0,
@@ -69,7 +69,7 @@ namespace MassSchemes{
 
 /// Limit numbers
 namespace Limits{
-   
+
    /// limit flags
    enum Limits : int{
       FIRST                   = 0,
@@ -85,7 +85,7 @@ namespace Limits{
 
 /// Renormalization scheme numbers
 namespace RenSchemes{
-   
+
    /// renormalization scheme falgs
    enum RenSchems : int {
       FIRST         = 0,
@@ -99,7 +99,7 @@ namespace RenSchemes{
 } // namespace RenSchemes
 
 namespace ThresholdVariables{
-   
+
    /// Threshold variable flags
    enum ThresholdVariables : int{
       FIRST              = 0,
@@ -143,7 +143,7 @@ namespace ThresholdVariables{
 } // namespace ThresholdVariables
 
 namespace EFTOrders{
-   
+
    /// Order flags
    enum EFTOrders : int{
       FIRST    = 0,

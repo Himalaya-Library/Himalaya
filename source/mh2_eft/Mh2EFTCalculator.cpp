@@ -9,7 +9,9 @@
 #include "ThresholdCalculator.hpp"
 #include "Hierarchies.hpp"
 #include "Logger.hpp"
+#include "dilog.h"
 #include <cmath>
+#include <string>
 
 namespace himalaya {
 namespace mh2_eft {
@@ -37,9 +39,13 @@ namespace {
    template <typename T> T pow19(T x) { return pow18(x)*x; }
    template <typename T> T pow20(T x) { return pow19(x)*x; }
 
+double isNaN(double var)
+{
+   if(std::isnan(var)) return 0.;
+   return var;
+}
+
 } // anonymous namespace
-} // namespace mh2_eft
-} // namespace himalaya
 
 /**
  *	Constructor
@@ -47,7 +53,7 @@ namespace {
  * 	@param msq2_ the averaged squark mass of the first two generations squared
  * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
  */
-himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(
+Mh2EFTCalculator::Mh2EFTCalculator(
    const himalaya::Parameters& p_, double msq2_, bool verbose)
    : p(p_), msq2(msq2_)
 {
@@ -55,7 +61,7 @@ himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(
 
    if (!std::isfinite(msq2_))
       msq2 = p.calculateMsq2();
-   
+
    // fill order map
    orderMap.clear();
    for (int i = EFTOrders::FIRST; i < EFTOrders::NUMBER_OF_EFT_ORDERS; i++) {
@@ -63,13 +69,14 @@ himalaya::mh2_eft::Mh2EFTCalculator::Mh2EFTCalculator(
    }
 }
 
-void himalaya::mh2_eft::Mh2EFTCalculator::setCorrectionFlag(int variable, int enable){
+void Mh2EFTCalculator::setCorrectionFlag(int variable, int enable)
+{
    if(enable < 0 || enable > 1) INFO_MSG("You can only enable (1) or disable (0) corrections!");
    if(orderMap.find(variable) == orderMap.end()) INFO_MSG("Your variable is not defined in the EFTOrders enum!");
    orderMap.at(variable) = enable;
 }
 
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT0Loop()
+double Mh2EFTCalculator::getDeltaMh2EFT0Loop() const
 {
    return pow2(p.MZ * std::cos(2 * std::atan(p.vu/p.vd)));
 }
@@ -79,19 +86,19 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT0Loop()
  * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, 
-								int omitMSSMLogs){
+double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) const
+{
    ThresholdCalculator thresholdCalculator(p, msq2);
-   
+
    using std::log;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
-   
+
    const double v2 = pow2(p.vu) + pow2(p.vd);
    const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
-   
+
    // 1-Loop prefactor at
    const double pref_at = 1./pow2(4*Pi) * pow2(p.Mt * gt);
-   
+
    const double beta = atan(p.vu/p.vd);
    const double cbeta = cos(beta);
    const double c2beta = cos(2*beta);
@@ -104,7 +111,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs,
    const double lmwMt = log(pow2(p.MW / p.Mt));
    const double lmzMt = log(pow2(p.MZ / p.Mt));
    const int Xi = 1;	// gauge parameter
-   
+
    // Threshold corrections
    const double dlambdayb2g12 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::LAMBDA_YB2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
@@ -150,22 +157,22 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs,
    // corrections to Mh2
    const double dmh2g12g22 = isNaN(orderMap.at(EFTOrders::G12G22)*(pow2(cbeta)*v2*(10
       *dlambdayb2g12 - 9*pow2(c2beta)*(2 + lmMt - lmhtreeMt))/20.));
-   const double dmh2g14 = isNaN(orderMap.at(EFTOrders::G14)*((v2*(20*(-36 
+   const double dmh2g14 = isNaN(orderMap.at(EFTOrders::G14)*((v2*(20*(-36
       + 100*dlambdag14 + 100*dlambdaregg14 + 100*
       dlambdachig14 - 27*lmMt + 27*lmzMt) - 30*(40*dg1g1 + 6*(-2 + lmzMt) +
       3*lmMt*(-3 + Xi))*pow2(c2beta) + 9*(-126 + 45*lmhtreeMt - 60*lmMt + 10*
       lmwMt + 5*lmzMt + 15*sqrt(3)*Pi)*pow4(c2beta) + 180*asin(mhtree/(2*p.MW)
       )*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree))*pow4(c2beta) + 90*asin(c2beta/
       2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) + pow4(c2beta))))/4000.));
-   const double dmh2g24 = isNaN(orderMap.at(EFTOrders::G24)*((v2*(20*(-12 
+   const double dmh2g24 = isNaN(orderMap.at(EFTOrders::G24)*((v2*(20*(-12
       + 4*dlambdachig24 + 4*dlambdag24 + 4*
-      dlambdaregg24 - 9*lmMt + 6*lmwMt + 3*lmzMt) - 10*(8*dg2g2 + 2*(-6 + 
+      dlambdaregg24 - 9*lmMt + 6*lmwMt + 3*lmzMt) - 10*(8*dg2g2 + 2*(-6 +
       2*lmwMt + lmzMt) + 3*lmMt*(-3 + Xi))*pow2(c2beta) + (-126 + 45*lmhtreeMt -
       60*lmMt + 10*lmwMt + 5*lmzMt + 15*sqrt(3.)*Pi)*pow4(c2beta) + 10*asin(
       c2beta/2.)*sqrt(-1 + 4/pow2(c2beta))*(12 - 4*pow2(c2beta) + pow4(c2beta))
       + 20*asin(mhtree/(2*p.MW))*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree))*(12 - 4*
       pow2(c2beta) + pow4(c2beta))))/160.));
-   const double dmh2g12yb2 = isNaN(orderMap.at(EFTOrders::G12YB2)*((v2*(20*(-12 
+   const double dmh2g12yb2 = isNaN(orderMap.at(EFTOrders::G12YB2)*((v2*(20*(-12
       + 10*dlambdag12g22 + 10*dlambdaregg12g22 + 10*
       dlambdachig12g22 - 9*lmMt + 9*lmzMt) - 60*(-4 + lmwMt + lmzMt + lmMt*(-
       3 + Xi))*pow2(c2beta) + 60*asin(mhtree/(2*p.MW))*(-2 + pow2(c2beta))*
@@ -196,7 +203,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs,
 
    return dmh2yt4 + k*(pow2(p.g1*p.g2)*dmh2g12g22 + pow4(p.g1)*dmh2g14 + pow4(p.g2)*
       dmh2g24 + pow2(p.g1*yb)*dmh2g12yb2 + pow2(p.g2*yb)*dmh2g22yb2 + pow4(yb)*
-      dmh2yb4 + pow2(p.g1*ytau)*dmh2g12ytau2 + pow2(p.g2*ytau)*dmh2g22ytau2 + 
+      dmh2yb4 + pow2(p.g1*ytau)*dmh2g12ytau2 + pow2(p.g2*ytau)*dmh2g22ytau2 +
       pow4(ytau)*dmh2ytau4 + pow2(p.g1*yt)*dmh2g12yt2 + pow2(p.g2*yt)*dmh2g22yt2);
 }
 
@@ -205,10 +212,10 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs,
  * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
-								int omitMSSMLogs){
+double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) const
+{
    ThresholdCalculator thresholdCalculator(p, msq2);
-   
+
    using std::log;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    // couplings
@@ -231,10 +238,10 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
    const double lmhtreeMt = log(pow2(mhtree / p.Mt));
    const double lmbMt = log(pow2(p.Mb / p.Mt));
    const double lmtauMt = log(pow2(p.Mtau / p.Mt));
-   
+
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
-   
+
    // Threshold corrections
    const double dytas = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
@@ -276,7 +283,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
       ThresholdVariables::LAMBDA_YT4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
    const double dytyb = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   
+
    // Corrections to Mh
    const double dmh2yt4g32 = isNaN(orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
       + (-32 + 48 * dytas) * lmMt - 24 * dytas
@@ -312,7 +319,7 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
       *dytyb*(-6 + dlambdayt4 + 12*lmMt) + pow2(cbeta)*(dlambdayt4yb2 + 3
       *dlambdayt4*(lmhtreeMt - 1 - lmMt) - 6*(5 + lmMt*(13 - 6*lmhtreeMt + 3
       *lmMt) + 2*pow2(Pi))))/2.));
-   
+
    // Loop factor
    const double k2 = 1/pow4(4.*Pi);
 
@@ -327,13 +334,14 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs,
  * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  * 	@param omitDeltaLambda3L an integer flag to disable the MSSM contribution to delta_lambda_3L
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
-								int omitMSSMLogs,
-								int omitDeltaLambda3L){
+double Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
+                                             int omitMSSMLogs,
+                                             int omitDeltaLambda3L) const
+{
    ThresholdCalculator thresholdCalculator(p, msq2);
-   
+
    using std::log;
-   
+
    const double catas2 = 248.1215180432007;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
    // threshold correction of yt_as DRbar'
@@ -345,9 +353,9 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
    // threshold correction of g3_as DRbar'
    const double dg3as = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::G3_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   
+
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
-   
+
    // 3-Loop prefactor at*as^2
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
 
@@ -366,19 +374,20 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
  *   @param mst1 the mass of the light stop quark
  *   @return delta_Lambda 3L
  */
-double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const{
+double Mh2EFTCalculator::getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const
+{
    using std::log;
-   
+
    const double LS = omitlogs*log(pow2(scale / p.MSt(0))) + log(pow2(p.MSt(0) / mst1));
-   
+
    const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
-   
+
    // 3-Loop prefactor
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
-   
+
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vd) + pow2(p.vu);
-   
+
    const double xt = Xt/mst1;
    const double catas2 = 248.1215180432007;
 
@@ -391,17 +400,5 @@ double himalaya::mh2_eft::Mh2EFTCalculator::getDeltaLambdaDegenerate(double scal
    return deltaLambda3L;
 }
 
-/**
- * 	A function which maps a boolean to a string.
- * 	@param tf a boolean.
- * 	@return A string which is 'true' if tf is true or 'false' if tf is false.
- */
-std::string himalaya::mh2_eft::Mh2EFTCalculator::tf(const bool tf){
-   return tf ? "\033[1;32mtrue\033[0m" : "\033[1;31mfalse\033[0m";
-}
-
-double himalaya::mh2_eft::Mh2EFTCalculator::isNaN(double var){
-   if(std::isnan(var)) return 0.;
-   return var;
-}
-
+} // namespace mh2_eft
+} // namespace himalaya
