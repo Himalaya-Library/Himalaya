@@ -29,6 +29,7 @@ namespace himalaya{
        * 	@param Mst2 a double stop 2 mass
        * 	@param MuSUSY a double mu parameter
        * 	@param s2t a double 2 times the sine of the stop/sbottom quark mixing angle
+       *        @param Msq average light squark mass
        * 	@param mdrFlag an int 0 for DR and 1 for MDR scheme
        * 	@param oneLoopFlag an int flag to consider the one-loop expansion terms
        * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms

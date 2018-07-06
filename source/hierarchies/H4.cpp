@@ -20,7 +20,7 @@
  * 	@param beta a double which is the mixing angle beta
  * 	@param lmMt a double log((<renormalization scale> / Mt)^2)
  * 	@param lmMsq a double log((<renormalization scale> / Msq)^2)
- * 	@param lmMst1 a double log((<renormalization scale> / Mst1)^2)
+ * 	@param lmMsusy a double log((<renormalization scale> / Msusy)^2)
  * 	@param Mt a double top/bottom quark mass
  * 	@param Msusy a double (Mst1 + Mst2 + Mgl) / 3.
  * 	@param Msq a double the average squark mass w/o the top squark
