@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.org/Himalaya-Library/Himalaya.svg?branch=master)](https://travis-ci.org/Himalaya-Library/Himalaya)
 
-**This is an experimental version. Please use the published versions which can be found by tags.**
-
 Himalaya calculates three-loop corrections of order O((αt + αb)*αs^2)
 to the MSSM CP-even Higgs mass matrix and to the quartic Higgs
 coupling λ in the DR'-bar scheme using the results of:
@@ -24,7 +22,11 @@ Please refer to these papers as well as
 * R. V. Harlander, J. Klappert and A. Voigt, *Higgs mass prediction in
   the MSSM at three-loop level in a pure DR context*, [*Eur.Phys.J.*
   **C77** (2017) no.12, 814](https://doi.org/10.1140/epjc/s10052-017-5368-6),
-  [[1708.05720](https://arxiv.org/abs/1708.05720)]
+  [[1708.05720](https://arxiv.org/abs/1708.05720)],
+
+* R. V. Harlander, J. Klappert, A. D. Ochoa Franco and A. Voigt,
+  *The light CP-even MSSM Higgs mass resummed to fourth logarithmic order*,
+  [[1807.XXXX](https://arxiv.org/abs/1807.XXXX)]   
 
 when using Himalaya.
 
