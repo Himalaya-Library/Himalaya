@@ -12,6 +12,9 @@
 #include <cmath>
 #include <type_traits>
 
+namespace himalaya{
+namespace hierarchies{
+
 /**
  * 	Constructor
  * 	@param flagMap the flagMap for the truncation of expansion variables
@@ -33,7 +36,7 @@
  * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms
  * 	@param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-himalaya::H6bq22g::H6bq22g(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmglst2,
+H6bq22g::H6bq22g(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmglst2,
 		 double Dmsqst2, double lmMt, double lmMst1, double lmMst2,
 		 double Mt, double Mst1, double Mst2, double Msq, double MuSUSY,
 		 double s2t,
@@ -70,7 +73,7 @@ himalaya::H6bq22g::H6bq22g(const std::map<unsigned int, unsigned int>& flagMap, 
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6bq22g'
  */
-double himalaya::H6bq22g::getS1() const {
+double H6bq22g::getS1() const {
    return -(threeLoopFlag*pow2(Al4p)*(pow2(Mt)*pow2(s2t)*((5*Dmglst2*Dmsqst2*(-1081
         + 165*lmMst1 - 165*lmMst2)*(-1 + pow2(Sbeta))*pow2(Sbeta)*pow4(Mst1))/(
         9.*pow2(Msq)*pow3(Mst2)) + pow2(MuSUSY)*(53.385802469135804 + (40*B4)/
@@ -459,7 +462,7 @@ double himalaya::H6bq22g::getS1() const {
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6bq22g'
  */
-double himalaya::H6bq22g::getS2() const {
+double H6bq22g::getS2() const {
    return -(oneLoopFlag*((4*Mt*MuSUSY*s2t*(4*(lmMst1 - lmMst2)*pow2(Mt) + ((-2 -
         lmMst1 + lmMst2)*pow2(Mst1) + (2 - lmMst1 + lmMst2)*pow2(Mst2))*pow2(
         s2t)))/Tbeta + 4*pow2(Mt)*pow2(s2t)*(2*(lmMst1 - lmMst2)*(pow2(Mst1) -
@@ -2530,7 +2533,7 @@ double himalaya::H6bq22g::getS2() const {
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6bq22g'
  */
-double himalaya::H6bq22g::getS12() const {
+double H6bq22g::getS12() const {
    return (Al4p*Mt*MuSUSY*xDmglst2*z2*pow2(Dmglst2)*(-22680*twoLoopFlag*pow2(Mst1)*
         (2*Mt*pow2(Mst1)*pow2(Mst2)*(-24*Mt*MuSUSY*s2t + 4*Tbeta*pow2(Mt) +
         Mst2*(MuSUSY + 9*Mst2*Tbeta)*pow2(s2t)) + 2*Mt*(-36*Mt*MuSUSY*s2t + 28*
@@ -3640,7 +3643,7 @@ double himalaya::H6bq22g::getS12() const {
 /**
  * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log0() const {
+double H6bq22g::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       (588*Mst2*pow2(Dmglst2)*pow4(Msq)*(1134000*pow2(Mst1)*pow4(Mst2)*(-8*(-
@@ -3954,7 +3957,7 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log0() const {
 /**
  * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log1() const {
+double H6bq22g::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       (4*Mst2*pow2(Dmglst2)*pow4(Msq)*(-225*pow2(Mst1)*pow4(Mst2)*(-664*pow2(
@@ -4075,7 +4078,7 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log1() const {
 /**
  * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log2() const {
+double H6bq22g::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       (Mst2*pow2(Dmglst2)*pow4(Msq)*(pow2(Mst2)*pow4(Mst1)*(33360*pow2(Mst2)*
@@ -4130,10 +4133,13 @@ double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log2() const {
 /**
  * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H6bq22g::calc_coef_at_as2_no_sm_logs_log3() const {
+double H6bq22g::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       -298.6666666666667;
 
    return result;
 }
+
+}	// hierarchies
+}	// himalaya

@@ -10,7 +10,8 @@
 #include <map>
 
 namespace himalaya{
-   
+namespace hierarchies{
+
    class H6b2qg2{
    public:
       /**
@@ -72,4 +73,6 @@ namespace himalaya{
       int shiftst1{}, shiftst2{}, shiftst3{}, xDR2DRMOD{}, xDmsqst2{}, xDmglst2{}, xMst{}; /**< MDR and truncation flags */
       int oneLoopFlag{}, twoLoopFlag{}, threeLoopFlag{}; /**< loop flags */
    };
+
+}	// hierarchies
 }	// himalaya

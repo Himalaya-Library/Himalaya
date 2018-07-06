@@ -422,6 +422,8 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    himalaya::HierarchyObject& ho, const int oneLoopFlagIn,
    const int twoLoopFlagIn, const int threeLoopFlagIn) const
 {
+   using namespace himalaya::hierarchies;
+
    // get the hierarchy
    const int hierarchy = ho.getSuitableHierarchy();
 

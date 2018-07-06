@@ -12,6 +12,9 @@
 #include <cmath>
 #include <type_traits>
 
+namespace himalaya{
+namespace hierarchies{
+
 /**
  * 	Constructor
  * 	@param flagMap the flagMap for the truncation of expansion variables
@@ -34,7 +37,7 @@
  * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms
  * 	@param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-himalaya::H9q2::H9q2(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmst12, double Dmsqst1,
+H9q2::H9q2(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmst12, double Dmsqst1,
 		 double lmMt, double lmMgl, double lmMst1,
 		 double Mgl, double Mt, double Mst1, double Mst2, double Msq, double MuSUSY,
 		 double s2t,
@@ -72,7 +75,7 @@ himalaya::H9q2::H9q2(const std::map<unsigned int, unsigned int>& flagMap, double
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9q2'
  */
-double himalaya::H9q2::getS1() const {
+double H9q2::getS1() const {
    return -(pow2(MuSUSY)*((Al4p*(10*xMgl*pow4(Mgl)*(2*xDmst12*pow2(Mt)*(216*(1 - 3*
         lmMgl + 3*lmMst1)*twoLoopFlag*pow2(Mst1)*pow2(s2t) + Al4p*
         threeLoopFlag*(288*(262 + 335*lmMst1 - 96*lmMt - 72*lmMst1*lmMt +
@@ -182,7 +185,7 @@ double himalaya::H9q2::getS1() const {
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9q2'
  */
-double himalaya::H9q2::getS2() const {
+double H9q2::getS2() const {
    return (576*Al4p*z2*(1440*twoLoopFlag*pow2(Sbeta)*pow3(Mgl)*pow3(Mt)*pow4(Msq)*(
         xDmst12*pow2(Mst1)*(3*x*pow2(Mgl)*(Mt*(MuSUSY - Mgl*Tbeta) + s2t*Tbeta*
         pow2(Mgl)) - (Mt*MuSUSY + 4*s2t*Tbeta*x*pow2(Mgl))*pow2(Mst1))*pow3(
@@ -867,7 +870,7 @@ double himalaya::H9q2::getS2() const {
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9q2'
  */
-double himalaya::H9q2::getS12() const {
+double H9q2::getS12() const {
    return (MuSUSY*(-6*xDmst12*pow3(Dmst12)*(threeLoopFlag*pow2(Al4p)*(-3*s2t*(
         104600 + 104000*lmMst1 - 52480*pow2(lmMst1) + (18675*Dmsqst1)/pow2(Msq)
         + (64*pow2(Mgl)*(4113 + 90*lmMgl - 1792*lmMst1 + 120*lmMt - 48*pow2(
@@ -1177,7 +1180,7 @@ double himalaya::H9q2::getS12() const {
 /**
  * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log0() const {
+double H9q2::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       (-432*pow2(log(pow2(Mst1)/pow2(Mgl)))*pow4(Msq)*(-2*Mt*pow2(Dmst12)*pow2(
@@ -1277,7 +1280,7 @@ double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log0() const {
 /**
  * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log1() const {
+double H9q2::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       (8*(-6*pow2(Mt)*pow2(log(pow2(Mst1)/pow2(Mgl)))*pow4(Msq)*(-203*Mt*pow2(
@@ -1344,7 +1347,7 @@ double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log1() const {
 /**
  * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log2() const {
+double H9q2::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       (8*(Mt*pow2(Dmst12)*pow2(Mst2)*pow4(Msq)*(528*Mt*s2t*pow2(Mst1)*pow3(Mgl)
@@ -1365,14 +1368,14 @@ double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log2() const {
         Dmst12)*pow4(Mgl) + 2*Dmst12*(-85*Mgl*Mt + 44*s2t*pow2(Mst1))*pow3(Mgl)
         *pow4(Mst2) + 2*Mt*(-85*pow4(Mgl) + 9*pow4(Mst1))*pow6(Mst2))))/(9.*
         pow3(Mt)*pow4(Msq)*pow4(Mst1)*pow6(Mst2));
-   
+
    return result;
 }
 
 /**
  * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log3() const {
+double H9q2::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       -298.6666666666667;
@@ -1380,5 +1383,5 @@ double himalaya::H9q2::calc_coef_at_as2_no_sm_logs_log3() const {
    return result;
 }
 
-
-
+}	// hierarchies
+}	// himalaya

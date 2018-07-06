@@ -12,6 +12,9 @@
 #include <cmath>
 #include <type_traits>
 
+namespace himalaya{
+namespace hierarchies{
+
 /**
  * 	Constructor
  * 	@param flagMap the flagMap for the truncation of expansion variables
@@ -34,7 +37,7 @@
  * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms
  * 	@param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-himalaya::H5g1::H5g1(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmglst1,
+H5g1::H5g1(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmglst1,
 		 double lmMt, double lmMst1, double lmMst2, double lmMsq,
 		 double Mgl, double Mt, double Mst1, double Mst2, double Msq, double MuSUSY,
 		 double s2t,
@@ -71,7 +74,7 @@ himalaya::H5g1::H5g1(const std::map<unsigned int, unsigned int>& flagMap, double
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5g1'
  */
-double himalaya::H5g1::getS1() const {
+double H5g1::getS1() const {
    return (pow2(Mt)*pow2(MuSUSY)*(972*oneLoopFlag*pow2(s2t)*(2 - lmMst1 + lmMst2 -
         (2*(lmMst1 - lmMst2)*pow2(Mst1)*(pow2(Mst1) + pow2(Mst2)))/pow4(Mst2))
         + 16*threeLoopFlag*pow2(Al4p)*(486*pow2(s2t)*(83.61265432098766 + 4*B4
@@ -302,7 +305,7 @@ double himalaya::H5g1::getS1() const {
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5g1'
  */
-double himalaya::H5g1::getS2() const {
+double H5g1::getS2() const {
    return -(oneLoopFlag*((4*Mt*MuSUSY*s2t*(4*(lmMst1 - lmMst2)*pow2(Mt) + ((-2 -
         lmMst1 + lmMst2)*pow2(Mst1) + (2 - lmMst1 + lmMst2)*pow2(Mst2))*pow2(
         s2t)))/Tbeta + pow2(Mt)*pow2(s2t)*(8*(lmMst1 - lmMst2)*(pow2(Mst1) -
@@ -1749,7 +1752,7 @@ double himalaya::H5g1::getS2() const {
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5g1'
  */
-double himalaya::H5g1::getS12() const {
+double H5g1::getS12() const {
    return -(MuSUSY*((Mt*(9*oneLoopFlag*s2t*(2*(2 - lmMst1 + lmMst2)*Mt*MuSUSY*s2t +
         4*(-lmMst1 + lmMst2)*Tbeta*pow2(Mt) + (-2 + lmMst1 - lmMst2)*Tbeta*
         pow2(Mst2)*pow2(s2t)) - (48*Al4p*twoLoopFlag*(-(Mst1*Mt*(4*Mgl*Mt*
@@ -2057,7 +2060,7 @@ double himalaya::H5g1::getS12() const {
 /**
  * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log0() const {
+double H5g1::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       1555.7037037037037 - (17720*Dmglst1)/(27.*Mgl) + (5936*Mst1*s2t)/(9.*Mt)
@@ -3452,7 +3455,7 @@ double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log0() const {
 /**
  * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log1() const {
+double H5g1::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       -447.7037037037037 - (11024*Dmglst1)/(27.*Mgl) + (1472*Mst1*s2t)/(3.*Mt)
@@ -3775,7 +3778,7 @@ double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log1() const {
 /**
  * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log2() const {
+double H5g1::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       (14760*pow2(Mgl)*pow2(Mst1)*pow2(Mst2)*pow2(Mt)*pow2(MuSUSY)*pow2(s2t) -
@@ -3892,7 +3895,7 @@ double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log2() const {
 /**
  * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log3() const {
+double H5g1::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       -298.6666666666667;
@@ -3900,5 +3903,5 @@ double himalaya::H5g1::calc_coef_at_as2_no_sm_logs_log3() const {
    return result;
 }
 
-
-
+}	// hierarchies
+}	// himalaya

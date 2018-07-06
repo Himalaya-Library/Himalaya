@@ -12,6 +12,9 @@
 #include <cmath>
 #include <type_traits>
 
+namespace himalaya{
+namespace hierarchies{
+
 /**
  * 	Constructor
  * 	@param flagMap the flagMap for the truncation of expansion variables
@@ -33,7 +36,7 @@
  * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms
  * 	@param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-himalaya::H6::H6(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmglst2,
+H6::H6(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmglst2,
 		 double lmMt, double lmMst1, double lmMst2, double lmMsq,
 		 double Mt, double Mst1, double Mst2, double Msq, double MuSUSY,
 		 double s2t,
@@ -70,7 +73,7 @@ himalaya::H6::H6(const std::map<unsigned int, unsigned int>& flagMap, double Al4
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
  */
-double himalaya::H6::getS1() const {
+double H6::getS1() const {
    return -(pow2(Mt)*(-(pow2(MuSUSY)*(3645*oneLoopFlag*pow2(s2t)*(2 - lmMst1 +
         lmMst2 - (2*(lmMst1 - lmMst2)*pow2(Mst1)*(pow2(Mst1) + pow2(Mst2)))/
         pow4(Mst2)) + (19440*Al4p*pow2(s2t)*((2 - lmMst2)*twoLoopFlag*xDmglst2*
@@ -460,7 +463,7 @@ double himalaya::H6::getS1() const {
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
  */
-double himalaya::H6::getS2() const {
+double H6::getS2() const {
    return -(oneLoopFlag*((4*Mt*MuSUSY*s2t*(4*(lmMst1 - lmMst2)*pow2(Mt) + ((-2 -
         lmMst1 + lmMst2)*pow2(Mst1) + (2 - lmMst1 + lmMst2)*pow2(Mst2))*pow2(
         s2t)))/Tbeta + 4*pow2(Mt)*pow2(s2t)*(2*(lmMst1 - lmMst2)*(pow2(Mst1) -
@@ -2881,7 +2884,7 @@ double himalaya::H6::getS2() const {
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
  */
-double himalaya::H6::getS12() const {
+double H6::getS12() const {
    return Al4p*z2*(Al4p*threeLoopFlag*(MuSUSY*((Mt*s2t*shiftst3*pow2(Mst2)*(-4*
         pow2(Mt) + ((-1 - lmMst1 + lmMst2)*pow2(Mst1) + pow2(Mst2))*pow2(s2t)))
         /(3.*pow2(Mst1)) - pow2(Mt)*pow2(s2t)*((-5*(Mst2*(41*Dmglst2 + 5*Mst2)
@@ -3919,7 +3922,7 @@ double himalaya::H6::getS12() const {
         1296.*pow4(Mst1)*pow6(Mst2)));
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log0() const {
+double H6::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       4832.548148148148 + (7949728*Dmglst2)/(945.*Mst2) + (448*OepS2)/9. + (
@@ -4650,7 +4653,7 @@ double himalaya::H6::calc_coef_at_as2_no_sm_logs_log0() const {
    return result;
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log1() const {
+double H6::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       -474.3703703703704 - (115472*Dmglst2)/(27.*Mst2) + (204928*Dmglst2*s2t)/(
@@ -4828,7 +4831,7 @@ double himalaya::H6::calc_coef_at_as2_no_sm_logs_log1() const {
    return result;
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log2() const {
+double H6::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       (1920*pow11(Mst2)*pow2(Mt)*pow2(s2t) + 52480*s2t*pow2(Dmglst2)*pow3(Mt)*
@@ -4892,7 +4895,7 @@ double himalaya::H6::calc_coef_at_as2_no_sm_logs_log2() const {
    return result;
 }
 
-double himalaya::H6::calc_coef_at_as2_no_sm_logs_log3() const {
+double H6::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       -298.6666666666667;
@@ -4900,6 +4903,5 @@ double himalaya::H6::calc_coef_at_as2_no_sm_logs_log3() const {
    return result;
 }
 
-
-
-
+}	// hierarchies
+}	// himalaya

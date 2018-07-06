@@ -12,6 +12,9 @@
 #include <cmath>
 #include <type_traits>
 
+namespace himalaya{
+namespace hierarchies{
+
 /**
  * 	Constructor
  * 	@param flagMap the flagMap for the truncation of expansion variables
@@ -33,7 +36,7 @@
  * 	@param twoLoopFlag an int flag to consider the two-loop expansion terms
  * 	@param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-himalaya::H9::H9(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmst12, double Dmsqst1,
+H9::H9(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmst12, double Dmsqst1,
 		 double lmMt, double lmMgl, double lmMst1,
 		 double Mgl, double Mt,  double Mst1, double Mst2, double MuSUSY,
 		 double s2t,
@@ -70,7 +73,7 @@ himalaya::H9::H9(const std::map<unsigned int, unsigned int>& flagMap, double Al4
 /**
  * 	@return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
  */
-double himalaya::H9::getS1() const {
+double H9::getS1() const {
    return -(pow2(MuSUSY)*((10*Al4p*xMgl*pow4(Mgl)*(2*xDmst12*pow2(Mt)*(216*(1 - 3*
         lmMgl + 3*lmMst1)*twoLoopFlag*pow2(Mst1)*pow2(s2t) + Al4p*
         threeLoopFlag*(288*(262 + 335*lmMst1 - 96*lmMt - 72*lmMst1*lmMt +
@@ -169,7 +172,7 @@ double himalaya::H9::getS1() const {
 /**
  * 	@return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
  */
-double himalaya::H9::getS2() const {
+double H9::getS2() const {
    return -(-5*xDmst12*pow2(Mst1)*pow3(Dmst12)*(Mt*(54*oneLoopFlag*(-(Mt*Tbeta*
         pow2(s2t)*(pow2(MuSUSY)*(-1 + pow2(Sbeta)) + 18*pow2(Mst1)*pow2(Sbeta))
         ) - 8*Tbeta*pow2(Sbeta)*pow3(Mt) + MuSUSY*pow2(Sbeta)*(8*s2t*pow2(Mt) -
@@ -799,7 +802,7 @@ double himalaya::H9::getS2() const {
 /**
  * 	@return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
  */
-double himalaya::H9::getS12() const {
+double H9::getS12() const {
    return (MuSUSY*(Mt*pow2(Mst1)*((20*Al4p*xMgl*pow4(Mgl)*(xDmst12*pow3(Dmst12)*(
         216*s2t*twoLoopFlag*pow2(Mst1)*(4*(1 - 3*lmMgl + 3*lmMst1)*Mt*MuSUSY*
         s2t + 96*(-1 + lmMgl - lmMst1)*Tbeta*pow2(Mt) + (-1 + 3*lmMgl - 3*
@@ -1081,7 +1084,7 @@ double himalaya::H9::getS12() const {
 /**
  * 	@return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9::calc_coef_at_as2_no_sm_logs_log0() const {
+double H9::calc_coef_at_as2_no_sm_logs_log0() const {
 
    const double result =
       -(432*pow2(log(pow2(Mst1)/pow2(Mgl)))*pow4(Mst1)*(-2*Mt*pow2(Dmst12)*
@@ -1174,7 +1177,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log0() const {
 /**
  * 	@return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9::calc_coef_at_as2_no_sm_logs_log1() const {
+double H9::calc_coef_at_as2_no_sm_logs_log1() const {
 
    const double result =
       (-8*(6*pow2(Mt)*pow2(log(pow2(Mst1)/pow2(Mgl)))*pow4(Mst1)*(-203*Mt*pow2(
@@ -1236,7 +1239,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log1() const {
 /**
  * 	@return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9::calc_coef_at_as2_no_sm_logs_log2() const {
+double H9::calc_coef_at_as2_no_sm_logs_log2() const {
 
    const double result =
       (-8*(6*Dmst12*pow2(Mt)*(43*Mt*pow2(Mgl)*pow2(Mst1) - 248*s2t*pow2(Mst1)*
@@ -1263,7 +1266,7 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log2() const {
 /**
  * 	@return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
-double himalaya::H9::calc_coef_at_as2_no_sm_logs_log3() const {
+double H9::calc_coef_at_as2_no_sm_logs_log3() const {
 
    const double result =
       -298.6666666666667;
@@ -1271,3 +1274,5 @@ double himalaya::H9::calc_coef_at_as2_no_sm_logs_log3() const {
    return result;
 }
 
+}	// hierarchies
+}	// himalaya
