@@ -6,6 +6,7 @@
 // ====================================================================
 
 #include "HierarchyCalculator.hpp"
+#include "Hierarchies.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "H3.hpp"
 #include "H32q2g.hpp"
