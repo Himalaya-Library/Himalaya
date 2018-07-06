@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(Himalaya CXX Fortran)
+project(Himalaya VERSION 2.0.0 LANGUAGES CXX Fortran)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
@@ -17,11 +17,6 @@ find_package(Mathematica 8.0)
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
-
-#set version number
-set(Himalaya_VERSION_MAJOR 2)
-set(Himalaya_VERSION_MINOR 0)
-set(Himalaya_VERSION_RELEASE 0)
 
 # set the C++ standard
 set(CMAKE_CXX_STANDARD 11)
