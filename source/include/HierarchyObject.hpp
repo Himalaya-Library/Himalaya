@@ -129,7 +129,7 @@ namespace himalaya{
        * 	Sets the MDR masses
        * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
        */
-      void setMDRMasses(Eigen::Vector2d& mdrMasses);
+      void setMDRMasses(const Eigen::Vector2d& mdrMasses);
       /**
        * 	Sets the delta of the CP-even Higgs mass matrix
        * 	@param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
@@ -222,12 +222,6 @@ namespace himalaya{
       std::map<int, double> dLambdaMap{};						/**< map which holds all delta_lambda corrections multiplied with prefactors */
       std::map<int, double> dLambdaDRbarPrimeToMSbarShiftMap{};				/**< map which holds all DR' -> MS shifts for delta_lambda corrections multiplied with prefactors */
       std::map<int, double> dMh2EFTMap{};						/**< map which holds all delta_Mh2_EFT corrections */
-      /**
-       * 	Sorts a vector.
-       * 	@param vector The vector which should be sorted.
-       *	@return Returns a vector the lightest entry at position 0.
-       */
-      static Eigen::Vector2d sortVector(Eigen::Vector2d& vector);
    };
    /**
     * 	Prints out all information of the HierarchyObject

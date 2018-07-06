@@ -10,6 +10,25 @@
 #include <cmath>
 #include <iostream>
 
+namespace himalaya {
+namespace {
+
+/**
+ * Sorts a vector.
+ * @param v The vector which should be sorted.
+ * @return Returns a vector the lightest entry at position 0.
+ */
+Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
+   auto vector = v;
+   if (vector(0) > vector(1)) {
+      std::swap(vector(0), vector(1));
+   }
+   return vector;
+}
+
+} // anonymous namespace
+} // namespace himalaya
+
 /**
  * 	A constructor.
  * 	@param isAlphab the boolean which determines wether the members are proportinal to alpha_b or alpha_t.
@@ -153,7 +172,7 @@ Eigen::Matrix2d himalaya::HierarchyObject::getDMhDRbarPrimeToH3mShift() const{
  * 	Sets the MDR masses
  * 	@param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
  */
-void himalaya::HierarchyObject::setMDRMasses(Eigen::Vector2d& mdrMasses){
+void himalaya::HierarchyObject::setMDRMasses(const Eigen::Vector2d& mdrMasses){
    this -> mdrMasses = sortVector(mdrMasses);
 }
 
@@ -264,19 +283,6 @@ double himalaya::HierarchyObject::getDLambdaUncertainty(int loops) const{
    }
    
    throw std::runtime_error("Δλ uncertainty " + std::to_string(loops) + " loop(s) is not available.");
-}
-
-/**
- * 	Sorts a vector.
- * 	@param vector The vector which should be sorted.
- * 	@return Returns a vector the lightest entry at position 0.
- */
-Eigen::Vector2d himalaya::HierarchyObject::sortVector(Eigen::Vector2d& vector) {
-   // checks if all variables are ordered in the right way
-   if (vector(0) > vector(1)) {
-      std::swap(vector(0), vector(1));
-   }
-   return vector;
 }
 
 /**
