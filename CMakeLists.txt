@@ -53,7 +53,7 @@ file(GLOB LIBSOURCES
   ${SOURCE_PATH}/misc/*.cpp)
 
 # DSZ library files
-file(GLOB FSOURCES ${INCLUDE_PATH}/mh2l/*.f)
+file(GLOB FSOURCES ${SOURCE_PATH}/mh2l/*.f)
 
 # build the himalaya and DSZ library
 add_library(DSZ_static STATIC ${FSOURCES})
