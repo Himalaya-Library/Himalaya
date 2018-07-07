@@ -78,7 +78,7 @@ namespace Limits{
       MQ3_EQ_M3               = 2,      ///< Flag for mQ3 = m3
       MU3_EQ_M3               = 3,      ///< Flag for mU3 = m3
       MQ3_EQ_MU3_EQ_M3        = 4,      ///< Flag for mQ3 = mU3 = m3
-      DEGENERATE              = 5,	///< Flag for mQ3 = mU3 = m3 = msq
+      DEGENERATE              = 5,        ///< Flag for mQ3 = mU3 = m3 = msq
       NUMBER_OF_LIMITS                  ///< Number of limits
    };
 } // namespace Limits
@@ -89,12 +89,12 @@ namespace RenSchemes{
    /// renormalization scheme falgs
    enum RenSchems : int {
       FIRST         = 0,
-      H3m           = FIRST,	///< H3m flag
-      DRBARPRIME    = 1,	///< DRbar' flag
-      H3mMDRBAR     = 2,	///< MDRbar flag with H3m renormalization
-      MDRBARPRIME   = 3,	///< MDRbar flag with DRbar' renormalization
-      TEST          = 4,	///< A non-physical scheme to test implemented expressions
-      NUMBER_OF_REN_SCHEMES	///< Number of renormalization schemes
+      H3m           = FIRST,        ///< H3m flag
+      DRBARPRIME    = 1,        ///< DRbar' flag
+      H3mMDRBAR     = 2,        ///< MDRbar flag with H3m renormalization
+      MDRBARPRIME   = 3,        ///< MDRbar flag with DRbar' renormalization
+      TEST          = 4,        ///< A non-physical scheme to test implemented expressions
+      NUMBER_OF_REN_SCHEMES        ///< Number of renormalization schemes
    };
 } // namespace RenSchemes
 

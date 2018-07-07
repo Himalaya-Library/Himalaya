@@ -106,7 +106,7 @@ bool isfinite(double exact, double shifted, double limit) noexcept
    return true;
 }
 
-//	one-loop functions from arxiv:1407.4081. Checked.	//
+//        one-loop functions from arxiv:1407.4081. Checked.        //
 
 double F1(double x) noexcept {
    if(x == 1.) return 1.;
@@ -302,7 +302,7 @@ double f7(double x1, double x2) noexcept {
 
       const double x12 = pow2(x1);
       return -3*(1 - 2*x1 - 2*x12 + 2*pow3(x1) + pow2(x12) - 2*pow3(x1)*log(x12))
-	 /(pow3(x1 - 1)*pow2(x1 + 1));
+         /(pow3(x1 - 1)*pow2(x1 + 1));
    }
    if(x1 == x2){
       const double x12 = pow2(x1);
@@ -325,7 +325,7 @@ double f8(double x1, double x2) noexcept {
 
       const double x12 = pow2(x1);
       return 3*(-1 + 4*x12 - 3*pow2(x12) + 2*pow2(x12)*log(x12))
-	 /(4*pow3(x1 - 1)*pow2(1 + x1));
+         /(4*pow3(x1 - 1)*pow2(1 + x1));
    }
    if(x1 == x2){
       const double x12 = pow2(x1);
@@ -364,11 +364,11 @@ double phixyz(double x, double y, double z) noexcept {
 } // anonymous namespace
 
 /**
- * 	Constructor
- * 	@param p_ a HimalayaInterface struct
- * 	@param msq2_ the averaged squark mass of the first two generations squared
- * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
- * 	@param check a boolean which indicates if the threshold corrections should be tested
+ *         Constructor
+ *         @param p_ a HimalayaInterface struct
+ *         @param msq2_ the averaged squark mass of the first two generations squared
+ *         @param verbose a bool enable the output of the parameter validation. Enabled by default
+ *         @param check a boolean which indicates if the threshold corrections should be tested
  */
 ThresholdCalculator::ThresholdCalculator(
    const Parameters& p_, double msq2_, bool verbose, bool check)
@@ -392,41 +392,41 @@ ThresholdCalculator::ThresholdCalculator(
       const double pref = sqrt(2.)*p.Mt*pow4(p.g3/(4*Pi))/v;
 
       if(std::abs(mQ3-mU3) < eps && std::abs(mU3 - m3) < eps && std::abs(m3 - sqrt(msq2)) < eps){
-	 const double lim = pref*getDeltaYtAlphas2(Limits::DEGENERATE, 1);
-	 const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
-	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
-	 msq2 = pow2(mQ3 + std::abs(sqrt(msq2) - mQ3)/2.);
-	 const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::DEGENERATE;
+         const double lim = pref*getDeltaYtAlphas2(Limits::DEGENERATE, 1);
+         const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
+         p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
+         msq2 = pow2(mQ3 + std::abs(sqrt(msq2) - mQ3)/2.);
+         const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::DEGENERATE;
       } else if(std::abs(mQ3 - mU3) < eps && std::abs(mU3 - m3) < eps){
-	 const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3_EQ_M3, 1);
-	 const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
-	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
-	 const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3_EQ_M3;
+         const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3_EQ_M3, 1);
+         const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
+         p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
+         const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3_EQ_M3;
       } else if(std::abs(mQ3 - mU3) < eps){
-	 const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3, 1);
-	 const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
-	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
-	 const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3;
+         const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3, 1);
+         const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
+         p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
+         const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3;
       } else if(std::abs(mQ3 - m3) < eps){
-	 const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_M3, 1);
-	 const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
-	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
-	 const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_M3;
+         const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_M3, 1);
+         const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
+         p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
+         const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_M3;
       } else if(std::abs(mU3 - m3) < eps2){
-	 const double lim = pref*getDeltaYtAlphas2(Limits::MU3_EQ_M3, 1);
-	 const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
-	 p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
-	 const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-	 if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MU3_EQ_M3;
+         const double lim = pref*getDeltaYtAlphas2(Limits::MU3_EQ_M3, 1);
+         const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
+         p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
+         const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
+         if(!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MU3_EQ_M3;
       }
 
       // reset possible parameter shifts
@@ -437,14 +437,14 @@ ThresholdCalculator::ThresholdCalculator(
 }
 
 /**
- * 	Returns a specific threshold corrections for a given mass limit
- * 	@param variable an integer key for a threshold correctionn
- * 	@param scheme an integer key to set the scheme. Choices are {DRbar'} only!
- * 	@param omitLogs an integer to omit all log mu terms
- * 	@return a threshold correction for a given variable in a given scheme for a suitable mass limit
+ *         Returns a specific threshold corrections for a given mass limit
+ *         @param variable an integer key for a threshold correctionn
+ *         @param scheme an integer key to set the scheme. Choices are {DRbar'} only!
+ *         @param omitLogs an integer to omit all log mu terms
+ *         @return a threshold correction for a given variable in a given scheme for a suitable mass limit
  */
 double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
-							     int omitLogs) const
+                                                             int omitLogs) const
 {
    double thresholdCorrection = 0.;
    const double limit = p.massLimit3LThreshold;
@@ -456,154 +456,154 @@ double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
 
    switch(variable){
       case(ThresholdVariables::G3_AS):{
-	 thresholdCorrection = getDeltaG3Alphas(omitLogs);
-	 switch(scheme){
-	    case(RenSchemes::DRBARPRIME):
-	       thresholdCorrection = - thresholdCorrection;
-	       break;
-	 }
+         thresholdCorrection = getDeltaG3Alphas(omitLogs);
+         switch(scheme){
+            case(RenSchemes::DRBARPRIME):
+               thresholdCorrection = - thresholdCorrection;
+               break;
+         }
       }
       break;
       case(ThresholdVariables::YT_AS):{
-	 thresholdCorrection = getDeltaYtAlphas(limit, omitLogs);
-	 switch(scheme){
-	    case(RenSchemes::DRBARPRIME):
-	       thresholdCorrection = - thresholdCorrection;
-	       break;
-	 }
+         thresholdCorrection = getDeltaYtAlphas(limit, omitLogs);
+         switch(scheme){
+            case(RenSchemes::DRBARPRIME):
+               thresholdCorrection = - thresholdCorrection;
+               break;
+         }
       }
       break;
       case(ThresholdVariables::YT_AS2):{
-	 thresholdCorrection = getDeltaYtAlphas2(limit, omitLogs);
-	 switch(scheme){
-	    case(RenSchemes::DRBARPRIME):{
-	       const double dytas = getDeltaYtAlphas(limit, omitLogs);
-	       thresholdCorrection = 2 * getDeltaG3Alphas(omitLogs) * dytas
-		  + pow2(dytas) - thresholdCorrection;
-	    }
-	    break;
-	 }
+         thresholdCorrection = getDeltaYtAlphas2(limit, omitLogs);
+         switch(scheme){
+            case(RenSchemes::DRBARPRIME):{
+               const double dytas = getDeltaYtAlphas(limit, omitLogs);
+               thresholdCorrection = 2 * getDeltaG3Alphas(omitLogs) * dytas
+                  + pow2(dytas) - thresholdCorrection;
+            }
+            break;
+         }
       }
       break;
       case(ThresholdVariables::LAMBDA_AT):{
-	 thresholdCorrection = getDeltaLambdaAlphat(limit, omitLogs);
+         thresholdCorrection = getDeltaLambdaAlphat(limit, omitLogs);
       }
       break;
       case(ThresholdVariables::LAMBDA_AT_AS):{
-	 thresholdCorrection = getDeltaLambdaAlphatAlphas(limit, omitLogs);
-	 switch(scheme){
-	    case(RenSchemes::DRBARPRIME):
-	       thresholdCorrection = thresholdCorrection
-		  - 4 * getDeltaLambdaAlphat(limit, omitLogs) *
-		  getDeltaYtAlphas(limit, omitLogs);
-	       break;
-	 }
+         thresholdCorrection = getDeltaLambdaAlphatAlphas(limit, omitLogs);
+         switch(scheme){
+            case(RenSchemes::DRBARPRIME):
+               thresholdCorrection = thresholdCorrection
+                  - 4 * getDeltaLambdaAlphat(limit, omitLogs) *
+                  getDeltaYtAlphas(limit, omitLogs);
+               break;
+         }
       }
       break;
       // Note that the genuine contribution of lambda_atas2 is unknown and thus set to 0 (note: here are the reconstructed DR' logs included)
       // The lines below just convert it from MSbar to DRbar
       case(ThresholdVariables::LAMBDA_AT_AS2):{
-	 thresholdCorrection = getDeltaLambdaAlphatAlphas2(limit, omitLogs);
-	 switch(scheme){
-	    case(RenSchemes::DRBARPRIME):{
-	       const double dg3as = getDeltaG3Alphas(omitLogs);
-	       const double dytas = getDeltaYtAlphas(limit, omitLogs);
-	       thresholdCorrection = thresholdCorrection +
-	       (getDeltaLambdaAlphatAlphas(limit, omitLogs)
-	       * (-2 * dg3as - 4 * dytas)
-	       + getDeltaLambdaAlphat(limit, omitLogs) * (8 * dg3as * dytas
-		  + 10 * pow2(dytas) - 4 * getDeltaYtAlphas2(limit, omitLogs)));
-	    }
-	    break;
-	 }
+         thresholdCorrection = getDeltaLambdaAlphatAlphas2(limit, omitLogs);
+         switch(scheme){
+            case(RenSchemes::DRBARPRIME):{
+               const double dg3as = getDeltaG3Alphas(omitLogs);
+               const double dytas = getDeltaYtAlphas(limit, omitLogs);
+               thresholdCorrection = thresholdCorrection +
+               (getDeltaLambdaAlphatAlphas(limit, omitLogs)
+               * (-2 * dg3as - 4 * dytas)
+               + getDeltaLambdaAlphat(limit, omitLogs) * (8 * dg3as * dytas
+                  + 10 * pow2(dytas) - 4 * getDeltaYtAlphas2(limit, omitLogs)));
+            }
+            break;
+         }
       }
       break;
       case(ThresholdVariables::LAMBDA_YB2_G12):{
-	 return getDeltaLambdaYb2G12(omitLogs);
+         return getDeltaLambdaYb2G12(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_G14):{
-	 return getDeltaLambdaG14(omitLogs);
+         return getDeltaLambdaG14(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_REG_G14):{
-	 return getDeltaLambdaRegG14();
+         return getDeltaLambdaRegG14();
       }
       case(ThresholdVariables::LAMBDA_CHI_G14):{
-	 return getDeltaLambdaChiG14(omitLogs);
+         return getDeltaLambdaChiG14(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_CHI_G24):{
-	 return getDeltaLambdaChiG24(omitLogs);
+         return getDeltaLambdaChiG24(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_G24):{
-	 return getDeltaLambdaG24(omitLogs);
+         return getDeltaLambdaG24(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_REG_G24):{
-	 return getDeltaLambdaRegG24();
+         return getDeltaLambdaRegG24();
       }
       case(ThresholdVariables::LAMBDA_G12_G22):{
-	 return getDeltaLambdaG12G22(omitLogs);
+         return getDeltaLambdaG12G22(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_REG_G12_G22):{
-	 return getDeltaLambdaRegG12G22();
+         return getDeltaLambdaRegG12G22();
       }
       case(ThresholdVariables::LAMBDA_CHI_G12_G22):{
-	 return getDeltaLambdaChiG12G22();
+         return getDeltaLambdaChiG12G22();
       }
       case(ThresholdVariables::LAMBDA_YB2_G22):{
-	 return getDeltaLambdaYb2G22(omitLogs);
+         return getDeltaLambdaYb2G22(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YB4):{
-	 return getDeltaLambdaYb4(omitLogs);
+         return getDeltaLambdaYb4(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YT2_G12):{
-	 return getDeltaLambdaYt2G12(omitLogs);
+         return getDeltaLambdaYt2G12(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YT2_G22):{
-	 return getDeltaLambdaYt2G22(omitLogs);
+         return getDeltaLambdaYt2G22(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YTAU2_G12):{
-	 return getDeltaLambdaYtau2G12(omitLogs);
+         return getDeltaLambdaYtau2G12(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YTAU2_G22):{
-	 return getDeltaLambdaYtau2G22(omitLogs);
+         return getDeltaLambdaYtau2G22(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YTAU4):{
-	 return getDeltaLambdaYtau4(omitLogs);
+         return getDeltaLambdaYtau4(omitLogs);
       }
       case(ThresholdVariables::G1_G1):{
-	 return getDeltaG1G1(omitLogs);
+         return getDeltaG1G1(omitLogs);
       }
       case(ThresholdVariables::G2_G2):{
-	 return getDeltaG2G2(omitLogs);
+         return getDeltaG2G2(omitLogs);
       }
       case(ThresholdVariables::VEV_YT2):{
-	 return getDeltaVevYt2(limit);
+         return getDeltaVevYt2(limit);
       }
       case(ThresholdVariables::YT_YB):{
-	 return getDeltaYtYb(omitLogs);
+         return getDeltaYtYb(omitLogs);
       }
       case(ThresholdVariables::YT_YT):{
-	 return getDeltaYtYt(omitLogs);
+         return getDeltaYtYt(omitLogs);
       }
       case(ThresholdVariables::YTAU_YTAU):{
-	 return getDeltaYtauYtau(omitLogs);
+         return getDeltaYtauYtau(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YB4_G32):{
-	 return getDeltaLambdaYb4G32(omitLogs);
+         return getDeltaLambdaYb4G32(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YB6):{
-	 return getDeltaLambdaYb6(omitLogs);
+         return getDeltaLambdaYb6(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YT6):{
-	 return getDeltaLambdaYt6(omitLogs);
+         return getDeltaLambdaYt6(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YTAU6):{
-	 return getDeltaLambdaYtau6(omitLogs);
+         return getDeltaLambdaYtau6(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YT2_YB4):{
-	 return getDeltaLambdaYt2Yb4(omitLogs);
+         return getDeltaLambdaYt2Yb4(omitLogs);
       }
       case(ThresholdVariables::LAMBDA_YT4_YB2):{
-	 return getDeltaLambdaYt4Yb2(omitLogs);
+         return getDeltaLambdaYt4Yb2(omitLogs);
       }
    };
 
@@ -1020,12 +1020,12 @@ double ThresholdCalculator::getDeltaVevYt2(int limit) const
 
    switch (limit){
       case himalaya::Limits::GENERAL:
-	 return (-2*pow5(mQ32 - mU32)*pow2(p.s2t) + Xt2*((pow2(mQ32) - pow2(mU32))
-	    *(6*mQ32*mU32 + (pow2(mQ32) - 8*mQ32*mU32 + pow2(mU32))*pow2(p.s2t))
-	    - 12*pow2(c2t)*pow2(mQ32)*pow2(mU32)*log(mQ32/mU32)))/(8*mQ32*mU32*
-	    pow3(mQ32 - mU32));
+         return (-2*pow5(mQ32 - mU32)*pow2(p.s2t) + Xt2*((pow2(mQ32) - pow2(mU32))
+            *(6*mQ32*mU32 + (pow2(mQ32) - 8*mQ32*mU32 + pow2(mU32))*pow2(p.s2t))
+            - 12*pow2(c2t)*pow2(mQ32)*pow2(mU32)*log(mQ32/mU32)))/(8*mQ32*mU32*
+            pow3(mQ32 - mU32));
       default:
-	 return Xt2/(4.*mQ32);
+         return Xt2/(4.*mQ32);
    }
 }
 
@@ -3173,11 +3173,11 @@ double ThresholdCalculator::getDeltaLambdaYt4Yb2(int omitLogs) const
         Xt))/pow2(cbeta));
 }
 
-//	at*as^n threshold corrections with limits and DR' -> MS shifts		//
+//        at*as^n threshold corrections with limits and DR' -> MS shifts                //
 /**
- * 	Returns delta g3_as in the MSbar scheme for a given mass limit
- * 	@param omitLogs an intiger to omit all log mu terms
- * 	@return delta g3_as in the MSbar scheme for a given mass limit
+ *         Returns delta g3_as in the MSbar scheme for a given mass limit
+ *         @param omitLogs an intiger to omit all log mu terms
+ *         @return delta g3_as in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
 {
@@ -3198,10 +3198,10 @@ double ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
 }
 
 /**
- * 	Returns delta yt_as in the MSbar scheme for a given mass limit
- * 	@param limit an integer key for a mass limit
- * 	@param omitLogs an integer key to omit all mu terms
- * 	@return delta yt_as in the MSbar scheme for a given mass limit
+ *         Returns delta yt_as in the MSbar scheme for a given mass limit
+ *         @param limit an integer key for a mass limit
+ *         @param omitLogs an integer key to omit all mu terms
+ *         @return delta yt_as in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
 {
@@ -3224,7 +3224,7 @@ double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
 
    switch (limit){
       case(Limits::GENERAL):{
-	 return (2*(-2*lmQ3MR + (mQ32*mU32)/((-m32 + mQ32)*(m32 - mU32)) + pow4(m3)/((m32
+         return (2*(-2*lmQ3MR + (mQ32*mU32)/((-m32 + mQ32)*(m32 - mU32)) + pow4(m3)/((m32
         - mQ32)*(m32 - mU32)) - (mU32*log(mU32/pow2(mQ3))*(2*m32*(mQ32 - mU32)
         - mQ32*mU32 - 4*m3*mU32*Xt + 4*Xt*pow3(m3) + pow4(mU3)))/((-mQ32 +
         mU32)*pow2(m32 - mU32)) - (log(m32/pow2(mQ3))*pow3(m3)*(-4*mQ32*mU32*Xt
@@ -3233,20 +3233,20 @@ double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
         mU32))))/3.;
       }
       case(Limits::MQ3_EQ_MU3):{
-	 return (-2*((m32 - mQ32)*((-1 + 2*lmQ3MR)*m32 - (1 + 2*lmQ3MR)*mQ32 + 4*m3*Xt) +
+         return (-2*((m32 - mQ32)*((-1 + 2*lmQ3MR)*m32 - (1 + 2*lmQ3MR)*mQ32 + 4*m3*Xt) +
         2*(m3 - 2*Xt)*log(m32/pow2(mQ3))*pow3(m3)))/(3.*pow2(m32 - mQ32));
       }
       case(Limits::MQ3_EQ_M3):{
-	 return (-4*lmQ3MR - ((mQ32 - mU32)*(mQ32 - 3*mU32 - 8*mQ3*Xt) + 2*mU32*(-2*mQ32
+         return (-4*lmQ3MR - ((mQ32 - mU32)*(mQ32 - 3*mU32 - 8*mQ3*Xt) + 2*mU32*(-2*mQ32
         + mU32 - 4*mQ3*Xt)*log(mU32/pow2(mQ3)))/pow2(mQ32 - mU32))/3.;
       }
       case(Limits::MU3_EQ_M3):{
-	 return (2*(-2*lmQ3MR + (-3*mQ32 + mU3*(mU3 - 8*Xt))/(2.*(mQ32 - mU32)) - (log(
+         return (2*(-2*lmQ3MR + (-3*mQ32 + mU3*(mU3 - 8*Xt))/(2.*(mQ32 - mU32)) - (log(
         mU32/pow2(mQ3))*(-2*mQ32*mU3*(mU3 - 2*Xt) + pow4(mQ3) + 2*pow4(mU3)))/
         pow2(mQ32 - mU32)))/3.;
       }
       case(Limits::MQ3_EQ_MU3_EQ_M3):{
-	 return (-4*(mQ3 + lmQ3MR*mQ3 - Xt))/(3.*mQ3);
+         return (-4*(mQ3 + lmQ3MR*mQ3 - Xt))/(3.*mQ3);
       }
    };
 
@@ -3254,10 +3254,10 @@ double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
 }
 
 /**
-  * 	Returns delta yt_as^2 in the MSbar scheme for a given mass limit
-  * 	@param limit an integer key for a mass limit
-  * 	@param omitLogs an integer key to omit all mu terms
-  * 	@return delta yt_as^2 in the MSbar scheme for a given mass limit
+  *         Returns delta yt_as^2 in the MSbar scheme for a given mass limit
+  *         @param limit an integer key for a mass limit
+  *         @param omitLogs an integer key to omit all mu terms
+  *         @return delta yt_as^2 in the MSbar scheme for a given mass limit
   */
 double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
 {
@@ -3279,7 +3279,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
 
    switch (limit){
       case(Limits::GENERAL):{
-	 return (4*pow2(lmQ3MR) - 60*pow2(log(msq2/mQ32)) - (16*Xt*(-3*m3*(mQ32 + 10*msq2
+         return (4*pow2(lmQ3MR) - 60*pow2(log(msq2/mQ32)) - (16*Xt*(-3*m3*(mQ32 + 10*msq2
         + mU32) + 14*pow3(m3)))/((m32 - mQ32)*(m32 - mU32)) + (60*(mQ32 - msq2)
         *dilog(1 - msq2/mQ32)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) + (8*
         m3*(m32 - mQ32)*(mQ32 - msq2)*Xt)/(mQ32 - mU32) - 2*pow4(m3)))/pow3(m32
@@ -3453,7 +3453,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
         mU32)))/18.;
       }
       case(Limits::MQ3_EQ_MU3):{
-	 return (4*pow2(lmQ3MR) + (128*m3*Xt*(m32 - mQ32 + m3*Xt))/pow2(m32 - mQ32) - 60*
+         return (4*pow2(lmQ3MR) + (128*m3*Xt*(m32 - mQ32 + m3*Xt))/pow2(m32 - mQ32) - 60*
         pow2(log(msq2/mQ32)) + (480*m3*msq2*(-mQ32 + msq2)*Xt*log(msq2/mQ32))/
         pow2(-(m32*mQ3) + pow3(mQ3)) + (32*(8*m3 - 9*Xt)*log(m32/mQ32)*pow3(m3)
         )/((m32 - mQ32)*mQ32) - (32*Xt*(-3*m3*(mQ32 + 5*msq2) + 7*pow3(m3)))/
@@ -3496,7 +3496,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
         )))/pow4(m32 - mQ32))/18.;
       }
       case(Limits::MQ3_EQ_M3):{
-	 return   (8064 + (384*(mQ32 + mU32 + 2*mQ3*Xt)*log(mQ32/mU32))/(mQ32 - mU32) +
+         return   (8064 + (384*(mQ32 + mU32 + 2*mQ3*Xt)*log(mQ32/mU32))/(mQ32 - mU32) +
         192*pow2(lmQ3MR) - 2880*pow2(log(msq2/mQ32)) - (288*(mQ3 - 2*Xt)*(-2*
         mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32)))/(-(mQ3*mU32) + pow3(mQ3)
         ) - (2880*msq2*(-2*mQ32 + 2*msq2 + (-3*mQ32 + msq2)*log(msq2/mQ32))*(-(
@@ -3569,7 +3569,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
         864.;
       }
       case(Limits::MU3_EQ_M3):{
-	 return(32080 - (1536*(mQ32 + mU3*(mU3 + 2*Xt))*log(mU32/mQ32))/(mQ32 - mU32) +
+         return(32080 - (1536*(mQ32 + mU3*(mU3 + 2*Xt))*log(mU32/mQ32))/(mQ32 - mU32) +
         768*pow2(lmQ3MR) - 11520*pow2(log(msq2/mQ32)) - (1152*(mU3 - 2*Xt)*(2*(
         mQ32 - mU32) + (mQ32 + mU32)*log(mU32/mQ32)))/(-(mQ32*mU3) + pow3(mU3))
         - (11520*msq2*(2*(msq2 - mU32) + (msq2 - 3*mU32)*log(msq2/mU32))*(-(
@@ -3667,7 +3667,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
         pow9(mU3))))/pow4(-(mQ32*mU3) + pow3(mU3)))/3456.;
       }
       case(Limits::MQ3_EQ_MU3_EQ_M3):{
-	 return (1835*mQ32*msq2 - 232*mQ3*msq2*Xt + 780*mQ32*msq2*log(msq2/mQ32) - 360*
+         return (1835*mQ32*msq2 - 232*mQ3*msq2*Xt + 780*mQ32*msq2*log(msq2/mQ32) - 360*
         mQ3*msq2*Xt*log(msq2/mQ32) - 4*lmQ3MR*mQ3*(mQ32 - msq2)*(335*mQ3 + 104*
         Xt + 60*mQ3*log(msq2/mQ32)) + 96*mQ32*pow2(Xt) - 96*msq2*pow2(Xt) +
         180*mQ32*msq2*pow2(log(msq2/mQ32)) + 232*Xt*pow3(mQ3) - 120*Xt*log(
@@ -3677,7 +3677,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
         mQ32*(mQ32 - msq2));
       }
       case(Limits::DEGENERATE):{
-	 return (-2075*mQ32 + 712*mQ3*Xt - 4*lmQ3MR*mQ3*(335*mQ3 + 104*Xt) + 12*mQ32*
+         return (-2075*mQ32 + 712*mQ3*Xt - 4*lmQ3MR*mQ3*(335*mQ3 + 104*Xt) + 12*mQ32*
         pow2(lmQ3MR) + 96*pow2(Xt))/(54.*mQ32);
       }
    };
@@ -3686,10 +3686,10 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
 }
 
 /**
- * 	Returns delta lambda_at in the MSbar scheme for a given mass limit
- * 	@param limit an integer key for a mass limit
- * 	@param omitLogs an integer key to omit all mu terms
- * 	@return delta lambda_at in the MSbar scheme for a given mass limit
+ *         Returns delta lambda_at in the MSbar scheme for a given mass limit
+ *         @param limit an integer key for a mass limit
+ *         @param omitLogs an integer key to omit all mu terms
+ *         @return delta lambda_at in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
 {
@@ -3711,11 +3711,11 @@ double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
 
    switch (limit){
       case(Limits::GENERAL):{
-	 return 12*pow4(Xt)/pow2(mQ32 - mU32) + 12*lmQ3MR + (6 - 12*pow2(Xt)/(mQ32 - mU32)
-	    + (6*(mQ32 + mU32)/pow3(mQ32 - mU32))*pow4(Xt))*log(mU32/mQ32);
+         return 12*pow4(Xt)/pow2(mQ32 - mU32) + 12*lmQ3MR + (6 - 12*pow2(Xt)/(mQ32 - mU32)
+            + (6*(mQ32 + mU32)/pow3(mQ32 - mU32))*pow4(Xt))*log(mU32/mQ32);
       }
       case(Limits::MQ3_EQ_MU3):{
-	 return 12*lmQ3MR + 12*pow2(Xt)/mQ32 - pow4(Xt)/pow2(mQ32);
+         return 12*lmQ3MR + 12*pow2(Xt)/mQ32 - pow4(Xt)/pow2(mQ32);
       }
    };
 
@@ -3723,10 +3723,10 @@ double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
 }
 
 /**
- * 	Returns delta lambda_atas in the MSbar scheme for a given mass limit
- * 	@param limit an integer key for a mass limit
- * 	@param omitLogs an integer key to omit all mu terms
- * 	@return delta lambda_atas in the MSbar scheme for a given mass limit
+ *         Returns delta lambda_atas in the MSbar scheme for a given mass limit
+ *         @param limit an integer key for a mass limit
+ *         @param omitLogs an integer key to omit all mu terms
+ *         @return delta lambda_atas in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) const
 {
@@ -3749,7 +3749,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
 
    switch (limit){
       case(Limits::GENERAL):{
-	 return 16*(-6*pow2(lmQ3MR) - (4*m32*pow2(Xt))/(pow2(mQ3)*pow2(mU3)) - (32*m3*
+         return 16*(-6*pow2(lmQ3MR) - (4*m32*pow2(Xt))/(pow2(mQ3)*pow2(mU3)) - (32*m3*
         pow3(Xt))/pow2(mQ32 - mU32) - (2*dilog(1 - m32/pow2(mQ3))*(-8*(m32 -
         mQ32)*Xt*pow2(mQ32 - mU32)*pow3(m3) - 4*m3*(2*m32 - mQ32 - mU32)*pow2(
         m32 - mQ32)*pow3(Xt) + 2*pow3(mQ32 - mU32)*pow4(m3) - (2*m32 - mQ32 -
@@ -3809,7 +3809,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
         - mU32)*pow3(mQ32 - mU32)));
       }
       case(Limits::MQ3_EQ_MU3):{
-	 return (-8*(48*(m3 - 2*Xt)*dilog(1 - m32/pow2(mQ3))*pow3(m3)*pow6(mQ3) + 4*log(
+         return (-8*(48*(m3 - 2*Xt)*dilog(1 - m32/pow2(mQ3))*pow3(m3)*pow6(mQ3) + 4*log(
         m32/pow2(mQ3))*pow3(m3)*(2*m32*mQ32*Xt*(-6*mQ32 + pow2(Xt)) - 16*pow3(
         Xt)*pow4(mQ3) + pow3(m3)*(-6*mQ32*pow2(Xt) + 6*pow4(mQ3) + pow4(Xt)) +
         mQ32*pow5(Xt) - 12*Xt*pow6(mQ3) + m3*(18*pow2(Xt)*pow4(mQ3) - 2*mQ32*
@@ -3823,7 +3823,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
         mQ3)))))/(3.*pow2(m32 - mQ32)*pow6(mQ3));
       }
       case(Limits::MQ3_EQ_M3):{
-	 return 4*(-23 + (8*(3*mQ32 - 3*mU32 - 8*mQ3*Xt))/(mQ32 - mU32) - 24*pow2(lmQ3MR)
+         return 4*(-23 + (8*(3*mQ32 - 3*mU32 - 8*mQ3*Xt))/(mQ32 - mU32) - 24*pow2(lmQ3MR)
         - (16*pow2(Xt))/(mQ32 - mU32) - (16*pow2(Xt))/pow2(mU3) - (128*mQ3*
         pow3(Xt))/pow2(mQ32 - mU32) + (-19*mQ32*mU32 + 8*pow4(mQ3) + 7*pow4(
         mU3))/(mQ32*mU32 - pow4(mU3)) - (10*pow4(Xt))/pow2(mQ32 - mU32) + (2*(
@@ -3853,7 +3853,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
         pow6(mQ3) + 5*pow6(mU3))))/pow5(mQ32 - mU32));
       }
       case(Limits::MU3_EQ_M3):{
-	 return (-8*(4*mQ32*dilog(1 - mU32/pow2(mQ3))*pow3(mQ32 - mU32)*(8*Xt*pow3(mU3) +
+         return (-8*(4*mQ32*dilog(1 - mU32/pow2(mQ3))*pow3(mQ32 - mU32)*(8*Xt*pow3(mU3) +
         4*mU3*pow3(Xt) + 2*pow4(mU3) + pow4(Xt)) + pow2(mQ32 - mU32)*(-4*(-1 +
         lmQ3MR)*pow2(mU32 - pow2(Xt))*pow4(mU3) + pow4(mQ3)*(8*(-1 + 3*lmQ3MR)*
         mU32*pow2(Xt) + 64*Xt*pow3(mU3) - 32*(-2 + lmQ3MR)*mU3*pow3(Xt) + (25 -
@@ -3884,7 +3884,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
         mQ32 - mU32));
       }
       case(Limits::MQ3_EQ_MU3_EQ_M3):{
-	 return (-8*(-2*lmQ3MR*mQ3*Xt*(-24*mQ32*Xt - 4*mQ3*pow2(Xt) + 24*pow3(mQ3) +
+         return (-8*(-2*lmQ3MR*mQ3*Xt*(-24*mQ32*Xt - 4*mQ3*pow2(Xt) + 24*pow3(mQ3) +
         pow3(Xt)) + Xt*(-28*mQ32*pow2(Xt) + 12*Xt*pow3(mQ3) - mQ3*pow3(Xt) +
         24*pow4(mQ3) + 2*pow4(Xt)) + 36*pow2(lmQ3MR)*pow5(mQ3)))/(3.*pow5(mQ3));
       }
@@ -3894,10 +3894,10 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
 }
 
 /**
- * 	Returns delta lambda_atas2 in the MSbar scheme for a given mass limit
- * 	@param limit an integer key for a mass limit
- * 	@param omitLogs an integer key to omit all mu terms
- * 	@return delta lambda_atas2 in the MSbar scheme for a given mass limit
+ *         Returns delta lambda_atas2 in the MSbar scheme for a given mass limit
+ *         @param limit an integer key for a mass limit
+ *         @param omitLogs an integer key to omit all mu terms
+ *         @return delta lambda_atas2 in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs) const
 {
@@ -4144,7 +4144,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs)
         mU32))))/3.;
       };
       case(Limits::MQ3_EQ_MU3):{
-	 return -(384*lmQ3MR*dilog(1 - m32/mQ32)*pow3(m3)*(-137*m3*mQ32 - 184*m32*Xt +
+         return -(384*lmQ3MR*dilog(1 - m32/mQ32)*pow3(m3)*(-137*m3*mQ32 - 184*m32*Xt +
         192*mQ32*Xt + 133*pow3(m3))*pow8(mQ3) + (m32 - mQ32)*(160*lmQ3MR*m3*
         mQ32*log(msq2/mQ32)*pow2(m32 - mQ32)*(2*mQ32*Xt*(-6*mQ32 + pow2(Xt)) +
         m3*(Xt4 - 6*mQ32*pow2(Xt) + 6*pow4(mQ3))) + 9*dlatas2Const*pow2(m32 -
@@ -4177,7 +4177,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs)
         power10(mQ3)))/(9.*pow3(-m32 + mQ32)*pow8(mQ3));
       }
       case(Limits::MQ3_EQ_M3):{
-	 return (3*dlatas2Const + (8*lmQ3MR*(3857 + (216*mQ32)/mU32))/3. - (32*lmQ3MR*(
+         return (3*dlatas2Const + (8*lmQ3MR*(3857 + (216*mQ32)/mU32))/3. - (32*lmQ3MR*(
         3853*mQ32 - 2701*mU32))/(9.*(mQ32 - mU32)) - 384*lmQ3MR*z3 + 160*
         lmQ3MR*log(msq2/mQ32) + (160*lmQ3MR*mQ32*log(msq2/mQ32))/mU32 + (16*
         lmQ3MR*(569*mQ32 - 377*mU32)*log(mU32/mQ32))/(3.*(mQ32 - mU32)) - 4000*
@@ -4249,7 +4249,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs)
         pow3(mQ3))*pow4(mU3)))/3.;
       }
       case(Limits::MU3_EQ_M3):{
-	 return (3*dlatas2Const - (32*lmQ3MR*(2701*mQ32 - 3853*mU32))/(9.*(mQ32 - mU32))
+         return (3*dlatas2Const - (32*lmQ3MR*(2701*mQ32 - 3853*mU32))/(9.*(mQ32 - mU32))
         + (8*lmQ3MR*(3857 + (216*mU32)/mQ32))/3. - 384*lmQ3MR*z3 + 160*lmQ3MR*
         log(msq2/mQ32) + (160*lmQ3MR*mU32*log(msq2/mQ32))/mQ32 - 4000*pow2(
         lmQ3MR) + (2352*mU32*pow2(lmQ3MR))/mQ32 + (16*(207*mQ32 - 271*mU32)*
@@ -4341,7 +4341,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs)
         ))/3.;
       }
       case(Limits::MQ3_EQ_MU3_EQ_M3):{
-	 return dlatas2Const + (160*lmQ3MR*log(msq2/mQ32)*(Xt4 - 6*mQ32*pow2(Xt) - 12*Xt*
+         return dlatas2Const + (160*lmQ3MR*log(msq2/mQ32)*(Xt4 - 6*mQ32*pow2(Xt) - 12*Xt*
         pow3(mQ3) + 2*mQ3*pow3(Xt) + 6*pow4(mQ3)))/(9.*pow4(mQ3)) + (8*lmQ3MR*(
         180*msq2*Xt4 + 176*mQ3*Xt5 - mQ32*((98 + 27*lmQ3MR)*Xt4 + 1080*msq2*
         pow2(Xt)) + 8*(-416 + 111*lmQ3MR)*pow3(mQ3)*pow3(Xt) + 24*(45*msq2 + 2*
@@ -4355,20 +4355,20 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs)
 }
 
 /**
- * 	Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
- * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
- * 	@param omitLogs an integer key to omit all log mu terms
- * 	@param omitXtLogs an integer key to omit all Xt^4*Log[mu] and Xt^5*Log[mu] terms
+ *         Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
+ *         @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
+ *         @param omitLogs an integer key to omit all log mu terms
+ *         @param omitXtLogs an integer key to omit all Xt^4*Log[mu] and Xt^5*Log[mu] terms
  */
 double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs) const {
    double xtTerms = 0.;
    if(xtOrder <= 3){
       xtTerms = getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 4, omitXtLogs)
-	 + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 5, omitXtLogs)
-	 + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 6, omitXtLogs);
+         + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 5, omitXtLogs)
+         + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 6, omitXtLogs);
    } else{
       xtTerms = getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 5, omitXtLogs)
-	 + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 6, omitXtLogs);
+         + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 6, omitXtLogs);
    }
 
    const double g3as = getDeltaG3Alphas(omitLogs);
@@ -4382,10 +4382,10 @@ double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs,
 }
 
 /**
- * 	Returns the DRbarPrime to MSbar shift of delta lambda 3L at a given xtOrder
- * 	@param limit an integer key for a mass limit
- * 	@param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
- * 	@param omitLogs an integer key to omit all log mu terms
+ *         Returns the DRbarPrime to MSbar shift of delta lambda 3L at a given xtOrder
+ *         @param limit an integer key for a mass limit
+ *         @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
+ *         @param omitLogs an integer key to omit all log mu terms
  */
 double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs) const {
 
@@ -4410,7 +4410,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
 
    switch (limit){
       case(Limits::GENERAL):{
-	 return (-4*Xt4*(640*mQ32*(mQ32 - mU32)*mU32*log(mQ32/mU32)*pow2(m32 - mQ32)*
+         return (-4*Xt4*(640*mQ32*(mQ32 - mU32)*mU32*log(mQ32/mU32)*pow2(m32 - mQ32)*
         pow2(m32 - mU32)*pow2(m3*(m32 - mQ32)*mU32*log(mQ32/mU32) + (mQ32 -
         mU32)*log(mQ32/m32)*pow3(m3)) - 512*m3*mQ32*mU32*(-8*mQ32 + 4*lmQ3MR*
         mQ32 + 8*mU32 - 4*lmQ3MR*mU32 + (4*m32 - 2*(mQ32 + mU32))*dilog(1 -
@@ -4605,7 +4605,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         mU3) + 52*mQ32*power10(m3) - 308*mU32*power10(m3) - 9*m32*power10(mU3)
         - 3*mQ32*power10(mU3)))))/(3.*mQ32*mU32*pow4(m32 - mQ32)*pow4(m32 -
         mU32)*pow4(mQ32 - mU32))+
-	(-32*Xt5*(32*pow2(m32 - mQ32)*pow2(m32 - mU32)*(m3*(m32 - mQ32)*mU32*log(
+        (-32*Xt5*(32*pow2(m32 - mQ32)*pow2(m32 - mU32)*(m3*(m32 - mQ32)*mU32*log(
         mQ32/mU32) + (mQ32 - mU32)*log(mQ32/m32)*pow3(m3))*(mQ32*(mQ32 - mU32)*
         mU32*(-2*m32 + mQ32 + mU32)*dilog(1 - m32/mQ32) + m32*mU32*pow4(mQ3) -
         lmQ3MR*m32*mU32*pow4(mQ3) + m32*mU32*log(mQ32/m32)*pow4(mQ3) + 2*m32*
@@ -4696,12 +4696,12 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         pow8(mQ3) - m32*(88*pow4(mQ3)*pow4(mU3) - 11*mU32*pow6(mQ3) + 9*mQ32*
         pow6(mU3) + 10*pow8(mQ3)) + 6*power10(mQ3))))))/(3.*mQ32*mU32*pow3(m32
         - mQ32)*pow3(m32 - mU32)*pow5(mQ32 - mU32))+
-	(1280*Xt6*(-2*mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32))*pow2(m3*(m32
+        (1280*Xt6*(-2*mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32))*pow2(m3*(m32
         - mQ32)*mU32*log(mQ32/mU32) + (mQ32 - mU32)*log(mQ32/m32)*pow3(m3)))/(
         3.*pow2(m32 - mQ32)*pow2(m32 - mU32)*pow5(mQ32 - mU32));
       }
       case(Limits::MQ3_EQ_MU3):{
-	 return (2*Xt4*(120*(m32 - mQ32)*mQ32*(m32 - msq2)*dilog(1 - m32/msq2)*(mQ32*msq2
+         return (2*Xt4*(120*(m32 - mQ32)*mQ32*(m32 - msq2)*dilog(1 - m32/msq2)*(mQ32*msq2
         + m32*(-5*mQ32 + 3*msq2) + pow4(m3)) + 600*msq2*pow4(m3)*pow4(mQ3) +
         480*msq2*dilog(1 - msq2/mQ32)*pow4(m3)*pow4(mQ3) + 240*msq2*log(mQ32/
         m32)*pow4(m3)*pow4(mQ3) - 600*msq2*log(mQ32/msq2)*pow4(m3)*pow4(mQ3) +
@@ -4764,7 +4764,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         mQ3) + 240*log(mQ32/msq2)*power10(mQ3) + 500*pow2(lmQ3MR)*power10(mQ3)
         - 72*pow2(log(mQ32/m32))*power10(mQ3) - 60*pow2(log(mQ32/msq2))*
         power10(mQ3)))/(9.*pow4(m32 - mQ32)*pow6(mQ3))+
-	(-32*m3*Xt5*(60*mQ32*(-m32 + mQ32)*(m32 - msq2)*(mQ32 - msq2)*dilog(1 -
+        (-32*m3*Xt5*(60*mQ32*(-m32 + mQ32)*(m32 - msq2)*(mQ32 - msq2)*dilog(1 -
         m32/msq2) + 2*mQ32*dilog(1 - m32/mQ32)*pow3(m32 - mQ32) - 60*mQ32*msq2*
         pow4(m3) + 60*mQ32*msq2*dilog(1 - msq2/mQ32)*pow4(m3) - 60*mQ32*msq2*
         log(mQ32/m32)*pow4(m3) + 90*mQ32*msq2*log(mQ32/msq2)*pow4(m3) + 30*
@@ -4801,11 +4801,11 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         log(mQ32/m32)*pow8(m3) - 156*pow2(log(mQ32/m32))*pow8(m3) - 67*pow8(
         mQ3) + 78*lmQ3MR*pow8(mQ3) - 6*log(mQ32/m32)*pow8(mQ3) - 5*log(mQ32/
         msq2)*pow8(mQ3)))/(9.*pow4(m32 - mQ32)*pow6(mQ3))+
-	(640*Xt6*pow2(-(m3*mQ32) + pow3(m3) + log(mQ32/m32)*pow3(m3)))/(9.*pow4(-
+        (640*Xt6*pow2(-(m3*mQ32) + pow3(m3) + log(mQ32/m32)*pow3(m3)))/(9.*pow4(-
         (m32*mQ3) + pow3(mQ3)));
       }
       case(Limits::MQ3_EQ_M3):{
-	 return -(Xt4*(122320*msq2*mU32*pow14(mQ3) - 6560*lmQ3MR*msq2*mU32*pow14(mQ3) +
+         return -(Xt4*(122320*msq2*mU32*pow14(mQ3) - 6560*lmQ3MR*msq2*mU32*pow14(mQ3) +
         40992*msq2*mU32*dilog(1 - mQ32/mU32)*pow14(mQ3) - 5376*lmQ3MR*msq2*
         mU32*dilog(1 - mQ32/mU32)*pow14(mQ3) + 5760*msq2*mU32*dilog(1 - msq2/
         mU32)*pow14(mQ3) - 5280*msq2*mU32*log(mQ32/msq2)*pow14(mQ3) - 3840*
@@ -5104,7 +5104,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         + 4320*log(mQ32/msq2)*pow2(log(mQ32/mU32))*pow8(mQ3)*power10(mU3) +
         7080*pow3(log(mQ32/mU32))*pow8(mQ3)*power10(mU3)))/(18.*(mQ32 - msq2)*
         mU32*pow4(mQ3)*pow7(mQ32 - mU32))+
-	(4*Xt5*(-3424*mU32*pow12(mQ3) + 2208*lmQ3MR*mU32*pow12(mQ3) - 192*mU32*
+        (4*Xt5*(-3424*mU32*pow12(mQ3) + 2208*lmQ3MR*mU32*pow12(mQ3) - 192*mU32*
         dilog(1 - mQ32/mU32)*pow12(mQ3) - 160*mU32*log(mQ32/msq2)*pow12(mQ3) +
         3360*mU32*log(mQ32/mU32)*pow12(mQ3) - 2768*lmQ3MR*mU32*log(mQ32/mU32)*
         pow12(mQ3) + 224*mU32*dilog(1 - mQ32/mU32)*log(mQ32/mU32)*pow12(mQ3) +
@@ -5213,11 +5213,11 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         pow2(log(mQ32/msq2))*pow4(msq)*power10(mU3) + 15*log(mQ32/mU32)*pow2(
         log(mQ32/msq2))*pow4(msq)*power10(mU3)))/(3.*mU32*pow3(mQ3)*pow7(mQ32 -
         mU32))+
-	(1280*mQ32*Xt6*(-2*mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32))*pow2(-
+        (1280*mQ32*Xt6*(-2*mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32))*pow2(-
         mQ32 + mU32 + mU32*log(mQ32/mU32)))/(3.*pow7(mQ32 - mU32));
       }
       case(Limits::MU3_EQ_M3):{
-	 return (Xt4*(84*msq2*mU32*dilog(1 - mU32/mQ32)*pow14(mQ3) - 78*msq2*mU32*dilog(1
+         return (Xt4*(84*msq2*mU32*dilog(1 - mU32/mQ32)*pow14(mQ3) - 78*msq2*mU32*dilog(1
         - mU32/mQ32)*log(mQ32/mU32)*pow14(mQ3) + 244640*mQ32*msq2*pow14(mU3) -
         13120*lmQ3MR*mQ32*msq2*pow14(mU3) + 1800*mQ32*msq2*dilog(1 - msq2/mU32)
         *pow14(mU3) + 80556*mQ32*msq2*dilog(1 - mU32/mQ32)*pow14(mU3) - 10752*
@@ -5616,7 +5616,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         pow2(log(mQ32/mU32))*pow8(mQ3)*power10(mU3) + 58647*pow3(log(mQ32/mU32)
         )*pow8(mQ3)*power10(mU3)))/(36.*mQ32*(-msq2 + mU32)*pow4(mU3)*pow7(mQ32
         - mU32))+
-	(2*Xt5*(88*mU32*dilog(1 - mU32/mQ32)*pow12(mQ3) + 48*mU32*log(mQ32/mU32)*
+        (2*Xt5*(88*mU32*dilog(1 - mU32/mQ32)*pow12(mQ3) + 48*mU32*log(mQ32/mU32)*
         pow12(mQ3) - 32*mU32*dilog(1 - mU32/mQ32)*log(mQ32/mU32)*pow12(mQ3) +
         48*mU32*log(mU32/mQ32)*pow12(mQ3) - 24*mU32*log(mQ32/mU32)*log(mU32/
         mQ32)*pow12(mQ3) + 6848*mQ32*pow12(mU3) - 4416*lmQ3MR*mQ32*pow12(mU3) -
@@ -5797,11 +5797,11 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         mU3) + 40*log(mQ32/msq2)*pow2(log(mQ32/mU32))*pow4(mQ3)*power10(mU3) +
         1508*pow3(log(mQ32/mU32))*pow4(mQ3)*power10(mU3)))/(3.*mQ32*pow3(mU3)*
         pow7(mQ32 - mU32))+
-	(1280*mU32*Xt6*(-2*mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32))*pow2(-
+        (1280*mU32*Xt6*(-2*mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32))*pow2(-
         mQ32 + mU32 + mQ32*log(mQ32/mU32)))/(3.*pow7(mQ32 - mU32));
       }
       case(Limits::MQ3_EQ_MU3_EQ_M3):{
-	 return (Xt4*(10990*msq2*pow4(mQ3) - 296*lmQ3MR*msq2*pow4(mQ3) - 2724*msq2*log(
+         return (Xt4*(10990*msq2*pow4(mQ3) - 296*lmQ3MR*msq2*pow4(mQ3) - 2724*msq2*log(
         mQ32/msq2)*pow4(mQ3) - 480*lmQ3MR*msq2*log(mQ32/msq2)*pow4(mQ3) - 1044*
         msq2*log(msq2/mQ32)*pow4(mQ3) - 312*msq2*pow2(lmQ3MR)*pow4(mQ3) + 612*
         msq2*pow2(log(mQ32/msq2))*pow4(mQ3) - 432*mQ32*log(mQ32/msq2)*pow4(msq)
@@ -5814,7 +5814,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         msq) - 810*pow2(log(mQ32/msq2))*pow6(msq) - 18*dilog(1 - msq2/mQ32)*(-
         68*msq2*pow4(mQ3) - 31*mQ32*pow4(msq) + 9*pow6(mQ3) + 90*pow6(msq))))/(
         27.*(mQ32 - msq2)*pow8(mQ3))
-	-(Xt5*(2176*msq2*pow4(mQ3) - 11264*lmQ3MR*msq2*pow4(mQ3) - 3744*msq2*log(
+        -(Xt5*(2176*msq2*pow4(mQ3) - 11264*lmQ3MR*msq2*pow4(mQ3) - 3744*msq2*log(
         mQ32/msq2)*pow4(mQ3) + 2016*msq2*log(msq2/mQ32)*pow4(mQ3) + 2331*msq2*
         pow2(log(mQ32/msq2))*pow4(mQ3) - 47232*mQ32*log(mQ32/msq2)*pow4(msq) -
         47232*mQ32*log(msq2/mQ32)*pow4(msq) + 14085*mQ32*pow2(log(mQ32/msq2))*
@@ -5825,12 +5825,12 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
         mQ32*pow4(msq) + 161*pow6(mQ3) + 1663*pow6(msq)) - 18*dilog(1 - msq2/
         mQ32)*(-259*msq2*pow4(mQ3) - 1565*mQ32*pow4(msq) + 161*pow6(mQ3) +
         1663*pow6(msq))))/(216.*(mQ32 - msq2)*pow9(mQ3))+
-	(160*Xt6)/(9.*pow6(mQ3));
+        (160*Xt6)/(9.*pow6(mQ3));
       }
       case(Limits::DEGENERATE):{
-	 return (2*Xt4*(-5735 + 148*lmQ3MR + 156*pow2(lmQ3MR)))/(27.*pow4(mQ3))+
-	 (-176*(-7 + 8*lmQ3MR)*Xt5)/(27.*pow5(mQ3))
-	 +160/(9.*pow6(mQ3))*Xt6;
+         return (2*Xt4*(-5735 + 148*lmQ3MR + 156*pow2(lmQ3MR)))/(27.*pow4(mQ3))+
+         (-176*(-7 + 8*lmQ3MR)*Xt5)/(27.*pow5(mQ3))
+         +160/(9.*pow6(mQ3))*Xt6;
       }
    };
 
@@ -5839,16 +5839,16 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
 
 
 /**
- * 	Sets the mass limit to check terms
- * 	@param limit an integer key for a mass limit
+ *         Sets the mass limit to check terms
+ *         @param limit an integer key for a mass limit
  */
 void ThresholdCalculator::setLimit(int limit){
    p.massLimit3LThreshold = limit;
 }
 
 /**
- * 	Get the mass limit determined by ThresholdCalculator
- * 	@return The determined mass limit
+ *         Get the mass limit determined by ThresholdCalculator
+ *         @return The determined mass limit
  */
 int ThresholdCalculator::getLimit() const {
    return p.massLimit3LThreshold;

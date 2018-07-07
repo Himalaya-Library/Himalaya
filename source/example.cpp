@@ -66,16 +66,16 @@ int main()
 
    for (const auto& point: points) {
       try {
-	 // init hierarchy calculator
-	 himalaya::HierarchyCalculator hc(point);
+         // init hierarchy calculator
+         himalaya::HierarchyCalculator hc(point);
 
-	 // calculate the 3-loop corrections O(α_t*α_s^2)
-	 const auto hoTop = hc.calculateDMh3L(false);
+         // calculate the 3-loop corrections O(α_t*α_s^2)
+         const auto hoTop = hc.calculateDMh3L(false);
 
-	 std::cout << hoTop;
+         std::cout << hoTop;
 
-	 // calculate the 3-loop corrections O(α_b*α_s^2)
-	 // himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
+         // calculate the 3-loop corrections O(α_b*α_s^2)
+         // himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
       } catch (const std::exception& e) {
          ERROR_MSG(e.what());
       }

@@ -49,10 +49,10 @@ double isNaN(double var)
 } // anonymous namespace
 
 /**
- *	Constructor
- * 	@param p_ a HimalayaInterface struct
- * 	@param msq2_ the averaged squark mass of the first two generations squared
- * 	@param verbose a bool enable the output of the parameter validation. Enabled by default
+ *        Constructor
+ *         @param p_ a HimalayaInterface struct
+ *         @param msq2_ the averaged squark mass of the first two generations squared
+ *         @param verbose a bool enable the output of the parameter validation. Enabled by default
  */
 Mh2EFTCalculator::Mh2EFTCalculator(
    const himalaya::Parameters& p_, double msq2_, bool verbose)
@@ -83,9 +83,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT0Loop() const
 }
 
 /**
- * 	Returns the 1-loop EFT contribution to the Higgs mass
- * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
- * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
+ *         Returns the 1-loop EFT contribution to the Higgs mass
+ *         @param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
+ *         @param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  */
 double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) const
 {
@@ -111,7 +111,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
    const double lmhtreeMt = log(pow2(mhtree / p.Mt));
    const double lmwMt = log(pow2(p.MW / p.Mt));
    const double lmzMt = log(pow2(p.MZ / p.Mt));
-   const int Xi = 1;	// gauge parameter
+   const int Xi = 1;        // gauge parameter
 
    // Threshold corrections
    const double dlambdayb2g12 = thresholdCalculator.getThresholdCorrection(
@@ -191,7 +191,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
       *dlambdayt2g22 + pow2(c2beta)*(2 + 2*dvyt2 - 3*lmMt))/4.));
    const double dmh2yt4 = isNaN(orderMap.at(EFTOrders::YT4)*(pref_at*(12 * lmMt +
       thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs))));
+         RenSchemes::DRBARPRIME, omitMSSMLogs))));
    const double dmh2g12ytau2 = isNaN(orderMap.at(EFTOrders::G12YTAU2)*(pow2(cbeta)*v2*(
       10*dlambdaytau2g12 + 3*pow2(c2beta)*(-2 + lmhtreeMt - lmMt))/20.));
    const double dmh2g22ytau2 = isNaN(orderMap.at(EFTOrders::G22YTAU2)*(pow2(cbeta)*v2*(2
@@ -209,9 +209,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
 }
 
 /**
- * 	Returns the 2-loop EFT contribution to the Higgs mass
- * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
- * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
+ *         Returns the 2-loop EFT contribution to the Higgs mass
+ *         @param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
+ *         @param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  */
 double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) const
 {
@@ -289,7 +289,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
    const double dmh2yt4g32 = isNaN(orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
       + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs))));
+         RenSchemes::DRBARPRIME, omitMSSMLogs))));
    const double dmh2yb4g32 = isNaN(orderMap.at(EFTOrders::G32YB4)*(pow4(cbeta)
       *(dlambdayb4g32 + 32*lmMt*(47 - 24*lmhtreeMt + 12*lmMt))*v2/2.));
    const double dmh2yb6 = isNaN(orderMap.at(EFTOrders::YB6)*(pow6(cbeta)*v2*(29 + 2
@@ -304,7 +304,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
       *(dlambdayb4*(lmhtreeMt - 1 - lmMt)*pow2(mhtree) - 48*lmMt*(4 - 2*lmhtreeMt
       + lmMt)*pow2(mhtree) - 6*(dlambdaytau2g12*pow2(p.g1) + dlambdaytau2g22
       *pow2(p.g2)))*v2/(2*pow2(mhtree))));
-   const double dmh2yt4ytau2 = 0.;	//??
+   const double dmh2yt4ytau2 = 0.;        //??
    const double dmh2ytau6 = isNaN(orderMap.at(EFTOrders::YTAU6)*(pow4(cbeta)*v2*(12
       *dytauytau*(8 + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt) + pow2(cbeta)*(3
       *dlambdaytau6 + 3*dlambdaytau4*(lmhtreeMt - 1 - lmMt) - 2*(6 + 15*lmMt
@@ -330,10 +330,10 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 }
 
 /**
- * 	Returns the 3-loop EFT contribution to the Higgs mass
- * 	@param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
- * 	@param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
- * 	@param omitDeltaLambda3L an integer flag to disable the MSSM contribution to delta_lambda_3L
+ *         Returns the 3-loop EFT contribution to the Higgs mass
+ *         @param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
+ *         @param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
+ *         @param omitDeltaLambda3L an integer flag to disable the MSSM contribution to delta_lambda_3L
  */
 double Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
                                              int omitMSSMLogs,
@@ -365,8 +365,8 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
       + 48 * dytas2) * lmMt + 64 * dytas - 84 * pow2(dytas) - 24 * dytas2
       + catas2
       + omitDeltaLambda3L*thresholdCalculator.getThresholdCorrection(
-	 ThresholdVariables::LAMBDA_AT_AS2,
-	 RenSchemes::DRBARPRIME, omitMSSMLogs));
+         ThresholdVariables::LAMBDA_AT_AS2,
+         RenSchemes::DRBARPRIME, omitMSSMLogs));
 }
 
 /**
