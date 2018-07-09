@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
+#include "EFTFlags.hpp"
 
 #include <Eigen/Core>
 #include <Eigen/Eigenvalues>

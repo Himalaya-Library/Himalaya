@@ -35,6 +35,7 @@ Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
  */
 HierarchyObject::HierarchyObject(bool isAlphab)
    : isAlphab(isAlphab)
+   , renormalizationScheme(mh2_eft::RenSchemes::DRBARPRIME)
 {
 }
 
