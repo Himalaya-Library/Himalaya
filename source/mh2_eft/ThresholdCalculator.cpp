@@ -6,7 +6,7 @@
 // ====================================================================
 
 #include "ThresholdCalculator.hpp"
-#include "Hierarchies.hpp"
+#include "EFTFlags.hpp"
 #include "Logger.hpp"
 #include "dilog.h"
 #include <cmath>
@@ -1019,7 +1019,7 @@ double ThresholdCalculator::getDeltaVevYt2(int limit) const
    if(limit == Limits::MQ3_EQ_M3 || limit == Limits::MU3_EQ_M3) limit = Limits::GENERAL;
 
    switch (limit){
-      case himalaya::Limits::GENERAL:
+      case Limits::GENERAL:
          return (-2*pow5(mQ32 - mU32)*pow2(p.s2t) + Xt2*((pow2(mQ32) - pow2(mU32))
             *(6*mQ32*mU32 + (pow2(mQ32) - 8*mQ32*mU32 + pow2(mU32))*pow2(p.s2t))
             - 12*pow2(c2t)*pow2(mQ32)*pow2(mU32)*log(mQ32/mU32)))/(8*mQ32*mU32*

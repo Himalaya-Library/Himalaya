@@ -7,6 +7,7 @@
 
 #include "HierarchyObject.hpp"
 #include "Hierarchies.hpp"
+#include "EFTFlags.hpp"
 #include <cmath>
 #include <iostream>
 
@@ -452,8 +453,8 @@ std::string HierarchyObject::getH3mHierarchyNotation(int hierarchy) const
 std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
 {
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   const std::string renSchemeString = (ho.getRenormalizationScheme() == RenSchemes::H3m
-      || ho.getRenormalizationScheme() == RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
+   const std::string renSchemeString = (ho.getRenormalizationScheme() == mh2_eft::RenSchemes::H3m
+      || ho.getRenormalizationScheme() == mh2_eft::RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
    const std::string massString = ho.getIsAlphab() ? "Msbottom" : "Mstop";
    const std::string spaces = ho.getIsAlphab() ? "            " : "               ";
    ostr << "===================================\n"

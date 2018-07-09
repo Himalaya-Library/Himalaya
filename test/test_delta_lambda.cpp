@@ -102,19 +102,21 @@ double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 /// calculates Mh^2 in the EFT at 1-loop level
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
+   using namespace himalaya::mh2_eft;
+
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G14, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G24, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YB2, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YB4, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YTAU2, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YTAU2, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU4, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G12YT2, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G22YT2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G14, 0);
+   mhc.setCorrectionFlag(EFTOrders::G24, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(EFTOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
 
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
@@ -122,14 +124,16 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 /// calculates Mh^2 in the EFT at 2-loop level
 double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 {
+   using namespace himalaya::mh2_eft;
+
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::G32YB4, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YB6, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YT6, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU2YB4, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
-   mhc.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
+   mhc.setCorrectionFlag(EFTOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::YB6, 0);
+   mhc.setCorrectionFlag(EFTOrders::YT6, 0);
+   mhc.setCorrectionFlag(EFTOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(EFTOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::YB2YT4, 0);
 
    return mhc.getDeltaMh2EFT2Loop(1,1);
 }

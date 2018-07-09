@@ -7,7 +7,7 @@
 
 #include "Mh2EFTCalculator.hpp"
 #include "ThresholdCalculator.hpp"
-#include "Hierarchies.hpp"
+#include "EFTFlags.hpp"
 #include "Logger.hpp"
 #include "dilog.h"
 #include <cmath>

@@ -3,6 +3,7 @@
 #include "HierarchyCalculator.hpp"
 #undef private
 #include "Hierarchies.hpp"
+#include "EFTFlags.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
@@ -49,6 +50,7 @@ himalaya::Parameters make_point()
 TEST_CASE("test_FO_expansions")
 {
    using namespace himalaya;
+   using namespace himalaya::mh2_eft;
 
    const double eps = 1e-10;
 

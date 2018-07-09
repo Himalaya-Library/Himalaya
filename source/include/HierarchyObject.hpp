@@ -8,7 +8,7 @@
 #pragma once
 
 #include "version.hpp"
-#include "Hierarchies.hpp"
+#include "EFTFlags.hpp"
 #include <iosfwd>
 #include <Eigen/Core>
 #include <vector>
@@ -207,7 +207,7 @@ namespace himalaya{
       bool isAlphab{false};                                                                /**< the bool isAlphab */
       int hierarchy{};                                                                        /**< the suitable hierarchy */
       int mdrFlag{0};                                                                        /**< the MDR-scheme flag */
-      int renormalizationScheme{RenSchemes::DRBARPRIME};                                /**< the renormalization scheme flag */
+      int renormalizationScheme{mh2_eft::RenSchemes::DRBARPRIME};                                /**< the renormalization scheme flag */
       double absDiff2L{};                                                                /**< the absolute difference of the two loop Higgs masses */
       double relDiff2L{};                                                                /**< the relative difference of the two loop Higgs masses */
       std::map<int, double> expUncertainties{};                                                /**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */

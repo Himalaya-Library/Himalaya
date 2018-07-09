@@ -7,6 +7,7 @@
 
 #include "HierarchyCalculator.hpp"
 #include "Hierarchies.hpp"
+#include "EFTFlags.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "H3.hpp"
 #include "H32q2g.hpp"
@@ -190,25 +191,25 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    calcDeltaLambda3L(ho, false);
 
    // set flags to omit all but O(at*as^n)
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12G22, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G14, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G24, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YB2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G22YB2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YTAU2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G22YTAU2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YTAU4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G12YT2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G22YT2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::G32YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YB6, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YT6, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YTAU2YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YTAU6, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YT2YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::EFTOrders::YB2YT4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12G22, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YB2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G14, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G24, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YB2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G22YB2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YTAU2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G22YTAU2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YT2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G22YT2, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G32YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YB6, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YT6, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU2YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU6, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YT2YB4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YB2YT4, 0);
 
    // mh_eft^2
    const double mh2_eft = mh2EFTCalculator.getDeltaMh2EFT0Loop();
@@ -224,15 +225,15 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
       + ho.getDLambdaEFT()*v2);
    ho.setDLambda(0, mh2_eft/v2);
    ho.setDLambda(1, pref_1L*(tc.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_AT,RenSchemes::DRBARPRIME, 1))/v2);
+      mh2_eft::ThresholdVariables::LAMBDA_AT, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDLambda(2, pref_2L*(tc.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_AT_AS, RenSchemes::DRBARPRIME, 1))/v2);
+      mh2_eft::ThresholdVariables::LAMBDA_AT_AS, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDLambda(3, ho.getDLambdaEFT());
    ho.setDLambdaDRbarPrimeToMSbarShift(0, 0.);
    ho.setDLambdaDRbarPrimeToMSbarShift(1, 0.);
    ho.setDLambdaDRbarPrimeToMSbarShift(2, pref_2L*(-4*ho.getDLambda(1)
-      *tc.getThresholdCorrection(ThresholdVariables::YT_AS,
-                                 RenSchemes::DRBARPRIME, 1))/v2);
+      *tc.getThresholdCorrection(mh2_eft::ThresholdVariables::YT_AS,
+                                 mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
 
    {
       auto ho_mdr = ho;
@@ -1331,9 +1332,9 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    // to isolate the logarithmic ones. Checked.
    const double eftLogs = pref*(
       tc.getThresholdCorrection(
-            ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 1)
+            mh2_eft::ThresholdVariables::LAMBDA_AT_AS2, mh2_eft::RenSchemes::DRBARPRIME, 1)
       - tc.getThresholdCorrection(
-            ThresholdVariables::LAMBDA_AT_AS2, RenSchemes::DRBARPRIME, 0));
+            mh2_eft::ThresholdVariables::LAMBDA_AT_AS2, mh2_eft::RenSchemes::DRBARPRIME, 0));
 
    // calculate the non-logarithmic part of delta_lambda @ 3L
    const double deltaLambda3LNonLog = pref*(ho.getDLambdaNonLog()
