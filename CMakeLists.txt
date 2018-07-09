@@ -48,6 +48,9 @@ configure_file (
 
 # Himalaya library files
 file(GLOB LIBSOURCES
+  ${SOURCE_PATH}/HierarchyCalculator.cpp
+  ${SOURCE_PATH}/HierarchyObject.cpp
+  ${SOURCE_PATH}/Himalaya_interface.cpp
   ${SOURCE_PATH}/hierarchies/*.cpp
   ${SOURCE_PATH}/mh2_eft/*.cpp
   ${SOURCE_PATH}/misc/*.cpp)
