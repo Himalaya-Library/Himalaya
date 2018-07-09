@@ -414,6 +414,8 @@ void HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift)
  */
 std::string HierarchyObject::getH3mHierarchyNotation(int hierarchy) const
 {
+   using namespace himalaya::hierarchies;
+
    switch (hierarchy){
       case Hierarchies::h3:
          return "h3";

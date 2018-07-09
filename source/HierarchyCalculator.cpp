@@ -49,20 +49,20 @@ namespace {
 
 /** The hierarchy map which maps all hierarchies to their mother hierarchies */
 const std::map<int, int> hierarchyMap = {
-   { Hierarchies::h3     , Hierarchies::h3  },
-   { Hierarchies::h32q2g , Hierarchies::h3  },
-   { Hierarchies::h3q22g , Hierarchies::h3  },
-   { Hierarchies::h4     , Hierarchies::h4  },
-   { Hierarchies::h5     , Hierarchies::h5  },
-   { Hierarchies::h5g1   , Hierarchies::h5  },
-   { Hierarchies::h6     , Hierarchies::h6  },
-   { Hierarchies::h6g2   , Hierarchies::h6  },
-   { Hierarchies::h6b    , Hierarchies::h6b },
-   { Hierarchies::h6b2qg2, Hierarchies::h6b },
-   { Hierarchies::h6bq22g, Hierarchies::h6b },
-   { Hierarchies::h6bq2g2, Hierarchies::h6b },
-   { Hierarchies::h9     , Hierarchies::h9  },
-   { Hierarchies::h9q2   , Hierarchies::h9  }
+   { hierarchies::Hierarchies::h3     , hierarchies::Hierarchies::h3  },
+   { hierarchies::Hierarchies::h32q2g , hierarchies::Hierarchies::h3  },
+   { hierarchies::Hierarchies::h3q22g , hierarchies::Hierarchies::h3  },
+   { hierarchies::Hierarchies::h4     , hierarchies::Hierarchies::h4  },
+   { hierarchies::Hierarchies::h5     , hierarchies::Hierarchies::h5  },
+   { hierarchies::Hierarchies::h5g1   , hierarchies::Hierarchies::h5  },
+   { hierarchies::Hierarchies::h6     , hierarchies::Hierarchies::h6  },
+   { hierarchies::Hierarchies::h6g2   , hierarchies::Hierarchies::h6  },
+   { hierarchies::Hierarchies::h6b    , hierarchies::Hierarchies::h6b },
+   { hierarchies::Hierarchies::h6b2qg2, hierarchies::Hierarchies::h6b },
+   { hierarchies::Hierarchies::h6bq22g, hierarchies::Hierarchies::h6b },
+   { hierarchies::Hierarchies::h6bq2g2, hierarchies::Hierarchies::h6b },
+   { hierarchies::Hierarchies::h9     , hierarchies::Hierarchies::h9  },
+   { hierarchies::Hierarchies::h9q2   , hierarchies::Hierarchies::h9  }
 };
 
 /**
@@ -107,7 +107,7 @@ HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 void HierarchyCalculator::init(){
    // fill flag list
    flagMap.clear();
-   for (int i = ExpansionDepth::FIRST; i < ExpansionDepth::NUMBER_OF_EXPANSIONS; i++) {
+   for (int i = hierarchies::ExpansionDepth::FIRST; i < hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS; i++) {
       flagMap.emplace(i, 1u);
    }
 
@@ -259,6 +259,8 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
  */
 int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
 {
+   using namespace himalaya::hierarchies;
+
    // set flags to truncate the expansion
    flagMap.at(ExpansionDepth::xx) = 0;
    flagMap.at(ExpansionDepth::xxMst) = 0;
@@ -360,6 +362,8 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
  */
 bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& ho) const
 {
+   using namespace himalaya::hierarchies;
+
    double Mst1, Mst2;
    if(!ho.getIsAlphab()){
       Mst1 = p.MSt(0);
@@ -828,6 +832,8 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
                                            const unsigned int oneLoopFlag,
                                            const unsigned int twoLoopFlag) const
 {
+   using namespace himalaya::hierarchies;
+
    double Mst1mod = 0., Mst1, Mst2;
    if(!ho.getIsAlphab()){
       Mst1 = p.MSt(0);
@@ -882,6 +888,8 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
                                            const unsigned int oneLoopFlag,
                                            const unsigned int twoLoopFlag) const
 {
+   using namespace himalaya::hierarchies;
+
    double Mst2mod = 0., Mst2;
    if(!ho.getIsAlphab()){
       Mst2 = p.MSt(1);
@@ -936,11 +944,11 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    int truncateXt = 1;
 
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   if(suitableHierarchy == himalaya::Hierarchies::h3
-      || suitableHierarchy == himalaya::Hierarchies::h32q2g
-      || suitableHierarchy == himalaya::Hierarchies::h3q22g
-      || suitableHierarchy == himalaya::Hierarchies::h9
-      || suitableHierarchy == himalaya::Hierarchies::h9q2) truncateXt = 0;
+   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h3
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h32q2g
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h3q22g
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) truncateXt = 0;
 
    // pre-factor of shift -> checked normalization against H3m normalization and they coincide
    const double k = 1 / (16 * pow2(Pi));
@@ -955,7 +963,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const double Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    double Xt = p.Au(2,2) - p.mu / Tbeta;
    // Hierarchy h4 only covers O(Xt^0)
-   if(suitableHierarchy == himalaya::Hierarchies::h4) Xt = 0;
+   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h4) Xt = 0;
 
    // threshold for degenerate squark mass case is 1% of the stop mass
    const double eps = Mst1 * 0.01;
@@ -1055,11 +1063,11 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    // truncate shift at O(Xt^2) to be consistent with H3m result
    int truncateXt = 1;
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   if(suitableHierarchy == himalaya::Hierarchies::h3
-      || suitableHierarchy == himalaya::Hierarchies::h32q2g
-      || suitableHierarchy == himalaya::Hierarchies::h3q22g
-      || suitableHierarchy == himalaya::Hierarchies::h9
-      || suitableHierarchy == himalaya::Hierarchies::h9q2) truncateXt = 0;
+   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h3
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h32q2g
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h3q22g
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) truncateXt = 0;
 
    // tanbeta
    const double Tbeta = p.vu / p.vd;
@@ -1070,7 +1078,7 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
 
    double Xt = p.Au(2,2) - p.mu / Tbeta;
    // Hierarchy h4 only covers O(Xt^0)
-   if(suitableHierarchy == himalaya::Hierarchies::h4) Xt = 0;
+   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h4) Xt = 0;
 
    // threshold for degenerate squark mass case is 1% of the stop mass
    const double eps = Mst1 * 0.01;
@@ -1299,11 +1307,11 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    // set Xt order truncation for EFT contribution to be consistent with H3m
    const int suitableHierarchy = ho.getSuitableHierarchy();
    const int xtOrder =
-      (suitableHierarchy == himalaya::Hierarchies::h3
-       || suitableHierarchy == himalaya::Hierarchies::h32q2g
-       || suitableHierarchy == himalaya::Hierarchies::h3q22g
-       || suitableHierarchy == himalaya::Hierarchies::h9
-       || suitableHierarchy == himalaya::Hierarchies::h9q2) ? 3 : 4;
+      (suitableHierarchy == himalaya::hierarchies::Hierarchies::h3
+       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h32q2g
+       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h3q22g
+       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9
+       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) ? 3 : 4;
 
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
@@ -1388,6 +1396,8 @@ double HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& h
                                                     const unsigned int oneLoopFlag,
                                                     const unsigned int twoLoopFlag,
                                                     const unsigned int threeLoopFlag){
+   using namespace himalaya::hierarchies;
+
    double Mh;
    double Mhcut;
    std::vector<double> errors;

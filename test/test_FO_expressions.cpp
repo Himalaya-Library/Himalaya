@@ -51,6 +51,7 @@ TEST_CASE("test_FO_expansions")
 {
    using namespace himalaya;
    using namespace himalaya::mh2_eft;
+   using namespace himalaya::hierarchies;
 
    const double eps = 1e-10;
 
