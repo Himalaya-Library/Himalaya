@@ -8,6 +8,8 @@
 #pragma once
 
 namespace himalaya {
+namespace hierarchies {
+
 namespace Hierarchies {
 
 /// Hierarchy numbers
@@ -67,4 +69,5 @@ namespace MassSchemes{
    };
 }
 
+} // namespace hierarchies
 } // namespace himalaya
