@@ -25,7 +25,7 @@ Please refer to these papers as well as
 
 * R. V. Harlander, J. Klappert, A. D. Ochoa Franco and A. Voigt,
   *The light CP-even MSSM Higgs mass resummed to fourth logarithmic order*,
-  [[1807.XXXX](https://arxiv.org/abs/1807.XXXX)]   
+  [[1807.03509](https://arxiv.org/abs/1807.03509)]   
 
 when using Himalaya.
 
