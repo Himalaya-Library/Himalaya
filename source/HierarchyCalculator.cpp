@@ -1376,9 +1376,8 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    // part is of order O(xt^4) and using the shift O(xt^5). Note that the shift
    // for delta_lambda_H3m is always of order of the hierarchy as well
    const int xt4Flag = xtOrder == 3 ? 1 : 0;
-   ho.setDLambdaXtUncertainty(pref*(xt4Flag*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 5, 1)
-      + tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 6, 0))/v2);
+   ho.setDLambdaXtUncertainty(
+      std::abs(xt4Flag*pref/v2*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)));
 }
 
 
