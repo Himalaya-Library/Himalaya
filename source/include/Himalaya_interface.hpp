@@ -14,8 +14,11 @@
 namespace himalaya {
 
 using V2 = Eigen::Vector2d;   ///< real 2-vector
+using CM22 = Eigen::Matrix2cd;///< complex 2x2 matrix
+using CM44 = Eigen::Matrix4cd;///< complex 4x4 matrix
 using RM22 = Eigen::Matrix2d; ///< real 2x2 matrix
 using RM33 = Eigen::Matrix3d; ///< real 3x3 matrix
+using RM44 = Eigen::Matrix4d; ///< real 4x4 matrix
 const double NaN = std::numeric_limits<double>::quiet_NaN();
 
 /**
