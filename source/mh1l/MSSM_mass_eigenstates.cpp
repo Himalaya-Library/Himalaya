@@ -820,7 +820,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    RM22 se(RM22::Zero());
    se << std::real(se11), std::real(se12), std::real(se12), std::real(se22);
 
-   return se;
+   return se * one_loop;
 }
 
 /**
