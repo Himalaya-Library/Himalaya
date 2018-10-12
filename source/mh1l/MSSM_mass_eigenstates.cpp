@@ -678,13 +678,23 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
 
    if (loops >= 0) {
       const auto m0 = get_mass_matrix_hh();
-
       const auto c1 = m0(0,0) + m0(1,1);
       const auto c2 = sqrt(sqr(m0(0,0)) + 4*sqr(m0(0,1))
                            - 2*m0(0,0)*m0(1,1) + sqr(m0(1,1)));
 
       mh2(0) += 0.5*(c1 - c2);
       mh2(1) += 0.5*(c1 + c2);
+
+      if (loops > 0) {
+         const auto p2 = mh2(0);
+         const auto m1 = delta_mh2_1loop(p2);
+         const auto c3 = m1(0,0) + m1(1,1);
+         const auto c4 = (m0(0,0)*m1(0,0) - m0(1,1)*m1(0,0)
+            + 4*m0(0,1)*m1(0,1) - m0(0,0)*m1(1,1) + m0(1,1)*m1(1,1))/c2;
+
+         mh2(0) += 0.5*(c3 - c4);
+         mh2(1) += 0.5*(c3 + c4);
+      }
    }
 
    return mh2;
