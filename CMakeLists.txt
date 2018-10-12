@@ -9,7 +9,7 @@ find_package(Mathematica 8.0)
 
 # if needed, set your Fortran and C++ compiler
 #set (CMAKE_Fortran_COMPILER gfortran)
-#set (CMAKE_CXX_COMPILER clang++-3.8)
+#set (CMAKE_CXX_COMPILER clang++)
 #set (CMAKE_CXX_COMPILER icpc)
 
 # set the build type to release. If one needs debugging symbols, compile

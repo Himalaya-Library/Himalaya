@@ -33,6 +33,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       mhc.setCorrectionFlag(EFTOrders::YB6, 0);
       mhc.setCorrectionFlag(EFTOrders::YT6, 0);
       mhc.setCorrectionFlag(EFTOrders::YTAU2YB4, 0);
+      mhc.setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
       mhc.setCorrectionFlag(EFTOrders::YTAU6, 0);
       mhc.setCorrectionFlag(EFTOrders::YT2YB4, 0);
       mhc.setCorrectionFlag(EFTOrders::YB2YT4, 0);

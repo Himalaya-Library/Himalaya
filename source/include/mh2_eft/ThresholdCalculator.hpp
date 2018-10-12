@@ -150,6 +150,7 @@ namespace mh2_eft{
       double getDeltaLambdaG12G22(int omitLogs) const;
       /**
        *         Returns delta_lambda_reg_g1^2_g2^2
+       *         @param omitLogs an integer key to omit all mu terms
        *         @return delta_lambda_reg_g1^2_g2^2
        */
       double getDeltaLambdaRegG12G22() const;
@@ -157,7 +158,7 @@ namespace mh2_eft{
        *         Returns delta_lambda_chi_g1^2_g2^2
        *         @return delta_lambda_chi_g1^2_g2^2
        */
-      double getDeltaLambdaChiG12G22() const;
+      double getDeltaLambdaChiG12G22(int omitLogs) const;
       /**
        *         Returns delta_lambda_yb^2_g2^2
        *         @param omitLogs an integer key to omit all mu terms
@@ -219,6 +220,33 @@ namespace mh2_eft{
        */
       double getDeltaVevYt2(int limit) const;
       /**
+       *         Returns delta_lambda_v_yb^2
+       *         @return delta_lambda_v_yb^2
+       */
+      double getDeltaVevYb2() const;
+      /**
+       *         Returns delta_lambda_v_ytau^2
+       *         @return delta_lambda_v_ytau^2
+       */
+      double getDeltaVevYtau2() const;
+      /**
+       * 	       Returns delta_lambda_v_g1^2
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_lambda_v_g1^2
+       */
+      double getDeltaVevG12(int omitLogs) const;
+      /**
+       *         Returns delta_lambda_v_g2^2
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_lambda_v_g2^2
+       */
+      double getDeltaVevG22(int omitLogs) const;
+      /**
+       *         Returns delta_ytau_yb
+       *         @return delta_ytau_yb
+       */
+      double getDeltaYtauYb() const;
+      /**
        *         Returns delta_yt_yt
        *         @param omitLogs an integer key to omit all mu terms
        *         @return delta_yt_yt
@@ -236,6 +264,24 @@ namespace mh2_eft{
        *         @return delta_yt_yb
        */
       double getDeltaYtYb(int omitLogs) const;
+      /**
+       *         Returns delta_yb_yt
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_yb_yt
+       */
+      double getDeltaYbYt(int omitLogs) const;
+      /**
+       *         Returns delta_yb_as
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_yb_as
+       */
+      double getDeltaYbAs(int omitLogs) const;
+      /**
+       *         Returns delta_yb_yb
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_yb_yb
+       */
+      double getDeltaYbYb(int omitLogs) const;
       /**
        *         Returns delta_lambda_yb4_g32
        *         @param omitLogs an integer key to omit all mu terms
@@ -272,6 +318,18 @@ namespace mh2_eft{
        *         @return delta_lambda_yt4_yb2
        */
       double getDeltaLambdaYt4Yb2(int omitLogs) const;
+      /**
+       *         Returns delta_lambda_ytau4_yb2
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_lambda_ytau4_yb2
+       */
+      double getDeltaLambdaYtau4Yb2(int omitLogs) const;
+      /**
+       *         Returns delta_lambda_ytau2_yb4
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_lambda_ytau2_yb4
+       */
+      double getDeltaLambdaYtau2Yb4(int omitLogs) const;
       Parameters p{}; ///< The HimalayaInterface struct
       double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
       int xtOrderLambdaAtAs2 = 6; ///< A flag to truncate the Xt order of delta_lambda_at_as2 at a given value starting at 4
