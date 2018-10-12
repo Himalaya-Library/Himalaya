@@ -20,7 +20,7 @@ public:
    /// Higgs 1-loop contribution DR'
    RM22 delta_mh2_1loop(double p2) const;
    /// Higgs 1-loop contribution DR' for p = g1 = g2 = 0
-   RM22 delta_mh2_1loop_effpot_gaugeless() const;
+   RM22 delta_mh2_1loop_gaugeless() const;
 
 private:
    using A2 = Eigen::Array<double,2,1>;

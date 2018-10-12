@@ -94,7 +94,7 @@ TEST_CASE("test_EFT_vs_FO_1loop")
    const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
 
    const MSSM_mass_eigenstates me(p);
-   const auto DMh2_full_1L = me.delta_mh2_1loop_effpot_gaugeless();
+   const auto DMh2_full_1L = me.delta_mh2_1loop_gaugeless();
    // TODO: diagonalize
    const auto Mh2_full_1L = 0. + DMh2_full_1L(1,1);
 

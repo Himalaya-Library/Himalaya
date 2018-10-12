@@ -662,6 +662,7 @@ void MSSM_mass_eigenstates::calculate_MCha()
 
 /**
  * Higgs 1-loop DR' contribution for arbitrary momentum.
+ * The function returns 1/(4Pi)^2 (-selfenergy + tadpole).
  *
  * @param p2 squared momentum
  *
@@ -823,12 +824,15 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
 }
 
 /**
- * Higgs 1-loop DR' contribution for p = 0 in the gaugeless limit (g1
- * = g2 = 0).
+ * Higgs 1-loop DR' contribution in the gaugeless limit (p = g1 = g2 =
+ * 0).  Note, that p = 0 in the gaugeless limit, because in the MSSM p
+ * = mh = 0 vanishes when g1 = g2 = 0.
+ *
+ * The function returns 1/(4Pi)^2 (-selfenergy + tadpole).
  *
  * @return 1-loop contribution for p = g1 = g2 = 0
  */
-RM22 MSSM_mass_eigenstates::delta_mh2_1loop_effpot_gaugeless() const
+RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
    const auto yt = pars.Yu(2,2);
    const auto yb = pars.Yd(2,2);
