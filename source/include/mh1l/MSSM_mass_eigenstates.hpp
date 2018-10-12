@@ -13,22 +13,9 @@
 namespace himalaya {
 namespace mh1l {
 
-class MSSM_mass_eigenstates {
-public:
-   MSSM_mass_eigenstates(const Parameters&);
-
-   /// calculates squared Higgs masses
-   V2 calculate_Mh2(int loops) const;
-   /// Higgs 1-loop contribution DR'
-   RM22 delta_mh2_1loop(double p2) const;
-   /// Higgs 1-loop contribution DR' for p = g1 = g2 = 0
-   RM22 delta_mh2_1loop_gaugeless() const;
-
-private:
+struct MSSM_spectrum {
    using A2 = Eigen::Array<double,2,1>;
    using A4 = Eigen::Array<double,4,1>;
-
-   Parameters pars;         ///< MSSM DR' parameters
 
    double M2VWm{0.};        ///< MSSM DR' squared W mass
    double M2VZ{0.};         ///< MSSM DR' squared Z mass
@@ -69,46 +56,68 @@ private:
    RM22 UM{RM22::Zero()};   ///< MSSM DR' positive chargino mixing matrix
    RM22 UP{RM22::Zero()};   ///< MSSM DR' negative chargino mixing matrix
 
+   void calculate_spectrum(const Parameters&);
+
+   void calculate_MVWm(const Parameters&);   ///< calculates DR' W mass
+   void calculate_MVZ(const Parameters&);    ///< calculates DR' Z mass
+   void calculate_MFt(const Parameters&);    ///< calculates DR' top mass
+   void calculate_MFb(const Parameters&);    ///< calculates DR' bottom mass
+   void calculate_MFtau(const Parameters&);  ///< calculates DR' tau mass
+   void calculate_MSveL(const Parameters&);  ///< calculates DR' electron-like sneutrino mass
+   void calculate_MSvmL(const Parameters&);  ///< calculates DR' muon-like sneutrino mass
+   void calculate_MSvtL(const Parameters&);  ///< calculates DR' tau-like sneutrino mass
+   void calculate_MSu(const Parameters&);    ///< calculates DR' sup masses
+   void calculate_MSd(const Parameters&);    ///< calculates DR' sdown masses
+   void calculate_MSc(const Parameters&);    ///< calculates DR' scharm masses
+   void calculate_MSs(const Parameters&);    ///< calculates DR' sstrange masses
+   void calculate_MSt(const Parameters&);    ///< calculates DR' stop masses
+   void calculate_MSb(const Parameters&);    ///< calculates DR' sbottom masses
+   void calculate_MSe(const Parameters&);    ///< calculates DR' selectron masses
+   void calculate_MSm(const Parameters&);    ///< calculates DR' smuon masses
+   void calculate_MStau(const Parameters&);  ///< calculates DR' stau masses
+   void calculate_Mhh(const Parameters&);    ///< calculates DR' CP-even Higgs masses
+   void calculate_MAh(const Parameters&);    ///< calculates DR' CP-odd Higgs masses
+   void calculate_MHpm(const Parameters&);   ///< calculates DR' charged Higgs masses
+   void calculate_MChi(const Parameters&);   ///< calculates DR' neutralino masses
+   void calculate_MCha(const Parameters&);   ///< calculates DR' chargino masses
+
+   RM22 get_mass_matrix_Su(const Parameters&) const;   ///< sup mass matrix
+   RM22 get_mass_matrix_Sd(const Parameters&) const;   ///< sdown mass matrix
+   RM22 get_mass_matrix_Sc(const Parameters&) const;   ///< scharm mass matrix
+   RM22 get_mass_matrix_Ss(const Parameters&) const;   ///< sstrange mass matrix
+   RM22 get_mass_matrix_St(const Parameters&) const;   ///< stop mass matrix
+   RM22 get_mass_matrix_Sb(const Parameters&) const;   ///< sbottom mass matrix
+   RM22 get_mass_matrix_Se(const Parameters&) const;   ///< selectron mass matrix
+   RM22 get_mass_matrix_Sm(const Parameters&) const;   ///< smuon mass matrix
+   RM22 get_mass_matrix_Stau(const Parameters&) const; ///< stau mass matrix
+   RM22 get_mass_matrix_hh(const Parameters&) const;   ///< CP-even Higgs mass matrix
+   RM22 get_mass_matrix_Ah(const Parameters&) const;   ///< CP-odd Higgs mass matrix
+   RM22 get_mass_matrix_Hpm(const Parameters&) const;  ///< charged Higgs mass matrix
+   RM44 get_mass_matrix_Chi(const Parameters&) const;  ///< neutralino mass matrix
+   RM22 get_mass_matrix_Cha(const Parameters&) const;  ///< chargino mass matrix
+};
+
+class MSSM_mass_eigenstates {
+public:
+   MSSM_mass_eigenstates(const Parameters&);
+
+   /// calculates squared Higgs masses
+   V2 calculate_Mh2(int loops) const;
+   /// Higgs 1-loop contribution DR'
+   RM22 delta_mh2_1loop(double p2) const;
+   /// Higgs 1-loop contribution DR' for p = g1 = g2 = 0
+   RM22 delta_mh2_1loop_gaugeless() const;
+
+private:
+   Parameters pars;         ///< MSSM DR' parameters
+   MSSM_spectrum masses;    ///< MSSM DR' masses / mixings
+   MSSM_spectrum gaugeless; ///< MSSM DR' masses / mixings for g1 = g2 = 0
+
    /// calculates all DR' masses and mixings
    void calculate_parameters();
 
-   void calculate_MVWm();   ///< calculates DR' W mass
-   void calculate_MVZ();    ///< calculates DR' Z mass
-   void calculate_MFt();    ///< calculates DR' top mass
-   void calculate_MFb();    ///< calculates DR' bottom mass
-   void calculate_MFtau();  ///< calculates DR' tau mass
-   void calculate_MSveL();  ///< calculates DR' electron-like sneutrino mass
-   void calculate_MSvmL();  ///< calculates DR' muon-like sneutrino mass
-   void calculate_MSvtL();  ///< calculates DR' tau-like sneutrino mass
-   void calculate_MSu();    ///< calculates DR' sup masses
-   void calculate_MSd();    ///< calculates DR' sdown masses
-   void calculate_MSc();    ///< calculates DR' scharm masses
-   void calculate_MSs();    ///< calculates DR' sstrange masses
-   void calculate_MSt();    ///< calculates DR' stop masses
-   void calculate_MSb();    ///< calculates DR' sbottom masses
-   void calculate_MSe();    ///< calculates DR' selectron masses
-   void calculate_MSm();    ///< calculates DR' smuon masses
-   void calculate_MStau();  ///< calculates DR' stau masses
-   void calculate_Mhh();    ///< calculates DR' CP-even Higgs masses
-   void calculate_MAh();    ///< calculates DR' CP-odd Higgs masses
-   void calculate_MHpm();   ///< calculates DR' charged Higgs masses
-   void calculate_MChi();   ///< calculates DR' neutralino masses
-   void calculate_MCha();   ///< calculates DR' chargino masses
-
-   RM22 get_mass_matrix_Su() const;   ///< sup mass matrix
-   RM22 get_mass_matrix_Sd() const;   ///< sdown mass matrix
-   RM22 get_mass_matrix_Sc() const;   ///< scharm mass matrix
-   RM22 get_mass_matrix_Ss() const;   ///< sstrange mass matrix
-   RM22 get_mass_matrix_St() const;   ///< stop mass matrix
-   RM22 get_mass_matrix_Sb() const;   ///< sbottom mass matrix
-   RM22 get_mass_matrix_Se() const;   ///< selectron mass matrix
-   RM22 get_mass_matrix_Sm() const;   ///< smuon mass matrix
-   RM22 get_mass_matrix_Stau() const; ///< stau mass matrix
-   RM22 get_mass_matrix_hh() const;   ///< CP-even Higgs mass matrix
-   RM22 get_mass_matrix_Ah() const;   ///< CP-odd Higgs mass matrix
-   RM22 get_mass_matrix_Hpm() const;  ///< charged Higgs mass matrix
-   RM44 get_mass_matrix_Chi() const;  ///< neutralino mass matrix
-   RM22 get_mass_matrix_Cha() const;  ///< chargino mass matrix
+   /// sets g1 = g2 = 0
+   Parameters make_gaugeless(const Parameters&) const;
 
    /// A0 Passarino-Veltman function
    double A0(double) const;

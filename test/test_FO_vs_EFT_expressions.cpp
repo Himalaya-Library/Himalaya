@@ -103,8 +103,8 @@ TEST_CASE("test_FO_1loop_gaugeless")
    CHECK_CLOSE(DMh2_1(1,0), DMh2_2(1,0), eps);
    CHECK_CLOSE(DMh2_1(1,1), DMh2_2(1,1), eps);
    CHECK_CLOSE(DMh2_2(0,0), DMh2_3(0,0), 1e-7);
-   CHECK_CLOSE(DMh2_2(0,1), DMh2_3(0,1), 1e-7);
-   CHECK_CLOSE(DMh2_2(1,0), DMh2_3(1,0), 1e-7);
+   CHECK_CLOSE(DMh2_2(0,1), DMh2_3(0,1), eps);
+   CHECK_CLOSE(DMh2_2(1,0), DMh2_3(1,0), eps);
    CHECK_CLOSE(DMh2_2(1,1), DMh2_3(1,1), 1e-7);
 }
 

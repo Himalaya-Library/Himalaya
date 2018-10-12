@@ -144,39 +144,33 @@ void symmetrize(Eigen::MatrixBase<Derived>& m)
 
 } // anonymous namespace
 
-MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
-   : pars(pars_)
+void MSSM_spectrum::calculate_spectrum(const Parameters& pars)
 {
-   calculate_parameters();
+   calculate_MVZ(pars);
+   calculate_MVWm(pars);
+   calculate_MFt(pars);
+   calculate_MFb(pars);
+   calculate_MFtau(pars);
+   calculate_MSveL(pars);
+   calculate_MSvmL(pars);
+   calculate_MSvtL(pars);
+   calculate_MSu(pars);
+   calculate_MSd(pars);
+   calculate_MSc(pars);
+   calculate_MSs(pars);
+   calculate_MSt(pars);
+   calculate_MSb(pars);
+   calculate_MSe(pars);
+   calculate_MSm(pars);
+   calculate_MStau(pars);
+   calculate_Mhh(pars);
+   calculate_MAh(pars);
+   calculate_MHpm(pars);
+   calculate_MChi(pars);
+   calculate_MCha(pars);
 }
 
-void MSSM_mass_eigenstates::calculate_parameters()
-{
-   calculate_MVZ();
-   calculate_MVWm();
-   calculate_MFt();
-   calculate_MFb();
-   calculate_MFtau();
-   calculate_MSveL();
-   calculate_MSvmL();
-   calculate_MSvtL();
-   calculate_MSu();
-   calculate_MSd();
-   calculate_MSc();
-   calculate_MSs();
-   calculate_MSt();
-   calculate_MSb();
-   calculate_MSe();
-   calculate_MSm();
-   calculate_MStau();
-   calculate_Mhh();
-   calculate_MAh();
-   calculate_MHpm();
-   calculate_MChi();
-   calculate_MCha();
-}
-
-void MSSM_mass_eigenstates::calculate_MVWm()
+void MSSM_spectrum::calculate_MVWm(const Parameters& pars)
 {
    const auto g2 = pars.g2;
    const auto vu = pars.vu;
@@ -185,7 +179,7 @@ void MSSM_mass_eigenstates::calculate_MVWm()
    M2VWm = 0.25*sqr(g2)*(sqr(vd) + sqr(vu));
 }
 
-void MSSM_mass_eigenstates::calculate_MVZ()
+void MSSM_spectrum::calculate_MVZ(const Parameters& pars)
 {
    const auto gY = pars.g1 * sqrt35;
    const auto g2 = pars.g2;
@@ -195,22 +189,22 @@ void MSSM_mass_eigenstates::calculate_MVZ()
    M2VZ = 0.25*(sqr(gY) + sqr(g2))*(sqr(vd) + sqr(vu));
 }
 
-void MSSM_mass_eigenstates::calculate_MFt()
+void MSSM_spectrum::calculate_MFt(const Parameters& pars)
 {
    MFt = pars.Yu(2,2) * pars.vu * inv_sqrt2;
 }
 
-void MSSM_mass_eigenstates::calculate_MFb()
+void MSSM_spectrum::calculate_MFb(const Parameters& pars)
 {
    MFb = pars.Yd(2,2) * pars.vd * inv_sqrt2;
 }
 
-void MSSM_mass_eigenstates::calculate_MFtau()
+void MSSM_spectrum::calculate_MFtau(const Parameters& pars)
 {
    MFtau = pars.Ye(2,2) * pars.vd * inv_sqrt2;
 }
 
-void MSSM_mass_eigenstates::calculate_MSveL()
+void MSSM_spectrum::calculate_MSveL(const Parameters& pars)
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -222,7 +216,7 @@ void MSSM_mass_eigenstates::calculate_MSveL()
       + sqr(vu)) - sqr(g2)*(-sqr(vd) + sqr(vu)));
 }
 
-void MSSM_mass_eigenstates::calculate_MSvmL()
+void MSSM_spectrum::calculate_MSvmL(const Parameters& pars)
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -234,7 +228,7 @@ void MSSM_mass_eigenstates::calculate_MSvmL()
       + sqr(vu)) - sqr(g2)*(-sqr(vd) + sqr(vu)));
 }
 
-void MSSM_mass_eigenstates::calculate_MSvtL()
+void MSSM_spectrum::calculate_MSvtL(const Parameters& pars)
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -246,7 +240,7 @@ void MSSM_mass_eigenstates::calculate_MSvtL()
       + sqr(vu)) - sqr(g2)*(-sqr(vd) + sqr(vu)));
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Su() const
+RM22 MSSM_spectrum::get_mass_matrix_Su(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -271,14 +265,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Su() const
    return mass_matrix_Su;
 }
 
-void MSSM_mass_eigenstates::calculate_MSu()
+void MSSM_spectrum::calculate_MSu(const Parameters& pars)
 {
-   const auto mass_matrix_Su = get_mass_matrix_Su();
+   const auto mass_matrix_Su = get_mass_matrix_Su(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Su, M2Su, ZU);
    normalize_to_interval(ZU);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Sd() const
+RM22 MSSM_spectrum::get_mass_matrix_Sd(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -303,14 +297,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Sd() const
    return mass_matrix_Sd;
 }
 
-void MSSM_mass_eigenstates::calculate_MSd()
+void MSSM_spectrum::calculate_MSd(const Parameters& pars)
 {
-   const auto mass_matrix_Sd = get_mass_matrix_Sd();
+   const auto mass_matrix_Sd = get_mass_matrix_Sd(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sd, M2Sd, ZD);
    normalize_to_interval(ZD);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Sc() const
+RM22 MSSM_spectrum::get_mass_matrix_Sc(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -335,14 +329,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Sc() const
    return mass_matrix_Sc;
 }
 
-void MSSM_mass_eigenstates::calculate_MSc()
+void MSSM_spectrum::calculate_MSc(const Parameters& pars)
 {
-   const auto mass_matrix_Sc = get_mass_matrix_Sc();
+   const auto mass_matrix_Sc = get_mass_matrix_Sc(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sc, M2Sc, ZC);
    normalize_to_interval(ZC);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Ss() const
+RM22 MSSM_spectrum::get_mass_matrix_Ss(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -367,14 +361,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Ss() const
    return mass_matrix_Ss;
 }
 
-void MSSM_mass_eigenstates::calculate_MSs()
+void MSSM_spectrum::calculate_MSs(const Parameters& pars)
 {
-   const auto mass_matrix_Ss = get_mass_matrix_Ss();
+   const auto mass_matrix_Ss = get_mass_matrix_Ss(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Ss, M2Ss, ZS);
    normalize_to_interval(ZS);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_St() const
+RM22 MSSM_spectrum::get_mass_matrix_St(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -399,14 +393,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_St() const
    return mass_matrix_St;
 }
 
-void MSSM_mass_eigenstates::calculate_MSt()
+void MSSM_spectrum::calculate_MSt(const Parameters& pars)
 {
-   const auto mass_matrix_St = get_mass_matrix_St();
+   const auto mass_matrix_St = get_mass_matrix_St(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_St, M2St, ZT);
    normalize_to_interval(ZT);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Sb() const
+RM22 MSSM_spectrum::get_mass_matrix_Sb(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -431,14 +425,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Sb() const
    return mass_matrix_Sb;
 }
 
-void MSSM_mass_eigenstates::calculate_MSb()
+void MSSM_spectrum::calculate_MSb(const Parameters& pars)
 {
-   const auto mass_matrix_Sb = get_mass_matrix_Sb();
+   const auto mass_matrix_Sb = get_mass_matrix_Sb(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sb, M2Sb, ZB);
    normalize_to_interval(ZB);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Se() const
+RM22 MSSM_spectrum::get_mass_matrix_Se(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -463,14 +457,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Se() const
    return mass_matrix_Se;
 }
 
-void MSSM_mass_eigenstates::calculate_MSe()
+void MSSM_spectrum::calculate_MSe(const Parameters& pars)
 {
-   const auto mass_matrix_Se = get_mass_matrix_Se();
+   const auto mass_matrix_Se = get_mass_matrix_Se(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Se, M2Se, ZE);
    normalize_to_interval(ZE);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Sm() const
+RM22 MSSM_spectrum::get_mass_matrix_Sm(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -495,14 +489,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Sm() const
    return mass_matrix_Sm;
 }
 
-void MSSM_mass_eigenstates::calculate_MSm()
+void MSSM_spectrum::calculate_MSm(const Parameters& pars)
 {
-   const auto mass_matrix_Sm = get_mass_matrix_Sm();
+   const auto mass_matrix_Sm = get_mass_matrix_Sm(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sm, M2Sm, ZM);
    normalize_to_interval(ZM);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Stau() const
+RM22 MSSM_spectrum::get_mass_matrix_Stau(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -527,14 +521,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Stau() const
    return mass_matrix_Stau;
 }
 
-void MSSM_mass_eigenstates::calculate_MStau()
+void MSSM_spectrum::calculate_MStau(const Parameters& pars)
 {
-   const auto mass_matrix_Stau = get_mass_matrix_Stau();
+   const auto mass_matrix_Stau = get_mass_matrix_Stau(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Stau, M2Stau, ZTau);
    normalize_to_interval(ZTau);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_hh() const
+RM22 MSSM_spectrum::get_mass_matrix_hh(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -554,14 +548,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_hh() const
    return mass_matrix_hh;
 }
 
-void MSSM_mass_eigenstates::calculate_Mhh()
+void MSSM_spectrum::calculate_Mhh(const Parameters& pars)
 {
-   const auto mass_matrix_hh = get_mass_matrix_hh();
+   const auto mass_matrix_hh = get_mass_matrix_hh(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_hh, M2hh, ZH);
    normalize_to_interval(ZH);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Ah() const
+RM22 MSSM_spectrum::get_mass_matrix_Ah(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -598,14 +592,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Ah() const
    return mass_matrix_Ah;
 }
 
-void MSSM_mass_eigenstates::calculate_MAh()
+void MSSM_spectrum::calculate_MAh(const Parameters& pars)
 {
-   const auto mass_matrix_Ah = get_mass_matrix_Ah();
+   const auto mass_matrix_Ah = get_mass_matrix_Ah(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Ah, M2Ah, ZA);
    normalize_to_interval(ZA);
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Hpm() const
+RM22 MSSM_spectrum::get_mass_matrix_Hpm(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -630,14 +624,14 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Hpm() const
    return mass_matrix_Hpm;
 }
 
-void MSSM_mass_eigenstates::calculate_MHpm()
+void MSSM_spectrum::calculate_MHpm(const Parameters& pars)
 {
-   const auto mass_matrix_Hpm = get_mass_matrix_Hpm();
+   const auto mass_matrix_Hpm = get_mass_matrix_Hpm(pars);
    flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Hpm, M2Hpm, ZP);
    normalize_to_interval(ZP);
 }
 
-RM44 MSSM_mass_eigenstates::get_mass_matrix_Chi() const
+RM44 MSSM_spectrum::get_mass_matrix_Chi(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
@@ -665,11 +659,11 @@ RM44 MSSM_mass_eigenstates::get_mass_matrix_Chi() const
    return mass_matrix_Chi;
 }
 
-void MSSM_mass_eigenstates::calculate_MChi()
+void MSSM_spectrum::calculate_MChi(const Parameters& pars)
 {
    CM44 ZN_tmp(CM44::Zero());
 
-   const auto mass_matrix_Chi = get_mass_matrix_Chi();
+   const auto mass_matrix_Chi = get_mass_matrix_Chi(pars);
    flexiblesusy::fs_diagonalize_symmetric(mass_matrix_Chi, MChi, ZN_tmp);
    normalize_to_interval(ZN_tmp);
 
@@ -678,7 +672,7 @@ void MSSM_mass_eigenstates::calculate_MChi()
    ZN = ZN_tmp.real();
 }
 
-RM22 MSSM_mass_eigenstates::get_mass_matrix_Cha() const
+RM22 MSSM_spectrum::get_mass_matrix_Cha(const Parameters& pars) const
 {
    const auto g2 = pars.g2;
    const auto vu = pars.vu;
@@ -696,12 +690,33 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_Cha() const
    return mass_matrix_Cha;
 }
 
-void MSSM_mass_eigenstates::calculate_MCha()
+void MSSM_spectrum::calculate_MCha(const Parameters& pars)
 {
-   const auto mass_matrix_Cha = get_mass_matrix_Cha();
+   const auto mass_matrix_Cha = get_mass_matrix_Cha(pars);
    flexiblesusy::fs_svd(mass_matrix_Cha, MCha, UM, UP);
 }
 
+/* ************************************************************ */
+
+MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
+   : pars(pars_)
+{
+   calculate_parameters();
+}
+
+void MSSM_mass_eigenstates::calculate_parameters()
+{
+   masses.calculate_spectrum(pars);
+   gaugeless.calculate_spectrum(make_gaugeless(pars));
+}
+
+Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars) const
+{
+   auto gl = pars;
+   gl.g1 = 0.;
+   gl.g2 = 0.;
+   return gl;
+}
 
 /**
  * Returns the Higgs pole masses at a given loop level.  The function
@@ -718,7 +733,7 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
    V2 mh2(V2::Zero());
 
    if (loops >= 0) {
-      const auto m0 = get_mass_matrix_hh();
+      const auto m0 = masses.get_mass_matrix_hh(pars);
       const auto c1 = m0(0,0) + m0(1,1);
       const auto c2 = sqrt(sqr(m0(0,0)) + 4*sqr(m0(0,1))
                            - 2*m0(0,0)*m0(1,1) + sqr(m0(1,1)));
@@ -751,17 +766,54 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
 {
-   const auto g1 = pars.g1;
-   const auto g2 = pars.g2;
-   const auto yt = pars.Yu(2,2);
-   const auto yb = pars.Yd(2,2);
-   const auto ytau = pars.Ye(2,2);
-   const auto vu = pars.vu;
-   const auto vd = pars.vd;
-   const auto mu = pars.mu;
-   const auto At = pars.Au(2,2);
-   const auto Ab = pars.Ad(2,2);
-   const auto Atau = pars.Ae(2,2);
+   const auto g1     = pars.g1;
+   const auto g2     = pars.g2;
+   const auto yt     = pars.Yu(2,2);
+   const auto yb     = pars.Yd(2,2);
+   const auto ytau   = pars.Ye(2,2);
+   const auto vu     = pars.vu;
+   const auto vd     = pars.vd;
+   const auto mu     = pars.mu;
+   const auto At     = pars.Au(2,2);
+   const auto Ab     = pars.Ad(2,2);
+   const auto Atau   = pars.Ae(2,2);
+   const auto M2VWm  = masses.M2VWm;
+   const auto M2VZ   = masses.M2VZ;
+   const auto MFt    = masses.MFt;
+   const auto MFb    = masses.MFb;
+   const auto MFtau  = masses.MFtau;
+   const auto M2SveL = masses.M2SveL;
+   const auto M2SvmL = masses.M2SvmL;
+   const auto M2SvtL = masses.M2SvtL;
+   const auto M2Su   = masses.M2Su;
+   const auto M2Sd   = masses.M2Sd;
+   const auto M2Sc   = masses.M2Sc;
+   const auto M2Ss   = masses.M2Ss;
+   const auto M2St   = masses.M2St;
+   const auto M2Sb   = masses.M2Sb;
+   const auto M2Se   = masses.M2Se;
+   const auto M2Sm   = masses.M2Sm;
+   const auto M2Stau = masses.M2Stau;
+   const auto M2hh   = masses.M2hh;
+   const auto M2Ah   = masses.M2Ah;
+   const auto M2Hpm  = masses.M2Hpm;
+   const auto MChi   = masses.MChi;
+   const auto MCha   = masses.MCha;
+   const auto ZU     = masses.ZU;
+   const auto ZD     = masses.ZD;
+   const auto ZC     = masses.ZC;
+   const auto ZS     = masses.ZS;
+   const auto ZT     = masses.ZT;
+   const auto ZB     = masses.ZB;
+   const auto ZE     = masses.ZE;
+   const auto ZM     = masses.ZM;
+   const auto ZTau   = masses.ZTau;
+   const auto ZH     = masses.ZH;
+   const auto ZA     = masses.ZA;
+   const auto ZP     = masses.ZP;
+   const auto ZN     = masses.ZN;
+   const auto UM     = masses.UM;
+   const auto UP     = masses.UP;
 
    double se11{0.}, se12{0.}, se22{0.};
 
@@ -915,15 +967,24 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
-   const auto yt = pars.Yu(2,2);
-   const auto yb = pars.Yd(2,2);
-   const auto ytau = pars.Ye(2,2);
-   const auto vu = pars.vu;
-   const auto vd = pars.vd;
-   const auto mu = pars.mu;
-   const auto At = pars.Au(2,2);
-   const auto Ab = pars.Ad(2,2);
-   const auto Atau = pars.Ae(2,2);
+   const auto yt     = pars.Yu(2,2);
+   const auto yb     = pars.Yd(2,2);
+   const auto ytau   = pars.Ye(2,2);
+   const auto vu     = pars.vu;
+   const auto vd     = pars.vd;
+   const auto mu     = pars.mu;
+   const auto At     = pars.Au(2,2);
+   const auto Ab     = pars.Ad(2,2);
+   const auto Atau   = pars.Ae(2,2);
+   const auto MFt    = gaugeless.MFt;
+   const auto MFb    = gaugeless.MFb;
+   const auto MFtau  = gaugeless.MFtau;
+   const auto M2St   = gaugeless.M2St;
+   const auto M2Sb   = gaugeless.M2Sb;
+   const auto M2Stau = gaugeless.M2Stau;
+   const auto ZT     = gaugeless.ZT;
+   const auto ZB     = gaugeless.ZB;
+   const auto ZTau   = gaugeless.ZTau;
 
    double se11{0.}, se12{0.}, se22{0.};
 
