@@ -23,7 +23,7 @@ himalaya::Parameters make_point()
    const double msl = MS;
    const double mse = MS;
 
-   const double Xt = xt * std::sqrt(std::sqrt(msq * msu));
+   const double Xt = xt * std::sqrt(msq * msu);
 
    himalaya::Parameters pars;
    pars.scale = MS;
