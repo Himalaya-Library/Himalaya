@@ -92,6 +92,21 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 
 } // anonymous namespace
 
+TEST_CASE("test_FO_1loop_gaugeless")
+{
+   using namespace himalaya::mh1l;
+
+   const double eps = 1e-10;
+   const MSSM_mass_eigenstates me(make_point());
+   const auto DMh2_1 = me.delta_mh2_1loop_gaugeless();
+   const auto DMh2_2 = me.delta_mh2_1loop(0);
+
+   CHECK_CLOSE(DMh2_1(0,0), DMh2_2(0,0), eps);
+   CHECK_CLOSE(DMh2_1(0,1), DMh2_2(0,1), eps);
+   CHECK_CLOSE(DMh2_1(1,0), DMh2_2(1,0), eps);
+   CHECK_CLOSE(DMh2_1(1,1), DMh2_2(1,1), eps);
+}
+
 TEST_CASE("test_EFT_vs_FO_1loop")
 {
    using namespace himalaya;
