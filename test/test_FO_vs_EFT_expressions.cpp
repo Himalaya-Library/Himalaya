@@ -85,16 +85,22 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
    using namespace himalaya::mh2_eft;
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
-   mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G14, 0);
-   mhc.setCorrectionFlag(EFTOrders::G24, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
+
+   if (pars.g1 < 1e-5) {
+      mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G14, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
+   }
+
+   if (pars.g2 < 1e-5) {
+      mhc.setCorrectionFlag(EFTOrders::G24, 0);
+      mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
+   }
 
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
@@ -124,13 +130,31 @@ TEST_CASE("test_FO_1loop_gaugeless")
    CHECK_CLOSE(DMh2_2(1,1), DMh2_3(1,1), 1e-7);
 }
 
-TEST_CASE("test_EFT_vs_FO_1loop")
+TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
 {
-   using namespace himalaya;
    using namespace himalaya::mh1l;
    using namespace himalaya::mh2_eft;
 
    const auto p = make_gaugeless(make_point());
+
+   const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
+   const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
+
+   const MSSM_mass_eigenstates me(p);
+   const auto Mh2_full_0L = me.calculate_Mh2(0);
+   const auto Mh2_full_1L = me.calculate_Mh2(1);
+
+   CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
+   // TODO increase precision
+   CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
+}
+
+TEST_CASE("test_EFT_vs_FO_1loop")
+{
+   using namespace himalaya::mh1l;
+   using namespace himalaya::mh2_eft;
+
+   const auto p = make_point();
 
    const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
    const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
