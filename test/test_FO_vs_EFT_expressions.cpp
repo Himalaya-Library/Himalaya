@@ -62,8 +62,8 @@ himalaya::Parameters make_point()
 himalaya::Parameters make_gaugeless(const himalaya::Parameters& pars)
 {
    auto gl = pars;
-   gl.g1 = 0.;
-   gl.g2 = 0.;
+   gl.g1 = 1e-8;
+   gl.g2 = 1e-8;
    gl.MW = himalaya::NaN;
    gl.MZ = himalaya::NaN;
    gl.validate(false);
@@ -82,7 +82,20 @@ double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 /// calculates Mh^2 in the EFT at 1-loop level
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
+   using namespace himalaya::mh2_eft;
+
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
+   mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G14, 0);
+   mhc.setCorrectionFlag(EFTOrders::G24, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
+
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
 
@@ -117,7 +130,7 @@ TEST_CASE("test_EFT_vs_FO_1loop")
    using namespace himalaya::mh1l;
    using namespace himalaya::mh2_eft;
 
-   const auto p = make_point();
+   const auto p = make_gaugeless(make_point());
 
    const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
    const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
@@ -128,5 +141,5 @@ TEST_CASE("test_EFT_vs_FO_1loop")
 
    CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
    // TODO increase precision
-   CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-4);
+   CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
 }
