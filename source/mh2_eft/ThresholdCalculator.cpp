@@ -49,6 +49,10 @@ namespace {
       return is_zero(a - b, prec);
    }
 
+   double calc_cw(double mW, double mZ) {
+      return std::abs(mZ) > std::numeric_limits<double>::epsilon() ? mW/mZ : 0.;
+   }
+
    // The parts below are taken from FlexibleSUSY
    /// lambda^2(u,v)
    double lambda_2(double u, double v) noexcept
@@ -1922,7 +1926,7 @@ double ThresholdCalculator::getDeltaVevYtau2() const{
 
 double ThresholdCalculator::getDeltaVevG12(int omitLogs) const{
 
-   const double sw = sin(acos(p.MW/p.MZ));
+   const double sw = sin(acos(calc_cw(p.MW, p.MZ)));
    const double Mu = p.mu;
    const double M1 = p.M1;
    const double beta = atan(p.vu/p.vd);
@@ -1975,8 +1979,8 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const{
    const double M2 = p.M2;
    const double Mu = p.mu;
    const double Mu2 = pow2(Mu);
-   const double cw = p.MW/p.MZ;
-   const double sw = sin(acos(p.MW/p.MZ));
+   const double cw = calc_cw(p.MW, p.MZ);
+   const double sw = sin(acos(cw));
    const double beta = atan(p.vu/p.vd);
    const double cbeta = cos(beta);
    const double c2be = cos(2*beta);
