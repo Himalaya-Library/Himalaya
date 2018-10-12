@@ -59,6 +59,15 @@ himalaya::Parameters make_point()
    return pars;
 }
 
+/// calculates Mh^2 in the EFT at tree level
+double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
+{
+   const double beta = std::atan(pars.vu/pars.vd);
+   const double cos_2beta = std::cos(2*beta);
+
+   return pow2(pars.MZ * cos_2beta);
+}
+
 /// calculates Mh^2 in the EFT at 1-loop level
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
@@ -91,12 +100,14 @@ TEST_CASE("test_EFT_vs_FO_1loop")
 
    const auto p = make_point();
 
+   const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
    const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
 
    const MSSM_mass_eigenstates me(p);
-   const auto DMh2_full_1L = me.delta_mh2_1loop_gaugeless();
-   // TODO: diagonalize
-   const auto Mh2_full_1L = 0. + DMh2_full_1L(1,1);
+   const auto Mh2_full_0L = me.calculate_Mh2(0);
+   const auto Mh2_full_1L = me.calculate_Mh2(1);
 
-   CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L, 1e-4);
+   CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
+   // TODO increase precision
+   CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-4);
 }

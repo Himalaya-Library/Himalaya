@@ -17,6 +17,8 @@ class MSSM_mass_eigenstates {
 public:
    MSSM_mass_eigenstates(const Parameters&);
 
+   /// calculates squared Higgs masses
+   V2 calculate_Mh2(int loops) const;
    /// Higgs 1-loop contribution DR'
    RM22 delta_mh2_1loop(double p2) const;
    /// Higgs 1-loop contribution DR' for p = g1 = g2 = 0

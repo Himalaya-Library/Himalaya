@@ -10,6 +10,7 @@
 #include "pv.hpp"
 #include "sum.hpp"
 #include "Logger.hpp"
+#include <cmath>
 
 namespace himalaya {
 namespace mh1l {
@@ -658,6 +659,35 @@ void MSSM_mass_eigenstates::calculate_MCha()
 {
    const auto mass_matrix_Cha = get_mass_matrix_Cha();
    flexiblesusy::fs_svd(mass_matrix_Cha, MCha, UM, UP);
+}
+
+
+/**
+ * Returns the Higgs pole masses at a given loop level.  The function
+ * does not include implicit or explicit higher orders.
+ *
+ * @param loops number of loops
+ *
+ * @return Higgs pole masses
+ */
+V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
+{
+   using std::sqrt;
+
+   V2 mh2(V2::Zero());
+
+   if (loops >= 0) {
+      const auto m0 = get_mass_matrix_hh();
+
+      const auto c1 = m0(0,0) + m0(1,1);
+      const auto c2 = sqrt(sqr(m0(0,0)) + 4*sqr(m0(0,1))
+                           - 2*m0(0,0)*m0(1,1) + sqr(m0(1,1)));
+
+      mh2(0) += 0.5*(c1 - c2);
+      mh2(1) += 0.5*(c1 + c2);
+   }
+
+   return mh2;
 }
 
 /**
