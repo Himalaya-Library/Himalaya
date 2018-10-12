@@ -210,6 +210,8 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU6, 0);
    mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YT2YB4, 0);
    mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YB2YT4, 0);
+   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU4YB2, 0);
+
 
    // mh_eft^2
    const double mh2_eft = mh2EFTCalculator.getDeltaMh2EFT0Loop();
@@ -321,7 +323,7 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
          // normalized to the exact logarithms
          calcDeltaLambda3L(ho, true);
          /*const double deltaLambdaUncertainty = std::abs((ho.getDLambdaEFT()
-            - ho.getDLambdaH3m())/(ho.getDLambdaEFT() - ho.getDLambdaNonLog()));*/
+          - ho.getDLambdaH3m())/(ho.getDLambdaEFT() - ho.getDLambdaNonLog()));*/
 
          // add these errors to include the error of the expansion in the comparison
          const double currError = sqrt(pow2(twoLoopError/Mh2l)
@@ -1374,7 +1376,9 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    // hierachy (h3, h9 ~ xt^3, h5, h6, h6b ~ xt^4), whereas delta_lambda_EFT
    // the non-logarithmic term is of order of the hierarchy but the logarithmic
    // part is of order O(xt^4) and using the shift O(xt^5). Note that the shift
-   // for delta_lambda_H3m is always of order of the hierarchy as well
+   // for delta_lambda_H3m is always of order of the hierarchy as well.
+   // the logarithms are omitted since one would double count the error when
+   // combining it with delta_exp
    const int xt4Flag = xtOrder == 3 ? 1 : 0;
    ho.setDLambdaXtUncertainty(
       std::abs(xt4Flag*pref/v2*tc.getDRbarPrimeToMSbarXtTerms(tc.getLimit(), 4, 1)));
