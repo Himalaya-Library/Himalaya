@@ -79,22 +79,7 @@ double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 /// calculates Mh^2 in the EFT at 1-loop level
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
-   using namespace himalaya::mh2_eft;
-
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
-   mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G14, 0);
-   mhc.setCorrectionFlag(EFTOrders::G24, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::YB4, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
-   mhc.setCorrectionFlag(EFTOrders::YTAU4, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
-
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
 
