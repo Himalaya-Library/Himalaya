@@ -45,6 +45,41 @@ DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(/)
 DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(+)
 DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(-)
 
+template <typename T>
+typename std::enable_if<!std::is_unsigned<T>::value, bool>::type
+is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
+{
+   return std::abs(a) <= prec;
+}
+
+/**
+ * Converts the given vector of masses and the corresponding (complex)
+ * mixing matrix to SLHA convention: Matrix rows with non-zero
+ * imaginary parts are multiplied by i and the corresponding mass
+ * eigenvalue is multiplied by -1.  As a result the mixing matrix will
+ * be real and the mass eigenvalues might be positive or negative.  It
+ * is assumed that these mixings result from diagonalizing a symmetric
+ * fermion mass matrix in the convention of Haber and Kane,
+ * Phys. Rept. 117 (1985) 75-263.  This conversion makes sense only if
+ * the original symmetric mass matrix is real-valued.
+ *
+ * @param m vector of masses
+ * @param z mixing matrix
+ */
+template<int N>
+void convert_symmetric_fermion_mixings_to_slha(
+   Eigen::Array<double, N, 1>& m,
+   Eigen::Matrix<std::complex<double>, N, N>& z)
+{
+   for (int i = 0; i < N; i++) {
+      // check if i'th row contains non-zero imaginary parts
+      if (!is_zero(z.row(i).imag().cwiseAbs().maxCoeff())) {
+         z.row(i) *= std::complex<double>(0.0,1.0);
+         m(i) *= -1;
+      }
+   }
+}
+
 /**
  * Normalize each element of the given real matrix to be within the
  * interval [min, max].  Values < min are set to min.  Values > max
@@ -632,9 +667,15 @@ RM44 MSSM_mass_eigenstates::get_mass_matrix_Chi() const
 
 void MSSM_mass_eigenstates::calculate_MChi()
 {
+   CM44 ZN_tmp(CM44::Zero());
+
    const auto mass_matrix_Chi = get_mass_matrix_Chi();
-   flexiblesusy::fs_diagonalize_symmetric(mass_matrix_Chi, MChi, ZN);
-   normalize_to_interval(ZN);
+   flexiblesusy::fs_diagonalize_symmetric(mass_matrix_Chi, MChi, ZN_tmp);
+   normalize_to_interval(ZN_tmp);
+
+   // convert to SLHA convention to avoid imaginary parts
+   convert_symmetric_fermion_mixings_to_slha(MChi, ZN_tmp);
+   ZN = ZN_tmp.real();
 }
 
 RM22 MSSM_mass_eigenstates::get_mass_matrix_Cha() const
@@ -722,7 +763,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    const auto Ab = pars.Ad(2,2);
    const auto Atau = pars.Ae(2,2);
 
-   std::complex<double> se11, se12, se22;
+   double se11{0.}, se12{0.}, se22{0.};
 
    se11 += (A0(M2VZ)*(-3*sqr(g1) - 5*sqr(g2)))/20.;
    se11 += -(A0(M2VWm)*sqr(g2))/2.;
@@ -858,7 +899,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    se22 += -2*SUM(gI2,0,1,((-2*A0(M2VWm) + A0(M2Hpm(gI2)) + B0(p2,M2VWm,M2Hpm(gI2))*(M2VWm - 2*p2 - 2*M2Hpm(gI2)))*sqr(g2*ZP(gI2,1)))/4.);
 
    RM22 se(RM22::Zero());
-   se << std::real(se11), std::real(se12), std::real(se12), std::real(se22);
+   se << se11, se12, se12, se22;
 
    return se * one_loop;
 }

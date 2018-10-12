@@ -65,9 +65,9 @@ private:
    RM22 ZH{RM22::Zero()};   ///< MSSM DR' CP-even Higgs mixing matrix
    RM22 ZA{RM22::Zero()};   ///< MSSM DR' CP-odd Higgs mixing matrix
    RM22 ZP{RM22::Zero()};   ///< MSSM DR' charged Higgs mixing matrix
-   CM44 ZN{CM44::Zero()};   ///< MSSM DR' neutralino mixing matrix
-   CM22 UM{CM22::Zero()};   ///< MSSM DR' positive chargino mixing matrix
-   CM22 UP{CM22::Zero()};   ///< MSSM DR' negative chargino mixing matrix
+   RM44 ZN{RM44::Zero()};   ///< MSSM DR' neutralino mixing matrix
+   RM22 UM{RM22::Zero()};   ///< MSSM DR' positive chargino mixing matrix
+   RM22 UP{RM22::Zero()};   ///< MSSM DR' negative chargino mixing matrix
 
    /// calculates all DR' masses and mixings
    void calculate_parameters();
