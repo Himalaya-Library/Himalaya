@@ -20,13 +20,13 @@ himalaya::Parameters make_point()
    const double beta = std::atan(tb);
    const double v = 245.;
 
-   const double msq2 = MS;
-   const double msu2 = MS;
-   const double mg   = MS;
-   const double msl2 = MS;
-   const double mse2 = MS;
+   const double msq = MS;
+   const double msu = MS;
+   const double mg  = MS;
+   const double msl = MS;
+   const double mse = MS;
 
-   const double Xt = xt * std::sqrt(std::sqrt(msq2 * msu2));
+   const double Xt = xt * std::sqrt(msq * msu);
 
    himalaya::Parameters pars;
    pars.scale = MS;
@@ -36,11 +36,11 @@ himalaya::Parameters make_point()
    pars.g3    = 1.05733;
    pars.vu    = v*std::sin(beta);
    pars.vd    = v*std::cos(beta);
-   pars.mq2   << pow2(msq2), 0, 0, 0, pow2(msq2), 0, 0, 0, pow2(msq2);
-   pars.md2   << pow2(MS), 0, 0, 0, pow2(MS), 0, 0, 0, pow2(MS);
-   pars.mu2   << pow2(msu2), 0, 0, 0, pow2(msu2), 0, 0, 0, pow2(msu2);
-   pars.ml2   << pow2(msl2), 0, 0, 0, pow2(msl2), 0, 0, 0, pow2(msl2);
-   pars.me2   << pow2(mse2), 0, 0, 0, pow2(mse2), 0, 0, 0, pow2(mse2);
+   pars.mq2   << pow2(msq), 0, 0, 0, pow2(msq), 0, 0, 0, pow2(msq);
+   pars.md2   << pow2(MS) , 0, 0, 0, pow2(MS) , 0, 0, 0, pow2(MS);
+   pars.mu2   << pow2(msu), 0, 0, 0, pow2(msu), 0, 0, 0, pow2(msu);
+   pars.ml2   << pow2(msl), 0, 0, 0, pow2(msl), 0, 0, 0, pow2(msl);
+   pars.me2   << pow2(mse), 0, 0, 0, pow2(mse), 0, 0, 0, pow2(mse);
    pars.Au    << 0, 0, 0, 0, 0, 0, 0, 0, Xt + pars.mu/tb;
    pars.Ae    << 0, 0, 0, 0, 0, 0, 0, 0, 0;
    pars.Ad    << 0, 0, 0, 0 ,0 ,0 ,0 ,0 ,0;
@@ -224,7 +224,7 @@ TEST_CASE("test_delta_lambda")
 
    CHECK_CLOSE(Mh2_2L, calc_Mh2_EFT_0L(pars)
                      + calc_Mh2_EFT_1L(pars)
-                     + calc_Mh2_EFT_2L(pars), 1e-6);
+                     + calc_Mh2_EFT_2L(pars), 1e-5);
 
    CHECK_CLOSE(Mh2_3L, calc_Mh2_EFT_0L(pars)
                      + calc_Mh2_EFT_1L(pars)
