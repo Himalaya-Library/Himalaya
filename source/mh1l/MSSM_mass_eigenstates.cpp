@@ -142,6 +142,16 @@ void symmetrize(Eigen::MatrixBase<Derived>& m)
          m(i,k) = m(k,i);
 }
 
+int sign(double x)
+{
+   return x < 0 ? -1 : 1;
+}
+
+double signed_sqrt(double x)
+{
+   return sign(x)*std::abs(x);
+}
+
 } // anonymous namespace
 
 void MSSM_spectrum::calculate_spectrum(const Parameters& pars)
@@ -696,6 +706,51 @@ void MSSM_spectrum::calculate_MCha(const Parameters& pars)
    flexiblesusy::fs_svd(mass_matrix_Cha, MCha, UM, UP);
 }
 
+std::ostream& operator<<(std::ostream& ostr, const MSSM_spectrum& spec)
+{
+   const auto ssqrt = [] (double x) { return signed_sqrt(x); };
+
+   ostr << "MFb = " << spec.MFb << '\n';
+   ostr << "MFt = " << spec.MFt << '\n';
+   ostr << "MFtau = " << spec.MFtau << '\n';
+   ostr << "MSveL = " << signed_sqrt(spec.M2SveL) << '\n';
+   ostr << "MSvmL = " << signed_sqrt(spec.M2SvmL) << '\n';
+   ostr << "MSvtL = " << signed_sqrt(spec.M2SvtL) << '\n';
+   ostr << "MSd = " << spec.M2Sd.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MSu = " << spec.M2Su.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MSe = " << spec.M2Se.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MSm = " << spec.M2Sm.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MStau = " << spec.M2Stau.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MSs = " << spec.M2Ss.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MSc = " << spec.M2Sc.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MSb = " << spec.M2Sb.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MSt = " << spec.M2St.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "Mhh = " << spec.M2hh.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MAh = " << spec.M2Ah.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MHpm = " << spec.M2Hpm.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MChi = " << spec.MChi.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MCha = " << spec.MCha.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MVWm = " << signed_sqrt(spec.M2VWm) << '\n';
+   ostr << "MVZ = " << signed_sqrt(spec.M2VZ) << '\n';
+   ostr << "ZD = " << spec.ZD << '\n';
+   ostr << "ZU = " << spec.ZU << '\n';
+   ostr << "ZE = " << spec.ZE << '\n';
+   ostr << "ZM = " << spec.ZM << '\n';
+   ostr << "ZTau = " << spec.ZTau << '\n';
+   ostr << "ZS = " << spec.ZS << '\n';
+   ostr << "ZC = " << spec.ZC << '\n';
+   ostr << "ZB = " << spec.ZB << '\n';
+   ostr << "ZT = " << spec.ZT << '\n';
+   ostr << "ZH = " << spec.ZH << '\n';
+   ostr << "ZA = " << spec.ZA << '\n';
+   ostr << "ZP = " << spec.ZP << '\n';
+   ostr << "ZN = " << spec.ZN << '\n';
+   ostr << "UM = " << spec.UM << '\n';
+   ostr << "UP = " << spec.UP << '\n';
+
+   return ostr;
+}
+
 /* ************************************************************ */
 
 MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
@@ -1056,6 +1111,24 @@ double MSSM_mass_eigenstates::A0(double m2) const
 double MSSM_mass_eigenstates::B0(double p2, double m12, double m22) const
 {
    return b0(p2, m12, m22, sqr(pars.scale));
+}
+
+std::ostream& operator<<(std::ostream& ostr, const MSSM_mass_eigenstates& me)
+{
+   ostr << "====================================\n"
+           "MSSM_mass_eigenstates\n"
+           "====================================\n";
+   ostr << me.pars;
+   ostr << "------------------------------------\n"
+           "DR' masses and mixings\n"
+           "------------------------------------\n"
+        << me.masses;
+   ostr << "------------------------------------\n"
+           "DR' masses and mixings (g1 = g2 = 0)\n"
+           "------------------------------------\n"
+        << me.gaugeless;
+
+   return ostr;
 }
 
 } // namespace mh1l

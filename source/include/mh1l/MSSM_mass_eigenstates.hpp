@@ -97,6 +97,9 @@ struct MSSM_spectrum {
    RM22 get_mass_matrix_Cha(const Parameters&) const;  ///< chargino mass matrix
 };
 
+/// prints the spectrum
+std::ostream& operator<<(std::ostream&, const MSSM_spectrum&);
+
 class MSSM_mass_eigenstates {
 public:
    MSSM_mass_eigenstates(const Parameters&);
@@ -107,6 +110,8 @@ public:
    RM22 delta_mh2_1loop(double p2) const;
    /// Higgs 1-loop contribution DR' for p = g1 = g2 = 0
    RM22 delta_mh2_1loop_gaugeless() const;
+
+   friend std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
 private:
    Parameters pars;         ///< MSSM DR' parameters
@@ -124,6 +129,9 @@ private:
    /// B0 Passarino-Veltman function
    double B0(double, double, double) const;
 };
+
+/// prints the internals of MSSM_mass_eigenstates
+std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
 } // namespace mh1l
 } // namespace himalaya
