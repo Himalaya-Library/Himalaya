@@ -149,7 +149,7 @@ int sign(double x)
 
 double signed_sqrt(double x)
 {
-   return sign(x)*std::abs(x);
+   return sign(x)*std::sqrt(std::abs(x));
 }
 
 } // anonymous namespace
@@ -728,8 +728,8 @@ std::ostream& operator<<(std::ostream& ostr, const MSSM_spectrum& spec)
    ostr << "Mhh = " << spec.M2hh.transpose().unaryExpr(ssqrt) << '\n';
    ostr << "MAh = " << spec.M2Ah.transpose().unaryExpr(ssqrt) << '\n';
    ostr << "MHpm = " << spec.M2Hpm.transpose().unaryExpr(ssqrt) << '\n';
-   ostr << "MChi = " << spec.MChi.transpose().unaryExpr(ssqrt) << '\n';
-   ostr << "MCha = " << spec.MCha.transpose().unaryExpr(ssqrt) << '\n';
+   ostr << "MChi = " << spec.MChi.transpose() << '\n';
+   ostr << "MCha = " << spec.MCha.transpose() << '\n';
    ostr << "MVWm = " << signed_sqrt(spec.M2VWm) << '\n';
    ostr << "MVZ = " << signed_sqrt(spec.M2VZ) << '\n';
    ostr << "ZD = " << spec.ZD << '\n';
