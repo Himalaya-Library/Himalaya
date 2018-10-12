@@ -59,6 +59,14 @@ himalaya::Parameters make_point()
    return pars;
 }
 
+himalaya::Parameters make_gaugeless(const himalaya::Parameters& pars)
+{
+   auto gl = pars;
+   gl.g1 = 0.;
+   gl.g2 = 0.;
+   return gl;
+}
+
 /// calculates Mh^2 in the EFT at tree level
 double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 {
@@ -97,14 +105,22 @@ TEST_CASE("test_FO_1loop_gaugeless")
    using namespace himalaya::mh1l;
 
    const double eps = 1e-10;
-   const MSSM_mass_eigenstates me(make_point());
+   const auto p    = make_point();
+   const auto p_gl = make_gaugeless(p);
+   const MSSM_mass_eigenstates me(p);
+   const MSSM_mass_eigenstates me_gl(p_gl); // gaugeless
    const auto DMh2_1 = me.delta_mh2_1loop_gaugeless();
-   const auto DMh2_2 = me.delta_mh2_1loop(0);
+   const auto DMh2_2 = me_gl.delta_mh2_1loop_gaugeless();
+   const auto DMh2_3 = me_gl.delta_mh2_1loop(0);
 
    CHECK_CLOSE(DMh2_1(0,0), DMh2_2(0,0), eps);
    CHECK_CLOSE(DMh2_1(0,1), DMh2_2(0,1), eps);
    CHECK_CLOSE(DMh2_1(1,0), DMh2_2(1,0), eps);
    CHECK_CLOSE(DMh2_1(1,1), DMh2_2(1,1), eps);
+   CHECK_CLOSE(DMh2_2(0,0), DMh2_3(0,0), 1e-7);
+   CHECK_CLOSE(DMh2_2(0,1), DMh2_3(0,1), 1e-7);
+   CHECK_CLOSE(DMh2_2(1,0), DMh2_3(1,0), 1e-7);
+   CHECK_CLOSE(DMh2_2(1,1), DMh2_3(1,1), 1e-7);
 }
 
 TEST_CASE("test_EFT_vs_FO_1loop")
