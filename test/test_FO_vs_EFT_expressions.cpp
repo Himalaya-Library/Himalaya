@@ -11,9 +11,9 @@ double pow2(double x) { return x*x; }
 
 himalaya::Parameters make_point()
 {
-   const double MS = 100000.;
-   const double xt = 2.;
-   const double tb = 5.;
+   const double MS = 10000.;
+   const double xt = 1.;
+   const double tb = 20.;
    const double beta = std::atan(tb);
    const double v = 245.;
 
