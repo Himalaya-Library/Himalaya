@@ -37,6 +37,18 @@ namespace {
 
    const double Pi  = 3.1415926535897932384626433832795;
 
+   template <typename T>
+   bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
+   {
+      return std::fabs(a) < prec;
+   }
+
+   template <typename T>
+   bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+   {
+      return is_zero(a - b, prec);
+   }
+
    // The parts below are taken from FlexibleSUSY
    /// lambda^2(u,v)
    double lambda_2(double u, double v) noexcept
@@ -92,6 +104,983 @@ namespace {
       return phi_neg(u,v);
    }
 
+
+double F1(double x) noexcept
+{
+   const double x2 = pow2(x);
+
+   if (is_equal(x, 0.))
+      return 0.;
+
+   if (is_equal(x, 1., 0.01))
+      return (16 + 41*x - 44*x2 + 21*pow3(x) - 4*pow4(x))/30.;
+
+   return x*std::log(x2)/(x2-1);
+}
+
+double F2(double x) noexcept
+{
+   const double x2 = pow2(x);
+
+   if (is_equal(x, 0.))
+      return 0.;
+
+   if (is_equal(x, 1., 0.01))
+      return (-5 + 216*x - 226*x2 + 104*pow3(x) - 19*pow4(x))/70.;
+
+   return 6*x2*(2-2*x2+(1+x2)*std::log(x2))/pow3(x2-1);
+}
+
+double F3(double x) noexcept
+{
+   const double x2 = pow2(x);
+
+   if (is_equal(x, 0.))
+      return 0.;
+
+   if (is_equal(x, 1., 0.01))
+      return (-27 + 218*x - 142*x2 + 48*pow3(x) - 7*pow4(x))/90.;
+
+   return 2*x*(5*(1-x2)+(1+4*x2)*std::log(x2))/(3*pow2(x2-1));
+}
+
+double F4(double x) noexcept
+{
+   const double x2 = pow2(x);
+
+   if (is_equal(x, 0.))
+      return 0.;
+
+   if (is_equal(x, 1., 0.01))
+      return (31 + 22*x - 42*x2 + 24*pow3(x) - 5*pow4(x))/30.;
+
+   return 2*x*(x2-1-std::log(x2))/pow2(x2-1);
+}
+
+double F5(double x) noexcept
+{
+   const double x2 = pow2(x);
+   const double x4 = pow4(x);
+
+   if (is_equal(x, 0.))
+      return 0.;
+
+   if (is_equal(x, 1., 0.01))
+      return (13 + 165*x - 174*x2 + 81*pow3(x) - 15*x4)/70.;
+
+   if (is_equal(x, -1., 0.01))
+     return (-13 + 165*x + 174*x2 + 81*pow3(x) + 15*x4)/70.;
+
+   return 3*x*(1-x4+2*x2*std::log(x2))/pow3(1-x2);
+}
+
+double F6(double x) noexcept
+{
+   const double x2 = pow2(x);
+
+   if (is_equal(x, 0.))
+      return -0.75;
+
+   if (is_equal(x, 1., 0.01))
+      return (-103 + 128*x - 26*x2 + pow4(x))/120.;
+
+   if (is_equal(x, -1., 0.01))
+      return (-103 - 128*x - 26*x2 + pow4(x))/120.;
+
+   return (x2-3)/(4*(1-x2)) + x2*(x2-2)/(2*pow2(1.-x2))*std::log(x2);
+}
+
+double F7(double x) noexcept
+{
+   const double x2 = pow2(x);
+   const double x4 = pow4(x);
+
+   if (is_equal(x, 0.))
+      return -1.5;
+
+   if (is_equal(x, 1., 0.01))
+      return -1.8642857142857139 + 2.057142857142856*x
+         + 1.7142857142857153*x2 - 1.1428571428571432*pow3(x)
+         + 0.2357142857142858*x4;
+
+   if (is_equal(x, -1., 0.01))
+      return -1.8642857142857139 - 2.057142857142856*x
+         + 1.7142857142857153*x2 + 1.1428571428571432*pow3(x)
+         + 0.2357142857142858*x4;
+
+   return (-3*(x4-6*x2+1.))/(2*pow2(x2-1))
+      + (3*x4*(x2-3.))/(pow3(x2-1.))*std::log(x2);
+}
+
+/// F8(x1,x2) in the limit x1 -> 1 and x2 -> 1
+double F8_1_1(double x1, double x2) noexcept
+{
+   return 1. + 1.333333333333333*(-1 + x1) +
+      (1.333333333333333 - 0.6666666666666661*(-1 + x1))*(-1 + x2);
+}
+
+/// F8(x1,x2) in the limit x1 -> 1
+double F8_1_x2(double x1, double x2) noexcept
+{
+   const double lx22 = std::log(pow2(x2));
+
+   return -2. + (4.*(-1. + x1)*(-0.5 + 2.*pow2(x2) - 1.5*pow4(x2)
+                                + pow4(x2)*lx22))
+      /pow3(-1. + pow2(x2))
+      + (2. - 2.*pow2(x2) + 2.*pow4(x2)*lx22)
+      /pow2(-1. + pow2(x2))
+      - (1.3333333333333333*pow3(-1. + x1)*(
+            -pow2(x2) - 9.*pow4(x2) + 9.*pow6(x2)
+            + pow8(x2)
+            + (-6.*pow4(x2) - 6.*pow6(x2))*lx22))
+      /pow5(-1. + pow2(x2))
+      + (2.*pow2(-1. + x1)*(
+            -0.16666666666666666 + 1.5*pow2(x2) + 1.5*pow4(x2)
+            - 2.8333333333333335*pow6(x2)
+            + (3.*pow4(x2) + pow6(x2))*lx22))
+      /pow4(-1. + pow2(x2))
+      + (0.26666666666666666*pow4(-1. + x1)*(
+            0.25 + 2.5*pow2(x2) + 80.*pow4(x2) - 47.5*pow6(x2)
+            - 36.25*pow8(x2) + power10(x2)
+            + (37.5*pow4(x2) + 75.*pow6(x2)
+               + 7.5*pow8(x2))*lx22))
+      /pow6(-1. + pow2(x2));
+}
+
+/// F8(x1,x2) in the limit x1 -> 0
+double F8_0_x2(double x1, double x2) noexcept
+{
+   const double lx22 = std::log(pow2(x2));
+
+   return -2. + (2.*pow2(x1)*lx22)/(-1. + pow2(x2)) +
+      (2.*pow2(x2)*lx22)/(-1. + pow2(x2));
+}
+
+// F8(x1,x2) in the limit x1 -> x2
+double F8_x1_x2(double x1, double x2) noexcept
+{
+   const double lx22 = std::log(pow2(x2));
+
+   return -2. + (2.*(x1 - x2)*(3.*x2 - 4.*pow3(x2) + pow5(x2) +
+        2.*x2*lx22))/pow3(-1. + pow2(x2)) +
+   (2.*pow2(x2)*(-1. + pow2(x2) - 2.*lx22 +
+        pow2(x2)*lx22))/pow2(-1. + pow2(x2)) -
+   (0.33333333333333326*pow2(x1 - x2)*
+      (17.000000000000007 - 9.000000000000007*pow2(x2) -
+        9.*pow4(x2) + pow6(x2) +
+        6.000000000000002*lx22 +
+        18.000000000000004*pow2(x2)*lx22))/
+    pow4(-1. + pow2(x2)) -
+   (1.333333333333333*pow3(x1 - x2)*
+      (-1. - 9.000000000000002*pow2(x2) +
+        9.000000000000002*pow4(x2) + pow6(x2) -
+        6.*pow2(x2)*lx22 -
+        6.000000000000003*pow4(x2)*lx22))/
+    (x2*pow5(-1. + pow2(x2)));
+}
+
+double F8(double x1, double x2) noexcept
+{
+   if (is_equal(x1, 0.) && is_equal(x2, 0.))
+      return -2.;
+
+   if (is_equal(std::fabs(x1), 1., 0.01) && is_equal(std::fabs(x2), 1., 0.01))
+      return F8_1_1(std::fabs(x1), std::fabs(x2));
+
+   if (is_equal(std::fabs(x1), 1., 0.01)) {
+      if (is_equal(x2, 0., 0.01)) {
+         return -2.333333333333332 + 5.66666666666667*pow2(x2) +
+            std::fabs(x1)*(2.6666666666666643 - 5.333333333333339*pow2(x2)) +
+            pow2(x1)*(-0.33333333333333215 + 1.6666666666666696*pow2(x2));
+      }
+
+      return F8_1_x2(std::fabs(x1), x2);
+   }
+
+   if (is_equal(std::fabs(x2), 1., 0.01)) {
+      if (is_equal(x1, 0., 0.01)) {
+         return -2.3333333333333335 + 2.6666666666666665*std::fabs(x2) -
+            0.3333333333333333*pow2(x2) +
+            pow2(x1)*(5.666666666666667 - 5.333333333333334*std::fabs(x2) +
+                     1.6666666666666667*pow2(x2));
+      }
+
+      return F8_1_x2(std::fabs(x2), x1);
+   }
+
+   if (is_equal(x1, 0., 0.0001))
+      return F8_0_x2(x1, x2);
+
+   if (is_equal(x2, 0., 0.0001))
+      return F8_0_x2(x2, x1);
+
+   if (is_equal(std::fabs(x1), std::fabs(x2), 0.00001))
+      return F8_x1_x2(std::fabs(x1), std::fabs(x2));
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return -2. + 2./(x12-x22)
+      *(pow4(x1)/(x12-1.)*std::log(x12)
+        -pow4(x2)/(x22-1.)*std::log(x22));
+}
+
+/// F9(x1,x2) in the limit x1 -> 1 and x2 -> 1
+double F9_1_1(double x1, double x2) noexcept
+{
+   return 8.223809523809523 - 12.863492063492064*x2
+      + 10.580952380952382*pow2(x2) - 4.609523809523809*pow3(x2)
+      + 0.8349206349206348*pow4(x2)
+      + x1*(-12.863492063492064 + 26.260317460317456*x2
+            - 24.609523809523807*pow2(x2) + 11.530158730158728*pow3(x2)
+            - 2.184126984126984*pow4(x2))
+      + pow3(x1)*(-4.60952380952381 + 11.53015873015873*x2
+                        - 11.961904761904762*pow2(x2)
+                        + 5.942857142857143*pow3(x2)
+                        - 1.1682539682539683*pow4(x2))
+      + pow4(x1)*(0.8349206349206351 - 2.1841269841269844*x2
+                        + 2.3190476190476197*pow2(x2)
+                        - 1.1682539682539685*pow3(x2)
+                        + 0.23174603174603178*pow4(x2))
+      + pow2(x1)*(10.580952380952379 - 24.609523809523804*x2
+                 + 24.6047619047619*pow2(x2)
+                 - 11.96190476190476*pow3(x2)
+                 + 2.319047619047619*pow4(x2));
+}
+
+/// F9(x1,x2) in the limit x1 -> 1
+double F9_1_x2(double x1, double x2) noexcept
+{
+   const double lx22 = std::log(pow2(x2));
+
+   return (-2.*(-1. + x1)*pow3(-1. + pow2(x2))*(
+              -1. + pow4(x2) - 2.*pow2(x2)*lx22)
+           + 2.*pow4(-1. + pow2(x2))*(
+              1. - pow2(x2) + pow2(x2)*lx22)
+           - 1.3333333333333333*pow3(-1. + x1)*(
+              -1. + pow2(x2))*(
+                 -1. - 9.*pow2(x2) + 9.*pow4(x2) + pow6(x2)
+                 + (-6.*pow2(x2) - 6.*pow4(x2))*lx22)
+           + 0.3333333333333333*pow2(-1. + x1)*pow2(-1. + pow2(x2))
+           *(5. + 15.*pow2(x2) - 21.*pow4(x2) + pow6(x2)
+             + (18.*pow2(x2) + 6.*pow4(x2))*lx22)
+           - 0.06666666666666667*pow4(-1. + x1)*(
+              -16. - 305.*pow2(x2) + 170.*pow4(x2) + 160.*pow6(x2)
+              - 10.*pow8(x2) + power10(x2)
+              + (-150.*pow2(x2) - 300.*pow4(x2)
+                 - 30.*pow6(x2))*lx22))
+      /pow6(-1. + pow2(x2));
+}
+
+/// F9(x1,x2) in the limit x1 -> 0
+double F9_0_x2(double, double x2) noexcept
+{
+   return (2.*std::log(pow2(x2)))/(-1. + pow2(x2));
+}
+
+/// F9(x1,x2) in the limit x1 -> x2
+double F9_x1_x2(double x1, double x2) noexcept
+{
+   const double lx22 = std::log(pow2(x2));
+
+   return (2.*(-1. + pow2(x2) - lx22))/
+      pow2(-1. + pow2(x2)) -
+      (2.*(x1 - x2)*(-1. + pow4(x2) -
+                     2.*pow2(x2)*lx22))/
+      (x2*pow3(-1. + pow2(x2))) -
+      (1.3333333333333333*pow3(x1 - x2)*
+       (-1.0000000000000002 - 9.*pow2(x2) + 9.*pow4(x2) +
+        pow6(x2) - 6.*pow2(x2)*lx22 -
+        6.*pow4(x2)*lx22))/
+      (x2*pow5(-1. + pow2(x2))) +
+      (1.6666666666666665*pow2(x1 - x2)*
+       (0.2000000000000001 - 4.200000000000001*pow2(x2) +
+        3.000000000000001*pow4(x2) + pow6(x2) -
+        1.2000000000000002*pow2(x2)*lx22 -
+        3.6000000000000005*pow4(x2)*lx22))/
+      (pow2(x2)*pow4(-1. + pow2(x2)));
+}
+
+double F9(double x1, double x2) noexcept
+{
+   if (is_equal(std::fabs(x1), 1., 0.01) && is_equal(std::fabs(x2), 1., 0.01))
+      return F9_1_1(std::fabs(x1), std::fabs(x2));
+
+   if (is_equal(std::fabs(x1), 1., 0.01)) {
+      if (is_equal(x2, 0., 0.01))
+         return 2. - 2.*(-1 + std::fabs(x1)) + 5./3.*pow2(-1 + std::fabs(x1));
+
+      return F9_1_x2(std::fabs(x1), x2);
+   }
+
+   if (is_equal(std::fabs(x2), 1., 0.01)) {
+      if (is_equal(x1, 0., 0.01))
+         return 2. - 2.*(-1 + std::fabs(x2)) + 5./3.*pow2(-1 + std::fabs(x2));
+
+      return F9_1_x2(std::fabs(x2), x1);
+   }
+
+   if (is_equal(x1, 0., 0.0001))
+      return F9_0_x2(x1, x2);
+
+   if (is_equal(x2, 0., 0.0001))
+      return F9_0_x2(x2, x1);
+
+   if (is_equal(std::fabs(x1), std::fabs(x2), 0.00001))
+      return F9_x1_x2(std::fabs(x1), std::fabs(x2));
+
+   const double x12 = pow2(x1);
+   const double x22 = pow2(x2);
+
+   return 2./(x12-x22)*(x12/(x12-1.)*std::log(x12)-x22/(x22-1.)*std::log(x22));
+}
+
+double f1(double r) noexcept
+{
+   if (is_equal(r, 0., 0.01))
+      return 18./7.*pow2(r);
+
+   // The function is even under x-> -x
+   if (is_equal(r, 1., 0.01))
+      return (-81 + 464*r + 270*pow2(r)
+              - 208*pow3(r) + 45*pow4(r))/490.;
+
+   // Notice the flipped sign for the odd terms
+   if (is_equal(r, -1., 0.01))
+      return (-81 - 464*r + 270*pow2(r)
+              + 208*pow3(r) + 45*pow4(r))/490.;
+
+   const double r2 = pow2(r);
+
+   return (6*(r2+3)*r2)/(7*pow2(r2-1))
+      + (6*(r2-5)*pow4(r)*std::log(r2))/(7*pow3(r2-1));
+}
+
+double f2(double r) noexcept
+{
+   if (is_equal(r, 0., 0.01))
+      return 22./9.*pow2(r);
+
+   // The function is even under x -> -x
+   if (is_equal(r, 1., 0.01))
+      return (-285 + 1616*r + 1230*pow2(r)
+              - 848*pow3(r) + 177*pow4(r))/1890.;
+
+   // Notice the flipped sign for the odd terms
+   if (is_equal(r, -1., 0.01))
+      return (-285 - 1616*r + 1230*pow2(r)
+              + 848*pow3(r) + 177*pow4(r))/1890.;
+
+   const double r2 = pow2(r);
+
+   return (2*(r2+11)*r2)/(9*pow2(r2-1))
+      + (2*(5*r2-17)*pow4(r)*std::log(r2))/(9*pow3(r2-1));
+}
+
+double f3(double r) noexcept
+{
+   if (is_equal(r, 0., 0.001))
+      return 4./3.;
+
+   if (is_equal(r, 1., 0.01))
+      return (849 - 1184*r + 1566*pow2(r)
+              - 736*pow3(r) + 135*pow4(r))/630.;
+
+   if (is_equal(r, -1., 0.01))
+      return (849 + 1184*r + 1566*pow2(r)
+              + 736*pow3(r) + 135*pow4(r))/630.;
+
+   const double r2 = pow2(r);
+   const double r4 = pow4(r);
+
+   return (2*(r4+9*r2+2))/(3*pow2(r2-1))
+      + (2*(r4-7*r2-6)*r2*std::log(r2))/(3*pow3(r2-1));
+}
+
+double f4(double r) noexcept
+{
+   if (is_equal(r, 0., 0.001))
+      return 12./7.;
+
+   const double r2 = pow2(r);
+   const double r4 = pow4(r);
+
+   if (is_equal(r, 1., 0.01))
+      return (2589 - 3776*r + 4278*r2 - 1984*pow3(r) + 363*r4)/1470.;
+
+   if (is_equal(r, -1., 0.01))
+      return (2589 + 3776*r + 4278*r2 + 1984*pow3(r) + 363*r4)/1470.;
+
+   return (2*(5*r4+25*r2+6))/(7*pow2(r2-1))
+      + (2*(r4-19*r2-18)*r2*std::log(r2))/(7*pow3(r2-1));
+}
+
+/// f5(r1,r2) in the limit r1 -> 1 and r2 -> 1
+double f5_1_1(double r1, double r2) noexcept
+{
+   return 0.772943722943723
+      - 0.5524891774891774*r2
+      + 0.7870670995670994*pow2(r2)
+      - 0.3316558441558441*pow3(r2)
+      + 0.056277056277056266*pow4(r2)
+      + r1*(-0.5524891774891774
+            + 1.0700757575757573*r2
+            - 0.6625541125541123*pow2(r2)
+            + 0.22483766233766228*pow3(r2)
+            - 0.03344155844155843*pow4(r2))
+      + pow3(r1)*(-0.33165584415584404
+                        + 0.22483766233766223*r2
+                        - 0.08755411255411245*pow2(r2)
+                        + 0.01650432900432896*pow3(r2)
+                        - 0.0007034632034631958*pow4(r2))
+      + pow4(r1)*(0.05627705627705626
+                        - 0.03344155844155841*r2
+                        + 0.010281385281385256*pow2(r2)
+                        - 0.0007034632034631921*pow3(r2)
+                        - 0.0002705627705627725*pow4(r2))
+      + pow2(r1)*(0.7870670995670994 - 0.6625541125541123*r2
+                 + 0.32061688311688297*pow2(r2)
+                 - 0.08755411255411248*pow3(r2)
+                 + 0.01028138528138527*pow4(r2));
+}
+
+/// f5(r1,r2) in the limit r1 -> 1
+double f5_1_r2(double r1, double r2) noexcept
+{
+   const double lr22 = std::log(pow2(r2));
+
+   return (-0.025*pow3(-1. + r1)*(
+              4. - 17.*r2 + 4.*pow2(r2)
+              - 25.*pow3(r2)
+              - 20.*pow4(r2)
+              + 41.*pow5(r2)
+              + 12.*pow6(r2)
+              + pow7(r2)
+              + (-30.*pow3(r2) - 30.*pow5(r2))
+              *lr22))/(pow6(-1. + r2)*pow2(1. + r2))
+      - (0.125*pow2(-1. + r1)*(
+            1. - 4.*r2 + pow2(r2)
+            - 4.*pow3(r2)
+            - 5.*pow4(r2)
+            + 8.*pow5(r2)
+            + 3.*pow6(r2)
+            + (-6.*pow3(r2) - 6.*pow5(r2))
+            *lr22))/(pow5(-1. + r2)*pow2(1. + r2))
+      + (0.75*(-1 + r2 + 2*pow2(r2)
+               - pow4(r2)
+               - pow5(r2)
+               + (pow3(r2) + pow5(r2))
+               *lr22))/(pow3(-1 + r2)*pow2(1 + r2))
+      + (0.25*(-1. + r1)*(
+            1. - r2 - 2.*pow2(r2) + 8.*pow3(r2)
+            + pow4(r2) - 7.*pow5(r2)
+            + (3.*pow3(r2) + 3.*pow5(r2))
+            *lr22))/(pow4(-1. + r2)*pow2(1. + r2))
+      + (0.05*pow4(-1. + r1)*(
+            -1. + 4.5*r2 + 2.*pow2(r2)
+            + 16.5*pow3(r2) - 16.5*pow5(r2) - 2.*pow6(r2)
+            - 4.5*pow7(r2) + pow8(r2)
+            + (15.*pow3(r2) + 15.*pow5(r2))
+            *lr22))/(pow7(-1. + r2)*pow2(1. + r2));
+}
+
+/// f5(r1,r2) in the limit r1 -> 0
+double f5_0_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return ((1 + r22)*(1 - r22 + r22*lr22))/pow2(-1 + r22) +
+      (r1*r2*(2 - 2*r22 + lr22 +
+              r22*lr22))/pow2(-1 + r22) +
+      pow2(r1)*(-2/(-1 + r22) + ((1 + r22)*lr22)/pow2(-1 + r22));
+}
+
+/// f5(r1,r2) in the limit r1 -> 0 and r2 -> 1
+double f5_0_1(double, double r2) noexcept
+{
+   return 0.75*(1 + (-1 + r2)/3. + pow2(-1 + r2)/6.);
+}
+
+/// f5(r1,r2) in the limit r1 -> r2
+double f5_r1_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return ((r1 - r2)*(11*r2 + 3*pow3(r2) - 15*pow5(r2) + pow7(r2) +
+        3*r2*lr22 + 18*pow3(r2)*lr22 +
+        3*pow5(r2)*lr22))/pow4(-1 + r22)\
+    + (pow2(r1 - r2)*(-17 - 116*r22 + 90*pow4(r2) +
+        44*pow6(r2) - pow8(r2) - 3*lr22 -
+        75*r22*lr22 -
+        105*pow4(r2)*lr22 -
+        9*pow6(r2)*lr22))/
+    (3.*pow5(-1 + r22)) +
+   (-1 - 5*r22 + 5*pow4(r2) + pow6(r2) -
+      3*r22*lr22 -
+      6*pow4(r2)*lr22 + pow6(r2)*lr22)
+     /pow3(-1 + r22) +
+   (pow3(r1 - r2)*(3 + 273*r22 + 314*pow4(r2) -
+        498*pow6(r2) - 93*pow8(r2) + power10(r2) +
+        90*r22*lr22 +
+        510*pow4(r2)*lr22 +
+        342*pow6(r2)*lr22 +
+        18*pow8(r2)*lr22))/
+    (6.*r2*pow6(-1 + r22));
+}
+
+double f5(double r1, double r2) noexcept
+{
+   if (is_equal(r1, 0., 0.0001) && is_equal(r2, 0., 0.0001))
+      return 0.75;
+
+   if (is_equal(r1, 1., 0.01) && is_equal(r2, 1., 0.01))
+      return f5_1_1(r1, r2);
+
+   if (is_equal(r1, -1., 0.01) && is_equal(r2, -1., 0.01))
+      return f5_1_1(-r1, -r2);
+
+   if (is_equal(r1, 1., 0.01)) {
+      if (is_equal(r2, 0., 0.01))
+         return f5_0_1(r2, r1);
+
+      return f5_1_r2(r1, r2);
+   }
+
+   if (is_equal(r2, 1., 0.01)) {
+      if (is_equal(r1, 0., 0.01))
+         return f5_0_1(r1, r2);
+
+      return f5_1_r2(r2, r1);
+   }
+
+   if (is_equal(r1, 0., 0.0001))
+      return 0.75 * f5_0_r2(r1, r2);
+
+   if (is_equal(r2, 0., 0.0001))
+      return 0.75 * f5_0_r2(r2, r1);
+
+   if (is_equal(r1, r2, 0.0001))
+      return 0.75 * f5_r1_r2(r2, r1);
+
+   const double r12 = pow2(r1);
+   const double r22 = pow2(r2);
+
+   const double result
+      = (1+pow2(r1+r2)-r12*r22)/((r12-1)*(r22-1))
+      + (pow3(r1)*(r12+1)*std::log(r12))/(pow2(r12-1)*(r1-r2))
+      - (pow3(r2)*(r22+1)*std::log(r22))/((r1-r2)*pow2(r22-1));
+
+   return 0.75 * result;
+}
+
+/// f6(r1,r2) in the limit r1 -> 1 and r2 -> 1
+double f6_1_1(double r1, double r2) noexcept
+{
+   return 1 + (4*(-1 + r1))/7. - (2*pow2(-1 + r1))/35.
+      - pow3(-1 + r1)/70. + (9*pow4(-1 + r1))/490.
+      + (0.5714285714285714 - (2*(-1 + r1))/35. - pow2(-1 + r1)/70.
+         + (9*pow3(-1 + r1))/490.
+         - (3*pow4(-1 + r1))/245.)*(-1 + r2)
+      + (-0.05714285714285714 + (1 - r1)/70. + (9*pow2(-1 + r1))/490.
+         - (3*pow3(-1 + r1))/245.
+         + pow4(-1 + r1)/147.)*pow2(-1 + r2)
+      + (-0.014285714285714285 + (9*(-1 + r1))/490.
+         - (3*pow2(-1 + r1))/245. + pow3(-1 + r1)/147.
+         - pow4(-1 + r1)/294.)*pow3(-1 + r2)
+      + (0.018367346938775512 - (3*(-1 + r1))/245. + pow2(-1 + r1)/147.
+         - pow3(-1 + r1)/294.
+         + (5*pow4(-1 + r1))/3234.)*pow4(-1 + r2);
+}
+
+/// f6(r1,r2) in the limit r1 -> 1
+double f6_1_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+
+   return ((-1 + r22)*(
+              -3 + 16*r2 + 33*r22 - 332*pow3(r2)
+              + 573*pow4(r2) - 584*pow5(r2) + 297*pow6(r2)
+              - 60*pow7(r2) - 2*pow3(r1)*(
+                 8 - 49*r2 + 121*r22 - 129*pow3(r2)
+                 - 99*pow4(r2) + 28*pow5(r2))
+              + pow4(r1)*(
+                 3 - 18*r2 + 43*r22 - 42*pow3(r2)
+                 - 47*pow4(r2) + pow6(r2))
+              - 2*r1*(-8 + 10*r2 + 106*r22 - 359*pow3(r2)
+                      + 211*pow4(r2) - 101*pow5(r2)
+                      + 21*pow6(r2))
+              - 2*pow2(r1)*(-15 + 98*r2 - 264*r22
+                                  + 331*pow3(r2) + 106*pow4(r2)
+                                  - 99*pow5(r2) + 23*pow6(r2)))
+           + 60*pow5(r2)*(5 + pow4(r1) + pow3(r1)*(-5 + r2)
+                                - 10*r2 + 10*r22 - 5*pow3(r2)
+                                + pow4(r2) + pow2(r1)*(
+                                   10 - 5*r2 + r22)
+                                + r1*(-10 + 10*r2 - 5*r22
+                                      + pow3(r2)))*std::log(r22))
+      /(70.*pow7(-1 + r2)*pow2(1 + r2));
+}
+
+/// f6(r1,r2) in the limit r1 -> 0
+double f6_0_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return (pow2(r1)*(1 - r22 + r22*lr22))/pow2(-1 + r22) +
+      (r1*(r2 - pow3(r2) + pow3(r2)*lr22))/pow2(-1 + r22) +
+      (r22 - pow4(r2) + pow4(r2)*lr22)/pow2(-1 + r22);
+}
+
+// f6(r1,r2) in the limit r1 -> r2
+double f6_r1_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return ((r1 - r2)*(3*r2 + 7*pow3(r2) - 11*pow5(r2) + pow7(r2) +
+        10*pow3(r2)*lr22 +
+        2*pow5(r2)*lr22))/pow4(-1 + r22)\
+    + (pow2(r1 - r2)*(-3 - 62*r22 + 36*pow4(r2) +
+        30*pow6(r2) - pow8(r2) -
+        30*r22*lr22 -
+        60*pow4(r2)*lr22 -
+        6*pow6(r2)*lr22))/
+    (3.*pow5(-1 + r22)) +
+   (-3*r22 + 2*pow4(r2) + pow6(r2) -
+      5*pow4(r2)*lr22 + pow6(r2)*lr22)
+     /pow3(-1 + r22) +
+   (pow3(r1 - r2)*(107*r2 + 206*pow3(r2) - 252*pow5(r2) -
+        62*pow7(r2) + pow9(r2) + 30*r2*lr22 +
+        240*pow3(r2)*lr22 +
+        198*pow5(r2)*lr22 +
+        12*pow7(r2)*lr22))/
+    (6.*pow6(-1 + r22));
+}
+
+/// f6(r1,r2) in the limit r1 -> 0 and r2 -> 1
+double f6_0_1(double, double r2) noexcept
+{
+   return 6./7.*(0.5 + (2*(-1 + r2))/3. - pow3(-1 + r2)/15.
+                 + pow4(-1 + r2)/20.);
+}
+
+double f6(double r1, double r2) noexcept
+{
+   if (is_equal(r1, 0., 0.0001) && is_equal(r2, 0., 0.0001))
+      return 0.;
+
+   if (is_equal(r1, 1., 0.01) && is_equal(r2, 1., 0.01))
+      return f6_1_1(r1, r2);
+
+   if (is_equal(r1, -1., 0.01) && is_equal(r2, -1., 0.01))
+      return f6_1_1(-r1, -r2);
+
+   if (is_equal(r1, 1., 0.01)) {
+      if (is_equal(r2, 0., 0.0001))
+         return f6_0_1(r2, r1);
+
+      return f6_1_r2(r1, r2);
+   }
+
+   if (is_equal(r2, 1., 0.01)) {
+      if (is_equal(r1, 0., 0.0001))
+         return f6_0_1(r1, r2);
+
+      return f6_1_r2(r2, r1);
+   }
+
+   if (is_equal(r1, 0., 0.0001))
+      return 6./7. * f6_0_r2(r1, r2);
+
+   if (is_equal(r2, 0., 0.0001))
+      return 6./7. * f6_0_r2(r2, r1);
+
+   if (is_equal(r1, r2, 0.0001))
+      return 6./7. * f6_r1_r2(r2, r1);
+
+   const double r12 = pow2(r1);
+   const double r22 = pow2(r2);
+
+   const double result
+      = (r12+r22+r1*r2-r12*r22)/((r12-1)*(r22-1))
+      + (pow5(r1)*std::log(r12))/(pow2(r12-1)*(r1-r2))
+      - (pow5(r2)*std::log(r22))/((r1-r2)*pow2(r22-1));
+
+   return 6./7. * result;
+}
+
+/// f7(r1,r2) in the limit r1 -> 1 and r2 -> 1
+double f7_1_1(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+
+   return (15700 - 14411*r2 + 7850*r22 - 2498*pow3(r2)
+           + 355*pow4(r2)
+           + pow2(r1)*(7850 - 2558*r2 - 750*r22 + 940*pow3(r2)
+                      - 235*pow4(r2))
+           + pow4(r1)*(355 + 65*r2 - 235*r22 + 142*pow3(r2)
+                             - 30*pow4(r2))
+           + r1*(-14411 + 8375*r2 - 2558*r22 + 180*pow3(r2)
+                 + 65*pow4(r2))
+           + pow3(r1)*(-2498 + 180*r2 + 940*r22
+                             - 645*pow3(r2) + 142*pow4(r2)))
+      /2310.;
+}
+
+/// f7(r1,r2) in the limit r1 -> 1
+double f7_1_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return (-10*(-1 + r1)*pow3(-1 + r2)*(
+              2 - 5*r2 - 4*r22 + 4*pow3(r2) + 2*pow4(r2)
+              + pow5(r2) - 6*pow3(r2)*lr22)
+           - 30*pow4(-1 + r2)*(
+              1 - 2*r2 - 2*r22 + 2*pow3(r2) + pow4(r2)
+              - 2*pow3(r2)*lr22)
+           + 10*pow2(-1 + r1)*pow2(-1 + r2)*(
+              -1 + 3*r2 + 3*r22 - 3*pow4(r2) - 3*pow5(r2)
+              + pow6(r2) + 6*pow3(r2)*lr22)
+           + 2*pow3(-1 + r1)*(-1 + r2)*(
+              -2 + 6*r2 + 18*r22 + 15*pow3(r2) - 30*pow4(r2)
+              - 18*pow5(r2) + 14*pow6(r2) - 3*pow7(r2)
+              + 30*pow3(r2)*lr22)
+           + pow4(-1 + r1)*(
+              -1 + 48*r22 + 42*pow3(r2) - 90*pow4(r2)
+              - 24*pow5(r2) + 40*pow6(r2) - 18*pow7(r2)
+              + 3*pow8(r2) + 60*pow3(r2)*lr22))
+      /(10.*pow7(-1 + r2)*pow2(1 + r2));
+}
+
+/// f7(r1,r2) in the limit r1 -> 0
+double f7_0_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return -((r1*r2*(-1 + r22 - lr22))/pow2(-1 + r22)) +
+      (pow2(r1)*(1 - r22 + lr22))/pow2(-1 + r22) +
+      (1 - r22 + r22*lr22)/pow2(-1 + r22);
+}
+
+/// f7(r1,r2) in the limit r1 -> 0 and r2 -> 1
+double f7_0_1(double, double r2) noexcept
+{
+   return 6.*(0.5 + (1 - r2)/3. + pow2(-1 + r2)/6. - pow3(-1 + r2)/15.
+              + pow4(-1 + r2)/60.);
+}
+
+/// f7(r1,r2) in the limit r1 -> r2
+double f7_r1_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return (-1 - 2*r22 + 3*pow4(r2) -
+      3*r22*lr22 - pow4(r2)*lr22)
+     /pow3(-1 + r22) +
+   ((r1 - r2)*(8*r2 - 4*pow3(r2) - 4*pow5(r2) +
+        3*r2*lr22 + 8*pow3(r2)*lr22 +
+        pow5(r2)*lr22))/pow4(-1 + r22) +
+   (pow2(r1 - r2)*(-14 - 54*r22 + 54*pow4(r2) +
+        14*pow6(r2) - 3*lr22 -
+        45*r22*lr22 -
+        45*pow4(r2)*lr22 -
+        3*pow6(r2)*lr22))/
+    (3.*pow5(-1 + r22)) +
+   (pow3(r1 - r2)*(3 + 166*r22 + 108*pow4(r2) -
+        246*pow6(r2) - 31*pow8(r2) +
+        60*r22*lr22 +
+        270*pow4(r2)*lr22 +
+        144*pow6(r2)*lr22 +
+        6*pow8(r2)*lr22))/
+    (6.*r2*pow6(-1 + r22));
+}
+
+double f7(double r1, double r2) noexcept
+{
+   if (is_equal(r1, 0., 0.0001) && is_equal(r2, 0., 0.0001))
+      return 6.;
+
+   if (is_equal(r1, 1., 0.01) && is_equal(r2, 1., 0.01))
+      return f7_1_1(r1, r2);
+
+   if (is_equal(r1, -1., 0.01) && is_equal(r2, -1., 0.01))
+      return f7_1_1(-r1, -r2);
+
+   if (is_equal(r1, 1., 0.01)) {
+      if (is_equal(r2, 0., 0.0001))
+         return f7_0_1(r2, r1);
+
+      return f7_1_r2(r1, r2);
+   }
+
+   if (is_equal(r2, 1., 0.01)) {
+      if (is_equal(r1, 0., 0.0001))
+         return f7_0_1(r1, r2);
+
+      return f7_1_r2(r2, r1);
+   }
+
+   if (is_equal(r1, 0., 0.0001))
+      return 6. * f7_0_r2(r1, r2);
+
+   if (is_equal(r2, 0., 0.0001))
+      return 6. * f7_0_r2(r2, r1);
+
+   if (is_equal(r1, r2, 0.0001))
+      return 6. * f7_r1_r2(r2, r1);
+
+   const double r12 = pow2(r1);
+   const double r22 = pow2(r2);
+
+   const double result
+      = (1+r1*r2)/((r12-1)*(r22-1))
+      + (pow3(r1)*std::log(r12))/(pow2(r12-1)*(r1-r2))
+      - (pow3(r2)*std::log(r22))/((r1-r2)*pow2(r22-1));
+
+   return 6. * result;
+}
+
+/// f8(r1,r2) in the limit r1 -> 1 and r2 -> 1
+double f8_1_1(double r1, double r2) noexcept
+{
+   return 1 - pow2(-1 + r1)/10. + (3*pow3(-1 + r1))/40.
+      - (3*pow4(-1 + r1))/70.
+      + ((1 - r1)/10. + (3*pow2(-1 + r1))/40.
+         - (3*pow3(-1 + r1))/70.
+         + (3*pow4(-1 + r1))/140.)*(-1 + r2)
+      + (-0.1 + (3*(-1 + r1))/40. - (3*pow2(-1 + r1))/70.
+         + (3*pow3(-1 + r1))/140.
+         - pow4(-1 + r1)/105.)*pow2(-1 + r2)
+      + (0.075 - (3*(-1 + r1))/70. + (3*pow2(-1 + r1))/140.
+         - pow3(-1 + r1)/105.
+         + pow4(-1 + r1)/280.)*pow3(-1 + r2)
+      + (-0.04285714285714286 + (3*(-1 + r1))/140.
+         - pow2(-1 + r1)/105. + pow3(-1 + r1)/280.
+         - pow4(-1 + r1)/1155.)*pow4(-1 + r2);
+}
+
+/// f8(r1,r2) in the limit r1 -> 1
+double f8_1_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return (30*pow4(-1 + r2)*(
+              -1 + 4*r22 - 3*pow4(r2)
+              + 2*pow4(r2)*lr22)
+           + 10*pow2(-1 + r1)*pow2(-1 + r2)*(
+              1 - 4*r2 + 4*r22 + 8*pow3(r2)
+              - 5*pow4(r2) - 4*pow5(r2)
+              + 6*pow4(r2)*lr22)
+           + 10*(-1 + r1)*pow3(-1 + r2)*(
+              1 - 4*r2 + 4*r22 + 8*pow3(r2)
+              - 5*pow4(r2) - 4*pow5(r2)
+              + 6*pow4(r2)*lr22)
+           + 2*pow3(-1 + r1)*(-1 + r2)*(
+              3 - 14*r2 + 18*r22 + 30*pow3(r2)
+              - 15*pow4(r2) - 18*pow5(r2) - 6*pow6(r2)
+              + 2*pow7(r2) + 30*pow4(r2)*lr22)
+           + pow4(-1 + r1)*(
+              3 - 16*r2 + 24*r22 + 48*pow3(r2)
+              - 48*pow5(r2) - 24*pow6(r2) + 16*pow7(r2)
+              - 3*pow8(r2) + 60*pow4(r2)*lr22))
+      /(40.*pow7(-1 + r2)*pow2(1 + r2));
+}
+
+/// f8(r1,r2) in the limit r1 -> 0
+double f8_0_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return -((pow2(r1)*r2*(-1 + r22 - lr22))/pow2(-1 + r22)) +
+      (r1*(1 - r22 + r22*lr22))/pow2(-1 + r22) +
+      (r2 - pow3(r2) + pow3(r2)*lr22)/pow2(-1 + r22);
+}
+
+/// f8(r1,r2) in the limit r1 -> 0 and r2 -> 1
+double f8_0_1(double, double r2) noexcept
+{
+   return 1.5*(0.5 + (-1 + r2)/6. - pow2(-1 + r2)/6. + pow3(-1 + r2)/10.
+               - pow4(-1 + r2)/20.);
+}
+
+/// f8(r1,r2) in the limit r1 -> r2
+double f8_r1_r2(double r1, double r2) noexcept
+{
+   const double r22 = pow2(r2);
+   const double lr22 = std::log(r22);
+
+   return (2*(-r2 + pow5(r2) - 2*pow3(r2)*lr22))/
+    pow3(-1 + r22) +
+   ((r1 - r2)*(1 + 9*r22 - 9*pow4(r2) - pow6(r2) +
+        6*r22*lr22 +
+        6*pow4(r2)*lr22))/pow4(-1 + r22)\
+    + (2*pow2(r1 - r2)*(-19*r2 - 9*pow3(r2) +
+        27*pow5(r2) + pow7(r2) - 6*r2*lr22 -
+        30*pow3(r2)*lr22 -
+        12*pow5(r2)*lr22))/
+    (3.*pow5(-1 + r22)) +
+   (pow3(r1 - r2)*(31 + 246*r22 - 108*pow4(r2) -
+        166*pow6(r2) - 3*pow8(r2) + 6*lr22 +
+        144*r22*lr22 +
+        270*pow4(r2)*lr22 +
+        60*pow6(r2)*lr22))/
+    (6.*pow6(-1 + r22));
+}
+
+double f8(double r1, double r2) noexcept
+{
+   if (is_equal(r1, 0., 0.0001) && is_equal(r2, 0., 0.0001))
+      return 0.;
+
+   if (is_equal(r1, 1., 0.01) && is_equal(r2, 1., 0.01))
+      return f8_1_1(r1, r2);
+
+   if (is_equal(r1, -1., 0.01) && is_equal(r2, -1., 0.01))
+      return -1.;
+
+   if (is_equal(r1, 1., 0.01)) {
+      if (is_equal(r2, 0., 0.0001))
+         return f8_0_1(r2, r1);
+
+      return f8_1_r2(r1, r2);
+   }
+
+   if (is_equal(r2, 1., 0.01)) {
+      if (is_equal(r1, 0., 0.0001))
+         return f8_0_1(r1, r2);
+
+      return f8_1_r2(r2, r1);
+   }
+
+   if (is_equal(r1, 0., 0.0001))
+      return 1.5 * f8_0_r2(r1, r2);
+
+   if (is_equal(r2, 0., 0.0001))
+      return 1.5 * f8_0_r2(r2, r1);
+
+   if (is_equal(r1, r2, 0.0001))
+      return 1.5 * f8_r1_r2(r2, r1);
+
+   const double r12 = pow2(r1);
+   const double r22 = pow2(r2);
+
+   const double result
+      = (r1+r2)/((r12-1)*(r22-1))
+      + (pow4(r1)*std::log(r12))/(pow2(r12-1)*(r1-r2))
+      - (pow4(r2)*std::log(r22))/((r1-r2)*pow2(r22-1));
+
+   return 1.5 * result;
+}
+
+
 bool isfinite(double exact, double shifted, double limit) noexcept
 {
    // checks if the threshold correction in the general mass case is finite and smaller than 1
@@ -106,238 +1095,6 @@ bool isfinite(double exact, double shifted, double limit) noexcept
 }
 
 //        one-loop functions from arxiv:1407.4081. Checked.        //
-
-double F1(double x) noexcept {
-   if(x == 1.) return 1.;
-
-   const double x2 = pow2(x);
-
-   return x*log(x2)/(x2 - 1);
-}
-
-double F2(double x) noexcept {
-   if(x == 1.) return 1.;
-
-   const double x2 = pow2(x);
-
-   return 6*x2*(2 - 2*x2 + (1 + x2)*log(x2))/pow3(x2 - 1);
-}
-
-double F3(double x) noexcept {
-   if(x == 1.) return 1.;
-
-   const double x2 = pow2(x);
-
-   return 2*x*(5*(1 - x2) + (1 + 4*x2)*log(x2))/(3*pow2(x2 - 1));
-}
-
-double F4(double x) noexcept {
-   if(x == 1.) return 1.;
-
-   const double x2 = pow2(x);
-
-   return 2*x*(x2 - 1 - log(x2))/pow2(x2 - 1);
-}
-
-double F5(double x) noexcept {
-   if(x == 1.) return 1.;
-
-   const double x2 = pow2(x);
-
-   return 3*x*(1 - pow2(x2) + 2*x2*log(x2))/pow3(1 - x2);
-}
-
-double F6(double x) noexcept {
-   if(x == 1.) return 0.;
-
-   const double x2 = pow2(x);
-
-   return (x2 - 3)/(4.*(1-x2)) + x2*(x2 - 2)*log(x2)/(2*pow2(1 - x2));
-}
-
-double F7(double x) noexcept {
-   if(x == 1.) return 1.;
-
-   const double x2 = pow2(x);
-
-   return -3*(1 - 6*x2 + pow2(x2))/(2*pow2(x2 - 1)) + 3*pow2(x2)*(x2 - 3)
-      *log(x2)/pow3(x2 - 1);
-}
-
-double F8(double x1, double x2) noexcept {
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-
-      const double x12 = pow2(x1);
-      return 2*(x12 - pow2(x12) + pow2(x12)*log(x12))/pow2(x12 - 1);
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 2*(-1 + x12 + x12*(x12 - 2)*log(x12))/pow2(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return -2 + 2*(pow2(x12)*log(x12)/(x12 - 1) - pow2(x22)*log(x22)/(x22 - 1))
-      /(x12 - x22);
-}
-
-double F9(double x1, double x2) noexcept {
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-
-      const double x12 = pow2(x1);
-      return 2*(1 - x12 + x12*log(x12))/pow2(x12 - 1);
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 2*(-1 + x12 - log(x12))/pow2(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
-}
-
-double f1(double x) noexcept {
-   if(x == 1.) return 0.;
-
-   const double x2 = pow2(x);
-
-   return 6*x2*(3+x2)/(7*pow2(x2 - 1)) + 6*pow2(x2)*(x2 - 5)*log(x2)/(7
-                                                                      *pow3(x2-1));
-}
-
-double f2(double x) noexcept {
-   if(x == 1.) return 0.;
-
-   const double x2 = pow2(x);
-
-   return 2*x2*(11 + x2)/(9*pow2(x2 - 1)) + 2*pow2(x2)*(5*x2 - 17)*log(x2)/(9*
-                                                                            pow3(x2 - 1));
-}
-
-double f3(double x) noexcept {
-   if(x == 1.) return 0.;
-
-   const double x2 = pow2(x);
-
-   return 2*(2 + 9*x2 + pow2(x2))/(3*pow2(x2 - 1)) + 2*x2*(-6 - 7*x2 + pow2(x2))
-      *log(x2)/(3*pow3(x2 - 1));
-}
-
-double f4(double x) noexcept {
-   if(x == 1.) return 0.;
-
-   const double x2 = pow2(x);
-
-   return 2*(6 + 25*x2 + 5*pow2(x2))/(7*pow2(x2 - 1)) + 2*x2*(-18 - 19*x2
-                                                              + pow2(x2))*log(x2)/(7*pow3(x2 - 1));
-}
-
-double f5(double x1, double x2) noexcept {
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-
-      const double x12 = pow2(x1);
-      return 3*(-1 + x1 + 2*x12 - pow2(x12) - pow5(x1) + (pow3(x1) + pow5(x1))
-                *log(x12))/(4*pow3(x1 - 1)*pow2(1 + x1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 3/4.*(-1 - 5*x12 + 5*pow2(x12) + pow3(x12) + x12*(-3 - 6*x12 + pow2(x12))
-                   *log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 3/4.*((1 - x12*x22 + pow2(x1 + x2))/((x12 - 1)*(x22 - 1))
-                + pow3(x1)*(1 + x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
-                - pow3(x2)*(1 + x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
-
-double f6(double x1, double x2) noexcept {
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-
-      const double x12 = pow2(x1);
-      return -3*(1 - 2*x12 - 2*pow3(x1) + pow2(x12) + 2*pow5(x1) - 2*pow5(x1)
-                 *log(x12))/(7*pow3(x1 - 1)*pow2(x1 + 1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 6/7.*x12*(-3 + 2*x12 + pow2(x12) + x12*(x12 - 5)*log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 6/7.*((x12 + x1*x2 + x22 - x12*x22)/((x12 - 1)*(x22 - 1))
-                + pow5(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
-                - pow5(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
-
-double f7(double x1, double x2) noexcept {
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-
-      const double x12 = pow2(x1);
-      return -3*(1 - 2*x1 - 2*x12 + 2*pow3(x1) + pow2(x12) - 2*pow3(x1)*log(x12))
-         /(pow3(x1 - 1)*pow2(x1 + 1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return -6*(1 + 2*x12 -3*pow2(x12) + x12*(3 + x12)*log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 6*((1 + x1*x2)/((x12 - 1)*(x22 - 1))
-             + pow3(x1)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
-             - pow3(x2)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
-
-double f8(double x1, double x2) noexcept {
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   } if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-
-      const double x12 = pow2(x1);
-      return 3*(-1 + 4*x12 - 3*pow2(x12) + 2*pow2(x12)*log(x12))
-         /(4*pow3(x1 - 1)*pow2(1 + x1));
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 3*x1*(-1 + pow2(x12) - 2*x12*log(x12))/pow3(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 3/2.*((x1 + x2)/((x12 - 1)*(x22 - 1))
-                + pow2(x12)*log(x12)/(pow2(x12 - 1)*(x1 - x2))
-                - pow2(x22)*log(x22)/(pow2(x22 - 1)*(x1 - x2)));
-}
 
 double deltaxyz(double x, double y, double z) noexcept {
    return pow2(x) + pow2(y) + pow2(z) - 2*(x*y+x*z+y*z);
