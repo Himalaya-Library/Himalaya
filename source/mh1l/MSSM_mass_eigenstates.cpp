@@ -574,30 +574,14 @@ RM22 MSSM_spectrum::get_mass_matrix_Ah(const Parameters& pars) const
    const auto mA2 = sqr(pars.MA);
    const auto v2 = sqr(vu) + sqr(vd);
    const auto Bmu = mA2*vu*vd/v2;
-   const auto gbar2 = 0.6*sqr(g1) + sqr(g2);
    const auto xi = 1.;
 
    RM22 mass_matrix_Ah;
 
-   mass_matrix_Ah(0,0) = (Bmu*vu)/vd + (sqr(g1)*sqr(vd))/20. - (sqr(g1)*sqr(vu))/20.;
-   mass_matrix_Ah(0,1) = Bmu;
-   mass_matrix_Ah(1,1) = (Bmu*vd)/vu - (sqr(g1)*sqr(vd))/20. + (sqr(g1)*sqr(vu))/20.;
-
-   if (gbar2 > 0.) {
-      mass_matrix_Ah(0,0) +=
-         ((3*pow4(g1)*xi*sqr(vd))/20. + (pow4(g2)*xi*sqr(vd))/4. +
-          (sqrt35*xi*sqr(g1)*sqr(g2)*sqr(vd))/2.)/gbar2;
-
-      mass_matrix_Ah(0,1) +=
-         ((-3*vd*vu*pow4(g1)*xi)/20. - (vd*vu*pow4(g2)*xi)/4. -
-          (sqrt35*vd*vu*xi*sqr(g1)*sqr(g2))/2.)/gbar2;
-
-      mass_matrix_Ah(1,1) +=
-         ((3*pow4(g1)*xi*sqr(vu))/20. + (pow4(g2)*xi*sqr(vu))/4. +
-          (sqrt35*xi*sqr(g1)*sqr(g2)*sqr(vu))/2.)/gbar2;
-   }
-
+   mass_matrix_Ah(0,0) = (20*Bmu*vu + pow3(vd)*xi*(3*sqr(g1) + 5*sqr(g2)))/(20.*vd);
+   mass_matrix_Ah(0,1) = Bmu - (vd*vu*xi*(3*sqr(g1) + 5*sqr(g2)))/20.;
    mass_matrix_Ah(1,0) = mass_matrix_Ah(0,1);
+   mass_matrix_Ah(1,1) = (20*Bmu*vd + pow3(vu)*xi*(3*sqr(g1) + 5*sqr(g2)))/(20.*vu);
 
    return mass_matrix_Ah;
 }
@@ -611,7 +595,6 @@ void MSSM_spectrum::calculate_MAh(const Parameters& pars)
 
 RM22 MSSM_spectrum::get_mass_matrix_Hpm(const Parameters& pars) const
 {
-   const auto g1 = pars.g1;
    const auto g2 = pars.g2;
    const auto vu = pars.vu;
    const auto vd = pars.vd;
@@ -622,14 +605,10 @@ RM22 MSSM_spectrum::get_mass_matrix_Hpm(const Parameters& pars) const
 
    RM22 mass_matrix_Hpm;
 
-   mass_matrix_Hpm(0,0) = (20*Bmu*vu + pow3(vd)*sqr(g1)
-      + 5*pow3(vd)*xi*sqr(g2) - vd*sqr(g1)*sqr(vu)
-      + 5*vd*sqr(g2)*sqr(vu))/(20.*vd);
+   mass_matrix_Hpm(0,0) = (4*Bmu*vu + vd*sqr(g2)*(xi*sqr(vd) + sqr(vu)))/(4.*vd);
    mass_matrix_Hpm(0,1) = Bmu - (vd*vu*(-1 + xi)*sqr(g2))/4.;
    mass_matrix_Hpm(1,0) = mass_matrix_Hpm(0,1);
-   mass_matrix_Hpm(1,1) = (20*Bmu*vd + pow3(vu)*sqr(g1)
-      + 5*pow3(vu)*xi*sqr(g2) - vu*sqr(g1)*sqr(vd)
-      + 5*vu*sqr(g2)*sqr(vd))/(20.*vu);
+   mass_matrix_Hpm(1,1) = (4*Bmu*vd + vu*sqr(g2)*(sqr(vd) + xi*sqr(vu)))/(4.*vu);
 
    return mass_matrix_Hpm;
 }
