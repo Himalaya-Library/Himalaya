@@ -1082,6 +1082,16 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
    return se * one_loop;
 }
 
+/**
+ * Derivative of Higgs 1-loop DR' contribution w.r.t. p^2, in the
+ * gaugeless limit (p = g1 = g2 = 0).  Note, that p = 0 in the
+ * gaugeless limit, because in the MSSM p = mh = 0 vanishes when g1 =
+ * g2 = 0.
+ *
+ * The function returns 1/(4Pi)^2 d/dp^2 (-selfenergy + tadpole).
+ *
+ * @return derivative of 1-loop contribution for p = g1 = g2 = 0
+ */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 {
    const auto yt     = pars.Yu(2,2);
