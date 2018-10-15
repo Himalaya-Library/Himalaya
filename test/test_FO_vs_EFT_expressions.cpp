@@ -239,10 +239,17 @@ TEST_CASE("test_FO_2loop_momentum_iteration")
 {
    using namespace himalaya;
    using namespace himalaya::mh1l;
+   using namespace himalaya::mh2_eft::EFTOrders;
    using A2 = Eigen::Array<double,2,1>;
 
    const auto p = make_point();
-   const MSSM_mass_eigenstates me(p);
+   MSSM_mass_eigenstates me(p);
+
+   // disable 2-loop corrections
+   me.set_correction(EFTOrders::G32YT4, 0);
+   me.set_correction(EFTOrders::G32YB4, 0);
+   me.set_correction(EFTOrders::YT6, 0);
+   me.set_correction(EFTOrders::YTAU6, 0);
 
    // calculates Mh^2 as a function of p^2
    const auto Mh2_1L_p2 = [&me] (double p2) {

@@ -7,6 +7,7 @@
 
 #include "MSSM_mass_eigenstates.hpp"
 #include "DSZHiggs.hpp"
+#include "EFTFlags.hpp"
 #include "linalg2.hpp"
 #include "pv.hpp"
 #include "sum.hpp"
@@ -780,15 +781,26 @@ std::ostream& operator<<(std::ostream& ostr, const MSSM_spectrum& spec)
 MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
    : pars(pars_)
 {
+   using namespace himalaya::mh2_eft::EFTOrders;
+
    calculate_parameters();
+
+   for (int i = EFTOrders::FIRST; i < EFTOrders::NUMBER_OF_EFT_ORDERS; i++)
+      orders.emplace(i, 1);
 }
 
+/**
+ * Calculates all running masses and mixings.
+ */
 void MSSM_mass_eigenstates::calculate_parameters()
 {
    masses.calculate_spectrum(pars);
    gaugeless.calculate_spectrum(make_gaugeless(pars));
 }
 
+/**
+ * Transform parameter point to be gaugeless, g1 = g2 = 0.
+ */
 Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars) const
 {
    auto gl = pars;
@@ -1224,6 +1236,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 {
    using namespace himalaya::mssm_twoloophiggs;
+   using namespace himalaya::mh2_eft::EFTOrders;
 
    const auto g3 = pars.g3;
    const auto mt2 = pow2(gaugeless.MFt);
@@ -1256,22 +1269,58 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
    RM22 dmh(RM22::Zero());
 
    // 2-loop contribution from momentum iteration
-   dmh += delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
+   dmh += delta_mh2_2loop_mom_it();
 
-   dmh += delta_mh2_2loop_at_as(mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3);
+   if (orders.at(EFTOrders::G32YT4)) {
+      dmh += delta_mh2_2loop_at_as(
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3);
+   }
 
-   dmh += delta_mh2_2loop_at_at(mt2, mb2, mA2, mst12, mst22, msb12, msb22, sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2);
+   if (orders.at(EFTOrders::G32YB4)) {
+      dmh += delta_mh2_2loop_ab_as(
+         mb2, mg, msb12, msb22, sxb, cxb, scale2, mu, cotb, vev2, g3);
+   }
 
-   dmh += delta_mh2_2loop_ab_as(mb2, mg, msb12, msb22, sxb, cxb, scale2, mu, cotb, vev2, g3);
+   if (orders.at(EFTOrders::YT6)) {
+      dmh += delta_mh2_2loop_at_at(
+         mt2, mb2, mA2, mst12, mst22, msb12, msb22,
+         sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2);
+   }
 
-   dmh += delta_mh2_2loop_atau_atau(mtau2, mA2, msv2, mstau12, mstau22, sxtau, cxtau, scale2, mu, tanb, vev2);
+   if (orders.at(EFTOrders::YTAU6)) {
+      dmh += delta_mh2_2loop_atau_atau(
+         mtau2, mA2, msv2, mstau12, mstau22,
+         sxtau, cxtau, scale2, mu, tanb, vev2);
+   }
 
    return dmh;
+}
+
+/**
+ * Returns Higgs 2-loop contributions from momentum iteration of
+ * 1-loop self-energy in the gaugeless limit p^2 = g1 = g2 = 0.
+ *
+ * @return 2-loop contribution from momentum iteration
+ */
+RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it() const
+{
+   return delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
 }
 
 RM22 MSSM_mass_eigenstates::get_mass_matrix_hh() const
 {
    return masses.get_mass_matrix_hh(pars);
+}
+
+void MSSM_mass_eigenstates::set_correction(int order, int flag)
+{
+   if (flag < 0 || flag > 1)
+      INFO_MSG("You can only enable (1) or disable (0) corrections!");
+
+   if (orders.find(order) == orders.end())
+      INFO_MSG("Your variable is not defined in the EFTOrders enum!");
+
+   orders.at(order) = flag;
 }
 
 double MSSM_mass_eigenstates::A0(double m2) const

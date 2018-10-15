@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Himalaya_interface.hpp"
+#include <map>
 #include <Eigen/Core>
 
 namespace himalaya {
@@ -114,15 +115,20 @@ public:
    RM22 delta_mh2_1loop_gaugeless_deriv() const;
    /// Higgs 2-loop contributions DR' for p = 0
    RM22 delta_mh2_2loop() const;
+   /// Higgs 2-loop contributions DR' for p = g1 = g2 = 0 from momentum iteration
+   RM22 delta_mh2_2loop_mom_it() const;
    /// returns CP-even Higgs mass matrix
    RM22 get_mass_matrix_hh() const;
+   /// enable/disable loop corrections
+   void set_correction(int, int);
 
    friend std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
 private:
-   Parameters pars;         ///< MSSM DR' parameters
-   MSSM_spectrum masses;    ///< MSSM DR' masses / mixings
-   MSSM_spectrum gaugeless; ///< MSSM DR' masses / mixings for g1 = g2 = 0
+   Parameters pars;            ///< MSSM DR' parameters
+   MSSM_spectrum masses;       ///< MSSM DR' masses / mixings
+   MSSM_spectrum gaugeless;    ///< MSSM DR' masses / mixings for g1 = g2 = 0
+   std::map<int,int> orders{}; ///< enable/disable corrections
 
    /// calculates tree-level squared Higgs masses
    V2 calculate_Mh2_tree() const;
