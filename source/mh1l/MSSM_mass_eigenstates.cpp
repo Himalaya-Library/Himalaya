@@ -6,6 +6,7 @@
 // ====================================================================
 
 #include "MSSM_mass_eigenstates.hpp"
+#include "DSZHiggs.hpp"
 #include "linalg2.hpp"
 #include "pv.hpp"
 #include "sum.hpp"
@@ -1222,10 +1223,48 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 
 RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 {
+   using namespace himalaya::mssm_twoloophiggs;
+
+   const auto g3 = pars.g3;
+   const auto mt2 = pow2(gaugeless.MFt);
+   const auto mb2 = pow2(gaugeless.MFb);
+   const auto mtau2 = pow2(gaugeless.MFtau);
+   const auto mg = pars.MG;
+   const auto mst12 = pow2(pars.MSt(0));
+   const auto mst22 = pow2(pars.MSt(1));
+   const auto msb12 = pow2(pars.MSb(0));
+   const auto msb22 = pow2(pars.MSb(1));
+   const auto mstau12 = pow2(pars.MStau(0));
+   const auto mstau22 = pow2(pars.MStau(1));
+   const auto msv2 = gaugeless.M2SvtL;
+   const auto mA2 = pow2(pars.MA);
+   const auto theta_t = 0.5*std::asin(pars.s2t);
+   const auto theta_b = 0.5*std::asin(pars.s2b);
+   const auto theta_tau = 0.5*std::asin(pars.s2tau);
+   const auto sxt = std::sin(theta_t);
+   const auto cxt = std::cos(theta_t);
+   const auto sxb = std::sin(theta_b);
+   const auto cxb = std::cos(theta_b);
+   const auto sxtau = std::sin(theta_tau);
+   const auto cxtau = std::cos(theta_tau);
+   const auto scale2 = pow2(pars.scale);
+   const auto mu = -pars.mu;
+   const auto tanb = pars.vu/pars.vd;
+   const auto cotb = 1./tanb;
+   const auto vev2 = pow2(pars.vu) + pow2(pars.vd);
+
    RM22 dmh(RM22::Zero());
 
    // 2-loop contribution from momentum iteration
    dmh += delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
+
+   dmh += delta_mh2_2loop_at_as(mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3);
+
+   dmh += delta_mh2_2loop_at_at(mt2, mb2, mA2, mst12, mst22, msb12, msb22, sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2);
+
+   dmh += delta_mh2_2loop_ab_as(mb2, mg, msb12, msb22, sxb, cxb, scale2, mu, cotb, vev2, g3);
+
+   dmh += delta_mh2_2loop_atau_atau(mtau2, mA2, msv2, mstau12, mstau22, sxtau, cxtau, scale2, mu, tanb, vev2);
 
    return dmh;
 }
