@@ -144,8 +144,12 @@ TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
    const auto Mh2_full_0L = me.calculate_Mh2(0);
    const auto Mh2_full_1L = me.calculate_Mh2(1);
 
+   INFO("Mh2_full_0L = " << Mh2_full_0L(0));
+   INFO("Mh2_full_1L = " << Mh2_full_1L(0));
+   INFO("Mh2_EFT_0L = " << Mh2_EFT_0L);
+   INFO("Mh2_EFT_1L = " << Mh2_EFT_1L);
+
    CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
-   // TODO increase precision
    CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
 }
 
@@ -157,13 +161,17 @@ TEST_CASE("test_EFT_vs_FO_1loop")
    const auto p = make_point();
 
    const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
-   const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
+   const auto Mh2_EFT_1L = Mh2_EFT_0L + calc_Mh2_EFT_1L(p);
 
    const MSSM_mass_eigenstates me(p);
    const auto Mh2_full_0L = me.calculate_Mh2(0);
    const auto Mh2_full_1L = me.calculate_Mh2(1);
 
+   INFO("Mh2_full_0L = " << Mh2_full_0L(0));
+   INFO("Mh2_full_1L = " << Mh2_full_1L(0));
+   INFO("Mh2_EFT_0L = " << Mh2_EFT_0L);
+   INFO("Mh2_EFT_1L = " << Mh2_EFT_1L);
+
    CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
-   // TODO increase precision
    CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
 }
