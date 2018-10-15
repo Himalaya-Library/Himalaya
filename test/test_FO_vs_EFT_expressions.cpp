@@ -2,6 +2,7 @@
 #include "Mh2EFTCalculator.hpp"
 #include "MSSM_mass_eigenstates.hpp"
 #include "EFTFlags.hpp"
+#include "linalg2.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
@@ -232,4 +233,40 @@ TEST_CASE("test_FO_1loop_derivative")
    const auto Mh2_1L_deriv_num = derivative_central<3>(deriv, p2, eps);
 
    CHECK_CLOSE(Mh2_1L_deriv, Mh2_1L_deriv_num, 1e-4);
+}
+
+TEST_CASE("test_FO_2loop_momentum_iteration")
+{
+   using namespace himalaya;
+   using namespace himalaya::mh1l;
+   using A2 = Eigen::Array<double,2,1>;
+
+   const auto p = make_point();
+   const MSSM_mass_eigenstates me(p);
+
+   // calculates Mh^2 as a function of p^2
+   const auto Mh2_1L_p2 = [&me] (double p2) {
+      const auto mm_0L = me.get_mass_matrix_hh();
+      const auto mm_1L = me.delta_mh2_1loop(p2);
+      const RM22 mm = mm_0L + mm_1L;
+
+      A2 M2hh;
+      RM22 ZH;
+      // diagonalize 1-loop mass matrix for given p^2
+      flexiblesusy::fs_diagonalize_hermitian(mm, M2hh, ZH);
+
+      return M2hh(0);
+   };
+
+   const auto Mh2_1L = me.calculate_Mh2(1)(0);
+   const auto Mh2_2L_mom_it = Mh2_1L_p2(Mh2_1L_p2(0));
+   const auto Mh2_2L = me.calculate_Mh2(2)(0);
+
+   INFO("Mh2_1L = " << Mh2_1L);
+   INFO("Mh2_2L = " << Mh2_2L);
+   INFO("Mh2_2L_mom_it = " << Mh2_2L_mom_it);
+
+   // check that (analytic and numeric) momentum iteration goes into
+   // the same direction and is ~ 10% close to each other
+   CHECK(10*std::abs(Mh2_2L - Mh2_2L_mom_it) < std::abs(Mh2_2L - Mh2_1L));
 }

@@ -112,6 +112,8 @@ public:
    RM22 delta_mh2_1loop_gaugeless() const;
    /// derivative of Higgs 1-loop contribution DR' for p = g1 = g2 = 0
    RM22 delta_mh2_1loop_gaugeless_deriv() const;
+   /// returns CP-even Higgs mass matrix
+   RM22 get_mass_matrix_hh() const;
 
    friend std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
