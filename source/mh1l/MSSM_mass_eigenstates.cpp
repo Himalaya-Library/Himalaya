@@ -18,7 +18,7 @@ namespace mh1l {
 namespace {
 
 const double sqrt2 = 1.414213562373095;
-const double sqrt15 = 1.414213562373095; // sqrt(15)
+const double sqrt15 = 3.872983346207417; // sqrt(15)
 const double sqrt35 = 0.7745966692414834; // sqrt(3/5)
 const double inv_sqrt2 = 0.7071067811865475; // 1/sqrt2
 const double one_loop = 0.006332573977646111; // 1/(4Pi)^2
