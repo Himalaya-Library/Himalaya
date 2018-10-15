@@ -899,11 +899,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    se11 += -(SUM(gI1,0,1,-(A0(M2Hpm(gI1))*(vd*(3*sqr(g1) + 5*sqr(g2))*sqr(ZP(gI1,0)) + vd*(-3*sqr(g1) + 5*sqr(g2))*sqr(ZP(gI1,1)) + 10*vu*sqr(g2)*ZP(gI1,0)*ZP(gI1,1)))/20.)/vd);
    se11 += (-3*SUM(gI1,0,1,(A0(M2St(gI1))*(vd*(sqr(g1) - 5*sqr(g2))*sqr(ZT(gI1,0)) - 4*vd*sqr(g1*ZT(gI1,1)) + 20*mu*sqrt2*yt*ZT(gI1,0)*ZT(gI1,1)))/20.))/vd;
    se11 += -(SUM(gI1,0,1,-(A0(M2Stau(gI1))*(vd*(3*sqr(g1) - 5*sqr(g2) + 20*sqr(ytau))*sqr(ZTau(gI1,0)) + 2*vd*(-3*sqr(g1) + 10*sqr(ytau))*sqr(ZTau(gI1,1)) + 20*Atau*sqrt2*ytau*ZTau(gI1,0)*ZTau(gI1,1)))/20.)/vd);
-   se11 += SUM(gI1,0,3,MChi(gI1)*SUM(gI2,0,3,(B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*MChi(gI2)*sqr(ZN(gI1,2)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2)))/50.));
-   se11 += -SUM(gI1,0,3,SUM(gI2,0,3,-((A0(sqr(MChi(gI1))) + A0(sqr(MChi(gI2))) + B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*(-p2 + sqr(MChi(gI1)) + sqr(MChi(gI2))))*sqr(ZN(gI1,2)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2)))/50.))/2.;
-   se11 += SUM(gI1,0,3,(2*A0(sqr(MChi(gI1)))*MChi(gI1)*(sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI1,2))/5.)/vd;
-   se11 += -SUM(gI2,0,1,((2*A0(M2VZ) - A0(M2Ah(gI2)) + B0(p2,M2VZ,M2Ah(gI2))*(-M2VZ + 2*p2 + 2*M2Ah(gI2)))*(3*sqr(g1) + 5*sqr(g2))*sqr(ZA(gI2,0)))/20.);
-   se11 += -2*SUM(gI2,0,1,((-2*A0(M2VWm) + A0(M2Hpm(gI2)) + B0(p2,M2VWm,M2Hpm(gI2))*(M2VWm - 2*p2 - 2*M2Hpm(gI2)))*sqr(g2*ZP(gI2,0)))/4.);
+   se11 += SUM(gI1,0,3,MChi(gI1)*SUM(gI2,0,3,(B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*MChi(gI2)*sqr(ZN(gI1,2)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2)))/50.));
+   se11 += -SUM(gI1,0,3,SUM(gI2,0,3,-((A0(sqr(MChi(gI1))) + A0(sqr(MChi(gI2))) + B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*(-p2 + sqr(MChi(gI1)) + sqr(MChi(gI2))))*sqr(ZN(gI1,2)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2)))/50.))/2.;
+   se11 += SUM(gI1,0,3,(2*A0(sqr(MChi(gI1)))*MChi(gI1)*(g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI1,2))/5.)/vd;
+   se11 += -SUM(gI2,0,1,-((2*A0(M2VZ) - A0(M2Ah(gI2)) + B0(p2,M2VZ,M2Ah(gI2))*(-M2VZ + 2*p2 + 2*M2Ah(gI2)))*(3*sqr(g1) + 5*sqr(g2))*sqr(ZA(gI2,0)))/20.);
+   se11 += -2*SUM(gI2,0,1,-((2*A0(M2VWm) - A0(M2Hpm(gI2)) + B0(p2,M2VWm,M2Hpm(gI2))*(-M2VWm + 2*p2 + 2*M2Hpm(gI2)))*sqr(g2*ZP(gI2,0)))/4.);
 
    se12 += (-7*vd*vu*B0(p2,M2VWm,M2VWm)*pow4(g2))/8.;
    se12 += (vd*vu*B0(p2,M2SveL,M2SveL)*sqr(3*sqr(g1) + 5*sqr(g2)))/400.;
@@ -926,19 +926,19 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    se12 += -SUM(gI1,0,1,SUM(gI2,0,1,-(B0(p2,M2Stau(gI1),M2Stau(gI2))*(ZTau(gI1,0)*(vu*(3*sqr(g1) - 5*sqr(g2))*ZTau(gI2,0) + 10*mu*sqrt2*ytau*ZTau(gI2,1)) + 2*ZTau(gI1,1)*(5*mu*sqrt2*ytau*ZTau(gI2,0) - 3*vu*sqr(g1)*ZTau(gI2,1)))*(ZTau(gI1,0)*(vd*(3*sqr(g1) - 5*sqr(g2) + 20*sqr(ytau))*ZTau(gI2,0) + 10*Atau*sqrt2*ytau*ZTau(gI2,1)) + 2*ZTau(gI1,1)*(5*Atau*sqrt2*ytau*ZTau(gI2,0) + vd*(-3*sqr(g1) + 10*sqr(ytau))*ZTau(gI2,1))))/400.));
    se12 += SUM(gI1,0,1,(A0(M2hh(gI1))*(3*sqr(g1) + 5*sqr(g2))*ZH(gI1,0)*ZH(gI1,1))/10.)/2.;
    se12 += SUM(gI1,0,1,-(A0(M2Hpm(gI1))*sqr(g2)*ZP(gI1,0)*ZP(gI1,1))/2.);
-   se12 += SUM(gI1,0,3,MChi(gI1)*SUM(gI2,0,3,-(B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*MChi(gI2)*(ZN(gI1,2)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2))*(ZN(gI1,3)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.));
-   se12 += -SUM(gI1,0,3,SUM(gI2,0,3,((A0(sqr(MChi(gI1))) + A0(sqr(MChi(gI2))) + B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*(-p2 + sqr(MChi(gI1)) + sqr(MChi(gI2))))*(ZN(gI1,2)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2))*(ZN(gI1,3)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.))/2.;
-   se12 += -SUM(gI2,0,1,-((2*A0(M2VZ) - A0(M2Ah(gI2)) + B0(p2,M2VZ,M2Ah(gI2))*(-M2VZ + 2*p2 + 2*M2Ah(gI2)))*(3*sqr(g1) + 5*sqr(g2))*ZA(gI2,0)*ZA(gI2,1))/20.);
+   se12 += SUM(gI1,0,3,MChi(gI1)*SUM(gI2,0,3,-(B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*MChi(gI2)*(ZN(gI1,2)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2))*(ZN(gI1,3)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.));
+   se12 += -SUM(gI1,0,3,SUM(gI2,0,3,((A0(sqr(MChi(gI1))) + A0(sqr(MChi(gI2))) + B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*(-p2 + sqr(MChi(gI1)) + sqr(MChi(gI2))))*(ZN(gI1,2)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,2))*(ZN(gI1,3)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.))/2.;
+   se12 += -SUM(gI2,0,1,((2*A0(M2VZ) - A0(M2Ah(gI2)) + B0(p2,M2VZ,M2Ah(gI2))*(-M2VZ + 2*p2 + 2*M2Ah(gI2)))*(3*sqr(g1) + 5*sqr(g2))*ZA(gI2,0)*ZA(gI2,1))/20.);
    se12 += -2*SUM(gI2,0,1,((2*A0(M2VWm) - A0(M2Hpm(gI2)) + B0(p2,M2VWm,M2Hpm(gI2))*(-M2VWm + 2*p2 + 2*M2Hpm(gI2)))*sqr(g2)*ZP(gI2,0)*ZP(gI2,1))/4.);
 
    se22 += (A0(M2VZ)*(-3*sqr(g1) - 5*sqr(g2)))/20.;
    se22 += -(A0(M2VWm)*sqr(g2))/2.;
    se22 += (-7*B0(p2,M2VWm,M2VWm)*pow4(g2)*sqr(vu))/8.;
    se22 += -3*B0(p2,sqr(MFt),sqr(MFt))*(p2 - 4*sqr(MFt))*sqr(yt);
+   se22 += -(B0(p2,M2SveL,M2SveL)*sqr(vu*(3*sqr(g1) + 5*sqr(g2))))/400.;
+   se22 += -(B0(p2,M2SvmL,M2SvmL)*sqr(vu*(3*sqr(g1) + 5*sqr(g2))))/400.;
+   se22 += -(B0(p2,M2SvtL,M2SvtL)*sqr(vu*(3*sqr(g1) + 5*sqr(g2))))/400.;
    se22 += (-7*B0(p2,M2VZ,M2VZ)*sqr(vu*(3*sqr(g1) + 5*sqr(g2))))/400.;
-   se22 += -(B0(p2,M2SveL,M2SveL)*sqr(3*vu*sqr(g1) + 5*vu*sqr(g2)))/400.;
-   se22 += -(B0(p2,M2SvmL,M2SvmL)*sqr(3*vu*sqr(g1) + 5*vu*sqr(g2)))/400.;
-   se22 += -(B0(p2,M2SvtL,M2SvtL)*sqr(3*vu*sqr(g1) + 5*vu*sqr(g2)))/400.;
    se22 += SUM(gI1,0,1,(A0(M2Ah(gI1))*(3*sqr(g1) + 5*sqr(g2))*(sqr(ZA(gI1,0)) - sqr(ZA(gI1,1))))/20.)/2.;
    se22 += -SUM(gI1,0,1,(vu*A0(M2Ah(gI1))*(3*sqr(g1) + 5*sqr(g2))*(sqr(ZA(gI1,0)) - sqr(ZA(gI1,1))))/20.)/(2.*vu);
    se22 += 3*SUM(gI1,0,1,-(A0(M2Sb(gI1))*((sqr(g1) + 5*sqr(g2))*sqr(ZB(gI1,0)) + 2*sqr(g1*ZB(gI1,1))))/20.);
@@ -978,11 +978,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    se22 += -(SUM(gI1,0,1,(A0(M2Hpm(gI1))*(vu*(3*sqr(g1) - 5*sqr(g2))*sqr(ZP(gI1,0)) - vu*(3*sqr(g1) + 5*sqr(g2))*sqr(ZP(gI1,1)) - 10*vd*sqr(g2)*ZP(gI1,0)*ZP(gI1,1)))/20.)/vu);
    se22 += (-3*SUM(gI1,0,1,-(A0(M2St(gI1))*(vu*(sqr(g1) - 5*sqr(g2) + 20*sqr(yt))*sqr(ZT(gI1,0)) - 4*vu*(sqr(g1) - 5*sqr(yt))*sqr(ZT(gI1,1)) + 20*At*sqrt2*yt*ZT(gI1,0)*ZT(gI1,1)))/20.))/vu;
    se22 += -(SUM(gI1,0,1,(A0(M2Stau(gI1))*(vu*(3*sqr(g1) - 5*sqr(g2))*sqr(ZTau(gI1,0)) - 6*vu*sqr(g1*ZTau(gI1,1)) + 20*mu*sqrt2*ytau*ZTau(gI1,0)*ZTau(gI1,1)))/20.)/vu);
-   se22 += SUM(gI1,0,3,MChi(gI1)*SUM(gI2,0,3,(B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*MChi(gI2)*sqr(ZN(gI1,3)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.));
-   se22 += -SUM(gI1,0,3,SUM(gI2,0,3,-((A0(sqr(MChi(gI1))) + A0(sqr(MChi(gI2))) + B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*(-p2 + sqr(MChi(gI1)) + sqr(MChi(gI2))))*sqr(ZN(gI1,3)*(sqrt15*g1*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.))/2.;
-   se22 += SUM(gI1,0,3,(-2*A0(sqr(MChi(gI1)))*MChi(gI1)*(sqrt15*g1*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI1,3))/5.)/vu;
-   se22 += -SUM(gI2,0,1,((2*A0(M2VZ) - A0(M2Ah(gI2)) + B0(p2,M2VZ,M2Ah(gI2))*(-M2VZ + 2*p2 + 2*M2Ah(gI2)))*(3*sqr(g1) + 5*sqr(g2))*sqr(ZA(gI2,1)))/20.);
-   se22 += -2*SUM(gI2,0,1,((-2*A0(M2VWm) + A0(M2Hpm(gI2)) + B0(p2,M2VWm,M2Hpm(gI2))*(M2VWm - 2*p2 - 2*M2Hpm(gI2)))*sqr(g2*ZP(gI2,1)))/4.);
+   se22 += SUM(gI1,0,3,MChi(gI1)*SUM(gI2,0,3,(B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*MChi(gI2)*sqr(ZN(gI1,3)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.));
+   se22 += -SUM(gI1,0,3,SUM(gI2,0,3,-((A0(sqr(MChi(gI1))) + A0(sqr(MChi(gI2))) + B0(p2,sqr(MChi(gI1)),sqr(MChi(gI2)))*(-p2 + sqr(MChi(gI1)) + sqr(MChi(gI2))))*sqr(ZN(gI1,3)*(g1*sqrt15*ZN(gI2,0) - 5*g2*ZN(gI2,1)) + (g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI2,3)))/50.))/2.;
+   se22 += SUM(gI1,0,3,(-2*A0(sqr(MChi(gI1)))*MChi(gI1)*(g1*sqrt15*ZN(gI1,0) - 5*g2*ZN(gI1,1))*ZN(gI1,3))/5.)/vu;
+   se22 += -SUM(gI2,0,1,-((2*A0(M2VZ) - A0(M2Ah(gI2)) + B0(p2,M2VZ,M2Ah(gI2))*(-M2VZ + 2*p2 + 2*M2Ah(gI2)))*(3*sqr(g1) + 5*sqr(g2))*sqr(ZA(gI2,1)))/20.);
+   se22 += -2*SUM(gI2,0,1,-((2*A0(M2VWm) - A0(M2Hpm(gI2)) + B0(p2,M2VWm,M2Hpm(gI2))*(-M2VWm + 2*p2 + 2*M2Hpm(gI2)))*sqr(g2*ZP(gI2,1)))/4.);
 
    RM22 se(RM22::Zero());
    se << se11, se12, se12, se22;
