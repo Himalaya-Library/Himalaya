@@ -7,6 +7,7 @@
 
 #include "HierarchyCalculator.hpp"
 #include "Hierarchies.hpp"
+#include "DSZHiggs.h"
 #include "EFTFlags.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "H3.hpp"
@@ -34,9 +35,6 @@
 #include <vector>
 
 #include <Eigen/Eigenvalues>
-
-extern "C" void dszhiggs_(double *t, double *mg, double *T1, double *T2, double *st, double *ct, double *q, double *mu, double *tanb,
-      double *v2, double *gs, int *OS, double *S11, double *S22, double *S12);
 
 namespace himalaya {
 
