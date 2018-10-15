@@ -83,6 +83,48 @@ void convert_symmetric_fermion_mixings_to_slha(
 }
 
 /**
+ * Diagonalizes a mass matrix perturbatively.
+ *
+ * @param m0 tree-level contribution
+ * @param m1 1-loop contribution
+ * @param m2 2-loop contribution
+ *
+ * @return perturbatively calculated mass eigenvalues
+ */
+V2 diagonalize_perturbatively(const RM22& m0, const RM22& m1, const RM22& m2)
+{
+   using std::sqrt;
+
+   // tree-level
+   const auto a11 = m0(0,0), a12 = m0(0,1), a22 = m0(1,1);
+   const auto c1 = a11 + a22;
+   const auto c2 = sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
+
+   V2 mh2;
+   mh2 << 0.5*(c1 - c2), 0.5*(c1 + c2);
+
+   // 1-loop
+   const auto b11 = m1(0,0), b12 = m1(0,1), b22 = m1(1,1);
+   const auto c3 = b11 + b22;
+   const auto c4 = (a11*b11 - a22*b11 + 4*a12*b12 - a11*b22 + a22*b22)/c2;
+
+   mh2(0) += 0.5*(c3 - c4);
+   mh2(1) += 0.5*(c3 + c4);
+
+   // 2-loop
+   const auto d11 = m2(0,0), d12 = m2(0,1), d22 = m2(1,1);
+   const auto c5 = 0.5*c2*(
+      - pow2(c4)/pow6(c2)
+      + (pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22) + 2*a11*d11
+         - 2*a22*d11 + 8*a12*d12 - 2*a11*d22 + 2*a22*d22)/pow4(c2));
+
+   mh2(0) += 0.5*(d11 + d22 - c5);
+   mh2(1) += 0.5*(d11 + d22 + c5);
+
+   return mh2;
+}
+
+/**
  * Normalize each element of the given real matrix to be within the
  * interval [min, max].  Values < min are set to min.  Values > max
  * are set to max.
@@ -755,6 +797,26 @@ Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars) const
 }
 
 /**
+ * Returns the tree-level squared Higgs masses.
+ * @return squared Higgs masses
+ */
+V2 MSSM_mass_eigenstates::calculate_Mh2_tree() const
+{
+   using std::sqrt;
+
+   const auto m0 = masses.get_mass_matrix_hh(pars);
+   const auto a11 = m0(0,0), a12 = m0(0,1), a22 = m0(1,1);
+   const auto c1 = a11 + a22;
+   const auto c2 = sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
+
+   V2 mh2_tree;
+   mh2_tree(0) = 0.5*(c1 - c2);
+   mh2_tree(1) = 0.5*(c1 + c2);
+
+   return mh2_tree;
+}
+
+/**
  * Returns the Higgs pole masses at a given loop level.  The function
  * does not include implicit or explicit higher orders.
  *
@@ -764,45 +826,23 @@ Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars) const
  */
 V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
 {
-   using std::sqrt;
-
-   V2 mh2(V2::Zero());
+   RM22 m0(RM22::Zero()), m1(RM22::Zero()), m2(RM22::Zero());
 
    if (loops >= 0) {
-      const auto m0 = masses.get_mass_matrix_hh(pars);
-      const auto a11 = m0(0,0), a12 = m0(0,1), a22 = m0(1,1);
-      const auto c1 = a11 + a22;
-      const auto c2 = sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
-
-      mh2(0) += 0.5*(c1 - c2);
-      mh2(1) += 0.5*(c1 + c2);
+      m0 = masses.get_mass_matrix_hh(pars);
 
       if (loops > 0) {
-         const auto p2 = mh2(0);
-         const auto m1 = delta_mh2_1loop(p2);
-         const auto b11 = m1(0,0), b12 = m1(0,1), b22 = m1(1,1);
-         const auto c3 = b11 + b22;
-         const auto c4 = (a11*b11 - a22*b11 + 4*a12*b12 - a11*b22 + a22*b22)/c2;
-
-         mh2(0) += 0.5*(c3 - c4);
-         mh2(1) += 0.5*(c3 + c4);
+         const auto p2 = calculate_Mh2_tree()(0);
+         m1 = delta_mh2_1loop(p2);
 
          if (loops > 1) {
             // 2-loop contribution from momentum iteration
-            const RM22 m2_mom = delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
-            const auto d11 = m2_mom(0,0), d12 = m2_mom(0,1), d22 = m2_mom(1,1);
-            const auto c5 = 0.5*c2*(
-               - pow2(c4)/pow6(c2)
-               + (pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22) + 2*a11*d11
-                  - 2*a22*d11 + 8*a12*d12 - 2*a11*d22 + 2*a22*d22)/pow4(c2));
-
-            mh2(0) += 0.5*(d11 + d22 - c5);
-            mh2(1) += 0.5*(d11 + d22 + c5);
+            m2 = delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
          }
       }
    }
 
-   return mh2;
+   return diagonalize_perturbatively(m0, m1, m2);
 }
 
 /**

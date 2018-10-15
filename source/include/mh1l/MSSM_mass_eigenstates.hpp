@@ -122,6 +122,9 @@ private:
    MSSM_spectrum masses;    ///< MSSM DR' masses / mixings
    MSSM_spectrum gaugeless; ///< MSSM DR' masses / mixings for g1 = g2 = 0
 
+   /// calculates tree-level squared Higgs masses
+   V2 calculate_Mh2_tree() const;
+
    /// calculates all DR' masses and mixings
    void calculate_parameters();
 
