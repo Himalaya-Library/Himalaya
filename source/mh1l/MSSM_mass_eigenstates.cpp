@@ -254,7 +254,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Su(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
-   const auto yu = pars.Yu(0,0);
+   const auto yu = 0.; // pars.Yu(0,0);
    const auto vu = pars.vu;
    const auto vd = pars.vd;
    const auto mu = pars.mu;
@@ -286,7 +286,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Sd(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
-   const auto yd = pars.Yd(0,0);
+   const auto yd = 0.; // pars.Yd(0,0);
    const auto vu = pars.vu;
    const auto vd = pars.vd;
    const auto mu = pars.mu;
@@ -318,7 +318,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Sc(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
-   const auto yc = pars.Yu(1,1);
+   const auto yc = 0.; // pars.Yu(1,1);
    const auto vu = pars.vu;
    const auto vd = pars.vd;
    const auto mu = pars.mu;
@@ -350,7 +350,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Ss(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
-   const auto ys = pars.Yd(1,1);
+   const auto ys = 0.; // pars.Yd(1,1);
    const auto vu = pars.vu;
    const auto vd = pars.vd;
    const auto mu = pars.mu;
@@ -446,7 +446,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Se(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
-   const auto ye = pars.Ye(0,0);
+   const auto ye = 0.; // pars.Ye(0,0);
    const auto vu = pars.vu;
    const auto vd = pars.vd;
    const auto mu = pars.mu;
@@ -478,7 +478,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Sm(const Parameters& pars) const
 {
    const auto g1 = pars.g1;
    const auto g2 = pars.g2;
-   const auto ym = pars.Ye(1,1);
+   const auto ym = 0.; // pars.Ye(1,1);
    const auto vu = pars.vu;
    const auto vd = pars.vd;
    const auto mu = pars.mu;
