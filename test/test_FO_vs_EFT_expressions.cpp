@@ -147,6 +147,32 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
 
+/// calculates Mh^2 in the EFT at 2-loop level
+double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
+{
+   using namespace himalaya::mh2_eft;
+
+   himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
+
+   if (pars.g1 < 1e-5) {
+      mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G14, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
+   }
+
+   if (pars.g2 < 1e-5) {
+      mhc.setCorrectionFlag(EFTOrders::G24, 0);
+      mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
+      mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
+   }
+
+   return mhc.getDeltaMh2EFT2Loop(1,1);
+}
+
 } // anonymous namespace
 
 TEST_CASE("test_FO_1loop_gaugeless")
@@ -195,7 +221,7 @@ TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
    CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
 }
 
-TEST_CASE("test_EFT_vs_FO_1loop")
+TEST_CASE("test_EFT_vs_FO_2loop")
 {
    using namespace himalaya::mh1l;
    using namespace himalaya::mh2_eft;
@@ -204,18 +230,23 @@ TEST_CASE("test_EFT_vs_FO_1loop")
 
    const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
    const auto Mh2_EFT_1L = Mh2_EFT_0L + calc_Mh2_EFT_1L(p);
+   const auto Mh2_EFT_2L = Mh2_EFT_1L + calc_Mh2_EFT_2L(p);
 
    const MSSM_mass_eigenstates me(p);
    const auto Mh2_full_0L = me.calculate_Mh2(0);
    const auto Mh2_full_1L = me.calculate_Mh2(1);
+   const auto Mh2_full_2L = me.calculate_Mh2(2);
 
    INFO("Mh2_full_0L = " << Mh2_full_0L(0));
    INFO("Mh2_full_1L = " << Mh2_full_1L(0));
+   INFO("Mh2_full_2L = " << Mh2_full_2L(0));
    INFO("Mh2_EFT_0L = " << Mh2_EFT_0L);
    INFO("Mh2_EFT_1L = " << Mh2_EFT_1L);
+   INFO("Mh2_EFT_2L = " << Mh2_EFT_2L);
 
    CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
    CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
+   CHECK_CLOSE(Mh2_EFT_2L, Mh2_full_2L(0), 1e-5);
 }
 
 TEST_CASE("test_FO_1loop_derivative")
