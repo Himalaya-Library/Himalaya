@@ -47,22 +47,26 @@
 namespace himalaya {
 namespace mssm_twoloophiggs {
 
+/// 2-loop CP-even Higgs contribution O(at*as)
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
    double tanb, double vev2, double g3, int scheme = 0);
 
+/// 2-loop CP-even Higgs contribution O(at^2)
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
    double mt2, double mb2, double mA2, double mst12,
    double mst22, double msb12, double msb22,
    double sxt, double cxt, double sxb, double cxb,
    double scale2, double mu, double tanb, double vev2);
 
+/// 2-loop CP-even Higgs contribution O(ab*as)
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_as(
    double mb2, double mg, double msb12, double msb22,
    double sxb, double cxb, double scale2, double mu,
    double cotb, double vev2, double g3, int scheme = 0);
 
+/// 2-loop CP-even Higgs contribution O(atau^2)
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_atau_atau(
    double mtau2, double mA2, double msv2, double mstau12,
    double mstau22, double sintau, double costau, double scale2,

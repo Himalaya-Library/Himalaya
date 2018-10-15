@@ -100,7 +100,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
       g*sqrtabs(del/g2))/ (2.*g)))/ (rdel*(-t + T + g*(-1 +
       sqrtabs(del/g2)))))))/ rdel))/tanb))/(32.*Pi4);
 
-   return -result;
+   return result;
 }
 
 /// Pietro Slavich implementation
@@ -117,7 +117,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_general(
 
    result(1,0) = result(0,1);
 
-   return -result;
+   return result;
 }
 
 } // anonymous namespace
@@ -149,7 +149,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
 
    result(1,0) = result(0,1);
 
-   return -result;
+   return result;
 }
 
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_as(
@@ -179,7 +179,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_atau_atau(
 
    result(1,0) = result(0,1);
 
-   return -result;
+   return result;
 }
 
 } // namespace mssm_twoloophiggs
