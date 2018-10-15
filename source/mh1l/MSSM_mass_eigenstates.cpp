@@ -24,8 +24,10 @@ const double inv_sqrt2 = 0.7071067811865475; // 1/sqrt2
 const double one_loop = 0.006332573977646111; // 1/(4Pi)^2
 
 template <typename T> T sqr(T x) { return x*x; }
+double pow2(double x) { return x*x; }
 double pow3(double x) { return x*x*x; }
 double pow4(double x) { return x*x*x*x; }
+double pow6(double x) { return x*x*x*x*x*x; }
 
 #define DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(op)                     \
    template <typename T>                                                \
@@ -768,9 +770,9 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
 
    if (loops >= 0) {
       const auto m0 = masses.get_mass_matrix_hh(pars);
-      const auto c1 = m0(0,0) + m0(1,1);
-      const auto c2 = sqrt(sqr(m0(0,0)) + 4*sqr(m0(0,1))
-                           - 2*m0(0,0)*m0(1,1) + sqr(m0(1,1)));
+      const auto a11 = m0(0,0), a12 = m0(0,1), a22 = m0(1,1);
+      const auto c1 = a11 + a22;
+      const auto c2 = sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
 
       mh2(0) += 0.5*(c1 - c2);
       mh2(1) += 0.5*(c1 + c2);
@@ -778,9 +780,9 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
       if (loops > 0) {
          const auto p2 = mh2(0);
          const auto m1 = delta_mh2_1loop(p2);
-         const auto c3 = m1(0,0) + m1(1,1);
-         const auto c4 = (m0(0,0)*m1(0,0) - m0(1,1)*m1(0,0)
-            + 4*m0(0,1)*m1(0,1) - m0(0,0)*m1(1,1) + m0(1,1)*m1(1,1))/c2;
+         const auto b11 = m1(0,0), b12 = m1(0,1), b22 = m1(1,1);
+         const auto c3 = b11 + b22;
+         const auto c4 = (a11*b11 - a22*b11 + 4*a12*b12 - a11*b22 + a22*b22)/c2;
 
          mh2(0) += 0.5*(c3 - c4);
          mh2(1) += 0.5*(c3 + c4);
@@ -788,11 +790,14 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
          if (loops > 1) {
             // 2-loop contribution from momentum iteration
             const RM22 m2_mom = delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
-            const auto d11 = m2_mom(0,0);
-            const auto d22 = m2_mom(1,1);
+            const auto d11 = m2_mom(0,0), d12 = m2_mom(0,1), d22 = m2_mom(1,1);
+            const auto c5 = 0.5*c2*(
+               - pow2(c4)/pow6(c2)
+               + (pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22) + 2*a11*d11
+                  - 2*a22*d11 + 8*a12*d12 - 2*a11*d22 + 2*a22*d22)/pow4(c2));
 
-            mh2(0) += 0.5*(d11 + d22);
-            mh2(1) += 0.5*(d11 + d22);
+            mh2(0) += 0.5*(d11 + d22 - c5);
+            mh2(1) += 0.5*(d11 + d22 + c5);
          }
       }
    }
