@@ -38,6 +38,7 @@ include_directories(${INCLUDE_PATH})
 include_directories(${INCLUDE_PATH}/hierarchies)
 include_directories(${INCLUDE_PATH}/mh2_eft)
 include_directories(${INCLUDE_PATH}/mh1l)
+include_directories(${INCLUDE_PATH}/mh2l)
 include_directories(${INCLUDE_PATH}/misc)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
@@ -58,7 +59,7 @@ file(GLOB LIBSOURCES
   ${SOURCE_PATH}/misc/*.cpp)
 
 # DSZ library files
-file(GLOB FSOURCES ${SOURCE_PATH}/mh2l/*.f)
+file(GLOB FSOURCES ${SOURCE_PATH}/mh2l/*.f ${SOURCE_PATH}/mh2l/*.cpp)
 
 # build the himalaya and DSZ library
 add_library(DSZ_static STATIC ${FSOURCES})
