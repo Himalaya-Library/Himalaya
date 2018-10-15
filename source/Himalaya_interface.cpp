@@ -169,9 +169,29 @@ void Parameters::validate(bool verbose)
       }
    }
 
-   // sort stops/sbottoms
+   if (std::isnan(MStau(0)) || std::isnan(MStau(1)) || std::isnan(s2tau)) {
+      const double tan_beta = vu / vd;
+      const double beta = std::atan(tan_beta);
+      const double cos_2beta = std::cos(2 * beta);
+      const double Xtau = Mtau * (Ae(2,2) - mu * tan_beta);
+      const double sw2 = 1 - MW * MW / MZ / MZ;
+      RM22 stauMatrix;
+      stauMatrix << ml2(2, 2) + sqr(Mtau) - (0.5 - sw2) * sqr(MZ) * cos_2beta, Xtau,
+         Xtau, me2(2, 2) + sqr(Mtau) - sw2 * sqr(MZ) * cos_2beta;
+
+      std::tie(MStau, s2tau) = calculate_MSf_s2f(stauMatrix);
+
+      if (verbose) {
+         INFO_MSG("Stau masses or mixing angle not provided. Calculated values:\n" <<
+                  "\tstau masses: " << MStau(0) << " GeV, " << MStau(1) << " GeV,\n" <<
+                  "\tmixing angle sin(2*theta): " << s2tau << ".");
+      }
+   }
+
+   // sort stops/sbottoms/staus
    sort_ew(MSt, s2t);
    sort_ew(MSb, s2b);
+   sort_ew(MStau, s2tau);
 
    // check if the stop/sbottom masses are degenerated. If this is the
    // case one could get spurious poles in Pietro's code. To avoid

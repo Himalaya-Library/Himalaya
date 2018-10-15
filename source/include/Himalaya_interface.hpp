@@ -59,10 +59,12 @@ struct Parameters {
    double MA{};                          ///< CP-odd Higgs
    V2 MSt{NaN, NaN};              ///< stops
    V2 MSb{NaN, NaN};              ///< sbottoms
+   V2 MStau{NaN, NaN};            ///< staus
 
    // DR'-bar mixing angles
    double s2t{NaN};               ///< sine of 2 times the stop mixing angle
    double s2b{NaN};               ///< sine of 2 times the sbottom mixing angle
+   double s2tau{NaN};             ///< sine of 2 times the stau mixing angle
 
    int massLimit3LThreshold{};           ///< an integer flag to set the mass limit
 
