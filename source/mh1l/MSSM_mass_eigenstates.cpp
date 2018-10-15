@@ -836,8 +836,7 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
          m1 = delta_mh2_1loop(p2);
 
          if (loops > 1) {
-            // 2-loop contribution from momentum iteration
-            m2 = delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
+            m2 = delta_mh2_2loop();
          }
       }
    }
@@ -1219,6 +1218,16 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
    se << se11, se12, se12, se22;
 
    return se * one_loop;
+}
+
+RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
+{
+   RM22 dmh(RM22::Zero());
+
+   // 2-loop contribution from momentum iteration
+   dmh += delta_mh2_1loop_gaugeless() * delta_mh2_1loop_gaugeless_deriv();
+
+   return dmh;
 }
 
 RM22 MSSM_mass_eigenstates::get_mass_matrix_hh() const
