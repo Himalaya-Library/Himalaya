@@ -110,6 +110,8 @@ public:
    RM22 delta_mh2_1loop(double p2) const;
    /// Higgs 1-loop contribution DR' for p = g1 = g2 = 0
    RM22 delta_mh2_1loop_gaugeless() const;
+   /// derivative of Higgs 1-loop contribution DR' for p = g1 = g2 = 0
+   RM22 delta_mh2_1loop_gaugeless_deriv() const;
 
    friend std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
@@ -128,6 +130,8 @@ private:
    double A0(double) const;
    /// B0 Passarino-Veltman function
    double B0(double, double, double) const;
+   /// derivative of B0 function w.r.t. p^2, for p^2 = 0
+   double D1B0(double, double) const;
 };
 
 /// prints the internals of MSSM_mass_eigenstates

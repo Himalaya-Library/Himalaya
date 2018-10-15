@@ -130,5 +130,34 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    return ans;
 }
 
+/**
+ * Derivative of B0(p^2, m1^2, m2^2, Q^2) w.r.t. p^2, for p^2 = 0.
+ *
+ * @note Implemented only in the p^2 = 0 limit.
+ *
+ * @param m2a squared mass
+ * @param m2b squared mass
+ *
+ * @return derivative of B0 w.r.t. p^2 at p^2 = 0
+ */
+double d1_b0(double m2a, double m2b) noexcept
+{
+   using std::abs;
+
+   const double m4a = m2a * m2a;
+   const double m4b = m2b * m2b;
+
+   if ((std::abs(m2a) < 0.0001) != (std::abs(m2b) < 0.0001)) {
+      return (m4a - m4b) / (2. * pow3(m2a - m2b));
+   } else if (std::abs(m2a) < 0.0001 && std::abs(m2b) < 0.0001) {
+      return 0.;
+   } else if (std::abs(m2b - m2a) < 0.001) {
+      return 1./(6. * m2a) + (m2a - m2b)/(12.* m4a);
+   }
+
+   return (m4a - m4b + 2. * m2a * m2b * std::log(m2b/m2a))
+      /(2. * pow3(m2a - m2b));
+}
+
 } // namespace mh1l
 } // namespace himalaya

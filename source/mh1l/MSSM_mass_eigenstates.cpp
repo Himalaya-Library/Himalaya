@@ -1082,6 +1082,80 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
    return se * one_loop;
 }
 
+RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
+{
+   const auto yt     = pars.Yu(2,2);
+   const auto yb     = pars.Yd(2,2);
+   const auto ytau   = pars.Ye(2,2);
+   const auto vu     = pars.vu;
+   const auto vd     = pars.vd;
+   const auto mu     = pars.mu;
+   const auto At     = pars.Au(2,2);
+   const auto Ab     = pars.Ad(2,2);
+   const auto Atau   = pars.Ae(2,2);
+   const auto MFt    = gaugeless.MFt;
+   const auto MFb    = gaugeless.MFb;
+   const auto MFtau  = gaugeless.MFtau;
+   const auto M2St   = gaugeless.M2St;
+   const auto M2Sb   = gaugeless.M2Sb;
+   const auto M2Stau = gaugeless.M2Stau;
+   const auto ZT     = gaugeless.ZT;
+   const auto ZB     = gaugeless.ZB;
+   const auto ZTau   = gaugeless.ZTau;
+
+   double se11{0.}, se12{0.}, se22{0.};
+
+   se11 += -3*B0(0,sqr(MFb),sqr(MFb))*sqr(yb);
+   se11 += 12*D1B0(sqr(MFb),sqr(MFb))*sqr(MFb*yb);
+   se11 += -(B0(0,sqr(MFtau),sqr(MFtau))*sqr(ytau));
+   se11 += 4*D1B0(sqr(MFtau),sqr(MFtau))*sqr(MFtau*ytau);
+   se11 += -3*D1B0(M2Sb(0),M2Sb(0))*sqr(yb*(vd*yb*(sqr(ZB(0,0)) + sqr(ZB(0,1))) + Ab*sqrt2*ZB(0,0)*ZB(0,1)));
+   se11 += -3*D1B0(M2Sb(1),M2Sb(1))*sqr(yb*(vd*yb*(sqr(ZB(1,0)) + sqr(ZB(1,1))) + Ab*sqrt2*ZB(1,0)*ZB(1,1)));
+   se11 += (-3*D1B0(M2Sb(0),M2Sb(1))*sqr(yb*(Ab*sqrt2*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1)) + 2*vd*yb*(ZB(0,0)*ZB(1,0) + ZB(0,1)*ZB(1,1)))))/4.;
+   se11 += (-3*D1B0(M2Sb(1),M2Sb(0))*sqr(yb*(Ab*sqrt2*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1)) + 2*vd*yb*(ZB(0,0)*ZB(1,0) + ZB(0,1)*ZB(1,1)))))/4.;
+   se11 += -6*D1B0(M2St(0),M2St(0))*sqr(mu*yt*ZT(0,0)*ZT(0,1));
+   se11 += -6*D1B0(M2St(1),M2St(1))*sqr(mu*yt*ZT(1,0)*ZT(1,1));
+   se11 += (-3*D1B0(M2St(0),M2St(1))*sqr(mu*yt*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1))))/2.;
+   se11 += (-3*D1B0(M2St(1),M2St(0))*sqr(mu*yt*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1))))/2.;
+   se11 += -(D1B0(M2Stau(0),M2Stau(0))*sqr(ytau*(vd*ytau*(sqr(ZTau(0,0)) + sqr(ZTau(0,1))) + Atau*sqrt2*ZTau(0,0)*ZTau(0,1))));
+   se11 += -(D1B0(M2Stau(1),M2Stau(1))*sqr(ytau*(vd*ytau*(sqr(ZTau(1,0)) + sqr(ZTau(1,1))) + Atau*sqrt2*ZTau(1,0)*ZTau(1,1))));
+   se11 += -(D1B0(M2Stau(0),M2Stau(1))*sqr(ytau*(Atau*sqrt2*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1)) + 2*vd*ytau*(ZTau(0,0)*ZTau(1,0) + ZTau(0,1)*ZTau(1,1)))))/4.;
+   se11 += -(D1B0(M2Stau(1),M2Stau(0))*sqr(ytau*(Atau*sqrt2*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1)) + 2*vd*ytau*(ZTau(0,0)*ZTau(1,0) + ZTau(0,1)*ZTau(1,1)))))/4.;
+
+   se12 += 3*mu*D1B0(M2Sb(0),M2Sb(0))*sqr(yb)*ZB(0,0)*ZB(0,1)*(sqrt2*vd*yb*(sqr(ZB(0,0)) + sqr(ZB(0,1))) + 2*Ab*ZB(0,0)*ZB(0,1));
+   se12 += 3*mu*D1B0(M2Sb(1),M2Sb(1))*sqr(yb)*ZB(1,0)*ZB(1,1)*(sqrt2*vd*yb*(sqr(ZB(1,0)) + sqr(ZB(1,1))) + 2*Ab*ZB(1,0)*ZB(1,1));
+   se12 += (3*mu*D1B0(M2Sb(0),M2Sb(1))*sqr(yb)*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1))*(Ab*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1)) + sqrt2*vd*yb*(ZB(0,0)*ZB(1,0) + ZB(0,1)*ZB(1,1))))/2.;
+   se12 += (3*mu*D1B0(M2Sb(1),M2Sb(0))*sqr(yb)*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1))*(Ab*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1)) + sqrt2*vd*yb*(ZB(0,0)*ZB(1,0) + ZB(0,1)*ZB(1,1))))/2.;
+   se12 += 3*mu*D1B0(M2St(0),M2St(0))*sqr(yt)*ZT(0,0)*ZT(0,1)*(sqrt2*vu*yt*(sqr(ZT(0,0)) + sqr(ZT(0,1))) + 2*At*ZT(0,0)*ZT(0,1));
+   se12 += 3*mu*D1B0(M2St(1),M2St(1))*sqr(yt)*ZT(1,0)*ZT(1,1)*(sqrt2*vu*yt*(sqr(ZT(1,0)) + sqr(ZT(1,1))) + 2*At*ZT(1,0)*ZT(1,1));
+   se12 += (3*mu*D1B0(M2St(0),M2St(1))*sqr(yt)*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1))*(At*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1)) + sqrt2*vu*yt*(ZT(0,0)*ZT(1,0) + ZT(0,1)*ZT(1,1))))/2.;
+   se12 += (3*mu*D1B0(M2St(1),M2St(0))*sqr(yt)*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1))*(At*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1)) + sqrt2*vu*yt*(ZT(0,0)*ZT(1,0) + ZT(0,1)*ZT(1,1))))/2.;
+   se12 += mu*sqrt2*D1B0(M2Stau(0),M2Stau(0))*sqr(ytau)*ZTau(0,0)*ZTau(0,1)*(vd*ytau*(sqr(ZTau(0,0)) + sqr(ZTau(0,1))) + Atau*sqrt2*ZTau(0,0)*ZTau(0,1));
+   se12 += mu*sqrt2*D1B0(M2Stau(1),M2Stau(1))*sqr(ytau)*ZTau(1,0)*ZTau(1,1)*(vd*ytau*(sqr(ZTau(1,0)) + sqr(ZTau(1,1))) + Atau*sqrt2*ZTau(1,0)*ZTau(1,1));
+   se12 += (mu*sqrt2*D1B0(M2Stau(0),M2Stau(1))*sqr(ytau)*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1))*(Atau*sqrt2*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1)) + 2*vd*ytau*(ZTau(0,0)*ZTau(1,0) + ZTau(0,1)*ZTau(1,1))))/4.;
+   se12 += (mu*sqrt2*D1B0(M2Stau(1),M2Stau(0))*sqr(ytau)*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1))*(Atau*sqrt2*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1)) + 2*vd*ytau*(ZTau(0,0)*ZTau(1,0) + ZTau(0,1)*ZTau(1,1))))/4.;
+
+   se22 += -3*B0(0,sqr(MFt),sqr(MFt))*sqr(yt);
+   se22 += 12*D1B0(sqr(MFt),sqr(MFt))*sqr(MFt*yt);
+   se22 += -6*D1B0(M2Sb(0),M2Sb(0))*sqr(mu*yb*ZB(0,0)*ZB(0,1));
+   se22 += -6*D1B0(M2Sb(1),M2Sb(1))*sqr(mu*yb*ZB(1,0)*ZB(1,1));
+   se22 += (-3*D1B0(M2Sb(0),M2Sb(1))*sqr(mu*yb*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1))))/2.;
+   se22 += (-3*D1B0(M2Sb(1),M2Sb(0))*sqr(mu*yb*(ZB(0,1)*ZB(1,0) + ZB(0,0)*ZB(1,1))))/2.;
+   se22 += -3*D1B0(M2St(0),M2St(0))*sqr(yt*(vu*yt*(sqr(ZT(0,0)) + sqr(ZT(0,1))) + At*sqrt2*ZT(0,0)*ZT(0,1)));
+   se22 += -3*D1B0(M2St(1),M2St(1))*sqr(yt*(vu*yt*(sqr(ZT(1,0)) + sqr(ZT(1,1))) + At*sqrt2*ZT(1,0)*ZT(1,1)));
+   se22 += (-3*D1B0(M2St(0),M2St(1))*sqr(yt*(At*sqrt2*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1)) + 2*vu*yt*(ZT(0,0)*ZT(1,0) + ZT(0,1)*ZT(1,1)))))/4.;
+   se22 += (-3*D1B0(M2St(1),M2St(0))*sqr(yt*(At*sqrt2*(ZT(0,1)*ZT(1,0) + ZT(0,0)*ZT(1,1)) + 2*vu*yt*(ZT(0,0)*ZT(1,0) + ZT(0,1)*ZT(1,1)))))/4.;
+   se22 += -2*D1B0(M2Stau(0),M2Stau(0))*sqr(mu*ytau*ZTau(0,0)*ZTau(0,1));
+   se22 += -2*D1B0(M2Stau(1),M2Stau(1))*sqr(mu*ytau*ZTau(1,0)*ZTau(1,1));
+   se22 += -(D1B0(M2Stau(0),M2Stau(1))*sqr(mu*ytau*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1))))/2.;
+   se22 += -(D1B0(M2Stau(1),M2Stau(0))*sqr(mu*ytau*(ZTau(0,1)*ZTau(1,0) + ZTau(0,0)*ZTau(1,1))))/2.;
+
+   RM22 se;
+   se << se11, se12, se12, se22;
+
+   return se * one_loop;
+}
+
 double MSSM_mass_eigenstates::A0(double m2) const
 {
    return a0(m2, sqr(pars.scale));
@@ -1090,6 +1164,11 @@ double MSSM_mass_eigenstates::A0(double m2) const
 double MSSM_mass_eigenstates::B0(double p2, double m12, double m22) const
 {
    return b0(p2, m12, m22, sqr(pars.scale));
+}
+
+double MSSM_mass_eigenstates::D1B0(double m12, double m22) const
+{
+   return d1_b0(m12, m22);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const MSSM_mass_eigenstates& me)
