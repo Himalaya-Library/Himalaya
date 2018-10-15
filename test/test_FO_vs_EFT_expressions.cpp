@@ -9,6 +9,47 @@ namespace {
 
 double pow2(double x) { return x*x; }
 
+/**
+ * Calculates the 1st derivative of \f$f(x)\f$ up to order \a Order
+ * using the central finite difference.  This function calls \f$f\f$
+ * 2 * (Order + 1) times.
+ *
+ * @param f function
+ * @param x point at which derivative is to be calculated
+ * @param eps measure for step size \f$h\f$
+ * @tparam Order order of accuracy (0, 1, 2, 3)
+ *
+ * @return derivative
+ */
+template <int Order, class F, class A>
+auto derivative_central(const F& f, A x, A eps = std::numeric_limits<A>::epsilon())
+   -> decltype(f(x))
+{
+   static_assert(Order <= 3, "1st central derivative with order > 3 not implemented");
+
+   using return_type = decltype(f(x));
+
+   // coefficients from Math. Comp. 51 (1988), 699-706, Table 1
+   // DOI: http://dx.doi.org/10.1090/S0025-5718-1988-0935077-0
+   static const std::vector<std::vector<double> > coeffs = {
+      {0.5},
+      {2./3., -1./12.},
+      {3./4., -3./20., 1./60.},
+      {4./5., -1./5., 4./105., -1./280.}
+   };
+
+   const A h = std::fabs(x) < eps ? eps : std::sqrt(eps) * x;
+   return_type result = 0;
+
+   for (int i = 0; i < Order + 1; i++) {
+      const double coeff = coeffs[Order][i];
+      const A step = (i + 1) * h;
+      result += coeff * (f(x + step) - f(x - step));
+   }
+
+   return result / h;
+}
+
 himalaya::Parameters make_point()
 {
    const double MS = 10000.;
@@ -174,4 +215,21 @@ TEST_CASE("test_EFT_vs_FO_1loop")
 
    CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
    CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
+}
+
+TEST_CASE("test_FO_1loop_derivative")
+{
+   using namespace himalaya::mh1l;
+
+   const auto p = make_gaugeless(make_point());
+   const auto p2 = 1e-5;
+   const auto eps = 1e-1;
+
+   const MSSM_mass_eigenstates me(p);
+   const auto Mh2_1L_deriv = me.delta_mh2_1loop_gaugeless_deriv()(0);
+
+   const auto deriv = [&me] (double p2) { return me.delta_mh2_1loop(p2)(0); };
+   const auto Mh2_1L_deriv_num = derivative_central<3>(deriv, p2, eps);
+
+   CHECK_CLOSE(Mh2_1L_deriv, Mh2_1L_deriv_num, 1e-4);
 }
