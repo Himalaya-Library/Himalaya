@@ -29,7 +29,6 @@ template <typename T> T sqr(T x) { return x*x; }
 double pow2(double x) { return x*x; }
 double pow3(double x) { return x*x*x; }
 double pow4(double x) { return x*x*x*x; }
-double pow6(double x) { return x*x*x*x*x*x; }
 
 #define DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(op)                     \
    template <typename T>                                                \
