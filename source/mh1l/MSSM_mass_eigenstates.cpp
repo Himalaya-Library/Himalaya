@@ -1314,15 +1314,12 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it() const
    const auto DMH_0L = gaugeless.get_mass_matrix_hh(make_gaugeless(pars));
    // 1-loop Higgs mass matrix in gaugeless limit
    const auto DMH_1L = delta_mh2_1loop_gaugeless();
+   const auto DMH_2L = RM22::Zero();
 
-   const auto a11 = DMH_0L(0,0), a12 = DMH_0L(0,1), a22 = DMH_0L(1,1);
-   const auto b11 = DMH_1L(0,0), b12 = DMH_1L(0,1), b22 = DMH_1L(1,1);
-   const auto c2 = std::sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
-   const auto c3 = b11 + b22;
-   const auto c4 = (a11*b11 - a22*b11 + 4*a12*b12 - a11*b22 + a22*b22)/c2;
+   const auto dmh2 = diagonalize_perturbatively(DMH_0L, DMH_1L, DMH_2L);
 
    // 1-loop contribution to (squared) Higgs mass eigenvalues.
-   const auto dmh2_1L_gl = 0.5*(c3 - c4);
+   const auto dmh2_1L_gl = std::get<1>(dmh2)(0);
 
    return delta_mh2_1loop_gaugeless_deriv()*dmh2_1L_gl;
 }
