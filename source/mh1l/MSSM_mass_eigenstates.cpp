@@ -13,6 +13,7 @@
 #include "sum.hpp"
 #include "Logger.hpp"
 #include <cmath>
+#include <tuple>
 
 namespace himalaya {
 namespace mh1l {
@@ -92,7 +93,7 @@ void convert_symmetric_fermion_mixings_to_slha(
  *
  * @return perturbatively calculated mass eigenvalues
  */
-V2 diagonalize_perturbatively(const RM22& m0, const RM22& m1, const RM22& m2)
+std::tuple<V2,V2,V2> diagonalize_perturbatively(const RM22& m0, const RM22& m1, const RM22& m2)
 {
    using std::sqrt;
 
@@ -101,16 +102,16 @@ V2 diagonalize_perturbatively(const RM22& m0, const RM22& m1, const RM22& m2)
    const auto c1 = a11 + a22;
    const auto c2 = sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
 
-   V2 mh2;
-   mh2 << 0.5*(c1 - c2), 0.5*(c1 + c2);
+   V2 mh2_0L;
+   mh2_0L << 0.5*(c1 - c2), 0.5*(c1 + c2);
 
    // 1-loop
    const auto b11 = m1(0,0), b12 = m1(0,1), b22 = m1(1,1);
    const auto c3 = b11 + b22;
    const auto c4 = (a11*b11 - a22*b11 + 4*a12*b12 - a11*b22 + a22*b22)/c2;
 
-   mh2(0) += 0.5*(c3 - c4);
-   mh2(1) += 0.5*(c3 + c4);
+   V2 mh2_1L;
+   mh2_1L << 0.5*(c3 - c4), 0.5*(c3 + c4);
 
    // 2-loop
    const auto d11 = m2(0,0), d12 = m2(0,1), d22 = m2(1,1);
@@ -118,10 +119,10 @@ V2 diagonalize_perturbatively(const RM22& m0, const RM22& m1, const RM22& m2)
                         - pow2(c4) + 2*a11*d11 - 2*a22*d11 + 8*a12*d12
                         - 2*a11*d22 + 2*a22*d22)/c2;
 
-   mh2(0) += 0.5*(d11 + d22 - c5);
-   mh2(1) += 0.5*(d11 + d22 + c5);
+   V2 mh2_2L;
+   mh2_2L << 0.5*(d11 + d22 - c5), 0.5*(d11 + d22 + c5);
 
-   return mh2;
+   return std::make_tuple(mh2_0L, mh2_1L, mh2_2L);
 }
 
 /**
@@ -837,14 +838,18 @@ V2 MSSM_mass_eigenstates::calculate_Mh2_tree() const
  */
 V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
 {
-   RM22 m0(RM22::Zero()), m1(RM22::Zero()), m2(RM22::Zero());
+   RM22 m0(RM22::Zero()), m0_gl(RM22::Zero()),
+        m1(RM22::Zero()), m1_gl(RM22::Zero()),
+        m2(RM22::Zero());
 
    if (loops >= 0) {
-      m0 = masses.get_mass_matrix_hh(pars);
+      m0    = masses.get_mass_matrix_hh(pars);
+      m0_gl = gaugeless.get_mass_matrix_hh(make_gaugeless(pars));
 
       if (loops > 0) {
          const auto p2 = calculate_Mh2_tree()(0);
-         m1 = delta_mh2_1loop(p2);
+         m1    = delta_mh2_1loop(p2);
+         m1_gl = delta_mh2_1loop_gaugeless();
 
          if (loops > 1) {
             m2 = delta_mh2_2loop();
@@ -852,7 +857,10 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
       }
    }
 
-   return diagonalize_perturbatively(m0, m1, m2);
+   const auto Mh2    = diagonalize_perturbatively(m0, m1, m2);
+   const auto Mh2_gl = diagonalize_perturbatively(m0_gl, m1_gl, m2);
+
+   return std::get<0>(Mh2) + std::get<1>(Mh2) + std::get<2>(Mh2_gl);
 }
 
 /**
