@@ -116,12 +116,13 @@ std::tuple<V2,V2,V2> diagonalize_perturbatively(
 
    // 2-loop
    const auto d11 = m2(0,0), d12 = m2(0,1), d22 = m2(1,1);
-   const auto c5 = 0.5*(pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22)
+   const auto c5 = d11 + d22;
+   const auto c6 = 0.5*(pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22)
                         - pow2(c4) + 2*a11*d11 - 2*a22*d11 + 8*a12*d12
                         - 2*a11*d22 + 2*a22*d22)/c2;
 
    V2 mh2_2L;
-   mh2_2L << 0.5*(d11 + d22 - c5), 0.5*(d11 + d22 + c5);
+   mh2_2L << 0.5*(c5 - c6), 0.5*(c6 + c6);
 
    return std::make_tuple(mh2_0L, mh2_1L, mh2_2L);
 }
