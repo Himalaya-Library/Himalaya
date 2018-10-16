@@ -115,10 +115,9 @@ V2 diagonalize_perturbatively(const RM22& m0, const RM22& m1, const RM22& m2)
 
    // 2-loop
    const auto d11 = m2(0,0), d12 = m2(0,1), d22 = m2(1,1);
-   const auto c5 = 0.5*c2*(
-      - pow2(c4)/pow6(c2)
-      + (pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22) + 2*a11*d11
-         - 2*a22*d11 + 8*a12*d12 - 2*a11*d22 + 2*a22*d22)/pow4(c2));
+   const auto c5 = 0.5*(pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22)
+                        - pow2(c4) + 2*a11*d11 - 2*a22*d11 + 8*a12*d12
+                        - 2*a11*d22 + 2*a22*d22)/c2;
 
    mh2(0) += 0.5*(d11 + d22 - c5);
    mh2(1) += 0.5*(d11 + d22 + c5);
