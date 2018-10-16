@@ -1299,6 +1299,9 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
       dmh += delta_mh2_2loop_atau_atau(
          mtau2, mA2, msv2, mstau12, mstau22,
          sxtau, cxtau, scale2, mu, tanb, vev2);
+      dmh += delta_mh2_2loop_ab_atau(
+         mtau2, mb2, mstau12, mstau22, msb12, msb22,
+         sxtau, cxtau, sxb, cxb, scale2, mu, tanb, vev2);
    }
 
    return dmh;
