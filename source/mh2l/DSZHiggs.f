@@ -5259,6 +5259,7 @@ c
       
       subroutine taubot(t,b,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,
      $     S11,S12,S22) 
+     $ bind(C, name="taubot_")
       
       implicit none
       

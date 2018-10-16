@@ -82,6 +82,27 @@ int tausqhiggs_(double * t, double * A0, double * BL, double * T1,
                 double * mu, double * tanb, double * vv, int * OS,
                 double * S11, double * S22, double * S12);
 
+/**
+ * Two-loop O(a_tau * a_bottom) corrections to the CP-even Higgs mass
+ * matrix.  Routine written by P. Slavich (e-mail:
+ * slavich@mppmu.mpg.de).  Based on Allanach et.al., JHEP 0409 (2004)
+ * 044 [hep-ph/0406166].
+ *
+ * I/O PARAMETERS:
+ * t = m_tau^2, b = m_b^2,
+ * T1 = m_stau1^2, T2 = m_stau2^2, B1 = m_sbottom1^2, B2 = m_sbottom2^2,
+ * st = sin(theta_stau), ct = cos(theta_stau),
+ * sb = sin(theta_sbottom), cb = cos(theta_sbottom),
+ * q = Q^2 (ren. scale), mu = Higgs mixing parameter, tb = tan(beta),
+ * v2 = v^2, Sij = 2-loop corrections to the CP-even Higgs mass matrix
+ * elements.
+ */
+int taubot_(double * t, double * b,
+            double * T1, double * T2, double * B1, double * B2,
+            double * st, double * ct, double * sb, double * cb,
+            double * q, double * mu, double * tanb, double * vv,
+            double * S11, double * S22, double * S12);
+
 #ifdef __cplusplus
 }
 #endif

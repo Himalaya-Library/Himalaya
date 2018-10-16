@@ -72,5 +72,12 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_atau_atau(
    double mstau22, double sintau, double costau, double scale2,
    double mu, double tanb, double vev2, int scheme = 0);
 
+/// 2-loop CP-even Higgs contribution O(ab*atau)
+Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_atau(
+   double mtau2, double mb2,
+   double mstau12, double mstau22, double msb12, double msb22,
+   double sintau, double costau, double sxb, double cxb,
+   double scale2, double mu, double tanb, double vev2);
+
 } // namespace mssm_twoloophiggs
 } // namespace himalaya
