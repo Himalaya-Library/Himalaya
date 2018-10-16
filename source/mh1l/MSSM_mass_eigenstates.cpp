@@ -1277,7 +1277,9 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
    RM22 dmh(RM22::Zero());
 
    // 2-loop contribution from momentum iteration
-   dmh += delta_mh2_2loop_mom_it();
+   if (include_mom_it) {
+      dmh += delta_mh2_2loop_mom_it();
+   }
 
    if (orders.at(EFTOrders::G32YT4)) {
       dmh += delta_mh2_2loop_at_as(
@@ -1342,6 +1344,11 @@ void MSSM_mass_eigenstates::set_correction(int order, int flag)
       INFO_MSG("Your variable is not defined in the EFTOrders enum!");
 
    orders.at(order) = flag;
+}
+
+void MSSM_mass_eigenstates::enable_mom_it(bool flag)
+{
+   include_mom_it = flag;
 }
 
 double MSSM_mass_eigenstates::A0(double m2) const

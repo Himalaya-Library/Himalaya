@@ -121,6 +121,8 @@ public:
    RM22 get_mass_matrix_hh() const;
    /// enable/disable loop corrections
    void set_correction(int, int);
+   /// enable/disable momentum iteration
+   void enable_mom_it(bool);
 
    friend std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
@@ -129,6 +131,7 @@ private:
    MSSM_spectrum masses;       ///< MSSM DR' masses / mixings
    MSSM_spectrum gaugeless;    ///< MSSM DR' masses / mixings for g1 = g2 = 0
    std::map<int,int> orders{}; ///< enable/disable corrections
+   bool include_mom_it{true};  ///< include/exclude momentum iteration
 
    /// calculates tree-level squared Higgs masses
    V2 calculate_Mh2_tree() const;
