@@ -7,7 +7,7 @@
 
 #include "HierarchyCalculator.hpp"
 #include "Hierarchies.hpp"
-#include "DSZHiggs.h"
+#include "DSZHiggs.hpp"
 #include "EFTFlags.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "H3.hpp"
@@ -1237,39 +1237,34 @@ Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& h
                                               const unsigned int shiftOneLoop,
                                               const unsigned int shiftTwoLoop) const
 {
-   Eigen::Matrix2d Mt42L;
-   double S11, S12, S22;
-   double Mt2;
-   double MG = p.MG;
-   double st;
-   double ct;
-   double Mst12 = pow2(shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop));
-   double Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop));
-   if(!ho.getIsAlphab()){
-      const double theta = asin(p.s2t)/2.;
+   using namespace himalaya::mssm_twoloophiggs;
+
+   double Mt2, st, ct;
+
+   if (!ho.getIsAlphab()) {
+      const double theta = 0.5*std::asin(p.s2t);
       Mt2 = pow2(p.Mt);
-      st = sin(theta);
-      ct = cos(theta);
-   }
-   else{
-      const double theta = asin(p.s2b)/2.;
+      st = std::sin(theta);
+      ct = std::cos(theta);
+   } else {
+      const double theta = 0.5*std::asin(p.s2b);
       Mt2 = pow2(p.Mb);
-      st = sin(theta);
-      ct = cos(theta);
+      st = std::sin(theta);
+      ct = std::cos(theta);
    }
-   double scale2 = pow2(p.scale);
-   // note the sign difference in mu
-   double mu = - p.mu;
-   double tanb = p.vu/p.vd;
-   double v2 = pow2(p.vu) + pow2(p.vd);
-   double gs = p.g3;
-   int os = 0;
-   dszhiggs_(&Mt2, &MG, &Mst12, &Mst22, &st, &ct, &scale2, &mu, &tanb, &v2, &gs,
-             &os, &S11, &S22, &S12);
-   Mt42L(0, 0) = S11;
-   Mt42L(1, 0) = S12;
-   Mt42L(0, 1) = S12;
-   Mt42L(1, 1) = S22;
+
+   const double Mst12 = pow2(shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop));
+   const double Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop));
+   const double MG = p.MG;
+   const double scale2 = pow2(p.scale);
+   const double mu = - p.mu; // note the sign difference in mu
+   const double tanb = p.vu/p.vd;
+   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double gs = p.g3;
+
+   const Eigen::Matrix2d Mt42L = delta_mh2_2loop_at_as(
+      Mt2, MG, Mst12, Mst22, st, ct, scale2, mu, tanb, v2, gs);
+
    return Mt42L;
 }
 
