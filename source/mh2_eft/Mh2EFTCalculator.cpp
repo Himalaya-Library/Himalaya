@@ -416,14 +416,14 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
       *pow4(sbeta))/2.));
 
    // the second term comes from the tanb resummation
-   dmh2yb6 += 0*isNaN(orderMap.at(EFTOrders::YB6)*((dlambdayb4*(2*Xb
+   dmh2yb6 += isNaN(orderMap.at(EFTOrders::YB6)*((dlambdayb4*(2*Xb
       *F5(mQ3/mD3)*pow2(cbeta) - mD3*mQ3*(6*lmUMR + 4*F6(mD3/p.mu) + 8*F6(mQ3/p.mu)
       - 3*pow2(sbeta) + 6*lmAMR*pow2(sbeta))))/(8.*mD3*mQ3)));
-   dmh2yt2yb4 += 0*isNaN(orderMap.at(EFTOrders::YT2YB4)*((dlambdayb4
+   dmh2yt2yb4 += isNaN(orderMap.at(EFTOrders::YT2YB4)*((dlambdayb4
       *(4*p.mu*Xt*F5(mQ3/mU3)*pow2(sbeta) + mQ3*mU3*(-8*p.mu*F6(mU3/p.mu) + p.mu*(9
       - 7*c2beta - 4*lmUMR + 2*(-5 + 3*c2beta)*lmAMR) - 8*Xt
       *F9(mQ3/p.mu,mU3/p.mu)*tbeta)))/(16.*mQ3*p.mu*mU3)));
-   dmh2yb4g32 += 0*isNaN(orderMap.at(EFTOrders::G32YB4)*((-4
+   dmh2yb4g32 += isNaN(orderMap.at(EFTOrders::G32YB4)*((-4
       *dlambdayb4*(p.MG + p.MG*F6(mD3/p.MG) + p.MG*F6(mQ3/p.MG) - Xb*F9(mQ3/p.MG,mD3/p.MG)
       + p.MG*lm3MR))/(3.*p.MG)));
 
