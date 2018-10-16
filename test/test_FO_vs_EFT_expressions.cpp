@@ -273,7 +273,7 @@ TEST_CASE("test_FO_2loop_momentum_iteration")
    using namespace himalaya::mh2_eft::EFTOrders;
    using A2 = Eigen::Array<double,2,1>;
 
-   const auto p = make_point();
+   const auto p = make_gaugeless(make_point());
    MSSM_mass_eigenstates me(p);
 
    // disable 2-loop corrections
@@ -306,5 +306,5 @@ TEST_CASE("test_FO_2loop_momentum_iteration")
 
    // check that (analytic and numeric) momentum iteration goes into
    // the same direction and is ~ 10% close to each other
-   CHECK(10*std::abs(Mh2_2L - Mh2_2L_mom_it) < std::abs(Mh2_2L - Mh2_1L));
+   CHECK(100*std::abs(Mh2_2L - Mh2_2L_mom_it) < std::abs(Mh2_2L - Mh2_1L));
 }
