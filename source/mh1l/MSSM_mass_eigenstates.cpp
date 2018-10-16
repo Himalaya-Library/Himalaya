@@ -93,7 +93,8 @@ void convert_symmetric_fermion_mixings_to_slha(
  *
  * @return perturbatively calculated mass eigenvalues
  */
-std::tuple<V2,V2,V2> diagonalize_perturbatively(const RM22& m0, const RM22& m1, const RM22& m2)
+std::tuple<V2,V2,V2> diagonalize_perturbatively(
+   const RM22& m0, const RM22& m1 = RM22::Zero(), const RM22& m2 = RM22::Zero())
 {
    using std::sqrt;
 
@@ -857,7 +858,7 @@ V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
       }
    }
 
-   const auto Mh2    = diagonalize_perturbatively(m0, m1, m2);
+   const auto Mh2    = diagonalize_perturbatively(m0, m1);
    const auto Mh2_gl = diagonalize_perturbatively(m0_gl, m1_gl, m2);
 
    return std::get<0>(Mh2) + std::get<1>(Mh2) + std::get<2>(Mh2_gl);
@@ -1314,9 +1315,8 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it() const
    const auto DMH_0L = gaugeless.get_mass_matrix_hh(make_gaugeless(pars));
    // 1-loop Higgs mass matrix in gaugeless limit
    const auto DMH_1L = delta_mh2_1loop_gaugeless();
-   const auto DMH_2L = RM22::Zero();
 
-   const auto dmh2 = diagonalize_perturbatively(DMH_0L, DMH_1L, DMH_2L);
+   const auto dmh2 = diagonalize_perturbatively(DMH_0L, DMH_1L);
 
    // 1-loop contribution to (squared) Higgs mass eigenvalues.
    const auto dmh2_1L_gl = std::get<1>(dmh2)(0);
