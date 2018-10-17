@@ -1084,6 +1084,52 @@ double f8(double r1, double r2) noexcept
    return 1.5 * result;
 }
 
+/// threshold loop functions from [1504.05200] Eq.(14)
+double f1HD(double x) noexcept
+{
+   const double x2 = pow2(x);
+   const double den = 1. - x2;
+
+   if (std::abs(den) < 1e-5)
+      return -1.;
+
+   return x2/den * std::log(x2);
+}
+
+/// threshold loop functions from [1504.05200] Eq.(15)
+double f2HD(double x) noexcept
+{
+   const double x2 = pow2(x);
+   const double den = 1. - x2;
+
+   if (std::abs(den) < 1e-5)
+      return 0.5;
+
+   return 1./den * (1. + x2/den * std::log(x2));
+}
+
+/// threshold loop functions from [1504.05200] Eq.(17)
+double f3HD(double x) noexcept
+{
+   using gm2calc::dilog;
+
+   const double x2 = pow2(x);
+   const double x4 = pow4(x);
+   const double den = 1. - x2;
+   const std::complex<double> cden = den;
+   const double zeta2 = 1.644934066848226;
+
+   if (std::abs(den) < 1e-5)
+      return -9./4.;
+
+   const std::complex<double> result =
+      (-1. + 2*x2 + 2.*x4)/pow2(den) * (
+         std::log(x2)*std::log(cden) +
+         dilog(x2) - zeta2 - x2*std::log(x2));
+
+   return result.real();
+}
+
 
 bool isfinite(double exact, double shifted, double limit) noexcept
 {
@@ -2594,6 +2640,62 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
         pow2(sbeta)*pow2(Yb))*pow6(mQ3) + 2*(-2 + pow2(cbeta))*pow8(mQ3)) + (
         mQ32 - Mu2)*(-2 + pow2(cbeta))*power10(mD3)))/(mQ32*(mD32 - Mu2)*(mQ32
         - Mu2)*pow2(cbeta)*pow2(mD32 - mQ32)*pow4(mD3))));
+}
+
+/**
+ * 2-loop threshold correction to lambda O(at^2) from SUSYHD
+ * [1504.05200] Eq.(21).
+ *
+ * @note Only valid for mQ3 = mU3!
+ *
+ * @param omitLogs factor which multiplies the log(mst^2/Q^2) terms
+ *
+ * @return 2-loop threshold correction O(at^2)
+ */
+double ThresholdCalculator::getDeltaLambdaYt6_SUSYHD(int omitLogs) const
+{
+   using std::log;
+   using std::sqrt;
+
+   const double mQ32 = p.mq2(2,2);
+   const double mU32 = p.mu2(2,2);
+   const double mQ3 = std::sqrt(mQ32);
+   const double mU3 = std::sqrt(mU32);
+   const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
+   const double mst2 = mQ3 * mU3;
+   const double mst = std::sqrt(mst2);
+   const double xt = Xt/mst;
+   const double muhat = p.mu/mst;
+   const double tb = p.vu/p.vd;
+   const double beta = std::atan(tb);
+   const double cb2 = pow2(std::cos(beta));
+   const double sb2 = pow2(std::sin(beta));
+   const double s2b = std::sin(2*beta);
+   const double Q2 = pow2(p.scale);
+   const double lmst2Q2 = omitLogs*std::log(mst2/Q2);
+
+   const double dlam =
+      (3*(0.5 - 8.34993159891064*cb2 - 4*lmst2Q2 + 13*cb2*lmst2Q2 +
+       12.*cb2*(0.04173653333333327 + lmst2Q2)*xt*((2*muhat)/s2b + xt) -
+       8*f1HD(muhat) + 4*f3HD(muhat) + 3*pow2(lmst2Q2) -
+       3*cb2*pow2(lmst2Q2) + 6*pow2(muhat) - 6*lmst2Q2*pow2(muhat) -
+       2*f1HD(muhat)*pow2(muhat) + 3*f2HD(muhat)*pow2(muhat) +
+       3.*cb2*(0.04173653333333327 + lmst2Q2)*pow2((2*muhat)/s2b + xt) +
+       pow2(xt)*(-7 + 19.6878144*cb2 + 27*lmst2Q2 - 24*cb2*lmst2Q2 +
+          4*f1HD(muhat) - 4*f2HD(muhat) - 6*pow2(muhat) +
+          6*lmst2Q2*pow2(muhat) - 6*f1HD(muhat)*pow2(muhat) -
+          6*f2HD(muhat)*pow2(muhat) -
+          3.*cb2*(0.007049244444444251 + lmst2Q2)*pow2((2*muhat)/s2b + xt))
+        - 2.*cb2*(-0.4373952000000001 + lmst2Q2)*((2*muhat)/s2b + xt)*
+        pow3(xt) + ((22 - 25*cb2 - 26*lmst2Q2 + 24*cb2*lmst2Q2 -
+            2*f1HD(muhat) + 2*f2HD(muhat) + 4*pow2(muhat) -
+            4*lmst2Q2*pow2(muhat) + 4*f1HD(muhat)*pow2(muhat) +
+            2*f2HD(muhat)*pow2(muhat) +
+            (2.*cb2*(-0.04145706666666671 + lmst2Q2)*
+               pow2(2.*muhat + s2b*xt))/pow2(s2b))*pow4(xt))/4. -
+       ((-1 + cb2)*(-1 + lmst2Q2)*pow6(xt))/2.))/sb2;
+
+   return dlam;
 }
 
 double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const

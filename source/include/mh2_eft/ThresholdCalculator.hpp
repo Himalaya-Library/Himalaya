@@ -301,6 +301,12 @@ namespace mh2_eft{
        */
       double getDeltaLambdaYt6(int omitLogs) const;
       /**
+       *         Returns delta_lambda_yt6 from SUSYHD
+       *         @param omitLogs an integer key to omit all mu terms
+       *         @return delta_lambda_yt6
+       */
+      double getDeltaLambdaYt6_SUSYHD(int omitLogs) const;
+      /**
        *         Returns delta_lambda_ytau6
        *         @param omitLogs an integer key to omit all mu terms
        *         @return delta_lambda_ytau6
