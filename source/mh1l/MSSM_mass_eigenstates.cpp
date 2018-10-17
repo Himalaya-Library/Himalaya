@@ -831,38 +831,28 @@ V2 MSSM_mass_eigenstates::calculate_Mh2_tree() const
 }
 
 /**
- * Returns the Higgs pole masses at a given loop level.  The function
- * does not include implicit or explicit higher orders.
+ * Returns the squared Higgs pole masses at tree-, 1- and 2-loop
+ * level.  The function does not include implicit or explicit higher
+ * orders.
  *
- * @param loops number of loops
- *
- * @return Higgs pole masses
+ * @return Higgs pole masses at tree-, 1- and 2-loop level
  */
-V2 MSSM_mass_eigenstates::calculate_Mh2(int loops) const
+std::tuple<V2,V2,V2> MSSM_mass_eigenstates::calculate_Mh2() const
 {
-   RM22 m0(RM22::Zero()), m0_gl(RM22::Zero()),
-        m1(RM22::Zero()), m1_gl(RM22::Zero()),
-        m2(RM22::Zero());
+   const auto p2    = calculate_Mh2_tree()(0);
+   const RM22 m0    = masses.get_mass_matrix_hh(pars);
+   const RM22 m0_gl = gaugeless.get_mass_matrix_hh(make_gaugeless(pars));
+   const RM22 m1    = delta_mh2_1loop(p2);
+   const RM22 m1_gl = delta_mh2_1loop_gaugeless();
+   const RM22 m2    = delta_mh2_2loop();
 
-   if (loops >= 0) {
-      m0    = masses.get_mass_matrix_hh(pars);
-      m0_gl = gaugeless.get_mass_matrix_hh(make_gaugeless(pars));
-
-      if (loops > 0) {
-         const auto p2 = calculate_Mh2_tree()(0);
-         m1    = delta_mh2_1loop(p2);
-         m1_gl = delta_mh2_1loop_gaugeless();
-
-         if (loops > 1) {
-            m2 = delta_mh2_2loop();
-         }
-      }
-   }
-
+   // tree-level and 1-loop with electroweak gauge couplings
    const auto Mh2    = diagonalize_perturbatively(m0, m1);
+
+   // 2-loop in gaugless limit (p = g1 = g2 = 0)
    const auto Mh2_gl = diagonalize_perturbatively(m0_gl, m1_gl, m2);
 
-   return std::get<0>(Mh2) + std::get<1>(Mh2) + std::get<2>(Mh2_gl);
+   return std::make_tuple(std::get<0>(Mh2), std::get<1>(Mh2), std::get<2>(Mh2_gl));
 }
 
 /**

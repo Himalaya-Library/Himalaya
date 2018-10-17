@@ -210,8 +210,9 @@ TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
    const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
 
    const MSSM_mass_eigenstates me(p);
-   const auto Mh2_full_0L = me.calculate_Mh2(0);
-   const auto Mh2_full_1L = me.calculate_Mh2(1);
+   const auto Mh2_full    = me.calculate_Mh2();
+   const auto Mh2_full_0L = std::get<0>(Mh2_full);
+   const auto Mh2_full_1L = (Mh2_full_0L + std::get<1>(Mh2_full)).eval();
 
    INFO("Mh2_full_0L = " << Mh2_full_0L(0));
    INFO("Mh2_full_1L = " << Mh2_full_1L(0));
@@ -237,9 +238,10 @@ TEST_CASE("test_EFT_vs_FO_2loop")
    me.set_correction(EFTOrders::YT6, 0);
    me.enable_mom_it(false);
 
-   const auto Mh2_full_0L = me.calculate_Mh2(0);
-   const auto Mh2_full_1L = me.calculate_Mh2(1);
-   const auto Mh2_full_2L = me.calculate_Mh2(2);
+   const auto Mh2_full    = me.calculate_Mh2();
+   const auto Mh2_full_0L = std::get<0>(Mh2_full);
+   const auto Mh2_full_1L = (Mh2_full_0L + std::get<1>(Mh2_full)).eval();
+   const auto Mh2_full_2L = (Mh2_full_1L + std::get<2>(Mh2_full)).eval();
 
    INFO("Mh2_full_0L = " << Mh2_full_0L(0));
    INFO("Mh2_full_1L = " << Mh2_full_1L(0));
@@ -300,9 +302,14 @@ TEST_CASE("test_FO_2loop_momentum_iteration")
       return M2hh(0);
    };
 
-   const auto Mh2_1L = me.calculate_Mh2(1)(0);
+   const auto Mh2_full    = me.calculate_Mh2();
+   const auto Mh2_full_0L = std::get<0>(Mh2_full);
+   const auto Mh2_full_1L = (Mh2_full_0L + std::get<1>(Mh2_full)).eval();
+   const auto Mh2_full_2L = (Mh2_full_1L + std::get<2>(Mh2_full)).eval();
+
+   const auto Mh2_1L = Mh2_full_1L(0);
    const auto Mh2_2L_mom_it = Mh2_1L_p2(Mh2_1L_p2(0));
-   const auto Mh2_2L = me.calculate_Mh2(2)(0);
+   const auto Mh2_2L = Mh2_full_2L(0);
 
    INFO("Mh2_1L = " << Mh2_1L);
    INFO("Mh2_2L = " << Mh2_2L);

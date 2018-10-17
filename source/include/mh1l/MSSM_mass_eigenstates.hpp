@@ -9,6 +9,7 @@
 
 #include "Himalaya_interface.hpp"
 #include <map>
+#include <tuple>
 #include <Eigen/Core>
 
 namespace himalaya {
@@ -106,7 +107,7 @@ public:
    MSSM_mass_eigenstates(const Parameters&);
 
    /// calculates squared Higgs masses
-   V2 calculate_Mh2(int loops) const;
+   std::tuple<V2,V2,V2> calculate_Mh2() const;
    /// Higgs 1-loop contribution DR'
    RM22 delta_mh2_1loop(double p2) const;
    /// Higgs 1-loop contribution DR' for p = g1 = g2 = 0
