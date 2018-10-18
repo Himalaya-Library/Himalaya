@@ -152,7 +152,6 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
    using namespace himalaya::mh2_eft;
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
-   mhc.setCorrectionFlag(EFTOrders::YT6, 0);
 
    if (pars.g1 < 1e-5) {
       mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
@@ -238,7 +237,6 @@ TEST_CASE("test_EFT_vs_FO_2loop")
    const auto Mh2_EFT_2L = Mh2_EFT_1L + DMh2_EFT_2L;
 
    MSSM_mass_eigenstates me(p);
-   me.set_correction(EFTOrders::YT6, 0);
    me.enable_mom_it(false);
 
    const auto Mh2_full     = me.calculate_Mh2();
