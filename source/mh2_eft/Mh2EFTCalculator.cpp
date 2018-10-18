@@ -40,9 +40,13 @@ namespace {
    template <typename T> T pow19(T x) { return pow18(x)*x; }
    template <typename T> T pow20(T x) { return pow19(x)*x; }
 
-double isNaN(double var)
+double isNaN(double var, const std::string& msg = "")
 {
-   if(std::isnan(var)) return 0.;
+   if (std::isnan(var)) {
+      WARNING_MSG("NaN appeared in calculation of threshold correction"
+                  << (msg.empty() ? "" : " " + msg) << "!");
+      return 0.;
+   }
    return var;
 }
 
@@ -208,14 +212,16 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
       + lmwMt + 2*asin(mhtree/(2.*p.MW))*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree)))
       - 18*pow4(c2beta) - 180*lmMt*pow4(c2beta) + 45*(-6 + 3*lmhtreeMt + sqrt(3.)
       *Pi)*pow4(c2beta) + 15*(-2 + lmzMt + 2*asin(std::abs(c2beta)/2.)*sqrt(-1
-      + 4/pow2(c2beta)))*(12 - 4* pow2(c2beta) + pow4(c2beta))))/400.));
+      + 4/pow2(c2beta)))*(12 - 4* pow2(c2beta) + pow4(c2beta))))/400.),
+      "dmh2g12g22");
    const double dmh2g14 = isNaN(orderMap.at(EFTOrders::G14)*(-(v2*(-20*(18 + 100
       *dlambdag14 + 100*dlambdaregg14 + 100*dlambdachig14 - 27*lmMt) + 30*(40
       *dg1g1 - 40*dvg12 + 3*lmMt*(-3 + Xi))*pow2(c2beta) - 9*(-116 + 45*lmhtreeMt
       - 60*lmMt + 10*lmwMt + 15*sqrt(3.)*Pi + 20*asin(mhtree/(2.*p.MW))*sqrt(-1
       + (4*pow2(p.MW))/pow2(mhtree)))*pow4(c2beta) - 45*(-2 + lmzMt
       + 2*asin(std::abs(c2beta)/2.)*sqrt(-1 + 4/pow2(c2beta)))*(12 - 4
-      *pow2(c2beta) + pow4(c2beta))))/4000.));
+      *pow2(c2beta) + pow4(c2beta))))/4000.),
+      "dmh2g14");
    const double dmh2g24 = isNaN(orderMap.at(EFTOrders::G24)*(-(v2*(-120 - 80
       *dlambdachig24 - 80*dlambdag24 - 80*dlambdaregg24 + 180*lmMt + 80*dg2g2
       *pow2(c2beta) - 80*dvg22*pow2(c2beta) - 90*lmMt*pow2(c2beta) + 30*lmMt*Xi
@@ -223,28 +229,38 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
       *lmhtreeMt + sqrt(3)*Pi)*pow4(c2beta) - 5*(-2 + lmzMt + 2
       *asin(std::abs(c2beta)/2.)*sqrt(-1 + 4/pow2(c2beta)))*(12 - 4*pow2(c2beta)
       + pow4(c2beta)) - 10*(-2 + lmwMt + 2*asin(mhtree/(2.*p.MW))*sqrt(-1 + (4
-      *pow2(p.MW))/pow2(mhtree)))*(12 - 4*pow2(c2beta) + pow4(c2beta))))/160.));
+      *pow2(p.MW))/pow2(mhtree)))*(12 - 4*pow2(c2beta) + pow4(c2beta))))/160.),
+      "dmh2g24");
    const double dmh2g12yb2 = isNaN(orderMap.at(EFTOrders::G12YB2)*((v2*(10
       *dlambdayb2g12 + 3*(-6 + 2*dvyb2 + 3*lmhtreeMt - 3*lmMt)*pow2(c2beta))
-      *pow2(cbeta))/20.));
+      *pow2(cbeta))/20.),
+      "dmh2g12yb2");
    const double dmh2g22yb2 = isNaN(orderMap.at(EFTOrders::G22YB2)*((v2*(2
       *dlambdayb2g22 + (-6 + 2*dvyb2 + 3*lmhtreeMt - 3*lmMt)*pow2(c2beta))
-      *pow2(cbeta))/4.));
+      *pow2(cbeta))/4.),
+      "dmh2g22yb2");
    const double dmh2yb4 = isNaN(orderMap.at(EFTOrders::YB4)*(pow4(cbeta)*v2
-      *(dlambdayb4 + 12*(2 - lmhtreeMt + lmMt))/2.));
+      *(dlambdayb4 + 12*(2 - lmhtreeMt + lmMt))/2.),
+      "dmh2yb4");
    const double dmh2g12yt2 = isNaN(orderMap.at(EFTOrders::G12YT2)*(pow2(sbeta)*v2*(10
-      *dlambdayt2g12 + pow2(c2beta)*(6 + 6*dvyt2 - 9*lmMt))/20.));
+      *dlambdayt2g12 + pow2(c2beta)*(6 + 6*dvyt2 - 9*lmMt))/20.),
+      "dmh2g12yt2");
    const double dmh2g22yt2 = isNaN(orderMap.at(EFTOrders::G22YT2)*(pow2(sbeta)*v2*(2
-      *dlambdayt2g22 + pow2(c2beta)*(2 + 2*dvyt2 - 3*lmMt))/4.));
+      *dlambdayt2g22 + pow2(c2beta)*(2 + 2*dvyt2 - 3*lmMt))/4.),
+      "dmh2g22yt2");
    const double dmh2yt4 = isNaN(orderMap.at(EFTOrders::YT4)*(pref_at*(12 * lmMt +
       thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
-         RenSchemes::DRBARPRIME, omitMSSMLogs))));
+         RenSchemes::DRBARPRIME, omitMSSMLogs))),
+      "dmh2yt4");
    const double dmh2g12ytau2 = isNaN(orderMap.at(EFTOrders::G12YTAU2)*(((10*dlambdaytau2g12
-      + 3*(-2 + 2*dvytau2 + lmhtreeMt - lmMt)*pow2(c2beta))*pow2(cbeta)*v2)/20.));
+      + 3*(-2 + 2*dvytau2 + lmhtreeMt - lmMt)*pow2(c2beta))*pow2(cbeta)*v2)/20.),
+      "dmh2g12ytau2");
    const double dmh2g22ytau2 = isNaN(orderMap.at(EFTOrders::G22YTAU2)*(((2*dlambdaytau2g22
-      + (-2 + 2*dvytau2 + lmhtreeMt - lmMt)*pow2(c2beta))*pow2(cbeta)*v2)/4.));
+      + (-2 + 2*dvytau2 + lmhtreeMt - lmMt)*pow2(c2beta))*pow2(cbeta)*v2)/4.),
+      "dmh2g22ytau2");
    const double dmh2ytau4 = isNaN(orderMap.at(EFTOrders::YTAU4)*(pow4(cbeta)*v2*(8
-      + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt)/2.));
+      + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt)/2.),
+      "dmh2ytau4");
 
    // Loop factor
    const double k = 1/pow2(4.*Pi);
@@ -368,64 +384,76 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
    const double dmh2yt4g32 = isNaN(orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
       + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
-         RenSchemes::DRBARPRIME, omitMSSMLogs))));
+         RenSchemes::DRBARPRIME, omitMSSMLogs))),
+      "dmh2yt4g32");
    double dmh2yb4g32 = isNaN(orderMap.at(EFTOrders::G32YB4)*(((dlambdayb4g32 
       - 48*lmhtreeMt*(dybas + 16*lmMt) + 16*(3*dybas*(2 + lmMt)
-      + 2*lmMt*(47 + 12*lmMt)))*v2*pow4(cbeta))/2.));
+      + 2*lmMt*(47 + 12*lmMt)))*v2*pow4(cbeta))/2.),
+      "dmh2yb4g32");
    double dmh2yb6 = isNaN(orderMap.at(EFTOrders::YB6)*((v2*pow4(cbeta)*(
       -288*dybyb*(-2 + lmhtreeMt - lmMt)*pow2(Mhtree) + pow2(cbeta)*(-12*v2
       *(3*dlambdayb2g22*pow2(p.g2) + 5*dlambdayb2g12*pow2(gy)) + pow2(Mhtree)
       *(49 + 6*dlambdayb6 + 144*dvyb2 + 60*lmbMt - 144*dvyb2*lmhtreeMt - 5652*lmMt
       + 144*dvyb2*lmMt + 2592*lmhtreeMt*lmMt - 36*pow2(lmbMt) - 1296*pow2(lmMt) 
       + 6*pow2(Pi) + 6*dlambdayb4*(3 + (-6 + 2*dvyb2+ 3*lmhtreeMt - 3*lmMt)
-      *pow4(YBC))))))/(12.*pow2(Mhtree))));
+      *pow4(YBC))))))/(12.*pow2(Mhtree))),
+      "dmh2yb6");
    const double dmh2yt6= isNaN(orderMap.at(EFTOrders::YT6)*((v2*(4*dytyt*(
       -6 + dlambdayt4 + 12*lmMt) + (-6 + dlambdayt6 + dlambdayt4*(2 + 2*dvyt2
       - 3*lmMt) + 24*dvyt2*(-1 + lmMt) - 18*lmMt*(1 + 3*lmMt) - pow2(Pi))
-      *pow2(sbeta))*pow4(sbeta))/2.));
+      *pow2(sbeta))*pow4(sbeta))/2.),
+      "dmh2yt6");
    const double dmh2yb4ytau2 = isNaN(orderMap.at(EFTOrders::YTAU2YB4)*((v2*(
       -2*v2*(3*dlambdaytau2g22*pow2(p.g2) + 5*dlambdaytau2g12*pow2(gy))
       + lmhtreeMt*pow2(Mhtree)*(-24*dvytau2 + 96*lmMt + dlambdayb4*pow4(YBC)) 
       + pow2(Mhtree)*(dlambdayb4 + dlambdayb4ytau2 - 48*lmMt*(4 + lmMt) 
       - dlambdayb4*(2 + lmMt)*pow4(YBC) + 2*dvytau2*(12 + 12*lmMt 
-      + dlambdayb4*pow4(YBC))))*pow6(cbeta))/(2.*pow2(Mhtree))));
+      + dlambdayb4*pow4(YBC))))*pow6(cbeta))/(2.*pow2(Mhtree))),
+      "dmh2yb4ytau2");
    const double dmh2yb2ytau4 = isNaN(orderMap.at(EFTOrders::YTAU4YB2)*((v2*(-2*v2
       *pow2(cbeta)*(3*dlambdayb2g22*pow2(p.g2) + 5*dlambdayb2g12*pow2(gy)) + 3
       *lmhtreeMt*(-16*dytauyb + (3*dlambdaytau4 - 8*dvyb2 + 24*lmMt)*pow2(cbeta))
       *pow2(Mhtree) + 3*(4*dytauyb*(8 + dlambdaytau4 + 4*lmMt) + (dlambdayb2ytau4 
       + 8*dvyb2*(1 + lmMt) - 6*lmMt*(9 + 2*lmMt) + dlambdaytau4*(2*dvyb2 - 3*(1 
-      + lmMt)))*pow2(cbeta))*pow2(Mhtree))*pow4(cbeta))/(6.*pow2(Mhtree))));
+      + lmMt)))*pow2(cbeta))*pow2(Mhtree))*pow4(cbeta))/(6.*pow2(Mhtree))),
+      "dmh2yb2ytau4");
    const double dmh2ytau6 = isNaN(orderMap.at(EFTOrders::YTAU6)*(-(v2*(-12
       *dytauytau*(8 + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt)*pow2(Mhtree) 
       + pow2(cbeta)*(2*v2*(3*dlambdaytau2g22*pow2(p.g2) + 5*dlambdaytau2g12
       *pow2(gy)) + pow2(Mhtree)*(6 - 3*dlambdaytau6 + 180*lmMt - 60*lmhtreeMt
       *lmMt + dlambdaytau4*(3 - 3*lmhtreeMt + 3*lmMt) - 6*dvytau2*(4 
       + dlambdaytau4 - 4*lmhtreeMt + 4*lmMt) - 21*lmtauMt + 30*pow2(lmMt) 
-      + 9*pow2(lmtauMt) + pow2(Pi))))*pow4(cbeta))/(6.*pow2(Mhtree))));
+      + 9*pow2(lmtauMt) + pow2(Pi))))*pow4(cbeta))/(6.*pow2(Mhtree))),
+      "dmh2ytau6");
    double dmh2yt2yb4 = isNaN(orderMap.at(EFTOrders::YT2YB4)*((v2*pow4(cbeta)
       *(96*dybyt*(2 + lmMt)*pow2(Mhtree) - 24*lmhtreeMt*pow2(Mhtree)*(4*dybyt 
       + (2*dvyt2 - 9*lmMt)*pow2(sbeta)) + pow2(sbeta)*(-4*v2*(3*dlambdayt2g22
       *pow2(p.g2) + 5*dlambdayt2g12*pow2(gy)) + pow2(Mhtree)*(2*dlambdayt2yb4 
       + 3*(8*lmbMt + 16*dvyt2*(1 + lmMt) - 3*(5 + 4*lmMt*(9 + 4*lmMt)) 
       - 2*pow2(Pi)) + 2*dlambdayb4*(2 + 2*dvyt2 - 3*lmMt)*pow4(YBC)))))
-      /(4.*pow2(Mhtree))));
+      /(4.*pow2(Mhtree))),
+      "dmh2yt2yb4");
    const double dmh2yt4yb2 = isNaN(orderMap.at(EFTOrders::YB2YT4)*((v2*(4
       *dytyb*(-6 + dlambdayt4 + 12*lmMt) + pow2(cbeta)*(dlambdayt4yb2 
       + dlambdayt4*(-3 + 2*dvyb2 + 3*lmhtreeMt - 3*lmMt) + 3*(8*dvyb2*(-1 
       + lmMt) - 26*lmMt + 12*lmhtreeMt*lmMt - 6*pow2(lmMt) + pow2(Pi))))
-      *pow4(sbeta))/2.));
+      *pow4(sbeta))/2.),
+      "dmh2yt4yb2");
 
    // the second term comes from the tanb resummation
    dmh2yb6 += isNaN(orderMap.at(EFTOrders::YB6)*((dlambdayb4*(2*Xb
       *F5(mQ3/mD3)*pow2(cbeta) - mD3*mQ3*(6*lmUMR + 4*F6(mD3/p.mu) + 8*F6(mQ3/p.mu)
-      - 3*pow2(sbeta) + 6*lmAMR*pow2(sbeta))))/(8.*mD3*mQ3)));
+      - 3*pow2(sbeta) + 6*lmAMR*pow2(sbeta))))/(8.*mD3*mQ3)),
+      "dmh2yb6");
    dmh2yt2yb4 += isNaN(orderMap.at(EFTOrders::YT2YB4)*((dlambdayb4
       *(4*p.mu*Xt*F5(mQ3/mU3)*pow2(sbeta) + mQ3*mU3*(-8*p.mu*F6(mU3/p.mu) + p.mu*(9
       - 7*c2beta - 4*lmUMR + 2*(-5 + 3*c2beta)*lmAMR) - 8*Xt
-      *F9(mQ3/p.mu,mU3/p.mu)*tbeta)))/(16.*mQ3*p.mu*mU3)));
+      *F9(mQ3/p.mu,mU3/p.mu)*tbeta)))/(16.*mQ3*p.mu*mU3)),
+      "dmh2yt2yb4");
    dmh2yb4g32 += isNaN(orderMap.at(EFTOrders::G32YB4)*((-4
       *dlambdayb4*(p.MG + p.MG*F6(mD3/p.MG) + p.MG*F6(mQ3/p.MG) - Xb*F9(mQ3/p.MG,mD3/p.MG)
-      + p.MG*lm3MR))/(3.*p.MG)));
+      + p.MG*lm3MR))/(3.*p.MG)),
+      "dmh2yb4g32");
 
    // Loop factor
    const double k2 = 1/pow4(4.*Pi);
