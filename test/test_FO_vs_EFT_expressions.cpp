@@ -58,7 +58,6 @@ himalaya::Parameters make_point()
    const double tb = 20.;
    const double beta = std::atan(tb);
    const double v = 245.;
-
    const double msq = MS;
    const double msu = MS;
    const double mg  = MS;
@@ -230,25 +229,39 @@ TEST_CASE("test_EFT_vs_FO_2loop")
 
    const auto p = make_point();
 
-   const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
-   const auto Mh2_EFT_1L = Mh2_EFT_0L + calc_Mh2_EFT_1L(p);
-   const auto Mh2_EFT_2L = Mh2_EFT_1L + calc_Mh2_EFT_2L(p);
+   const auto DMh2_EFT_0L = calc_Mh2_EFT_0L(p);
+   const auto DMh2_EFT_1L = calc_Mh2_EFT_1L(p);
+   const auto DMh2_EFT_2L = calc_Mh2_EFT_2L(p);
+
+   const auto Mh2_EFT_0L = DMh2_EFT_0L;
+   const auto Mh2_EFT_1L = Mh2_EFT_0L + DMh2_EFT_1L;
+   const auto Mh2_EFT_2L = Mh2_EFT_1L + DMh2_EFT_2L;
 
    MSSM_mass_eigenstates me(p);
    me.set_correction(EFTOrders::YT6, 0);
    me.enable_mom_it(false);
 
-   const auto Mh2_full    = me.calculate_Mh2();
-   const auto Mh2_full_0L = std::get<0>(Mh2_full);
-   const auto Mh2_full_1L = (Mh2_full_0L + std::get<1>(Mh2_full)).eval();
-   const auto Mh2_full_2L = (Mh2_full_1L + std::get<2>(Mh2_full)).eval();
+   const auto Mh2_full     = me.calculate_Mh2();
+   const auto DMh2_full_0L = std::get<0>(Mh2_full);
+   const auto DMh2_full_1L = std::get<1>(Mh2_full);
+   const auto DMh2_full_2L = std::get<2>(Mh2_full);
+   const auto Mh2_full_0L  = DMh2_full_0L;
+   const auto Mh2_full_1L  = (Mh2_full_0L + DMh2_full_1L).eval();
+   const auto Mh2_full_2L  = (Mh2_full_1L + DMh2_full_2L).eval();
 
-   INFO("Mh2_full_0L = " << Mh2_full_0L(0));
-   INFO("Mh2_full_1L = " << Mh2_full_1L(0));
-   INFO("Mh2_full_2L = " << Mh2_full_2L(0));
-   INFO("Mh2_EFT_0L = " << Mh2_EFT_0L);
-   INFO("Mh2_EFT_1L = " << Mh2_EFT_1L);
-   INFO("Mh2_EFT_2L = " << Mh2_EFT_2L);
+   INFO("DMh2_full_0L = " << DMh2_full_0L);
+   INFO("DMh2_full_1L = " << DMh2_full_1L);
+   INFO("DMh2_full_2L = " << DMh2_full_2L);
+   INFO("Mh2_full_0L  = " << Mh2_full_0L(0));
+   INFO("Mh2_full_1L  = " << Mh2_full_1L(0));
+   INFO("Mh2_full_2L  = " << Mh2_full_2L(0));
+
+   INFO("DMh2_EFT_0L  = " << DMh2_EFT_0L);
+   INFO("DMh2_EFT_1L  = " << DMh2_EFT_1L);
+   INFO("DMh2_EFT_2L  = " << DMh2_EFT_2L);
+   INFO("Mh2_EFT_0L   = " << Mh2_EFT_0L);
+   INFO("Mh2_EFT_1L   = " << Mh2_EFT_1L);
+   INFO("Mh2_EFT_2L   = " << Mh2_EFT_2L);
 
    CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L(0), 1e-6);
    CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L(0), 1e-5);
