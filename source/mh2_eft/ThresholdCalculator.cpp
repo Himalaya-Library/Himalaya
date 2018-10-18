@@ -49,6 +49,19 @@ namespace {
       return is_zero(a - b, prec);
    }
 
+   template <typename T>
+   bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+   {
+      if (is_equal(a, b, std::numeric_limits<T>::epsilon()))
+         return true;
+
+      if (std::abs(a) < std::numeric_limits<T>::epsilon() ||
+          std::abs(b) < std::numeric_limits<T>::epsilon())
+         return false;
+
+      return std::abs((a - b)/a) < prec;
+   }
+
    double calc_cw(double mW, double mZ) {
       return std::abs(mZ) > std::numeric_limits<double>::epsilon() ? mW/mZ : 0.;
    }
@@ -2720,6 +2733,11 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    const double mA2 = pow2(mA);
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
    const double lmUMR = omitLogs*log(Mu2 / MR2);
+
+   if (is_equal_rel(mQ32, mU32, 0.1) &&
+       (is_equal_rel(mQ32, mA2, 0.1) || is_equal_rel(mU32, mA2, 0.1))) {
+      return getDeltaLambdaYt6_SUSYHD(omitLogs);
+   }
 
    return (18*pow2(cbeta)*pow2(log(mA2/MR2)))/pow2(sbeta) - (288*Yt*pow2(cbeta)*
         pow3(Xt))/(pow2(mQ32 - mU32)*pow2(sbeta)) - (6*Xt6*(11*mQ32*mU32 + 2*
