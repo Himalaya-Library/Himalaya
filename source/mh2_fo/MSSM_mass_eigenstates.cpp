@@ -97,11 +97,13 @@ void convert_symmetric_fermion_mixings_to_slha(
  * @param m0 tree-level contribution
  * @param m1 1-loop contribution
  * @param m2 2-loop contribution
+ * @param m3 3-loop contribution
  *
  * @return perturbatively calculated mass eigenvalues
  */
-std::tuple<V2,V2,V2> diagonalize_perturbatively(
-   const RM22& m0, const RM22& m1 = RM22::Zero(), const RM22& m2 = RM22::Zero())
+std::tuple<V2,V2,V2,V2> diagonalize_perturbatively(
+   const RM22& m0, const RM22& m1 = RM22::Zero(),
+   const RM22& m2 = RM22::Zero(), const RM22& m3 = RM22::Zero())
 {
    using std::sqrt;
 
@@ -129,9 +131,21 @@ std::tuple<V2,V2,V2> diagonalize_perturbatively(
                         - 2*a11*d22 + 2*a22*d22)/c2;
 
    V2 mh2_2L;
-   mh2_2L << 0.5*(c5 - c6), 0.5*(c6 + c6);
+   mh2_2L << 0.5*(c5 - c6), 0.5*(c5 + c6);
 
-   return std::make_tuple(mh2_0L, mh2_1L, mh2_2L);
+   // 3-loop
+   const auto e11 = m3(0,0), e12 = m3(0,1), e22 = m3(1,1);
+   const auto c7 = e11 + e22;
+   const auto c8 = 0.5/c2*(
+      2*(4*b12*d12 + b11*(d11 - d22) + b22*(-d11 + d22) + a11*e11 - a22*e11
+         + 4*a12*e12 - a11*e22 + a22*e22)
+      + (c4*(2*b11*b22 - 2*a11*d11 + 2*a22*d11 - 8*a12*d12 + 2*a11*d22
+             - 2*a22*d22 - sqr(b11) - 4*sqr(b12) - sqr(b22) + sqr(c4)))/c2);
+
+   V2 mh2_3L;
+   mh2_3L << 0.5*(c7 - c8), 0.5*(c7 + c8);
+
+   return std::make_tuple(mh2_0L, mh2_1L, mh2_2L, mh2_3L);
 }
 
 /**
