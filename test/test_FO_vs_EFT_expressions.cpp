@@ -176,7 +176,7 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 
 TEST_CASE("test_FO_1loop_gaugeless")
 {
-   using namespace himalaya::mh1l;
+   using namespace himalaya::mh2_fo;
 
    const double eps = 1e-10;
    const auto p    = make_point();
@@ -199,7 +199,7 @@ TEST_CASE("test_FO_1loop_gaugeless")
 
 TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
 {
-   using namespace himalaya::mh1l;
+   using namespace himalaya::mh2_fo;
    using namespace himalaya::mh2_eft;
 
    const auto p = make_gaugeless(make_point());
@@ -223,7 +223,7 @@ TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
 
 TEST_CASE("test_EFT_vs_FO_2loop")
 {
-   using namespace himalaya::mh1l;
+   using namespace himalaya::mh2_fo;
    using namespace himalaya::mh2_eft;
 
    const auto p = make_point();
@@ -268,7 +268,7 @@ TEST_CASE("test_EFT_vs_FO_2loop")
 
 TEST_CASE("test_FO_1loop_derivative")
 {
-   using namespace himalaya::mh1l;
+   using namespace himalaya::mh2_fo;
 
    const auto p = make_gaugeless(make_point());
    const auto p2 = 1e-5;
@@ -286,7 +286,7 @@ TEST_CASE("test_FO_1loop_derivative")
 TEST_CASE("test_FO_2loop_momentum_iteration")
 {
    using namespace himalaya;
-   using namespace himalaya::mh1l;
+   using namespace himalaya::mh2_fo;
    using namespace himalaya::mh2_eft::EFTOrders;
    using A2 = Eigen::Array<double,2,1>;
 

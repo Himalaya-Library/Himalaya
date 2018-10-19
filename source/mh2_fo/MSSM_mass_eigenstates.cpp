@@ -16,7 +16,7 @@
 #include <tuple>
 
 namespace himalaya {
-namespace mh1l {
+namespace mh2_fo {
 
 namespace {
 
@@ -1296,5 +1296,5 @@ std::ostream& operator<<(std::ostream& ostr, const MSSM_mass_eigenstates& me)
    return ostr;
 }
 
-} // namespace mh1l
+} // namespace mh2_fo
 } // namespace himalaya

@@ -12,7 +12,7 @@
 #include <Eigen/Core>
 
 namespace himalaya {
-namespace mh1l {
+namespace mh2_fo {
 
 #define SUM(...) (get_sum(__VA_ARGS__)(__VA_ARGS__))
 
@@ -86,5 +86,5 @@ auto sum(Idx ini, Idx fin, Function f) -> decltype(EvalEigenXpr<Idx>(ini, f))
     return s;
 }
 
-} // namespace mh1l
+} // namespace mh2_fo
 } // namespace himalaya

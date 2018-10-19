@@ -24,7 +24,7 @@
 #include <limits>
 
 namespace himalaya {
-namespace mh1l {
+namespace mh2_fo {
 
 namespace {
 
@@ -159,5 +159,5 @@ double d1_b0(double m2a, double m2b) noexcept
       /(2. * pow3(m2a - m2b));
 }
 
-} // namespace mh1l
+} // namespace mh2_fo
 } // namespace himalaya

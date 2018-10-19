@@ -13,7 +13,7 @@
 #include <Eigen/Core>
 
 namespace himalaya {
-namespace mh1l {
+namespace mh2_fo {
 
 struct MSSM_spectrum {
    MSSM_spectrum(const Parameters&);
@@ -157,5 +157,5 @@ private:
 /// prints the internals of MSSM_mass_eigenstates
 std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
-} // namespace mh1l
+} // namespace mh2_fo
 } // namespace himalaya

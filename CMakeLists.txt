@@ -37,7 +37,7 @@ set(INCLUDE_PATH ${SOURCE_PATH}/include)
 include_directories(${INCLUDE_PATH})
 include_directories(${INCLUDE_PATH}/hierarchies)
 include_directories(${INCLUDE_PATH}/mh2_eft)
-include_directories(${INCLUDE_PATH}/mh1l)
+include_directories(${INCLUDE_PATH}/mh2_fo)
 include_directories(${INCLUDE_PATH}/mh2l)
 include_directories(${INCLUDE_PATH}/misc)
 include_directories(${EIGEN3_INCLUDE_DIR})
@@ -54,7 +54,7 @@ file(GLOB LIBSOURCES
   ${SOURCE_PATH}/HierarchyObject.cpp
   ${SOURCE_PATH}/Himalaya_interface.cpp
   ${SOURCE_PATH}/hierarchies/*.cpp
-  ${SOURCE_PATH}/mh1l/*.cpp
+  ${SOURCE_PATH}/mh2_fo/*.cpp
   ${SOURCE_PATH}/mh2_eft/*.cpp
   ${SOURCE_PATH}/misc/*.cpp)
 
