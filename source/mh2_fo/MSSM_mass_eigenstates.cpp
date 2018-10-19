@@ -820,18 +820,10 @@ Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars)
  */
 V2 MSSM_mass_eigenstates::calculate_Mh2_tree() const
 {
-   using std::sqrt;
-
    const auto m0 = get_mass_matrix_hh();
-   const auto a11 = m0(0,0), a12 = m0(0,1), a22 = m0(1,1);
-   const auto c1 = a11 + a22;
-   const auto c2 = sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
+   const auto mh2_tree = diagonalize_perturbatively(m0);
 
-   V2 mh2_tree;
-   mh2_tree(0) = 0.5*(c1 - c2);
-   mh2_tree(1) = 0.5*(c1 + c2);
-
-   return mh2_tree;
+   return std::get<0>(mh2_tree);
 }
 
 /**
