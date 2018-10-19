@@ -204,21 +204,21 @@ TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
 
    const auto p = make_gaugeless(make_point());
 
-   const auto Mh2_EFT_0L = calc_Mh2_EFT_0L(p);
-   const auto Mh2_EFT_1L = calc_Mh2_EFT_1L(p);
+   const auto DMh2_EFT_0L = calc_Mh2_EFT_0L(p);
+   const auto DMh2_EFT_1L = calc_Mh2_EFT_1L(p);
 
    const MSSM_mass_eigenstates me(p);
-   const auto Mh2_full    = me.calculate_Mh2();
-   const auto Mh2_full_0L = std::get<0>(Mh2_full);
-   const auto Mh2_full_1L = Mh2_full_0L + std::get<1>(Mh2_full);
+   const auto DMh2_full    = me.calculate_Mh2();
+   const auto DMh2_full_0L = std::get<0>(DMh2_full);
+   const auto DMh2_full_1L = std::get<1>(DMh2_full);
 
-   INFO("Mh2_full_0L = " << Mh2_full_0L);
-   INFO("Mh2_full_1L = " << Mh2_full_1L);
-   INFO("Mh2_EFT_0L = " << Mh2_EFT_0L);
-   INFO("Mh2_EFT_1L = " << Mh2_EFT_1L);
+   INFO("DMh2_full_0L = " << DMh2_full_0L);
+   INFO("DMh2_full_1L = " << DMh2_full_1L);
+   INFO("DMh2_EFT_0L  = " << DMh2_EFT_0L);
+   INFO("DMh2_EFT_1L  = " << DMh2_EFT_1L);
 
-   CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L, 1e-6);
-   CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L, 1e-5);
+   CHECK_CLOSE(DMh2_EFT_0L, DMh2_full_0L, 1e-6);
+   CHECK_CLOSE(DMh2_EFT_1L, DMh2_full_1L, 1e-5);
 }
 
 TEST_CASE("test_EFT_vs_FO_2loop")
@@ -232,38 +232,25 @@ TEST_CASE("test_EFT_vs_FO_2loop")
    const auto DMh2_EFT_1L = calc_Mh2_EFT_1L(p);
    const auto DMh2_EFT_2L = calc_Mh2_EFT_2L(p);
 
-   const auto Mh2_EFT_0L = DMh2_EFT_0L;
-   const auto Mh2_EFT_1L = Mh2_EFT_0L + DMh2_EFT_1L;
-   const auto Mh2_EFT_2L = Mh2_EFT_1L + DMh2_EFT_2L;
-
    MSSM_mass_eigenstates me(p);
    me.enable_mom_it(false);
 
-   const auto Mh2_full     = me.calculate_Mh2();
-   const auto DMh2_full_0L = std::get<0>(Mh2_full);
-   const auto DMh2_full_1L = std::get<1>(Mh2_full);
-   const auto DMh2_full_2L = std::get<2>(Mh2_full);
-   const auto Mh2_full_0L  = DMh2_full_0L;
-   const auto Mh2_full_1L  = Mh2_full_0L + DMh2_full_1L;
-   const auto Mh2_full_2L  = Mh2_full_1L + DMh2_full_2L;
+   const auto DMh2_full    = me.calculate_Mh2();
+   const auto DMh2_full_0L = std::get<0>(DMh2_full);
+   const auto DMh2_full_1L = std::get<1>(DMh2_full);
+   const auto DMh2_full_2L = std::get<2>(DMh2_full);
 
    INFO("DMh2_full_0L = " << DMh2_full_0L);
    INFO("DMh2_full_1L = " << DMh2_full_1L);
    INFO("DMh2_full_2L = " << DMh2_full_2L);
-   INFO("Mh2_full_0L  = " << Mh2_full_0L);
-   INFO("Mh2_full_1L  = " << Mh2_full_1L);
-   INFO("Mh2_full_2L  = " << Mh2_full_2L);
 
    INFO("DMh2_EFT_0L  = " << DMh2_EFT_0L);
    INFO("DMh2_EFT_1L  = " << DMh2_EFT_1L);
    INFO("DMh2_EFT_2L  = " << DMh2_EFT_2L);
-   INFO("Mh2_EFT_0L   = " << Mh2_EFT_0L);
-   INFO("Mh2_EFT_1L   = " << Mh2_EFT_1L);
-   INFO("Mh2_EFT_2L   = " << Mh2_EFT_2L);
 
-   CHECK_CLOSE(Mh2_EFT_0L, Mh2_full_0L, 1e-6);
-   CHECK_CLOSE(Mh2_EFT_1L, Mh2_full_1L, 1e-5);
-   CHECK_CLOSE(Mh2_EFT_2L, Mh2_full_2L, 1e-5);
+   CHECK_CLOSE(DMh2_EFT_0L, DMh2_full_0L, 1e-6);
+   CHECK_CLOSE(DMh2_EFT_1L, DMh2_full_1L, 1e-5);
+   CHECK_CLOSE(DMh2_EFT_2L, DMh2_full_2L, 1e-5);
 }
 
 TEST_CASE("test_FO_1loop_derivative")
