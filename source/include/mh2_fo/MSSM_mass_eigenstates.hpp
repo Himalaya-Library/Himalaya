@@ -12,9 +12,22 @@
 #include <tuple>
 #include <Eigen/Core>
 
+/**
+ * @file MSSM_mass_eigenstates.hpp
+ *
+ * @brief Contains the definition of the \a MSSM_spectrum and \a
+ * MSSM_mass_eigenstates classes.
+ */
+
 namespace himalaya {
 namespace mh2_fo {
 
+/**
+ * @class MSSM_spectrum
+ *
+ * @brief Contains the tree-level DR' mass spectrum and mixing
+ * matrices.
+ */
 struct MSSM_spectrum {
    MSSM_spectrum(const Parameters&);
 
@@ -106,6 +119,12 @@ struct MSSM_spectrum {
 /// prints the spectrum
 std::ostream& operator<<(std::ostream&, const MSSM_spectrum&);
 
+/**
+ * @class MSSM_mass_eigenstates
+ *
+ * @brief This class performs a fixed-order calculation of the light
+ * Higgs mass up to 2-loop order.
+ */
 class MSSM_mass_eigenstates {
 public:
    MSSM_mass_eigenstates(const Parameters&);

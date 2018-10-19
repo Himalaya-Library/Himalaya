@@ -23,6 +23,13 @@
 #include <cmath>
 #include <limits>
 
+/**
+ * @file pv.cpp
+ *
+ * @brief Implementation of real Passarino-Veltman loop functions with
+ * squared arguments.
+ */
+
 namespace himalaya {
 namespace mh2_fo {
 

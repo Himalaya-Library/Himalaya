@@ -8,8 +8,8 @@
 /**
  * @file pv.hpp
  *
- * @brief Real Passarino-Veltman loop functions with squared
- * arguments.
+ * @brief Declaration of real Passarino-Veltman loop functions with
+ * squared arguments.
  */
 
 #pragma once

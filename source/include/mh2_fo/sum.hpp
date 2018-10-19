@@ -7,6 +7,20 @@
 
 #pragma once
 
+/**
+ * @file sum.hpp
+ *
+ * @brief Contains the definition of the \a SUM macro.
+ *
+ * Usage example of the \a SUM macro:
+ *
+ * Calculate \f$\sum_{n=1}^{10} n^2\f$
+ *
+ * @code{.cpp}
+const double s = SUM(n,1,10,n*n);
+   @endcode
+ */
+
 #include <type_traits>
 #include <cstddef>
 #include <Eigen/Core>

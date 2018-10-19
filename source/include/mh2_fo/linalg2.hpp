@@ -29,6 +29,14 @@
 #include <Eigen/Eigenvalues>
 #include <unsupported/Eigen/MatrixFunctions>
 
+/**
+ * @file linalg2.hpp
+ *
+ * @brief Contains routines to diagonalize mass matrices.
+ *
+ * @note This file has been taken from the FlexibleSUSY 2.2.0 package.
+ */
+
 namespace flexiblesusy {
 
 #define MAX_(i, j) (((i) > (j)) ? (i) : (j))

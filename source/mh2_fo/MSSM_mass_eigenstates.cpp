@@ -15,6 +15,13 @@
 #include <cmath>
 #include <tuple>
 
+/**
+ * @file MSSM_mass_eigenstates.cpp
+ *
+ * @brief Contains the implementation of the \a MSSM_spectrum and \a
+ * MSSM_mass_eigenstates classes.
+ */
+
 namespace himalaya {
 namespace mh2_fo {
 
