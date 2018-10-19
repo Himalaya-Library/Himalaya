@@ -123,14 +123,14 @@ std::ostream& operator<<(std::ostream&, const MSSM_spectrum&);
  * @class MSSM_mass_eigenstates
  *
  * @brief This class performs a fixed-order calculation of the light
- * Higgs mass up to 2-loop order.
+ * CP-even Higgs mass up to 2-loop order.
  */
 class MSSM_mass_eigenstates {
 public:
    MSSM_mass_eigenstates(const Parameters&);
 
    /// calculates squared Higgs masses
-   std::tuple<V2,V2,V2> calculate_Mh2() const;
+   std::tuple<double,double,double> calculate_Mh2() const;
    /// returns tree-level CP-even Higgs mass matrix
    RM22 get_mass_matrix_hh() const;
    /// returns tree-level CP-even Higgs mass matrix for p = g1 = g2 = 0

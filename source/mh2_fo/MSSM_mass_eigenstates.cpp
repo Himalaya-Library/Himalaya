@@ -835,20 +835,20 @@ V2 MSSM_mass_eigenstates::calculate_Mh2_tree() const
 }
 
 /**
- * Returns the squared Higgs pole masses at tree-, 1- and 2-loop
- * level.  The function does not include implicit or explicit higher
- * orders.
+ * Returns the tree-level, 1- and 2-loop contribution to the squared
+ * light CP-even Higgs pole mass.  The function does not include
+ * implicit or explicit higher orders.
  *
- * @return Higgs pole masses at tree-, 1- and 2-loop level
+ * @return Tree-level, 1- and 2-loop contribution to light CP-even Higgs mass
  */
-std::tuple<V2,V2,V2> MSSM_mass_eigenstates::calculate_Mh2() const
+std::tuple<double,double,double> MSSM_mass_eigenstates::calculate_Mh2() const
 {
    const auto p2    = calculate_Mh2_tree()(0);
-   const RM22 m0    = get_mass_matrix_hh();
-   const RM22 m0_gl = get_mass_matrix_hh_gaugeless();
-   const RM22 m1    = delta_mh2_1loop(p2);
-   const RM22 m1_gl = delta_mh2_1loop_gaugeless();
-   const RM22 m2    = delta_mh2_2loop();
+   const auto m0    = get_mass_matrix_hh();
+   const auto m0_gl = get_mass_matrix_hh_gaugeless();
+   const auto m1    = delta_mh2_1loop(p2);
+   const auto m1_gl = delta_mh2_1loop_gaugeless();
+   const auto m2    = delta_mh2_2loop();
 
    // tree-level and 1-loop with electroweak gauge couplings
    const auto Mh2    = diagonalize_perturbatively(m0, m1);
@@ -856,7 +856,9 @@ std::tuple<V2,V2,V2> MSSM_mass_eigenstates::calculate_Mh2() const
    // 2-loop in gaugless limit (p = g1 = g2 = 0)
    const auto Mh2_gl = diagonalize_perturbatively(m0_gl, m1_gl, m2);
 
-   return std::make_tuple(std::get<0>(Mh2), std::get<1>(Mh2), std::get<2>(Mh2_gl));
+   return std::make_tuple(std::get<0>(Mh2)(0),
+                          std::get<1>(Mh2)(0),
+                          std::get<2>(Mh2_gl)(0));
 }
 
 /**
@@ -1155,6 +1157,21 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
    return se * one_loop;
 }
 
+/**
+ * CP-even Higgs 2-loop DR' contribution in the gaugeless limit (p =
+ * g1 = g2 = 0).
+ *
+ * @note The 2-loop contribution to the heavy CP-even Higgs mass
+ * assumes that the tree-level CP-even Higgs mass matrix is expressed
+ * in terms of the CP-odd Higgs pole mass, see [hep-ph/0105096]
+ * Eqs.(22)-(23).  If the tree-level CP-even Higgs mass matrix is
+ * expressed in terms of the running CP-odd Higgs mass, then a
+ * corresponding 2-loop contribution to the CP-odd Higgs mass must be
+ * included in this function.  See the implementation in
+ * SOFTSUSY/FlexibleSUSY for an example.
+ *
+ * @return 2-loop contribution for p = g1 = g2 = 0
+ */
 RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 {
    using namespace himalaya::mssm_twoloophiggs;
