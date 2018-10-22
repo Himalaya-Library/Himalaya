@@ -399,8 +399,8 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
       *pow4(YBC))))))/(12.*pow2(Mhtree))),
       "dmh2yb6");
    const double dmh2yt6= isNaN(orderMap.at(EFTOrders::YT6)*((v2*(4*dytyt*(
-      -6 + dlambdayt4 + 12*lmMt) + (-6 + dlambdayt6 + dlambdayt4*(2 + 2*dvyt2
-      - 3*lmMt) + 24*dvyt2*(-1 + lmMt) - 18*lmMt*(1 + 3*lmMt) - pow2(Pi))
+      -6 + dlambdayt4 + 12*lmMt) + (-12 + dlambdayt6 + dlambdayt4*(2 + 2*dvyt2
+      - 3*lmMt) + 24*dvyt2*(-1 + lmMt) - 18*lmMt*(1 + 3*lmMt) - 2*pow2(Pi))
       *pow2(sbeta))*pow4(sbeta))/2.),
       "dmh2yt6");
    const double dmh2yb4ytau2 = isNaN(orderMap.at(EFTOrders::YTAU2YB4)*((v2*(

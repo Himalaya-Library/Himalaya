@@ -2658,6 +2658,9 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
  *
  * @note Only valid for mQ3 = mU3!
  *
+ * @note Multiplied by a factor 2 in order to match the convention of
+ * LTM.
+ *
  * @param omitLogs factor which multiplies the log(mst^2/Q^2) terms
  *
  * @return 2-loop threshold correction O(at^2)
@@ -2705,7 +2708,7 @@ double ThresholdCalculator::getDeltaLambdaYt6_SUSYHD(int omitLogs) const
                pow2(2.*muhat + s2b*xt))/pow2(s2b))*pow4(xt))/4. -
        ((-1 + cb2)*(-1 + lmst2Q2)*pow6(xt))/2.))/sb2;
 
-   return dlam;
+   return 2*dlam;
 }
 
 double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
