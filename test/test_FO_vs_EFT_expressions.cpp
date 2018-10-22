@@ -233,7 +233,6 @@ TEST_CASE("test_EFT_vs_FO_2loop")
    const auto DMh2_EFT_2L = calc_Mh2_EFT_2L(p);
 
    MSSM_mass_eigenstates me(p);
-   me.enable_mom_it(false);
 
    const auto DMh2_full    = me.calculate_Mh2();
    const auto DMh2_full_0L = std::get<0>(DMh2_full);
