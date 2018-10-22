@@ -214,7 +214,7 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    // mh_eft^2
    const double mh2_eft = mh2EFTCalculator.getDeltaMh2EFT0Loop();
    // 1-Loop prefactor at
-   const double pref_1L = 1./pow2(4*Pi) * pow2(p.Mt * gt);
+   const double pref_1L = 2./pow2(4*Pi) * pow2(p.Mt * gt);
    // 2-Loop prefactor at*as
    const double pref_2L = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
    // fill in results of EFT calculation

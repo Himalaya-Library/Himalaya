@@ -1319,8 +1319,8 @@ double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
          thresholdCorrection = getDeltaLambdaAlphatAlphas(limit, omitLogs);
          switch (scheme) {
             case(RenSchemes::DRBARPRIME):
-               thresholdCorrection = thresholdCorrection
-                  - 4 * getDeltaLambdaAlphat(limit, omitLogs) *
+               thresholdCorrection +=
+                  - 8 * getDeltaLambdaAlphat(limit, omitLogs) *
                   getDeltaYtAlphas(limit, omitLogs);
                break;
          }
@@ -1335,10 +1335,10 @@ double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
             case(RenSchemes::DRBARPRIME):{
                const double dg3as = getDeltaG3Alphas(omitLogs);
                const double dytas = getDeltaYtAlphas(limit, omitLogs);
-               thresholdCorrection = thresholdCorrection +
+               thresholdCorrection +=
                (getDeltaLambdaAlphatAlphas(limit, omitLogs)
                * (-2 * dg3as - 4 * dytas)
-               + getDeltaLambdaAlphat(limit, omitLogs) * (8 * dg3as * dytas
+               + 2*getDeltaLambdaAlphat(limit, omitLogs) * (8 * dg3as * dytas
                   + 10 * pow2(dytas) - 4 * getDeltaYtAlphas2(limit, omitLogs)));
             }
             break;
@@ -4868,10 +4868,11 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
 }
 
 /**
- *         Returns delta lambda_at in the MSbar scheme for a given mass limit
- *         @param limit an integer key for a mass limit
- *         @param omitLogs an integer key to omit all mu terms
- *         @return delta lambda_at in the MSbar scheme for a given mass limit
+ * Returns delta lambda_at in the MSbar scheme for a given mass limit.
+ * Expression normalized as in Eq.(10) of [1407.4081].
+ * @param limit an integer key for a mass limit
+ * @param omitLogs an integer key to omit all mu terms
+ * @return delta lambda_at in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
 {
@@ -4893,11 +4894,11 @@ double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
 
    switch (limit) {
       case(Limits::GENERAL):{
-         return 12*pow4(Xt)/pow2(mQ32 - mU32) + 12*lmQ3MR + (6 - 12*pow2(Xt)/(mQ32 - mU32)
-            + (6*(mQ32 + mU32)/pow3(mQ32 - mU32))*pow4(Xt))*log(mU32/mQ32);
+         return 0.5*(12*pow4(Xt)/pow2(mQ32 - mU32) + 12*lmQ3MR + (6 - 12*pow2(Xt)/(mQ32 - mU32)
+            + (6*(mQ32 + mU32)/pow3(mQ32 - mU32))*pow4(Xt))*log(mU32/mQ32));
       }
       case(Limits::MQ3_EQ_MU3):{
-         return 12*lmQ3MR + 12*pow2(Xt)/mQ32 - pow4(Xt)/pow2(mQ32);
+         return 0.5*(12*lmQ3MR + 12*pow2(Xt)/mQ32 - pow4(Xt)/pow2(mQ32));
       }
    };
 
@@ -5561,7 +5562,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs,
    const double lambdaat = getDeltaLambdaAlphat(p.massLimit3LThreshold, omitLogs);
    const double lambdaatas = getDeltaLambdaAlphatAlphas(p.massLimit3LThreshold, omitLogs);
 
-   return -(-2.*(lambdaat*(3*pow2(ytas) + 2*ytas2) + (lambdaatas - 4*ytas*lambdaat)
+   return -(-2.*(2.*lambdaat*(3*pow2(ytas) + 2*ytas2) + (lambdaatas - 8*ytas*lambdaat)
       *(g3as + 2*ytas)) - xtTerms);
 }
 

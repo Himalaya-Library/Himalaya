@@ -249,7 +249,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
       *dlambdayt2g22 + pow2(c2beta)*(2 + 2*dvyt2 - 3*lmMt))/4.),
       "dmh2g22yt2");
    const double dmh2yt4 = isNaN(orderMap.at(EFTOrders::YT4)*(pref_at*(12 * lmMt +
-      thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
+      2*thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
          RenSchemes::DRBARPRIME, omitMSSMLogs))),
       "dmh2yt4");
    const double dmh2g12ytau2 = isNaN(orderMap.at(EFTOrders::G12YTAU2)*(((10*dlambdaytau2g12

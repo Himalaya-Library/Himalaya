@@ -67,7 +67,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(ytas2_lim_gen, -55.90563134, eps);
       const double lamat_lim_gen = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(lamat_lim_gen, 14.31721183, eps);
+      CHECK_CLOSE(lamat_lim_gen, 14.31721183/2., eps);
       const double lamatas_lim_gen = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_gen, -87.06409990, eps);
@@ -104,7 +104,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(ytas2_lim_mq3_mu3, -55.53609836, eps);
       const double lamat_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(lamat_lim_mq3_mu3, 14.35556635, eps);
+      CHECK_CLOSE(lamat_lim_mq3_mu3, 14.35556635/2., eps);
       const double lamatas_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mq3_mu3, -102.3684261, eps);
