@@ -81,10 +81,10 @@ int main()
          //himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
 
          // calculate fixed-order corrections for v^2 << MS^2
-         himalaya::mh2_eft::Mh2EFTCalculator mhc(point);
-         const auto dmh2_eft_0l = mhc.getDeltaMh2EFT0Loop();
-         const auto dmh2_eft_1l = mhc.getDeltaMh2EFT1Loop(1,1);
-         const auto dmh2_eft_2l = mhc.getDeltaMh2EFT2Loop(1,1);
+         himalaya::mh2_eft::Mh2EFTCalculator meft(point);
+         const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
+         const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
+         const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
 
          std::cout << "Mh^2_EFT_0L  = " << dmh2_eft_0l << " GeV^2 O(g1^2, g2^2)\n";
          std::cout << "ΔMh^2_EFT_1L = " << dmh2_eft_1l << " GeV^2 O(full)\n";
@@ -92,8 +92,8 @@ int main()
                    << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
 
          // calculate fixed-order corrections
-         himalaya::mh2_fo::MSSM_mass_eigenstates me(point);
-         const auto dmh_fo     = me.calculate_Mh2();
+         himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point);
+         const auto dmh_fo     = mfo.calculate_Mh2();
          const auto dmh2_fo_0l = std::get<0>(dmh_fo);
          const auto dmh2_fo_1l = std::get<1>(dmh_fo);
          const auto dmh2_fo_2l = std::get<2>(dmh_fo);
