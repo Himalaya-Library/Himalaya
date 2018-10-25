@@ -6,10 +6,13 @@
 // ====================================================================
 
 #include "HierarchyCalculator.hpp"
+#include "Mh2EFTCalculator.hpp"
+#include "MSSM_mass_eigenstates.hpp"
 
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <tuple>
 #include <vector>
 
 #include <mathlink.h>
@@ -132,68 +135,6 @@ void put_message(MLINK link,
    MLPutFunction(link, "CompoundExpression", 2);
    MLPutFunction(link, message_function.c_str(), 1);
    MLPutUTF8String(link, reinterpret_cast<const unsigned char*>(message_str.c_str()), message_str.size());
-}
-
-/******************************************************************/
-
-void put_result(const himalaya::HierarchyObject& ho, MLINK link)
-{
-   MLPutFunction(link, "List", 11);
-
-   const auto hierarchy = ho.getSuitableHierarchy();
-   const std::string msf = ho.getIsAlphab() ? "MsbottomMDRPrime" : "MstopMDRPrime";
-
-   Eigen::Vector4d expansion_uncertainty;
-   expansion_uncertainty << 0., ho.getDMhExpUncertainty(1),
-      ho.getDMhExpUncertainty(2), ho.getDMhExpUncertainty(3);
-
-   Eigen::Vector4d lambda;
-   lambda << ho.getDLambda(0), ho.getDLambda(1),
-             ho.getDLambda(2), ho.getDLambda(3);
-
-   Eigen::Vector4d lambda_uncertainty;
-   lambda_uncertainty << 0., 0., 0., ho.getDLambdaUncertainty(3);
-
-   Eigen::Vector4d lambda_shift_DRp_to_MS;
-   lambda_shift_DRp_to_MS <<
-      ho.getDLambdaDRbarPrimeToMSbarShift(0),
-      ho.getDLambdaDRbarPrimeToMSbarShift(1),
-      ho.getDLambdaDRbarPrimeToMSbarShift(2),
-      ho.getDLambdaDRbarPrimeToMSbarShift(3);
-
-   std::vector<Eigen::Matrix2d> Mh2;
-   for (int i = 0; i < 4; i++)
-      Mh2.push_back(ho.getDMh(i));
-
-   std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_MDRp;
-   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_MDRp.push_back(ho.getDMhDRbarPrimeToMDRbarPrimeShift());
-
-   std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_H3m;
-   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_H3m.push_back(ho.getDMhDRbarPrimeToH3mShift());
-
-   Eigen::Vector4d Mh2_eft;
-   Mh2_eft << ho.getDMh2EFT(0), ho.getDMh2EFT(1),
-              ho.getDMh2EFT(2), ho.getDMh2EFT(3);
-
-   MLPutRuleTo(link, hierarchy, "hierarchyID");
-   MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
-   MLPutRuleTo(link, ho.getMDRMasses(), msf);
-   MLPutRuleTo(link, Mh2, "Mh2");
-   MLPutRuleTo(link, Mh2_shift_DRp_to_MDRp, "Mh2ShiftDRbarPrimeToMDRPrime");
-   MLPutRuleTo(link, Mh2_shift_DRp_to_H3m, "Mh2ShiftDRbarPrimeToH3m");
-   MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
-   MLPutRuleTo(link, Mh2_eft, "Mh2EFT");
-   MLPutRuleTo(link, lambda, "lambda");
-   MLPutRuleTo(link, lambda_uncertainty, "lambdaUncertainty");
-   MLPutRuleTo(link, lambda_shift_DRp_to_MS, "lambdaShiftDRbarPrimeToMSbar");
-
-   MLEndPacket(link);
 }
 
 /******************************************************************/
@@ -391,6 +332,8 @@ Data make_data(const std::vector<double>& parsvec)
       pars.s2b = s2b;
    }
 
+   pars.validate(verbose);
+
    if (c != N_input_parameters) {
       throw std::runtime_error(
          "Bug: Expecting to read " + std::to_string(N_input_parameters) +
@@ -400,6 +343,115 @@ Data make_data(const std::vector<double>& parsvec)
    }
 
    return Data(pars, bottom, verbose);
+}
+
+/******************************************************************/
+
+struct Results {
+   using Loop_corrections = std::tuple<double,double,double,double>;
+
+   himalaya::HierarchyObject ho{false};
+   Loop_corrections eft; ///< fixed-order corrections for v^2 << MS^2
+   Loop_corrections fo;  ///< fixed-order corrections
+};
+
+/******************************************************************/
+
+Results calculate_results(const Data& data)
+{
+   Results res;
+
+   himalaya::HierarchyCalculator hc(data.pars, data.verbose);
+   res.ho = hc.calculateDMh3L(data.bottom);
+
+   // calculate fixed-order corrections for v^2 << MS^2
+   himalaya::mh2_eft::Mh2EFTCalculator meft(data.pars);
+   const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
+   const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
+   const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
+
+   res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
+                             dmh2_eft_2l, res.ho.getDMh2EFT(3));
+
+   // calculate fixed-order corrections
+   himalaya::mh2_fo::MSSM_mass_eigenstates mfo(data.pars);
+   const auto dmh_fo    = mfo.calculate_Mh2(); // 0L, 1L, 2L
+   const auto dmh_fo_3l = res.ho.getDMh2(3);   // 3L
+
+   res.fo = std::tuple_cat(dmh_fo, std::tie(dmh_fo_3l));
+
+   return res;
+}
+
+/******************************************************************/
+
+void put_result(const Results& res, MLINK link)
+{
+   MLPutFunction(link, "List", 12);
+
+   const auto& ho = res.ho;
+   const auto& eft = res.eft;
+   const auto& fo = res.fo;
+
+   const auto hierarchy = ho.getSuitableHierarchy();
+   const std::string msf = ho.getIsAlphab() ? "MsbottomMDRPrime" : "MstopMDRPrime";
+
+   Eigen::Vector4d expansion_uncertainty;
+   expansion_uncertainty << 0., ho.getDMhExpUncertainty(1),
+      ho.getDMhExpUncertainty(2), ho.getDMhExpUncertainty(3);
+
+   Eigen::Vector4d lambda;
+   lambda << ho.getDLambda(0), ho.getDLambda(1),
+             ho.getDLambda(2), ho.getDLambda(3);
+
+   Eigen::Vector4d lambda_uncertainty;
+   lambda_uncertainty << 0., 0., 0., ho.getDLambdaUncertainty(3);
+
+   Eigen::Vector4d lambda_shift_DRp_to_MS;
+   lambda_shift_DRp_to_MS <<
+      ho.getDLambdaDRbarPrimeToMSbarShift(0),
+      ho.getDLambdaDRbarPrimeToMSbarShift(1),
+      ho.getDLambdaDRbarPrimeToMSbarShift(2),
+      ho.getDLambdaDRbarPrimeToMSbarShift(3);
+
+   std::vector<Eigen::Matrix2d> Mh2;
+   for (int i = 0; i < 4; i++)
+      Mh2.push_back(ho.getDMh(i));
+
+   std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_MDRp;
+   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.push_back(ho.getDMhDRbarPrimeToMDRbarPrimeShift());
+
+   std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_H3m;
+   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.push_back(ho.getDMhDRbarPrimeToH3mShift());
+
+   Eigen::Vector4d Mh2_eft;
+   Mh2_eft << std::get<0>(eft), std::get<1>(eft),
+              std::get<2>(eft), std::get<3>(eft);
+
+   Eigen::Vector4d Mh2_fo;
+   Mh2_fo << std::get<0>(fo), std::get<1>(fo),
+             std::get<2>(fo), std::get<3>(fo);
+
+   MLPutRuleTo(link, hierarchy, "hierarchyID");
+   MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
+   MLPutRuleTo(link, ho.getMDRMasses(), msf);
+   MLPutRuleTo(link, Mh2, "Mh2");
+   MLPutRuleTo(link, Mh2_shift_DRp_to_MDRp, "Mh2ShiftDRbarPrimeToMDRPrime");
+   MLPutRuleTo(link, Mh2_shift_DRp_to_H3m, "Mh2ShiftDRbarPrimeToH3m");
+   MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
+   MLPutRuleTo(link, Mh2_eft, "Mh2EFT");
+   MLPutRuleTo(link, Mh2_fo, "Mh2FO");
+   MLPutRuleTo(link, lambda, "lambda");
+   MLPutRuleTo(link, lambda_uncertainty, "lambdaUncertainty");
+   MLPutRuleTo(link, lambda_shift_DRp_to_MS, "lambdaShiftDRbarPrimeToMSbar");
+
+   MLEndPacket(link);
 }
 
 } // anonymous namespace
@@ -420,14 +472,11 @@ DLLEXPORT int HimalayaCalculateDMh3L(
    try {
       Redirect_output rd(link);
 
-      const auto data = make_data(read_list(link));
-
-      himalaya::HierarchyCalculator hc(data.pars, data.verbose);
-      const auto ho = hc.calculateDMh3L(data.bottom);
+      const auto res = calculate_results(make_data(read_list(link)));
 
       rd.flush();
 
-      put_result(ho, link);
+      put_result(res, link);
    } catch (const std::exception& e) {
       put_message(link, "HimalayaErrorMessage", e.what());
       MLPutSymbol(link, "$Failed");

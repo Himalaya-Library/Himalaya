@@ -43,6 +43,7 @@ TestPoint[point_, name_] :=
            TestClose[Mh2ShiftDRbarPrimeToH3m                        /. output, Mh2ShiftDRbarPrimeToH3m                        /. (expectedOutput /. point), eps];
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
            TestClose[Mh2EFT                                         /. output, Mh2EFT                                         /. (expectedOutput /. point), eps];
+           TestClose[Mh2FO                                          /. output, Mh2FO                                          /. (expectedOutput /. point), eps];
            TestClose[lambda                                         /. output, lambda                                         /. (expectedOutput /. point), eps];
            TestClose[lambdaUncertainty                              /. output, lambdaUncertainty                              /. (expectedOutput /. point), eps];
            TestClose[lambdaShiftDRbarPrimeToMSbar                   /. output, lambdaShiftDRbarPrimeToMSbar                   /. (expectedOutput /. point), eps];
@@ -163,7 +164,8 @@ MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
             {{-1.5317742384518245, 1.9557280682757228}, {1.9557280682757228, 7.446661229467915}}
         },
         expansionUncertainty -> {0., 0., 0.29936990221850124, 0.029834152694507742}, 
-        Mh2EFT -> {8230.066622149989, 10331.078614427297, 1881.1471720931024, 695.2285664220773},
+        Mh2EFT -> {8230.066622149989, 8153.829456860672, 845.4016216350051, 695.2285664220773},
+        Mh2FO -> {8229.896089958725, 8148.2372899382335, 819.1632627059424, 696.8358059760103},
         lambda -> {0.13599819257964818, 0.06251358668613667, 0.0014909887921878413, 0.00031561329131293657}, 
         lambdaUncertainty -> {0., 0., 0., 0.002031176262211924},
         lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.2898259577239126*^-6, -0.000771028340668861}
