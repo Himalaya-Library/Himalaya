@@ -207,7 +207,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
    const double bbhDR = 2 - Pi/sqrt(3.) - log(pow2(mhtree)/pow2(p.Mt));
 
    const double bbwDR =
-      2 - lmwMt - 2*asin(mhtree/(2.*p.MW))*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree));
+      2 - lmwMt - 2*std::asin(mhtree/(2.*p.MW))*sqrt(-1 + (4*pow2(p.MW))/pow2(mhtree));
 
    const double bbzDR =
       2 - lmzMt - 2*std::asin(sqrt(pow2(c2beta))/2.)*sqrt(-1 + 4/pow2(c2beta));
