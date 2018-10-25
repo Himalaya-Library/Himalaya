@@ -20,6 +20,7 @@ namespace {
    const double zt3 = 1.2020569031595942853997381615114;
    const double Pi  = 3.1415926535897932384626433832795;
    const double log2 = std::log(2.);
+   const double sqrt3 = std::sqrt(3.);
    template <typename T> T pow2(T x)  { return x*x; }
    template <typename T> T pow3(T x)  { return x*x*x; }
    template <typename T> T pow4(T x)  { return x*x*x*x; }
@@ -204,7 +205,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
    const double dvytau2 = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs);
 
-   const double bbhDR = 2 - Pi/sqrt(3.) - log(pow2(mhtree/p.Mt));
+   const double bbhDR = 2 - Pi/sqrt3 - log(pow2(mhtree/p.Mt));
 
    const double bbwDR =
       2 - lmwMt - 2*std::asin(mhtree/(2.*p.MW))*sqrt(-1 + 4*pow2(p.MW/mhtree));
