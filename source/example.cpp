@@ -22,7 +22,7 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
    pars.mu = MS;
    pars.g1 = 0.46;
    pars.g2 = 0.65;
-   pars.g3 = 1.10073;
+   pars.g3 = 1.166;
    pars.vd = 246*std::cos(beta);
    pars.vu = 246*std::sin(beta);
    pars.mq2 << MS2, 0, 0,
@@ -49,9 +49,9 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
    pars.Ae << 0, 0, 0,
               0, 0, 0,
               0, 0, 0;
-   pars.Yu << 0, 0, 0, 0, 0, 0, 0, 0, 0.85;
-   pars.Yd << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0.15;
-   pars.Ye << 0, 0, 0, 0, 0, 0, 0, 0, 0.1;
+   pars.Yu << 0, 0, 0, 0, 0, 0, 0, 0, 0.862;
+   pars.Yd << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0.133;
+   pars.Ye << 0, 0, 0, 0, 0, 0, 0, 0, 0.101;
    pars.MA = MS;
    pars.M1 = MS;
    pars.M2 = MS;
@@ -65,7 +65,7 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
 int main()
 {
    const std::vector<himalaya::Parameters> points = {
-      setup_point(2500., 10., 0.)
+      setup_point(2000., 20., std::sqrt(6.))
    };
 
    for (const auto& point: points) {
