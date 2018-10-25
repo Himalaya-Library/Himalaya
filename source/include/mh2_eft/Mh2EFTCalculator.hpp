@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Himalaya_interface.hpp"
+#include <iosfwd>
 #include <limits>
 #include <map>
 
@@ -69,6 +70,9 @@ namespace mh2_eft{
       double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
       std::map<unsigned int, unsigned int> orderMap{}; ///< A map which holds all EFTOrders key value pairs to enable/disable certain corrections
    };
+
+   /// prints loop corrections for v^2 << MS^2
+   std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
 
 }        // mh2_eft
 }        // himalaya

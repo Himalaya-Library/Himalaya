@@ -11,6 +11,7 @@
 #include "Logger.hpp"
 #include "dilog.h"
 #include <cmath>
+#include <iostream>
 #include <string>
 
 namespace himalaya {
@@ -539,6 +540,28 @@ double Mh2EFTCalculator::getDeltaLambdaDegenerate(double scale, double mst1, dou
       + pow3(xt)*(160*LS + 864*pow2(LS) + 8*(2722 - 2259*zt3)))/v2;
 
    return deltaLambda3L;
+}
+
+/**
+ * Calculates the loop corrections in the approximation v^2 << MS^2
+ * and prints the result.
+ *
+ * @param ostr output stream
+ * @param mhc Mh2EFTCalculator object
+ *
+ * @return output stream
+ */
+std::ostream& operator<<(std::ostream& ostr, const Mh2EFTCalculator& mhc)
+{
+   const auto dmh2_0l =  mhc.getDeltaMh2EFT0Loop();
+   const auto dmh2_1l =  mhc.getDeltaMh2EFT1Loop(1,1);
+   const auto dmh2_2l =  mhc.getDeltaMh2EFT2Loop(1,1);
+
+   ostr << "Mh^2_EFT_0L  = " << dmh2_0l << " GeV^2 O(g1^2, g2^2)\n";
+   ostr << "ΔMh^2_EFT_1L = " << dmh2_1l << " GeV^2 O(full)\n";
+   ostr << "ΔMh^2_EFT_2L = " << dmh2_2l << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
+
+   return ostr;
 }
 
 } // namespace mh2_eft
