@@ -553,6 +553,12 @@ double Mh2EFTCalculator::getDeltaLambdaDegenerate(double scale, double mst1, dou
  */
 std::ostream& operator<<(std::ostream& ostr, const Mh2EFTCalculator& mhc)
 {
+   ostr << "=========================\n"
+        << "Himalaya Mh2EFTCalculator\n"
+        << "=========================\n"
+        << mhc.p
+        << "msq2  = " << mhc.msq2 << " GeV^2\n";
+
    const auto dmh2_0l =  mhc.getDeltaMh2EFT0Loop();
    const auto dmh2_1l =  mhc.getDeltaMh2EFT1Loop(1,1);
    const auto dmh2_2l =  mhc.getDeltaMh2EFT2Loop(1,1);

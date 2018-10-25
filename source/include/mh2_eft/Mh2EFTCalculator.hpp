@@ -65,6 +65,8 @@ namespace mh2_eft{
        *         @param enable set to 1 to enable and to 0 to disable the chosen correction
        */
       void setCorrectionFlag(int variable, int enable);
+
+      friend std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
    private:
       Parameters p{}; ///< The HimalayaInterface struct
       double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
