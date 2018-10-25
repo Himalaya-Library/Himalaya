@@ -7,6 +7,7 @@
 
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
+#include "MSSM_mass_eigenstates.hpp"
 #include "Logger.hpp"
 #include  <iomanip>
 
@@ -24,21 +25,21 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
    pars.g3 = 1.10073;
    pars.vd = 246*std::cos(beta);
    pars.vu = 246*std::sin(beta);
-   pars.mq2 << MS2*1.1, 0, 0,
-               0, MS2*1.2, 0,
-               0, 0, MS2*1.3;
-   pars.md2 << MS2*0.9, 0, 0,
-               0, MS2*0.8, 0,
-               0, 0, MS2*0.7;
-   pars.mu2 << MS2*2, 0, 0,
-               0, MS2*2.1, 0,
-               0, 0, MS2*2.2;
-   pars.ml2 << MS2*3, 0, 0,
-               0, MS2*3.1, 0,
-               0, 0, MS2*3.2;
-   pars.me2 << MS2*4, 0, 0,
-               0, MS2*4.1, 0,
-               0, 0, MS2*4.2;
+   pars.mq2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.md2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.mu2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.ml2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.me2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
    pars.Au << 0, 0, 0,
               0, 0, 0, 0,
               0, Xt + pars.mu/tb;
@@ -48,13 +49,15 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
    pars.Ae << 0, 0, 0,
               0, 0, 0,
               0, 0, 0;
-   pars.MA = MS*3;
-   pars.M1 = MS*5;
-   pars.M2 = MS*6;
-   pars.MG = MS*7;
-   pars.Mt = 154.682;
-   pars.Mb = 2.50901;
-   pars.Mtau = 1.777;
+   pars.Yu << 0, 0, 0, 0, 0, 0, 0, 0, 0.85;
+   pars.Yd << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0.15;
+   pars.Ye << 0, 0, 0, 0, 0, 0, 0, 0, 0.1;
+   pars.MA = MS;
+   pars.M1 = MS;
+   pars.M2 = MS;
+   pars.MG = MS;
+
+   pars.validate(true);
 
    return pars;
 }
@@ -71,16 +74,34 @@ int main()
          himalaya::HierarchyCalculator hc(point, 0);
 
          // calculate the 3-loop corrections O(α_t*α_s^2)
-         //const auto hoTop = hc.calculateDMh3L(false);
+         const auto hoTop = hc.calculateDMh3L(false);
+         std::cout << hoTop;
 
-         //std::cout << hoTop;
          // calculate the 3-loop corrections O(α_b*α_s^2)
          //himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
 
-         // check EFT expressions
-         /*std::cout << std::setprecision(16) << point;
-         himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(point);
-         std::cout << mh2EFTCalculator.getDeltaMh2EFT2Loop(1,1) << "\n";*/
+         // calculate fixed-order corrections for v^2 << MS^2
+         himalaya::mh2_eft::Mh2EFTCalculator mhc(point);
+         const auto dmh2_eft_0l = mhc.getDeltaMh2EFT0Loop();
+         const auto dmh2_eft_1l = mhc.getDeltaMh2EFT1Loop(1,1);
+         const auto dmh2_eft_2l = mhc.getDeltaMh2EFT2Loop(1,1);
+
+         std::cout << "Mh^2_EFT_0L  = " << dmh2_eft_0l << " GeV^2 O(g1^2, g2^2)\n";
+         std::cout << "ΔMh^2_EFT_1L = " << dmh2_eft_1l << " GeV^2 O(full)\n";
+         std::cout << "ΔMh^2_EFT_2L = " << dmh2_eft_2l
+                   << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
+
+         // calculate fixed-order corrections
+         himalaya::mh2_fo::MSSM_mass_eigenstates me(point);
+         const auto dmh_fo     = me.calculate_Mh2();
+         const auto dmh2_fo_0l = std::get<0>(dmh_fo);
+         const auto dmh2_fo_1l = std::get<1>(dmh_fo);
+         const auto dmh2_fo_2l = std::get<2>(dmh_fo);
+
+         std::cout << "Mh^2_FO_0L   = " << dmh2_fo_0l << " GeV^2 O(full)\n";
+         std::cout << "ΔMh^2_FO_1L  = " << dmh2_fo_1l << " GeV^2 O(full)\n";
+         std::cout << "ΔMh^2_FO_2L  = " << dmh2_fo_2l
+                   << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
       } catch (const std::exception& e) {
          ERROR_MSG(e.what());
       }
