@@ -267,8 +267,10 @@ std::ostream& operator<<(std::ostream& ostr, const Parameters& pars)
         << "MA    = " << pars.MA << '\n'
         << "MSt   = {" << pars.MSt(0) << ", " << pars.MSt(1) << "}\n"
         << "MSb   = {" << pars.MSb(0) << ", " << pars.MSb(1) << "}\n"
+        << "MStau = {" << pars.MStau(0) << ", " << pars.MStau(1) << "}\n"
         << "s2t   = " << pars.s2t << '\n'
-        << "s2b   = " << pars.s2b << '\n';
+        << "s2b   = " << pars.s2b << '\n'
+        << "s2tau = " << pars.s2tau << '\n';
 
    return ostr;
 }
