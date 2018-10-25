@@ -92,63 +92,6 @@ void convert_symmetric_fermion_mixings_to_slha(
 }
 
 /**
- * Diagonalizes a mass matrix perturbatively.
- *
- * @param m0 tree-level contribution
- * @param m1 1-loop contribution
- * @param m2 2-loop contribution
- * @param m3 3-loop contribution
- *
- * @return perturbatively calculated mass eigenvalues
- */
-std::tuple<V2,V2,V2,V2> diagonalize_perturbatively(
-   const RM22& m0, const RM22& m1 = RM22::Zero(),
-   const RM22& m2 = RM22::Zero(), const RM22& m3 = RM22::Zero())
-{
-   using std::sqrt;
-
-   // tree-level
-   const auto a11 = m0(0,0), a12 = m0(0,1), a22 = m0(1,1);
-   const auto c1 = a11 + a22;
-   const auto c2 = sqrt(sqr(a11) + 4*sqr(a12) - 2*a11*a22 + sqr(a22));
-
-   V2 mh2_0L;
-   mh2_0L << 0.5*(c1 - c2), 0.5*(c1 + c2);
-
-   // 1-loop
-   const auto b11 = m1(0,0), b12 = m1(0,1), b22 = m1(1,1);
-   const auto c3 = b11 + b22;
-   const auto c4 = (a11*b11 - a22*b11 + 4*a12*b12 - a11*b22 + a22*b22)/c2;
-
-   V2 mh2_1L;
-   mh2_1L << 0.5*(c3 - c4), 0.5*(c3 + c4);
-
-   // 2-loop
-   const auto d11 = m2(0,0), d12 = m2(0,1), d22 = m2(1,1);
-   const auto c5 = d11 + d22;
-   const auto c6 = 0.5*(pow2(b11) + 4*pow2(b12) - 2*b11*b22 + pow2(b22)
-                        - pow2(c4) + 2*a11*d11 - 2*a22*d11 + 8*a12*d12
-                        - 2*a11*d22 + 2*a22*d22)/c2;
-
-   V2 mh2_2L;
-   mh2_2L << 0.5*(c5 - c6), 0.5*(c5 + c6);
-
-   // 3-loop
-   const auto e11 = m3(0,0), e12 = m3(0,1), e22 = m3(1,1);
-   const auto c7 = e11 + e22;
-   const auto c8 = 0.5/c2*(
-      2*(4*b12*d12 + b11*(d11 - d22) + b22*(-d11 + d22) + a11*e11 - a22*e11
-         + 4*a12*e12 - a11*e22 + a22*e22)
-      + (c4*(2*b11*b22 - 2*a11*d11 + 2*a22*d11 - 8*a12*d12 + 2*a11*d22
-             - 2*a22*d22 - sqr(b11) - 4*sqr(b12) - sqr(b22) + sqr(c4)))/c2);
-
-   V2 mh2_3L;
-   mh2_3L << 0.5*(c7 - c8), 0.5*(c7 + c8);
-
-   return std::make_tuple(mh2_0L, mh2_1L, mh2_2L, mh2_3L);
-}
-
-/**
  * Normalize each element of the given real matrix to be within the
  * interval [min, max].  Values < min are set to min.  Values > max
  * are set to max.
@@ -835,7 +778,7 @@ Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars)
 V2 MSSM_mass_eigenstates::calculate_Mh2_tree() const
 {
    const auto m0 = get_mass_matrix_hh();
-   const auto mh2_tree = diagonalize_perturbatively(m0);
+   const auto mh2_tree = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0);
 
    return std::get<0>(mh2_tree);
 }
@@ -857,10 +800,10 @@ std::tuple<double,double,double> MSSM_mass_eigenstates::calculate_Mh2() const
    const auto m2    = delta_mh2_2loop();
 
    // tree-level and 1-loop with electroweak gauge couplings
-   const auto Mh2    = diagonalize_perturbatively(m0, m1);
+   const auto Mh2    = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0, m1);
 
    // 2-loop in gaugless limit (p = g1 = g2 = 0)
-   const auto Mh2_gl = diagonalize_perturbatively(m0_gl, m1_gl, m2);
+   const auto Mh2_gl = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0_gl, m1_gl, m2);
 
    return std::make_tuple(std::get<0>(Mh2)(0),
                           std::get<1>(Mh2)(0),
@@ -1259,7 +1202,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it() const
    // 1-loop Higgs mass matrix in gaugeless limit
    const auto DMH_1L = delta_mh2_1loop_gaugeless();
 
-   const auto dmh2 = diagonalize_perturbatively(DMH_0L, DMH_1L);
+   const auto dmh2 = flexiblesusy::fs_diagonalize_hermitian_perturbatively(DMH_0L, DMH_1L);
 
    // 1-loop contribution to (squared) Higgs mass eigenvalues.
    const auto dmh2_1L_gl = std::get<1>(dmh2)(0);

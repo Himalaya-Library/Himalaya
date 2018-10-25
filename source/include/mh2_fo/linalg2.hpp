@@ -24,6 +24,7 @@
 #include <cmath>
 #include <complex>
 #include <algorithm>
+#include <tuple>
 #include <Eigen/Core>
 #include <Eigen/SVD>
 #include <Eigen/Eigenvalues>
@@ -1517,5 +1518,24 @@ void fs_diagonalize_hermitian
 {
     fs_diagonalize_hermitian_errbd(m, w, 0, &w_errbd);
 }
+
+using V2   = Eigen::Vector2d; ///< real 2-vector
+using RM22 = Eigen::Matrix2d; ///< real 2x2 matrix
+
+/**
+ * Diagonalizes a 2x2 hermitian mass matrix perturbatively.
+ *
+ * @param m0 tree-level contribution
+ * @param m1 1-loop contribution
+ * @param m2 2-loop contribution
+ * @param m3 3-loop contribution
+ *
+ * @return perturbatively calculated mass eigenvalues
+ */
+std::tuple<V2,V2,V2,V2> fs_diagonalize_hermitian_perturbatively(
+   const RM22& m0,
+   const RM22& m1 = RM22::Zero(),
+   const RM22& m2 = RM22::Zero(),
+   const RM22& m3 = RM22::Zero());
 
 } // namespace flexiblesusy
