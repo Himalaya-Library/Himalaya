@@ -25,6 +25,7 @@
 #include "H9.hpp"
 #include "H9q2.hpp"
 #include "Constants.hpp"
+#include "linalg2.hpp"
 #include "Logger.hpp"
 #include "Utils.hpp"
 #include "ThresholdCalculator.hpp"
@@ -247,6 +248,16 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
       ho.setMDRMasses(mdrMasses);
       ho.setDMhDRbarPrimeToMDRbarPrimeShift(ho_mdr.getDMhDRbarPrimeToMDRbarPrimeShift()
                                             + ho_mdr.getDMh(3) - ho.getDMh(3));
+   }
+
+   // perturbatively diagonalize
+   {
+      const auto DMh2 = flexiblesusy::fs_diagonalize_hermitian_perturbatively(
+         ho.getDMh(0), ho.getDMh(1), ho.getDMh(2), ho.getDMh(3));
+      ho.setDMh2(0, std::get<0>(DMh2)(0));
+      ho.setDMh2(1, std::get<1>(DMh2)(0));
+      ho.setDMh2(2, std::get<2>(DMh2)(0));
+      ho.setDMh2(3, std::get<3>(DMh2)(0));
    }
 
    return ho;

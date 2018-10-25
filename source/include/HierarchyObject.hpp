@@ -51,6 +51,11 @@ namespace himalaya{
        */
       Eigen::Matrix2d getDMh(int loops) const;
       /**
+       *         @param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
+       *         @return The correction to squared CP-even Higgs mass at the given loop order.
+       */
+      double getDMh2(int loops) const;
+      /**
        *         @return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
        */
       Eigen::Matrix2d getDMhDRbarPrimeToMDRbarPrimeShift() const;
@@ -136,6 +141,12 @@ namespace himalaya{
        */
       void setDMh(int loops, const Eigen::Matrix2d& dMh);
       /**
+       *         Sets the delta of the squared CP-even Higgs mass
+       *         @param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
+       *         @param the delta of the squared mass.
+       */
+      void setDMh2(int loops, double dMh2);
+      /**
        *         Sets the mdrFlag to calculate the corretions in the without MDR (0) or with MDR (1) shifts
        *         @param mdrFlag an int. (0) for H3m (DR')- and (1) for MDR-scheme.
        *         @throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
@@ -211,6 +222,7 @@ namespace himalaya{
       double relDiff2L{};                                                                /**< the relative difference of the two loop Higgs masses */
       std::map<int, double> expUncertainties{};                                                /**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
       std::map<int, Eigen::Matrix2d> dMhMap{};                                                /**< the map which holds all mass matrices at the given loop order */
+      std::map<int, double> dMh2Map{};                                                   ///< map holding loop corretions to squared CP-even Higgs mass
       Eigen::Matrix2d mdrShift{};                                                        /**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
       Eigen::Vector2d mdrMasses{};                                                        /**< the 'vector' which holds the MDR masses */
       double dLambdaH3m{};                                                                /**< delta_lambda 3-loop with H3m logs */

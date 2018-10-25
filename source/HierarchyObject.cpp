@@ -149,6 +149,22 @@ void HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh)
 }
 
 /**
+ * Sets the delta of the squared CP-even Higgs mass
+ * @param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
+ * @param the delta of the squared mass.
+ */
+void HierarchyObject::setDMh2(int loops, double dMh2)
+{
+   if (loops >= 0 && loops <= 3) {
+      dMh2Map[loops] = dMh2;
+   } else {
+      throw std::runtime_error("squared Higgs mass correction for "
+                               + std::to_string(loops)
+                               + " loop(s) is not available.");
+   }
+}
+
+/**
  *         @param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
  *         @return The CP-even Higgs mass matrix at the given loop order.
  */
@@ -159,6 +175,20 @@ Eigen::Matrix2d HierarchyObject::getDMh(int loops) const
    }
 
    throw std::runtime_error("Higgs mass matrix for " + std::to_string(loops)
+                            + " loop(s) is not available.");
+}
+
+/**
+ * @param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
+ * @return The correction to squared CP-even Higgs mass at the given loop order.
+ */
+double HierarchyObject::getDMh2(int loops) const
+{
+   if (loops >= 0 && loops <= 3) {
+      return dMh2Map.at(loops);
+   }
+
+   throw std::runtime_error("Higgs mass correction for " + std::to_string(loops)
                             + " loop(s) is not available.");
 }
 
