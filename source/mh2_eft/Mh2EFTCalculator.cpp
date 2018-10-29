@@ -431,19 +431,23 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
       + 3*pow2(lmMt) - pow2(Pi))))*v2*pow4(sbeta))/2.),
       "dmh2yt4yb2");
 
+   const double mA2 = pow2(p.MA);
+   const double m3 = p.MG;
+   const double m32 = pow2(m3);
    // the second term comes from the tanb resummation
-   dmh2yb6 += isNaN(orderMap.at(EFTOrders::YB6)*((dlambdayb4*(2*Xb
-      *F5(mQ3/mD3)*pow2(cbeta) - mD3*mQ3*(6*lmUMR + 4*F6(mD3/p.mu) + 8*F6(mQ3/p.mu)
-      - 3*pow2(sbeta) + 6*lmAMR*pow2(sbeta))))/(8.*mD3*mQ3)),
+   dmh2yb6 += isNaN(orderMap.at(EFTOrders::YB6)*(-(dlambdayb4*(-2*pow2(Xb)*F5(mQ3/mD3)
+      *pow2(sbeta) + mD3*mQ3*(6*lmUMR + 4*F6(mD3/p.mu) + 8*F6(mQ3/p.mu) - 3*pow2(sbeta)
+      + 6*log(mA2/MR2)*pow2(sbeta)))*v2*pow6(cbeta))/(4.*mD3*mQ3*pow2(cbeta))),
       "dmh2yb6");
-   dmh2yt2yb4 += isNaN(orderMap.at(EFTOrders::YT2YB4)*((dlambdayb4
-      *(4*p.mu*Xt*F5(mQ3/mU3)*pow2(sbeta) + mQ3*mU3*(-8*p.mu*F6(mU3/p.mu) + p.mu*(9
-      - 7*c2beta - 4*lmUMR + 2*(-5 + 3*c2beta)*lmAMR) - 8*Xt
-      *F9(mQ3/p.mu,mU3/p.mu)*tbeta)))/(16.*mQ3*p.mu*mU3)),
+   dmh2yt2yb4 += isNaN(orderMap.at(EFTOrders::YT2YB4)*(-(dlambdayb4*pow2(sbeta)
+      *(-2*p.mu*pow2(Xt)*F5(mQ3/mU3)*pow2(sbeta) + mQ3*mU3*(4*p.mu*F6(mU3/p.mu) + 4*tbeta
+      *Xt*F9(mQ3/p.mu,mU3/p.mu) + p.mu*(2*lmUMR - pow2(sbeta) - 8*pow2(sbeta)
+      + 2*log(mA2/MR2)*(pow2(sbeta) + 4*pow2(sbeta)))))*v2*pow4(cbeta))
+      /(4.*mQ3*p.mu*mU3*pow2(sbeta))),
       "dmh2yt2yb4");
-   dmh2yb4g32 += isNaN(orderMap.at(EFTOrders::G32YB4)*((-4
-      *dlambdayb4*(p.MG + p.MG*F6(mD3/p.MG) + p.MG*F6(mQ3/p.MG) - Xb*F9(mQ3/p.MG,mD3/p.MG)
-      + p.MG*lm3MR))/(3.*p.MG)),
+   dmh2yb4g32 += isNaN(orderMap.at(EFTOrders::G32YB4)*((-8*dlambdayb4*(1
+      + F6(mD3/m3) + F6(mQ3/m3) - (Xb*F9(mQ3/m3,mD3/m3))/m3 + log(m32/MR2))
+      *v2*pow4(cbeta))/3.),
       "dmh2yb4g32");
 
    // Loop factor
