@@ -2348,7 +2348,10 @@ double ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs) const
    const double mD3 = sqrt(mD32);
    const double m3 = sqrt(m32);
    const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
+   const double Xb2 = pow2(Xb);
    const double eps = 0.01*mQ3;
+   const double lmQ3MR = log(mQ32) - lMR;
+   const double lmD3MR = log(mD32) - lMR;
 
    if (std::abs(mQ3 - m3) < eps && std::abs(mD3 - m3) < eps && std::abs(mQ3 - mD3) < eps) {
       return (-8*(Xb*(-12*mQ32*Xb + 4*mQ3*pow2(Xb) - 24*pow3(mQ3) + pow3(Xb)) + 8*mQ3*
@@ -2356,12 +2359,91 @@ double ThresholdCalculator::getDeltaLambdaYb4G32(int omitLogs) const
         16*mQ3*log(mQ3)*(-3*mQ32*Xb - 3*mQ3*pow2(Xb) + 3*pow3(mQ3) + 3*lMR
         *pow3(mQ3) + pow3(Xb)) + 48*pow2(log(mQ3))*pow4(mQ3) + 12*
         pow2(lMR)*pow4(mQ3)))/(3.*pow4(mQ3));
+   } else if(std::abs(mD3 - mQ3) < eps){
+     return (-4*(-48*pow3(m3)*pow3(Xb)*pow4(mQ3) + 156*lmQ3MR*pow3(m3)*pow3(Xb)*pow4(
+        mQ3) - 124*log(m32/MR2)*pow3(m3)*pow3(Xb)*pow4(mQ3) - 192*Xb2*pow4(m3)*
+        pow4(mQ3) + 96*lmQ3MR*Xb2*pow4(m3)*pow4(mQ3) + 96*Xb2*log(m32/MR2)*
+        pow4(m3)*pow4(mQ3) + 24*mQ32*pow4(m3)*pow4(Xb) + 54*lmQ3MR*mQ32*pow4(
+        m3)*pow4(Xb) - 78*mQ32*log(m32/MR2)*pow4(m3)*pow4(Xb) - 20*m32*pow4(
+        mQ3)*pow4(Xb) - 15*lmQ3MR*m32*pow4(mQ3)*pow4(Xb) + 39*m32*log(m32/MR2)*
+        pow4(mQ3)*pow4(Xb) + 16*mQ32*pow3(Xb)*pow5(m3) - 264*lmQ3MR*mQ32*pow3(
+        Xb)*pow5(m3) + 248*mQ32*log(m32/MR2)*pow3(Xb)*pow5(m3) - 96*Xb*pow4(
+        mQ3)*pow5(m3) + 192*lmQ3MR*Xb*pow4(mQ3)*pow5(m3) - 96*Xb*log(m32/MR2)*
+        pow4(mQ3)*pow5(m3) + m32*Xb*log(m32/mQ32)*(66*m32*mQ32*pow3(Xb) - 31*
+        pow3(Xb)*pow4(m3) + 156*m3*Xb2*pow4(mQ3) - 39*pow3(Xb)*pow4(mQ3) + 24*
+        pow3(m3)*(-11*mQ32*Xb2 + 8*pow4(mQ3)) + 124*Xb2*pow5(m3)) + 48*mQ32*
+        Xb2*pow6(m3) - 48*mQ32*Xb2*log(m32/MR2)*pow6(m3) - 48*pow4(mQ3)*pow6(
+        m3) + 48*log(m32/MR2)*pow4(mQ3)*pow6(m3) - 8*pow4(Xb)*pow6(m3) - 31*
+        lmQ3MR*pow4(Xb)*pow6(m3) + 39*log(m32/MR2)*pow4(Xb)*pow6(m3) + 192*m32*
+        Xb2*pow6(mQ3) - 240*lmQ3MR*m32*Xb2*pow6(mQ3) + 192*Xb*pow3(m3)*pow6(
+        mQ3) - 192*lmQ3MR*Xb*pow3(m3)*pow6(mQ3) + 96*(m3 + 2*Xb)*dilog(1 - m32/
+        mQ32)*pow3(m3)*pow6(mQ3) + 96*Xb*log(m32/MR2)*pow3(m3)*pow6(mQ3) - 96*
+        lmQ3MR*Xb*log(m32/MR2)*pow3(m3)*pow6(mQ3) + 96*Xb*pow2(lmQ3MR)*pow3(m3)
+        *pow6(mQ3) + 32*m3*pow3(Xb)*pow6(mQ3) - 16*lmQ3MR*m3*pow3(Xb)*pow6(mQ3)
+        + 156*pow4(m3)*pow6(mQ3) - 144*lmQ3MR*pow4(m3)*pow6(mQ3) + 24*log(m32/
+        MR2)*pow4(m3)*pow6(mQ3) - 48*lmQ3MR*log(m32/MR2)*pow4(m3)*pow6(mQ3) +
+        72*pow2(lmQ3MR)*pow4(m3)*pow6(mQ3) + 4*pow4(Xb)*pow6(mQ3) - 8*lmQ3MR*
+        pow4(Xb)*pow6(mQ3) + 124*lmQ3MR*pow3(Xb)*pow7(m3) - 124*log(m32/MR2)*
+        pow3(Xb)*pow7(m3) - 144*m32*pow8(mQ3) + 144*lmQ3MR*m32*pow8(mQ3) - 96*
+        m3*Xb*pow8(mQ3) - 48*Xb2*pow8(mQ3) + 96*lmQ3MR*Xb2*pow8(mQ3) - 48*m32*
+        pow2(lmQ3MR)*pow8(mQ3) + 36*power10(mQ3) - 72*lmQ3MR*power10(mQ3) + 24*
+        pow2(lmQ3MR)*power10(mQ3)))/(3.*pow2(m32 - mQ32)*pow6(mQ3));
+   } else if(std::abs(m3 - mQ3) < eps){
+     return 12 - 8*lmQ3MR + (8*(-13*mD32 + 13*mQ32 + 2*lmQ3MR*(3*mD32 - mQ3*(3*mQ3 +
+        8*Xb)) + 8*Xb2))/(mD32 - mQ32) - (2*pow2(lmQ3MR)*(-2*mD32*mQ3*(27*mQ3 +
+        40*Xb) + (43*mQ3 + 16*Xb)*pow3(mQ3) + 27*pow4(mD3)))/pow2(mD32 - mQ32)
+        + (lmQ3MR*(-16*mQ32*Xb2 - 6*mD32*(43*mQ32 + 8*Xb2) - 256*mQ3*pow3(Xb) +
+        129*pow4(mD3) + 177*pow4(mQ3) - 128*pow4(Xb)))/pow2(mD32 - mQ32) + (
+        lmQ3MR*(-32*pow2(-(mQ3*Xb2) + pow3(mQ3)) + 2*(89*mQ32 + 56*Xb2)*pow4(
+        mD3) + 2*lmQ3MR*mD32*(-2*mD32*mQ3*(11*mQ3 + 40*Xb) + (27*mQ3 + 16*Xb)*
+        pow3(mQ3) + 11*pow4(mD3)) - mD32*(112*mQ32*Xb2 + 105*pow4(mQ3) + 32*
+        pow4(Xb)) - 89*pow6(mD3)))/pow2(-(mD3*mQ32) + pow3(mD3)) + (4*(8*pow2(-
+        (mQ3*Xb2) + pow3(mQ3)) - 2*(11*mQ32 + 32*mQ3*Xb + 8*Xb2)*pow4(mD3) - 8*
+        mD32*dilog(1 - mQ32/mD32)*(-8*Xb*pow3(mQ3) - 4*mQ3*pow3(Xb) + 2*pow4(
+        mQ3) + pow4(Xb)) + mD32*(32*mQ32*Xb2 + 64*Xb*pow3(mQ3) + 128*mQ3*pow3(
+        Xb) - 3*pow4(mQ3) + 56*pow4(Xb)) + 17*pow6(mD3)))/pow2(-(mD3*mQ32) +
+        pow3(mD3)) - (16*log(mD32/mQ32)*((9*mQ32 - 8*mQ3*Xb - 8*Xb2)*pow4(mD3)
+        + 2*mQ32*(-6*mQ32*Xb2 - 4*Xb*pow3(mQ3) + 4*mQ3*pow3(Xb) + 3*pow4(mQ3) +
+        5*pow4(Xb)) + 2*mD32*(10*mQ32*Xb2 + 8*Xb*pow3(mQ3) + 12*mQ3*pow3(Xb) -
+        6*pow4(mQ3) + 7*pow4(Xb)) - 3*pow6(mD3) + 2*lmQ3MR*((-3*mQ32 + 4*Xb2)*
+        pow4(mD3) + mD32*(-8*mQ32*Xb2 - 4*Xb*pow3(mQ3) - 4*mQ3*pow3(Xb) + 4*
+        pow4(mQ3) - 2*pow4(Xb)) - 2*mQ32*(-2*mQ32*Xb2 - 2*Xb*pow3(mQ3) + 2*mQ3*
+        pow3(Xb) + pow4(mQ3) + 2*pow4(Xb)) + pow6(mD3))))/pow3(mD32 - mQ32) - (
+        16*pow2(log(mD32/mQ32))*(2*mD32*mQ32*(5*mQ32*Xb2 + 8*Xb*pow3(mQ3) + 4*
+        mQ3*pow3(Xb) - 4*pow4(mQ3) - 3*pow4(Xb)) + 2*pow4(mD3)*(-7*mQ32*Xb2 -
+        4*Xb*pow3(mQ3) - 2*mQ3*pow3(Xb) + 4*pow4(mQ3) - 2*pow4(Xb)) + pow4(mQ3)
+        *(-2*mQ32*Xb2 - 8*Xb*pow3(mQ3) - 4*mQ3*pow3(Xb) + 3*pow4(mQ3) + 2*pow4(
+        Xb)) + (-4*mQ32 + 6*Xb2)*pow6(mD3) + pow8(mD3)))/pow4(mD32 - mQ32);
+   } else if(std::abs(m3 - mD3) < eps){
+     return 12 - 8*lmQ3MR + (8*(-13*mD32 + 13*mQ32 + 2*lmQ3MR*(3*mD32 - 3*mQ32 + 8*
+        mD3*Xb) - 8*Xb2))/(mD32 - mQ32) - (2*pow2(lmQ3MR)*(-54*mD32*mQ32 - 80*
+        mD3*mQ32*Xb + 16*Xb*pow3(mD3) + 43*pow4(mD3) + 27*pow4(mQ3)))/pow2(mD32
+        - mQ32) + (lmQ3MR*(-48*mQ32*Xb2 - 2*mD32*(129*mQ32 + 8*Xb2) - 256*mD3*
+        pow3(Xb) + 177*pow4(mD3) + 129*pow4(mQ3) - 128*pow4(Xb)))/pow2(mD32 -
+        mQ32) + 16*pow2(log(mD32/mQ32))*(-2.375 - (10*mD3*Xb)/(mD32 - mQ32) - (
+        2*(3*mD32 - mQ32)*Xb2)/pow2(mD32 - mQ32) - (4*mD3*pow3(Xb))/pow2(mD32 -
+        mQ32) + (2*mD32*(3*mD32 + mQ32)*pow4(Xb))/pow4(mD32 - mQ32)) + (log(
+        mD32/mQ32)*(-352*mD32*mQ32*Xb2 - 512*mQ32*Xb*pow3(mD3) - 128*mD3*mQ32*
+        pow3(Xb) - 384*pow3(mD3)*pow3(Xb) - 363*mQ32*pow4(mD3) + 176*Xb2*pow4(
+        mD3) + 363*mD32*pow4(mQ3) + 256*mD3*Xb*pow4(mQ3) + 176*Xb2*pow4(mQ3) -
+        288*mD32*pow4(Xb) - 96*mQ32*pow4(Xb) + 256*Xb*pow5(mD3) + 121*pow6(mD3)
+        - 4*lmQ3MR*(-32*pow3(mD3)*(5*mQ32*Xb - pow3(Xb)) + (-57*mQ32 + 32*Xb2)*
+        pow4(mD3) + 32*Xb2*pow4(mQ3) + 16*mD3*(-2*mQ32*pow3(Xb) + 5*Xb*pow4(
+        mQ3)) + mD32*(-64*mQ32*Xb2 + 57*pow4(mQ3) - 32*pow4(Xb)) - 16*mQ32*
+        pow4(Xb) + 80*Xb*pow5(mD3) + 19*pow6(mD3) - 19*pow6(mQ3)) + 2*lmD3MR*(-
+        32*pow3(mD3)*(5*mQ32*Xb - 4*pow3(Xb)) - 33*mQ32*pow4(mD3) + 33*mD32*
+        pow4(mQ3) + 80*mD3*Xb*pow4(mQ3) + 80*Xb*pow5(mD3) + 11*pow6(mD3) - 11*
+        pow6(mQ3)) - 121*pow6(mQ3)))/pow3(mD32 - mQ32) + (4*(-64*mD3*mQ32*Xb*(
+        mQ32 - 2*Xb2) + 64*mQ32*Xb*pow3(mD3) - (3*mQ32 + 16*Xb2)*pow4(mD3) -
+        16*Xb2*pow4(mQ3) + 56*mQ32*pow4(Xb) - 8*mQ32*dilog(1 - mD32/mQ32)*(-8*
+        Xb*pow3(mD3) - 4*mD3*pow3(Xb) + 2*pow4(mD3) + pow4(Xb)) + mD32*(32*
+        mQ32*Xb2 - 22*pow4(mQ3) + 8*pow4(Xb)) + 8*pow6(mD3) + 17*pow6(mQ3)))/
+        pow2(-(mD32*mQ3) + pow3(mQ3)) - (lmD3MR*((105*mQ32 - 64*Xb2)*pow4(mD3)
+        - 112*Xb2*pow4(mQ3) - 2*lmQ3MR*mQ32*(-22*mD32*mQ32 - 80*mD3*mQ32*Xb +
+        16*Xb*pow3(mD3) + 27*pow4(mD3) + 11*pow4(mQ3)) + 32*mQ32*pow4(Xb) +
+        mD32*(112*mQ32*Xb2 - 178*pow4(mQ3) + 32*pow4(Xb)) + 32*pow6(mD3) + 89*
+        pow6(mQ3)))/pow2(-(mD32*mQ3) + pow3(mQ3));
    }
-
-   /*mQ32 = p.mq2(2,2)*(1 + 0.02);
-   mD32 = p.md2(2,2)*(1 - 0.015);
-   mQ3 = sqrt(mQ32);
-   mD3 = sqrt(mD32);*/
 
    return 16*(-2*pow2(lMR) + (16*Xb*(m3*(m32 - mD32)*(m32 - mQ32)*log(mD3) - (m32 -
         mQ32)*dilog(1 - m32/mD32)*pow3(m3) + (m32 - mD32)*dilog(1 - m32/mQ32)*
@@ -2436,7 +2518,19 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
    const double Mu2 = pow2(Mu);
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
    const double lmUMR = omitLogs*log(Mu2 / MR2);
+   const double eps = mQ3*0.01;
 
+   if(std::abs(mD3 - mQ3) < eps && std::abs(mA - mQ3) < eps && std::abs(Mu - mQ3) < eps){
+     const double M = sqrt(mQ3*mD3);
+     return (30.*pow4(cbeta)*(Xb2*pow2(M)*(Xb2*(0.2 + 0.7*pow2(cbeta) - 0.1*pow2(
+        sbeta)) + 0.17495808000000004*Xb*Yb*pow2(sbeta) - 0.004229546666666551*
+        pow2(sbeta)*pow2(Yb)) + (Xb2*(-0.4 - 2.8*pow2(cbeta) + 
+        0.5375628799999999*pow2(sbeta)) + 0.10016767999999983*Xb*Yb*pow2(sbeta)
+        + 0.025041919999999957*pow2(sbeta)*pow2(Yb))*pow4(M) - 
+        0.0041457066666666705*pow2(sbeta)*pow2(Yb)*pow4(Xb) + (0.8 + pow2(
+        cbeta) - 0.6699863197821283*pow2(sbeta))*pow6(M) - 0.06666666666666667*
+        pow2(cbeta)*pow6(Xb)))/pow6(M);
+   }
    //TODO limits
    return 3*(10 - 5/pow2(cbeta) - (2*mD32)/(mQ32*pow2(cbeta)) - (4*mQ32)/(mD32*
         pow2(cbeta)) + (2*mD32)/((mD32 - Mu2)*pow2(cbeta)) + (8*Mu2)/(mD32*
@@ -3533,6 +3627,36 @@ double ThresholdCalculator::getDeltaLambdaYt2Yb4(int omitLogs) const
    const double Xb2 = pow2(Xb);
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
    const double lmUMR = omitLogs*log(Mu2 / MR2);
+   const double eps = mQ3*0.01;
+
+   if(std::abs(mU3 - mQ3) < eps && std::abs(mD3 - mQ3) < eps && std::abs(Mu - mQ3) < eps){
+     const double M = sqrt(mQ3*mD3);
+     return (2.675765602178715*pow2(cbeta)*(cbeta*(1.4948992530373513*sbeta*pow3(M)*
+        pow3(Xb) - 8.96939551822411*sbeta*Xt*pow5(M)) + pow4(cbeta)*(Xb2*pow2(
+        M)*(-0.3737248132593378*Xb2 - 0.34273774426277803*Xb*Yt - 
+        0.514106616394167*pow2(Yt)) + (3.5039051224688698*Xb2 + 
+        5.046224971651371*Xb*Yt + 1.2615562429128429*pow2(Yt))*pow4(M) + 
+        0.05195844587770295*pow2(Yt)*pow4(Xb) + 1.*pow6(M)) + pow2(sbeta)*(-
+        0.20235594112794902*Xb2*Xt2*pow2(sbeta)*pow2(Yb) + pow2(M)*(
+        1.4948992530373513*Xb*Xt2*Yb*pow2(sbeta) + 0.7474496265186756*Xt2*pow2(
+        sbeta)*pow2(Yb) + Xb2*(1.1211744397780137*Xt2 + 1.4948992530373513*Xt*
+        Yb*pow2(sbeta) + 0.7474496265186756*pow2(sbeta)*pow2(Yb))) + (Xb*(-
+        7.0078102449377395*Xt - 7.0078102449377395*Yb)*pow2(sbeta) - 
+        7.0078102449377395*Xt*Yb*pow2(sbeta) + Xb2*(-2.2423488795560274 + 
+        1.2615562429128426*pow2(sbeta)) + Xt2*(-2.2423488795560274 + 
+        1.2615562429128426*pow2(sbeta)) - 3.5039051224688698*pow2(sbeta)*pow2(
+        Yb))*pow4(M) + (-17.93879103644822 - 10.511715367406609*pow2(sbeta))*
+        pow6(M)) + pow2(cbeta)*(Xt*(0.7474496265186756*Xb*Xt - 
+        0.6125456657667098*Yb*Yt)*pow2(sbeta)*pow3(Xb) + Xb*pow2(M)*(Xb2*(-
+        0.342737744262778*Yb - 0.34273774426277803*Yt)*pow2(sbeta) + 
+        2.9897985060747025*Xt*Yb*Yt*pow2(sbeta) + Xb*Xt*(-6.727046638668082*Xt
+        + 1.4948992530373513*Yb + 1.4948992530373513*Yt)*pow2(sbeta) + (
+        0.3737248132593378 + 0.3737248132593378*pow2(sbeta))*pow3(Xb)) + (-
+        8.407868305684794*Xb2 + Xt*(8.96939551822411*Xt - 7.0078102449377395*Yb
+        - 7.0078102449377395*Yt) + Xb*(-7.0078102449377395*Xt + 
+        5.0462249716513705*Yb + 5.0462249716513705*Yt))*pow2(sbeta)*pow4(M) + (
+        8.969395518224111 + 6.242348879556027*pow2(sbeta))*pow6(M))))/pow6(M);
+   }
 
    return -6 + (48*Xb*std::abs(Mu)*(dilog(1 - Mu2/mD32) - dilog(1 - Mu2/mQ32)))/(cbeta*(
         mD32 - mQ32)*sbeta) + (48*Xt*std::abs(Mu)*((mQ32 + Mu2)*(Mu2 - mU32)*dilog(1
@@ -3906,6 +4030,35 @@ double ThresholdCalculator::getDeltaLambdaYt4Yb2(int omitLogs) const
    const double Xb2 = pow2(Xb);
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
    const double lmUMR = omitLogs*log(Mu2 / MR2);
+   const double eps = mQ3*0.01;
+
+   if(std::abs(mU3 - mQ3) < eps && std::abs(mD3 - mQ3) < eps && std::abs(Mu - mQ3) < eps){
+     const double M = sqrt(mQ3*mU3);
+     return (2.675765602178715*pow2(sbeta)*(cbeta*M*sbeta*(-0.7474496265186756*Xb*Xt4
+        + (8.96939551822411*Xb + 1.4948992530373513*Xt)*Xt2*pow2(M) - 
+        8.96939551822411*Xb*pow4(M)) + pow4(cbeta)*(Yt*(1.4948992530373513*Xb*
+        Xt2 + Xb2*(1.4948992530373513*Xt + 0.7474496265186756*Yt) + 
+        0.7474496265186756*Xt2*Yt)*pow2(M) - 0.20235594112794902*Xb2*Xt2*pow2(
+        Yt) + (1.2615562429128426*Xb2 - 7.0078102449377395*Xb*Xt + 
+        1.2615562429128426*Xt2 - 7.0078102449377395*Xb*Yt - 7.0078102449377395*
+        Xt*Yt - 3.5039051224688698*pow2(Yt))*pow4(M) - 10.511715367406609*pow6(
+        M)) + pow2(sbeta)*(0.05195844587770295*Xt4*pow2(sbeta)*pow2(Yb) + Xt2*
+        pow2(M)*(Xt2*(0.3737248132593378 - 0.560587219889007*pow2(sbeta)) - 
+        0.342737744262778*Xt*Yb*pow2(sbeta) - 0.514106616394167*pow2(sbeta)*
+        pow2(Yb)) + pow2(sbeta)*(5.746254002024897*Xt2 + 5.046224971651371*Xt*
+        Yb + 1.2615562429128429*pow2(Yb))*pow4(M) + (8.969395518224111 + 1.*
+        pow2(sbeta))*pow6(M)) + pow2(cbeta)*(Xt*pow2(M)*(Xb2*Xt*(
+        1.1211744397780137 - 2.2423488795560274*pow2(sbeta)) + Xt2*(-
+        1.1211744397780137*Xt - 0.342737744262778*Yb - 0.342737744262778*Yt)*
+        pow2(sbeta) + Xb*(1.4948992530373513*Xt*Yb + 1.4948992530373513*Xt*Yt +
+        2.9897985060747025*Yb*Yt)*pow2(sbeta)) + Xb*(0.3737248132593378*Xb*Xt -
+        0.6125456657667098*Yb*Yt)*pow2(sbeta)*pow3(Xt) + (Xb*(-
+        7.0078102449377395*Xt - 7.0078102449377395*Yb - 7.0078102449377395*Yt)*
+        pow2(sbeta) + Xb2*(-2.2423488795560274 + 8.96939551822411*pow2(sbeta))
+        + Xt*((5.0462249716513705*Yb + 5.0462249716513705*Yt)*pow2(sbeta) + Xt*
+        (-2.2423488795560274 + 9.530922730763425*pow2(sbeta))))*pow4(M) + (-
+        17.93879103644822 + 6.242348879556027*pow2(sbeta))*pow6(M))))/pow6(M);
+   }
 
    return -4 + (48*Xb*std::abs(Mu)*((mD32 + Mu2)*(-mQ32 + Mu2)*dilog(1 - Mu2/mD32) + (
         mD32 - Mu2)*(mQ32 + Mu2)*dilog(1 - Mu2/mQ32)))/(cbeta*(mD32 - mQ32)*(

@@ -334,7 +334,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
-   const double B00DR = 2- lmhtreeMt;
+   const double B00DR = 2 - lmhtreeMt;
 
    // Threshold corrections
    const double dytas = thresholdCalculator.getThresholdCorrection(
