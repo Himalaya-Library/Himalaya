@@ -318,8 +318,6 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
    const double Mhtree = std::abs(c2beta*p.MZ);
    const double lmhtreeMt = log(pow2(Mhtree / p.Mt));
    const double lmbMt = log(pow2(p.Mb / p.Mt));
-   const double lmtauMt = log(pow2(p.Mtau / p.Mt));
-   const double YBC = 1.;
    const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
    const double mQ32 = p.mq2(2,2);
    const double mD32 = p.md2(2,2);
@@ -328,9 +326,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
    const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
    const double mU3 = sqrt(p.mu2(2,2));
    const double MR2 = pow2(p.scale);
-   const double lmAMR = omitMSSMLogs*log(pow2(p.MA) / MR2);
    const double lmUMR = omitMSSMLogs*log(pow2(p.mu) / MR2);
-   const double lm3MR = omitMSSMLogs*log(pow2(p.MG) / MR2);
 
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
