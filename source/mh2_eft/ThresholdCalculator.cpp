@@ -2558,7 +2558,7 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
    const double lmUMR = omitLogs*log(Mu2 / MR2);
    const double eps = mQ3*0.01;
-   std::cout << eps << " " << std::abs(mD3 - mQ3) << " " <<  std::abs(mA - mQ3) << " " << std::abs(Mu - mQ3) << "\n";
+
    if(std::abs(mD3 - mQ3) < eps && std::abs(mA - mQ3) < eps && std::abs(Mu - mQ3) < eps){
      const double M = sqrt(mQ3*mD3);
      return (30.*pow4(cbeta)*(Xb2*pow2(M)*(Xb2*(0.2 + 0.7*pow2(cbeta) - 0.1*pow2(
