@@ -10,12 +10,16 @@
 #include "dilog.h"
 #include <cmath>
 #include <limits>
+#include <mutex>
 #include <utility>
 
 namespace himalaya {
 namespace mssm_twoloophiggs {
 
 namespace {
+
+/// locks MSSM fortran functions that are not threadsafe
+std::mutex mtx;
 
 template <typename T> T constexpr sqr(T a) { return a * a; }
 template <typename T> T sqrtabs(T a) { return std::sqrt(std::abs(a)); }
@@ -143,9 +147,13 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
 {
    Eigen::Matrix<double, 2, 2> result;
 
-   ddshiggs_(&mt2, &mb2, &mA2, &mst12, &mst22, &msb12, &msb22,
-             &sxt, &cxt, &sxb, &cxb, &scale2, &mu, &tanb, &vev2,
-             &result(0,0), &result(0,1), &result(1,1));
+   {
+      std::lock_guard<std::mutex> lg(mtx);
+
+      ddshiggs_(&mt2, &mb2, &mA2, &mst12, &mst22, &msb12, &msb22,
+                &sxt, &cxt, &sxb, &cxb, &scale2, &mu, &tanb, &vev2,
+                &result(0,0), &result(0,1), &result(1,1));
+   }
 
    result(1,0) = result(0,1);
 
