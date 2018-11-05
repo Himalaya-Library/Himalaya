@@ -49,7 +49,7 @@ configure_file (
   )
 
 # Himalaya library files
-file(GLOB LIBSOURCES
+file(GLOB HIM_LIBSOURCES
   ${SOURCE_PATH}/HierarchyCalculator.cpp
   ${SOURCE_PATH}/HierarchyObject.cpp
   ${SOURCE_PATH}/Himalaya_interface.cpp
@@ -59,16 +59,18 @@ file(GLOB LIBSOURCES
   ${SOURCE_PATH}/misc/*.cpp)
 
 # DSZ library files
-file(GLOB FSOURCES ${SOURCE_PATH}/mh2l/*.f ${SOURCE_PATH}/mh2l/*.cpp)
+file(GLOB DSZ_LIBSOURCES
+  ${SOURCE_PATH}/mh2l/*.f
+  ${SOURCE_PATH}/mh2l/*.cpp)
 
 # build the himalaya and DSZ library
-add_library(DSZ_static STATIC ${FSOURCES})
+add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_static PROPERTIES OUTPUT_NAME DSZ)
-add_library(DSZ_shared SHARED ${FSOURCES})
+add_library(DSZ_shared SHARED ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_shared PROPERTIES OUTPUT_NAME DSZ)
-add_library(Himalaya_static STATIC ${LIBSOURCES})
+add_library(Himalaya_static STATIC ${HIM_LIBSOURCES})
 set_target_properties(Himalaya_static PROPERTIES OUTPUT_NAME Himalaya)
-add_library(Himalaya_shared SHARED ${LIBSOURCES})
+add_library(Himalaya_shared SHARED ${HIM_LIBSOURCES})
 set_target_properties(Himalaya_shared PROPERTIES OUTPUT_NAME Himalaya)
 target_link_libraries(Himalaya_shared PUBLIC DSZ_shared)
 
