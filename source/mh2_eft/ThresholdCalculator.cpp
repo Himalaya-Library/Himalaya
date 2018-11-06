@@ -1983,7 +1983,16 @@ double ThresholdCalculator::getDeltaVevYtau2() const{
    return exact;
 }
 
-double ThresholdCalculator::getDeltaVevG12(int omitLogs) const{
+/**
+ * @warning The implemented is currently incorrect, so don't trust the
+ * result!
+ */
+double ThresholdCalculator::getDeltaVevG12(int omitLogs) const
+{
+   using std::acos;
+   using std::log;
+   using std::sqrt;
+   using std::tan;
 
    const double sw = std::sin(acos(calc_cw(p.MW, p.MZ)));
    const double MR2 = pow2(p.scale);
@@ -2012,8 +2021,6 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const{
    const double s6beta = std::sin(6*beta);
    const double c2beta = std::cos(2*beta);
    const double c4beta = std::cos(4*beta);
-   const double c8beta = std::cos(8*beta);
-   const double tbeta = tan(beta);
    const double eps = M1*0.01;
    const double lmUMR = omitLogs*log(pow2(Mu) / MR2);
    const double lmD3MR = omitLogs*log(pow2(mD3) / MR2);
@@ -2021,9 +2028,24 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const{
    const double lmL3MR = omitLogs*log(pow2(mL3) / MR2);
    const double lmQ3MR = omitLogs*log(pow2(mQ3) / MR2);
 
-   if (std::abs(beta - Pi/4.) < Pi/4.*0.01) return 0.;
+   if (std::abs(beta - Pi/4.) < Pi/4.*0.01)
+      return 0.;
 
-   const double exact = (pow2(sw)*(4*lmD3MR + 12*lmE3MR + 6*lmL3MR + 2*lmQ3MR + 24*lmUMR + 6*log(
+   if (std::abs(M1 - Mu) < eps) {
+      const double lim = (pow2(sw)*(4096*lmD3MR + 12288*lmE3MR + 6144*lmL3MR + 2048*lmQ3MR +
+        24576*lmUMR + 6144*log(pow2(p.MA)/MR2) + 16384*log(pow2(mU3)/MR2) + 4096*log(pow2(
+        mD1)/MR2) + 4096*log(pow2(mD2)/MR2) + 12288*log(pow2(mE1)/MR2) + 12288*
+        log(pow2(mE2)/MR2) + 6144*log(pow2(mL1)/MR2) + 6144*log(pow2(mL2)/MR2)
+        + 2048*log(pow2(mQ1)/MR2) + 2048*log(pow2(mQ2)/MR2) + 16384*log(pow2(
+        mU1)/MR2) + 16384*log(pow2(mU2)/MR2) - (80*(371 - 65*c4beta + 140*
+        s2beta + 64*s6beta))/pow2(c2beta) + (15*(5985 - 2203*c4beta + 8196*
+        s2beta)*log(MR2/pow2(p.M1)))/pow4(cbeta + sbeta)))/409600.;
+
+      return lim;
+   }
+
+   const double exact =
+       (pow2(sw)*(4*lmD3MR + 12*lmE3MR + 6*lmL3MR + 2*lmQ3MR + 24*lmUMR + 6*log(
         pow2(p.MA)/MR2) + 16*log(pow2(mU3)/MR2) + 4*log(pow2(mD1)/MR2) + 4*log(pow2(mD2)/
         MR2) + 12*log(pow2(mE1)/MR2) + 12*log(pow2(mE2)/MR2) + 6*log(pow2(mL1)/
         MR2) + 6*log(pow2(mL2)/MR2) + 2*log(pow2(mQ1)/MR2) + 2*log(pow2(mQ2)/
@@ -2037,32 +2059,19 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const{
         13*s2beta + s6beta)*pow3(Mu) + 2*(-1 + c4beta)*pow4(M1) + (-1 + 3*
         c4beta)*pow4(Mu)))/(pow2(c2beta)*pow2(M1 - Mu)*pow2(M1 + Mu))))/400.;
 
-   if (std::abs(M1 - Mu) < eps) {
-      const double lim = (pow2(sw)*(4096*lmD3MR + 12288*lmE3MR + 6144*lmL3MR + 2048*lmQ3MR +
-        24576*lmUMR + 6144*log(pow2(p.MA)/MR2) + 16384*log(pow2(mU3)/MR2) + 4096*log(pow2(
-        mD1)/MR2) + 4096*log(pow2(mD2)/MR2) + 12288*log(pow2(mE1)/MR2) + 12288*
-        log(pow2(mE2)/MR2) + 6144*log(pow2(mL1)/MR2) + 6144*log(pow2(mL2)/MR2)
-        + 2048*log(pow2(mQ1)/MR2) + 2048*log(pow2(mQ2)/MR2) + 16384*log(pow2(
-        mU1)/MR2) + 16384*log(pow2(mU2)/MR2) - (80*(371 - 65*c4beta + 140*
-        s2beta + 64*s6beta))/pow2(c2beta) + (15*(5985 - 2203*c4beta + 8196*
-        s2beta)*log(MR2/pow2(p.M1)))/pow4(cbeta + sbeta)))/409600.;
-      /*const double muShifted = M1 + std::abs(M1 - Mu)/2.;
-      const double shifted = (3*pow2(sw)*(2*omitLogs*log(pow2(p.scale)/pow2(muShifted))*pow3(muShifted)*(2*(4 + c4beta)*muShifted*pow2(
-        M1) + 6*M1*s2beta*pow2(muShifted) + (3*s2beta + s6beta)*pow3(M1) - 2*c4beta*
-        pow3(muShifted)) + omitLogs*log(pow2(p.scale)/pow2(M1))*pow3(M1)*(-12*muShifted*s2beta*pow2(M1) -
-        3*(5 + c4beta)*M1*pow2(muShifted) + (-1 + 3*c4beta)*pow3(M1) - 2*(3*s2beta +
-        s6beta)*pow3(muShifted)) + (M1 - muShifted)*(M1 + muShifted)*(-2*(9 + c4beta)*pow2(M1)*pow2(
-        muShifted) - muShifted*(13*s2beta + s6beta)*pow3(M1) - M1*(13*s2beta + s6beta)*pow3(
-        muShifted) + 2*(-1 + c4beta)*pow4(M1) + (-1 + 3*c4beta)*pow4(muShifted))))/(80.*pow2(
-        c2beta)*pow3(pow2(M1) - pow2(muShifted)));
-      if (!isfinite(exact, shifted, lim)) return lim;*/
-      return lim;
-   }
-
    return exact;
 }
 
-double ThresholdCalculator::getDeltaVevG22(int omitLogs) const{
+/**
+ * @warning The implemented is currently incorrect, so don't trust the
+ * result!
+ */
+double ThresholdCalculator::getDeltaVevG22(int omitLogs) const
+{
+   using std::acos;
+   using std::log;
+   using std::sqrt;
+   using std::tan;
 
    const double MR2 = pow2(p.scale);
    const double M1 = p.M1;
@@ -2075,129 +2084,25 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const{
    const double cbeta = std::cos(beta);
    const double c2beta = std::cos(2*beta);
    const double c4beta = std::cos(4*beta);
-   const double c8beta = std::cos(8*beta);
    const double sbeta = std::sin(beta);
    const double s2beta = std::sin(2*beta);
    const double s6beta = std::sin(6*beta);
    const double eps = Mu*0.01;
    const double mL3 = sqrt(p.ml2(2,2));
-   const double mE3 = sqrt(p.me2(2,2));
    const double mL2 = sqrt(p.ml2(1,1));
-   const double mE2 = sqrt(p.me2(1,1));
    const double mL1 = sqrt(p.ml2(0,0));
-   const double mE1 = sqrt(p.me2(0,0));
    const double mQ3 = sqrt(p.mq2(2,2));
-   const double mU3 = sqrt(p.mu2(2,2));
    const double mQ2 = sqrt(p.mq2(1,1));
-   const double mU2 = sqrt(p.mu2(1,1));
    const double mQ1 = sqrt(p.mq2(0,0));
-   const double mU1 = sqrt(p.mu2(0,0));
-   const double mD3 = sqrt(p.mu2(2,2));
-   const double mD2 = sqrt(p.mu2(1,1));
-   const double mD1 = sqrt(p.mu2(0,0));
    const double lmUMR = omitLogs*log(pow2(Mu) / MR2);
-   const double lmD3MR = omitLogs*log(pow2(mD3) / MR2);
-   const double lmE3MR = omitLogs*log(pow2(mE3) / MR2);
    const double lmL3MR = omitLogs*log(pow2(mL3) / MR2);
    const double lmQ3MR = omitLogs*log(pow2(mQ3) / MR2);
 
-   if (std::abs(beta - Pi/4.) < Pi/4.*0.01) return 0.;
-
-   const double exact = (2*lmL3MR*pow2(cw) + 6*lmQ3MR*pow2(cw) + 8*lmUMR*pow2(cw) + 2*log(pow2(p.MA)/
-        MR2)*pow2(cw) + 16*log(pow2(M2)/MR2)*pow2(cw) + 2*log(pow2(mL1)/MR2)*
-        pow2(cw) + 2*log(pow2(mL2)/MR2)*pow2(cw) + 6*log(pow2(mQ1)/MR2)*pow2(
-        cw) + 6*log(pow2(mQ2)/MR2)*pow2(cw) + (3*log(MR2/pow2(M1))*pow2(sw)*
-        pow3(M1)*(-((-Mu2 + pow2(M2))*(-((1 + c4beta)*M2*Mu) - 2*Mu2*(s2beta +
-        s6beta) + 2*(s2beta + s6beta)*pow2(M2))*pow3(Mu)) - 2*Mu2*pow2(M1)*((5
-        - 3*c4beta)*M2*Mu2 + 4*Mu*s2beta*pow2(M2) + (1 + c4beta)*pow3(M2) + 4*
-        s2beta*pow3(Mu)) + ((11 - 5*c4beta)*M2*Mu2 + 8*Mu*s2beta*pow2(M2) + (1
-        + c4beta)*pow3(M2) + 8*s2beta*pow3(Mu))*pow4(M1) + 2*(1 + c4beta)*pow3(
-        M1)*(-3*Mu2*pow2(M2) + pow4(M2) + 2*pow4(Mu)) - 2*M1*Mu2*(-((5 + 7*
-        c4beta)*Mu2*pow2(M2)) + 4*M2*s2beta*pow3(Mu) + 3*(1 + c4beta)*pow4(M2)
-        + (5 + 3*c4beta)*pow4(Mu)) + 2*(-((-1 + c4beta)*Mu2) + 4*M2*Mu*s2beta +
-        2*pow2(M2))*pow5(M1)))/(pow2(c2beta)*pow2(M2 - Mu)*pow2(M2 + Mu)*pow3(
-        M1 - Mu)*pow3(M1 + Mu)) + (3*log(MR2/pow2(M2))*pow3(M2)*((1 + c4beta)*(
-        -1 + pow2(cw))*pow2(-Mu2 + pow2(M2))*pow3(M1) + M1*Mu*(-1 + pow2(cw))*(
-        -Mu2 + pow2(M2))*(8*M2*Mu2*s2beta + (11 - 5*c4beta)*Mu*pow2(M2) + 8*
-        s2beta*pow3(M2) + (1 + c4beta)*pow3(Mu)) + (M2*Mu2*(18 + c4beta*(18 -
-        13*pow2(cw)) + 35*pow2(cw)) + 48*Mu*s2beta*pow2(cw)*pow2(M2) - (6 - 13*
-        pow2(cw) + 3*c4beta*(2 + pow2(cw)))*pow3(M2) + 2*(3*s6beta + s2beta*(3
-        + 8*pow2(cw)))*pow3(Mu))*pow4(M1) + 2*pow2(M1)*(Mu2*(7 - 14*pow2(cw) +
-        c4beta*(7 + 2*pow2(cw)))*pow3(M2) + 4*s2beta*(1 - 13*pow2(cw))*pow2(M2)
-        *pow3(Mu) + 4*Mu*s2beta*(-1 + pow2(cw))*pow4(M2) + M2*(-17 - 36*pow2(
-        cw) + c4beta*(-19 + 14*pow2(cw)))*pow4(Mu) + 2*(-1 + pow2(cw))*pow5(M2)
-        - 2*(3*s6beta + s2beta*(3 + 8*pow2(cw)))*pow5(Mu)) + Mu2*(-(Mu2*(8 -
-        15*pow2(cw) + c4beta*(8 + pow2(cw)))*pow3(M2)) + 8*s2beta*(1 + 5*pow2(
-        cw))*pow2(M2)*pow3(Mu) + 8*Mu*s2beta*(-1 + pow2(cw))*pow4(M2) + M2*(22
-        + c4beta*(18 - 13*pow2(cw)) + 31*pow2(cw))*pow4(Mu) - 2*(-1 + c4beta)*(
-        -1 + pow2(cw))*pow5(M2) + 2*(3*s6beta + s2beta*(3 + 8*pow2(cw)))*pow5(
-        Mu))))/(pow2(c2beta)*pow2(M1 - Mu)*pow2(M1 + Mu)*pow3(-M2 + Mu)*pow3(M2
-        + Mu)) + (pow4(M1)*(2*Mu2*(-27 - 68*pow2(cw) + c4beta*(-33 + 34*pow2(
-        cw)))*pow2(M2) - 9*Mu*(s2beta + s6beta + 16*s2beta*pow2(cw))*pow3(M2) -
-        3*M2*(3*s6beta + s2beta*(-5 + 56*pow2(cw)))*pow3(Mu) + 2*(6 - 23*pow2(
-        cw) + c4beta*(6 + pow2(cw)))*pow4(M2) + (24 - 55*pow2(cw) + c4beta*(12
-        + 5*pow2(cw)))*pow4(Mu)) - 3*(-1 + pow2(cw))*((11 - 5*c4beta)*M2*Mu2 +
-        8*Mu*s2beta*pow2(M2) + (1 + c4beta)*pow3(M2) + 8*s2beta*pow3(Mu))*pow5(
-        M1) - 3*(-1 + pow2(cw))*pow3(M1)*(-2*(1 + c4beta)*Mu2*pow3(M2) + 2*(-
-        s2beta + s6beta)*pow2(M2)*pow3(Mu) - Mu*(s2beta + s6beta)*pow4(M2) + (-
-        5 + 3*c4beta)*M2*pow4(Mu) + (1 + c4beta)*pow5(M2) - (5*s2beta + s6beta)
-        *pow5(Mu)) - 6*(-1 + pow2(cw))*(-((-1 + c4beta)*Mu2) + 4*M2*Mu*s2beta +
-        2*pow2(M2))*pow6(M1) - 3*M1*Mu*(-1 + pow2(cw))*((-5 + 3*c4beta)*pow3(
-        M2)*pow3(Mu) + Mu2*(7*s2beta - s6beta)*pow4(M2) + 2*(-9*s2beta +
-        s6beta)*pow2(M2)*pow4(Mu) + (11 - 5*c4beta)*Mu*pow5(M2) + 4*(-3 +
-        c4beta)*M2*pow5(Mu) + 8*s2beta*pow6(M2) - (5*s2beta + s6beta)*pow6(Mu))
-        - 2*pow2(M1)*(-3*(s2beta + 3*s6beta + 50*s2beta*pow2(cw))*pow3(M2)*
-        pow3(Mu) + Mu2*(15 - 7*c4beta*(-3 + pow2(cw)) - 49*pow2(cw))*pow4(M2) +
-        2*(-27 - 68*pow2(cw) + c4beta*(-39 + 40*pow2(cw)))*pow2(M2)*pow4(Mu) +
-        12*Mu*s2beta*(-1 + pow2(cw))*pow5(M2) - 3*M2*(3*s6beta + s2beta*(-7 +
-        58*pow2(cw)))*pow5(Mu) + 6*(-1 + pow2(cw))*pow6(M2) + (27 - 58*pow2(cw)
-        + c4beta*(15 + 2*pow2(cw)))*pow6(Mu)) + Mu2*(-3*(3*s6beta + s2beta*(7 +
-        44*pow2(cw)))*pow3(M2)*pow3(Mu) + 2*Mu2*(12 - 29*pow2(cw) + c4beta*(6 +
-        pow2(cw)))*pow4(M2) + 2*(-39 - 56*pow2(cw) + c4beta*(-27 + 28*pow2(cw))
-        )*pow2(M2)*pow4(Mu) - 24*Mu*s2beta*(-1 + pow2(cw))*pow5(M2) - 3*M2*(3*
-        s6beta + s2beta*(7 + 44*pow2(cw)))*pow5(Mu) + 6*(-1 + c4beta)*(-1 +
-        pow2(cw))*pow6(M2) + (12 - 43*pow2(cw) + c4beta*(12 + 5*pow2(cw)))*
-        pow6(Mu)))/(pow2(c2beta)*pow2(M1 - Mu)*pow2(M2 - Mu)*pow2(M1 + Mu)*
-        pow2(M2 + Mu)) + (3*log(MR2/Mu2)*((Mu2*(-1 + s2beta)*s2beta*(M2*(7*M2 -
-        3*Mu)*Mu2 + pow2(M1)*(5*M2*Mu + 7*Mu2 - 8*pow2(M2)) + M1*Mu*(6*M2*Mu -
-        3*Mu2 + 5*pow2(M2))))/((M1 - Mu)*(-M2 + Mu)*pow2(M1 + Mu)*pow2(M2 + Mu)
-        ) - (Mu2*(-1 + s2beta)*(pow2(M1)*(M2*Mu + 11*Mu2 - 16*pow2(M2)) + M1*
-        Mu*(-2*M2*Mu - 7*Mu2 + pow2(M2)) + Mu2*(-7*M2*Mu - 8*Mu2 + 11*pow2(M2))
-        ))/((M1 - Mu)*(-M2 + Mu)*pow2(M1 + Mu)*pow2(M2 + Mu)) - 16*pow2(s2beta)
-        - (Mu2*s2beta*(M2*(7*M2 + 3*Mu)*Mu2 + pow2(M1)*(-5*M2*Mu + 7*Mu2 - 8*
-        pow2(M2)) + M1*Mu*(6*M2*Mu + 3*Mu2 - 5*pow2(M2)))*pow2(cbeta + sbeta))/
-        ((M1 + Mu)*(M2 + Mu)*pow2(M1 - Mu)*pow2(M2 - Mu)) + (Mu2*(Mu2*(-7*M2*Mu
-        + 8*Mu2 - 11*pow2(M2)) + M1*Mu*(2*M2*Mu - 7*Mu2 + pow2(M2)) + pow2(M1)*
-        (M2*Mu - 11*Mu2 + 16*pow2(M2)))*pow2(cbeta + sbeta))/((M1 + Mu)*(M2 +
-        Mu)*pow2(M1 - Mu)*pow2(M2 - Mu)) - (2*pow3(M1)*(M1*Mu2*(3*(1 + c4beta)*
-        M2 + Mu*(15*s2beta - s6beta)) + (1 + c4beta)*Mu2*pow2(M1) - (M2 +
-        c4beta*M2 + 16*Mu*s2beta)*pow3(M1) + (-4*(-1 + c4beta)*Mu + M2*(s2beta
-        + s6beta))*pow3(Mu) + (-7 + c4beta)*pow4(M1)))/((M1 - M2)*pow3(-Mu2 +
-        pow2(M1))) + (2*pow3(M2)*(-5*(1 + c4beta)*Mu2*pow2(M2) - 16*Mu*s2beta*
-        pow3(M2) + M2*(13*s2beta - 3*s6beta)*pow3(Mu) + M1*(9*(1 + c4beta)*M2*
-        Mu2 - 3*(1 + c4beta)*pow3(M2) + 3*(s2beta + s6beta)*pow3(Mu)) + (-5 +
-        3*c4beta)*pow4(M2) - 4*(-1 + c4beta)*pow4(Mu)))/((M1 - M2)*pow3(-Mu2 +
-        pow2(M2))) - (2*pow2(cw)*pow3(Mu)*(M1*(-Mu2 + pow2(M2))*pow3(Mu)*(2*(-3
-        + c4beta)*M2*Mu2 - 10*Mu*s2beta*pow2(M2) + (-3 + c4beta)*pow3(M2) - 2*
-        s2beta*pow3(Mu)) - (-Mu2 + pow2(M2))*pow3(M1)*(-2*Mu2*(5*s2beta +
-        s6beta)*pow2(M2) + (-3 + c4beta)*Mu*pow3(M2) + (-3 + c4beta)*M2*pow3(
-        Mu) + (s2beta + s6beta)*pow4(M2) + (s2beta + s6beta)*pow4(Mu)) + (-Mu2
-        + pow2(M2))*(-((-3 + c4beta)*M2*Mu) + 2*Mu2*s2beta + 2*s2beta*pow2(M2))
-        *pow5(M1) + pow4(M1)*(-16*Mu2*s2beta*pow3(M2) + 19*(-3 + c4beta)*pow2(
-        M2)*pow3(Mu) - 2*(-3 + c4beta)*Mu*pow4(M2) - 82*M2*s2beta*pow4(Mu) + 2*
-        s2beta*pow5(M2) + 7*(-3 + c4beta)*pow5(Mu)) + 2*(12*M2*Mu2*s2beta - 3*(
-        -3 + c4beta)*Mu*pow2(M2) + 4*s2beta*pow3(M2) - (-3 + c4beta)*pow3(Mu))*
-        pow6(M1) + pow3(Mu)*(-8*s2beta*pow3(M2)*pow3(Mu) - 2*(3 + c4beta)*Mu2*
-        pow4(M2) + 4*(-3 + 2*c4beta)*pow2(M2)*pow4(Mu) - 2*Mu*s2beta*pow5(M2) -
-        22*M2*s2beta*pow5(Mu) + (1 + c4beta)*pow6(M2) + (-7 + c4beta)*pow6(Mu))
-        + pow2(M1)*(2*(3 + 5*c4beta)*pow3(Mu)*pow4(M2) + 16*s2beta*pow3(M2)*
-        pow4(Mu) - 9*(-5 + 3*c4beta)*pow2(M2)*pow5(Mu) - 3*(1 + c4beta)*Mu*
-        pow6(M2) + 80*M2*s2beta*pow6(Mu) - 4*(-6 + c4beta)*pow7(Mu))))/(pow3(M1
-        - Mu)*pow3(M1 + Mu)*pow3(-M2 + Mu)*pow3(M2 + Mu))))/pow2(c2beta))/48.;
-
+   if (std::abs(beta - Pi/4.) < Pi/4.*0.01)
+      return 0.;
 
    if (std::abs(M1 - Mu) < eps && std::abs(M2 - Mu) < eps) {
-     return (lmL3MR*pow2(cw))/24. + (lmQ3MR*pow2(cw))/8. + (lmUMR*pow2(cw))/6. + (
+      return (lmL3MR*pow2(cw))/24. + (lmQ3MR*pow2(cw))/8. + (lmUMR*pow2(cw))/6. + (
         log(pow2(p.MA)/MR2)*pow2(cw))/24. + (log(pow2(M2)/MR2)*pow2(cw))/3. + (log(
         pow2(mL1)/MR2)*pow2(cw))/24. + (log(pow2(mL2)/MR2)*pow2(cw))/24. + (
         log(pow2(mQ1)/MR2)*pow2(cw))/8. + (log(pow2(mQ2)/MR2)*pow2(cw))/8. - (
@@ -2210,7 +2115,8 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const{
    if (std::abs(M1 - Mu) < eps) {
       const double t2beta = tan(2*beta);
       const double c2w = cos(2*acos(cw));
-      const double lim = (512*lmL3MR*pow2(cw) + 1536*lmQ3MR*pow2(cw) + 2048*lmUMR*pow2(cw) + 512*
+      const double lim =
+        (512*lmL3MR*pow2(cw) + 1536*lmQ3MR*pow2(cw) + 2048*lmUMR*pow2(cw) + 512*
         log(pow2(p.MA)/MR2)*pow2(cw) + 4096*log(pow2(M2)/MR2)*pow2(cw) + 512*log(pow2(
         mL1)/MR2)*pow2(cw) + 512*log(pow2(mL2)/MR2)*pow2(cw) + 1536*log(pow2(
         mQ1)/MR2)*pow2(cw) + 1536*log(pow2(mQ2)/MR2)*pow2(cw) + (2*log(MR2/
@@ -2259,7 +2165,8 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const{
         6119 - 2917*c4beta - 128*s6beta + 4180*c2beta*t2beta + 1024*pow2(
         c2beta))*pow7(Mu))))/(Mu2*pow2(c2beta)*pow2(M2 + Mu)*pow3(M2 - Mu)))/
         12288.;
-        return lim;
+
+      return lim;
    }
 
    if (std::abs(M2 - Mu) < eps) {
@@ -2605,8 +2512,102 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const{
         ) + 139*pow2(cw)*pow5(M1)*sin(2*(3*beta + w)) + 3797*pow5(Mu)*sin(2*(3*
         beta + w)) - 4297*pow2(cw)*pow5(Mu)*sin(2*(3*beta + w))))))/(4.*pow2(
         c2beta)*pow2(cbeta + sbeta)*pow3(M1 - Mu)*pow3(M1 + Mu)))/98304.;
-        return lim;
+
+      return lim;
    }
+
+   const double exact =
+      (2*lmL3MR*pow2(cw) + 6*lmQ3MR*pow2(cw) + 8*lmUMR*pow2(cw) + 2*log(pow2(p.MA)/
+        MR2)*pow2(cw) + 16*log(pow2(M2)/MR2)*pow2(cw) + 2*log(pow2(mL1)/MR2)*
+        pow2(cw) + 2*log(pow2(mL2)/MR2)*pow2(cw) + 6*log(pow2(mQ1)/MR2)*pow2(
+        cw) + 6*log(pow2(mQ2)/MR2)*pow2(cw) + (3*log(MR2/pow2(M1))*pow2(sw)*
+        pow3(M1)*(-((-Mu2 + pow2(M2))*(-((1 + c4beta)*M2*Mu) - 2*Mu2*(s2beta +
+        s6beta) + 2*(s2beta + s6beta)*pow2(M2))*pow3(Mu)) - 2*Mu2*pow2(M1)*((5
+        - 3*c4beta)*M2*Mu2 + 4*Mu*s2beta*pow2(M2) + (1 + c4beta)*pow3(M2) + 4*
+        s2beta*pow3(Mu)) + ((11 - 5*c4beta)*M2*Mu2 + 8*Mu*s2beta*pow2(M2) + (1
+        + c4beta)*pow3(M2) + 8*s2beta*pow3(Mu))*pow4(M1) + 2*(1 + c4beta)*pow3(
+        M1)*(-3*Mu2*pow2(M2) + pow4(M2) + 2*pow4(Mu)) - 2*M1*Mu2*(-((5 + 7*
+        c4beta)*Mu2*pow2(M2)) + 4*M2*s2beta*pow3(Mu) + 3*(1 + c4beta)*pow4(M2)
+        + (5 + 3*c4beta)*pow4(Mu)) + 2*(-((-1 + c4beta)*Mu2) + 4*M2*Mu*s2beta +
+        2*pow2(M2))*pow5(M1)))/(pow2(c2beta)*pow2(M2 - Mu)*pow2(M2 + Mu)*pow3(
+        M1 - Mu)*pow3(M1 + Mu)) + (3*log(MR2/pow2(M2))*pow3(M2)*((1 + c4beta)*(
+        -1 + pow2(cw))*pow2(-Mu2 + pow2(M2))*pow3(M1) + M1*Mu*(-1 + pow2(cw))*(
+        -Mu2 + pow2(M2))*(8*M2*Mu2*s2beta + (11 - 5*c4beta)*Mu*pow2(M2) + 8*
+        s2beta*pow3(M2) + (1 + c4beta)*pow3(Mu)) + (M2*Mu2*(18 + c4beta*(18 -
+        13*pow2(cw)) + 35*pow2(cw)) + 48*Mu*s2beta*pow2(cw)*pow2(M2) - (6 - 13*
+        pow2(cw) + 3*c4beta*(2 + pow2(cw)))*pow3(M2) + 2*(3*s6beta + s2beta*(3
+        + 8*pow2(cw)))*pow3(Mu))*pow4(M1) + 2*pow2(M1)*(Mu2*(7 - 14*pow2(cw) +
+        c4beta*(7 + 2*pow2(cw)))*pow3(M2) + 4*s2beta*(1 - 13*pow2(cw))*pow2(M2)
+        *pow3(Mu) + 4*Mu*s2beta*(-1 + pow2(cw))*pow4(M2) + M2*(-17 - 36*pow2(
+        cw) + c4beta*(-19 + 14*pow2(cw)))*pow4(Mu) + 2*(-1 + pow2(cw))*pow5(M2)
+        - 2*(3*s6beta + s2beta*(3 + 8*pow2(cw)))*pow5(Mu)) + Mu2*(-(Mu2*(8 -
+        15*pow2(cw) + c4beta*(8 + pow2(cw)))*pow3(M2)) + 8*s2beta*(1 + 5*pow2(
+        cw))*pow2(M2)*pow3(Mu) + 8*Mu*s2beta*(-1 + pow2(cw))*pow4(M2) + M2*(22
+        + c4beta*(18 - 13*pow2(cw)) + 31*pow2(cw))*pow4(Mu) - 2*(-1 + c4beta)*(
+        -1 + pow2(cw))*pow5(M2) + 2*(3*s6beta + s2beta*(3 + 8*pow2(cw)))*pow5(
+        Mu))))/(pow2(c2beta)*pow2(M1 - Mu)*pow2(M1 + Mu)*pow3(-M2 + Mu)*pow3(M2
+        + Mu)) + (pow4(M1)*(2*Mu2*(-27 - 68*pow2(cw) + c4beta*(-33 + 34*pow2(
+        cw)))*pow2(M2) - 9*Mu*(s2beta + s6beta + 16*s2beta*pow2(cw))*pow3(M2) -
+        3*M2*(3*s6beta + s2beta*(-5 + 56*pow2(cw)))*pow3(Mu) + 2*(6 - 23*pow2(
+        cw) + c4beta*(6 + pow2(cw)))*pow4(M2) + (24 - 55*pow2(cw) + c4beta*(12
+        + 5*pow2(cw)))*pow4(Mu)) - 3*(-1 + pow2(cw))*((11 - 5*c4beta)*M2*Mu2 +
+        8*Mu*s2beta*pow2(M2) + (1 + c4beta)*pow3(M2) + 8*s2beta*pow3(Mu))*pow5(
+        M1) - 3*(-1 + pow2(cw))*pow3(M1)*(-2*(1 + c4beta)*Mu2*pow3(M2) + 2*(-
+        s2beta + s6beta)*pow2(M2)*pow3(Mu) - Mu*(s2beta + s6beta)*pow4(M2) + (-
+        5 + 3*c4beta)*M2*pow4(Mu) + (1 + c4beta)*pow5(M2) - (5*s2beta + s6beta)
+        *pow5(Mu)) - 6*(-1 + pow2(cw))*(-((-1 + c4beta)*Mu2) + 4*M2*Mu*s2beta +
+        2*pow2(M2))*pow6(M1) - 3*M1*Mu*(-1 + pow2(cw))*((-5 + 3*c4beta)*pow3(
+        M2)*pow3(Mu) + Mu2*(7*s2beta - s6beta)*pow4(M2) + 2*(-9*s2beta +
+        s6beta)*pow2(M2)*pow4(Mu) + (11 - 5*c4beta)*Mu*pow5(M2) + 4*(-3 +
+        c4beta)*M2*pow5(Mu) + 8*s2beta*pow6(M2) - (5*s2beta + s6beta)*pow6(Mu))
+        - 2*pow2(M1)*(-3*(s2beta + 3*s6beta + 50*s2beta*pow2(cw))*pow3(M2)*
+        pow3(Mu) + Mu2*(15 - 7*c4beta*(-3 + pow2(cw)) - 49*pow2(cw))*pow4(M2) +
+        2*(-27 - 68*pow2(cw) + c4beta*(-39 + 40*pow2(cw)))*pow2(M2)*pow4(Mu) +
+        12*Mu*s2beta*(-1 + pow2(cw))*pow5(M2) - 3*M2*(3*s6beta + s2beta*(-7 +
+        58*pow2(cw)))*pow5(Mu) + 6*(-1 + pow2(cw))*pow6(M2) + (27 - 58*pow2(cw)
+        + c4beta*(15 + 2*pow2(cw)))*pow6(Mu)) + Mu2*(-3*(3*s6beta + s2beta*(7 +
+        44*pow2(cw)))*pow3(M2)*pow3(Mu) + 2*Mu2*(12 - 29*pow2(cw) + c4beta*(6 +
+        pow2(cw)))*pow4(M2) + 2*(-39 - 56*pow2(cw) + c4beta*(-27 + 28*pow2(cw))
+        )*pow2(M2)*pow4(Mu) - 24*Mu*s2beta*(-1 + pow2(cw))*pow5(M2) - 3*M2*(3*
+        s6beta + s2beta*(7 + 44*pow2(cw)))*pow5(Mu) + 6*(-1 + c4beta)*(-1 +
+        pow2(cw))*pow6(M2) + (12 - 43*pow2(cw) + c4beta*(12 + 5*pow2(cw)))*
+        pow6(Mu)))/(pow2(c2beta)*pow2(M1 - Mu)*pow2(M2 - Mu)*pow2(M1 + Mu)*
+        pow2(M2 + Mu)) + (3*log(MR2/Mu2)*((Mu2*(-1 + s2beta)*s2beta*(M2*(7*M2 -
+        3*Mu)*Mu2 + pow2(M1)*(5*M2*Mu + 7*Mu2 - 8*pow2(M2)) + M1*Mu*(6*M2*Mu -
+        3*Mu2 + 5*pow2(M2))))/((M1 - Mu)*(-M2 + Mu)*pow2(M1 + Mu)*pow2(M2 + Mu)
+        ) - (Mu2*(-1 + s2beta)*(pow2(M1)*(M2*Mu + 11*Mu2 - 16*pow2(M2)) + M1*
+        Mu*(-2*M2*Mu - 7*Mu2 + pow2(M2)) + Mu2*(-7*M2*Mu - 8*Mu2 + 11*pow2(M2))
+        ))/((M1 - Mu)*(-M2 + Mu)*pow2(M1 + Mu)*pow2(M2 + Mu)) - 16*pow2(s2beta)
+        - (Mu2*s2beta*(M2*(7*M2 + 3*Mu)*Mu2 + pow2(M1)*(-5*M2*Mu + 7*Mu2 - 8*
+        pow2(M2)) + M1*Mu*(6*M2*Mu + 3*Mu2 - 5*pow2(M2)))*pow2(cbeta + sbeta))/
+        ((M1 + Mu)*(M2 + Mu)*pow2(M1 - Mu)*pow2(M2 - Mu)) + (Mu2*(Mu2*(-7*M2*Mu
+        + 8*Mu2 - 11*pow2(M2)) + M1*Mu*(2*M2*Mu - 7*Mu2 + pow2(M2)) + pow2(M1)*
+        (M2*Mu - 11*Mu2 + 16*pow2(M2)))*pow2(cbeta + sbeta))/((M1 + Mu)*(M2 +
+        Mu)*pow2(M1 - Mu)*pow2(M2 - Mu)) - (2*pow3(M1)*(M1*Mu2*(3*(1 + c4beta)*
+        M2 + Mu*(15*s2beta - s6beta)) + (1 + c4beta)*Mu2*pow2(M1) - (M2 +
+        c4beta*M2 + 16*Mu*s2beta)*pow3(M1) + (-4*(-1 + c4beta)*Mu + M2*(s2beta
+        + s6beta))*pow3(Mu) + (-7 + c4beta)*pow4(M1)))/((M1 - M2)*pow3(-Mu2 +
+        pow2(M1))) + (2*pow3(M2)*(-5*(1 + c4beta)*Mu2*pow2(M2) - 16*Mu*s2beta*
+        pow3(M2) + M2*(13*s2beta - 3*s6beta)*pow3(Mu) + M1*(9*(1 + c4beta)*M2*
+        Mu2 - 3*(1 + c4beta)*pow3(M2) + 3*(s2beta + s6beta)*pow3(Mu)) + (-5 +
+        3*c4beta)*pow4(M2) - 4*(-1 + c4beta)*pow4(Mu)))/((M1 - M2)*pow3(-Mu2 +
+        pow2(M2))) - (2*pow2(cw)*pow3(Mu)*(M1*(-Mu2 + pow2(M2))*pow3(Mu)*(2*(-3
+        + c4beta)*M2*Mu2 - 10*Mu*s2beta*pow2(M2) + (-3 + c4beta)*pow3(M2) - 2*
+        s2beta*pow3(Mu)) - (-Mu2 + pow2(M2))*pow3(M1)*(-2*Mu2*(5*s2beta +
+        s6beta)*pow2(M2) + (-3 + c4beta)*Mu*pow3(M2) + (-3 + c4beta)*M2*pow3(
+        Mu) + (s2beta + s6beta)*pow4(M2) + (s2beta + s6beta)*pow4(Mu)) + (-Mu2
+        + pow2(M2))*(-((-3 + c4beta)*M2*Mu) + 2*Mu2*s2beta + 2*s2beta*pow2(M2))
+        *pow5(M1) + pow4(M1)*(-16*Mu2*s2beta*pow3(M2) + 19*(-3 + c4beta)*pow2(
+        M2)*pow3(Mu) - 2*(-3 + c4beta)*Mu*pow4(M2) - 82*M2*s2beta*pow4(Mu) + 2*
+        s2beta*pow5(M2) + 7*(-3 + c4beta)*pow5(Mu)) + 2*(12*M2*Mu2*s2beta - 3*(
+        -3 + c4beta)*Mu*pow2(M2) + 4*s2beta*pow3(M2) - (-3 + c4beta)*pow3(Mu))*
+        pow6(M1) + pow3(Mu)*(-8*s2beta*pow3(M2)*pow3(Mu) - 2*(3 + c4beta)*Mu2*
+        pow4(M2) + 4*(-3 + 2*c4beta)*pow2(M2)*pow4(Mu) - 2*Mu*s2beta*pow5(M2) -
+        22*M2*s2beta*pow5(Mu) + (1 + c4beta)*pow6(M2) + (-7 + c4beta)*pow6(Mu))
+        + pow2(M1)*(2*(3 + 5*c4beta)*pow3(Mu)*pow4(M2) + 16*s2beta*pow3(M2)*
+        pow4(Mu) - 9*(-5 + 3*c4beta)*pow2(M2)*pow5(Mu) - 3*(1 + c4beta)*Mu*
+        pow6(M2) + 80*M2*s2beta*pow6(Mu) - 4*(-6 + c4beta)*pow7(Mu))))/(pow3(M1
+        - Mu)*pow3(M1 + Mu)*pow3(-M2 + Mu)*pow3(M2 + Mu))))/pow2(c2beta))/48.;
 
    return exact;
 }
