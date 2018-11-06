@@ -111,6 +111,22 @@ Mh2EFTCalculator::Mh2EFTCalculator(
    for (int i = EFTOrders::FIRST; i < EFTOrders::NUMBER_OF_EFT_ORDERS; i++) {
       orderMap.emplace(i, 1u);
    }
+
+   if (p.g1 < 1e-5) {
+      setCorrectionFlag(EFTOrders::G12G22, 0);
+      setCorrectionFlag(EFTOrders::G12YB2, 0);
+      setCorrectionFlag(EFTOrders::G14, 0);
+      setCorrectionFlag(EFTOrders::G12YB2, 0);
+      setCorrectionFlag(EFTOrders::G12YTAU2, 0);
+      setCorrectionFlag(EFTOrders::G12YT2, 0);
+   }
+
+   if (p.g2 < 1e-5) {
+      setCorrectionFlag(EFTOrders::G24, 0);
+      setCorrectionFlag(EFTOrders::G22YB2, 0);
+      setCorrectionFlag(EFTOrders::G22YTAU2, 0);
+      setCorrectionFlag(EFTOrders::G22YT2, 0);
+   }
 }
 
 void Mh2EFTCalculator::setCorrectionFlag(int variable, int enable)
