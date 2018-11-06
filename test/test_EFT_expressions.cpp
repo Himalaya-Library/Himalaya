@@ -25,7 +25,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 
    {
       const double delta_mh_1l = mhc.getDeltaMh2EFT1Loop(1, 1);
-      CHECK_CLOSE(delta_mh_1l, 3665.091362110566, eps);
+      CHECK_CLOSE(delta_mh_1l, 3719.0821870931, eps);
    }
 
    {
