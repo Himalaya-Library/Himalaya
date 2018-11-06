@@ -2038,14 +2038,14 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const{
         3*c4beta)*pow4(Mu)))/(pow2(c2beta)*pow2(M1 - Mu)*pow2(M1 + Mu))))/240.;
 
    if (std::abs(M1 - Mu) < eps) {
-      const double lim = (pow2(sw)*(-2048*lmD3MR - 6144*lmE3MR - 3072*lmL3MR - 1024*lmQ3MR -
-        12288*lmUMR - 3072*log(pow2(p.MA)/MR2) - 8192*log(pow2(mU3)/MR2) - 2048*log(pow2(
-        mD1)/MR2) - 2048*log(pow2(mD2)/MR2) - 6144*log(pow2(mE1)/MR2) - 6144*
-        log(pow2(mE2)/MR2) - 3072*log(pow2(mL1)/MR2) - 3072*log(pow2(mL2)/MR2)
-        - 1024*log(pow2(mQ1)/MR2) - 1024*log(pow2(mQ2)/MR2) - 8192*log(pow2(
-        mU1)/MR2) - 8192*log(pow2(mU2)/MR2) - 48*(67 + 47*c4beta + 268*s2beta +
-        32*s6beta)*pow2(1/c2beta) - (9*(-3001 + 1091*c4beta - 4100*s2beta)*
-        log(MR2/pow2(M1)))/pow4(cbeta + sbeta)))/122880.;
+      const double lim = (pow2(sw)*(4096*lmD3MR + 12288*lmE3MR + 6144*lmL3MR + 2048*lmQ3MR +
+        24576*lmUMR + 6144*log(pow2(p.MA)/MR2) + 16384*log(pow2(mU3)/MR2) + 4096*log(pow2(
+        mD1)/MR2) + 4096*log(pow2(mD2)/MR2) + 12288*log(pow2(mE1)/MR2) + 12288*
+        log(pow2(mE2)/MR2) + 6144*log(pow2(mL1)/MR2) + 6144*log(pow2(mL2)/MR2)
+        + 2048*log(pow2(mQ1)/MR2) + 2048*log(pow2(mQ2)/MR2) + 16384*log(pow2(
+        mU1)/MR2) + 16384*log(pow2(mU2)/MR2) - (80*(371 - 65*c4beta + 140*
+        s2beta + 64*s6beta))/pow2(c2beta) + (15*(5985 - 2203*c4beta + 8196*
+        s2beta)*log(MR2/pow2(p.M1)))/pow4(cbeta + sbeta)))/409600.;
       /*const double muShifted = M1 + std::abs(M1 - Mu)/2.;
       const double shifted = (3*pow2(sw)*(2*omitLogs*log(pow2(p.scale)/pow2(muShifted))*pow3(muShifted)*(2*(4 + c4beta)*muShifted*pow2(
         M1) + 6*M1*s2beta*pow2(muShifted) + (3*s2beta + s6beta)*pow3(M1) - 2*c4beta*
@@ -2198,14 +2198,14 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const{
 
 
    if (std::abs(M1 - Mu) < eps && std::abs(M2 - Mu) < eps) {
-     return -(lmL3MR*pow2(cw))/24. - (lmQ3MR*pow2(cw))/8. - (lmUMR*pow2(cw))/6. - (
-        log(pow2(p.MA)/MR2)*pow2(cw))/24. - (log(pow2(M2)/MR2)*pow2(cw))/3. - (log(
-        pow2(mL1)/MR2)*pow2(cw))/24. - (log(pow2(mL2)/MR2)*pow2(cw))/24. - (
-        log(pow2(mQ1)/MR2)*pow2(cw))/8. - (log(pow2(mQ2)/MR2)*pow2(cw))/8. + (-
-        2*(131 + 111*c4beta + 300*s2beta + 64*s6beta) + (87 + 211*c4beta + 412*
-        s2beta + 32*s6beta)*pow2(cw))/(1536.*pow2(c2beta)) + (log(MR2/pow2(
-        M1))*(12146 + 32784*cbeta*sbeta - (3193 + 4100*s2beta)*pow2(cw) +
-        c4beta*(-4230 + 899*pow2(cw))))/(8192.*pow4(cbeta + sbeta));
+     return (lmL3MR*pow2(cw))/24. + (lmQ3MR*pow2(cw))/8. + (lmUMR*pow2(cw))/6. + (
+        log(pow2(p.MA)/MR2)*pow2(cw))/24. + (log(pow2(M2)/MR2)*pow2(cw))/3. + (log(
+        pow2(mL1)/MR2)*pow2(cw))/24. + (log(pow2(mL2)/MR2)*pow2(cw))/24. + (
+        log(pow2(mQ1)/MR2)*pow2(cw))/8. + (log(pow2(mQ2)/MR2)*pow2(cw))/8. - (
+        998 + 408*s2beta + 256*s6beta + (101 - 428*s2beta - 64*s6beta)*pow2(cw)
+        + 3*c4beta*(42 + 83*pow2(cw)))/(3072.*pow2(c2beta)) + (log(MR2/pow2(M1))
+        *(24258 + 32776*s2beta - 3*(2123 + 2732*s2beta)*pow2(cw) + c4beta*(-
+        8502 + 1819*pow2(cw))))/(16384.*pow4(cbeta + sbeta));
    }
 
    /*if (std::abs(M1 - Mu) < eps) {
