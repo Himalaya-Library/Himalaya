@@ -2028,6 +2028,8 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const
    const double lmL3MR = omitLogs*log(pow2(mL3) / MR2);
    const double lmQ3MR = omitLogs*log(pow2(mQ3) / MR2);
 
+   WARNING_MSG("Corrections to delta_v of O(g1^2) are currently incorrect!");
+
    if (std::abs(beta - Pi/4.) < Pi/4.*0.01)
       return 0.;
 
@@ -2097,6 +2099,8 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const
    const double lmUMR = omitLogs*log(pow2(Mu) / MR2);
    const double lmL3MR = omitLogs*log(pow2(mL3) / MR2);
    const double lmQ3MR = omitLogs*log(pow2(mQ3) / MR2);
+
+   WARNING_MSG("Corrections to delta_v of O(g2^2) are currently incorrect!");
 
    if (std::abs(beta - Pi/4.) < Pi/4.*0.01)
       return 0.;
