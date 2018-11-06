@@ -197,36 +197,12 @@ TEST_CASE("test_FO_1loop_gaugeless")
    CHECK_CLOSE(DMh2_2(1,1), DMh2_3(1,1), 1e-7);
 }
 
-TEST_CASE("test_EFT_vs_FO_1loop_gaugeless")
+TEST_CASE("test_EFT_vs_FO_gaugeless")
 {
    using namespace himalaya::mh2_fo;
    using namespace himalaya::mh2_eft;
 
    const auto p = make_gaugeless(make_point());
-
-   const auto DMh2_EFT_0L = calc_Mh2_EFT_0L(p);
-   const auto DMh2_EFT_1L = calc_Mh2_EFT_1L(p);
-
-   const MSSM_mass_eigenstates me(p);
-   const auto DMh2_full    = me.calculate_Mh2();
-   const auto DMh2_full_0L = std::get<0>(DMh2_full);
-   const auto DMh2_full_1L = std::get<1>(DMh2_full);
-
-   INFO("DMh2_full_0L = " << DMh2_full_0L);
-   INFO("DMh2_full_1L = " << DMh2_full_1L);
-   INFO("DMh2_EFT_0L  = " << DMh2_EFT_0L);
-   INFO("DMh2_EFT_1L  = " << DMh2_EFT_1L);
-
-   CHECK_CLOSE(DMh2_EFT_0L, DMh2_full_0L, 1e-6);
-   CHECK_CLOSE(DMh2_EFT_1L, DMh2_full_1L, 1e-5);
-}
-
-TEST_CASE("test_EFT_vs_FO_2loop")
-{
-   using namespace himalaya::mh2_fo;
-   using namespace himalaya::mh2_eft;
-
-   const auto p = make_point();
 
    const auto DMh2_EFT_0L = calc_Mh2_EFT_0L(p);
    const auto DMh2_EFT_1L = calc_Mh2_EFT_1L(p);
