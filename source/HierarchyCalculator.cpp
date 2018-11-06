@@ -77,6 +77,33 @@ std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& e
   return sortedEigenvalues;
 }
 
+/// set flags to omit all corrections, except O(at*as^n)
+void disable_non_as_terms(himalaya::mh2_eft::Mh2EFTCalculator& mhc)
+{
+   using namespace himalaya::mh2_eft;
+
+   mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G14, 0);
+   mhc.setCorrectionFlag(EFTOrders::G24, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(EFTOrders::YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(EFTOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
+   mhc.setCorrectionFlag(EFTOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::YB6, 0);
+   mhc.setCorrectionFlag(EFTOrders::YT6, 0);
+   mhc.setCorrectionFlag(EFTOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(EFTOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(EFTOrders::YB2YT4, 0);
+   mhc.setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
+}
+
 } // anonymous namespace
 
 /**
@@ -174,13 +201,6 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    // here one needs it with the minus sign to convert DR -> H3m
    ho.setDMhDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
 
-   // create a modified parameters struct and construct Mh2EFTCalculator and ThresholdCalculator
-   auto p_mass_ES = p;
-   p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
-   p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
-   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
-   himalaya::mh2_eft::ThresholdCalculator tc (p_mass_ES);
-
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
 
@@ -189,28 +209,14 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    // calculate delta_lambda @ 3-loop level
    calcDeltaLambda3L(ho, false);
 
-   // set flags to omit all but O(at*as^n)
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12G22, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YB2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G14, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G24, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YB2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G22YB2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YTAU2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G22YTAU2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G12YT2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G22YT2, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::G32YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YB6, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YT6, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU2YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU6, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YT2YB4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YB2YT4, 0);
-   mh2EFTCalculator.setCorrectionFlag(himalaya::mh2_eft::EFTOrders::YTAU4YB2, 0);
-
+   // create a modified parameters struct and construct
+   // Mh2EFTCalculator and ThresholdCalculator
+   auto p_mass_ES = p;
+   p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
+   p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
+   himalaya::mh2_eft::ThresholdCalculator tc (p_mass_ES);
+   disable_non_as_terms(mh2EFTCalculator); // omit all but O(at*as^n)
 
    // mh_eft^2
    const double mh2_eft = mh2EFTCalculator.getDeltaMh2EFT0Loop();
@@ -1324,18 +1330,24 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    const double gt = sqrt(2)*p.Mt/std::sqrt(v2);
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
 
-   // create a modified parameters struct and construct Mh2EFTCalculator and ThresholdCalculator
+   // create a modified parameters struct and construct
+   // Mh2EFTCalculator and ThresholdCalculator
    auto p_mass_ES = p;
    p_mass_ES.mu2(2,2) = pow2(p.MSt(0));
    p_mass_ES.mq2(2,2) = pow2(p.MSt(1));
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator(p_mass_ES);
    himalaya::mh2_eft::ThresholdCalculator tc (p_mass_ES);
+   disable_non_as_terms(mh2EFTCalculator); // omit all but O(at*as^n)
 
    // calculate the (non-)logarithmic part of Mh2 without delta_lambda_3L
-   // the first line is equivalent to  64 * dytas - 84 * pow2(dytas) - 24 * dytas2 + catas2 including all log(mu^2/Mst1^2)
-   // which are also included in the H3m result, and the second line omits these log(mu^2/Mst1^2) terms since they originate
-   // from SM contributions. The non-logarithmic part contains only Xt orders up to O(Xt^2) which are also included in H3m
-   // so no subtraction is needed. Checked.
+   //
+   // The first line is equivalent to 64 * dytas - 84 * pow2(dytas) -
+   // 24 * dytas2 + catas2 including all log(mu^2/Mst1^2) which are
+   // also included in the H3m result, and the second line omits these
+   // log(mu^2/Mst1^2) terms since they originate from SM
+   // contributions. The non-logarithmic part contains only Xt orders
+   // up to O(Xt^2) which are also included in H3m so no subtraction
+   // is needed. Checked.
    const double subtractionTermH3m = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,1,0);
    const double subtractionTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
 
