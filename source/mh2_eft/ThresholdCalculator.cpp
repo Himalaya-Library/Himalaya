@@ -1190,11 +1190,11 @@ double phixyz(double x, double y, double z) noexcept {
 } // anonymous namespace
 
 /**
- *         Constructor
- *         @param p_ a HimalayaInterface struct
- *         @param msq2_ the averaged squark mass of the first two generations squared
- *         @param verbose a bool enable the output of the parameter validation. Enabled by default
- *         @param check a boolean which indicates if the threshold corrections should be tested
+ * Constructor
+ * @param p_ a HimalayaInterface struct
+ * @param msq2_ the averaged squark mass of the first two generations squared
+ * @param verbose a bool enable the output of the parameter validation. Enabled by default
+ * @param check a boolean which indicates if the threshold corrections should be tested
  */
 ThresholdCalculator::ThresholdCalculator(
    const Parameters& p_, double msq2_, bool verbose, bool check)
@@ -1263,11 +1263,11 @@ ThresholdCalculator::ThresholdCalculator(
 }
 
 /**
- *         Returns a specific threshold corrections for a given mass limit
- *         @param variable an integer key for a threshold correctionn
- *         @param scheme an integer key to set the scheme. Choices are {DRbar'} only!
- *         @param omitLogs an integer to omit all log mu terms
- *         @return a threshold correction for a given variable in a given scheme for a suitable mass limit
+ * Returns a specific threshold corrections for a given mass limit
+ * @param variable an integer key for a threshold correctionn
+ * @param scheme an integer key to set the scheme. Choices are {DRbar'} only!
+ * @param omitLogs an integer to omit all log mu terms
+ * @return a threshold correction for a given variable in a given scheme for a suitable mass limit
  */
 double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
                                                              int omitLogs) const
@@ -4804,9 +4804,9 @@ double ThresholdCalculator::getDeltaLambdaYtau2Yb4(int omitLogs) const
 
 //        at*as^n threshold corrections with limits and DR' -> MS shifts                //
 /**
- *         Returns delta g3_as in the MSbar scheme for a given mass limit
- *         @param omitLogs an intiger to omit all log mu terms
- *         @return delta g3_as in the MSbar scheme for a given mass limit
+ * Returns delta g3_as in the MSbar scheme for a given mass limit
+ * @param omitLogs an intiger to omit all log mu terms
+ * @return delta g3_as in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
 {
@@ -4827,10 +4827,10 @@ double ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
 }
 
 /**
- *         Returns delta yt_as in the MSbar scheme for a given mass limit
- *         @param limit an integer key for a mass limit
- *         @param omitLogs an integer key to omit all mu terms
- *         @return delta yt_as in the MSbar scheme for a given mass limit
+ * Returns delta yt_as in the MSbar scheme for a given mass limit
+ * @param limit an integer key for a mass limit
+ * @param omitLogs an integer key to omit all mu terms
+ * @return delta yt_as in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
 {
@@ -4883,10 +4883,10 @@ double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
 }
 
 /**
-  *         Returns delta yt_as^2 in the MSbar scheme for a given mass limit
-  *         @param limit an integer key for a mass limit
-  *         @param omitLogs an integer key to omit all mu terms
-  *         @return delta yt_as^2 in the MSbar scheme for a given mass limit
+  * Returns delta yt_as^2 in the MSbar scheme for a given mass limit
+  * @param limit an integer key for a mass limit
+  * @param omitLogs an integer key to omit all mu terms
+  * @return delta yt_as^2 in the MSbar scheme for a given mass limit
   */
 double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
 {
@@ -5315,10 +5315,10 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
 }
 
 /**
- *         Returns delta lambda_at in the MSbar scheme for a given mass limit
- *         @param limit an integer key for a mass limit
- *         @param omitLogs an integer key to omit all mu terms
- *         @return delta lambda_at in the MSbar scheme for a given mass limit
+ * Returns delta lambda_at in the MSbar scheme for a given mass limit
+ * @param limit an integer key for a mass limit
+ * @param omitLogs an integer key to omit all mu terms
+ * @return delta lambda_at in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
 {
@@ -5352,10 +5352,10 @@ double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
 }
 
 /**
- *         Returns delta lambda_atas in the MSbar scheme for a given mass limit
- *         @param limit an integer key for a mass limit
- *         @param omitLogs an integer key to omit all mu terms
- *         @return delta lambda_atas in the MSbar scheme for a given mass limit
+ * Returns delta lambda_atas in the MSbar scheme for a given mass limit
+ * @param limit an integer key for a mass limit
+ * @param omitLogs an integer key to omit all mu terms
+ * @return delta lambda_atas in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) const
 {
@@ -5523,10 +5523,10 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
 }
 
 /**
- *         Returns delta lambda_atas2 in the MSbar scheme for a given mass limit
- *         @param limit an integer key for a mass limit
- *         @param omitLogs an integer key to omit all mu terms
- *         @return delta lambda_atas2 in the MSbar scheme for a given mass limit
+ * Returns delta lambda_atas2 in the MSbar scheme for a given mass limit
+ * @param limit an integer key for a mass limit
+ * @param omitLogs an integer key to omit all mu terms
+ * @return delta lambda_atas2 in the MSbar scheme for a given mass limit
  */
 double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs) const
 {
@@ -5984,10 +5984,10 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs)
 }
 
 /**
- *         Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
- *         @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
- *         @param omitLogs an integer key to omit all log mu terms
- *         @param omitXtLogs an integer key to omit all Xt^4*Log[mu] and Xt^5*Log[mu] terms
+ * Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
+ * @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
+ * @param omitLogs an integer key to omit all log mu terms
+ * @param omitXtLogs an integer key to omit all Xt^4*Log[mu] and Xt^5*Log[mu] terms
  */
 double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs) const
 {
@@ -6013,10 +6013,10 @@ double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs,
 }
 
 /**
- *         Returns the DRbarPrime to MSbar shift of delta lambda 3L at a given xtOrder
- *         @param limit an integer key for a mass limit
- *         @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
- *         @param omitLogs an integer key to omit all log mu terms
+ * Returns the DRbarPrime to MSbar shift of delta lambda 3L at a given xtOrder
+ * @param limit an integer key for a mass limit
+ * @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
+ * @param omitLogs an integer key to omit all log mu terms
  */
 double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs) const
 {
@@ -7470,8 +7470,8 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
 
 
 /**
- *         Sets the mass limit to check terms
- *         @param limit an integer key for a mass limit
+ * Sets the mass limit to check terms
+ * @param limit an integer key for a mass limit
  */
 void ThresholdCalculator::setLimit(int limit)
 {
@@ -7479,8 +7479,8 @@ void ThresholdCalculator::setLimit(int limit)
 }
 
 /**
- *         Get the mass limit determined by ThresholdCalculator
- *         @return The determined mass limit
+ * Get the mass limit determined by ThresholdCalculator
+ * @return The determined mass limit
  */
 int ThresholdCalculator::getLimit() const
 {
