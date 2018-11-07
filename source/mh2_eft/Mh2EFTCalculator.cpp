@@ -129,7 +129,9 @@ Mh2EFTCalculator::Mh2EFTCalculator(
       orderMap.emplace(i, 1u);
    }
 
-   if (p.g1 < 1e-5) {
+   const double eps = 1e-10;
+
+   if (std::abs(p.g1) < eps) {
       setCorrectionFlag(EFTOrders::G12G22, 0);
       setCorrectionFlag(EFTOrders::G12YB2, 0);
       setCorrectionFlag(EFTOrders::G14, 0);
@@ -138,11 +140,44 @@ Mh2EFTCalculator::Mh2EFTCalculator(
       setCorrectionFlag(EFTOrders::G12YT2, 0);
    }
 
-   if (p.g2 < 1e-5) {
+   if (std::abs(p.g2) < eps) {
       setCorrectionFlag(EFTOrders::G24, 0);
       setCorrectionFlag(EFTOrders::G22YB2, 0);
       setCorrectionFlag(EFTOrders::G22YTAU2, 0);
       setCorrectionFlag(EFTOrders::G22YT2, 0);
+   }
+
+   if (std::abs(p.Mt) < eps) {
+      setCorrectionFlag(EFTOrders::G12YT2  , 0);
+      setCorrectionFlag(EFTOrders::G22YT2  , 0);
+      setCorrectionFlag(EFTOrders::YT4     , 0);
+      setCorrectionFlag(EFTOrders::G32YT4  , 0);
+      setCorrectionFlag(EFTOrders::YT6     , 0);
+      setCorrectionFlag(EFTOrders::YTAU2YT4, 0);
+      setCorrectionFlag(EFTOrders::YT2YB4  , 0);
+      setCorrectionFlag(EFTOrders::YB2YT4  , 0);
+   }
+
+   if (std::abs(p.Mb) < eps) {
+      setCorrectionFlag(EFTOrders::G12YB2  , 0);
+      setCorrectionFlag(EFTOrders::G22YB2  , 0);
+      setCorrectionFlag(EFTOrders::YB4     , 0);
+      setCorrectionFlag(EFTOrders::G32YB4  , 0);
+      setCorrectionFlag(EFTOrders::YB6     , 0);
+      setCorrectionFlag(EFTOrders::YTAU2YB4, 0);
+      setCorrectionFlag(EFTOrders::YT2YB4  , 0);
+      setCorrectionFlag(EFTOrders::YB2YT4  , 0);
+      setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
+   }
+
+   if (std::abs(p.Mtau) < eps) {
+      setCorrectionFlag(EFTOrders::G12YTAU2, 1);
+      setCorrectionFlag(EFTOrders::G22YTAU2, 1);
+      setCorrectionFlag(EFTOrders::YTAU4   , 0);
+      setCorrectionFlag(EFTOrders::YTAU2YB4, 0);
+      setCorrectionFlag(EFTOrders::YTAU2YT4, 0);
+      setCorrectionFlag(EFTOrders::YTAU6   , 0);
+      setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
    }
 }
 
