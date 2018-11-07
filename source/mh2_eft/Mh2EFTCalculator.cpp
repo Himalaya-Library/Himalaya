@@ -380,50 +380,79 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
    const double B00DR = 2 - lmhtreeMt;
 
    // Threshold corrections
-   const double dytas = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb4g32 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YB4_G32, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb4 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb6 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YB6, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayt4 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_AT, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dytyt = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YT_YT, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayt6 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YT6, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvyt2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dytauytau = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YTAU_YTAU, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaytau4 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaytau6 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YTAU6, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayt2yb4 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YT2_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayt4yb2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YT4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dytyb = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvytau2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvyb2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dytauyb = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YTAU_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb4ytau2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YTAU2_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb2ytau4 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YTAU4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dybyt = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YB_YT, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dybas = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YB_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dybyb = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::YB_YB, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dytas = CALC_IF(orderMap.at(EFTOrders::G32YT4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayb4g32 = CALC_IF(orderMap.at(EFTOrders::G32YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB4_G32, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayb4 =
+      CALC_IF(orderMap.at(EFTOrders::YB6) || orderMap.at(EFTOrders::YTAU2YB4) ||
+              orderMap.at(EFTOrders::YT2YB4) || orderMap.at(EFTOrders::G32YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayb6 = CALC_IF(orderMap.at(EFTOrders::YB6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB6, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayt4 =
+      CALC_IF(orderMap.at(EFTOrders::YT6) || orderMap.at(EFTOrders::YB2YT4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_AT, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dytyt = CALC_IF(orderMap.at(EFTOrders::YT6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YT_YT, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayt6 = CALC_IF(orderMap.at(EFTOrders::YT6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT6, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvyt2 = CALC_IF(orderMap.at(EFTOrders::YT6) || orderMap.at(EFTOrders::YT2YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dytauytau = CALC_IF(orderMap.at(EFTOrders::YTAU6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YTAU_YTAU, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaytau4 =
+      CALC_IF(orderMap.at(EFTOrders::YTAU4YB2) || orderMap.at(EFTOrders::YTAU6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaytau6 = CALC_IF(orderMap.at(EFTOrders::YTAU6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU6, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayt2yb4 = CALC_IF(orderMap.at(EFTOrders::YT2YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayt4yb2 = CALC_IF(orderMap.at(EFTOrders::YB2YT4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dytyb = CALC_IF(orderMap.at(EFTOrders::YB2YT4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvytau2 =
+      CALC_IF(orderMap.at(EFTOrders::YTAU2YB4) || orderMap.at(EFTOrders::YTAU6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvyb2 =
+      CALC_IF(orderMap.at(EFTOrders::YB6) || orderMap.at(EFTOrders::YTAU4YB2) ||
+              orderMap.at(EFTOrders::YB2YT4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dytauyb = CALC_IF(orderMap.at(EFTOrders::YTAU4YB2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YTAU_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayb4ytau2 = CALC_IF(orderMap.at(EFTOrders::YTAU2YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU2_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayb2ytau4 = CALC_IF(orderMap.at(EFTOrders::YTAU4YB2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dybyt = CALC_IF(orderMap.at(EFTOrders::YT2YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YB_YT, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dybas = CALC_IF(orderMap.at(EFTOrders::G32YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YB_AS, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dybyb = CALC_IF(orderMap.at(EFTOrders::YB6),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::YB_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
 
 
    // Corrections to Mh
