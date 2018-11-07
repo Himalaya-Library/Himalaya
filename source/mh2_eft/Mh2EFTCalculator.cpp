@@ -372,8 +372,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
    const double cbeta = cos(beta);
    const double c2beta = cos(2*beta);
    const double sbeta = sin(beta);
-   const double Mhtree = std::abs(c2beta*p.MZ);
-   const double lmhtreeMt = log(pow2(Mhtree / p.Mt));
+   const double mhtree = std::abs(c2beta*p.MZ);
    const double lmbMt = log(pow2(p.Mb / p.Mt));
    const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
    const double mQ32 = p.mq2(2,2);
@@ -390,7 +389,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
-   const double B00DR = 2 - lmhtreeMt;
+   const double B00DR = fB(pow2(mhtree),0.,pow2(p.Mt));
 
    // Threshold corrections
    const double dytas = CALC_IF(orderMap.at(EFTOrders::G32YT4),
