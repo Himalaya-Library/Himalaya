@@ -63,8 +63,11 @@ namespace {
       return std::abs((a - b)/a) < prec;
    }
 
-   double calc_cw(double mW, double mZ) {
-      return std::abs(mZ) > std::numeric_limits<double>::epsilon() ? mW/mZ : 0.;
+   double calc_cw(double mW, double mZ)
+   {
+      return std::abs(mZ) > std::numeric_limits<double>::epsilon()
+         ? mW/mZ
+         : 1.0;
    }
 
 /// threshold loop functions from [1504.05200] Eq.(14)

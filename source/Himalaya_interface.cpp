@@ -31,6 +31,18 @@ double sqr(double x) noexcept
    return x*x;
 }
 
+double calc_cw2(double mW, double mZ)
+{
+   return std::abs(mZ) > std::numeric_limits<double>::epsilon()
+      ? pow2(mW/mZ)
+      : 1.0;
+}
+
+double calc_sw2(double mW, double mZ)
+{
+   return 1.0 - calc_cw2(mW, mZ);
+}
+
 /// sorts two eigenvalues
 void sort_ew(V2& ew, double& theta) noexcept
 {
@@ -89,7 +101,7 @@ double Parameters::calculateMsq2() const
 
    const double beta = std::atan(vu / vd);
    const double cos_2beta = std::cos(2 * beta);
-   const double sw2 = 1 - pow2(MW / MZ);
+   const double sw2 = calc_sw2(MW, MZ);
    const double msq = pow(pow2(mq2(0,0))*pow2(mq2(1,1))
       *mq2(0,0)*md2(0,0)*mu2(1,1)*md2(1,1)
       *(mq2(2, 2) + pow2(Mb) - (1 / 2. - 1 / 3. * sw2) * pow2(MZ) * cos_2beta)
@@ -136,7 +148,7 @@ void Parameters::validate(bool verbose)
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
       const double Xt = Mt * (Au(2,2) - mu / tan_beta);
-      const double sw2 = 1 - MW * MW / MZ / MZ;
+      const double sw2 = calc_sw2(MW, MZ);
       RM22 stopMatrix;
       stopMatrix << mq2(2, 2) + sqr(Mt) + (1/2. - 2/3. * sw2) * sqr(MZ) * cos_2beta, Xt,
         Xt, mu2(2, 2) + sqr(Mt) + 2 / 3. * sw2 * sqr(MZ) * cos_2beta;
@@ -155,7 +167,7 @@ void Parameters::validate(bool verbose)
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
       const double Xb = Mb * (Ad(2,2) - mu * tan_beta);
-      const double sw2 = 1 - MW * MW / MZ / MZ;
+      const double sw2 = calc_sw2(MW, MZ);
       RM22 sbottomMatrix;
       sbottomMatrix << mq2(2, 2) + sqr(Mb) - (1/2. - 1/3. * sw2) * sqr(MZ) * cos_2beta, Xb,
          Xb, md2(2, 2) + sqr(Mb) - 1/3. * sw2 * sqr(MZ) * cos_2beta;
@@ -174,7 +186,7 @@ void Parameters::validate(bool verbose)
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
       const double Xtau = Mtau * (Ae(2,2) - mu * tan_beta);
-      const double sw2 = 1 - MW * MW / MZ / MZ;
+      const double sw2 = calc_sw2(MW, MZ);
       RM22 stauMatrix;
       stauMatrix << ml2(2, 2) + sqr(Mtau) - (0.5 - sw2) * sqr(MZ) * cos_2beta, Xtau,
          Xtau, me2(2, 2) + sqr(Mtau) - sw2 * sqr(MZ) * cos_2beta;
