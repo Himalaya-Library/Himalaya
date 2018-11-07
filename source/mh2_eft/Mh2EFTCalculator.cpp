@@ -44,6 +44,31 @@ namespace {
    template <typename T> T pow19(T x) { return pow18(x)*x; }
    template <typename T> T pow20(T x) { return pow19(x)*x; }
 
+   template <typename T>
+   bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
+   {
+      return std::fabs(a) < prec;
+   }
+
+   template <typename T>
+   bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+   {
+      return is_zero(a - b, prec);
+   }
+
+   template <typename T>
+   bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+   {
+      if (is_equal(a, b, std::numeric_limits<T>::epsilon()))
+         return true;
+
+      if (std::abs(a) < std::numeric_limits<T>::epsilon() ||
+          std::abs(b) < std::numeric_limits<T>::epsilon())
+         return false;
+
+      return std::abs((a - b)/a) < prec;
+   }
+
 double isNaN(double var, const std::string& msg = "")
 {
    if (std::isnan(var)) {
@@ -52,6 +77,33 @@ double isNaN(double var, const std::string& msg = "")
       return 0.;
    }
    return var;
+}
+
+/// Re(B0(s,x,x,q2)), Eq.(2.4) from [hep-ph/0701051]
+double fB(double s, double x, double q2)
+{
+   using std::asin;
+   using std::log;
+   using std::sqrt;
+
+   if (is_zero(s) && is_zero(x))
+      return 0.0;
+
+   if (is_zero(s))
+      return -log(x/q2);
+
+   if (is_zero(x))
+      return 2.0 - log(s/q2);
+
+   if (is_equal(s, x))
+      return 2.0 - 1.813799364234218 - log(x/q2);
+
+   if (s <= 4.0*x)
+      return 2.0 - log(x/q2) - 2.0*sqrt(4.0*x/s - 1.0)*asin(sqrt(s/(4.0*x)));
+
+   // s > 4*s
+   return 2.0 - log(x/q2)
+      + sqrt(1.0 - 4.0*x/s)*log(s*(1.0 - sqrt(1.0 - 4.0*x/s))/(2*x) - 1.0);
 }
 
 } // anonymous namespace
@@ -124,6 +176,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
    // 1-Loop prefactor at
    const double pref_at = 1./pow2(4*Pi) * pow2(p.Mt * gt);
 
+   const double q2 = pow2(p.Mt);
    const double beta = atan(p.vu/p.vd);
    const double cbeta = cos(beta);
    const double c2beta = cos(2*beta);
@@ -132,9 +185,6 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
    const double yt = sqrt(2.)*p.Mt/p.vu;
    const double yb = sqrt(2.)*p.Mb/p.vd;
    const double ytau = sqrt(2.)*p.Mtau/p.vd;
-   const double lmhtreeMt = log(pow2(mhtree / p.Mt));
-   const double lmwMt = log(pow2(p.MW / p.Mt));
-   const double lmzMt = log(pow2(p.MZ / p.Mt));
    const int Xi = 1;        // gauge parameter
 
    // Threshold corrections
@@ -216,15 +266,10 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
       thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs));
 
-   const double bbhDR = 2 - Pi/sqrt3 - log(pow2(mhtree/p.Mt));
-
-   const double bbwDR =
-      2 - lmwMt - 2*std::asin(mhtree/(2.*p.MW))*sqrt(-1 + 4*pow2(p.MW/mhtree));
-
-   const double bbzDR =
-      2 - lmzMt - 2*std::asin(sqrt(pow2(c2beta))/2.)*sqrt(-1 + 4/pow2(c2beta));
-
-   const double B00DR = 2- lmhtreeMt;
+   const double bbhDR = fB(pow2(mhtree),pow2(mhtree),q2);
+   const double bbwDR = fB(pow2(mhtree),pow2(p.MW),q2);
+   const double bbzDR = fB(pow2(mhtree),pow2(p.MZ),q2);
+   const double B00DR = fB(pow2(mhtree),0.,q2);
 
    // corrections to Mh2
    const double dmh2g12g22 = isNaN(orderMap.at(EFTOrders::G12G22)*(
