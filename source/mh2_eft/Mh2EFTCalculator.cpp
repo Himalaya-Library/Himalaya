@@ -543,6 +543,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
    ThresholdCalculator thresholdCalculator(p, msq2);
 
    using std::log;
+   using std::sqrt;
 
    const double catas2 = 248.1215180432007;
    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
@@ -556,7 +557,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
    const double dg3as = thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::G3_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
 
-   const double gt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
+   const double gt = sqrt(2.)*p.Mt/sqrt(pow2(p.vu) + pow2(p.vd));
 
    // 3-Loop prefactor at*as^2
    const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
