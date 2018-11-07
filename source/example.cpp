@@ -62,6 +62,17 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
    return pars;
 }
 
+himalaya::Parameters make_gaugeless(const himalaya::Parameters& pars)
+{
+   auto gl = pars;
+   gl.g1 = 0.;
+   gl.g2 = 0.;
+   gl.MW = himalaya::NaN;
+   gl.MZ = himalaya::NaN;
+   gl.validate(false);
+   return gl;
+}
+
 int main()
 {
    const std::vector<himalaya::Parameters> points = {
@@ -80,26 +91,28 @@ int main()
          // calculate the 3-loop corrections O(α_b*α_s^2)
          //himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
 
+         const auto point_gl = make_gaugeless(point);
+
          // calculate fixed-order corrections for v^2 << MS^2
-         himalaya::mh2_eft::Mh2EFTCalculator meft(point);
+         himalaya::mh2_eft::Mh2EFTCalculator meft(point_gl);
          const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
          const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
          const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
 
          std::cout << "Mh^2_EFT_0L  = " << dmh2_eft_0l << " GeV^2 O(g1^2, g2^2)\n";
-         std::cout << "ΔMh^2_EFT_1L = " << dmh2_eft_1l << " GeV^2 O(full)\n";
+         std::cout << "ΔMh^2_EFT_1L = " << dmh2_eft_1l << " GeV^2 O(αt + αb + ατ)\n";
          std::cout << "ΔMh^2_EFT_2L = " << dmh2_eft_2l
                    << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
 
          // calculate fixed-order corrections
-         himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point);
+         himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point_gl);
          const auto dmh_fo     = mfo.calculate_Mh2();
          const auto dmh2_fo_0l = std::get<0>(dmh_fo);
          const auto dmh2_fo_1l = std::get<1>(dmh_fo);
          const auto dmh2_fo_2l = std::get<2>(dmh_fo);
 
          std::cout << "Mh^2_FO_0L   = " << dmh2_fo_0l << " GeV^2 O(full)\n";
-         std::cout << "ΔMh^2_FO_1L  = " << dmh2_fo_1l << " GeV^2 O(full)\n";
+         std::cout << "ΔMh^2_FO_1L  = " << dmh2_fo_1l << " GeV^2 O(αt + αb + ατ)\n";
          std::cout << "ΔMh^2_FO_2L  = " << dmh2_fo_2l
                    << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
       } catch (const std::exception& e) {

@@ -357,6 +357,19 @@ struct Results {
 
 /******************************************************************/
 
+himalaya::Parameters make_gaugeless(const himalaya::Parameters& pars)
+{
+   auto gl = pars;
+   gl.g1 = 0.;
+   gl.g2 = 0.;
+   gl.MW = himalaya::NaN;
+   gl.MZ = himalaya::NaN;
+   gl.validate(false);
+   return gl;
+}
+
+/******************************************************************/
+
 Results calculate_results(const Data& data)
 {
    Results res;
@@ -364,8 +377,11 @@ Results calculate_results(const Data& data)
    himalaya::HierarchyCalculator hc(data.pars, data.verbose);
    res.ho = hc.calculateDMh3L(data.bottom);
 
+   // create point with g1 = g2 = 0
+   const auto pars_gl = make_gaugeless(data.pars);
+
    // calculate fixed-order corrections for v^2 << MS^2
-   himalaya::mh2_eft::Mh2EFTCalculator meft(data.pars);
+   himalaya::mh2_eft::Mh2EFTCalculator meft(pars_gl);
    const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
    const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
    const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
@@ -374,7 +390,7 @@ Results calculate_results(const Data& data)
                              dmh2_eft_2l, res.ho.getDMh2EFT(3));
 
    // calculate fixed-order corrections
-   himalaya::mh2_fo::MSSM_mass_eigenstates mfo(data.pars);
+   himalaya::mh2_fo::MSSM_mass_eigenstates mfo(pars_gl);
    const auto dmh_fo    = mfo.calculate_Mh2(); // 0L, 1L, 2L
    const auto dmh_fo_3l = res.ho.getDMh2(3);   // 3L
 
