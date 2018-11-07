@@ -14,6 +14,8 @@
 #include <iostream>
 #include <string>
 
+#define CALC_IF(cond,expr) ((cond) ? (expr) : 0)
+
 namespace himalaya {
 namespace mh2_eft {
 
@@ -173,54 +175,83 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
    const int Xi = 1;        // gauge parameter
 
    // Threshold corrections
-   const double dlambdayb2g12 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YB2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdag14 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_G14, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaregg14 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_REG_G14, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdachig14 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_CHI_G14, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dg1g1 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::G1_G1, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdachig24 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_CHI_G24, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdag24 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_G24, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dg2g2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::G2_G2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaregg24 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_REG_G24, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdag12g22 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaregg12g22 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_REG_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdachig12g22 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_CHI_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb2g22 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YB2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayb4 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayt2g12 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YT2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvyt2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdayt2g22 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YT2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaytau2g12 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YTAU2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaytau2g22 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YTAU2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dlambdaytau4 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvg12 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_G12, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvg22 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_G22, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvyb2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs);
-   const double dvytau2 = thresholdCalculator.getThresholdCorrection(
-      ThresholdVariables::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs);
+   const double dlambdayb2g12 = CALC_IF(orderMap.at(EFTOrders::G12YB2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdag14 = CALC_IF(orderMap.at(EFTOrders::G14),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_G14, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaregg14 = CALC_IF(orderMap.at(EFTOrders::G14),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_REG_G14, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdachig14 = CALC_IF(orderMap.at(EFTOrders::G14),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_CHI_G14, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dg1g1 = CALC_IF(orderMap.at(EFTOrders::G14),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::G1_G1, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdachig24 = CALC_IF(orderMap.at(EFTOrders::G24),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_CHI_G24, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdag24 = CALC_IF(orderMap.at(EFTOrders::G24),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_G24, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dg2g2 = CALC_IF(orderMap.at(EFTOrders::G24),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::G2_G2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaregg24 = CALC_IF(orderMap.at(EFTOrders::G24),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_REG_G24, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdag12g22 = CALC_IF(orderMap.at(EFTOrders::G12G22),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaregg12g22 = CALC_IF(orderMap.at(EFTOrders::G12G22),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_REG_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdachig12g22 = CALC_IF(orderMap.at(EFTOrders::G12G22),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_CHI_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayb2g22 = CALC_IF(orderMap.at(EFTOrders::G22YB2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayb4 = CALC_IF(orderMap.at(EFTOrders::YB4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayt2g12 = CALC_IF(orderMap.at(EFTOrders::G12YT2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdayt2g22 = CALC_IF(orderMap.at(EFTOrders::G22YT2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YT2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaytau2g12 = CALC_IF(orderMap.at(EFTOrders::G12YTAU2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaytau2g22 = CALC_IF(orderMap.at(EFTOrders::G22YTAU2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dlambdaytau4 = CALC_IF(orderMap.at(EFTOrders::YTAU4),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvg12 =
+      CALC_IF(orderMap.at(EFTOrders::G12G22) || orderMap.at(EFTOrders::G14),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvg22 =
+      CALC_IF(orderMap.at(EFTOrders::G12G22) || orderMap.at(EFTOrders::G24),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvyt2 =
+      CALC_IF(orderMap.at(EFTOrders::G12YT2) || orderMap.at(EFTOrders::G22YT2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvyb2 =
+      CALC_IF(orderMap.at(EFTOrders::G12YB2) || orderMap.at(EFTOrders::G22YB2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+   const double dvytau2 =
+      CALC_IF(orderMap.at(EFTOrders::G12YTAU2) || orderMap.at(EFTOrders::G22YTAU2),
+      thresholdCalculator.getThresholdCorrection(
+      ThresholdVariables::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs));
 
    const double bbhDR = 2 - Pi/sqrt3 - log(pow2(mhtree/p.Mt));
 
