@@ -18,10 +18,14 @@
 
 #pragma once
 
+/**
+ * @file threshold_loop_functions.hpp
+ * @brief Declaration of the loop functions from [arXiv:1407.4081]
+ * @note The file has been taken from FlexibleSUSY.
+ */
+
 namespace himalaya {
 namespace threshold_loop_functions {
-
-// loop functions from arXiv:1407.4081
 
 #ifdef __GNUC__
 #  define ATTR(x) __attribute__ ((x))

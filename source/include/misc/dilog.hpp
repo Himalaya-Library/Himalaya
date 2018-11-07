@@ -20,6 +20,12 @@
 
 #include <complex>
 
+/**
+ * @file dilog.hpp
+ * @brief Declaration of the dilogarithm function
+ * @note The file has been taken from GM2Calc.
+ */
+
 #ifdef __GNUC__
 #  define ATTR(x) __attribute__ ((x))
 #else

@@ -17,10 +17,16 @@
 // ====================================================================
 
 #include "threshold_loop_functions.hpp"
-#include "dilog.h"
+#include "dilog.hpp"
 
 #include <cmath>
 #include <limits>
+
+/**
+ * @file threshold_loop_functions.cpp
+ * @brief Implementation of the loop functions from [arXiv:1407.4081]
+ * @note The file has been taken from FlexibleSUSY.
+ */
 
 namespace himalaya {
 namespace threshold_loop_functions {

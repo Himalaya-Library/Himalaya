@@ -16,9 +16,15 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-#include "dilog.h"
+#include "dilog.hpp"
 #include <cmath>
 #include <limits>
+
+/**
+ * @file dilog.cpp
+ * @brief Implementation of the dilogarithm function
+ * @note The file has been taken from GM2Calc.
+ */
 
 namespace himalaya {
 

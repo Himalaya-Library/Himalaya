@@ -7,7 +7,7 @@
 
 #include "DSZHiggs.hpp"
 #include "DSZHiggs.h"
-#include "dilog.h"
+#include "dilog.hpp"
 #include <cmath>
 #include <limits>
 #include <mutex>

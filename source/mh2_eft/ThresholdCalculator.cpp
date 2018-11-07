@@ -9,7 +9,7 @@
 #include "EFTFlags.hpp"
 #include "Logger.hpp"
 #include "threshold_loop_functions.hpp"
-#include "dilog.h"
+#include "dilog.hpp"
 #include <cmath>
 
 namespace himalaya {
