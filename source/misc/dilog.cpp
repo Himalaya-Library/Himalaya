@@ -20,7 +20,7 @@
 #include <cmath>
 #include <limits>
 
-namespace gm2calc {
+namespace himalaya {
 
 namespace {
    template <typename T>
@@ -202,10 +202,10 @@ std::complex<double> dilog(const std::complex<double>& z) noexcept {
 double clausen_2(double x) noexcept
 {
    using std::exp;
-   using gm2calc::dilog;
+   using himalaya::dilog;
    const std::complex<double> img(0.,1.);
 
    return std::imag(dilog(exp(img*x)));
 }
 
-} // namespace gm2calc
+} // namespace himalaya

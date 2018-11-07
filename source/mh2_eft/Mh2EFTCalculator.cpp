@@ -9,7 +9,7 @@
 #include "ThresholdCalculator.hpp"
 #include "EFTFlags.hpp"
 #include "Logger.hpp"
-#include "dilog.h"
+#include "threshold_loop_functions.hpp"
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -52,43 +52,6 @@ double isNaN(double var, const std::string& msg = "")
       return 0.;
    }
    return var;
-}
-
-double F5(double x) noexcept {
-   if(x == 1.) return 1.;
-
-   const double x2 = pow2(x);
-
-   return 3*x*(1 - pow2(x2) + 2*x2*log(x2))/pow3(1 - x2);
-}
-
-double F6(double x) noexcept {
-   if(x == 1.) return 0.;
-
-   const double x2 = pow2(x);
-
-   return (x2 - 3)/(4.*(1-x2)) + x2*(x2 - 2)*log(x2)/(2*pow2(1 - x2));
-}
-
-double F9(double x1, double x2) noexcept {
-   if(x1 == 1. && x2 == 1.){
-      return 1.;
-   }
-   if(x1 == 1. || x2 == 1.){
-      if (x1 == 1.) x1 = x2;
-
-      const double x12 = pow2(x1);
-      return 2*(1 - x12 + x12*log(x12))/pow2(x12 - 1);
-   }
-   if(x1 == x2){
-      const double x12 = pow2(x1);
-      return 2*(-1 + x12 - log(x12))/pow2(x12 - 1);
-   }
-
-   const double x12 = pow2(x1);
-   const double x22 = pow2(x2);
-
-   return 2*(x12*log(x12)/(x12 - 1) - x22*log(x22)/(x22 - 1))/(x12 - x22);
 }
 
 } // anonymous namespace
@@ -340,6 +303,8 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
  */
 double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) const
 {
+   using namespace himalaya::threshold_loop_functions;
+
    ThresholdCalculator thresholdCalculator(p, msq2);
 
    using std::log;

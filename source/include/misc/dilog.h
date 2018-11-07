@@ -16,8 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-#ifndef DILOG_H
-#define DILOG_H
+#pragma once
 
 #include <complex>
 
@@ -27,7 +26,7 @@
 #  define ATTR(x)
 #endif
 
-namespace gm2calc {
+namespace himalaya {
 
 /// real dilogarithm
 double dilog(double) noexcept ATTR(const);
@@ -38,6 +37,4 @@ std::complex<double> dilog(const std::complex<double>&) noexcept ATTR(const);
 /// Clausen function Cl_2(x)
 double clausen_2(double) noexcept ATTR(const);
 
-} // namespace gm2calc
-
-#endif
+} // namespace himalaya

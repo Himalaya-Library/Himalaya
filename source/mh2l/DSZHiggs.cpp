@@ -37,7 +37,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
    using std::log;
    using std::sin;
    using std::pow;
-   using gm2calc::dilog;
+   using himalaya::dilog;
 
    constexpr double Pi2 = M_PI * M_PI;
    constexpr double Pi4 = M_PI * M_PI * M_PI * M_PI;
