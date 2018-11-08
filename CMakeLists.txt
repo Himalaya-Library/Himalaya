@@ -49,19 +49,42 @@ configure_file (
   )
 
 # Himalaya library files
-file(GLOB HIM_LIBSOURCES
+set(HIM_LIBSOURCES
+  # interface
   ${SOURCE_PATH}/HierarchyCalculator.cpp
   ${SOURCE_PATH}/HierarchyObject.cpp
   ${SOURCE_PATH}/Himalaya_interface.cpp
-  ${SOURCE_PATH}/hierarchies/*.cpp
-  ${SOURCE_PATH}/mh2_fo/*.cpp
-  ${SOURCE_PATH}/mh2_eft/*.cpp
-  ${SOURCE_PATH}/misc/*.cpp)
+  # hierarchies
+  ${SOURCE_PATH}/hierarchies/H32q2g.cpp
+  ${SOURCE_PATH}/hierarchies/H3.cpp
+  ${SOURCE_PATH}/hierarchies/H3q22g.cpp
+  ${SOURCE_PATH}/hierarchies/H4.cpp
+  ${SOURCE_PATH}/hierarchies/H5.cpp
+  ${SOURCE_PATH}/hierarchies/H5g1.cpp
+  ${SOURCE_PATH}/hierarchies/H6b2qg2.cpp
+  ${SOURCE_PATH}/hierarchies/H6b.cpp
+  ${SOURCE_PATH}/hierarchies/H6bq22g.cpp
+  ${SOURCE_PATH}/hierarchies/H6bq2g2.cpp
+  ${SOURCE_PATH}/hierarchies/H6.cpp
+  ${SOURCE_PATH}/hierarchies/H6g2.cpp
+  ${SOURCE_PATH}/hierarchies/H9.cpp
+  ${SOURCE_PATH}/hierarchies/H9q2.cpp
+  # EFT calculation
+  ${SOURCE_PATH}/mh2_eft/Mh2EFTCalculator.cpp
+  ${SOURCE_PATH}/mh2_eft/ThresholdCalculator.cpp
+  ${SOURCE_PATH}/mh2_eft/threshold_loop_functions.cpp
+  # fixed-order calculation
+  ${SOURCE_PATH}/mh2_fo/linalg2.cpp
+  ${SOURCE_PATH}/mh2_fo/MSSM_mass_eigenstates.cpp
+  ${SOURCE_PATH}/mh2_fo/pv.cpp
+  # helpers
+  ${SOURCE_PATH}/misc/dilog.cpp)
 
 # DSZ library files
-file(GLOB DSZ_LIBSOURCES
-  ${SOURCE_PATH}/mh2l/*.f
-  ${SOURCE_PATH}/mh2l/*.cpp)
+set(DSZ_LIBSOURCES
+  ${SOURCE_PATH}/mh2l/DSZHiggs.cpp
+  ${SOURCE_PATH}/mh2l/DSZHiggs.f
+  ${SOURCE_PATH}/mh2l/functs.f)
 
 # build the himalaya and DSZ library
 add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})
@@ -76,8 +99,6 @@ target_link_libraries(Himalaya_shared PUBLIC DSZ_shared)
 
 # set the executable
 add_executable(example ${SOURCE_PATH}/example.cpp)
-
-# link mh2l and himalaya to the executable
 target_link_libraries(example Himalaya_static DSZ_static)
 
 # create LibrayLink executable
