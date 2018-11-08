@@ -24,13 +24,11 @@ namespace mh2_fo {
 
 namespace {
 
-constexpr double EPSTOL = 1.0e-11; ///< underflow accuracy
-constexpr double TOL = 1e-4;
+const double EPSTOL = 1.0e-11; ///< underflow accuracy
 
-constexpr double sqr(double a) noexcept { return a*a; }
-constexpr double pow3(double a) noexcept { return a*a*a; }
-constexpr double pow6(double a) noexcept { return a*a*a*a*a*a; }
-constexpr double log_abs(double a) noexcept { return std::log(std::abs(a)); }
+double sqr(double a) noexcept { return a*a; }
+double pow3(double a) noexcept { return a*a*a; }
+double log_abs(double a) noexcept { return std::log(std::abs(a)); }
 
 template <class T>
 std::complex<T> fast_log(const std::complex<T>& z) noexcept
