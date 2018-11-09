@@ -3,7 +3,6 @@
 #include "MSSM_mass_eigenstates.hpp"
 #include "EFTFlags.hpp"
 #include "linalg2.hpp"
-#include "Logger.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
@@ -70,9 +69,9 @@ himalaya::Parameters make_point()
    himalaya::Parameters pars;
    pars.scale = MS;
    pars.mu    = MS;
-   pars.g1    = 0*0.448494;
-   pars.g2    = 0*0.607902;
-   pars.g3    = 0*1.05733;
+   pars.g1    = 0.448494;
+   pars.g2    = 0.607902;
+   pars.g3    = 1.05733;
    pars.vu    = v*std::sin(beta);
    pars.vd    = v*std::cos(beta);
    pars.mq2   << pow2(msq), 0, 0, 0, pow2(msq), 0, 0, 0, pow2(msq);
@@ -83,9 +82,9 @@ himalaya::Parameters make_point()
    pars.Au    << 0, 0, 0, 0, 0, 0, 0, 0, Xt + pars.mu/tb;
    pars.Ae    << 0, 0, 0, 0, 0, 0, 0, 0, 0;
    pars.Ad    << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0;
-   pars.Yu    << 0, 0, 0, 0, 0, 0, 0, 0, 1e-4;
-   pars.Ye    << 0, 0, 0, 0, 0, 0, 0, 0, 1e-4;
-   pars.Yd    << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 1.0;
+   pars.Yu    << 0, 0, 0, 0, 0, 0, 0, 0, 0.8;
+   pars.Ye    << 0, 0, 0, 0, 0, 0, 0, 0, 0.1;
+   pars.Yd    << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0.3;
    pars.M1    = MS;
    pars.M2    = MS;
    pars.MG    = mg;
