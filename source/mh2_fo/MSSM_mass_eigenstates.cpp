@@ -758,6 +758,28 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
 
    for (int i = EFTOrders::FIRST; i < EFTOrders::NUMBER_OF_EFT_ORDERS; i++)
       orders.emplace(i, 1);
+
+   const double eps = 1e-10;
+
+   if (std::abs(pars_.Mt) < eps) {
+      orders.at(EFTOrders::G32YT4) = 0;
+      orders.at(EFTOrders::YT6) = 0;
+      orders.at(EFTOrders::YB6) = 0;
+   }
+
+   if (std::abs(pars_.Mb) < eps) {
+      orders.at(EFTOrders::G32YB4) = 0;
+      orders.at(EFTOrders::YT6) = 0;
+      orders.at(EFTOrders::YB6) = 0;
+      orders.at(EFTOrders::YTAU2YB4) = 0;
+      orders.at(EFTOrders::YTAU4YB2) = 0;
+   }
+
+   if (std::abs(pars_.Mtau) < eps) {
+      orders.at(EFTOrders::YTAU6) = 0;
+      orders.at(EFTOrders::YTAU2YB4) = 0;
+      orders.at(EFTOrders::YTAU4YB2) = 0;
+   }
 }
 
 /**
@@ -1181,6 +1203,9 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
       dmh += delta_mh2_2loop_atau_atau(
          mtau2, mA2, msv2, mstau12, mstau22,
          sxtau, cxtau, scale2, mu, tanb, vev2);
+   }
+
+   if (orders.at(EFTOrders::YTAU2YB4) || orders.at(EFTOrders::YTAU4YB2)) {
       dmh += delta_mh2_2loop_ab_atau(
          mtau2, mb2, mstau12, mstau22, msb12, msb22,
          sxtau, cxtau, sxb, cxb, scale2, mu, tanb, vev2);
