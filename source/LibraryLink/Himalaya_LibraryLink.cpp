@@ -33,11 +33,14 @@ inline void MLPut(MLINK link, int c)
    MLPutInteger(link, c);
 }
 
+/*
 inline void MLPut(MLINK link, double c)
 {
    MLPutReal(link, c);
 }
+*/
 
+/*
 inline void MLPut(MLINK link, std::complex<double> c)
 {
    if (std::imag(c) == 0.) {
@@ -48,6 +51,7 @@ inline void MLPut(MLINK link, std::complex<double> c)
       MLPutReal(link, std::imag(c));
    }
 }
+*/
 
 template <int M>
 void MLPut(MLINK link, const Eigen::Array<double,M,1>& a)

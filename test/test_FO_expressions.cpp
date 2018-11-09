@@ -1,7 +1,5 @@
 #include "doctest.h"
-#define private public
 #include "HierarchyCalculator.hpp"
-#undef private
 #include "Hierarchies.hpp"
 #include "EFTFlags.hpp"
 
@@ -57,8 +55,6 @@ TEST_CASE("test_FO_expansions")
 
    for (int i = 0; i < Hierarchies::NUMBER_OF_HIERARCHIES; i++) {
       himalaya::HierarchyCalculator hc(make_point());
-      hc.init();
-
       himalaya::HierarchyObject ho(false);
       ho.setRenormalizationScheme(RenSchemes::H3m);
       ho.setMDRFlag(1);
