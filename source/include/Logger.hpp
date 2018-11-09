@@ -10,6 +10,9 @@
 #include <iostream>
 
 /**
+ * @file Logger.hpp
+ * @brief Implementation of logging macros.
+ *
  * The following message logger macros are available:
  *
  * VERBOSE_MSG(message)  prints a verbose message

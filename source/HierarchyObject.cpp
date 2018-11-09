@@ -11,6 +11,13 @@
 #include <cmath>
 #include <iostream>
 
+/**
+ * @file HierarchyObject.cpp
+ *
+ * @brief Implementation of the HierarchyObject, which contains all
+ * the calculational results.
+ */
+
 namespace himalaya {
 namespace {
 
@@ -106,10 +113,9 @@ double HierarchyObject::getRelDiff2L() const
  */
 void HierarchyObject::setDMhExpUncertainty(int loops, double uncertainty)
 {
-   if(loops > 0 && loops <= 3){
+   if (loops > 0 && loops <= 3) {
       expUncertainties[loops] = uncertainty;
-   }
-   else {
+   } else {
       throw std::runtime_error("Expansion uncertainty for "
                                + std::to_string(loops) + " loop(s) is not available.");
    }
@@ -121,7 +127,7 @@ void HierarchyObject::setDMhExpUncertainty(int loops, double uncertainty)
  */
 double HierarchyObject::getDMhExpUncertainty(int loops) const
 {
-   if(loops > 0 && loops <= 3){
+   if (loops > 0 && loops <= 3) {
       return expUncertainties.at(loops);
    }
 
@@ -138,10 +144,9 @@ double HierarchyObject::getDMhExpUncertainty(int loops) const
  */
 void HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh)
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       dMhMap[loops] = dMh;
-   }
-   else {
+   } else {
       throw std::runtime_error("Higgs mass matrix for "
                                + std::to_string(loops)
                                + " loop(s) is not available.");
@@ -151,7 +156,7 @@ void HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh)
 /**
  * Sets the delta of the squared CP-even Higgs mass
  * @param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
- * @param the delta of the squared mass.
+ * @param dMh2 the delta of the squared mass.
  */
 void HierarchyObject::setDMh2(int loops, double dMh2)
 {
@@ -170,7 +175,7 @@ void HierarchyObject::setDMh2(int loops, double dMh2)
  */
 Eigen::Matrix2d HierarchyObject::getDMh(int loops) const
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       return dMhMap.at(loops);
    }
 

@@ -14,13 +14,18 @@
 #include <iostream>
 #include <string>
 
+/**
+ * @file Mh2EFTCalculator.cpp
+ * @brief Implementation of EFT Higgs mass calculation class.
+ */
+
 #define CALC_IF(cond,expr) ((cond) ? (expr) : 0)
 
 namespace himalaya {
 namespace mh2_eft {
 
 namespace {
-   const double zt3 = 1.2020569031595942853997381615114;
+   const double zt3 = 1.2020569031595942853997381615114; // zeta(3)
    const double Pi  = 3.1415926535897932384626433832795;
    const double log2 = std::log(2.);
    const double sqrt3 = std::sqrt(3.);
@@ -69,6 +74,7 @@ namespace {
       return std::abs((a - b)/a) < prec;
    }
 
+/// Returns var if not NaN, 0 otherwise
 double isNaN(double var, const std::string& msg = "")
 {
    if (std::isnan(var)) {
@@ -101,7 +107,7 @@ double fB(double s, double x, double q2)
    if (s <= 4.0*x)
       return 2.0 - log(x/q2) - 2.0*sqrt(4.0*x/s - 1.0)*asin(sqrt(s/(4.0*x)));
 
-   // s > 4*s
+   // s > 4*x
    return 2.0 - log(x/q2)
       + sqrt(1.0 - 4.0*x/s)*log(s*(1.0 - sqrt(1.0 - 4.0*x/s))/(2*x) - 1.0);
 }
@@ -181,22 +187,31 @@ Mh2EFTCalculator::Mh2EFTCalculator(
    }
 }
 
-void Mh2EFTCalculator::setCorrectionFlag(int variable, int enable)
+void Mh2EFTCalculator::setCorrectionFlag(int flag, int enable)
 {
-   if(enable < 0 || enable > 1) INFO_MSG("You can only enable (1) or disable (0) corrections!");
-   if(orderMap.find(variable) == orderMap.end()) INFO_MSG("Your variable is not defined in the EFTOrders enum!");
-   orderMap.at(variable) = enable;
+   if (enable < 0 || enable > 1)
+      ERROR_MSG("You can only enable (1) or disable (0) corrections!");
+
+   if (orderMap.find(flag) == orderMap.end())
+      ERROR_MSG("Your flag is not defined in the EFTOrders enum!");
+
+   orderMap.at(flag) = enable;
 }
 
+/**
+ * Returns the tree-level EFT contribution to the light CP-even Higgs mass
+ */
 double Mh2EFTCalculator::getDeltaMh2EFT0Loop() const
 {
    return pow2(p.MZ * std::cos(2 * std::atan(p.vu/p.vd)));
 }
 
 /**
- * Returns the 1-loop EFT contribution to the Higgs mass
+ * Returns the 1-loop EFT contribution to the light CP-even Higgs mass
+ *
  * @param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * @param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
+ * @return 1-loop EFT contribution to the light CP-even Higgs mass
  */
 double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) const
 {
@@ -377,14 +392,13 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
 }
 
 /**
- * Returns the 2-loop EFT contribution to the Higgs mass
+ * Returns the 2-loop EFT contribution to the light CP-even Higgs mass
  * @param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * @param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
+ * @return 2-loop EFT contribution to the light CP-even Higgs mass
  */
 double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) const
 {
-   using namespace himalaya::threshold_loop_functions;
-
    ThresholdCalculator thresholdCalculator(p, msq2);
 
    using std::log;
@@ -503,7 +517,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
       isNaN(orderMap.at(EFTOrders::YB6)*(-((-144*dybyb*(B00DR
       + lmMt) + pow2(cbeta)*(-49 - 3*dlambdayb6 + 72*dvyb2
       - 72*B00DR*dvyb2 - 60*lmbMt + 234*lmMt + 1296*B00DR*lmMt - 72*dvyb2
-      *lmMt + dlambdayb4*(-9 + 9*B00DR - 6*dvyb2 + 9*lmMt) + 36*pow2(lmbMt) 
+      *lmMt + dlambdayb4*(-9 + 9*B00DR - 6*dvyb2 + 9*lmMt) + 36*pow2(lmbMt)
       + 648*pow2(lmMt) - 6*pow2(Pi)))*v2*pow4(cbeta))/6.),
       "dmh2yb6");
    const double dmh2yt6= isNaN(orderMap.at(EFTOrders::YT6)*((v2*(4*dytyt*(
@@ -548,14 +562,15 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 }
 
 /**
- * Returns the 3-loop EFT contribution to the Higgs mass
+ * Returns the 3-loop EFT contribution to the light CP-even Higgs mass.
+ *
  * @param omitSMLogs an integer flag to remove all Log(mu^2/mt^2) terms
  * @param omitMSSMLogs an integer flag to remove all Log(mu^2/Mx^2) terms
  * @param omitDeltaLambda3L an integer flag to disable the MSSM contribution to delta_lambda_3L
+ * @return 3-loop contribution to the light CP-even Higgs mass
  */
-double Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
-                                             int omitMSSMLogs,
-                                             int omitDeltaLambda3L) const
+double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
+   int omitSMLogs, int omitMSSMLogs, int omitDeltaLambda3L) const
 {
    ThresholdCalculator thresholdCalculator(p, msq2);
 
@@ -589,12 +604,17 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(int omitSMLogs,
 }
 
 /**
- * Returns the matching relation of delta_Lambda 3L for the degenerate mass case
+ * Returns the matching relation of delta_Lambda 3L for the degenerate
+ * mass case.
+ *
  * @param scale the renormalization scale
  * @param mst1 the mass of the light stop quark
+ * @param Xt stop mixing parameter
+ * @param omitlogs factor which multiplies the logs
  * @return delta_Lambda 3L
  */
-double Mh2EFTCalculator::getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const
+double Mh2EFTCalculator::getDeltaLambdaDegenerate(
+   double scale, double mst1, double Xt, int omitlogs) const
 {
    using std::log;
 

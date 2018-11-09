@@ -12,6 +12,14 @@
 #include "dilog.hpp"
 #include <cmath>
 
+/**
+ * @file ThresholdCalculator.cpp
+ *
+ * @brief Implementation of threshold corrections class to express the
+ * Higgs mass calculation in terms of SM MS-bar / MSSM DR'-bar
+ * parameters.
+ */
+
 namespace himalaya {
 namespace mh2_eft {
 
@@ -119,22 +127,23 @@ double f3HD(double x) noexcept
 
 bool isfinite(double exact, double shifted, double limit) noexcept
 {
-   // checks if the threshold correction in the general mass case is finite and smaller than 1
+   // checks if the threshold correction in the general mass case is
+   // finite and smaller than 1
    if (!std::isfinite(exact) || !std::isfinite(shifted)
        || (std::abs(exact) > 1. && std::abs(shifted) > 1.))
       return false;
 
-   // checks if the difference of the shifted result to the limit is greater than the difference
-   // of the exact result to the limit which should indicate the divergence of the general mass case
+   // checks if the difference of the shifted result to the limit is
+   // greater than the difference of the exact result to the limit
+   // which should indicate the divergence of the general mass case
    if (std::abs(shifted - limit) >= std::abs(exact - limit))
       return false;
 
    return true;
 }
 
-//        one-loop functions from arxiv:1407.4081. Checked.        //
-
-double deltaxyz(double x, double y, double z) noexcept {
+double deltaxyz(double x, double y, double z) noexcept
+{
    return threshold_loop_functions::delta_xyz(x, y, z);
 }
 
@@ -150,7 +159,8 @@ double deltaxyz(double x, double y, double z) noexcept {
  *
  * @return \f$\Phi(x,y,z)\f$
  */
-double phixyz(double x, double y, double z) noexcept {
+double phixyz(double x, double y, double z) noexcept
+{
    return threshold_loop_functions::phi_xyz(x, y, z);
 }
 

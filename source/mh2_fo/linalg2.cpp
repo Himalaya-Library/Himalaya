@@ -19,6 +19,12 @@
 #include "linalg2.hpp"
 #include "Logger.hpp"
 
+/**
+ * @file linalg2.cpp
+ * @brief Implementation of the Passarino-Veltman functions
+ * @note This file has been taken from FlexibleSUSY.
+ */
+
 namespace flexiblesusy {
 
 namespace {

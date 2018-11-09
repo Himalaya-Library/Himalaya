@@ -12,6 +12,11 @@
 #include <limits>
 #include <map>
 
+/**
+ * @file Mh2EFTCalculator.hpp
+ * @brief Definition of EFT Higgs mass calculation class.
+ */
+
 namespace himalaya{
 namespace mh2_eft{
 

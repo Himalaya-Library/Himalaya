@@ -13,7 +13,14 @@
 #include <vector>
 #include <map>
 
-namespace himalaya{
+/**
+ * @file HierarchyObject.hpp
+ *
+ * @brief Definition of the HierarchyObject, which contains all
+ * the calculational results.
+ */
+
+namespace himalaya {
    /**
     *         The HierarchyObject class.
     */
@@ -143,7 +150,7 @@ namespace himalaya{
       /**
        *         Sets the delta of the squared CP-even Higgs mass
        *         @param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
-       *         @param the delta of the squared mass.
+       *         @param dMh2 the delta of the squared mass.
        */
       void setDMh2(int loops, double dMh2);
       /**

@@ -13,6 +13,11 @@
 #include <mutex>
 #include <utility>
 
+/**
+ * @file DSZHiggs.cpp
+ * @brief Implementation of C++ wrappers for 2-loop FORTRAN routines.
+ */
+
 namespace himalaya {
 namespace mssm_twoloophiggs {
 

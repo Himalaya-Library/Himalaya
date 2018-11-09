@@ -37,6 +37,11 @@
 
 #include <Eigen/Eigenvalues>
 
+/**
+ * @file HierarchyCalculator.cpp
+ * @brief Implementation of the HierarchyCalculator.
+ */
+
 namespace himalaya {
 
 static bool isInfoPrinted; ///< If this bool is true, than no info will be printed in further runs

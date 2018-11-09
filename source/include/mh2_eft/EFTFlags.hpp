@@ -7,6 +7,12 @@
 
 #pragma once
 
+/**
+ * @file EFTFlags.hpp
+ *
+ * @brief Enum definitions for the EFT calculation
+ */
+
 namespace himalaya{
 namespace mh2_eft{
 

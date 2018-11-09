@@ -17,6 +17,13 @@
 
 #include <Eigen/Eigenvalues>
 
+/**
+ * @file Himalaya_interface.cpp
+ *
+ * @brief Definition of the helper functions for the MSSM input
+ * parameters
+ */
+
 namespace himalaya {
 
 namespace {

@@ -12,7 +12,17 @@
 #include "version.hpp"
 #include <map>
 
-namespace himalaya{
+/**
+ * @file HierarchyCalculator.hpp
+ *
+ * @brief Definition of the HierarchyCalculator.
+ *
+ * Definition of the HierarchyCalculatur, which selects the best
+ * suited hierarchy for the given MSSM parameter point and calculates
+ * the loop corrections.
+ */
+
+namespace himalaya {
    /**
     * The HierarchyCalculatur class
     */

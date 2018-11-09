@@ -10,6 +10,14 @@
 #include "Himalaya_interface.hpp"
 #include <limits>
 
+/**
+ * @file ThresholdCalculator.hpp
+ *
+ * @brief Definition of threshold corrections class to express the
+ * Higgs mass calculation in terms of SM MS-bar / MSSM DR'-bar
+ * parameters.
+ */
+
 namespace himalaya{
 namespace mh2_eft{
 
@@ -150,7 +158,6 @@ private:
    double getDeltaLambdaG12G22(int omitLogs) const;
    /**
     * Returns delta_lambda_reg_g1^2_g2^2
-    * @param omitLogs an integer key to omit all mu terms
     * @return delta_lambda_reg_g1^2_g2^2
     */
    double getDeltaLambdaRegG12G22() const;
@@ -336,9 +343,9 @@ private:
     * @return delta_lambda_ytau2_yb4
     */
    double getDeltaLambdaYtau2Yb4(int omitLogs) const;
-   Parameters p{}; ///< The HimalayaInterface struct
-   double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
-   int xtOrderLambdaAtAs2 = 6; ///< A flag to truncate the Xt order of delta_lambda_at_as2 at a given value starting at 4
+   Parameters p{}; ///< Himalaya input parameters
+   double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< average squared squark mass of the first two generations
+   int xtOrderLambdaAtAs2 = 6; ///< flag to truncate the Xt order of delta_lambda_at_as2 at a given power starting at 4
 };
 
 } // namespace mh2_eft

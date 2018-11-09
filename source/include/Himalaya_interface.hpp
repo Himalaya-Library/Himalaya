@@ -11,6 +11,11 @@
 #include <limits>
 #include <Eigen/Core>
 
+/**
+ * @file Himalaya_interface.hpp
+ * @brief Definition of the MSSM input parameters
+ */
+
 namespace himalaya {
 
 using V2 = Eigen::Vector2d;   ///< real 2-vector
