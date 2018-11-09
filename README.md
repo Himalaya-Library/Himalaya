@@ -66,8 +66,11 @@ When the build is complete, the libraries `libDSZ` and `libHimalaya`
 have been created.  The latter must be linked to user-written programs
 to call the routines of Himalaya.  The library `libDSZ` is optional
 and has to be linked in addition, if the program does not already
-incorporate the associated FORTRAN code of G. Degrassi, P. Slavich and
-F. Zwirner [[hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096)].
+incorporate the associated FORTRAN code of P. Slavich for the 2-loop
+corrections [[hep-ph/0105096](https://arxiv.org/abs/hep-ph/0105096),
+[hep-ph/0112177](https://arxiv.org/abs/hep-ph/0112177),
+[hep-ph/0212132](https://arxiv.org/abs/hep-ph/0212132),
+[hep-ph/0305127](https://arxiv.org/abs/hep-ph/0305127)].
 
 ### C++ interface
 
