@@ -403,24 +403,11 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
    const double ytau4 = pow2(ytau2);
    const double ytau6 = pow3(ytau2);
    const double beta = atan(p.vu/p.vd);
-   const double tbeta = p.vu/p.vd;
    const double cbeta = cos(beta);
    const double c2beta = cos(2*beta);
    const double sbeta = sin(beta);
    const double mhtree = std::abs(c2beta*p.MZ);
    const double lmbMt = log(pow2(p.Mb / p.Mt));
-   const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
-   const double mQ32 = p.mq2(2,2);
-   const double mD32 = p.md2(2,2);
-   const double mD3 = sqrt(mD32);
-   const double mQ3 = sqrt(mQ32);
-   const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
-   const double mU3 = sqrt(p.mu2(2,2));
-   const double MR2 = pow2(p.scale);
-   const double lmUMR = omitMSSMLogs*log(pow2(p.mu) / MR2);
-   const double mA2 = pow2(p.MA);
-   const double m3 = p.MG;
-   const double m32 = pow2(m3);
 
    // 2-Loop prefactor at*as
    const double pref = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
@@ -501,38 +488,18 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
       thresholdCalculator.getThresholdCorrection(
       ThresholdVariables::YB_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
 
-
-   // term from the tanb resummation
-   const double dmh2yb6_tb =
-      isNaN(orderMap.at(EFTOrders::YB6)*(-(dlambdayb4*(-2*pow2(Xb)*F5(mQ3/mD3)
-      *pow2(sbeta) + mD3*mQ3*(6*lmUMR + 4*F6(mD3/p.mu) + 8*F6(mQ3/p.mu) - 3*pow2(sbeta)
-      + 6*log(mA2/MR2)*pow2(sbeta)))*v2*pow6(cbeta))/(4.*mD3*mQ3*pow2(cbeta))),
-      "dmh2yb6");
-   const double dmh2yt2yb4_tb =
-      isNaN(orderMap.at(EFTOrders::YT2YB4)*(-(dlambdayb4*pow2(sbeta)
-      *(-2*p.mu*pow2(Xt)*F5(mQ3/mU3)*pow2(sbeta) + mQ3*mU3*(4*p.mu*F6(mU3/p.mu) + 4*tbeta
-      *Xt*F9(mQ3/p.mu,mU3/p.mu) + p.mu*(2*lmUMR - pow2(sbeta) - 8*pow2(sbeta)
-      + 2*log(mA2/MR2)*(pow2(sbeta) + 4*pow2(sbeta)))))*v2*pow4(cbeta))
-      /(4.*mQ3*p.mu*mU3*pow2(sbeta))),
-      "dmh2yt2yb4");
-   const double dmh2yb4g32_tb =
-      isNaN(orderMap.at(EFTOrders::G32YB4)*((-8*dlambdayb4*(1
-      + F6(mD3/m3) + F6(mQ3/m3) - (Xb*F9(mQ3/m3,mD3/m3))/m3 + log(m32/MR2))
-      *v2*pow4(cbeta))/3.),
-      "dmh2yb4g32");
-
    // Corrections to Mh
    const double dmh2yt4g32 = isNaN(orderMap.at(EFTOrders::G32YT4)*(pref*(96 * pow2(lmMt)
       + (-32 + 48 * dytas) * lmMt - 24 * dytas
       + thresholdCalculator.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
          RenSchemes::DRBARPRIME, omitMSSMLogs))),
       "dmh2yt4g32");
-   const double dmh2yb4g32 = dmh2yb4g32_tb +
+   const double dmh2yb4g32 =
       isNaN(orderMap.at(EFTOrders::G32YB4)*((dlambdayb4g32
       + 16*(3*B00DR*(dybas + 16*lmMt) + lmMt*(-2 + 3*dybas
       + 24*lmMt)))*v2*pow4(cbeta))/2.,
       "dmh2yb4g32");
-   const double dmh2yb6 = dmh2yb6_tb +
+   const double dmh2yb6 =
       isNaN(orderMap.at(EFTOrders::YB6)*(-((-144*dybyb*(B00DR
       + lmMt) + pow2(cbeta)*(-49 - 3*dlambdayb6 + 72*dvyb2
       - 72*B00DR*dvyb2 - 60*lmbMt + 234*lmMt + 1296*B00DR*lmMt - 72*dvyb2
@@ -560,7 +527,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
       - 12*dvytau2*(-1 + B00DR + lmMt) + 15*pow2(lmMt) + pow2(Pi))))*v2
       *pow4(cbeta))/6.),
       "dmh2ytau6");
-   const double dmh2yt2yb4 = dmh2yt2yb4_tb +
+   const double dmh2yt2yb4 =
       isNaN(orderMap.at(EFTOrders::YT2YB4)*(((48*dybyt*lmMt
       + (dlambdayt2yb4 + dlambdayb4*(2 + 2*dvyt2 - 3*lmMt) + 3*(-15 + 8*lmbMt
       + 8*dvyt2*(-1 + lmMt) + 18*lmMt - 24*pow2(lmMt) - 2*pow2(Pi)))*pow2(sbeta)
