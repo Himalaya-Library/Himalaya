@@ -198,7 +198,8 @@ InitializeHimalaya["Himalaya_LibraryLink.so"];
 ```
 
 Now, the `HimalayaCalculateDMh3L[]` function is available, which
-calculates the loop corrections available by Himalaya.
+calculates the loop corrections available by Himalaya.  A full and
+detailed example can be found in [source/example.m](source/example.m).
 
 **Example**:
 
