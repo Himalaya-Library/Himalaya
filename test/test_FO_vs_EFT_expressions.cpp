@@ -60,6 +60,7 @@ himalaya::Parameters make_point()
    const double v = 245.;
    const double msq = MS;
    const double msu = MS;
+   const double msd = MS;
    const double mg  = MS;
    const double msl = MS;
    const double mse = MS;
@@ -75,16 +76,16 @@ himalaya::Parameters make_point()
    pars.vu    = v*std::sin(beta);
    pars.vd    = v*std::cos(beta);
    pars.mq2   << pow2(msq), 0, 0, 0, pow2(msq), 0, 0, 0, pow2(msq);
-   pars.md2   << pow2(MS) , 0, 0, 0, pow2(MS) , 0, 0, 0, pow2(MS);
+   pars.md2   << pow2(msd), 0, 0, 0, pow2(msd), 0, 0, 0, pow2(msd);
    pars.mu2   << pow2(msu), 0, 0, 0, pow2(msu), 0, 0, 0, pow2(msu);
    pars.ml2   << pow2(msl), 0, 0, 0, pow2(msl), 0, 0, 0, pow2(msl);
    pars.me2   << pow2(mse), 0, 0, 0, pow2(mse), 0, 0, 0, pow2(mse);
    pars.Au    << 0, 0, 0, 0, 0, 0, 0, 0, Xt + pars.mu/tb;
    pars.Ae    << 0, 0, 0, 0, 0, 0, 0, 0, 0;
-   pars.Ad    << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0;
+   pars.Ad    << 0, 0, 0, 0, 0, 0, 0, 0, 0;
    pars.Yu    << 0, 0, 0, 0, 0, 0, 0, 0, 0.8;
    pars.Ye    << 0, 0, 0, 0, 0, 0, 0, 0, 0.1;
-   pars.Yd    << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0.3;
+   pars.Yd    << 0, 0, 0, 0, 0, 0, 0, 0, 0.3;
    pars.M1    = MS;
    pars.M2    = MS;
    pars.MG    = mg;
