@@ -103,8 +103,8 @@ himalaya::Parameters make_point()
 himalaya::Parameters make_gaugeless(const himalaya::Parameters& pars)
 {
    auto gl = pars;
-   gl.g1 = 1e-8;
-   gl.g2 = 1e-8;
+   gl.g1 = 0;
+   gl.g2 = 0;
    gl.MW = himalaya::NaN;
    gl.MZ = himalaya::NaN;
    gl.validate(false);
