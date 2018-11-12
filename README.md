@@ -169,20 +169,22 @@ by calling
 double delta_lambda_3L_uncertainty = ho.getDLambdaUncertainty(3);
 ```
 
-The function `getDLambdaUncertainty` returns an uncertainty
-estimate by taking into account higher order Xt^n terms missing in
-some hierarcy expansions.
+The function `getDLambdaUncertainty` returns an uncertainty estimate
+by taking into account Xt^4 terms missing in some hierarchy
+expansions.
 
-A full and detailed example can be found in `source/example.cpp`.
+A full and detailed example can be found in
+[source/example.cpp](source/example.cpp).
 
 ### Mathematica interface
 
 Since version 2.0.0 Himalaya can be run from within Mathematica using
 the LibraryLink interface.  To load Himalaya into Mathematica, first,
-the file `source/LibraryLink/Himalaya_LibraryLink.m` must be loaded,
-which defines the Himalaya's Mathematica functions.  Assuming the
-current directory is in the `build/` sub-directory of Himalaya, this
-can be done with:
+the file
+[source/LibraryLink/Himalaya_LibraryLink.m](source/LibraryLink/Himalaya_LibraryLink.m)
+must be loaded, which defines the Himalaya's Mathematica functions.
+Assuming the current directory is in the `build/` sub-directory of
+Himalaya, this can be done with:
 
 ```.m
 Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
