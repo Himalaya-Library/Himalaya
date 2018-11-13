@@ -51,11 +51,8 @@ auto derivative_central(const F& f, A x, A eps = std::numeric_limits<A>::epsilon
    return result / h;
 }
 
-himalaya::Parameters make_point()
+himalaya::Parameters make_point(double MS = 10000, double xt = 1, double tb = 20)
 {
-   const double MS = 10000.;
-   const double xt = 1.;
-   const double tb = 20.;
    const double beta = std::atan(tb);
    const double v = 245.;
    const double msq = MS;
