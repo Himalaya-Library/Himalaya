@@ -63,6 +63,25 @@ is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
    return std::abs(a) <= prec;
 }
 
+template <typename T>
+bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+{
+   return is_zero(a - b, prec);
+}
+
+template <typename T>
+bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+{
+   if (is_equal(a, b, std::numeric_limits<T>::epsilon()))
+      return true;
+
+   if (std::abs(a) < std::numeric_limits<T>::epsilon() ||
+       std::abs(b) < std::numeric_limits<T>::epsilon())
+      return false;
+
+   return std::abs((a - b)/a) < prec;
+}
+
 /**
  * Converts the given vector of masses and the corresponding (complex)
  * mixing matrix to SLHA convention: Matrix rows with non-zero
@@ -1179,8 +1198,15 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
    RM22 dmh(RM22::Zero());
 
    // 2-loop contribution from momentum iteration
-   if (include_mom_it) {
+   switch (mom_it) {
+   case Momentum_iteration::pert:
       dmh += delta_mh2_2loop_mom_it();
+      break;
+   case Momentum_iteration::num:
+      dmh += delta_mh2_2loop_mom_it_num();
+      break;
+   default:
+      break;
    }
 
    if (orders.at(EFTOrders::G32YT4)) {
@@ -1235,6 +1261,37 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it() const
    return delta_mh2_1loop_gaugeless_deriv()*dmh2_1L_gl;
 }
 
+/**
+ * Returns Higgs 2-loop (and higher) contributions from momentum
+ * iteration of 1-loop self-energy.
+ *
+ * @return 2-loop (and higher) contribution from momentum iteration
+ */
+RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it_num() const
+{
+   const auto DMH_0L = get_mass_matrix_hh();
+   const auto mh2_0L = masses.M2hh(0);
+   auto p2 = mh2_0L;
+   const int n_max = 100;
+   int n = 0;
+   bool has_converged = false;
+   RM22 DMH(RM22::Zero());
+
+   while (!has_converged && n < n_max) {
+      DMH = DMH_0L + delta_mh2_1loop(p2);
+
+      MSSM_spectrum::A2 M2hh;
+      RM22 ZH;
+      flexiblesusy::fs_diagonalize_hermitian(DMH, M2hh, ZH);
+
+      has_converged = is_equal_rel(M2hh(0), p2, mom_it_threshold);
+      p2 = M2hh(0);
+      n++;
+   };
+
+   return DMH - DMH_0L - delta_mh2_1loop(mh2_0L);
+}
+
 RM22 MSSM_mass_eigenstates::get_mass_matrix_hh() const
 {
    return masses.get_mass_matrix_hh();
@@ -1256,9 +1313,10 @@ void MSSM_mass_eigenstates::set_correction(int order, int flag)
    orders.at(order) = flag;
 }
 
-void MSSM_mass_eigenstates::enable_mom_it(bool flag)
+void MSSM_mass_eigenstates::set_mom_it(Momentum_iteration mi, double thresh)
 {
-   include_mom_it = flag;
+   mom_it = mi;
+   mom_it_threshold = thresh;
 }
 
 double MSSM_mass_eigenstates::A0(double m2) const

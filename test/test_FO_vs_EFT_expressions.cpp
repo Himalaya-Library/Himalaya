@@ -210,7 +210,7 @@ TEST_CASE("test_FO_1loop_derivative")
    CHECK_CLOSE(Mh2_1L_deriv, Mh2_1L_deriv_num, 1e-4);
 }
 
-TEST_CASE("test_FO_2loop_momentum_iteration")
+TEST_CASE("test_FO_2loop_momentum_iteration_pert")
 {
    using namespace himalaya;
    using namespace himalaya::mh2_fo;
@@ -254,6 +254,52 @@ TEST_CASE("test_FO_2loop_momentum_iteration")
    INFO("Mh2_2L_mom_it = " << Mh2_2L_mom_it);
 
    // check that (analytic and numeric) momentum iteration goes into
+   // the same direction and is ~ 1% close to each other
+   CHECK(std::abs(Mh2_2L - Mh2_2L_mom_it) < 0.01*std::abs(Mh2_2L - Mh2_1L));
+}
+
+TEST_CASE("test_FO_2loop_momentum_iteration_num")
+{
+   using namespace himalaya;
+   using namespace himalaya::mh2_fo;
+   using namespace himalaya::mh2_eft::EFTOrders;
+
+   const auto p = make_gaugeless(make_point());
+   MSSM_mass_eigenstates me(p);
+
+   // disable 2-loop corrections
+   me.set_correction(EFTOrders::G32YT4, 0);
+   me.set_correction(EFTOrders::G32YB4, 0);
+   me.set_correction(EFTOrders::YT6, 0);
+   me.set_correction(EFTOrders::YTAU6, 0);
+   me.set_correction(EFTOrders::YTAU2YB4, 0);
+   me.set_correction(EFTOrders::YTAU4YB2, 0);
+
+   // calculate perturbatively
+   me.set_mom_it(Momentum_iteration::pert);
+
+   const auto Mh2_pert    = me.calculate_Mh2();
+   const auto Mh2_pert_0L = std::get<0>(Mh2_pert);
+   const auto Mh2_pert_1L = std::get<1>(Mh2_pert);
+   const auto Mh2_pert_2L = std::get<2>(Mh2_pert);
+
+   INFO("Mh2_pert_0L = " << Mh2_pert_0L);
+   INFO("Mh2_pert_1L = " << Mh2_pert_1L);
+   INFO("Mh2_pert_2L = " << Mh2_pert_2L);
+
+   // calculate numerically
+   me.set_mom_it(Momentum_iteration::num);
+
+   const auto Mh2_num    = me.calculate_Mh2();
+   const auto Mh2_num_0L = std::get<0>(Mh2_num);
+   const auto Mh2_num_1L = std::get<1>(Mh2_num);
+   const auto Mh2_num_2L = std::get<2>(Mh2_num);
+
+   INFO("Mh2_num_0L = " << Mh2_num_0L);
+   INFO("Mh2_num_1L = " << Mh2_num_1L);
+   INFO("Mh2_num_2L = " << Mh2_num_2L);
+
+   // check that (analytic and numeric) momentum iteration goes into
    // the same direction and is ~ 10% close to each other
-   CHECK(100*std::abs(Mh2_2L - Mh2_2L_mom_it) < std::abs(Mh2_2L - Mh2_1L));
+   CHECK(std::abs(Mh2_pert_2L - Mh2_num_2L) < 0.1*std::abs(Mh2_pert_2L));
 }

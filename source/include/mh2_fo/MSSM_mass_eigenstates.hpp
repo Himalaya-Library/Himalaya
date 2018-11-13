@@ -119,6 +119,13 @@ struct MSSM_spectrum {
 /// prints the spectrum
 std::ostream& operator<<(std::ostream&, const MSSM_spectrum&);
 
+/// momentum iteration settings
+enum class Momentum_iteration {
+   off,  ///< no momentum iteration
+   pert, ///< perturbatively up to 2-loop level
+   num,  ///< numerically (all orders)
+};
+
 /**
  * @class MSSM_mass_eigenstates
  *
@@ -145,10 +152,12 @@ public:
    RM22 delta_mh2_2loop() const;
    /// Higgs 2-loop contributions DR' for p = g1 = g2 = 0 from momentum iteration
    RM22 delta_mh2_2loop_mom_it() const;
+   /// Higgs 2-loop (and higher) contributions DR' from numerical momentum iteration
+   RM22 delta_mh2_2loop_mom_it_num() const;
    /// enable/disable loop corrections
    void set_correction(int, int);
-   /// enable/disable momentum iteration
-   void enable_mom_it(bool);
+   /// customize momentum iteration
+   void set_mom_it(Momentum_iteration, double thresh = 1e-5);
 
    friend std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
@@ -157,7 +166,8 @@ private:
    MSSM_spectrum masses;       ///< MSSM DR' masses / mixings
    MSSM_spectrum gaugeless;    ///< MSSM DR' masses / mixings for g1 = g2 = 0
    std::map<int,int> orders{}; ///< enable/disable corrections
-   bool include_mom_it{true};  ///< include/exclude momentum iteration
+   Momentum_iteration mom_it{Momentum_iteration::pert}; ///< momentum iteration settings
+   double mom_it_threshold{1e-5}; ///< threshold for numeric momentum iteration
 
    /// calculates tree-level squared Higgs masses
    V2 calculate_Mh2_tree() const;
