@@ -928,13 +928,15 @@ double ThresholdCalculator::getDeltaVevYb2() const
       - pow2(mQ32)))/(4.*pow3(mD32 - mQ32));
 
    if (std::abs(mQ32 - mD32) < eps) {
-      const double mQ3 = sqrt(mQ32);
+     return Xb2/(4.*mQ32);
+      /*const double mQ3 = sqrt(mQ32);
       const double mD3 = sqrt(mD32);
       const double lim = Xb2/(4.*mQ32);
       const double mD32Shifted2 = pow2(mQ3 + std::abs(mD3 - mQ3)/2.);
       const double shifted = (3*Xb2*(2*mD32Shifted2*mQ32*log(mQ32/mD32Shifted2)
-	 + pow2(mD32Shifted2) - pow2(mQ32)))/(4.*pow3(mD32Shifted2 - mQ32));
-      if (!isfinite(exact, shifted, lim)) return lim;
+        + pow2(mD32Shifted2) - pow2(mQ32)))/(4.*pow3(mD32Shifted2 - mQ32));
+      std::cout << exact << " " << shifted << " " << lim << " party\n";
+      if (!isfinite(exact, shifted, lim)) return lim;*/
    }
 
    return exact;
@@ -950,13 +952,14 @@ double ThresholdCalculator::getDeltaVevYtau2() const{
       - pow2(mL32)))/(4.*pow3(mE32 - mL32));
 
    if (std::abs(mL32 - mE32) < eps) {
-      const double mL3 = sqrt(mL32);
+     return Xtau2/(12.*mL32);
+      /*const double mL3 = sqrt(mL32);
       const double mE3 = sqrt(mE32);
       const double lim = Xtau2/(12.*mL32);
       const double mE32Shifted2 = pow2(mL3 + std::abs(mE3 - mL3)/2.);
       const double shifted = (Xtau2*(2*log(mL32/mE32Shifted2)*mE32Shifted2*mL32
 	 + pow2(mE32Shifted2) - pow2(mL32)))/(4.*pow3(mE32Shifted2 - mL32));
-      if (!isfinite(exact, shifted, lim)) return lim;
+      if (!isfinite(exact, shifted, lim)) return lim;*/
    }
 
    return exact;
