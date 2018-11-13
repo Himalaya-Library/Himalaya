@@ -1289,6 +1289,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it_num() const
       n++;
    };
 
+   if (!has_converged) {
+      WARNING_MSG("Momentum iteration has not converged after "
+                  << n << " iterations.");
+   }
+
    return DMH - DMH_0L - delta_mh2_1loop(mh2_0L);
 }
 
