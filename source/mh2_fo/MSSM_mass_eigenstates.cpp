@@ -1200,10 +1200,10 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
    // 2-loop contribution from momentum iteration
    switch (mom_it) {
    case Momentum_iteration::pert:
-      dmh += delta_mh2_2loop_mom_it();
+      dmh += delta_mh2_2loop_mom_it_pert();
       break;
    case Momentum_iteration::num:
-      dmh += delta_mh2_2loop_mom_it_num();
+      dmh += delta_mh2_2loop_mom_it_num(mom_it_precision_goal, mom_it_max_iterations);
       break;
    default:
       break;
@@ -1246,7 +1246,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
  *
  * @return 2-loop contribution from momentum iteration
  */
-RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it() const
+RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it_pert() const
 {
    // tree-level Higgs mass matrix in gaugeless limit
    const auto DMH_0L = get_mass_matrix_hh_gaugeless();
@@ -1265,26 +1265,29 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it() const
  * Returns Higgs 2-loop (and higher) contributions from momentum
  * iteration of 1-loop self-energy.
  *
+ * @param precision_goal precision goal (fraction, between 0 and 1)
+ * @param max_iterations maximum number of iterations
+ *
  * @return 2-loop (and higher) contribution from momentum iteration
  */
-RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it_num() const
+RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it_num(
+   double precision_goal, int max_iterations) const
 {
    const auto DMH_0L = get_mass_matrix_hh();
    const auto mh2_0L = masses.M2hh(0);
    auto p2 = mh2_0L;
-   const int n_max = 100;
    int n = 0;
    bool has_converged = false;
    RM22 DMH(RM22::Zero());
 
-   while (!has_converged && n < n_max) {
+   while (!has_converged && n < max_iterations) {
       DMH = DMH_0L + delta_mh2_1loop(p2);
 
       MSSM_spectrum::A2 M2hh;
       RM22 ZH;
       flexiblesusy::fs_diagonalize_hermitian(DMH, M2hh, ZH);
 
-      has_converged = is_equal_rel(M2hh(0), p2, mom_it_threshold);
+      has_converged = is_equal_rel(M2hh(0), p2, precision_goal);
       p2 = M2hh(0);
       n++;
    };
@@ -1318,10 +1321,14 @@ void MSSM_mass_eigenstates::set_correction(int order, int flag)
    orders.at(order) = flag;
 }
 
-void MSSM_mass_eigenstates::set_mom_it(Momentum_iteration mi, double thresh)
+void MSSM_mass_eigenstates::set_mom_it(
+   Momentum_iteration mi,
+   double mom_it_precision_goal_,
+   int mom_it_max_iterations_)
 {
    mom_it = mi;
-   mom_it_threshold = thresh;
+   mom_it_precision_goal = mom_it_precision_goal_;
+   mom_it_max_iterations = mom_it_max_iterations_;
 }
 
 double MSSM_mass_eigenstates::A0(double m2) const

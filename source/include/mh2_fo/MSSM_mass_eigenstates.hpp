@@ -151,13 +151,13 @@ public:
    /// Higgs 2-loop contributions DR' for p = 0
    RM22 delta_mh2_2loop() const;
    /// Higgs 2-loop contributions DR' for p = g1 = g2 = 0 from momentum iteration
-   RM22 delta_mh2_2loop_mom_it() const;
+   RM22 delta_mh2_2loop_mom_it_pert() const;
    /// Higgs 2-loop (and higher) contributions DR' from numerical momentum iteration
-   RM22 delta_mh2_2loop_mom_it_num() const;
+   RM22 delta_mh2_2loop_mom_it_num(double precision_goal = 1e-5, int max_iterations = 100) const;
    /// enable/disable loop corrections
    void set_correction(int, int);
    /// customize momentum iteration
-   void set_mom_it(Momentum_iteration, double thresh = 1e-5);
+   void set_mom_it(Momentum_iteration, double mom_it_precision_goal_ = 1e-5, int mom_it_max_iterations_ = 100);
 
    friend std::ostream& operator<<(std::ostream&, const MSSM_mass_eigenstates&);
 
@@ -167,7 +167,8 @@ private:
    MSSM_spectrum gaugeless;    ///< MSSM DR' masses / mixings for g1 = g2 = 0
    std::map<int,int> orders{}; ///< enable/disable corrections
    Momentum_iteration mom_it{Momentum_iteration::pert}; ///< momentum iteration settings
-   double mom_it_threshold{1e-5}; ///< threshold for numeric momentum iteration
+   double mom_it_precision_goal{1e-5}; ///< precision goal for numeric momentum iteration
+   int mom_it_max_iterations{100};     ///< maximum number of numeric momentum iterations
 
    /// calculates tree-level squared Higgs masses
    V2 calculate_Mh2_tree() const;
