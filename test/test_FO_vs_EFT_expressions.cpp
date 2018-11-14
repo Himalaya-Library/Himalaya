@@ -222,6 +222,8 @@ TEST_CASE("test_FO_2loop_momentum_iteration_pert")
    me.set_correction(EFTOrders::G32YB4, 0);
    me.set_correction(EFTOrders::YT6, 0);
    me.set_correction(EFTOrders::YTAU6, 0);
+   me.set_correction(EFTOrders::YTAU2YB4, 0);
+   me.set_correction(EFTOrders::YTAU4YB2, 0);
 
    // calculates Mh^2 as a function of p^2
    const auto Mh2_1L_p2 = [&me] (double p2) {
