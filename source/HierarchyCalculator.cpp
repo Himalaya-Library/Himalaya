@@ -1264,12 +1264,12 @@ Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& h
    double Mt2, st, ct;
 
    if (!ho.getIsAlphab()) {
-      const double theta = 0.5*std::asin(p.s2t);
+      const double theta = p.theta_t;
       Mt2 = pow2(p.Mt);
       st = std::sin(theta);
       ct = std::cos(theta);
    } else {
-      const double theta = 0.5*std::asin(p.s2b);
+      const double theta = p.theta_b;
       Mt2 = pow2(p.Mb);
       st = std::sin(theta);
       ct = std::cos(theta);
@@ -1283,9 +1283,11 @@ Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& h
    const double tanb = p.vu/p.vd;
    const double v2 = pow2(p.vu) + pow2(p.vd);
    const double gs = p.g3;
+   const int include_heavy_higgs = 0;
 
    const Eigen::Matrix2d Mt42L = delta_mh2_2loop_at_as(
-      Mt2, MG, Mst12, Mst22, st, ct, scale2, mu, tanb, v2, gs);
+      Mt2, MG, Mst12, Mst22, st, ct, scale2, mu, tanb, v2, gs,
+      include_heavy_higgs);
 
    return Mt42L;
 }

@@ -55,12 +55,12 @@ void sort_ew(V2& ew, double& theta) noexcept
 {
    if (ew(0) > ew(1)) {
       std::swap(ew(0), ew(1));
-      theta *= -1;
+      theta += M_PI/2.;
    }
 }
 
-/// calculates mass eigenvalues (in GeV) and sin(2*theta)
-std::pair<V2,double> calculate_MSf_s2f(const RM22& M)
+/// calculates mass eigenvalues (in GeV), sin(2*theta) and theta
+std::tuple<V2,double,double> calculate_MSf_s2f(const RM22& M)
 {
    const Eigen::SelfAdjointEigenSolver<RM22> es(M);
    RM22 ev = es.eigenvectors().real();
@@ -89,9 +89,7 @@ std::pair<V2,double> calculate_MSf_s2f(const RM22& M)
 
    sort_ew(ew, theta);
 
-   const double s2t = std::sin(2 * theta);
-
-   return std::make_pair(ew, s2t);
+   return std::make_tuple(ew, std::sin(2 * theta), theta);
 }
 
 RM33 h_svd(const RM33& M)
@@ -150,7 +148,7 @@ void Parameters::validate(bool verbose)
    if(std::isnan(Mtau)) Mtau = 0.7071067811865475*Ye(2,2)*vd;
    
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
-   if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t)) {
+   if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t) || std::isnan(theta_t)) {
       const double tan_beta = vu / vd;
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
@@ -160,16 +158,16 @@ void Parameters::validate(bool verbose)
       stopMatrix << mq2(2, 2) + sqr(Mt) + (1/2. - 2/3. * sw2) * sqr(MZ) * cos_2beta, Xt,
         Xt, mu2(2, 2) + sqr(Mt) + 2 / 3. * sw2 * sqr(MZ) * cos_2beta;
 
-      std::tie(MSt, s2t) = calculate_MSf_s2f(stopMatrix);
+      std::tie(MSt, s2t, theta_t) = calculate_MSf_s2f(stopMatrix);
 
       if (verbose) {
          INFO_MSG("Stop masses or mixing angle not provided. Calculated values:\n" <<
                   "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" <<
-                  "\tmixing angle sin(2*theta): " << s2t);
+                  "\tmixing angle sin(2*theta_t): " << s2t << ", theta_t = " << theta_t);
       }
    }
 
-   if (std::isnan(MSb(0)) || std::isnan(MSb(1)) || std::isnan(s2b)) {
+   if (std::isnan(MSb(0)) || std::isnan(MSb(1)) || std::isnan(s2b) || std::isnan(theta_b)) {
       const double tan_beta = vu / vd;
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
@@ -179,16 +177,16 @@ void Parameters::validate(bool verbose)
       sbottomMatrix << mq2(2, 2) + sqr(Mb) - (1/2. - 1/3. * sw2) * sqr(MZ) * cos_2beta, Xb,
          Xb, md2(2, 2) + sqr(Mb) - 1/3. * sw2 * sqr(MZ) * cos_2beta;
 
-      std::tie(MSb, s2b) = calculate_MSf_s2f(sbottomMatrix);
+      std::tie(MSb, s2b, theta_b) = calculate_MSf_s2f(sbottomMatrix);
 
       if (verbose) {
          INFO_MSG("Sbottom masses or mixing angle not provided. Calculated values:\n" <<
                   "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" <<
-                  "\tmixing angle sin(2*theta): " << s2b << ".");
+                  "\tmixing angle sin(2*theta_b): " << s2b << ", theta_b = " << theta_b);
       }
    }
 
-   if (std::isnan(MStau(0)) || std::isnan(MStau(1)) || std::isnan(s2tau)) {
+   if (std::isnan(MStau(0)) || std::isnan(MStau(1)) || std::isnan(s2tau) || std::isnan(theta_tau)) {
       const double tan_beta = vu / vd;
       const double beta = std::atan(tan_beta);
       const double cos_2beta = std::cos(2 * beta);
@@ -198,12 +196,12 @@ void Parameters::validate(bool verbose)
       stauMatrix << ml2(2, 2) + sqr(Mtau) - (0.5 - sw2) * sqr(MZ) * cos_2beta, Xtau,
          Xtau, me2(2, 2) + sqr(Mtau) - sw2 * sqr(MZ) * cos_2beta;
 
-      std::tie(MStau, s2tau) = calculate_MSf_s2f(stauMatrix);
+      std::tie(MStau, s2tau, theta_tau) = calculate_MSf_s2f(stauMatrix);
 
       if (verbose) {
          INFO_MSG("Stau masses or mixing angle not provided. Calculated values:\n" <<
                   "\tstau masses: " << MStau(0) << " GeV, " << MStau(1) << " GeV,\n" <<
-                  "\tmixing angle sin(2*theta): " << s2tau << ".");
+                  "\tmixing angle sin(2*theta_tau): " << s2tau << ", theta_tau = " << theta_tau);
       }
    }
 

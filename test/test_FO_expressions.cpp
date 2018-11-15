@@ -36,6 +36,8 @@ himalaya::Parameters make_point()
    pars.MSb <<  2000.14, 2001.09;
    pars.s2t = -0.999995;
    pars.s2b = -0.550527;
+   pars.theta_t = -0.783817;
+   pars.theta_b = -0.291498;
 
    return pars;
 }

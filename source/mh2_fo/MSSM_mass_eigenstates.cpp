@@ -1180,20 +1180,18 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
    const auto mstau22 = pow2(pars.MStau(1));
    const auto msv2 = gaugeless.M2SvtL;
    const auto mA2 = pow2(pars.MA);
-   const auto theta_t = 0.5*std::asin(pars.s2t);
-   const auto theta_b = 0.5*std::asin(pars.s2b);
-   const auto theta_tau = 0.5*std::asin(pars.s2tau);
-   const auto sxt = std::sin(theta_t);
-   const auto cxt = std::cos(theta_t);
-   const auto sxb = std::sin(theta_b);
-   const auto cxb = std::cos(theta_b);
-   const auto sxtau = std::sin(theta_tau);
-   const auto cxtau = std::cos(theta_tau);
+   const auto sxt = std::sin(pars.theta_t);
+   const auto cxt = std::cos(pars.theta_t);
+   const auto sxb = std::sin(pars.theta_b);
+   const auto cxb = std::cos(pars.theta_b);
+   const auto sxtau = std::sin(pars.theta_tau);
+   const auto cxtau = std::cos(pars.theta_tau);
    const auto scale2 = pow2(pars.scale);
    const auto mu = -pars.mu;
    const auto tanb = pars.vu/pars.vd;
    const auto cotb = 1./tanb;
    const auto vev2 = pow2(pars.vu) + pow2(pars.vd);
+   const auto include_heavy_higgs = 1;
 
    RM22 dmh(RM22::Zero());
 
@@ -1211,24 +1209,28 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 
    if (orders.at(EFTOrders::G32YT4)) {
       dmh += delta_mh2_2loop_at_as(
-         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3);
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3,
+         include_heavy_higgs);
    }
 
    if (orders.at(EFTOrders::G32YB4)) {
       dmh += delta_mh2_2loop_ab_as(
-         mb2, mg, msb12, msb22, sxb, cxb, scale2, mu, cotb, vev2, g3);
+         mb2, mg, msb12, msb22, sxb, cxb, scale2, mu, cotb, vev2, g3,
+         include_heavy_higgs);
    }
 
    if (orders.at(EFTOrders::YT6)) {
       dmh += delta_mh2_2loop_at_at(
          mt2, mb2, mA2, mst12, mst22, msb12, msb22,
-         sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2);
+         sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2,
+         include_heavy_higgs);
    }
 
    if (orders.at(EFTOrders::YTAU6)) {
       dmh += delta_mh2_2loop_atau_atau(
          mtau2, mA2, msv2, mstau12, mstau22,
-         sxtau, cxtau, scale2, mu, tanb, vev2);
+         sxtau, cxtau, scale2, mu, tanb, vev2,
+         include_heavy_higgs);
    }
 
    if (orders.at(EFTOrders::YTAU2YB4) || orders.at(EFTOrders::YTAU4YB2)) {

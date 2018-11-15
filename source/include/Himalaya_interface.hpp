@@ -70,6 +70,9 @@ struct Parameters {
    double s2t{NaN};               ///< sine of 2 times the stop mixing angle
    double s2b{NaN};               ///< sine of 2 times the sbottom mixing angle
    double s2tau{NaN};             ///< sine of 2 times the stau mixing angle
+   double theta_t{NaN};           ///< stop mixing angle
+   double theta_b{NaN};           ///< sbottom mixing angle
+   double theta_tau{NaN};         ///< stau mixing angle
 
    int massLimit3LThreshold{};           ///< an integer flag to set the mass limit
 
