@@ -123,6 +123,31 @@ int dszodd_(double * t, double * g, double * T1,
             double * q, double * mu, double * tanb,
             double * vv, double * gs, double * dma);
 
+/**
+ * Two-loop O(a_t^2 + at ab + ab^2) corrections to the CP-odd Higgs mass
+ * Written by P. Slavich (e-mail: slavich@mppmu.mpg.de).
+ * Based on A. Dedes, G. Degrassi and P. Slavich, hep-ph/0305127.
+ *
+ * Last update:  13/05/2003.
+ *
+ * I/O PARAMETERS:
+ * t = m_top^2, b = m_bot^2, A0 = m_A^2, T1 = m_stop1^2, T2 = m_stop2^2,
+ * B1 = m_sbot1^2, B2 = m_sbot2^2, st = sin(theta_stop),
+ * ct = cos(theta_stop), sb = sin(theta_sbot), cb = cos(theta_sbot),
+ * q = Q^2 (ren. scale), mu = Higgs mixing parameter, tanb = tan(beta),
+ * vv = v^2,
+ * dma = 2-loop corrections to the CP-odd Higgs mass.
+ *
+ * Notice: we assume that the 1-loop part is computed in terms of
+ *         running (DRbar) parameters, evaluated at the scale Q. The
+ *         parameters in the bottom/sbottom sector should be computed
+ *         in term of the "resummed" bottom Yukawa coupling.
+*/
+int ddsodd_(double * t, double * b, double * A0, double * T1,
+            double * T2, double * B1, double * B2, double * st,
+            double * ct, double * sb, double * cb, double * q,
+            double * mu, double * tanb, double * vv, double * dma);
+
 #ifdef __cplusplus
 }
 #endif

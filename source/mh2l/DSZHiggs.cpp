@@ -265,6 +265,24 @@ double delta_ma2_2loop_at_as(
       mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs);
 }
 
+double delta_ma2_2loop_at_at(
+   double mt2, double mb2, double mA2, double mst12,
+   double mst22, double msb12, double msb22,
+   double sxt, double cxt, double sxb, double cxb,
+   double scale2, double mu, double tanb, double vev2)
+{
+   double result;
+
+   {
+      std::lock_guard<std::mutex> lg(mtx);
+
+      ddsodd_(&mt2, &mb2, &mA2, &mst12, &mst22, &msb12, &msb22,
+              &sxt, &cxt, &sxb, &cxb, &scale2, &mu, &tanb, &vev2, &result);
+   }
+
+   return result;
+}
+
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
@@ -304,7 +322,11 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
 
    result(1,0) = result(0,1);
 
-   return result;
+   const double dMA = delta_ma2_2loop_at_at(
+      mt2, mb2, mA2, mst12, mst22, msb12, msb22,
+      sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2);
+
+   return result + rotate_by(dMA, tanb);
 }
 
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_as(
