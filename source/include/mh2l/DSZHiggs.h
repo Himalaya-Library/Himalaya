@@ -27,13 +27,13 @@ extern "C" {
  * I/O PARAMETERS:
  * t = m_top^2, g = m_gluino^2, T1 = m_stop1^2, T2 = m_stop2^2,
  * st = sin(theta_stop), ct = cos(theta_stop), q = Q^2 (ren. scale),
- * mu = Higgs mixing parameter, tanb = tan(beta), v2 = v^2,
+ * mu = Higgs mixing parameter, tanb = tan(beta), vv = v^2,
  * OS = renormalization scheme for 1-loop (0 = DRbar, 1 = On-Shell),
  * Sij = 2-loop corrections to the CP-even Higgs mass matrix elements.
  */
 int dszhiggs_(double * t, double * g, double * T1, double * T2,
               double * st, double * ct, double * q, double * mu,
-              double * tanb, double *v2, double * gs, int * OS,
+              double * tanb, double *vv, double * gs, int * OS,
               double * S11, double * S22, double * S12);
 
 /**
@@ -73,7 +73,7 @@ int ddshiggs_(double * t, double * b, double * A0, double * T1,
  * I/O PARAMETERS:
  * t = m_tau^2, A0 = m_A^2, BL = m_snu^2, T1 = m_stau1^2, T2 = m_stau2^2,
  * st = sin(theta_stau), ct = cos(theta_stau), q = Q^2 (ren. scale),
- * mu = Higgs mixing parameter, tb = tan(beta), v2 = v^2,
+ * mu = Higgs mixing parameter, tb = tan(beta), vv = v^2,
  * OS = renormalization scheme for 1-loop (0 = DRbar, 1 = On-Shell),
  * Sij = 2-loop corrections to the CP-even Higgs mass matrix elements.
  */
@@ -94,7 +94,7 @@ int tausqhiggs_(double * t, double * A0, double * BL, double * T1,
  * st = sin(theta_stau), ct = cos(theta_stau),
  * sb = sin(theta_sbottom), cb = cos(theta_sbottom),
  * q = Q^2 (ren. scale), mu = Higgs mixing parameter, tb = tan(beta),
- * v2 = v^2, Sij = 2-loop corrections to the CP-even Higgs mass matrix
+ * vv = v^2, Sij = 2-loop corrections to the CP-even Higgs mass matrix
  * elements.
  */
 int taubot_(double * t, double * b,
@@ -114,7 +114,7 @@ int taubot_(double * t, double * b,
  * I/O PARAMETERS:
  * t = m_top^2, g = m_gluino^2, T1 = m_stop1^2, T2 = m_stop2^2,
  * st = sin(theta_stop), ct = cos(theta_stop), q = Q^2 (ren. scale),
- * mu = Higgs mixing parameter, tanb = tan(beta), v2 = v^2,
+ * mu = Higgs mixing parameter, tanb = tan(beta), vv = v^2,
  * gs = strong coupling,
  * dma = 2-loop corrections to the CP-odd Higgs mass.
  */
@@ -147,6 +147,25 @@ int ddsodd_(double * t, double * b, double * A0, double * T1,
             double * T2, double * B1, double * B2, double * st,
             double * ct, double * sb, double * cb, double * q,
             double * mu, double * tanb, double * vv, double * dma);
+
+/**
+ * Two-loop O(a_tau^2) corrections to the CP-odd Higgs mass in the
+ * DRbar scheme. Written by P. Slavich (e-mail: slavich@mppmu.mpg.de).
+ * Based on A. Brignole, G. Degrassi, P. Slavich and F. Zwirner,
+ * hep-ph/0112177 with appropriate substitutions for top -> tau.
+ *
+ * Last update:  19/06/2003.
+ *
+ * I/O PARAMETERS:
+ * t = m_tau^2, A0 = m_A^2, BL = m_snu^2, T1 = m_stau1^2, T2 = m_stau2^2,
+ * st = sin(theta_stau), ct = cos(theta_stau), q = Q^2 (ren. scale),
+ * mu = Higgs mixing parameter, tb = tan(beta), vv = v^2,
+ * dma = 2-loop corrections to the CP-odd Higgs mass.
+ */
+int tausqodd_(double * t, double * A0, double * BL, double * T1,
+              double * T2, double * st, double * ct, double * q,
+              double * mu, double * tanb, double * vv,
+              double * dma);
 
 #ifdef __cplusplus
 }
