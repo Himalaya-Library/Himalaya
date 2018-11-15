@@ -103,6 +103,26 @@ int taubot_(double * t, double * b,
             double * q, double * mu, double * tanb, double * vv,
             double * S11, double * S22, double * S12);
 
+/**
+ * Two-loop O(a_t a_s) corrections to the CP-odd Higgs mass in the
+ * DRbar scheme.  Written by P. Slavich (e-mail: slavich@pd.infn.it).
+ * Based on G. Degrassi, P. Slavich and F. Zwirner,
+ * Nucl. Phys. B611 (2001) 403 [hep-ph/0105096].
+ *
+ * Last update:  13/12/2001.
+ *
+ * I/O PARAMETERS:
+ * t = m_top^2, g = m_gluino^2, T1 = m_stop1^2, T2 = m_stop2^2,
+ * st = sin(theta_stop), ct = cos(theta_stop), q = Q^2 (ren. scale),
+ * mu = Higgs mixing parameter, tanb = tan(beta), v2 = v^2,
+ * gs = strong coupling,
+ * dma = 2-loop corrections to the CP-odd Higgs mass.
+ */
+int dszodd_(double * t, double * g, double * T1,
+            double * T2, double * st, double * ct,
+            double * q, double * mu, double * tanb,
+            double * vv, double * gs, double * dma);
+
 #ifdef __cplusplus
 }
 #endif

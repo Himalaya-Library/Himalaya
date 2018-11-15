@@ -129,19 +129,161 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_general(
    return result;
 }
 
+Eigen::Matrix<double, 2, 2> rotate_by(double dm2, double tanb)
+{
+   const double tanb2 = sqr(tanb);
+   const double sinb = tanb / sqrtabs(1. + tanb2);
+   const double cosb = 1. / sqrtabs(1. + tanb2);
+
+   Eigen::Matrix<double, 2, 2> result;
+
+   result(0,0) = dm2 * sqr(sinb);
+   result(0,1) = - dm2 * sinb * cosb;
+   result(1,0) = result(0,1);
+   result(1,1) = dm2 * sqr(cosb);
+
+   return result;
+}
+
+double calc_At(double mt2, double mst12, double mst22,
+   double sxt, double cxt, double mu, double tanb)
+{
+   const double s2t = 2*cxt*sxt;
+   const double Xt = (mst12 - mst22)*s2t/2./sqrtabs(mt2);
+   const double At = Xt - mu/tanb;
+
+   return At;
+}
+
+double phi(double x, double y, double z)
+{
+   using std::log;
+
+   const double u = x/z, v = y/z;
+   const double lambda = sqrtabs(sqr(1 - u - v) - 4*u*v);
+   const double xp = 0.5 * (1 + (u - v) - lambda);
+   const double xm = 0.5 * (1 - (u - v) - lambda);
+
+   return 1./lambda * (2*logabs(xp)*logabs(xm) - logabs(u)*logabs(v) -
+                       2*(dilog(xp) + dilog(xm)) + M_PI*M_PI/3.);
+}
+
+/// First derivative of phi[t,T,g] w.r.t. T
+double dphi_010(double t, double T, double g)
+{
+   using std::fabs;
+   using std::sqrt;
+   using std::log;
+   using std::pow;
+
+   constexpr double Pi2 = M_PI * M_PI;
+   const double g2 = sqr(g);
+   const double abbr = (-4*t*T)/g2 + sqr(1 - t/g - T/g);
+   const double rabbr = sqrtabs(abbr);
+
+   return ((g + t - T)*(Pi2 - 6*dilog((g - rabbr*g + t - T)/(2.*g)) -
+      6*dilog((g - rabbr*g - t + T)/(2.*g)) -
+      3*logabs(t/g)*logabs(T/g) + 6*logabs((g - rabbr*g + t -
+      T)/(2.*g))*logabs((g - rabbr*g - t + T)/(2.*g))) + (3*rabbr*g* (
+      rabbr*g*((-1 + rabbr)*g + t - T)*logabs(t/g) +
+      2*T*(-2*g*logabs(4.) + (g + rabbr*g + t - T)*logabs((g - rabbr*g
+      + t - T)/g) + (g + rabbr*g + t - T)*logabs((g + rabbr*g + t -
+      T)/g) + g*logabs((g - rabbr*g - t + T)/g) - rabbr*g*logabs((g -
+      rabbr*g - t + T)/g) - t*logabs((g - rabbr*g - t + T)/g) +
+      T*logabs((g - rabbr*g - t + T)/g) + g*logabs((g + rabbr*g - t +
+      T)/g) - rabbr*g*logabs((g + rabbr*g - t + T)/g) - t*logabs((g +
+      rabbr*g - t + T)/g) + T*logabs((g + rabbr*g - t + T)/g)) ) ) /
+      (T*(g - rabbr*g - t + T)))/(3.*pow(fabs(abbr),1.5)*g2);
+}
+
 } // anonymous namespace
+
+double delta_ma2_2loop_at_as_mst1_eq_mst2(
+   double mt2, double mg, double mst12, double mst22,
+   double sxt, double cxt, double scale2, double mu,
+   double tanb, double vev2, double gs)
+{
+   using std::atan;
+   using std::log;
+   using std::sin;
+
+   constexpr double Pi2 = M_PI * M_PI;
+   const double g = sqr(mg);
+   const double g2 = sqr(g);
+   const double q = scale2;
+   const double q2 = sqr(scale2);
+   const double t = mt2;
+   const double T = mst12;
+   const double sb = sin(atan(tanb));
+   const double ht2 = 2./vev2*mt2/sqr(sb);
+   const double At = calc_At(mt2, mst12, mst22, sxt, cxt, mu, tanb);
+
+   const double result = (-2*(g*(2*At*g + 2*At*t - At*T + mg*T + mg*(g
+      - t)*logabs(g/t) - At*T*logabs(g/q)*logabs(t/q) -
+      mg*T*logabs(g/q)*logabs(t/q) - 4*mg*T*logabs(T/q) -
+      2*At*T*sqr(logabs(T/q)) + logabs((g*t)/q2)*(-(At*(g + t - T)) +
+      mg*T + (At + mg)*T*logabs(T/q))) - 2*(At + mg)*(g + t -
+      T)*T*phi(t,T,g) + T*(At*(g2 + sqr(t - T) - 2*g*T) + mg*(g2 +
+      sqr(t - T) - 2*g*(t + T)))*dphi_010(t,T,g)))/ (g*T);
+
+   const double pref = 4*sqr(gs)/sqr(16*Pi2) * ht2*mu*(1./tanb + tanb);
+
+   return pref * result;
+}
+
+double delta_ma2_2loop_at_as_general(
+   double mt2, double mg, double mst12, double mst22,
+   double sxt, double cxt, double scale2, double mu,
+   double tanb, double vev2, double gs)
+{
+   double result;
+
+   dszodd_(&mt2, &mg, &mst12, &mst22, &sxt, &cxt, &scale2, &mu,
+           &tanb, &vev2, &gs, &result);
+
+   return result;
+}
+
+/// 2-loop contribution to CP-odd Higgs O(at*as)
+double delta_ma2_2loop_at_as(
+   double mt2, double mg, double mst12, double mst22,
+   double sxt, double cxt, double scale2, double mu,
+   double tanb, double vev2, double gs)
+{
+   if (std::abs((mst12 - mst22)/mst12) < 1e-8) {
+      const double At = calc_At(mt2, mst12, mst22, sxt, cxt, mu, tanb);
+
+      // if At = 0 => mu = 0 => dMA(2L) = 0
+      if (std::abs(At) < std::numeric_limits<double>::epsilon())
+         return 0.;
+
+      return delta_ma2_2loop_at_as_mst1_eq_mst2(
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs);
+   }
+
+   return delta_ma2_2loop_at_as_general(
+      mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs);
+}
 
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
    double tanb, double vev2, double gs, int scheme)
 {
-   if (std::abs((mst12 - mst22)/mst12) < 1e-8)
-      return delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
-         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs, scheme);
+   Eigen::Matrix<double, 2, 2> result;
 
-   return delta_mh2_2loop_at_as_general(
-      mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs, scheme);
+   if (std::abs((mst12 - mst22)/mst12) < 1e-8) {
+      result = delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs, scheme);
+   } else {
+      result = delta_mh2_2loop_at_as_general(
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs, scheme);
+   }
+
+   const double dMA = delta_ma2_2loop_at_as(
+      mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs);
+
+   return result + rotate_by(dMA, tanb);
 }
 
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
