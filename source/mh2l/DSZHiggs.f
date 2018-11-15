@@ -5326,6 +5326,7 @@ c
       
       subroutine taubotodd(t,b,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,
      $     DMA) 
+     $ bind(C, name="taubotodd_")
       
       implicit none
       

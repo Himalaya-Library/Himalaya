@@ -387,11 +387,28 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_atau_atau(
    return result + rotate_by(dMA, tanb);
 }
 
-Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_atau(
+double delta_ma2_2loop_ab_atau(
    double mtau2, double mb2,
    double mstau12, double mstau22, double msb12, double msb22,
    double sintau, double costau, double sxb, double cxb,
    double scale2, double mu, double tanb, double vev2)
+{
+   double result;
+
+   taubotodd_(&mtau2, &mb2,
+              &mstau12, &mstau22, &msb12, &msb22,
+              &sintau, &costau, &sxb, &cxb,
+              &scale2, &mu, &tanb, &vev2, &result);
+
+   return result;
+}
+
+Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_atau(
+   double mtau2, double mb2,
+   double mstau12, double mstau22, double msb12, double msb22,
+   double sintau, double costau, double sxb, double cxb,
+   double scale2, double mu, double tanb, double vev2,
+   int include_heavy_higgs)
 {
    Eigen::Matrix<double, 2, 2> result;
 
@@ -403,7 +420,13 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_atau(
 
    result(1,0) = result(0,1);
 
-   return result;
+   const double dMA = include_heavy_higgs
+      ? delta_ma2_2loop_ab_atau(
+         mtau2, mb2, mstau12, mstau22, msb12, msb22, sintau, costau, sxb, cxb,
+         scale2, mu, tanb, vev2)
+      : 0.;
+
+   return result + rotate_by(dMA, tanb);
 }
 
 } // namespace mssm_twoloophiggs

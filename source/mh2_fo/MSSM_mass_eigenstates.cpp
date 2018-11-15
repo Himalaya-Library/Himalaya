@@ -1252,7 +1252,8 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
    if (orders.at(EFTOrders::YTAU2YB4) || orders.at(EFTOrders::YTAU4YB2)) {
       dmh += delta_mh2_2loop_ab_atau(
          mtau2, mb2, mstau12, mstau22, msb12, msb22,
-         sxtau, cxtau, sxb, cxb, scale2, mu, tanb, vev2);
+         sxtau, cxtau, sxb, cxb, scale2, mu, tanb, vev2,
+         include_heavy_higgs);
    }
 
    return dmh;
