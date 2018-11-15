@@ -126,6 +126,12 @@ enum class Momentum_iteration {
    num,  ///< numerically (all orders)
 };
 
+/// diagonalization settings
+enum class Diagonalization {
+   pert, ///< perturbatively
+   num,  ///< numerically
+};
+
 /**
  * @class MSSM_mass_eigenstates
  *
@@ -156,6 +162,8 @@ public:
    RM22 delta_mh2_2loop_mom_it_num(double precision_goal = 1e-5, int max_iterations = 100) const;
    /// enable/disable loop corrections
    void set_correction(int, int);
+   /// customize diagonalization
+   void set_diagonalization(Diagonalization);
    /// customize momentum iteration
    void set_mom_it(Momentum_iteration, double mom_it_precision_goal_ = 1e-5, int mom_it_max_iterations_ = 100);
 
@@ -169,6 +177,7 @@ private:
    Momentum_iteration mom_it{Momentum_iteration::pert}; ///< momentum iteration settings
    double mom_it_precision_goal{1e-5}; ///< precision goal for numeric momentum iteration
    int mom_it_max_iterations{100};     ///< maximum number of numeric momentum iterations
+   Diagonalization diagonalization{Diagonalization::pert}; ///< diagonalization settings
 
    /// calculates tree-level squared Higgs masses
    V2 calculate_Mh2_tree() const;

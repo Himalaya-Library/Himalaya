@@ -835,20 +835,36 @@ std::tuple<double,double,double> MSSM_mass_eigenstates::calculate_Mh2() const
 {
    const auto p2    = calculate_Mh2_tree()(0);
    const auto m0    = get_mass_matrix_hh();
-   const auto m0_gl = get_mass_matrix_hh_gaugeless();
    const auto m1    = delta_mh2_1loop(p2);
-   const auto m1_gl = delta_mh2_1loop_gaugeless();
    const auto m2    = delta_mh2_2loop();
 
-   // tree-level and 1-loop with electroweak gauge couplings
-   const auto Mh2    = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0, m1);
+   if (diagonalization == Diagonalization::pert) {
+      const auto m0_gl = get_mass_matrix_hh_gaugeless();
+      const auto m1_gl = delta_mh2_1loop_gaugeless();
 
-   // 2-loop in gaugless limit (p = g1 = g2 = 0)
-   const auto Mh2_gl = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0_gl, m1_gl, m2);
+      // tree-level and 1-loop with electroweak gauge couplings
+      const auto Mh2 = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0, m1);
 
-   return std::make_tuple(std::get<0>(Mh2)(0),
-                          std::get<1>(Mh2)(0),
-                          std::get<2>(Mh2_gl)(0));
+      // 2-loop in gaugless limit (p = g1 = g2 = 0)
+      const auto Mh2_gl = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0_gl, m1_gl, m2);
+
+      return std::make_tuple(std::get<0>(Mh2)(0),
+                             std::get<1>(Mh2)(0),
+                             std::get<2>(Mh2_gl)(0));
+   }
+
+   // numeric diagonalization
+   RM22 ZH;
+   MSSM_spectrum::A2 M2hh_0L, M2hh_1L, M2hh_2L;
+   const RM22 MHH_0L = m0;
+   const RM22 MHH_1L = m0 + m1;
+   const RM22 MHH_2L = m0 + m1 + m2;
+
+   flexiblesusy::fs_diagonalize_hermitian(MHH_0L, M2hh_0L, ZH);
+   flexiblesusy::fs_diagonalize_hermitian(MHH_1L, M2hh_1L, ZH);
+   flexiblesusy::fs_diagonalize_hermitian(MHH_2L, M2hh_2L, ZH);
+
+   return std::make_tuple(M2hh_0L(0), (M2hh_1L - M2hh_0L)(0), (M2hh_2L - M2hh_1L)(0));
 }
 
 /**
@@ -1331,6 +1347,11 @@ void MSSM_mass_eigenstates::set_mom_it(
    mom_it = mi;
    mom_it_precision_goal = mom_it_precision_goal_;
    mom_it_max_iterations = mom_it_max_iterations_;
+}
+
+void MSSM_mass_eigenstates::set_diagonalization(Diagonalization diag)
+{
+   diagonalization = diag;
 }
 
 double MSSM_mass_eigenstates::A0(double m2) const
