@@ -107,9 +107,10 @@ double fB(double s, double x, double q2)
    if (s <= 4.0*x)
       return 2.0 - log(x/q2) - 2.0*sqrt(4.0*x/s - 1.0)*asin(sqrt(s/(4.0*x)));
 
+   const double sq = sqrt(1.0 - 4.0*x/s);
+
    // s > 4*x
-   return 2.0 - log(x/q2)
-      + sqrt(1.0 - 4.0*x/s)*log(s*(1.0 - sqrt(1.0 - 4.0*x/s))/(2*x) - 1.0);
+   return 2.0 - log(x/q2) + sq*log(s*(1.0 - sq)/(2*x) - 1.0);
 }
 
 } // anonymous namespace
