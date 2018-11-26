@@ -215,6 +215,7 @@ Xt = Sqrt[6] MS;
 result = HimalayaCalculateDMh3L[
    settings -> {
        bottom -> False,
+       loopOrder -> 3,
        verbose -> True
    },
    parameters -> {

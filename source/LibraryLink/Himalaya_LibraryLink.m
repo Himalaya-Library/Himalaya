@@ -27,6 +27,9 @@ Arguments:
     - bottom -> (True | False): calculate alpha_bottom (True) or
       alpha_top (False) corrections.  Default: False
 
+    - loopOrder -> (0 | 1 | 2 | 3): calculate corrections up to
+      (including) this loop order, skip all higher orders.  Default: 3
+
     - verbose -> (True | False): print verbose output.  Default: True
 
  - parameters - List of replacement rules for the running MSSM input
@@ -90,6 +93,7 @@ Xt = Sqrt[6]*MS;
 output = HimalayaCalculateDMh3L[
     settings -> {
         bottom -> False,
+        loopOrder -> 3,
         verbose -> True
     },
     parameters -> {
@@ -131,7 +135,7 @@ output = HimalayaCalculateDMh3L[
 { parameters, settings };
 
 (* settings *)
-{ bottom, verbose };
+{ bottom, loopOrder, verbose };
 
 (* input parameters *)
 { scale, mu, g1, g2, g3, vd, vu,
@@ -163,6 +167,7 @@ InitializeHimalaya[libName_String] := (
 
 himalayaDefaultSettings = {
     bottom -> False,
+    loopOrder -> 3,
     verbose -> True
 };
 
@@ -216,6 +221,7 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
         HimalayaNumericQ /@ {
             (* settings *)
             Boole[OptionValue[bottom]],
+            OptionValue[loopOrder],
             Boole[OptionValue[verbose]],
             (* parameters *)
             OptionValue[scale],

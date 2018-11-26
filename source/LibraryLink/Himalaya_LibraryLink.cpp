@@ -232,14 +232,16 @@ std::vector<double> read_list(MLINK link)
 /******************************************************************/
 
 struct Data {
-   Data(const himalaya::Parameters& pars_, bool bottom_, bool verbose_)
+   Data(const himalaya::Parameters& pars_, bool bottom_, int loopOrder_, bool verbose_)
       : pars(pars_)
       , bottom(bottom_)
+      , loopOrder(loopOrder_)
       , verbose(verbose_)
       {}
 
    himalaya::Parameters pars{};
    bool bottom{false};
+   int loopOrder{3};
    bool verbose{true};
 };
 
@@ -247,7 +249,7 @@ struct Data {
 
 Data make_data(const std::vector<double>& parsvec)
 {
-   const int N_input_parameters = 123; // number of Himalaya input parameters
+   const int N_input_parameters = 124; // number of Himalaya input parameters
 
    if (parsvec.size() != N_input_parameters) {
       throw std::runtime_error("HimalayaCalculateDMh3L expects "
@@ -258,6 +260,7 @@ Data make_data(const std::vector<double>& parsvec)
    int c = 0; // counter
 
    const bool bottom = parsvec.at(c++);
+   const int loopOrder = parsvec.at(c++);
    const bool verbose = parsvec.at(c++);
 
    himalaya::Parameters pars;
@@ -346,7 +349,7 @@ Data make_data(const std::vector<double>& parsvec)
          " parameters have been read.");
    }
 
-   return Data(pars, bottom, verbose);
+   return Data(pars, bottom, loopOrder, verbose);
 }
 
 /******************************************************************/
@@ -355,8 +358,8 @@ struct Results {
    using Loop_corrections = std::tuple<double,double,double,double>;
 
    himalaya::HierarchyObject ho{false};
-   Loop_corrections eft; ///< fixed-order corrections for v^2 << MS^2
-   Loop_corrections fo;  ///< fixed-order corrections
+   Loop_corrections eft{}; ///< fixed-order corrections for v^2 << MS^2
+   Loop_corrections fo{};  ///< fixed-order corrections
 };
 
 /******************************************************************/
@@ -364,9 +367,15 @@ struct Results {
 Results calculate_results(const Data& data)
 {
    Results res;
+   double dmh2_fo_3l = 0.; // 3L
+   double dmh2_eft_3l = 0.; // 3L
 
-   himalaya::HierarchyCalculator hc(data.pars, data.verbose);
-   res.ho = hc.calculateDMh3L(data.bottom);
+   if (data.loopOrder > 2) {
+      himalaya::HierarchyCalculator hc(data.pars, data.verbose);
+      res.ho = hc.calculateDMh3L(data.bottom);
+      dmh2_fo_3l = res.ho.getDMh2(3);
+      dmh2_eft_3l = res.ho.getDMh2EFT(3);
+   }
 
    // calculate fixed-order corrections for v^2 << MS^2
    himalaya::mh2_eft::Mh2EFTCalculator meft(data.pars);
@@ -375,14 +384,13 @@ Results calculate_results(const Data& data)
    const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
 
    res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
-                             dmh2_eft_2l, res.ho.getDMh2EFT(3));
+                             dmh2_eft_2l, dmh2_eft_3l);
 
    // calculate fixed-order corrections
    himalaya::mh2_fo::MSSM_mass_eigenstates mfo(data.pars);
-   const auto dmh_fo    = mfo.calculate_Mh2(); // 0L, 1L, 2L
-   const auto dmh_fo_3l = res.ho.getDMh2(3);   // 3L
+   const auto dmh2_fo = mfo.calculate_Mh2(); // 0L, 1L, 2L
 
-   res.fo = std::tuple_cat(dmh_fo, std::tie(dmh_fo_3l));
+   res.fo = std::tuple_cat(dmh2_fo, std::tie(dmh2_fo_3l));
 
    return res;
 }
