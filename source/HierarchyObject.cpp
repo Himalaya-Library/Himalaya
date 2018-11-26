@@ -43,6 +43,18 @@ Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
 HierarchyObject::HierarchyObject(bool isAlphab)
    : isAlphab(isAlphab)
    , renormalizationScheme(mh2_eft::RenSchemes::DRBARPRIME)
+   , expUncertainties{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
+   , dMhMap{ {0,Eigen::Matrix2d::Zero()},
+             {1,Eigen::Matrix2d::Zero()},
+             {2,Eigen::Matrix2d::Zero()},
+             {3,Eigen::Matrix2d::Zero()} }
+   , dMh2Map{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
+   , mdrShift{Eigen::Matrix2d::Zero()}
+   , mdrMasses{Eigen::Vector2d::Zero()}
+   , h3mShift{Eigen::Matrix2d::Zero()}
+   , dLambdaMap{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
+   , dLambdaDRbarPrimeToMSbarShiftMap{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
+   , dMh2EFTMap{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
 {
 }
 

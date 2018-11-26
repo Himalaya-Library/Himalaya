@@ -221,25 +221,25 @@ namespace himalaya {
        */
       void setDMh2EFT(int loops, double deltaMh2);
    private:
-      bool isAlphab{false};                                                                /**< the bool isAlphab */
-      int hierarchy{};                                                                        /**< the suitable hierarchy */
-      int mdrFlag{0};                                                                        /**< the MDR-scheme flag */
-      int renormalizationScheme{};                                                       /**< the renormalization scheme flag */
-      double absDiff2L{};                                                                /**< the absolute difference of the two loop Higgs masses */
-      double relDiff2L{};                                                                /**< the relative difference of the two loop Higgs masses */
-      std::map<int, double> expUncertainties{};                                                /**< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3 */
-      std::map<int, Eigen::Matrix2d> dMhMap{};                                                /**< the map which holds all mass matrices at the given loop order */
-      std::map<int, double> dMh2Map{};                                                   ///< map holding loop corretions to squared CP-even Higgs mass
-      Eigen::Matrix2d mdrShift{};                                                        /**< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s */
-      Eigen::Vector2d mdrMasses{};                                                        /**< the 'vector' which holds the MDR masses */
-      double dLambdaH3m{};                                                                /**< delta_lambda 3-loop with H3m logs */
-      double dLambdaEFT{};                                                                /**< delta_lambda 3-loop with EFT logs */
-      double dLambdaNonLog{};                                                                /**< delta_lambda 3-loop, non-logarithmic part */
-      double dLambdaXtUncertainty{};                                                        /**< The uncertainty of delta_lambda_EFT due to mising Xt terms */
-      Eigen::Matrix2d h3mShift{};                                                        /**< The DR' -> H3m shift which should be added to the DR' result */
-      std::map<int, double> dLambdaMap{};                                                /**< map which holds all delta_lambda corrections multiplied with prefactors */
-      std::map<int, double> dLambdaDRbarPrimeToMSbarShiftMap{};                                /**< map which holds all DR' -> MS shifts for delta_lambda corrections multiplied with prefactors */
-      std::map<int, double> dMh2EFTMap{};                                                /**< map which holds all delta_Mh2_EFT corrections */
+      bool isAlphab{false};                                     ///< the bool isAlphab
+      int hierarchy{};                                          ///< the suitable hierarchy
+      int mdrFlag{0};                                           ///< the MDR-scheme flag
+      int renormalizationScheme{};                              ///< the renormalization scheme flag
+      double absDiff2L{};                                       ///< the absolute difference of the two loop Higgs masses
+      double relDiff2L{};                                       ///< the relative difference of the two loop Higgs masses
+      std::map<int, double> expUncertainties{};                 ///< the map which holds the expansion uncertainties, the keys are the loop order: 1, 2, 3
+      std::map<int, Eigen::Matrix2d> dMhMap{};                  ///< the map which holds all mass matrices at the given loop order
+      std::map<int, double> dMh2Map{};                          ///< map holding loop corretions to squared CP-even Higgs mass
+      Eigen::Matrix2d mdrShift{};                               ///< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s
+      Eigen::Vector2d mdrMasses{};                              ///< the 'vector' which holds the MDR masses
+      double dLambdaH3m{};                                      ///< delta_lambda 3-loop with H3m logs
+      double dLambdaEFT{};                                      ///< delta_lambda 3-loop with EFT logs
+      double dLambdaNonLog{};                                   ///< delta_lambda 3-loop, non-logarithmic part
+      double dLambdaXtUncertainty{};                            ///< The uncertainty of delta_lambda_EFT due to mising Xt terms
+      Eigen::Matrix2d h3mShift{};                               ///< The DR' -> H3m shift which should be added to the DR' result
+      std::map<int, double> dLambdaMap{};                       ///< map which holds all delta_lambda corrections multiplied with prefactors
+      std::map<int, double> dLambdaDRbarPrimeToMSbarShiftMap{}; ///< map which holds all DR' -> MS shifts for delta_lambda corrections multiplied with prefactors
+      std::map<int, double> dMh2EFTMap{};                       ///< map which holds all delta_Mh2_EFT corrections
    };
    /**
     *         Prints out all information of the HierarchyObject
