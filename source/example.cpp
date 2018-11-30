@@ -41,8 +41,8 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
                0, MS2, 0,
                0, 0, MS2;
    pars.Au << 0, 0, 0,
-              0, 0, 0, 0,
-              0, Xt + pars.mu/tb;
+              0, 0, 0,
+              0, 0, Xt + pars.mu/tb;
    pars.Ad << 0, 0, 0,
               0, 0, 0,
               0, 0, 0;
