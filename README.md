@@ -58,8 +58,6 @@ files. Assuming that GNU make is used, one can start the build by running
 make
 ```
 
-By default the code is compiled with optimizations.
-
 ## Running Himalaya
 
 When the build is complete, the libraries `libDSZ` and `libHimalaya`
@@ -117,16 +115,18 @@ pars.MW = 8.04136643E+01;            // Mass of the W boson
 pars.MZ = 9.06817306E+01;            // Mass of the Z boson 
 pars.Mt = 1.52117491E+02;            // Mass of the top quark
 pars.Mb = 2.42010269E+00;            // Mass of the bottom quark
+pars.Mtau = 1.777;                   // Mass of the tau lepton
 ```
 
 Afterwards one can create a `HierarchyCalculator` object for the
-chosen parameter set:
+chosen parameter point:
 
 ```cpp
 himalaya::HierarchyCalculator hc(pars);
 ```
 
-To calculate the DR'-bar loop corrections one needs to call:
+To calculate the loop corrections in the DR'-bar scheme one needs to
+call:
 
 ```cpp
 // the boolean argument switches between corrections proportional to αt (false) or αb (true)
@@ -137,18 +137,15 @@ All information which has been gathered during the calculation will be
 stored in the returned `HierarchyObject` and can be accessed by member
 functions.
 
-To obtain the three-loop correction to the Higgs mass matrix one needs
-to call:
+To extract the three-loop correction to the Higgs mass matrix one
+needs to call:
 
 ```cpp
 // returns a 2x2 matrix with the αt*αs^2 correction for the given parameter point
 auto dMh3L = ho.getDMh(3);
 ```
 
-The returned matrix should be added to the two-loop mass matrix
-**before** diagonalization.
-
-To obtain the three-loop correction to the quartic Higgs coupling λ of
+To extract the three-loop correction to the quartic Higgs coupling λ of
 the Standard Model in the DR'-bar scheme in the convention of
 [[1407.4081](https://arxiv.org/abs/1407.4081)] one needs to call
 
@@ -156,35 +153,123 @@ the Standard Model in the DR'-bar scheme in the convention of
 double delta_lambda_3L = ho.getDLambda(3);
 ```
 
-The function `getDLambda` returns the loop corrections in
-the DR'-bar scheme.  The three-loop shift to the MS-bar scheme,
-ocurring when the one- and two-loop corrections are expressed in terms
-of the Standard Model MS-bar strong gauge and top Yukawa couplings can
-be obtained by calling `ho.getDLambdaDRbarPrimeToMSbarShift(3)`.
+The three-loop shift to the MS-bar scheme, ocurring when the one- and
+two-loop corrections are expressed in terms of the Standard Model
+MS-bar strong gauge and top Yukawa couplings can be obtained by
+calling `ho.getDLambdaDRbarPrimeToMSbarShift(3)`.
 
-An uncertainty estimate of the calculated three-loop λ can be obtained
-by calling
+An uncertainty estimate of the calculated three-loop λ due to the
+truncation of the mass hierarchy expansions can be obtained by calling
 
 ```cpp
 double delta_lambda_3L_uncertainty = ho.getDLambdaUncertainty(3);
 ```
 
-The function `getDLambdaUncertainty` returns an uncertainty estimate
-by taking into account Xt^4 terms missing in some hierarchy
-expansions.
-
 A full and detailed example can be found in
 [source/example.cpp](source/example.cpp).
+
+**Example**:
+
+```cpp
+#include "HierarchyCalculator.hpp"
+#include "Logger.hpp"
+#include <cmath>
+
+himalaya::Parameters setup_point(double MS, double tb, double xt)
+{
+   himalaya::Parameters pars;
+
+   const double MS2 = MS*MS;
+   const double Xt = xt*MS;
+   const double beta = std::atan(tb);
+   pars.scale = MS;
+   pars.mu = MS;
+   pars.g1 = 0.46;
+   pars.g2 = 0.65;
+   pars.g3 = 1.166;
+   pars.vd = 246*std::cos(beta);
+   pars.vu = 246*std::sin(beta);
+   pars.mq2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.md2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.mu2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.ml2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.me2 << MS2, 0, 0,
+               0, MS2, 0,
+               0, 0, MS2;
+   pars.Au << 0, 0, 0,
+              0, 0, 0,
+              0, 0, Xt + pars.mu/tb;
+   pars.Ad << 0, 0, 0, 0, 0, 0, 0, 0, 0;
+   pars.Ae << 0, 0, 0, 0, 0, 0, 0, 0, 0;
+   pars.Yu << 0, 0, 0, 0, 0, 0, 0, 0, 0.862;
+   pars.Yd << 0, 0, 0, 0 ,0 ,0 ,0 ,0, 0.133;
+   pars.Ye << 0, 0, 0, 0, 0, 0, 0, 0, 0.101;
+   pars.MA = MS;
+   pars.M1 = MS;
+   pars.M2 = MS;
+   pars.MG = MS;
+
+   pars.validate(true);
+
+   return pars;
+}
+
+int main()
+{
+   const auto point = setup_point(2000., 20., std::sqrt(6.));
+   himalaya::HierarchyCalculator hc(point);
+
+   try {
+      // calculate the 3-loop corrections O(α_t*α_s^2)
+      const auto ho = hc.calculateDMh3L(false);
+
+      // extract 2x2 matrix with three-loop O(αt*αs^2) corrections
+      const auto dMh3L = ho.getDMh(3);
+      // extract three-loop O(αt*αs^2) correction to λ (DR'-bar scheme)
+      const double delta_lambda_3L_DR = ho.getDLambda(3);
+      // extract uncertainty estimate
+      const double delta_lambda_3L_uncertainty = ho.getDLambdaUncertainty(3);
+      // convert to MS-bar scheme
+      const double delta_lambda_3L_MS =
+         delta_lambda_3L_DR + ho.getDLambdaDRbarPrimeToMSbarShift(3);
+
+      INFO_MSG("Δλ(3-loop,DR') = " << delta_lambda_3L_DR
+               << " +- " << delta_lambda_3L_uncertainty);
+      INFO_MSG("Δλ(3-loop,MS) = " << delta_lambda_3L_MS
+               << " +- " << delta_lambda_3L_uncertainty);
+   } catch (const std::exception& e) {
+      ERROR_MSG(e.what());
+   }
+
+   return 0;
+}
+```
+
+Output:
+
+```
+Himalaya info: Δλ(3-loop,DR') = 0.000315613 +- 0.00203118
+Himalaya info: Δλ(3-loop,MS) = -0.000455415 +- 0.00203118
+```
 
 ### Mathematica interface
 
 Since version 2.0.0 Himalaya can be run from within Mathematica using
-the LibraryLink interface.  To load Himalaya into Mathematica, first,
-the file
+the LibraryLink interface.  To load Himalaya into a Mathematica
+session, first, the file
 [source/LibraryLink/Himalaya_LibraryLink.m](source/LibraryLink/Himalaya_LibraryLink.m)
-must be loaded, which defines the Himalaya's Mathematica functions.
-Assuming the current directory is in the `build/` sub-directory of
-Himalaya, this can be done with:
+must be loaded, which defines the Himalaya's Mathematica interface
+functions.  Assuming the current directory is the `build/`
+sub-directory of Himalaya, loading `Himalaya_LibraryLink.m` may be
+done by calling
 
 ```.m
 Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
@@ -197,9 +282,10 @@ using the `InitializeHimalaya[]` function:
 InitializeHimalaya["Himalaya_LibraryLink.so"];
 ```
 
-Now, the `HimalayaCalculateDMh3L[]` function is available, which
-calculates the loop corrections available by Himalaya.  A full and
-detailed example can be found in [source/example.m](source/example.m).
+After the initialization, the function `HimalayaCalculateDMh3L[]` is
+available, which calculates the loop corrections implemented in
+Himalaya.  A full and detailed example can be found in
+[source/example.m](source/example.m).
 
 **Example**:
 
