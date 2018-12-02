@@ -8,8 +8,7 @@
 #include "HierarchyCalculator.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "MSSM_mass_eigenstates.hpp"
-#include "Logger.hpp"
-#include  <iomanip>
+#include  <iostream>
 
 himalaya::Parameters setup_point(double MS, double tb, double xt)
 {
@@ -116,7 +115,7 @@ int main()
          std::cout << "ΔMh^2_FO_2L  = " << dmh2_fo_2l
                    << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
       } catch (const std::exception& e) {
-         ERROR_MSG(e.what());
+         std::cerr << "Error: " << e.what() << '\n';
       }
    }
 

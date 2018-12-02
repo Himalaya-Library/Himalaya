@@ -172,7 +172,7 @@ A full and detailed example can be found in
 
 ```cpp
 #include "HierarchyCalculator.hpp"
-#include "Logger.hpp"
+#include <iostream>
 #include <cmath>
 
 himalaya::Parameters setup_point(double MS, double tb, double xt)
@@ -241,12 +241,12 @@ int main()
       const double delta_lambda_3L_MS =
          delta_lambda_3L_DR + ho.getDLambdaDRbarPrimeToMSbarShift(3);
 
-      INFO_MSG("Δλ(3-loop,DR') = " << delta_lambda_3L_DR
-               << " +- " << delta_lambda_3L_uncertainty);
-      INFO_MSG("Δλ(3-loop,MS) = " << delta_lambda_3L_MS
-               << " +- " << delta_lambda_3L_uncertainty);
+      std::cout << "Δλ(3-loop,DR') = " << delta_lambda_3L_DR
+                << " +- " << delta_lambda_3L_uncertainty << '\n'
+                << "Δλ(3-loop,MS) = " << delta_lambda_3L_MS
+                << " +- " << delta_lambda_3L_uncertainty << '\n';
    } catch (const std::exception& e) {
-      ERROR_MSG(e.what());
+      std::cerr << e.what() << '\n';
    }
 
    return 0;
