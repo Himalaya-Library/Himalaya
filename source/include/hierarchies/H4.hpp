@@ -62,9 +62,9 @@ namespace hierarchies{
        */
       double calc_coef_at_as2_no_sm_logs_log3() const;
    private:
-      double At{}, lmMt{}, lmMsq{}, lmMsusy{}, Msusy{}, Mt{}, Msq{}, Cbeta{}, Sbeta{}, Al4p{}; /**< common variables */
-      double shiftst1{}, shiftst2{}, shiftst3{}, xAt{}, xMsq{}, xlmMsusy{}, xMsusy{}; /**< MDR and truncation flags */
-      int oneLoopFlag{}, twoLoopFlag{}, threeLoopFlag{}; /**< loop flags */
+      double At{}, lmMt{}, lmMsq{}, lmMsusy{}, Msusy{}, Mt{}, Msq{}, Cbeta{}, Sbeta{}, Al4p{}; ///< common variables
+      double shiftst1{}, shiftst2{}, shiftst3{}, xAt{}, xMsq{}, xlmMsusy{}, xMsusy{}; ///< MDR and truncation flags
+      int oneLoopFlag{}, twoLoopFlag{}, threeLoopFlag{}; ///< loop flags
    };
 
 }        // hierarchies
