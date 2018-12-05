@@ -42,11 +42,20 @@ include_directories(${INCLUDE_PATH}/mh2l)
 include_directories(${INCLUDE_PATH}/misc)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
+set(EXEC_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
+set(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/include")
+set(LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib")
+
 # setting the correct version to all headers
 configure_file (
   "${INCLUDE_PATH}/version.hpp.in"
-  "${INCLUDE_PATH}/version.hpp"
-  )
+  "${INCLUDE_PATH}/version.hpp")
+
+# generate himalaya.pc file for pkg-config
+configure_file (
+  "${PROJECT_SOURCE_DIR}/cmake/himalaya.pc.in"
+  "${CMAKE_BINARY_DIR}/himalaya.pc"
+  @ONLY)
 
 # Himalaya library files
 set(HIM_LIBSOURCES
@@ -113,12 +122,17 @@ if(Mathematica_FOUND)
   Mathematica_ABSOLUTIZE_LIBRARY_DEPENDENCIES(${LL_LIB})
 endif()
 
-# install
+# install libraries
 install(
   TARGETS Himalaya_static Himalaya_shared DSZ_static DSZ_shared
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
 )
+
+# install himalaya.pc file
+install(FILES
+  "${CMAKE_BINARY_DIR}/himalaya.pc"
+  DESTINATION "${LIB_INSTALL_DIR}/pkgconfig")
 
 # adding documentation
 add_subdirectory(doc)
