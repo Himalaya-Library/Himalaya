@@ -37,8 +37,8 @@ Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
 } // anonymous namespace
 
 /**
- *         A constructor.
- *         @param isAlphab the boolean which determines wether the members are proportinal to alpha_b or alpha_t.
+ * A constructor.
+ * @param isAlphab the boolean which determines wether the members are proportinal to alpha_b or alpha_t.
  */
 HierarchyObject::HierarchyObject(bool isAlphab)
    : isAlphab(isAlphab)
@@ -59,7 +59,7 @@ HierarchyObject::HierarchyObject(bool isAlphab)
 }
 
 /**
- *         @return The value of isAlphab.
+ * @return The value of isAlphab.
  */
 bool HierarchyObject::getIsAlphab() const
 {
@@ -67,8 +67,8 @@ bool HierarchyObject::getIsAlphab() const
 }
 
 /**
- *         Sets the suitable hierarchy
- *         @param hierarchy the integer key of the hierarchy.
+ * Sets the suitable hierarchy
+ * @param hierarchy the integer key of the hierarchy.
  */
 void HierarchyObject::setSuitableHierarchy(int hierarchy)
 {
@@ -76,7 +76,7 @@ void HierarchyObject::setSuitableHierarchy(int hierarchy)
 }
 
 /**
- *         @return The key to the suitable hierarchy
+ * @return The key to the suitable hierarchy
  */
 int HierarchyObject::getSuitableHierarchy() const
 {
@@ -84,8 +84,8 @@ int HierarchyObject::getSuitableHierarchy() const
 }
 
 /**
- *         Sets the absolute difference of the Higgs masses at two-loop level
- *         @param absDiff2L the absolute difference of the Higgs masses as a double.
+ * Sets the absolute difference of the Higgs masses at two-loop level
+ * @param absDiff2L the absolute difference of the Higgs masses as a double.
  */
 void HierarchyObject::setAbsDiff2L(double absDiff2L)
 {
@@ -93,7 +93,7 @@ void HierarchyObject::setAbsDiff2L(double absDiff2L)
 }
 
 /**
- *         @return The absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
+ * @return The absolute difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
  */
 double HierarchyObject::getAbsDiff2L() const
 {
@@ -101,8 +101,8 @@ double HierarchyObject::getAbsDiff2L() const
 }
 
 /**
- *         Sets the relative difference ot the Higgs masses at two-loop level
- *         @param relDiff2L the relative difference of the Higgs masses as a double.
+ * Sets the relative difference ot the Higgs masses at two-loop level
+ * @param relDiff2L the relative difference of the Higgs masses as a double.
  */
 void HierarchyObject::setRelDiff2L(double relDiff2L)
 {
@@ -110,7 +110,7 @@ void HierarchyObject::setRelDiff2L(double relDiff2L)
 }
 
 /**
- *         @return The relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
+ * @return The relative difference of the exact and expanded Higgs masses at two-loop level at the order O(alpha_x + alpha_x*alpha_s).
  */
 double HierarchyObject::getRelDiff2L() const
 {
@@ -119,9 +119,9 @@ double HierarchyObject::getRelDiff2L() const
 
 
 /**
- *         Sets the uncertainty of the expansion at a given loop level.
- *         @param loops the integer value of the corresponding loops. Can be 1, 2 or 3.
- *         @param uncertainty the expansion untertainty at the given loop order as a double.
+ * Sets the uncertainty of the expansion at a given loop level.
+ * @param loops the integer value of the corresponding loops. Can be 1, 2 or 3.
+ * @param uncertainty the expansion untertainty at the given loop order as a double.
  */
 void HierarchyObject::setDMhExpUncertainty(int loops, double uncertainty)
 {
@@ -134,8 +134,8 @@ void HierarchyObject::setDMhExpUncertainty(int loops, double uncertainty)
 }
 
 /**
- *         @param loops an integer which can be 1, 2 or 3.
- *         @return A double which is the expansion uncertainty for the given loop order.
+ * @param loops an integer which can be 1, 2 or 3.
+ * @return A double which is the expansion uncertainty for the given loop order.
  */
 double HierarchyObject::getDMhExpUncertainty(int loops) const
 {
@@ -150,9 +150,9 @@ double HierarchyObject::getDMhExpUncertainty(int loops) const
 }
 
 /**
- *         Sets the delta of the CP-even Higgs mass matrix
- *         @param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
- *         @param dMh the delta of the mass matrix.
+ * Sets the delta of the CP-even Higgs mass matrix
+ * @param loops the integer value of the corresponding loops. Can be 0, 1, 2 or 3. 0 corresponds to the tree-level.
+ * @param dMh the delta of the mass matrix.
  */
 void HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh)
 {
@@ -182,8 +182,8 @@ void HierarchyObject::setDMh2(int loops, double dMh2)
 }
 
 /**
- *         @param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
- *         @return The CP-even Higgs mass matrix at the given loop order.
+ * @param loops an integer which can be 0, 1, 2, 3. Here, 0 corresponds to the tree-level matrix.
+ * @return The CP-even Higgs mass matrix at the given loop order.
  */
 Eigen::Matrix2d HierarchyObject::getDMh(int loops) const
 {
@@ -210,8 +210,8 @@ double HierarchyObject::getDMh2(int loops) const
 }
 
 /**
- *         Sets the DR' -> MDR' shift
- *         @param mdrShift the DR' -> MDR' shiftet matrix of the form M(MDR') - M(DR').
+ * Sets the DR' -> MDR' shift
+ * @param mdrShift the DR' -> MDR' shiftet matrix of the form M(MDR') - M(DR').
  */
 void HierarchyObject::setDMhDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift)
 {
@@ -219,7 +219,7 @@ void HierarchyObject::setDMhDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& 
 }
 
 /**
- *         @return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
+ * @return The matrix M(MDR') - M(DR') at the order O(alpha_x + alpha_x*alpha_s)
  */
 Eigen::Matrix2d HierarchyObject::getDMhDRbarPrimeToMDRbarPrimeShift() const
 {
@@ -238,8 +238,8 @@ Eigen::Matrix2d HierarchyObject::getDMhDRbarPrimeToH3mShift() const
 
 
 /**
- *         Sets the MDR masses
- *         @param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
+ * Sets the MDR masses
+ * @param mdrMasses a vector containting the MDR masses with the lightest particle at position 0.
  */
 void HierarchyObject::setMDRMasses(const Eigen::Vector2d& mdrMasses)
 {
@@ -247,7 +247,7 @@ void HierarchyObject::setMDRMasses(const Eigen::Vector2d& mdrMasses)
 }
 
 /**
- *         @return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
+ * @return A vector of the MDR stop/sbottom masses. The 0th entry corresponds to the lighter particle.
  */
 Eigen::Vector2d HierarchyObject::getMDRMasses() const
 {
@@ -255,9 +255,9 @@ Eigen::Vector2d HierarchyObject::getMDRMasses() const
 }
 
 /**
- *         Sets the mdrFlag to calculate the corretions in without MDR (0) or with MDR (1) shifts.
- *         @param mdrFlag an int. (0) for H3m (DR')- and (1) for MDR-scheme.
- *         @throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
+ * Sets the mdrFlag to calculate the corretions in without MDR (0) or with MDR (1) shifts.
+ * @param mdrFlag an int. (0) for H3m (DR')- and (1) for MDR-scheme.
+ * @throws runtime_exception if the flag is neither 0 or 1 an exception is thrown.
  */
 void HierarchyObject::setMDRFlag(int mdrFlag)
 {
@@ -271,7 +271,7 @@ void HierarchyObject::setMDRFlag(int mdrFlag)
 
 
 /**
- *         @return the MDRFlag integer.
+ * @return the MDRFlag integer.
  */
 int HierarchyObject::getMDRFlag() const
 {
@@ -279,9 +279,9 @@ int HierarchyObject::getMDRFlag() const
 }
 
 /**
- *         Sets the renormalization scheme accodring to the RenScheme enum
- *         @param renScheme an int according to the RenScheme enum.
- *         @throws runtime_exception if the flag is not in {0,1,2,3} an exception is thrown
+ * Sets the renormalization scheme accodring to the RenScheme enum
+ * @param renScheme an int according to the RenScheme enum.
+ * @throws runtime_exception if the flag is not in {0,1,2,3} an exception is thrown
  */
 void HierarchyObject::setRenormalizationScheme(int renScheme)
 {
@@ -294,7 +294,7 @@ void HierarchyObject::setRenormalizationScheme(int renScheme)
 }
 
 /**
- *         @return Renormalization scheme key
+ * @return Renormalization scheme key
  */
 int HierarchyObject::getRenormalizationScheme() const
 {
@@ -303,8 +303,8 @@ int HierarchyObject::getRenormalizationScheme() const
 
 
 /**
- *         Sets the delta_lambda at 3-loop order with H3m logs.
- *         @param deltaLambda delta_lambda at 3-loop order.
+ * Sets the delta_lambda at 3-loop order with H3m logs.
+ * @param deltaLambda delta_lambda at 3-loop order.
  */
 void HierarchyObject::setDLambdaH3m(double deltaLambda)
 {
@@ -312,7 +312,7 @@ void HierarchyObject::setDLambdaH3m(double deltaLambda)
 }
 
 /**
- *         @return 3-loop delta_lambda with H3m logs
+ * @return 3-loop delta_lambda with H3m logs
  */
 double HierarchyObject::getDLambdaH3m() const
 {
@@ -320,8 +320,8 @@ double HierarchyObject::getDLambdaH3m() const
 }
 
 /**
- *         Sets the delta_lambda at 3-loop order with EFT logs.
- *         @param deltaLambda delta_lambda at 3-loop order.
+ * Sets the delta_lambda at 3-loop order with EFT logs.
+ * @param deltaLambda delta_lambda at 3-loop order.
  */
 void HierarchyObject::setDLambdaEFT(double deltaLambda)
 {
@@ -329,15 +329,15 @@ void HierarchyObject::setDLambdaEFT(double deltaLambda)
 }
 
 /**
- *         @return 3-loop delta_lambda with EFT logs
+ * @return 3-loop delta_lambda with EFT logs
  */
 double HierarchyObject::getDLambdaEFT() const{
    return dLambdaEFT;
 }
 
 /**
- *         Sets the constant part of delta_lambda at 3-loop order.
- *         @param deltaLambda constant part of delta_lambda at 3-loop order.
+ * Sets the constant part of delta_lambda at 3-loop order.
+ * @param deltaLambda constant part of delta_lambda at 3-loop order.
  */
 void HierarchyObject::setDLambdaNonLog(double deltaLambda)
 {
@@ -345,7 +345,7 @@ void HierarchyObject::setDLambdaNonLog(double deltaLambda)
 }
 
 /**
- *        @return 3-loop delta_lambda for the degenerated mass case with EFT logs
+ * @return 3-loop delta_lambda for the degenerated mass case with EFT logs
  */
 double HierarchyObject::getDLambdaNonLog() const
 {
@@ -353,8 +353,8 @@ double HierarchyObject::getDLambdaNonLog() const
 }
 
 /**
- *         Sets the Xt parts of the uncertainty of delta_lambda
- *      @param uncertainty of 3-loop delta_lambda
+ * Sets the Xt parts of the uncertainty of delta_lambda
+ * @param uncertainty of 3-loop delta_lambda
  */
 void HierarchyObject::setDLambdaXtUncertainty(double uncertainty)
 {
@@ -371,8 +371,8 @@ double HierarchyObject::getDLambdaUncertainty(int loops) const{
 }
 
 /**
- *         @return delta_lambda
- *         @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
+ * @return delta_lambda
+ * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
 double HierarchyObject::getDLambda(int loops) const
 {
@@ -384,9 +384,9 @@ double HierarchyObject::getDLambda(int loops) const
 }
 
 /**
- *         Sets the Delta_lambda at loops-loop
- *         @param loops an integer, could be 0 (tree), ..., 3 (3L)
- *         @param deltaLambda delta_lambda at tree-level
+ * Sets the Delta_lambda at loops-loop
+ * @param loops an integer, could be 0 (tree), ..., 3 (3L)
+ * @param deltaLambda delta_lambda at tree-level
  */
 void HierarchyObject::setDLambda(int loops, double deltaLambda)
 {
@@ -399,8 +399,8 @@ void HierarchyObject::setDLambda(int loops, double deltaLambda)
 }
 
 /**
- *         @return Delta_Mh2_EFT
- *         @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
+ * @return Delta_Mh2_EFT
+ * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
 double HierarchyObject::getDMh2EFT(int loops) const
 {
@@ -412,9 +412,9 @@ double HierarchyObject::getDMh2EFT(int loops) const
 }
 
 /**
- *         Sets Delta_Mh2_EFT at loops-loop
- *         @param loops an integer, could be 0 (tree), ..., 3 (3L)
- *         @param deltaMh2 delta_Mh^2
+ * Sets Delta_Mh2_EFT at loops-loop
+ * @param loops an integer, could be 0 (tree), ..., 3 (3L)
+ * @param deltaMh2 delta_Mh^2
  */
 void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
 {
@@ -427,8 +427,8 @@ void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
 }
 
 /**
- *         @return shift to convert delta_lambda from DR' to MS scheme. This shift has to be added to the 1L result
- *         @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
+ * @return shift to convert delta_lambda from DR' to MS scheme. This shift has to be added to the 1L result
+ * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
 double HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const
 {
@@ -440,9 +440,9 @@ double HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const
 }
 
 /**
- *         Sets the DR' to MS shift for delta_lambda at loops-loop
- *         @param loops an integer, could be 0(tree), ..., 3 (3L shift)
- *         @param shift the shift
+ * Sets the DR' to MS shift for delta_lambda at loops-loop
+ * @param loops an integer, could be 0(tree), ..., 3 (3L shift)
+ * @param shift the shift
  */
 void HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift)
 {
@@ -455,9 +455,9 @@ void HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift)
 }
 
 /**
- *      Returns the H3m notation of a given hierarchy.
- *      @param hierarchy An integer of a Himalaya hierarchy.
- *      @return Returns the corresponding H3m notation of the given hierarchy as a string.
+ * Returns the H3m notation of a given hierarchy.
+ * @param hierarchy An integer of a Himalaya hierarchy.
+ * @return Returns the corresponding H3m notation of the given hierarchy as a string.
  */
 std::string HierarchyObject::getH3mHierarchyNotation(int hierarchy) const
 {
@@ -498,7 +498,7 @@ std::string HierarchyObject::getH3mHierarchyNotation(int hierarchy) const
 }
 
 /**
- *         Prints out all information of the HierarchyObject
+ * Prints out all information of the HierarchyObject
  */
 std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
 {

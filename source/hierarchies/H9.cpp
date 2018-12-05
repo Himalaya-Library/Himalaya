@@ -16,25 +16,25 @@ namespace himalaya{
 namespace hierarchies{
 
 /**
- *         Constructor
- *         @param flagMap the flagMap for the truncation of expansion variables
- *         @param Al4p a double alpha_s/4/Pi
- *         @param beta a double which is the mixing angle beta
- *         @param Dmst12 a double Mst1^2 - Mst2^2
- *         @param Dmsqst1  a double Msq1^2 - Mst1^2
- *         @param lmMt a double log((<renormalization scale> / Mt)^2)
- *         @param lmMgl a double log((<renormalization scale> / Mgl)^2)
- *         @param lmMst1 a double log((<renormalization scale> / Mst1)^2)
- *         @param Mgl a double gluino mass
- *         @param Mt a double top/bottom quark mass
- *         @param Mst1 a double stop 1 mass
- *         @param Mst2 a double stop 2 mass
- *         @param MuSUSY a double mu parameter
- *         @param s2t a double 2 times the sine of the stop/sbottom quark mixing angle
- *         @param mdrFlag an int 0 for DR and 1 for MDR scheme
- *         @param oneLoopFlag an int flag to consider the one-loop expansion terms
- *         @param twoLoopFlag an int flag to consider the two-loop expansion terms
- *         @param threeLoopFlag an int flag to consider the three-loop expansion terms
+ * Constructor
+ * @param flagMap the flagMap for the truncation of expansion variables
+ * @param Al4p a double alpha_s/4/Pi
+ * @param beta a double which is the mixing angle beta
+ * @param Dmst12 a double Mst1^2 - Mst2^2
+ * @param Dmsqst1  a double Msq1^2 - Mst1^2
+ * @param lmMt a double log((<renormalization scale> / Mt)^2)
+ * @param lmMgl a double log((<renormalization scale> / Mgl)^2)
+ * @param lmMst1 a double log((<renormalization scale> / Mst1)^2)
+ * @param Mgl a double gluino mass
+ * @param Mt a double top/bottom quark mass
+ * @param Mst1 a double stop 1 mass
+ * @param Mst2 a double stop 2 mass
+ * @param MuSUSY a double mu parameter
+ * @param s2t a double 2 times the sine of the stop/sbottom quark mixing angle
+ * @param mdrFlag an int 0 for DR and 1 for MDR scheme
+ * @param oneLoopFlag an int flag to consider the one-loop expansion terms
+ * @param twoLoopFlag an int flag to consider the two-loop expansion terms
+ * @param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
 H9::H9(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double beta, double Dmst12, double Dmsqst1,
                  double lmMt, double lmMgl, double lmMst1,
@@ -71,7 +71,7 @@ H9::H9(const std::map<unsigned int, unsigned int>& flagMap, double Al4p, double 
 }
 
 /**
- *         @return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
+ * @return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
  */
 double H9::getS1() const {
    return -(pow2(MuSUSY)*((10*Al4p*xMgl*pow4(Mgl)*(2*xDmst12*pow2(Mt)*(216*(1 - 3*
@@ -170,7 +170,7 @@ double H9::getS1() const {
 }
 
 /**
- *         @return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
+ * @return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
  */
 double H9::getS2() const {
    return -(-5*xDmst12*pow2(Mst1)*pow3(Dmst12)*(Mt*(54*oneLoopFlag*(-(Mt*Tbeta*
@@ -800,7 +800,7 @@ double H9::getS2() const {
 }
 
 /**
- *         @return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
+ * @return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H9'
  */
 double H9::getS12() const {
    return (MuSUSY*(Mt*pow2(Mst1)*((20*Al4p*xMgl*pow4(Mgl)*(xDmst12*pow3(Dmst12)*(
@@ -1082,7 +1082,7 @@ double H9::getS12() const {
 }
 
 /**
- *         @return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ * @return returns the susy log^0 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
 double H9::calc_coef_at_as2_no_sm_logs_log0() const {
 
@@ -1175,7 +1175,7 @@ double H9::calc_coef_at_as2_no_sm_logs_log0() const {
 }
 
 /**
- *         @return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ * @return returns the susy log^1 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
 double H9::calc_coef_at_as2_no_sm_logs_log1() const {
 
@@ -1237,7 +1237,7 @@ double H9::calc_coef_at_as2_no_sm_logs_log1() const {
 }
 
 /**
- *         @return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ * @return returns the susy log^2 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
 double H9::calc_coef_at_as2_no_sm_logs_log2() const {
 
@@ -1264,7 +1264,7 @@ double H9::calc_coef_at_as2_no_sm_logs_log2() const {
 }
 
 /**
- *         @return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
+ * @return returns the susy log^3 term of Mh^2 @ O(at*as^2) without any log(mu^2) terms normalized to DO (H3m*12/Mt^4/Sbeta^2)
  */
 double H9::calc_coef_at_as2_no_sm_logs_log3() const {
 

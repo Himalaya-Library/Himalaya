@@ -27,7 +27,7 @@ using RM44 = Eigen::Matrix4d; ///< real 4x4 matrix
 const double NaN = std::numeric_limits<double>::quiet_NaN();
 
 /**
- *         The Himalaya interface struct
+ * The Himalaya interface struct
  *
  * All input parameters are expected to be provided in the DR'-bar scheme.
  */

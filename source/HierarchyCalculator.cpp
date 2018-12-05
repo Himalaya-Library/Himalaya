@@ -47,7 +47,7 @@ namespace himalaya {
 static bool isInfoPrinted; ///< If this bool is true, than no info will be printed in further runs
 
 /**
- *         Define static variables
+ * Define static variables
  */
 namespace {
 
@@ -112,9 +112,9 @@ void disable_non_as_terms(himalaya::mh2_eft::Mh2EFTCalculator& mhc)
 } // anonymous namespace
 
 /**
- *         Constructor
- *         @param p_ a HimalayaInterface struct
- *         @param verbose_ suppress informative output during the calculation, if set to false
+ * Constructor
+ * @param p_ a HimalayaInterface struct
+ * @param verbose_ suppress informative output during the calculation, if set to false
  */
 HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
                                          const bool verbose_)
@@ -133,7 +133,7 @@ HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 }
 
 /**
- *         Initializes all common variables.
+ * Initializes all common variables.
  */
 void HierarchyCalculator::init(){
    // fill flag list
@@ -165,9 +165,9 @@ void HierarchyCalculator::init(){
 }
 
 /**
- *         Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
- *         @param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
- *         @return A HierarchyObject which holds all information of the calculation.
+ * Calculates the 3-loop mass matrix and other information of the hierarchy selection process.
+ * @param isAlphab a bool which determines if the returned object is proportinal to alpha_b.
+ * @return A HierarchyObject which holds all information of the calculation.
  */
 himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
 {
@@ -275,9 +275,9 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
 }
 
 /**
- *         Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @return An integer which is identified with the suitable hierarchy.
+ * Compares deviation of all hierarchies with the exact two-loop result and returns the hierarchy which minimizes the error.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @return An integer which is identified with the suitable hierarchy.
  */
 int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
 {
@@ -378,9 +378,9 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
 }
 
 /**
- *         Checks if a hierarchy is suitable to the given mass spectrum.
- *         @param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
- *         @returns A bool if the hierarchy candidate is suitable to the given mass spectrum.
+ * Checks if a hierarchy is suitable to the given mass spectrum.
+ * @param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
+ * @returns A bool if the hierarchy candidate is suitable to the given mass spectrum.
  */
 bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& ho) const
 {
@@ -437,13 +437,13 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
 
 // TODO(avoigt): if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
 /**
- *         Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @param oneLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded one-loop results to the returned value, respectivley.
- *         @param twoLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded two-loop results to the returned value, respectivley.
- *         @param threeLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded three-loop results to the returned value, respectivley.
- *         @throws runtime_error Throws a runtime_error if the tree-level is requested in terms of hierarchies.
- *         @return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
+ * Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @param oneLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded one-loop results to the returned value, respectivley.
+ * @param twoLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded two-loop results to the returned value, respectivley.
+ * @param threeLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded three-loop results to the returned value, respectivley.
+ * @throws runtime_error Throws a runtime_error if the tree-level is requested in terms of hierarchies.
+ * @return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
  */
 Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    himalaya::HierarchyObject& ho, const int oneLoopFlagIn,
@@ -844,11 +844,11 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 }
 
 /**
- *         Shifts Msx1 according to the hierarchy to the MDR scheme.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
- *         @param twoLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s^2).
- *         @return A double which is the MDR sx_1 mass.
+ * Shifts Msx1 according to the hierarchy to the MDR scheme.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
+ * @param twoLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s^2).
+ * @return A double which is the MDR sx_1 mass.
  */
 double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
                                            const unsigned int oneLoopFlag,
@@ -900,11 +900,11 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
 }
 
 /**
- *         Shifts Msx2 according to the hierarchy to the MDR scheme.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
- *         @param twoLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s^2).
- *         @return A double which is the MDR sx_2 mass.
+ * Shifts Msx2 according to the hierarchy to the MDR scheme.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @param oneLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s).
+ * @param twoLoopFlag an integer flag which is 0 or 1 in order to shift the order O(alpha_s^2).
+ * @return A double which is the MDR sx_2 mass.
  */
 double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
                                            const unsigned int oneLoopFlag,
@@ -952,9 +952,9 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
 }
 
 /**
- *         Shifts the H3m renormalization scheme to DR' scheme. This shift has to be added to the H3m result!
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @return A matrix which shifts the H3m scheme to the DR' scheme at three-loop level
+ * Shifts the H3m renormalization scheme to DR' scheme. This shift has to be added to the H3m result!
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @return A matrix which shifts the H3m scheme to the DR' scheme at three-loop level
  *
  */
 Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
@@ -1071,10 +1071,10 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
 }
 
 /**
- *         Shifts the H3m renormalization scheme to DR' scheme. This shift has to be added to the H3m result!
- *         Note: This shift is WITHOUT the three-loop pre-factor g3^4*k^3*Mt^2*yt^2*Sin[beta]^2 with k = 1 / (16 Pi^2)
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @return A double which shifts the H3m scheme to the DR' scheme at three-loop level
+ * Shifts the H3m renormalization scheme to DR' scheme. This shift has to be added to the H3m result!
+ * Note: This shift is WITHOUT the three-loop pre-factor g3^4*k^3*Mt^2*yt^2*Sin[beta]^2 with k = 1 / (16 Pi^2)
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @return A double which shifts the H3m scheme to the DR' scheme at three-loop level
  *
  */
 double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
@@ -1169,11 +1169,11 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
 
 
 /**
- *         Calculates the loop corrected Higgs mass matrix at the order O(alpha_x). Here, x can be t or b.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @param shiftOneLoop An integer flag which is 0 or 1 in order to shift the one-loop terms to the MDR scheme.
- *         @param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
- *         @return The loop corrected Higgs mass matrix at the order O(alpha_x).
+ * Calculates the loop corrected Higgs mass matrix at the order O(alpha_x). Here, x can be t or b.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @param shiftOneLoop An integer flag which is 0 or 1 in order to shift the one-loop terms to the MDR scheme.
+ * @param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
+ * @return The loop corrected Higgs mass matrix at the order O(alpha_x).
  */
 Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const himalaya::HierarchyObject& ho,
@@ -1249,11 +1249,11 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
 }
 
 /**
- *         Calculates the loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s). Here, x can be t or b.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @param shiftOneLoop An integer flag which is 0 or 1 in order to shift the one-loop terms to the MDR scheme.
- *         @param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
- *         @return The loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s).
+ * Calculates the loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s). Here, x can be t or b.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @param shiftOneLoop An integer flag which is 0 or 1 in order to shift the one-loop terms to the MDR scheme.
+ * @param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
+ * @return The loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s).
  */
 Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
                                               const unsigned int shiftOneLoop,
@@ -1293,12 +1293,12 @@ Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& h
 }
 
 /**
- *         Calculates the contribution to the order (alpha_x) and (alpha_s alpha_x) as the difference
- *         of the Higgs mass matrices of the MDR and DR scheme. Here, x can be t or b.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @param shiftOneLoop a bool to shift the terms at one-loop level.
- *         @param shiftTwoLoop a bool to shift the terms at two-loop level.
- *         @return The loop corrected Higgs mass matrix difference of the MDR and DR scheme at the given order.
+ * Calculates the contribution to the order (alpha_x) and (alpha_s alpha_x) as the difference
+ * of the Higgs mass matrices of the MDR and DR scheme. Here, x can be t or b.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @param shiftOneLoop a bool to shift the terms at one-loop level.
+ * @param shiftTwoLoop a bool to shift the terms at two-loop level.
+ * @return The loop corrected Higgs mass matrix difference of the MDR and DR scheme at the given order.
  */
 Eigen::Matrix2d HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::HierarchyObject& ho,
                                                             const bool shiftOneLoop,
@@ -1318,8 +1318,8 @@ Eigen::Matrix2d HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::Hier
 }
 
 /**
- *        Fills in delta_lambda @ 3L to the given HierarchyObject
- *        @param ho a HierrachyObject
+ * Fills in delta_lambda @ 3L to the given HierarchyObject
+ * @param ho a HierrachyObject
  */
 void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool omitXtOrders) const
 {
@@ -1409,13 +1409,13 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
 
 
 /**
- *         Estimates the uncertainty of the expansion at a given order.
- *         @param ho a HierarchyObject with constant isAlphab.
- *         @param massMatrix the CP-even Higgs mass matrix without the corrections whose uncertainty should be estimated.
- *         @param oneLoopFlag an integer flag which is 0 or 1 in order to estimate the uncertainty of the one-loop expansion terms.
- *         @param twoLoopFlag an integer flag which is 0 or 1 in order to estimate the uncertainty of the two-loop expansion terms.
- *         @param threeLoopFlag an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-loop expansion terms.
- *         @return A double which is the estimated uncertainty.
+ * Estimates the uncertainty of the expansion at a given order.
+ * @param ho a HierarchyObject with constant isAlphab.
+ * @param massMatrix the CP-even Higgs mass matrix without the corrections whose uncertainty should be estimated.
+ * @param oneLoopFlag an integer flag which is 0 or 1 in order to estimate the uncertainty of the one-loop expansion terms.
+ * @param twoLoopFlag an integer flag which is 0 or 1 in order to estimate the uncertainty of the two-loop expansion terms.
+ * @param threeLoopFlag an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-loop expansion terms.
+ * @return A double which is the estimated uncertainty.
  */
 double HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& ho,
                                                     const Eigen::Matrix2d& massMatrix,
@@ -1550,10 +1550,10 @@ double HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& h
 }
 
 /**
- *         Maps a hierarchy to it's mother hierarchy.
- *         @param hierarchy the key to a hierarchy.
- *         @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
- *         @returns The key of the mother hierarchy.
+ * Maps a hierarchy to it's mother hierarchy.
+ * @param hierarchy the key to a hierarchy.
+ * @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
+ * @returns The key of the mother hierarchy.
  */
 int HierarchyCalculator::getCorrectHierarchy(const int hierarchy) const
 {
@@ -1568,7 +1568,7 @@ int HierarchyCalculator::getCorrectHierarchy(const int hierarchy) const
 }
 
 /**
- *         Prints out some information about Himalaya.
+ * Prints out some information about Himalaya.
  */
 void HierarchyCalculator::printInfo() const
 {

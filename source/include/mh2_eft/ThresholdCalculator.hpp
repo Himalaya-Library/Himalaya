@@ -237,7 +237,7 @@ private:
     */
    double getDeltaVevYtau2() const;
    /**
-    * 	       Returns delta_lambda_v_g1^2
+    * Returns delta_lambda_v_g1^2
     * @param omitLogs an integer key to omit all mu terms
     * @return delta_lambda_v_g1^2
     */

@@ -116,11 +116,11 @@ double Parameters::calculateMsq2() const
 }
 
 /**
- *         Checks if the stop/sbottom masses and mixing angles are provided. Otherwise calculate them.
- *         Checks if the stop/sbottom masses are ordered in the right way. If these masses are wrongly ordered
- *         the right ordering will be introduced.
- *         Checks if the stops/sbottom masses are degenerated and introduce a small shift to the 1st stop/sbottom mass in this case.
- *         @param verbose a bool which suppresses the information of the calculation if set to flase
+ * Checks if the stop/sbottom masses and mixing angles are provided. Otherwise calculate them.
+ * Checks if the stop/sbottom masses are ordered in the right way. If these masses are wrongly ordered
+ * the right ordering will be introduced.
+ * Checks if the stops/sbottom masses are degenerated and introduce a small shift to the 1st stop/sbottom mass in this case.
+ * @param verbose a bool which suppresses the information of the calculation if set to flase
  */
 void Parameters::validate(bool verbose)
 {
