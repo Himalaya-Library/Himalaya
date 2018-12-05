@@ -776,7 +776,7 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
    using namespace himalaya::mh2_eft::EFTOrders;
 
    for (int i = EFTOrders::FIRST; i < EFTOrders::NUMBER_OF_EFT_ORDERS; i++)
-      orders.emplace(i, 1);
+      orders.at(i) = 1;
 
    const double eps = 1e-10;
 
@@ -1334,8 +1334,9 @@ void MSSM_mass_eigenstates::set_correction(int order, int flag)
    if (flag < 0 || flag > 1)
       INFO_MSG("You can only enable (1) or disable (0) corrections!");
 
-   if (orders.find(order) == orders.end())
-      INFO_MSG("Your variable is not defined in the EFTOrders enum!");
+   if (order < mh2_eft::EFTOrders::EFTOrders::FIRST ||
+       order >= mh2_eft::EFTOrders::EFTOrders::NUMBER_OF_EFT_ORDERS)
+      ERROR_MSG("Your order is not defined in the EFTOrders enum!");
 
    orders.at(order) = flag;
 }

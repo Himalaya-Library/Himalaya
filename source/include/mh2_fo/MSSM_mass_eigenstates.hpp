@@ -8,7 +8,8 @@
 #pragma once
 
 #include "Himalaya_interface.hpp"
-#include <map>
+#include "EFTFlags.hpp"
+#include <array>
 #include <tuple>
 #include <Eigen/Core>
 
@@ -173,7 +174,7 @@ private:
    Parameters pars;            ///< MSSM DR' parameters
    MSSM_spectrum masses;       ///< MSSM DR' masses / mixings
    MSSM_spectrum gaugeless;    ///< MSSM DR' masses / mixings for g1 = g2 = 0
-   std::map<int,int> orders{}; ///< enable/disable corrections
+   std::array<int,mh2_eft::EFTOrders::EFTOrders::NUMBER_OF_EFT_ORDERS> orders{};   ///< enable/disable corrections
    Momentum_iteration mom_it{Momentum_iteration::pert}; ///< momentum iteration settings
    double mom_it_precision_goal{1e-5}; ///< precision goal for numeric momentum iteration
    int mom_it_max_iterations{100};     ///< maximum number of numeric momentum iterations

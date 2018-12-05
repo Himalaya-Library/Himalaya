@@ -8,9 +8,10 @@
 #pragma once
 
 #include "Himalaya_interface.hpp"
+#include "EFTFlags.hpp"
 #include <iosfwd>
 #include <limits>
-#include <map>
+#include <array>
 
 /**
  * @file Mh2EFTCalculator.hpp
@@ -66,16 +67,16 @@ public:
    double getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const;
    /**
     * Sets the flag to enable or disable a correction of a given variable
-    * @param variable an integer taken from the EFTOrders enum
-    * @param enable set to 1 to enable and to 0 to disable the chosen correction
+    * @param order an integer taken from the EFTOrders enum
+    * @param flag set to 1 to enable and to 0 to disable the chosen correction
     */
-   void setCorrectionFlag(int variable, int enable);
+   void setCorrectionFlag(int order, int flag);
 
    friend std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
 private:
    Parameters p{}; ///< The HimalayaInterface struct
    double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
-   std::map<unsigned int, unsigned int> orderMap{}; ///< A map which holds all EFTOrders key value pairs to enable/disable certain corrections
+   std::array<int, EFTOrders::EFTOrders::NUMBER_OF_EFT_ORDERS> orders{}; ///< holds all EFTOrders to enable/disable certain corrections
 };
 
 /// prints loop corrections for v^2 << MS^2
