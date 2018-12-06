@@ -8,6 +8,7 @@
 #include "HierarchyObject.hpp"
 #include "Hierarchies.hpp"
 #include "EFTFlags.hpp"
+#include "version.hpp"
 #include <cmath>
 #include <iostream>
 

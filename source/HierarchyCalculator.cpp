@@ -29,6 +29,7 @@
 #include "Logger.hpp"
 #include "Utils.hpp"
 #include "ThresholdCalculator.hpp"
+#include "version.hpp"
 #include <iostream>
 #include <numeric>
 #include <stdexcept>

@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include "version.hpp"
 #include <iosfwd>
 #include <Eigen/Core>
 #include <vector>
