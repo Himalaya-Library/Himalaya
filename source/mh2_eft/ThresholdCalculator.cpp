@@ -2107,7 +2107,7 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    const double mA2 = pow2(mA);
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
    const double lmUMR = omitLogs*log(Mu2 / MR2);
-
+   std::cout << "phi " << phixyz(mA,mA,mA) << "\n";
    if (is_equal_rel(mQ32, mU32, 0.1) &&
        (is_equal_rel(mQ32, mA2, 0.1) || is_equal_rel(mU32, mA2, 0.1))) {
       return getDeltaLambdaYt6_SUSYHD(omitLogs);
@@ -2494,10 +2494,30 @@ double ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs) const
    const double beta = std::atan(p.vu/p.vd);
    const double sbeta = std::sin(beta);
    const double cbeta = std::cos(beta);
+   const double sbe = sbeta;
+   const double cbe = cbeta;
    const double Xtau = p.Ae(2,2) - p.mu*p.vu/p.vd;
    const double Ytau = p.Ae(2,2) + p.mu*p.vd/p.vu;
    const double Mu = p.mu;
 
+   if(std::abs(mE3 - mL3) < 0.1*mE3){
+     const double lMS = log(mL32/MR2);
+     const double M = mL3;
+     const double Xtau2 = pow2(Xtau);
+     return (pow2(cbe)*(cbe*(4.994969600000008 - 48.*lMS)*sbe*pow3(M)*pow3(Xtau)
+	+ Xtau2*pow4(M)*(-0.1268863999999965 + pow2(cbe)*(lMS*(99. - 40.5*pow2(sbe))
+	+ 25.88317440000001*pow2(sbe)) + (-96. + 6.75*lMS)*pow4(cbe) + lMS*(74.25
+	- 99.*pow2(sbe) + 6.75*pow4(sbe))) + pow2(M)*(-0.12437120000000013
+        + pow2(cbe)*(6.621856000000005*pow2(sbe) + lMS*(-22.5 + 4.5*pow2(sbe)))
+        + (39. - 0.75*lMS)*pow4(cbe) + lMS*(-18.75 + 22.5*pow2(sbe)
+	- 0.75*pow4(sbe)))*pow4(Xtau) + cbe*(4.507545599999993 + 108.*lMS)*sbe
+        *Xtau*pow5(M) + cbe*(-0.24874240000000025 + 6.*lMS)*M*sbe*pow5(Xtau)
+	+ (0.7512575999999989 + pow2(cbe)*(3.9004104065361593*pow2(sbe)
+	+ lMS*(-30. + 58.5*pow2(sbe))) + (54. - 9.75*lMS + 18.*pow2(lMS))
+        *pow4(cbe) + lMS*(-2.25 + 30.*pow2(sbe) - 9.75*pow4(sbe)))*pow6(M)
+	+ (lMS*(1.5 - 1.5*pow2(sbe)) + pow2(cbe)*(1.5*lMS - 0.12437120000000013
+        *pow2(sbe)) - 3.*pow4(cbe))*pow6(Xtau)))/pow6(M);
+   }
    return 2*(5 + lMR*(10 - 8*log(mE3)) - 8*log(mE3) - 12*(1 + lMR)*log(mL3) + 5*
         pow2(lMR) + 8*pow2(log(mE3)) + 12*pow2(log(mL3)) - (pow2(Xtau)*(-36*
         pow2(mE3)*(pow2(mE3) - pow2(mL3))*pow2(mL3)*pow2(log(mE3)) - 4*pow2(
