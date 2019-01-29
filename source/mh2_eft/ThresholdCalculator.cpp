@@ -2107,7 +2107,7 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    const double mA2 = pow2(mA);
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
    const double lmUMR = omitLogs*log(Mu2 / MR2);
-   std::cout << "phi " << phixyz(mA,mA,mA) << "\n";
+
    if (is_equal_rel(mQ32, mU32, 0.1) &&
        (is_equal_rel(mQ32, mA2, 0.1) || is_equal_rel(mU32, mA2, 0.1))) {
       return getDeltaLambdaYt6_SUSYHD(omitLogs);
