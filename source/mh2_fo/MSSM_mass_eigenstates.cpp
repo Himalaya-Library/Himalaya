@@ -799,6 +799,13 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
       orders.at(EFTOrders::YTAU2YB4) = 0;
       orders.at(EFTOrders::YTAU4YB2) = 0;
    }
+
+   //For now, disable all yb ytau @ 2 loop
+   orders.at(EFTOrders::YB6) = 0;
+   orders.at(EFTOrders::YTAU6) = 0;
+   orders.at(EFTOrders::YTAU2YB4) = 0;
+   orders.at(EFTOrders::YTAU4YB2) = 0;
+   orders.at(EFTOrders::G32YB4) = 0;
 }
 
 /**
@@ -1019,8 +1026,8 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
    const auto yt     = pars.Yu(2,2);
-   const auto yb     = pars.Yd(2,2);
-   const auto ytau   = pars.Ye(2,2);
+   const auto yb     = 0.*pars.Yd(2,2);
+   const auto ytau   = 0.*pars.Ye(2,2);
    const auto vu     = pars.vu;
    const auto vd     = pars.vd;
    const auto mu     = pars.mu;
@@ -1103,8 +1110,8 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 {
    const auto yt     = pars.Yu(2,2);
-   const auto yb     = pars.Yd(2,2);
-   const auto ytau   = pars.Ye(2,2);
+   const auto yb     = 0.*pars.Yd(2,2);
+   const auto ytau   = 0.*pars.Ye(2,2);
    const auto mu     = pars.mu;
    const auto At     = pars.Au(2,2);
    const auto Ab     = pars.Ad(2,2);
@@ -1223,6 +1230,14 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
       break;
    }
 
+//          std::cout << "include heavy higgs " << include_heavy_higgs << "\n";
+// std::cout << delta_mh2_2loop_at_at(
+//          mt2, mb2, mA2, mst12, mst22, msb12, msb22,
+//          sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2,
+//          include_heavy_higgs) << "\n";
+//          std::cout << "test " << pars.Au(2,2) << " " << sqrt(mt2) << " " << sqrt(mb2) << " " << sqrt(mA2) << " " << mst12 << " " << mst22 << " " << msb12 << " " << msb22 << " " <<
+//          pars.theta_t << " " << sqrt(scale2) << " " << mu << " " << tanb << " " << vev2 << " " <<
+//          include_heavy_higgs << "\n";
    if (orders.at(EFTOrders::G32YT4)) {
       dmh += delta_mh2_2loop_at_as(
          mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3,

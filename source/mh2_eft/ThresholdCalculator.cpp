@@ -924,7 +924,7 @@ double ThresholdCalculator::getDeltaVevYb2() const
    const double mD32 = p.md2(2,2);
    const double eps = mQ32*0.01;
 
-   const double exact = (3*Xb2*(2*mD32*mQ32*log(mQ32/mD32) + pow2(mD32) 
+   const double exact = (3*Xb2*(2*mD32*mQ32*log(mQ32/mD32) + pow2(mD32)
       - pow2(mQ32)))/(4.*pow3(mD32 - mQ32));
 
    if (std::abs(mQ32 - mD32) < eps) {
@@ -1808,7 +1808,7 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
         cbeta) - 0.6699863197821283*pow2(sbeta))*pow6(M) - 0.06666666666666667*
         pow2(cbeta)*pow6(Xb)))/pow6(M);
    }
-   //TODO limits
+
    return 3*(10 - 5/pow2(cbeta) - (2*mD32)/(mQ32*pow2(cbeta)) - (4*mQ32)/(mD32*
         pow2(cbeta)) + (2*mD32)/((mD32 - Mu2)*pow2(cbeta)) + (8*Mu2)/(mD32*
         pow2(cbeta)) + (4*Mu2)/(mQ32*pow2(cbeta)) + (4*Mu2)/((mQ32 - Mu2)*pow2(
@@ -2089,10 +2089,8 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    using himalaya::dilog;
 
    const double MR2 = pow2(p.scale);
-   const double mQ32 = p.mq2(2,2);
-   const double mU32 = p.mu2(2,2);
-   const double mQ3 = sqrt(mQ32);
-   const double mU3 = sqrt(mU32);
+   double mQ32 = p.mq2(2,2);
+   double mU32 = p.mu2(2,2);
    const double mA = p.MA;
    const double beta = std::atan(p.vu/p.vd);
    const double sbeta = std::sin(beta);
@@ -2102,16 +2100,21 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    const double Xt2 = pow2(Xt);
    const double Xt4 = pow2(Xt2);
    const double Xt6 = pow3(Xt2);
-   const double Mu = p.mu;
-   const double Mu2 = pow2(Mu);
    const double mA2 = pow2(mA);
    const double lmQ3MR = omitLogs*log(mQ32 / MR2);
-   const double lmUMR = omitLogs*log(Mu2 / MR2);
 
    if (is_equal_rel(mQ32, mU32, 0.1) &&
        (is_equal_rel(mQ32, mA2, 0.1) || is_equal_rel(mU32, mA2, 0.1))) {
       return getDeltaLambdaYt6_SUSYHD(omitLogs);
    }
+
+   mQ32 = p.mq2(2,2) * (1.02);
+   mU32 = p.mu2(2,2) * (0.98);
+   const double mQ3 = sqrt(mQ32);
+   const double mU3 = sqrt(mU32);
+   const double Mu = p.mu * sqrt(1.03);
+   const double Mu2 = pow2(Mu);
+   const double lmUMR = omitLogs*log(Mu2 / MR2);
 
    return (18*pow2(cbeta)*pow2(log(mA2/MR2)))/pow2(sbeta) - (288*Yt*pow2(cbeta)*
         pow3(Xt))/(pow2(mQ32 - mU32)*pow2(sbeta)) - (6*Xt6*(11*mQ32*mU32 + 2*
@@ -2505,18 +2508,18 @@ double ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs) const
      const double M = mL3;
      const double Xtau2 = pow2(Xtau);
      return (pow2(cbe)*(cbe*(4.994969600000008 - 48.*lMS)*sbe*pow3(M)*pow3(Xtau)
-	+ Xtau2*pow4(M)*(-0.1268863999999965 + pow2(cbe)*(lMS*(99. - 40.5*pow2(sbe))
-	+ 25.88317440000001*pow2(sbe)) + (-96. + 6.75*lMS)*pow4(cbe) + lMS*(74.25
-	- 99.*pow2(sbe) + 6.75*pow4(sbe))) + pow2(M)*(-0.12437120000000013
-        + pow2(cbe)*(6.621856000000005*pow2(sbe) + lMS*(-22.5 + 4.5*pow2(sbe)))
-        + (39. - 0.75*lMS)*pow4(cbe) + lMS*(-18.75 + 22.5*pow2(sbe)
-	- 0.75*pow4(sbe)))*pow4(Xtau) + cbe*(4.507545599999993 + 108.*lMS)*sbe
-        *Xtau*pow5(M) + cbe*(-0.24874240000000025 + 6.*lMS)*M*sbe*pow5(Xtau)
-	+ (0.7512575999999989 + pow2(cbe)*(3.9004104065361593*pow2(sbe)
-	+ lMS*(-30. + 58.5*pow2(sbe))) + (54. - 9.75*lMS + 18.*pow2(lMS))
-        *pow4(cbe) + lMS*(-2.25 + 30.*pow2(sbe) - 9.75*pow4(sbe)))*pow6(M)
-	+ (lMS*(1.5 - 1.5*pow2(sbe)) + pow2(cbe)*(1.5*lMS - 0.12437120000000013
-        *pow2(sbe)) - 3.*pow4(cbe))*pow6(Xtau)))/pow6(M);
+     + Xtau2*pow4(M)*(-0.1268863999999965 + pow2(cbe)*(lMS*(99. - 40.5*pow2(sbe))
+     + 25.88317440000001*pow2(sbe)) + (-96. + 6.75*lMS)*pow4(cbe) + lMS*(74.25
+     - 99.*pow2(sbe) + 6.75*pow4(sbe))) + pow2(M)*(-0.12437120000000013
+     + pow2(cbe)*(6.621856000000005*pow2(sbe) + lMS*(-22.5 + 4.5*pow2(sbe)))
+     + (39. - 0.75*lMS)*pow4(cbe) + lMS*(-18.75 + 22.5*pow2(sbe)
+     - 0.75*pow4(sbe)))*pow4(Xtau) + cbe*(4.507545599999993 + 108.*lMS)*sbe
+     *Xtau*pow5(M) + cbe*(-0.24874240000000025 + 6.*lMS)*M*sbe*pow5(Xtau)
+     + (0.7512575999999989 + pow2(cbe)*(3.9004104065361593*pow2(sbe)
+     + lMS*(-30. + 58.5*pow2(sbe))) + (54. - 9.75*lMS + 18.*pow2(lMS))
+     *pow4(cbe) + lMS*(-2.25 + 30.*pow2(sbe) - 9.75*pow4(sbe)))*pow6(M)
+     + (lMS*(1.5 - 1.5*pow2(sbe)) + pow2(cbe)*(1.5*lMS - 0.12437120000000013
+     *pow2(sbe)) - 3.*pow4(cbe))*pow6(Xtau)))/pow6(M);
    }
    return 2*(5 + lMR*(10 - 8*log(mE3)) - 8*log(mE3) - 12*(1 + lMR)*log(mL3) + 5*
         pow2(lMR) + 8*pow2(log(mE3)) + 12*pow2(log(mL3)) - (pow2(Xtau)*(-36*
@@ -6500,3 +6503,4 @@ void ThresholdCalculator::setXtOrderOfDeltaLambdaAtAs2(int xtOrder)
 
 } // namespace mh2_eft
 } // namespace himalaya
+

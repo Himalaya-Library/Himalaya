@@ -11,6 +11,7 @@
 #include <cmath>
 #include <limits>
 #include <mutex>
+#include <iostream>
 #include <utility>
 
 /**
@@ -331,6 +332,8 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
          mt2, mb2, mA2, mst12, mst22, msb12, msb22,
          sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2)
       : 0.;
+
+//       std::cout << "dma " << dMA << "\n" << result << "\n";
 
    return result + rotate_by(dMA, tanb);
 }

@@ -75,7 +75,7 @@ himalaya::Parameters make_gaugeless(const himalaya::Parameters& pars)
 int main()
 {
    const std::vector<himalaya::Parameters> points = {
-      setup_point(2000., 20., std::sqrt(6.))
+      setup_point(20000., 20., std::sqrt(6.))
    };
 
    for (const auto& point: points) {
@@ -94,6 +94,7 @@ int main()
 
          // calculate fixed-order corrections for v^2 << MS^2
          himalaya::mh2_eft::Mh2EFTCalculator meft(point_gl);
+         //himalaya::mh2_eft::Mh2EFTCalculator meft(point);
          const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
          const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
          const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
@@ -105,6 +106,7 @@ int main()
 
          // calculate fixed-order corrections
          himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point_gl);
+         //himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point);
          const auto dmh_fo     = mfo.calculate_Mh2();
          const auto dmh2_fo_0l = std::get<0>(dmh_fo);
          const auto dmh2_fo_1l = std::get<1>(dmh_fo);

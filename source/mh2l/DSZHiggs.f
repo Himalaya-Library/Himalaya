@@ -150,7 +150,7 @@ c     end of addition by ALEX
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/sbe
-      hb = dsqrt(2d0/vv)*mb/cbe
+      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
       
       k = 3d0/(16d0*Pi**2)**2 
 
@@ -176,7 +176,6 @@ c     end of addition by ALEX
       S11 = k*S11
       S12 = k*S12
       S22 = k*S22
-      
       return
       end
       
@@ -306,7 +305,7 @@ c     end of addition by ALEX
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/sbe
-      hb = dsqrt(2d0/vv)*mb/cbe
+      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
       
       k = 3d0/(16d0*Pi**2)**2 
       
@@ -639,7 +638,7 @@ c     end of addition by ALEX
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/sbe
-      hb = dsqrt(2d0/vv)*mb/cbe
+      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
       
       Xt = (T1-T2)*s2t/2d0/mt    
       Xb = (B1-B2)*s2b/2d0/mb           
@@ -5289,7 +5288,7 @@ c
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/cbe
-      hb = dsqrt(2d0/vv)*mb/cbe
+      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
       
       k = 3d0/(16d0*Pi**2)**2 
       
@@ -5355,7 +5354,7 @@ c
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/cbe
-      hb = dsqrt(2d0/vv)*mb/cbe
+      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
       
       k = 3d0/(16d0*Pi**2)**2 
       
@@ -5406,7 +5405,7 @@ c
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/cbe
-      hb = dsqrt(2d0/vv)*mb/cbe
+      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
       
       k = 3d0/(16d0*Pi**2)**2 
       
@@ -5481,7 +5480,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF1q = -.5d0*ht*hb*s2t*s2b*(T1-T2)/T1/T2*pippob
       
@@ -5504,7 +5503,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF2q = .5d0*ht*hb*s2b/s2t/T1/T2/(T1-T2)*pippob*
      $     (s2t**2*(T1**2-T2**2) + 2d0*c2t**2*T1*T2*Log(T1/T2))
@@ -5528,7 +5527,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF3q = -.5d0*ht*hb*s2b/s2t/T1/T2/(T1-T2)**2*pippob*
      $     ((T1-T2)*(s2t**2*(T1+T2)**2 - 8d0*c2t**2*T1*T2)
@@ -5553,7 +5552,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF4q = .5d0*ht*hb*s2b/s2t/(T1-T2)*Log(B1/B2)*
      $     (2d0*c2t**2*pippot + s2t**2*(T1-T2)*Log(T1*T2/q**2))
@@ -5577,7 +5576,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF5q = .5d0*hb*ht/s2b/s2t* 
      $     (-4d0*pippob*pippot/(B1-B2)/(T1-T2)*(1d0-c2b**2*c2t**2)
@@ -5605,7 +5604,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF6q = .5d0*ht*hb*s2t*s2b*Log(B1/B2)*Log(T1/T2)
       
@@ -5628,7 +5627,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauFq = .5d0*ht*hb*s2b/s2t/(T1-T2)*pippob*
      $     (2d0*c2t**2*pippot + s2t**2*(T1-T2)*Log(T1*T2/q**2))
@@ -5652,7 +5651,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauGq = .5d0*hb*ht*s2b*s2t*pippob*Log(T1/T2)
       
@@ -5676,7 +5675,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       Xt = (T1-T2)*s2t/2d0/sqrt(t)    
       Xb = (B1-B2)*s2b/2d0/sqrt(b)
