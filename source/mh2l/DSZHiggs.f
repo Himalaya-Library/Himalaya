@@ -29,7 +29,7 @@ c
 c     
       
       subroutine DDSHiggs(t,b,A0,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,
-     $     S11,S12,S22) 
+     $     S11,S12,S22,atasf) 
      $ bind(C, name="ddshiggs_")
       
       implicit none
@@ -40,6 +40,7 @@ c
      $     ,pi,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
+      integer atasf
       double precision, parameter :: eps_st = 1d-5
       double precision, parameter :: eps_t1 = 1d-5
       double precision, parameter :: eps_sb = 1d-8
@@ -150,12 +151,16 @@ c     end of addition by ALEX
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/sbe
-      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
+      if (atasf.eq.1) then
+        hb = 0d0*dsqrt(2d0/vv)*mb/cbe
+      else
+        hb = dsqrt(2d0/vv)*mb/cbe
+      endif
       
       k = 3d0/(16d0*Pi**2)**2 
 
       call makefuncs(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
-     $     F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb,FAp)
+     $     F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb,FAp,atasf)
       
       S11 = .5d0*ht**2*mu**2*s2t**2*F3t
      $     + 2d0*hb**2*mb**2*F1b + 2d0*hb**2*Ab*mb*s2b*F2b
@@ -185,7 +190,7 @@ c     end of addition by ALEX
 *     
       
       subroutine DDSodd(t,b,A0,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,
-     $     DMA) 
+     $     DMA, atasf) 
      $ bind(C, name="ddsodd_")
       
       implicit none
@@ -195,6 +200,7 @@ c     end of addition by ALEX
      $     ,pi,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
+      integer atasf
       double precision, parameter :: eps_st = 1d-5
       double precision, parameter :: eps_t1 = 1d-5
       double precision, parameter :: eps_sb = 1d-8
@@ -305,12 +311,16 @@ c     end of addition by ALEX
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/sbe
-      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
+      if (atasf.eq.1) then
+        hb = 0d0*dsqrt(2d0/vv)*mb/cbe
+      else
+        hb = dsqrt(2d0/vv)*mb/cbe
+      endif
       
       k = 3d0/(16d0*Pi**2)**2 
       
       call makefuncs(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
-     $     F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb,FAp)
+     $     F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb,FAp,atasf)
       
       DMA = -(ht**2*mu*At/(T1-T2)*Ft + hb**2*mu*Ab/(B1-B2)*Fb
      $     + 2d0*ht*hb*FAp)/sbe/cbe
@@ -448,7 +458,7 @@ c     end of addition by ALEX
       k = 3d0/(16d0*Pi**2)**2 
       
       call makefuncs(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
-     $     F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb,FAp)
+     $     F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb,FAp, 0)
       
       v1 = Sqrt(vv)*cbe
       v2 = Sqrt(vv)*sbe
@@ -468,7 +478,7 @@ c     end of addition by ALEX
       
       subroutine makefuncs(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,
      $     q,mu,vv,tanb,F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,
-     $     Ft,Fb,Gt,Gb,FAp)
+     $     Ft,Fb,Gt,Gb,FAp, atasf)
       
       implicit none
       
@@ -480,6 +490,7 @@ c     end of addition by ALEX
      $     ,DT2B1,DT1B2,DT2B2,Dbc2t,DB1c2t,DB2c2t,DT1c2b,DT2c2b,Dc2tc2b
      $     ,Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb
      $     ,Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
+      integer atasf
       
       common/listderiv/D1t,DT1,DT2,Dc2t,DT1T1,DT2T2,
      $     Dtt,Dc2tc2t,DT1t,DT2t,DT1T2,
@@ -494,7 +505,7 @@ c     end of addition by ALEX
       double precision Xt,Xb,At,Ab
       
       call makederiv(b,t,A0,B1,B2,T1,T2,s2b,c2b,s2t,c2t,
-     $     q,mu,vv,1d0/tanb)
+     $     q,mu,vv,1d0/tanb, atasf)
       
       D1b = D1t
       DB1 = DT1
@@ -512,7 +523,8 @@ c     end of addition by ALEX
       DB2c2b = DT2c2t
       Dtc2b = Dbc2t
 
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       F1t = Dtt + DT1T1 + DT2T2 + 2d0*(DT1t + DT2t + DT1T2)
      $     +(Dcptpb + Dcptmptt + Dcptptb - 2d0*Dsptmpttsptptb)
@@ -596,11 +608,12 @@ c     end of addition by ALEX
 *     
       
       subroutine makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,
-     $     q,mu,vv,tanb)
+     $     q,mu,vv,tanb,atasf)
       
       implicit double precision (t)
       implicit character (a-s,u-z)
       
+      integer atasf
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       double precision ht,hb,mt,mb,Xt,Xb,Yt,Yb,sbe,cbe,mu2,Nc
       double precision Delt,phi,pLi2
@@ -638,7 +651,11 @@ c     end of addition by ALEX
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/sbe
-      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
+      if (atasf.eq.1) then
+        hb = 0d0*dsqrt(2d0/vv)*mb/cbe
+      else
+        hb = dsqrt(2d0/vv)*mb/cbe
+      endif
       
       Xt = (T1-T2)*s2t/2d0/mt    
       Xb = (B1-B2)*s2b/2d0/mb           
@@ -3903,11 +3920,13 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function F1q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function F1q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       implicit none
       
       double precision F1q
+      integer atasf
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
       double precision D1t,DT1,DT2,Dc2t,DT1T1,DT2T2,Dtt,Dc2tc2t,DT1t
@@ -3923,7 +3942,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       F1q = Dtt + DT1T1 + DT2T2 + 2d0*(DT1t + DT2t + DT1T2)
      $     +(4d0*Dcptpb + Dcptmptt + Dcptptb - 2d0*Dsptmpttsptptb)
@@ -3936,10 +3956,12 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function F2q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function F2q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       implicit none
       
+      integer atasf
       double precision F2q
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
@@ -3956,7 +3978,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       F2q = DT1T1 - DT2T2 + DT1t - DT2t
      $     -4d0*c2t**2/(T1-T2)*(Dtc2t + DT1c2t + DT2c2t)
@@ -3969,10 +3992,11 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function F3q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function F3q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       implicit none
-      
+      integer atasf
       double precision F3q
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
@@ -3989,7 +4013,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       F3q = DT1T1 + DT2T2 - 2d0*DT1T2
      $     - 2d0/(T1-T2)*(DT1-DT2)
@@ -4004,10 +4029,12 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function F4q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function F4q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       implicit none
       
+      integer atasf
       double precision F4q
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
@@ -4024,7 +4051,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       F4q = DT1b + DT1B1 + DT1B2 - DT2b - DT2B1 - DT2B2
      $     -4d0*c2t**2/(T1-T2)*(DB1c2t + DB2c2t + Dbc2t)
@@ -4038,10 +4066,12 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function F5q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function F5q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       implicit none
       
+      integer atasf
       double precision F5q
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
@@ -4058,7 +4088,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       F5q = DT1B1 - DT1B2 - DT2B1 + DT2B2
      $     + 16d0*c2t**2*c2b**2/(T1-T2)/(B1-B2)*Dc2tc2b
@@ -4074,10 +4105,12 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function F6q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function F6q(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       implicit none
       
+      integer atasf
       double precision F6q
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
@@ -4094,7 +4127,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       F6q = Dtb + DT1b + DT2b + DB1t + DB2t
      $     + DT1B1 + DT1B2 + DT2B1 + DT2B2
@@ -4107,10 +4141,11 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function Fq(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function Fq(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,atasf)
       
       implicit none
       
+      integer atasf
       double precision Fq
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
@@ -4127,7 +4162,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       Fq = DT1 - DT2 - 4d0*c2t**2/(T1-T2)*Dc2t      
       
@@ -4138,10 +4174,11 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function Gq(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function Gq(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,atasf)
       
       implicit none
       
+      integer atasf
       double precision Gq
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       
@@ -4158,7 +4195,8 @@ c     end of addition by ALEX
      $     Dcptpb,Dcpttptb,Dcpbptt,Dcptptb,Dcptmptt,Dcpbmptb,
      $     Dspbmptbspbptt,Dsptmpttsptptb,Dsptmpttspbmptb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       Gq = D1t + DT1 + DT2
       
@@ -4169,10 +4207,12 @@ c     end of addition by ALEX
 ***********************************************************************
 *     
       
-      function FAq(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      function FAq(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       implicit none
       
+      integer atasf
       double precision FAq
       double precision t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb
       double precision Xt,Xb,At,Ab
@@ -4196,7 +4236,8 @@ c     end of addition by ALEX
       At = Xt - mu/tanb
       Ab = Xb - mu*tanb
       
-      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb)
+      call makederiv(t,b,A0,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
+     &     atasf)
       
       FAq = Dcptpb/Sqrt(b)/Sqrt(t)
      $     +4d0*(At*Ab - mu**2)**2*Sqrt(t)*Sqrt(b)
@@ -5288,7 +5329,7 @@ c
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/cbe
-      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
+      hb = dsqrt(2d0/vv)*mb/cbe
       
       k = 3d0/(16d0*Pi**2)**2 
       
@@ -5354,8 +5395,8 @@ c
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/cbe
-      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
-      
+      hb = dsqrt(2d0/vv)*mb/cbe
+
       k = 3d0/(16d0*Pi**2)**2 
       
       call makefuncstau(t,b,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
@@ -5405,8 +5446,8 @@ c
       cbe = dcos(datan(tanb))
       
       ht = dsqrt(2d0/vv)*mt/cbe
-      hb = 0d0*dsqrt(2d0/vv)*mb/cbe
-      
+      hb = dsqrt(2d0/vv)*mb/cbe
+
       k = 3d0/(16d0*Pi**2)**2 
       
       call makefuncstau(t,b,T1,T2,B1,B2,s2t,c2t,s2b,c2b,q,mu,vv,tanb,
@@ -5480,8 +5521,8 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
-      
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
+
       tauF1q = -.5d0*ht*hb*s2t*s2b*(T1-T2)/T1/T2*pippob
       
       return
@@ -5503,7 +5544,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF2q = .5d0*ht*hb*s2b/s2t/T1/T2/(T1-T2)*pippob*
      $     (s2t**2*(T1**2-T2**2) + 2d0*c2t**2*T1*T2*Log(T1/T2))
@@ -5527,7 +5568,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF3q = -.5d0*ht*hb*s2b/s2t/T1/T2/(T1-T2)**2*pippob*
      $     ((T1-T2)*(s2t**2*(T1+T2)**2 - 8d0*c2t**2*T1*T2)
@@ -5552,7 +5593,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF4q = .5d0*ht*hb*s2b/s2t/(T1-T2)*Log(B1/B2)*
      $     (2d0*c2t**2*pippot + s2t**2*(T1-T2)*Log(T1*T2/q**2))
@@ -5576,7 +5617,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF5q = .5d0*hb*ht/s2b/s2t* 
      $     (-4d0*pippob*pippot/(B1-B2)/(T1-T2)*(1d0-c2b**2*c2t**2)
@@ -5604,7 +5645,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauF6q = .5d0*ht*hb*s2t*s2b*Log(B1/B2)*Log(T1/T2)
       
@@ -5627,7 +5668,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauFq = .5d0*ht*hb*s2b/s2t/(T1-T2)*pippob*
      $     (2d0*c2t**2*pippot + s2t**2*(T1-T2)*Log(T1*T2/q**2))
@@ -5651,7 +5692,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       tauGq = .5d0*hb*ht*s2b*s2t*pippob*Log(T1/T2)
       
@@ -5675,7 +5716,7 @@ c
       pippot = T1*(Log(T1/q)-1d0) - T2*(Log(T2/q)-1d0)
       
       ht = dsqrt(2d0*t/vv)/cos(atan(tanb))
-      hb = 0d0*dsqrt(2d0*b/vv)/cos(atan(tanb))
+      hb = dsqrt(2d0*b/vv)/cos(atan(tanb))
       
       Xt = (T1-T2)*s2t/2d0/sqrt(t)    
       Xb = (B1-B2)*s2b/2d0/sqrt(b)

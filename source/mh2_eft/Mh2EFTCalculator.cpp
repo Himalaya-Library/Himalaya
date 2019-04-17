@@ -194,6 +194,7 @@ Mh2EFTCalculator::Mh2EFTCalculator(
 
     const double eps = 1e-10;
 
+    //TODO check consistency
     if (std::abs(p.g1) < eps) {
         setCorrectionFlag(EFTOrders::G12G22, 0);
         setCorrectionFlag(EFTOrders::G12YB2, 0);
@@ -231,6 +232,7 @@ Mh2EFTCalculator::Mh2EFTCalculator(
         setCorrectionFlag(EFTOrders::YT2YB4  , 0);
         setCorrectionFlag(EFTOrders::YB2YT4  , 0);
         setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
+        setCorrectionFlag(EFTOrders::YT6     , 0);
     }
 
     if (std::abs(p.Mtau) < eps) {

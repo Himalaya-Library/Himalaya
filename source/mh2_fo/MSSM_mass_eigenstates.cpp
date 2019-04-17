@@ -768,7 +768,7 @@ std::ostream& operator<<(std::ostream& ostr, const MSSM_spectrum& spec)
 
 /* ************************************************************ */
 
-MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
+MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_at_as)
    : pars(pars_)
    , masses(pars_)
    , gaugeless(make_gaugeless(pars_))
@@ -780,6 +780,7 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
 
    const double eps = 1e-10;
 
+   //TODO check if they are still consistent
    if (std::abs(pars_.Mt) < eps) {
       orders.at(EFTOrders::G32YT4) = 0;
       orders.at(EFTOrders::YT6) = 0;
@@ -800,12 +801,14 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_)
       orders.at(EFTOrders::YTAU4YB2) = 0;
    }
 
-   //For now, disable all yb ytau @ 2 loop
-   orders.at(EFTOrders::YB6) = 0;
-   orders.at(EFTOrders::YTAU6) = 0;
-   orders.at(EFTOrders::YTAU2YB4) = 0;
-   orders.at(EFTOrders::YTAU4YB2) = 0;
-   orders.at(EFTOrders::G32YB4) = 0;
+   if(only_at_as){
+      orders.at(EFTOrders::YB6) = 0;
+      orders.at(EFTOrders::YTAU6) = 0;
+      orders.at(EFTOrders::YTAU2YB4) = 0;
+      orders.at(EFTOrders::YTAU4YB2) = 0;
+      orders.at(EFTOrders::G32YB4) = 0;
+   } else
+     orders.at(EFTOrders::ONLY_AT_AS) = 0;
 }
 
 /**
@@ -1026,8 +1029,8 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
    const auto yt     = pars.Yu(2,2);
-   const auto yb     = 0.*pars.Yd(2,2);
-   const auto ytau   = 0.*pars.Ye(2,2);
+   auto yb     = pars.Yd(2,2);
+   auto ytau   = pars.Ye(2,2);
    const auto vu     = pars.vu;
    const auto vd     = pars.vd;
    const auto mu     = pars.mu;
@@ -1045,7 +1048,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
    const auto ZTau   = gaugeless.ZTau;
 
    double se11{0.}, se12{0.}, se22{0.};
-
+   using namespace himalaya::mh2_eft::EFTOrders;
+   if(orders.at(EFTOrders::ONLY_AT_AS) == 1){
+      yb = 0.;
+      ytau = 0.;
+   }
    se11 += 12*B0(0,sqr(MFb),sqr(MFb))*sqr(MFb*yb);
    se11 += 4*B0(0,sqr(MFtau),sqr(MFtau))*sqr(MFtau*ytau);
    se11 += (3*Ab*sqrt2*yb*A0(M2Sb(0))*ZB(0,0)*ZB(0,1))/vd;
@@ -1110,8 +1117,8 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 {
    const auto yt     = pars.Yu(2,2);
-   const auto yb     = 0.*pars.Yd(2,2);
-   const auto ytau   = 0.*pars.Ye(2,2);
+   auto yb     = pars.Yd(2,2);
+   auto ytau   = pars.Ye(2,2);
    const auto mu     = pars.mu;
    const auto At     = pars.Au(2,2);
    const auto Ab     = pars.Ad(2,2);
@@ -1125,6 +1132,12 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
    const auto ZT     = gaugeless.ZT;
    const auto ZB     = gaugeless.ZB;
    const auto ZTau   = gaugeless.ZTau;
+
+   using namespace himalaya::mh2_eft::EFTOrders;
+   if(orders.at(EFTOrders::ONLY_AT_AS) == 1){
+     yb = 0.;
+     ytau = 0.;
+   }
 
    double se11{0.}, se12{0.}, se22{0.};
 
@@ -1254,7 +1267,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
       dmh += delta_mh2_2loop_at_at(
          mt2, mb2, mA2, mst12, mst22, msb12, msb22,
          sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2,
-         include_heavy_higgs);
+         include_heavy_higgs, orders.at(EFTOrders::ONLY_AT_AS));
    }
 
    if (orders.at(EFTOrders::YTAU6)) {

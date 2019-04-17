@@ -60,7 +60,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
    double mst22, double msb12, double msb22,
    double sxt, double cxt, double sxb, double cxb,
    double scale2, double mu, double tanb, double vev2,
-   int include_heavy_higgs);
+   int include_heavy_higgs, int atasf);
 
 /// 2-loop CP-even Higgs contribution O(ab*as)
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_as(

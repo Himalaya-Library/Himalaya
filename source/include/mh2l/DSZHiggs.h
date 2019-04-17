@@ -60,7 +60,7 @@ int ddshiggs_(double * t, double * b, double * A0, double * T1,
               double * T2, double * B1, double * B2, double * st,
               double * ct, double * sb, double * cb, double * q,
               double * mu, double * tanb, double * vv,
-              double * S11, double * S12, double * S22);
+              double * S11, double * S12, double * S22, int * atasf);
 
 /**
  * Two-loop O(a_tau^2) corrections to the CP-even Higgs mass matrix.
@@ -146,7 +146,7 @@ int dszodd_(double * t, double * g, double * T1,
 int ddsodd_(double * t, double * b, double * A0, double * T1,
             double * T2, double * B1, double * B2, double * st,
             double * ct, double * sb, double * cb, double * q,
-            double * mu, double * tanb, double * vv, double * dma);
+            double * mu, double * tanb, double * vv, double * dma, int * atasf);
 
 /**
  * Two-loop O(a_tau^2) corrections to the CP-odd Higgs mass in the

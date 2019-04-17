@@ -112,6 +112,7 @@ namespace EFTOrders {
       G32YT4   = 19,
       YB2YT4   = 20,
       YTAU4YB2 = 21,
+      ONLY_AT_AS = 22,
       NUMBER_OF_EFT_ORDERS
    };
 } // namespace EFTOrders

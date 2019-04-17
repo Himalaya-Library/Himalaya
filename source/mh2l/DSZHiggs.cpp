@@ -8,6 +8,7 @@
 #include "DSZHiggs.hpp"
 #include "DSZHiggs.h"
 #include "dilog.hpp"
+#include "EFTFlags.hpp"
 #include <cmath>
 #include <limits>
 #include <mutex>
@@ -270,7 +271,7 @@ double delta_ma2_2loop_at_at(
    double mt2, double mb2, double mA2, double mst12,
    double mst22, double msb12, double msb22,
    double sxt, double cxt, double sxb, double cxb,
-   double scale2, double mu, double tanb, double vev2)
+   double scale2, double mu, double tanb, double vev2, int atasf)
 {
    double result;
 
@@ -278,7 +279,7 @@ double delta_ma2_2loop_at_at(
       std::lock_guard<std::mutex> lg(mtx);
 
       ddsodd_(&mt2, &mb2, &mA2, &mst12, &mst22, &msb12, &msb22,
-              &sxt, &cxt, &sxb, &cxb, &scale2, &mu, &tanb, &vev2, &result);
+              &sxt, &cxt, &sxb, &cxb, &scale2, &mu, &tanb, &vev2, &result, &atasf);
    }
 
    return result;
@@ -313,7 +314,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
    double mst22, double msb12, double msb22,
    double sxt, double cxt, double sxb, double cxb,
    double scale2, double mu, double tanb, double vev2,
-   int include_heavy_higgs)
+   int include_heavy_higgs, int atasf)
 {
    Eigen::Matrix<double, 2, 2> result;
 
@@ -322,7 +323,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
 
       ddshiggs_(&mt2, &mb2, &mA2, &mst12, &mst22, &msb12, &msb22,
                 &sxt, &cxt, &sxb, &cxb, &scale2, &mu, &tanb, &vev2,
-                &result(0,0), &result(0,1), &result(1,1));
+                &result(0,0), &result(0,1), &result(1,1), &atasf);
    }
 
    result(1,0) = result(0,1);
@@ -330,7 +331,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
    const double dMA = include_heavy_higgs
       ? delta_ma2_2loop_at_at(
          mt2, mb2, mA2, mst12, mst22, msb12, msb22,
-         sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2)
+         sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2, atasf)
       : 0.;
 
 //       std::cout << "dma " << dMA << "\n" << result << "\n";

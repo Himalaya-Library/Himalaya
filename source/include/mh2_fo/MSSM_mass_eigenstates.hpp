@@ -141,7 +141,7 @@ enum class Diagonalization {
  */
 class MSSM_mass_eigenstates {
 public:
-   MSSM_mass_eigenstates(const Parameters&);
+   MSSM_mass_eigenstates(const Parameters&, bool only_at_as = false);
 
    /// calculates squared Higgs masses
    std::tuple<double,double,double> calculate_Mh2() const;

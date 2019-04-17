@@ -105,7 +105,7 @@ int main()
                    << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
 
          // calculate fixed-order corrections
-         himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point_gl);
+         himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point_gl, false);
          //himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point);
          const auto dmh_fo     = mfo.calculate_Mh2();
          const auto dmh2_fo_0l = std::get<0>(dmh_fo);
