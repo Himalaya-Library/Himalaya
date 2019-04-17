@@ -50,6 +50,7 @@ int dszhiggs_(double * t, double * g, double * T1, double * T2,
  * q = Q^2 (ren. scale), mu = Higgs mixing parameter, tanb = tan(beta),
  * vv = v^2,
  * Sij = 2-loop corrections to the CP-even Higgs mass matrix elements,
+ * atat = if 1, returns only O(at^2) corrections
  *
  * Notice: we assume that the 1-loop part is computed in terms of
  *         running (DRbar) parameters, evaluated at the scale Q. The
@@ -60,7 +61,7 @@ int ddshiggs_(double * t, double * b, double * A0, double * T1,
               double * T2, double * B1, double * B2, double * st,
               double * ct, double * sb, double * cb, double * q,
               double * mu, double * tanb, double * vv,
-              double * S11, double * S12, double * S22, int * atasf);
+              double * S11, double * S12, double * S22, int * atat);
 
 /**
  * Two-loop O(a_tau^2) corrections to the CP-even Higgs mass matrix.
@@ -137,6 +138,7 @@ int dszodd_(double * t, double * g, double * T1,
  * q = Q^2 (ren. scale), mu = Higgs mixing parameter, tanb = tan(beta),
  * vv = v^2,
  * dma = 2-loop corrections to the CP-odd Higgs mass.
+ * atat = if 1, returns only O(at^2) corrections
  *
  * Notice: we assume that the 1-loop part is computed in terms of
  *         running (DRbar) parameters, evaluated at the scale Q. The
@@ -146,7 +148,7 @@ int dszodd_(double * t, double * g, double * T1,
 int ddsodd_(double * t, double * b, double * A0, double * T1,
             double * T2, double * B1, double * B2, double * st,
             double * ct, double * sb, double * cb, double * q,
-            double * mu, double * tanb, double * vv, double * dma, int * atasf);
+            double * mu, double * tanb, double * vv, double * dma, int * atat);
 
 /**
  * Two-loop O(a_tau^2) corrections to the CP-odd Higgs mass in the

@@ -41,6 +41,8 @@
  * cotb   : DR' 1/tan(beta) in the MSSM
  * vev2   : squared DR' vev^2 = (vu^2 + vd^2) in the MSSM
  *
+ * atat   : if set to 1, calculates only O(at^2) corrections
+ *
  * include_heavy_higgs: factor multiplying the contribution from the heavy Higgs
  */
 
@@ -60,7 +62,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
    double mst22, double msb12, double msb22,
    double sxt, double cxt, double sxb, double cxb,
    double scale2, double mu, double tanb, double vev2,
-   int include_heavy_higgs, int atasf);
+   int include_heavy_higgs, int atat);
 
 /// 2-loop CP-even Higgs contribution O(ab*as)
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_as(
