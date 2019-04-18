@@ -29,6 +29,7 @@
 #include "Logger.hpp"
 #include "Utils.hpp"
 #include "ThresholdCalculator.hpp"
+#include "MSSM_mass_eigenstates.hpp"
 #include "version.hpp"
 #include <iostream>
 #include <numeric>
@@ -230,12 +231,7 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    const double pref_1L = 1./pow2(4*Pi) * pow2(p.Mt * gt);
    // 2-Loop prefactor at*as
    const double pref_2L = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
-   // fill in results of EFT calculation
-   ho.setDMh2EFT(0, mh2_eft);
-   ho.setDMh2EFT(1, mh2EFTCalculator.getDeltaMh2EFT1Loop(1, 1));
-   ho.setDMh2EFT(2, mh2EFTCalculator.getDeltaMh2EFT2Loop(1, 1));
-   ho.setDMh2EFT(3, mh2EFTCalculator.getDeltaMh2EFT3Loop(1, 1, 0)
-      + ho.getDLambdaEFT()*v2);
+
    ho.setDLambda(0, mh2_eft/v2);
    ho.setDLambda(1, pref_1L*(tc.getThresholdCorrection(
       mh2_eft::ThresholdVariables::LAMBDA_AT, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
@@ -247,6 +243,25 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    ho.setDLambdaDRbarPrimeToMSbarShift(2, pref_2L*(-4*ho.getDLambda(1)
       *tc.getThresholdCorrection(mh2_eft::ThresholdVariables::YT_AS,
                                  mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
+
+   himalaya::mh2_fo::MSSM_mass_eigenstates mfo(p);
+   const auto dmh_fo = mfo.calculate_Mh2();
+   ho.setDMh2FO(0, std::get<0>(dmh_fo));
+   ho.setDMh2FO(1, std::get<1>(dmh_fo));
+   ho.setDMh2FO(2, std::get<2>(dmh_fo));
+   ho.setDMh2FO(3, 0);
+
+   himalaya::mh2_fo::MSSM_mass_eigenstates mfo_atas(p, true);
+   const auto dmh_fo_atas = mfo_atas.calculate_Mh2();
+   ho.setDMh2FO(4, std::get<2>(dmh_fo_atas));
+
+   // fill in results of EFT calculation
+   himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator_full(p);
+   ho.setDMh2EFT(0, mh2EFTCalculator_full.getDeltaMh2EFT0Loop());
+   ho.setDMh2EFT(1, mh2EFTCalculator_full.getDeltaMh2EFT1Loop(1, 1));
+   ho.setDMh2EFT(2, mh2EFTCalculator_full.getDeltaMh2EFT2Loop(1, 1));
+   ho.setDMh2EFT(3, mh2EFTCalculator_full.getDeltaMh2EFT3Loop(1, 1, 0)
+      + ho.getDLambdaEFT()*v2);
 
    {
       auto ho_mdr = ho;

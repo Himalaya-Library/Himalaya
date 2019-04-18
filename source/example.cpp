@@ -90,7 +90,7 @@ int main()
          // calculate the 3-loop corrections O(α_b*α_s^2)
          //himalaya::HierarchyObject hoBot = hc.calculateDMh3L(true);
 
-         const auto point_gl = make_gaugeless(point);
+         /*const auto point_gl = make_gaugeless(point);
 
          // calculate fixed-order corrections for v^2 << MS^2
          himalaya::mh2_eft::Mh2EFTCalculator meft(point_gl);
@@ -105,7 +105,7 @@ int main()
                    << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
 
          // calculate fixed-order corrections
-         himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point_gl, false);
+         himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point_gl, true);
          //himalaya::mh2_fo::MSSM_mass_eigenstates mfo(point);
          const auto dmh_fo     = mfo.calculate_Mh2();
          const auto dmh2_fo_0l = std::get<0>(dmh_fo);
@@ -115,7 +115,7 @@ int main()
          std::cout << "Mh^2_FO_0L   = " << dmh2_fo_0l << " GeV^2 O(full)\n";
          std::cout << "ΔMh^2_FO_1L  = " << dmh2_fo_1l << " GeV^2 O(αt + αb + ατ)\n";
          std::cout << "ΔMh^2_FO_2L  = " << dmh2_fo_2l
-                   << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
+                   << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";*/
       } catch (const std::exception& e) {
          std::cerr << "Error: " << e.what() << '\n';
       }

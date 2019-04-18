@@ -355,7 +355,7 @@ Data make_data(const std::vector<double>& parsvec)
 /******************************************************************/
 
 struct Results {
-   using Loop_corrections = std::tuple<double,double,double,double>;
+   using Loop_corrections = std::tuple<double,double,double,double,double>;
 
    himalaya::HierarchyObject ho{false};
    Loop_corrections eft{}; ///< fixed-order corrections for v^2 << MS^2
@@ -375,22 +375,41 @@ Results calculate_results(const Data& data)
       res.ho = hc.calculateDMh3L(data.bottom);
       dmh2_fo_3l = res.ho.getDMh2(3);
       dmh2_eft_3l = res.ho.getDMh2EFT(3);
+
+      const auto dmh2_eft_0l = res.ho.getDMh2EFT(0);
+      const auto dmh2_eft_1l = res.ho.getDMh2EFT(1);
+      const auto dmh2_eft_2l = res.ho.getDMh2EFT(2);
+
+      res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
+                             dmh2_eft_2l, dmh2_eft_3l, 0.);
+
+      const auto dmh2_fo_0l = res.ho.getDMh2EFT(0);
+      const auto dmh2_fo_1l = res.ho.getDMh2EFT(1);
+      const auto dmh2_fo_2l = res.ho.getDMh2EFT(2);
+      const auto dmh2_fo_3l = res.ho.getDMh2EFT(3);
+      const auto dmh2_fo_2latas = res.ho.getDMh2EFT(4);
+
+      res.fo = std::make_tuple(dmh2_fo_0l, dmh2_fo_1l, dmh2_fo_2l,
+                               dmh2_fo_3l, dmh2_fo_2latas);
+   } else {
+      // calculate fixed-order corrections for v^2 << MS^2
+      himalaya::mh2_eft::Mh2EFTCalculator meft(data.pars);
+      const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
+      const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
+      const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
+
+      res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
+                                dmh2_eft_2l, dmh2_eft_3l, 0.);
+
+      // calculate fixed-order corrections
+      himalaya::mh2_fo::MSSM_mass_eigenstates mfo(data.pars);
+      const auto dmh2_fo = mfo.calculate_Mh2(); // 0L, 1L, 2L
+
+      himalaya::mh2_fo::MSSM_mass_eigenstates mfo_atas(data.pars, true);
+      const auto dmh2_fo_atas = mfo_atas.calculate_Mh2(); // 0L, 1L, 2L
+
+      res.fo = std::tuple_cat(dmh2_fo, std::tie(dmh2_fo_3l), std::tie(std::get<2>(dmh2_fo_atas)));
    }
-
-   // calculate fixed-order corrections for v^2 << MS^2
-   himalaya::mh2_eft::Mh2EFTCalculator meft(data.pars);
-   const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
-   const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
-   const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
-
-   res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
-                             dmh2_eft_2l, dmh2_eft_3l);
-
-   // calculate fixed-order corrections
-   himalaya::mh2_fo::MSSM_mass_eigenstates mfo(data.pars);
-   const auto dmh2_fo = mfo.calculate_Mh2(); // 0L, 1L, 2L
-
-   res.fo = std::tuple_cat(dmh2_fo, std::tie(dmh2_fo_3l));
 
    return res;
 }
@@ -448,7 +467,7 @@ void put_result(const Results& res, MLINK link)
 
    Eigen::Vector4d Mh2_fo;
    Mh2_fo << std::get<0>(fo), std::get<1>(fo),
-             std::get<2>(fo), std::get<3>(fo);
+             std::get<2>(fo), std::get<3>(fo), std::get<4>(fo);
 
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");

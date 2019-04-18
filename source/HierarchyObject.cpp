@@ -413,6 +413,19 @@ double HierarchyObject::getDMh2EFT(int loops) const
 }
 
 /**
+ * @return Delta_Mh2_FO
+ * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L), 4 (2L only O(αt*αs + αt^2))
+ */
+double HierarchyObject::getDMh2FO(int loops) const
+{
+   if(loops >= 0 && loops <= 4){
+      return dMh2FOMap.at(loops);
+   }
+
+   throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+}
+
+/**
  * Sets Delta_Mh2_EFT at loops-loop
  * @param loops an integer, could be 0 (tree), ..., 3 (3L)
  * @param deltaMh2 delta_Mh^2
@@ -421,6 +434,21 @@ void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
 {
    if(loops >= 0 && loops <= 3){
       dMh2EFTMap[loops] = deltaMh2;
+   }
+   else {
+      throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+   }
+}
+
+/**
+ * Sets Delta_Mh2_FO at loops-loop
+ * @param loops an integer, could be 0 (tree), ..., 3 (3L), 4 (2L only O(αt*αs + αt^2))
+ * @param deltaMh2 delta_Mh^2
+ */
+void HierarchyObject::setDMh2FO(int loops, double deltaMh2)
+{
+   if(loops >= 0 && loops <= 4){
+      dMh2FOMap[loops] = deltaMh2;
    }
    else {
       throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
@@ -541,9 +569,14 @@ std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
         << "Δλ_2L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(2) << "\n"
         << "Δλ_3L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(3) << "\n"
         << "Mh^2_EFT_0L           =  " << ho.getDMh2EFT(0) << " GeV^2 O(g1^2, g2^2)\n"
-        << "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFT(1) << " GeV^2 O(αt)\n"
-        << "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFT(2) << " GeV^2 O(αt*αs)\n"
-        << "ΔMh^2_EFT_3L          =  " << ho.getDMh2EFT(3) << " GeV^2 O(αt*αs^2)"
+        << "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFT(1) << " GeV^2 O(full)\n"
+        << "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFT(2) << " GeV^2 O(αt*αs + αt^2)\n"
+        << "ΔMh^2_EFT_3L          =  " << ho.getDMh2EFT(3) << " GeV^2 O(αt*αs^2)\n"
+        << "Mh^2_FO_0L           =  " << ho.getDMh2FO(0) << " GeV^2 O(g1^2, g2^2)\n"
+        << "ΔMh^2_FO_1L          =  " << ho.getDMh2FO(1) << " GeV^2 O(full)\n"
+        << "ΔMh^2_FO_2L          =  " << ho.getDMh2FO(2) << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n"
+        << "ΔMh^2_FO_3L          =  " << ho.getDMh2FO(3) << " GeV^2 O(αt*αs^2)\n"
+        << "ΔMh^2_FO_2L          =  " << ho.getDMh2FO(4) << " GeV^2 O(αt*αs + αt^2)"
         << '\n';
 
    return ostr;

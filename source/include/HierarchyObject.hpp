@@ -110,6 +110,11 @@ namespace himalaya {
        */
       double getDMh2EFT(int loops) const;
       /**
+       * @return Delta_Mh2_FO
+       * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L), 4 (2L only O(αt*αs + αt^2))
+       */
+      double getDMh2FO(int loops) const;
+      /**
        * Sets the suitable hierarchy
        * @param hierarchy the integer key of the hierarchy.
        */
@@ -219,6 +224,12 @@ namespace himalaya {
        * @param deltaMh2 delta_Mh^2
        */
       void setDMh2EFT(int loops, double deltaMh2);
+      /**
+       * Sets Delta_Mh2_FO at loops-loop
+       * @param loops an integer, could be 0 (tree), ..., 3 (3L), 4 (2L only O(αt*αs + αt^2))
+       * @param deltaMh2 delta_Mh^2
+       */
+       void setDMh2FO(int loops, double deltaMh2);
    private:
       bool isAlphab{false};                                     ///< the bool isAlphab
       int hierarchy{};                                          ///< the suitable hierarchy
@@ -239,6 +250,7 @@ namespace himalaya {
       std::map<int, double> dLambdaMap{};                       ///< map which holds all delta_lambda corrections multiplied with prefactors
       std::map<int, double> dLambdaDRbarPrimeToMSbarShiftMap{}; ///< map which holds all DR' -> MS shifts for delta_lambda corrections multiplied with prefactors
       std::map<int, double> dMh2EFTMap{};                       ///< map which holds all delta_Mh2_EFT corrections
+      std::map<int, double> dMh2FOMap{};                        ///< map which holds all delta_Mh2_FO corrections
    };
    /**
     * Prints out all information of the HierarchyObject
