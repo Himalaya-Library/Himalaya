@@ -204,7 +204,7 @@ TEST_CASE("test_FO_1loop_derivative")
    const auto deriv = [&me] (double p2) { return me.delta_mh2_1loop(p2)(0); };
    const auto Mh2_1L_deriv_num = derivative_central<3>(deriv, p2, eps);
 
-   CHECK_CLOSE(Mh2_1L_deriv, Mh2_1L_deriv_num, 1e-4);
+   CHECK_CLOSE(Mh2_1L_deriv, Mh2_1L_deriv_num, 1e-3);
 }
 
 TEST_CASE("test_FO_2loop_momentum_iteration_pert")
