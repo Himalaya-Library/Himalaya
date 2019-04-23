@@ -422,7 +422,7 @@ Results calculate_results(const Data& data)
 
 void put_result(const Results& res, MLINK link)
 {
-   MLPutFunction(link, "List", 12);
+   MLPutFunction(link, "List", 13);
 
    const auto& ho = res.ho;
    const auto& eft = res.eft;
