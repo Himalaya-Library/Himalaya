@@ -75,7 +75,7 @@ himalaya::Parameters make_gaugeless(const himalaya::Parameters& pars)
 int main()
 {
    const std::vector<himalaya::Parameters> points = {
-      setup_point(20000., 20., std::sqrt(6.))
+      setup_point(2000., 20., std::sqrt(6.))
    };
 
    for (const auto& point: points) {
