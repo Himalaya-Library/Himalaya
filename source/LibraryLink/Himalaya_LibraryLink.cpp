@@ -384,10 +384,10 @@ Results calculate_results(const Data& data)
       res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
                                 dmh2_eft_2l, dmh2_eft_3l);
 
-      const auto dmh2_fo_0l = res.ho.getDMh2EFT(0);
-      const auto dmh2_fo_1l = res.ho.getDMh2EFT(1);
-      const auto dmh2_fo_2l = res.ho.getDMh2EFT(2);
-      const auto dmh2_fo_3l = res.ho.getDMh2EFT(3);
+      const auto dmh2_fo_0l = res.ho.getDMh2FO(0);
+      const auto dmh2_fo_1l = res.ho.getDMh2FO(1);
+      const auto dmh2_fo_2l = res.ho.getDMh2FO(2);
+      const auto dmh2_fo_3l = res.ho.getDMh2FO(3);
       const auto dmh2_fo_2l_dom = res.ho.getDMh2FO(4);
 
       res.fo = std::make_tuple(dmh2_fo_0l, dmh2_fo_1l, dmh2_fo_2l,
