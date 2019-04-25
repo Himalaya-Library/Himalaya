@@ -368,21 +368,18 @@ struct Results {
 Results calculate_results(const Data& data)
 {
    Results res;
-   double dmh2_fo_3l = 0.; // 3L
-   double dmh2_eft_3l = 0.; // 3L
 
    if (data.loopOrder > 2) {
       himalaya::HierarchyCalculator hc(data.pars, data.verbose);
       res.ho = hc.calculateDMh3L(data.bottom);
-      dmh2_fo_3l = res.ho.getDMh2(3);
-      dmh2_eft_3l = res.ho.getDMh2EFT(3);
 
       const auto dmh2_eft_0l = res.ho.getDMh2EFT(0);
       const auto dmh2_eft_1l = res.ho.getDMh2EFT(1);
       const auto dmh2_eft_2l = res.ho.getDMh2EFT(2);
+      const auto dmh2_eft_3l = res.ho.getDMh2EFT(3);
 
-      res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
-                                dmh2_eft_2l, dmh2_eft_3l);
+      res.eft =
+         std::make_tuple(dmh2_eft_0l, dmh2_eft_1l, dmh2_eft_2l, dmh2_eft_3l);
 
       const auto dmh2_fo_0l = res.ho.getDMh2FO(0);
       const auto dmh2_fo_1l = res.ho.getDMh2FO(1);
@@ -390,18 +387,18 @@ Results calculate_results(const Data& data)
       const auto dmh2_fo_3l = res.ho.getDMh2FO(3);
       const auto dmh2_fo_2l_dom = res.ho.getDMh2FO(4);
 
-      res.fo = std::make_tuple(dmh2_fo_0l, dmh2_fo_1l, dmh2_fo_2l,
-                               dmh2_fo_3l);
-      res.fo_dom = std::make_tuple(0.0, 0.0, dmh2_fo_2l_dom, 0.0);
+      res.fo = std::make_tuple(dmh2_fo_0l, dmh2_fo_1l, dmh2_fo_2l, dmh2_fo_3l);
+      res.fo_dom =
+         std::make_tuple(dmh2_fo_0l, dmh2_fo_1l, dmh2_fo_2l_dom, dmh2_fo_3l);
    } else {
       // calculate fixed-order corrections for v^2 << MS^2
       himalaya::mh2_eft::Mh2EFTCalculator meft(data.pars);
       const auto dmh2_eft_0l = meft.getDeltaMh2EFT0Loop();
       const auto dmh2_eft_1l = meft.getDeltaMh2EFT1Loop(1,1);
       const auto dmh2_eft_2l = meft.getDeltaMh2EFT2Loop(1,1);
+      const auto zero = 0.;
 
-      res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l,
-                                dmh2_eft_2l, dmh2_eft_3l);
+      res.eft = std::make_tuple(dmh2_eft_0l, dmh2_eft_1l, dmh2_eft_2l, 0.);
 
       // calculate fixed-order corrections
       himalaya::mh2_fo::MSSM_mass_eigenstates mfo(data.pars);
@@ -411,8 +408,8 @@ Results calculate_results(const Data& data)
       himalaya::mh2_fo::MSSM_mass_eigenstates mfo_dom(data.pars, true);
       const auto dmh2_fo_dom = mfo_dom.calculate_Mh2(); // 0L, 1L, 2L
 
-      res.fo = std::tuple_cat(dmh2_fo, std::tie(dmh2_fo_3l));
-      res.fo_dom = std::tuple_cat(dmh2_fo, std::tie(std::get<2>(dmh2_fo_dom)));
+      res.fo = std::tuple_cat(dmh2_fo, std::tie(zero));
+      res.fo_dom = std::tuple_cat(dmh2_fo_dom, std::tie(zero));
    }
 
    return res;
@@ -475,7 +472,8 @@ void put_result(const Results& res, MLINK link)
              std::get<2>(fo), std::get<3>(fo);
 
    Eigen::Vector4d Mh2_fo_dominant;
-   Mh2_fo_dominant << 0.0, 0.0, std::get<2>(fo_dom), 0.0;
+   Mh2_fo_dominant << std::get<0>(fo_dom), std::get<1>(fo_dom),
+                      std::get<2>(fo_dom), std::get<3>(fo_dom);
 
    MLPutRuleTo(link, hierarchy, "hierarchyID");
    MLPutRuleTo(link, ho.getH3mHierarchyNotation(hierarchy), "hierarchyName");
