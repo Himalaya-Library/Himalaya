@@ -48,7 +48,7 @@ include_directories(${INCLUDE_PATH}/misc)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 set(EXEC_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
-set(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/include/himalaya")
+set(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/include")
 set(LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib")
 
 # setting the correct version to all headers
@@ -140,7 +140,7 @@ install(FILES
   "${INCLUDE_PATH}/HierarchyObject.hpp"
   "${INCLUDE_PATH}/Himalaya_interface.hpp"
   "${INCLUDE_PATH}/version.hpp"
-  DESTINATION "${INCLUDE_INSTALL_DIR}")
+  DESTINATION "${INCLUDE_INSTALL_DIR}/himalaya")
 
 # install himalaya.pc file
 install(FILES
