@@ -1,3 +1,17 @@
+Himalaya 2.0.2
+==============
+
+Changes
+-------
+
+ * [commit 462c43c]: An exception is thrown if the (input) gluino mass
+   parameter is negative.
+
+   The implemented 2- and 3-loop contributions usually assume that
+   M3 > 0. For this reason the gluino phase factor is absent from the
+   expressions (i.e. has always been set to 1) and cannot be adjusted
+   in case M3 < 0 to make the gluino mass positive.
+
 Himalaya 2.0.1
 ==============
 
