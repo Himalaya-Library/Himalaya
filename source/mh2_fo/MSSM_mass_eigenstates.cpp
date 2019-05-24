@@ -1243,14 +1243,6 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
       break;
    }
 
-//          std::cout << "include heavy higgs " << include_heavy_higgs << "\n";
-// std::cout << delta_mh2_2loop_at_at(
-//          mt2, mb2, mA2, mst12, mst22, msb12, msb22,
-//          sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2,
-//          include_heavy_higgs) << "\n";
-//          std::cout << "test " << pars.Au(2,2) << " " << sqrt(mt2) << " " << sqrt(mb2) << " " << sqrt(mA2) << " " << mst12 << " " << mst22 << " " << msb12 << " " << msb22 << " " <<
-//          pars.theta_t << " " << sqrt(scale2) << " " << mu << " " << tanb << " " << vev2 << " " <<
-//          include_heavy_higgs << "\n";
    if (orders.at(EFTOrders::G32YT4)) {
       dmh += delta_mh2_2loop_at_as(
          mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3,
