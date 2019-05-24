@@ -1028,9 +1028,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
+   using namespace himalaya::mh2_eft::EFTOrders;
+
    const auto yt     = pars.Yu(2,2);
-   auto yb     = pars.Yd(2,2);
-   auto ytau   = pars.Ye(2,2);
+   const auto yb     = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
+   const auto ytau   = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
    const auto vu     = pars.vu;
    const auto vd     = pars.vd;
    const auto mu     = pars.mu;
@@ -1048,11 +1050,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
    const auto ZTau   = gaugeless.ZTau;
 
    double se11{0.}, se12{0.}, se22{0.};
-   using namespace himalaya::mh2_eft::EFTOrders;
-   if(orders.at(EFTOrders::ONLY_AT_AS) == 1){
-      yb = 0.;
-      ytau = 0.;
-   }
+
    se11 += 12*B0(0,sqr(MFb),sqr(MFb))*sqr(MFb*yb);
    se11 += 4*B0(0,sqr(MFtau),sqr(MFtau))*sqr(MFtau*ytau);
    se11 += (3*Ab*sqrt2*yb*A0(M2Sb(0))*ZB(0,0)*ZB(0,1))/vd;
@@ -1116,9 +1114,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 {
+   using namespace himalaya::mh2_eft::EFTOrders;
+
    const auto yt     = pars.Yu(2,2);
-   auto yb     = pars.Yd(2,2);
-   auto ytau   = pars.Ye(2,2);
+   const auto yb     = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
+   const auto ytau   = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
    const auto mu     = pars.mu;
    const auto At     = pars.Au(2,2);
    const auto Ab     = pars.Ad(2,2);
@@ -1132,12 +1132,6 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
    const auto ZT     = gaugeless.ZT;
    const auto ZB     = gaugeless.ZB;
    const auto ZTau   = gaugeless.ZTau;
-
-   using namespace himalaya::mh2_eft::EFTOrders;
-   if(orders.at(EFTOrders::ONLY_AT_AS) == 1){
-     yb = 0.;
-     ytau = 0.;
-   }
 
    double se11{0.}, se12{0.}, se22{0.};
 
