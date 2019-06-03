@@ -12,6 +12,12 @@ Changes
    expressions (i.e. has always been set to 1) and cannot be adjusted
    in case M3 < 0 to make the gluino mass positive.
 
+Fixed bugs
+----------
+
+ * [commit d7bffa7]: Update `FindMathematica.cmake` to version 3.2.5,
+   which fixes a build error due to missing libuuid.
+
 Himalaya 2.0.1
 ==============
 
