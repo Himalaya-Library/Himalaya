@@ -115,6 +115,14 @@ void Parameters::validate(bool verbose)
          "must be greater than zero!");
    }
 
+   // The implemented 2- and 3-loop contributions assumed that M3 > 0.
+   // For this reason the gluino phase factor is absent from the
+   // expressions (i.e. has always been set to 1) and cannot be
+   // adjusted in case M3 < 0.
+   if (MG < 0.) {
+      throw std::runtime_error("Gluino mass parameter must not be negative!");
+   }
+
    // force gluino mass to be positive
    MG = std::abs(MG);
 
