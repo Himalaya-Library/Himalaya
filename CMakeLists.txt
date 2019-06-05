@@ -3,11 +3,6 @@ project(Himalaya VERSION 2.0.0 LANGUAGES CXX Fortran)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
-if(EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-  include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-  conan_basic_setup()
-endif()
-
 # require an Eigen installation
 find_package(Eigen3 3.0 REQUIRED)
 find_package(Mathematica 8.0)

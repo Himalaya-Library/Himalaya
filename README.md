@@ -46,14 +46,18 @@ The required Eigen library can be installed using the package manager
 of your Linux distribution.  On Debian/Ubuntu, for example, one may
 run:
 
-    sudo apt-get install libeigen3-dev
+```sh
+sudo apt-get install libeigen3-dev
+```
 
 Alternatively, the [Conan](https://conan.io/) package manager can be
 used to install the dependencies:
 
-    mkdir -p build
-    cd build
-    conan install ..
+```sh
+mkdir -p build
+cd build
+conan install ..
+```
 
 ### Compilation of Himalaya
 
@@ -61,17 +65,24 @@ Himalaya uses CMake to generate files for build automation.  To build
 Himalaya one should first create a separate `build` directory inside
 Himalaya's top directory.  Afterwards, `cmake` should be called:
 
-```
-cd $HIMALAY_PATH
+```sh
 mkdir -p build
 cd build
 cmake ..
 ```
 
+`cmake` will search for required dependencies on your system, see the
+previous section. If you want to use the dependencies installed by
+Conan (see above), you need to run instead:
+
+```sh
+cmake .. -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
+```
+
 After calling `cmake` the build directory contains all required build
 files. Assuming that GNU make is used, one can start the build by running
 
-```
+```sh
 make
 ```
 

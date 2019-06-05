@@ -2,4 +2,4 @@
 eigen/[>=3.0]@conan/stable
 
 [generators]
-cmake
+cmake_paths
