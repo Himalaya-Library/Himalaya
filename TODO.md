@@ -1,11 +1,5 @@
 # Todo list for Himalaya 2.1.0
 
-## Physics
-
-* correct 1-loop electroweak contributions to δv
-
-* fix 2-loop test `test_FO_vs_EFT_expressions`
-
 ## Interfaces
 
 * decide on C++ interface for the EFT/FO calculation
