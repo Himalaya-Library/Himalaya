@@ -253,7 +253,10 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
 
    himalaya::mh2_fo::MSSM_mass_eigenstates mfo_atas(p, true);
    const auto dmh_fo_atas = mfo_atas.calculate_Mh2();
-   ho.setDMh2FO(4, std::get<2>(dmh_fo_atas));
+   ho.setDMh2FOAt(0, 0.);
+   ho.setDMh2FOAt(1, std::get<1>(dmh_fo_atas));
+   ho.setDMh2FOAt(2, std::get<2>(dmh_fo_atas));
+   ho.setDMh2FOAt(3, 0.); // filled later, see below
 
    // fill in results of EFT calculation
    himalaya::mh2_eft::Mh2EFTCalculator mh2EFTCalculator_full(p);
@@ -287,6 +290,7 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
       ho.setDMh2(3, std::get<3>(DMh2)(0));
       // set 3L FO corrections to perturbatively diagonalized O(at*as^n) corrections
       ho.setDMh2FO(3,std::get<3>(DMh2)(0));
+      ho.setDMh2FOAt(3,std::get<3>(DMh2)(0));
    }
 
    return ho;

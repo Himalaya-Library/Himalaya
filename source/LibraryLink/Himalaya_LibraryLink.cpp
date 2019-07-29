@@ -385,11 +385,15 @@ Results calculate_results(const Data& data)
       const auto dmh2_fo_1l = res.ho.getDMh2FO(1);
       const auto dmh2_fo_2l = res.ho.getDMh2FO(2);
       const auto dmh2_fo_3l = res.ho.getDMh2FO(3);
-      const auto dmh2_fo_2l_dom = res.ho.getDMh2FO(4);
+
+      const auto dmh2_fo_0l_at = res.ho.getDMh2FOAt(0);
+      const auto dmh2_fo_1l_at = res.ho.getDMh2FOAt(1);
+      const auto dmh2_fo_2l_at = res.ho.getDMh2FOAt(2);
+      const auto dmh2_fo_3l_at = res.ho.getDMh2FOAt(3);
 
       res.fo = std::make_tuple(dmh2_fo_0l, dmh2_fo_1l, dmh2_fo_2l, dmh2_fo_3l);
       res.fo_dom =
-         std::make_tuple(dmh2_fo_0l, dmh2_fo_1l, dmh2_fo_2l_dom, dmh2_fo_3l);
+         std::make_tuple(dmh2_fo_0l_at, dmh2_fo_1l_at, dmh2_fo_2l_at, dmh2_fo_3l_at);
    } else {
       // calculate fixed-order corrections for v^2 << MS^2
       himalaya::mh2_eft::Mh2EFTCalculator meft(data.pars);
@@ -484,7 +488,7 @@ void put_result(const Results& res, MLINK link)
    MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
    MLPutRuleTo(link, Mh2_eft, "Mh2EFT");
    MLPutRuleTo(link, Mh2_fo, "Mh2FO");
-   MLPutRuleTo(link, Mh2_fo_dominant, "Mh2FOAtAsAndAtAt");
+   MLPutRuleTo(link, Mh2_fo_dominant, "Mh2FOAt");
    MLPutRuleTo(link, lambda, "lambda");
    MLPutRuleTo(link, lambda_uncertainty, "lambdaUncertainty");
    MLPutRuleTo(link, lambda_shift_DRp_to_MS, "lambdaShiftDRbarPrimeToMSbar");

@@ -414,12 +414,25 @@ double HierarchyObject::getDMh2EFT(int loops) const
 
 /**
  * @return Delta_Mh2_FO
- * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L), 4 (2L only O(αt*αs + αt^2))
+ * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
 double HierarchyObject::getDMh2FO(int loops) const
 {
-   if(loops >= 0 && loops <= 4){
+   if(loops >= 0 && loops <= 3){
       return dMh2FOMap.at(loops);
+   }
+
+   throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+}
+
+/**
+ * @return Delta_Mh2_FO (only contributions that go with αt)
+ * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
+ */
+double HierarchyObject::getDMh2FOAt(int loops) const
+{
+   if (loops >= 0 && loops <= 3) {
+      return dMh2FOAtMap.at(loops);
    }
 
    throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
@@ -442,15 +455,29 @@ void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
 
 /**
  * Sets Delta_Mh2_FO at loops-loop
- * @param loops an integer, could be 0 (tree), ..., 3 (3L), 4 (2L only O(αt*αs + αt^2))
+ * @param loops an integer, could be 0 (tree), ..., 3 (3L)
  * @param deltaMh2 delta_Mh^2
  */
 void HierarchyObject::setDMh2FO(int loops, double deltaMh2)
 {
-   if(loops >= 0 && loops <= 4){
+   if(loops >= 0 && loops <= 3){
       dMh2FOMap[loops] = deltaMh2;
    }
    else {
+      throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+   }
+}
+
+/**
+ * Sets Delta_Mh2_FO at loops-loop (only contributions that go with αt)
+ * @param loops an integer, could be 0 (tree), ..., 3 (3L)
+ * @param deltaMh2 delta_Mh^2
+ */
+void HierarchyObject::setDMh2FOAt(int loops, double deltaMh2)
+{
+   if (loops >= 0 && loops <= 3) {
+      dMh2FOAtMap[loops] = deltaMh2;
+   } else {
       throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
    }
 }
@@ -576,7 +603,10 @@ std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
         << "ΔMh^2_FO_1L           =  " << ho.getDMh2FO(1) << " GeV^2 O(full)\n"
         << "ΔMh^2_FO_2L           =  " << ho.getDMh2FO(2) << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n"
         << "ΔMh^2_FO_3L           =  " << ho.getDMh2FO(3) << " GeV^2 O(αt*αs^2)\n"
-        << "ΔMh^2_FO_2L           =  " << ho.getDMh2FO(4) << " GeV^2 O(αt*αs + αt^2)"
+        << "Mh^2_FO_0L            =  " << ho.getDMh2FOAt(0) << " GeV^2 O()\n"
+        << "ΔMh^2_FO_1L           =  " << ho.getDMh2FOAt(1) << " GeV^2 O(αt)\n"
+        << "ΔMh^2_FO_2L           =  " << ho.getDMh2FOAt(2) << " GeV^2 O(αt*αs + αt^2)\n"
+        << "ΔMh^2_FO_2L           =  " << ho.getDMh2FOAt(3) << " GeV^2 O(αt*αs^2)"
         << '\n';
 
    return ostr;
