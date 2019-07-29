@@ -403,7 +403,7 @@ void HierarchyObject::setDLambda(int loops, double deltaLambda)
  * @return Delta_Mh2_EFT (only contributions that go with αt)
  * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
  */
-double HierarchyObject::getDMh2EFT(int loops) const
+double HierarchyObject::getDMh2EFTAt(int loops) const
 {
    if(loops >= 0 && loops <= 3){
       return dMh2EFTMap.at(loops);
@@ -595,10 +595,10 @@ std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
         << "Δλ_1L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(1) << "\n"
         << "Δλ_2L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(2) << "\n"
         << "Δλ_3L DR' -> MS shift =  " << ho.getDLambdaDRbarPrimeToMSbarShift(3) << "\n"
-        << "Mh^2_EFT_0L           =  " << ho.getDMh2EFT(0) << " GeV^2 O(g1^2, g2^2)\n"
-        << "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFT(1) << " GeV^2 O(αt)\n"
-        << "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFT(2) << " GeV^2 O(αt*αs + αt^2)\n"
-        << "ΔMh^2_EFT_3L          =  " << ho.getDMh2EFT(3) << " GeV^2 O(αt*αs^2)\n"
+        << "Mh^2_EFT_0L           =  " << ho.getDMh2EFTAt(0) << " GeV^2 O(g1^2, g2^2)\n"
+        << "ΔMh^2_EFT_1L          =  " << ho.getDMh2EFTAt(1) << " GeV^2 O(αt)\n"
+        << "ΔMh^2_EFT_2L          =  " << ho.getDMh2EFTAt(2) << " GeV^2 O(αt*αs + αt^2)\n"
+        << "ΔMh^2_EFT_3L          =  " << ho.getDMh2EFTAt(3) << " GeV^2 O(αt*αs^2)\n"
         << "Mh^2_FO_0L            =  " << ho.getDMh2FO(0) << " GeV^2 O(g1^2, g2^2)\n"
         << "ΔMh^2_FO_1L           =  " << ho.getDMh2FOAt(1) << " GeV^2 O(αt)\n"
         << "ΔMh^2_FO_2L           =  " << ho.getDMh2FOAt(2) << " GeV^2 O(αt*αs + αt^2)\n"

@@ -108,7 +108,7 @@ namespace himalaya {
        * @return Delta_Mh2_EFT (only contributions that go with αt)
        * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
        */
-      double getDMh2EFT(int loops) const;
+      double getDMh2EFTAt(int loops) const;
       /**
        * @return Delta_Mh2_FO
        * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)

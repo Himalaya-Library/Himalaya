@@ -42,7 +42,7 @@ TestPoint[point_, name_] :=
            TestClose[Mh2ShiftDRbarPrimeToMDRPrime                   /. output, Mh2ShiftDRbarPrimeToMDRPrime                   /. (expectedOutput /. point), eps];
            TestClose[Mh2ShiftDRbarPrimeToH3m                        /. output, Mh2ShiftDRbarPrimeToH3m                        /. (expectedOutput /. point), eps];
            TestClose[expansionUncertainty                           /. output, expansionUncertainty                           /. (expectedOutput /. point), eps];
-           TestClose[Mh2EFT                                         /. output, Mh2EFT                                         /. (expectedOutput /. point), eps];
+           TestClose[Mh2EFTAt                                       /. output, Mh2EFTAt                                       /. (expectedOutput /. point), eps];
            TestClose[Mh2FO                                          /. output, Mh2FO                                          /. (expectedOutput /. point), eps];
            TestClose[Mh2FOAt                                        /. output, Mh2FOAt                                        /. (expectedOutput /. point), eps];
            TestClose[lambda                                         /. output, lambda                                         /. (expectedOutput /. point), eps];
@@ -165,7 +165,7 @@ MakePoint[MS_?NumericQ, TB_?NumericQ, Xt_?NumericQ] := {
             {{-1.5317742384518245, 1.9557280682757228}, {1.9557280682757228, 7.446661229467915}}
         },
         expansionUncertainty -> {0., 0., 0.29936990221850124, 0.029834152694507742}, 
-        Mh2EFT -> {8230.066622149989, 10337.454195300139, 830.6875834664329, 695.6106523929473},
+        Mh2EFTAt -> {8230.066622149989, 10337.454195300139, 830.6875834664329, 695.6106523929473},
         Mh2FO -> {8229.896089958725, 8148.2372899382335, 819.1872548102838, 696.8358059760103},
         Mh2FOAt -> {0., 10331.756116368255, 820.6212844284601, 696.8358059760103},
         lambda -> {0.13599819257964818, 0.06251358668613667, 0.0014909887921878413, 0.00031561329131293657}, 

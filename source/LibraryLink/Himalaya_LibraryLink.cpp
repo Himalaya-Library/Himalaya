@@ -381,10 +381,10 @@ Results calculate_results(const Data& data)
       himalaya::HierarchyCalculator hc(data.pars, data.verbose);
       res.ho = hc.calculateDMh3L(data.bottom);
 
-      const auto dmh2_eft_0l = res.ho.getDMh2EFT(0);
-      const auto dmh2_eft_1l = res.ho.getDMh2EFT(1);
-      const auto dmh2_eft_2l = res.ho.getDMh2EFT(2);
-      const auto dmh2_eft_3l = res.ho.getDMh2EFT(3);
+      const auto dmh2_eft_0l = res.ho.getDMh2EFTAt(0);
+      const auto dmh2_eft_1l = res.ho.getDMh2EFTAt(1);
+      const auto dmh2_eft_2l = res.ho.getDMh2EFTAt(2);
+      const auto dmh2_eft_3l = res.ho.getDMh2EFTAt(3);
 
       res.eft =
          std::make_tuple(dmh2_eft_0l, dmh2_eft_1l, dmh2_eft_2l, dmh2_eft_3l);
@@ -494,7 +494,7 @@ void put_result(const Results& res, MLINK link)
    MLPutRuleTo(link, Mh2_shift_DRp_to_MDRp, "Mh2ShiftDRbarPrimeToMDRPrime");
    MLPutRuleTo(link, Mh2_shift_DRp_to_H3m, "Mh2ShiftDRbarPrimeToH3m");
    MLPutRuleTo(link, expansion_uncertainty, "expansionUncertainty");
-   MLPutRuleTo(link, Mh2_eft, "Mh2EFT");
+   MLPutRuleTo(link, Mh2_eft, "Mh2EFTAt");
    MLPutRuleTo(link, Mh2_fo, "Mh2FO");
    MLPutRuleTo(link, Mh2_fo_dominant, "Mh2FOAt");
    MLPutRuleTo(link, lambda, "lambda");

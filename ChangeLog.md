@@ -11,7 +11,7 @@ New features
    At the C++ level one can use the following new accessors of the
    `HierarchyObject` class:
 
-    * `getDMh2EFT(int loops)`: Returns loop corrections in the EFT
+    * `getDMh2EFTAt(int loops)`: Returns loop corrections in the EFT
       limit v^2 << MSUSY^2.
     * `getDMh2FOAt(int loops)`: Returns loop corrections in the full
       MSSM.
@@ -19,7 +19,7 @@ New features
    At the Mathematica level the following new symbols are provided
    in the output of `HimalayaCalculateDMh3L[]`:
 
-    * `Mh2EFT`: Loop corrections in the EFT limit v^2 << MSUSY^2.
+    * `Mh2EFTAt`: Loop corrections in the EFT limit v^2 << MSUSY^2.
     * `Mh2FOAt`: Loop corrections in the full MSSM.
 
  * The full 1-loop, 2-loop O((αt+ab)\*αs + (αt+αb)^2 + ab\*aτ + aτ^2)
