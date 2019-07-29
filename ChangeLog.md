@@ -5,8 +5,8 @@ New features
 ------------
 
  * The 1-, 2- and 3-loop corrections of O(αt), O(αt\*αs) and
-   O(αt\*αs^2) to the light CP-even Higgs mass are now available in
-   the EFT limit v^2 << MSUSY^2.
+   O(αt\*αs^2) to the squared light CP-even Higgs mass are now
+   available in the EFT limit v^2 << MSUSY^2.
 
    At the C++ level one can use the following new accessors of the
    `HierarchyObject` class:
@@ -21,6 +21,16 @@ New features
 
     * `Mh2EFT`: Loop corrections in the EFT limit v^2 << MSUSY^2.
     * `Mh2FOAt`: Loop corrections in the full MSSM.
+
+ * The full 1-loop, 2-loop O((αt+ab)\*αs + (αt+αb)^2 + ab\*aτ + aτ^2)
+   and 3-loop O(αt\*αs^2) to the squared light CP-even Higgs mass are
+   now available.
+
+   At the C++ level one can use the new accessor `getDMh2FO(int
+   loops)` of the `HierarchyObject` class.
+
+   At the Mathematica level the new symbol `Mh2FO` is provided in the
+   output of `HimalayaCalculateDMh3L[]`.
 
 Himalaya 2.0.1
 ==============
