@@ -105,7 +105,7 @@ namespace himalaya {
        */
       double getDLambdaDRbarPrimeToMSbarShift(int loops) const;
       /**
-       * @return Delta_Mh2_EFT
+       * @return Delta_Mh2_EFT (only contributions that go with αt)
        * @param loops an integer, could be 0 (tree), 1 (1L), ..., 3 (3L)
        */
       double getDMh2EFT(int loops) const;
@@ -224,7 +224,7 @@ namespace himalaya {
        */
       Eigen::Matrix2d getDMhDRbarPrimeToH3mShift() const;
       /**
-       * Sets Delta_Mh2_EFT at loops-loop
+       * Sets Delta_Mh2_EFT at loops-loop (only contributions that go with αt)
        * @param loops an integer, could be 0 (tree), ..., 3 (3L with Delta_lambda_EFT)
        * @param deltaMh2 delta_Mh^2
        */
