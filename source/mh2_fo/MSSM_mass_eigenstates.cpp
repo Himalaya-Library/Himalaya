@@ -813,6 +813,10 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
       orders.at(EFTOrders::YTAU2YB4) = 0;
       orders.at(EFTOrders::YTAU4YB2) = 0;
       orders.at(EFTOrders::G32YB4) = 0;
+
+      // re-calculate DR' masses for g1 = g2 = yb = ytau = 0
+      masses = make_3rd_gen(make_gaugeless(pars_));
+      masses.M2hh(0) = 0.;
    } else {
      orders.at(EFTOrders::ONLY_AT_AS) = 0;
    }

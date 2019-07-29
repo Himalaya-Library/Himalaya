@@ -126,6 +126,18 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
 
+/// calculates Mh^2 in the EFT at 1-loop level (only alpha_t contribution)
+double calc_Mh2_EFT_1L_at(const himalaya::Parameters& pars)
+{
+   auto p = make_gaugeless(pars);
+   p.Mb = 0.;
+   p.Mtau = 0.;
+
+   himalaya::mh2_eft::Mh2EFTCalculator mhc(p);
+
+   return mhc.getDeltaMh2EFT1Loop(1,1);
+}
+
 /// calculates Mh^2 in the EFT at 2-loop level
 double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 {
@@ -166,28 +178,46 @@ TEST_CASE("test_EFT_vs_FO_gaugeless")
 
    const auto p = make_gaugeless(make_point());
 
-   const auto DMh2_EFT_0L = calc_Mh2_EFT_0L(p);
-   const auto DMh2_EFT_1L = calc_Mh2_EFT_1L(p);
-   const auto DMh2_EFT_2L = calc_Mh2_EFT_2L(p);
+   const auto DMh2_EFT_0L    = calc_Mh2_EFT_0L(p);
+   const auto DMh2_EFT_1L    = calc_Mh2_EFT_1L(p);
+   const auto DMh2_EFT_2L    = calc_Mh2_EFT_2L(p);
+   const auto DMh2_EFT_1L_at = calc_Mh2_EFT_1L_at(p);
+   const auto DMh2_EFT_2L_at = calc_Mh2_EFT_2L(p);
 
-   MSSM_mass_eigenstates me(p, true);
+   MSSM_mass_eigenstates me_full(p, false);
+   MSSM_mass_eigenstates me_at(p, true);
 
-   const auto DMh2_full    = me.calculate_Mh2();
-   const auto DMh2_full_0L = std::get<0>(DMh2_full);
-   const auto DMh2_full_1L = std::get<1>(DMh2_full);
-   const auto DMh2_full_2L = std::get<2>(DMh2_full);
+   const auto DMh2_FO       = me_full.calculate_Mh2();
+   const auto DMh2_FO_at    = me_at.calculate_Mh2();
 
-   INFO("DMh2_full_0L = " << DMh2_full_0L);
-   INFO("DMh2_full_1L = " << DMh2_full_1L);
-   INFO("DMh2_full_2L = " << DMh2_full_2L);
+   const auto DMh2_FO_0L    = std::get<0>(DMh2_FO);
+   const auto DMh2_FO_1L    = std::get<1>(DMh2_FO);
+   const auto DMh2_FO_2L    = std::get<2>(DMh2_FO);
+   const auto DMh2_FO_0L_at = std::get<0>(DMh2_FO_at);
+   const auto DMh2_FO_1L_at = std::get<1>(DMh2_FO_at);
+   const auto DMh2_FO_2L_at = std::get<2>(DMh2_FO_at);
+
+   INFO("DMh2_FO_0L = " << DMh2_FO_0L);
+   INFO("DMh2_FO_1L = " << DMh2_FO_1L);
+   INFO("DMh2_FO_2L = " << DMh2_FO_2L);
+
+   INFO("DMh2_FO_0L = " << DMh2_FO_0L_at << " O(alpha_t*...)");
+   INFO("DMh2_FO_1L = " << DMh2_FO_1L_at << " O(alpha_t*...)");
+   INFO("DMh2_FO_2L = " << DMh2_FO_2L_at << " O(alpha_t*...)");
 
    INFO("DMh2_EFT_0L  = " << DMh2_EFT_0L);
    INFO("DMh2_EFT_1L  = " << DMh2_EFT_1L);
    INFO("DMh2_EFT_2L  = " << DMh2_EFT_2L);
 
-   CHECK_CLOSE(DMh2_EFT_0L, DMh2_full_0L, 1e-6);
-   CHECK_CLOSE(DMh2_EFT_1L, DMh2_full_1L, 1e-5);
-   CHECK_CLOSE(DMh2_EFT_2L, DMh2_full_2L, 1e-5);
+   INFO("DMh2_EFT_1L  = " << DMh2_EFT_1L_at << " O(alpha_t*...)");
+   INFO("DMh2_EFT_2L  = " << DMh2_EFT_2L_at << " O(alpha_t*...)");
+
+   CHECK_CLOSE(DMh2_EFT_0L   , DMh2_FO_0L, 1e-6);
+   CHECK_CLOSE(DMh2_EFT_1L   , DMh2_FO_1L, 1e-5);
+
+   CHECK_CLOSE(0.            , DMh2_FO_0L_at, 1e-7);
+   CHECK_CLOSE(DMh2_EFT_1L_at, DMh2_FO_1L_at, 1e-5);
+   CHECK_CLOSE(DMh2_EFT_2L_at, DMh2_FO_2L_at, 1e-5);
 }
 
 TEST_CASE("test_FO_1loop_derivative")
