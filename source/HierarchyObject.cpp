@@ -603,7 +603,6 @@ std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
         << "ΔMh^2_FO_1L           =  " << ho.getDMh2FO(1) << " GeV^2 O(full)\n"
         << "ΔMh^2_FO_2L           =  " << ho.getDMh2FO(2) << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n"
         << "ΔMh^2_FO_3L           =  " << ho.getDMh2FO(3) << " GeV^2 O(αt*αs^2)\n"
-        << "Mh^2_FO_0L            =  " << ho.getDMh2FOAt(0) << " GeV^2 O()\n"
         << "ΔMh^2_FO_1L           =  " << ho.getDMh2FOAt(1) << " GeV^2 O(αt)\n"
         << "ΔMh^2_FO_2L           =  " << ho.getDMh2FOAt(2) << " GeV^2 O(αt*αs + αt^2)\n"
         << "ΔMh^2_FO_2L           =  " << ho.getDMh2FOAt(3) << " GeV^2 O(αt*αs^2)"
