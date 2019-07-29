@@ -32,6 +32,19 @@ New features
    At the Mathematica level the new symbol `Mh2FO` is provided in the
    output of `HimalayaCalculateDMh3L[]`.
 
+Changes
+-------
+
+ * The getter to access the loop corrections to the light CP-even
+   Higgs mass in the EFT limit has been renamed `getDMh2EFT` ->
+   `getDMh2EFTAt`. The new name reflects that fact that only
+   αt-enhanced contributions are returned.
+
+ * The Mathematica symbol which contains the loop corrections to the
+   light CP-even Higgs mass in the EFT limit has been renamed `Mh2EFT`
+   -> `Mh2EFTAt`. The new name reflects that fact that only
+   αt-enhanced contributions are included.
+
 Himalaya 2.0.1
 ==============
 
