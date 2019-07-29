@@ -768,7 +768,13 @@ std::ostream& operator<<(std::ostream& ostr, const MSSM_spectrum& spec)
 
 /* ************************************************************ */
 
-MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_at_as)
+/**
+ * Constructor
+ *
+ * @param pars_ MSSM DR' parameters
+ * @param only_at if true, only alpha_t-enhanced contributions are calculated
+ */
+MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_at)
    : pars(pars_)
    , masses(pars_)
    , gaugeless(make_gaugeless(pars_))
@@ -801,14 +807,15 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
       orders.at(EFTOrders::YTAU4YB2) = 0;
    }
 
-   if(only_at_as){
+   if (only_at) {
       orders.at(EFTOrders::YB6) = 0;
       orders.at(EFTOrders::YTAU6) = 0;
       orders.at(EFTOrders::YTAU2YB4) = 0;
       orders.at(EFTOrders::YTAU4YB2) = 0;
       orders.at(EFTOrders::G32YB4) = 0;
-   } else
+   } else {
      orders.at(EFTOrders::ONLY_AT_AS) = 0;
+   }
 }
 
 /**
