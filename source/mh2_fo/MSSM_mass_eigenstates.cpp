@@ -829,6 +829,40 @@ Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars)
    return gl;
 }
 
+/// sets yb = ytau = 0
+Parameters MSSM_mass_eigenstates::make_3rd_gen(const Parameters& pars)
+{
+   const double eps = 1e-6;
+
+   auto gen3 = pars;
+
+   gen3.Mb = NaN;
+   gen3.Mtau = NaN;
+   gen3.MSb.setConstant(NaN);
+   gen3.MStau.setConstant(NaN);
+   gen3.s2b = NaN;
+   gen3.s2tau = NaN;
+   gen3.theta_b = NaN;
+   gen3.theta_tau = NaN;
+
+   for (int i = 0; i < 3; i++) {
+      for (int k = 0; k < 3; k++) {
+         if (i == 2 && k == 2) {
+            gen3.Yd(i,k) = eps;
+            gen3.Ye(i,k) = eps;
+         } else {
+            gen3.Yd(i,k) = 0.;
+            gen3.Ye(i,k) = 0.;
+            gen3.Yu(i,k) = 0.;
+         }
+      }
+   }
+
+   gen3.validate(false);
+
+   return gen3;
+}
+
 /**
  * Returns the tree-level squared Higgs masses.
  * @return squared Higgs masses

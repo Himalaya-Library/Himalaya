@@ -186,6 +186,9 @@ private:
    /// sets g1 = g2 = 0
    static Parameters make_gaugeless(const Parameters&);
 
+   /// sets yb = ytau = 0
+   static Parameters make_3rd_gen(const Parameters&);
+
    /// A0 Passarino-Veltman function
    double A0(double) const;
    /// B0 Passarino-Veltman function
