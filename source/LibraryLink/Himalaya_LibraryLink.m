@@ -78,9 +78,9 @@ Output: A list of replacement rules with
  - Mh2ShiftDRbarPrimeToMDRPrime: list with {0L, 1L, 2L, 3L} shifts from DR' -> MDR' scheme
  - Mh2ShiftDRbarPrimeToH3m: list with {0L, 1L, 2L, 3L} shifts from DR' -> H3m scheme
  - expansionUncertainty: uncertainty from mass expansion for 0-, 1-, 2- and 3-loop correction
- - Mh2EFT: list with {0L, 1L, 2L, 3L} squared light CP-even Higgs mass contribution in the decoupling limit (DR' scheme)
+ - Mh2EFT: list with {0L, 1L, 2L, 3L} squared light CP-even Higgs mass contribution in the decoupling limit (DR' scheme) (only at-enhanced contributions)
  - Mh2FO: list with {0L, 1L, 2L, 3L} squared light CP-even Higgs mass contribution (DR' scheme)
- - Mh2FOAt: list with {0L, 1L, 2L, 3L} squared light CP-even Higgs mass contribution (DR' scheme) with only at-enhanced contributions
+ - Mh2FOAt: list with {0L, 1L, 2L, 3L} squared light CP-even Higgs mass contribution (DR' scheme) (only at-enhanced contributions)
  - lambda: {0L, 1L, 2L, 3L} correction to lambda, in DR' scheme, w/ full logarithms
  - lambdaUncertainty: uncertainty of lambda {0L, 1L, 2L, 3L}
  - lambdaShiftDRbarPrimeToMSbar: shifts from DR' -> MS scheme for lambda {0L, 1L, 2L, 3L}
