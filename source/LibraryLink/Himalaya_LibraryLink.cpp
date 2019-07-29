@@ -249,7 +249,7 @@ struct Data {
 
 Data make_data(const std::vector<double>& parsvec)
 {
-   const int N_input_parameters = 124; // number of Himalaya input parameters
+   const int N_input_parameters = 127; // number of Himalaya input parameters
 
    if (parsvec.size() != N_input_parameters) {
       throw std::runtime_error("HimalayaCalculateDMh3L expects "
@@ -321,13 +321,16 @@ Data make_data(const std::vector<double>& parsvec)
    if (Mb > 0) pars.Mb = Mb;
    if (Mtau > 0) pars.Mtau = Mtau;
 
-   Eigen::Vector2d MSt, MSb;
+   Eigen::Vector2d MSt, MSb, MStau;
    MSt(0) = parsvec.at(c++);
    MSt(1) = parsvec.at(c++);
    MSb(0) = parsvec.at(c++);
    MSb(1) = parsvec.at(c++);
+   MStau(0) = parsvec.at(c++);
+   MStau(1) = parsvec.at(c++);
    const double s2t = parsvec.at(c++);
    const double s2b = parsvec.at(c++);
+   const double s2tau = parsvec.at(c++);
 
    if (MSt.minCoeff() > 0. && std::abs(s2t) <= 1.) {
       pars.MSt = MSt;
@@ -337,6 +340,11 @@ Data make_data(const std::vector<double>& parsvec)
    if (MSb.minCoeff() > 0. && std::abs(s2b) <= 1.) {
       pars.MSb = MSb;
       pars.s2b = s2b;
+   }
+
+   if (MStau.minCoeff() > 0. && std::abs(s2tau) <= 1.) {
+      pars.MStau = MStau;
+      pars.s2tau = s2tau;
    }
 
    pars.validate(verbose);

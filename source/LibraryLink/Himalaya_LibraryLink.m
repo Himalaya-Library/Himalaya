@@ -65,8 +65,10 @@ Arguments:
     - Mtau: (optional) tau lepton mass
     - MSt: (optional) 2-vector with stop masses
     - MSb: (optional) 2-vector with sbottom masses
+    - MStau: (optional) 2-vector with stau masses
     - s2t: (optional) sine of 2 times stop mixing angle
     - s2b: (optional) sine of 2 times sbottom mixing angle
+    - s2tau: (optional) sine of 2 times stau mixing angle
 
 Output: A list of replacement rules with
 
@@ -141,7 +143,8 @@ output = HimalayaCalculateDMh3L[
 (* input parameters *)
 { scale, mu, g1, g2, g3, vd, vu,
   mq2, md2, mu2, ml2, me2, Au, Ad, Ae, Yu, Yd, Ye,
-  MA, M1, M2, M3, MW, MZ, Mt, Mb, Mtau, MSt, MSb, s2t, s2b };
+  MA, M1, M2, M3, MW, MZ, Mt, Mb, Mtau, MSt, MSb, MStau,
+  s2t, s2b, s2tau };
 
 (* output parameters *)
 { hierarchyID, hierarchyName,
@@ -195,15 +198,17 @@ himalayaDefaultParameters = {
         M1 -> 0,
         M2 -> 0,
         M3 -> 0,
-        MW -> -1,        (* invalid input *)
-        MZ -> -1,        (* invalid input *)
-        Mt -> -1,        (* invalid input *)
-        Mb -> -1,        (* invalid input *)
-        Mtau -> -1,      (* invalid input *)
-        MSt -> {-1, -1}, (* invalid input *)
-        MSb -> {-1, -1}, (* invalid input *)
-        s2t -> -2,       (* invalid input *)
-        s2b -> -2        (* invalid input *)
+        MW -> -1,          (* invalid input *)
+        MZ -> -1,          (* invalid input *)
+        Mt -> -1,          (* invalid input *)
+        Mb -> -1,          (* invalid input *)
+        Mtau -> -1,        (* invalid input *)
+        MSt -> {-1, -1},   (* invalid input *)
+        MSb -> {-1, -1},   (* invalid input *)
+        MStau -> {-1, -1}, (* invalid input *)
+        s2t -> -2,         (* invalid input *)
+        s2b -> -2,         (* invalid input *)
+        s2tau -> -2        (* invalid input *)
 };
 
 Options[HimalayaCalculateDMh3L] = {
@@ -356,8 +361,11 @@ HimalayaCalculateDMh3L[OptionsPattern[]] :=
             OptionValue[MSt][[2]],
             OptionValue[MSb][[1]],
             OptionValue[MSb][[2]],
+            OptionValue[MStau][[1]],
+            OptionValue[MStau][[2]],
             OptionValue[s2t],
-            OptionValue[s2b]
+            OptionValue[s2b],
+            OptionValue[s2tau]
         }
     ];
 
