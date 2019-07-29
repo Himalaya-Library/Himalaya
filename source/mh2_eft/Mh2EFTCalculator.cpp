@@ -244,7 +244,7 @@ Mh2EFTCalculator::Mh2EFTCalculator(
         setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
     }
 
-    // For now, disable all 1L corrections, except 1L O(at, ab, atau)
+    // For now, disable all 1L corrections, except 1L O(at)
     setCorrectionFlag(EFTOrders::G14     , 0);
     setCorrectionFlag(EFTOrders::G24     , 0);
     setCorrectionFlag(EFTOrders::G12G22  , 0);
@@ -254,6 +254,8 @@ Mh2EFTCalculator::Mh2EFTCalculator(
     setCorrectionFlag(EFTOrders::G22YB2  , 0);
     setCorrectionFlag(EFTOrders::G12YTAU2, 0);
     setCorrectionFlag(EFTOrders::G22YTAU2, 0);
+    setCorrectionFlag(EFTOrders::YB4, 0);
+    setCorrectionFlag(EFTOrders::YTAU4, 0);
 
     // For now, disable all 2L corrections, except 2L O(at*as + at^2)
     setCorrectionFlag(EFTOrders::G32YB4  , 0);

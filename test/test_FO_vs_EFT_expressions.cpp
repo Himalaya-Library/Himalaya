@@ -213,7 +213,9 @@ TEST_CASE("test_EFT_vs_FO_gaugeless")
    INFO("DMh2_EFT_2L  = " << DMh2_EFT_2L_at << " O(alpha_t*...)");
 
    CHECK_CLOSE(DMh2_EFT_0L   , DMh2_FO_0L, 1e-6);
-   CHECK_CLOSE(DMh2_EFT_1L   , DMh2_FO_1L, 1e-5);
+
+   // this test may be enabled once 1L O(αb + ατ) expressions re-enabled
+   // CHECK_CLOSE(DMh2_EFT_1L   , DMh2_FO_1L, 1e-5);
 
    CHECK_CLOSE(0.            , DMh2_FO_0L_at, 1e-7);
    CHECK_CLOSE(DMh2_EFT_1L_at, DMh2_FO_1L_at, 1e-5);
