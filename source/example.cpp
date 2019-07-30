@@ -62,10 +62,10 @@ himalaya::Parameters setup_point(double MS, double tb, double xt)
 
 int main()
 {
-   const auto point = setup_point(2000., 20., std::sqrt(6.));
-   himalaya::HierarchyCalculator hc(point);
-
    try {
+      const auto point = setup_point(2000., 20., std::sqrt(6.));
+      himalaya::HierarchyCalculator hc(point);
+
       // calculate the 3-loop corrections O(α_t*α_s^2)
       const auto ho = hc.calculateDMh3L(false);
       std::cout << ho;
