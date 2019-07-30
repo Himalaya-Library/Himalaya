@@ -392,10 +392,13 @@ corrections:
     {{-1.53177, 1.95573}, {1.95573, 7.44666}}
   },
   expansionUncertainty -> {0., 0., 0.29937, 0.0298342},
-  Mh2EFT -> {8230.07, 10331.1, 1881.15, 695.229},
+
+  Mh2EFTAt -> {8230.07, 10337.5, 830.688, 695.611},
+  Mh2FO -> {8229.9, 8148.24, 819.187, 696.836},
+  Mh2FOAt -> {0., 10331.8, 820.621, 696.836},
   lambda -> {0.135998, 0.0625136, 0.00149099, 0.000315613},
-  lambdaUncertainty -> {0., 0., 0., 0.00100837},
-  lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.28983*10^-6, -0.000771028} }
+  lambdaUncertainty -> {0., 0., 0., 0.00203118},
+  lambdaShiftDRbarPrimeToMSbar -> {0., 0., 7.28983 10^-6  , -0.000771028} }
 ```
 
 See `?HimalayaCalculateDMh3L` for a detailed documentation of the
