@@ -171,7 +171,7 @@ void Parameters::validate(bool verbose)
       if (verbose) {
          INFO_MSG("Stop masses or mixing angle not provided. Calculated values:\n" <<
                   "\tstop masses: " << MSt(0) << " GeV, " << MSt(1) << " GeV,\n" <<
-                  "\tmixing angle sin(2*theta_t): " << s2t << ", theta_t = " << theta_t);
+                  "\tmixing angle sin(2*theta_t) = " << s2t << ", theta_t = " << theta_t);
       }
    }
 
@@ -190,7 +190,7 @@ void Parameters::validate(bool verbose)
       if (verbose) {
          INFO_MSG("Sbottom masses or mixing angle not provided. Calculated values:\n" <<
                   "\tsbottom masses: " << MSb(0) << " GeV, " << MSb(1) << " GeV,\n" <<
-                  "\tmixing angle sin(2*theta_b): " << s2b << ", theta_b = " << theta_b);
+                  "\tmixing angle sin(2*theta_b) = " << s2b << ", theta_b = " << theta_b);
       }
    }
 
@@ -209,7 +209,7 @@ void Parameters::validate(bool verbose)
       if (verbose) {
          INFO_MSG("Stau masses or mixing angle not provided. Calculated values:\n" <<
                   "\tstau masses: " << MStau(0) << " GeV, " << MStau(1) << " GeV,\n" <<
-                  "\tmixing angle sin(2*theta_tau): " << s2tau << ", theta_tau = " << theta_tau);
+                  "\tmixing angle sin(2*theta_tau) = " << s2tau << ", theta_tau = " << theta_tau);
       }
    }
 
