@@ -28,6 +28,10 @@ Please refer to these papers as well as
   [*Eur.Phys.J.* **C78** (2018) no.10, 874](https://doi.org/10.1140/epjc/s10052-018-6351-6),
   [[1807.03509](https://arxiv.org/abs/1807.03509)]   
 
+* R. V. Harlander, J. Klappert, and A. Voigt,
+  *The light CP-even MSSM Higgs mass including N3LO+N3LL QCD corrections*,
+  [[1910.03595](https://arxiv.org/abs/1910.03595)]   
+
 when using Himalaya.
 
 ## Requirements
