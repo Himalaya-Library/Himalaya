@@ -4,7 +4,7 @@ Himalaya 3.0.0
 New features
 ------------
 
- * The 1-, 2- and 3-loop corrections of O(αt), O(αt\*αs) and
+ * The 1-, 2- and 3-loop corrections of O(αt), O(αt\*αs + αt^2) and
    O(αt\*αs^2) to the squared light CP-even Higgs mass are now
    available in the EFT limit v^2 << MSUSY^2.
 
