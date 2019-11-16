@@ -1,39 +1,3 @@
-*      
-*     SOME AUXILIARY FUNCTIONS CALLED BY THE DSZ, BDSZ & DDS ROUTINES
-*
-*     Last updates:
-*
-*                 13/07/2004: 1) unused variables removed
-*                 24/11/2003: 1) phi expansion around lambda=0 removed
-*
-*                 06/08/2003: 1) phi expansion around x/z=0,y/z=0
-*
-*                 13/05/2003: 1) new routine for the complex dilogarithm
-*                             2) phi expansion around lambda=0
-*                             3) more Passarino-Veltman functions
-*
-***********************************************************************
-*
-
-      function Li2(x)
-
-      implicit none
-
-      complex*16 CLI2,z
-      real*8 x,Li2
-
-      z = DCMPLX(x,0d0)
-      Li2 = dreal(CLI2(z))
-
-      return
-      end
-
-
-*
-***********************************************************************
-*
-
-
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 C       SPENCE-FUNKTION KOMPLEX, FREI NACH HOLLIK                     C
 C---------------------------------------------------------------------C
