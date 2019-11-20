@@ -90,6 +90,14 @@ files. Assuming that GNU make is used, one can start the build by running
 make
 ```
 
+By default the example executable `example` is created from
+[source/example.cpp](source/example.cpp), which prints all loop
+corrections calculated by Himalaya for a given MSSM parameter point:
+
+```sh
+./example
+```
+
 ## Running Himalaya
 
 When the build is complete, the libraries `libDSZ` and `libHimalaya`
