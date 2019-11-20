@@ -115,9 +115,9 @@ First one has to include the header
 #include "HierarchyCalculator.hpp"
 ```
 
-in the C++ file. The DR'-bar parameters which define the MSSM
-parameter must be stored in a `Parameters` object.  Here, an example
-for the SPS1a benchmark point is given:
+in the C++ file. The MSSM DR'-bar parameters must be stored in a
+`Parameters` object.  Here, an example for the SPS1a benchmark point
+is given:
 
 ```cpp
 himalaya::Parameters pars;           // DR'-bar parameters struct
