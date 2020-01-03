@@ -93,7 +93,8 @@ set(HIM_LIBSOURCES
 set(DSZ_LIBSOURCES
   ${SOURCE_PATH}/mh2l/DSZHiggs.cpp
   ${SOURCE_PATH}/mh2l/DSZHiggs.f
-  ${SOURCE_PATH}/mh2l/functs.f)
+  ${SOURCE_PATH}/mh2l/functs.f
+  ${SOURCE_PATH}/mh2l/li2.cpp)
 
 # build the himalaya and DSZ library
 add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})

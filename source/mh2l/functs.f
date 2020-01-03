@@ -105,3 +105,26 @@ c        write(*,*) 'cspen:', cspen
      *               +.5D0*CDLOG(Z-1D0)**2-CDLOG(Z)*CDLOG(1D0-Z)
 c        write(*,*) 'cspen:', cspen
       END
+
+*
+***********************************************************************
+*
+
+!>    @brief C wrapper for complex dilogarithm
+      subroutine li2c(re_in, im_in, re_out, im_out)
+     $ bind(C, name="li2c_")
+
+      implicit none
+
+      double precision, intent(in) :: re_in, im_in
+      double precision, intent(out) :: re_out, im_out
+      complex*16 z, l, pCSPEN
+
+      z = dcmplx(re_in, im_in)
+      l = pCSPEN(z)
+
+      re_out = dble(l)
+      im_out = dimag(l)
+
+      return
+      end
