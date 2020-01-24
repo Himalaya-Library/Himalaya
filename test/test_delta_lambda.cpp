@@ -12,11 +12,8 @@ namespace {
 
 double pow2(double x) { return x*x; }
 
-himalaya::Parameters make_point()
+himalaya::Parameters make_point(double MS = 100000., double tb = 5., double xt = 2.)
 {
-   const double MS = 100000.;
-   const double xt = 2.;
-   const double tb = 5.;
    const double beta = std::atan(tb);
    const double v = 245.;
 
