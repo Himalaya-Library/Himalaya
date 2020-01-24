@@ -262,7 +262,7 @@ TEST_CASE("test_lambda_degenerate")
 {
    using namespace himalaya;
 
-   const auto MS = 3000.;
+   const auto MS = 5000.;
    const auto tb = 20.;
    const auto xt = -2.;
    const auto pars = make_point(MS, tb, xt);
@@ -325,9 +325,13 @@ TEST_CASE("test_lambda_degenerate")
                 )
       );
 
+   const int hierarchy = ho.getSuitableHierarchy();
+   const auto hierarchy_name = ho.getH3mHierarchyNotation(hierarchy);
+
    INFO("MS = " << MS << ", tb = " << tb << ", xt = " << xt);
    INFO("yt = " << yt << ", g3 = " << g3 << ", LS = " << LS);
    INFO("αt^2 = " << alt2 << ", as^2 = " << as2);
+   INFO("hierarchy = " << hierarchy_name);
 
    const double eps = 1e-5;
 
