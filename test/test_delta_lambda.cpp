@@ -255,3 +255,82 @@ TEST_CASE("test_lambda_limit_degenerate")
 
    CHECK_CLOSE(z2_gen_Himalaya, z2_gen_EFT, uncertainty);
 }
+
+/// Compare analytic expressions Eqs.(43)-(44) from arXiv:1807.03509
+/// with Himalaya calculation.
+TEST_CASE("test_lambda_degenerate")
+{
+   using namespace himalaya;
+
+   const auto MS = 3000.;
+   const auto tb = 20.;
+   const auto xt = -2.;
+   const auto pars = make_point(MS, tb, xt);
+
+   const double PI = 3.141592653589793;
+   const double z3 = 1.202056903159594; // Zeta[3]
+   const double k = 0.006332573977646111; // 1/(4Pi)^2
+   const double sqrt2 = 1.414213562373095; // Sqrt[2]
+   const double Q = pars.scale;
+   const double Q2 = pow2(Q);
+   const double MS2 = pow2(MS);
+   const double LS = std::log(Q2/MS2);
+   const double LS2 = pow2(LS);
+   const double LS3 = LS2*LS;
+   const double xt2 = pow2(xt);
+   const double xt3 = xt2*xt;
+   const double yt = sqrt2*pars.Mt/pars.vu;
+   const double g3 = pars.g3;
+   const double alt = pow2(yt)/(4.*PI); // Eq.(7) from arXiv:1807.03509
+   const double alt2 = pow2(alt);
+   const double as = pow2(g3)*k; // Eq.(7) from arXiv:1807.03509
+   const double as2 = pow2(as);
+   const double sb = std::sin(std::atan(tb)); // sin(beta)
+   const double sb4 = pow2(pow2(sb)); // sin^4(beta)
+
+   auto hc = HierarchyCalculator(pars);
+   const auto ho = hc.calculateDMh3L(false);
+
+   // Delta lambda calculated with Himalaya
+   const auto dl3 = ho.getDLambda(3);
+   // delta lambda calculated with Himalaya (shift DR' -> MS)
+   const auto dl3_shift = ho.getDLambdaDRbarPrimeToMSbarShift(3);
+
+   /*
+     Eq.(11) from arXiv:1807.03509
+
+     cSM20 = (-1888/9 + 160 Zeta[3] + 7424/45 Zeta[2]^2 - 1024/3 PolyLog[4,1/2] - 512/9 PolyLog[2,1/2]^2 - 1024/9 PolyLog[2,1/2] Zeta[2])
+   */
+
+   const double cSM20 = 124.0607590216004;
+
+   // Eq.(43) from arXiv:1807.03509
+   const double dl3_analytic = alt2*as2*sb4*(
+      1./27. * (
+                6082 - 27832*LS + 14856*LS2 - 4032*LS3
+                - 15408*z3 + 1728*LS*z3 - 27*cSM20
+                + xt*(7616*LS - 11712*LS2 + 32*(-940 + 477*z3))
+                + xt2*(28848 - 2640*LS + 1008*LS2 - 11880*z3)
+                + xt3*(160*LS + 864*LS2 + 8*(2722 - 2259*z3))
+                )
+      );
+
+   // Eq.(44) from arXiv:1807.03509
+   const double dl3_analytic_shift = alt2*as2*sb4*(
+      1./27. * (
+                26916*LS - 18816*LS2 - 5904*LS3
+                - xt*(-3744 + 14016*LS + 18816*LS2)
+                - xt2*(29652 - 5424*LS - 9936*LS2)
+                - xt3*(-6768 - 13152*LS - 2688*LS2)
+                )
+      );
+
+   INFO("MS = " << MS << ", tb = " << tb << ", xt = " << xt);
+   INFO("yt = " << yt << ", g3 = " << g3 << ", LS = " << LS);
+   INFO("αt^2 = " << alt2 << ", as^2 = " << as2);
+
+   const double eps = 1e-5;
+
+   CHECK_CLOSE(dl3, dl3_analytic, eps);
+   CHECK_CLOSE(dl3_shift, dl3_analytic_shift, eps);
+}
