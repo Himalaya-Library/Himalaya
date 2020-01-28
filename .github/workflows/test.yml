@@ -1,0 +1,25 @@
+name: test
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: install conan
+      run: pip install conan
+    - name: install dependencies
+      run: conan install .
+    - name: cmake
+      run: cmake . -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
+    - name: make
+      run: make
+    - name: make test
+      run: make test
