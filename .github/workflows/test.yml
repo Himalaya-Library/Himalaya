@@ -26,8 +26,8 @@ jobs:
       if: startsWith(matrix.os, 'ubuntu-')
     - name: install gfortran on MacOS
       run: |
-        sudo brew gcc
-        sudo brew link gcc
+        brew gcc
+        brew link gcc
       if: startsWith(matrix.os, 'macos-')
     - name: cmake
       run: cmake . -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
