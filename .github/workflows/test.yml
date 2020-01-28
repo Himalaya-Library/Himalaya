@@ -26,7 +26,7 @@ jobs:
       if: startsWith(matrix.os, 'ubuntu-')
     - name: install gfortran on MacOS
       run: |
-        brew gcc
+        brew install gcc
         brew link gcc
       if: startsWith(matrix.os, 'macos-')
     - name: cmake
