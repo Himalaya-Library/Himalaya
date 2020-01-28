@@ -31,7 +31,9 @@ jobs:
       if: startsWith(matrix.os, 'macos-')
     - name: cmake
       run: cmake . -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
-    - name: make
-      run: make
-    - name: make test
-      run: make test
+    - name: cmake build
+      run: cmake --build .
+    - name: ctest
+      run: ctest
+      env:
+        CTEST_OUTPUT_ON_FAILURE: 1
