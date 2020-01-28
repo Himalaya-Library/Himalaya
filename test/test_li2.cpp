@@ -12078,7 +12078,7 @@ TEST_CASE("test_Mathematica_values")
       const std::complex<double> li2_c = himalaya::dilog(v.first);
 
       CHECK_CLOSE_COMPLEX(li2_f, v.second, 1e-14);
-      CHECK_CLOSE_COMPLEX(li2_c, v.second, 1e-15);
+      CHECK_CLOSE_COMPLEX(li2_c, v.second, 1e-14);
    }
 }
 
