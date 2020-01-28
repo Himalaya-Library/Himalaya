@@ -1,9 +1,20 @@
 language: cpp
+os:
+  - linux
+  - osx
 compiler:
   - clang
   - gcc
-before_install:
-  - sudo apt-get install gfortran libeigen3-dev
+addons:
+  apt:
+    packages:
+      - libeigen3-dev
+      - gfortran
+  homebrew:
+    packages:
+      - eigen
+      - gcc
+    update: true
 script:
   - mkdir build
   - cd build
