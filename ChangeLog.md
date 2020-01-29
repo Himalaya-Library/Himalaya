@@ -1,3 +1,18 @@
+Himalaya 3.0.1
+==============
+
+Changes
+-------
+
+ * The threshold correction loop functions and the dilogarithm
+   function have been replaced by cleaner and faster implementations.
+
+Fixed bugs
+----------
+
+ * [commit 4f063f1]: Fix linking error on MacOS.
+
+
 Himalaya 3.0.0
 ==============
 
