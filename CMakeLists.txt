@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(Himalaya VERSION 3.0.0 LANGUAGES CXX Fortran)
+project(Himalaya VERSION 3.0.1 LANGUAGES CXX Fortran)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
