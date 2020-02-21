@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(Himalaya VERSION 3.0.1 LANGUAGES CXX Fortran)
 
+include(GNUInstallDirs)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
 # require an Eigen installation
@@ -41,10 +43,6 @@ include_directories(${INCLUDE_PATH}/mh2_fo)
 include_directories(${INCLUDE_PATH}/mh2l)
 include_directories(${INCLUDE_PATH}/misc)
 include_directories(${EIGEN3_INCLUDE_DIR})
-
-set(EXEC_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
-set(INCLUDE_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/include")
-set(LIB_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/lib")
 
 # setting the correct version to all headers
 configure_file (
@@ -126,8 +124,9 @@ endif()
 # install libraries
 install(
   TARGETS Himalaya_static Himalaya_shared DSZ_static DSZ_shared
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
 # install public headers
@@ -136,12 +135,12 @@ install(FILES
   "${INCLUDE_PATH}/HierarchyObject.hpp"
   "${INCLUDE_PATH}/Himalaya_interface.hpp"
   "${INCLUDE_PATH}/version.hpp"
-  DESTINATION "${INCLUDE_INSTALL_DIR}/himalaya")
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/himalaya")
 
 # install himalaya.pc file
 install(FILES
   "${CMAKE_BINARY_DIR}/himalaya.pc"
-  DESTINATION "${LIB_INSTALL_DIR}/pkgconfig")
+  DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig")
 
 # adding documentation
 add_subdirectory(doc)
