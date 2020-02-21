@@ -27,9 +27,9 @@
 # Himalaya::Himalaya
 # Himalaya::DSZ
 
-# search Himalaya_interface.hpp first in ${Himalaya_INCLUDE_DIR}
+# search himalaya/Himalaya_interface.hpp first in ${Himalaya_INCLUDE_DIR}
 find_path(Himalaya_INCLUDE_DIRS
-  NAMES Himalaya_interface.hpp
+  NAMES himalaya/Himalaya_interface.hpp
   PATHS
     ${Himalaya_INCLUDE_DIR}
   PATH_SUFFIXES
@@ -45,7 +45,7 @@ find_path(Himalaya_INCLUDE_DIRS
 )
 
 find_path(Himalaya_INCLUDE_DIRS
-  NAMES Himalaya_interface.hpp
+  NAMES himalaya/Himalaya_interface.hpp
 )
 
 # search Himalaya library first in ${Himalaya_LIBRARY}
@@ -88,7 +88,7 @@ find_library(DSZ_LIBRARIES
 
 # find version
 if(Himalaya_INCLUDE_DIRS)
-  file(READ "${Himalaya_INCLUDE_DIRS}/version.hpp" _himalaya_version_header)
+  file(READ "${Himalaya_INCLUDE_DIRS}/himalaya/version.hpp" _himalaya_version_header)
 
   string(REGEX MATCH "define[ \t]+Himalaya_VERSION_MAJOR[ \t]+([0-9]+)" _himalaya_version_major_match "${_himalaya_version_header}")
   set(Himalaya_VERSION_MAJOR "${CMAKE_MATCH_1}")
