@@ -97,6 +97,7 @@ target_include_directories(DSZ_static
   PRIVATE
     ${PRIVATE_HEADERS}
 )
+add_library(Himalaya::DSZ::static ALIAS DSZ_static)
 
 # DSZ shared library
 add_library(DSZ_shared SHARED ${DSZ_LIBSOURCES})
@@ -107,6 +108,7 @@ target_include_directories(DSZ_shared
   PRIVATE
     ${PRIVATE_HEADERS}
 )
+add_library(Himalaya::DSZ::shared ALIAS DSZ_shared)
 
 # Himalaya static library
 add_library(Himalaya_static STATIC ${HIM_LIBSOURCES})
@@ -118,6 +120,7 @@ target_include_directories(Himalaya_static
   PRIVATE
     ${PRIVATE_HEADERS}
 )
+add_library(Himalaya::Himalaya::static ALIAS Himalaya_static)
 
 # Himalaya shared library
 add_library(Himalaya_shared SHARED ${HIM_LIBSOURCES})
@@ -130,10 +133,15 @@ target_include_directories(Himalaya_shared
   PRIVATE
     ${PRIVATE_HEADERS}
 )
+add_library(Himalaya::Himalaya::shared ALIAS Himalaya_shared)
+
+# generic targets
+add_library(Himalaya::Himalaya ALIAS Himalaya_static)
+add_library(Himalaya::DSZ ALIAS DSZ_static)
 
 # example executable
 add_executable(example ${SOURCE_PATH}/example.cpp)
-target_link_libraries(example Himalaya_static DSZ_static)
+target_link_libraries(example Himalaya::Himalaya Himalaya::DSZ)
 
 # create LibrayLink
 if(Mathematica_FOUND)
@@ -145,7 +153,7 @@ if(Mathematica_FOUND)
     PRIVATE
       ${Mathematica_INCLUDE_DIR}
       ${Mathematica_MathLink_INCLUDE_DIR}
-      $<TARGET_PROPERTY:Himalaya_static,INCLUDE_DIRECTORIES>
+      $<TARGET_PROPERTY:Himalaya::Himalaya::static,INCLUDE_DIRECTORIES>
     )
   set_target_properties(${LL_LIB} PROPERTIES LINK_FLAGS "${Mathematica_MathLink_LINKER_FLAGS}")
 

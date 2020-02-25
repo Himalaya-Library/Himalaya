@@ -8,11 +8,11 @@ function(add_himalaya_test name)
     )
   target_link_libraries(
     ${name}
-    Himalaya_static
-    DSZ_static
+    Himalaya::Himalaya
+    Himalaya::DSZ
     )
   target_include_directories(
-    ${name} PRIVATE $<TARGET_PROPERTY:Himalaya_static,INCLUDE_DIRECTORIES>
+    ${name} PRIVATE $<TARGET_PROPERTY:Himalaya::Himalaya,INCLUDE_DIRECTORIES>
     )
   add_test(NAME ${name} COMMAND ${name})
 endfunction()
