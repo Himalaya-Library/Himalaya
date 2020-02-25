@@ -43,12 +43,6 @@ set(PRIVATE_HEADERS
   ${INCLUDE_PATH}/mh2l
   ${INCLUDE_PATH}/misc)
 
-# generate himalaya.pc file for pkg-config
-configure_file (
-  "${PROJECT_SOURCE_DIR}/cmake/himalaya.pc.in"
-  "${CMAKE_BINARY_DIR}/himalaya.pc"
-  @ONLY)
-
 # Himalaya library sources
 set(HIM_LIBSOURCES
   # interface
@@ -160,6 +154,12 @@ if(Mathematica_FOUND)
   Mathematica_ABSOLUTIZE_LIBRARY_DEPENDENCIES(${LL_LIB})
 endif()
 
+# generate himalaya.pc file for pkg-config
+configure_file (
+  "${PROJECT_SOURCE_DIR}/cmake/himalaya.pc.in"
+  "${PROJECT_BINARY_DIR}/himalaya.pc"
+  @ONLY)
+
 # install libraries
 install(
   TARGETS Himalaya_static Himalaya_shared DSZ_static DSZ_shared
@@ -175,8 +175,8 @@ install(
 )
 
 # install himalaya.pc file
-install(FILES
-  "${CMAKE_BINARY_DIR}/himalaya.pc"
+install(
+  FILES "${PROJECT_BINARY_DIR}/himalaya.pc"
   DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig")
 
 # adding documentation
