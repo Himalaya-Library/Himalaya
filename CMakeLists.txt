@@ -108,11 +108,15 @@ target_link_libraries(example Himalaya_static DSZ_static)
 if(Mathematica_FOUND)
   set(LL_SRC ${SOURCE_PATH}/LibraryLink/Himalaya_LibraryLink.cpp)
   set(LL_LIB Himalaya_LibraryLink)
-  include_directories(${Mathematica_INCLUDE_DIR})
-  include_directories(${Mathematica_MathLink_INCLUDE_DIR})
   Mathematica_ADD_LIBRARY(${LL_LIB} ${LL_SRC})
   target_link_libraries(${LL_LIB} PRIVATE Himalaya_shared ${Mathematica_MathLink_LIBRARIES})
+  target_include_directories(${LL_LIB}
+    PRIVATE
+      ${Mathematica_INCLUDE_DIR}
+      ${Mathematica_MathLink_INCLUDE_DIR}
+    )
   set_target_properties(${LL_LIB} PROPERTIES LINK_FLAGS "${Mathematica_MathLink_LINKER_FLAGS}")
+
   Mathematica_ABSOLUTIZE_LIBRARY_DEPENDENCIES(${LL_LIB})
 endif()
 
