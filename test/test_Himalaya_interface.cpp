@@ -1,5 +1,6 @@
 #include "doctest.h"
-#include "Himalaya_interface.hpp"
+
+#include "himalaya/Himalaya_interface.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 

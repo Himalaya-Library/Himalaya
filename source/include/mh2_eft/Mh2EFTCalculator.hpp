@@ -7,8 +7,10 @@
 
 #pragma once
 
-#include "Himalaya_interface.hpp"
+#include "himalaya/Himalaya_interface.hpp"
+
 #include "EFTFlags.hpp"
+
 #include <iosfwd>
 #include <limits>
 #include <array>

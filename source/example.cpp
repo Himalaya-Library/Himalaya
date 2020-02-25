@@ -5,7 +5,8 @@
 // version 3.
 // ====================================================================
 
-#include "HierarchyCalculator.hpp"
+#include "himalaya/HierarchyCalculator.hpp"
+
 #include <iostream>
 #include <cmath>
 

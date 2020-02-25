@@ -5,10 +5,12 @@
 // version 3.
 // ====================================================================
 
-#include "HierarchyObject.hpp"
+#include "himalaya/HierarchyObject.hpp"
+#include "himalaya/version.hpp"
+
 #include "Hierarchies.hpp"
 #include "EFTFlags.hpp"
-#include "version.hpp"
+
 #include <cmath>
 #include <iostream>
 

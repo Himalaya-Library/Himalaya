@@ -5,7 +5,9 @@
 // version 3.
 // ====================================================================
 
-#include "HierarchyCalculator.hpp"
+#include "himalaya/HierarchyCalculator.hpp"
+#include "himalaya/version.hpp"
+
 #include "Hierarchies.hpp"
 #include "DSZHiggs.hpp"
 #include "EFTFlags.hpp"
@@ -30,7 +32,7 @@
 #include "Utils.hpp"
 #include "ThresholdCalculator.hpp"
 #include "MSSM_mass_eigenstates.hpp"
-#include "version.hpp"
+
 #include <iostream>
 #include <numeric>
 #include <stdexcept>

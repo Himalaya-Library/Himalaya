@@ -5,9 +5,11 @@
 // version 3.
 // ====================================================================
 
-#include "Himalaya_interface.hpp"
+#include "himalaya/Himalaya_interface.hpp"
+
 #include "Logger.hpp"
 #include "Utils.hpp"
+
 #include <cmath>
 #include <iostream>
 #include <string>

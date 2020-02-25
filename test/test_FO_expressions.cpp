@@ -1,5 +1,7 @@
 #include "doctest.h"
-#include "HierarchyCalculator.hpp"
+
+#include "himalaya/HierarchyCalculator.hpp"
+
 #include "Hierarchies.hpp"
 #include "EFTFlags.hpp"
 

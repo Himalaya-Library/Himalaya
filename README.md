@@ -122,7 +122,7 @@ coupling of the Standard Model in the MS-bar scheme.
 First one has to include the header
 
 ```cpp
-#include "HierarchyCalculator.hpp"
+#include "himalaya/HierarchyCalculator.hpp"
 ```
 
 in the C++ file. The MSSM DR'-bar parameters must be stored in a
@@ -213,7 +213,7 @@ A full and detailed example can be found in
 **Example**:
 
 ```cpp
-#include "HierarchyCalculator.hpp"
+#include "himalaya/HierarchyCalculator.hpp"
 #include <iostream>
 #include <cmath>
 

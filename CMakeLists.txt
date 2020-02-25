@@ -161,12 +161,10 @@ install(
 )
 
 # install public headers
-install(FILES
-  "${INCLUDE_PATH}/HierarchyCalculator.hpp"
-  "${INCLUDE_PATH}/HierarchyObject.hpp"
-  "${INCLUDE_PATH}/Himalaya_interface.hpp"
-  "${INCLUDE_PATH}/version.hpp"
-  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/himalaya")
+install(
+  DIRECTORY "${INCLUDE_PATH}/himalaya"
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
+)
 
 # install himalaya.pc file
 install(FILES
