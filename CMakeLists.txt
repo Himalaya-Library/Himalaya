@@ -36,13 +36,11 @@ set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source)
 set(INCLUDE_PATH ${SOURCE_PATH}/include)
 
 #include c++ header files
-include_directories(${INCLUDE_PATH})
 include_directories(${INCLUDE_PATH}/hierarchies)
 include_directories(${INCLUDE_PATH}/mh2_eft)
 include_directories(${INCLUDE_PATH}/mh2_fo)
 include_directories(${INCLUDE_PATH}/mh2l)
 include_directories(${INCLUDE_PATH}/misc)
-include_directories(${EIGEN3_INCLUDE_DIR})
 
 # generate himalaya.pc file for pkg-config
 configure_file (
@@ -92,13 +90,34 @@ set(DSZ_LIBSOURCES
 # build the himalaya and DSZ library
 add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_static PROPERTIES OUTPUT_NAME DSZ)
+target_include_directories(DSZ_static
+  PUBLIC
+    ${EIGEN3_INCLUDE_DIR}
+)
+
 add_library(DSZ_shared SHARED ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_shared PROPERTIES OUTPUT_NAME DSZ)
+target_include_directories(DSZ_shared
+  PUBLIC
+    ${EIGEN3_INCLUDE_DIR}
+)
+
 add_library(Himalaya_static STATIC ${HIM_LIBSOURCES})
 set_target_properties(Himalaya_static PROPERTIES OUTPUT_NAME Himalaya)
+target_include_directories(Himalaya_static
+  PUBLIC
+    ${INCLUDE_PATH}
+    ${EIGEN3_INCLUDE_DIR}
+)
+
 add_library(Himalaya_shared SHARED ${HIM_LIBSOURCES})
 set_target_properties(Himalaya_shared PROPERTIES OUTPUT_NAME Himalaya)
 target_link_libraries(Himalaya_shared PUBLIC DSZ_shared)
+target_include_directories(Himalaya_shared
+  PUBLIC
+    ${INCLUDE_PATH}
+    ${EIGEN3_INCLUDE_DIR}
+)
 
 # set the executable
 add_executable(example ${SOURCE_PATH}/example.cpp)
