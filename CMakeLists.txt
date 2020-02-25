@@ -35,12 +35,13 @@ endif()
 set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source)
 set(INCLUDE_PATH ${SOURCE_PATH}/include)
 
-#include c++ header files
-include_directories(${INCLUDE_PATH}/hierarchies)
-include_directories(${INCLUDE_PATH}/mh2_eft)
-include_directories(${INCLUDE_PATH}/mh2_fo)
-include_directories(${INCLUDE_PATH}/mh2l)
-include_directories(${INCLUDE_PATH}/misc)
+# private headers
+set(PRIVATE_HEADERS
+  ${INCLUDE_PATH}/hierarchies
+  ${INCLUDE_PATH}/mh2_eft
+  ${INCLUDE_PATH}/mh2_fo
+  ${INCLUDE_PATH}/mh2l
+  ${INCLUDE_PATH}/misc)
 
 # generate himalaya.pc file for pkg-config
 configure_file (
@@ -48,7 +49,7 @@ configure_file (
   "${CMAKE_BINARY_DIR}/himalaya.pc"
   @ONLY)
 
-# Himalaya library files
+# Himalaya library sources
 set(HIM_LIBSOURCES
   # interface
   ${SOURCE_PATH}/HierarchyCalculator.cpp
@@ -80,36 +81,45 @@ set(HIM_LIBSOURCES
   # helpers
   ${SOURCE_PATH}/misc/dilog.cpp)
 
-# DSZ library files
+# DSZ library sources
 set(DSZ_LIBSOURCES
   ${SOURCE_PATH}/mh2l/DSZHiggs.cpp
   ${SOURCE_PATH}/mh2l/DSZHiggs.f
   ${SOURCE_PATH}/mh2l/functs.f
   ${SOURCE_PATH}/mh2l/li2.cpp)
 
-# build the himalaya and DSZ library
+# DSZ static library
 add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_static PROPERTIES OUTPUT_NAME DSZ)
 target_include_directories(DSZ_static
   PUBLIC
     ${EIGEN3_INCLUDE_DIR}
+  PRIVATE
+    ${PRIVATE_HEADERS}
 )
 
+# DSZ shared library
 add_library(DSZ_shared SHARED ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_shared PROPERTIES OUTPUT_NAME DSZ)
 target_include_directories(DSZ_shared
   PUBLIC
     ${EIGEN3_INCLUDE_DIR}
+  PRIVATE
+    ${PRIVATE_HEADERS}
 )
 
+# Himalaya static library
 add_library(Himalaya_static STATIC ${HIM_LIBSOURCES})
 set_target_properties(Himalaya_static PROPERTIES OUTPUT_NAME Himalaya)
 target_include_directories(Himalaya_static
   PUBLIC
     ${INCLUDE_PATH}
     ${EIGEN3_INCLUDE_DIR}
+  PRIVATE
+    ${PRIVATE_HEADERS}
 )
 
+# Himalaya shared library
 add_library(Himalaya_shared SHARED ${HIM_LIBSOURCES})
 set_target_properties(Himalaya_shared PROPERTIES OUTPUT_NAME Himalaya)
 target_link_libraries(Himalaya_shared PUBLIC DSZ_shared)
@@ -117,13 +127,15 @@ target_include_directories(Himalaya_shared
   PUBLIC
     ${INCLUDE_PATH}
     ${EIGEN3_INCLUDE_DIR}
+  PRIVATE
+    ${PRIVATE_HEADERS}
 )
 
-# set the executable
+# example executable
 add_executable(example ${SOURCE_PATH}/example.cpp)
 target_link_libraries(example Himalaya_static DSZ_static)
 
-# create LibrayLink executable
+# create LibrayLink
 if(Mathematica_FOUND)
   set(LL_SRC ${SOURCE_PATH}/LibraryLink/Himalaya_LibraryLink.cpp)
   set(LL_LIB Himalaya_LibraryLink)
@@ -133,6 +145,7 @@ if(Mathematica_FOUND)
     PRIVATE
       ${Mathematica_INCLUDE_DIR}
       ${Mathematica_MathLink_INCLUDE_DIR}
+      $<TARGET_PROPERTY:Himalaya_static,INCLUDE_DIRECTORIES>
     )
   set_target_properties(${LL_LIB} PROPERTIES LINK_FLAGS "${Mathematica_MathLink_LINKER_FLAGS}")
 

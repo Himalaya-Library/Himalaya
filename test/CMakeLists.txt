@@ -11,6 +11,9 @@ function(add_himalaya_test name)
     Himalaya_static
     DSZ_static
     )
+  target_include_directories(
+    ${name} PRIVATE $<TARGET_PROPERTY:Himalaya_static,INCLUDE_DIRECTORIES>
+    )
   add_test(NAME ${name} COMMAND ${name})
 endfunction()
 
