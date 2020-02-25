@@ -5,6 +5,8 @@
 // version 3.
 // ====================================================================
 
-#define Himalaya_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
-#define Himalaya_VERSION_MINOR @PROJECT_VERSION_MINOR@
-#define Himalaya_VERSION_RELEASE @PROJECT_VERSION_PATCH@
+#pragma once
+
+#define Himalaya_VERSION_MAJOR 3
+#define Himalaya_VERSION_MINOR 0
+#define Himalaya_VERSION_RELEASE 1

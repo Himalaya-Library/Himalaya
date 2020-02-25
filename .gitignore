@@ -2,6 +2,5 @@
 build/
 .kdev4/
 *.kdev4
-source/include/version.hpp
 doc/html
 doc/latex

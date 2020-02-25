@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(Himalaya VERSION 3.0.1 LANGUAGES CXX Fortran)
+project(Himalaya LANGUAGES CXX Fortran)
 
 include(GNUInstallDirs)
 
@@ -43,11 +43,6 @@ include_directories(${INCLUDE_PATH}/mh2_fo)
 include_directories(${INCLUDE_PATH}/mh2l)
 include_directories(${INCLUDE_PATH}/misc)
 include_directories(${EIGEN3_INCLUDE_DIR})
-
-# setting the correct version to all headers
-configure_file (
-  "${INCLUDE_PATH}/version.hpp.in"
-  "${INCLUDE_PATH}/version.hpp")
 
 # generate himalaya.pc file for pkg-config
 configure_file (
