@@ -32,6 +32,7 @@ Please refer to these papers as well as
 
 * R. V. Harlander, J. Klappert, and A. Voigt,
   *The light CP-even MSSM Higgs mass including N3LO+N3LL QCD corrections*,
+  [*Eur.Phys.J.* **C80** (2020) no.3, 186](https://doi.org/10.1140/epjc/s10052-020-7747-7),
   [[1910.03595](https://arxiv.org/abs/1910.03595)]   
 
 when using Himalaya.
