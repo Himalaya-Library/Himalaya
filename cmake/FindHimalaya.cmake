@@ -34,8 +34,6 @@ find_path(Himalaya_INCLUDE_DIRS
     ${Himalaya_INCLUDE_DIR}
   PATH_SUFFIXES
     include
-    source
-    source/include
   NO_DEFAULT_PATH
   NO_CMAKE_PATH
   NO_CMAKE_ENVIRONMENT_PATH

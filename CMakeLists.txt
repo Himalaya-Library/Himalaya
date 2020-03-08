@@ -33,15 +33,15 @@ endif()
 
 # set paths
 set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source)
-set(INCLUDE_PATH ${SOURCE_PATH}/include)
+set(PUBLIC_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # private headers
 set(PRIVATE_HEADERS
-  ${INCLUDE_PATH}/hierarchies
-  ${INCLUDE_PATH}/mh2_eft
-  ${INCLUDE_PATH}/mh2_fo
-  ${INCLUDE_PATH}/mh2l
-  ${INCLUDE_PATH}/misc)
+  ${SOURCE_PATH}/include/hierarchies
+  ${SOURCE_PATH}/include/mh2_eft
+  ${SOURCE_PATH}/include/mh2_fo
+  ${SOURCE_PATH}/include/mh2l
+  ${SOURCE_PATH}/include/misc)
 
 # Himalaya library sources
 set(HIM_LIBSOURCES
@@ -109,7 +109,7 @@ add_library(Himalaya_static STATIC ${HIM_LIBSOURCES})
 set_target_properties(Himalaya_static PROPERTIES OUTPUT_NAME Himalaya)
 target_include_directories(Himalaya_static
   PUBLIC
-    ${INCLUDE_PATH}
+    ${PUBLIC_HEADERS}
     ${EIGEN3_INCLUDE_DIR}
   PRIVATE
     ${PRIVATE_HEADERS}
@@ -122,7 +122,7 @@ set_target_properties(Himalaya_shared PROPERTIES OUTPUT_NAME Himalaya)
 target_link_libraries(Himalaya_shared PUBLIC DSZ_shared)
 target_include_directories(Himalaya_shared
   PUBLIC
-    ${INCLUDE_PATH}
+    ${PUBLIC_HEADERS}
     ${EIGEN3_INCLUDE_DIR}
   PRIVATE
     ${PRIVATE_HEADERS}
@@ -170,7 +170,7 @@ install(
 
 # install public headers
 install(
-  DIRECTORY "${INCLUDE_PATH}/himalaya"
+  DIRECTORY "${PUBLIC_HEADERS}/himalaya"
   DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 

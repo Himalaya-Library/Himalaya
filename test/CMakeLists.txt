@@ -1,4 +1,3 @@
-include_directories(${INCLUDE_PATH}/test)
 add_definitions(-DDOCTEST_CONFIG_IMPLEMENT_WITH_MAIN)
 
 function(add_himalaya_test name)
