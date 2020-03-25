@@ -1,3 +1,17 @@
+Himalaya 3.1.0
+==============
+
+Changes
+-------
+
+ * Faster implementation of 2-loop function phi(x,y,z) [Davydychev and
+   Tausk, Nucl. Phys. B397 (1993) 23] for degenerate mass spectra.
+
+ * The public Himalaya headers are placed in the `himalaya`
+   sub-directory of the include directory, in order to avoid conflicts
+   with other installed headers.
+
+
 Himalaya 3.0.1
 ==============
 
