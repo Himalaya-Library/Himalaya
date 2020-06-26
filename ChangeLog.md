@@ -1,15 +1,23 @@
-Himalaya 3.1.0
+Himalaya 4.0.0
 ==============
 
 Changes
 -------
 
- * Faster implementation of 2-loop function phi(x,y,z) [Davydychev and
-   Tausk, Nucl. Phys. B397 (1993) 23] for degenerate mass spectra.
+ * The public Himalaya headers have been moved to the
+   `include/himalaya/` directory. When installed, the public headers
+   are now located in a `himalaya/` sub-directory of include
+   directory. As a consequence, the headers have to be included via
 
- * The public Himalaya headers are placed in the `himalaya`
-   sub-directory of the include directory, in order to avoid conflicts
-   with other installed headers.
+       #include "himalaya/HierarchyCalculator.hpp"
+
+ * [commit 03022da]: Faster implementation of 2-loop function
+   phi(x,y,z) [Davydychev and Tausk, Nucl. Phys. B397 (1993) 23] for
+   degenerate mass spectra.
+
+ * [commit eb52c7b]: Faster implementation of the dilogarithm function.
+
+ * [commit d957fd7]: Update `FindMathematica.cmake` to version 3.3.0.
 
 
 Himalaya 3.0.1
