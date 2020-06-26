@@ -7,6 +7,6 @@
 
 #pragma once
 
-#define Himalaya_VERSION_MAJOR 3
+#define Himalaya_VERSION_MAJOR 4
 #define Himalaya_VERSION_MINOR 0
-#define Himalaya_VERSION_RELEASE 1
+#define Himalaya_VERSION_RELEASE 0
