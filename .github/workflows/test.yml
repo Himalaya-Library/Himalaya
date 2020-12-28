@@ -25,9 +25,10 @@ jobs:
       run: sudo apt install gfortran
       if: startsWith(matrix.os, 'ubuntu-')
     - name: use gcc and gfortran on MacOS
-      run: |
-        export CXX="gcc-10"
-        export FC="gfortran-10"
+      run:
+      env:
+        CXX: gcc-10
+        FC: gfortran-10
       if: startsWith(matrix.os, 'macos-')
     - name: cmake
       run: cmake . -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
