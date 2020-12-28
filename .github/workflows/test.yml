@@ -27,8 +27,8 @@ jobs:
     - name: cmake
       run: cmake . -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
       env:
-        CXX: g++-10
-        FC: gfortran-10
+        CXX: g++
+        FC: gfortran
     - name: cmake build
       run: cmake --build .
     - name: ctest
