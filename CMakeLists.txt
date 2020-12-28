@@ -138,7 +138,7 @@ add_executable(example ${SOURCE_PATH}/example.cpp)
 target_link_libraries(example Himalaya::Himalaya Himalaya::DSZ)
 
 # create LibrayLink
-if(Mathematica_FOUND)
+if(Mathematica_WolframLibrary_FOUND)
   set(LL_SRC ${SOURCE_PATH}/LibraryLink/Himalaya_LibraryLink.cpp)
   set(LL_LIB Himalaya_LibraryLink)
   Mathematica_ADD_LIBRARY(${LL_LIB} ${LL_SRC})

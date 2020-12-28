@@ -24,7 +24,7 @@ add_himalaya_test(test_Himalaya_interface)
 add_himalaya_test(test_li2)
 add_himalaya_test(test_delta_lambda)
 
-if(Mathematica_FOUND)
+if(Mathematica_WolframLibrary_FOUND)
   Mathematica_WolframLibrary_ADD_TEST (
     NAME test_LibraryLink
     TARGET Himalaya_LibraryLink
