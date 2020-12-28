@@ -21,9 +21,6 @@ jobs:
       run: pip install conan
     - name: install dependencies
       run: conan install .
-    - name: install gfortran on Ubuntu
-      run: sudo apt install gfortran
-      if: startsWith(matrix.os, 'ubuntu-')
     - name: cmake
       run: cmake . -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
       env:
