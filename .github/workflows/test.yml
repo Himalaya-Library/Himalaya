@@ -25,7 +25,6 @@ jobs:
       run: sudo apt install gfortran
       if: startsWith(matrix.os, 'ubuntu-')
     - name: use gcc and gfortran on MacOS
-      run:
       env:
         CXX: gcc-10
         FC: gfortran-10
