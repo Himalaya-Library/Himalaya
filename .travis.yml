@@ -1,8 +1,9 @@
 language: cpp
-os:
-  - linux
-  - osx
-    osx_image: xcode11.6
+jobs:
+  include:
+    - os: linux
+    - os: osx
+      osx_image: xcode11.6
 compiler:
   - clang
   - gcc
