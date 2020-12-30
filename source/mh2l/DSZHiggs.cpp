@@ -39,10 +39,6 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
    double tanb, double vev2, double gs, int /* scheme */)
 {
    using std::fabs;
-   using std::sqrt;
-   using std::atan;
-   using std::log;
-   using std::sin;
    using std::pow;
 
    constexpr double Pi2 = M_PI * M_PI;
@@ -56,7 +52,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
    const double Tsq = sqr(mst12);
    const double del = g2 + tsq + Tsq - 2*(g*t + g*T + t*T);
    const double rdel = sqrtabs(del);
-   const double sb = sin(atan(tanb));
+   const double sb = std::sin(std::atan(tanb));
    const double ht2 = 2./vev2*mt2/sqr(sb);
 
    Eigen::Matrix<double, 2, 2> result;
@@ -158,8 +154,6 @@ double calc_At(double mt2, double mst12, double mst22,
 
 double phi(double x, double y, double z)
 {
-   using std::log;
-
    const double u = x/z, v = y/z;
    const double lambda = sqrtabs(sqr(1 - u - v) - 4*u*v);
    const double xp = 0.5 * (1 + (u - v) - lambda);
@@ -173,8 +167,6 @@ double phi(double x, double y, double z)
 double dphi_010(double t, double T, double g)
 {
    using std::fabs;
-   using std::sqrt;
-   using std::log;
    using std::pow;
 
    constexpr double Pi2 = M_PI * M_PI;
@@ -204,10 +196,6 @@ double delta_ma2_2loop_at_as_mst1_eq_mst2(
    double sxt, double cxt, double scale2, double mu,
    double tanb, double vev2, double gs)
 {
-   using std::atan;
-   using std::log;
-   using std::sin;
-
    constexpr double Pi2 = M_PI * M_PI;
    const double g = sqr(mg);
    const double g2 = sqr(g);
@@ -215,7 +203,7 @@ double delta_ma2_2loop_at_as_mst1_eq_mst2(
    const double q2 = sqr(scale2);
    const double t = mt2;
    const double T = mst12;
-   const double sb = sin(atan(tanb));
+   const double sb = std::sin(std::atan(tanb));
    const double ht2 = 2./vev2*mt2/sqr(sb);
    const double At = calc_At(mt2, mst12, mst22, sxt, cxt, mu, tanb);
 
