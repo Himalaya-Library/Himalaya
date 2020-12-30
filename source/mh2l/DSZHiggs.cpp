@@ -38,9 +38,6 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
    double /* sxt */, double /* cxt */, double scale2, double mu,
    double tanb, double vev2, double gs, int /* scheme */)
 {
-   using std::fabs;
-   using std::pow;
-
    constexpr double Pi2 = M_PI * M_PI;
    constexpr double Pi4 = M_PI * M_PI * M_PI * M_PI;
    const double g = sqr(mg);
@@ -73,7 +70,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
       g*sqrtabs(del/g2))/(2.*g))*logabs((g - t + T -
       g*sqrtabs(del/g2))/(2.*g)) - 6*li2((g + t - T -
       g*sqrtabs(del/g2))/(2.*g)) - 6*li2((g - t + T -
-      g*sqrtabs(del/g2))/(2.*g))))/ (3.*g2)))/(2.*pow(fabs(del)/g2,1.5))))/
+      g*sqrtabs(del/g2))/(2.*g))))/ (3.*g2)))/(2.*std::pow(std::abs(del)/g2,1.5))))/
       (8.*Pi4*T);
 
    result(1,0) = result(0,1);
@@ -88,7 +85,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
       g*sqrtabs(del/g2))/ (2.*g)) - 6*li2((g - t + T -
       g*sqrtabs(del/g2))/(2.*g)) - 3*logabs(t/g)*logabs(T/g) +
       6*logabs((-rdel + g + t - T)/(2.*g))* logabs((-rdel + g - t +
-      T)/(2.*g))))/(3.*pow(fabs(del),1.5)) + (4*g*(g + t - T)*(Pi2 -
+      T)/(2.*g))))/(3.*std::pow(std::abs(del),1.5)) + (4*g*(g + t - T)*(Pi2 -
       6*li2((g + t - T - g*sqrtabs(del/g2))/(2.*g)) - 6*li2((g - t
       + T - g*sqrtabs(del/g2))/ (2.*g)) - 3*logabs(t/g)*logabs(T/g) +
       6*logabs((g + t - T - g*sqrtabs(del/g2))/(2.*g))* logabs((g - t
@@ -97,7 +94,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
       6*li2((g + t - T - g*sqrtabs(del/g2))/(2.*g)) - 6*li2((g - t
       + T - g*sqrtabs(del/g2))/ (2.*g)) - 3*logabs(t/g)*logabs(T/g) +
       6*logabs((-rdel + g + t - T)/(2.*g))*logabs((-rdel + g - t +
-      T)/(2.*g))))/ (3.*pow(fabs(del),1.5)) + (g*(-(logabs(t/g)/T) -
+      T)/(2.*g))))/ (3.*std::pow(std::abs(del),1.5)) + (g*(-(logabs(t/g)/T) -
       (2*(-(g*logabs(4.)) + (rdel + g + t - T)*logabs((-rdel + g + t -
       T)/g) + (-rdel + g - t + T)*logabs((-rdel + g - t + T)/g)))/
       (rdel*(rdel - g + t - T)) - 2*(((rdel + g + t - T)* logabs((g +
@@ -166,9 +163,6 @@ double phi(double x, double y, double z)
 /// First derivative of phi[t,T,g] w.r.t. T
 double dphi_010(double t, double T, double g)
 {
-   using std::fabs;
-   using std::pow;
-
    constexpr double Pi2 = M_PI * M_PI;
    const double g2 = sqr(g);
    const double abbr = (-4*t*T)/g2 + sqr(1 - t/g - T/g);
@@ -186,7 +180,7 @@ double dphi_010(double t, double T, double g)
       T*logabs((g - rabbr*g - t + T)/g) + g*logabs((g + rabbr*g - t +
       T)/g) - rabbr*g*logabs((g + rabbr*g - t + T)/g) - t*logabs((g +
       rabbr*g - t + T)/g) + T*logabs((g + rabbr*g - t + T)/g)) ) ) /
-      (T*(g - rabbr*g - t + T)))/(3.*pow(fabs(abbr),1.5)*g2);
+      (T*(g - rabbr*g - t + T)))/(3.*std::pow(std::abs(abbr),1.5)*g2);
 }
 
 } // anonymous namespace
