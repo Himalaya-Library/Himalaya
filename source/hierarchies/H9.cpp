@@ -10,7 +10,6 @@
 #include "Constants.hpp"
 #include "Utils.hpp"
 #include <cmath>
-#include <type_traits>
 
 namespace himalaya{
 namespace hierarchies{

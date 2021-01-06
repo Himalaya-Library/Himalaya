@@ -9,7 +9,6 @@
 #include "ThresholdCalculator.hpp"
 #include "EFTFlags.hpp"
 #include "Logger.hpp"
-#include "threshold_loop_functions.hpp"
 #include <cmath>
 #include <iostream>
 #include <string>

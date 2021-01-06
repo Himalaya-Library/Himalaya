@@ -18,10 +18,8 @@
 
 #pragma once
 
-#include <cstdint>
 #include <limits>
 #include <cctype>
-#include <cmath>
 #include <complex>
 #include <algorithm>
 #include <tuple>

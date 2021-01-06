@@ -12,10 +12,10 @@
 
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <tuple>
 #include <utility>
-#include <vector>
 
 #include <Eigen/Eigenvalues>
 

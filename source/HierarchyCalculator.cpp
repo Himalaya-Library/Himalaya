@@ -6,6 +6,7 @@
 // ====================================================================
 
 #include "himalaya/HierarchyCalculator.hpp"
+#include "himalaya/HierarchyObject.hpp"
 #include "himalaya/version.hpp"
 
 #include "Hierarchies.hpp"
@@ -33,10 +34,12 @@
 #include "ThresholdCalculator.hpp"
 #include "MSSM_mass_eigenstates.hpp"
 
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <numeric>
 #include <stdexcept>
-#include <type_traits>
+#include <string>
 #include <vector>
 
 #include <Eigen/Eigenvalues>

@@ -10,6 +10,7 @@
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
 #include <map>
+#include <Eigen/Core>
 
 /**
  * @file HierarchyCalculator.hpp

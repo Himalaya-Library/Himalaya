@@ -17,7 +17,7 @@
 // ====================================================================
 
 #include "linalg2.hpp"
-#include "Logger.hpp"
+#include <cmath>
 
 /**
  * @file linalg2.cpp

@@ -19,8 +19,10 @@
 #include "threshold_loop_functions.hpp"
 #include "dilog.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <limits>
+#include <utility>
 
 /**
  * @file threshold_loop_functions.cpp

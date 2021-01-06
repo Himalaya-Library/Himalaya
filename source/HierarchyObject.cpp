@@ -6,13 +6,15 @@
 // ====================================================================
 
 #include "himalaya/HierarchyObject.hpp"
-#include "himalaya/version.hpp"
 
 #include "Hierarchies.hpp"
 #include "EFTFlags.hpp"
 
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
+#include <string>
+#include <utility>
 
 /**
  * @file HierarchyObject.cpp

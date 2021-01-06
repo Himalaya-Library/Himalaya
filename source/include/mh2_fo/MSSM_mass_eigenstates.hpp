@@ -12,6 +12,7 @@
 #include "EFTFlags.hpp"
 
 #include <array>
+#include <iosfwd>
 #include <tuple>
 #include <Eigen/Core>
 

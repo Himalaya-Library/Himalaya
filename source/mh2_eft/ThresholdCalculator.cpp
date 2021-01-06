@@ -11,6 +11,8 @@
 #include "threshold_loop_functions.hpp"
 #include "dilog.hpp"
 #include <cmath>
+#include <complex>
+#include <stdexcept>
 
 /**
  * @file ThresholdCalculator.cpp

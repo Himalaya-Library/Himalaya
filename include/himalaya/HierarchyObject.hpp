@@ -8,9 +8,9 @@
 #pragma once
 
 #include <iosfwd>
-#include <Eigen/Core>
-#include <vector>
 #include <map>
+#include <string>
+#include <Eigen/Core>
 
 /**
  * @file HierarchyObject.hpp
