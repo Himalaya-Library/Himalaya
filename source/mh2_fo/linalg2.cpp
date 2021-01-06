@@ -46,12 +46,10 @@ double pow2(double x) noexcept { return x*x; }
 std::tuple<V2,V2,V2,V2> fs_diagonalize_hermitian_perturbatively(
    const RM22& m0, const RM22& m1, const RM22& m2, const RM22& m3)
 {
-   using std::sqrt;
-
    // tree-level
    const auto a11 = m0(0,0), a12 = m0(0,1), a22 = m0(1,1);
    const auto c1 = a11 + a22;
-   const auto c2 = sqrt(pow2(a11) + 4*pow2(a12) - 2*a11*a22 + pow2(a22));
+   const auto c2 = std::sqrt(pow2(a11) + 4*pow2(a12) - 2*a11*a22 + pow2(a22));
 
    V2 mh2_0L;
    mh2_0L << 0.5*(c1 - c2), 0.5*(c1 + c2);
