@@ -83,10 +83,13 @@ const std::map<int, int> hierarchyMap = {
  */
 std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es)
 {
-  std::vector<double> sortedEigenvalues
-     = {sqrt(std::real(es.eigenvalues()(0))), sqrt(std::real(es.eigenvalues()(1)))};
-  std::sort(sortedEigenvalues.begin(), sortedEigenvalues.end());
-  return sortedEigenvalues;
+   const auto eigenvalues = es.eigenvalues().real().cwiseSqrt();
+
+   if (eigenvalues(0) < eigenvalues(1)) {
+      return {eigenvalues(0), eigenvalues(1)};
+   } else {
+      return {eigenvalues(1), eigenvalues(0)};
+   }
 }
 
 /// set flags to omit all corrections, except O(at*as^n)
