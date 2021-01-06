@@ -40,35 +40,35 @@ template <typename T> T pow3(T x)
 }
 template <typename T> T pow4(T x)
 {
-    return x * x * x * x;
+    return pow2(pow2(x));
 }
 template <typename T> T pow5(T x)
 {
-    return x * x * x * x * x;
+    return pow4(x) * x;
 }
 template <typename T> T pow6(T x)
 {
-    return x * x * x * x * x * x;
+    return pow2(pow2(x) * x);
 }
 template <typename T> T pow7(T x)
 {
-    return x * x * x * x * x * x * x;
+    return pow6(x) * x;
 }
 template <typename T> T pow8(T x)
 {
-    return x * x * x * x * x * x * x * x;
+    return pow2(pow4(x));
 }
 template <typename T> T pow9(T x)
 {
-    return x * x * x * x * x * x * x * x * x;
+    return pow8(x) * x;
 }
 template <typename T> T power10(T x)
 {
-    return pow9(x) * x;
+    return pow2(pow5(x));
 }
 template <typename T> T pow11(T x)
 {
-    return pow2(x) * pow9(x);
+    return pow10(x) * x;
 }
 template <typename T> T pow12(T x)
 {
