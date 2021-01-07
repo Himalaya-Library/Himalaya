@@ -153,7 +153,7 @@ void HierarchyCalculator::init(){
    }
 
    // beta
-   const double beta = atan(p.vu / p.vd);
+   const double beta = std::atan(p.vu / p.vd);
 
    // Al4p
    Al4p = pow2(p.g3 / (4 * Pi));
@@ -323,7 +323,7 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
    int suitableHierarchy = -1;
 
    // sine of 2 times beta
-   const double s2b = sin(2*atan(p.vu/p.vd));
+   const double s2b = std::sin(2*std::atan(p.vu/p.vd));
    const double tbeta = p.vu/p.vd;
 
    // tree level Higgs mass matrix
@@ -1033,29 +1033,29 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const double Dmst12 = Mst12 - Mst22;
 
    // logarithms
-   const double lmMst1 = log(scale2 / Mst12);
-   const double lmMst2 = log(scale2 / Mst22);
-   const double lmMsq = log(scale2 / Msq2);
-   const double lmMgl = log(scale2 / Mgl2);
+   const double lmMst1 = std::log(scale2 / Mst12);
+   const double lmMst2 = std::log(scale2 / Mst22);
+   const double lmMsq = std::log(scale2 / Msq2);
+   const double lmMgl = std::log(scale2 / Mgl2);
 
    // degenerate mass case flag
    bool isDegen = false;
 
    // check for degenerate squark masses
    if(std::abs(Mst1 - Mst2) < eps){
-      const double Mst2shift = Mst1 + sqrt(std::abs(Dmst12))/2.;
-      const double lmMst2shift = log(scale2 / pow2(Mst2shift));
+      const double Mst2shift = Mst1 + std::sqrt(std::abs(Dmst12))/2.;
+      const double lmMst2shift = std::log(scale2 / pow2(Mst2shift));
       // limit
       const double lim = (32*Xt2*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 +
         lmMst1)*pow2(Mst1))*pow2(p.mu))/(3.*pow6(Mst1));
       // exact result
       const double exact = (16*Xt2*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
-        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*pow2(p.mu)*(-4*log(Mst1/
+        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*pow2(p.mu)*(-4*std::log(Mst1/
         Mst2)*pow2(Mst1)*pow2(Mst2) + pow4(Mst1) - pow4(Mst2)))/(pow2(Mst1)*
         pow2(Mst2)*pow3(pow2(Mst1) - pow2(Mst2)));
       // exact result with shifted stop_2 mass
       const double exactShifted = (16*Xt2*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
-        lmMst1)*pow2(Mst1) + (1 + lmMst2shift)*pow2(Mst2shift))*pow2(p.mu)*(-4*log(Mst1/
+        lmMst1)*pow2(Mst1) + (1 + lmMst2shift)*pow2(Mst2shift))*pow2(p.mu)*(-4*std::log(Mst1/
         Mst2shift)*pow2(Mst1)*pow2(Mst2shift) + pow4(Mst1) - pow4(Mst2shift)))/(pow2(Mst1)*
         pow2(Mst2shift)*pow3(pow2(Mst1) - pow2(Mst2shift)));
 
@@ -1079,18 +1079,18 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    else{
       // matrix elements
       shift(0, 0) = (16*Xt2*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
-        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*pow2(p.mu)*(-4*log(Mst1/
+        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*pow2(p.mu)*(-4*std::log(Mst1/
         Mst2)*pow2(Mst1)*pow2(Mst2) + pow4(Mst1) - pow4(Mst2)))/(pow2(Mst1)*
         pow2(Mst2)*pow3(pow2(Mst1) - pow2(Mst2)));
       shift(1, 0) = (16*p.mu*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 +
-        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*log(Mst1/Mst2)*pow2(
+        lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*std::log(Mst1/Mst2)*pow2(
         Mst1)*pow2(Mst2)*(p.mu*Xt2 + Tbeta*pow3(Xt)) + p.mu*Xt2*(-pow4(Mst1) +
         pow4(Mst2)) + Tbeta*Xt*(pow3(pow2(Mst1) - pow2(Mst2)) + pow2(Xt)*(-
         pow4(Mst1) + pow4(Mst2)))))/(Tbeta*pow2(Mst1)*pow2(Mst2)*pow3(pow2(
         Mst1) - pow2(Mst2)));
       shift(0, 1) = shift(1,0);
       shift(1, 1) = (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
-        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(-4*log(Mst1/Mst2)*pow2(Mst1)*
+        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(-4*std::log(Mst1/Mst2)*pow2(Mst1)*
         pow2(Mst2)*(Xt2*pow2(p.mu) + truncateXt*pow2(Tbeta)*pow2(Xt2) + 2*p.mu*
         Tbeta*pow3(Xt)) + Xt2*(-2*pow2(Tbeta)*pow3(pow2(Mst1) - pow2(Mst2)) +
         pow2(p.mu)*(pow4(Mst1) - pow4(Mst2))) + Tbeta*(-2*p.mu*Xt*pow3(pow2(Mst1) -
@@ -1148,32 +1148,32 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    const double Dmst12 = Mst12 - Mst22;
 
    // logarithms
-   const double lmMst1 = omitLogs * log(scale2 / Mst12);
-   const double lmMst2 = omitLogs * log(scale2 / Mst12) - log(Mst22 / Mst12);
-   const double lmMsq = omitLogs * log(scale2 / Mst12) - log(Msq2 / Mst12);
-   const double lmMgl = omitLogs * log(scale2 / Mst12) - log(Mgl2 / Mst12);
+   const double lmMst1 = omitLogs * std::log(scale2 / Mst12);
+   const double lmMst2 = omitLogs * std::log(scale2 / Mst12) - std::log(Mst22 / Mst12);
+   const double lmMsq = omitLogs * std::log(scale2 / Mst12) - std::log(Msq2 / Mst12);
+   const double lmMgl = omitLogs * std::log(scale2 / Mst12) - std::log(Mgl2 / Mst12);
 
    // degenerate mass case flag
    bool isDegen = false;
 
    // check for degenerate squark masses
    if(std::abs(Mst1 - Mst2) < eps){
-      const double Mst2shift = Mst1 + sqrt(std::abs(Dmst12))/2.;
-      const double lmMst2shift = log(scale2 / pow2(Mst2shift));
+      const double Mst2shift = Mst1 + std::sqrt(std::abs(Dmst12))/2.;
+      const double lmMst2shift = std::log(scale2 / pow2(Mst2shift));
       // limit
       const double lim = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
         pow2(Mst1))*(-6*Xt2*pow2(Mst1) + truncateXt*pow2(Xt2) + 6*pow4(Mst1)))/
         (3.*pow6(Mst1));
       // exact result
       const double exact =  (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
-        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*truncateXt*log(Mst2/Mst1)*
+        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*truncateXt*std::log(Mst2/Mst1)*
         pow2(Mst1)*pow2(Mst2)*pow2(Xt2) - 2*Xt2*pow3(pow2(Mst1) - pow2(Mst2)) +
         (pow2(Mst1) + pow2(Mst2))*pow3(pow2(Mst1) - pow2(Mst2)) + truncateXt*
         pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*pow3(pow2(
         Mst1) - pow2(Mst2)));
       // exact result with shifted stop_2 mass
       const double exactShifted =  (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
-        pow2(Mst1) + (1 + lmMst2shift)*pow2(Mst2shift))*(4*truncateXt*log(Mst2shift/Mst1)*
+        pow2(Mst1) + (1 + lmMst2shift)*pow2(Mst2shift))*(4*truncateXt*std::log(Mst2shift/Mst1)*
         pow2(Mst1)*pow2(Mst2shift)*pow2(Xt2) - 2*Xt2*pow3(pow2(Mst1) - pow2(Mst2shift)) +
         (pow2(Mst1) + pow2(Mst2shift))*pow3(pow2(Mst1) - pow2(Mst2shift)) + truncateXt*
         pow2(Xt2)*(pow4(Mst1) - pow4(Mst2shift))))/(pow2(Mst1)*pow2(Mst2shift)*pow3(pow2(
@@ -1190,7 +1190,7 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    }
    else{
       shift = (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*pow2(Msq) + (1 + lmMst1)*
-        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*truncateXt*log(Mst2/Mst1)*
+        pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*truncateXt*std::log(Mst2/Mst1)*
         pow2(Mst1)*pow2(Mst2)*pow2(Xt2) - 2*Xt2*pow3(pow2(Mst1) - pow2(Mst2)) +
         (pow2(Mst1) + pow2(Mst2))*pow3(pow2(Mst1) - pow2(Mst2)) + truncateXt*
         pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*pow3(pow2(
@@ -1213,22 +1213,22 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const unsigned int shiftOneLoop,
    const unsigned int shiftTwoLoop) const
 {
+   using std::log;
+
    Eigen::Matrix2d Mt41L;
    const double sqrt2 = std::sqrt(2.0);
    const double pi2 = Pi*Pi;
    const double GF = 1/(sqrt2 * (pow2(p.vu) + pow2(p.vd)));
-   const double beta = atan(p.vu/p.vd);
+   const double beta = std::atan(p.vu/p.vd);
    const double Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
-   const double sbeta = sin(beta);
-   const double cbeta = cos(beta);
-   double Mt;
-   double s2t;
-   if(!ho.getIsAlphab()){
+   const double sbeta = std::sin(beta);
+   const double cbeta = std::cos(beta);
+   double Mt, s2t;
+   if (!ho.getIsAlphab()) {
       s2t = p.s2t;
       Mt = p.Mt;
-   }
-   else{
+   } else {
       s2t = p.s2b;
       Mt = p.Mb;
    }
