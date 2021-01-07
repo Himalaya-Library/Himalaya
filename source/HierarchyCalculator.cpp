@@ -420,11 +420,10 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
    using namespace himalaya::hierarchies;
 
    double Mst1, Mst2;
-   if(!ho.getIsAlphab()){
+   if (!ho.getIsAlphab()) {
       Mst1 = p.MSt(0);
       Mst2 = p.MSt(1);
-   }
-   else{
+   } else {
       Mst1 = p.MSb(0);
       Mst2 = p.MSb(1);
    }
@@ -496,8 +495,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       At = p.Au(2,2);
       Mt = p.Mt;
       s2t = p.s2t;
-   }
-   else {
+   } else {
       At = p.Ad(2,2);
       Mt = p.Mb;
       s2t = p.s2b;
@@ -890,14 +888,15 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
    using namespace himalaya::hierarchies;
 
    double Mst1mod = 0., Mst1, Mst2;
-   if(!ho.getIsAlphab()){
+
+   if (!ho.getIsAlphab()) {
       Mst1 = p.MSt(0);
       Mst2 = p.MSt(1);
-   }
-   else{
+   } else {
       Mst1 = p.MSb(0);
       Mst2 = p.MSb(1);
    }
+
    const double lmMst2 = std::log(pow2(p.scale) / pow2(Mst2));
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p)
@@ -946,10 +945,9 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
    using namespace himalaya::hierarchies;
 
    double Mst2mod = 0., Mst2;
-   if(!ho.getIsAlphab()){
+   if (!ho.getIsAlphab()) {
       Mst2 = p.MSt(1);
-   }
-   else{
+   } else {
       Mst2 = p.MSb(1);
    }
    const double Dmglst2 = Mgl - Mst2;
@@ -1599,10 +1597,10 @@ double HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& h
  */
 int HierarchyCalculator::getCorrectHierarchy(const int hierarchy) const
 {
-   if(hierarchy < 0 || hierarchy > 13){
-      if(hierarchy == -1){
+   if (hierarchy < 0 || hierarchy > 13) {
+      if (hierarchy == -1) {
          throw std::runtime_error("No suitable hierarchy found!");
-      } else{
+      } else {
          throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) + " not included!");
       }
    }
