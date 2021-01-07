@@ -153,7 +153,7 @@ void HierarchyCalculator::init(){
    }
 
    // beta
-   const double beta = std::atan(p.vu / p.vd);
+   const double beta = calcBeta();
 
    // Al4p
    Al4p = pow2(p.g3 / (4 * Pi));
@@ -323,7 +323,7 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
    int suitableHierarchy = -1;
 
    // sine of 2 times beta
-   const double s2b = std::sin(2*std::atan(p.vu/p.vd));
+   const double s2b = std::sin(2*calcBeta());
    const double tbeta = p.vu/p.vd;
 
    // tree level Higgs mass matrix
@@ -503,7 +503,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       s2t = p.s2b;
    }
 
-   const double beta = std::atan(p.vu / p.vd);
+   const double beta = calcBeta();
    const double lmMt = std::log(pow2(p.scale / Mt));
 
    // this loop is needed to calculate the suitable mass shift order by order
@@ -1219,7 +1219,7 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const double sqrt2 = std::sqrt(2.0);
    const double pi2 = Pi*Pi;
    const double GF = 1/(sqrt2 * (pow2(p.vu) + pow2(p.vd)));
-   const double beta = std::atan(p.vu/p.vd);
+   const double beta = calcBeta();
    const double Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double sbeta = std::sin(beta);
@@ -1351,6 +1351,13 @@ Eigen::Matrix2d HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::Hier
 
    return Eigen::Matrix2d::Zero();
 }
+
+
+double HierarchyCalculator::calcBeta() const
+{
+   return std::atan(p.vu / p.vd);
+}
+
 
 /**
  * Fills in delta_lambda @ 3L to the given HierarchyObject
