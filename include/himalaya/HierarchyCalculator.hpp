@@ -113,10 +113,6 @@ namespace himalaya {
       bool verbose{true}; ///< enable/disable verbose output
       std::map<unsigned int, unsigned int> flagMap{}; ///< holds hierarchy key value pairs
       /**
-       * Initializes all common variables.
-       */
-      void init();
-      /**
        * Checks if a hierarchy is suitable to the given mass spectrum.
        * @param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
        * @returns A bool if the hierarchy candidate is suitable to the given mass spectrum.

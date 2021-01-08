@@ -138,17 +138,6 @@ HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 
    p.validate(verbose);
 
-   // init common variables
-   init();
-}
-
-/**
- * Initializes all common variables.
- */
-void HierarchyCalculator::init()
-{
-   // fill flag list
-   flagMap.clear();
    for (int i = hierarchies::ExpansionDepth::FIRST; i < hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS; i++) {
       flagMap.emplace(i, 1u);
    }
