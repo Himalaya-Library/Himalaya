@@ -100,15 +100,26 @@ himalaya::Parameters make_point()
 }
 
 
-/// calculate amu and uncertainty
-void calculate(const himalaya::Parameters& point)
+/// calculate all Higgs mass corrections
+himalaya::HierarchyObject calculate(const himalaya::Parameters& point)
 {
+   const bool isAlphab = false;
+   himalaya::HierarchyObject ho(isAlphab);
+
    try {
       himalaya::HierarchyCalculator hc(point, verbose);
-      const auto ho = hc.calculateDMh3L(false);
+      ho = hc.calculateDMh3L(isAlphab);
    } catch (const std::exception& e) {
-      std::cerr << e.what() << '\n';
    }
+
+   return ho;
+}
+
+
+/// avoid removal of value
+template <class T>
+inline void do_not_optimize(const T& value) {
+   asm volatile("" : : "r,m"(value) : "memory");
 }
 
 
@@ -131,7 +142,7 @@ double time_in_milliseconds(unsigned N, F&& f)
    return time_in_milliseconds([N, f] {
       for (unsigned i = 0; i < N; i++) {
          try {
-            (void) f();
+            do_not_optimize(f());
          } catch (...) {
          }
       }
