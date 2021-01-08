@@ -116,6 +116,7 @@ namespace himalaya {
       double Msq{};       ///< mean light squark mass
       double prefac{};    ///< prefactor of the Higgs mass matrix
       bool verbose{true}; ///< enable/disable verbose output
+      std::map<unsigned int, unsigned int> flagMap{}; ///< holds hierarchy key value pairs
       /**
        * Initializes all common variables.
        */
@@ -141,7 +142,6 @@ namespace himalaya {
        *
        */
       double shiftH3mToDRbarPrimeMh2(const himalaya::HierarchyObject& ho, int omitLogs) const;
-      std::map<unsigned int, unsigned int> flagMap{}; ///< A map which holds all hierarchy key value pairs.
       /**
        * Maps a hierarchy to it's mother hierarchy.
        * @param hierarchy the key to a hierarchy.
