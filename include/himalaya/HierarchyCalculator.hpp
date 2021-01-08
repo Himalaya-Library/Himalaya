@@ -110,7 +110,6 @@ namespace himalaya {
                                      const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);
    private:
       Parameters p{};     ///< Himalaya input parameters
-      double Al4p{};      ///< alpha_s/(4*Pi)
       double lmMgl{};     ///< log(pow2(p.scale / Mgl))
       double lmMsq{};     ///< log(pow2(p.scale / Msq))
       double Msq{};       ///< mean light squark mass
@@ -162,6 +161,8 @@ namespace himalaya {
       double calcV2() const;
       /// calculate prefactor of the Higgs mass matrix
       double calcHiggsMassMatrixPrefactor() const;
+      /// calculate prefactor as/(4 Pi)
+      double calcAsOver4Pi() const;
       /**
        * Prints out some information about Himalaya.
        */

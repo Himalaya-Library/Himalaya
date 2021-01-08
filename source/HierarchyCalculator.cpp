@@ -153,9 +153,6 @@ void HierarchyCalculator::init()
       flagMap.emplace(i, 1u);
    }
 
-   // Al4p
-   Al4p = oneLoop * pow2(p.g3);
-
    // Msq, checked
    Msq = std::sqrt(std::abs(p.calculateMsq2()));
 
@@ -514,6 +511,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          break;
       }
       if(runThisOrder){
+         const double Al4p = calcAsOver4Pi();
          // set the Msx masses according to MDRFlag
          if(oneLoopFlag == 1){
             Mst1 = shiftMst1ToMDR(ho, 0, 0);
@@ -888,6 +886,7 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
       Mst2 = p.MSb(1);
    }
 
+   const double Al4p = calcAsOver4Pi();
    const double Mgl = p.MG;
    const double lmMst2 = std::log(pow2(p.scale) / pow2(Mst2));
    const double Dmglst2 = Mgl - Mst2;
@@ -942,6 +941,7 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
    } else {
       Mst2 = p.MSb(1);
    }
+   const double Al4p = calcAsOver4Pi();
    const double Mgl = p.MG;
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p)
@@ -1366,6 +1366,12 @@ double HierarchyCalculator::calcHiggsMassMatrixPrefactor() const
 {
    // GF = 1/(sqrt(2) * (vu^2 + vd^2)) is calculated in the DR'-bar scheme
    return 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(calcBeta())));
+}
+
+
+double HierarchyCalculator::calcAsOver4Pi() const
+{
+   return oneLoop * pow2(p.g3);
 }
 
 
