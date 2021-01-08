@@ -110,7 +110,6 @@ namespace himalaya {
                                      const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);
    private:
       Parameters p{};     ///< Himalaya input parameters
-      double lmMgl{};     ///< log(pow2(p.scale / Mgl))
       double lmMsq{};     ///< log(pow2(p.scale / Msq))
       double Msq{};       ///< mean light squark mass
       bool verbose{true}; ///< enable/disable verbose output

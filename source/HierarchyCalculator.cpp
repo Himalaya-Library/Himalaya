@@ -158,9 +158,6 @@ void HierarchyCalculator::init()
 
    // lmMsq, checked
    lmMsq = std::log(pow2(p.scale / Msq));
-
-   // lmMgl, checked
-   lmMgl = std::log(pow2(p.scale / p.MG));
 }
 
 /**
@@ -490,6 +487,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    const double beta = calcBeta();
    const double lmMt = std::log(pow2(p.scale / Mt));
    const double Mgl = p.MG;
+   const double lmMgl = std::log(pow2(p.scale / p.MG));
 
    // this loop is needed to calculate the suitable mass shift order by order
    for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
@@ -889,6 +887,7 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
    const double Al4p = calcAsOver4Pi();
    const double Mgl = p.MG;
    const double lmMst2 = std::log(pow2(p.scale) / pow2(Mst2));
+   const double lmMgl = std::log(pow2(p.scale / p.MG));
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p)
       * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2)
@@ -943,6 +942,7 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
    }
    const double Al4p = calcAsOver4Pi();
    const double Mgl = p.MG;
+   const double lmMgl = std::log(pow2(p.scale / p.MG));
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p)
       * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
