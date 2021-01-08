@@ -159,9 +159,6 @@ void HierarchyCalculator::init()
    // Al4p
    Al4p = oneLoop * pow2(p.g3);
 
-   // MGl
-   Mgl = p.MG;
-
    // Msq, checked
    Msq = std::sqrt(std::abs(p.calculateMsq2()));
 
@@ -169,7 +166,7 @@ void HierarchyCalculator::init()
    lmMsq = std::log(pow2(p.scale / Msq));
 
    // lmMgl, checked
-   lmMgl = std::log(pow2(p.scale / Mgl));
+   lmMgl = std::log(pow2(p.scale / p.MG));
 
    // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here, GF is calculated in the DR'-bar scheme, checked)
    prefac = 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(beta)));
@@ -427,9 +424,10 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
 
    // check if the squark mass is the heaviest mass
    const double delta = 1.3;        // allow for an offset of 30%
+   const double Mgl = p.MG;
 
    if(Mst2 > delta*Msq) return false;
-   if(p.MG > delta*Msq) return false;
+   if(Mgl > delta*Msq) return false;
 
    switch (ho.getSuitableHierarchy()){
       case Hierarchies::h3:
@@ -500,6 +498,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
    const double beta = calcBeta();
    const double lmMt = std::log(pow2(p.scale / Mt));
+   const double Mgl = p.MG;
 
    // this loop is needed to calculate the suitable mass shift order by order
    for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
@@ -894,6 +893,7 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
       Mst2 = p.MSb(1);
    }
 
+   const double Mgl = p.MG;
    const double lmMst2 = std::log(pow2(p.scale) / pow2(Mst2));
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p)
@@ -947,6 +947,7 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
    } else {
       Mst2 = p.MSb(1);
    }
+   const double Mgl = p.MG;
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p)
       * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
@@ -1019,6 +1020,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
 
    // squared masses
    const double Mst12 = pow2(Mst1);
+   const double Mgl = p.MG;
    const double Mgl2 = pow2(p.MG);
    const double Msq2 = pow2(Msq);
    const double scale2 = pow2(p.scale);
@@ -1134,6 +1136,7 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
 
    // squared masses
    const double Mst12 = pow2(Mst1);
+   const double Mgl = p.MG;
    const double Mgl2 = pow2(p.MG);
    const double Msq2 = pow2(Msq);
    const double scale2 = pow2(p.scale);

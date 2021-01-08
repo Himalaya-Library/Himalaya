@@ -113,7 +113,6 @@ namespace himalaya {
       double Al4p{};      ///< alpha_s/(4*Pi)
       double lmMgl{};     ///< log(pow2(p.scale / Mgl))
       double lmMsq{};     ///< log(pow2(p.scale / Msq))
-      double Mgl{};       ///< Gluino mass
       double Msq{};       ///< mean light squark mass
       double prefac{};    ///< prefactor of the Higgs mass matrix
       bool verbose{true}; ///< enable/disable verbose output
