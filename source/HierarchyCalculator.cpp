@@ -321,7 +321,7 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
 
    // sine of 2 times beta
    const double s2b = std::sin(2*calcBeta());
-   const double tbeta = p.vu/p.vd;
+   const double tbeta = calcTanBeta();
 
    // tree level Higgs mass matrix
    Eigen::Matrix2d treelvl;
@@ -1006,7 +1006,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const double prefac = pow4(p.g3) * pow3(k) * pow2(p.Mt * yt);
 
    // tanbeta
-   const double Tbeta = p.vu / p.vd;
+   const double Tbeta = calcTanBeta();
 
    // stop masses
    const double Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
@@ -1120,7 +1120,7 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) truncateXt = 0;
 
    // tanbeta
-   const double Tbeta = p.vu / p.vd;
+   const double Tbeta = calcTanBeta();
 
    // stop masses
    const double Mst1 = p.MSt(0);
@@ -1309,7 +1309,7 @@ Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& h
    const double MG = p.MG;
    const double scale2 = pow2(p.scale);
    const double mu = - p.mu; // note the sign difference in mu
-   const double tanb = p.vu/p.vd;
+   const double tanb = calcTanBeta();
    const double v2 = calcV2();
    const double gs = p.g3;
    const int include_heavy_higgs = 0;
@@ -1347,9 +1347,15 @@ Eigen::Matrix2d HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::Hier
 }
 
 
+double HierarchyCalculator::calcTanBeta() const
+{
+   return p.vu / p.vd;
+}
+
+
 double HierarchyCalculator::calcBeta() const
 {
-   return std::atan(p.vu / p.vd);
+   return std::atan(calcTanBeta());
 }
 
 

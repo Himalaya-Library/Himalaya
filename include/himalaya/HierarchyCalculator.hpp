@@ -156,6 +156,8 @@ namespace himalaya {
        * @param omitXtOrders a bool to omit xtOrders of delta_lambda_EFT
        */
       void calcDeltaLambda3L(HierarchyObject& ho, bool omitXtOrders) const;
+      /// calculate tan(beta)
+      double calcTanBeta() const;
       /// calculate beta from tan(beta)
       double calcBeta() const;
       /// calculate v^2 = vu^2 + vd^2
