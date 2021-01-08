@@ -171,11 +171,8 @@ void HierarchyCalculator::init()
    // lmMgl, checked
    lmMgl = std::log(pow2(p.scale / Mgl));
 
-   const double pi2 = Pi*Pi;
-   const double v2 = pow2(p.vu) + pow2(p.vd);
-
    // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here, GF is calculated in the DR'-bar scheme, checked)
-   prefac = 3. / (2. * v2 * pi2 * pow2(std::sin(beta)));
+   prefac = 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(beta)));
 }
 
 /**
@@ -221,8 +218,7 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    ho.setDMhDRbarPrimeToH3mShift(-shiftH3mToDRbarPrime(ho));
 
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
-   const double v2 = pow2(p.vu) + pow2(p.vd);
-
+   const double v2 = calcV2();
    const double gt = sqrt2*p.Mt/std::sqrt(v2);
 
    // calculate delta_lambda @ 3-loop level
@@ -1216,7 +1212,7 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
 
    Eigen::Matrix2d Mt41L;
    const double pi2 = Pi*Pi;
-   const double GF = 1/(sqrt2 * (pow2(p.vu) + pow2(p.vd)));
+   const double GF = 1/(sqrt2 * calcV2());
    const double beta = calcBeta();
    const double Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
@@ -1314,7 +1310,7 @@ Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& h
    const double scale2 = pow2(p.scale);
    const double mu = - p.mu; // note the sign difference in mu
    const double tanb = p.vu/p.vd;
-   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double v2 = calcV2();
    const double gs = p.g3;
    const int include_heavy_higgs = 0;
 
@@ -1357,6 +1353,12 @@ double HierarchyCalculator::calcBeta() const
 }
 
 
+double HierarchyCalculator::calcV2() const
+{
+   return pow2(p.vu) + pow2(p.vd);
+}
+
+
 /**
  * Fills in delta_lambda @ 3L to the given HierarchyObject
  * @param ho a HierrachyObject
@@ -1373,7 +1375,7 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
        || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) ? 3 : 4;
 
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
-   const double v2 = pow2(p.vu) + pow2(p.vd);
+   const double v2 = calcV2();
    const double gt = sqrt2*p.Mt/std::sqrt(v2);
    const double pref = threeLoop * pow2(p.Mt * gt * pow2(p.g3));
 

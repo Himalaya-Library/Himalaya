@@ -158,6 +158,8 @@ namespace himalaya {
       void calcDeltaLambda3L(HierarchyObject& ho, bool omitXtOrders) const;
       /// calculate beta from tan(beta)
       double calcBeta() const;
+      /// calculate v^2 = vu^2 + vd^2
+      double calcV2() const;
       /**
        * Prints out some information about Himalaya.
        */
