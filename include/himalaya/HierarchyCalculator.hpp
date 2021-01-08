@@ -111,7 +111,6 @@ namespace himalaya {
    private:
       Parameters p{};     ///< Himalaya input parameters
       double lmMsq{};     ///< log(pow2(p.scale / Msq))
-      double Msq{};       ///< mean light squark mass
       bool verbose{true}; ///< enable/disable verbose output
       std::map<unsigned int, unsigned int> flagMap{}; ///< holds hierarchy key value pairs
       /**
@@ -162,6 +161,8 @@ namespace himalaya {
       double calcHiggsMassMatrixPrefactor() const;
       /// calculate prefactor as/(4 Pi)
       double calcAsOver4Pi() const;
+      /// mean (non-squared) light squark mass
+      double calcMeanMsq() const;
       /**
        * Prints out some information about Himalaya.
        */
