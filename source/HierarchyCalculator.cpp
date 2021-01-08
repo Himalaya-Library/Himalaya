@@ -152,9 +152,6 @@ void HierarchyCalculator::init()
    for (int i = hierarchies::ExpansionDepth::FIRST; i < hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS; i++) {
       flagMap.emplace(i, 1u);
    }
-
-   // lmMsq, checked
-   lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
 }
 
 /**
@@ -597,6 +594,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Msusy = (Mst1 + Mst2 + Mgl) / 3.;
                const double lmMsusy = std::log(pow2(p.scale / Msusy));
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
+               const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                const H4 hierarchy4(flagMap, Al4p, At, beta,
                   lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
@@ -617,6 +615,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmglst1 = Mgl - Mst1;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
+               const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                switch(hierarchy){
                   case Hierarchies::h5:{
                      const H5 hierarchy5(flagMap, Al4p, beta, Dmglst1,
@@ -663,6 +662,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmglst2 = Mgl - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
+               const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                switch(hierarchy){
                   case Hierarchies::h6:{
                      const H6 hierarchy6(flagMap, Al4p, beta, Dmglst2,
@@ -888,6 +888,7 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
    const double Mgl = p.MG;
    const double lmMst2 = std::log(pow2(p.scale) / pow2(Mst2));
    const double lmMgl = std::log(pow2(p.scale / p.MG));
+   const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p)
       * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2)
@@ -944,6 +945,7 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
    const double Mgl = p.MG;
    const double Msq = calcMeanMsq();
    const double lmMgl = std::log(pow2(p.scale / p.MG));
+   const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p)
       * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));

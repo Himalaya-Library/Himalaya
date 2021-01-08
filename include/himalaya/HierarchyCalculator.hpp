@@ -110,7 +110,6 @@ namespace himalaya {
                                      const unsigned int twoLoopFlag, const unsigned int threeLoopFlag);
    private:
       Parameters p{};     ///< Himalaya input parameters
-      double lmMsq{};     ///< log(pow2(p.scale / Msq))
       bool verbose{true}; ///< enable/disable verbose output
       std::map<unsigned int, unsigned int> flagMap{}; ///< holds hierarchy key value pairs
       /**
