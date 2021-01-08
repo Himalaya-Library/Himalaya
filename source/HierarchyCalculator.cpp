@@ -145,7 +145,8 @@ HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
 /**
  * Initializes all common variables.
  */
-void HierarchyCalculator::init(){
+void HierarchyCalculator::init()
+{
    // fill flag list
    flagMap.clear();
    for (int i = hierarchies::ExpansionDepth::FIRST; i < hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS; i++) {
@@ -222,7 +223,7 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
 
-   const double gt = std::sqrt(2.0)*p.Mt/std::sqrt(v2);
+   const double gt = sqrt2*p.Mt/std::sqrt(v2);
 
    // calculate delta_lambda @ 3-loop level
    calcDeltaLambda3L(ho, false);
@@ -239,9 +240,9 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
    // mh_eft^2
    const double mh2_eft = mh2EFTCalculator.getDeltaMh2EFT0Loop();
    // 1-Loop prefactor at
-   const double pref_1L = 1./pow2(4*Pi) * pow2(p.Mt * gt);
+   const double pref_1L = oneLoop * pow2(p.Mt * gt);
    // 2-Loop prefactor at*as
-   const double pref_2L = 1./pow4(4*Pi) * pow2(p.Mt * gt * p.g3);
+   const double pref_2L = twoLoop * pow2(p.Mt * gt * p.g3);
 
    ho.setDLambda(0, mh2_eft/v2);
    ho.setDLambda(1, pref_1L*(tc.getThresholdCorrection(
@@ -1005,7 +1006,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
 
    // pre-factor of shift -> checked normalization against H3m normalization and they coincide
    const double k = 1 / (16 * pow2(Pi));
-   const double yt = std::sqrt(2.0) * p.Mt / p.vu;
+   const double yt = sqrt2 * p.Mt / p.vu;
    const double prefac = pow4(p.g3) * pow3(k) * pow2(p.Mt * yt);
 
    // tanbeta
@@ -1214,7 +1215,6 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    using std::log;
 
    Eigen::Matrix2d Mt41L;
-   const double sqrt2 = std::sqrt(2.0);
    const double pi2 = Pi*Pi;
    const double GF = 1/(sqrt2 * (pow2(p.vu) + pow2(p.vd)));
    const double beta = calcBeta();
@@ -1374,8 +1374,8 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
 
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = pow2(p.vu) + pow2(p.vd);
-   const double gt = std::sqrt(2.0)*p.Mt/std::sqrt(v2);
-   const double pref = 1./pow6(4*Pi) * pow2(p.Mt * gt * pow2(p.g3));
+   const double gt = sqrt2*p.Mt/std::sqrt(v2);
+   const double pref = threeLoop * pow2(p.Mt * gt * pow2(p.g3));
 
    // create a modified parameters struct and construct
    // Mh2EFTCalculator and ThresholdCalculator
