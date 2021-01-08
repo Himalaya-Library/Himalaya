@@ -164,9 +164,6 @@ void HierarchyCalculator::init()
 
    // lmMgl, checked
    lmMgl = std::log(pow2(p.scale / p.MG));
-
-   // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here, GF is calculated in the DR'-bar scheme, checked)
-   prefac = 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(calcBeta())));
 }
 
 /**
@@ -860,11 +857,12 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    }
 
    Eigen::Matrix2d higgsMassMatrix;
-   higgsMassMatrix(0, 0) = prefac * sigS1Full;
-   higgsMassMatrix(0, 1) = prefac * sigS12Full;
+   higgsMassMatrix(0, 0) = sigS1Full;
+   higgsMassMatrix(0, 1) = sigS12Full;
    higgsMassMatrix(1, 0) = higgsMassMatrix(0, 1);
-   higgsMassMatrix(1, 1) = prefac * sigS2Full;
-   return higgsMassMatrix;
+   higgsMassMatrix(1, 1) = sigS2Full;
+
+   return calcHiggsMassMatrixPrefactor() * higgsMassMatrix;
 }
 
 /**
@@ -1361,6 +1359,13 @@ double HierarchyCalculator::calcBeta() const
 double HierarchyCalculator::calcV2() const
 {
    return pow2(p.vu) + pow2(p.vd);
+}
+
+
+double HierarchyCalculator::calcHiggsMassMatrixPrefactor() const
+{
+   // GF = 1/(sqrt(2) * (vu^2 + vd^2)) is calculated in the DR'-bar scheme
+   return 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(calcBeta())));
 }
 
 

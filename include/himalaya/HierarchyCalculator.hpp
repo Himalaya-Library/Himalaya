@@ -114,7 +114,6 @@ namespace himalaya {
       double lmMgl{};     ///< log(pow2(p.scale / Mgl))
       double lmMsq{};     ///< log(pow2(p.scale / Msq))
       double Msq{};       ///< mean light squark mass
-      double prefac{};    ///< prefactor of the Higgs mass matrix
       bool verbose{true}; ///< enable/disable verbose output
       std::map<unsigned int, unsigned int> flagMap{}; ///< holds hierarchy key value pairs
       /**
@@ -161,6 +160,8 @@ namespace himalaya {
       double calcBeta() const;
       /// calculate v^2 = vu^2 + vd^2
       double calcV2() const;
+      /// calculate prefactor of the Higgs mass matrix
+      double calcHiggsMassMatrixPrefactor() const;
       /**
        * Prints out some information about Himalaya.
        */
