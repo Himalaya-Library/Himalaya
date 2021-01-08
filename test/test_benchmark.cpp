@@ -128,16 +128,14 @@ double time_in_milliseconds(F&& f)
 template <class F>
 double time_in_milliseconds(unsigned N, F&& f)
 {
-   auto loop = [N, f]() {
+   return time_in_milliseconds([N, f] {
       for (unsigned i = 0; i < N; i++) {
          try {
             (void) f();
          } catch (...) {
          }
       }
-   };
-
-   return time_in_milliseconds(loop);
+   });
 }
 
 } // anonymous namespace
