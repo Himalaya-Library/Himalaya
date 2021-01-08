@@ -101,9 +101,8 @@ himalaya::Parameters make_point()
 
 
 /// calculate all Higgs mass corrections
-himalaya::HierarchyObject calculate(const himalaya::Parameters& point)
+himalaya::HierarchyObject calculate_all(const himalaya::Parameters& point, bool isAlphab)
 {
-   const bool isAlphab = false;
    himalaya::HierarchyObject ho(isAlphab);
 
    try {
@@ -152,11 +151,21 @@ double time_in_milliseconds(unsigned N, F&& f)
 } // anonymous namespace
 
 
-TEST_CASE("benchmark fixed-order")
+TEST_CASE("benchmark all loop corrections O(as^2*at^2)")
 {
    const unsigned N = 1000;
    const auto time_in_ms = time_in_milliseconds(
-      N, [] { return calculate(make_point()); });
+      N, [] { return calculate_all(make_point(), false); });
 
-   std::cout << "Average time per point: " << time_in_ms/N << " ms\n";
+   std::cout << "Average time per point: " << time_in_ms/N << " ms O(as^2*at^2)\n";
+}
+
+
+TEST_CASE("benchmark all loop corrections O(as^2*ab^2)")
+{
+   const unsigned N = 1000;
+   const auto time_in_ms = time_in_milliseconds(
+      N, [] { return calculate_all(make_point(), false); });
+
+   std::cout << "Average time per point: " << time_in_ms/N << " ms O(as^2*ab^2)\n";
 }
