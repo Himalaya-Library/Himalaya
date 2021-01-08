@@ -153,9 +153,6 @@ void HierarchyCalculator::init()
       flagMap.emplace(i, 1u);
    }
 
-   // beta
-   const double beta = calcBeta();
-
    // Al4p
    Al4p = oneLoop * pow2(p.g3);
 
@@ -169,7 +166,7 @@ void HierarchyCalculator::init()
    lmMgl = std::log(pow2(p.scale / p.MG));
 
    // prefactor, GF = 1/(sqrt(2) * (vu^2 + vd^2)) (here, GF is calculated in the DR'-bar scheme, checked)
-   prefac = 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(beta)));
+   prefac = 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(calcBeta())));
 }
 
 /**
