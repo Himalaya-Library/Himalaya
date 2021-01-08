@@ -28,7 +28,7 @@ template <typename T> T pow16(T x)   noexcept { return pow2(pow8(x)); }
 template <typename T> T pow17(T x)   noexcept { return pow16(x) * x; }
 template <typename T> T pow18(T x)   noexcept { return pow2(pow9(x)); }
 template <typename T> T pow19(T x)   noexcept { return pow18(x) * x; }
-template <typename T> T pow20(T x)   noexcept { return pow19(x) * x; }
+template <typename T> T pow20(T x)   noexcept { return pow2(power10(x)); }
 
 } // anonymous namespace
 } // himalaya namespace
