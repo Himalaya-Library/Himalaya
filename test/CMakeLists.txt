@@ -24,6 +24,7 @@ add_himalaya_test(test_FO_vs_EFT_expressions)
 add_himalaya_test(test_Himalaya_interface)
 add_himalaya_test(test_li2)
 add_himalaya_test(test_delta_lambda)
+add_himalaya_test(test_points)
 
 if(Mathematica_WolframLibrary_FOUND)
   Mathematica_WolframLibrary_ADD_TEST (
