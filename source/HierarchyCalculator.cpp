@@ -1001,9 +1001,8 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) truncateXt = 0;
 
    // pre-factor of shift -> checked normalization against H3m normalization and they coincide
-   const double k = 1 / (16 * pow2(Pi));
    const double yt = sqrt2 * p.Mt / p.vu;
-   const double prefac = pow4(p.g3) * pow3(k) * pow2(p.Mt * yt);
+   const double prefac = threeLoop * pow4(p.g3) * pow2(p.Mt * yt);
 
    // tanbeta
    const double Tbeta = calcTanBeta();
