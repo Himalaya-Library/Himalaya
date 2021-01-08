@@ -9,6 +9,7 @@
 #include "ThresholdCalculator.hpp"
 #include "EFTFlags.hpp"
 #include "Logger.hpp"
+#include "power.hpp"
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -29,83 +30,6 @@ namespace
 {
 const double zt3 = 1.2020569031595942853997381615114; // zeta(3)
 const double Pi  = 3.1415926535897932384626433832795;
-
-template <typename T> T pow2(T x)
-{
-    return x * x;
-}
-template <typename T> T pow3(T x)
-{
-    return x * x * x;
-}
-template <typename T> T pow4(T x)
-{
-    return pow2(pow2(x));
-}
-template <typename T> T pow5(T x)
-{
-    return pow4(x) * x;
-}
-template <typename T> T pow6(T x)
-{
-    return pow2(pow2(x) * x);
-}
-template <typename T> T pow7(T x)
-{
-    return pow6(x) * x;
-}
-template <typename T> T pow8(T x)
-{
-    return pow2(pow4(x));
-}
-template <typename T> T pow9(T x)
-{
-    return pow8(x) * x;
-}
-template <typename T> T power10(T x)
-{
-    return pow2(pow5(x));
-}
-template <typename T> T pow11(T x)
-{
-    return pow10(x) * x;
-}
-template <typename T> T pow12(T x)
-{
-    return pow2(pow6(x));
-}
-template <typename T> T pow13(T x)
-{
-    return pow4(x) * pow9(x);
-}
-template <typename T> T pow14(T x)
-{
-    return pow2(pow7(x));
-}
-template <typename T> T pow15(T x)
-{
-    return pow6(x) * pow9(x);
-}
-template <typename T> T pow16(T x)
-{
-    return pow2(pow8(x));
-}
-template <typename T> T pow17(T x)
-{
-    return pow16(x) * x;
-}
-template <typename T> T pow18(T x)
-{
-    return pow2(pow9(x));
-}
-template <typename T> T pow19(T x)
-{
-    return pow18(x) * x;
-}
-template <typename T> T pow20(T x)
-{
-    return pow19(x) * x;
-}
 
 template <typename T>
 bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept {
