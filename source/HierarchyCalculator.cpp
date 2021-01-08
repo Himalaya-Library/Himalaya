@@ -157,7 +157,7 @@ void HierarchyCalculator::init()
    const double beta = calcBeta();
 
    // Al4p
-   Al4p = pow2(p.g3 / (4 * Pi));
+   Al4p = oneLoop * pow2(p.g3);
 
    // MGl
    Mgl = p.MG;
