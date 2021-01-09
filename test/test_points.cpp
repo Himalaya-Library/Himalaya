@@ -22,6 +22,9 @@ const char PATH_SEPARATOR =
 
 namespace {
 
+const std::string data_file = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "test_points.txt";
+
+
 const bool verbose = false;
 
 
@@ -189,14 +192,14 @@ std::vector<std::pair<Point, Data>> read_points(const std::string& filename)
 
 // TEST_CASE("write_points")
 // {
-//    write_points("test_points.txt");
+//    write_points(data_file);
 // }
 
 
 TEST_CASE("test_points")
 {
    const double eps  = std::pow(10.0, -N_DIGITS);
-   const auto points = read_points(std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "test_points.txt");
+   const auto points = read_points(data_file);
 
    for (const auto& p: points) {
       const auto point = make_point(p.first);
