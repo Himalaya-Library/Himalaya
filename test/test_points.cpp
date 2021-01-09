@@ -123,8 +123,14 @@ std::pair<himalaya::HierarchyObject, Data> calculate_all(const himalaya::Paramet
       himalaya::HierarchyCalculator hc(point, verbose);
       ho = hc.calculateDMh3L(false);
 
-      data.MhFO  = std::sqrt(ho.getDMh2FO(0) + ho.getDMh2FO(1) + ho.getDMh2FO(2) + ho.getDMh2FO(3));
-      data.MhEFT = std::sqrt(ho.getDMh2EFTAt(0) + ho.getDMh2EFTAt(1) + ho.getDMh2EFTAt(2) + ho.getDMh2EFTAt(3));
+      data.MhFO  = std::sqrt(ho.getDMh2FO(0)
+                             + ho.getDMh2FOAt(1)
+                             + ho.getDMh2FOAt(2)
+                             + ho.getDMh2FOAt(3));
+      data.MhEFT = std::sqrt(ho.getDMh2EFTAt(0)
+                             + ho.getDMh2EFTAt(1)
+                             + ho.getDMh2EFTAt(2)
+                             + ho.getDMh2EFTAt(3));
    } catch (const std::exception& e) {
       std::cerr << e.what() << '\n';
    }
