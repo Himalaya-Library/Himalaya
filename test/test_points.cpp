@@ -5,6 +5,7 @@
 #include <iostream>
 #include <limits>
 #include <utility>
+#include <vector>
 #include <Eigen/Core>
 
 
