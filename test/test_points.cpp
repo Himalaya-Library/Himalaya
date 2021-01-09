@@ -110,47 +110,52 @@ himalaya::Parameters make_point(const Point& point)
    pars.M2 = MS;
    pars.MG = MS;
 
-   pars.validate(verbose);
-
    return pars;
 }
 
 
 std::pair<himalaya::HierarchyObject, Data> calculate_all(const himalaya::Parameters& point)
 {
-   himalaya::HierarchyCalculator hc(point, verbose);
    himalaya::HierarchyObject ho(false);
    Data data{0.0, 0.0};
 
    try {
+      himalaya::HierarchyCalculator hc(point, verbose);
       ho = hc.calculateDMh3L(false);
 
       data.MhFO  = std::sqrt(ho.getDMh2FO(0) + ho.getDMh2FO(1) + ho.getDMh2FO(2) + ho.getDMh2FO(3));
       data.MhEFT = std::sqrt(ho.getDMh2EFTAt(0) + ho.getDMh2EFTAt(1) + ho.getDMh2EFTAt(2) + ho.getDMh2EFTAt(3));
-   } catch (const std::exception&) {
-      std::cerr << point << '\n';
+   } catch (const std::exception& e) {
+      std::cerr << e.what() << '\n';
    }
 
    return { ho, data };
 }
 
 
-void write_points(const std::string& filename)
+void write_points_with_xt_tb(std::ostream& ostr, double xt, double tb)
 {
-   std::ofstream ostr(filename);
-
    const unsigned N = 100;
    const double MS_start = 200;
    const double MS_stop  = 10000 + MS_start;
 
    for (unsigned i = 0; i < N; i++) {
       const double MS = MS_start + i*(MS_stop - MS_start)/N;
-      Point point{MS, 0.0, 20.0};
+      Point point{MS, xt, tb};
 
       const auto result = calculate_all(make_point(point));
       const auto data = result.second;
       ostr << std::setprecision(N_DIGITS+1) << point << '\t' << data << '\n';
    }
+}
+
+
+void write_points(const std::string& filename)
+{
+   std::ofstream ostr(filename);
+   write_points_with_xt_tb(ostr,             0.0, 20.0);
+   write_points_with_xt_tb(ostr, -std::sqrt(6.0), 20.0);
+   write_points_with_xt_tb(ostr,  std::sqrt(6.0), 20.0);
 }
 
 
