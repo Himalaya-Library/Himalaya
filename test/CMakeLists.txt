@@ -1,4 +1,5 @@
 add_definitions(-DDOCTEST_CONFIG_IMPLEMENT_WITH_MAIN)
+add_definitions(-DTEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 function(add_himalaya_test name)
   add_executable(
@@ -24,6 +25,7 @@ add_himalaya_test(test_FO_vs_EFT_expressions)
 add_himalaya_test(test_Himalaya_interface)
 add_himalaya_test(test_li2)
 add_himalaya_test(test_delta_lambda)
+add_himalaya_test(test_points)
 
 if(Mathematica_WolframLibrary_FOUND)
   Mathematica_WolframLibrary_ADD_TEST (
