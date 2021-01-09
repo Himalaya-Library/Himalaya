@@ -6,7 +6,6 @@
 #include <limits>
 #include <utility>
 #include <Eigen/Core>
-#include <Eigen/Eigenvalues>
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
@@ -24,14 +23,16 @@ struct Point {
 
 
 struct Data {
-   double Mh;
+   double MhFO;
+   double MhEFT;
 };
 
 
 std::ostream& operator<<(std::ostream& ostr, const Data& data)
 {
    ostr << "Data["
-        << data.Mh << "]";
+        << data.MhFO << ", "
+        << data.MhEFT << "]";
    return ostr;
 }
 
@@ -85,24 +86,20 @@ himalaya::Parameters make_point(const Point& point)
 
 
 const std::pair<Point, Data> points[] = {
-   { {1000.0, 0.0, 20.0}, {96.8024604087} }
+   { {1000.0, 0.0, 20.0}, {115.3055285523, 119.7294298774} }
 };
 
 
-Data calculate_all(const himalaya::Parameters& point)
+std::pair<himalaya::HierarchyObject, Data> calculate_all(const himalaya::Parameters& point)
 {
    himalaya::HierarchyCalculator hc(point);
    const auto ho = hc.calculateDMh3L(false);
-   const auto dMh_0L = ho.getDMh(0);
-   const auto dMh_1L = ho.getDMh(3);
-   const auto dMh_2L = ho.getDMh(3);
-   const auto dMh_3L = ho.getDMh(3);
 
-   Eigen::SelfAdjointEigenSolver<Eigen::Matrix2d> solver(dMh_0L + dMh_1L + dMh_2L + dMh_3L);
+   Data data;
+   data.MhFO  = std::sqrt(ho.getDMh2FO(0) + ho.getDMh2FO(1) + ho.getDMh2FO(2) + ho.getDMh2FO(3));
+   data.MhEFT = std::sqrt(ho.getDMh2EFTAt(0) + ho.getDMh2EFTAt(1) + ho.getDMh2EFTAt(2) + ho.getDMh2EFTAt(3));
 
-   Data data{ std::sqrt(solver.eigenvalues()(0)) };
-
-   return data;
+   return { ho, data };
 }
 
 
@@ -115,8 +112,12 @@ TEST_CASE("test_points")
 
    for (const auto& p: points) {
       const auto point = make_point(p.first);
-      const auto data = calculate_all(point);
-      INFO("point = " << point);
-      CHECK_CLOSE(p.second.Mh, data.Mh, eps);
+      const auto result = calculate_all(point);
+      const auto ho = result.first;
+      const auto data = result.second;
+      INFO("point =\n" << point);
+      INFO("ho =\n" << ho);
+      CHECK_CLOSE(p.second.MhFO , data.MhFO , eps);
+      CHECK_CLOSE(p.second.MhEFT, data.MhEFT, eps);
    }
 }
