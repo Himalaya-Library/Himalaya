@@ -35,8 +35,8 @@ struct Point {
 
 
 struct Data {
-   double MhFO;
-   double MhEFT;
+   double MhFO{};
+   double MhEFT{};
 };
 
 
@@ -114,14 +114,13 @@ himalaya::Parameters make_point(const Point& point)
 }
 
 
-std::pair<himalaya::HierarchyObject, Data> calculate_all(const himalaya::Parameters& point)
+Data calculate_all(const himalaya::Parameters& point)
 {
-   himalaya::HierarchyObject ho(false);
-   Data data{0.0, 0.0};
+   Data data;
 
    try {
       himalaya::HierarchyCalculator hc(point, verbose);
-      ho = hc.calculateDMh3L(false);
+      const auto ho = hc.calculateDMh3L(false);
 
       data.MhFO  = std::sqrt(ho.getDMh2FO(0)
                              + ho.getDMh2FOAt(1)
@@ -135,7 +134,7 @@ std::pair<himalaya::HierarchyObject, Data> calculate_all(const himalaya::Paramet
       std::cerr << e.what() << '\n';
    }
 
-   return { ho, data };
+   return data;
 }
 
 
@@ -149,8 +148,7 @@ void write_points_with_xt_tb(std::ostream& ostr, double xt, double tb)
       const double MS = MS_start + i*(MS_stop - MS_start)/N;
       Point point{MS, xt, tb};
 
-      const auto result = calculate_all(make_point(point));
-      const auto data = result.second;
+      const auto data = calculate_all(make_point(point));
       ostr << std::setprecision(N_DIGITS+1) << point << '\t' << data << '\n';
    }
 }
@@ -201,11 +199,8 @@ TEST_CASE("test_points")
 
    for (const auto& p: points) {
       const auto point = make_point(p.first);
-      const auto result = calculate_all(point);
-      const auto ho = result.first;
-      const auto data = result.second;
+      const auto data = calculate_all(point);
       INFO("point =\n" << point);
-      INFO("ho =\n" << ho);
       CHECK_CLOSE(p.second.MhFO , data.MhFO , eps);
       CHECK_CLOSE(p.second.MhEFT, data.MhEFT, eps);
    }
