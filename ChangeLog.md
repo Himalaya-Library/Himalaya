@@ -1,3 +1,16 @@
+Himalaya 4.1.0
+==============
+
+Changes
+-------
+
+ * [commit 9a6b60b]: Performance improvement by ~25% by replacing the
+   old FORTRAN implementation of the complex dilogarithm (dating back
+   to 20.07.83, written by Wolfgang Hollik and Ansgar Denner) by a
+   more performant one from the [polylogarithm package
+   6.0.0](https://github.com/Expander/polylogarithm).
+
+
 Himalaya 4.0.0
 ==============
 
