@@ -3,6 +3,8 @@
 #include "doctest.h"
 #include "himalaya/HierarchyCalculator.hpp"
 #include <cmath>
+#include <fstream>
+#include <iostream>
 #include <limits>
 #include <utility>
 #include <Eigen/Core>
@@ -28,11 +30,16 @@ struct Data {
 };
 
 
+std::ostream& operator<<(std::ostream& ostr, const Point& point)
+{
+   ostr << point.MS << '\t' << point.xt << '\t' << point.tb;
+   return ostr;
+}
+
+
 std::ostream& operator<<(std::ostream& ostr, const Data& data)
 {
-   ostr << "Data["
-        << data.MhFO << ", "
-        << data.MhEFT << "]";
+   ostr << data.MhFO << '\t' << data.MhEFT;
    return ostr;
 }
 
@@ -92,18 +99,49 @@ const std::pair<Point, Data> points[] = {
 
 std::pair<himalaya::HierarchyObject, Data> calculate_all(const himalaya::Parameters& point)
 {
-   himalaya::HierarchyCalculator hc(point);
-   const auto ho = hc.calculateDMh3L(false);
+   himalaya::HierarchyCalculator hc(point, verbose);
+   himalaya::HierarchyObject ho(false);
+   Data data{0.0, 0.0};
 
-   Data data;
-   data.MhFO  = std::sqrt(ho.getDMh2FO(0) + ho.getDMh2FO(1) + ho.getDMh2FO(2) + ho.getDMh2FO(3));
-   data.MhEFT = std::sqrt(ho.getDMh2EFTAt(0) + ho.getDMh2EFTAt(1) + ho.getDMh2EFTAt(2) + ho.getDMh2EFTAt(3));
+   try {
+      ho = hc.calculateDMh3L(false);
+
+      data.MhFO  = std::sqrt(ho.getDMh2FO(0) + ho.getDMh2FO(1) + ho.getDMh2FO(2) + ho.getDMh2FO(3));
+      data.MhEFT = std::sqrt(ho.getDMh2EFTAt(0) + ho.getDMh2EFTAt(1) + ho.getDMh2EFTAt(2) + ho.getDMh2EFTAt(3));
+   } catch (const std::exception&) {
+      std::cerr << point << '\n';
+   }
 
    return { ho, data };
 }
 
 
+void write_points(const std::string& filename)
+{
+   std::ofstream ostr(filename);
+
+   const unsigned N = 100;
+   const double MS_start = 200;
+   const double MS_stop  = 10000 + MS_start;
+
+   for (unsigned i = 0; i < N; i++) {
+      const double MS = MS_start + i*(MS_stop - MS_start)/N;
+      Point point{MS, 0.0, 20.0};
+
+      const auto result = calculate_all(make_point(point));
+      const auto data = result.second;
+      ostr << point << '\t' << data << '\n';
+   }
+}
+
+
 } // anonymous namespace
+
+
+// TEST_CASE("write_points")
+// {
+//    write_points("test_points.txt");
+// }
 
 
 TEST_CASE("test_points")
