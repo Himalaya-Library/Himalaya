@@ -1,5 +1,3 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 1
-
 #include "doctest.h"
 #include "himalaya/HierarchyCalculator.hpp"
 #include <cmath>
@@ -9,12 +7,24 @@
 #include <utility>
 #include <Eigen/Core>
 
+
+const char PATH_SEPARATOR =
+#ifdef _WIN32
+   '\\';
+#else
+   '/';
+#endif
+
+
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
 
 namespace {
 
 const bool verbose = false;
+
+
+const int N_DIGITS = 6;
 
 
 struct Point {
@@ -37,10 +47,24 @@ std::ostream& operator<<(std::ostream& ostr, const Point& point)
 }
 
 
+std::istream& operator>>(std::istream& istr, Point& point)
+{
+   istr >> point.MS >> point.xt >> point.tb;
+   return istr;
+}
+
+
 std::ostream& operator<<(std::ostream& ostr, const Data& data)
 {
    ostr << data.MhFO << '\t' << data.MhEFT;
    return ostr;
+}
+
+
+std::istream& operator>>(std::istream& istr, Data& data)
+{
+   istr >> data.MhFO >> data.MhEFT;
+   return istr;
 }
 
 
@@ -92,11 +116,6 @@ himalaya::Parameters make_point(const Point& point)
 }
 
 
-const std::pair<Point, Data> points[] = {
-   { {1000.0, 0.0, 20.0}, {115.3055285523, 119.7294298774} }
-};
-
-
 std::pair<himalaya::HierarchyObject, Data> calculate_all(const himalaya::Parameters& point)
 {
    himalaya::HierarchyCalculator hc(point, verbose);
@@ -130,8 +149,28 @@ void write_points(const std::string& filename)
 
       const auto result = calculate_all(make_point(point));
       const auto data = result.second;
-      ostr << point << '\t' << data << '\n';
+      ostr << std::setprecision(N_DIGITS+1) << point << '\t' << data << '\n';
    }
+}
+
+
+std::vector<std::pair<Point, Data>> read_points(const std::string& filename)
+{
+   std::ifstream istr(filename);
+   std::vector<std::pair<Point, Data>> vec;
+   std::string line;
+
+   while (std::getline(istr, line)) {
+      Point point;
+      Data data;
+
+      std::istringstream isstr(line);
+      isstr >> point >> data;
+
+      vec.push_back({point, data});
+   }
+
+   return vec;
 }
 
 
@@ -146,7 +185,8 @@ void write_points(const std::string& filename)
 
 TEST_CASE("test_points")
 {
-   const double eps  = 1e-12;
+   const double eps  = std::pow(10.0, -N_DIGITS);
+   const auto points = read_points(std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "test_points.txt");
 
    for (const auto& p: points) {
       const auto point = make_point(p.first);

@@ -1,4 +1,5 @@
 add_definitions(-DDOCTEST_CONFIG_IMPLEMENT_WITH_MAIN)
+add_definitions(-DTEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 function(add_himalaya_test name)
   add_executable(
