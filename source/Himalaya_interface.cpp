@@ -8,7 +8,7 @@
 #include "himalaya/Himalaya_interface.hpp"
 
 #include "Logger.hpp"
-#include "Utils.hpp"
+#include "power.hpp"
 
 #include <cmath>
 #include <iostream>

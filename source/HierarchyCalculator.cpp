@@ -30,7 +30,6 @@
 #include "Constants.hpp"
 #include "linalg2.hpp"
 #include "Logger.hpp"
-#include "Utils.hpp"
 #include "ThresholdCalculator.hpp"
 #include "MSSM_mass_eigenstates.hpp"
 
