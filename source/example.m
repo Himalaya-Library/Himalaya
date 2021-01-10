@@ -1,6 +1,6 @@
 Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
 
-InitializeHimalaya["Himalaya_LibraryLink.so"];
+InitializeHimalaya[FileNameJoin[{".", "Himalaya_LibraryLink.so"}]];
 
 MS = 2000;
 TB = 20;
