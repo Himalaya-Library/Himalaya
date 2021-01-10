@@ -26,26 +26,31 @@ namespace {
 
 const double EPSTOL = 1.0e-11; ///< underflow accuracy
 
-double sqr(double a) noexcept { return a*a; }
-double pow3(double a) noexcept { return a*a*a; }
+constexpr double dabs(double a) noexcept { return a >= 0. ? a : -a; }
+constexpr double sqr(double a) noexcept { return a*a; }
+constexpr double pow3(double a) noexcept { return a*a*a; }
 double log_abs(double a) noexcept { return std::log(std::abs(a)); }
 
+/// fast implementation of complex logarithm
 template <class T>
 std::complex<T> fast_log(const std::complex<T>& z) noexcept
 {
-   return std::complex<T>(std::log(std::abs(z)), std::arg(z));
+   const T rz = std::real(z);
+   const T iz = std::imag(z);
+
+   return std::complex<T>(0.5*std::log(rz*rz + iz*iz), std::atan2(iz, rz));
 }
 
-bool is_close(double m1, double m2, double tol) noexcept
+constexpr bool is_close(double m1, double m2, double tol) noexcept
 {
-   using std::abs;
-   const double mmax = abs(std::max(abs(m1), abs(m2)));
+   const double mmax = std::max(dabs(m1), dabs(m2));
+   const double mmin = std::min(dabs(m1), dabs(m2));
    const double max_tol = tol * mmax;
 
-   if (max_tol == 0. && mmax != 0. && tol != 0.)
-      return abs(m1 - m2) <= tol;
+   if (max_tol == 0.0 && mmax != 0.0 && tol != 0.0)
+      return mmax - mmin <= tol;
 
-   return abs(m1 - m2) <= max_tol;
+   return mmax - mmin <= max_tol;
 }
 
 /// returns a/b if a/b is finite, otherwise returns numeric_limits::max()
