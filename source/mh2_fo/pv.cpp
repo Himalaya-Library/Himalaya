@@ -24,12 +24,13 @@ namespace mh2_fo {
 
 namespace {
 
-const double EPSTOL = 1.0e-11; ///< underflow accuracy
+constexpr double EPSTOL = 1.0e-11; ///< underflow accuracy
 
 constexpr double dabs(double a) noexcept { return a >= 0. ? a : -a; }
 constexpr double sqr(double a) noexcept { return a*a; }
 constexpr double pow3(double a) noexcept { return a*a*a; }
 double log_abs(double a) noexcept { return std::log(std::abs(a)); }
+
 
 /// fast implementation of complex logarithm
 template <class T>
@@ -40,6 +41,7 @@ std::complex<T> fast_log(const std::complex<T>& z) noexcept
 
    return std::complex<T>(0.5*std::log(rz*rz + iz*iz), std::atan2(iz, rz));
 }
+
 
 constexpr bool is_close(double m1, double m2, double tol) noexcept
 {
@@ -53,14 +55,17 @@ constexpr bool is_close(double m1, double m2, double tol) noexcept
    return mmax - mmin <= max_tol;
 }
 
+
 /// returns a/b if a/b is finite, otherwise returns numeric_limits::max()
 template <typename T>
-T divide_finite(T a, T b) noexcept {
+T divide_finite(T a, T b) noexcept
+{
    T result = a / b;
    if (!std::isfinite(result))
       result = std::numeric_limits<T>::max();
    return result;
 }
+
 
 double fB(const std::complex<double>& a) noexcept
 {
@@ -74,7 +79,9 @@ double fB(const std::complex<double>& a) noexcept
    return std::real(-1.0 + fast_log(1.0 - a) - a*fast_log(1.0 - 1.0/a));
 }
 
+
 } // anonymous namespace
+
 
 double a0(double m2, double q2) noexcept
 {
@@ -83,6 +90,7 @@ double a0(double m2, double q2) noexcept
 
    return m2 * (1.0 - log_abs(m2 / q2));
 }
+
 
 /**
  * B0 function with squared arguments, from hep-ph/9606211.
@@ -124,6 +132,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
 
    return ans;
 }
+
 
 /**
  * Derivative of B0(p^2, m1^2, m2^2, Q^2) w.r.t. p^2, for p^2 = 0.
