@@ -37,6 +37,7 @@ struct Point {
 struct Data {
    double MhFO{};
    double MhEFT{};
+   double lambda{};
 };
 
 
@@ -56,14 +57,14 @@ std::istream& operator>>(std::istream& istr, Point& point)
 
 std::ostream& operator<<(std::ostream& ostr, const Data& data)
 {
-   ostr << data.MhFO << '\t' << data.MhEFT;
+   ostr << data.MhFO << '\t' << data.MhEFT << '\t' << data.lambda;
    return ostr;
 }
 
 
 std::istream& operator>>(std::istream& istr, Data& data)
 {
-   istr >> data.MhFO >> data.MhEFT;
+   istr >> data.MhFO >> data.MhEFT >> data.lambda;
    return istr;
 }
 
@@ -130,6 +131,10 @@ Data calculate_all(const himalaya::Parameters& point)
                              + ho.getDMh2EFTAt(1)
                              + ho.getDMh2EFTAt(2)
                              + ho.getDMh2EFTAt(3));
+      data.lambda = std::sqrt(ho.getDLambda(0)
+                              + ho.getDLambda(1)
+                              + ho.getDLambda(2)
+                              + ho.getDLambda(3));
    } catch (const std::exception& e) {
       std::cerr << e.what() << '\n';
    }
@@ -201,7 +206,8 @@ TEST_CASE("test_points")
       const auto point = make_point(p.first);
       const auto data = calculate_all(point);
       INFO("point =\n" << point);
-      CHECK_CLOSE(p.second.MhFO , data.MhFO , eps);
-      CHECK_CLOSE(p.second.MhEFT, data.MhEFT, eps);
+      CHECK_CLOSE(p.second.MhFO  , data.MhFO  , eps);
+      CHECK_CLOSE(p.second.MhEFT , data.MhEFT , eps);
+      CHECK_CLOSE(p.second.lambda, data.lambda, eps);
    }
 }
