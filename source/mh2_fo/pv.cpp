@@ -139,8 +139,6 @@ double b0(double p2, double m12, double m22, double q2) noexcept
  */
 double d1_b0(double m12, double m22) noexcept
 {
-   using std::abs;
-
    const double m14 = m12 * m12;
    const double m24 = m22 * m22;
 
