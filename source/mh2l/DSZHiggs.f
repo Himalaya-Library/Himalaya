@@ -5192,7 +5192,7 @@ c     from Davydychev and Tausk, Nucl. Phys. B397 (1993) 23
       double precision x,y,z,myphi
       double precision u,v
       double precision Pi,pLi2
-      complex*16 clam,cxp,cxm,CLI2,ccphi
+      complex*16 clam,cxp,cxm,CLI2,ccphi,fast_cdlog
       double precision delt,phi0,phi2,phi4
       
       Pi = 3.14159265358979d0
@@ -5231,7 +5231,7 @@ c     auxiliary variables
          
 c     phi function from eq. (A4)
          
-         ccphi = (2d0*log(cxp)*log(cxm) - log(u)*log(v) - 
+         ccphi = (2d0*fast_cdlog(cxp)*fast_cdlog(cxm) - log(u)*log(v) - 
      &        2d0*(CLI2(cxp) + CLI2(cxm)) + Pi**2/3d0)/clam
          myphi = dreal(ccphi)
          
