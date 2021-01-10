@@ -12073,7 +12073,7 @@ TEST_CASE("test_complex_fixed_values")
 
 TEST_CASE("test_Mathematica_values")
 {
-   for (const auto v: mma_values) {
+   for (const auto& v: mma_values) {
       const std::complex<double> li2_f = himalaya::li2(v.first);
       const std::complex<double> li2_c = himalaya::dilog(v.first);
 
@@ -12084,7 +12084,7 @@ TEST_CASE("test_Mathematica_values")
 
 TEST_CASE("test_Mathematica_values_close_to_unity")
 {
-   for (const auto v: mma_values_close_to_unity) {
+   for (const auto& v: mma_values_close_to_unity) {
       const std::complex<double> li2_f = himalaya::li2(v.first);
       const std::complex<double> li2_c = himalaya::dilog(v.first);
 
