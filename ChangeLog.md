@@ -10,6 +10,9 @@ Changes
    more performant one from the [polylogarithm package
    6.0.0](https://github.com/Expander/polylogarithm).
 
+ * [commit 1251eba]: Performance improvement by ~10% by replacing the
+   complex logarithm by a faster implementation.
+
  * [commit 313d06d]: Require a C++-14 compatible compiler.
 
 
