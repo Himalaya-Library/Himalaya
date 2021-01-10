@@ -59,16 +59,14 @@ T divide_finite(T a, T b) noexcept {
 
 double fB(const std::complex<double>& a) noexcept
 {
-   using std::abs;
-   const double x = a.real();
+   const double re = std::real(a);
+   const double im = std::imag(a);
 
-   if (abs(x) < EPSTOL)
-      return -1. - x + sqr(x) * 0.5;
+   if ((std::abs(re) == 0.0 || std::abs(re) == 1.0) && im == 0.0) {
+      return -1.0;
+   }
 
-   if (is_close(x, 1., EPSTOL))
-      return -1.;
-
-   return std::real(fast_log(1. - a) - 1. - a * fast_log(1.0 - 1.0 / a));
+   return std::real(-1.0 + fast_log(1.0 - a) - a*fast_log(1.0 - 1.0/a));
 }
 
 } // anonymous namespace
