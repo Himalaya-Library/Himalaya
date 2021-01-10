@@ -9,6 +9,11 @@
 #include <Eigen/Core>
 
 
+#define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
+
+
+namespace {
+
 const char PATH_SEPARATOR =
 #ifdef _WIN32
    '\\';
@@ -16,19 +21,10 @@ const char PATH_SEPARATOR =
    '/';
 #endif
 
-
-#define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
-
-
-namespace {
-
-const std::string data_file = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "test_points.txt";
-
-
-const bool verbose = false;
-
-
-const int N_DIGITS = 6;
+const std::string DATA_FILE = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "test_points.txt";
+const bool VERBOSE = false;
+const bool IS_ALPHA_B = false; // calculate O(as^2*ab^2) corrections
+const int N_DIGITS = 6; // number of digits to test
 
 
 struct Point {
@@ -123,8 +119,8 @@ Data calculate_all(const himalaya::Parameters& point)
    Data data;
 
    try {
-      himalaya::HierarchyCalculator hc(point, verbose);
-      const auto ho = hc.calculateDMh3L(false);
+      himalaya::HierarchyCalculator hc(point, VERBOSE);
+      const auto ho = hc.calculateDMh3L(IS_ALPHA_B);
 
       data.MhFO  = std::sqrt(ho.getDMh2FO(0)
                              + ho.getDMh2FOAt(1)
@@ -192,14 +188,14 @@ std::vector<std::pair<Point, Data>> read_points(const std::string& filename)
 
 // TEST_CASE("write_points")
 // {
-//    write_points(data_file);
+//    write_points(DATA_FILE);
 // }
 
 
 TEST_CASE("test_points")
 {
    const double eps  = std::pow(10.0, -N_DIGITS);
-   const auto points = read_points(data_file);
+   const auto points = read_points(DATA_FILE);
 
    for (const auto& p: points) {
       const auto point = make_point(p.first);
