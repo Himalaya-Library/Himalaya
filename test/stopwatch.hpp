@@ -5,8 +5,7 @@
 // version 3.
 // ====================================================================
 
-#ifndef STOPWATCH_HPP
-#define STOPWATCH_HPP
+#pragma once
 
 #include <chrono>
 
@@ -44,5 +43,3 @@ private:
 };
 
 } // namespace himalaya
-
-#endif
