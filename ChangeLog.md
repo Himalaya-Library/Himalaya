@@ -10,6 +10,8 @@ Changes
    more performant one from the [polylogarithm package
    6.0.0](https://github.com/Expander/polylogarithm).
 
+ * [commit 313d06d]: Require a C++-14 compatible compiler.
+
 
 Himalaya 4.0.0
 ==============
