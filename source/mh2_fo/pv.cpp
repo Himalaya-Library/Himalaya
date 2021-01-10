@@ -90,16 +90,14 @@ double a0(double m2, double q2) noexcept
  */
 double b0(double p2, double m12, double m22, double q2) noexcept
 {
-   using std::abs;
-
    // protect against infrared divergence
    if (is_close(p2, 0., EPSTOL) && is_close(m12, 0., EPSTOL)
        && is_close(m22, 0., EPSTOL))
       return 0.;
 
    double ans = 0.;
-   const double mMax2 = std::max(abs(m12), abs(m22));
-   const double pTest = abs(divide_finite(p2, mMax2));
+   const double mMax2 = std::max(std::abs(m12), std::abs(m22));
+   const double pTest = std::abs(divide_finite(p2, mMax2));
 
    if (pTest > 1e-10) {
       const double s = p2 - m22 + m12;
@@ -113,7 +111,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       if (is_close(m12, m22, EPSTOL)) {
          ans = -log_abs(m12 / q2);
       } else {
-         const double mMin2 = std::min(abs(m12), abs(m22));
+         const double mMin2 = std::min(std::abs(m12), std::abs(m22));
 
          if (mMin2 < 1.e-30) {
             ans = 1. - log_abs(mMax2 / q2);
