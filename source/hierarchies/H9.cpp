@@ -8,7 +8,7 @@
 #include "H9.hpp"
 #include "Hierarchies.hpp"
 #include "Constants.hpp"
-#include "Utils.hpp"
+#include "power.hpp"
 #include <cmath>
 
 namespace himalaya{

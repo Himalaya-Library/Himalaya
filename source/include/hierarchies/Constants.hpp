@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Utils.hpp"
+#include "power.hpp"
 #include <complex>
 
 namespace himalaya {
