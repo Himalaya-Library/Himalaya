@@ -77,7 +77,7 @@ bool HierarchyObject::getIsAlphab() const
  */
 void HierarchyObject::setSuitableHierarchy(int hierarchy)
 {
-   this -> hierarchy = hierarchy;
+   this->hierarchy = hierarchy;
 }
 
 /**
@@ -94,7 +94,7 @@ int HierarchyObject::getSuitableHierarchy() const
  */
 void HierarchyObject::setAbsDiff2L(double absDiff2L)
 {
-   this -> absDiff2L = absDiff2L;
+   this->absDiff2L = absDiff2L;
 }
 
 /**
@@ -111,7 +111,7 @@ double HierarchyObject::getAbsDiff2L() const
  */
 void HierarchyObject::setRelDiff2L(double relDiff2L)
 {
-   this -> relDiff2L = relDiff2L;
+   this->relDiff2L = relDiff2L;
 }
 
 /**
@@ -266,14 +266,13 @@ Eigen::Vector2d HierarchyObject::getMDRMasses() const
  */
 void HierarchyObject::setMDRFlag(int mdrFlag)
 {
-   if(mdrFlag != 0 && mdrFlag != 1) {
+   if (mdrFlag != 0 && mdrFlag != 1) {
       throw std::runtime_error(
-         "The MDR-flag has to be 0 (DR-scheme) or 1 (MDR-scheme). Input: "
-         + std::to_string(mdrFlag) + ".");
+         "The MDR-flag has to be 0 (DR-scheme) or 1 (MDR-scheme). Input: " +
+         std::to_string(mdrFlag) + ".");
    }
-   this -> mdrFlag = mdrFlag;
+   this->mdrFlag = mdrFlag;
 }
-
 
 /**
  * @return the MDRFlag integer.
@@ -290,10 +289,11 @@ int HierarchyObject::getMDRFlag() const
  */
 void HierarchyObject::setRenormalizationScheme(int renScheme)
 {
-   if(renScheme < 0 || renScheme > 3) {
+   if (renScheme < 0 || renScheme > 3) {
       throw std::runtime_error(
          "The renormalization scheme has to be 0 (H3m), 1 (DR'), 2 (H3m"
-         " with MDR), 3 (MDR'). Input: " + std::to_string(renScheme) + ".");
+         " with MDR), 3 (MDR'). Input: " +
+         std::to_string(renScheme) + ".");
    }
    renormalizationScheme = renScheme;
 }
@@ -366,13 +366,17 @@ void HierarchyObject::setDLambdaXtUncertainty(double uncertainty)
    dLambdaXtUncertainty = uncertainty;
 }
 
-double HierarchyObject::getDLambdaUncertainty(int loops) const{
-   if(loops >= 0 && loops <= 3){
-      if(loops == 3) return std::abs(dLambdaXtUncertainty) + std::abs(getDLambdaEFT() - getDLambdaH3m());
+double HierarchyObject::getDLambdaUncertainty(int loops) const
+{
+   if (loops >= 0 && loops <= 2) {
       return 0.;
+   } else if (loops == 3) {
+      return std::abs(dLambdaXtUncertainty) +
+             std::abs(getDLambdaEFT() - getDLambdaH3m());
    }
 
-   throw std::runtime_error("Δλ uncertainty " + std::to_string(loops) + " loop(s) is not available.");
+   throw std::runtime_error("Δλ uncertainty " + std::to_string(loops) +
+                            " loop(s) is not available.");
 }
 
 /**
@@ -381,11 +385,12 @@ double HierarchyObject::getDLambdaUncertainty(int loops) const{
  */
 double HierarchyObject::getDLambda(int loops) const
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       return dLambdaMap.at(loops);
    }
 
-   throw std::runtime_error("Δλ for " + std::to_string(loops) + " loop(s) is not available.");
+   throw std::runtime_error("Δλ for " + std::to_string(loops) +
+                            " loop(s) is not available.");
 }
 
 /**
@@ -395,11 +400,11 @@ double HierarchyObject::getDLambda(int loops) const
  */
 void HierarchyObject::setDLambda(int loops, double deltaLambda)
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       dLambdaMap[loops] = deltaLambda;
-   }
-   else {
-      throw std::runtime_error("Δλ for " + std::to_string(loops) + " loop(s) is not available.");
+   } else {
+      throw std::runtime_error("Δλ for " + std::to_string(loops) +
+                               " loop(s) is not available.");
    }
 }
 
@@ -409,7 +414,7 @@ void HierarchyObject::setDLambda(int loops, double deltaLambda)
  */
 double HierarchyObject::getDMh2EFTAt(int loops) const
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       return dMh2EFTMap.at(loops);
    }
 
@@ -422,7 +427,7 @@ double HierarchyObject::getDMh2EFTAt(int loops) const
  */
 double HierarchyObject::getDMh2FO(int loops) const
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       return dMh2FOMap.at(loops);
    }
 
@@ -449,11 +454,11 @@ double HierarchyObject::getDMh2FOAt(int loops) const
  */
 void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       dMh2EFTMap[loops] = deltaMh2;
-   }
-   else {
-      throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+   } else {
+      throw std::runtime_error("Higgs mass for " + std::to_string(loops) +
+                               " loop(s) is not available.");
    }
 }
 
@@ -464,11 +469,11 @@ void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
  */
 void HierarchyObject::setDMh2FO(int loops, double deltaMh2)
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       dMh2FOMap[loops] = deltaMh2;
-   }
-   else {
-      throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+   } else {
+      throw std::runtime_error("Higgs mass for " + std::to_string(loops) +
+                               " loop(s) is not available.");
    }
 }
 
@@ -482,7 +487,8 @@ void HierarchyObject::setDMh2FOAt(int loops, double deltaMh2)
    if (loops >= 0 && loops <= 3) {
       dMh2FOAtMap[loops] = deltaMh2;
    } else {
-      throw std::runtime_error("Higgs mass for " + std::to_string(loops) + " loop(s) is not available.");
+      throw std::runtime_error("Higgs mass for " + std::to_string(loops) +
+                               " loop(s) is not available.");
    }
 }
 
@@ -492,11 +498,12 @@ void HierarchyObject::setDMh2FOAt(int loops, double deltaMh2)
  */
 double HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       return dLambdaDRbarPrimeToMSbarShiftMap.at(loops);
    }
 
-   throw std::runtime_error("Δ_DR' -> MS shift for " + std::to_string(loops) + " loop(s) is not available.");
+   throw std::runtime_error("Δ_DR' -> MS shift for " + std::to_string(loops) +
+                            " loop(s) is not available.");
 }
 
 /**
@@ -506,11 +513,12 @@ double HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const
  */
 void HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift)
 {
-   if(loops >= 0 && loops <= 3){
+   if (loops >= 0 && loops <= 3) {
       dLambdaDRbarPrimeToMSbarShiftMap[loops] = shift;
-   }
-   else {
-      throw std::runtime_error("Δ_DR' -> MS shift for " + std::to_string(loops) + " loop(s) is not available.");
+   } else {
+      throw std::runtime_error("Δ_DR' -> MS shift for " +
+                               std::to_string(loops) +
+                               " loop(s) is not available.");
    }
 }
 
