@@ -48,18 +48,6 @@ Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
 HierarchyObject::HierarchyObject(bool isAlphab)
    : isAlphab(isAlphab)
    , renormalizationScheme(mh2_eft::RenSchemes::DRBARPRIME)
-   , expUncertainties{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
-   , dMhMap{ {0,Eigen::Matrix2d::Zero()},
-             {1,Eigen::Matrix2d::Zero()},
-             {2,Eigen::Matrix2d::Zero()},
-             {3,Eigen::Matrix2d::Zero()} }
-   , dMh2Map{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
-   , mdrShift{Eigen::Matrix2d::Zero()}
-   , mdrMasses{Eigen::Vector2d::Zero()}
-   , h3mShift{Eigen::Matrix2d::Zero()}
-   , dLambdaMap{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
-   , dLambdaDRbarPrimeToMSbarShiftMap{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
-   , dMh2EFTMap{ {0,0.}, {1,0.}, {2,0.}, {3,0.} }
 {
 }
 
@@ -131,7 +119,7 @@ double HierarchyObject::getRelDiff2L() const
 void HierarchyObject::setDMhExpUncertainty(int loops, double uncertainty)
 {
    if (loops > 0 && loops <= 3) {
-      expUncertainties[loops] = uncertainty;
+      expUncertainties.at(loops) = uncertainty;
    } else {
       throw std::runtime_error("Expansion uncertainty for "
                                + std::to_string(loops) + " loop(s) is not available.");
@@ -162,7 +150,7 @@ double HierarchyObject::getDMhExpUncertainty(int loops) const
 void HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh)
 {
    if (loops >= 0 && loops <= 3) {
-      dMhMap[loops] = dMh;
+      dMhMap.at(loops) = dMh;
    } else {
       throw std::runtime_error("Higgs mass matrix for "
                                + std::to_string(loops)
@@ -178,7 +166,7 @@ void HierarchyObject::setDMh(int loops, const Eigen::Matrix2d& dMh)
 void HierarchyObject::setDMh2(int loops, double dMh2)
 {
    if (loops >= 0 && loops <= 3) {
-      dMh2Map[loops] = dMh2;
+      dMh2Map.at(loops) = dMh2;
    } else {
       throw std::runtime_error("squared Higgs mass correction for "
                                + std::to_string(loops)
@@ -248,7 +236,7 @@ Eigen::Matrix2d HierarchyObject::getDMhDRbarPrimeToH3mShift() const
  */
 void HierarchyObject::setMDRMasses(const Eigen::Vector2d& mdrMasses)
 {
-   this -> mdrMasses = sortVector(mdrMasses);
+   this->mdrMasses = sortVector(mdrMasses);
 }
 
 /**
@@ -401,7 +389,7 @@ double HierarchyObject::getDLambda(int loops) const
 void HierarchyObject::setDLambda(int loops, double deltaLambda)
 {
    if (loops >= 0 && loops <= 3) {
-      dLambdaMap[loops] = deltaLambda;
+      dLambdaMap.at(loops) = deltaLambda;
    } else {
       throw std::runtime_error("Δλ for " + std::to_string(loops) +
                                " loop(s) is not available.");
@@ -455,7 +443,7 @@ double HierarchyObject::getDMh2FOAt(int loops) const
 void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
 {
    if (loops >= 0 && loops <= 3) {
-      dMh2EFTMap[loops] = deltaMh2;
+      dMh2EFTMap.at(loops) = deltaMh2;
    } else {
       throw std::runtime_error("Higgs mass for " + std::to_string(loops) +
                                " loop(s) is not available.");
@@ -470,7 +458,7 @@ void HierarchyObject::setDMh2EFT(int loops, double deltaMh2)
 void HierarchyObject::setDMh2FO(int loops, double deltaMh2)
 {
    if (loops >= 0 && loops <= 3) {
-      dMh2FOMap[loops] = deltaMh2;
+      dMh2FOMap.at(loops) = deltaMh2;
    } else {
       throw std::runtime_error("Higgs mass for " + std::to_string(loops) +
                                " loop(s) is not available.");
@@ -485,7 +473,7 @@ void HierarchyObject::setDMh2FO(int loops, double deltaMh2)
 void HierarchyObject::setDMh2FOAt(int loops, double deltaMh2)
 {
    if (loops >= 0 && loops <= 3) {
-      dMh2FOAtMap[loops] = deltaMh2;
+      dMh2FOAtMap.at(loops) = deltaMh2;
    } else {
       throw std::runtime_error("Higgs mass for " + std::to_string(loops) +
                                " loop(s) is not available.");
@@ -514,7 +502,7 @@ double HierarchyObject::getDLambdaDRbarPrimeToMSbarShift(int loops) const
 void HierarchyObject::setDLambdaDRbarPrimeToMSbarShift(int loops, double shift)
 {
    if (loops >= 0 && loops <= 3) {
-      dLambdaDRbarPrimeToMSbarShiftMap[loops] = shift;
+      dLambdaDRbarPrimeToMSbarShiftMap.at(loops) = shift;
    } else {
       throw std::runtime_error("Δ_DR' -> MS shift for " +
                                std::to_string(loops) +
