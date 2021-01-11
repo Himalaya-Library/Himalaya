@@ -125,12 +125,10 @@ void disable_non_as_terms(himalaya::mh2_eft::Mh2EFTCalculator& mhc)
  * @param p_ a HimalayaInterface struct
  * @param verbose_ suppress informative output during the calculation, if set to false
  */
-HierarchyCalculator::HierarchyCalculator(const Parameters& p_,
-                                         const bool verbose_)
-   : p(p_)
-   , verbose(verbose_)
+HierarchyCalculator::HierarchyCalculator(const Parameters& p_, bool verbose_)
+   : p(p_), verbose(verbose_)
 {
-   if(!isInfoPrinted && verbose){
+   if (!isInfoPrinted && verbose) {
       printInfo();
       isInfoPrinted = true;
    }
@@ -444,8 +442,8 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
  * @return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
  */
 Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
-   himalaya::HierarchyObject& ho, const int oneLoopFlagIn,
-   const int twoLoopFlagIn, const int threeLoopFlagIn) const
+   himalaya::HierarchyObject& ho, int oneLoopFlagIn,
+   int twoLoopFlagIn, int threeLoopFlagIn) const
 {
    using namespace himalaya::hierarchies;
 
@@ -832,7 +830,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    }
 
    // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
-   if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
+   if (oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1) {
       Eigen::Vector2d mdrMasses;
       mdrMasses(0) = Mst1;
       mdrMasses(1) = Mst2;
@@ -856,8 +854,8 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
  * @return A double which is the MDR sx_1 mass.
  */
 double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
-                                           const unsigned int oneLoopFlag,
-                                           const unsigned int twoLoopFlag) const
+                                           unsigned oneLoopFlag,
+                                           unsigned twoLoopFlag) const
 {
    using namespace himalaya::hierarchies;
 
@@ -918,8 +916,8 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
  * @return A double which is the MDR sx_2 mass.
  */
 double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
-                                           const unsigned int oneLoopFlag,
-                                           const unsigned int twoLoopFlag) const
+                                           unsigned oneLoopFlag,
+                                           unsigned twoLoopFlag) const
 {
    using namespace himalaya::hierarchies;
 
@@ -1193,8 +1191,8 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
  */
 Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const himalaya::HierarchyObject& ho,
-   const unsigned int shiftOneLoop,
-   const unsigned int shiftTwoLoop) const
+   unsigned shiftOneLoop,
+   unsigned shiftTwoLoop) const
 {
    using std::log;
 
@@ -1272,9 +1270,10 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
  * @param shiftTwoLoop An integer flag which is 0 or 1 in order to shift the two-loop terms to the MDR scheme.
  * @return The loop corrected Higgs mass matrix at the order O(alpha_x*alpha_s).
  */
-Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
-                                              const unsigned int shiftOneLoop,
-                                              const unsigned int shiftTwoLoop) const
+Eigen::Matrix2d
+HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
+                              unsigned shiftOneLoop,
+                              unsigned shiftTwoLoop) const
 {
    using namespace himalaya::mssm_twoloophiggs;
 
@@ -1317,9 +1316,10 @@ Eigen::Matrix2d HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& h
  * @param shiftTwoLoop a bool to shift the terms at two-loop level.
  * @return The loop corrected Higgs mass matrix difference of the MDR and DR scheme at the given order.
  */
-Eigen::Matrix2d HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::HierarchyObject& ho,
-                                                            const bool shiftOneLoop,
-                                                            const bool shiftTwoLoop) const
+Eigen::Matrix2d
+HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::HierarchyObject& ho,
+                                            bool shiftOneLoop,
+                                            bool shiftTwoLoop) const
 {
    if(shiftOneLoop && shiftTwoLoop){
       return getMt41L(ho, 1, 1) + getMt42L(ho, 1, 1) - getMt41L(ho, 0, 0) - getMt42L(ho, 0, 0);
@@ -1333,7 +1333,6 @@ Eigen::Matrix2d HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::Hier
 
    return Eigen::Matrix2d::Zero();
 }
-
 
 double HierarchyCalculator::calcTanBeta() const
 {
@@ -1472,11 +1471,10 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
  * @param threeLoopFlag an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-loop expansion terms.
  * @return A double which is the estimated uncertainty.
  */
-double HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& ho,
-                                                    const Eigen::Matrix2d& massMatrix,
-                                                    const unsigned int oneLoopFlag,
-                                                    const unsigned int twoLoopFlag,
-                                                    const unsigned int threeLoopFlag){
+double HierarchyCalculator::getExpansionUncertainty(
+   himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix,
+   unsigned oneLoopFlag, unsigned twoLoopFlag, unsigned threeLoopFlag)
+{
    using namespace himalaya::hierarchies;
 
    double Mh;
@@ -1610,7 +1608,7 @@ double HierarchyCalculator::getExpansionUncertainty(himalaya::HierarchyObject& h
  * @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
  * @returns The key of the mother hierarchy.
  */
-int HierarchyCalculator::getCorrectHierarchy(const int hierarchy) const
+int HierarchyCalculator::getCorrectHierarchy(int hierarchy) const
 {
    if (hierarchy < 0 || hierarchy > 13) {
       if (hierarchy == -1) {
