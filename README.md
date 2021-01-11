@@ -322,7 +322,7 @@ Afterwards, the LibraryLink `Himalaya_LibraryLink.so` must be loaded
 using the `InitializeHimalaya[]` function:
 
 ```.m
-InitializeHimalaya["Himalaya_LibraryLink.so"];
+InitializeHimalaya[FileNameJoin[{".", "Himalaya_LibraryLink.so"}]];
 ```
 
 After the initialization, the function `HimalayaCalculateDMh3L[]` is
@@ -335,7 +335,7 @@ Himalaya.  A full and detailed example can be found in
 ```.m
 Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
 
-InitializeHimalaya["Himalaya_LibraryLink.so"];
+InitializeHimalaya[FileNameJoin[{".", "Himalaya_LibraryLink.so"}]];
 
 MS = 2000;
 TB = 20;
