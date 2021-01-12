@@ -9,7 +9,7 @@
 #include "himalaya/HierarchyObject.hpp"
 #include "himalaya/version.hpp"
 
-#include "Hierarchies.hpp"
+#include "enums.hpp"
 #include "DSZHiggs.hpp"
 #include "EFTFlags.hpp"
 #include "Mh2EFTCalculator.hpp"

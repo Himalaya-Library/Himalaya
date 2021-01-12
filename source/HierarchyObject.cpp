@@ -7,7 +7,7 @@
 
 #include "himalaya/HierarchyObject.hpp"
 
-#include "Hierarchies.hpp"
+#include "enums.hpp"
 #include "EFTFlags.hpp"
 
 #include <cmath>

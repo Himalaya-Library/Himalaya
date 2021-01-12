@@ -6,7 +6,7 @@
 // ====================================================================
 
 #include "H3q22g.hpp"
-#include "Hierarchies.hpp"
+#include "enums.hpp"
 #include "Constants.hpp"
 #include "power.hpp"
 #include <cmath>
