@@ -34,6 +34,7 @@
 #include "MSSM_mass_eigenstates.hpp"
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <iostream>
 #include <map>
@@ -79,9 +80,9 @@ const std::map<int, int> hierarchyMap = {
 /**
  * Sorts the eigenvalues of a 2x2 matrix.
  * @param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
- * @return A sorted vector with the lowest eigenvalue at position 0.
+ * @return A sorted array with the lowest eigenvalue at position 0.
  */
-std::vector<double> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es)
+std::array<double, 2> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es)
 {
    const auto eigenvalues = es.eigenvalues().real().cwiseSqrt();
 
