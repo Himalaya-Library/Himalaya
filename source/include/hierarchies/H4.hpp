@@ -16,7 +16,7 @@ namespace hierarchies{
    public:
       /**
        * Constructor
-       * @param expansionFlags the flagMap for the truncation of expansion variables
+       * @param expansionDepth the flagMap for the truncation of expansion variables
        * @param Al4p a double alpha_s/4/Pi
        * @param At a double tri-linear breaking term
        * @param beta a double which is the mixing angle beta
@@ -30,7 +30,7 @@ namespace hierarchies{
        * @param twoLoopFlag an int flag to consider the two-loop expansion terms
        * @param threeLoopFlag an int flag to consider the three-loop expansion terms
        */
-      H4(const ExpansionFlags_t& expansionFlags, double Al4p, double At, double beta,
+      H4(const ExpansionFlags_t& expansionDepth, double Al4p, double At, double beta,
                  double lmMt, double lmMsq, double lmMsusy, double Mt, double Msusy, double Msq,
                  int mdrFlag, int oneLoopFlag, int twoLoopFlag, int threeLoopFlag);
       /**

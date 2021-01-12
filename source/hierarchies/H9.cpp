@@ -16,7 +16,7 @@ namespace hierarchies{
 
 /**
  * Constructor
- * @param expansionFlags the flagMap for the truncation of expansion variables
+ * @param expansionDepth the flagMap for the truncation of expansion variables
  * @param Al4p a double alpha_s/4/Pi
  * @param beta a double which is the mixing angle beta
  * @param Dmst12 a double Mst1^2 - Mst2^2
@@ -35,7 +35,7 @@ namespace hierarchies{
  * @param twoLoopFlag an int flag to consider the two-loop expansion terms
  * @param threeLoopFlag an int flag to consider the three-loop expansion terms
  */
-H9::H9(const ExpansionFlags_t& expansionFlags, double Al4p, double beta, double Dmst12, double Dmsqst1,
+H9::H9(const ExpansionFlags_t& expansionDepth, double Al4p, double beta, double Dmst12, double Dmsqst1,
                  double lmMt, double lmMgl, double lmMst1,
                  double Mgl, double Mt,  double Mst1, double Mst2, double MuSUSY,
                  double s2t,
@@ -63,10 +63,10 @@ H9::H9(const ExpansionFlags_t& expansionFlags, double Al4p, double beta, double 
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   x = expansionFlags.at(ExpansionDepth::xx);
-   xDmst12 = expansionFlags.at(ExpansionDepth::xxDmglst1);
-   xDmsqst1 = expansionFlags.at(ExpansionDepth::xxDmsqst1);
-   xMgl = expansionFlags.at(ExpansionDepth::xxMgl);
+   x = expansionDepth.at(ExpansionDepth::xx);
+   xDmst12 = expansionDepth.at(ExpansionDepth::xxDmglst1);
+   xDmsqst1 = expansionDepth.at(ExpansionDepth::xxDmsqst1);
+   xMgl = expansionDepth.at(ExpansionDepth::xxMgl);
 }
 
 /**

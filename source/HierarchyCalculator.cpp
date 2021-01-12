@@ -136,7 +136,7 @@ HierarchyCalculator::HierarchyCalculator(const Parameters& p_, bool verbose_)
 
    p.validate(verbose);
 
-   expansionFlags.assign(hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS, 1);
+   expansionDepth.assign(hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS, 1);
 }
 
 /**
@@ -278,8 +278,8 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
    using namespace himalaya::hierarchies;
 
    // set flags to truncate the expansion
-   expansionFlags.at(ExpansionDepth::xx) = 0;
-   expansionFlags.at(ExpansionDepth::xxMst) = 0;
+   expansionDepth.at(ExpansionDepth::xx) = 0;
+   expansionDepth.at(ExpansionDepth::xxMst) = 0;
    double error = -1.;
    int suitableHierarchy = -1;
 
@@ -366,8 +366,8 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
    ho.setSuitableHierarchy(suitableHierarchy);
 
    // reset the flags
-   expansionFlags.at(ExpansionDepth::xx) = 1;
-   expansionFlags.at(ExpansionDepth::xxMst) = 1;
+   expansionDepth.at(ExpansionDepth::xx) = 1;
+   expansionDepth.at(ExpansionDepth::xxMst) = 1;
    return suitableHierarchy;
 }
 
@@ -516,7 +516,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                switch(hierarchy){
                   case Hierarchies::h3:{
-                     const H3 hierarchy3(expansionFlags, Al4p, beta,
+                     const H3 hierarchy3(expansionDepth, Al4p, beta,
                         Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                         Mgl, Mt, Mst1, Mst2, Msq, p.mu,
                         s2t,
@@ -535,7 +535,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h32q2g:{
-                     const H32q2g hierarchy32q2g(expansionFlags, Al4p, beta,
+                     const H32q2g hierarchy32q2g(expansionDepth, Al4p, beta,
                         Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                         Mt, Mst1, Mst2, p.mu,
                         s2t,
@@ -554,7 +554,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h3q22g:{
-                     const H3q22g hierarchy3q22g(expansionFlags, Al4p, beta,
+                     const H3q22g hierarchy3q22g(expansionDepth, Al4p, beta,
                         Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                         Mt, Mst1, Mst2, Msq, p.mu,
                         s2t,
@@ -580,7 +580,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsusy = std::log(pow2(p.scale / Msusy));
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H4 hierarchy4(expansionFlags, Al4p, At, beta,
+               const H4 hierarchy4(expansionDepth, Al4p, At, beta,
                   lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hierarchy4.getS1();
@@ -603,7 +603,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                switch(hierarchy){
                   case Hierarchies::h5:{
-                     const H5 hierarchy5(expansionFlags, Al4p, beta, Dmglst1,
+                     const H5 hierarchy5(expansionDepth, Al4p, beta, Dmglst1,
                         lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
                         Mst2, Msq, p.mu,
                         s2t,
@@ -622,7 +622,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h5g1:{
-                     const H5g1 hierarchy5g1(expansionFlags, Al4p, beta, Dmglst1,
+                     const H5g1 hierarchy5g1(expansionDepth, Al4p, beta, Dmglst1,
                         lmMt, lmMst1, lmMst2, lmMsq, Mgl, Mt, Mst1,
                         Mst2, Msq, p.mu,
                         s2t,
@@ -650,7 +650,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                switch(hierarchy){
                   case Hierarchies::h6:{
-                     const H6 hierarchy6(expansionFlags, Al4p, beta, Dmglst2,
+                     const H6 hierarchy6(expansionDepth, Al4p, beta, Dmglst2,
                         lmMt, lmMst1, lmMst2, lmMsq,
                         Mt, Mst1, Mst2, Msq, p.mu,
                         s2t,
@@ -669,7 +669,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h6g2:{
-                     const H6g2 hierarchy6g2(expansionFlags, Al4p, beta, Dmglst2,
+                     const H6g2 hierarchy6g2(expansionDepth, Al4p, beta, Dmglst2,
                         lmMt, lmMst1, lmMst2, lmMsq,
                         Mgl, Mt, Mst1, Mst2, Msq, p.mu,
                         s2t,
@@ -697,7 +697,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                switch(hierarchy){
                   case Hierarchies::h6b:{
-                     const H6b hierarchy6b(expansionFlags, Al4p, beta, Dmglst2,
+                     const H6b hierarchy6b(expansionDepth, Al4p, beta, Dmglst2,
                         Dmsqst2, lmMt, lmMst1, lmMst2,
                         Mt, Mst1, Mst2, p.mu,
                         s2t,
@@ -716,7 +716,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h6b2qg2:{
-                     const H6b2qg2 hierarchy6b2qg2(expansionFlags, Al4p, beta, Dmglst2,
+                     const H6b2qg2 hierarchy6b2qg2(expansionDepth, Al4p, beta, Dmglst2,
                         Dmsqst2, lmMt, lmMst1, lmMst2,
                         Mgl, Mt, Mst1, Mst2, p.mu,
                         s2t,
@@ -735,7 +735,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h6bq22g:{
-                     const H6bq22g hierarchy6bq22g(expansionFlags, Al4p, beta, Dmglst2,
+                     const H6bq22g hierarchy6bq22g(expansionDepth, Al4p, beta, Dmglst2,
                         Dmsqst2, lmMt, lmMst1, lmMst2,
                         Mt, Mst1, Mst2, Msq, p.mu,
                         s2t,
@@ -754,7 +754,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h6bq2g2:{
-                     const H6bq2g2 hierarchy6bq2g2(expansionFlags, Al4p, beta, Dmglst2,
+                     const H6bq2g2 hierarchy6bq2g2(expansionDepth, Al4p, beta, Dmglst2,
                         Dmsqst2, lmMt, lmMst1, lmMst2,
                         Mgl, Mt, Mst1,Mst2, Msq, p.mu,
                         s2t,
@@ -781,7 +781,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                switch(hierarchy){
                   case Hierarchies::h9:{
-                     const H9 hierarchy9(expansionFlags, Al4p, beta, Dmst12, Dmsqst1,
+                     const H9 hierarchy9(expansionDepth, Al4p, beta, Dmst12, Dmsqst1,
                         lmMt, lmMgl, lmMst1,
                         Mgl, Mt, Mst1, Mst2, p.mu,
                         s2t,
@@ -800,7 +800,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   }
                   break;
                   case Hierarchies::h9q2:{
-                     const H9q2 hierarchy9q2(expansionFlags, Al4p, beta, Dmst12, Dmsqst1,
+                     const H9q2 hierarchy9q2(expansionDepth, Al4p, beta, Dmst12, Dmsqst1,
                         lmMt, lmMgl, lmMst1,
                         Mgl, Mt, Mst1, Mst2, Msq, p.mu,
                         s2t,
@@ -1480,113 +1480,113 @@ double HierarchyCalculator::getExpansionUncertainty(
    double Mhcut;
    std::vector<double> errors;
    // reset flags
-   expansionFlags.at(ExpansionDepth::xxMst) = 1;
+   expansionDepth.at(ExpansionDepth::xxMst) = 1;
    Eigen::EigenSolver<Eigen::Matrix2d> es;
    switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
       // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion uncertainty
-      expansionFlags.at(ExpansionDepth::xxDmglst1) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst1) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmglst1) = 1;
-      expansionFlags.at(ExpansionDepth::xxDmsqst1) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst1) = 1;
+      expansionDepth.at(ExpansionDepth::xxDmsqst1) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmsqst1) = 1;
-      expansionFlags.at(ExpansionDepth::xxDmst12) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmsqst1) = 1;
+      expansionDepth.at(ExpansionDepth::xxDmst12) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmst12) = 1;
+      expansionDepth.at(ExpansionDepth::xxDmst12) = 1;
       break;
    case Hierarchies::h4:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
-      expansionFlags.at(ExpansionDepth::xxAt) = 0;
+      expansionDepth.at(ExpansionDepth::xxAt) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxAt) = 1;
-      expansionFlags.at(ExpansionDepth::xxlmMsusy) = 0;
+      expansionDepth.at(ExpansionDepth::xxAt) = 1;
+      expansionDepth.at(ExpansionDepth::xxlmMsusy) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxlmMsusy) = 1;
-      expansionFlags.at(ExpansionDepth::xxMsq) = 0;
+      expansionDepth.at(ExpansionDepth::xxlmMsusy) = 1;
+      expansionDepth.at(ExpansionDepth::xxMsq) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxMsq) = 1;
-      expansionFlags.at(ExpansionDepth::xxMsusy) = 0;
+      expansionDepth.at(ExpansionDepth::xxMsq) = 1;
+      expansionDepth.at(ExpansionDepth::xxMsusy) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxMsusy) = 1;
+      expansionDepth.at(ExpansionDepth::xxMsusy) = 1;
       break;
    case Hierarchies::h5:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
-      expansionFlags.at(ExpansionDepth::xxDmglst1) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst1) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmglst1) = 1;
-      expansionFlags.at(ExpansionDepth::xxMsq) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst1) = 1;
+      expansionDepth.at(ExpansionDepth::xxMsq) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxMsq) = 1;
+      expansionDepth.at(ExpansionDepth::xxMsq) = 1;
       break;
    case Hierarchies::h6:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
-      expansionFlags.at(ExpansionDepth::xxDmglst2) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst2) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmglst2) = 1;
-      expansionFlags.at(ExpansionDepth::xxMsq) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst2) = 1;
+      expansionDepth.at(ExpansionDepth::xxMsq) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxMsq) = 1;
+      expansionDepth.at(ExpansionDepth::xxMsq) = 1;
       break;
    case Hierarchies::h6b:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
-      expansionFlags.at(ExpansionDepth::xxDmglst2) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst2) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmglst2) = 1;
-      expansionFlags.at(ExpansionDepth::xxDmsqst2) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmglst2) = 1;
+      expansionDepth.at(ExpansionDepth::xxDmsqst2) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmsqst2) = 1;
+      expansionDepth.at(ExpansionDepth::xxDmsqst2) = 1;
       break;
    case Hierarchies::h9:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
-      expansionFlags.at(ExpansionDepth::xxDmsqst1) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmsqst1) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmsqst1) = 1;
-      expansionFlags.at(ExpansionDepth::xxDmst12) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmsqst1) = 1;
+      expansionDepth.at(ExpansionDepth::xxDmst12) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxDmst12) = 1;
-      expansionFlags.at(ExpansionDepth::xxMgl) = 0;
+      expansionDepth.at(ExpansionDepth::xxDmst12) = 1;
+      expansionDepth.at(ExpansionDepth::xxMgl) = 0;
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mhcut = sortEigenvalues(es).at(0);
       errors.push_back(std::abs(Mh - Mhcut));
-      expansionFlags.at(ExpansionDepth::xxMgl) = 1;
+      expansionDepth.at(ExpansionDepth::xxMgl) = 1;
       break;
    }
    // evalue the sqrt of the squared errors
@@ -1595,8 +1595,8 @@ double HierarchyCalculator::getExpansionUncertainty(
                       [](double l, double r) { return l + r*r; });
 
    // set the expansion depth for the next comparison
-   expansionFlags.at(ExpansionDepth::xxMst) = 0;
-   expansionFlags.at(ExpansionDepth::xx) = 0;
+   expansionDepth.at(ExpansionDepth::xxMst) = 0;
+   expansionDepth.at(ExpansionDepth::xx) = 0;
 
    return std::sqrt(squaredErrorSum);
 }

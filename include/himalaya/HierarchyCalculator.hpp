@@ -111,7 +111,7 @@ namespace himalaya {
    private:
       Parameters p{};                    ///< Himalaya input parameters
       bool verbose{true};                ///< enable/disable verbose output
-      std::vector<int> expansionFlags{}; ///< hierarchy expansion flags
+      std::vector<int> expansionDepth{}; ///< hierarchy expansion depth
       /**
        * Checks if a hierarchy is suitable to the given mass spectrum.
        * @param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
