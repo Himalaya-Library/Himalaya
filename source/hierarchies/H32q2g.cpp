@@ -6,7 +6,7 @@
 // ====================================================================
 
 #include "H32q2g.hpp"
-#include "enums.hpp"
+#include "Enums.hpp"
 #include "Constants.hpp"
 #include "power.hpp"
 #include <cmath>
