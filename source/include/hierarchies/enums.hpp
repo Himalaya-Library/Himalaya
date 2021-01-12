@@ -38,20 +38,20 @@ namespace ExpansionDepth {
 
 /// expansion depth flags
 enum ExpansionDepth : int {
-   FIRST     = 14,
-   xx        = FIRST,   ///< truncate the two loop expansion at the three loop expansion depth
-   xxMst     = 15,      ///< truncate the expansion depth in the stop/sbottom masses by one order
-   xxDmglst1 = 16,      ///< truncate the expansion depth in the difference of stop/sbottom 1 mass and the gluino mass by one order
-   xxDmsqst1 = 17,      ///< truncate the expansion depth in the difference of the stop/sbottom 1 mass and the average squark mass by one order
-   xxDmst12  = 18,      ///< truncate the expansion depth in the difference of the stop/sbottom masses by one order
-   xxAt      = 19,      ///< truncate the expansion depth in At/Ab by one order
-   xxlmMsusy = 20,      ///< truncate the expansion depth in log(Msusy) by one order
-   xxMsq     = 21,      ///< truncate the expansion depth in the average squark mass by one order
-   xxMsusy   = 22,      ///< truncate the expansion depth in the average SUSY mass by one order
-   xxDmglst2 = 23,      ///< truncate the expansion depth in the difference of the stop/sbottom 2 mass and the gluino mass by one order
-   xxDmsqst2 = 24,      ///< truncate the expansion depth in the difference of the average squark mass and the stop/sbottom 2 mass by one order
-   xxMgl     = 25,      ///< truncate the expansion depth in the gluino mass by one order
-   NUMBER_OF_EXPANSIONS ///< Number of expansions
+   FIRST     =  0,
+   xx        =  FIRST,   ///< truncate the two loop expansion at the three loop expansion depth
+   xxMst     =  1,       ///< truncate the expansion depth in the stop/sbottom masses by one order
+   xxDmglst1 =  2,       ///< truncate the expansion depth in the difference of stop/sbottom 1 mass and the gluino mass by one order
+   xxDmsqst1 =  3,       ///< truncate the expansion depth in the difference of the stop/sbottom 1 mass and the average squark mass by one order
+   xxDmst12  =  4,       ///< truncate the expansion depth in the difference of the stop/sbottom masses by one order
+   xxAt      =  5,       ///< truncate the expansion depth in At/Ab by one order
+   xxlmMsusy =  6,       ///< truncate the expansion depth in log(Msusy) by one order
+   xxMsq     =  7,       ///< truncate the expansion depth in the average squark mass by one order
+   xxMsusy   =  8,       ///< truncate the expansion depth in the average SUSY mass by one order
+   xxDmglst2 =  9,       ///< truncate the expansion depth in the difference of the stop/sbottom 2 mass and the gluino mass by one order
+   xxDmsqst2 = 10,       ///< truncate the expansion depth in the difference of the average squark mass and the stop/sbottom 2 mass by one order
+   xxMgl     = 11,       ///< truncate the expansion depth in the gluino mass by one order
+   NUMBER_OF_EXPANSIONS
 };
 
 } // namespace ExpansionDepth
