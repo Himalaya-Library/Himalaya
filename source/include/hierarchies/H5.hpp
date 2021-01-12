@@ -35,7 +35,7 @@ namespace hierarchies{
        * @param twoLoopFlag an int flag to consider the two-loop expansion terms
        * @param threeLoopFlag an int flag to consider the three-loop expansion terms
        */
-      H5(const ExpansionFlag_t& flagMap, double Al4p, double beta, double Dmglst1,
+      H5(const ExpansionFlags_t& flagMap, double Al4p, double beta, double Dmglst1,
                  double lmMt, double lmMst1, double lmMst2, double lmMsq, double Mt, double Mst1,
                  double Mst2, double Msq, double MuSUSY,
                  double s2t,
