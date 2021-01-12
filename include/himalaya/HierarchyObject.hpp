@@ -249,10 +249,10 @@ namespace himalaya {
       double absDiff2L{};                      ///< the absolute difference of the two loop Higgs masses
       double relDiff2L{};                      ///< the relative difference of the two loop Higgs masses
       std::array<double,4> expUncertainties{}; ///< holds the expansion uncertainties, the keys are the loop order: 0, 1, 2, 3
-      std::array<Eigen::Matrix2d,4> dMhMap{ Eigen::Matrix2d::Zero(),
-                                            Eigen::Matrix2d::Zero(),
-                                            Eigen::Matrix2d::Zero(),
-                                            Eigen::Matrix2d::Zero() }; ///< holds all mass matrices at the given loop order
+      std::array<Eigen::Matrix2d,4> dMhMap{ {Eigen::Matrix2d::Zero(),
+                                             Eigen::Matrix2d::Zero(),
+                                             Eigen::Matrix2d::Zero(),
+                                             Eigen::Matrix2d::Zero()} }; ///< holds all mass matrices at the given loop order
       std::array<double,4> dMh2Map{};          ///< holds loop corretions to squared CP-even Higgs mass
       Eigen::Matrix2d mdrShift{Eigen::Matrix2d::Zero()};  ///< the mass matrix of the difference of the MDR - DR contributions of the order alpha_x + alpha_x*alpha_s
       Eigen::Vector2d mdrMasses{Eigen::Vector2d::Zero()}; ///< the 'array' which holds the MDR masses
