@@ -27,7 +27,7 @@
 #include "H6g2.hpp"
 #include "H9.hpp"
 #include "H9q2.hpp"
-#include "constants.hpp"
+#include "Constants.hpp"
 #include "linalg2.hpp"
 #include "Logger.hpp"
 #include "ThresholdCalculator.hpp"
