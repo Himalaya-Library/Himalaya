@@ -12,7 +12,7 @@
 namespace himalaya {
 namespace hierarchies {
 
-using ExpansionFlags_t = std::vector<unsigned>;
+using ExpansionFlags_t = std::vector<int>;
 
 }        // hierarchies
 }        // himalaya
