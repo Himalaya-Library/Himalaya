@@ -1604,7 +1604,7 @@ int HierarchyCalculator::getMotherHierarchy(int hierarchy) const
    }
 
    // maps all hierarchies to their mother hierarchy
-   const auto hierarchyMap = [] {
+   static const auto hierarchyMap = [] {
       std::array<int, Hierarchies::NUMBER_OF_HIERARCHIES> a{};
       a[hierarchies::Hierarchies::h3]      = hierarchies::Hierarchies::h3;
       a[hierarchies::Hierarchies::h32q2g]  = hierarchies::Hierarchies::h3;
