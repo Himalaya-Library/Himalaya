@@ -7,7 +7,7 @@
 
 #include "H6b.hpp"
 #include "enums.hpp"
-#include "Constants.hpp"
+#include "constants.hpp"
 #include "power.hpp"
 #include <cmath>
 
