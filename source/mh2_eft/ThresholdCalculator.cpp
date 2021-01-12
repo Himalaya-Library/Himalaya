@@ -10,7 +10,7 @@
 #include "Logger.hpp"
 #include "threshold_loop_functions.hpp"
 #include "dilog.hpp"
-#include "power.hpp"
+#include "Powers.hpp"
 #include <cmath>
 #include <complex>
 #include <stdexcept>

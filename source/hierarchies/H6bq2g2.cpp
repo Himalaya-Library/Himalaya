@@ -8,7 +8,7 @@
 #include "H6bq2g2.hpp"
 #include "Enums.hpp"
 #include "Constants.hpp"
-#include "power.hpp"
+#include "Powers.hpp"
 #include <cmath>
 
 namespace himalaya{

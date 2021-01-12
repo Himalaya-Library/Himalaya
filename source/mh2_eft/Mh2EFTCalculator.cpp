@@ -9,7 +9,7 @@
 #include "ThresholdCalculator.hpp"
 #include "EFTFlags.hpp"
 #include "Logger.hpp"
-#include "power.hpp"
+#include "Powers.hpp"
 #include <cmath>
 #include <iostream>
 #include <string>
