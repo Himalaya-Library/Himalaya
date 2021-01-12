@@ -59,24 +59,6 @@ static bool isInfoPrinted; ///< If this bool is true, than no info will be print
  */
 namespace {
 
-/** The hierarchy map which maps all hierarchies to their mother hierarchies */
-const std::map<int, int> hierarchyMap = {
-   { hierarchies::Hierarchies::h3     , hierarchies::Hierarchies::h3  },
-   { hierarchies::Hierarchies::h32q2g , hierarchies::Hierarchies::h3  },
-   { hierarchies::Hierarchies::h3q22g , hierarchies::Hierarchies::h3  },
-   { hierarchies::Hierarchies::h4     , hierarchies::Hierarchies::h4  },
-   { hierarchies::Hierarchies::h5     , hierarchies::Hierarchies::h5  },
-   { hierarchies::Hierarchies::h5g1   , hierarchies::Hierarchies::h5  },
-   { hierarchies::Hierarchies::h6     , hierarchies::Hierarchies::h6  },
-   { hierarchies::Hierarchies::h6g2   , hierarchies::Hierarchies::h6  },
-   { hierarchies::Hierarchies::h6b    , hierarchies::Hierarchies::h6b },
-   { hierarchies::Hierarchies::h6b2qg2, hierarchies::Hierarchies::h6b },
-   { hierarchies::Hierarchies::h6bq22g, hierarchies::Hierarchies::h6b },
-   { hierarchies::Hierarchies::h6bq2g2, hierarchies::Hierarchies::h6b },
-   { hierarchies::Hierarchies::h9     , hierarchies::Hierarchies::h9  },
-   { hierarchies::Hierarchies::h9q2   , hierarchies::Hierarchies::h9  }
-};
-
 /**
  * Sorts the eigenvalues of a 2x2 matrix.
  * @param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
@@ -509,7 +491,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             throw std::runtime_error("There are no tree-level hierarchies included!");
          }
          // select the suitable hierarchy for the specific hierarchy and set variables
-         switch(getCorrectHierarchy(hierarchy)){
+         switch(getMotherHierarchy(hierarchy)){
             case Hierarchies::h3:{
                const double Dmglst1 = Mgl - Mst1;
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
@@ -879,7 +861,7 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
    const double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p)
       * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2)
       * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
-   switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
+   switch (getMotherHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
       Mst1mod = (1 + mdr2mst1ka);
       break;
@@ -935,7 +917,7 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
    const double Dmglst2 = Mgl - Mst2;
    const double mdr2mst2ka = (-80. * twoLoopFlag * pow2(Al4p)
       * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2)) / (3. * pow2(Mst2));
-   switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
+   switch (getMotherHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
       Mst2mod = (1 + mdr2mst2ka);
       break;
@@ -1483,7 +1465,7 @@ double HierarchyCalculator::getExpansionUncertainty(
    // reset flags
    expansionDepth.at(ExpansionDepth::Mst) = 1;
    Eigen::EigenSolver<Eigen::Matrix2d> es;
-   switch (getCorrectHierarchy(ho.getSuitableHierarchy())) {
+   switch (getMotherHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
       es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
       Mh = sortEigenvalues(es).at(0);
@@ -1608,7 +1590,7 @@ double HierarchyCalculator::getExpansionUncertainty(
  * @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
  * @returns The key of the mother hierarchy.
  */
-int HierarchyCalculator::getCorrectHierarchy(int hierarchy) const
+int HierarchyCalculator::getMotherHierarchy(int hierarchy) const
 {
    using namespace himalaya::hierarchies;
 
@@ -1621,6 +1603,24 @@ int HierarchyCalculator::getCorrectHierarchy(int hierarchy) const
                                   " not included!");
       }
    }
+
+   /** The hierarchy map which maps all hierarchies to their mother hierarchies */
+   static const std::map<int, int> hierarchyMap = {
+      { hierarchies::Hierarchies::h3     , hierarchies::Hierarchies::h3  },
+      { hierarchies::Hierarchies::h32q2g , hierarchies::Hierarchies::h3  },
+      { hierarchies::Hierarchies::h3q22g , hierarchies::Hierarchies::h3  },
+      { hierarchies::Hierarchies::h4     , hierarchies::Hierarchies::h4  },
+      { hierarchies::Hierarchies::h5     , hierarchies::Hierarchies::h5  },
+      { hierarchies::Hierarchies::h5g1   , hierarchies::Hierarchies::h5  },
+      { hierarchies::Hierarchies::h6     , hierarchies::Hierarchies::h6  },
+      { hierarchies::Hierarchies::h6g2   , hierarchies::Hierarchies::h6  },
+      { hierarchies::Hierarchies::h6b    , hierarchies::Hierarchies::h6b },
+      { hierarchies::Hierarchies::h6b2qg2, hierarchies::Hierarchies::h6b },
+      { hierarchies::Hierarchies::h6bq22g, hierarchies::Hierarchies::h6b },
+      { hierarchies::Hierarchies::h6bq2g2, hierarchies::Hierarchies::h6b },
+      { hierarchies::Hierarchies::h9     , hierarchies::Hierarchies::h9  },
+      { hierarchies::Hierarchies::h9q2   , hierarchies::Hierarchies::h9  }
+   };
 
    return hierarchyMap.at(hierarchy);
 }

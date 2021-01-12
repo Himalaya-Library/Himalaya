@@ -139,7 +139,7 @@ namespace himalaya {
        * @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
        * @returns The key of the mother hierarchy.
        */
-      int getCorrectHierarchy(int hierarchy) const;
+      int getMotherHierarchy(int hierarchy) const;
       /**
        * Fills in delta_lambda @ 3L to the given HierarchyObject
        * @param ho a HierrachyObject
