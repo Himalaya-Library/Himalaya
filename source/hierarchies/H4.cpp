@@ -53,10 +53,10 @@ H4::H4(const ExpansionFlags_t& expansionDepth, double Al4p, double At, double be
    this -> threeLoopFlag = threeLoopFlag;
    this -> Al4p = Al4p;
    // expansion flags
-   xAt = expansionDepth.at(ExpansionDepth::xxAt);
-   xMsq = expansionDepth.at(ExpansionDepth::xxMsq);
-   xlmMsusy = expansionDepth.at(ExpansionDepth::xxlmMsusy);
-   xMsusy = expansionDepth.at(ExpansionDepth::xxMsusy);
+   xAt = expansionDepth.at(ExpansionDepth::At);
+   xMsq = expansionDepth.at(ExpansionDepth::Msq);
+   xlmMsusy = expansionDepth.at(ExpansionDepth::lmMsusy);
+   xMsusy = expansionDepth.at(ExpansionDepth::Msusy);
 }
 
 /**

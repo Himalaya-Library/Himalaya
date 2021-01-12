@@ -61,9 +61,9 @@ H32q2g::H32q2g(const ExpansionFlags_t& expansionDepth, double Al4p, double beta,
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   xDmglst1 = expansionDepth.at(ExpansionDepth::xxDmglst1);
-   xDmst12 = expansionDepth.at(ExpansionDepth::xxDmglst1);
-   xDmsqst1 = expansionDepth.at(ExpansionDepth::xxDmsqst1);
+   xDmglst1 = expansionDepth.at(ExpansionDepth::Dmglst1);
+   xDmst12 = expansionDepth.at(ExpansionDepth::Dmglst1);
+   xDmsqst1 = expansionDepth.at(ExpansionDepth::Dmsqst1);
 }
 
 /**

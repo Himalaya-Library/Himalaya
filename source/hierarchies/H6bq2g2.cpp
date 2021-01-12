@@ -66,9 +66,9 @@ H6bq2g2::H6bq2g2(const ExpansionFlags_t& expansionDepth, double Al4p, double bet
    shiftst3 = mdrFlag;
    xDR2DRMOD = mdrFlag;
    // expansion flags
-   xDmglst2 = expansionDepth.at(ExpansionDepth::xxDmglst2);
-   xDmsqst2 = expansionDepth.at(ExpansionDepth::xxDmsqst2);
-   xMst = expansionDepth.at(ExpansionDepth::xxMst);
+   xDmglst2 = expansionDepth.at(ExpansionDepth::Dmglst2);
+   xDmsqst2 = expansionDepth.at(ExpansionDepth::Dmsqst2);
+   xMst = expansionDepth.at(ExpansionDepth::Mst);
 }
 
 /**

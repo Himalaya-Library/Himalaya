@@ -64,9 +64,9 @@ H6::H6(const ExpansionFlags_t& expansionDepth, double Al4p, double beta, double 
    shiftst3 = mdrFlag;
    xDR2DRMOD = mdrFlag;
    // expansion flags
-   xDmglst2 = expansionDepth.at(ExpansionDepth::xxDmglst2);
-   xMsq = expansionDepth.at(ExpansionDepth::xxMsq);
-   xMst = expansionDepth.at(ExpansionDepth::xxMst);
+   xDmglst2 = expansionDepth.at(ExpansionDepth::Dmglst2);
+   xMsq = expansionDepth.at(ExpansionDepth::Msq);
+   xMst = expansionDepth.at(ExpansionDepth::Mst);
 }
 
 /**

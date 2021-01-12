@@ -63,10 +63,10 @@ H9::H9(const ExpansionFlags_t& expansionDepth, double Al4p, double beta, double 
    shiftst2 = mdrFlag;
    shiftst3 = mdrFlag;
    // expansion flags
-   x = expansionDepth.at(ExpansionDepth::xx);
-   xDmst12 = expansionDepth.at(ExpansionDepth::xxDmglst1);
-   xDmsqst1 = expansionDepth.at(ExpansionDepth::xxDmsqst1);
-   xMgl = expansionDepth.at(ExpansionDepth::xxMgl);
+   x = expansionDepth.at(ExpansionDepth::threeLoop);
+   xDmst12 = expansionDepth.at(ExpansionDepth::Dmglst1);
+   xDmsqst1 = expansionDepth.at(ExpansionDepth::Dmsqst1);
+   xMgl = expansionDepth.at(ExpansionDepth::Mgl);
 }
 
 /**
