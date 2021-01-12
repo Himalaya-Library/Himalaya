@@ -41,24 +41,10 @@ struct Data {
 };
 
 
-std::ostream& operator<<(std::ostream& ostr, const Point& point)
-{
-   ostr << point.MS << '\t' << point.xt << '\t' << point.tb;
-   return ostr;
-}
-
-
 std::istream& operator>>(std::istream& istr, Point& point)
 {
    istr >> point.MS >> point.xt >> point.tb;
    return istr;
-}
-
-
-std::ostream& operator<<(std::ostream& ostr, const Data& data)
-{
-   ostr << data.MhFO << '\t' << data.MhEFT << '\t' << data.lambda;
-   return ostr;
 }
 
 
@@ -143,6 +129,65 @@ Data calculate_all(const himalaya::Parameters& point)
 }
 
 
+std::vector<std::pair<Point, Data>> read_points(const std::string& filename)
+{
+   std::ifstream istr(filename);
+   std::vector<std::pair<Point, Data>> vec;
+   std::string line;
+
+   while (std::getline(istr, line)) {
+      Point point;
+      Data data;
+
+      std::istringstream isstr(line);
+      isstr >> point >> data;
+
+      vec.push_back({point, data});
+   }
+
+   return vec;
+}
+
+
+} // anonymous namespace
+
+
+TEST_CASE("test_points")
+{
+   const double eps  = std::pow(10.0, -N_DIGITS);
+   const auto points = read_points(DATA_FILE);
+
+   for (const auto& p: points) {
+      const auto point = make_point(p.first);
+      const auto data = calculate_all(point);
+      INFO("point =\n" << point);
+      CHECK_CLOSE(p.second.MhFO  , data.MhFO  , eps);
+      CHECK_CLOSE(p.second.MhEFT , data.MhEFT , eps);
+      CHECK_CLOSE(p.second.lambda, data.lambda, eps);
+   }
+}
+
+
+// uncomment this to re-generate the points
+#if 0
+
+namespace {
+
+
+std::ostream& operator<<(std::ostream& ostr, const Point& point)
+{
+   ostr << point.MS << '\t' << point.xt << '\t' << point.tb;
+   return ostr;
+}
+
+
+std::ostream& operator<<(std::ostream& ostr, const Data& data)
+{
+   ostr << data.MhFO << '\t' << data.MhEFT << '\t' << data.lambda;
+   return ostr;
+}
+
+
 void write_points_with_xt_tb(std::ostream& ostr, double xt, double tb)
 {
    const unsigned N = 100;
@@ -168,46 +213,12 @@ void write_points(const std::string& filename)
 }
 
 
-std::vector<std::pair<Point, Data>> read_points(const std::string& filename)
-{
-   std::ifstream istr(filename);
-   std::vector<std::pair<Point, Data>> vec;
-   std::string line;
-
-   while (std::getline(istr, line)) {
-      Point point;
-      Data data;
-
-      std::istringstream isstr(line);
-      isstr >> point >> data;
-
-      vec.push_back({point, data});
-   }
-
-   return vec;
-}
-
-
 } // anonymous namespace
 
 
-// TEST_CASE("write_points")
-// {
-//    write_points(DATA_FILE);
-// }
-
-
-TEST_CASE("test_points")
+TEST_CASE("write_points")
 {
-   const double eps  = std::pow(10.0, -N_DIGITS);
-   const auto points = read_points(DATA_FILE);
-
-   for (const auto& p: points) {
-      const auto point = make_point(p.first);
-      const auto data = calculate_all(point);
-      INFO("point =\n" << point);
-      CHECK_CLOSE(p.second.MhFO  , data.MhFO  , eps);
-      CHECK_CLOSE(p.second.MhEFT , data.MhEFT , eps);
-      CHECK_CLOSE(p.second.lambda, data.lambda, eps);
-   }
+   write_points(DATA_FILE);
 }
+
+#endif
