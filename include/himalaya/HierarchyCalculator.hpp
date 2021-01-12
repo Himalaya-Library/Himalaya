@@ -9,7 +9,7 @@
 
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
-#include <map>
+#include <vector>
 #include <Eigen/Core>
 
 /**
@@ -111,7 +111,7 @@ namespace himalaya {
    private:
       Parameters p{};     ///< Himalaya input parameters
       bool verbose{true}; ///< enable/disable verbose output
-      std::map<unsigned, unsigned> flagMap{}; ///< holds hierarchy key value pairs
+      std::vector<unsigned> flagMap{}; ///< holds hierarchy key value pairs
       /**
        * Checks if a hierarchy is suitable to the given mass spectrum.
        * @param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.

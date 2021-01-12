@@ -36,6 +36,7 @@
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+#include <map>
 #include <numeric>
 #include <stdexcept>
 #include <string>
@@ -135,9 +136,7 @@ HierarchyCalculator::HierarchyCalculator(const Parameters& p_, bool verbose_)
 
    p.validate(verbose);
 
-   for (int i = hierarchies::ExpansionDepth::FIRST; i < hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS; i++) {
-      flagMap.emplace(i, 1u);
-   }
+   flagMap.assign(hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS, 1u);
 }
 
 /**
