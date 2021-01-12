@@ -109,9 +109,9 @@ namespace himalaya {
       double getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, unsigned oneLoopFlag,
                                      unsigned twoLoopFlag, unsigned threeLoopFlag);
    private:
-      Parameters p{};     ///< Himalaya input parameters
-      bool verbose{true}; ///< enable/disable verbose output
-      std::vector<int> flagMap{}; ///< holds hierarchy key value pairs
+      Parameters p{};                    ///< Himalaya input parameters
+      bool verbose{true};                ///< enable/disable verbose output
+      std::vector<int> expansionFlags{}; ///< hierarchy expansion flags
       /**
        * Checks if a hierarchy is suitable to the given mass spectrum.
        * @param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.
