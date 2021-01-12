@@ -9,7 +9,7 @@
 
 #include "Himalaya_interface.hpp"
 #include "HierarchyObject.hpp"
-#include <vector>
+#include <array>
 #include <Eigen/Core>
 
 /**
@@ -111,7 +111,7 @@ namespace himalaya {
    private:
       Parameters p{};                    ///< Himalaya input parameters
       bool verbose{true};                ///< enable/disable verbose output
-      std::vector<int> expansionDepth{}; ///< hierarchy expansion depth
+      std::array<int, 12> expansionDepth{}; ///< hierarchy expansion depth
       /**
        * Checks if a hierarchy is suitable to the given mass spectrum.
        * @param ho a HierarchyObject with constant isAlphab and a hierarchy candidate.

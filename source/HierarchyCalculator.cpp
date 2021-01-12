@@ -136,7 +136,7 @@ HierarchyCalculator::HierarchyCalculator(const Parameters& p_, bool verbose_)
 
    p.validate(verbose);
 
-   expansionDepth.assign(hierarchies::ExpansionDepth::NUMBER_OF_EXPANSIONS, 1);
+   expansionDepth.fill(1);
 }
 
 /**

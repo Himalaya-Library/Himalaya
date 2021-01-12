@@ -7,12 +7,14 @@
 
 #pragma once
 
-#include <vector>
+#include <array>
+
+#include "enums.hpp"
 
 namespace himalaya {
 namespace hierarchies {
 
-using ExpansionFlags_t = std::vector<int>;
+using ExpansionFlags_t = std::array<int, ExpansionDepth::NUMBER_OF_EXPANSIONS>;
 
 }        // hierarchies
 }        // himalaya
