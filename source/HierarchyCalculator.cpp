@@ -37,7 +37,6 @@
 #include <array>
 #include <cmath>
 #include <iostream>
-#include <map>
 #include <numeric>
 #include <stdexcept>
 #include <string>
@@ -1604,23 +1603,25 @@ int HierarchyCalculator::getMotherHierarchy(int hierarchy) const
       }
    }
 
-   /** The hierarchy map which maps all hierarchies to their mother hierarchies */
-   static const std::map<int, int> hierarchyMap = {
-      { hierarchies::Hierarchies::h3     , hierarchies::Hierarchies::h3  },
-      { hierarchies::Hierarchies::h32q2g , hierarchies::Hierarchies::h3  },
-      { hierarchies::Hierarchies::h3q22g , hierarchies::Hierarchies::h3  },
-      { hierarchies::Hierarchies::h4     , hierarchies::Hierarchies::h4  },
-      { hierarchies::Hierarchies::h5     , hierarchies::Hierarchies::h5  },
-      { hierarchies::Hierarchies::h5g1   , hierarchies::Hierarchies::h5  },
-      { hierarchies::Hierarchies::h6     , hierarchies::Hierarchies::h6  },
-      { hierarchies::Hierarchies::h6g2   , hierarchies::Hierarchies::h6  },
-      { hierarchies::Hierarchies::h6b    , hierarchies::Hierarchies::h6b },
-      { hierarchies::Hierarchies::h6b2qg2, hierarchies::Hierarchies::h6b },
-      { hierarchies::Hierarchies::h6bq22g, hierarchies::Hierarchies::h6b },
-      { hierarchies::Hierarchies::h6bq2g2, hierarchies::Hierarchies::h6b },
-      { hierarchies::Hierarchies::h9     , hierarchies::Hierarchies::h9  },
-      { hierarchies::Hierarchies::h9q2   , hierarchies::Hierarchies::h9  }
-   };
+   // maps all hierarchies to their mother hierarchy
+   const auto hierarchyMap = [] {
+      std::array<int, Hierarchies::NUMBER_OF_HIERARCHIES> a{};
+      a[hierarchies::Hierarchies::h3]      = hierarchies::Hierarchies::h3;
+      a[hierarchies::Hierarchies::h32q2g]  = hierarchies::Hierarchies::h3;
+      a[hierarchies::Hierarchies::h3q22g]  = hierarchies::Hierarchies::h3;
+      a[hierarchies::Hierarchies::h4]      = hierarchies::Hierarchies::h4;
+      a[hierarchies::Hierarchies::h5]      = hierarchies::Hierarchies::h5;
+      a[hierarchies::Hierarchies::h5g1]    = hierarchies::Hierarchies::h5;
+      a[hierarchies::Hierarchies::h6]      = hierarchies::Hierarchies::h6;
+      a[hierarchies::Hierarchies::h6g2]    = hierarchies::Hierarchies::h6;
+      a[hierarchies::Hierarchies::h6b]     = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h6b2qg2] = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h6bq22g] = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h6bq2g2] = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h9]      = hierarchies::Hierarchies::h9;
+      a[hierarchies::Hierarchies::h9q2]    = hierarchies::Hierarchies::h9;
+      return a;
+   }();
 
    return hierarchyMap.at(hierarchy);
 }
