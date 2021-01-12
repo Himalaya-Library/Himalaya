@@ -15,21 +15,21 @@ namespace Hierarchies {
 /// Hierarchy numbers
 enum Hierarchies : int {
    FIRST   =  0,
-   h3      =  FIRST,        ///< hierarchy h3
-   h32q2g  =  1,            ///< hierarchy h32q2g
-   h3q22g  =  2,            ///< hierarchy h3q22g
-   h4      =  3,            ///< hierarchy h4
-   h5      =  4,            ///< hierarchy h5
-   h5g1    =  5,            ///< hierarchy h5g1
-   h6      =  6,            ///< hierarchy h6
-   h6b     =  7,            ///< hierarchy h6b
-   h6b2qg2 =  8,            ///< hierarchy h6b2qg2
-   h6bq22g =  9,            ///< hierarchy h6bq22g
-   h6bq2g2 = 10,            ///< hierarchy h6bq2g2
-   h6g2    = 11,            ///< hierarchy h6g2
-   h9      = 12,            ///< hierarchy h9
-   h9q2    = 13,            ///< hierarchy h9q2
-   NUMBER_OF_HIERARCHIES    ///< Number of hierarchies
+   h3      =  FIRST,
+   h32q2g  =  1,
+   h3q22g  =  2,
+   h4      =  3,
+   h5      =  4,
+   h5g1    =  5,
+   h6      =  6,
+   h6b     =  7,
+   h6b2qg2 =  8,
+   h6bq22g =  9,
+   h6bq2g2 = 10,
+   h6g2    = 11,
+   h9      = 12,
+   h9q2    = 13,
+   NUMBER_OF_HIERARCHIES
 };
 
 } // namespace Hierarchies
@@ -57,10 +57,10 @@ enum ExpansionDepth : int {
 } // namespace ExpansionDepth
 
 /// Mass schemes
-namespace MassSchemes{
+namespace MassSchemes {
 
    /// mass scheme flags
-   enum MassSchemes : int{
+   enum MassSchemes : int {
       FIRST        = 0,
       DEFAULT      = FIRST,
       MASSEIGEN    = 1,
