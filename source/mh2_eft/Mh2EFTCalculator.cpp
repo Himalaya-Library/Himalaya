@@ -110,9 +110,7 @@ Mh2EFTCalculator::Mh2EFTCalculator(
         msq2 = p.calculateMsq2();
 
     // fill orders
-    for (int i = EFTOrders::FIRST; i < EFTOrders::NUMBER_OF_EFT_ORDERS; i++) {
-        orders[i] = 1;
-    }
+    orders.fill(1);
 
     const double eps = 1e-10;
 
