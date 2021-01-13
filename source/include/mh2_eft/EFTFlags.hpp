@@ -87,8 +87,7 @@ namespace ThresholdVariables {
 namespace EFTOrders {
    /// Order flags
    enum EFTOrders : int{
-      FIRST    = 0,
-      G12G22   = FIRST,
+      G12G22   = 0,
       G14      = 1,
       G24      = 2,
       G12YB2   = 3,
