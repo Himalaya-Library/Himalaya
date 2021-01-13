@@ -165,7 +165,7 @@ public:
    /// Higgs 2-loop (and higher) contributions DR' from numerical momentum iteration
    RM22 delta_mh2_2loop_mom_it_num(double precision_goal = 1e-5, int max_iterations = 100) const;
    /// enable/disable loop corrections
-   void set_correction(int, int);
+   void set_correction(mh2_eft::EFTOrders::EFTOrders, int);
    /// customize diagonalization
    void set_diagonalization(Diagonalization);
    /// customize momentum iteration
