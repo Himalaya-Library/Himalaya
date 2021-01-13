@@ -21,8 +21,7 @@ namespace RenSchemes {
 
    /// renormalization scheme falgs
    enum RenSchems : int {
-      FIRST         = 0,
-      H3m           = FIRST,    ///< H3m
+      H3m           = 0,        ///< H3m
       DRBARPRIME    = 1,        ///< DRbar'
       H3mMDRBAR     = 2,        ///< MDRbar with H3m renormalization
       MDRBARPRIME   = 3,        ///< MDRbar with DRbar' renormalization
@@ -35,8 +34,7 @@ namespace ThresholdVariables {
 
    /// Threshold variable flags
    enum ThresholdVariables : int{
-      FIRST              = 0,
-      G3_AS              = FIRST,   ///< g3_as threshold correction
+      G3_AS              = 0,       ///< g3_as threshold correction
       YT_AS              = 1,       ///< yt_as threshold correction
       YT_AS2             = 2,       ///< yt_as^2 threshold correction
       LAMBDA_AT          = 3,       ///< lambga_at threshold correction
@@ -122,8 +120,7 @@ namespace Limits {
 
    /// limit flags
    enum Limits : int{
-      FIRST                   = 0,
-      GENERAL                 = FIRST,  ///< general mass case
+      GENERAL                 = 0,      ///< general mass case
       MQ3_EQ_MU3              = 1,      ///< mQ3 = mU3
       MQ3_EQ_M3               = 2,      ///< mQ3 = m3
       MU3_EQ_M3               = 3,      ///< mU3 = m3
