@@ -16,75 +16,75 @@
 namespace himalaya{
 namespace mh2_eft{
 
+
 /// Renormalization scheme numbers
 namespace RenSchemes {
-
    /// renormalization scheme falgs
    enum RenSchems : int {
-      H3m           = 0,        ///< H3m
-      DRBARPRIME    = 1,        ///< DRbar'
-      H3mMDRBAR     = 2,        ///< MDRbar with H3m renormalization
-      MDRBARPRIME   = 3,        ///< MDRbar with DRbar' renormalization
-      TEST          = 4,        ///< A non-physical scheme to test implemented expressions
+      H3m,         ///< H3m
+      DRBARPRIME,  ///< DRbar'
+      H3mMDRBAR,   ///< MDRbar with H3m renormalization
+      MDRBARPRIME, ///< MDRbar with DRbar' renormalization
+      TEST,        ///< A non-physical scheme to test implemented expressions
       NUMBER_OF_REN_SCHEMES
    };
 } // namespace RenSchemes
 
-namespace ThresholdVariables {
 
+namespace ThresholdVariables {
    /// Threshold variable flags
-   enum ThresholdVariables : int{
-      G3_AS              = 0,       ///< g3_as threshold correction
-      YT_AS              = 1,       ///< yt_as threshold correction
-      YT_AS2             = 2,       ///< yt_as^2 threshold correction
-      LAMBDA_AT          = 3,       ///< lambga_at threshold correction
-      LAMBDA_AT_AS       = 4,       ///< lambda_atas threshold correction
-      LAMBDA_AT_AS2      = 5,       ///< lambda_atas2 threshold correction
-      LAMBDA_YB2_G12     = 6,       ///< lambda_yb2_g12 threshold correction
-      LAMBDA_G14         = 7,       ///< lambda_g14 threshold correction
-      LAMBDA_REG_G14     = 8,       ///< lambda_reg_g14 threshold correction
-      LAMBDA_CHI_G14     = 9,       ///< lambda_chi_g14 threshold correction
-      LAMBDA_CHI_G24     = 10,      ///< lambda_chi_g24 threshold correction
-      LAMBDA_G24         = 11,      ///< lambda_g24 threshold correction
-      LAMBDA_REG_G24     = 12,      ///< lambda_reg_g24 threshold correction
-      LAMBDA_G12_G22     = 13,      ///< lambda_g12_g22 threshold correction
-      LAMBDA_REG_G12_G22 = 14,      ///< lambda_reg_g12_g22 threshold correction
-      LAMBDA_CHI_G12_G22 = 15,      ///< lambda_chi_g12_g22 threshold correction
-      LAMBDA_YB2_G22     = 16,      ///< lambda_yb2_g22 threshold correction
-      LAMBDA_YB4         = 17,      ///< lambda_yb4 threshold correction
-      LAMBDA_YT2_G12     = 18,      ///< lambda_yt2_g12 threshold correction
-      LAMBDA_YT2_G22     = 19,      ///< lambda_yt2_g22 threshold correction
-      LAMBDA_YTAU2_G12   = 20,      ///< lambda_ytau2_g12 threshold correction
-      LAMBDA_YTAU2_G22   = 21,      ///< lambda_ytau2_g22 threshold correction
-      LAMBDA_YTAU4       = 22,      ///< lambda_ytau4 threshold correction
-      G1_G1              = 23,      ///< g1_g1 threshold correction
-      G2_G2              = 24,      ///< g2_g2 threshold correction
-      VEV_YT2            = 25,      ///< vev_yt2 threshold correction
-      YT_YB              = 26,      ///< yt_yb threshold correction
-      YT_YT              = 27,      ///< yt_yt threshold correction
-      YTAU_YTAU          = 28,      ///< ytau_ytau threshold correction
-      LAMBDA_YB4_G32     = 29,      ///< yb4_g32 threshold correction
-      LAMBDA_YB6         = 30,      ///< yb6s threshold correction
-      LAMBDA_YT6         = 31,      ///< yt6 threshold correction
-      LAMBDA_YTAU6       = 32,      ///< ytau6 threshold correction
-      LAMBDA_YT2_YB4     = 33,      ///< yt2_yb4 threshold correction
-      LAMBDA_YT4_YB2     = 34,      ///< yt4_yb2 threshold correction
-      VEV_YB2            = 35,      ///< vev_yb2 threshold correction
-      VEV_YTAU2          = 36,      ///< vev_ytau2 threshold correction
-      VEV_G12            = 37,      ///< ytau_yb threshold correction
-      VEV_G22            = 38,      ///< ytau_yb threshold correction
-      YTAU_YB            = 39,      ///< ytau_yb threshold correction
-      LAMBDA_YTAU4_YB2   = 40,      ///< ytau4_yb2 threshold correction
-      LAMBDA_YTAU2_YB4   = 41,      ///< ytau2_yb4 threshold correction
-      YB_YT              = 42,
-      YB_AS              = 43,
-      YB_YB              = 44,
+   enum ThresholdVariables : int {
+      G3_AS,              ///< g3_as threshold correction
+      YT_AS,              ///< yt_as threshold correction
+      YT_AS2,             ///< yt_as^2 threshold correction
+      LAMBDA_AT,          ///< lambga_at threshold correction
+      LAMBDA_AT_AS,       ///< lambda_atas threshold correction
+      LAMBDA_AT_AS2,      ///< lambda_atas2 threshold correction
+      LAMBDA_YB2_G12,     ///< lambda_yb2_g12 threshold correction
+      LAMBDA_G14,         ///< lambda_g14 threshold correction
+      LAMBDA_REG_G14,     ///< lambda_reg_g14 threshold correction
+      LAMBDA_CHI_G14,     ///< lambda_chi_g14 threshold correction
+      LAMBDA_CHI_G24,     ///< lambda_chi_g24 threshold correction
+      LAMBDA_G24,         ///< lambda_g24 threshold correction
+      LAMBDA_REG_G24,     ///< lambda_reg_g24 threshold correction
+      LAMBDA_G12_G22,     ///< lambda_g12_g22 threshold correction
+      LAMBDA_REG_G12_G22, ///< lambda_reg_g12_g22 threshold correction
+      LAMBDA_CHI_G12_G22, ///< lambda_chi_g12_g22 threshold correction
+      LAMBDA_YB2_G22,     ///< lambda_yb2_g22 threshold correction
+      LAMBDA_YB4,         ///< lambda_yb4 threshold correction
+      LAMBDA_YT2_G12,     ///< lambda_yt2_g12 threshold correction
+      LAMBDA_YT2_G22,     ///< lambda_yt2_g22 threshold correction
+      LAMBDA_YTAU2_G12,   ///< lambda_ytau2_g12 threshold correction
+      LAMBDA_YTAU2_G22,   ///< lambda_ytau2_g22 threshold correction
+      LAMBDA_YTAU4,       ///< lambda_ytau4 threshold correction
+      G1_G1,              ///< g1_g1 threshold correction
+      G2_G2,              ///< g2_g2 threshold correction
+      VEV_YT2,            ///< vev_yt2 threshold correction
+      YT_YB,              ///< yt_yb threshold correction
+      YT_YT,              ///< yt_yt threshold correction
+      YTAU_YTAU,          ///< ytau_ytau threshold correction
+      LAMBDA_YB4_G32,     ///< yb4_g32 threshold correction
+      LAMBDA_YB6,         ///< yb6s threshold correction
+      LAMBDA_YT6,         ///< yt6 threshold correction
+      LAMBDA_YTAU6,       ///< ytau6 threshold correction
+      LAMBDA_YT2_YB4,     ///< yt2_yb4 threshold correction
+      LAMBDA_YT4_YB2,     ///< yt4_yb2 threshold correction
+      VEV_YB2,            ///< vev_yb2 threshold correction
+      VEV_YTAU2,          ///< vev_ytau2 threshold correction
+      VEV_G12,            ///< ytau_yb threshold correction
+      VEV_G22,            ///< ytau_yb threshold correction
+      YTAU_YB,            ///< ytau_yb threshold correction
+      LAMBDA_YTAU4_YB2,   ///< ytau4_yb2 threshold correction
+      LAMBDA_YTAU2_YB4,   ///< ytau2_yb4 threshold correction
+      YB_YT,
+      YB_AS,
+      YB_YB,
       NUMBER_OF_THRESHOLD_VARIALES
    };
 } // namespace ThresholdVariables
 
-namespace EFTOrders {
 
+namespace EFTOrders {
    /// Order flags
    enum EFTOrders : int{
       FIRST    = 0,
@@ -115,17 +115,17 @@ namespace EFTOrders {
    };
 } // namespace EFTOrders
 
+
 /// Limit numbers
 namespace Limits {
-
    /// limit flags
-   enum Limits : int{
-      GENERAL                 = 0,      ///< general mass case
-      MQ3_EQ_MU3              = 1,      ///< mQ3 = mU3
-      MQ3_EQ_M3               = 2,      ///< mQ3 = m3
-      MU3_EQ_M3               = 3,      ///< mU3 = m3
-      MQ3_EQ_MU3_EQ_M3        = 4,      ///< mQ3 = mU3 = m3
-      DEGENERATE              = 5,      ///< mQ3 = mU3 = m3 = msq
+   enum Limits : int {
+      GENERAL,          ///< general mass case
+      MQ3_EQ_MU3,       ///< mQ3 = mU3
+      MQ3_EQ_M3,        ///< mQ3 = m3
+      MU3_EQ_M3,        ///< mU3 = m3
+      MQ3_EQ_MU3_EQ_M3, ///< mQ3 = mU3 = m3
+      DEGENERATE,       ///< mQ3 = mU3 = m3 = msq
       NUMBER_OF_LIMITS
    };
 } // namespace Limits
