@@ -188,14 +188,10 @@ Mh2EFTCalculator::Mh2EFTCalculator(
     setCorrectionFlag(EFTOrders::YTAU6   , 0);
 }
 
-void Mh2EFTCalculator::setCorrectionFlag(int order, int flag)
+void Mh2EFTCalculator::setCorrectionFlag(EFTOrders::EFTOrders order, int flag)
 {
     if (flag < 0 || flag > 1)
         ERROR_MSG("You can only enable (1) or disable (0) corrections!");
-
-    if (order < EFTOrders::EFTOrders::FIRST ||
-            order >= EFTOrders::EFTOrders::NUMBER_OF_EFT_ORDERS)
-        ERROR_MSG("Your order is not defined in the EFTOrders enum!");
 
     orders.at(order) = flag;
 }

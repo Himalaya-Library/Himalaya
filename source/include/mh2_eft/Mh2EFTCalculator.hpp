@@ -72,7 +72,7 @@ public:
     * @param order an integer taken from the EFTOrders enum
     * @param flag set to 1 to enable and to 0 to disable the chosen correction
     */
-   void setCorrectionFlag(int order, int flag);
+   void setCorrectionFlag(EFTOrders::EFTOrders order, int flag);
 
    friend std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
 private:
