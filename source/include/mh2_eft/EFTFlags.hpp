@@ -33,7 +33,7 @@ namespace RenSchemes {
 
 
 namespace ThresholdVariables {
-   /// Threshold variable flags
+   /// Coupling orders in threshold corrections
    enum ThresholdVariables : int {
       G3_AS,              ///< g3_as threshold correction
       YT_AS,              ///< yt_as threshold correction
