@@ -6,6 +6,7 @@
 // ====================================================================
 
 #include "Mh2EFTCalculator.hpp"
+#include "Constants.hpp"
 #include "ThresholdCalculator.hpp"
 #include "Flags.hpp"
 #include "Logger.hpp"
@@ -28,9 +29,6 @@ namespace mh2_eft
 
 namespace
 {
-const double zt3   = 1.2020569031595942853997381615114; // zeta(3)
-const double Pi    = 3.1415926535897932384626433832795;
-const double sqrt2 = 1.4142135623730950488016887242097;
 
 template <typename T>
 bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
@@ -595,7 +593,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
     const double pref = 1. / pow6(4 * Pi) * pow2(p.Mt * gt * pow2(p.g3));
 
     return pref * (736 * pow3(lmMt) + (160 + 192 * dg3as + 384 * dytas) * pow2(lmMt)
-                   + (-128 * zt3 - 2056 / 3. + -64 * dg3as - 512 * dytas + 72 * pow2(dytas)
+                   + (-128 * z3 - 2056 / 3. + -64 * dg3as - 512 * dytas + 72 * pow2(dytas)
                       + 48 * dytas2) * lmMt + 64 * dytas - 84 * pow2(dytas) - 24 * dytas2
                    + catas2
                    + omitDeltaLambda3L * thresholdCalculator.getThresholdCorrection(
@@ -632,10 +630,10 @@ double Mh2EFTCalculator::getDeltaLambdaDegenerate(
     const double catas2 = 248.1215180432007;
 
     const double deltaLambda3L = 2 / 27.*pref * (6082 - 27832 * LS + 14856 * pow2(LS)
-                                 - 4032 * pow3(LS) - 15408 * zt3 + 1728 * zt3 * LS - 27 * catas2 / 2.
-                                 + xt * (7616 * LS - 11712 * pow2(LS) + 32 * (-940 + 477 * zt3))
-                                 + pow2(xt) * (28848 - 2640 * LS + 1008 * pow2(LS) - 11880 * zt3)
-                                 + pow3(xt) * (160 * LS + 864 * pow2(LS) + 8 * (2722 - 2259 * zt3))) / v2;
+                                 - 4032 * pow3(LS) - 15408 * z3 + 1728 * z3 * LS - 27 * catas2 / 2.
+                                 + xt * (7616 * LS - 11712 * pow2(LS) + 32 * (-940 + 477 * z3))
+                                 + pow2(xt) * (28848 - 2640 * LS + 1008 * pow2(LS) - 11880 * z3)
+                                 + pow3(xt) * (160 * LS + 864 * pow2(LS) + 8 * (2722 - 2259 * z3))) / v2;
 
     return deltaLambda3L;
 }
