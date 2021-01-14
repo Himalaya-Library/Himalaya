@@ -1447,13 +1447,12 @@ double HierarchyCalculator::getExpansionUncertainty(
    double Mh{};
    double Mhcut{};
    double uncertainty{};
-   Eigen::EigenSolver<Eigen::Matrix2d> es;
 
    // re-computes the Higgs mass eigenvalues (modifies its arguments)
    const auto recomputeMh =
-      [this, &es, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
+      [this, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
       (HierarchyObject& ho) {
-         es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
+         Eigen::EigenSolver<Eigen::Matrix2d> es(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
          return sortEigenvalues(es).at(0);
       };
 
