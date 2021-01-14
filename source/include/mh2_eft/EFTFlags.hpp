@@ -87,7 +87,7 @@ namespace ThresholdVariables {
 
 
 namespace EFTOrders {
-   /// Order flags
+   /// Coupling orders in EFT calculation
    enum EFTOrders : int{
       G12G22,
       G14,
