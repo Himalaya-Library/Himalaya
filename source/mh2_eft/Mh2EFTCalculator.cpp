@@ -405,9 +405,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
     const double v2 = pow2(p.vu) + pow2(p.vd);
     const double gt = sqrt2 * p.Mt / std::sqrt(v2);
     const double g32 = pow2(p.g3);
-    const double yt2 = pow2(sqrt2 * p.Mt / p.vu);
-    const double yb2 = pow2(sqrt2 * p.Mb / p.vd);
-    const double ytau2 = pow2(sqrt2 * p.Mtau / p.vd);
+    const double yt2 = 2*pow2(p.Mt / p.vu);
+    const double yb2 = 2*pow2(p.Mb / p.vd);
+    const double ytau2 = 2*pow2(p.Mtau / p.vd);
     const double yt4 = pow2(yt2);
     const double yb4 = pow2(yb2);
     const double yt6 = pow3(yt2);
