@@ -21,12 +21,14 @@ namespace mh2_eft{
 namespace RenSchemes {
    /// renormalization scheme falgs
    enum RenSchems : int {
-      H3m,         ///< H3m
-      DRBARPRIME,  ///< DRbar'
-      H3mMDRBAR,   ///< MDRbar with H3m renormalization
-      MDRBARPRIME, ///< MDRbar with DRbar' renormalization
-      TEST,        ///< A non-physical scheme to test implemented expressions
-      NUMBER_OF_REN_SCHEMES
+      FIRST = 0,                    ///< [0]
+      H3m = FIRST,                  ///< [0] H3m
+      DRBARPRIME,                   ///< [1] DRbar'
+      H3mMDRBAR,                    ///< [2] MDRbar with H3m renormalization
+      MDRBARPRIME,                  ///< [3] MDRbar with DRbar' renormalization
+      NUMBER_OF_REN_SCHEMES,        ///< [4] number of actual renormalization schemes
+      TEST = NUMBER_OF_REN_SCHEMES, ///< [4] A non-physical scheme to test implemented expressions
+      NUMBER_OF_ALL_REN_SCHEMES     ///< [5] number of all renormalization schemes
    };
 } // namespace RenSchemes
 

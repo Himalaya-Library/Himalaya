@@ -277,7 +277,8 @@ int HierarchyObject::getMDRFlag() const
  */
 void HierarchyObject::setRenormalizationScheme(int renScheme)
 {
-   if (renScheme < 0 || renScheme > 3) {
+   if (renScheme < mh2_eft::RenSchemes::RenSchems::FIRST ||
+       renScheme >= mh2_eft::RenSchemes::RenSchems::NUMBER_OF_REN_SCHEMES) {
       throw std::runtime_error(
          "The renormalization scheme has to be 0 (H3m), 1 (DR'), 2 (H3m"
          " with MDR), 3 (MDR'). Input: " +
