@@ -28,8 +28,9 @@ namespace mh2_eft
 
 namespace
 {
-const double zt3 = 1.2020569031595942853997381615114; // zeta(3)
-const double Pi  = 3.1415926535897932384626433832795;
+const double zt3   = 1.2020569031595942853997381615114; // zeta(3)
+const double Pi    = 3.1415926535897932384626433832795;
+const double sqrt2 = 1.4142135623730950488016887242097;
 
 template <typename T>
 bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept {
@@ -219,7 +220,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
 
     const double v2 = pow2(p.vu) + pow2(p.vd);
-    const double gt = sqrt(2) * p.Mt / std::sqrt(v2);
+    const double gt = sqrt2 * p.Mt / std::sqrt(v2);
 
     // 1-Loop prefactor at
     const double pref_at = 1. / pow2(4 * Pi) * pow2(p.Mt * gt);
@@ -230,9 +231,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const double c2beta = cos(2 * beta);
     const double sbeta = sin(beta);
     const double mhtree = std::abs(c2beta * p.MZ);
-    const double yt = sqrt(2.) * p.Mt / p.vu;
-    const double yb = sqrt(2.) * p.Mb / p.vd;
-    const double ytau = sqrt(2.) * p.Mtau / p.vd;
+    const double yt = sqrt2 * p.Mt / p.vu;
+    const double yb = sqrt2 * p.Mb / p.vd;
+    const double ytau = sqrt2 * p.Mtau / p.vd;
     const int Xi = 1;        // gauge parameter
 
     // Threshold corrections
@@ -403,11 +404,11 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
     const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
     // couplings
     const double v2 = pow2(p.vu) + pow2(p.vd);
-    const double gt = sqrt(2) * p.Mt / std::sqrt(v2);
+    const double gt = sqrt2 * p.Mt / std::sqrt(v2);
     const double g32 = pow2(p.g3);
-    const double yt2 = pow2(sqrt(2.) * p.Mt / p.vu);
-    const double yb2 = pow2(sqrt(2.) * p.Mb / p.vd);
-    const double ytau2 = pow2(sqrt(2.) * p.Mtau / p.vd);
+    const double yt2 = pow2(sqrt2 * p.Mt / p.vu);
+    const double yb2 = pow2(sqrt2 * p.Mb / p.vd);
+    const double ytau2 = pow2(sqrt2 * p.Mtau / p.vd);
     const double yt4 = pow2(yt2);
     const double yb4 = pow2(yb2);
     const double yt6 = pow3(yt2);
@@ -585,7 +586,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
     const double dg3as = thresholdCalculator.getThresholdCorrection(
                              ThresholdCouplingOrders::G3_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
 
-    const double gt = sqrt(2.) * p.Mt / sqrt(pow2(p.vu) + pow2(p.vd));
+    const double gt = sqrt2 * p.Mt / std::sqrt(pow2(p.vu) + pow2(p.vd));
 
     // 3-Loop prefactor at*as^2
     const double pref = 1. / pow6(4 * Pi) * pow2(p.Mt * gt * pow2(p.g3));
@@ -616,13 +617,13 @@ double Mh2EFTCalculator::getDeltaLambdaDegenerate(
 
     const double LS = omitlogs * log(pow2(scale / p.MSt(0))) + log(pow2(p.MSt(0) / mst1));
 
-    const double gt = sqrt(2) * p.Mt / std::sqrt(pow2(p.vu) + pow2(p.vd));
+    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
+    const double v2 = pow2(p.vd) + pow2(p.vu);
+
+    const double gt = sqrt2 * p.Mt / std::sqrt(v2);
 
     // 3-Loop prefactor
     const double pref = 1. / pow6(4 * Pi) * pow2(p.Mt * gt * pow2(p.g3));
-
-    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
-    const double v2 = pow2(p.vd) + pow2(p.vu);
 
     const double xt = Xt / mst1;
     const double catas2 = 248.1215180432007;
