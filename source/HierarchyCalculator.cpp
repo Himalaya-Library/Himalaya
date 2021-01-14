@@ -1451,8 +1451,8 @@ double HierarchyCalculator::getExpansionUncertainty(
 
    // re-computes the Higgs mass eigenvalues (modifies its arguments)
    const auto recomputeMh =
-      [this, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
-      (Eigen::EigenSolver<Eigen::Matrix2d>& es, HierarchyObject& ho) {
+      [this, &es, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
+      (HierarchyObject& ho) {
          es.compute(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
          return sortEigenvalues(es).at(0);
       };
@@ -1462,85 +1462,85 @@ double HierarchyCalculator::getExpansionUncertainty(
 
    switch (getMotherHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
-      Mh = recomputeMh(es, ho);
+      Mh = recomputeMh(ho);
       // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion uncertainty
       expansionDepth.at(ExpansionDepth::Dmglst1) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmglst1) = 1;
       expansionDepth.at(ExpansionDepth::Dmsqst1) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmsqst1) = 1;
       expansionDepth.at(ExpansionDepth::Dmst12) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmst12) = 1;
       break;
    case Hierarchies::h4:
-      Mh = recomputeMh(es, ho);
+      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::At) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::At) = 1;
       expansionDepth.at(ExpansionDepth::lmMsusy) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::lmMsusy) = 1;
       expansionDepth.at(ExpansionDepth::Msq) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Msq) = 1;
       expansionDepth.at(ExpansionDepth::Msusy) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Msusy) = 1;
       break;
    case Hierarchies::h5:
-      Mh = recomputeMh(es, ho);
+      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmglst1) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmglst1) = 1;
       expansionDepth.at(ExpansionDepth::Msq) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Msq) = 1;
       break;
    case Hierarchies::h6:
-      Mh = recomputeMh(es, ho);
+      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmglst2) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmglst2) = 1;
       expansionDepth.at(ExpansionDepth::Msq) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Msq) = 1;
       break;
    case Hierarchies::h6b:
-      Mh = recomputeMh(es, ho);
+      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmglst2) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmglst2) = 1;
       expansionDepth.at(ExpansionDepth::Dmsqst2) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmsqst2) = 1;
       break;
    case Hierarchies::h9:
-      Mh = recomputeMh(es, ho);
+      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmsqst1) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmsqst1) = 1;
       expansionDepth.at(ExpansionDepth::Dmst12) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Dmst12) = 1;
       expansionDepth.at(ExpansionDepth::Mgl) = 0;
-      Mhcut = recomputeMh(es, ho);
+      Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
       expansionDepth.at(ExpansionDepth::Mgl) = 1;
       break;
