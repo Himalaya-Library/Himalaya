@@ -13,8 +13,8 @@
  * @brief Enum definitions for the EFT calculation
  */
 
-namespace himalaya{
-namespace mh2_eft{
+namespace himalaya {
+namespace mh2_eft {
 
 
 namespace RenSchemes {
@@ -83,9 +83,9 @@ enum class ThresholdCouplingOrders : int {
 };
 
 
-namespace EFTCouplingOrders {
-   /// Coupling orders in EFT calculation
-   enum EFTCouplingOrders : int {
+namespace CouplingOrders {
+   /// Coupling orders for calculation
+   enum CouplingOrders : int {
       G12G22,
       G14,
       G24,
@@ -111,7 +111,7 @@ namespace EFTCouplingOrders {
       ONLY_AT_AS,
       NUMBER_OF_EFT_ORDERS
    };
-} // namespace EFTCouplingOrders
+} // namespace CouplingOrders
 
 
 /// limits

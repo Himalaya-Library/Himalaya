@@ -27,14 +27,14 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
    }
 
    {
-      mhc.setCorrectionFlag(EFTCouplingOrders::G32YB4, 0);
-      mhc.setCorrectionFlag(EFTCouplingOrders::YB6, 0);
-      mhc.setCorrectionFlag(EFTCouplingOrders::YT6, 0);
-      mhc.setCorrectionFlag(EFTCouplingOrders::YTAU2YB4, 0);
-      mhc.setCorrectionFlag(EFTCouplingOrders::YTAU4YB2, 0);
-      mhc.setCorrectionFlag(EFTCouplingOrders::YTAU6, 0);
-      mhc.setCorrectionFlag(EFTCouplingOrders::YT2YB4, 0);
-      mhc.setCorrectionFlag(EFTCouplingOrders::YB2YT4, 0);
+      mhc.setCorrectionFlag(CouplingOrders::G32YB4, 0);
+      mhc.setCorrectionFlag(CouplingOrders::YB6, 0);
+      mhc.setCorrectionFlag(CouplingOrders::YT6, 0);
+      mhc.setCorrectionFlag(CouplingOrders::YTAU2YB4, 0);
+      mhc.setCorrectionFlag(CouplingOrders::YTAU4YB2, 0);
+      mhc.setCorrectionFlag(CouplingOrders::YTAU6, 0);
+      mhc.setCorrectionFlag(CouplingOrders::YT2YB4, 0);
+      mhc.setCorrectionFlag(CouplingOrders::YB2YT4, 0);
       const double delta_mh_2l = mhc.getDeltaMh2EFT2Loop(1, 1);
       const double pref = 1./pow4(4*Pi) * pow2(p.Mt * yt * p.g3);
       CHECK_CLOSE(delta_mh_2l, pref*778.7287955, eps);

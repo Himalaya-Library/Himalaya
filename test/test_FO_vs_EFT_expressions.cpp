@@ -243,19 +243,19 @@ TEST_CASE("test_FO_2loop_momentum_iteration_pert")
 {
    using namespace himalaya;
    using namespace himalaya::mh2_fo;
-   using namespace himalaya::mh2_eft::EFTCouplingOrders;
+   using namespace himalaya::mh2_eft::CouplingOrders;
    using A2 = Eigen::Array<double,2,1>;
 
    const auto p = make_gaugeless(make_point());
    MSSM_mass_eigenstates me(p);
 
    // disable 2-loop corrections
-   me.set_correction(EFTCouplingOrders::G32YT4, 0);
-   me.set_correction(EFTCouplingOrders::G32YB4, 0);
-   me.set_correction(EFTCouplingOrders::YT6, 0);
-   me.set_correction(EFTCouplingOrders::YTAU6, 0);
-   me.set_correction(EFTCouplingOrders::YTAU2YB4, 0);
-   me.set_correction(EFTCouplingOrders::YTAU4YB2, 0);
+   me.set_correction(CouplingOrders::G32YT4, 0);
+   me.set_correction(CouplingOrders::G32YB4, 0);
+   me.set_correction(CouplingOrders::YT6, 0);
+   me.set_correction(CouplingOrders::YTAU6, 0);
+   me.set_correction(CouplingOrders::YTAU2YB4, 0);
+   me.set_correction(CouplingOrders::YTAU4YB2, 0);
 
    // calculates Mh^2 as a function of p^2
    const auto Mh2_1L_p2 = [&me] (double p2) {
@@ -293,18 +293,18 @@ TEST_CASE("test_FO_2loop_momentum_iteration_num")
 {
    using namespace himalaya;
    using namespace himalaya::mh2_fo;
-   using namespace himalaya::mh2_eft::EFTCouplingOrders;
+   using namespace himalaya::mh2_eft::CouplingOrders;
 
    const auto p = make_gaugeless(make_point());
    MSSM_mass_eigenstates me(p);
 
    // disable 2-loop corrections
-   me.set_correction(EFTCouplingOrders::G32YT4, 0);
-   me.set_correction(EFTCouplingOrders::G32YB4, 0);
-   me.set_correction(EFTCouplingOrders::YT6, 0);
-   me.set_correction(EFTCouplingOrders::YTAU6, 0);
-   me.set_correction(EFTCouplingOrders::YTAU2YB4, 0);
-   me.set_correction(EFTCouplingOrders::YTAU4YB2, 0);
+   me.set_correction(CouplingOrders::G32YT4, 0);
+   me.set_correction(CouplingOrders::G32YB4, 0);
+   me.set_correction(CouplingOrders::YT6, 0);
+   me.set_correction(CouplingOrders::YTAU6, 0);
+   me.set_correction(CouplingOrders::YTAU2YB4, 0);
+   me.set_correction(CouplingOrders::YTAU4YB2, 0);
 
    // calculate perturbatively
    me.set_mom_it(Momentum_iteration::pert);

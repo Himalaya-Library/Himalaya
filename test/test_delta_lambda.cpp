@@ -105,18 +105,18 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
    using namespace himalaya::mh2_eft;
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G12G22, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G14, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G24, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G22YB2, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YB4, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G12YTAU2, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G22YTAU2, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YTAU4, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G12YT2, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G22YT2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12G22, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G14, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G24, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G22YT2, 0);
 
    return mhc.getDeltaMh2EFT1Loop(1,1);
 }
@@ -127,13 +127,13 @@ double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
    using namespace himalaya::mh2_eft;
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
-   mhc.setCorrectionFlag(EFTCouplingOrders::G32YB4, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YB6, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YT6, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YTAU2YB4, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YTAU6, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YT2YB4, 0);
-   mhc.setCorrectionFlag(EFTCouplingOrders::YB2YT4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YB6, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YT6, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YB2YT4, 0);
 
    return mhc.getDeltaMh2EFT2Loop(1,1);
 }
