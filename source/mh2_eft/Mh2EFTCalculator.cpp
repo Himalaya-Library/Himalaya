@@ -224,7 +224,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const double gt = sqrt2 * p.Mt / std::sqrt(v2);
 
     // 1-Loop prefactor at
-    const double pref_at = 1. / pow2(4 * Pi) * pow2(p.Mt * gt);
+    const double pref_at = oneLoop * pow2(p.Mt * gt);
 
     const double q2 = pow2(p.Mt);
     const double beta = atan(p.vu / p.vd);
@@ -382,13 +382,11 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
                                    + dlambdaytau4 + 4 * lmMt) * v2 * pow4(cbeta)) / 2.),
                                    "dmh2ytau4");
 
-    // Loop factor
-    const double k = 1 / pow2(4.*Pi);
-
-    return dmh2yt4 + k * (pow2(p.g1 * p.g2) * dmh2g12g22 + pow4(p.g1) * dmh2g14 + pow4(p.g2) *
-                          dmh2g24 + pow2(p.g1 * yb) * dmh2g12yb2 + pow2(p.g2 * yb) * dmh2g22yb2 + pow4(yb) *
-                          dmh2yb4 + pow2(p.g1 * ytau) * dmh2g12ytau2 + pow2(p.g2 * ytau) * dmh2g22ytau2 +
-                          pow4(ytau) * dmh2ytau4 + pow2(p.g1 * yt) * dmh2g12yt2 + pow2(p.g2 * yt) * dmh2g22yt2);
+    return dmh2yt4 + oneLoop * (
+       pow2(p.g1 * p.g2) * dmh2g12g22 + pow4(p.g1) * dmh2g14 + pow4(p.g2) *
+       dmh2g24 + pow2(p.g1 * yb) * dmh2g12yb2 + pow2(p.g2 * yb) * dmh2g22yb2 + pow4(yb) *
+       dmh2yb4 + pow2(p.g1 * ytau) * dmh2g12ytau2 + pow2(p.g2 * ytau) * dmh2g22ytau2 +
+       pow4(ytau) * dmh2ytau4 + pow2(p.g1 * yt) * dmh2g12yt2 + pow2(p.g2 * yt) * dmh2g22yt2);
 }
 
 /**
@@ -422,7 +420,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
     const double lmbMt = log(pow2(p.Mb / p.Mt));
 
     // 2-Loop prefactor at*as
-    const double pref = 1. / pow4(4 * Pi) * pow2(p.Mt * gt * p.g3);
+    const double pref = twoLoop * pow2(p.Mt * gt * p.g3);
     const double B00DR = 0.;
 
     // Threshold corrections
@@ -551,12 +549,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                                                     + 3 * pow2(lmMt) - pow2(Pi)))) * v2 * pow4(sbeta)) / 2.),
                                     "dmh2yt4yb2");
 
-    // Loop factor
-    const double k2 = 1 / pow4(4.*Pi);
-
-    return k2 * (g32 * yb4 * dmh2yb4g32 + yb6 * dmh2yb6 + yt6 * dmh2yt6 + yb4 * ytau2
-                 * dmh2yb4ytau2 + yb2 * ytau4 * dmh2yb2ytau4 + ytau6 * dmh2ytau6 + yt2 * yb4
-                 * dmh2yt2yb4 + yt4 * yb2 * dmh2yt4yb2) + dmh2yt4g32;
+    return twoLoop * (g32 * yb4 * dmh2yb4g32 + yb6 * dmh2yb6 + yt6 * dmh2yt6 + yb4 * ytau2
+                   * dmh2yb4ytau2 + yb2 * ytau4 * dmh2yb2ytau4 + ytau6 * dmh2ytau6 + yt2 * yb4
+                   * dmh2yt2yb4 + yt4 * yb2 * dmh2yt4yb2) + dmh2yt4g32;
 }
 
 /**
@@ -590,7 +585,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
     const double gt = sqrt2 * p.Mt / std::sqrt(pow2(p.vu) + pow2(p.vd));
 
     // 3-Loop prefactor at*as^2
-    const double pref = 1. / pow6(4 * Pi) * pow2(p.Mt * gt * pow2(p.g3));
+    const double pref = threeLoop * pow2(p.Mt * gt * pow2(p.g3));
 
     return pref * (736 * pow3(lmMt) + (160 + 192 * dg3as + 384 * dytas) * pow2(lmMt)
                    + (-128 * z3 - 2056 / 3. + -64 * dg3as - 512 * dytas + 72 * pow2(dytas)
@@ -624,7 +619,7 @@ double Mh2EFTCalculator::getDeltaLambdaDegenerate(
     const double gt = sqrt2 * p.Mt / std::sqrt(v2);
 
     // 3-Loop prefactor
-    const double pref = 1. / pow6(4 * Pi) * pow2(p.Mt * gt * pow2(p.g3));
+    const double pref = threeLoop * pow2(p.Mt * gt * pow2(p.g3));
 
     const double xt = Xt / mst1;
     const double catas2 = 248.1215180432007;
