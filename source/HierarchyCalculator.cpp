@@ -1434,19 +1434,19 @@ double HierarchyCalculator::getExpansionUncertainty(
    using namespace himalaya::hierarchies;
 
    // re-computes the Higgs mass eigenvalues (modifies its arguments)
-   const auto recomputeMh =
-      [this, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
-      (HierarchyObject& ho) {
-         return calcSmallestEigenvalue(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag));
-      };
+   const auto recomputeMh = [&](HierarchyObject& ho) {
+      return calcSmallestEigenvalue(
+         massMatrix +
+         calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag));
+   };
 
-   // re-computes the Higgs mass eigenvalues (modifies its arguments)
+   // re-computes the Higgs mass eigenvalues with a flag temporarily set to 0
+   // (modifies its arguments)
    const auto recomputeMhWithLowerExpansionAt =
-      [this, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
-      (HierarchyObject& ho, ExpansionDepth::ExpansionDepth flag) {
-         expansionDepth.at(flag) = 0;
-         const auto Mh = calcSmallestEigenvalue(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag));
-         expansionDepth.at(flag) = 1; // reset
+      [&](HierarchyObject& ho, ExpansionDepth::ExpansionDepth flag) {
+         expansionDepth.at(flag) = 0; // temporarily lower the expansion
+         const auto Mh = recomputeMh(ho);
+         expansionDepth.at(flag) = 1; // reset flag
          return Mh;
       };
 
