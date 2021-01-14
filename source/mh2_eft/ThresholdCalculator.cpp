@@ -227,13 +227,13 @@ ThresholdCalculator::ThresholdCalculator(
 
 /**
  * Returns a specific threshold corrections for a given mass limit
- * @param variable an integer key for a threshold correctionn
+ * @param variable coupling order of threshold correction
  * @param scheme an integer key to set the scheme. Choices are {DRbar'} only!
  * @param omitLogs an integer to omit all log mu terms
  * @return a threshold correction for a given variable in a given scheme for a suitable mass limit
  */
-double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
-                                                             int omitLogs) const
+double ThresholdCalculator::getThresholdCorrection(
+   ThresholdVariables variable, int scheme, int omitLogs) const
 {
    double thresholdCorrection = 0.;
    const Limits limit = static_cast<Limits>(p.massLimit3LThreshold);
@@ -425,6 +425,8 @@ double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
       case(ThresholdVariables::YTAU_YB):{
          return getDeltaYtauYb();
       }
+      default:
+         break;
    };
 
    return thresholdCorrection;
