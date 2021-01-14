@@ -7,7 +7,7 @@
 
 #include "DSZHiggs.hpp"
 #include "DSZHiggs.h"
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 #include "li2.hpp"
 #include <cmath>
 #include <limits>

@@ -9,7 +9,7 @@
 
 #include "himalaya/Himalaya_interface.hpp"
 
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 
 #include <iosfwd>
 #include <limits>

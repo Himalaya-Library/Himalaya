@@ -6,7 +6,7 @@
 // ====================================================================
 
 #include "ThresholdCalculator.hpp"
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 #include "Logger.hpp"
 #include "threshold_loop_functions.hpp"
 #include "dilog.hpp"

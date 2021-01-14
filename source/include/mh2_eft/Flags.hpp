@@ -8,9 +8,9 @@
 #pragma once
 
 /**
- * @file EFTFlags.hpp
+ * @file Flags.hpp
  *
- * @brief Enum definitions for the EFT calculation
+ * @brief enum definitions
  */
 
 namespace himalaya {
@@ -125,5 +125,6 @@ enum class Limits : int {
    NUMBER_OF_LIMITS
 };
 
-}        // mh2_eft
-}        // himalaya
+
+} // namespace mh2_eft
+} // namespace himalaya

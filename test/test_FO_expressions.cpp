@@ -3,7 +3,7 @@
 #include "himalaya/HierarchyCalculator.hpp"
 
 #include "Enums.hpp"
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 

@@ -7,7 +7,7 @@
 
 #include "MSSM_mass_eigenstates.hpp"
 #include "DSZHiggs.hpp"
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 #include "linalg2.hpp"
 #include "pv.hpp"
 #include "sum.hpp"

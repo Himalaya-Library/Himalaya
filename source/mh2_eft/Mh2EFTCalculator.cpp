@@ -7,7 +7,7 @@
 
 #include "Mh2EFTCalculator.hpp"
 #include "ThresholdCalculator.hpp"
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 #include "Logger.hpp"
 #include "Powers.hpp"
 #include <cmath>

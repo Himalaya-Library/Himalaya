@@ -11,7 +11,7 @@
 
 #include "Enums.hpp"
 #include "DSZHiggs.hpp"
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 #include "Hierarchies.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "Constants.hpp"

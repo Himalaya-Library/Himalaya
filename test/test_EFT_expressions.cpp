@@ -2,7 +2,7 @@
 
 #include "Mh2EFTCalculator.hpp"
 #include "ThresholdCalculator.hpp"
-#include "EFTFlags.hpp"
+#include "Flags.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
