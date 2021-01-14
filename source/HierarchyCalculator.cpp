@@ -280,12 +280,12 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
          // of the Himalaya_Interface struct
 
          //calculate the exact Higgs mass at 2-loop (only up to alpha_s alpha_t/b)
-         const Eigen::EigenSolver<Eigen::Matrix2d> es2L (treelvl + Mt41L + Mt42L);
+         const Eigen::EigenSolver<Eigen::Matrix2d> es2L(treelvl + Mt41L + Mt42L, false);
          const double Mh2l = sortEigenvalues(es2L).at(0);
 
          // calculate the expanded 2-loop expression with the specific hierarchy
          const Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L
-            + calculateHierarchy(ho, 0, 1, 0));
+            + calculateHierarchy(ho, 0, 1, 0), false);
 
          // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
          const double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
