@@ -17,9 +17,8 @@ namespace himalaya{
 namespace mh2_eft{
 
 
-/// Renormalization scheme numbers
 namespace RenSchemes {
-   /// renormalization scheme falgs
+   /// renormalization schemes
    enum RenSchems : int {
       FIRST = 0,                    ///< [0]
       H3m = FIRST,                  ///< [0] H3m
