@@ -393,13 +393,13 @@ std::tuple<double, double>
 HierarchyCalculator::calcMStopMDRFlag(const HierarchyObject& ho, int loopOrder) const
 {
    if (loopOrder == 1) {
-      return {shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0)};
+      return std::make_tuple(shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0));
    } else if (loopOrder == 2) {
-      return {shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
-              shiftMst2ToMDR(ho, ho.getMDRFlag(), 0)};
+      return std::make_tuple(shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
+                             shiftMst2ToMDR(ho, ho.getMDRFlag(), 0));
    } else if (loopOrder == 3) {
-      return {shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
-              shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag())};
+      return std::make_tuple(shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
+                             shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()));
    } else {
       throw std::runtime_error("There are no tree-level hierarchies included!");
    }
