@@ -60,7 +60,7 @@ TEST_CASE("test_FO_expansions")
    for (int i = 0; i < Hierarchies::NUMBER_OF_HIERARCHIES; i++) {
       himalaya::HierarchyCalculator hc(make_point());
       himalaya::HierarchyObject ho(false);
-      ho.setRenormalizationScheme(RenSchemes::H3m);
+      ho.setRenormalizationScheme(static_cast<int>(RenSchemes::H3m));
       ho.setMDRFlag(1);
       ho.setSuitableHierarchy(i);
 

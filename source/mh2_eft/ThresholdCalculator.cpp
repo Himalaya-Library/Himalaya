@@ -228,12 +228,12 @@ ThresholdCalculator::ThresholdCalculator(
 /**
  * Returns a specific threshold corrections for a given mass limit
  * @param variable coupling order of threshold correction
- * @param scheme an integer key to set the scheme. Choices are {DRbar'} only!
+ * @param scheme renormalization scheme. Choices are {DRbar'} only!
  * @param omitLogs an integer to omit all log mu terms
  * @return a threshold correction for a given variable in a given scheme for a suitable mass limit
  */
 double ThresholdCalculator::getThresholdCorrection(
-   ThresholdCouplingOrders variable, int scheme, int omitLogs) const
+   ThresholdCouplingOrders variable, RenSchemes scheme, int omitLogs) const
 {
    double thresholdCorrection = 0.;
    const Limits limit = static_cast<Limits>(p.massLimit3LThreshold);
@@ -250,6 +250,8 @@ double ThresholdCalculator::getThresholdCorrection(
             case(RenSchemes::DRBARPRIME):
                thresholdCorrection = - thresholdCorrection;
                break;
+            default:
+               break;
          }
       }
       break;
@@ -258,6 +260,8 @@ double ThresholdCalculator::getThresholdCorrection(
          switch (scheme) {
             case(RenSchemes::DRBARPRIME):
                thresholdCorrection = - thresholdCorrection;
+               break;
+            default:
                break;
          }
       }
@@ -270,6 +274,8 @@ double ThresholdCalculator::getThresholdCorrection(
                thresholdCorrection = 2 * getDeltaG3Alphas(omitLogs) * dytas
                   + pow2(dytas) - thresholdCorrection;
             }
+            break;
+         default:
             break;
          }
       }
@@ -285,6 +291,8 @@ double ThresholdCalculator::getThresholdCorrection(
                thresholdCorrection = thresholdCorrection
                   - 4 * getDeltaLambdaAlphat(limit, omitLogs) *
                   getDeltaYtAlphas(limit, omitLogs);
+               break;
+            default:
                break;
          }
       }
@@ -304,6 +312,8 @@ double ThresholdCalculator::getThresholdCorrection(
                + getDeltaLambdaAlphat(limit, omitLogs) * (8 * dg3as * dytas
                   + 10 * pow2(dytas) - 4 * getDeltaYtAlphas2(limit, omitLogs)));
             }
+            break;
+         default:
             break;
          }
       }

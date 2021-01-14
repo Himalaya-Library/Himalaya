@@ -26,6 +26,16 @@
 namespace himalaya {
 namespace {
 
+mh2_eft::RenSchemes toRenSchemes(int r)
+{
+   return static_cast<mh2_eft::RenSchemes>(r);
+}
+
+int toInt(mh2_eft::RenSchemes r)
+{
+   return static_cast<int>(r);
+}
+
 /**
  * Sorts a vector.
  * @param v The vector which should be sorted.
@@ -47,7 +57,7 @@ Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
  */
 HierarchyObject::HierarchyObject(bool isAlphab)
    : isAlphab(isAlphab)
-   , renormalizationScheme(mh2_eft::RenSchemes::DRBARPRIME)
+   , renormalizationScheme(toInt(mh2_eft::RenSchemes::DRBARPRIME))
 {
 }
 
@@ -277,8 +287,8 @@ int HierarchyObject::getMDRFlag() const
  */
 void HierarchyObject::setRenormalizationScheme(int renScheme)
 {
-   if (renScheme < mh2_eft::RenSchemes::FIRST ||
-       renScheme >= mh2_eft::RenSchemes::NUMBER_OF_REN_SCHEMES) {
+   if (renScheme < toInt(mh2_eft::RenSchemes::FIRST) ||
+       renScheme >= toInt(mh2_eft::RenSchemes::NUMBER_OF_REN_SCHEMES)) {
       throw std::runtime_error(
          "The renormalization scheme has to be 0 (H3m), 1 (DR'), 2 (H3m"
          " with MDR), 3 (MDR'). Input: " +
@@ -560,8 +570,10 @@ std::string HierarchyObject::getH3mHierarchyNotation(int hierarchy) const
 std::ostream& operator<<(std::ostream& ostr, const HierarchyObject& ho)
 {
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   const std::string renSchemeString = (ho.getRenormalizationScheme() == mh2_eft::RenSchemes::H3m
-      || ho.getRenormalizationScheme() == mh2_eft::RenSchemes::H3mMDRBAR) ? "H3m scheme" : "DR'";
+   const std::string renSchemeString =
+      (toRenSchemes(ho.getRenormalizationScheme()) == mh2_eft::RenSchemes::H3m ||
+       toRenSchemes(ho.getRenormalizationScheme()) == mh2_eft::RenSchemes::H3mMDRBAR)
+      ? "H3m scheme" : "DR'";
    const std::string massString = ho.getIsAlphab() ? "Msbottom" : "Mstop";
    const std::string spaces = ho.getIsAlphab() ? "            " : "               ";
    ostr << "===================================\n"

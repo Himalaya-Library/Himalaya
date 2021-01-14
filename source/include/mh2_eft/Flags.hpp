@@ -17,19 +17,17 @@ namespace himalaya {
 namespace mh2_eft {
 
 
-namespace RenSchemes {
-   /// renormalization schemes
-   enum RenSchemes : int {
-      FIRST = 0,                    ///< [0]
-      H3m = FIRST,                  ///< [0] H3m
-      DRBARPRIME,                   ///< [1] DRbar'
-      H3mMDRBAR,                    ///< [2] MDRbar with H3m renormalization
-      MDRBARPRIME,                  ///< [3] MDRbar with DRbar' renormalization
-      NUMBER_OF_REN_SCHEMES,        ///< [4] number of actual renormalization schemes
-      TEST = NUMBER_OF_REN_SCHEMES, ///< [4] A non-physical scheme to test implemented expressions
-      NUMBER_OF_ALL_REN_SCHEMES     ///< [5] number of all renormalization schemes
-   };
-} // namespace RenSchemes
+/// renormalization schemes
+enum class RenSchemes : int {
+   FIRST = 0,                    ///< [0]
+   H3m = FIRST,                  ///< [0] H3m
+   DRBARPRIME,                   ///< [1] DRbar'
+   H3mMDRBAR,                    ///< [2] MDRbar with H3m renormalization
+   MDRBARPRIME,                  ///< [3] MDRbar with DRbar' renormalization
+   NUMBER_OF_REN_SCHEMES,        ///< [4] number of actual renormalization schemes
+   TEST = NUMBER_OF_REN_SCHEMES, ///< [4] A non-physical scheme to test implemented expressions
+   NUMBER_OF_ALL_REN_SCHEMES     ///< [5] number of all renormalization schemes
+};
 
 
 /// Coupling orders in threshold corrections
