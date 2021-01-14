@@ -659,7 +659,7 @@ std::ostream& operator<<(std::ostream& ostr, const Mh2EFTCalculator& mhc)
 
     ostr << "Mh^2_EFT_0L  = " << dmh2_0l << " GeV^2 O(g1^2, g2^2)\n";
     ostr << "ΔMh^2_EFT_1L = " << dmh2_1l << " GeV^2 O(full)\n";
-    ostr << "ΔMh^2_EFT_2L = " << dmh2_2l << " GeV^2 O((αt+ab)*αs + (αt+αb)^2 + ab*aτ + aτ^2)\n";
+    ostr << "ΔMh^2_EFT_2L = " << dmh2_2l << " GeV^2 O((αt+αb)*αs + (αt+αb)^2 + αb*ατ + ατ^2)\n";
 
     return ostr;
 }
