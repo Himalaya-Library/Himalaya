@@ -202,7 +202,7 @@ himalaya::Parameters test_point(){
    pars.s2t = sin(2*asin(5.57720315E-01));
    pars.s2b = sin(2*asin(-9.33860207E-01));
 
-   pars.massLimit3LThreshold = himalaya::mh2_eft::Limits::GENERAL;
+   pars.massLimit3LThreshold = static_cast<int>(himalaya::mh2_eft::Limits::GENERAL);
 
    return pars;
 }

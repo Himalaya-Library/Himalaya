@@ -115,19 +115,16 @@ namespace EFTOrders {
 } // namespace EFTOrders
 
 
-/// Limit numbers
-namespace Limits {
-   /// limit flags
-   enum Limits : int {
-      GENERAL,          ///< general mass case
-      MQ3_EQ_MU3,       ///< mQ3 = mU3
-      MQ3_EQ_M3,        ///< mQ3 = m3
-      MU3_EQ_M3,        ///< mU3 = m3
-      MQ3_EQ_MU3_EQ_M3, ///< mQ3 = mU3 = m3
-      DEGENERATE,       ///< mQ3 = mU3 = m3 = msq
-      NUMBER_OF_LIMITS
-   };
-} // namespace Limits
+/// limits
+enum class Limits : int {
+   GENERAL,          ///< general mass case
+   MQ3_EQ_MU3,       ///< mQ3 = mU3
+   MQ3_EQ_M3,        ///< mQ3 = m3
+   MU3_EQ_M3,        ///< mU3 = m3
+   MQ3_EQ_MU3_EQ_M3, ///< mQ3 = mU3 = m3
+   DEGENERATE,       ///< mQ3 = mU3 = m3 = msq
+   NUMBER_OF_LIMITS
+};
 
 }        // mh2_eft
 }        // himalaya

@@ -187,35 +187,35 @@ ThresholdCalculator::ThresholdCalculator(
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          msq2 = pow2(mQ3 + std::abs(sqrt(msq2) - mQ3)/2.);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::DEGENERATE;
+         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::DEGENERATE);
       } else if (std::abs(mQ3 - mU3) < eps && std::abs(mU3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3_EQ_M3;
+         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3_EQ_M3);
       } else if (std::abs(mQ3 - mU3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_MU3;
+         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3);
       } else if (std::abs(mQ3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MQ3_EQ_M3;
+         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_M3);
       } else if (std::abs(mU3 - m3) < eps2) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = Limits::MU3_EQ_M3;
+         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MU3_EQ_M3);
       }
 
       // reset possible parameter shifts
@@ -236,7 +236,7 @@ double ThresholdCalculator::getThresholdCorrection(int variable, int scheme,
                                                              int omitLogs) const
 {
    double thresholdCorrection = 0.;
-   const double limit = p.massLimit3LThreshold;
+   const Limits limit = static_cast<Limits>(p.massLimit3LThreshold);
 
    if (scheme != RenSchemes::TEST && scheme != RenSchemes::DRBARPRIME) {
       INFO_MSG("Your renormalization scheme is not compatible with the"
@@ -884,7 +884,7 @@ double ThresholdCalculator::getDeltaYtYb(int omitLogs) const
         p.mu*mU3*pow2(sbeta));
 }
 
-double ThresholdCalculator::getDeltaVevYt2(int limit) const
+double ThresholdCalculator::getDeltaVevYt2(Limits limit) const
 {
    const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
    const double mQ32 = p.mq2(2,2);
@@ -3825,7 +3825,7 @@ double ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
  * @param omitLogs an integer key to omit all mu terms
  * @return delta yt_as in the MSbar scheme for a given mass limit
  */
-double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
+double ThresholdCalculator::getDeltaYtAlphas(Limits limit, int omitLogs) const
 {
 
    using std::log;
@@ -3870,6 +3870,8 @@ double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
       case(Limits::MQ3_EQ_MU3_EQ_M3):{
          return (-4*(mQ3 + lmQ3MR*mQ3 - Xt))/(3.*mQ3);
       }
+      default:
+         break;
    };
 
    throw std::runtime_error("Mass limit not included!");
@@ -3881,7 +3883,7 @@ double ThresholdCalculator::getDeltaYtAlphas(int limit, int omitLogs) const
   * @param omitLogs an integer key to omit all mu terms
   * @return delta yt_as^2 in the MSbar scheme for a given mass limit
   */
-double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
+double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
 {
    using std::log;
    using std::sqrt;
@@ -4302,6 +4304,8 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
          return (-2075*mQ32 + 712*mQ3*Xt - 4*lmQ3MR*mQ3*(335*mQ3 + 104*Xt) + 12*mQ32*
         pow2(lmQ3MR) + 96*pow2(Xt))/(54.*mQ32);
       }
+      default:
+         break;
    };
 
    throw std::runtime_error("Mass limit not included!");
@@ -4313,7 +4317,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(int limit, int omitLogs) const
  * @param omitLogs an integer key to omit all mu terms
  * @return delta lambda_at in the MSbar scheme for a given mass limit
  */
-double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
+double ThresholdCalculator::getDeltaLambdaAlphat(Limits limit, int omitLogs) const
 {
 
    using std::log;
@@ -4339,6 +4343,8 @@ double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
       case(Limits::MQ3_EQ_MU3):{
          return 12*lmQ3MR + 12*pow2(Xt)/mQ32 - pow4(Xt)/pow2(mQ32);
       }
+      default:
+         break;
    };
 
    throw std::runtime_error("Mass limit not included!");
@@ -4350,7 +4356,7 @@ double ThresholdCalculator::getDeltaLambdaAlphat(int limit, int omitLogs) const
  * @param omitLogs an integer key to omit all mu terms
  * @return delta lambda_atas in the MSbar scheme for a given mass limit
  */
-double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) const
+double ThresholdCalculator::getDeltaLambdaAlphatAlphas(Limits limit, int omitLogs) const
 {
    using std::log;
    using std::sqrt;
@@ -4510,6 +4516,8 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
         pow3(Xt)) + Xt*(-28*mQ32*pow2(Xt) + 12*Xt*pow3(mQ3) - mQ3*pow3(Xt) +
         24*pow4(mQ3) + 2*pow4(Xt)) + 36*pow2(lmQ3MR)*pow5(mQ3)))/(3.*pow5(mQ3));
       }
+      default:
+         break;
    };
 
    throw std::runtime_error("Mass limit not included!");
@@ -4521,7 +4529,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(int limit, int omitLogs) 
  * @param omitLogs an integer key to omit all mu terms
  * @return delta lambda_atas2 in the MSbar scheme for a given mass limit
  */
-double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs) const
+double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLogs) const
 {
 
    using std::log;
@@ -4971,6 +4979,8 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(int limit, int omitLogs)
         mQ3) + (-851 - 990*lmQ3MR - 432*z3 + 2484*pow2(lmQ3MR))*pow6(mQ3)))/(
         27.*pow6(mQ3));
       }
+      default:
+         break;
    }
 
    throw std::runtime_error("Mass limit not included!");
@@ -4987,19 +4997,19 @@ double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs,
    double xtTerms = 0.;
 
    if (xtOrder <= 3) {
-      xtTerms = getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 4, omitXtLogs)
-         + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 5, omitXtLogs)
-         + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 6, omitXtLogs);
+      xtTerms = getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 4, omitXtLogs)
+              + getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 5, omitXtLogs)
+              + getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 6, omitXtLogs);
    } else {
-      xtTerms = getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 5, omitXtLogs)
-         + getDRbarPrimeToMSbarXtTerms(p.massLimit3LThreshold, 6, omitXtLogs);
+      xtTerms = getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 5, omitXtLogs)
+              + getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 6, omitXtLogs);
    }
 
    const double g3as = getDeltaG3Alphas(omitLogs);
-   const double ytas = getDeltaYtAlphas(p.massLimit3LThreshold, omitLogs);
-   const double ytas2 = getDeltaYtAlphas2(p.massLimit3LThreshold, omitLogs);
-   const double lambdaat = getDeltaLambdaAlphat(p.massLimit3LThreshold, omitLogs);
-   const double lambdaatas = getDeltaLambdaAlphatAlphas(p.massLimit3LThreshold, omitLogs);
+   const double ytas = getDeltaYtAlphas(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
+   const double ytas2 = getDeltaYtAlphas2(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
+   const double lambdaat = getDeltaLambdaAlphat(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
+   const double lambdaatas = getDeltaLambdaAlphatAlphas(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
 
    return -(-2.*(lambdaat*(3*pow2(ytas) + 2*ytas2) + (lambdaatas - 4*ytas*lambdaat)
       *(g3as + 2*ytas)) - xtTerms);
@@ -5011,7 +5021,7 @@ double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs,
  * @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
  * @param omitLogs an integer key to omit all log mu terms
  */
-double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs) const
+double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(Limits limit, int xtOrder, int omitLogs) const
 {
    using std::log;
    using std::sqrt;
@@ -6456,6 +6466,8 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
          (-176*(-7 + 8*lmQ3MR)*Xt5)/(27.*pow5(mQ3))
          +160/(9.*pow6(mQ3))*Xt6;
       }
+      default:
+         break;
    };
 
    throw std::runtime_error("Mass limit not included!");
@@ -6466,18 +6478,18 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, 
  * Sets the mass limit to check terms
  * @param limit an integer key for a mass limit
  */
-void ThresholdCalculator::setLimit(int limit)
+void ThresholdCalculator::setLimit(Limits limit)
 {
-   p.massLimit3LThreshold = limit;
+   p.massLimit3LThreshold = static_cast<int>(limit);
 }
 
 /**
  * Get the mass limit determined by ThresholdCalculator
  * @return The determined mass limit
  */
-int ThresholdCalculator::getLimit() const
+Limits ThresholdCalculator::getLimit() const
 {
-   return p.massLimit3LThreshold;
+   return static_cast<Limits>(p.massLimit3LThreshold);
 }
 
 void ThresholdCalculator::setXtOrderOfDeltaLambdaAtAs2(int xtOrder)

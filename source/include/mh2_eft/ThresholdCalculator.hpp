@@ -8,6 +8,7 @@
 #pragma once
 
 #include "himalaya/Himalaya_interface.hpp"
+#include "EFTFlags.hpp"
 
 #include <limits>
 
@@ -53,17 +54,17 @@ public:
     * @param xtOrder an integer key to get a specific Xt order starting at 4
     * @param omitLogs an integer key to omit all log mu terms
     */
-   double getDRbarPrimeToMSbarXtTerms(int limit, int xtOrder, int omitLogs) const;
+   double getDRbarPrimeToMSbarXtTerms(Limits limit, int xtOrder, int omitLogs) const;
    /**
     * Sets the mass limit to check terms
     * @param limit an integer key for a mass limit
     */
-   void setLimit(int limit);
+   void setLimit(Limits limit);
    /**
     * Get the mass limit determined by ThresholdCalculator
     * @return The determined mass limit
     */
-   int getLimit() const;
+   Limits getLimit() const;
    /**
     * Sets the order of Xt for getDeltaLambdaAlphatAlphas2
     * @param xtOrder an integer key to truncate delta_lambda_at_as2 at a given Xt order starting at 4
@@ -82,35 +83,35 @@ private:
     * @param omitLogs an integer key to omit all mu terms
     * @return delta yt_as in the MSbar scheme for a given mass limit
     */
-   double getDeltaYtAlphas(int limit, int omitLogs) const;
+   double getDeltaYtAlphas(Limits limit, int omitLogs) const;
    /**
     * Returns delta yt_as^2 in the MSbar scheme for a given mass limit
     * @param limit an integer key for a mass limit
     * @param omitLogs an integer key to omit all mu terms
     * @return delta yt_as^2 in the MSbar scheme for a given mass limit
     */
-   double getDeltaYtAlphas2(int limit, int omitLogs) const;
+   double getDeltaYtAlphas2(Limits limit, int omitLogs) const;
    /**
     * Returns delta lambda_at in the MSbar scheme for a given mass limit
     * @param limit an integer key for a mass limit
     * @param omitLogs an integer key to omit all mu terms
     * @return delta lambda_at in the MSbar scheme for a given mass limit
     */
-   double getDeltaLambdaAlphat(int limit, int omitLogs) const;
+   double getDeltaLambdaAlphat(Limits limit, int omitLogs) const;
    /**
     * Returns delta lambda_atas in the MSbar scheme for a given mass limit
     * @param limit an integer key for a mass limit
     * @param omitLogs an integer key to omit all mu terms
     * @return delta lambda_atas in the MSbar scheme for a given mass limit
     */
-   double getDeltaLambdaAlphatAlphas(int limit, int omitLogs) const;
+   double getDeltaLambdaAlphatAlphas(Limits limit, int omitLogs) const;
    /**
     * Returns delta lambda_atas2 in the MSbar scheme for a given mass limit
     * @param limit an integer key for a mass limit
     * @param omitLogs an integer key to omit all mu terms
     * @return delta lambda_atas2 in the MSbar scheme for a given mass limit
     */
-   double getDeltaLambdaAlphatAlphas2(int limit, int omitLogs) const;
+   double getDeltaLambdaAlphatAlphas2(Limits limit, int omitLogs) const;
    /**
     * Returns delta_lambda_yb^2_g1^2
     * @param omitLogs an integer key to omit all mu terms
@@ -226,7 +227,7 @@ private:
     * @param limit an integer key for a mass limit
     * @return delta_lambda_v_yt^2
     */
-   double getDeltaVevYt2(int limit) const;
+   double getDeltaVevYt2(Limits limit) const;
    /**
     * Returns delta_lambda_v_yb^2
     * @return delta_lambda_v_yb^2
