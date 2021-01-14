@@ -27,6 +27,7 @@
 #include <numeric>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 
 #include <Eigen/Eigenvalues>
 
@@ -387,6 +388,24 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
    return false;
 }
 
+
+std::tuple<double, double>
+HierarchyCalculator::calcMStopMDRFlag(const HierarchyObject& ho, int loopOrder) const
+{
+   if (loopOrder == 1) {
+      return {shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0)};
+   } else if (loopOrder == 2) {
+      return {shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
+              shiftMst2ToMDR(ho, ho.getMDRFlag(), 0)};
+   } else if (loopOrder == 3) {
+      return {shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
+              shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag())};
+   } else {
+      throw std::runtime_error("There are no tree-level hierarchies included!");
+   }
+}
+
+
 // TODO(avoigt): if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
 /**
  * Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
@@ -448,22 +467,8 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       if(runThisOrder){
          const double Al4p = calcAsOver4Pi();
          const double Msq = calcMeanMsq();
-         // set the Msx masses according to MDRFlag
-         if(oneLoopFlag == 1){
-            Mst1 = shiftMst1ToMDR(ho, 0, 0);
-            Mst2 = shiftMst2ToMDR(ho, 0, 0);
-         }
-         else if(twoLoopFlag == 1){
-            Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), 0);
-            Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), 0);
-         }
-         else if(threeLoopFlag == 1){
-            Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
-            Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
-         }
-         else{
-            throw std::runtime_error("There are no tree-level hierarchies included!");
-         }
+         // set the stop masses according to MDRFlag
+         std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, currentLoopOrder);
          // select the suitable hierarchy for the specific hierarchy and set variables
          switch(getMotherHierarchy(hierarchy)){
             case Hierarchies::h3:{
