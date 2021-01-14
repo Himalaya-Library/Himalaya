@@ -1433,10 +1433,6 @@ double HierarchyCalculator::getExpansionUncertainty(
 {
    using namespace himalaya::hierarchies;
 
-   double Mh{};
-   double Mhcut{};
-   double uncertainty{};
-
    // re-computes the Higgs mass eigenvalues (modifies its arguments)
    const auto recomputeMh =
       [this, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
@@ -1447,9 +1443,12 @@ double HierarchyCalculator::getExpansionUncertainty(
    // reset flags
    expansionDepth.at(ExpansionDepth::Mst) = 1;
 
+   const double Mh = recomputeMh(ho);
+   double Mhcut{};
+   double uncertainty{};
+
    switch (getMotherHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
-      Mh = recomputeMh(ho);
       // truncate the expansion at all variables with one order lower than the expansion depth and evaluate the expansion uncertainty
       expansionDepth.at(ExpansionDepth::Dmglst1) = 0;
       Mhcut = recomputeMh(ho);
@@ -1465,7 +1464,6 @@ double HierarchyCalculator::getExpansionUncertainty(
       expansionDepth.at(ExpansionDepth::Dmst12) = 1;
       break;
    case Hierarchies::h4:
-      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::At) = 0;
       Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
@@ -1484,7 +1482,6 @@ double HierarchyCalculator::getExpansionUncertainty(
       expansionDepth.at(ExpansionDepth::Msusy) = 1;
       break;
    case Hierarchies::h5:
-      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmglst1) = 0;
       Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
@@ -1495,7 +1492,6 @@ double HierarchyCalculator::getExpansionUncertainty(
       expansionDepth.at(ExpansionDepth::Msq) = 1;
       break;
    case Hierarchies::h6:
-      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmglst2) = 0;
       Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
@@ -1506,7 +1502,6 @@ double HierarchyCalculator::getExpansionUncertainty(
       expansionDepth.at(ExpansionDepth::Msq) = 1;
       break;
    case Hierarchies::h6b:
-      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmglst2) = 0;
       Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
@@ -1517,7 +1512,6 @@ double HierarchyCalculator::getExpansionUncertainty(
       expansionDepth.at(ExpansionDepth::Dmsqst2) = 1;
       break;
    case Hierarchies::h9:
-      Mh = recomputeMh(ho);
       expansionDepth.at(ExpansionDepth::Dmsqst1) = 0;
       Mhcut = recomputeMh(ho);
       uncertainty += pow2(Mh - Mhcut);
