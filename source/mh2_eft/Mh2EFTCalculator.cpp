@@ -33,22 +33,25 @@ const double Pi    = 3.1415926535897932384626433832795;
 const double sqrt2 = 1.4142135623730950488016887242097;
 
 template <typename T>
-bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept {
-    return std::fabs(a) < prec;
+bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
+{
+    return std::abs(a) < prec;
 }
 
 template <typename T>
-bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept {
+bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+{
     return is_zero(a - b, prec);
 }
 
 template <typename T>
-bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept {
+bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+{
     if (is_equal(a, b, std::numeric_limits<T>::epsilon()))
         return true;
 
     if (std::abs(a) < std::numeric_limits<T>::epsilon() ||
-    std::abs(b) < std::numeric_limits<T>::epsilon())
+        std::abs(b) < std::numeric_limits<T>::epsilon())
         return false;
 
     return std::abs((a - b) / a) < prec;
