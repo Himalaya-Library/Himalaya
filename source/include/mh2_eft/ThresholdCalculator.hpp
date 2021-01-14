@@ -40,7 +40,7 @@ public:
     * @param omitLogs an integer to omit all log mu terms
     * @return a threshold correction for a given variable in a given scheme for a suitable mass limit
     */
-   double getThresholdCorrection(ThresholdVariables variable, int scheme, int omitLogs) const;
+   double getThresholdCorrection(ThresholdCouplingOrders variable, int scheme, int omitLogs) const;
    /**
     * Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
     * @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1

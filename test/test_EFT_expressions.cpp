@@ -27,14 +27,14 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
    }
 
    {
-      mhc.setCorrectionFlag(EFTOrders::G32YB4, 0);
-      mhc.setCorrectionFlag(EFTOrders::YB6, 0);
-      mhc.setCorrectionFlag(EFTOrders::YT6, 0);
-      mhc.setCorrectionFlag(EFTOrders::YTAU2YB4, 0);
-      mhc.setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
-      mhc.setCorrectionFlag(EFTOrders::YTAU6, 0);
-      mhc.setCorrectionFlag(EFTOrders::YT2YB4, 0);
-      mhc.setCorrectionFlag(EFTOrders::YB2YT4, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::G32YB4, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::YB6, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::YT6, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::YTAU2YB4, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::YTAU4YB2, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::YTAU6, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::YT2YB4, 0);
+      mhc.setCorrectionFlag(EFTCouplingOrders::YB2YT4, 0);
       const double delta_mh_2l = mhc.getDeltaMh2EFT2Loop(1, 1);
       const double pref = 1./pow4(4*Pi) * pow2(p.Mt * yt * p.g3);
       CHECK_CLOSE(delta_mh_2l, pref*778.7287955, eps);
@@ -51,25 +51,25 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
    // check threshold corrections
    {
 
-      const double g3as = tc.getThresholdCorrection(ThresholdVariables::G3_AS,
+      const double g3as = tc.getThresholdCorrection(ThresholdCouplingOrders::G3_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(g3as, -0.1736769306, eps);
 
       // general mass case
       tc.setLimit(Limits::GENERAL);
-      const double ytas_lim_gen = tc.getThresholdCorrection(ThresholdVariables::YT_AS,
+      const double ytas_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas_lim_gen, -3.215927532, eps);
-      const double ytas2_lim_gen = tc.getThresholdCorrection(ThresholdVariables::YT_AS2,
+      const double ytas2_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas2_lim_gen, -55.90563134, eps);
-      const double lamat_lim_gen = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
+      const double lamat_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamat_lim_gen, 14.31721183, eps);
-      const double lamatas_lim_gen = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
+      const double lamatas_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_gen, -87.06409990, eps);
-      const double lamatas2_lim_gen = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS2,
+      const double lamatas2_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas2_lim_gen, 207.7740287, eps);
       const double drToMsShift_gen = tc.getDRbarPrimeToMSbarShift(3, 1);
@@ -77,16 +77,16 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 
       // mQ3 = m3
       tc.setLimit(Limits::MQ3_EQ_M3);
-      const double ytas_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS,
+      const double ytas_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas_lim_mq3_m3, -2.975633850, eps);
-      const double ytas2_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS2,
+      const double ytas2_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas2_lim_mq3_m3, -54.39344951, eps);
-      const double lamatas_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
+      const double lamatas_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mq3_m3, -71.71873062, eps);
-      const double lamatas2_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS2,
+      const double lamatas2_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas2_lim_mq3_m3, 71.11240105, eps);
       const double drToMsShift_mq3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
@@ -94,19 +94,19 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 
       // mQ3 = mU3
       tc.setLimit(Limits::MQ3_EQ_MU3);
-      const double ytas_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS,
+      const double ytas_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas_lim_mq3_mu3, -3.187793781, eps);
-      const double ytas2_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS2,
+      const double ytas2_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas2_lim_mq3_mu3, -55.53609836, eps);
-      const double lamat_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT,
+      const double lamat_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamat_lim_mq3_mu3, 14.35556635, eps);
-      const double lamatas_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
+      const double lamatas_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mq3_mu3, -102.3684261, eps);
-      const double lamatas2_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS2,
+      const double lamatas2_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas2_lim_mq3_mu3, 231.4042763, eps);
       const double drToMsShift_mq3_mu3 = tc.getDRbarPrimeToMSbarShift(3, 1);
@@ -114,16 +114,16 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 
       // mq3 = mu3 = m3
       tc.setLimit(Limits::MQ3_EQ_MU3_EQ_M3);
-      const double ytas_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS,
+      const double ytas_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas_lim_mq3_mu3_m3, -2.957820456, eps);
-      const double ytas2_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS2,
+      const double ytas2_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas2_lim_mq3_mu3_m3, -53.98859513, eps);
-      const double lamatas_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
+      const double lamatas_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mq3_mu3_m3, -87.55800303, eps);
-      const double lamatas2_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS2,
+      const double lamatas2_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas2_lim_mq3_mu3_m3, 102.8902455, eps);
       const double drToMsShift_mq3_mu3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
@@ -131,16 +131,16 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 
       // mU3 = m3
       tc.setLimit(Limits::MU3_EQ_M3);
-      const double ytas_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS,
+      const double ytas_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas_lim_mu3_m3, -2.747511273, eps);
-      const double ytas2_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::YT_AS2,
+      const double ytas2_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas2_lim_mu3_m3, -52.71555755, eps);
-      const double lamatas_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS,
+      const double lamatas_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mu3_m3, -61.18314361, eps);
-      const double lamatas2_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdVariables::LAMBDA_AT_AS2,
+      const double lamatas2_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas2_lim_mu3_m3, -32.38839351, eps);
       const double drToMsShift_mu3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
@@ -148,7 +148,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 
       // degenerate mass case
       tc.setLimit(Limits::DEGENERATE);
-      const double ytas2_lim_degen = tc.getThresholdCorrection(ThresholdVariables::YT_AS2,
+      const double ytas2_lim_degen = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas2_lim_degen, -52.81677866, eps);
       const double drToMsShift_degen = tc.getDRbarPrimeToMSbarShift(3, 1);

@@ -783,7 +783,7 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
    , masses(pars_)
    , gaugeless(make_gaugeless(pars_))
 {
-   using namespace himalaya::mh2_eft::EFTOrders;
+   using namespace himalaya::mh2_eft::EFTCouplingOrders;
 
    orders.fill(1);
 
@@ -791,38 +791,38 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
 
    //TODO check if they are still consistent
    if (std::abs(pars_.Mt) < eps) {
-      orders.at(EFTOrders::G32YT4) = 0;
-      orders.at(EFTOrders::YT6) = 0;
-      orders.at(EFTOrders::YB6) = 0;
+      orders.at(EFTCouplingOrders::G32YT4) = 0;
+      orders.at(EFTCouplingOrders::YT6) = 0;
+      orders.at(EFTCouplingOrders::YB6) = 0;
    }
 
    if (std::abs(pars_.Mb) < eps) {
-      orders.at(EFTOrders::G32YB4) = 0;
-      orders.at(EFTOrders::YT6) = 0;
-      orders.at(EFTOrders::YB6) = 0;
-      orders.at(EFTOrders::YTAU2YB4) = 0;
-      orders.at(EFTOrders::YTAU4YB2) = 0;
+      orders.at(EFTCouplingOrders::G32YB4) = 0;
+      orders.at(EFTCouplingOrders::YT6) = 0;
+      orders.at(EFTCouplingOrders::YB6) = 0;
+      orders.at(EFTCouplingOrders::YTAU2YB4) = 0;
+      orders.at(EFTCouplingOrders::YTAU4YB2) = 0;
    }
 
    if (std::abs(pars_.Mtau) < eps) {
-      orders.at(EFTOrders::YTAU6) = 0;
-      orders.at(EFTOrders::YTAU2YB4) = 0;
-      orders.at(EFTOrders::YTAU4YB2) = 0;
+      orders.at(EFTCouplingOrders::YTAU6) = 0;
+      orders.at(EFTCouplingOrders::YTAU2YB4) = 0;
+      orders.at(EFTCouplingOrders::YTAU4YB2) = 0;
    }
 
    if (only_at) {
-      orders.at(EFTOrders::YB6) = 0;
-      orders.at(EFTOrders::YTAU6) = 0;
-      orders.at(EFTOrders::YTAU2YB4) = 0;
-      orders.at(EFTOrders::YTAU4YB2) = 0;
-      orders.at(EFTOrders::G32YB4) = 0;
+      orders.at(EFTCouplingOrders::YB6) = 0;
+      orders.at(EFTCouplingOrders::YTAU6) = 0;
+      orders.at(EFTCouplingOrders::YTAU2YB4) = 0;
+      orders.at(EFTCouplingOrders::YTAU4YB2) = 0;
+      orders.at(EFTCouplingOrders::G32YB4) = 0;
 
       // re-calculate DR' masses for g1 = g2 = yb = ytau = 0
       pars = make_gaugeless(pars_);
       masses = make_3rd_gen(pars);
       masses.M2hh(0) = 0.;
    } else {
-     orders.at(EFTOrders::ONLY_AT_AS) = 0;
+     orders.at(EFTCouplingOrders::ONLY_AT_AS) = 0;
    }
 }
 
@@ -1077,11 +1077,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
-   using namespace himalaya::mh2_eft::EFTOrders;
+   using namespace himalaya::mh2_eft::EFTCouplingOrders;
 
    const auto yt     = pars.Yu(2,2);
-   const auto yb     = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
-   const auto ytau   = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
+   const auto yb     = orders.at(EFTCouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
+   const auto ytau   = orders.at(EFTCouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
    const auto vu     = pars.vu;
    const auto vd     = pars.vd;
    const auto mu     = pars.mu;
@@ -1163,11 +1163,11 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 {
-   using namespace himalaya::mh2_eft::EFTOrders;
+   using namespace himalaya::mh2_eft::EFTCouplingOrders;
 
    const auto yt     = pars.Yu(2,2);
-   const auto yb     = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
-   const auto ytau   = orders.at(EFTOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
+   const auto yb     = orders.at(EFTCouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
+   const auto ytau   = orders.at(EFTCouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
    const auto mu     = pars.mu;
    const auto At     = pars.Au(2,2);
    const auto Ab     = pars.Ad(2,2);
@@ -1244,7 +1244,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 {
    using namespace himalaya::mssm_twoloophiggs;
-   using namespace himalaya::mh2_eft::EFTOrders;
+   using namespace himalaya::mh2_eft::EFTCouplingOrders;
 
    const auto g3 = pars.g3;
    const auto mt2 = pow2(gaugeless.MFt);
@@ -1286,33 +1286,33 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
       break;
    }
 
-   if (orders.at(EFTOrders::G32YT4)) {
+   if (orders.at(EFTCouplingOrders::G32YT4)) {
       dmh += delta_mh2_2loop_at_as(
          mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3,
          include_heavy_higgs);
    }
 
-   if (orders.at(EFTOrders::G32YB4)) {
+   if (orders.at(EFTCouplingOrders::G32YB4)) {
       dmh += delta_mh2_2loop_ab_as(
          mb2, mg, msb12, msb22, sxb, cxb, scale2, mu, cotb, vev2, g3,
          include_heavy_higgs);
    }
 
-   if (orders.at(EFTOrders::YT6)) {
+   if (orders.at(EFTCouplingOrders::YT6)) {
       dmh += delta_mh2_2loop_at_at(
          mt2, mb2, mA2, mst12, mst22, msb12, msb22,
          sxt, cxt, sxb, cxb, scale2, mu, tanb, vev2,
-         include_heavy_higgs, orders.at(EFTOrders::ONLY_AT_AS));
+         include_heavy_higgs, orders.at(EFTCouplingOrders::ONLY_AT_AS));
    }
 
-   if (orders.at(EFTOrders::YTAU6)) {
+   if (orders.at(EFTCouplingOrders::YTAU6)) {
       dmh += delta_mh2_2loop_atau_atau(
          mtau2, mA2, msv2, mstau12, mstau22,
          sxtau, cxtau, scale2, mu, tanb, vev2,
          include_heavy_higgs);
    }
 
-   if (orders.at(EFTOrders::YTAU2YB4) || orders.at(EFTOrders::YTAU4YB2)) {
+   if (orders.at(EFTCouplingOrders::YTAU2YB4) || orders.at(EFTCouplingOrders::YTAU4YB2)) {
       dmh += delta_mh2_2loop_ab_atau(
          mtau2, mb2, mstau12, mstau22, msb12, msb22,
          sxtau, cxtau, sxb, cxb, scale2, mu, tanb, vev2,
@@ -1392,7 +1392,7 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_hh_gaugeless() const
    return gaugeless.get_mass_matrix_hh();
 }
 
-void MSSM_mass_eigenstates::set_correction(mh2_eft::EFTOrders::EFTOrders order, int flag)
+void MSSM_mass_eigenstates::set_correction(mh2_eft::EFTCouplingOrders::EFTCouplingOrders order, int flag)
 {
    if (flag < 0 || flag > 1)
       INFO_MSG("You can only enable (1) or disable (0) corrections!");

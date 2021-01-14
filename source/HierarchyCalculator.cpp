@@ -66,26 +66,26 @@ void disable_non_as_terms(himalaya::mh2_eft::Mh2EFTCalculator& mhc)
 {
    using namespace himalaya::mh2_eft;
 
-   mhc.setCorrectionFlag(EFTOrders::G12G22, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G14, 0);
-   mhc.setCorrectionFlag(EFTOrders::G24, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YB2, 0);
-   mhc.setCorrectionFlag(EFTOrders::YB4, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YTAU2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YTAU2, 0);
-   mhc.setCorrectionFlag(EFTOrders::YTAU4, 0);
-   mhc.setCorrectionFlag(EFTOrders::G12YT2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G22YT2, 0);
-   mhc.setCorrectionFlag(EFTOrders::G32YB4, 0);
-   mhc.setCorrectionFlag(EFTOrders::YB6, 0);
-   mhc.setCorrectionFlag(EFTOrders::YT6, 0);
-   mhc.setCorrectionFlag(EFTOrders::YTAU2YB4, 0);
-   mhc.setCorrectionFlag(EFTOrders::YTAU6, 0);
-   mhc.setCorrectionFlag(EFTOrders::YT2YB4, 0);
-   mhc.setCorrectionFlag(EFTOrders::YB2YT4, 0);
-   mhc.setCorrectionFlag(EFTOrders::YTAU4YB2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G12G22, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G14, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G24, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YB4, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G22YT2, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YB6, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YT6, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YB2YT4, 0);
+   mhc.setCorrectionFlag(EFTCouplingOrders::YTAU4YB2, 0);
 }
 
 } // anonymous namespace
@@ -175,14 +175,14 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
 
    ho.setDLambda(0, mh2_eft/v2);
    ho.setDLambda(1, pref_1L*(tc.getThresholdCorrection(
-      mh2_eft::ThresholdVariables::LAMBDA_AT, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
+      mh2_eft::ThresholdCouplingOrders::LAMBDA_AT, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDLambda(2, pref_2L*(tc.getThresholdCorrection(
-      mh2_eft::ThresholdVariables::LAMBDA_AT_AS, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
+      mh2_eft::ThresholdCouplingOrders::LAMBDA_AT_AS, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDLambda(3, ho.getDLambdaEFT());
    ho.setDLambdaDRbarPrimeToMSbarShift(0, 0.);
    ho.setDLambdaDRbarPrimeToMSbarShift(1, 0.);
    ho.setDLambdaDRbarPrimeToMSbarShift(2, pref_2L*(-4*ho.getDLambda(1)
-      *tc.getThresholdCorrection(mh2_eft::ThresholdVariables::YT_AS,
+      *tc.getThresholdCorrection(mh2_eft::ThresholdCouplingOrders::YT_AS,
                                  mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
 
    himalaya::mh2_fo::MSSM_mass_eigenstates mfo(p);
@@ -1387,9 +1387,9 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    // to isolate the logarithmic ones. Checked.
    const double eftLogs = pref*(
       tc.getThresholdCorrection(
-            mh2_eft::ThresholdVariables::LAMBDA_AT_AS2, mh2_eft::RenSchemes::DRBARPRIME, 1)
+            mh2_eft::ThresholdCouplingOrders::LAMBDA_AT_AS2, mh2_eft::RenSchemes::DRBARPRIME, 1)
       - tc.getThresholdCorrection(
-            mh2_eft::ThresholdVariables::LAMBDA_AT_AS2, mh2_eft::RenSchemes::DRBARPRIME, 0));
+            mh2_eft::ThresholdCouplingOrders::LAMBDA_AT_AS2, mh2_eft::RenSchemes::DRBARPRIME, 0));
 
    // calculate the non-logarithmic part of delta_lambda @ 3L
    const double deltaLambda3LNonLog = pref*(ho.getDLambdaNonLog()

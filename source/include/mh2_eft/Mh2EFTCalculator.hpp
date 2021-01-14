@@ -69,16 +69,16 @@ public:
    double getDeltaLambdaDegenerate(double scale, double mst1, double Xt, int omitlogs) const;
    /**
     * Sets the flag to enable or disable a correction of a given variable
-    * @param order an integer taken from the EFTOrders enum
+    * @param order an integer taken from the EFTCouplingOrders enum
     * @param flag set to 1 to enable and to 0 to disable the chosen correction
     */
-   void setCorrectionFlag(EFTOrders::EFTOrders order, int flag);
+   void setCorrectionFlag(EFTCouplingOrders::EFTCouplingOrders order, int flag);
 
    friend std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
 private:
    Parameters p{}; ///< The HimalayaInterface struct
    double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
-   std::array<int, EFTOrders::EFTOrders::NUMBER_OF_EFT_ORDERS> orders{}; ///< holds all EFTOrders to enable/disable certain corrections
+   std::array<int, EFTCouplingOrders::EFTCouplingOrders::NUMBER_OF_EFT_ORDERS> orders{}; ///< holds all EFTCouplingOrders to enable/disable certain corrections
 };
 
 /// prints loop corrections for v^2 << MS^2

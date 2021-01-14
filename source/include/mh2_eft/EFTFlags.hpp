@@ -33,7 +33,7 @@ namespace RenSchemes {
 
 
 /// Coupling orders in threshold corrections
-enum class ThresholdVariables : int {
+enum class ThresholdCouplingOrders : int {
    G3_AS,              ///< g3_as threshold correction
    YT_AS,              ///< yt_as threshold correction
    YT_AS2,             ///< yt_as^2 threshold correction
@@ -83,9 +83,9 @@ enum class ThresholdVariables : int {
 };
 
 
-namespace EFTOrders {
+namespace EFTCouplingOrders {
    /// Coupling orders in EFT calculation
-   enum EFTOrders : int{
+   enum EFTCouplingOrders : int {
       G12G22,
       G14,
       G24,
@@ -111,7 +111,7 @@ namespace EFTOrders {
       ONLY_AT_AS,
       NUMBER_OF_EFT_ORDERS
    };
-} // namespace EFTOrders
+} // namespace EFTCouplingOrders
 
 
 /// limits
