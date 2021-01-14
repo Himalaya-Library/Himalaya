@@ -19,7 +19,7 @@ namespace mh2_eft {
 
 namespace RenSchemes {
    /// renormalization schemes
-   enum RenSchems : int {
+   enum RenSchemes : int {
       FIRST = 0,                    ///< [0]
       H3m = FIRST,                  ///< [0] H3m
       DRBARPRIME,                   ///< [1] DRbar'
