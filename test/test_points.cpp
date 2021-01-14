@@ -36,8 +36,10 @@ struct Point {
 
 struct Data {
    double MhFO{};
+   double DMhFO{};
    double MhEFT{};
    double lambda{};
+   double Dlambda{};
 };
 
 
@@ -50,7 +52,7 @@ std::istream& operator>>(std::istream& istr, Point& point)
 
 std::istream& operator>>(std::istream& istr, Data& data)
 {
-   istr >> data.MhFO >> data.MhEFT >> data.lambda;
+   istr >> data.MhFO >> data.DMhFO >> data.MhEFT >> data.lambda >> data.Dlambda;
    return istr;
 }
 
@@ -113,6 +115,7 @@ Data calculate_all(const himalaya::Parameters& point)
                              + ho.getDMh2FOAt(1)
                              + ho.getDMh2FOAt(2)
                              + ho.getDMh2FOAt(3));
+      data.DMhFO = ho.getDMhExpUncertainty(3);
       data.MhEFT = std::sqrt(ho.getDMh2EFTAt(0)
                              + ho.getDMh2EFTAt(1)
                              + ho.getDMh2EFTAt(2)
@@ -121,6 +124,7 @@ Data calculate_all(const himalaya::Parameters& point)
                               + ho.getDLambda(1)
                               + ho.getDLambda(2)
                               + ho.getDLambda(3));
+      data.Dlambda = ho.getDLambdaUncertainty(3);
    } catch (const std::exception& e) {
       std::cerr << e.what() << '\n';
    }
@@ -183,7 +187,8 @@ std::ostream& operator<<(std::ostream& ostr, const Point& point)
 
 std::ostream& operator<<(std::ostream& ostr, const Data& data)
 {
-   ostr << data.MhFO << '\t' << data.MhEFT << '\t' << data.lambda;
+   ostr << data.MhFO << '\t' << data.DMhFO << '\t' << data.MhEFT << '\t'
+        << data.lambda << '\t' << data.Dlambda;
    return ostr;
 }
 
