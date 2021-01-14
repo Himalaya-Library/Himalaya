@@ -45,19 +45,16 @@ static bool isInfoPrinted; ///< If this bool is true, than no info will be print
 namespace {
 
 /**
- * Sorts the eigenvalues of a 2x2 matrix.
- * @param es the EigenSolver object corresponding to the matrix whose eigenvalues should be sorted.
- * @return A sorted array with the lowest eigenvalue at position 0.
+ * Returns sqrt of smallest eigenvalue of given 2x2 matrix.
+ * @param matrix the matrix whose eigenvalues should be computed
+ * @return sqrt of smallest eigenvalue
  */
-std::array<double, 2> sortEigenvalues(const Eigen::EigenSolver<Eigen::Matrix2d>& es)
+double calcSmallestEigenvalue(const Eigen::Matrix2d& matrix)
 {
-   const auto eigenvalues = es.eigenvalues().real().cwiseSqrt();
+   Eigen::EigenSolver<Eigen::Matrix2d> solver(matrix, false);
+   const auto eigenvalues = solver.eigenvalues().real().cwiseSqrt();
 
-   if (eigenvalues(0) < eigenvalues(1)) {
-      return {eigenvalues(0), eigenvalues(1)};
-   } else {
-      return {eigenvalues(1), eigenvalues(0)};
-   }
+   return eigenvalues(0) < eigenvalues(1) ? eigenvalues(0) : eigenvalues(1);
 }
 
 /// set flags to omit all corrections, except O(at*as^n)
@@ -276,19 +273,11 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
          // call the routine of Pietro Slavich to get the alpha_s alpha_t/b corrections with the MDRbar masses
          const Eigen::Matrix2d Mt42L = getMt42L(ho, ho.getMDRFlag(), 0);
 
-         // Note: spurious poles are handled by the validate method
-         // of the Himalaya_Interface struct
-
-         //calculate the exact Higgs mass at 2-loop (only up to alpha_s alpha_t/b)
-         const Eigen::EigenSolver<Eigen::Matrix2d> es2L(treelvl + Mt41L + Mt42L, false);
-         const double Mh2l = sortEigenvalues(es2L).at(0);
+         // calculate the exact Higgs mass at 2-loop (only up to alpha_s alpha_t/b)
+         const double Mh2l = calcSmallestEigenvalue(treelvl + Mt41L + Mt42L);
 
          // calculate the expanded 2-loop expression with the specific hierarchy
-         const Eigen::EigenSolver<Eigen::Matrix2d> esExpanded (treelvl + Mt41L
-            + calculateHierarchy(ho, 0, 1, 0), false);
-
-         // calculate the higgs mass in the given mass hierarchy and compare the result to estimate the error
-         const double Mh2LExpanded = sortEigenvalues(esExpanded).at(0);
+         const double Mh2LExpanded = calcSmallestEigenvalue(treelvl + Mt41L + calculateHierarchy(ho, 0, 1, 0));
 
          // estimate the error
          const double twoLoopError = std::abs((Mh2l - Mh2LExpanded));
@@ -1452,8 +1441,7 @@ double HierarchyCalculator::getExpansionUncertainty(
    const auto recomputeMh =
       [this, &massMatrix, oneLoopFlag, twoLoopFlag, threeLoopFlag]
       (HierarchyObject& ho) {
-         Eigen::EigenSolver<Eigen::Matrix2d> es(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag), false);
-         return sortEigenvalues(es).at(0);
+         return calcSmallestEigenvalue(massMatrix + calculateHierarchy(ho, oneLoopFlag, twoLoopFlag, threeLoopFlag));
       };
 
    // reset flags
