@@ -106,7 +106,7 @@ namespace himalaya {
        * @param threeLoopFlag an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-loop expansion terms.
        * @return A double which is the estimated uncertainty.
        */
-      double getExpansionUncertainty(himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, unsigned oneLoopFlag,
+      double getExpansionUncertainty(const himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, unsigned oneLoopFlag,
                                      unsigned twoLoopFlag, unsigned threeLoopFlag);
    private:
       Parameters p{};                    ///< Himalaya input parameters
