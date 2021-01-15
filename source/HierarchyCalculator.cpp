@@ -27,7 +27,6 @@
 #include <numeric>
 #include <stdexcept>
 #include <string>
-#include <tuple>
 
 #include <Eigen/Eigenvalues>
 
@@ -389,17 +388,17 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
 }
 
 
-std::tuple<double, double>
+std::array<double, 2>
 HierarchyCalculator::calcMstMDRFlag(const HierarchyObject& ho, int loopOrder) const
 {
    if (loopOrder == 1) {
-      return std::make_tuple(shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0));
+      return { shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0) };
    } else if (loopOrder == 2) {
-      return std::make_tuple(shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
-                             shiftMst2ToMDR(ho, ho.getMDRFlag(), 0));
+      return { shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
+               shiftMst2ToMDR(ho, ho.getMDRFlag(), 0) };
    } else if (loopOrder == 3) {
-      return std::make_tuple(shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
-                             shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()));
+      return { shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
+               shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()) };
    } else {
       throw std::runtime_error("There are no tree-level hierarchies included!");
    }
@@ -484,8 +483,8 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
          // set the stop masses according to MDRFlag
          const auto Msf = calcMstMDRFlag(ho, loopOrder);
-         const double Mst1 = std::get<0>(Msf);
-         const double Mst2 = std::get<1>(Msf);
+         const double Mst1 = Msf.at(0);
+         const double Mst2 = Msf.at(1);
 
          // calculate self-energy contributions and Delta lambda terms
          // for suitable hierarchy
@@ -751,10 +750,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    // add the MDR masses to the hierarchy object only if a 3-loop
    // calculation has to be done, otherwise let the user decide
    if (onlyThreeLoop) {
-      double Mst1 = 0., Mst2 = 0.;
-      std::tie(Mst1, Mst2) = calcMstMDRFlag(ho, 3);
+      const auto Msf = calcMstMDRFlag(ho, 3);
       Eigen::Vector2d mdrMasses;
-      mdrMasses << Mst1, Mst2;
+      mdrMasses << Msf.at(0), Msf.at(1);
       ho.setMDRMasses(mdrMasses);
    }
 
