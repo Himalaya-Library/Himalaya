@@ -6,11 +6,11 @@
 // ====================================================================
 
 #include "ThresholdCalculator.hpp"
+#include "dilog.hpp"
 #include "Flags.hpp"
 #include "Logger.hpp"
-#include "threshold_loop_functions.hpp"
-#include "dilog.hpp"
 #include "Powers.hpp"
+#include "threshold_loop_functions.hpp"
 #include <cmath>
 #include <complex>
 #include <stdexcept>
@@ -236,7 +236,7 @@ double ThresholdCalculator::getThresholdCorrection(
    ThresholdCouplingOrders variable, RenSchemes scheme, int omitLogs) const
 {
    double thresholdCorrection = 0.;
-   const Limits limit = static_cast<Limits>(p.massLimit3LThreshold);
+   const auto limit = static_cast<Limits>(p.massLimit3LThreshold);
 
    if (scheme != RenSchemes::TEST && scheme != RenSchemes::DRBARPRIME) {
       INFO_MSG("Your renormalization scheme is not compatible with the"
