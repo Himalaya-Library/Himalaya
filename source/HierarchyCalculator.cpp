@@ -420,8 +420,6 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    HierarchyObject& ho, int oneLoopFlagIn,
    int twoLoopFlagIn, int threeLoopFlagIn) const
 {
-   using namespace himalaya::hierarchies;
-
    // get the hierarchy
    const int hierarchy = ho.getSuitableHierarchy();
 
@@ -489,6 +487,8 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       std::tie(runThisOrder, oneLoopFlag, twoLoopFlag, threeLoopFlag) = setLoopFlags(loopOrder);
 
       if (runThisOrder) {
+         using namespace himalaya::hierarchies;
+
          // set the stop masses according to MDRFlag
          double Mst1 = 0., Mst2 = 0.;
          std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, loopOrder);
