@@ -453,28 +453,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
    // sets flags for the loop
    const auto setLoopFlags = [oneLoopFlagIn, twoLoopFlagIn, threeLoopFlagIn] (int loopOrder) {
-      bool runThisOrder = false;
-      int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
-
-      switch (loopOrder) {
-      case 1:
-         oneLoopFlag = 1;
-         runThisOrder = oneLoopFlagIn != 0;
-         break;
-      case 2:
-         twoLoopFlag = 1;
-         runThisOrder = twoLoopFlagIn != 0;
-         break;
-      case 3:
-         threeLoopFlag = 1;
-         runThisOrder = threeLoopFlagIn != 0;
-         break;
-      default:
-         throw std::runtime_error("setLoopFlags: invalid loop order (must be 1, 2 or 3)");
-         break;
+      if (loopOrder == 0) {
+         return std::make_tuple(false, 0, 0, 0);
+      } else if (loopOrder == 1) {
+         const bool runThisOrder = oneLoopFlagIn != 0;
+         return std::make_tuple(runThisOrder, 1, 0, 0);
+      } else if (loopOrder == 2) {
+         const bool runThisOrder = twoLoopFlagIn != 0;
+         return std::make_tuple(runThisOrder, 0, 1, 0);
+      } else if (loopOrder == 3) {
+         const bool runThisOrder = threeLoopFlagIn != 0;
+         return std::make_tuple(runThisOrder, 0, 0, 1);
       }
 
-      return std::make_tuple(runThisOrder, oneLoopFlag, twoLoopFlag, threeLoopFlag);
+      throw std::runtime_error("setLoopFlags: invalid loop order (must be 1, 2 or 3)");
    };
 
    // this loop is needed to calculate the suitable mass shift order by order
