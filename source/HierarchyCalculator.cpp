@@ -468,7 +468,8 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          // set the stop masses according to MDRFlag
          std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, loopOrder);
 
-         // select the suitable hierarchy for the specific hierarchy and set variables
+         // calculate self-energy contributions and Delta lambda terms
+         // for suitable hierarchy
          switch (hierarchy) {
              case Hierarchies::h3:{
                const double Dmglst1 = p.MG - Mst1;
