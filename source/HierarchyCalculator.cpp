@@ -746,9 +746,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                }
             } // h9q2
             break;
-         }
-      }
-   }
+         } // switch (hierarchy)
+      } // if (runThisOrder)
+   } // for looporder
 
    // add the MDR masses to the hierarchy object only if a 3-loop
    // calculation has to be done, otherwise let the user decide
