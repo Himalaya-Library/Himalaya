@@ -159,7 +159,7 @@ namespace himalaya {
       /// mean (non-squared) light squark mass
       double calcMeanMsq() const;
       /// calculate sfermion masses shifted to MDR
-      std::array<double, 2> calcMstMDRFlag(const HierarchyObject& ho, int loopOrder) const;
+      std::array<double, 2> calcMsfMDRFlag(const HierarchyObject& ho, int loopOrder) const;
       /**
        * Prints out some information about Himalaya.
        */
