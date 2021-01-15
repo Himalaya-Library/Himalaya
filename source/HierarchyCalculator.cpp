@@ -390,7 +390,7 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
 
 
 std::tuple<double, double>
-HierarchyCalculator::calcMStopMDRFlag(const HierarchyObject& ho, int loopOrder) const
+HierarchyCalculator::calcMstMDRFlag(const HierarchyObject& ho, int loopOrder) const
 {
    if (loopOrder == 1) {
       return std::make_tuple(shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0));
@@ -491,7 +491,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
          // set the stop masses according to MDRFlag
          double Mst1 = 0., Mst2 = 0.;
-         std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, loopOrder);
+         std::tie(Mst1, Mst2) = calcMstMDRFlag(ho, loopOrder);
 
          // calculate self-energy contributions and Delta lambda terms
          // for suitable hierarchy
@@ -754,7 +754,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    // calculation has to be done, otherwise let the user decide
    if (onlyThreeLoop) {
       double Mst1 = 0., Mst2 = 0.;
-      std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, 3);
+      std::tie(Mst1, Mst2) = calcMstMDRFlag(ho, 3);
       Eigen::Vector2d mdrMasses;
       mdrMasses << Mst1, Mst2;
       ho.setMDRMasses(mdrMasses);

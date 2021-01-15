@@ -158,8 +158,8 @@ namespace himalaya {
       double calcAsOver4Pi() const;
       /// mean (non-squared) light squark mass
       double calcMeanMsq() const;
-      /// calculate stop masses shifted to MDR
-      std::tuple<double, double> calcMStopMDRFlag(const HierarchyObject& ho, int loopOrder) const;
+      /// calculate sfermion masses shifted to MDR
+      std::tuple<double, double> calcMstMDRFlag(const HierarchyObject& ho, int loopOrder) const;
       /**
        * Prints out some information about Himalaya.
        */
