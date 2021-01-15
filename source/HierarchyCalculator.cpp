@@ -752,16 +752,12 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
    if (onlyThreeLoop) {
       Eigen::Vector2d mdrMasses;
-      mdrMasses(0) = Mst1;
-      mdrMasses(1) = Mst2;
+      mdrMasses << Mst1, Mst2;
       ho.setMDRMasses(mdrMasses);
    }
 
    Eigen::Matrix2d higgsMassMatrix;
-   higgsMassMatrix(0, 0) = selfEnergy11;
-   higgsMassMatrix(0, 1) = selfEnergy12;
-   higgsMassMatrix(1, 0) = selfEnergy12;
-   higgsMassMatrix(1, 1) = selfEnergy22;
+   higgsMassMatrix << selfEnergy11, selfEnergy12, selfEnergy12, selfEnergy22;
 
    return calcHiggsMassMatrixPrefactor() * higgsMassMatrix;
 }
