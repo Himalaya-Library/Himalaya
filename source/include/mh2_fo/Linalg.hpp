@@ -29,7 +29,7 @@
 #include <unsupported/Eigen/MatrixFunctions>
 
 /**
- * @file linalg2.hpp
+ * @file Linalg.hpp
  *
  * @brief Contains routines to diagonalize mass matrices.
  *

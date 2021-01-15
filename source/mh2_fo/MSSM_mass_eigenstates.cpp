@@ -8,7 +8,7 @@
 #include "MSSM_mass_eigenstates.hpp"
 #include "DSZHiggs.hpp"
 #include "Flags.hpp"
-#include "linalg2.hpp"
+#include "Linalg.hpp"
 #include "Logger.hpp"
 #include "pv.hpp"
 #include "sum.hpp"

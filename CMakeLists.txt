@@ -69,7 +69,7 @@ set(HIM_LIBSOURCES
   ${SOURCE_PATH}/mh2_eft/ThresholdCalculator.cpp
   ${SOURCE_PATH}/mh2_eft/threshold_loop_functions.cpp
   # fixed-order calculation
-  ${SOURCE_PATH}/mh2_fo/linalg2.cpp
+  ${SOURCE_PATH}/mh2_fo/Linalg.cpp
   ${SOURCE_PATH}/mh2_fo/MSSM_mass_eigenstates.cpp
   ${SOURCE_PATH}/mh2_fo/pv.cpp
   # helpers

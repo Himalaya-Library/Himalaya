@@ -16,11 +16,11 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-#include "linalg2.hpp"
+#include "Linalg.hpp"
 #include <cmath>
 
 /**
- * @file linalg2.cpp
+ * @file Linalg.cpp
  * @brief Implementation of the Passarino-Veltman functions
  * @note This file has been taken from FlexibleSUSY.
  */

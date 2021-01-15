@@ -14,7 +14,7 @@
 #include "Enums.hpp"
 #include "Flags.hpp"
 #include "Hierarchies.hpp"
-#include "linalg2.hpp"
+#include "Linalg.hpp"
 #include "Logger.hpp"
 #include "Mh2EFTCalculator.hpp"
 #include "MSSM_mass_eigenstates.hpp"
