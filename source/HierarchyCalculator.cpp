@@ -440,7 +440,6 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       s2t = p.s2b;
    }
 
-   const double beta = calcBeta();
    const double lmMt = std::log(pow2(p.scale / Mt));
 
    // this loop is needed to calculate the suitable mass shift order by order
@@ -463,7 +462,6 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          break;
       }
       if (runThisOrder) {
-         const double Al4p = calcAsOver4Pi();
          const double Msq = calcMeanMsq();
          // set the stop masses according to MDRFlag
          std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, loopOrder);
@@ -476,7 +474,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const H3 hierarchy3(expansionDepth, Al4p, beta,
+               const H3 hierarchy3(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
@@ -500,7 +498,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const H32q2g hierarchy32q2g(expansionDepth, Al4p, beta,
+               const H32q2g hierarchy32q2g(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   Mt, Mst1, Mst2, p.mu,
                   s2t,
@@ -524,7 +522,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const H3q22g hierarchy3q22g(expansionDepth, Al4p, beta,
+               const H3q22g hierarchy3q22g(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
@@ -548,7 +546,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsusy = std::log(pow2(p.scale / Msusy));
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H4 hierarchy4(expansionDepth, Al4p, At, beta,
+               const H4 hierarchy4(expansionDepth, calcAsOver4Pi(), At, calcBeta(),
                   lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hierarchy4.getS1();
@@ -570,7 +568,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H5 hierarchy5(expansionDepth, Al4p, beta, Dmglst1,
+               const H5 hierarchy5(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                   lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
                   Mst2, Msq, p.mu,
                   s2t,
@@ -594,7 +592,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H5g1 hierarchy5g1(expansionDepth, Al4p, beta, Dmglst1,
+               const H5g1 hierarchy5g1(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                   lmMt, lmMst1, lmMst2, lmMsq, p.MG, Mt, Mst1,
                   Mst2, Msq, p.mu,
                   s2t,
@@ -618,7 +616,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H6 hierarchy6(expansionDepth, Al4p, beta, Dmglst2,
+               const H6 hierarchy6(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   lmMt, lmMst1, lmMst2, lmMsq,
                   Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
@@ -642,7 +640,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H6g2 hierarchy6g2(expansionDepth, Al4p, beta, Dmglst2,
+               const H6g2 hierarchy6g2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   lmMt, lmMst1, lmMst2, lmMsq,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
@@ -666,7 +664,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6b hierarchy6b(expansionDepth, Al4p, beta, Dmglst2,
+               const H6b hierarchy6b(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   Mt, Mst1, Mst2, p.mu,
                   s2t,
@@ -690,7 +688,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6b2qg2 hierarchy6b2qg2(expansionDepth, Al4p, beta, Dmglst2,
+               const H6b2qg2 hierarchy6b2qg2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   p.MG, Mt, Mst1, Mst2, p.mu,
                   s2t,
@@ -714,7 +712,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6bq22g hierarchy6bq22g(expansionDepth, Al4p, beta, Dmglst2,
+               const H6bq22g hierarchy6bq22g(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
@@ -738,7 +736,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6bq2g2 hierarchy6bq2g2(expansionDepth, Al4p, beta, Dmglst2,
+               const H6bq2g2 hierarchy6bq2g2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   p.MG, Mt, Mst1,Mst2, Msq, p.mu,
                   s2t,
@@ -762,7 +760,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
-               const H9 hierarchy9(expansionDepth, Al4p, beta, Dmst12, Dmsqst1,
+               const H9 hierarchy9(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                   lmMt, lmMgl, lmMst1,
                   p.MG, Mt, Mst1, Mst2, p.mu,
                   s2t,
@@ -786,7 +784,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
-               const H9q2 hierarchy9q2(expansionDepth, Al4p, beta, Dmst12, Dmsqst1,
+               const H9q2 hierarchy9q2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                   lmMt, lmMgl, lmMst1,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
