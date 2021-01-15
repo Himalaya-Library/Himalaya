@@ -430,7 +430,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    double selfEnergy11 = 0., selfEnergy22 = 0., selfEnergy12 = 0.;
 
    // common variables
-   double At, Mt, s2t, Mst1 = 0., Mst2 = 0.;
+   double At, Mt, s2t;
    if (!ho.getIsAlphab()) {
       At = p.Au(2,2);
       Mt = p.Mt;
@@ -490,6 +490,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
       if (runThisOrder) {
          // set the stop masses according to MDRFlag
+         double Mst1 = 0., Mst2 = 0.;
          std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, loopOrder);
 
          // calculate self-energy contributions and Delta lambda terms
@@ -749,8 +750,11 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       }
    }
 
-   // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
+   // add the MDR masses to the hierarchy object only if a 3-loop
+   // calculation has to be done, otherwise let the user decide
    if (onlyThreeLoop) {
+      double Mst1 = 0., Mst2 = 0.;
+      std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, 3);
       Eigen::Vector2d mdrMasses;
       mdrMasses << Mst1, Mst2;
       ho.setMDRMasses(mdrMasses);
