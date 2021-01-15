@@ -6,13 +6,13 @@
 // ====================================================================
 
 #include "H3q22g.hpp"
-#include "Enums.hpp"
 #include "Constants.hpp"
+#include "Enums.hpp"
 #include "Powers.hpp"
 #include <cmath>
 
-namespace himalaya{
-namespace hierarchies{
+namespace himalaya {
+namespace hierarchies {
 
 /**
  * Constructor
@@ -1102,5 +1102,5 @@ double H3q22g::calc_coef_at_as2_no_sm_logs_log3() const {
    return result;
 }
 
-}        // hierarchies
-}        // himalaya
+} // namespace hierarchies
+} // namespace himalaya
