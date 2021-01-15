@@ -398,14 +398,8 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
 {
    using namespace himalaya::hierarchies;
 
-   double Mst1, Mst2;
-   if (!ho.getIsAlphab()) {
-      Mst1 = p.MSt(0);
-      Mst2 = p.MSt(1);
-   } else {
-      Mst1 = p.MSb(0);
-      Mst2 = p.MSb(1);
-   }
+   const double Mst1 = ho.getIsAlphab() ? p.MSb(0) : p.MSt(0);
+   const double Mst2 = ho.getIsAlphab() ? p.MSb(1) : p.MSt(1);
 
    // check if the squark mass is the heaviest mass
    const double delta = 1.3;        // allow for an offset of 30%
@@ -836,7 +830,7 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
 {
    using namespace himalaya::hierarchies;
 
-   double Mst1mod = 0., Mst1, Mst2;
+   double Mst1mod = 0., Mst1 = 0., Mst2 = 0.;
 
    if (!ho.getIsAlphab()) {
       Mst1 = p.MSt(0);
@@ -898,7 +892,7 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
 {
    using namespace himalaya::hierarchies;
 
-   double Mst2mod = 0., Mst2;
+   double Mst2mod = 0., Mst2 = 0.;
    if (!ho.getIsAlphab()) {
       Mst2 = p.MSt(1);
    } else {
@@ -1070,7 +1064,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
 double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    const himalaya::HierarchyObject& ho, int omitLogs) const
 {
-   double shift;
+   double shift = 0.;
 
    // truncate shift at O(Xt^2) to be consistent with H3m result
    int truncateXt = 1;
@@ -1181,7 +1175,7 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double sbeta = std::sin(beta);
    const double cbeta = std::cos(beta);
-   double Mt, s2t;
+   double Mt = 0., s2t = 0.;
    if (!ho.getIsAlphab()) {
       s2t = p.s2t;
       Mt = p.Mt;
@@ -1252,9 +1246,7 @@ HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
                               unsigned shiftOneLoop,
                               unsigned shiftTwoLoop) const
 {
-   using namespace himalaya::mssm_twoloophiggs;
-
-   double Mt2, st, ct;
+   double Mt2 = 0., st = 0., ct = 0.;
 
    if (!ho.getIsAlphab()) {
       const double theta = p.theta_t;
@@ -1278,7 +1270,7 @@ HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
    const double gs = p.g3;
    const int include_heavy_higgs = 0;
 
-   const Eigen::Matrix2d Mt42L = delta_mh2_2loop_at_as(
+   Eigen::Matrix2d Mt42L = mssm_twoloophiggs::delta_mh2_2loop_at_as(
       Mt2, MG, Mst12, Mst22, st, ct, scale2, mu, tanb, v2, gs,
       include_heavy_higgs);
 
