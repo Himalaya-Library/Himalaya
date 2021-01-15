@@ -9,9 +9,9 @@
 #include "DSZHiggs.hpp"
 #include "Flags.hpp"
 #include "linalg2.hpp"
+#include "Logger.hpp"
 #include "pv.hpp"
 #include "sum.hpp"
-#include "Logger.hpp"
 #include <cmath>
 #include <complex>
 #include <iostream>
@@ -789,7 +789,7 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
 
    const double eps = 1e-10;
 
-   //TODO check if they are still consistent
+   // TODO(voigt) check if they are still consistent
    if (std::abs(pars_.Mt) < eps) {
       orders.at(CouplingOrders::G32YT4) = 0;
       orders.at(CouplingOrders::YT6) = 0;
