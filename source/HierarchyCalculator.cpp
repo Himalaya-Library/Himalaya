@@ -459,15 +459,15 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       switch (loopOrder) {
       case 1:
          oneLoopFlag = 1;
-         runThisOrder = oneLoopFlag == oneLoopFlagIn;
+         runThisOrder = oneLoopFlagIn != 0;
          break;
       case 2:
          twoLoopFlag = 1;
-         runThisOrder = twoLoopFlag == twoLoopFlagIn;
+         runThisOrder = twoLoopFlagIn != 0;
          break;
       case 3:
          threeLoopFlag = 1;
-         runThisOrder = threeLoopFlag == threeLoopFlagIn;
+         runThisOrder = threeLoopFlagIn != 0;
          break;
       default:
          throw std::runtime_error("setLoopFlags: invalid loop order (must be 1, 2 or 3)");
