@@ -42,9 +42,8 @@ double sqr(double x) noexcept
 
 double calc_cw2(double mW, double mZ)
 {
-   return std::abs(mZ) > std::numeric_limits<double>::epsilon()
-      ? pow2(mW/mZ)
-      : 1.0;
+   const double cw2 = pow2(mW/mZ);
+   return std::isfinite(cw2) ? cw2 : 1.0;
 }
 
 double calc_sw2(double mW, double mZ)
