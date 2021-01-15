@@ -433,7 +433,6 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    const int hierarchy = ho.getSuitableHierarchy();
 
    // common variables
-   const double At = ho.getIsAlphab() ? p.Ad(2,2) : p.Au(2,2);
    const double Mt = ho.getIsAlphab() ? p.Mb : p.Mt;
    const double s2t = ho.getIsAlphab() ? p.s2b : p.s2t;
    const double Msq = calcMeanMsq();
@@ -548,6 +547,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const double lmMsusy = std::log(pow2(p.scale / Msusy));
             const double lmMst1 = std::log(pow2(p.scale / Mst1));
             const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
+            const double At = ho.getIsAlphab() ? p.Ad(2,2) : p.Au(2,2);
             const H4 hier(expansionDepth, calcAsOver4Pi(), At, calcBeta(),
                lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
                ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
