@@ -456,7 +456,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
    // this loop is needed to calculate the suitable mass shift order by order
    for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
-      bool runThisOrder;
+      bool runThisOrder = false;
       double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
       int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
       switch (loopOrder){
