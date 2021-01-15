@@ -106,8 +106,8 @@ namespace himalaya {
        * @param threeLoopFlag an integer flag which is 0 or 1 in order to estimte the uncertainty of the three-loop expansion terms.
        * @return A double which is the estimated uncertainty.
        */
-      double getExpansionUncertainty(const himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix, unsigned oneLoopFlag,
-                                     unsigned twoLoopFlag, unsigned threeLoopFlag);
+      double getExpansionUncertainty(const himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix,
+                                     int oneLoopFlag, int twoLoopFlag, int threeLoopFlag);
    private:
       Parameters p{};                    ///< Himalaya input parameters
       bool verbose{true};                ///< enable/disable verbose output
@@ -134,13 +134,6 @@ namespace himalaya {
        */
       double shiftH3mToDRbarPrimeMh2(const himalaya::HierarchyObject& ho, int omitLogs) const;
       /**
-       * Maps a hierarchy to it's mother hierarchy.
-       * @param hierarchy the key to a hierarchy.
-       * @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
-       * @returns The key of the mother hierarchy.
-       */
-      int getMotherHierarchy(int hierarchy) const;
-      /**
        * Fills in delta_lambda @ 3L to the given HierarchyObject
        * @param ho a HierrachyObject
        * @param omitXtOrders a bool to omit xtOrders of delta_lambda_EFT
@@ -160,9 +153,5 @@ namespace himalaya {
       double calcMeanMsq() const;
       /// calculate sfermion masses shifted to MDR
       std::array<double, 2> calcMsfMDRFlag(const HierarchyObject& ho, int loopOrder) const;
-      /**
-       * Prints out some information about Himalaya.
-       */
-      void printInfo() const;
   };
 }        // himalaya

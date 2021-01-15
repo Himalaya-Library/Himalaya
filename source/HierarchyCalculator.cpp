@@ -60,28 +60,89 @@ double calcSmallestEigenvalue(const Eigen::Matrix2d& matrix)
 /// set flags to omit all corrections, except O(at*as^n)
 void disable_non_as_terms(himalaya::mh2_eft::Mh2EFTCalculator& mhc)
 {
-   using namespace himalaya::mh2_eft;
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12G22, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G14, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G24, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YB4, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G22YT2, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YB6, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YT6, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YB2YT4, 0);
+   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU4YB2, 0);
+}
 
-   mhc.setCorrectionFlag(CouplingOrders::G12G22, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G14, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G24, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G22YB2, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YB4, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G12YTAU2, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G22YTAU2, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YTAU4, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G12YT2, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G22YT2, 0);
-   mhc.setCorrectionFlag(CouplingOrders::G32YB4, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YB6, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YT6, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YTAU2YB4, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YTAU6, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YT2YB4, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YB2YT4, 0);
-   mhc.setCorrectionFlag(CouplingOrders::YTAU4YB2, 0);
+/**
+ * Maps a hierarchy to it's mother hierarchy.
+ * @param hierarchy the key to a hierarchy.
+ * @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
+ * @returns The key of the mother hierarchy.
+ */
+int getMotherHierarchy(int hierarchy)
+{
+   using namespace himalaya::hierarchies;
+
+   if (hierarchy < Hierarchies::Hierarchies::FIRST ||
+       hierarchy >= Hierarchies::Hierarchies::NUMBER_OF_HIERARCHIES) {
+      if (hierarchy == -1) {
+         throw std::runtime_error("No suitable hierarchy found!");
+      } else {
+         throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) +
+                                  " not included!");
+      }
+   }
+
+   // maps all hierarchies to their mother hierarchy
+   static const auto hierarchyMap = [] {
+      std::array<int, Hierarchies::NUMBER_OF_HIERARCHIES> a{};
+      a[hierarchies::Hierarchies::h3]      = hierarchies::Hierarchies::h3;
+      a[hierarchies::Hierarchies::h32q2g]  = hierarchies::Hierarchies::h3;
+      a[hierarchies::Hierarchies::h3q22g]  = hierarchies::Hierarchies::h3;
+      a[hierarchies::Hierarchies::h4]      = hierarchies::Hierarchies::h4;
+      a[hierarchies::Hierarchies::h5]      = hierarchies::Hierarchies::h5;
+      a[hierarchies::Hierarchies::h5g1]    = hierarchies::Hierarchies::h5;
+      a[hierarchies::Hierarchies::h6]      = hierarchies::Hierarchies::h6;
+      a[hierarchies::Hierarchies::h6g2]    = hierarchies::Hierarchies::h6;
+      a[hierarchies::Hierarchies::h6b]     = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h6b2qg2] = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h6bq22g] = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h6bq2g2] = hierarchies::Hierarchies::h6b;
+      a[hierarchies::Hierarchies::h9]      = hierarchies::Hierarchies::h9;
+      a[hierarchies::Hierarchies::h9q2]    = hierarchies::Hierarchies::h9;
+      return a;
+   }();
+
+   return hierarchyMap.at(hierarchy);
+}
+
+/**
+ * Prints out some information about Himalaya.
+ */
+void printInfo()
+{
+   std::cerr << "........................................................................\n";
+   std::cerr << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\tѧѦѧ \n";
+   std::cerr << "Uses code by\n";
+   std::cerr << "  P. Slavich et al. (2-loop αt*αs) [hep-ph/0105096]\n";
+   std::cerr << "  P. Slavich et al. (2-loop αt^2) [hep-ph/0305127]\n";
+   std::cerr << "  P. Slavich et al. (2-loop αb*ατ) [hep-ph/0406166]\n";
+   std::cerr << "  P. Slavich et al. (2-loop ατ^2) [hep-ph/0112177]\n";
+   std::cerr << "Uses contributions\n";
+   std::cerr << "  3-loop αt*αs^2 to Mh^2 of Kant et al. [arXiv:1005.5709]\n";
+   std::cerr << "  2-loop αt*αs to λ of Bagnaschi et.al. [arXiv:1407.4081]\n";
+   std::cerr << "  2-loop αt^2 to λ of Bagnaschi et.al. [arXiv:1703.08166]\n";
+   std::cerr << "  2-loop αs^2 to yt of Bednyakov et.al. [hep-ph/0210258, hep-ph/0507139]\n";
+   std::cerr << "........................................................................\n";
 }
 
 } // anonymous namespace
@@ -1389,7 +1450,7 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
  */
 double HierarchyCalculator::getExpansionUncertainty(
    const himalaya::HierarchyObject& ho, const Eigen::Matrix2d& massMatrix,
-   unsigned oneLoopFlag, unsigned twoLoopFlag, unsigned threeLoopFlag)
+   int oneLoopFlag, int twoLoopFlag, int threeLoopFlag)
 {
    using namespace himalaya::hierarchies;
 
@@ -1459,69 +1520,6 @@ double HierarchyCalculator::getExpansionUncertainty(
    expansionDepth.at(ExpansionDepth::threeLoop) = 0;
 
    return std::sqrt(uncertainty);
-}
-
-/**
- * Maps a hierarchy to it's mother hierarchy.
- * @param hierarchy the key to a hierarchy.
- * @throws runtime_error Throws a runtime_error if the given hierarchy is not included.
- * @returns The key of the mother hierarchy.
- */
-int HierarchyCalculator::getMotherHierarchy(int hierarchy) const
-{
-   using namespace himalaya::hierarchies;
-
-   if (hierarchy < Hierarchies::Hierarchies::FIRST ||
-       hierarchy >= Hierarchies::Hierarchies::NUMBER_OF_HIERARCHIES) {
-      if (hierarchy == -1) {
-         throw std::runtime_error("No suitable hierarchy found!");
-      } else {
-         throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) +
-                                  " not included!");
-      }
-   }
-
-   // maps all hierarchies to their mother hierarchy
-   static const auto hierarchyMap = [] {
-      std::array<int, Hierarchies::NUMBER_OF_HIERARCHIES> a{};
-      a[hierarchies::Hierarchies::h3]      = hierarchies::Hierarchies::h3;
-      a[hierarchies::Hierarchies::h32q2g]  = hierarchies::Hierarchies::h3;
-      a[hierarchies::Hierarchies::h3q22g]  = hierarchies::Hierarchies::h3;
-      a[hierarchies::Hierarchies::h4]      = hierarchies::Hierarchies::h4;
-      a[hierarchies::Hierarchies::h5]      = hierarchies::Hierarchies::h5;
-      a[hierarchies::Hierarchies::h5g1]    = hierarchies::Hierarchies::h5;
-      a[hierarchies::Hierarchies::h6]      = hierarchies::Hierarchies::h6;
-      a[hierarchies::Hierarchies::h6g2]    = hierarchies::Hierarchies::h6;
-      a[hierarchies::Hierarchies::h6b]     = hierarchies::Hierarchies::h6b;
-      a[hierarchies::Hierarchies::h6b2qg2] = hierarchies::Hierarchies::h6b;
-      a[hierarchies::Hierarchies::h6bq22g] = hierarchies::Hierarchies::h6b;
-      a[hierarchies::Hierarchies::h6bq2g2] = hierarchies::Hierarchies::h6b;
-      a[hierarchies::Hierarchies::h9]      = hierarchies::Hierarchies::h9;
-      a[hierarchies::Hierarchies::h9q2]    = hierarchies::Hierarchies::h9;
-      return a;
-   }();
-
-   return hierarchyMap.at(hierarchy);
-}
-
-/**
- * Prints out some information about Himalaya.
- */
-void HierarchyCalculator::printInfo() const
-{
-   std::cerr << "........................................................................\n";
-   std::cerr << "Himalaya " << Himalaya_VERSION_MAJOR << "." << Himalaya_VERSION_MINOR << "." << Himalaya_VERSION_RELEASE << "\tѧѦѧ \n";
-   std::cerr << "Uses code by\n";
-   std::cerr << "  P. Slavich et al. (2-loop αt*αs) [hep-ph/0105096]\n";
-   std::cerr << "  P. Slavich et al. (2-loop αt^2) [hep-ph/0305127]\n";
-   std::cerr << "  P. Slavich et al. (2-loop αb*ατ) [hep-ph/0406166]\n";
-   std::cerr << "  P. Slavich et al. (2-loop ατ^2) [hep-ph/0112177]\n";
-   std::cerr << "Uses contributions\n";
-   std::cerr << "  3-loop αt*αs^2 to Mh^2 of Kant et al. [arXiv:1005.5709]\n";
-   std::cerr << "  2-loop αt*αs to λ of Bagnaschi et.al. [arXiv:1407.4081]\n";
-   std::cerr << "  2-loop αt^2 to λ of Bagnaschi et.al. [arXiv:1703.08166]\n";
-   std::cerr << "  2-loop αs^2 to yt of Bednyakov et.al. [hep-ph/0210258, hep-ph/0507139]\n";
-   std::cerr << "........................................................................\n";
 }
 
 } // namespace himalaya
