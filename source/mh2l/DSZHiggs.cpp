@@ -10,9 +10,9 @@
 #include "Flags.hpp"
 #include "li2.hpp"
 #include <cmath>
+#include <iostream>
 #include <limits>
 #include <mutex>
-#include <iostream>
 #include <utility>
 
 /**
@@ -36,7 +36,7 @@ template <typename T> T logabs(T x) { return std::log(std::abs(x)); }
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
    double mt2, double mg, double mst12, double /* mst22 */,
    double /* sxt */, double /* cxt */, double scale2, double mu,
-   double tanb, double vev2, double gs, int /* scheme */)
+   double tanb, double vev2, double g3, int /* scheme */)
 {
    constexpr double Pi2 = M_PI * M_PI;
    constexpr double Pi4 = M_PI * M_PI * M_PI * M_PI;
@@ -56,7 +56,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
 
    result(0,0) = 0.;
 
-   result(0,1) = (sqr(gs)*ht2*mg*mt2*mu* (-1 + logabs(t/q) -
+   result(0,1) = (sqr(g3)*ht2*mg*mt2*mu* (-1 + logabs(t/q) -
       (T*((2*del* (-(logabs(t/g)/T) - (2*(g + t - T +
       g*sqrtabs(del/g2))* logabs((g + t - T - g*sqrtabs(del/g2))/
       (2.*g)))/ (g*sqrtabs(del/g2)* (t - T + g*(-1 +
@@ -75,7 +75,7 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
 
    result(1,0) = result(0,1);
 
-   result(1,1) = (sqr(gs)*ht2*mt2*(-2 - (8*(g + t)*(-1 +
+   result(1,1) = (sqr(g3)*ht2*mt2*(-2 - (8*(g + t)*(-1 +
       logabs(g/q)))/T + 8*logabs(t/g) + 6*(-1 + logabs(t/q)) +
       8*sqr(logabs(t/q)) - 4*logabs(T/g) + (4*((g2*T - sqr(t - T)*(2*t
       + T) + 2*g*t*(t + 5*T))*logabs(t/g) +
@@ -110,12 +110,12 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as_general(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
-   double tanb, double vev2, double gs, int scheme)
+   double tanb, double vev2, double g3, int scheme)
 {
    Eigen::Matrix<double, 2, 2> result;
 
    dszhiggs_(&mt2, &mg, &mst12, &mst22, &sxt, &cxt, &scale2, &mu,
-             &tanb, &vev2, &gs, &scheme,
+             &tanb, &vev2, &g3, &scheme,
              &result(0,0), &result(1,1), &result(0,1));
 
    result(1,0) = result(0,1);
@@ -188,7 +188,7 @@ double dphi_010(double t, double T, double g)
 double delta_ma2_2loop_at_as_mst1_eq_mst2(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
-   double tanb, double vev2, double gs)
+   double tanb, double vev2, double g3)
 {
    constexpr double Pi2 = M_PI * M_PI;
    const double g = sqr(mg);
@@ -209,7 +209,7 @@ double delta_ma2_2loop_at_as_mst1_eq_mst2(
       T)*T*phi(t,T,g) + T*(At*(g2 + sqr(t - T) - 2*g*T) + mg*(g2 +
       sqr(t - T) - 2*g*(t + T)))*dphi_010(t,T,g)))/ (g*T);
 
-   const double pref = 4*sqr(gs)/sqr(16*Pi2) * ht2*mu*(1./tanb + tanb);
+   const double pref = 4*sqr(g3)/sqr(16*Pi2) * ht2*mu*(1./tanb + tanb);
 
    return pref * result;
 }
@@ -217,12 +217,12 @@ double delta_ma2_2loop_at_as_mst1_eq_mst2(
 double delta_ma2_2loop_at_as_general(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
-   double tanb, double vev2, double gs)
+   double tanb, double vev2, double g3)
 {
-   double result;
+   double result = 0.;
 
    dszodd_(&mt2, &mg, &mst12, &mst22, &sxt, &cxt, &scale2, &mu,
-           &tanb, &vev2, &gs, &result);
+           &tanb, &vev2, &g3, &result);
 
    return result;
 }
@@ -231,7 +231,7 @@ double delta_ma2_2loop_at_as_general(
 double delta_ma2_2loop_at_as(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
-   double tanb, double vev2, double gs)
+   double tanb, double vev2, double g3)
 {
    if (std::abs((mst12 - mst22)/mst12) < 1e-8) {
       const double At = calc_At(mt2, mst12, mst22, sxt, cxt, mu, tanb);
@@ -241,11 +241,11 @@ double delta_ma2_2loop_at_as(
          return 0.;
 
       return delta_ma2_2loop_at_as_mst1_eq_mst2(
-         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs);
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3);
    }
 
    return delta_ma2_2loop_at_as_general(
-      mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs);
+      mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3);
 }
 
 double delta_ma2_2loop_at_at(
@@ -254,7 +254,7 @@ double delta_ma2_2loop_at_at(
    double sxt, double cxt, double sxb, double cxb,
    double scale2, double mu, double tanb, double vev2, int atat)
 {
-   double result;
+   double result = 0.;
 
    {
       std::lock_guard<std::mutex> lg(mtx);
@@ -269,22 +269,22 @@ double delta_ma2_2loop_at_at(
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_as(
    double mt2, double mg, double mst12, double mst22,
    double sxt, double cxt, double scale2, double mu,
-   double tanb, double vev2, double gs,
+   double tanb, double vev2, double g3,
    int include_heavy_higgs)
 {
    Eigen::Matrix<double, 2, 2> result;
 
    if (std::abs((mst12 - mst22)/mst12) < 1e-8) {
       result = delta_mh2_2loop_at_as_st_0_mst1_eq_mst2(
-         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs, 0);
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3, 0);
    } else {
       result = delta_mh2_2loop_at_as_general(
-         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs, 0);
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3, 0);
    }
 
    const double dMA = include_heavy_higgs
       ? delta_ma2_2loop_at_as(
-         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, gs)
+         mt2, mg, mst12, mst22, sxt, cxt, scale2, mu, tanb, vev2, g3)
       : 0.;
 
    return result + rotate_by(dMA, tanb);
@@ -321,12 +321,12 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_at_at(
 Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_as(
    double mb2, double mg, double msb12, double msb22,
    double sxb, double cxb, double scale2, double mu,
-   double cotb, double vev2, double gs,
+   double cotb, double vev2, double g3,
    int include_heavy_higgs)
 {
    Eigen::Matrix<double, 2, 2> result(delta_mh2_2loop_at_as(
       mb2, mg, msb12, msb22, sxb, cxb, scale2, mu,
-      cotb, vev2, gs, include_heavy_higgs));
+      cotb, vev2, g3, include_heavy_higgs));
 
    std::swap(result(0,0), result(1,1));
 
@@ -338,7 +338,7 @@ double delta_ma2_2loop_atau_atau(
    double mstau22, double sintau, double costau, double scale2,
    double mu, double tanb, double vev2)
 {
-   double result;
+   double result = 0.;
 
    tausqodd_(&mtau2, &mA2, &msv2, &mstau12, &mstau22, &sintau,
              &costau, &scale2, &mu, &tanb, &vev2, &result);
@@ -376,7 +376,7 @@ double delta_ma2_2loop_ab_atau(
    double sintau, double costau, double sxb, double cxb,
    double scale2, double mu, double tanb, double vev2)
 {
-   double result;
+   double result = 0.;
 
    taubotodd_(&mtau2, &mb2,
               &mstau12, &mstau22, &msb12, &msb22,
