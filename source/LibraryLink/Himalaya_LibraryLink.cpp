@@ -461,20 +461,23 @@ void put_result(const Results& res, MLINK link)
       ho.getDLambdaDRbarPrimeToMSbarShift(3);
 
    std::vector<Eigen::Matrix2d> Mh2;
+   Mh2.reserve(4);
    for (int i = 0; i < 4; i++)
-      Mh2.push_back(ho.getDMh(i));
+      Mh2.emplace_back(ho.getDMh(i));
 
    std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_MDRp;
-   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_MDRp.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_MDRp.push_back(ho.getDMhDRbarPrimeToMDRbarPrimeShift());
+   Mh2_shift_DRp_to_MDRp.reserve(4);
+   Mh2_shift_DRp_to_MDRp.emplace_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.emplace_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.emplace_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_MDRp.emplace_back(ho.getDMhDRbarPrimeToMDRbarPrimeShift());
 
    std::vector<Eigen::Matrix2d> Mh2_shift_DRp_to_H3m;
-   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_H3m.push_back(Eigen::Matrix2d::Zero());
-   Mh2_shift_DRp_to_H3m.push_back(ho.getDMhDRbarPrimeToH3mShift());
+   Mh2_shift_DRp_to_H3m.reserve(4);
+   Mh2_shift_DRp_to_H3m.emplace_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.emplace_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.emplace_back(Eigen::Matrix2d::Zero());
+   Mh2_shift_DRp_to_H3m.emplace_back(ho.getDMhDRbarPrimeToH3mShift());
 
    Eigen::Vector4d Mh2_eft;
    Mh2_eft << std::get<0>(eft), std::get<1>(eft),
