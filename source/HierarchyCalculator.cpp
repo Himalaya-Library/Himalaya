@@ -280,7 +280,7 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
 
    // perturbatively diagonalize
    {
-      const auto DMh2 = flexiblesusy::fs_diagonalize_hermitian_perturbatively(
+      const auto DMh2 = fs_diagonalize_hermitian_perturbatively(
          ho.getDMh(0), ho.getDMh(1), ho.getDMh(2), ho.getDMh(3));
       ho.setDMh2(0, std::get<0>(DMh2)(0));
       ho.setDMh2(1, std::get<1>(DMh2)(0));

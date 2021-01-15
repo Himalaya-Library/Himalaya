@@ -318,7 +318,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Su() const
 void MSSM_spectrum::calculate_MSu()
 {
    const auto mass_matrix_Su = get_mass_matrix_Su();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Su, M2Su, ZU);
+   fs_diagonalize_hermitian(mass_matrix_Su, M2Su, ZU);
    normalize_to_interval(ZU);
 }
 
@@ -350,7 +350,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Sd() const
 void MSSM_spectrum::calculate_MSd()
 {
    const auto mass_matrix_Sd = get_mass_matrix_Sd();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sd, M2Sd, ZD);
+   fs_diagonalize_hermitian(mass_matrix_Sd, M2Sd, ZD);
    normalize_to_interval(ZD);
 }
 
@@ -382,7 +382,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Sc() const
 void MSSM_spectrum::calculate_MSc()
 {
    const auto mass_matrix_Sc = get_mass_matrix_Sc();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sc, M2Sc, ZC);
+   fs_diagonalize_hermitian(mass_matrix_Sc, M2Sc, ZC);
    normalize_to_interval(ZC);
 }
 
@@ -414,7 +414,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Ss() const
 void MSSM_spectrum::calculate_MSs()
 {
    const auto mass_matrix_Ss = get_mass_matrix_Ss();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Ss, M2Ss, ZS);
+   fs_diagonalize_hermitian(mass_matrix_Ss, M2Ss, ZS);
    normalize_to_interval(ZS);
 }
 
@@ -446,7 +446,7 @@ RM22 MSSM_spectrum::get_mass_matrix_St() const
 void MSSM_spectrum::calculate_MSt()
 {
    const auto mass_matrix_St = get_mass_matrix_St();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_St, M2St, ZT);
+   fs_diagonalize_hermitian(mass_matrix_St, M2St, ZT);
    normalize_to_interval(ZT);
 }
 
@@ -478,7 +478,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Sb() const
 void MSSM_spectrum::calculate_MSb()
 {
    const auto mass_matrix_Sb = get_mass_matrix_Sb();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sb, M2Sb, ZB);
+   fs_diagonalize_hermitian(mass_matrix_Sb, M2Sb, ZB);
    normalize_to_interval(ZB);
 }
 
@@ -510,7 +510,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Se() const
 void MSSM_spectrum::calculate_MSe()
 {
    const auto mass_matrix_Se = get_mass_matrix_Se();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Se, M2Se, ZE);
+   fs_diagonalize_hermitian(mass_matrix_Se, M2Se, ZE);
    normalize_to_interval(ZE);
 }
 
@@ -542,7 +542,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Sm() const
 void MSSM_spectrum::calculate_MSm()
 {
    const auto mass_matrix_Sm = get_mass_matrix_Sm();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Sm, M2Sm, ZM);
+   fs_diagonalize_hermitian(mass_matrix_Sm, M2Sm, ZM);
    normalize_to_interval(ZM);
 }
 
@@ -574,7 +574,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Stau() const
 void MSSM_spectrum::calculate_MStau()
 {
    const auto mass_matrix_Stau = get_mass_matrix_Stau();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Stau, M2Stau, ZTau);
+   fs_diagonalize_hermitian(mass_matrix_Stau, M2Stau, ZTau);
    normalize_to_interval(ZTau);
 }
 
@@ -601,7 +601,7 @@ RM22 MSSM_spectrum::get_mass_matrix_hh() const
 void MSSM_spectrum::calculate_Mhh()
 {
    const auto mass_matrix_hh = get_mass_matrix_hh();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_hh, M2hh, ZH);
+   fs_diagonalize_hermitian(mass_matrix_hh, M2hh, ZH);
    normalize_to_interval(ZH);
 }
 
@@ -629,7 +629,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Ah() const
 void MSSM_spectrum::calculate_MAh()
 {
    const auto mass_matrix_Ah = get_mass_matrix_Ah();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Ah, M2Ah, ZA);
+   fs_diagonalize_hermitian(mass_matrix_Ah, M2Ah, ZA);
    normalize_to_interval(ZA);
 }
 
@@ -656,7 +656,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Hpm() const
 void MSSM_spectrum::calculate_MHpm()
 {
    const auto mass_matrix_Hpm = get_mass_matrix_Hpm();
-   flexiblesusy::fs_diagonalize_hermitian(mass_matrix_Hpm, M2Hpm, ZP);
+   fs_diagonalize_hermitian(mass_matrix_Hpm, M2Hpm, ZP);
    normalize_to_interval(ZP);
 }
 
@@ -693,7 +693,7 @@ void MSSM_spectrum::calculate_MChi()
    CM44 ZN_tmp(CM44::Zero());
 
    const auto mass_matrix_Chi = get_mass_matrix_Chi();
-   flexiblesusy::fs_diagonalize_symmetric(mass_matrix_Chi, MChi, ZN_tmp);
+   fs_diagonalize_symmetric(mass_matrix_Chi, MChi, ZN_tmp);
    normalize_to_interval(ZN_tmp);
 
    // convert to SLHA convention to avoid imaginary parts
@@ -722,7 +722,7 @@ RM22 MSSM_spectrum::get_mass_matrix_Cha() const
 void MSSM_spectrum::calculate_MCha()
 {
    const auto mass_matrix_Cha = get_mass_matrix_Cha();
-   flexiblesusy::fs_svd(mass_matrix_Cha, MCha, UM, UP);
+   fs_svd(mass_matrix_Cha, MCha, UM, UP);
 }
 
 std::ostream& operator<<(std::ostream& ostr, const MSSM_spectrum& spec)
@@ -878,7 +878,7 @@ Parameters MSSM_mass_eigenstates::make_3rd_gen(const Parameters& pars)
 V2 MSSM_mass_eigenstates::calculate_Mh2_tree() const
 {
    const auto m0 = get_mass_matrix_hh();
-   const auto mh2_tree = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0);
+   const auto mh2_tree = fs_diagonalize_hermitian_perturbatively(m0);
 
    return std::get<0>(mh2_tree);
 }
@@ -902,10 +902,10 @@ std::tuple<double,double,double> MSSM_mass_eigenstates::calculate_Mh2() const
       const auto m1_gl = delta_mh2_1loop_gaugeless();
 
       // tree-level and 1-loop with electroweak gauge couplings
-      const auto Mh2 = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0, m1);
+      const auto Mh2 = fs_diagonalize_hermitian_perturbatively(m0, m1);
 
       // 2-loop in gaugless limit (p = g1 = g2 = 0)
-      const auto Mh2_gl = flexiblesusy::fs_diagonalize_hermitian_perturbatively(m0_gl, m1_gl, m2);
+      const auto Mh2_gl = fs_diagonalize_hermitian_perturbatively(m0_gl, m1_gl, m2);
 
       return std::make_tuple(std::get<0>(Mh2)(0),
                              std::get<1>(Mh2)(0),
@@ -919,9 +919,9 @@ std::tuple<double,double,double> MSSM_mass_eigenstates::calculate_Mh2() const
    const RM22 MHH_1L = m0 + m1;
    const RM22 MHH_2L = m0 + m1 + m2;
 
-   flexiblesusy::fs_diagonalize_hermitian(MHH_0L, M2hh_0L, ZH);
-   flexiblesusy::fs_diagonalize_hermitian(MHH_1L, M2hh_1L, ZH);
-   flexiblesusy::fs_diagonalize_hermitian(MHH_2L, M2hh_2L, ZH);
+   fs_diagonalize_hermitian(MHH_0L, M2hh_0L, ZH);
+   fs_diagonalize_hermitian(MHH_1L, M2hh_1L, ZH);
+   fs_diagonalize_hermitian(MHH_2L, M2hh_2L, ZH);
 
    return std::make_tuple(M2hh_0L(0), (M2hh_1L - M2hh_0L)(0), (M2hh_2L - M2hh_1L)(0));
 }
@@ -1335,7 +1335,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it_pert() const
    // 1-loop Higgs mass matrix in gaugeless limit
    const auto DMH_1L = delta_mh2_1loop_gaugeless();
 
-   const auto dmh2 = flexiblesusy::fs_diagonalize_hermitian_perturbatively(DMH_0L, DMH_1L);
+   const auto dmh2 = fs_diagonalize_hermitian_perturbatively(DMH_0L, DMH_1L);
 
    // 1-loop contribution to (squared) Higgs mass eigenvalues.
    const auto dmh2_1L_gl = std::get<1>(dmh2)(0);
@@ -1367,7 +1367,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_2loop_mom_it_num(
 
       MSSM_spectrum::A2 M2hh;
       RM22 ZH;
-      flexiblesusy::fs_diagonalize_hermitian(DMH, M2hh, ZH);
+      fs_diagonalize_hermitian(DMH, M2hh, ZH);
 
       has_converged = is_equal_rel(M2hh(0), p2, precision_goal);
       p2 = M2hh(0);

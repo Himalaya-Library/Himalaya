@@ -25,7 +25,7 @@
  * @note This file has been taken from FlexibleSUSY.
  */
 
-namespace flexiblesusy {
+namespace himalaya {
 
 namespace {
 
@@ -87,4 +87,4 @@ std::tuple<V2,V2,V2,V2> fs_diagonalize_hermitian_perturbatively(
    return std::make_tuple(mh2_0L, mh2_1L, mh2_2L, mh2_3L);
 }
 
-} // namespace flexiblesusy
+} // namespace himalaya

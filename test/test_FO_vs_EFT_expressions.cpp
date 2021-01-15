@@ -266,7 +266,7 @@ TEST_CASE("test_FO_2loop_momentum_iteration_pert")
       A2 M2hh;
       RM22 ZH;
       // diagonalize 1-loop mass matrix for given p^2
-      flexiblesusy::fs_diagonalize_hermitian(mm, M2hh, ZH);
+      fs_diagonalize_hermitian(mm, M2hh, ZH);
 
       return M2hh(0);
    };

@@ -36,7 +36,7 @@
  * @note This file has been taken from the FlexibleSUSY 2.2.0 package.
  */
 
-namespace flexiblesusy {
+namespace himalaya {
 
 #define MAX_(i, j) (((i) > (j)) ? (i) : (j))
 #define MIN_(i, j) (((i) < (j)) ? (i) : (j))
@@ -1536,4 +1536,4 @@ std::tuple<V2,V2,V2,V2> fs_diagonalize_hermitian_perturbatively(
    const RM22& m2 = RM22::Zero(),
    const RM22& m3 = RM22::Zero());
 
-} // namespace flexiblesusy
+} // namespace himalaya
