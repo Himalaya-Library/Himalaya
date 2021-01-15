@@ -27,7 +27,6 @@
 #include <numeric>
 #include <stdexcept>
 #include <string>
-#include <tuple>
 
 #include <Eigen/Eigenvalues>
 
@@ -389,26 +388,33 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
 }
 
 
-std::tuple<double, double>
-HierarchyCalculator::calcMStopMDRFlag(const HierarchyObject& ho, int loopOrder) const
+std::array<double, 2>
+HierarchyCalculator::calcMsfMDRFlag(const HierarchyObject& ho, int loopOrder) const
 {
    if (loopOrder == 1) {
-      return std::make_tuple(shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0));
+      return { shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0) };
    } else if (loopOrder == 2) {
-      return std::make_tuple(shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
-                             shiftMst2ToMDR(ho, ho.getMDRFlag(), 0));
+      return { shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
+               shiftMst2ToMDR(ho, ho.getMDRFlag(), 0) };
    } else if (loopOrder == 3) {
-      return std::make_tuple(shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
-                             shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()));
+      return { shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
+               shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()) };
    } else {
       throw std::runtime_error("There are no tree-level hierarchies included!");
    }
 }
 
 
-// TODO(avoigt): if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
 /**
- * Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
+ * Calculates the hierarchy contributions for a specific hierarchy at
+ * a specific loop order.
+ *
+ * Note: The hierarchy files containing 1-, 2- and 3-loop terms
+ * (αs^0 αt/b, αs αt/b, αs^2 αt/b).
+ *
+ * @todo If one is interested in the expansion at one- and two-loop,
+ * choose a unified choice for the MDR scheme.
+ *
  * @param ho a HierarchyObject with constant isAlphab.
  * @param oneLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded one-loop results to the returned value, respectivley.
  * @param twoLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded two-loop results to the returned value, respectivley.
@@ -417,391 +423,341 @@ HierarchyCalculator::calcMStopMDRFlag(const HierarchyObject& ho, int loopOrder) 
  * @return The loop corrected Higgs mass matrix which contains the expanded corrections at the given order.
  */
 Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
-   himalaya::HierarchyObject& ho, int oneLoopFlagIn,
+   HierarchyObject& ho, int oneLoopFlagIn,
    int twoLoopFlagIn, int threeLoopFlagIn) const
 {
-   using namespace himalaya::hierarchies;
+   // returnde self-energy contributions
+   double selfEnergy11 = 0., selfEnergy22 = 0., selfEnergy12 = 0.;
 
    // get the hierarchy
    const int hierarchy = ho.getSuitableHierarchy();
 
-   // the hierarchy files containing 1-, 2- and 3-loop terms (alpha_s^0 alpha_t/b, alpha_s alpha_t/b, alpha_s^2 alpha_t/b)
-   double sigS1Full = 0., sigS2Full = 0., sigS12Full = 0.;
-
    // common variables
-   double At, Mt, s2t, Mst1 = 0., Mst2 = 0.;
-   if (!ho.getIsAlphab()) {
-      At = p.Au(2,2);
-      Mt = p.Mt;
-      s2t = p.s2t;
-   } else {
-      At = p.Ad(2,2);
-      Mt = p.Mb;
-      s2t = p.s2b;
-   }
+   const double Mf = ho.getIsAlphab() ? p.Mb : p.Mt;
+   const double s2f = ho.getIsAlphab() ? p.s2b : p.s2t;
+   const double Msq = calcMeanMsq();
+   const double lmMf = std::log(pow2(p.scale / Mf));
+   const bool onlyThreeLoop = oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1;
 
-   const double beta = calcBeta();
-   const double lmMt = std::log(pow2(p.scale / Mt));
+   // calculates contributions to Delta lambda and stores them in ho
+   const auto calcDlambda = [] (HierarchyObject& ho, const auto& hier, double lmMsf1) {
+      const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
+      ho.setDLambdaH3m(c
+                       + lmMsf1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                       + pow2(lmMsf1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                       + pow3(lmMsf1) * hier.calc_coef_at_as2_no_sm_logs_log3());
+      ho.setDLambdaNonLog(c);
+   };
+
+   struct LoopFlags {
+      bool runThisOrder = false;
+      int oneLoop{}, twoLoop{}, threeLoop{};
+   };
+
+   // sets flags for the loop
+   const auto setLoopFlags = [oneLoopFlagIn, twoLoopFlagIn, threeLoopFlagIn] (int loopOrder) {
+      if (loopOrder == 0) {
+         return LoopFlags{false, 0, 0, 0};
+      } else if (loopOrder == 1) {
+         const bool runThisOrder = oneLoopFlagIn != 0;
+         return LoopFlags{runThisOrder, 1, 0, 0};
+      } else if (loopOrder == 2) {
+         const bool runThisOrder = twoLoopFlagIn != 0;
+         return LoopFlags{runThisOrder, 0, 1, 0};
+      } else if (loopOrder == 3) {
+         const bool runThisOrder = threeLoopFlagIn != 0;
+         return LoopFlags{runThisOrder, 0, 0, 1};
+      }
+
+      throw std::runtime_error("setLoopFlags: invalid loop order (must be 1, 2 or 3)");
+   };
 
    // this loop is needed to calculate the suitable mass shift order by order
-   for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
-      bool runThisOrder;
-      double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
-      int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
-      switch (currentLoopOrder){
-         case 1:
-            oneLoopFlag = 1;
-            runThisOrder = oneLoopFlag == oneLoopFlagIn;
-         break;
-         case 2:
-            twoLoopFlag = 1;
-            runThisOrder = twoLoopFlag == twoLoopFlagIn;
-         break;
-         case 3:
-            threeLoopFlag = 1;
-            runThisOrder = threeLoopFlag == threeLoopFlagIn;
-         break;
-      }
-      if(runThisOrder){
-         const double Al4p = calcAsOver4Pi();
-         const double Msq = calcMeanMsq();
-         // set the stop masses according to MDRFlag
-         std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, currentLoopOrder);
-         // select the suitable hierarchy for the specific hierarchy and set variables
-         switch(getMotherHierarchy(hierarchy)){
-            case Hierarchies::h3:{
-               const double Dmglst1 = p.MG - Mst1;
-               const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
-               const double Dmst12 = pow2(Mst1) - pow2(Mst2);
-               const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               switch(hierarchy){
-                  case Hierarchies::h3:{
-                     const H3 hierarchy3(expansionDepth, Al4p, beta,
-                        Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
-                        p.MG, Mt, Mst1, Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy3.getS1();
-                     curSig2 = hierarchy3.getS2();
-                     curSig12 = hierarchy3.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy3.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy3.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-                  case Hierarchies::h32q2g:{
-                     const H32q2g hierarchy32q2g(expansionDepth, Al4p, beta,
-                        Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
-                        Mt, Mst1, Mst2, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy32q2g.getS1();
-                     curSig2 = hierarchy32q2g.getS2();
-                     curSig12 = hierarchy32q2g.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-                  case Hierarchies::h3q22g:{
-                     const H3q22g hierarchy3q22g(expansionDepth, Al4p, beta,
-                        Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
-                        Mt, Mst1, Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy3q22g.getS1();
-                     curSig2 = hierarchy3q22g.getS2();
-                     curSig12 = hierarchy3q22g.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-               }
-            }
-            break;
-            case Hierarchies::h4:{
-               const double Msusy = (Mst1 + Mst2 + p.MG) / 3.;
-               const double lmMsusy = std::log(pow2(p.scale / Msusy));
-               const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H4 hierarchy4(expansionDepth, Al4p, At, beta,
-                  lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
-                  ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy4.getS1();
-               curSig2 = hierarchy4.getS2();
-               curSig12 = hierarchy4.getS12();
-               if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy4.calc_coef_at_as2_no_sm_logs_log0();
-                  ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy4.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
-                  ho.setDLambdaNonLog(c);
-               }
-            }
-            break;
-            case Hierarchies::h5:{
-               const double Dmglst1 = p.MG - Mst1;
-               const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               switch(hierarchy){
-                  case Hierarchies::h5:{
-                     const H5 hierarchy5(expansionDepth, Al4p, beta, Dmglst1,
-                        lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
-                        Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy5.getS1();
-                     curSig2 = hierarchy5.getS2();
-                     curSig12 = hierarchy5.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy5.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy5.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-                  case Hierarchies::h5g1:{
-                     const H5g1 hierarchy5g1(expansionDepth, Al4p, beta, Dmglst1,
-                        lmMt, lmMst1, lmMst2, lmMsq, p.MG, Mt, Mst1,
-                        Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy5g1.getS1();
-                     curSig2 = hierarchy5g1.getS2();
-                     curSig12 = hierarchy5g1.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-               }
-            }
-            break;
-            case Hierarchies::h6:{
-               const double Dmglst2 = p.MG - Mst2;
-               const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               switch(hierarchy){
-                  case Hierarchies::h6:{
-                     const H6 hierarchy6(expansionDepth, Al4p, beta, Dmglst2,
-                        lmMt, lmMst1, lmMst2, lmMsq,
-                        Mt, Mst1, Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy6.getS1();
-                     curSig2 = hierarchy6.getS2();
-                     curSig12 = hierarchy6.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy6.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy6.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     };
-                  }
-                  break;
-                  case Hierarchies::h6g2:{
-                     const H6g2 hierarchy6g2(expansionDepth, Al4p, beta, Dmglst2,
-                        lmMt, lmMst1, lmMst2, lmMsq,
-                        p.MG, Mt, Mst1, Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy6g2.getS1();
-                     curSig2 = hierarchy6g2.getS2();
-                     curSig12 = hierarchy6g2.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-               }
-            }
-            break;
-            case Hierarchies::h6b:{
-               const double Dmglst2 = p.MG - Mst2;
-               const double Dmsqst2 = Msq - Mst2;
-               const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               switch(hierarchy){
-                  case Hierarchies::h6b:{
-                     const H6b hierarchy6b(expansionDepth, Al4p, beta, Dmglst2,
-                        Dmsqst2, lmMt, lmMst1, lmMst2,
-                        Mt, Mst1, Mst2, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy6b.getS1();
-                     curSig2 = hierarchy6b.getS2();
-                     curSig12 = hierarchy6b.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy6b.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy6b.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-                  case Hierarchies::h6b2qg2:{
-                     const H6b2qg2 hierarchy6b2qg2(expansionDepth, Al4p, beta, Dmglst2,
-                        Dmsqst2, lmMt, lmMst1, lmMst2,
-                        p.MG, Mt, Mst1, Mst2, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy6b2qg2.getS1();
-                     curSig2 = hierarchy6b2qg2.getS2();
-                     curSig12 = hierarchy6b2qg2.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-                  case Hierarchies::h6bq22g:{
-                     const H6bq22g hierarchy6bq22g(expansionDepth, Al4p, beta, Dmglst2,
-                        Dmsqst2, lmMt, lmMst1, lmMst2,
-                        Mt, Mst1, Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy6bq22g.getS1();
-                     curSig2 = hierarchy6bq22g.getS2();
-                     curSig12 = hierarchy6bq22g.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-                  case Hierarchies::h6bq2g2:{
-                     const H6bq2g2 hierarchy6bq2g2(expansionDepth, Al4p, beta, Dmglst2,
-                        Dmsqst2, lmMt, lmMst1, lmMst2,
-                        p.MG, Mt, Mst1,Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy6bq2g2.getS1();
-                     curSig2 = hierarchy6bq2g2.getS2();
-                     curSig12 = hierarchy6bq2g2.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-               }
-            }
-            break;
-            case Hierarchies::h9:{
-               const double lmMgl = std::log(pow2(p.scale / p.MG));
-               const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const double Dmst12 = pow2(Mst1) - pow2(Mst2);
-               const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
-               switch(hierarchy){
-                  case Hierarchies::h9:{
-                     const H9 hierarchy9(expansionDepth, Al4p, beta, Dmst12, Dmsqst1,
-                        lmMt, lmMgl, lmMst1,
-                        p.MG, Mt, Mst1, Mst2, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy9.getS1();
-                     curSig2 = hierarchy9.getS2();
-                     curSig12 = hierarchy9.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy9.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy9.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-                  case Hierarchies::h9q2:{
-                     const H9q2 hierarchy9q2(expansionDepth, Al4p, beta, Dmst12, Dmsqst1,
-                        lmMt, lmMgl, lmMst1,
-                        p.MG, Mt, Mst1, Mst2, Msq, p.mu,
-                        s2t,
-                        ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-                     curSig1 = hierarchy9q2.getS1();
-                     curSig2 = hierarchy9q2.getS2();
-                     curSig12 = hierarchy9q2.getS12();
-                     if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                        const double c = hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0();
-                        ho.setDLambdaH3m(c
-                           + lmMst1 * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log1()
-                           + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
-                           + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
-                        ho.setDLambdaNonLog(c);
-                     }
-                  }
-                  break;
-               }
-            }
-            break;
-         }
-      }
-      sigS1Full += curSig1;
-      sigS2Full += curSig2;
-      sigS12Full += curSig12;
-   }
+   for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
+      // set flags to be used in the loop body
+      const auto loopFlags = setLoopFlags(loopOrder);
 
-   // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
-   if (oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1) {
+      if (loopFlags.runThisOrder) {
+         using namespace himalaya::hierarchies;
+
+         // set the stop masses according to MDRFlag
+         const auto Msf = calcMsfMDRFlag(ho, loopOrder);
+         const double Msf1 = Msf.at(0);
+         const double Msf2 = Msf.at(1);
+
+         // calculate self-energy contributions and Delta lambda terms
+         // for suitable hierarchy
+         switch (hierarchy) {
+         case Hierarchies::h3:{
+            const double Dmglst1 = p.MG - Msf1;
+            const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
+            const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const H3 hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
+               Dmglst1, Dmsf12, Dmsqst1, lmMf, lmMsf1,
+               p.MG, Mf, Msf1, Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h3
+         break;
+
+         case Hierarchies::h32q2g:{
+            const double Dmglst1 = p.MG - Msf1;
+            const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
+            const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const H32q2g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
+               Dmglst1, Dmsf12, Dmsqst1, lmMf, lmMsf1,
+               Mf, Msf1, Msf2, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h32q2g
+         break;
+
+         case Hierarchies::h3q22g:{
+            const double Dmglst1 = p.MG - Msf1;
+            const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
+            const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const H3q22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
+               Dmglst1, Dmsf12, Dmsqst1, lmMf, lmMsf1,
+               Mf, Msf1, Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h3q22g
+         break;
+
+         case Hierarchies::h4:{
+            const double Msusy = (Msf1 + Msf2 + p.MG) / 3.;
+            const double lmMsusy = std::log(pow2(p.scale / Msusy));
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
+            const double At = ho.getIsAlphab() ? p.Ad(2,2) : p.Au(2,2);
+            const H4 hier(expansionDepth, calcAsOver4Pi(), At, calcBeta(),
+               lmMf, lmMsq, lmMsusy, Mf, Msusy, Msq,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h4
+         break;
+
+         case Hierarchies::h5:{
+            const double Dmglst1 = p.MG - Msf1;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
+            const H5 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
+               lmMf, lmMsf1, lmMsf2, lmMsq, Mf, Msf1,
+               Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h5
+         break;
+
+         case Hierarchies::h5g1:{
+            const double Dmglst1 = p.MG - Msf1;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
+            const H5g1 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
+               lmMf, lmMsf1, lmMsf2, lmMsq, p.MG, Mf, Msf1,
+               Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h5g1
+         break;
+
+         case Hierarchies::h6:{
+            const double Dmglst2 = p.MG - Msf2;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
+            const H6 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               lmMf, lmMsf1, lmMsf2, lmMsq,
+               Mf, Msf1, Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            };
+         } // h6
+         break;
+
+         case Hierarchies::h6g2:{
+            const double Dmglst2 = p.MG - Msf2;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
+            const H6g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               lmMf, lmMsf1, lmMsf2, lmMsq,
+               p.MG, Mf, Msf1, Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h6g2
+         break;
+
+         case Hierarchies::h6b:{
+            const double Dmglst2 = p.MG - Msf2;
+            const double Dmsqst2 = Msq - Msf2;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const H6b hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               Dmsqst2, lmMf, lmMsf1, lmMsf2,
+               Mf, Msf1, Msf2, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h6b
+         break;
+
+         case Hierarchies::h6b2qg2:{
+            const double Dmglst2 = p.MG - Msf2;
+            const double Dmsqst2 = Msq - Msf2;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const H6b2qg2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               Dmsqst2, lmMf, lmMsf1, lmMsf2,
+               p.MG, Mf, Msf1, Msf2, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h6b2qg2
+         break;
+
+         case Hierarchies::h6bq22g:{
+            const double Dmglst2 = p.MG - Msf2;
+            const double Dmsqst2 = Msq - Msf2;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const H6bq22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               Dmsqst2, lmMf, lmMsf1, lmMsf2,
+               Mf, Msf1, Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h6bq22g
+         break;
+
+         case Hierarchies::h6bq2g2:{
+            const double Dmglst2 = p.MG - Msf2;
+            const double Dmsqst2 = Msq - Msf2;
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double lmMsf2 = std::log(pow2(p.scale / Msf2));
+            const H6bq2g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               Dmsqst2, lmMf, lmMsf1, lmMsf2,
+               p.MG, Mf, Msf1,Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h6bq2g2
+         break;
+
+         case Hierarchies::h9:{
+            const double lmMgl = std::log(pow2(p.scale / p.MG));
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
+            const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
+            const H9 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmsf12, Dmsqst1,
+               lmMf, lmMgl, lmMsf1,
+               p.MG, Mf, Msf1, Msf2, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h9
+         break;
+
+         case Hierarchies::h9q2:{
+            const double lmMgl = std::log(pow2(p.scale / p.MG));
+            const double lmMsf1 = std::log(pow2(p.scale / Msf1));
+            const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
+            const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
+            const H9q2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmsf12, Dmsqst1,
+               lmMf, lmMgl, lmMsf1,
+               p.MG, Mf, Msf1, Msf2, Msq, p.mu, s2f,
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
+            selfEnergy11 += hier.getS1();
+            selfEnergy22 += hier.getS2();
+            selfEnergy12 += hier.getS12();
+            if (onlyThreeLoop) {
+               calcDlambda(ho, hier, lmMsf1);
+            }
+         } // h9q2
+         break;
+
+         default:
+            throw std::runtime_error("calculateHierarchy: non-handled hierarchy");
+            break;
+         } // switch (hierarchy)
+      } // if (runThisOrder)
+   } // for looporder
+
+   // add the MDR masses to the hierarchy object only if a 3-loop
+   // calculation has to be done, otherwise let the user decide
+   if (onlyThreeLoop) {
+      const auto Msf = calcMsfMDRFlag(ho, 3);
       Eigen::Vector2d mdrMasses;
-      mdrMasses(0) = Mst1;
-      mdrMasses(1) = Mst2;
+      mdrMasses << Msf.at(0), Msf.at(1);
       ho.setMDRMasses(mdrMasses);
    }
 
    Eigen::Matrix2d higgsMassMatrix;
-   higgsMassMatrix(0, 0) = sigS1Full;
-   higgsMassMatrix(0, 1) = sigS12Full;
-   higgsMassMatrix(1, 0) = higgsMassMatrix(0, 1);
-   higgsMassMatrix(1, 1) = sigS2Full;
+   higgsMassMatrix << selfEnergy11, selfEnergy12, selfEnergy12, selfEnergy22;
 
    return calcHiggsMassMatrixPrefactor() * higgsMassMatrix;
 }
