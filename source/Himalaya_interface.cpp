@@ -40,13 +40,13 @@ double sqr(double x) noexcept
    return x*x;
 }
 
-double calc_cw2(double mW, double mZ)
+double calc_cw2(double mW, double mZ) noexcept
 {
    const double cw2 = pow2(mW/mZ);
    return std::isfinite(cw2) ? cw2 : 1.0;
 }
 
-double calc_sw2(double mW, double mZ)
+double calc_sw2(double mW, double mZ) noexcept
 {
    return 1.0 - calc_cw2(mW, mZ);
 }
