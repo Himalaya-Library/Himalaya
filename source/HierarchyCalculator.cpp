@@ -444,11 +444,11 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    const double lmMt = std::log(pow2(p.scale / Mt));
 
    // this loop is needed to calculate the suitable mass shift order by order
-   for(int currentLoopOrder = 1; currentLoopOrder <= 3; currentLoopOrder ++){
+   for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
       bool runThisOrder;
       double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
       int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
-      switch (currentLoopOrder){
+      switch (loopOrder){
          case 1:
             oneLoopFlag = 1;
             runThisOrder = oneLoopFlag == oneLoopFlagIn;
@@ -466,7 +466,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          const double Al4p = calcAsOver4Pi();
          const double Msq = calcMeanMsq();
          // set the stop masses according to MDRFlag
-         std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, currentLoopOrder);
+         std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, loopOrder);
 
          // select the suitable hierarchy for the specific hierarchy and set variables
          switch (hierarchy) {
