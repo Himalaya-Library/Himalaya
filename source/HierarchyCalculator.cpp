@@ -487,8 +487,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const H3 hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
-                  p.MG, Mt, Mst1, Mst2, Msq, p.mu,
-                  s2t,
+                  p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -506,8 +505,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const H32q2g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
-                  Mt, Mst1, Mst2, p.mu,
-                  s2t,
+                  Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -525,8 +523,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const H3q22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
-                  Mt, Mst1, Mst2, Msq, p.mu,
-                  s2t,
+                  Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -561,8 +558,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                const H5 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                   lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
-                  Mst2, Msq, p.mu,
-                  s2t,
+                  Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -580,8 +576,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                const H5g1 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                   lmMt, lmMst1, lmMst2, lmMsq, p.MG, Mt, Mst1,
-                  Mst2, Msq, p.mu,
-                  s2t,
+                  Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -599,8 +594,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                const H6 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   lmMt, lmMst1, lmMst2, lmMsq,
-                  Mt, Mst1, Mst2, Msq, p.mu,
-                  s2t,
+                  Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -618,8 +612,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
                const H6g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   lmMt, lmMst1, lmMst2, lmMsq,
-                  p.MG, Mt, Mst1, Mst2, Msq, p.mu,
-                  s2t,
+                  p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -637,8 +630,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const H6b hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
-                  Mt, Mst1, Mst2, p.mu,
-                  s2t,
+                  Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -656,8 +648,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const H6b2qg2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
-                  p.MG, Mt, Mst1, Mst2, p.mu,
-                  s2t,
+                  p.MG, Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -675,8 +666,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const H6bq22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
-                  Mt, Mst1, Mst2, Msq, p.mu,
-                  s2t,
+                  Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -694,8 +684,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const H6bq2g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
-                  p.MG, Mt, Mst1,Mst2, Msq, p.mu,
-                  s2t,
+                  p.MG, Mt, Mst1,Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -713,8 +702,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const H9 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                   lmMt, lmMgl, lmMst1,
-                  p.MG, Mt, Mst1, Mst2, p.mu,
-                  s2t,
+                  p.MG, Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
@@ -732,8 +720,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const H9q2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                   lmMt, lmMgl, lmMst1,
-                  p.MG, Mt, Mst1, Mst2, Msq, p.mu,
-                  s2t,
+                  p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
                curSig1 = hier.getS1();
                curSig2 = hier.getS2();
