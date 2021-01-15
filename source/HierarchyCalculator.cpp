@@ -442,7 +442,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    }
 
    // calculates contributions to Delta lambda and stores them in ho
-   const auto calcDlambda = [&ho] (const auto& hier, double lmMst1) {
+   const auto calcDlambda = [] (HierarchyObject& ho, const auto& hier, double lmMst1) {
       const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
       ho.setDLambdaH3m(c
                        + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
@@ -508,7 +508,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
              } // h3
              break;
@@ -526,7 +526,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h32q2g
             break;
@@ -544,7 +544,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h3q22g
             break;
@@ -561,7 +561,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h4
             break;
@@ -579,7 +579,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h5
             break;
@@ -597,7 +597,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h5g1
             break;
@@ -615,7 +615,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                };
             } // h6
             break;
@@ -633,7 +633,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h6g2
             break;
@@ -651,7 +651,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h6b
             break;
@@ -669,7 +669,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h6b2qg2
             break;
@@ -687,7 +687,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h6bq22g
             break;
@@ -705,7 +705,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h6bq2g2
             break;
@@ -723,7 +723,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h9
             break;
@@ -741,7 +741,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                selfEnergy22 += hier.getS2();
                selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
-                  calcDlambda(hier, lmMst1);
+                  calcDlambda(ho, hier, lmMst1);
                }
             } // h9q2
             break;
