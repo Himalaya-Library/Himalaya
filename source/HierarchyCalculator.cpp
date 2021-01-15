@@ -361,17 +361,11 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
          const double currError = std::sqrt(pow2(twoLoopError/Mh2l)
             + pow2(expUncertainty2L/Mh2LExpanded));
 
-         // if the error is negative, it is the first iteration and there is no hierarchy which fits better
-         if(error < 0){
-            error = currError;
-            suitableHierarchy = hierarchy;
-            ho.setAbsDiff2L(twoLoopError);
-            ho.setRelDiff2L(twoLoopError/Mh2l);
-            ho.setDMhExpUncertainty(2, expUncertainty2L);
-            ho.setDMhExpUncertainty(3, expUncertainty3L);
-         }
-         // compare the current error with the last error and choose the hierarchy which fits best (lowest error)
-         else if(currError < error){
+         // If the error is negative, it is the first iteration and
+         // there is no hierarchy which fits better.  Otherwise,
+         // compare the current error with the last error and choose
+         // the hierarchy which fits best (lowest error).
+         if (error < 0 || currError < error) {
             error = currError;
             suitableHierarchy = hierarchy;
             ho.setAbsDiff2L(twoLoopError);
