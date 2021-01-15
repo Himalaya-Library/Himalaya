@@ -450,15 +450,11 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       ho.setDLambdaNonLog(c);
    };
 
-   const double Msq = calcMeanMsq();
-   const double lmMt = std::log(pow2(p.scale / Mt));
-   const bool onlyThreeLoop = oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1;
-
-   // this loop is needed to calculate the suitable mass shift order by order
-   for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
+   // sets flags for the loop
+   const auto setLoopFlags = [oneLoopFlagIn, twoLoopFlagIn, threeLoopFlagIn] (int loopOrder) {
       bool runThisOrder = false;
-      double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
       int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
+
       switch (loopOrder){
          case 1:
             oneLoopFlag = 1;
@@ -473,6 +469,23 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             runThisOrder = threeLoopFlag == threeLoopFlagIn;
          break;
       }
+
+      return std::make_tuple(runThisOrder, oneLoopFlag, twoLoopFlag, threeLoopFlag);
+   };
+
+   const double Msq = calcMeanMsq();
+   const double lmMt = std::log(pow2(p.scale / Mt));
+   const bool onlyThreeLoop = oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1;
+
+   // this loop is needed to calculate the suitable mass shift order by order
+   for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
+      double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
+
+      // set flags to be used in the loop body
+      bool runThisOrder = false;
+      int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
+      std::tie(runThisOrder, oneLoopFlag, twoLoopFlag, threeLoopFlag) = setLoopFlags(loopOrder);
+
       if (runThisOrder) {
          // set the stop masses according to MDRFlag
          std::tie(Mst1, Mst2) = calcMStopMDRFlag(ho, loopOrder);
