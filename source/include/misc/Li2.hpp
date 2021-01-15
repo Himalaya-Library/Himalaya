@@ -21,7 +21,7 @@
 #include <complex>
 
 /**
- * @file dilog.hpp
+ * @file Li2.hpp
  * @brief Declaration of the dilogarithm function
  * @note The file has been taken from GM2Calc.
  */

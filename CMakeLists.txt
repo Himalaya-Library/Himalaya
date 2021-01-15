@@ -73,7 +73,7 @@ set(HIM_LIBSOURCES
   ${SOURCE_PATH}/mh2_fo/MSSM_mass_eigenstates.cpp
   ${SOURCE_PATH}/mh2_fo/pv.cpp
   # helpers
-  ${SOURCE_PATH}/misc/dilog.cpp)
+  ${SOURCE_PATH}/misc/Li2.cpp)
 
 # DSZ library sources
 set(DSZ_LIBSOURCES

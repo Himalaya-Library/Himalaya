@@ -5,13 +5,13 @@
 // version 3.
 // ====================================================================
 
-#include "dilog.hpp"
+#include "Li2.hpp"
 #include "complex.hpp"
 #include <cmath>
 #include <limits>
 
 /**
- * @file dilog.cpp
+ * @file Li2.cpp
  * @brief Implementation of the dilogarithm function
  * @note The implementation has been taken from the polylogarithm package.
  */
