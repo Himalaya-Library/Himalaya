@@ -428,17 +428,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    double selfEnergy11 = 0., selfEnergy22 = 0., selfEnergy12 = 0.;
 
    // common variables
-   double At, Mt, s2t;
-   if (!ho.getIsAlphab()) {
-      At = p.Au(2,2);
-      Mt = p.Mt;
-      s2t = p.s2t;
-   } else {
-      At = p.Ad(2,2);
-      Mt = p.Mb;
-      s2t = p.s2b;
-   }
-
+   const double At = ho.getIsAlphab() ? p.Ad(2,2) : p.Au(2,2);
+   const double Mt = ho.getIsAlphab() ? p.Mb : p.Mt;
+   const double s2t = ho.getIsAlphab() ? p.s2b : p.s2t;
    const double Msq = calcMeanMsq();
    const double lmMt = std::log(pow2(p.scale / Mt));
    const bool onlyThreeLoop = oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1;
