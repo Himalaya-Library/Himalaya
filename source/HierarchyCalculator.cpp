@@ -406,9 +406,16 @@ HierarchyCalculator::calcMstMDRFlag(const HierarchyObject& ho, int loopOrder) co
 }
 
 
-// TODO(avoigt): if one is interested in the expansion at one- and two-loop choose a unified choice for the MDR scheme
 /**
- * Calculates the hierarchy contributions for a specific hierarchy at a specific loop order.
+ * Calculates the hierarchy contributions for a specific hierarchy at
+ * a specific loop order.
+ *
+ * Note: The hierarchy files containing 1-, 2- and 3-loop terms
+ * (αs^0 αt/b, αs αt/b, αs^2 αt/b).
+ *
+ * @todo If one is interested in the expansion at one- and two-loop,
+ * choose a unified choice for the MDR scheme.
+ *
  * @param ho a HierarchyObject with constant isAlphab.
  * @param oneLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded one-loop results to the returned value, respectivley.
  * @param twoLoopFlagIn an integer flag which is 0 or 1 in order to add or omit the expanded two-loop results to the returned value, respectivley.
@@ -420,12 +427,11 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    HierarchyObject& ho, int oneLoopFlagIn,
    int twoLoopFlagIn, int threeLoopFlagIn) const
 {
+   // returnde self-energy contributions
+   double selfEnergy11 = 0., selfEnergy22 = 0., selfEnergy12 = 0.;
+
    // get the hierarchy
    const int hierarchy = ho.getSuitableHierarchy();
-
-   // the hierarchy files containing 1-, 2- and 3-loop terms
-   // (αs^0 αt/b, αs αt/b, αs^2 αt/b)
-   double selfEnergy11 = 0., selfEnergy22 = 0., selfEnergy12 = 0.;
 
    // common variables
    const double At = ho.getIsAlphab() ? p.Ad(2,2) : p.Au(2,2);
