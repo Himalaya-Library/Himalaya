@@ -442,7 +442,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    }
 
    // calculates contributions to Delta lambda and stores them in ho
-   const auto calcDlambda = [&ho] (auto& hier, double lmMst1) {
+   const auto calcDlambda = [&ho] (const auto& hier, double lmMst1) {
       const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
       ho.setDLambdaH3m(c
                        + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
