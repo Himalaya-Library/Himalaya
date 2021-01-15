@@ -5,7 +5,7 @@
 // version 3.
 // ====================================================================
 
-#include "li2.hpp"
+#include "Li2f.hpp"
 #include <complex>
 
 /// complex dilogarithm from FORTRAN module

@@ -83,7 +83,7 @@ set(DSZ_LIBSOURCES
   ${SOURCE_PATH}/mh2l/functs.f
   ${SOURCE_PATH}/mh2l/horner.f90
   ${SOURCE_PATH}/mh2l/Li2.f90
-  ${SOURCE_PATH}/mh2l/li2.cpp)
+  ${SOURCE_PATH}/mh2l/Li2f.cpp)
 
 # DSZ static library
 add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})

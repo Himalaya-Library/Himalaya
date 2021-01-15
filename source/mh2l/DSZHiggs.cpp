@@ -8,7 +8,7 @@
 #include "DSZHiggs.hpp"
 #include "DSZHiggs.h"
 #include "Flags.hpp"
-#include "li2.hpp"
+#include "Li2f.hpp"
 #include <cmath>
 #include <iostream>
 #include <limits>

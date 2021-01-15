@@ -1,6 +1,6 @@
 #include "doctest.h"
 #include "Li2.hpp"
-#include "li2.hpp"
+#include "Li2f.hpp"
 #include <complex>
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
