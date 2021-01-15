@@ -7,8 +7,8 @@
 
 #include "himalaya/HierarchyCalculator.hpp"
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 himalaya::Parameters setup_point(double MS, double tb, double xt)
 {
