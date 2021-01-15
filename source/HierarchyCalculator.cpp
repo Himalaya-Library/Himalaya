@@ -439,6 +439,10 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       s2t = p.s2b;
    }
 
+   const double Msq = calcMeanMsq();
+   const double lmMt = std::log(pow2(p.scale / Mt));
+   const bool onlyThreeLoop = oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1;
+
    // calculates contributions to Delta lambda and stores them in ho
    const auto calcDlambda = [] (HierarchyObject& ho, const auto& hier, double lmMst1) {
       const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
@@ -474,10 +478,6 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
       return std::make_tuple(runThisOrder, oneLoopFlag, twoLoopFlag, threeLoopFlag);
    };
-
-   const double Msq = calcMeanMsq();
-   const double lmMt = std::log(pow2(p.scale / Mt));
-   const bool onlyThreeLoop = oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1;
 
    // this loop is needed to calculate the suitable mass shift order by order
    for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
