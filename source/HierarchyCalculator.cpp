@@ -744,6 +744,10 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                }
             } // h9q2
             break;
+
+            default:
+               throw std::runtime_error("calculateHierarchy: non-handled hierarchy");
+               break;
          } // switch (hierarchy)
       } // if (runThisOrder)
    } // for looporder
