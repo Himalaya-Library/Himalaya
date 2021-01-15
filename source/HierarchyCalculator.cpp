@@ -474,20 +474,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const H3 hierarchy3(expansionDepth, calcAsOver4Pi(), calcBeta(),
+               const H3 hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy3.getS1();
-               curSig2 = hierarchy3.getS2();
-               curSig12 = hierarchy3.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy3.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy3.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy3.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h3
@@ -498,20 +498,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const H32q2g hierarchy32q2g(expansionDepth, calcAsOver4Pi(), calcBeta(),
+               const H32q2g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   Mt, Mst1, Mst2, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy32q2g.getS1();
-               curSig2 = hierarchy32q2g.getS2();
-               curSig12 = hierarchy32q2g.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy32q2g.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h32q2g
@@ -522,20 +522,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
-               const H3q22g hierarchy3q22g(expansionDepth, calcAsOver4Pi(), calcBeta(),
+               const H3q22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy3q22g.getS1();
-               curSig2 = hierarchy3q22g.getS2();
-               curSig12 = hierarchy3q22g.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy3q22g.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h3q22g
@@ -546,18 +546,18 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMsusy = std::log(pow2(p.scale / Msusy));
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H4 hierarchy4(expansionDepth, calcAsOver4Pi(), At, calcBeta(),
+               const H4 hier(expansionDepth, calcAsOver4Pi(), At, calcBeta(),
                   lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy4.getS1();
-               curSig2 = hierarchy4.getS2();
-               curSig12 = hierarchy4.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy4.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy4.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy4.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h4
@@ -568,20 +568,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H5 hierarchy5(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
+               const H5 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                   lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
                   Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy5.getS1();
-               curSig2 = hierarchy5.getS2();
-               curSig12 = hierarchy5.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy5.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy5.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy5.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h5
@@ -592,20 +592,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H5g1 hierarchy5g1(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
+               const H5g1 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                   lmMt, lmMst1, lmMst2, lmMsq, p.MG, Mt, Mst1,
                   Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy5g1.getS1();
-               curSig2 = hierarchy5g1.getS2();
-               curSig12 = hierarchy5g1.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy5g1.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy5g1.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h5g1
@@ -616,20 +616,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H6 hierarchy6(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               const H6 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   lmMt, lmMst1, lmMst2, lmMsq,
                   Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy6.getS1();
-               curSig2 = hierarchy6.getS2();
-               curSig12 = hierarchy6.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy6.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy6.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy6.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                };
             } // h6
@@ -640,20 +640,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
                const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
-               const H6g2 hierarchy6g2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               const H6g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   lmMt, lmMst1, lmMst2, lmMsq,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy6g2.getS1();
-               curSig2 = hierarchy6g2.getS2();
-               curSig12 = hierarchy6g2.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy6g2.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy6g2.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h6g2
@@ -664,20 +664,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6b hierarchy6b(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               const H6b hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   Mt, Mst1, Mst2, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy6b.getS1();
-               curSig2 = hierarchy6b.getS2();
-               curSig12 = hierarchy6b.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy6b.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy6b.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy6b.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h6b
@@ -688,20 +688,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6b2qg2 hierarchy6b2qg2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               const H6b2qg2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   p.MG, Mt, Mst1, Mst2, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy6b2qg2.getS1();
-               curSig2 = hierarchy6b2qg2.getS2();
-               curSig12 = hierarchy6b2qg2.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy6b2qg2.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h6b2qg2
@@ -712,20 +712,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6bq22g hierarchy6bq22g(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               const H6bq22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy6bq22g.getS1();
-               curSig2 = hierarchy6bq22g.getS2();
-               curSig12 = hierarchy6bq22g.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy6bq22g.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h6bq22g
@@ -736,20 +736,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double Dmsqst2 = Msq - Mst2;
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double lmMst2 = std::log(pow2(p.scale / Mst2));
-               const H6bq2g2 hierarchy6bq2g2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
+               const H6bq2g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   p.MG, Mt, Mst1,Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy6bq2g2.getS1();
-               curSig2 = hierarchy6bq2g2.getS2();
-               curSig12 = hierarchy6bq2g2.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy6bq2g2.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h6bq2g2
@@ -760,20 +760,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
-               const H9 hierarchy9(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
+               const H9 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                   lmMt, lmMgl, lmMst1,
                   p.MG, Mt, Mst1, Mst2, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy9.getS1();
-               curSig2 = hierarchy9.getS2();
-               curSig12 = hierarchy9.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy9.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy9.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy9.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h9
@@ -784,20 +784,20 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const double lmMst1 = std::log(pow2(p.scale / Mst1));
                const double Dmst12 = pow2(Mst1) - pow2(Mst2);
                const double Dmsqst1 = pow2(Msq) - pow2(Mst1);
-               const H9q2 hierarchy9q2(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
+               const H9q2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                   lmMt, lmMgl, lmMst1,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu,
                   s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hierarchy9q2.getS1();
-               curSig2 = hierarchy9q2.getS2();
-               curSig12 = hierarchy9q2.getS12();
+               curSig1 = hier.getS1();
+               curSig2 = hier.getS2();
+               curSig12 = hier.getS12();
                if(oneLoopFlagIn == 0 && twoLoopFlagIn == 0 && threeLoopFlagIn == 1){
-                  const double c = hierarchy9q2.calc_coef_at_as2_no_sm_logs_log0();
+                  const double c = hier.calc_coef_at_as2_no_sm_logs_log0();
                   ho.setDLambdaH3m(c
-                     + lmMst1 * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log1()
-                     + pow2(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log2()
-                     + pow3(lmMst1) * hierarchy9q2.calc_coef_at_as2_no_sm_logs_log3());
+                     + lmMst1 * hier.calc_coef_at_as2_no_sm_logs_log1()
+                     + pow2(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log2()
+                     + pow3(lmMst1) * hier.calc_coef_at_as2_no_sm_logs_log3());
                   ho.setDLambdaNonLog(c);
                }
             } // h9q2
