@@ -30,7 +30,7 @@ std::complex<double> li2(const std::complex<double>& z)
 
    li2c_(&re_in, &im_in, &re_out, &im_out);
 
-   return std::complex<double>(re_out, im_out);
+   return { re_out, im_out };
 }
 
 } // namespace himalaya
