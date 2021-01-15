@@ -427,7 +427,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
    // the hierarchy files containing 1-, 2- and 3-loop terms
    // (αs^0 αt/b, αs αt/b, αs^2 αt/b)
-   double sigS1Full = 0., sigS2Full = 0., sigS12Full = 0.;
+   double selfEnergy11 = 0., selfEnergy22 = 0., selfEnergy12 = 0.;
 
    // common variables
    double At, Mt, s2t, Mst1 = 0., Mst2 = 0.;
@@ -483,8 +483,6 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
 
    // this loop is needed to calculate the suitable mass shift order by order
    for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
-      double curSig1 = 0., curSig2 = 0., curSig12 = 0.;
-
       // set flags to be used in the loop body
       bool runThisOrder = false;
       int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
@@ -506,9 +504,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -524,9 +522,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -542,9 +540,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                   Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -559,9 +557,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                const H4 hier(expansionDepth, calcAsOver4Pi(), At, calcBeta(),
                   lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -577,9 +575,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
                   Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -595,9 +593,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   lmMt, lmMst1, lmMst2, lmMsq, p.MG, Mt, Mst1,
                   Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -613,9 +611,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   lmMt, lmMst1, lmMst2, lmMsq,
                   Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                };
@@ -631,9 +629,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   lmMt, lmMst1, lmMst2, lmMsq,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -649,9 +647,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -667,9 +665,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   p.MG, Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -685,9 +683,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -703,9 +701,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   Dmsqst2, lmMt, lmMst1, lmMst2,
                   p.MG, Mt, Mst1,Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -721,9 +719,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   lmMt, lmMgl, lmMst1,
                   p.MG, Mt, Mst1, Mst2, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -739,9 +737,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
                   lmMt, lmMgl, lmMst1,
                   p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
                   ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
-               curSig1 = hier.getS1();
-               curSig2 = hier.getS2();
-               curSig12 = hier.getS12();
+               selfEnergy11 += hier.getS1();
+               selfEnergy22 += hier.getS2();
+               selfEnergy12 += hier.getS12();
                if (onlyThreeLoop) {
                   calcDlambda(hier, lmMst1);
                }
@@ -749,9 +747,6 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             break;
          }
       }
-      sigS1Full += curSig1;
-      sigS2Full += curSig2;
-      sigS12Full += curSig12;
    }
 
    // add the MDR masses to the hierarchy object only if a 3-loop calculation has to be done, otherwise let the user decide
@@ -763,10 +758,10 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    }
 
    Eigen::Matrix2d higgsMassMatrix;
-   higgsMassMatrix(0, 0) = sigS1Full;
-   higgsMassMatrix(0, 1) = sigS12Full;
-   higgsMassMatrix(1, 0) = higgsMassMatrix(0, 1);
-   higgsMassMatrix(1, 1) = sigS2Full;
+   higgsMassMatrix(0, 0) = selfEnergy11;
+   higgsMassMatrix(0, 1) = selfEnergy12;
+   higgsMassMatrix(1, 0) = selfEnergy12;
+   higgsMassMatrix(1, 1) = selfEnergy22;
 
    return calcHiggsMassMatrixPrefactor() * higgsMassMatrix;
 }
