@@ -451,19 +451,24 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
       ho.setDLambdaNonLog(c);
    };
 
+   struct LoopFlags {
+      bool runThisOrder = false;
+      int oneLoop{}, twoLoop{}, threeLoop{};
+   };
+
    // sets flags for the loop
    const auto setLoopFlags = [oneLoopFlagIn, twoLoopFlagIn, threeLoopFlagIn] (int loopOrder) {
       if (loopOrder == 0) {
-         return std::make_tuple(false, 0, 0, 0);
+         return LoopFlags{false, 0, 0, 0};
       } else if (loopOrder == 1) {
          const bool runThisOrder = oneLoopFlagIn != 0;
-         return std::make_tuple(runThisOrder, 1, 0, 0);
+         return LoopFlags{runThisOrder, 1, 0, 0};
       } else if (loopOrder == 2) {
          const bool runThisOrder = twoLoopFlagIn != 0;
-         return std::make_tuple(runThisOrder, 0, 1, 0);
+         return LoopFlags{runThisOrder, 0, 1, 0};
       } else if (loopOrder == 3) {
          const bool runThisOrder = threeLoopFlagIn != 0;
-         return std::make_tuple(runThisOrder, 0, 0, 1);
+         return LoopFlags{runThisOrder, 0, 0, 1};
       }
 
       throw std::runtime_error("setLoopFlags: invalid loop order (must be 1, 2 or 3)");
@@ -472,11 +477,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    // this loop is needed to calculate the suitable mass shift order by order
    for (int loopOrder = 1; loopOrder <= 3; loopOrder++) {
       // set flags to be used in the loop body
-      bool runThisOrder = false;
-      int oneLoopFlag = 0, twoLoopFlag = 0, threeLoopFlag = 0;
-      std::tie(runThisOrder, oneLoopFlag, twoLoopFlag, threeLoopFlag) = setLoopFlags(loopOrder);
+      const auto loopFlags = setLoopFlags(loopOrder);
 
-      if (runThisOrder) {
+      if (loopFlags.runThisOrder) {
          using namespace himalaya::hierarchies;
 
          // set the stop masses according to MDRFlag
@@ -494,7 +497,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H3 hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -512,7 +515,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H32q2g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                Mt, Mst1, Mst2, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -530,7 +533,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H3q22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(),
                Dmglst1, Dmst12, Dmsqst1, lmMt, lmMst1,
                Mt, Mst1, Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -547,7 +550,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const double lmMsq = std::log(pow2(p.scale / calcMeanMsq()));
             const H4 hier(expansionDepth, calcAsOver4Pi(), At, calcBeta(),
                lmMt, lmMsq, lmMsusy, Mt, Msusy, Msq,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -565,7 +568,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H5 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                lmMt, lmMst1, lmMst2, lmMsq, Mt, Mst1,
                Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -583,7 +586,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H5g1 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst1,
                lmMt, lmMst1, lmMst2, lmMsq, p.MG, Mt, Mst1,
                Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -601,7 +604,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H6 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                lmMt, lmMst1, lmMst2, lmMsq,
                Mt, Mst1, Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -619,7 +622,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H6g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                lmMt, lmMst1, lmMst2, lmMsq,
                p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -637,7 +640,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H6b hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                Dmsqst2, lmMt, lmMst1, lmMst2,
                Mt, Mst1, Mst2, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -655,7 +658,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H6b2qg2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                Dmsqst2, lmMt, lmMst1, lmMst2,
                p.MG, Mt, Mst1, Mst2, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -673,7 +676,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H6bq22g hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                Dmsqst2, lmMt, lmMst1, lmMst2,
                Mt, Mst1, Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -691,7 +694,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H6bq2g2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmglst2,
                Dmsqst2, lmMt, lmMst1, lmMst2,
                p.MG, Mt, Mst1,Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -709,7 +712,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H9 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                lmMt, lmMgl, lmMst1,
                p.MG, Mt, Mst1, Mst2, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
@@ -727,7 +730,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
             const H9q2 hier(expansionDepth, calcAsOver4Pi(), calcBeta(), Dmst12, Dmsqst1,
                lmMt, lmMgl, lmMst1,
                p.MG, Mt, Mst1, Mst2, Msq, p.mu, s2t,
-               ho.getMDRFlag(), oneLoopFlag, twoLoopFlag, threeLoopFlag);
+               ho.getMDRFlag(), loopFlags.oneLoop, loopFlags.twoLoop, loopFlags.threeLoop);
             selfEnergy11 += hier.getS1();
             selfEnergy22 += hier.getS2();
             selfEnergy12 += hier.getS12();
