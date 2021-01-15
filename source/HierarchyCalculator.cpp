@@ -425,7 +425,8 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
    // get the hierarchy
    const int hierarchy = ho.getSuitableHierarchy();
 
-   // the hierarchy files containing 1-, 2- and 3-loop terms (alpha_s^0 alpha_t/b, alpha_s alpha_t/b, alpha_s^2 alpha_t/b)
+   // the hierarchy files containing 1-, 2- and 3-loop terms
+   // (αs^0 αt/b, αs αt/b, αs^2 αt/b)
    double sigS1Full = 0., sigS2Full = 0., sigS12Full = 0.;
 
    // common variables
