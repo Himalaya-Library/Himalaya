@@ -483,8 +483,9 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          using namespace himalaya::hierarchies;
 
          // set the stop masses according to MDRFlag
-         double Mst1 = 0., Mst2 = 0.;
-         std::tie(Mst1, Mst2) = calcMstMDRFlag(ho, loopOrder);
+         const auto Msf = calcMstMDRFlag(ho, loopOrder);
+         const double Mst1 = std::get<0>(Msf);
+         const double Mst2 = std::get<1>(Msf);
 
          // calculate self-energy contributions and Delta lambda terms
          // for suitable hierarchy
