@@ -9,16 +9,16 @@
 #include "himalaya/HierarchyObject.hpp"
 #include "himalaya/version.hpp"
 
-#include "Enums.hpp"
+#include "Constants.hpp"
 #include "DSZHiggs.hpp"
+#include "Enums.hpp"
 #include "Flags.hpp"
 #include "Hierarchies.hpp"
-#include "Mh2EFTCalculator.hpp"
-#include "Constants.hpp"
 #include "linalg2.hpp"
 #include "Logger.hpp"
-#include "ThresholdCalculator.hpp"
+#include "Mh2EFTCalculator.hpp"
 #include "MSSM_mass_eigenstates.hpp"
+#include "ThresholdCalculator.hpp"
 
 #include <algorithm>
 #include <array>
