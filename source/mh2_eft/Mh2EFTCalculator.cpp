@@ -7,10 +7,10 @@
 
 #include "Mh2EFTCalculator.hpp"
 #include "Constants.hpp"
-#include "ThresholdCalculator.hpp"
 #include "Flags.hpp"
 #include "Logger.hpp"
 #include "Powers.hpp"
+#include "ThresholdCalculator.hpp"
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -116,7 +116,7 @@ Mh2EFTCalculator::Mh2EFTCalculator(
 
     const double eps = 1e-10;
 
-    //TODO check consistency
+    // TODO(voigt) check consistency
     if (std::abs(p.g1) < eps) {
         setCorrectionFlag(CouplingOrders::G12G22, 0);
         setCorrectionFlag(CouplingOrders::G12YB2, 0);
