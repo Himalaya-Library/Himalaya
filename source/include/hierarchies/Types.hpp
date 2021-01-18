@@ -9,7 +9,7 @@
 
 #include <array>
 
-#include "HimalayaFlags.hpp"
+#include "HierarchyFlags.hpp"
 
 namespace himalaya {
 namespace hierarchies {

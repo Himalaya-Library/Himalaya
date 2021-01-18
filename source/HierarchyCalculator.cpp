@@ -11,9 +11,9 @@
 
 #include "Constants.hpp"
 #include "DSZHiggs.hpp"
-#include "HimalayaFlags.hpp"
 #include "Flags.hpp"
 #include "Hierarchies.hpp"
+#include "HierarchyFlags.hpp"
 #include "Linalg.hpp"
 #include "Logger.hpp"
 #include "Mh2EFTCalculator.hpp"

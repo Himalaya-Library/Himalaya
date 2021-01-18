@@ -7,7 +7,7 @@
 
 #include "H6g2.hpp"
 #include "Constants.hpp"
-#include "HimalayaFlags.hpp"
+#include "HierarchyFlags.hpp"
 #include "Powers.hpp"
 #include <cmath>
 
