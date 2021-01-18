@@ -7,7 +7,7 @@
 
 #include "H5g1.hpp"
 #include "Constants.hpp"
-#include "Enums.hpp"
+#include "HimalayaFlags.hpp"
 #include "Powers.hpp"
 #include <cmath>
 

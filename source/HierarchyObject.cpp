@@ -7,7 +7,7 @@
 
 #include "himalaya/HierarchyObject.hpp"
 
-#include "Enums.hpp"
+#include "HimalayaFlags.hpp"
 #include "Flags.hpp"
 
 #include <cmath>
