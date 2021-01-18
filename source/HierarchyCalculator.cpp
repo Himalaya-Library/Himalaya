@@ -1225,20 +1225,10 @@ HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
                               unsigned shiftOneLoop,
                               unsigned shiftTwoLoop) const
 {
-   double Mt2 = 0., st = 0., ct = 0.;
-
-   if (!ho.getIsAlphab()) {
-      const double theta = p.theta_t;
-      Mt2 = pow2(p.Mt);
-      st = std::sin(theta);
-      ct = std::cos(theta);
-   } else {
-      const double theta = p.theta_b;
-      Mt2 = pow2(p.Mb);
-      st = std::sin(theta);
-      ct = std::cos(theta);
-   }
-
+   const double Mt2 = ho.getIsAlphab() ? pow2(p.Mb) : pow2(p.Mt);
+   const double theta = ho.getIsAlphab() ? p.theta_b : p.theta_t;
+   const double st = std::sin(theta);
+   const double ct = std::cos(theta);
    const double Mst12 = pow2(shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop));
    const double Mst22 = pow2(shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop));
    const double MG = p.MG;
