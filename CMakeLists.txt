@@ -80,10 +80,10 @@ set(DSZ_LIBSOURCES
   ${SOURCE_PATH}/mh2l/DSZHiggs.cpp
   ${SOURCE_PATH}/mh2l/DSZHiggs.f
   ${SOURCE_PATH}/mh2l/fast_clog.f90
-  ${SOURCE_PATH}/mh2l/functs.f
   ${SOURCE_PATH}/mh2l/horner.f90
   ${SOURCE_PATH}/mh2l/Li2.f90
-  ${SOURCE_PATH}/mh2l/Li2f.cpp)
+  ${SOURCE_PATH}/mh2l/Li2f.cpp
+  ${SOURCE_PATH}/mh2l/Li2f.f90)
 
 # DSZ static library
 add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})
