@@ -1160,14 +1160,8 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double sbeta = std::sin(beta);
    const double cbeta = std::cos(beta);
-   double Mt = 0., s2t = 0.;
-   if (!ho.getIsAlphab()) {
-      s2t = p.s2t;
-      Mt = p.Mt;
-   } else {
-      s2t = p.s2b;
-      Mt = p.Mb;
-   }
+   const double Mt = ho.getIsAlphab() ? p.Mb : p.Mt;
+   const double s2t = ho.getIsAlphab() ? p.s2b : p.s2t;
 
    Mt41L(0, 0) = (-3 * GF * pow2(Mt) * pow2(p.mu) * pow2(1 / sbeta) *
       (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1) * log(Mst1) +
