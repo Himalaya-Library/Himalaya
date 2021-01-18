@@ -838,6 +838,7 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
    const double mdr2mst1ka = (-8. * twoLoopFlag * pow2(Al4p)
       * (10 * pow2(Msq) * (-1 + 2 * lmMsq + 2 * z2) + pow2(Mst2)
       * (-1 + 2 * lmMst2 + 2 * z2))) / (3. * pow2(Mst1));
+
    switch (getMotherHierarchy(ho.getSuitableHierarchy())) {
    case Hierarchies::h3:
    case Hierarchies::h4:
@@ -859,7 +860,10 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
    case Hierarchies::h9:
       Mst1mod = (1 + mdr2mst1ka);
       break;
+   default:
+      break;
    }
+
    return Mst1 * std::sqrt(Mst1mod);
 }
 
