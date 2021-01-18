@@ -37,7 +37,7 @@
 
 namespace himalaya {
 
-static bool isInfoPrinted; ///< If this bool is true, than no info will be printed in further runs
+static bool isInfoPrinted; ///< if true, no info will be printed in further runs
 
 /**
  * Define static variables
