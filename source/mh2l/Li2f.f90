@@ -8,8 +8,7 @@
       z = dcmplx(re_in, im_in)
       l = cdli2(z)
 
-      re_out = dble(l)
-      im_out = dimag(l)
+      re_out = real(l)
+      im_out = aimag(l)
 
-      return
       end
