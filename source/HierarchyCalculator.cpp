@@ -824,16 +824,10 @@ double HierarchyCalculator::shiftMst1ToMDR(const himalaya::HierarchyObject& ho,
 {
    using namespace himalaya::hierarchies;
 
-   double Mst1mod = 0., Mst1 = 0., Mst2 = 0.;
+   double Mst1mod = 0.;
 
-   if (!ho.getIsAlphab()) {
-      Mst1 = p.MSt(0);
-      Mst2 = p.MSt(1);
-   } else {
-      Mst1 = p.MSb(0);
-      Mst2 = p.MSb(1);
-   }
-
+   const double Mst1 = ho.getIsAlphab() ? p.MSb(0) : p.MSt(0);
+   const double Mst2 = ho.getIsAlphab() ? p.MSb(1) : p.MSt(1);
    const double Al4p = calcAsOver4Pi();
    const double Msq = calcMeanMsq();
    const double Mgl = p.MG;
