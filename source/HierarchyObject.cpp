@@ -8,7 +8,7 @@
 #include "himalaya/HierarchyObject.hpp"
 
 #include "Flags.hpp"
-#include "HierarchyFlags.hpp"
+#include "hierarchies/HierarchyFlags.hpp"
 
 #include <cmath>
 #include <iostream>
