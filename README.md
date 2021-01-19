@@ -94,7 +94,7 @@ make
 ```
 
 By default the example executable `example` is created from
-[source/example.cpp](source/example.cpp), which prints all loop
+[examples/example.cpp](examples/example.cpp), which prints all loop
 corrections calculated by Himalaya for a given MSSM parameter point:
 
 ```sh
@@ -209,7 +209,7 @@ double delta_lambda_3L_uncertainty = ho.getDLambdaUncertainty(3);
 ```
 
 A full and detailed example can be found in
-[source/example.cpp](source/example.cpp).
+[examples/example.cpp](examples/example.cpp).
 
 **Example**:
 
@@ -328,7 +328,7 @@ InitializeHimalaya[FileNameJoin[{".", "Himalaya_LibraryLink.so"}]];
 After the initialization, the function `HimalayaCalculateDMh3L[]` is
 available, which calculates the loop corrections implemented in
 Himalaya.  A full and detailed example can be found in
-[source/example.m](source/example.m).
+[examples/example.m](examples/example.m).
 
 **Example**:
 

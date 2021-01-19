@@ -32,6 +32,7 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
 endif()
 
 # set paths
+set(EXAMPLE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/examples)
 set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source)
 set(PUBLIC_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -137,7 +138,7 @@ add_library(Himalaya::Himalaya ALIAS Himalaya_static)
 add_library(Himalaya::DSZ ALIAS DSZ_static)
 
 # example executable
-add_executable(example ${SOURCE_PATH}/example.cpp)
+add_executable(example ${EXAMPLE_PATH}/example.cpp)
 target_link_libraries(example Himalaya::Himalaya Himalaya::DSZ)
 
 # create LibrayLink
