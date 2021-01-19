@@ -10,7 +10,7 @@
 #include "himalaya/version.hpp"
 
 #include "Constants.hpp"
-#include "DSZHiggs.hpp"
+#include "mh2l/DSZHiggs.hpp"
 #include "HimalayaFlags.hpp"
 #include "hierarchies/Hierarchies.hpp"
 #include "hierarchies/HierarchyFlags.hpp"

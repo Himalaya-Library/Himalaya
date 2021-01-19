@@ -41,7 +41,6 @@ set(PRIVATE_HEADERS
   ${SOURCE_PATH}
   ${SOURCE_PATH}/mh2_eft
   ${SOURCE_PATH}/mh2_fo
-  ${SOURCE_PATH}/mh2l
   ${SOURCE_PATH}/misc)
 
 # Himalaya library sources
