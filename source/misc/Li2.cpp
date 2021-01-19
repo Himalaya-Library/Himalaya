@@ -5,8 +5,8 @@
 // version 3.
 // ====================================================================
 
-#include "Li2.hpp"
-#include "complex.hpp"
+#include "./Li2.hpp"
+#include "./complex.hpp"
 #include <cmath>
 #include <limits>
 

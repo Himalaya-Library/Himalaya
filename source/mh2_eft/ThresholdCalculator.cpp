@@ -7,9 +7,9 @@
 
 #include "./ThresholdCalculator.hpp"
 #include "./EFTFlags.hpp"
-#include "Li2.hpp"
-#include "Logger.hpp"
-#include "Powers.hpp"
+#include "misc/Li2.hpp"
+#include "misc/Logger.hpp"
+#include "misc/Powers.hpp"
 #include "./threshold_loop_functions.hpp"
 #include <cmath>
 #include <complex>

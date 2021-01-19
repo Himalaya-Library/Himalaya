@@ -17,7 +17,7 @@
 // ====================================================================
 
 #include "./threshold_loop_functions.hpp"
-#include "Li2.hpp"
+#include "misc/Li2.hpp"
 
 #include <algorithm>
 #include <cmath>

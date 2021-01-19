@@ -9,7 +9,7 @@
 #include "mh2l/DSZHiggs.hpp"
 #include "HimalayaFlags.hpp"
 #include "Linalg.hpp"
-#include "Logger.hpp"
+#include "misc/Logger.hpp"
 #include "pv.hpp"
 #include "sum.hpp"
 #include <cmath>

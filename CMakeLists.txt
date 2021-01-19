@@ -40,8 +40,7 @@ set(PUBLIC_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(PRIVATE_HEADERS
   ${SOURCE_PATH}
   ${SOURCE_PATH}/mh2_eft
-  ${SOURCE_PATH}/mh2_fo
-  ${SOURCE_PATH}/misc)
+  ${SOURCE_PATH}/mh2_fo)
 
 # Himalaya library sources
 set(HIM_LIBSOURCES

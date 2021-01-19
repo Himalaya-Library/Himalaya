@@ -6,9 +6,9 @@
 // ====================================================================
 
 #include "H6g2.hpp"
-#include "Constants.hpp"
+#include "misc/Constants.hpp"
 #include "HierarchyFlags.hpp"
-#include "Powers.hpp"
+#include "misc/Powers.hpp"
 #include <cmath>
 
 namespace himalaya{

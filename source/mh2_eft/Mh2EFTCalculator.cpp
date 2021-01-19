@@ -6,10 +6,10 @@
 // ====================================================================
 
 #include "./Mh2EFTCalculator.hpp"
-#include "Constants.hpp"
+#include "misc/Constants.hpp"
 #include "./EFTFlags.hpp"
-#include "Logger.hpp"
-#include "Powers.hpp"
+#include "misc/Logger.hpp"
+#include "misc/Powers.hpp"
 #include "./ThresholdCalculator.hpp"
 #include <cmath>
 #include <iostream>

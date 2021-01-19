@@ -1,5 +1,5 @@
 #include "doctest.h"
-#include "Li2.hpp"
+#include "misc/Li2.hpp"
 #include "mh2l/Li2f.hpp"
 #include <complex>
 
