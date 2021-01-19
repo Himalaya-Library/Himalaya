@@ -8,7 +8,7 @@
 #pragma once
 
 #include "himalaya/Himalaya_interface.hpp"
-#include "EFTFlags.hpp"
+#include "./EFTFlags.hpp"
 
 #include <limits>
 

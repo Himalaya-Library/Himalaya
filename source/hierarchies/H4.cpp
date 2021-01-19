@@ -5,9 +5,9 @@
 // version 3.
 // ====================================================================
 
-#include "H4.hpp"
+#include "./H4.hpp"
+#include "./HierarchyFlags.hpp"
 #include "misc/Constants.hpp"
-#include "HierarchyFlags.hpp"
 #include "misc/Powers.hpp"
 #include <cmath>
 

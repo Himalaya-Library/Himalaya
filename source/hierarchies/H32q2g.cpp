@@ -5,9 +5,9 @@
 // version 3.
 // ====================================================================
 
-#include "H32q2g.hpp"
+#include "./H32q2g.hpp"
+#include "./HierarchyFlags.hpp"
 #include "misc/Constants.hpp"
-#include "HierarchyFlags.hpp"
 #include "misc/Powers.hpp"
 #include <cmath>
 

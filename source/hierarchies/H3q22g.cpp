@@ -5,9 +5,9 @@
 // version 3.
 // ====================================================================
 
-#include "H3q22g.hpp"
+#include "./H3q22g.hpp"
+#include "./HierarchyFlags.hpp"
 #include "misc/Constants.hpp"
-#include "HierarchyFlags.hpp"
 #include "misc/Powers.hpp"
 #include <cmath>
 

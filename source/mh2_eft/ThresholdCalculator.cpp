@@ -7,10 +7,10 @@
 
 #include "./ThresholdCalculator.hpp"
 #include "./EFTFlags.hpp"
+#include "./threshold_loop_functions.hpp"
 #include "misc/Li2.hpp"
 #include "misc/Logger.hpp"
 #include "misc/Powers.hpp"
-#include "./threshold_loop_functions.hpp"
 #include <cmath>
 #include <complex>
 #include <stdexcept>

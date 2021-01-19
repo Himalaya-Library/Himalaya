@@ -7,8 +7,8 @@
 
 #include "himalaya/HierarchyObject.hpp"
 
-#include "mh2_eft/EFTFlags.hpp"
 #include "hierarchies/HierarchyFlags.hpp"
+#include "mh2_eft/EFTFlags.hpp"
 
 #include <cmath>
 #include <iostream>
