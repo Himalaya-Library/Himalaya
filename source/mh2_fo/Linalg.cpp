@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-#include "Linalg.hpp"
+#include "./Linalg.hpp"
 #include <cmath>
 
 /**

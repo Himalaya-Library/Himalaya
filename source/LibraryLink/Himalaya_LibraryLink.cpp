@@ -8,7 +8,7 @@
 #include "himalaya/HierarchyCalculator.hpp"
 
 #include "Mh2EFTCalculator.hpp"
-#include "MSSM_mass_eigenstates.hpp"
+#include "mh2_fo/MSSM_mass_eigenstates.hpp"
 
 #include <iostream>
 #include <sstream>

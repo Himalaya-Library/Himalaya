@@ -1,8 +1,8 @@
 #include "doctest.h"
 #include "Mh2EFTCalculator.hpp"
-#include "MSSM_mass_eigenstates.hpp"
+#include "mh2_fo/MSSM_mass_eigenstates.hpp"
 #include "HimalayaFlags.hpp"
-#include "Linalg.hpp"
+#include "mh2_fo/Linalg.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 

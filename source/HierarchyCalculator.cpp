@@ -11,13 +11,13 @@
 
 #include "misc/Constants.hpp"
 #include "mh2l/DSZHiggs.hpp"
-#include "HimalayaFlags.hpp"
+#include "./HimalayaFlags.hpp"
 #include "hierarchies/Hierarchies.hpp"
 #include "hierarchies/HierarchyFlags.hpp"
-#include "Linalg.hpp"
+#include "mh2_fo/Linalg.hpp"
 #include "misc/Logger.hpp"
 #include "Mh2EFTCalculator.hpp"
-#include "MSSM_mass_eigenstates.hpp"
+#include "mh2_fo/MSSM_mass_eigenstates.hpp"
 #include "ThresholdCalculator.hpp"
 
 #include <algorithm>
