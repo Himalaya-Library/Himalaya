@@ -1,5 +1,5 @@
 #include "doctest.h"
-#include "Mh2EFTCalculator.hpp"
+#include "mh2_eft/Mh2EFTCalculator.hpp"
 #include "mh2_fo/MSSM_mass_eigenstates.hpp"
 #include "HimalayaFlags.hpp"
 #include "mh2_fo/Linalg.hpp"
