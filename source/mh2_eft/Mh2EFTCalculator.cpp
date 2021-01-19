@@ -5,12 +5,12 @@
 // version 3.
 // ====================================================================
 
-#include "Mh2EFTCalculator.hpp"
+#include "./Mh2EFTCalculator.hpp"
 #include "Constants.hpp"
-#include "EFTFlags.hpp"
+#include "./EFTFlags.hpp"
 #include "Logger.hpp"
 #include "Powers.hpp"
-#include "ThresholdCalculator.hpp"
+#include "./ThresholdCalculator.hpp"
 #include <cmath>
 #include <iostream>
 #include <string>

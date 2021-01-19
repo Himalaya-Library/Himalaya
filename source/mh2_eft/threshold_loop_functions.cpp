@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-#include "threshold_loop_functions.hpp"
+#include "./threshold_loop_functions.hpp"
 #include "Li2.hpp"
 
 #include <algorithm>
