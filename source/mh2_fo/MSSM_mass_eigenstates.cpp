@@ -7,7 +7,7 @@
 
 #include "MSSM_mass_eigenstates.hpp"
 #include "DSZHiggs.hpp"
-#include "Flags.hpp"
+#include "HimalayaFlags.hpp"
 #include "Linalg.hpp"
 #include "Logger.hpp"
 #include "pv.hpp"

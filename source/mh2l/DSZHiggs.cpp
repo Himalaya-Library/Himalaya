@@ -7,7 +7,7 @@
 
 #include "DSZHiggs.hpp"
 #include "DSZHiggs.h"
-#include "Flags.hpp"
+#include "HimalayaFlags.hpp"
 #include "Li2f.hpp"
 #include <cmath>
 #include <iostream>

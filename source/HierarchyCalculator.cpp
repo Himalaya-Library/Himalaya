@@ -11,7 +11,7 @@
 
 #include "Constants.hpp"
 #include "DSZHiggs.hpp"
-#include "Flags.hpp"
+#include "HimalayaFlags.hpp"
 #include "hierarchies/Hierarchies.hpp"
 #include "hierarchies/HierarchyFlags.hpp"
 #include "Linalg.hpp"
