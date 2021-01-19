@@ -60,26 +60,26 @@ double calcSmallestEigenvalue(const Eigen::Matrix2d& matrix)
 /// set flags to omit all corrections, except O(at*as^n)
 void disable_non_as_terms(himalaya::mh2_eft::Mh2EFTCalculator& mhc)
 {
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12G22, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G14, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G24, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YB2, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G22YB2, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YB4, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YTAU2, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G22YTAU2, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU4, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G12YT2, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G22YT2, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::G32YB4, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YB6, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YT6, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU2YB4, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU6, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YT2YB4, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YB2YT4, 0);
-   mhc.setCorrectionFlag(mh2_eft::CouplingOrders::YTAU4YB2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12G22, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G14, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G24, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YB2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G22YB2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YTAU2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G22YTAU2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YTAU4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G12YT2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G22YT2, 0);
+   mhc.setCorrectionFlag(CouplingOrders::G32YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YB6, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YT6, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YTAU2YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YTAU6, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YT2YB4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YB2YT4, 0);
+   mhc.setCorrectionFlag(CouplingOrders::YTAU4YB2, 0);
 }
 
 /**

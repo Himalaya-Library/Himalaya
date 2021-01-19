@@ -14,6 +14,7 @@ namespace {
 
 void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 {
+   using namespace himalaya;
    using namespace himalaya::mh2_eft;
 
    Mh2EFTCalculator mhc(p, msq2);

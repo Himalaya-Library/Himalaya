@@ -783,8 +783,6 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
    , masses(pars_)
    , gaugeless(make_gaugeless(pars_))
 {
-   using namespace himalaya::mh2_eft::CouplingOrders;
-
    orders.fill(1);
 
    const double eps = 1e-10;
@@ -1077,8 +1075,6 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
-   using namespace himalaya::mh2_eft::CouplingOrders;
-
    const auto yt     = pars.Yu(2,2);
    const auto yb     = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
    const auto ytau   = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
@@ -1163,8 +1159,6 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 {
-   using namespace himalaya::mh2_eft::CouplingOrders;
-
    const auto yt     = pars.Yu(2,2);
    const auto yb     = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
    const auto ytau   = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
@@ -1244,7 +1238,6 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 {
    using namespace himalaya::mssm_twoloophiggs;
-   using namespace himalaya::mh2_eft::CouplingOrders;
 
    const auto g3 = pars.g3;
    const auto mt2 = pow2(gaugeless.MFt);
@@ -1392,7 +1385,7 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_hh_gaugeless() const
    return gaugeless.get_mass_matrix_hh();
 }
 
-void MSSM_mass_eigenstates::set_correction(mh2_eft::CouplingOrders::CouplingOrders order, int flag)
+void MSSM_mass_eigenstates::set_correction(CouplingOrders::CouplingOrders order, int flag)
 {
    if (flag < 0 || flag > 1)
       INFO_MSG("You can only enable (1) or disable (0) corrections!");

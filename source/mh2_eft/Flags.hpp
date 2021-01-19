@@ -14,8 +14,6 @@
  */
 
 namespace himalaya {
-namespace mh2_eft {
-
 
 namespace CouplingOrders {
    /// Coupling orders for calculation
@@ -47,6 +45,4 @@ namespace CouplingOrders {
    };
 } // namespace CouplingOrders
 
-
-} // namespace mh2_eft
 } // namespace himalaya
