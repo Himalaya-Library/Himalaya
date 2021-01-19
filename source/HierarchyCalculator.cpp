@@ -1239,7 +1239,7 @@ HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
    const double gs = p.g3;
    const int include_heavy_higgs = 0;
 
-   Eigen::Matrix2d Mt42L = mssm_twoloophiggs::delta_mh2_2loop_at_as(
+   Eigen::Matrix2d Mt42L = mh2l::delta_mh2_2loop_at_as(
       Mt2, MG, Mst12, Mst22, st, ct, scale2, mu, tanb, v2, gs,
       include_heavy_higgs);
 

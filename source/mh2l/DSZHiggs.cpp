@@ -21,7 +21,7 @@
  */
 
 namespace himalaya {
-namespace mssm_twoloophiggs {
+namespace mh2l {
 
 namespace {
 
@@ -412,5 +412,5 @@ Eigen::Matrix<double, 2, 2> delta_mh2_2loop_ab_atau(
    return result + rotate_by(dMA, tanb);
 }
 
-} // namespace mssm_twoloophiggs
+} // namespace mh2l
 } // namespace himalaya

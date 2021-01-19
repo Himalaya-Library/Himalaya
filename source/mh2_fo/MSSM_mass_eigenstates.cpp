@@ -1237,7 +1237,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 {
-   using namespace himalaya::mssm_twoloophiggs;
+   using namespace himalaya::mh2l;
 
    const auto g3 = pars.g3;
    const auto mt2 = pow2(gaugeless.MFt);
