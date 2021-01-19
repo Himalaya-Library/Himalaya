@@ -6,7 +6,7 @@
 // ====================================================================
 
 #include "ThresholdCalculator.hpp"
-#include "Flags.hpp"
+#include "EFTFlags.hpp"
 #include "Li2.hpp"
 #include "Logger.hpp"
 #include "Powers.hpp"
