@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Types.hpp"
+#include "HierarchyTypes.hpp"
 
 namespace himalaya{
 namespace hierarchies{
