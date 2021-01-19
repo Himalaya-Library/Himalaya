@@ -37,10 +37,10 @@ const double sqrt35 = 0.7745966692414834; // sqrt(3/5)
 const double inv_sqrt2 = 0.7071067811865475; // 1/sqrt2
 const double one_loop = 0.006332573977646111; // 1/(4Pi)^2
 
-template <typename T> T sqr(T x) { return x*x; }
-double pow2(double x) { return x*x; }
-double pow3(double x) { return x*x*x; }
-double pow4(double x) { return x*x*x*x; }
+template <typename T> T constexpr sqr(T x) noexcept { return x*x; }
+constexpr double pow2(double x) noexcept { return x*x; }
+constexpr double pow3(double x) noexcept { return x*x*x; }
+constexpr double pow4(double x) noexcept { return pow2(pow2(x)); }
 
 #define DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(op)                     \
    template <typename T>                                                \
