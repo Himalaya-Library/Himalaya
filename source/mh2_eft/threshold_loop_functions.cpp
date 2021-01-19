@@ -31,6 +31,7 @@
  */
 
 namespace himalaya {
+namespace mh2_eft {
 namespace threshold_loop_functions {
 namespace {
    template <typename T> constexpr T  sqr(T x) noexcept { return x*x; }
@@ -1536,4 +1537,5 @@ double phi_xyz(double x, double y, double z) noexcept
 }
 
 } // namespace threshold_loop_functions
+} // namespace mh2_eft
 } // namespace himalaya
