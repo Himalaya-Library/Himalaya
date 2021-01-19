@@ -38,11 +38,11 @@ set(PUBLIC_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # private headers
 set(PRIVATE_HEADERS
-  ${SOURCE_PATH}/include/hierarchies
-  ${SOURCE_PATH}/include/mh2_eft
-  ${SOURCE_PATH}/include/mh2_fo
-  ${SOURCE_PATH}/include/mh2l
-  ${SOURCE_PATH}/include/misc)
+  ${SOURCE_PATH}/hierarchies
+  ${SOURCE_PATH}/mh2_eft
+  ${SOURCE_PATH}/mh2_fo
+  ${SOURCE_PATH}/mh2l
+  ${SOURCE_PATH}/misc)
 
 # Himalaya library sources
 set(HIM_LIBSOURCES
