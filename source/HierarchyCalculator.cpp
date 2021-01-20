@@ -1304,7 +1304,7 @@ double HierarchyCalculator::calcV2() const
 double HierarchyCalculator::calcHiggsMassMatrixPrefactor() const
 {
    // GF = 1/(sqrt(2) * (vu^2 + vd^2)) is calculated in the DR'-bar scheme
-   return 3. / (2. * calcV2() * Pi * Pi * pow2(std::sin(calcBeta())));
+   return 3. / (2. * Pi * Pi * pow2(p.vu));
 }
 
 
