@@ -3,7 +3,7 @@
 #include "himalaya/HierarchyCalculator.hpp"
 
 #include "mh2_eft/Mh2EFTCalculator.hpp"
-#include "HimalayaFlags.hpp"
+#include "misc/CouplingOrders.hpp"
 
 #include <Eigen/Core>
 #include <Eigen/Eigenvalues>

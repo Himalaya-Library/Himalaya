@@ -8,7 +8,7 @@
 #include "./DSZHiggs.hpp"
 #include "./DSZHiggs.h"
 #include "./Li2f.hpp"
-#include "HimalayaFlags.hpp"
+#include "misc/CouplingOrders.hpp"
 #include <cmath>
 #include <iostream>
 #include <limits>

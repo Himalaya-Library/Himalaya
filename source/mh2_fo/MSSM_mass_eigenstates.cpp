@@ -6,7 +6,7 @@
 // ====================================================================
 
 #include "./MSSM_mass_eigenstates.hpp"
-#include "HimalayaFlags.hpp"
+#include "misc/CouplingOrders.hpp"
 #include "./Linalg.hpp"
 #include "./pv.hpp"
 #include "./sum.hpp"

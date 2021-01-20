@@ -2,7 +2,7 @@
 
 #include "mh2_eft/Mh2EFTCalculator.hpp"
 #include "mh2_eft/ThresholdCalculator.hpp"
-#include "HimalayaFlags.hpp"
+#include "misc/CouplingOrders.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 

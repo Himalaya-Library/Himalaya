@@ -8,7 +8,7 @@
 #pragma once
 
 /**
- * @file HimalayaFlags.hpp
+ * @file CouplingOrders.hpp
  *
  * @brief enum definitions
  */

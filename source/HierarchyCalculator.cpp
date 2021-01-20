@@ -9,7 +9,7 @@
 #include "himalaya/HierarchyObject.hpp"
 #include "himalaya/version.hpp"
 
-#include "./HimalayaFlags.hpp"
+#include "misc/CouplingOrders.hpp"
 #include "hierarchies/Hierarchies.hpp"
 #include "hierarchies/HierarchyFlags.hpp"
 #include "mh2_eft/Mh2EFTCalculator.hpp"
