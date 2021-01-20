@@ -943,8 +943,6 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
 Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const himalaya::HierarchyObject& ho) const
 {
-   Eigen::Matrix2d shift;
-
    // truncate shift at O(Xt^2) to be consistent with H3m result
    int truncateXt = 1;
 
@@ -989,10 +987,10 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const double lmMgl = std::log(scale2 / Mgl2);
 
    // degenerate mass case flag
-   bool isDegen = false;
+   bool isDegenerate = false;
 
    // check for degenerate squark masses
-   if(std::abs(Mst1 - Mst2) < eps){
+   if (std::abs(Mst1 - Mst2) < eps) {
       const double Mst2shift = Mst1 + std::sqrt(std::abs(Dmst12))/2.;
       const double lmMst2shift = std::log(scale2 / pow2(Mst2shift));
       // limit
@@ -1009,25 +1007,25 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
         Mst2shift)*pow2(Mst1)*pow2(Mst2shift) + pow4(Mst1) - pow4(Mst2shift)))/(pow2(Mst1)*
         pow2(Mst2shift)*pow3(pow2(Mst1) - pow2(Mst2shift)));
 
-      isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
+      isDegenerate = std::abs(exactShifted - lim) >= std::abs(exact - lim)
          || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
 
-   if(isDegen){
-      // matrix elements
+   Eigen::Matrix2d shift;
+
+   // calculate matrix elements
+   if (isDegenerate) {
       shift(0, 0) = (32*Xt2*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 +
         lmMst1)*pow2(Mst1))*pow2(p.mu))/(3.*pow6(Mst1));
       shift(1, 0) = (-32*p.mu*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 +
         lmMst1)*pow2(Mst1))*(p.mu*Xt2 - 3*tb*Xt*pow2(Mst1) + tb*pow3(Xt)))/
         (3.*tb*pow6(Mst1));
-      shift(0, 1) = shift(1,0);
+      shift(0, 1) = shift(1, 0);
       shift(1, 1) = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 + lmMst1)*
         pow2(Mst1))*(-6*tb*(p.mu*Xt + tb*Xt2)*pow2(Mst1) + Xt2*pow2(p.mu) +
         truncateXt*pow2(tb)*pow2(Xt2) + 2*p.mu*tb*pow3(Xt) + 6*pow2(tb)*
         pow4(Mst1)))/(3.*pow2(tb)*pow6(Mst1));
-   }
-   else{
-      // matrix elements
+   } else {
       shift(0, 0) = (16*Xt2*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*Msq2 + (1 +
         lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*pow2(p.mu)*(-4*std::log(Mst1/
         Mst2)*pow2(Mst1)*pow2(Mst2) + pow4(Mst1) - pow4(Mst2)))/(pow2(Mst1)*
@@ -1038,7 +1036,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
         pow4(Mst2)) + tb*Xt*(pow3(pow2(Mst1) - pow2(Mst2)) + pow2(Xt)*(-
         pow4(Mst1) + pow4(Mst2)))))/(tb*pow2(Mst1)*pow2(Mst2)*pow3(pow2(
         Mst1) - pow2(Mst2)));
-      shift(0, 1) = shift(1,0);
+      shift(0, 1) = shift(1, 0);
       shift(1, 1) = (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*Msq2 + (1 + lmMst1)*
         pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(-4*std::log(Mst1/Mst2)*pow2(Mst1)*
         pow2(Mst2)*(Xt2*pow2(p.mu) + truncateXt*pow2(tb)*pow2(Xt2) + 2*p.mu*
