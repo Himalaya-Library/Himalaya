@@ -31,11 +31,11 @@ namespace mh2_fo {
 
 namespace {
 
-const double sqrt2 = 1.414213562373095;
-const double sqrt15 = 3.872983346207417; // sqrt(15)
-const double sqrt35 = 0.7745966692414834; // sqrt(3/5)
-const double inv_sqrt2 = 0.7071067811865475; // 1/sqrt2
-const double one_loop = 0.006332573977646111; // 1/(4Pi)^2
+const double sqrt2     = 1.41421356237309505;
+const double sqrt15    = 3.87298334620741689;      // sqrt(15)
+const double sqrt35    = 0.774596669241483377;     // sqrt(3/5)
+const double inv_sqrt2 = 0.707106781186547524;     // 1/sqrt(2)
+const double one_loop  = 6.332573977646110963e-03; // 1/(4Pi)^2
 
 template <typename T> T constexpr sqr(T x) noexcept { return x*x; }
 constexpr double pow2(double x) noexcept { return x*x; }
