@@ -19,6 +19,9 @@ const double z3        = 1.20205690315959429;      ///< Zeta[3]
 const double z4        = 1.08232323371113819;      ///< Zeta[4] = Pi^4/90
 const double sqrt2     = 1.41421356237309505;      ///< Sqrt[2]
 const double sqrt3     = 1.73205080756887729;      ///< Sqrt[3]
+const double sqrt15    = 3.87298334620741689;      ///< Sqrt[15]
+const double sqrt35    = 0.774596669241483377;     ///< Sqrt[3/5]
+const double inv_sqrt2 = 0.707106781186547524;     ///< 1/Sqrt[2]
 const double log2      = 0.693147180559945309;     ///< Log[2]
 const double log3      = 1.09861228866810969;      ///< Log[3]
 const double oneLoop   = 6.332573977646110963e-03; ///< 1/(4 Pi)^2

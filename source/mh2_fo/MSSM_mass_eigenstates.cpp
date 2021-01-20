@@ -10,8 +10,10 @@
 #include "./pv.hpp"
 #include "./sum.hpp"
 #include "mh2l/DSZHiggs.hpp"
+#include "misc/Constants.hpp"
 #include "misc/CouplingOrders.hpp"
 #include "misc/Logger.hpp"
+#include "misc/Powers.hpp"
 #include <cmath>
 #include <complex>
 #include <iostream>
@@ -31,16 +33,8 @@ namespace mh2_fo {
 
 namespace {
 
-const double sqrt2     = 1.41421356237309505;
-const double sqrt15    = 3.87298334620741689;      // sqrt(15)
-const double sqrt35    = 0.774596669241483377;     // sqrt(3/5)
-const double inv_sqrt2 = 0.707106781186547524;     // 1/sqrt(2)
-const double one_loop  = 6.332573977646110963e-03; // 1/(4Pi)^2
-
-template <typename T> T constexpr sqr(T x) noexcept { return x*x; }
-constexpr double pow2(double x) noexcept { return x*x; }
-constexpr double pow3(double x) noexcept { return x*x*x; }
-constexpr double pow4(double x) noexcept { return pow2(pow2(x)); }
+template <typename T>
+T constexpr sqr(T x) noexcept { return x*x; }
 
 #define DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(op)                     \
    template <typename T>                                                \
@@ -1067,7 +1061,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    RM22 se(RM22::Zero());
    se << se11, se12, se12, se22;
 
-   return se * one_loop;
+   return se * oneLoop;
 }
 
 /**
@@ -1150,7 +1144,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
    RM22 se;
    se << se11, se12, se12, se22;
 
-   return se * one_loop;
+   return se * oneLoop;
 }
 
 /**
@@ -1223,7 +1217,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
    RM22 se;
    se << se11, se12, se12, se22;
 
-   return se * one_loop;
+   return se * oneLoop;
 }
 
 /**
