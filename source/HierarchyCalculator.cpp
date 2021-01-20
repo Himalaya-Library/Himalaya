@@ -1062,24 +1062,24 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
 double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    const himalaya::HierarchyObject& ho, int omitLogs) const
 {
-   double shift = 0.;
+   const int suitableHierarchy = ho.getSuitableHierarchy();
 
    // truncate shift at O(Xt^2) to be consistent with H3m result
-   int truncateXt = 1;
-   const int suitableHierarchy = ho.getSuitableHierarchy();
-   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h3
+   const int truncateXt =
+     (suitableHierarchy == himalaya::hierarchies::Hierarchies::h3
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h32q2g
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h3q22g
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9
-      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) truncateXt = 0;
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2)
+     ? 0 : 1;
 
    // stop masses
    const double Mst1 = p.MSt(0);
    const double Mst2 = p.MSt(1);
 
-   double Xt = p.Au(2,2) - p.mu / calcTanBeta();
    // Hierarchy h4 only covers O(Xt^0)
-   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h4) Xt = 0;
+   const double Xt = suitableHierarchy == himalaya::hierarchies::Hierarchies::h4
+     ? 0 : p.Au(2,2) - p.mu / calcTanBeta();
 
    // threshold for degenerate squark mass case is 1% of the stop mass
    const double eps = Mst1 * 0.01;
@@ -1101,10 +1101,10 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
    const double lmMgl = omitLogs * std::log(scale2 / Mst12) - std::log(Mgl2 / Mst12);
 
    // degenerate mass case flag
-   bool isDegen = false;
+   bool isDegenerate = false;
 
    // check for degenerate squark masses
-   if(std::abs(Mst1 - Mst2) < eps){
+   if (std::abs(Mst1 - Mst2) < eps) {
       const double Mst2shift = Mst1 + std::sqrt(std::abs(Dmst12))/2.;
       const double lmMst2shift = std::log(scale2 / pow2(Mst2shift));
       // limit
@@ -1126,16 +1126,17 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
         pow2(Xt2)*(pow4(Mst1) - pow4(Mst2shift))))/(pow2(Mst1)*pow2(Mst2shift)*pow3(pow2(
         Mst1) - pow2(Mst2shift)));
 
-      isDegen = std::abs(exactShifted - lim) >= std::abs(exact - lim)
+      isDegenerate = std::abs(exactShifted - lim) >= std::abs(exact - lim)
          || !std::isfinite(exact) || !std::isfinite(exactShifted);
    }
 
-   if(isDegen){
+   double shift = 0.;
+
+   if (isDegenerate) {
       shift = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 + lmMst1)*
         pow2(Mst1))*(-6*Xt2*pow2(Mst1) + truncateXt*pow2(Xt2) + 6*pow4(Mst1)))/
         (3.*pow6(Mst1));
-   }
-   else{
+   } else {
       shift = (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*Msq2 + (1 + lmMst1)*
         pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*truncateXt*std::log(Mst2/Mst1)*
         pow2(Mst1)*pow2(Mst2)*pow2(Xt2) - 2*Xt2*pow3(pow2(Mst1) - pow2(Mst2)) +
