@@ -79,7 +79,7 @@ void MLPut(MLINK link, const Eigen::Matrix<double,M,N>& m)
          mat[i][k] = m(i, k);
 
    long dims[] = { M, N };
-   MLPutDoubleArray(link, (double*)mat, dims, NULL, 2);
+   MLPutDoubleArray(link, reinterpret_cast<double*>(mat), dims, nullptr, 2);
 }
 
 template <int M>
@@ -148,7 +148,6 @@ class Redirect_output {
 public:
    explicit Redirect_output(MLINK link_)
       : link(link_)
-      , buffer()
       , old_cout(std::cout.rdbuf(buffer.rdbuf()))
       , old_cerr(std::cerr.rdbuf(buffer.rdbuf()))
       {}
@@ -177,7 +176,7 @@ private:
 
 long number_of_args(MLINK link, const std::string& head)
 {
-   long argc;
+   long argc = 0;
 
    if (!MLCheckFunction(link, head.c_str(), &argc))
       std::cerr << "Error: argument is not a " << head << std::endl;
