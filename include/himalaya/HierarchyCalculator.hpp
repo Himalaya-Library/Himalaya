@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "Himalaya_interface.hpp"
-#include "HierarchyObject.hpp"
+#include "./Himalaya_interface.hpp"
+#include "./HierarchyObject.hpp"
 #include <array>
 #include <Eigen/Core>
 

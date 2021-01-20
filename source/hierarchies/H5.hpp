@@ -7,19 +7,19 @@
 
 #pragma once
 
-#include "HierarchyTypes.hpp"
+#include "./HierarchyTypes.hpp"
 
 namespace himalaya{
 namespace hierarchies{
 
-   class H6{
+   class H5{
    public:
       /**
        * Constructor
        * @param expansionDepth the flagMap for the truncation of expansion variables
        * @param Al4p a double alpha_s/4/Pi
        * @param beta a double which is the mixing angle beta
-       * @param Dmglst2 a double Mgl - Mst2
+       * @param Dmglst1 a double Mgl - Mst1
        * @param lmMt a double log((<renormalization scale> / Mt)^2)
        * @param lmMst1 a double log((<renormalization scale> / Mst1)^2)
        * @param lmMst2 a double log((<renormalization scale> / Mst2)^2)
@@ -35,21 +35,21 @@ namespace hierarchies{
        * @param twoLoopFlag an int flag to consider the two-loop expansion terms
        * @param threeLoopFlag an int flag to consider the three-loop expansion terms
        */
-      H6(const ExpansionFlags_t& expansionDepth, double Al4p, double beta, double Dmglst2,
-                 double lmMt, double lmMst1, double lmMst2, double lmMsq,
-                 double Mt, double Mst1, double Mst2, double Msq, double MuSUSY,
+      H5(const ExpansionFlags_t& expansionDepth, double Al4p, double beta, double Dmglst1,
+                 double lmMt, double lmMst1, double lmMst2, double lmMsq, double Mt, double Mst1,
+                 double Mst2, double Msq, double MuSUSY,
                  double s2t,
                  int mdrFlag, int oneLoopFlag, int twoLoopFlag, int threeLoopFlag);
       /**
-       * @return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
+       * @return The diagonal (1, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5'
        */
       double getS1() const;
       /**
-       * @return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
+       * @return The diagonal (2, 2) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5'
        */
       double getS2() const;
       /**
-       * @return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H6'
+       * @return The off-diagonal (1, 2) = (2, 1) matrix element of the Higgs mass matrix as a double for the hierarchy 'H5'
        */
       double getS12() const;
       /**
@@ -69,8 +69,8 @@ namespace hierarchies{
        */
       double calc_coef_at_as2_no_sm_logs_log3() const;
    private:
-      double Dmglst2{}, lmMt{}, lmMst1{}, lmMst2{}, lmMsq{}, Mt{}, Mst1{}, Mst2{}, Msq{}, MuSUSY{}, s2t{}, Tbeta{}, Sbeta{}, Al4p{}; ///< common variables
-      int shiftst1{}, shiftst2{}, shiftst3{}, xDR2DRMOD{}, xDmglst2{}, xMsq{}, xMst{}; ///< MDR and truncation flags
+      double Dmglst1{}, lmMt{}, lmMst1{}, lmMst2{}, lmMsq{}, Mt{}, Mst1{}, Mst2{}, Msq{}, MuSUSY{}, s2t{}, Tbeta{}, Sbeta{}, Cbeta{}, Al4p{}; ///< common variables
+      int shiftst1{}, shiftst2{}, shiftst3{}, xDmglst1{}, xMsq{}; ///< MDR and truncation flags
       int oneLoopFlag{}, twoLoopFlag{}, threeLoopFlag{}; ///< loop flags
    };
 

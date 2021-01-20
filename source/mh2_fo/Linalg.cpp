@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-#include "Linalg.hpp"
+#include "./Linalg.hpp"
 #include <cmath>
 
 /**
@@ -29,7 +29,7 @@ namespace himalaya {
 
 namespace {
 
-double pow2(double x) noexcept { return x*x; }
+constexpr double pow2(double x) noexcept { return x*x; }
 
 } // anonymous namespace
 

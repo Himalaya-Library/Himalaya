@@ -25,6 +25,7 @@
  */
 
 namespace himalaya {
+namespace mh2_eft {
 namespace threshold_loop_functions {
 
 #ifdef __GNUC__
@@ -72,4 +73,5 @@ double delta_xyz(double, double, double) TCFATTR;
 double phi_xyz(double, double, double) TCFATTR;
 
 } // namespace threshold_loop_functions
+} // namespace mh2_eft
 } // namespace himalaya

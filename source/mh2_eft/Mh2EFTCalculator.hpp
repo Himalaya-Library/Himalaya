@@ -9,7 +9,7 @@
 
 #include "himalaya/Himalaya_interface.hpp"
 
-#include "Flags.hpp"
+#include "misc/CouplingOrders.hpp"
 
 #include <iosfwd>
 #include <limits>

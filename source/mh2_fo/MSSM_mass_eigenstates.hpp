@@ -9,7 +9,7 @@
 
 #include "himalaya/Himalaya_interface.hpp"
 
-#include "Flags.hpp"
+#include "misc/CouplingOrders.hpp"
 
 #include <array>
 #include <iosfwd>
@@ -165,7 +165,7 @@ public:
    /// Higgs 2-loop (and higher) contributions DR' from numerical momentum iteration
    RM22 delta_mh2_2loop_mom_it_num(double precision_goal = 1e-5, int max_iterations = 100) const;
    /// enable/disable loop corrections
-   void set_correction(mh2_eft::CouplingOrders::CouplingOrders, int);
+   void set_correction(CouplingOrders::CouplingOrders, int);
    /// customize diagonalization
    void set_diagonalization(Diagonalization);
    /// customize momentum iteration
@@ -177,7 +177,7 @@ private:
    Parameters pars;            ///< MSSM DR' parameters
    MSSM_spectrum masses;       ///< MSSM DR' masses / mixings
    MSSM_spectrum gaugeless;    ///< MSSM DR' masses / mixings for g1 = g2 = 0
-   std::array<int,mh2_eft::CouplingOrders::NUMBER_OF_EFT_ORDERS> orders{};   ///< enable/disable corrections
+   std::array<int,CouplingOrders::NUMBER_OF_EFT_ORDERS> orders{};   ///< enable/disable corrections
    Momentum_iteration mom_it{Momentum_iteration::pert}; ///< momentum iteration settings
    double mom_it_precision_goal{1e-5}; ///< precision goal for numeric momentum iteration
    int mom_it_max_iterations{100};     ///< maximum number of numeric momentum iterations

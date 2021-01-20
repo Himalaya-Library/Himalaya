@@ -5,12 +5,12 @@
 // version 3.
 // ====================================================================
 
-#include "ThresholdCalculator.hpp"
-#include "Flags.hpp"
-#include "Li2.hpp"
-#include "Logger.hpp"
-#include "Powers.hpp"
-#include "threshold_loop_functions.hpp"
+#include "./ThresholdCalculator.hpp"
+#include "./EFTFlags.hpp"
+#include "./threshold_loop_functions.hpp"
+#include "misc/Li2.hpp"
+#include "misc/Logger.hpp"
+#include "misc/Powers.hpp"
 #include <cmath>
 #include <complex>
 #include <stdexcept>

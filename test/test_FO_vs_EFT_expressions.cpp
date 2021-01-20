@@ -1,8 +1,8 @@
 #include "doctest.h"
-#include "Mh2EFTCalculator.hpp"
-#include "MSSM_mass_eigenstates.hpp"
-#include "Flags.hpp"
-#include "Linalg.hpp"
+#include "mh2_eft/Mh2EFTCalculator.hpp"
+#include "mh2_fo/MSSM_mass_eigenstates.hpp"
+#include "misc/CouplingOrders.hpp"
+#include "mh2_fo/Linalg.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
@@ -243,7 +243,6 @@ TEST_CASE("test_FO_2loop_momentum_iteration_pert")
 {
    using namespace himalaya;
    using namespace himalaya::mh2_fo;
-   using namespace himalaya::mh2_eft::CouplingOrders;
    using A2 = Eigen::Array<double,2,1>;
 
    const auto p = make_gaugeless(make_point());
@@ -293,7 +292,6 @@ TEST_CASE("test_FO_2loop_momentum_iteration_num")
 {
    using namespace himalaya;
    using namespace himalaya::mh2_fo;
-   using namespace himalaya::mh2_eft::CouplingOrders;
 
    const auto p = make_gaugeless(make_point());
    MSSM_mass_eigenstates me(p);

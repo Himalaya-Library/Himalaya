@@ -2,8 +2,8 @@
 
 #include "himalaya/HierarchyCalculator.hpp"
 
-#include "Flags.hpp"
-#include "HierarchyFlags.hpp"
+#include "hierarchies/HierarchyFlags.hpp"
+#include "mh2_eft/EFTFlags.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 

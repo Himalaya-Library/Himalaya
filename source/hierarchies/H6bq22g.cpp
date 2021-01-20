@@ -5,10 +5,10 @@
 // version 3.
 // ====================================================================
 
-#include "H6bq22g.hpp"
-#include "Constants.hpp"
-#include "HierarchyFlags.hpp"
-#include "Powers.hpp"
+#include "./H6bq22g.hpp"
+#include "./HierarchyFlags.hpp"
+#include "misc/Constants.hpp"
+#include "misc/Powers.hpp"
 #include <cmath>
 
 namespace himalaya {

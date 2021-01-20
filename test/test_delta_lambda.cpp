@@ -2,8 +2,8 @@
 
 #include "himalaya/HierarchyCalculator.hpp"
 
-#include "Mh2EFTCalculator.hpp"
-#include "Flags.hpp"
+#include "mh2_eft/Mh2EFTCalculator.hpp"
+#include "misc/CouplingOrders.hpp"
 
 #include <Eigen/Core>
 #include <Eigen/Eigenvalues>
@@ -102,6 +102,7 @@ double calc_Mh2_EFT_0L(const himalaya::Parameters& pars)
 /// calculates Mh^2 in the EFT at 1-loop level
 double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 {
+   using namespace himalaya;
    using namespace himalaya::mh2_eft;
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);
@@ -124,6 +125,7 @@ double calc_Mh2_EFT_1L(const himalaya::Parameters& pars)
 /// calculates Mh^2 in the EFT at 2-loop level
 double calc_Mh2_EFT_2L(const himalaya::Parameters& pars)
 {
+   using namespace himalaya;
    using namespace himalaya::mh2_eft;
 
    himalaya::mh2_eft::Mh2EFTCalculator mhc(pars);

@@ -1,8 +1,8 @@
 #include "doctest.h"
 
-#include "Mh2EFTCalculator.hpp"
-#include "ThresholdCalculator.hpp"
-#include "Flags.hpp"
+#include "mh2_eft/Mh2EFTCalculator.hpp"
+#include "mh2_eft/ThresholdCalculator.hpp"
+#include "misc/CouplingOrders.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 
@@ -14,6 +14,7 @@ namespace {
 
 void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 {
+   using namespace himalaya;
    using namespace himalaya::mh2_eft;
 
    Mh2EFTCalculator mhc(p, msq2);

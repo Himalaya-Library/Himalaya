@@ -5,13 +5,15 @@
 // version 3.
 // ====================================================================
 
-#include "MSSM_mass_eigenstates.hpp"
-#include "DSZHiggs.hpp"
-#include "Flags.hpp"
-#include "Linalg.hpp"
-#include "Logger.hpp"
-#include "pv.hpp"
-#include "sum.hpp"
+#include "./MSSM_mass_eigenstates.hpp"
+#include "./Linalg.hpp"
+#include "./pv.hpp"
+#include "./sum.hpp"
+#include "mh2l/DSZHiggs.hpp"
+#include "misc/Constants.hpp"
+#include "misc/CouplingOrders.hpp"
+#include "misc/Logger.hpp"
+#include "misc/Powers.hpp"
 #include <cmath>
 #include <complex>
 #include <iostream>
@@ -31,16 +33,8 @@ namespace mh2_fo {
 
 namespace {
 
-const double sqrt2 = 1.414213562373095;
-const double sqrt15 = 3.872983346207417; // sqrt(15)
-const double sqrt35 = 0.7745966692414834; // sqrt(3/5)
-const double inv_sqrt2 = 0.7071067811865475; // 1/sqrt2
-const double one_loop = 0.006332573977646111; // 1/(4Pi)^2
-
-template <typename T> T constexpr sqr(T x) noexcept { return x*x; }
-constexpr double pow2(double x) noexcept { return x*x; }
-constexpr double pow3(double x) noexcept { return x*x*x; }
-constexpr double pow4(double x) noexcept { return pow2(pow2(x)); }
+template <typename T>
+T constexpr sqr(T x) noexcept { return x*x; }
 
 #define DEFINE_COMMUTATIVE_OPERATOR_COMPLEX_INT(op)                     \
    template <typename T>                                                \
@@ -73,17 +67,23 @@ bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
    return is_zero(a - b, prec);
 }
 
+/// compares two numbers for relative equality, treating numbers with
+/// small differences as equal
 template <typename T>
 bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
    if (is_equal(a, b, std::numeric_limits<T>::epsilon()))
       return true;
 
-   if (std::abs(a) < std::numeric_limits<T>::epsilon() ||
-       std::abs(b) < std::numeric_limits<T>::epsilon())
-      return false;
+   const T min = std::min(std::abs(a), std::abs(b));
 
-   return std::abs((a - b)/a) < prec;
+   if (min < std::numeric_limits<T>::epsilon()) {
+      return is_equal(a, b, prec);
+   }
+
+   const T max = std::max(std::abs(a), std::abs(b));
+
+   return is_equal(a, b, prec*max);
 }
 
 /**
@@ -783,8 +783,6 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
    , masses(pars_)
    , gaugeless(make_gaugeless(pars_))
 {
-   using namespace himalaya::mh2_eft::CouplingOrders;
-
    orders.fill(1);
 
    const double eps = 1e-10;
@@ -1063,7 +1061,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
    RM22 se(RM22::Zero());
    se << se11, se12, se12, se22;
 
-   return se * one_loop;
+   return se * oneLoop;
 }
 
 /**
@@ -1077,8 +1075,6 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop(double p2) const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
 {
-   using namespace himalaya::mh2_eft::CouplingOrders;
-
    const auto yt     = pars.Yu(2,2);
    const auto yb     = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
    const auto ytau   = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
@@ -1148,7 +1144,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
    RM22 se;
    se << se11, se12, se12, se22;
 
-   return se * one_loop;
+   return se * oneLoop;
 }
 
 /**
@@ -1163,8 +1159,6 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless() const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
 {
-   using namespace himalaya::mh2_eft::CouplingOrders;
-
    const auto yt     = pars.Yu(2,2);
    const auto yb     = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Yd(2,2);
    const auto ytau   = orders.at(CouplingOrders::ONLY_AT_AS) == 1 ? 0. : pars.Ye(2,2);
@@ -1223,7 +1217,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
    RM22 se;
    se << se11, se12, se12, se22;
 
-   return se * one_loop;
+   return se * oneLoop;
 }
 
 /**
@@ -1243,8 +1237,7 @@ RM22 MSSM_mass_eigenstates::delta_mh2_1loop_gaugeless_deriv() const
  */
 RM22 MSSM_mass_eigenstates::delta_mh2_2loop() const
 {
-   using namespace himalaya::mssm_twoloophiggs;
-   using namespace himalaya::mh2_eft::CouplingOrders;
+   using namespace himalaya::mh2l;
 
    const auto g3 = pars.g3;
    const auto mt2 = pow2(gaugeless.MFt);
@@ -1392,7 +1385,7 @@ RM22 MSSM_mass_eigenstates::get_mass_matrix_hh_gaugeless() const
    return gaugeless.get_mass_matrix_hh();
 }
 
-void MSSM_mass_eigenstates::set_correction(mh2_eft::CouplingOrders::CouplingOrders order, int flag)
+void MSSM_mass_eigenstates::set_correction(CouplingOrders::CouplingOrders order, int flag)
 {
    if (flag < 0 || flag > 1)
       INFO_MSG("You can only enable (1) or disable (0) corrections!");
