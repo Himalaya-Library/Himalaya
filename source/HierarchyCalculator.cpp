@@ -331,14 +331,14 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
 
    // sine of 2 times beta
    const double s2b = std::sin(2*calcBeta());
-   const double tbeta = calcTanBeta();
+   const double tb = calcTanBeta();
 
    // tree level Higgs mass matrix
    Eigen::Matrix2d treelvl;
-   treelvl (0,0) = s2b/2.*(pow2(p.MZ) / tbeta + pow2(p.MA) * tbeta);
+   treelvl (0,0) = s2b/2.*(pow2(p.MZ) / tb + pow2(p.MA) * tb);
    treelvl (1,0) = s2b/2.*(-pow2(p.MZ) - pow2(p.MA));
    treelvl (0,1) = treelvl (1,0);
-   treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tbeta + pow2(p.MA) / tbeta);
+   treelvl (1,1) = s2b/2.*(pow2(p.MZ) * tb + pow2(p.MA) / tb);
 
    ho.setDMh(0, treelvl);
 
