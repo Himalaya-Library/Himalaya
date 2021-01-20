@@ -9,7 +9,6 @@
 #include "himalaya/HierarchyObject.hpp"
 #include "himalaya/version.hpp"
 
-#include "misc/CouplingOrders.hpp"
 #include "hierarchies/Hierarchies.hpp"
 #include "hierarchies/HierarchyFlags.hpp"
 #include "mh2_eft/Mh2EFTCalculator.hpp"
@@ -18,6 +17,7 @@
 #include "mh2_fo/MSSM_mass_eigenstates.hpp"
 #include "mh2l/DSZHiggs.hpp"
 #include "misc/Constants.hpp"
+#include "misc/CouplingOrders.hpp"
 #include "misc/Logger.hpp"
 
 #include <algorithm>
