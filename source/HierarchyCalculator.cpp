@@ -19,6 +19,7 @@
 #include "misc/Constants.hpp"
 #include "misc/CouplingOrders.hpp"
 #include "misc/Logger.hpp"
+#include "misc/Powers.hpp"
 
 #include <algorithm>
 #include <array>
