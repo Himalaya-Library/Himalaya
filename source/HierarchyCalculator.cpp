@@ -965,9 +965,9 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    // stop masses
    const double Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    const double Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
-   double Xt = p.Au(2,2) - p.mu / tb;
    // Hierarchy h4 only covers O(Xt^0)
-   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h4) Xt = 0;
+   const double Xt = suitableHierarchy == himalaya::hierarchies::Hierarchies::h4
+     ? 0 : p.Au(2,2) - p.mu / tb;
 
    // threshold for degenerate squark mass case is 1% of the stop mass
    const double eps = Mst1 * 0.01;
