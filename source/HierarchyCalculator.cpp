@@ -959,13 +959,13 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const double yt = sqrt2 * p.Mt / p.vu;
    const double prefac = threeLoop * pow4(p.g3) * pow2(p.Mt * yt);
 
-   // tanbeta
-   const double Tbeta = calcTanBeta();
+   // tan(beta)
+   const double tb = calcTanBeta();
 
    // stop masses
    const double Mst1 = shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
    const double Mst2 = shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag());
-   double Xt = p.Au(2,2) - p.mu / Tbeta;
+   double Xt = p.Au(2,2) - p.mu / tb;
    // Hierarchy h4 only covers O(Xt^0)
    if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h4) Xt = 0;
 
@@ -1018,13 +1018,13 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
       shift(0, 0) = (32*Xt2*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 +
         lmMst1)*pow2(Mst1))*pow2(p.mu))/(3.*pow6(Mst1));
       shift(1, 0) = (-32*p.mu*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 +
-        lmMst1)*pow2(Mst1))*(p.mu*Xt2 - 3*Tbeta*Xt*pow2(Mst1) + Tbeta*pow3(Xt)))/
-        (3.*Tbeta*pow6(Mst1));
+        lmMst1)*pow2(Mst1))*(p.mu*Xt2 - 3*tb*Xt*pow2(Mst1) + tb*pow3(Xt)))/
+        (3.*tb*pow6(Mst1));
       shift(0, 1) = shift(1,0);
       shift(1, 1) = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 + lmMst1)*
-        pow2(Mst1))*(-6*Tbeta*(p.mu*Xt + Tbeta*Xt2)*pow2(Mst1) + Xt2*pow2(p.mu) +
-        truncateXt*pow2(Tbeta)*pow2(Xt2) + 2*p.mu*Tbeta*pow3(Xt) + 6*pow2(Tbeta)*
-        pow4(Mst1)))/(3.*pow2(Tbeta)*pow6(Mst1));
+        pow2(Mst1))*(-6*tb*(p.mu*Xt + tb*Xt2)*pow2(Mst1) + Xt2*pow2(p.mu) +
+        truncateXt*pow2(tb)*pow2(Xt2) + 2*p.mu*tb*pow3(Xt) + 6*pow2(tb)*
+        pow4(Mst1)))/(3.*pow2(tb)*pow6(Mst1));
    }
    else{
       // matrix elements
@@ -1034,20 +1034,20 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
         pow2(Mst2)*pow3(pow2(Mst1) - pow2(Mst2)));
       shift(1, 0) = (16*p.mu*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*Msq2 + (1 +
         lmMst1)*pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(4*std::log(Mst1/Mst2)*pow2(
-        Mst1)*pow2(Mst2)*(p.mu*Xt2 + Tbeta*pow3(Xt)) + p.mu*Xt2*(-pow4(Mst1) +
-        pow4(Mst2)) + Tbeta*Xt*(pow3(pow2(Mst1) - pow2(Mst2)) + pow2(Xt)*(-
-        pow4(Mst1) + pow4(Mst2)))))/(Tbeta*pow2(Mst1)*pow2(Mst2)*pow3(pow2(
+        Mst1)*pow2(Mst2)*(p.mu*Xt2 + tb*pow3(Xt)) + p.mu*Xt2*(-pow4(Mst1) +
+        pow4(Mst2)) + tb*Xt*(pow3(pow2(Mst1) - pow2(Mst2)) + pow2(Xt)*(-
+        pow4(Mst1) + pow4(Mst2)))))/(tb*pow2(Mst1)*pow2(Mst2)*pow3(pow2(
         Mst1) - pow2(Mst2)));
       shift(0, 1) = shift(1,0);
       shift(1, 1) = (16*(-6*(1 + lmMgl)*pow2(Mgl) + 10*(1 + lmMsq)*Msq2 + (1 + lmMst1)*
         pow2(Mst1) + (1 + lmMst2)*pow2(Mst2))*(-4*std::log(Mst1/Mst2)*pow2(Mst1)*
-        pow2(Mst2)*(Xt2*pow2(p.mu) + truncateXt*pow2(Tbeta)*pow2(Xt2) + 2*p.mu*
-        Tbeta*pow3(Xt)) + Xt2*(-2*pow2(Tbeta)*pow3(pow2(Mst1) - pow2(Mst2)) +
-        pow2(p.mu)*(pow4(Mst1) - pow4(Mst2))) + Tbeta*(-2*p.mu*Xt*pow3(pow2(Mst1) -
-        pow2(Mst2)) + Tbeta*(pow2(Mst1) + pow2(Mst2))*pow3(pow2(Mst1) - pow2(
+        pow2(Mst2)*(Xt2*pow2(p.mu) + truncateXt*pow2(tb)*pow2(Xt2) + 2*p.mu*
+        tb*pow3(Xt)) + Xt2*(-2*pow2(tb)*pow3(pow2(Mst1) - pow2(Mst2)) +
+        pow2(p.mu)*(pow4(Mst1) - pow4(Mst2))) + tb*(-2*p.mu*Xt*pow3(pow2(Mst1) -
+        pow2(Mst2)) + tb*(pow2(Mst1) + pow2(Mst2))*pow3(pow2(Mst1) - pow2(
         Mst2)) + 2*p.mu*pow3(Xt)*(pow4(Mst1) - pow4(Mst2))) + truncateXt*pow2(
-        Tbeta)*pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*
-        pow2(Tbeta)*pow3(pow2(Mst1) - pow2(Mst2)));
+        tb)*pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*
+        pow2(tb)*pow3(pow2(Mst1) - pow2(Mst2)));
    }
 
    return prefac * shift;
@@ -1074,14 +1074,11 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) truncateXt = 0;
 
-   // tanbeta
-   const double Tbeta = calcTanBeta();
-
    // stop masses
    const double Mst1 = p.MSt(0);
    const double Mst2 = p.MSt(1);
 
-   double Xt = p.Au(2,2) - p.mu / Tbeta;
+   double Xt = p.Au(2,2) - p.mu / calcTanBeta();
    // Hierarchy h4 only covers O(Xt^0)
    if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h4) Xt = 0;
 
