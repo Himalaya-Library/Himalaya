@@ -41,7 +41,8 @@ int toInt(mh2_eft::RenSchemes r)
  * @param v The vector which should be sorted.
  * @return Returns a vector the lightest entry at position 0.
  */
-Eigen::Vector2d sortVector(const Eigen::Vector2d& v) {
+Eigen::Vector2d sortVector(const Eigen::Vector2d& v)
+{
    auto vector = v;
    if (vector(0) > vector(1)) {
       std::swap(vector(0), vector(1));
