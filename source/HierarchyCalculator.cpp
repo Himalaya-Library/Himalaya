@@ -37,12 +37,28 @@
 
 namespace himalaya {
 
-static bool isInfoPrinted; ///< if true, no info will be printed in further runs
+static bool isInfoPrinted; ///< if true, no info will be printed
 
-/**
- * Define static variables
- */
 namespace {
+
+/// temporarily sets a variable to a new value, and resets the value
+/// to the old one when destoyed
+template<class T>
+class RAII_tmp_set {
+public:
+  RAII_tmp_set(T& variable_, T new_value_)
+    : variable(variable_)
+    , old_value(variable_)
+  {
+    variable_ = new_value_;
+  }
+  RAII_tmp_set(const RAII_tmp_set&) = delete;
+  RAII_tmp_set(RAII_tmp_set&&) = delete;
+  ~RAII_tmp_set() { variable = old_value; }
+private:
+  T& variable;
+  T old_value;
+};
 
 /**
  * Returns sqrt of smallest eigenvalue of given 2x2 matrix.
@@ -303,9 +319,10 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
 {
    using namespace himalaya::hierarchies;
 
-   // set flags to truncate the expansion
-   expansionDepth.at(ExpansionDepth::threeLoop) = 0;
-   expansionDepth.at(ExpansionDepth::Mst) = 0;
+   // temporarily set flags to truncate the expansion
+   const RAII_tmp_set<int> setThreeLoop(expansionDepth.at(ExpansionDepth::threeLoop), 0);
+   const RAII_tmp_set<int> setMst(expansionDepth.at(ExpansionDepth::Mst), 0);
+
    double error = -1.;
    int suitableHierarchy = -1;
 
@@ -377,9 +394,6 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
    }
    ho.setSuitableHierarchy(suitableHierarchy);
 
-   // reset the flags
-   expansionDepth.at(ExpansionDepth::threeLoop) = 1;
-   expansionDepth.at(ExpansionDepth::Mst) = 1;
    return suitableHierarchy;
 }
 
@@ -1429,14 +1443,14 @@ double HierarchyCalculator::getExpansionUncertainty(
    // re-computes the Higgs mass eigenvalues with a flag temporarily set to 0
    const auto recomputeMhWithLowerExpansion =
       [&](ExpansionDepth::ExpansionDepth flag) {
-         expansionDepth.at(flag) = 0; // temporarily lower the expansion
-         const auto Mh = recomputeMh();
-         expansionDepth.at(flag) = 1; // reset flag
-         return Mh;
+         // temporarily lower the expansion
+         RAII_tmp_set<int> setFlag(expansionDepth.at(flag), 0);
+         return recomputeMh();
       };
 
-   // reset flags
-   expansionDepth.at(ExpansionDepth::Mst) = 1;
+   // temporarily set expansion flags
+   RAII_tmp_set<int> setMst(expansionDepth.at(ExpansionDepth::Mst), 1);
+   RAII_tmp_set<int> setThreeLoop(expansionDepth.at(ExpansionDepth::threeLoop), 1);
 
    const double Mh = recomputeMh();
    double uncertainty{};
@@ -1475,10 +1489,6 @@ double HierarchyCalculator::getExpansionUncertainty(
       uncertainty += pow2(Mh - recomputeMhWithLowerExpansion(ExpansionDepth::Mgl));
       break;
    }
-
-   // set the expansion depth for the next comparison
-   expansionDepth.at(ExpansionDepth::Mst) = 0;
-   expansionDepth.at(ExpansionDepth::threeLoop) = 0;
 
    return std::sqrt(uncertainty);
 }
