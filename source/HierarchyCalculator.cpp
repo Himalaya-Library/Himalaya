@@ -943,15 +943,16 @@ double HierarchyCalculator::shiftMst2ToMDR(const himalaya::HierarchyObject& ho,
 Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
    const himalaya::HierarchyObject& ho) const
 {
-   // truncate shift at O(Xt^2) to be consistent with H3m result
-   int truncateXt = 1;
-
    const int suitableHierarchy = ho.getSuitableHierarchy();
-   if(suitableHierarchy == himalaya::hierarchies::Hierarchies::h3
+
+   // truncate shift at O(Xt^2) to be consistent with H3m result
+   const int truncateXt =
+     (suitableHierarchy == himalaya::hierarchies::Hierarchies::h3
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h32q2g
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h3q22g
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9
-      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2) truncateXt = 0;
+      || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2)
+     ? 0 : 1;
 
    // pre-factor of shift -> checked normalization against H3m normalization and they coincide
    const double yt = sqrt2 * p.Mt / p.vu;
