@@ -78,7 +78,7 @@ public:
 private:
    Parameters p{}; ///< The HimalayaInterface struct
    double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
-   std::array<int, CouplingOrders::NUMBER_OF_EFT_ORDERS> orders{}; ///< holds all CouplingOrders to enable/disable certain corrections
+   std::array<int, CouplingOrders::NUMBER_OF_COUPLING_ORDERS> orders{}; ///< holds all CouplingOrders to enable/disable certain corrections
 };
 
 /// prints loop corrections for v^2 << MS^2

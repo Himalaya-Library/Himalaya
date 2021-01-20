@@ -41,7 +41,7 @@ namespace CouplingOrders {
       YB2YT4,
       YTAU4YB2,
       ONLY_AT_AS,
-      NUMBER_OF_EFT_ORDERS
+      NUMBER_OF_COUPLING_ORDERS
    };
 } // namespace CouplingOrders
 
