@@ -3912,11 +3912,15 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
    const double mQ3 = sqrt(mQ32);
    const double msq = sqrt(msq2);
    const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
-   const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
+   const double lmQ3MR = omitLogs * std::log(Mst12 / MR2) + std::log(mQ32 / Mst12);
 
    switch (limit) {
       case Limits::GENERAL: {
-         return (4*pow2(lmQ3MR) - 60*pow2(log(msq2/mQ32)) - (16*Xt*(-3*m3*(mQ32 + 10*msq2
+         const double logmqQ3 = std::log(msq2/mQ32);
+         const double logU3Q3 = std::log(mU32/mQ32);
+         const double logm3Q3 = std::log(m32/mQ32);
+
+         return (4*pow2(lmQ3MR) - 60*pow2(logmqQ3) - (16*Xt*(-3*m3*(mQ32 + 10*msq2
         + mU32) + 14*pow3(m3)))/((m32 - mQ32)*(m32 - mU32)) + (60*(mQ32 - msq2)
         *dilog(1 - msq2/mQ32)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) + (8*
         m3*(m32 - mQ32)*(mQ32 - msq2)*Xt)/(mQ32 - mU32) - 2*pow4(m3)))/pow3(m32
@@ -3928,7 +3932,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         Xt)/(pow2(m32 - mQ32)*pow2(m32 - mU32)) + (mQ32*(-3*m32 + 3*mQ32 + 4*
         msq2))/pow3(-m32 + mQ32) - msq2*(3*(1/pow2(m32 - mQ32) + 1/pow2(m32 -
         mU32)) + (4*mU32)/pow3(m32 - mU32)) + (4*pow4(mQ3))/pow3(m32 - mQ32) +
-        (4*pow4(mU3))/pow3(m32 - mU32)) - (20*log(msq2/mQ32)*(-24*m3*mQ32*msq2*
+        (4*pow4(mU3))/pow3(m32 - mU32)) - (20*logmqQ3*(-24*m3*mQ32*msq2*
         mU32*Xt + 24*msq2*(mQ32 + mU32)*Xt*pow3(m3) + 3*mQ32*msq2*pow4(mU3) +
         pow4(mQ3)*(3*msq2*mU32 + 10*pow4(mU3)) + pow4(m3)*(-15*msq2*mU32 +
         mQ32*(-15*msq2 + 44*mU32) + 11*pow4(mQ3) + 11*pow4(mU3)) + 3*m32*((3*
@@ -3950,7 +3954,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         pow7(m3) - 14*(mQ32 + mU32)*pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(
         mU3) + m32*(-34*pow4(mQ3)*pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(
         mU3) + 9*pow8(mQ3) + 9*pow8(mU3)) - 40*Xt*pow9(m3) + 12*power10(m3)))/(
-        pow3(m32 - mQ32)*pow3(m32 - mU32)) + (pow2(log(mU32/mQ32))*((128*m32*
+        pow3(m32 - mQ32)*pow3(m32 - mU32)) + (pow2(logU3Q3)*((128*m32*
         pow2(m32 - mU32)*pow2(Xt)*pow4(mU3))/pow2(mQ32 - mU32) + Xt*((8*m3*(
         mQ32 - mU32)*pow2(m32 - mU32)*(-(mQ32*mU32) - 5*m32*(mQ32 + mU32) + 5*
         pow4(m3) + 3*pow4(mQ3) + 3*pow4(mU3)))/pow2(m32 - mQ32) - (8*(m32 -
@@ -3974,7 +3978,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         pow8(m3) + 3*mU32*pow8(mQ3) + 3*mQ32*pow8(mU3) + m32*(-34*pow4(mQ3)*
         pow4(mU3) - 26*mU32*pow6(mQ3) - 26*mQ32*pow6(mU3) + 9*pow8(mQ3) + 9*
         pow8(mU3)) + 12*power10(m3)))/pow3(m32 - mQ32)))/pow4(m32 - mU32) + (2*
-        log(mU32/mQ32)*(10*log(msq2/mQ32)*(-2*(3*msq2 + mU32)*pow4(m3) + 3*
+        logU3Q3*(10*logmqQ3*(-2*(3*msq2 + mU32)*pow4(m3) + 3*
         mU32*pow4(msq) + (4*m3*(m32 - mU32)*Xt*(m32*mU32 + 12*msq2*mU32 - 6*
         pow4(msq) - pow4(mU3)))/(-mQ32 + mU32) + 3*m32*(-6*msq2*mU32 + 3*pow4(
         msq) + pow4(mU3)) - pow6(mU3)) + (8*(m32 - mU32)*Xt*(-(mU32*(53*mQ32 +
@@ -3990,14 +3994,14 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         pow4(mU3)) + (90*msq2 + 271*mU32)*pow6(mQ3) + 3*mQ32*(20*msq2*pow4(mU3)
         - 93*pow6(mU3)) + 9*pow8(mQ3) + 9*pow8(mU3)) + 4*(13*mQ32 - 77*mU32)*
         power10(m3))/((mQ32 - mU32)*pow2(m32 - mQ32))))/pow3(m32 - mU32) - 4*
-        lmQ3MR*(20*log(msq2/mQ32) + (8*Xt*pow3(m3))/((m32 - mQ32)*(m32 - mU32))
-        - (log(mU32/mQ32)*(8*mU32*(mQ32 + 15*mU32)*pow4(m3) - 200*Xt*pow3(m3)*
+        lmQ3MR*(20*logmqQ3 + (8*Xt*pow3(m3))/((m32 - mQ32)*(m32 - mU32))
+        - (logU3Q3*(8*mU32*(mQ32 + 15*mU32)*pow4(m3) - 200*Xt*pow3(m3)*
         pow4(mU3) + (34*mQ32 - 98*mU32)*pow6(m3) + 23*(mQ32 - mU32)*pow6(mU3) +
         136*m3*Xt*pow6(mU3) + m32*(-69*mQ32*pow4(mU3) + 5*pow6(mU3)) + 64*Xt*
         pow7(m3)))/((-mQ32 + mU32)*pow3(m32 - mU32)) + (-463*m32*mQ32*mU32*(
         mQ32 + mU32) + 202*pow4(mQ3)*pow4(mU3) + pow4(m3)*(1044*mQ32*mU32 +
         257*pow4(mQ3) + 257*pow4(mU3)) - 573*(mQ32 + mU32)*pow6(m3) + 312*pow8(
-        m3))/(pow2(m32 - mQ32)*pow2(m32 - mU32)) - (log(m32/mQ32)*(-192*Xt*
+        m3))/(pow2(m32 - mQ32)*pow2(m32 - mU32)) - (logm3Q3*(-192*Xt*
         pow11(m3) + 154*pow12(m3) + 72*m32*(mQ32 + mU32)*pow4(mQ3)*pow4(mU3) -
         208*Xt*pow3(m3)*pow4(mQ3)*pow4(mU3) + 408*mQ32*mU32*(mQ32 + mU32)*Xt*
         pow5(m3) - 24*pow6(mQ3)*pow6(mU3) - pow6(m3)*(95*mU32*pow4(mQ3) + 95*
@@ -4005,8 +4009,8 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         *pow4(mU3) + 11*mU32*pow6(mQ3) + 11*mQ32*pow6(mU3)) - 200*Xt*(4*mQ32*
         mU32 + pow4(mQ3) + pow4(mU3))*pow7(m3) + (406*mQ32*mU32 + 163*pow4(mQ3)
         + 163*pow4(mU3))*pow8(m3) + 392*(mQ32 + mU32)*Xt*pow9(m3) - 288*(mQ32 +
-        mU32)*power10(m3)))/(pow3(m32 - mQ32)*pow3(m32 - mU32))) + 2*pow2(log(
-        m32/mQ32))*(-15*(m32 - msq2)*(1/(m32 - mQ32) + 1/(m32 - mU32) - (3*
+        mU32)*power10(m3)))/(pow3(m32 - mQ32)*pow3(m32 - mU32))) + 2*pow2(logm3Q3)*
+        (-15*(m32 - msq2)*(1/(m32 - mQ32) + 1/(m32 - mU32) - (3*
         mU32)/pow2(m32 - mU32) + (mQ32*(-3*m32 + 3*mQ32 + 4*msq2))/pow3(m32 -
         mQ32) + msq2*(3*(1/pow2(m32 - mQ32) + 1/pow2(m32 - mU32)) + (4*mU32)/
         pow3(m32 - mU32)) + (4*pow4(mQ3))/pow3(-m32 + mQ32) + (4*pow4(mU3))/
@@ -4044,7 +4048,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         mU32*(-41*pow4(mQ3)*pow4(mU3) + 167*mU32*pow6(mQ3) - 41*mQ32*pow6(mU3)
         + 34*pow8(mQ3) + 9*pow8(mU3)) + (346*mQ32 + 294*mU32)*power10(m3) + 3*
         mQ32*power10(mU3))/pow2(m32 - mU32)))/((mQ32 - mU32)*pow3(m32 - mQ32))
-        + (2*log(m32/mQ32)*(8*(m32 - mQ32)*Xt*pow2(m32 - mU32)*pow3(m3)*(3*
+        + (2*logm3Q3*(8*(m32 - mQ32)*Xt*pow2(m32 - mU32)*pow3(m3)*(3*
         mU32*(10*msq2 + mU32) - 15*m32*(5*mQ32 + 4*msq2 + 5*mU32) + mQ32*(30*
         msq2 + 59*mU32) + 85*pow4(m3) + 3*pow4(mQ3)) - (m32 - mU32)*(864*pow12(
         m3) + 48*pow6(mQ3)*pow6(mU3) + 3*m32*mQ32*mU32*(5*(2*msq2 - 23*mU32)*
@@ -4055,7 +4059,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         pow4(mU3))*pow8(m3) + pow4(m3)*(pow4(mQ3)*(-90*msq2*mU32 + 1894*pow4(
         mU3)) + (90*msq2 + 572*mU32)*pow6(mQ3) + 9*(10*msq2 + mU32)*pow6(mU3) +
         mQ32*(-90*msq2*pow4(mU3) + 572*pow6(mU3)) + 9*pow8(mQ3)) - 2*(971*mQ32
-        + 90*msq2 + 971*mU32)*power10(m3)) + 10*(m32 - mU32)*log(msq2/mQ32)*(-
+        + 90*msq2 + 971*mU32)*power10(m3)) + 10*(m32 - mU32)*logmqQ3*(-
         4*pow12(m3) + 42*mU32*pow4(mQ3)*pow6(m3) + 42*mQ32*pow4(mU3)*pow6(m3) -
         4*m3*(m32 - mQ32)*(m32 - mU32)*Xt*(-((mQ32 - 12*msq2 + mU32)*pow4(m3))
         + m32*(mQ32*mU32 - 12*pow4(msq)) + 6*mU32*pow4(msq) + 6*mQ32*(-2*msq2*
@@ -4069,7 +4073,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         + pow6(mQ3) + pow6(mU3)) + m32*(3*msq2*mU32*pow4(mQ3) + (-3*msq2 + 5*
         mU32)*pow6(mQ3) - 3*msq2*pow6(mU3) + mQ32*(3*msq2*pow4(mU3) + 5*pow6(
         mU3))) + (-8*mQ32 + 6*msq2 - 8*mU32)*pow8(m3) + 2*power10(m3))) + (2*
-        log(mU32/mQ32)*(604*mQ32*mU32*pow12(m3) - 204*mQ32*pow14(m3) - 180*
+        logU3Q3*(604*mQ32*mU32*pow12(m3) - 204*mQ32*pow14(m3) - 180*
         mU32*pow14(m3) + 64*pow16(m3) + 64*mU32*pow2(m32 - mQ32)*pow2(m32 -
         mU32)*pow2(Xt)*pow4(m3) + 234*pow12(m3)*pow4(mQ3) + 122*pow12(m3)*pow4(
         mU3) - 239*pow4(mU3)*pow6(m3)*pow6(mQ3) - 13*pow4(mQ3)*pow6(m3)*pow6(
@@ -4089,42 +4093,46 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         pow6(mQ3)*power10(mU3)))/(mQ32 - mU32)))/(pow3(m32 - mQ32)*pow4(m32 -
         mU32)))/18.;
       }
-      case(Limits::MQ3_EQ_MU3):{
+
+      case Limits::MQ3_EQ_MU3: {
+         const double logmqQ3 = std::log(msq2/mQ32);
+         const double logm3Q3 = std::log(m32/mQ32);
+
          return (4*pow2(lmQ3MR) + (128*m3*Xt*(m32 - mQ32 + m3*Xt))/pow2(m32 - mQ32) - 60*
-        pow2(log(msq2/mQ32)) + (480*m3*msq2*(-mQ32 + msq2)*Xt*log(msq2/mQ32))/
-        pow2(-(m32*mQ3) + pow3(mQ3)) + (32*(8*m3 - 9*Xt)*log(m32/mQ32)*pow3(m3)
+        pow2(logmqQ3) + (480*m3*msq2*(-mQ32 + msq2)*Xt*logmqQ3)/
+        pow2(-(m32*mQ3) + pow3(mQ3)) + (32*(8*m3 - 9*Xt)*logm3Q3*pow3(m3)
         )/((m32 - mQ32)*mQ32) - (32*Xt*(-3*m3*(mQ32 + 5*msq2) + 7*pow3(m3)))/
         pow2(m32 - mQ32) + (60*(mQ32 - msq2)*dilog(1 - msq2/mQ32)*(-3*m32*(mQ32
         - msq2) + mQ32*(mQ32 + msq2) + (2*m3*(m32 - mQ32)*(mQ32 - msq2)*Xt)/
         mQ32 - 2*pow4(m3)))/pow3(m32 - mQ32) - (120*(m32 - msq2)*dilog(1 -
         msq2/m32)*(mQ32*msq2 + m32*(-5*mQ32 + 3*msq2) + 8*m3*(mQ32 - msq2)*Xt +
         pow4(m3)))/pow3(m32 - mQ32) + (18*m32*(mQ32 - 20*msq2) - 120*mQ32*msq2
-        + 291*pow4(m3) - 181*pow4(mQ3))/pow2(m32 - mQ32) - (40*log(msq2/mQ32)*(
+        + 291*pow4(m3) - 181*pow4(mQ3))/pow2(m32 - mQ32) - (40*logmqQ3*(
         3*mQ32*msq2 + m32*(-11*mQ32 + 9*msq2) - 12*m3*msq2*Xt + 6*pow4(m3) + 5*
         pow4(mQ3)))/pow2(m32 - mQ32) + (60*(mQ32 - msq2)*dilog(1 - msq2/mQ32)*(
         2*m3*mQ32*(mQ32 - 9*msq2)*Xt + 2*(7*mQ32 + msq2)*Xt*pow3(m3) - 2*mQ32*
         pow4(m3) + (mQ32 + msq2)*pow4(mQ3) - 3*m32*(-(mQ32*msq2) + pow4(mQ3))))
         /(mQ32*pow3(m32 - mQ32)) - (16*m3*(55*m32*mQ32*Xt - 30*mQ32*msq2*Xt -
         32*mQ32*pow3(m3) + 16*Xt*pow4(m3) + 32*m3*pow4(mQ3) - 59*Xt*pow4(mQ3) -
-        5*Xt*log(msq2/mQ32)*(m32*mQ32 + 12*mQ32*msq2 - pow4(mQ3) - 6*pow4(msq))
+        5*Xt*logmqQ3*(m32*mQ32 + 12*mQ32*msq2 - pow4(mQ3) - 6*pow4(msq))
         ))/pow2(-(m32*mQ3) + pow3(mQ3)) + (4*dilog(1 - m32/mQ32)*(-40*mQ32*Xt*
         pow3(m3) + 13*mQ32*pow4(m3) - 36*m32*pow4(mQ3) + 22*m3*Xt*pow4(mQ3) +
         18*Xt*pow5(m3) - 16*pow6(m3) + 15*pow6(mQ3)))/pow2(-(m32*mQ3) + pow3(
         mQ3)) + (4*dilog(1 - m32/mQ32)*(32*mQ32*Xt*pow3(m3) - 51*mQ32*pow4(m3)
         - 4*m32*pow4(mQ3) - 14*m3*Xt*pow4(mQ3) - 18*Xt*pow5(m3) + 16*pow6(m3) +
         15*pow6(mQ3)))/pow2(-(m32*mQ3) + pow3(mQ3)) - (8*lmQ3MR*((m32 - mQ32)*(
-        -10*log(msq2/mQ32)*pow2(-(m32*mQ3) + pow3(mQ3)) + 28*mQ32*Xt*pow3(m3) -
+        -10*logmqQ3*pow2(-(m32*mQ3) + pow3(mQ3)) + 28*mQ32*Xt*pow3(m3) -
         188*mQ32*pow4(m3) + 293*m32*pow4(mQ3) - 68*m3*Xt*pow4(mQ3) + 32*Xt*
-        pow5(m3) - 101*pow6(mQ3)) + mQ32*log(m32/mQ32)*(104*mQ32*Xt*pow3(m3) -
+        pow5(m3) - 101*pow6(mQ3)) + mQ32*logm3Q3*(104*mQ32*Xt*pow3(m3) -
         57*mQ32*pow4(m3) - 36*m32*pow4(mQ3) - 96*Xt*pow5(m3) + 77*pow6(m3) +
-        12*pow6(mQ3))))/(mQ32*pow3(-m32 + mQ32)) + (8*log(m32/mQ32)*(6*mQ32*(3*
+        12*pow6(mQ3))))/(mQ32*pow3(-m32 + mQ32)) + (8*logm3Q3*(6*mQ32*(3*
         mQ32 + 20*msq2)*Xt*pow3(m3) + mQ32*(-291*mQ32 - 45*msq2 + 32*pow2(Xt))*
-        pow4(m3) + 14*mQ32*Xt*pow5(m3) + 152*mQ32*pow6(m3) - 5*mQ32*log(msq2/
-        mQ32)*(24*m3*msq2*(-mQ32 + msq2)*Xt + 2*(mQ32 - 12*msq2)*Xt*pow3(m3) -
+        pow4(m3) + 14*mQ32*Xt*pow5(m3) + 152*mQ32*pow6(m3) - 5*mQ32*logmqQ3*
+        (24*m3*msq2*(-mQ32 + msq2)*Xt + 2*(mQ32 - 12*msq2)*Xt*pow3(m3) -
         (mQ32 - 6*msq2)*pow4(m3) + 9*m32*(2*mQ32*msq2 - pow4(msq)) - 3*mQ32*
         pow4(msq) - 2*Xt*pow5(m3) + pow6(m3)) - 12*m3*Xt*pow6(mQ3) + 15*m32*(-(
         msq2*pow4(mQ3)) + 9*pow6(mQ3)) - 68*Xt*pow7(m3) + 32*pow8(m3) - 12*
-        pow8(mQ3)))/(mQ32*pow3(-m32 + mQ32)) + (4*pow2(log(m32/mQ32))*(-120*m3*
+        pow8(mQ3)))/(mQ32*pow3(-m32 + mQ32)) + (4*pow2(logm3Q3)*(-120*m3*
         mQ32*(mQ32 - msq2)*msq2*Xt - 12*Xt*pow3(m3)*(19*pow4(mQ3) + 10*pow4(
         msq)) + pow4(m3)*(-60*mQ32*msq2 + 94*pow4(mQ3) + 45*pow4(msq)) + 40*(8*
         mQ32 + 3*msq2)*Xt*pow5(m3) + (-264*mQ32 - 30*msq2 + 32*pow2(Xt))*pow6(
@@ -4134,10 +4142,14 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
       }
 
       case Limits::MQ3_EQ_M3: {
-         return   (8064 + (384*(mQ32 + mU32 + 2*mQ3*Xt)*log(mQ32/mU32))/(mQ32 - mU32) +
-        192*pow2(lmQ3MR) - 2880*pow2(log(msq2/mQ32)) - (288*(mQ3 - 2*Xt)*(-2*
-        mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32)))/(-(mQ3*mU32) + pow3(mQ3)
-        ) - (2880*msq2*(-2*mQ32 + 2*msq2 + (-3*mQ32 + msq2)*log(msq2/mQ32))*(-(
+         const double logmqQ3 = std::log(msq2/mQ32);
+         const double logU3Q3 = std::log(mU32/mQ32);
+         const double logQ3U3 = -logU3Q3;
+
+         return   (8064 + (384*(mQ32 + mU32 + 2*mQ3*Xt)*logQ3U3)/(mQ32 - mU32) +
+        192*pow2(lmQ3MR) - 2880*pow2(logmqQ3) - (288*(mQ3 - 2*Xt)*(-2*
+        mQ32 + 2*mU32 + (mQ32 + mU32)*logQ3U3))/(-(mQ3*mU32) + pow3(mQ3)
+        ) - (2880*msq2*(-2*mQ32 + 2*msq2 + (-3*mQ32 + msq2)*logmqQ3)*(-(
         mQ3*mU32) - 2*mQ32*Xt + 2*msq2*Xt + pow3(mQ3)))/((mQ32 - msq2)*(mQ32 -
         mU32)*pow3(mQ3)) - (2880*(msq2 - mU32)*dilog(1 - msq2/mU32)*(3*mQ32*(
         msq2 - mU32) + mU32*(msq2 + mU32) + 8*mQ3*(msq2 - mU32)*Xt - 2*pow4(
@@ -4145,38 +4157,38 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         (mQ32 - msq2)*Xt)/(mQ32 - mU32))*dilog(1 - msq2/mQ32))/pow4(mQ3) - (
         192*Xt*(mQ32*(90*msq2 - 58*mU32) + 3*mU32*(10*msq2 + mU32) + 23*pow4(
         mQ3)))/(mQ3*pow2(mQ32 - mU32)) + (32*(mQ32*(-10*mQ32 + 30*msq2 + 3*mU32
-        + 3*mQ32*log(mU32/mQ32)) + 30*log(msq2/mQ32)*(2*mQ32*msq2 - pow4(msq)))
-        )/pow4(mQ3) + (96*(2*mQ32*mU32 - 3*pow4(mQ3) + log(mQ32/mU32)*(3*mQ32*
+        + 3*mQ32*logU3Q3) + 30*logmqQ3*(2*mQ32*msq2 - pow4(msq)))
+        )/pow4(mQ3) + (96*(2*mQ32*mU32 - 3*pow4(mQ3) + logQ3U3*(3*mQ32*
         mU32 + pow4(mQ3)) + pow4(mU3)))/(-(mQ32*mU32) + pow4(mQ3)) - (12*(240*
         msq2*mU32 + 10*mQ32*(72*msq2 + 61*mU32) - 837*pow4(mQ3) + 19*pow4(mU3))
-        )/pow2(mQ32 - mU32) - (240*log(msq2/mQ32)*(72*mQ32*msq2*Xt + 24*msq2*
+        )/pow2(mQ32 - mU32) - (240*logmqQ3*(72*mQ32*msq2*Xt + 24*msq2*
         mU32*Xt + 18*(2*msq2 - 5*mU32)*pow3(mQ3) + mQ3*(12*msq2*mU32 + 43*pow4(
-        mU3)) + 47*pow5(mQ3)))/(mQ3*pow2(mQ32 - mU32)) + (24*(-(log(mU32/mQ32)*
+        mU3)) + 47*pow5(mQ3)))/(mQ3*pow2(mQ32 - mU32)) + (24*(-(logU3Q3*
         pow3(mQ3)*(-34*mQ32*mU32 + 8*mQ3*mU32*Xt - 24*Xt*pow3(mQ3) + 13*pow4(
         mQ3) + 17*pow4(mU3))) + mQ3*(mQ32 - mU32)*(-(mQ32*(120*msq2 + 137*mU32)
         ) + 24*mQ3*(10*msq2 + mU32)*Xt - 104*Xt*pow3(mQ3) + 129*pow4(mQ3) + 12*
-        (10*msq2*mU32 + pow4(mU3))) - 10*(mQ32 - mU32)*log(msq2/mQ32)*(-12*mQ3*
+        (10*msq2*mU32 + pow4(mU3))) - 10*(mQ32 - mU32)*logmqQ3*(-12*mQ3*
         msq2*mU32 - 48*mQ32*msq2*Xt + (12*msq2 - mU32)*pow3(mQ3) + 24*Xt*pow4(
         msq) + pow5(mQ3))))/(pow2(mQ32 - mU32)*pow3(mQ3)) - (960*msq2*(-10*
-        mQ32*msq2 + 7*pow4(mQ3) + 3*pow4(msq) + log(msq2/mQ32)*(-3*mQ32*msq2 +
+        mQ32*msq2 + 7*pow4(mQ3) + 3*pow4(msq) + logmqQ3*(-3*mQ32*msq2 +
         6*pow4(mQ3) + pow4(msq))))/(-(msq2*pow4(mQ3)) + pow6(mQ3)) + (48*(10*(
-        3*mQ32 - 3*mU32 - 8*mQ3*Xt)*log(msq2/mQ32)*pow2(-(mQ3*mU32) + pow3(mQ3)
+        3*mQ32 - 3*mU32 - 8*mQ3*Xt)*logmqQ3*pow2(-(mQ3*mU32) + pow3(mQ3)
         ) - pow2(mQ32 - mU32)*(6*mU32*(10*msq2 + mU32) - 3*mQ32*(20*msq2 + 221*
         mU32) + 48*mQ3*(10*msq2 + mU32)*Xt - 1312*Xt*pow3(mQ3) + 1189*pow4(mQ3)
-        ) + mQ32*log(mU32/mQ32)*(144*mU32*Xt*pow3(mQ3) - 33*mU32*pow4(mQ3) -
+        ) + mQ32*logU3Q3*(144*mU32*Xt*pow3(mQ3) - 33*mU32*pow4(mQ3) -
         88*mQ3*Xt*pow4(mU3) + mQ32*(256*mU32*pow2(Xt) + 53*pow4(mU3)) + 8*Xt*
         pow5(mQ3) + 11*pow6(mQ3) - 15*pow6(mU3))))/(mQ32*pow3(mQ32 - mU32)) + (
         6*dilog(1 - mU32/mQ32)*(80*mU32*Xt*pow3(mQ3) + 31*mU32*pow4(mQ3) - 19*
         mQ32*pow4(mU3) - 24*mQ3*Xt*pow4(mU3) + 456*Xt*pow5(mQ3) + 119*pow6(mQ3)
-        - 3*pow6(mU3)))/(-(mU32*pow4(mQ3)) + pow6(mQ3)) - (32*lmQ3MR*(120*log(
-        msq2/mQ32)*pow3(mQ32 - mU32) + (mQ32 - mU32)*(-2044*mQ32*mU32 - 1224*
+        - 3*pow6(mU3)))/(-(mU32*pow4(mQ3)) + pow6(mQ3)) - (32*lmQ3MR*(120*logmqQ3*
+        pow3(mQ32 - mU32) + (mQ32 - mU32)*(-2044*mQ32*mU32 - 1224*
         mQ3*mU32*Xt + 1176*Xt*pow3(mQ3) + 983*pow4(mQ3) + 1037*pow4(mU3)) + 6*
-        log(mU32/mQ32)*(64*mU32*Xt*pow3(mQ3) - 56*mU32*pow4(mQ3) - 5*mQ32*pow4(
+        logU3Q3*(64*mU32*Xt*pow3(mQ3) - 56*mU32*pow4(mQ3) - 5*mQ32*pow4(
         mU3) - 136*mQ3*Xt*pow4(mU3) + 64*Xt*pow5(mQ3) + 34*pow6(mQ3) + 23*pow6(
-        mU3))))/pow3(mQ32 - mU32) + (24*log(mU32/mQ32)*(-96*mQ32*mU32*(10*msq2
+        mU3))))/pow3(mQ32 - mU32) + (24*logU3Q3*(-96*mQ32*mU32*(10*msq2
         + 19*mU32)*Xt + 1544*mU32*Xt*pow4(mQ3) - 3*pow3(mQ3)*(120*msq2*mU32 +
         59*pow4(mU3)) - 479*mU32*pow5(mQ3) + 512*Xt*pow6(mQ3) + 24*Xt*pow6(mU3)
-        - 40*mQ3*log(msq2/mQ32)*(4*mU32*Xt*pow3(mQ3) + 2*(3*msq2 + mU32)*pow4(
+        - 40*mQ3*logmqQ3*(4*mU32*Xt*pow3(mQ3) + 2*(3*msq2 + mU32)*pow4(
         mQ3) - 3*mU32*pow4(msq) - 3*mQ32*(-6*msq2*mU32 + 3*pow4(msq) + pow4(
         mU3)) - 4*mQ3*Xt*(-12*msq2*mU32 + 6*pow4(msq) + pow4(mU3)) + pow6(mU3))
         + mQ3*(-120*msq2*pow4(mU3) + 527*pow6(mU3)) + 209*pow7(mQ3)))/(mQ3*
@@ -4195,7 +4207,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         + 6*msq2*pow4(mU3) - 13*pow6(mU3)) - pow4(msq)*pow6(mU3) + mQ32*(3*
         pow4(msq)*pow4(mU3) - 2*msq2*pow6(mU3)) + 16*(msq2 + mU32)*Xt*pow7(mQ3)
         + 17*(2*msq2 - 7*mU32)*pow8(mQ3) - 8*Xt*pow9(mQ3) + 29*power10(mQ3)))/(
-        pow3(mQ32 - mU32)*pow4(mQ3)) - (3*pow2(log(mU32/mQ32))*(-2248*Xt*pow11(
+        pow3(mQ32 - mU32)*pow4(mQ3)) - (3*pow2(logU3Q3)*(-2248*Xt*pow11(
         mQ3) + 2745*pow12(mQ3) - 3*pow12(mU3) + 240*mU32*Xt*(32*msq2*mU32 - 16*
         pow4(msq) + 15*pow4(mU3))*pow5(mQ3) - 4*pow6(mQ3)*(240*mU32*pow4(msq) -
         720*msq2*pow4(mU3) + 512*pow2(Xt)*pow4(mU3) + 215*pow6(mU3)) + 16*Xt*(-
@@ -4208,10 +4220,14 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
       }
 
       case Limits::MU3_EQ_M3: {
-         return(32080 - (1536*(mQ32 + mU3*(mU3 + 2*Xt))*log(mU32/mQ32))/(mQ32 - mU32) +
-        768*pow2(lmQ3MR) - 11520*pow2(log(msq2/mQ32)) - (1152*(mU3 - 2*Xt)*(2*(
-        mQ32 - mU32) + (mQ32 + mU32)*log(mU32/mQ32)))/(-(mQ32*mU3) + pow3(mU3))
-        - (11520*msq2*(2*(msq2 - mU32) + (msq2 - 3*mU32)*log(msq2/mU32))*(-(
+         const double logmqQ3 = std::log(msq2/mQ32);
+         const double logmqU3 = std::log(msq2/mU32);
+         const double logU3Q3 = std::log(mU32/mQ32);
+
+         return(32080 - (1536*(mQ32 + mU3*(mU3 + 2*Xt))*logU3Q3)/(mQ32 - mU32) +
+        768*pow2(lmQ3MR) - 11520*pow2(logmqQ3) - (1152*(mU3 - 2*Xt)*(2*(
+        mQ32 - mU32) + (mQ32 + mU32)*logU3Q3))/(-(mQ32*mU3) + pow3(mU3))
+        - (11520*msq2*(2*(msq2 - mU32) + (msq2 - 3*mU32)*logmqU3)*(-(
         mQ32*mU3) + 2*msq2*Xt - 2*mU32*Xt + pow3(mU3)))/((-mQ32 + mU32)*(-msq2
         + mU32)*pow3(mU3)) - (48*(9*(80*msq2 - 93*mU32)*mU32 + 10*mQ32*(24*msq2
         + 61*mU32) + 19*pow4(mQ3)))/pow2(mQ32 - mU32) - (11520*(mQ32 - msq2)*
@@ -4220,44 +4236,44 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         mU32)*((mQ32 - mU32)*(msq2 + 3*mU32) + 8*mU3*(msq2 - mU32)*Xt)*dilog(1
         - msq2/mU32))/((mQ32 - mU32)*pow4(mU3)) - (768*Xt*(mQ32*(30*msq2 - 58*
         mU32) + 90*msq2*mU32 + 3*pow4(mQ3) + 23*pow4(mU3)))/(mU3*pow2(mQ32 -
-        mU32)) + (384*(2*mQ32*mU32 + pow4(mQ3) - 3*pow4(mU3) + log(mU32/mQ32)*(
+        mU32)) + (384*(2*mQ32*mU32 + pow4(mQ3) - 3*pow4(mU3) + logU3Q3*(
         3*mQ32*mU32 + pow4(mU3))))/(-(mQ32*mU32) + pow4(mU3)) - (48*(2*mU3*(
         mQ32 - mU32)*(-120*msq2*mU3*(mU3 - 2*Xt) + mQ32*(120*msq2 + mU3*(-137*
-        mU3 + 24*Xt)) + (129*mU3 - 104*Xt)*pow3(mU3) + 12*pow4(mQ3)) + log(
-        mU32/mQ32)*pow3(mU3)*(10*mQ32*mU3*(-47*mU3 + 32*Xt) + mU32*(227*mU32 -
-        352*mU3*Xt - 256*pow2(Xt)) + 235*pow4(mQ3)) + 20*(mQ32 - mU32)*log(
-        msq2/mQ32)*(-12*msq2*mU32*(mU3 - 4*Xt) + mQ32*(12*msq2*mU3 + pow3(mU3))
+        mU3 + 24*Xt)) + (129*mU3 - 104*Xt)*pow3(mU3) + 12*pow4(mQ3)) + logU3Q3*
+        pow3(mU3)*(10*mQ32*mU3*(-47*mU3 + 32*Xt) + mU32*(227*mU32 -
+        352*mU3*Xt - 256*pow2(Xt)) + 235*pow4(mQ3)) + 20*(mQ32 - mU32)*logmqQ3*
+        (-12*msq2*mU32*(mU3 - 4*Xt) + mQ32*(12*msq2*mU3 + pow3(mU3))
         - 24*Xt*pow4(msq) - pow5(mU3))))/(pow2(mQ32 - mU32)*pow3(mU3)) - (960*
-        log(msq2/mQ32)*(36*msq2*mU32*(mU3 + 2*Xt) + 6*mQ32*(2*msq2*(mU3 + 2*Xt)
+        logmqQ3*(36*msq2*mU32*(mU3 + 2*Xt) + 6*mQ32*(2*msq2*(mU3 + 2*Xt)
         - 15*pow3(mU3)) + 43*mU3*pow4(mQ3) + 47*pow5(mU3)))/(mU3*pow2(mQ32 -
-        mU32)) - (128*(3 - log(mU32/mQ32))*((mQ32 - mU32)*(-60*msq2*mU32 + 30*
+        mU32)) - (128*(3 - logU3Q3)*((mQ32 - mU32)*(-60*msq2*mU32 + 30*
         pow4(msq) - 37*pow4(mU3)) + 8*Xt*pow5(mU3)))/((mQ32 - mU32)*pow4(mU3))
-        + (48*(-2 + log(mU32/mQ32))*(3*(80*msq2*mU3 + 27*pow3(mU3))*pow4(mQ3) +
+        + (48*(-2 + logU3Q3)*(3*(80*msq2*mU3 + 27*pow3(mU3))*pow4(mQ3) +
         480*mU32*Xt*pow4(msq) + 240*msq2*(mU3 - 4*Xt)*pow4(mU3) - 2*mQ32*(240*
         msq2*mU32*(mU3 - 2*Xt) + 240*Xt*pow4(msq) + (81*mU3 - 184*Xt)*pow4(mU3)
         ) + (65*mU32 - 432*mU3*Xt - 256*pow2(Xt))*pow5(mU3)))/(pow2(mQ32 -
-        mU32)*pow3(mU3)) - (96*(20*mU32*(3*mQ32 + mU3*(-3*mU3 + 8*Xt))*log(
-        msq2/mQ32)*pow2(mQ32 - mU32) + 2*pow2(mQ32 - mU32)*(-60*msq2*mU3*(mU3 -
+        mU32)*pow3(mU3)) - (96*(20*mU32*(3*mQ32 + mU3*(-3*mU3 + 8*Xt))*logmqQ3*
+        pow2(mQ32 - mU32) + 2*pow2(mQ32 - mU32)*(-60*msq2*mU3*(mU3 -
         8*Xt) + mQ32*(60*msq2 - 663*mU32 + 48*mU3*Xt) + 41*(29*mU3 - 32*Xt)*
-        pow3(mU3) + 6*pow4(mQ3)) + mU32*log(mU32/mQ32)*(mQ32*mU32*(-1177*mU32 +
+        pow3(mU3) + 6*pow4(mQ3)) + mU32*logU3Q3*(mQ32*mU32*(-1177*mU32 +
         864*mU3*Xt - 768*pow2(Xt)) + mU3*(625*mU3 - 656*Xt)*pow4(mQ3) + (563*
         mU32 - 336*mU3*Xt + 256*pow2(Xt))*pow4(mU3) - 43*pow6(mQ3))))/(mU32*
-        pow3(-mQ32 + mU32)) + (96*log(mU32/mQ32)*(mQ32*mU32*(3971*mU32 - 3328*
+        pow3(-mQ32 + mU32)) + (96*logU3Q3*(mQ32*mU32*(3971*mU32 - 3328*
         mU3*Xt + 1280*pow2(Xt)) + mU3*(-2867*mU3 + 1856*Xt)*pow4(mQ3) + (-1665*
         mU32 + 1728*mU3*Xt - 256*pow2(Xt))*pow4(mU3) + 625*pow6(mQ3)))/pow3(
-        mQ32 - mU32) - (128*lmQ3MR*(120*log(msq2/mQ32)*pow3(mQ32 - mU32) + (
+        mQ32 - mU32) - (128*lmQ3MR*(120*logmqQ3*pow3(mQ32 - mU32) + (
         mQ32 - mU32)*(-4*mQ32*mU3*(511*mU3 + 306*Xt) + (983*mU3 + 1176*Xt)*
-        pow3(mU3) + 1037*pow4(mQ3)) + 6*log(mU32/mQ32)*(2*mQ32*(-61*mU3 + 32*
+        pow3(mU3) + 1037*pow4(mQ3)) + 6*logU3Q3*(2*mQ32*(-61*mU3 + 32*
         Xt)*pow3(mU3) + mU3*(61*mU3 - 136*Xt)*pow4(mQ3) + 8*(7*mU3 + 8*Xt)*
         pow5(mU3) + pow6(mQ3))))/pow3(mQ32 - mU32) + (128*(-((3*mQ32 + 30*msq2
         - 10*mU32)*(mQ32 - mU32)*mU32) + 30*msq2*(msq2 - 2*mU32)*(mQ32 - mU32)*
-        log(msq2/mQ32) + 8*(-4*mQ32 + mU3*(4*mU3 + Xt))*log(mU32/mQ32)*pow4(
+        logmqQ3 + 8*(-4*mQ32 + mU3*(4*mU3 + Xt))*logU3Q3*pow4(
         mU3)))/(-(mQ32*pow4(mU3)) + pow6(mU3)) + (24*dilog(1 - mU32/mQ32)*(-(
         mQ32*(31*mU3 + 80*Xt)*pow3(mU3)) + mU3*(19*mU3 + 24*Xt)*pow4(mQ3) - (
         119*mU3 + 456*Xt)*pow5(mU3) + 3*pow6(mQ3)))/(-(mQ32*pow4(mU3)) + pow6(
-        mU3)) - (3840*msq2*(-10*msq2*mU32 + 3*pow4(msq) + 7*pow4(mU3) + log(
-        msq2/mU32)*(-3*msq2*mU32 + pow4(msq) + 6*pow4(mU3))))/(-(msq2*pow4(mU3)
-        ) + pow6(mU3)) + (3*pow2(log(mU32/mQ32))*(120*(mU3 - 8*Xt)*pow3(mU3)*
+        mU3)) - (3840*msq2*(-10*msq2*mU32 + 3*pow4(msq) + 7*pow4(mU3) + logmqU3*
+        (-3*msq2*mU32 + pow4(msq) + 6*pow4(mU3))))/(-(msq2*pow4(mU3)
+        ) + pow6(mU3)) + (3*pow2(logU3Q3)*(120*(mU3 - 8*Xt)*pow3(mU3)*
         pow4(msq) + pow4(mQ3)*(240*msq2*mU32 + 120*pow4(msq) - 1267*pow4(mU3))
         + 240*msq2*(mU3 + 8*Xt)*pow5(mU3) - 2*mQ32*(240*msq2*(mU3 + 4*Xt)*pow3(
         mU3) + 120*mU3*(mU3 - 4*Xt)*pow4(msq) + (2573*mU3 - 4832*Xt)*pow5(mU3))
@@ -4265,7 +4281,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         mU32)*pow4(mU3)) + (24*dilog(1 - mU32/mQ32)*(2*(159*mU3 - 52*Xt)*pow3(
         mU3)*pow4(mQ3) + 8*mQ32*(193*mU3 - 271*Xt)*pow5(mU3) + 8*mU3*(2*mU3 +
         3*Xt)*pow6(mQ3) + (-2649*mU3 + 2248*Xt)*pow7(mU3) + 3*pow8(mQ3)))/(
-        pow2(mQ32 - mU32)*pow4(mU3)) + (24*log(mU32/mQ32)*(-10*log(msq2/mQ32)*
+        pow2(mQ32 - mU32)*pow4(mU3)) + (24*logU3Q3*(-10*logmqQ3*
         pow2(mQ32 - mU32)*((mQ32 - mU32)*(6*msq2*mU32 + 3*pow4(msq) - 5*pow4(
         mU3)) + 8*mU3*Xt*(-6*msq2*mU32 + 3*pow4(msq) + 2*pow4(mU3))) + 8*Xt*
         pow3(mU3)*(5*(6*msq2 + 113*mU32)*pow4(mQ3) + 30*msq2*pow4(mU3) - 3*
@@ -4273,7 +4289,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         mU32*(-10*pow4(mQ3)*(9*msq2*mU32 + 325*pow4(mU3)) + 6*(5*msq2 + 2*mU32)
         *pow6(mQ3) - 3*(10*msq2 + 971*mU32)*pow6(mU3) + 18*mQ32*(5*msq2*pow4(
         mU3) + 338*pow6(mU3)) + 3*pow8(mQ3))))/(pow3(mQ32 - mU32)*pow4(mU3)) +
-        (3*pow2(log(mU32/mQ32))*(4*(240*msq2*(mU3 + 2*Xt)*pow3(mU3) + 120*mU3*(
+        (3*pow2(logU3Q3)*(4*(240*msq2*(mU3 + 2*Xt)*pow3(mU3) + 120*mU3*(
         mU3 - 2*Xt)*pow4(msq) + (-8781*mU3 + 12800*Xt)*pow5(mU3))*pow6(mQ3) +
         pow4(mQ3)*(-240*(11*mU3 - 12*Xt)*pow3(mU3)*pow4(msq) + 480*msq2*(21*mU3
         + 52*Xt)*pow5(mU3) + 2*(49527*mU32 - 43840*mU3*Xt + 9984*pow2(Xt))*
@@ -4288,16 +4304,16 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         2*msq2*mU32 + pow4(msq) + 13*pow4(mU3))*pow6(mQ3) - 2*msq2*(17*mU3 + 8*
         Xt)*pow7(mU3) + mQ32*((19*mU3 - 16*Xt)*pow3(mU3)*pow4(msq) - 2*msq2*(
         45*mU3 + 112*Xt)*pow5(mU3) + (119*mU3 - 16*Xt)*pow7(mU3)) + (-29*mU3 +
-        8*Xt)*pow9(mU3)))/(pow3(-mQ32 + mU32)*pow4(mU3)) - (6*log(mU32/mQ32)*(
+        8*Xt)*pow9(mU3)))/(pow3(-mQ32 + mU32)*pow4(mU3)) - (6*logU3Q3*(
         4*(mQ32 - mU32)*mU32*(-2*(45*msq2*mU3*(mU3 + 8*Xt) + (11243*mU3 - 5748*
         Xt)*pow3(mU3))*pow4(mQ3) + 30*msq2*(47*mU3 + 104*Xt)*pow5(mU3) + 2*
         mQ32*(15*msq2*(19*mU3 + 48*Xt)*pow3(mU3) + 4*(3693*mU3 - 1951*Xt)*pow5(
         mU3)) + (30*msq2 + 8*mU3*(497*mU3 - 9*Xt))*pow6(mQ3) + 3*(-3807*mU3 +
-        968*Xt)*pow7(mU3) + 3*pow8(mQ3)) + log(mU32/mQ32)*pow4(mU3)*(2*mU32*(
+        968*Xt)*pow7(mU3) + 3*pow8(mQ3)) + logU3Q3*pow4(mU3)*(2*mU32*(
         25391*mU32 - 28144*mU3*Xt + 2816*pow2(Xt))*pow4(mQ3) + 4*mQ32*(-12005*
         mU32 + 14088*mU3*Xt + 768*pow2(Xt))*pow4(mU3) - 4*mU3*(4621*mU3 - 5624*
         Xt)*pow6(mQ3) + (15341*mU32 - 19488*mU3*Xt - 512*pow2(Xt))*pow6(mU3) +
-        1149*pow8(mQ3)) - 40*(mQ32 - mU32)*log(msq2/mQ32)*(3*(47*mU3 + 136*Xt)*
+        1149*pow8(mQ3)) - 40*(mQ32 - mU32)*logmqQ3*(3*(47*mU3 + 136*Xt)*
         pow4(msq)*pow5(mU3) - pow4(mQ3)*(6*msq2*(3*mU3 + 8*Xt)*pow3(mU3) + 3*
         mU3*(3*mU3 - 8*Xt)*pow4(msq) + (33*mU3 - 80*Xt)*pow5(mU3)) + (6*msq2*
         mU32 + 3*pow4(msq) + 11*pow4(mU3))*pow6(mQ3) - 6*msq2*(17*mU3 + 8*Xt)*
@@ -4307,12 +4323,14 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
       }
 
       case Limits::MQ3_EQ_MU3_EQ_M3: {
-         return (1835*mQ32*msq2 - 232*mQ3*msq2*Xt + 780*mQ32*msq2*log(msq2/mQ32) - 360*
-        mQ3*msq2*Xt*log(msq2/mQ32) - 4*lmQ3MR*mQ3*(mQ32 - msq2)*(335*mQ3 + 104*
-        Xt + 60*mQ3*log(msq2/mQ32)) + 96*mQ32*pow2(Xt) - 96*msq2*pow2(Xt) +
-        180*mQ32*msq2*pow2(log(msq2/mQ32)) + 232*Xt*pow3(mQ3) - 120*Xt*log(
-        msq2/mQ32)*pow3(mQ3) - 1835*pow4(mQ3) - 540*log(msq2/mQ32)*pow4(mQ3) -
-        180*pow2(log(msq2/mQ32))*pow4(mQ3) - 360*dilog(1 - msq2/mQ32)*(-(mQ32*
+         const double logmqQ3 = std::log(msq2/mQ32);
+
+         return (1835*mQ32*msq2 - 232*mQ3*msq2*Xt + 780*mQ32*msq2*logmqQ3 - 360*
+        mQ3*msq2*Xt*logmqQ3 - 4*lmQ3MR*mQ3*(mQ32 - msq2)*(335*mQ3 + 104*
+        Xt + 60*mQ3*logmqQ3) + 96*mQ32*pow2(Xt) - 96*msq2*pow2(Xt) +
+        180*mQ32*msq2*pow2(logmqQ3) + 232*Xt*pow3(mQ3) - 120*Xt*logmqQ3*pow3(mQ3) -
+        1835*pow4(mQ3) - 540*logmqQ3*pow4(mQ3) -
+        180*pow2(logmqQ3)*pow4(mQ3) - 360*dilog(1 - msq2/mQ32)*(-(mQ32*
         msq2) + pow4(mQ3)) + 12*pow2(lmQ3MR)*(-(mQ32*msq2) + pow4(mQ3)))/(54.*
         mQ32*(mQ32 - msq2));
       }
