@@ -1323,10 +1323,17 @@ double HierarchyCalculator::calcV2() const
 }
 
 
+/**
+ * Prefactor of self-energy from Section 3 from [1005.5709].
+ *
+ * GF = 1/(Sqrt[2] (vu^2 + vd^2)) is defined in the DR'-bar scheme.
+ * Sin[beta]^2 = vu^2 / (vu^2 + vd^2)
+ *
+ * @return 3 Sqrt[2] GF / (2 Pi^2 Sin[beta]^2)
+ */
 double HierarchyCalculator::calcHiggsMassMatrixPrefactor() const
 {
-   // GF = 1/(sqrt(2) * (vu^2 + vd^2)) is calculated in the DR'-bar scheme
-   return 3. / (2. * Pi * Pi * pow2(p.vu));
+   return 3. / (2 * pow2(Pi * p.vu));
 }
 
 
