@@ -4567,7 +4567,6 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas(Limits limit, int omitLog
  */
 double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLogs) const
 {
-
    using std::log;
    using std::sqrt;
    using himalaya::dilog;
@@ -4581,7 +4580,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
    const double mU3 = sqrt(mU32);
    const double mQ3 = sqrt(mQ32);
    const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
-   const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
+   const double lmQ3MR = omitLogs * std::log(Mst12 / MR2) + std::log(mQ32 / Mst12);
    const double dlatas2Const = 0.;
    const double z3 = 1.202056903159594;
    const double Xt4 = xtOrderLambdaAtAs2 < 4 ? 0 : pow4(Xt);
@@ -4590,7 +4589,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
    if (limit == Limits::DEGENERATE) limit = Limits::MQ3_EQ_MU3_EQ_M3;
 
    switch (limit) {
-      case(Limits::GENERAL):{
+      case Limits::GENERAL: {
       return (3*dlatas2Const - 384*lmQ3MR*z3 + (160*lmQ3MR*m32*log(msq2/mQ32))/mQ32 +
         (160*lmQ3MR*m32*log(msq2/mQ32))/mU32 - 6096*pow2(lmQ3MR) + (2352*m32*
         pow2(lmQ3MR))/mQ32 + (2352*m32*pow2(lmQ3MR))/mU32 + (16*(-64*m32 + 207*
@@ -4808,8 +4807,9 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
         pow6(mU3) + 497*mU32*pow8(mQ3) + 497*mQ32*pow8(mU3) + 101*power10(mQ3)
         + 101*power10(mU3))))/(pow3(m32 - mQ32)*pow3(m32 - mU32)*pow3(mQ32 -
         mU32))))/3.;
-      };
-      case(Limits::MQ3_EQ_MU3):{
+      }
+
+      case Limits::MQ3_EQ_MU3: {
          return -(384*lmQ3MR*dilog(1 - m32/mQ32)*pow3(m3)*(-137*m3*mQ32 - 184*m32*Xt +
         192*mQ32*Xt + 133*pow3(m3))*pow8(mQ3) + (m32 - mQ32)*(160*lmQ3MR*m3*
         mQ32*log(msq2/mQ32)*pow2(m32 - mQ32)*(2*mQ32*Xt*(-6*mQ32 + pow2(Xt)) +
@@ -4842,7 +4842,8 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
         4*mQ32*pow2(Xt) + 2*pow4(mQ3))*pow9(m3) + 12*Xt*(-6*mQ32 + pow2(Xt))*
         power10(mQ3)))/(9.*pow3(-m32 + mQ32)*pow8(mQ3));
       }
-      case(Limits::MQ3_EQ_M3):{
+
+      case Limits::MQ3_EQ_M3: {
          return (3*dlatas2Const + (8*lmQ3MR*(3857 + (216*mQ32)/mU32))/3. - (32*lmQ3MR*(
         3853*mQ32 - 2701*mU32))/(9.*(mQ32 - mU32)) - 384*lmQ3MR*z3 + 160*
         lmQ3MR*log(msq2/mQ32) + (160*lmQ3MR*mQ32*log(msq2/mQ32))/mU32 + (16*
@@ -4914,7 +4915,8 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
         pow6(mU3) + 177*pow8(mU3)) + 64*power10(mQ3)))/(pow2(-(mQ3*mU32) +
         pow3(mQ3))*pow4(mU3)))/3.;
       }
-      case(Limits::MU3_EQ_M3):{
+
+      case Limits::MU3_EQ_M3: {
          return (3*dlatas2Const - (32*lmQ3MR*(2701*mQ32 - 3853*mU32))/(9.*(mQ32 - mU32))
         + (8*lmQ3MR*(3857 + (216*mU32)/mQ32))/3. - 384*lmQ3MR*z3 + 160*lmQ3MR*
         log(msq2/mQ32) + (160*lmQ3MR*mU32*log(msq2/mQ32))/mQ32 - 4000*pow2(
@@ -5006,7 +5008,8 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
         2425*power10(mQ3) + 256*power10(mU3))))/(3.*pow4(mQ3)*pow5(mQ32 - mU32)
         ))/3.;
       }
-      case(Limits::MQ3_EQ_MU3_EQ_M3):{
+
+      case Limits::MQ3_EQ_MU3_EQ_M3: {
          return dlatas2Const + (160*lmQ3MR*log(msq2/mQ32)*(Xt4 - 6*mQ32*pow2(Xt) - 12*Xt*
         pow3(mQ3) + 2*mQ3*pow3(Xt) + 6*pow4(mQ3)))/(9.*pow4(mQ3)) + (8*lmQ3MR*(
         180*msq2*Xt4 + 176*mQ3*Xt5 - mQ32*((98 + 27*lmQ3MR)*Xt4 + 1080*msq2*
@@ -5015,6 +5018,7 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
         mQ3) + (-851 - 990*lmQ3MR - 432*z3 + 2484*pow2(lmQ3MR))*pow6(mQ3)))/(
         27.*pow6(mQ3));
       }
+
       default:
          break;
    }
