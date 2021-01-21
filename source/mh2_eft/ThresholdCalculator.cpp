@@ -100,10 +100,11 @@ double f3HD(double x) noexcept
    if (std::abs(den) < 1e-5)
       return -9./4.;
 
+   const double logx2 = std::log(x2);
+
    const std::complex<double> result =
       (-1. + 2*x2 + 2.*x4)/pow2(den) * (
-         std::log(x2)*std::log(cden) +
-         dilog(x2) - zeta2 - x2*std::log(x2));
+         logx2*std::log(cden) + dilog(x2) - zeta2 - x2*logx2);
 
    return result.real();
 }

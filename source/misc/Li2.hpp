@@ -44,3 +44,5 @@ std::complex<double> dilog(const std::complex<double>&) noexcept ATTR(const);
 double clausen_2(double) noexcept ATTR(const);
 
 } // namespace himalaya
+
+#undef ATTR
