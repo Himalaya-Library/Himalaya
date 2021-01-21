@@ -5007,22 +5007,24 @@ double ThresholdCalculator::getDeltaLambdaAlphatAlphas2(Limits limit, int omitLo
  */
 double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs, int omitXtLogs) const
 {
+   const auto limit = static_cast<Limits>(p.massLimit3LThreshold);
+
    double xtTerms = 0.;
 
    if (xtOrder <= 3) {
-      xtTerms = getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 4, omitXtLogs)
-              + getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 5, omitXtLogs)
-              + getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 6, omitXtLogs);
+      xtTerms = getDRbarPrimeToMSbarXtTerms(limit, 4, omitXtLogs)
+              + getDRbarPrimeToMSbarXtTerms(limit, 5, omitXtLogs)
+              + getDRbarPrimeToMSbarXtTerms(limit, 6, omitXtLogs);
    } else {
-      xtTerms = getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 5, omitXtLogs)
-              + getDRbarPrimeToMSbarXtTerms(static_cast<Limits>(p.massLimit3LThreshold), 6, omitXtLogs);
+      xtTerms = getDRbarPrimeToMSbarXtTerms(limit, 5, omitXtLogs)
+              + getDRbarPrimeToMSbarXtTerms(limit, 6, omitXtLogs);
    }
 
    const double g3as = getDeltaG3Alphas(omitLogs);
-   const double ytas = getDeltaYtAlphas(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
-   const double ytas2 = getDeltaYtAlphas2(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
-   const double lambdaat = getDeltaLambdaAlphat(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
-   const double lambdaatas = getDeltaLambdaAlphatAlphas(static_cast<Limits>(p.massLimit3LThreshold), omitLogs);
+   const double ytas = getDeltaYtAlphas(limit, omitLogs);
+   const double ytas2 = getDeltaYtAlphas2(limit, omitLogs);
+   const double lambdaat = getDeltaLambdaAlphat(limit, omitLogs);
+   const double lambdaatas = getDeltaLambdaAlphatAlphas(limit, omitLogs);
 
    return -(-2.*(lambdaat*(3*pow2(ytas) + 2*ytas2) + (lambdaatas - 4*ytas*lambdaat)
       *(g3as + 2*ytas)) - xtTerms);
