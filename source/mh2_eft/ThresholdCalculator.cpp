@@ -5009,16 +5009,15 @@ double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs,
 {
    const auto limit = static_cast<Limits>(p.massLimit3LThreshold);
 
-   double xtTerms = 0.;
-
-   if (xtOrder <= 3) {
-      xtTerms = getDRbarPrimeToMSbarXtTerms(limit, 4, omitXtLogs)
-              + getDRbarPrimeToMSbarXtTerms(limit, 5, omitXtLogs)
-              + getDRbarPrimeToMSbarXtTerms(limit, 6, omitXtLogs);
-   } else {
-      xtTerms = getDRbarPrimeToMSbarXtTerms(limit, 5, omitXtLogs)
-              + getDRbarPrimeToMSbarXtTerms(limit, 6, omitXtLogs);
-   }
+   const double xtTerms =
+      xtOrder <= 3
+      ?
+      getDRbarPrimeToMSbarXtTerms(limit, 4, omitXtLogs) +
+      getDRbarPrimeToMSbarXtTerms(limit, 5, omitXtLogs) +
+      getDRbarPrimeToMSbarXtTerms(limit, 6, omitXtLogs)
+      :
+      getDRbarPrimeToMSbarXtTerms(limit, 5, omitXtLogs) +
+      getDRbarPrimeToMSbarXtTerms(limit, 6, omitXtLogs);
 
    const double g3as = getDeltaG3Alphas(omitLogs);
    const double ytas = getDeltaYtAlphas(limit, omitLogs);
