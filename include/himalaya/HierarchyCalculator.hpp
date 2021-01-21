@@ -139,10 +139,16 @@ namespace himalaya {
        * @param omitXtOrders a bool to omit xtOrders of delta_lambda_EFT
        */
       void calcDeltaLambda3L(HierarchyObject& ho, bool omitXtOrders) const;
+      /// calculate sin(beta)
+      double calcSinBeta() const;
+      /// calculate cos(beta)
+      double calcCosBeta() const;
       /// calculate tan(beta)
       double calcTanBeta() const;
       /// calculate beta from tan(beta)
       double calcBeta() const;
+      /// calculate v = sqrt(vu^2 + vd^2)
+      double calcV() const;
       /// calculate v^2 = vu^2 + vd^2
       double calcV2() const;
       /// calculate prefactor of the Higgs mass matrix

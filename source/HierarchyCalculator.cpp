@@ -1172,8 +1172,8 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const double beta = calcBeta();
    const double Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
-   const double sbeta = std::sin(beta);
-   const double cbeta = std::cos(beta);
+   const double sbeta = calcSinBeta();
+   const double cbeta = calcCosBeta();
    const double Mt = ho.getIsAlphab() ? p.Mb : p.Mt;
    const double s2t = ho.getIsAlphab() ? p.s2b : p.s2t;
 
@@ -1286,6 +1286,19 @@ HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::HierarchyObject& ho,
    return Eigen::Matrix2d::Zero();
 }
 
+
+double HierarchyCalculator::calcSinBeta() const
+{
+   return p.vu / calcV();
+}
+
+
+double HierarchyCalculator::calcCosBeta() const
+{
+   return p.vd / calcV();
+}
+
+
 double HierarchyCalculator::calcTanBeta() const
 {
    return p.vu / p.vd;
@@ -1295,6 +1308,12 @@ double HierarchyCalculator::calcTanBeta() const
 double HierarchyCalculator::calcBeta() const
 {
    return std::atan(calcTanBeta());
+}
+
+
+double HierarchyCalculator::calcV() const
+{
+   return std::sqrt(calcV2());
 }
 
 
