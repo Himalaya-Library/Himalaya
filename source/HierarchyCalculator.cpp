@@ -1273,17 +1273,17 @@ HierarchyCalculator::calcDRbarToMDRbarShift(const himalaya::HierarchyObject& ho,
                                             bool shiftOneLoop,
                                             bool shiftTwoLoop) const
 {
-   if(shiftOneLoop && shiftTwoLoop){
-      return getMt41L(ho, 1, 1) + getMt42L(ho, 1, 1) - getMt41L(ho, 0, 0) - getMt42L(ho, 0, 0);
-   }
-   if(shiftOneLoop){
-      return getMt41L(ho, 1, 1) - getMt41L(ho, 0, 0);
-   }
-   if(shiftTwoLoop){
-      return getMt42L(ho, 1, 1) - getMt42L(ho, 0, 0);
+   Eigen::Matrix2d shift{Eigen::Matrix2d::Zero()};
+
+   if (shiftOneLoop) {
+      shift += getMt41L(ho, 1, 1) - getMt41L(ho, 0, 0);
    }
 
-   return Eigen::Matrix2d::Zero();
+   if (shiftTwoLoop) {
+      shift += getMt42L(ho, 1, 1) - getMt42L(ho, 0, 0);
+   }
+
+   return shift;
 }
 
 
