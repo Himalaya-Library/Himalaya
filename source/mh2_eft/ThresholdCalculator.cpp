@@ -5036,7 +5036,6 @@ double ThresholdCalculator::getDRbarPrimeToMSbarShift(int xtOrder, int omitLogs,
 double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(Limits limit, int xtOrder, int omitLogs) const
 {
    using std::log;
-   using std::sqrt;
    using himalaya::dilog;
 
    const double Mst12 = pow2(p.MSt(0));
@@ -5044,10 +5043,10 @@ double ThresholdCalculator::getDRbarPrimeToMSbarXtTerms(Limits limit, int xtOrde
    const double MR2 = pow2(p.scale);
    const double mU32 = p.mu2(2,2);
    const double mQ32 = p.mq2(2,2);
-   const double m3 = sqrt(m32);
-   const double mU3 = sqrt(mU32);
-   const double mQ3 = sqrt(mQ32);
-   const double msq = sqrt(msq2);
+   const double m3 = std::sqrt(m32);
+   const double mU3 = std::sqrt(mU32);
+   const double mQ3 = std::sqrt(mQ32);
+   const double msq = std::sqrt(msq2);
    const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double Xt4 = xtOrder != 4 ? 0 : pow4(Xt);
    const double Xt5 = xtOrder != 5 ? 0 : pow5(Xt);
