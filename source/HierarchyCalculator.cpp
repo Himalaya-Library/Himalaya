@@ -1167,8 +1167,6 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    using std::log;
 
    Eigen::Matrix2d Mt41L;
-   const double pi2 = Pi*Pi;
-   const double GF = 1/(sqrt2 * calcV2());
    const double beta = calcBeta();
    const double Mst1 = shiftMst1ToMDR(ho, shiftOneLoop, shiftTwoLoop);
    const double Mst2 = shiftMst2ToMDR(ho, shiftOneLoop, shiftTwoLoop);
@@ -1177,13 +1175,13 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
    const double Mt = ho.getIsAlphab() ? p.Mb : p.Mt;
    const double s2t = ho.getIsAlphab() ? p.s2b : p.s2t;
 
-   Mt41L(0, 0) = (-3 * GF * pow2(Mt) * pow2(p.mu) * pow2(1 / sbeta) *
+   Mt41L(0, 0) = (-pow2(Mt) * pow2(p.mu) *
       (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1) * log(Mst1) +
       pow2(Mst2) * log(Mst1) - pow2(Mst1) * log(Mst2) -
       pow2(Mst2) * log(Mst2)) * pow2(s2t)) /
-      (4. * sqrt2 * (pow2(Mst1) - pow2(Mst2)) * pi2);
+      (4. * (pow2(Mst1) - pow2(Mst2)));
 
-   Mt41L(0, 1) = (3 * GF * pow2(1 / sbeta) *
+   Mt41L(0, 1) =
       (-(pow3(Mt) * p.mu * (log(Mst1) - log(Mst2)) * s2t) / 2. +
       (pow2(Mt) * pow2(p.mu) * 1 / tan(beta) *
       (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1) * log(Mst1) +
@@ -1192,12 +1190,11 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
       (4. * (pow2(Mst1) - pow2(Mst2))) +
       (Mt * p.mu * (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1) * log(Mst1) +
       pow2(Mst2) * log(Mst1) - pow2(Mst1) * log(Mst2) -
-      pow2(Mst2) * log(Mst2)) * pow3(s2t)) / 8.)) /
-      (sqrt2 * pi2);
+      pow2(Mst2) * log(Mst2)) * pow3(s2t)) / 8.);
 
    Mt41L (1,0) = Mt41L(0,1);
 
-   Mt41L(1, 1) = (3 * GF * pow2(1 / sbeta) *
+   Mt41L(1, 1) =
       (pow4(Mt) * (log(Mst1) + log(Mst2) - 2 * log(Mt)) +
       pow3(Mt) * p.mu * 1 / tan(beta) * (log(Mst1) - log(Mst2)) * s2t +
       (pow2(Mt) * pow2(1 / sbeta) *
@@ -1221,10 +1218,9 @@ Eigen::Matrix2d HierarchyCalculator::getMt41L(
       ((pow2(Mst1) - pow2(Mst2)) *
       (-pow2(Mst1) + pow2(Mst2) + pow2(Mst1) * log(Mst1) +
       pow2(Mst2) * log(Mst1) - pow2(Mst1) * log(Mst2) -
-      pow2(Mst2) * log(Mst2)) * pow4(s2t)) / 16.)) /
-      (sqrt2 * pi2);
+      pow2(Mst2) * log(Mst2)) * pow4(s2t)) / 16.);
 
-    return Mt41L;
+   return calcHiggsMassMatrixPrefactor() * Mt41L;
 }
 
 /**
