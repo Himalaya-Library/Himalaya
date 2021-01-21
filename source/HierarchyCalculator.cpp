@@ -57,7 +57,7 @@ public:
    RAII_tmp_set(RAII_tmp_set&&) noexcept = delete;
    ~RAII_tmp_set() { variable = old_value; }
    RAII_tmp_set& operator=(const RAII_tmp_set&) = delete;
-   RAII_tmp_set& operator=(RAII_tmp_set&& other) noexcept = default;
+   RAII_tmp_set& operator=(RAII_tmp_set&& other) noexcept = delete;
 private:
    T& variable;
    T old_value;
