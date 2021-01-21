@@ -3915,7 +3915,7 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
 
    switch (limit) {
-      case(Limits::GENERAL):{
+      case Limits::GENERAL: {
          return (4*pow2(lmQ3MR) - 60*pow2(log(msq2/mQ32)) - (16*Xt*(-3*m3*(mQ32 + 10*msq2
         + mU32) + 14*pow3(m3)))/((m32 - mQ32)*(m32 - mU32)) + (60*(mQ32 - msq2)
         *dilog(1 - msq2/mQ32)*(-3*m32*(mQ32 - msq2) + mQ32*(mQ32 + msq2) + (8*
@@ -4132,7 +4132,8 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         108*Xt*pow7(m3) + 116*pow8(m3) - 3*(5*pow4(mQ3)*pow4(msq) + 6*pow8(mQ3)
         )))/pow4(m32 - mQ32))/18.;
       }
-      case(Limits::MQ3_EQ_M3):{
+
+      case Limits::MQ3_EQ_M3: {
          return   (8064 + (384*(mQ32 + mU32 + 2*mQ3*Xt)*log(mQ32/mU32))/(mQ32 - mU32) +
         192*pow2(lmQ3MR) - 2880*pow2(log(msq2/mQ32)) - (288*(mQ3 - 2*Xt)*(-2*
         mQ32 + 2*mU32 + (mQ32 + mU32)*log(mQ32/mU32)))/(-(mQ3*mU32) + pow3(mQ3)
@@ -4205,7 +4206,8 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         power10(mU3) - 24*mQ3*Xt*power10(mU3)))/pow4(-(mQ3*mU32) + pow3(mQ3)))/
         864.;
       }
-      case(Limits::MU3_EQ_M3):{
+
+      case Limits::MU3_EQ_M3: {
          return(32080 - (1536*(mQ32 + mU3*(mU3 + 2*Xt))*log(mU32/mQ32))/(mQ32 - mU32) +
         768*pow2(lmQ3MR) - 11520*pow2(log(msq2/mQ32)) - (1152*(mU3 - 2*Xt)*(2*(
         mQ32 - mU32) + (mQ32 + mU32)*log(mU32/mQ32)))/(-(mQ32*mU3) + pow3(mU3))
@@ -4303,7 +4305,8 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         + 112*Xt)*pow5(mU3) + (49*mU3 - 96*Xt)*pow7(mU3)) + (-27*mU3 + 16*Xt)*
         pow9(mU3))))/pow4(-(mQ32*mU3) + pow3(mU3)))/3456.;
       }
-      case(Limits::MQ3_EQ_MU3_EQ_M3):{
+
+      case Limits::MQ3_EQ_MU3_EQ_M3: {
          return (1835*mQ32*msq2 - 232*mQ3*msq2*Xt + 780*mQ32*msq2*log(msq2/mQ32) - 360*
         mQ3*msq2*Xt*log(msq2/mQ32) - 4*lmQ3MR*mQ3*(mQ32 - msq2)*(335*mQ3 + 104*
         Xt + 60*mQ3*log(msq2/mQ32)) + 96*mQ32*pow2(Xt) - 96*msq2*pow2(Xt) +
@@ -4313,10 +4316,12 @@ double ThresholdCalculator::getDeltaYtAlphas2(Limits limit, int omitLogs) const
         msq2) + pow4(mQ3)) + 12*pow2(lmQ3MR)*(-(mQ32*msq2) + pow4(mQ3)))/(54.*
         mQ32*(mQ32 - msq2));
       }
-      case(Limits::DEGENERATE):{
+
+      case Limits::DEGENERATE: {
          return (-2075*mQ32 + 712*mQ3*Xt - 4*lmQ3MR*mQ3*(335*mQ3 + 104*Xt) + 12*mQ32*
         pow2(lmQ3MR) + 96*pow2(Xt))/(54.*mQ32);
       }
+
       default:
          break;
    };
