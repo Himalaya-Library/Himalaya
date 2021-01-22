@@ -166,3 +166,58 @@ double complex function cdli2(z)
   cdli2 = sgn*sum + rest
 
 end function cdli2
+
+
+!*********************************************************************
+!> @brief Evaluation of polynomial P(x) with len coefficients c
+!> @param x real argument of P
+!> @param c coefficients of P(x)
+!> @param len number of coefficients
+!> @return P(x)
+!*********************************************************************
+
+double precision function dhorner(x, c, len)
+  implicit none
+  integer :: len, i
+  double precision :: x, c(len)
+
+  dhorner = 0
+
+  do i = len, 1, -1
+     dhorner = dhorner*x + c(i)
+  end do
+
+end function dhorner
+
+
+!*********************************************************************
+!> @brief Fast implementation of complex logarithm
+!> @param z complex argument
+!> @return log(z)
+!*********************************************************************
+double complex function fast_cdlog(z)
+  implicit none
+  double complex :: z
+  double precision :: re, im
+
+  re = real(z)
+  im = aimag(z)
+  fast_cdlog = dcmplx(0.5D0*log(re**2 + im**2), datan2(im, re))
+
+end function fast_cdlog
+
+
+!>    @brief C wrapper for complex dilogarithm
+      subroutine li2c(re_in, im_in, re_out, im_out) bind(C, name="li2c_")
+      implicit none
+      double precision, intent(in) :: re_in, im_in
+      double precision, intent(out) :: re_out, im_out
+      double complex z, l, cdli2
+
+      z = dcmplx(re_in, im_in)
+      l = cdli2(z)
+
+      re_out = real(l)
+      im_out = aimag(l)
+
+      end
