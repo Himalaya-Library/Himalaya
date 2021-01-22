@@ -52,6 +52,16 @@ double calc_sw2(double mW, double mZ) noexcept
    return 1.0 - calc_cw2(mW, mZ);
 }
 
+double calc_v2(double vu, double vd) noexcept
+{
+   return pow2(vu) + pow2(vd);
+}
+
+double calc_cos2beta(double vu, double vd) noexcept
+{
+   return (pow2(vd) - pow2(vu))/calc_v2(vu, vd);
+}
+
 /// sorts two eigenvalues
 void sort_ew(V2& ew, double& theta) noexcept
 {
@@ -104,8 +114,7 @@ RM33 h_svd(const RM33& M)
 
 double Parameters::calculateMsq2() const
 {
-   const double beta = std::atan(vu / vd);
-   const double cos_2beta = std::cos(2 * beta);
+   const double cos_2beta = calc_cos2beta(vu, vd);
    const double sw2 = calc_sw2(MW, MZ);
    const double msq = pow(pow2(mq2(0,0))*pow2(mq2(1,1))
       *mq2(0,0)*md2(0,0)*mu2(1,1)*md2(1,1)
@@ -149,8 +158,8 @@ void Parameters::validate(bool verbose)
    Ye = h_svd(Ye);
 
    // calculate all other masses
-   if (std::isnan(MW)) MW = 0.5*g2*std::sqrt(pow2(vu) + pow2(vd));
-   if (std::isnan(MZ)) MZ = 0.5*std::sqrt((0.6*pow2(g1) + pow2(g2))*(pow2(vu) + pow2(vd)));
+   if (std::isnan(MW)) MW = 0.5*g2*std::sqrt(calc_v2(vu, vd));
+   if (std::isnan(MZ)) MZ = 0.5*std::sqrt((0.6*pow2(g1) + pow2(g2))*calc_v2(vu, vd));
    if (std::isnan(Mt)) Mt = inv_sqrt2*Yu(2,2)*vu;
    if (std::isnan(Mb)) Mb = inv_sqrt2*Yd(2,2)*vd;
    if (std::isnan(Mtau)) Mtau = inv_sqrt2*Ye(2,2)*vd;
@@ -158,8 +167,7 @@ void Parameters::validate(bool verbose)
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t) || std::isnan(theta_t)) {
       const double tan_beta = vu / vd;
-      const double beta = std::atan(tan_beta);
-      const double cos_2beta = std::cos(2 * beta);
+      const double cos_2beta = calc_cos2beta(vu, vd);
       const double Xt = Mt * (Au(2,2) - mu / tan_beta);
       const double sw2 = calc_sw2(MW, MZ);
       RM22 stopMatrix;
@@ -177,8 +185,7 @@ void Parameters::validate(bool verbose)
 
    if (std::isnan(MSb(0)) || std::isnan(MSb(1)) || std::isnan(s2b) || std::isnan(theta_b)) {
       const double tan_beta = vu / vd;
-      const double beta = std::atan(tan_beta);
-      const double cos_2beta = std::cos(2 * beta);
+      const double cos_2beta = calc_cos2beta(vu, vd);
       const double Xb = Mb * (Ad(2,2) - mu * tan_beta);
       const double sw2 = calc_sw2(MW, MZ);
       RM22 sbottomMatrix;
@@ -196,8 +203,7 @@ void Parameters::validate(bool verbose)
 
    if (std::isnan(MStau(0)) || std::isnan(MStau(1)) || std::isnan(s2tau) || std::isnan(theta_tau)) {
       const double tan_beta = vu / vd;
-      const double beta = std::atan(tan_beta);
-      const double cos_2beta = std::cos(2 * beta);
+      const double cos_2beta = calc_cos2beta(vu, vd);
       const double Xtau = Mtau * (Ae(2,2) - mu * tan_beta);
       const double sw2 = calc_sw2(MW, MZ);
       RM22 stauMatrix;
