@@ -308,14 +308,14 @@ Himalaya info: Δλ(3-loop,MS) = -0.000455415 +- 0.00203118
 Since version 2.0.0 Himalaya can be run from within Mathematica using
 the LibraryLink interface.  To load Himalaya into a Mathematica
 session, first, the file
-[source/LibraryLink/Himalaya_LibraryLink.m](source/LibraryLink/Himalaya_LibraryLink.m)
+[source/himalaya/LibraryLink/Himalaya_LibraryLink.m](source/himalaya/LibraryLink/Himalaya_LibraryLink.m)
 must be loaded, which defines the Himalaya's Mathematica interface
 functions.  Assuming the current directory is the `build/`
 sub-directory of Himalaya, loading `Himalaya_LibraryLink.m` may be
 done by calling
 
 ```.m
-Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
+Get[FileNameJoin[{"..", "source", "himalaya", "LibraryLink", "Himalaya_LibraryLink.m"}]];
 ```
 
 Afterwards, the LibraryLink `Himalaya_LibraryLink.so` must be loaded
@@ -333,7 +333,7 @@ Himalaya.  A full and detailed example can be found in
 **Example**:
 
 ```.m
-Get[FileNameJoin[{"..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
+Get[FileNameJoin[{"..", "source", "himalaya", "LibraryLink", "Himalaya_LibraryLink.m"}]];
 
 InitializeHimalaya[FileNameJoin[{".", "Himalaya_LibraryLink.so"}]];
 

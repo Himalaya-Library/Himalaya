@@ -33,11 +33,9 @@ endif()
 
 # set paths
 set(EXAMPLE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/examples)
-set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source)
+set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/himalaya)
 set(PUBLIC_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-# private headers
-set(PRIVATE_HEADERS ${SOURCE_PATH})
+set(PRIVATE_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/source)
 
 # Himalaya library sources
 set(HIM_LIBSOURCES

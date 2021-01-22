@@ -1,6 +1,6 @@
 #include "doctest.h"
-#include "misc/Li2.hpp"
-#include "mh2l/Li2f.hpp"
+#include "himalaya/misc/Li2.hpp"
+#include "himalaya/mh2l/Li2f.hpp"
 #include <complex>
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
