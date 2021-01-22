@@ -112,14 +112,12 @@ double Parameters::calculateMsq2() const
    const double cos_2beta = calc_cos2beta(vu, vd);
    const double sw2 = calc_sw2(MW, MZ);
    const double msq = std::pow(
-        pow2(mq2(0,0))
-       *pow2(mq2(1,1))
-       *mq2(0,0)
-       *md2(0,0)
-       *mu2(1,1)
-       *md2(1,1)
-       *(mq2(2, 2) + pow2(Mb) - (0.5 - sw2/3) * pow2(MZ) * cos_2beta)
-       *(md2(2, 2) + pow2(Mb) - sw2/3 * pow2(MZ) * cos_2beta),
+        mq2(0,0)*mq2(0,0) // sup L, sdown L
+       *mu2(0,0)*md2(0,0) // sup R, sdown R
+       *mq2(1,1)*mq2(1,1) // scharm L, sstrange L
+       *mu2(1,1)*md2(1,1) // scharm R, sstrange R
+       *(mq2(2, 2) + pow2(Mb) - (0.5 - sw2/3) * pow2(MZ) * cos_2beta) // sbottom L
+       *(md2(2, 2) + pow2(Mb) - sw2/3 * pow2(MZ) * cos_2beta),        // sbottom R
        0.05);
 
    return pow2(msq);
