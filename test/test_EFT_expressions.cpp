@@ -1,8 +1,8 @@
 #include "doctest.h"
 
-#include "mh2_eft/Mh2EFTCalculator.hpp"
-#include "mh2_eft/ThresholdCalculator.hpp"
-#include "misc/CouplingOrders.hpp"
+#include "himalaya/mh2_eft/Mh2EFTCalculator.hpp"
+#include "himalaya/mh2_eft/ThresholdCalculator.hpp"
+#include "himalaya/misc/CouplingOrders.hpp"
 
 #define CHECK_CLOSE(a,b,eps) CHECK((a) == doctest::Approx(b).epsilon(eps))
 

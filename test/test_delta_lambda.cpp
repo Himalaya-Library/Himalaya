@@ -2,8 +2,8 @@
 
 #include "himalaya/HierarchyCalculator.hpp"
 
-#include "mh2_eft/Mh2EFTCalculator.hpp"
-#include "misc/CouplingOrders.hpp"
+#include "himalaya/mh2_eft/Mh2EFTCalculator.hpp"
+#include "himalaya/misc/CouplingOrders.hpp"
 
 #include <Eigen/Core>
 #include <Eigen/Eigenvalues>

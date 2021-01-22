@@ -51,7 +51,7 @@ TestPoint[point_, name_] :=
           ];
 
 (* load LibrayLink *)
-Get[FileNameJoin[{DirectoryName[$InputFileName], "..", "source", "LibraryLink", "Himalaya_LibraryLink.m"}]];
+Get[FileNameJoin[{DirectoryName[$InputFileName], "..", "source", "himalaya", "LibraryLink", "Himalaya_LibraryLink.m"}]];
 
 InitializeHimalaya[libPath];
 
