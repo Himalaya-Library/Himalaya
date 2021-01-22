@@ -152,6 +152,14 @@ void Parameters::validate(bool verbose)
    Yd = h_svd(Yd);
    Ye = h_svd(Ye);
 
+   if (std::isnan(vu) || vu <= 0.) {
+      throw std::runtime_error("Invalid value of vu given!");
+   }
+
+   if (std::isnan(vd) || vd <= 0.) {
+      throw std::runtime_error("Invalid value of vd given!");
+   }
+
    // calculate all other masses
    if (std::isnan(MW)) {
       MW = 0.5*g2*std::sqrt(calc_v2(vu, vd));
