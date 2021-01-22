@@ -207,17 +207,24 @@ double complex function fast_cdlog(z)
 end function fast_cdlog
 
 
-!>    @brief C wrapper for complex dilogarithm
-      subroutine li2c(re_in, im_in, re_out, im_out) bind(C, name="li2c_")
-      implicit none
-      double precision, intent(in) :: re_in, im_in
-      double precision, intent(out) :: re_out, im_out
-      double complex z, l, cdli2
+!*********************************************************************
+!> @brief C wrapper for complex dilogarithm
+!> @param re_in real part of complex input
+!> @param im_in imaginary part of complex input
+!> @param re_out real part of complex output
+!> @param im_out imagoutary part of complex output
+!> @return log(z)
+!*********************************************************************
+subroutine li2c(re_in, im_in, re_out, im_out) bind(C, name="li2c_")
+  implicit none
+  double precision, intent(in) :: re_in, im_in
+  double precision, intent(out) :: re_out, im_out
+  double complex z, l, cdli2
 
-      z = dcmplx(re_in, im_in)
-      l = cdli2(z)
+  z = dcmplx(re_in, im_in)
+  l = cdli2(z)
 
-      re_out = real(l)
-      im_out = aimag(l)
+  re_out = real(l)
+  im_out = aimag(l)
 
-      end
+end subroutine li2c
