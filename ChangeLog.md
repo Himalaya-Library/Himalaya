@@ -15,6 +15,13 @@ Changes
 
  * [commit 313d06d]: Require a C++-14 compatible compiler.
 
+Fixed bugs
+----------
+
+ * [commit 2b7fdee]: In the calculation of the average light squark
+   mass the left-handed sup was counted twice, while the right-handed
+   sup was not counted.
+
 
 Himalaya 4.0.0
 ==============
