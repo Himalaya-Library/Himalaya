@@ -36,11 +36,6 @@ int sign(double x) noexcept
    return x >= 0. ? 1 : -1;
 }
 
-double sqr(double x) noexcept
-{
-   return x*x;
-}
-
 double calc_cw2(double mW, double mZ) noexcept
 {
    const double cw2 = pow2(mW/mZ);
@@ -158,11 +153,21 @@ void Parameters::validate(bool verbose)
    Ye = h_svd(Ye);
 
    // calculate all other masses
-   if (std::isnan(MW)) MW = 0.5*g2*std::sqrt(calc_v2(vu, vd));
-   if (std::isnan(MZ)) MZ = 0.5*std::sqrt((0.6*pow2(g1) + pow2(g2))*calc_v2(vu, vd));
-   if (std::isnan(Mt)) Mt = inv_sqrt2*Yu(2,2)*vu;
-   if (std::isnan(Mb)) Mb = inv_sqrt2*Yd(2,2)*vd;
-   if (std::isnan(Mtau)) Mtau = inv_sqrt2*Ye(2,2)*vd;
+   if (std::isnan(MW)) {
+      MW = 0.5*g2*std::sqrt(calc_v2(vu, vd));
+   }
+   if (std::isnan(MZ)) {
+      MZ = 0.5*std::sqrt((0.6*pow2(g1) + pow2(g2))*calc_v2(vu, vd));
+   }
+   if (std::isnan(Mt)) {
+      Mt = inv_sqrt2*Yu(2,2)*vu;
+   }
+   if (std::isnan(Mb)) {
+      Mb = inv_sqrt2*Yd(2,2)*vd;
+   }
+   if (std::isnan(Mtau)) {
+      Mtau = inv_sqrt2*Ye(2,2)*vd;
+   }
 
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t) || std::isnan(theta_t)) {
@@ -171,8 +176,8 @@ void Parameters::validate(bool verbose)
       const double Xt = Mt * (Au(2,2) - mu / tan_beta);
       const double sw2 = calc_sw2(MW, MZ);
       RM22 stopMatrix;
-      stopMatrix << mq2(2, 2) + sqr(Mt) + (0.5 - 2*sw2/3) * sqr(MZ) * cos_2beta, Xt,
-        Xt, mu2(2, 2) + sqr(Mt) + 2*sw2/3 * sqr(MZ) * cos_2beta;
+      stopMatrix << mq2(2, 2) + pow2(Mt) + (0.5 - 2*sw2/3) * pow2(MZ) * cos_2beta, Xt,
+         Xt, mu2(2, 2) + pow2(Mt) + 2*sw2/3 * pow2(MZ) * cos_2beta;
 
       std::tie(MSt, s2t, theta_t) = calculate_MSf_s2f(stopMatrix);
 
@@ -189,8 +194,8 @@ void Parameters::validate(bool verbose)
       const double Xb = Mb * (Ad(2,2) - mu * tan_beta);
       const double sw2 = calc_sw2(MW, MZ);
       RM22 sbottomMatrix;
-      sbottomMatrix << mq2(2, 2) + sqr(Mb) - (0.5 - sw2/3) * sqr(MZ) * cos_2beta, Xb,
-         Xb, md2(2, 2) + sqr(Mb) - sw2/3 * sqr(MZ) * cos_2beta;
+      sbottomMatrix << mq2(2, 2) + pow2(Mb) - (0.5 - sw2/3) * pow2(MZ) * cos_2beta, Xb,
+         Xb, md2(2, 2) + pow2(Mb) - sw2/3 * pow2(MZ) * cos_2beta;
 
       std::tie(MSb, s2b, theta_b) = calculate_MSf_s2f(sbottomMatrix);
 
@@ -207,8 +212,8 @@ void Parameters::validate(bool verbose)
       const double Xtau = Mtau * (Ae(2,2) - mu * tan_beta);
       const double sw2 = calc_sw2(MW, MZ);
       RM22 stauMatrix;
-      stauMatrix << ml2(2, 2) + sqr(Mtau) - (0.5 - sw2) * sqr(MZ) * cos_2beta, Xtau,
-         Xtau, me2(2, 2) + sqr(Mtau) - sw2 * sqr(MZ) * cos_2beta;
+      stauMatrix << ml2(2, 2) + pow2(Mtau) - (0.5 - sw2) * pow2(MZ) * cos_2beta, Xtau,
+         Xtau, me2(2, 2) + pow2(Mtau) - sw2 * pow2(MZ) * cos_2beta;
 
       std::tie(MStau, s2tau, theta_tau) = calculate_MSf_s2f(stauMatrix);
 
