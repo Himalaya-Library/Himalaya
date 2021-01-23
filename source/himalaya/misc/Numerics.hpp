@@ -15,6 +15,7 @@
 namespace himalaya {
 namespace {
 
+/// compares a number for being close to zero
 template <typename T>
 typename std::enable_if<!std::is_unsigned<T>::value, bool>::type
 is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
@@ -22,6 +23,7 @@ is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
    return std::abs(a) <= prec;
 }
 
+/// compares two numbers for absolute equality
 template <typename T>
 bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
@@ -47,6 +49,7 @@ bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
    return is_equal(a, b, prec*max);
 }
 
+/// compares two numbers for relative equality
 template <typename T>
 bool is_close(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
