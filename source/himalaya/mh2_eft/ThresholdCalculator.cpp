@@ -11,9 +11,11 @@
 #include "himalaya/misc/Constants.hpp"
 #include "himalaya/misc/Li2.hpp"
 #include "himalaya/misc/Logger.hpp"
+#include "himalaya/misc/Numerics.hpp"
 #include "himalaya/misc/Powers.hpp"
 #include <cmath>
 #include <complex>
+#include <limits>
 #include <stdexcept>
 
 /**
@@ -26,40 +28,14 @@
 
 namespace himalaya {
 namespace mh2_eft {
-
 namespace {
 
-   template <typename T>
-   bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
-   {
-      return std::fabs(a) < prec;
-   }
-
-   template <typename T>
-   bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
-   {
-      return is_zero(a - b, prec);
-   }
-
-   template <typename T>
-   bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
-   {
-      if (is_equal(a, b, std::numeric_limits<T>::epsilon()))
-         return true;
-
-      if (std::abs(a) < std::numeric_limits<T>::epsilon() ||
-          std::abs(b) < std::numeric_limits<T>::epsilon())
-         return false;
-
-      return std::abs((a - b)/a) < prec;
-   }
-
-   double calc_cw(double mW, double mZ)
-   {
-      return std::abs(mZ) > std::numeric_limits<double>::epsilon()
-         ? mW/mZ
-         : 1.0;
-   }
+double calc_cw(double mW, double mZ)
+{
+   return std::abs(mZ) > std::numeric_limits<double>::epsilon()
+      ? mW/mZ
+      : 1.0;
+}
 
 /// threshold loop functions from [1504.05200] Eq.(14)
 double f1HD(double x) noexcept

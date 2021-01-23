@@ -18,6 +18,7 @@
 
 #include "himalaya/mh2_eft/threshold_loop_functions.hpp"
 #include "himalaya/misc/Li2.hpp"
+#include "himalaya/misc/Numerics.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -42,40 +43,6 @@ namespace {
    template <typename T> constexpr T pow7(T x) noexcept { return pow6(x) * x; }
    template <typename T> constexpr T pow8(T x) noexcept { return sqr(quad(x)); }
    template <typename T> constexpr T pow9(T x) noexcept { return pow8(x) * x; }
-
-   template <typename T>
-   bool is_zero(T a, T prec) noexcept
-   {
-      return std::fabs(a) < prec;
-   }
-
-   template <typename T>
-   bool is_equal(T a, T b, T prec) noexcept
-   {
-      return is_zero(a - b, prec);
-   }
-
-   template <typename T>
-   bool is_equal_rel(T a, T b, T prec) noexcept
-   {
-      if (is_equal(a, b, std::numeric_limits<T>::epsilon())) {
-         return true;
-      }
-
-      if (std::fabs(a) < std::numeric_limits<T>::epsilon()) {
-         return is_equal(a, b, prec);
-      }
-
-      const double max = std::max(std::fabs(a), std::fabs(b));
-
-      return is_equal(a, b, prec*max);
-   }
-
-   bool is_close(double a, double b, double prec) noexcept
-   {
-      const double max = std::max(std::abs(a), std::abs(b));
-      return is_zero(a - b, prec*(1.0 + max));
-   }
 
    double logx(double x) noexcept
    {
