@@ -94,10 +94,7 @@ bool isfinite(double exact, double shifted, double limit) noexcept
    // checks if the difference of the shifted result to the limit is
    // greater than the difference of the exact result to the limit
    // which should indicate the divergence of the general mass case
-   if (std::abs(shifted - limit) >= std::abs(exact - limit))
-      return false;
-
-   return true;
+   return std::abs(shifted - limit) < std::abs(exact - limit);
 }
 
 double deltaxyz(double x, double y, double z) noexcept
