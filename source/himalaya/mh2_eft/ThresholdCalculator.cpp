@@ -65,10 +65,10 @@ namespace {
 double f1HD(double x) noexcept
 {
    const double x2 = pow2(x);
-   const double den = 1. - x2;
+   const double den = 1 - x2;
 
    if (std::abs(den) < 1e-5)
-      return -1.;
+      return -1;
 
    return x2/den * std::log(x2);
 }
@@ -77,12 +77,12 @@ double f1HD(double x) noexcept
 double f2HD(double x) noexcept
 {
    const double x2 = pow2(x);
-   const double den = 1. - x2;
+   const double den = 1 - x2;
 
    if (std::abs(den) < 1e-5)
       return 0.5;
 
-   return 1./den * (1. + x2/den * std::log(x2));
+   return (1 + x2/den * std::log(x2))/den;
 }
 
 /// threshold loop functions from [1504.05200] Eq.(17)
@@ -91,11 +91,11 @@ double f3HD(double x) noexcept
    using himalaya::dilog;
 
    const double x2 = pow2(x);
-   const double den = 1. - x2;
+   const double den = 1 - x2;
    const std::complex<double> cden = den;
 
    if (std::abs(den) < 1e-5)
-      return -9./4.;
+      return -9./4;
 
    const double logx2 = std::log(x2);
 
