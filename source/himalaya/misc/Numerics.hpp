@@ -15,17 +15,24 @@
 namespace himalaya {
 namespace {
 
+/// absolute
+template <typename T>
+constexpr T dabs(T a) noexcept
+{
+   return a >= T{0} ? a : -a;
+}
+
 /// compares a number for being close to zero
 template <typename T>
-typename std::enable_if<!std::is_unsigned<T>::value, bool>::type
+constexpr typename std::enable_if<!std::is_unsigned<T>::value, bool>::type
 is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
-   return std::abs(a) <= prec;
+   return dabs(a) <= prec;
 }
 
 /// compares two numbers for absolute equality
 template <typename T>
-bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+constexpr bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
    return is_zero(a - b, prec);
 }
@@ -33,27 +40,27 @@ bool is_equal(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 /// compares two numbers for relative equality, treating numbers with
 /// small differences as equal
 template <typename T>
-bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+constexpr bool is_equal_rel(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
    if (is_equal(a, b, std::numeric_limits<T>::epsilon()))
       return true;
 
-   const T min = std::min(std::abs(a), std::abs(b));
+   const T min = std::min(dabs(a), dabs(b));
 
    if (min < std::numeric_limits<T>::epsilon()) {
       return is_equal(a, b, prec);
    }
 
-   const T max = std::max(std::abs(a), std::abs(b));
+   const T max = std::max(dabs(a), dabs(b));
 
    return is_equal(a, b, prec*max);
 }
 
 /// compares two numbers for relative equality
 template <typename T>
-bool is_close(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
+constexpr bool is_close(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
-   const T max = std::max(std::abs(a), std::abs(b));
+   const T max = std::max(dabs(a), dabs(b));
    return is_zero(a - b, prec*(1.0 + max));
 }
 
