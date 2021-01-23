@@ -213,83 +213,149 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const int Xi = 1;        // gauge parameter
 
     // Threshold corrections
-    const double dlambdayb2g12 = CALC_IF(orders.at(CouplingOrders::G12YB2),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_YB2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdag14 = CALC_IF(orders.at(CouplingOrders::G14),
-                                      thresholdCalculator.getThresholdCorrection(
-                                          ThresholdCouplingOrders::LAMBDA_G14, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaregg14 = CALC_IF(orders.at(CouplingOrders::G14),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_REG_G14, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdachig14 = CALC_IF(orders.at(CouplingOrders::G14),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_CHI_G14, RenSchemes::DRBARPRIME, omitMSSMLogs));
+    const double dlambdayb2g12 =
+       CALC_IF(orders.at(CouplingOrders::G12YB2),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YB2_G12,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdag14 =
+       CALC_IF(orders.at(CouplingOrders::G14),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_G14, RenSchemes::DRBARPRIME,
+                  omitMSSMLogs));
+
+    const double dlambdaregg14 =
+       CALC_IF(orders.at(CouplingOrders::G14),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_REG_G14,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdachig14 =
+       CALC_IF(orders.at(CouplingOrders::G14),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_CHI_G14,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
     const double dg1g1 = CALC_IF(orders.at(CouplingOrders::G14),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::G1_G1, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdachig24 = CALC_IF(orders.at(CouplingOrders::G24),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_CHI_G24, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdag24 = CALC_IF(orders.at(CouplingOrders::G24),
-                                      thresholdCalculator.getThresholdCorrection(
-                                          ThresholdCouplingOrders::LAMBDA_G24, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::G1_G1,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdachig24 =
+       CALC_IF(orders.at(CouplingOrders::G24),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_CHI_G24,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdag24 =
+       CALC_IF(orders.at(CouplingOrders::G24),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_G24, RenSchemes::DRBARPRIME,
+                  omitMSSMLogs));
+
     const double dg2g2 = CALC_IF(orders.at(CouplingOrders::G24),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::G2_G2, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaregg24 = CALC_IF(orders.at(CouplingOrders::G24),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_REG_G24, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdag12g22 = CALC_IF(orders.at(CouplingOrders::G12G22),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaregg12g22 = CALC_IF(orders.at(CouplingOrders::G12G22),
-                                            thresholdCalculator.getThresholdCorrection(
-                                                    ThresholdCouplingOrders::LAMBDA_REG_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdachig12g22 = CALC_IF(orders.at(CouplingOrders::G12G22),
-                                            thresholdCalculator.getThresholdCorrection(
-                                                    ThresholdCouplingOrders::LAMBDA_CHI_G12_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayb2g22 = CALC_IF(orders.at(CouplingOrders::G22YB2),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_YB2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayb4 = CALC_IF(orders.at(CouplingOrders::YB4),
-                                      thresholdCalculator.getThresholdCorrection(
-                                          ThresholdCouplingOrders::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayt2g12 = CALC_IF(orders.at(CouplingOrders::G12YT2),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_YT2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayt2g22 = CALC_IF(orders.at(CouplingOrders::G22YT2),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_YT2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaytau2g12 = CALC_IF(orders.at(CouplingOrders::G12YTAU2),
-                                           thresholdCalculator.getThresholdCorrection(
-                                                   ThresholdCouplingOrders::LAMBDA_YTAU2_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaytau2g22 = CALC_IF(orders.at(CouplingOrders::G22YTAU2),
-                                           thresholdCalculator.getThresholdCorrection(
-                                                   ThresholdCouplingOrders::LAMBDA_YTAU2_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaytau4 = CALC_IF(orders.at(CouplingOrders::YTAU4),
-                                        thresholdCalculator.getThresholdCorrection(
-                                            ThresholdCouplingOrders::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dvg12 = 0.;/*
-        CALC_IF(orders.at(CouplingOrders::G12G22) || orders.at(CouplingOrders::G14),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::VEV_G12, RenSchemes::DRBARPRIME, omitMSSMLogs));*/
-    const double dvg22 = 0.;/*
-        CALC_IF(orders.at(CouplingOrders::G12G22) || orders.at(CouplingOrders::G24),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::VEV_G22, RenSchemes::DRBARPRIME, omitMSSMLogs));*/
-    const double dvyt2 =
-        CALC_IF(orders.at(CouplingOrders::G12YT2) || orders.at(CouplingOrders::G22YT2),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dvyb2 =
-        CALC_IF(orders.at(CouplingOrders::G12YB2) || orders.at(CouplingOrders::G22YB2),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::VEV_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dvytau2 =
-        CALC_IF(orders.at(CouplingOrders::G12YTAU2) || orders.at(CouplingOrders::G22YTAU2),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::G2_G2,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdaregg24 =
+       CALC_IF(orders.at(CouplingOrders::G24),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_REG_G24,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdag12g22 =
+       CALC_IF(orders.at(CouplingOrders::G12G22),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_G12_G22,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdaregg12g22 =
+       CALC_IF(orders.at(CouplingOrders::G12G22),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_REG_G12_G22,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdachig12g22 =
+       CALC_IF(orders.at(CouplingOrders::G12G22),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_CHI_G12_G22,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayb2g22 =
+       CALC_IF(orders.at(CouplingOrders::G22YB2),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YB2_G22,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayb4 =
+       CALC_IF(orders.at(CouplingOrders::YB4),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YB4, RenSchemes::DRBARPRIME,
+                  omitMSSMLogs));
+
+    const double dlambdayt2g12 =
+       CALC_IF(orders.at(CouplingOrders::G12YT2),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YT2_G12,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayt2g22 =
+       CALC_IF(orders.at(CouplingOrders::G22YT2),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YT2_G22,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdaytau2g12 =
+       CALC_IF(orders.at(CouplingOrders::G12YTAU2),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YTAU2_G12,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdaytau2g22 =
+       CALC_IF(orders.at(CouplingOrders::G22YTAU2),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YTAU2_G22,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdaytau4 =
+       CALC_IF(orders.at(CouplingOrders::YTAU4),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YTAU4, RenSchemes::DRBARPRIME,
+                  omitMSSMLogs));
+
+    const double dvg12 = 0.;
+    //     CALC_IF(orders.at(CouplingOrders::G12G22) ||
+    //     orders.at(CouplingOrders::G14),
+    // thresholdCalculator.getThresholdCorrection(
+    //    ThresholdCouplingOrders::VEV_G12, RenSchemes::DRBARPRIME,
+    //    omitMSSMLogs));
+
+    const double dvg22 = 0.;
+    // CALC_IF(orders.at(CouplingOrders::G12G22) ||
+    // orders.at(CouplingOrders::G24),
+    // thresholdCalculator.getThresholdCorrection(
+    //    ThresholdCouplingOrders::VEV_G22, RenSchemes::DRBARPRIME,
+    //    omitMSSMLogs));
+
+    const double dvyt2 = CALC_IF(orders.at(CouplingOrders::G12YT2) ||
+                                    orders.at(CouplingOrders::G22YT2),
+                                 thresholdCalculator.getThresholdCorrection(
+                                    ThresholdCouplingOrders::VEV_YT2,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dvyb2 = CALC_IF(orders.at(CouplingOrders::G12YB2) ||
+                                    orders.at(CouplingOrders::G22YB2),
+                                 thresholdCalculator.getThresholdCorrection(
+                                    ThresholdCouplingOrders::VEV_YB2,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dvytau2 = CALC_IF(orders.at(CouplingOrders::G12YTAU2) ||
+                                      orders.at(CouplingOrders::G22YTAU2),
+                                   thresholdCalculator.getThresholdCorrection(
+                                      ThresholdCouplingOrders::VEV_YTAU2,
+                                      RenSchemes::DRBARPRIME, omitMSSMLogs));
 
     const double bbhDR = fB(pow2(mhtree), pow2(mhtree), q2);
     const double bbwDR = fB(pow2(mhtree), pow2(p.MW), q2);
@@ -439,128 +505,231 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
     // Threshold corrections
     const double dytas = CALC_IF(orders.at(CouplingOrders::G32YT4),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayb4g32 = CALC_IF(orders.at(CouplingOrders::G32YB4),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_YB4_G32, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayb4 =
-        CALC_IF(orders.at(CouplingOrders::YB6) || orders.at(CouplingOrders::YTAU2YB4) ||
-                orders.at(CouplingOrders::YT2YB4) || orders.at(CouplingOrders::G32YB4),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::LAMBDA_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayb6 = CALC_IF(orders.at(CouplingOrders::YB6),
-                                      thresholdCalculator.getThresholdCorrection(
-                                          ThresholdCouplingOrders::LAMBDA_YB6, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayt4 =
-        CALC_IF(orders.at(CouplingOrders::YT6) || orders.at(CouplingOrders::YB2YT4),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::LAMBDA_AT, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::YT_AS,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayb4g32 =
+       CALC_IF(orders.at(CouplingOrders::G32YB4),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YB4_G32,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayb4 = CALC_IF(
+       orders.at(CouplingOrders::YB6) || orders.at(CouplingOrders::YTAU2YB4) ||
+          orders.at(CouplingOrders::YT2YB4) ||
+          orders.at(CouplingOrders::G32YB4),
+       thresholdCalculator.getThresholdCorrection(
+          ThresholdCouplingOrders::LAMBDA_YB4, RenSchemes::DRBARPRIME,
+          omitMSSMLogs));
+
+    const double dlambdayb6 =
+       CALC_IF(orders.at(CouplingOrders::YB6),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YB6, RenSchemes::DRBARPRIME,
+                  omitMSSMLogs));
+
+    const double dlambdayt4 = CALC_IF(
+       orders.at(CouplingOrders::YT6) || orders.at(CouplingOrders::YB2YT4),
+       thresholdCalculator.getThresholdCorrection(
+          ThresholdCouplingOrders::LAMBDA_AT, RenSchemes::DRBARPRIME,
+          omitMSSMLogs));
+
     const double dytyt = CALC_IF(orders.at(CouplingOrders::YT6),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::YT_YT, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayt6 = CALC_IF(orders.at(CouplingOrders::YT6),
-                                      thresholdCalculator.getThresholdCorrection(
-                                          ThresholdCouplingOrders::LAMBDA_YT6, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dvyt2 = CALC_IF(orders.at(CouplingOrders::YT6) || orders.at(CouplingOrders::YT2YB4),
+                                    ThresholdCouplingOrders::YT_YT,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayt6 =
+       CALC_IF(orders.at(CouplingOrders::YT6),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YT6, RenSchemes::DRBARPRIME,
+                  omitMSSMLogs));
+
+    const double dvyt2 = CALC_IF(orders.at(CouplingOrders::YT6) ||
+                                    orders.at(CouplingOrders::YT2YB4),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::VEV_YT2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::VEV_YT2,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
     const double dytauytau = CALC_IF(orders.at(CouplingOrders::YTAU6),
                                      thresholdCalculator.getThresholdCorrection(
-                                         ThresholdCouplingOrders::YTAU_YTAU, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaytau4 =
-        CALC_IF(orders.at(CouplingOrders::YTAU4YB2) || orders.at(CouplingOrders::YTAU6),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::LAMBDA_YTAU4, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdaytau6 = CALC_IF(orders.at(CouplingOrders::YTAU6),
-                                        thresholdCalculator.getThresholdCorrection(
-                                            ThresholdCouplingOrders::LAMBDA_YTAU6, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayt2yb4 = CALC_IF(orders.at(CouplingOrders::YT2YB4),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_YT2_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayt4yb2 = CALC_IF(orders.at(CouplingOrders::YB2YT4),
-                                         thresholdCalculator.getThresholdCorrection(
-                                                 ThresholdCouplingOrders::LAMBDA_YT4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                        ThresholdCouplingOrders::YTAU_YTAU,
+                                        RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdaytau4 = CALC_IF(
+       orders.at(CouplingOrders::YTAU4YB2) || orders.at(CouplingOrders::YTAU6),
+       thresholdCalculator.getThresholdCorrection(
+          ThresholdCouplingOrders::LAMBDA_YTAU4, RenSchemes::DRBARPRIME,
+          omitMSSMLogs));
+
+    const double dlambdaytau6 =
+       CALC_IF(orders.at(CouplingOrders::YTAU6),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YTAU6, RenSchemes::DRBARPRIME,
+                  omitMSSMLogs));
+
+    const double dlambdayt2yb4 =
+       CALC_IF(orders.at(CouplingOrders::YT2YB4),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YT2_YB4,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayt4yb2 =
+       CALC_IF(orders.at(CouplingOrders::YB2YT4),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YT4_YB2,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
     const double dytyb = CALC_IF(orders.at(CouplingOrders::YB2YT4),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::YT_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dvytau2 =
-        CALC_IF(orders.at(CouplingOrders::YTAU2YB4) || orders.at(CouplingOrders::YTAU6),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::VEV_YTAU2, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dvyb2 =
-        CALC_IF(orders.at(CouplingOrders::YB6) || orders.at(CouplingOrders::YTAU4YB2) ||
-                orders.at(CouplingOrders::YB2YT4),
-                thresholdCalculator.getThresholdCorrection(
-                    ThresholdCouplingOrders::VEV_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::YT_YB,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dvytau2 = CALC_IF(orders.at(CouplingOrders::YTAU2YB4) ||
+                                      orders.at(CouplingOrders::YTAU6),
+                                   thresholdCalculator.getThresholdCorrection(
+                                      ThresholdCouplingOrders::VEV_YTAU2,
+                                      RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dvyb2 = CALC_IF(orders.at(CouplingOrders::YB6) ||
+                                    orders.at(CouplingOrders::YTAU4YB2) ||
+                                    orders.at(CouplingOrders::YB2YT4),
+                                 thresholdCalculator.getThresholdCorrection(
+                                    ThresholdCouplingOrders::VEV_YB2,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
     const double dytauyb = CALC_IF(orders.at(CouplingOrders::YTAU4YB2),
                                    thresholdCalculator.getThresholdCorrection(
-                                       ThresholdCouplingOrders::YTAU_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayb4ytau2 = CALC_IF(orders.at(CouplingOrders::YTAU2YB4),
-                                           thresholdCalculator.getThresholdCorrection(
-                                                   ThresholdCouplingOrders::LAMBDA_YTAU2_YB4, RenSchemes::DRBARPRIME, omitMSSMLogs));
-    const double dlambdayb2ytau4 = CALC_IF(orders.at(CouplingOrders::YTAU4YB2),
-                                           thresholdCalculator.getThresholdCorrection(
-                                                   ThresholdCouplingOrders::LAMBDA_YTAU4_YB2, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                      ThresholdCouplingOrders::YTAU_YB,
+                                      RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayb4ytau2 =
+       CALC_IF(orders.at(CouplingOrders::YTAU2YB4),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YTAU2_YB4,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
+    const double dlambdayb2ytau4 =
+       CALC_IF(orders.at(CouplingOrders::YTAU4YB2),
+               thresholdCalculator.getThresholdCorrection(
+                  ThresholdCouplingOrders::LAMBDA_YTAU4_YB2,
+                  RenSchemes::DRBARPRIME, omitMSSMLogs));
+
     const double dybyt = CALC_IF(orders.at(CouplingOrders::YT2YB4),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::YB_YT, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::YB_YT,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
     const double dybas = CALC_IF(orders.at(CouplingOrders::G32YB4),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::YB_AS, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::YB_AS,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
+
     const double dybyb = CALC_IF(orders.at(CouplingOrders::YB6),
                                  thresholdCalculator.getThresholdCorrection(
-                                     ThresholdCouplingOrders::YB_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
+                                    ThresholdCouplingOrders::YB_YB,
+                                    RenSchemes::DRBARPRIME, omitMSSMLogs));
 
     // Corrections to Mh
-    const double dmh2yt4g32 = discardNaN(orders.at(CouplingOrders::G32YT4) * (pref * (96 * pow2(lmMt)
-                                    + (-32 + 48 * dytas) * lmMt - 24 * dytas
-                                    + thresholdCalculator.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
-                                            RenSchemes::DRBARPRIME, omitMSSMLogs))),
-                                    "dmh2yt4g32");
-    const double dmh2yb4g32 =
-        discardNaN(orders.at(CouplingOrders::G32YB4) * ((dlambdayb4g32
-                + 16 * (3 * B00DR * (dybas + 16 * lmMt) + lmMt * (-2 + 3 * dybas
-                        + 24 * lmMt))) * v2 * pow4(cbeta)) / 2.,
-              "dmh2yb4g32");
-    const double dmh2yb6 =
-        discardNaN(orders.at(CouplingOrders::YB6) * (-((-144 * dybyb * (B00DR
-                                           + lmMt) + pow2(cbeta) * (-49 - 3 * dlambdayb6 + 72 * dvyb2
-                                                   - 72 * B00DR * dvyb2 - 60 * lmbMt + 234 * lmMt + 1296 * B00DR * lmMt - 72 * dvyb2
-                                                   * lmMt + dlambdayb4 * (-9 + 9 * B00DR - 6 * dvyb2 + 9 * lmMt) + 36 * pow2(lmbMt)
-                                                   + 648 * pow2(lmMt) - 6 * pow2(Pi))) * v2 * pow4(cbeta)) / 6.),
-              "dmh2yb6");
-    const double dmh2yt6 = discardNaN(orders.at(CouplingOrders::YT6) * ((v2 * (4 * dytyt * (
-                                     -6 + dlambdayt4 + 12 * lmMt) + (-12 + dlambdayt6 + dlambdayt4 * (2 + 2 * dvyt2
-                                             - 3 * lmMt) + 24 * dvyt2 * (-1 + lmMt) - 18 * lmMt * (1 + 3 * lmMt) - 2 * pow2(Pi))
-                                 * pow2(sbeta)) * pow4(sbeta)) / 2.),
-                                 "dmh2yt6");
-    const double dmh2yb4ytau2 = discardNaN(orders.at(CouplingOrders::YTAU2YB4) * (((
-                                          dlambdayb4ytau2 - 96 * B00DR * lmMt - dlambdayb4 * (-1 + B00DR + lmMt) + 2
-                                          * dvytau2 * (-12 + 12 * B00DR + dlambdayb4 + 12 * lmMt) - 48 * pow2(lmMt)) * v2
-                                      * pow6(cbeta)) / 2.),
-                                      "dmh2yb4ytau2");
-    const double dmh2yb2ytau4 = discardNaN(orders.at(CouplingOrders::YTAU4YB2) * (((4 * dytauyb
-                                      * (4 * B00DR + dlambdaytau4 + 4 * lmMt) + pow2(cbeta) * (dlambdayb2ytau4 - 8 * dvyb2
-                                              + 8 * B00DR * dvyb2 + dlambdaytau4 * (3 - 3 * B00DR + 2 * dvyb2 - 3 * lmMt) - 6 * lmMt
-                                              - 24 * B00DR * lmMt + 8 * dvyb2 * lmMt - 12 * pow2(lmMt))) * v2 * pow4(cbeta)) / 2.),
-                                      "dmh2yb2ytau4");
-    const double dmh2ytau6 = discardNaN(orders.at(CouplingOrders::YTAU6) * (-((-12 * dytauytau
-                                   * (4 * B00DR + dlambdaytau4 + 4 * lmMt) + pow2(cbeta) * (-3 * dlambdaytau6 + 3
-                                           * dlambdaytau4 * (-1 + B00DR - 2 * dvytau2 + lmMt) + 2 * (6 + 30 * (1 + B00DR) * lmMt
-                                                   - 12 * dvytau2 * (-1 + B00DR + lmMt) + 15 * pow2(lmMt) + pow2(Pi)))) * v2
-                                   * pow4(cbeta)) / 6.),
-                                   "dmh2ytau6");
-    const double dmh2yt2yb4 =
-        discardNaN(orders.at(CouplingOrders::YT2YB4) * (((48 * dybyt * lmMt
-                + (dlambdayt2yb4 + dlambdayb4 * (2 + 2 * dvyt2 - 3 * lmMt) + 3 * (-15 + 8 * lmbMt
-                        + 8 * dvyt2 * (-1 + lmMt) + 18 * lmMt - 24 * pow2(lmMt) - 2 * pow2(Pi))) * pow2(sbeta)
-                + 12 * B00DR * (4 * dybyt + (2 * dvyt2 - 9 * lmMt) * pow2(sbeta))) * v2 * pow4(cbeta)) / 2.),
-              "dmh2yt2yb4");
-    const double dmh2yt4yb2 = discardNaN(orders.at(CouplingOrders::YB2YT4) * (((4 * dytyb * (-6
-                                    + dlambdayt4 + 12 * lmMt) + pow2(cbeta) * (dlambdayt4yb2 + dlambdayt4 * (3 - 3 * B00DR
-                                            + 2 * dvyb2 - 3 * lmMt) - 6 * (4 * dvyb2 + lmMt + 6 * B00DR * lmMt - 4 * dvyb2 * lmMt
-                                                    + 3 * pow2(lmMt) - pow2(Pi)))) * v2 * pow4(sbeta)) / 2.),
-                                    "dmh2yt4yb2");
+    const double dmh2yt4g32 = discardNaN(
+       orders.at(CouplingOrders::G32YT4) *
+          (pref * (96 * pow2(lmMt) + (-32 + 48 * dytas) * lmMt - 24 * dytas +
+                   thresholdCalculator.getThresholdCorrection(
+                      ThresholdCouplingOrders::LAMBDA_AT_AS,
+                      RenSchemes::DRBARPRIME, omitMSSMLogs))),
+       "dmh2yt4g32");
+
+    const double dmh2yb4g32 = discardNaN(
+       orders.at(CouplingOrders::G32YB4) *
+          ((dlambdayb4g32 + 16 * (3 * B00DR * (dybas + 16 * lmMt) +
+                                  lmMt * (-2 + 3 * dybas + 24 * lmMt))) *
+           v2 * pow4(cbeta)) /
+          2.,
+       "dmh2yb4g32");
+
+    const double dmh2yb6 = discardNaN(
+       orders.at(CouplingOrders::YB6) *
+          (-((-144 * dybyb * (B00DR + lmMt) +
+              pow2(cbeta) *
+                 (-49 - 3 * dlambdayb6 + 72 * dvyb2 - 72 * B00DR * dvyb2 -
+                  60 * lmbMt + 234 * lmMt + 1296 * B00DR * lmMt -
+                  72 * dvyb2 * lmMt +
+                  dlambdayb4 * (-9 + 9 * B00DR - 6 * dvyb2 + 9 * lmMt) +
+                  36 * pow2(lmbMt) + 648 * pow2(lmMt) - 6 * pow2(Pi))) *
+             v2 * pow4(cbeta)) /
+           6.),
+       "dmh2yb6");
+
+    const double dmh2yt6 = discardNaN(
+       orders.at(CouplingOrders::YT6) *
+          ((v2 *
+            (4 * dytyt * (-6 + dlambdayt4 + 12 * lmMt) +
+             (-12 + dlambdayt6 + dlambdayt4 * (2 + 2 * dvyt2 - 3 * lmMt) +
+              24 * dvyt2 * (-1 + lmMt) - 18 * lmMt * (1 + 3 * lmMt) -
+              2 * pow2(Pi)) *
+                pow2(sbeta)) *
+            pow4(sbeta)) /
+           2.),
+       "dmh2yt6");
+
+    const double dmh2yb4ytau2 = discardNaN(
+       orders.at(CouplingOrders::YTAU2YB4) *
+          (((dlambdayb4ytau2 - 96 * B00DR * lmMt -
+             dlambdayb4 * (-1 + B00DR + lmMt) +
+             2 * dvytau2 * (-12 + 12 * B00DR + dlambdayb4 + 12 * lmMt) -
+             48 * pow2(lmMt)) *
+            v2 * pow6(cbeta)) /
+           2.),
+       "dmh2yb4ytau2");
+
+    const double dmh2yb2ytau4 = discardNaN(
+       orders.at(CouplingOrders::YTAU4YB2) *
+          (((4 * dytauyb * (4 * B00DR + dlambdaytau4 + 4 * lmMt) +
+             pow2(cbeta) *
+                (dlambdayb2ytau4 - 8 * dvyb2 + 8 * B00DR * dvyb2 +
+                 dlambdaytau4 * (3 - 3 * B00DR + 2 * dvyb2 - 3 * lmMt) -
+                 6 * lmMt - 24 * B00DR * lmMt + 8 * dvyb2 * lmMt -
+                 12 * pow2(lmMt))) *
+            v2 * pow4(cbeta)) /
+           2.),
+       "dmh2yb2ytau4");
+
+    const double dmh2ytau6 = discardNaN(
+       orders.at(CouplingOrders::YTAU6) *
+          (-((-12 * dytauytau * (4 * B00DR + dlambdaytau4 + 4 * lmMt) +
+              pow2(cbeta) *
+                 (-3 * dlambdaytau6 +
+                  3 * dlambdaytau4 * (-1 + B00DR - 2 * dvytau2 + lmMt) +
+                  2 * (6 + 30 * (1 + B00DR) * lmMt -
+                       12 * dvytau2 * (-1 + B00DR + lmMt) + 15 * pow2(lmMt) +
+                       pow2(Pi)))) *
+             v2 * pow4(cbeta)) /
+           6.),
+       "dmh2ytau6");
+
+    const double dmh2yt2yb4 = discardNaN(
+       orders.at(CouplingOrders::YT2YB4) *
+          (((48 * dybyt * lmMt +
+             (dlambdayt2yb4 + dlambdayb4 * (2 + 2 * dvyt2 - 3 * lmMt) +
+              3 * (-15 + 8 * lmbMt + 8 * dvyt2 * (-1 + lmMt) + 18 * lmMt -
+                   24 * pow2(lmMt) - 2 * pow2(Pi))) *
+                pow2(sbeta) +
+             12 * B00DR * (4 * dybyt + (2 * dvyt2 - 9 * lmMt) * pow2(sbeta))) *
+            v2 * pow4(cbeta)) /
+           2.),
+       "dmh2yt2yb4");
+
+    const double dmh2yt4yb2 = discardNaN(
+       orders.at(CouplingOrders::YB2YT4) *
+          (((4 * dytyb * (-6 + dlambdayt4 + 12 * lmMt) +
+             pow2(cbeta) *
+                (dlambdayt4yb2 +
+                 dlambdayt4 * (3 - 3 * B00DR + 2 * dvyb2 - 3 * lmMt) -
+                 6 * (4 * dvyb2 + lmMt + 6 * B00DR * lmMt - 4 * dvyb2 * lmMt +
+                      3 * pow2(lmMt) - pow2(Pi)))) *
+            v2 * pow4(sbeta)) /
+           2.),
+       "dmh2yt4yb2");
 
     return twoLoop * (g32 * yb4 * dmh2yb4g32 + yb6 * dmh2yb6 + yt6 * dmh2yt6 + yb4 * ytau2
                    * dmh2yb4ytau2 + yb2 * ytau4 * dmh2yb2ytau4 + ytau6 * dmh2ytau6 + yt2 * yb4
