@@ -28,7 +28,7 @@ namespace mh2_eft {
 namespace {
 
 /// Returns var if not NaN, 0 otherwise
-double isNaN(double var, const std::string& msg = "")
+double discardNaN(double var, const std::string& msg = "")
 {
     if (std::isnan(var)) {
         WARNING_MSG("NaN appeared in calculation of threshold correction"
@@ -297,7 +297,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const double B00DR = fB(pow2(mhtree), 0., q2);
 
     // corrections to Mh2
-    const double dmh2g12g22 = isNaN(orders.at(CouplingOrders::G12G22) * (
+    const double dmh2g12g22 = discardNaN(orders.at(CouplingOrders::G12G22) * (
                                         (v2 * (24 + 40 * dlambdachig12g22 + 40 * dlambdag12g22 + 40 *
                                                 dlambdaregg12g22 - 36 * lmMt + 40 * dvg12 * pow2(c2beta) + 24 * dvg22 * pow2(
                                                         c2beta) + 36 * lmMt * pow2(c2beta) - 12 * lmMt * Xi * pow2(c2beta) - 6 * bbwDR * (-2
@@ -307,14 +307,14 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
                                     ),
                                     "dmh2g12g22");
 
-    const double dmh2g14 = isNaN(orders.at(CouplingOrders::G14) * (
+    const double dmh2g14 = discardNaN(orders.at(CouplingOrders::G14) * (
                                      -(v2 * (-4 * (18 + 100 * dlambdachig14 + 100 * dlambdag14 + 100 *
                                              dlambdaregg14 - 27 * lmMt) + 6 * (40 * dg1g1 - 40 * dvg12 + 3 * lmMt * (-3 + Xi)) *
                                              pow2(c2beta) + 9 * (9 * bbhDR + 2 * (1 + bbwDR + 6 * lmMt)) * pow4(c2beta) + 9 *
                                              bbzDR * (12 - 4 * pow2(c2beta) + pow4(c2beta)))) / 800.
                                  ),
                                  "dmh2g14");
-    const double dmh2g24 = isNaN(orders.at(CouplingOrders::G24) * (
+    const double dmh2g24 = discardNaN(orders.at(CouplingOrders::G24) * (
                                      -(v2 * (-24 - 16 * dlambdachig24 - 16 * dlambdag24 - 16 * dlambdaregg24 +
                                              36 * lmMt + 16 * dg2g2 * pow2(c2beta) - 16 * dvg22 * pow2(c2beta) - 18 * lmMt * pow2(
                                                      c2beta) + 6 * lmMt * Xi * pow2(c2beta) + 2 * pow4(c2beta) + 9 * bbhDR * pow4(
@@ -322,38 +322,38 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
                                                                      c2beta)) + bbzDR * (12 - 4 * pow2(c2beta) + pow4(c2beta)))) / 32.
                                  ),
                                  "dmh2g24");
-    const double dmh2g12yb2 = isNaN(orders.at(CouplingOrders::G12YB2) * (((
+    const double dmh2g12yb2 = discardNaN(orders.at(CouplingOrders::G12YB2) * (((
                                         10 * dlambdayb2g12 - 3 * (3 * B00DR - 2 * dvyb2 + 3 * lmMt) * pow2(c2beta))
                                     * pow2(cbeta) * v2) / 20.),
                                     "dmh2g12yb2");
-    const double dmh2g22yb2 = isNaN(orders.at(CouplingOrders::G22YB2) * (((
+    const double dmh2g22yb2 = discardNaN(orders.at(CouplingOrders::G22YB2) * (((
                                         2 * dlambdayb2g22 + (-3 * B00DR + 2 * dvyb2 - 3 * lmMt) * pow2(c2beta)) * pow2(
                                         cbeta) * v2) / 4.),
                                     "dmh2g22yb2");
-    const double dmh2yb4 = isNaN(orders.at(CouplingOrders::YB4) * (((12 * B00DR
+    const double dmh2yb4 = discardNaN(orders.at(CouplingOrders::YB4) * (((12 * B00DR
                                  + dlambdayb4 + 12 * lmMt) * v2 * pow4(cbeta)) / 2.),
                                  "dmh2yb4");
-    const double dmh2g12yt2 = isNaN(orders.at(CouplingOrders::G12YT2) * (((10
+    const double dmh2g12yt2 = discardNaN(orders.at(CouplingOrders::G12YT2) * (((10
                                     * dlambdayt2g12 + (6 + 6 * dvyt2 - 9 * lmMt) * pow2(c2beta)) * pow2(sbeta) * v2)
                                     / 20.),
                                     "dmh2g12yt2");
-    const double dmh2g22yt2 = isNaN(orders.at(CouplingOrders::G22YT2) * (((2
+    const double dmh2g22yt2 = discardNaN(orders.at(CouplingOrders::G22YT2) * (((2
                                     * dlambdayt2g22 + (2 + 2 * dvyt2 - 3 * lmMt) * pow2(c2beta)) * pow2(sbeta)
                                     * v2) / 4.),
                                     "dmh2g22yt2");
-    const double dmh2yt4 = isNaN(orders.at(CouplingOrders::YT4) * (pref_at * (12 * lmMt +
+    const double dmh2yt4 = discardNaN(orders.at(CouplingOrders::YT4) * (pref_at * (12 * lmMt +
                                  thresholdCalculator.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT,
                                          RenSchemes::DRBARPRIME, omitMSSMLogs))),
                                  "dmh2yt4");
-    const double dmh2g12ytau2 = isNaN(orders.at(CouplingOrders::G12YTAU2) * (-((-10
+    const double dmh2g12ytau2 = discardNaN(orders.at(CouplingOrders::G12YTAU2) * (-((-10
                                       * dlambdaytau2g12 + 3 * B00DR * pow2(c2beta) + 3 * (-2 * dvytau2 + lmMt) *
                                       pow2(c2beta)) * pow2(cbeta) * v2) / 20.),
                                       "dmh2g12ytau2");
-    const double dmh2g22ytau2 = isNaN(orders.at(CouplingOrders::G22YTAU2) * (-((-2
+    const double dmh2g22ytau2 = discardNaN(orders.at(CouplingOrders::G22YTAU2) * (-((-2
                                       * dlambdaytau2g22 + B00DR * pow2(c2beta) + (-2 * dvytau2 + lmMt) * pow2(
                                           c2beta)) * pow2(cbeta) * v2) / 4.),
                                       "dmh2g22ytau2");
-    const double dmh2ytau4 = isNaN(orders.at(CouplingOrders::YTAU4) * (((4 * B00DR
+    const double dmh2ytau4 = discardNaN(orders.at(CouplingOrders::YTAU4) * (((4 * B00DR
                                    + dlambdaytau4 + 4 * lmMt) * v2 * pow4(cbeta)) / 2.),
                                    "dmh2ytau4");
 
@@ -473,51 +473,51 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                                      ThresholdCouplingOrders::YB_YB, RenSchemes::DRBARPRIME, omitMSSMLogs));
 
     // Corrections to Mh
-    const double dmh2yt4g32 = isNaN(orders.at(CouplingOrders::G32YT4) * (pref * (96 * pow2(lmMt)
+    const double dmh2yt4g32 = discardNaN(orders.at(CouplingOrders::G32YT4) * (pref * (96 * pow2(lmMt)
                                     + (-32 + 48 * dytas) * lmMt - 24 * dytas
                                     + thresholdCalculator.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
                                             RenSchemes::DRBARPRIME, omitMSSMLogs))),
                                     "dmh2yt4g32");
     const double dmh2yb4g32 =
-        isNaN(orders.at(CouplingOrders::G32YB4) * ((dlambdayb4g32
+        discardNaN(orders.at(CouplingOrders::G32YB4) * ((dlambdayb4g32
                 + 16 * (3 * B00DR * (dybas + 16 * lmMt) + lmMt * (-2 + 3 * dybas
                         + 24 * lmMt))) * v2 * pow4(cbeta)) / 2.,
               "dmh2yb4g32");
     const double dmh2yb6 =
-        isNaN(orders.at(CouplingOrders::YB6) * (-((-144 * dybyb * (B00DR
+        discardNaN(orders.at(CouplingOrders::YB6) * (-((-144 * dybyb * (B00DR
                                            + lmMt) + pow2(cbeta) * (-49 - 3 * dlambdayb6 + 72 * dvyb2
                                                    - 72 * B00DR * dvyb2 - 60 * lmbMt + 234 * lmMt + 1296 * B00DR * lmMt - 72 * dvyb2
                                                    * lmMt + dlambdayb4 * (-9 + 9 * B00DR - 6 * dvyb2 + 9 * lmMt) + 36 * pow2(lmbMt)
                                                    + 648 * pow2(lmMt) - 6 * pow2(Pi))) * v2 * pow4(cbeta)) / 6.),
               "dmh2yb6");
-    const double dmh2yt6 = isNaN(orders.at(CouplingOrders::YT6) * ((v2 * (4 * dytyt * (
+    const double dmh2yt6 = discardNaN(orders.at(CouplingOrders::YT6) * ((v2 * (4 * dytyt * (
                                      -6 + dlambdayt4 + 12 * lmMt) + (-12 + dlambdayt6 + dlambdayt4 * (2 + 2 * dvyt2
                                              - 3 * lmMt) + 24 * dvyt2 * (-1 + lmMt) - 18 * lmMt * (1 + 3 * lmMt) - 2 * pow2(Pi))
                                  * pow2(sbeta)) * pow4(sbeta)) / 2.),
                                  "dmh2yt6");
-    const double dmh2yb4ytau2 = isNaN(orders.at(CouplingOrders::YTAU2YB4) * (((
+    const double dmh2yb4ytau2 = discardNaN(orders.at(CouplingOrders::YTAU2YB4) * (((
                                           dlambdayb4ytau2 - 96 * B00DR * lmMt - dlambdayb4 * (-1 + B00DR + lmMt) + 2
                                           * dvytau2 * (-12 + 12 * B00DR + dlambdayb4 + 12 * lmMt) - 48 * pow2(lmMt)) * v2
                                       * pow6(cbeta)) / 2.),
                                       "dmh2yb4ytau2");
-    const double dmh2yb2ytau4 = isNaN(orders.at(CouplingOrders::YTAU4YB2) * (((4 * dytauyb
+    const double dmh2yb2ytau4 = discardNaN(orders.at(CouplingOrders::YTAU4YB2) * (((4 * dytauyb
                                       * (4 * B00DR + dlambdaytau4 + 4 * lmMt) + pow2(cbeta) * (dlambdayb2ytau4 - 8 * dvyb2
                                               + 8 * B00DR * dvyb2 + dlambdaytau4 * (3 - 3 * B00DR + 2 * dvyb2 - 3 * lmMt) - 6 * lmMt
                                               - 24 * B00DR * lmMt + 8 * dvyb2 * lmMt - 12 * pow2(lmMt))) * v2 * pow4(cbeta)) / 2.),
                                       "dmh2yb2ytau4");
-    const double dmh2ytau6 = isNaN(orders.at(CouplingOrders::YTAU6) * (-((-12 * dytauytau
+    const double dmh2ytau6 = discardNaN(orders.at(CouplingOrders::YTAU6) * (-((-12 * dytauytau
                                    * (4 * B00DR + dlambdaytau4 + 4 * lmMt) + pow2(cbeta) * (-3 * dlambdaytau6 + 3
                                            * dlambdaytau4 * (-1 + B00DR - 2 * dvytau2 + lmMt) + 2 * (6 + 30 * (1 + B00DR) * lmMt
                                                    - 12 * dvytau2 * (-1 + B00DR + lmMt) + 15 * pow2(lmMt) + pow2(Pi)))) * v2
                                    * pow4(cbeta)) / 6.),
                                    "dmh2ytau6");
     const double dmh2yt2yb4 =
-        isNaN(orders.at(CouplingOrders::YT2YB4) * (((48 * dybyt * lmMt
+        discardNaN(orders.at(CouplingOrders::YT2YB4) * (((48 * dybyt * lmMt
                 + (dlambdayt2yb4 + dlambdayb4 * (2 + 2 * dvyt2 - 3 * lmMt) + 3 * (-15 + 8 * lmbMt
                         + 8 * dvyt2 * (-1 + lmMt) + 18 * lmMt - 24 * pow2(lmMt) - 2 * pow2(Pi))) * pow2(sbeta)
                 + 12 * B00DR * (4 * dybyt + (2 * dvyt2 - 9 * lmMt) * pow2(sbeta))) * v2 * pow4(cbeta)) / 2.),
               "dmh2yt2yb4");
-    const double dmh2yt4yb2 = isNaN(orders.at(CouplingOrders::YB2YT4) * (((4 * dytyb * (-6
+    const double dmh2yt4yb2 = discardNaN(orders.at(CouplingOrders::YB2YT4) * (((4 * dytyb * (-6
                                     + dlambdayt4 + 12 * lmMt) + pow2(cbeta) * (dlambdayt4yb2 + dlambdayt4 * (3 - 3 * B00DR
                                             + 2 * dvyb2 - 3 * lmMt) - 6 * (4 * dvyb2 + lmMt + 6 * B00DR * lmMt - 4 * dvyb2 * lmMt
                                                     + 3 * pow2(lmMt) - pow2(Pi)))) * v2 * pow4(sbeta)) / 2.),
