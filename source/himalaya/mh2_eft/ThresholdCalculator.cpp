@@ -8,6 +8,7 @@
 #include "himalaya/mh2_eft/ThresholdCalculator.hpp"
 #include "himalaya/mh2_eft/EFTFlags.hpp"
 #include "himalaya/mh2_eft/threshold_loop_functions.hpp"
+#include "himalaya/misc/Constants.hpp"
 #include "himalaya/misc/Li2.hpp"
 #include "himalaya/misc/Logger.hpp"
 #include "himalaya/misc/Powers.hpp"
@@ -27,8 +28,6 @@ namespace himalaya {
 namespace mh2_eft {
 
 namespace {
-
-   const double Pi  = 3.1415926535897932384626433832795;
 
    template <typename T>
    bool is_zero(T a, T prec = std::numeric_limits<T>::epsilon()) noexcept
@@ -92,10 +91,8 @@ double f3HD(double x) noexcept
    using himalaya::dilog;
 
    const double x2 = pow2(x);
-   const double x4 = pow4(x);
    const double den = 1. - x2;
    const std::complex<double> cden = den;
-   const double zeta2 = 1.644934066848226;
 
    if (std::abs(den) < 1e-5)
       return -9./4.;
@@ -103,8 +100,8 @@ double f3HD(double x) noexcept
    const double logx2 = std::log(x2);
 
    const std::complex<double> result =
-      (-1. + 2*x2 + 2.*x4)/pow2(den) * (
-         logx2*std::log(cden) + dilog(x2) - zeta2 - x2*logx2);
+      (-1 + x2*(2 + 2*x2))/pow2(den) * (
+         logx2*std::log(cden) + dilog(x2) - z2 - x2*logx2);
 
    return result.real();
 }
@@ -177,9 +174,8 @@ ThresholdCalculator::ThresholdCalculator(
       const double eps = mQ3*0.01;
       const double eps2 = mU3*0.01;
       const double msq2Save = msq2;
-      const double Pi  = 3.1415926535897932384626433832795;
       const double v = sqrt(pow2(p.vu) + pow2(p.vd));
-      const double pref = sqrt(2.)*p.Mt*pow4(p.g3/(4*Pi))/v;
+      const double pref = sqrt2*p.Mt*pow4(p.g3/(4*Pi))/v;
 
       if (std::abs(mQ3-mU3) < eps && std::abs(mU3 - m3) < eps && std::abs(m3 - sqrt(msq2)) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::DEGENERATE, 1);
