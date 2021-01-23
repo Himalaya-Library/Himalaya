@@ -83,7 +83,19 @@ double f3HD(double x) noexcept
 }
 
 
-bool isfinite(double exact, double shifted, double limit) noexcept
+/**
+ * Checks if the difference of the shifted general mass case result to
+ * the exact limit result is smaller than the difference of the
+ * general mass case result to the limit, which should indicate a
+ * non-divergence of the general mass case.
+ *
+ * @param exact general mass case for exact parameter values
+ * @param shifted general mass case with slightly shifted masses
+ * @param limit the limit that is close to the parameter point
+ *
+ * @return true if shifted general mass case is numerically stable
+ */
+bool isGeneralStable(double exact, double shifted, double limit) noexcept
 {
    // checks if the threshold correction in the general mass case is
    // finite and smaller than 1
@@ -91,9 +103,6 @@ bool isfinite(double exact, double shifted, double limit) noexcept
        || (std::abs(exact) > 1. && std::abs(shifted) > 1.))
       return false;
 
-   // checks if the difference of the shifted result to the limit is
-   // greater than the difference of the exact result to the limit
-   // which should indicate the divergence of the general mass case
    return std::abs(shifted - limit) < std::abs(exact - limit);
 }
 
@@ -157,35 +166,35 @@ ThresholdCalculator::ThresholdCalculator(
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          msq2 = pow2(mQ3 + std::abs(std::sqrt(msq2) - mQ3)/2.);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::DEGENERATE);
+         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::DEGENERATE);
       } else if (std::abs(mQ3 - mU3) < eps && std::abs(mU3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3_EQ_M3);
+         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3_EQ_M3);
       } else if (std::abs(mQ3 - mU3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3);
+         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3);
       } else if (std::abs(mQ3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_M3);
+         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_M3);
       } else if (std::abs(mU3 - m3) < eps2) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isfinite(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MU3_EQ_M3);
+         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MU3_EQ_M3);
       }
 
       // reset possible parameter shifts
@@ -887,7 +896,7 @@ double ThresholdCalculator::getDeltaVevYb2() const
       const double shifted = (3*Xb2*(2*mD32Shifted2*mQ32*log(mQ32/mD32Shifted2)
         + pow2(mD32Shifted2) - pow2(mQ32)))/(4.*pow3(mD32Shifted2 - mQ32));
       std::cout << exact << " " << shifted << " " << lim << " party\n";
-      if (!isfinite(exact, shifted, lim)) return lim;*/
+      if (!isGeneralStable(exact, shifted, lim)) return lim;*/
    }
 
    return exact;
@@ -910,7 +919,7 @@ double ThresholdCalculator::getDeltaVevYtau2() const{
       const double mE32Shifted2 = pow2(mL3 + std::abs(mE3 - mL3)/2.);
       const double shifted = (Xtau2*(2*log(mL32/mE32Shifted2)*mE32Shifted2*mL32
 	 + pow2(mE32Shifted2) - pow2(mL32)))/(4.*pow3(mE32Shifted2 - mL32));
-      if (!isfinite(exact, shifted, lim)) return lim;*/
+      if (!isGeneralStable(exact, shifted, lim)) return lim;*/
    }
 
    return exact;
