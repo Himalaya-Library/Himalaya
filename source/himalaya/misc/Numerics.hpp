@@ -61,7 +61,7 @@ template <typename T>
 constexpr bool is_close(T a, T b, T prec = std::numeric_limits<T>::epsilon()) noexcept
 {
    const T max = std::max(dabs(a), dabs(b));
-   return is_zero(a - b, prec*(1.0 + max));
+   return is_zero(a - b, prec*(1 + max));
 }
 
 } // anonymous namespace
