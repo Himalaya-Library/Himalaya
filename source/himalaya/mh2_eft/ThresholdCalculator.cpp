@@ -241,10 +241,10 @@ double ThresholdCalculator::getThresholdCorrection(
    }
 
    switch (variable) {
-      case(ThresholdCouplingOrders::G3_AS):{
+      case ThresholdCouplingOrders::G3_AS:{
          thresholdCorrection = getDeltaG3Alphas(omitLogs);
          switch (scheme) {
-            case(RenSchemes::DRBARPRIME):
+            case RenSchemes::DRBARPRIME:
                thresholdCorrection = - thresholdCorrection;
                break;
             default:
@@ -252,10 +252,10 @@ double ThresholdCalculator::getThresholdCorrection(
          }
       }
       break;
-      case(ThresholdCouplingOrders::YT_AS):{
+      case ThresholdCouplingOrders::YT_AS:{
          thresholdCorrection = getDeltaYtAlphas(limit, omitLogs);
          switch (scheme) {
-            case(RenSchemes::DRBARPRIME):
+            case RenSchemes::DRBARPRIME:
                thresholdCorrection = - thresholdCorrection;
                break;
             default:
@@ -263,10 +263,10 @@ double ThresholdCalculator::getThresholdCorrection(
          }
       }
       break;
-      case(ThresholdCouplingOrders::YT_AS2):{
+      case ThresholdCouplingOrders::YT_AS2:{
          thresholdCorrection = getDeltaYtAlphas2(limit, omitLogs);
          switch (scheme) {
-            case(RenSchemes::DRBARPRIME):{
+            case RenSchemes::DRBARPRIME:{
                const double dytas = getDeltaYtAlphas(limit, omitLogs);
                thresholdCorrection = 2 * getDeltaG3Alphas(omitLogs) * dytas
                   + pow2(dytas) - thresholdCorrection;
@@ -277,14 +277,14 @@ double ThresholdCalculator::getThresholdCorrection(
          }
       }
       break;
-      case(ThresholdCouplingOrders::LAMBDA_AT):{
+      case ThresholdCouplingOrders::LAMBDA_AT:{
          thresholdCorrection = getDeltaLambdaAlphat(limit, omitLogs);
       }
       break;
-      case(ThresholdCouplingOrders::LAMBDA_AT_AS):{
+      case ThresholdCouplingOrders::LAMBDA_AT_AS:{
          thresholdCorrection = getDeltaLambdaAlphatAlphas(limit, omitLogs);
          switch (scheme) {
-            case(RenSchemes::DRBARPRIME):
+            case RenSchemes::DRBARPRIME:
                thresholdCorrection = thresholdCorrection
                   - 4 * getDeltaLambdaAlphat(limit, omitLogs) *
                   getDeltaYtAlphas(limit, omitLogs);
@@ -297,10 +297,10 @@ double ThresholdCalculator::getThresholdCorrection(
       // Note that the genuine contribution of lambda_atas2 is unknown and thus
       // set to 0 (note: here are the reconstructed DR' logs included)
       // The lines below just convert it from MSbar to DRbar
-      case(ThresholdCouplingOrders::LAMBDA_AT_AS2):{
+      case ThresholdCouplingOrders::LAMBDA_AT_AS2:{
          thresholdCorrection = getDeltaLambdaAlphatAlphas2(limit, omitLogs);
          switch (scheme) {
-            case(RenSchemes::DRBARPRIME):{
+            case RenSchemes::DRBARPRIME:{
                const double dg3as = getDeltaG3Alphas(omitLogs);
                const double dytas = getDeltaYtAlphas(limit, omitLogs);
                thresholdCorrection = thresholdCorrection +
@@ -315,121 +315,121 @@ double ThresholdCalculator::getThresholdCorrection(
          }
       }
       break;
-      case(ThresholdCouplingOrders::LAMBDA_YB2_G12):{
+      case ThresholdCouplingOrders::LAMBDA_YB2_G12:{
          return getDeltaLambdaYb2G12(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_G14):{
+      case ThresholdCouplingOrders::LAMBDA_G14:{
          return getDeltaLambdaG14(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_REG_G14):{
+      case ThresholdCouplingOrders::LAMBDA_REG_G14:{
          return getDeltaLambdaRegG14();
       }
-      case(ThresholdCouplingOrders::LAMBDA_CHI_G14):{
+      case ThresholdCouplingOrders::LAMBDA_CHI_G14:{
          return getDeltaLambdaChiG14(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_CHI_G24):{
+      case ThresholdCouplingOrders::LAMBDA_CHI_G24:{
          return getDeltaLambdaChiG24(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_G24):{
+      case ThresholdCouplingOrders::LAMBDA_G24:{
          return getDeltaLambdaG24(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_REG_G24):{
+      case ThresholdCouplingOrders::LAMBDA_REG_G24:{
          return getDeltaLambdaRegG24();
       }
-      case(ThresholdCouplingOrders::LAMBDA_G12_G22):{
+      case ThresholdCouplingOrders::LAMBDA_G12_G22:{
          return getDeltaLambdaG12G22(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_REG_G12_G22):{
+      case ThresholdCouplingOrders::LAMBDA_REG_G12_G22:{
          return getDeltaLambdaRegG12G22();
       }
-      case(ThresholdCouplingOrders::LAMBDA_CHI_G12_G22):{
+      case ThresholdCouplingOrders::LAMBDA_CHI_G12_G22:{
          return getDeltaLambdaChiG12G22(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YB2_G22):{
+      case ThresholdCouplingOrders::LAMBDA_YB2_G22:{
          return getDeltaLambdaYb2G22(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YB4):{
+      case ThresholdCouplingOrders::LAMBDA_YB4:{
          return getDeltaLambdaYb4(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YT2_G12):{
+      case ThresholdCouplingOrders::LAMBDA_YT2_G12:{
          return getDeltaLambdaYt2G12(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YT2_G22):{
+      case ThresholdCouplingOrders::LAMBDA_YT2_G22:{
          return getDeltaLambdaYt2G22(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YTAU2_G12):{
+      case ThresholdCouplingOrders::LAMBDA_YTAU2_G12:{
          return getDeltaLambdaYtau2G12(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YTAU2_G22):{
+      case ThresholdCouplingOrders::LAMBDA_YTAU2_G22:{
          return getDeltaLambdaYtau2G22(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YTAU4):{
+      case ThresholdCouplingOrders::LAMBDA_YTAU4:{
          return getDeltaLambdaYtau4(omitLogs);
       }
-      case(ThresholdCouplingOrders::G1_G1):{
+      case ThresholdCouplingOrders::G1_G1:{
          return getDeltaG1G1(omitLogs);
       }
-      case(ThresholdCouplingOrders::G2_G2):{
+      case ThresholdCouplingOrders::G2_G2:{
          return getDeltaG2G2(omitLogs);
       }
-      case(ThresholdCouplingOrders::VEV_YT2):{
+      case ThresholdCouplingOrders::VEV_YT2:{
          return getDeltaVevYt2(limit);
       }
-      case(ThresholdCouplingOrders::YT_YB):{
+      case ThresholdCouplingOrders::YT_YB:{
          return getDeltaYtYb(omitLogs);
       }
-      case(ThresholdCouplingOrders::YT_YT):{
+      case ThresholdCouplingOrders::YT_YT:{
          return getDeltaYtYt(omitLogs);
       }
-      case(ThresholdCouplingOrders::YTAU_YTAU):{
+      case ThresholdCouplingOrders::YTAU_YTAU:{
          return getDeltaYtauYtau(omitLogs);
       }
-      case(ThresholdCouplingOrders::YB_YB):{
+      case ThresholdCouplingOrders::YB_YB:{
         return getDeltaYbYb(omitLogs);
       }
-      case(ThresholdCouplingOrders::YB_YT):{
+      case ThresholdCouplingOrders::YB_YT:{
         return getDeltaYbYt(omitLogs);
       }
-      case(ThresholdCouplingOrders::YB_AS):{
+      case ThresholdCouplingOrders::YB_AS:{
         return getDeltaYbAs(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YB4_G32):{
+      case ThresholdCouplingOrders::LAMBDA_YB4_G32:{
          return getDeltaLambdaYb4G32(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YB6):{
+      case ThresholdCouplingOrders::LAMBDA_YB6:{
          return getDeltaLambdaYb6(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YT6):{
+      case ThresholdCouplingOrders::LAMBDA_YT6:{
          return getDeltaLambdaYt6(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YTAU6):{
+      case ThresholdCouplingOrders::LAMBDA_YTAU6:{
          return getDeltaLambdaYtau6(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YT2_YB4):{
+      case ThresholdCouplingOrders::LAMBDA_YT2_YB4:{
          return getDeltaLambdaYt2Yb4(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YT4_YB2):{
+      case ThresholdCouplingOrders::LAMBDA_YT4_YB2:{
          return getDeltaLambdaYt4Yb2(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YTAU4_YB2):{
+      case ThresholdCouplingOrders::LAMBDA_YTAU4_YB2:{
         return getDeltaLambdaYtau4Yb2(omitLogs);
       }
-      case(ThresholdCouplingOrders::LAMBDA_YTAU2_YB4):{
+      case ThresholdCouplingOrders::LAMBDA_YTAU2_YB4:{
         return getDeltaLambdaYtau2Yb4(omitLogs);
       }
-      case(ThresholdCouplingOrders::VEV_G12):{
+      case ThresholdCouplingOrders::VEV_G12:{
          return getDeltaVevG12(omitLogs);
       }
-      case(ThresholdCouplingOrders::VEV_G22):{
+      case ThresholdCouplingOrders::VEV_G22:{
          return getDeltaVevG22(omitLogs);
       }
-      case(ThresholdCouplingOrders::VEV_YB2):{
+      case ThresholdCouplingOrders::VEV_YB2:{
          return getDeltaVevYb2();
       }
-      case(ThresholdCouplingOrders::VEV_YTAU2):{
+      case ThresholdCouplingOrders::VEV_YTAU2:{
          return getDeltaVevYtau2();
       }
-      case(ThresholdCouplingOrders::YTAU_YB):{
+      case ThresholdCouplingOrders::YTAU_YB:{
          return getDeltaYtauYb();
       }
       default:
