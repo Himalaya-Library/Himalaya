@@ -37,7 +37,7 @@ c
       double precision t,b,A0,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,S11
      $     ,S12,S22
       double precision c2t,s2t,c2b,s2b,At,Ab,Xt,Xb,mt,mb,cbe,sbe,ht,hb
-     $     ,pi,k
+     $     ,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
       integer atat
@@ -49,8 +49,7 @@ c
       double precision, parameter :: eps_b1t2 = 1d-7
       double precision, parameter :: eps_b2t1 = 1d-8
       double precision, parameter :: eps_b2t2 = 1d-9
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       mb = dsqrt(b)
@@ -197,7 +196,7 @@ c     end of addition by ALEX
       
       double precision t,b,A0,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,DMA
       double precision c2t,s2t,c2b,s2b,At,Ab,Xt,Xb,mt,mb,cbe,sbe,ht,hb
-     $     ,pi,k
+     $     ,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
       integer atat
@@ -209,8 +208,7 @@ c     end of addition by ALEX
       double precision, parameter :: eps_b1t2 = 1d-7
       double precision, parameter :: eps_b2t1 = 1d-8
       double precision, parameter :: eps_b2t2 = 1d-9
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       mb = dsqrt(b)
@@ -342,7 +340,7 @@ c     end of addition by ALEX
       implicit none
       
       double precision t,b,A0,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv
-      double precision c2t,s2t,c2b,s2b,At,Ab,Xt,Xb,mt,mb,cbe,sbe,pi,k
+      double precision c2t,s2t,c2b,s2b,At,Ab,Xt,Xb,mt,mb,cbe,sbe,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
       double precision v1,v2,S1,S2
@@ -354,8 +352,7 @@ c     end of addition by ALEX
       double precision, parameter :: eps_b1t2 = 1d-7
       double precision, parameter :: eps_b2t1 = 1d-8
       double precision, parameter :: eps_b2t2 = 1d-9
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       mb = dsqrt(b)
@@ -4285,15 +4282,13 @@ C     .
       implicit none
       
       integer OS
-      double precision ht,gs,k,mt,pi,v2
+      double precision ht,gs,k,mt,v2
       double precision t,mg,T1,T2,st,ct,q,A,X,mu,tanb,sb,s2t,c2t
       double precision F1,F2,F3,sF2,sF3
       double precision DF1,DF2,DF3,DsF2,DsF3
       double precision F2_s,sF2_A,sF3_A
       double precision S11,S22,S12,osdr
-      
-c$$$  pi = 3.14159265897d0
-      pi = 3.1415926535898d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       
@@ -4721,12 +4716,10 @@ c     DMA = 2-loop corrections to the CP-odd Higgs mass.
       
       implicit none
       
-      double precision ht,gs,k,mt,pi,v2
+      double precision ht,gs,k,mt,v2
       double precision t,mg,T1,T2,st,ct,q,A,X,mu,tanb,sb,cb,s2t
       double precision FA,FA_A,DMA
-      
-c$$$  pi = 3.14159265897d0
-      pi = 3.1415926535898d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       
@@ -4889,10 +4882,8 @@ c     running (DRbar) parameters, evaluated at the scale Q.
       double precision gs,k,mt,vv
       double precision t,mg,T1,T2,st,ct,q,A,X,mu,tanb,sb,cb,s2t,c2t,v1
      $     ,v2
-      double precision F2l,G2l,S1,S2,pi
-      
-c$$$  pi = 3.14159265897d0
-      pi = 3.1415926535898d0
+      double precision F2l,G2l,S1,S2
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       
@@ -5195,11 +5186,10 @@ c     from Davydychev and Tausk, Nucl. Phys. B397 (1993) 23
       
       double precision x,y,z,myphi
       double precision u,v
-      double precision Pi,pLi2
+      double precision pLi2
       complex*16 clam,cxp,cxm,CLI2,ccphi,fast_cdlog
       double precision delt,phi0,phi2,phi4
-      
-      Pi = 3.14159265358979d0
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
 c     auxiliary variables
       
@@ -5310,11 +5300,10 @@ c
       double precision t,b,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,S11,S12
      $     ,S22
       double precision c2t,s2t,c2b,s2b,At,Ab,Xt,Xb,mt,mb,cbe,sbe,ht,hb
-     $     ,pi,k
+     $     ,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       mb = dsqrt(b)
@@ -5376,11 +5365,10 @@ c
       
       double precision t,b,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv,DMA
       double precision c2t,s2t,c2b,s2b,At,Ab,Xt,Xb,mt,mb,cbe,sbe,ht,hb
-     $     ,pi,k
+     $     ,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       mb = dsqrt(b)
@@ -5426,12 +5414,11 @@ c
       
       double precision t,b,T1,T2,B1,B2,st,ct,sb,cb,q,mu,tanb,vv
       double precision c2t,s2t,c2b,s2b,At,Ab,Xt,Xb,mt,mb,cbe,sbe,ht,hb
-     $     ,pi,k
+     $     ,k
       double precision F1t,F2t,F3t,F4t,F1b,F2b,F3b,F4b,F5,F6,Ft,Fb,Gt,Gb
      $     ,FAp
       double precision v1,v2,S1,S2
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       mt = dsqrt(t)
       mb = dsqrt(b)
@@ -5759,14 +5746,13 @@ C     .
       implicit none
       
       integer OS
-      double precision ht,k,mt,pi,v2,tb
+      double precision ht,k,mt,v2,tb
       double precision t,mu2,A0,BL,T1,T2,st,ct,q,A,X,mu,tanb,sb,cb,s2t
      $     ,c2t
       double precision F1,F2,F3,dmuF2,dmuF3,dAtF2,dAtF3,DM12,DM22
       double precision DF1,DF2,DF3,DdmuF2,DdmuF3,DdAtF2,DdAtF3,F2_s
       double precision S11,S22,S12,osdr,DMom,ShiftB,ShiftB2,ShiftB3,sw
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       tanb = 1d0/tb             ! swap H1 <-> H2 !!!
       
@@ -5886,10 +5872,8 @@ c     when necessary we consider the residues:
       double precision t,mu2,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision delt,pLi2,phi
       double precision tauF1ab
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
 
       mu2 = mu**2
       if (mu2.eq.0d0) then
@@ -5927,10 +5911,8 @@ c     when necessary we consider the residues:
       double precision t,mu2,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision delt,pLi2,phi,Xt,Yt,st2,ct2
       double precision tauF1c
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       mu2 = mu**2
       if (mu2.eq.0d0) then
@@ -6022,10 +6004,8 @@ c     when necessary we consider the residues:
       double precision t,mu2,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision delt,pLi2,phi
       double precision tauF2ab
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
 
       tauF2ab = -(3.+Nc)/2.*(Log(T1/q)**2-Log(T2/q)**2)
       
@@ -6042,10 +6022,8 @@ c     when necessary we consider the residues:
       double precision t,mu2,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision delt,pLi2,phi,ct2,st2,Xt,Yt,At
       double precision tauF2c
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       mu2 = mu**2
       if (mu2.eq.0d0) then
@@ -6139,10 +6117,8 @@ c     when necessary we consider the residues:
       double precision t,mu2,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision delt,pLi2,phi
       double precision tauF3ab
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       tauF3ab = (2.+Nc)/2.*(2.-Log(T1/q)-Log(T2/q))
      $     *(2.-(T1+T2)/(T1-T2)*Log(T1/T2))
@@ -6160,10 +6136,8 @@ c     when necessary we consider the residues:
       double precision t,mu2,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision delt,pLi2,phi,ct2,st2,Xt,Yt,At
       double precision tauF3c
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       mu2 = mu**2
       if (mu2.eq.0d0) then
@@ -6299,10 +6273,8 @@ c     when necessary we consider the residues:
       double precision t,mu2,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision delt,pLi2,phi,ct2,st2,Xt,Yt,At
       double precision F2_s
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       mu2 = mu**2
       
@@ -6343,10 +6315,8 @@ c     when necessary we consider the residues:
       implicit none
       double precision t,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu,At,ht
       double precision dmuF2,dmuF3,dAtF2,dAtF3,DM12,DM22
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       dmuF2 = -Nc/4.*(Log(T1/q)**2-Log(T2/q)**2)
       
@@ -6389,11 +6359,8 @@ c     shift of the parameters from DRbar to On-Shell scheme
      $     ,dcotb
       double precision pi12_1,pi12_2
       double precision mt,ct2,st2,v2,v22,colorfactor 
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
-
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       mu2 = mu**2
       
@@ -6546,12 +6513,11 @@ c     DMA = 2-loop corrections to the CP-odd Higgs mass.
       
       implicit none
       
-      double precision ht,k,mt,pi,v2,tb
+      double precision ht,k,mt,v2,tb
       double precision t,mu2,A0,BL,T1,T2,st,ct,q,A,X,mu,tanb,sb,cb,s2t
      $     ,c2t
       double precision FA,FA_A,DMA
-      
-      pi = 3.14159265897d0
+      double precision, parameter :: pi = 3.1415926535897932d0
       
       tanb = 1d0/tb             ! swap H1 <-> H2 !!!
       
@@ -6621,10 +6587,8 @@ c     when necessary we consider the residues:
       implicit none
       double precision t,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision tauFAab
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       tauFAab = (5.+2.*Nc)*(T1*(1.-Log(T1/q)+Log(T1/q)**2/2)-
      $     T2*(1.-Log(T2/q)+Log(T2/q)**2/2))
@@ -6642,10 +6606,8 @@ c     when necessary we consider the residues:
       double precision t,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision mu2,Xt,Yt,At,st2,ct2
       double precision tauFAc,phi,delt,pLi2
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
       
       mu2 = mu**2
       if (mu2.eq.0d0) then
@@ -6742,10 +6704,9 @@ c     when necessary we consider the residues:
       implicit none
       double precision t,A0,BL,T1,T2,s2t,c2t,cb,sb,q,mu
       double precision tauresFAc,phi,delt,pLi2
-      double precision Pi,Nc,Xt,Yt ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision Xt,Yt
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
 
       Xt = s2t*(T1-T2)/2d0/Sqrt(t)
       Yt = Xt - mu/cb/sb
@@ -6787,12 +6748,12 @@ c             running (DRbar) parameters, evaluated at the scale Q.
 
       implicit none
 
-      double precision ht,k,mt,pi,vv,v1,v2,tb
+      double precision ht,k,mt,vv,v1,v2,tb
       double precision t,mu2,A0,BL,T1,T2,st,ct,q,A,X,mu,tanb,sb,cb,s2t
      $     ,c2t
       double precision F2l,G2l,S1,S2,sw
+      double precision, parameter :: pi = 3.1415926535897932d0
 
-      pi = 3.14159265897d0
       tanb = 1d0/tb           ! swap H1 <-> H2 !!!
       
       mt = dsqrt(t)
@@ -6853,10 +6814,8 @@ c$$$      k = 3d0*ht**2/(16d0*Pi**2)**2
       implicit none
       double precision t,A0,BL,T1,T2,s2t,c2t,q,mu,mu2,sb,cb,sb2,cb2
       double precision F2l,G2l,phi,delt,pLi2,Xt,Yt,At
-      double precision Pi,Nc ! color factor !!!
-      
-      Pi = 3.141592654d0
-      Nc = 1d0
+      double precision, parameter :: Nc = 1d0 ! color factor !!!
+      double precision, parameter :: Pi = 3.1415926535897932d0
 
       sb2 = sb**2
       cb2 = cb**2
