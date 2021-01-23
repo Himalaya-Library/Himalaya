@@ -41,29 +41,33 @@ double isNaN(double var, const std::string& msg = "")
 /// Re(B0(s,x,x,q2)), Eq.(2.4) from [hep-ph/0701051]
 double fB(double s, double x, double q2)
 {
-    using std::asin;
-    using std::log;
-    using std::sqrt;
-
-    if (is_zero(s) && is_zero(x))
+    if (is_zero(s) && is_zero(x)) {
         return 0.0;
+    }
 
-    if (is_zero(s))
-        return -log(x / q2);
+    if (is_zero(s)) {
+        return -std::log(x / q2);
+    }
 
-    if (is_zero(x))
-        return 2.0 - log(s / q2);
+    if (is_zero(x)) {
+        return 2.0 - std::log(s / q2);
+    }
 
-    if (is_equal(s, x))
-        return 2.0 - 1.813799364234218 - log(x / q2);
+    if (is_equal(s, x)) {
+        return 2.0 - 1.813799364234218 - std::log(x / q2);
+    }
 
-    if (s <= 4.0 * x)
-        return 2.0 - log(x / q2) - 2.0 * sqrt(4.0 * x / s - 1.0) * asin(sqrt(s / (4.0 * x)));
+    if (s <= 4.0 * x) {
+       return 2.0 - std::log(x / q2) -
+              2.0 * std::sqrt(4.0 * x / s - 1.0) *
+                 std::asin(std::sqrt(s / (4.0 * x)));
+    }
 
-    const double sq = sqrt(1.0 - 4.0 * x / s);
+    const double sq = std::sqrt(1.0 - 4.0 * x / s);
 
     // s > 4*x
-    return 2.0 - log(x / q2) + sq * log(s * (1.0 - sq) / (2 * x) - 1.0);
+    return 2.0 - std::log(x / q2) +
+           sq * std::log(s * (1.0 - sq) / (2 * x) - 1.0);
 }
 
 } // anonymous namespace
@@ -189,8 +193,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
 {
     ThresholdCalculator thresholdCalculator(p, msq2);
 
-    using std::log;
-    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
+    const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
 
     const double v2 = pow2(p.vu) + pow2(p.vd);
     const double gt = sqrt2 * p.Mt / std::sqrt(v2);
@@ -199,10 +202,10 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const double pref_at = oneLoop * pow2(p.Mt * gt);
 
     const double q2 = pow2(p.Mt);
-    const double beta = atan(p.vu / p.vd);
-    const double cbeta = cos(beta);
-    const double c2beta = cos(2 * beta);
-    const double sbeta = sin(beta);
+    const double beta = std::atan(p.vu / p.vd);
+    const double cbeta = std::cos(beta);
+    const double c2beta = std::cos(2 * beta);
+    const double sbeta = std::sin(beta);
     const double mhtree = std::abs(c2beta * p.MZ);
     const double yt = sqrt2 * p.Mt / p.vu;
     const double yb = sqrt2 * p.Mb / p.vd;
@@ -371,8 +374,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 {
     ThresholdCalculator thresholdCalculator(p, msq2);
 
-    using std::log;
-    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
+    const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
     // couplings
     const double v2 = pow2(p.vu) + pow2(p.vd);
     const double gt = sqrt2 * p.Mt / std::sqrt(v2);
@@ -386,10 +388,10 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
     const double yb6 = pow3(yb2);
     const double ytau4 = pow2(ytau2);
     const double ytau6 = pow3(ytau2);
-    const double beta = atan(p.vu / p.vd);
-    const double cbeta = cos(beta);
-    const double sbeta = sin(beta);
-    const double lmbMt = log(pow2(p.Mb / p.Mt));
+    const double beta = std::atan(p.vu / p.vd);
+    const double cbeta = std::cos(beta);
+    const double sbeta = std::sin(beta);
+    const double lmbMt = std::log(pow2(p.Mb / p.Mt));
 
     // 2-Loop prefactor at*as
     const double pref = twoLoop * pow2(p.Mt * gt * p.g3);
@@ -539,11 +541,8 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
 {
     ThresholdCalculator thresholdCalculator(p, msq2);
 
-    using std::log;
-    using std::sqrt;
-
     const double catas2 = 248.1215180432007;
-    const double lmMt = omitSMLogs * log(pow2(p.scale / p.Mt));
+    const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
     // threshold correction of yt_as DRbar'
     const double dytas = thresholdCalculator.getThresholdCorrection(
                              ThresholdCouplingOrders::YT_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
@@ -581,9 +580,8 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
 double Mh2EFTCalculator::getDeltaLambdaDegenerate(
     double scale, double mst1, double Xt, int omitlogs) const
 {
-    using std::log;
-
-    const double LS = omitlogs * log(pow2(scale / p.MSt(0))) + log(pow2(p.MSt(0) / mst1));
+    const double LS = omitlogs * std::log(pow2(scale / p.MSt(0)))
+       + std::log(pow2(p.MSt(0) / mst1));
 
     // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
     const double v2 = pow2(p.vd) + pow2(p.vu);
