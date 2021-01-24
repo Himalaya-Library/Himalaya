@@ -174,7 +174,7 @@ void Mh2EFTCalculator::setCorrectionFlag(CouplingOrders::CouplingOrders order, i
  */
 double Mh2EFTCalculator::getDeltaMh2EFT0Loop() const
 {
-    return pow2(p.MZ * std::cos(2 * std::atan(p.vu / p.vd)));
+    return pow2(p.MZ * std::cos(2 * calcBeta()));
 }
 
 /**
@@ -190,17 +190,17 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
 
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
 
-    const double v2 = pow2(p.vu) + pow2(p.vd);
-    const double gt = sqrt2 * p.Mt / std::sqrt(v2);
+    const double v2 = calcV2();
+    const double gt = sqrt2 * p.Mt / calcV();
 
     // 1-Loop prefactor at
     const double pref_at = oneLoop * pow2(p.Mt * gt);
 
     const double q2 = pow2(p.Mt);
-    const double beta = std::atan(p.vu / p.vd);
-    const double cbeta = std::cos(beta);
+    const double beta = calcBeta();
+    const double cbeta = calcCosBeta();
     const double c2beta = std::cos(2 * beta);
-    const double sbeta = std::sin(beta);
+    const double sbeta = calcSinBeta();
     const double mhtree = std::abs(c2beta * p.MZ);
     const double yt = sqrt2 * p.Mt / p.vu;
     const double yb = sqrt2 * p.Mb / p.vd;
@@ -476,8 +476,8 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
     // couplings
-    const double v2 = pow2(p.vu) + pow2(p.vd);
-    const double gt = sqrt2 * p.Mt / std::sqrt(v2);
+    const double v2 = calcV2();
+    const double gt = sqrt2 * p.Mt / calcV();
     const double g32 = pow2(p.g3);
     const double yt2 = 2*pow2(p.Mt / p.vu);
     const double yb2 = 2*pow2(p.Mb / p.vd);
@@ -488,9 +488,8 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
     const double yb6 = pow3(yb2);
     const double ytau4 = pow2(ytau2);
     const double ytau6 = pow3(ytau2);
-    const double beta = std::atan(p.vu / p.vd);
-    const double cbeta = std::cos(beta);
-    const double sbeta = std::sin(beta);
+    const double cbeta = calcCosBeta();
+    const double sbeta = calcSinBeta();
     const double lmbMt = std::log(pow2(p.Mb / p.Mt));
 
     // 2-Loop prefactor at*as
@@ -756,7 +755,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
     const double dg3as = thresholdCalculator.getThresholdCorrection(
                              ThresholdCouplingOrders::G3_AS, RenSchemes::DRBARPRIME, omitMSSMLogs);
 
-    const double gt = sqrt2 * p.Mt / std::sqrt(pow2(p.vu) + pow2(p.vd));
+    const double gt = sqrt2 * p.Mt / std::sqrt(calcV2());
 
     // 3-Loop prefactor at*as^2
     const double pref = threeLoop * pow2(p.Mt * gt * pow2(p.g3));
@@ -787,9 +786,9 @@ double Mh2EFTCalculator::getDeltaLambdaDegenerate(
        + std::log(pow2(p.MSt(0) / mst1));
 
     // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
-    const double v2 = pow2(p.vd) + pow2(p.vu);
+    const double v2 = calcV2();
 
-    const double gt = sqrt2 * p.Mt / std::sqrt(v2);
+    const double gt = sqrt2 * p.Mt / calcV();
 
     // 3-Loop prefactor
     const double pref = threeLoop * pow2(p.Mt * gt * pow2(p.g3));
@@ -804,6 +803,36 @@ double Mh2EFTCalculator::getDeltaLambdaDegenerate(
                                  + pow3(xt) * (160 * LS + 864 * pow2(LS) + 8 * (2722 - 2259 * z3))) / v2;
 
     return deltaLambda3L;
+}
+
+double Mh2EFTCalculator::calcBeta() const
+{
+   return std::atan(calcTanBeta());
+}
+
+double Mh2EFTCalculator::calcTanBeta() const
+{
+   return p.vu / p.vd;
+}
+
+double Mh2EFTCalculator::calcV() const
+{
+   return std::sqrt(calcV2());
+}
+
+double Mh2EFTCalculator::calcV2() const
+{
+   return pow2(p.vu) + pow2(p.vd);
+}
+
+double Mh2EFTCalculator::calcSinBeta() const
+{
+   return p.vu / calcV();
+}
+
+double Mh2EFTCalculator::calcCosBeta() const
+{
+   return p.vd / calcV();
 }
 
 /**

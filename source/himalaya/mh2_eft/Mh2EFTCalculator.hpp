@@ -75,6 +75,19 @@ public:
 
    friend std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
 private:
+   /// calculate beta
+   double calcBeta() const;
+   /// calculate tan(beta)
+   double calcTanBeta() const;
+   /// calculate v
+   double calcV() const;
+   /// calculate v^2
+   double calcV2() const;
+   /// calculate sin(beta)
+   double calcSinBeta() const;
+   /// calculate cos(beta)
+   double calcCosBeta() const;
+
    Parameters p{}; ///< The HimalayaInterface struct
    std::array<int, CouplingOrders::NUMBER_OF_COUPLING_ORDERS> orders{}; ///< holds all CouplingOrders to enable/disable certain corrections
 };
