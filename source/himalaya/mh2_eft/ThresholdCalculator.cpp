@@ -157,7 +157,7 @@ ThresholdCalculator::ThresholdCalculator(
       const double eps = mQ3*0.01;
       const double eps2 = mU3*0.01;
       const double v = std::sqrt(pow2(p.vu) + pow2(p.vd));
-      const double pref = sqrt2*p.Mt*pow4(p.g3/(4*Pi))/v;
+      const double pref = twoLoop*sqrt2*p.Mt*pow4(p.g3)/v;
 
       const double shifted_mU32 = pow2(mQ3 + std::abs(mU3 - mQ3)/2);
       const double shifted_msq2 = pow2(mQ3 + std::abs(std::sqrt(msq2) - mQ3)/2);
