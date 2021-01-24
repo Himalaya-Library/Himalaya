@@ -166,35 +166,40 @@ ThresholdCalculator::ThresholdCalculator(
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          msq2 = pow2(mQ3 + std::abs(std::sqrt(msq2) - mQ3)/2.);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::DEGENERATE);
+         if (!isGeneralStable(exact, exactShifted, lim))
+            p.massLimit3LThreshold = static_cast<int>(Limits::DEGENERATE);
       } else if (std::abs(mQ3 - mU3) < eps && std::abs(mU3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3_EQ_M3);
+         if (!isGeneralStable(exact, exactShifted, lim))
+            p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3_EQ_M3);
       } else if (std::abs(mQ3 - mU3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3);
+         if (!isGeneralStable(exact, exactShifted, lim))
+            p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3);
       } else if (std::abs(mQ3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_M3);
+         if (!isGeneralStable(exact, exactShifted, lim))
+            p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_M3);
       } else if (std::abs(mU3 - m3) < eps2) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          p.mu2(2,2) = pow2(mQ3 + std::abs(mU3 - mQ3)/2.);
          p.MG = mQ3 + std::abs(m3 - mQ3)/2.;
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         if (!isGeneralStable(exact, exactShifted, lim)) p.massLimit3LThreshold = static_cast<int>(Limits::MU3_EQ_M3);
+         if (!isGeneralStable(exact, exactShifted, lim))
+            p.massLimit3LThreshold = static_cast<int>(Limits::MU3_EQ_M3);
       }
 
       // reset possible parameter shifts
