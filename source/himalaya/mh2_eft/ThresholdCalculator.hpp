@@ -345,6 +345,14 @@ private:
     * @return delta_lambda_ytau2_yb4
     */
    double getDeltaLambdaYtau2Yb4(int omitLogs) const;
+   /// calculate beta
+   double calcBeta() const;
+   /// calculate tan(beta)
+   double calcTanBeta() const;
+   /// calculate v
+   double calcV() const;
+   /// calculate v^2
+   double calcV2() const;
    /// calculate sin(beta)
    double calcSinBeta() const;
    /// calculate cos(beta)
@@ -353,10 +361,14 @@ private:
    double calcXt() const;
    /// calculate Xb
    double calcXb() const;
+   /// calculate Xtau
+   double calcXtau() const;
    /// calculate Yt
    double calcYt() const;
    /// calculate Yb
    double calcYb() const;
+   /// calculate Ytau
+   double calcYtau() const;
    Parameters p{}; ///< Himalaya input parameters
    double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< average squared squark mass of the first two generations
    int xtOrderLambdaAtAs2 = 6; ///< flag to truncate the Xt order of delta_lambda_at_as2 at a given power starting at 4
