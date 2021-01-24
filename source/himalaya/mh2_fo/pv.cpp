@@ -29,7 +29,6 @@ constexpr double EPSTOL = 1.0e-11; ///< underflow accuracy
 constexpr double dabs(double a) noexcept { return a >= 0. ? a : -a; }
 constexpr double sqr(double a) noexcept { return a*a; }
 constexpr double pow3(double a) noexcept { return a*a*a; }
-double log_abs(double a) noexcept { return std::log(std::abs(a)); }
 
 
 constexpr double sign(double x) noexcept
@@ -185,19 +184,21 @@ double b0(double p2, double m12, double m22, double q2) noexcept
  */
 double d1_b0(double m12, double m22) noexcept
 {
+   m12 = std::abs(m12);
+   m22 = std::abs(m22);
    const double m14 = m12 * m12;
    const double m24 = m22 * m22;
 
-   if ((std::abs(m12) < 0.0001) != (std::abs(m22) < 0.0001)) {
+   if ((m12 < 0.0001) != (m22 < 0.0001)) {
       return (m14 - m24) / (2. * pow3(m12 - m22));
-   } else if (std::abs(m12) < 0.0001 && std::abs(m22) < 0.0001) {
+   } else if (m12 < 0.0001 && m22 < 0.0001) {
       return 0.;
    } else if (std::abs(m22 - m12) < 0.001) {
       return 1./(6. * m12) + (m12 - m22)/(12.* m14);
    }
 
-   return (m14 - m24 + 2. * m12 * m22 * std::log(m22/m12))
-      /(2. * pow3(m12 - m22));
+   return (m14 - m24 + 2 * m12 * m22 * std::log(m22/m12))
+      /(2 * pow3(m12 - m22));
 }
 
 } // namespace mh2_fo
