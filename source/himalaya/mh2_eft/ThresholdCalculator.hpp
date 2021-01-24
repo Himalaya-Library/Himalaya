@@ -345,6 +345,14 @@ private:
     * @return delta_lambda_ytau2_yb4
     */
    double getDeltaLambdaYtau2Yb4(int omitLogs) const;
+   /// calculate Xt
+   double calcXt() const;
+   /// calculate Xb
+   double calcXb() const;
+   /// calculate Yt
+   double calcYt() const;
+   /// calculate Yb
+   double calcYb() const;
    Parameters p{}; ///< Himalaya input parameters
    double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< average squared squark mass of the first two generations
    int xtOrderLambdaAtAs2 = 6; ///< flag to truncate the Xt order of delta_lambda_at_as2 at a given power starting at 4
