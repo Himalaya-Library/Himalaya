@@ -210,14 +210,14 @@ ThresholdCalculator::ThresholdCalculator(
 }
 
 /**
- * Returns a specific threshold corrections for a given mass limit
- * @param variable coupling order of threshold correction
+ * Returns a specific threshold correction
+ * @param couplingOrder coupling order of threshold correction
  * @param scheme renormalization scheme. Choices are {DRbar'} only!
  * @param omitLogs an integer to omit all log mu terms
- * @return a threshold correction for a given variable in a given scheme for a suitable mass limit
+ * @return a threshold correction for a given couplingOrder in a given scheme for a suitable mass limit
  */
 double ThresholdCalculator::getThresholdCorrection(
-   ThresholdCouplingOrders variable, RenSchemes scheme, int omitLogs) const
+   ThresholdCouplingOrders couplingOrder, RenSchemes scheme, int omitLogs) const
 {
    double thresholdCorrection = 0.;
    const auto limit = static_cast<Limits>(p.massLimit3LThreshold);
@@ -227,7 +227,7 @@ double ThresholdCalculator::getThresholdCorrection(
                " implemented threshold corrections!");
    }
 
-   switch (variable) {
+   switch (couplingOrder) {
       case ThresholdCouplingOrders::G3_AS:{
          thresholdCorrection = getDeltaG3Alphas(omitLogs);
          switch (scheme) {

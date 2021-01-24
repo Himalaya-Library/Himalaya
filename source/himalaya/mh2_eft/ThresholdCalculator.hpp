@@ -34,13 +34,13 @@ public:
     */
    ThresholdCalculator(const Parameters& p_, double msq2_ = std::numeric_limits<double>::quiet_NaN(), bool verbose = true, bool check = false);
    /**
-    * Returns a specific threshold corrections for a given mass limit
-    * @param variable coupling order of threshold correction
+    * Returns a specific threshold correction
+    * @param couplingOrder coupling order of threshold correction
     * @param scheme an integer key to set the scheme. Choices are {MSbar, DRbar', DRbar}
     * @param omitLogs an integer to omit all log mu terms
-    * @return a threshold correction for a given variable in a given scheme for a suitable mass limit
+    * @return a threshold correction for a given couplingOrder in a given scheme for a suitable mass limit
     */
-   double getThresholdCorrection(ThresholdCouplingOrders variable, RenSchemes scheme, int omitLogs) const;
+   double getThresholdCorrection(ThresholdCouplingOrders couplingOrder, RenSchemes scheme, int omitLogs) const;
    /**
     * Returns the shift needed to convert the 3L threshold correction of lambda to the MSbar scheme
     * @param xtOrder an integer key to omit the Xt contributions starting at xtOrder + 1
