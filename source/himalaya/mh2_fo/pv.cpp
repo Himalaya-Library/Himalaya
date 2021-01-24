@@ -94,7 +94,7 @@ double a0(double m2, double q2) noexcept
 
 /**
  * B0 function with squared arguments, from hep-ph/9606211.
- * Note it returns the REAL PART ONLY.
+ * @note returns only the real part of B0
  */
 double b0(double p2, double m12, double m22, double q2) noexcept
 {
