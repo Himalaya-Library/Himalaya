@@ -345,6 +345,10 @@ private:
     * @return delta_lambda_ytau2_yb4
     */
    double getDeltaLambdaYtau2Yb4(int omitLogs) const;
+   /// calculate sin(beta)
+   double calcSinBeta() const;
+   /// calculate cos(beta)
+   double calcCosBeta() const;
    /// calculate Xt
    double calcXt() const;
    /// calculate Xb

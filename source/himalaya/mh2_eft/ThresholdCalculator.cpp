@@ -744,9 +744,8 @@ double ThresholdCalculator::getDeltaG2G2(int omitLogs) const
 double ThresholdCalculator::getDeltaYtYt(int omitLogs) const
 {
    const double MR2 = pow2(p.scale);
-   const double beta = std::atan(p.vu/p.vd);
-   const double cbeta = std::cos(beta);
-   const double sbeta = std::sin(beta);
+   const double cbeta = calcCosBeta();
+   const double sbeta = calcSinBeta();
    const double Xt2 = pow2(calcXt());
    const double mQ3 = std::sqrt(p.mq2(2,2));
    const double mU3 = std::sqrt(p.mu2(2,2));
@@ -760,9 +759,8 @@ double ThresholdCalculator::getDeltaYtYt(int omitLogs) const
 double ThresholdCalculator::getDeltaYtauYtau(int omitLogs) const
 {
    const double MR2 = pow2(p.scale);
-   const double beta = std::atan(p.vu/p.vd);
-   const double cbeta = std::cos(beta);
-   const double sbeta = std::sin(beta);
+   const double cbeta = calcCosBeta();
+   const double sbeta = calcSinBeta();
    const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
    const double mL3 = std::sqrt(p.ml2(2,2));
    const double mE3 = std::sqrt(p.me2(2,2));
@@ -775,9 +773,8 @@ double ThresholdCalculator::getDeltaYtauYtau(int omitLogs) const
 
 double ThresholdCalculator::getDeltaYbYb(int omitLogs) const
 {
-   const double beta = std::atan(p.vu / p.vd);
-   const double cbeta = std::cos(beta);
-   const double sbeta = std::sin(beta);
+   const double cbeta = calcCosBeta();
+   const double sbeta = calcSinBeta();
    const double mA2 = pow2(p.MA);
    const double MR2 = pow2(p.scale);
    const double mQ3 = std::sqrt(p.mq2(2,2));
@@ -792,9 +789,8 @@ double ThresholdCalculator::getDeltaYbYb(int omitLogs) const
 double ThresholdCalculator::getDeltaYbYt(int omitLogs) const
 {
    const double tbe = p.vu / p.vd;
-   const double beta = std::atan(tbe);
-   const double cbeta = std::cos(beta);
-   const double sbeta = std::sin(beta);
+   const double cbeta = calcCosBeta();
+   const double sbeta = calcSinBeta();
    const double mA2 = pow2(p.MA);
    const double MR2 = pow2(p.scale);
    const double mU3 = std::sqrt(p.mu2(2,2));
@@ -829,9 +825,8 @@ double ThresholdCalculator::getDeltaYbAs(int omitLogs) const
 double ThresholdCalculator::getDeltaYtYb(int omitLogs) const
 {
    const double MR2 = pow2(p.scale);
-   const double beta = std::atan(p.vu/p.vd);
-   const double cbeta = std::cos(beta);
-   const double sbeta = std::sin(beta);
+   const double cbeta = calcCosBeta();
+   const double sbeta = calcSinBeta();
    const double mD3 = std::sqrt(p.md2(2,2));
    const double mQ3 = std::sqrt(p.mq2(2,2));
    const double mU3 = std::sqrt(p.mu2(2,2));
@@ -942,8 +937,8 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const
    const double mD2 = std::sqrt(p.mu2(1,1));
    const double mD1 = std::sqrt(p.mu2(0,0));
    const double beta = std::atan(p.vu/p.vd);
-   const double sbeta = std::sin(beta);
-   const double cbeta = std::cos(beta);
+   const double sbeta = calcSinBeta();
+   const double cbeta = calcCosBeta();
    const double s2beta = std::sin(2*beta);
    const double s6beta = std::sin(6*beta);
    const double c2beta = std::cos(2*beta);
@@ -1009,10 +1004,10 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const
    const double cw = calc_cw(p.MW, p.MZ);
    const double sw = std::sin(std::acos(cw));
    const double beta = std::atan(p.vu/p.vd);
-   const double cbeta = std::cos(beta);
+   const double cbeta = calcCosBeta();
    const double c2beta = std::cos(2*beta);
    const double c4beta = std::cos(4*beta);
-   const double sbeta = std::sin(beta);
+   const double sbeta = calcSinBeta();
    const double s2beta = std::sin(2*beta);
    const double s6beta = std::sin(6*beta);
    const double eps = Mu*0.01;
@@ -1547,8 +1542,7 @@ double ThresholdCalculator::getDeltaYtauYb() const
    const double Xt2 = pow2(calcXt());
    const double mQ3 = std::sqrt(p.mq2(2,2));
    const double mU3 = std::sqrt(p.mu2(2,2));
-   const double beta = std::atan(p.vu/p.vd);
-   const double sbeta = std::sin(beta);
+   const double sbeta = calcSinBeta();
 
    return -(pow2(sbeta)*Xt2*F5(mQ3/mU3))/(4*mQ3*mU3);
 }
@@ -1724,9 +1718,8 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
    const double mQ3 = std::sqrt(mQ32);
    const double mD3 = std::sqrt(mD32);
    const double mA = p.MA;
-   const double beta = std::atan(p.vu/p.vd);
-   const double sbeta = std::sin(beta);
-   const double cbeta = std::cos(beta);
+   const double sbeta = calcSinBeta();
+   const double cbeta = calcCosBeta();
    const double Xb = calcXb();
    const double Yb = calcYb();
    const double Mu = p.mu;
@@ -1989,8 +1982,8 @@ double ThresholdCalculator::getDeltaLambdaYt6_SUSYHD(int omitLogs) const
    const double muhat = p.mu/mst;
    const double tb = p.vu/p.vd;
    const double beta = std::atan(tb);
-   const double cb2 = pow2(std::cos(beta));
-   const double sb2 = pow2(std::sin(beta));
+   const double cb2 = pow2(calcCosBeta());
+   const double sb2 = pow2(calcSinBeta());
    const double s2b = std::sin(2*beta);
    const double Q2 = pow2(p.scale);
    const double lmst2Q2 = omitLogs*std::log(mst2/Q2);
@@ -2028,9 +2021,8 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    double mQ32 = p.mq2(2,2);
    double mU32 = p.mu2(2,2);
    const double mA = p.MA;
-   const double beta = std::atan(p.vu/p.vd);
-   const double sbeta = std::sin(beta);
-   const double cbeta = std::cos(beta);
+   const double sbeta = calcSinBeta();
+   const double cbeta = calcCosBeta();
    const double Xt = calcXt();
    const double Yt = calcYt();
    const double Xt2 = pow2(Xt);
@@ -2429,9 +2421,8 @@ double ThresholdCalculator::getDeltaLambdaYtau6(int omitLogs) const
    const double mL3 = std::sqrt(mL32);
    const double mE3 = std::sqrt(mE32);
    const double mA = p.MA;
-   const double beta = std::atan(p.vu/p.vd);
-   const double sbeta = std::sin(beta);
-   const double cbeta = std::cos(beta);
+   const double sbeta = calcSinBeta();
+   const double cbeta = calcCosBeta();
    const double sbe = sbeta;
    const double cbe = cbeta;
    const double Xtau = p.Ae(2,2) - p.mu*p.vu/p.vd;
@@ -2847,9 +2838,8 @@ double ThresholdCalculator::getDeltaLambdaYt2Yb4(int omitLogs) const
    const double mU3 = std::sqrt(mU32);
    const double mD3 = std::sqrt(mD32);
    const double mA = p.MA;
-   const double beta = std::atan(p.vu/p.vd);
-   const double sbeta = std::sin(beta);
-   const double cbeta = std::cos(beta);
+   const double sbeta = calcSinBeta();
+   const double cbeta = calcCosBeta();
    const double Xt = calcXt();
    const double Yt = calcYt();
    const double Xb = calcXb();
@@ -3248,9 +3238,8 @@ double ThresholdCalculator::getDeltaLambdaYt4Yb2(int omitLogs) const
    const double mU3 = std::sqrt(mU32);
    const double mD3 = std::sqrt(mD32);
    const double mA = p.MA;
-   const double beta = std::atan(p.vu/p.vd);
-   const double sbeta = std::sin(beta);
-   const double cbeta = std::cos(beta);
+   const double sbeta = calcSinBeta();
+   const double cbeta = calcCosBeta();
    const double Xt = calcXt();
    const double Yt = calcYt();
    const double Xb = calcXb();
@@ -3665,9 +3654,8 @@ double ThresholdCalculator::getDeltaLambdaYtau4Yb2(int omitLogs) const
    const double mQ3 = std::sqrt(mQ32);
    const double mL3 = std::sqrt(p.ml2(2,2));
    const double mE3 = std::sqrt(p.me2(2,2));
-   const double beta = std::atan(p.vu/p.vd);
-   const double cbeta = std::cos(beta);
-   const double sbeta = std::sin(beta);
+   const double cbeta = calcCosBeta();
+   const double sbeta = calcSinBeta();
    const double lmQ3MR = omitLogs*log(mQ32 / pow2(p.scale));
    const double eps = mQ3*0.01;
 
@@ -3712,9 +3700,8 @@ double ThresholdCalculator::getDeltaLambdaYtau2Yb4(int omitLogs) const
    const double lmL3MR = omitLogs*log(pow2(mL3)/pow2(p.scale));
    const double lmD3MR = omitLogs*log(pow2(mD3)/pow2(p.scale));
    const double lmQ3MR = omitLogs*log(mQ32 / pow2(p.scale));
-   const double beta = std::atan(p.vu/p.vd);
-   const double cbeta = std::cos(beta);
-   const double sbeta = std::sin(beta);
+   const double cbeta = calcCosBeta();
+   const double sbeta = calcSinBeta();
    const double eps = mQ3*0.01;
 
    if (std::abs(mE3 - mL3) < eps && std::abs(mD3 - mQ3) < eps) {
@@ -6605,6 +6592,16 @@ Limits ThresholdCalculator::getLimit() const
 void ThresholdCalculator::setXtOrderOfDeltaLambdaAtAs2(int xtOrder)
 {
    xtOrderLambdaAtAs2 = xtOrder;
+}
+
+double ThresholdCalculator::calcSinBeta() const
+{
+   return p.vu / std::sqrt(pow2(p.vu) + pow2(p.vd));
+}
+
+double ThresholdCalculator::calcCosBeta() const
+{
+   return p.vd / std::sqrt(pow2(p.vu) + pow2(p.vd));
 }
 
 double ThresholdCalculator::calcXt() const
