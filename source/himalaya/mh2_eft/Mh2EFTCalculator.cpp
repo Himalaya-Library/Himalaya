@@ -77,9 +77,8 @@ double fB(double s, double x, double q2)
  * @param p_ a HimalayaInterface struct
  * @param verbose a bool enable the output of the parameter validation. Enabled by default
  */
-Mh2EFTCalculator::Mh2EFTCalculator(
-    const himalaya::Parameters& p_, bool verbose)
-    : p(p_), msq2(p.calculateMsq2())
+Mh2EFTCalculator::Mh2EFTCalculator(const himalaya::Parameters& p_, bool verbose)
+    : p(p_)
 {
     p.validate(verbose);
 
@@ -187,7 +186,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT0Loop() const
  */
 double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) const
 {
-    ThresholdCalculator thresholdCalculator(p, msq2);
+    ThresholdCalculator thresholdCalculator(p, p.calculateMsq2());
 
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
 
@@ -473,7 +472,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
  */
 double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) const
 {
-    ThresholdCalculator thresholdCalculator(p, msq2);
+    ThresholdCalculator thresholdCalculator(p, p.calculateMsq2());
 
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
     // couplings
@@ -743,7 +742,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
     int omitSMLogs, int omitMSSMLogs, int omitDeltaLambda3L) const
 {
-    ThresholdCalculator thresholdCalculator(p, msq2);
+    ThresholdCalculator thresholdCalculator(p, p.calculateMsq2());
 
     const double catas2 = 248.1215180432007;
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
@@ -821,8 +820,7 @@ std::ostream& operator<<(std::ostream& ostr, const Mh2EFTCalculator& mhc)
     ostr << "=========================\n"
          << "Himalaya Mh2EFTCalculator\n"
          << "=========================\n"
-         << mhc.p
-         << "msq2  = " << mhc.msq2 << " GeV^2\n";
+         << mhc.p;
 
     const auto dmh2_0l =  mhc.getDeltaMh2EFT0Loop();
     const auto dmh2_1l =  mhc.getDeltaMh2EFT1Loop(1, 1);

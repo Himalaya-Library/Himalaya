@@ -76,7 +76,6 @@ public:
    friend std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
 private:
    Parameters p{}; ///< The HimalayaInterface struct
-   double msq2{};  ///< the average squark mass of the first two generations squared
    std::array<int, CouplingOrders::NUMBER_OF_COUPLING_ORDERS> orders{}; ///< holds all CouplingOrders to enable/disable certain corrections
 };
 
