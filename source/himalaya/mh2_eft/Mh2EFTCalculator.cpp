@@ -201,7 +201,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const double cbeta = calcCosBeta();
     const double c2beta = std::cos(2 * beta);
     const double sbeta = calcSinBeta();
-    const double mhtree = std::abs(c2beta * p.MZ);
+    const double mhtree2 = pow2(c2beta * p.MZ);
     const double yt = sqrt2 * p.Mt / p.vu;
     const double yb = sqrt2 * p.Mb / p.vd;
     const double ytau = sqrt2 * p.Mtau / p.vd;
@@ -352,10 +352,10 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
                                       ThresholdCouplingOrders::VEV_YTAU2,
                                       RenSchemes::DRBARPRIME, omitMSSMLogs));
 
-    const double bbhDR = fB(pow2(mhtree), pow2(mhtree), q2);
-    const double bbwDR = fB(pow2(mhtree), pow2(p.MW), q2);
-    const double bbzDR = fB(pow2(mhtree), pow2(p.MZ), q2);
-    const double B00DR = fB(pow2(mhtree), 0., q2);
+    const double bbhDR = fB(mhtree2, mhtree2, q2);
+    const double bbwDR = fB(mhtree2, pow2(p.MW), q2);
+    const double bbzDR = fB(mhtree2, pow2(p.MZ), q2);
+    const double B00DR = fB(mhtree2, 0., q2);
 
     // corrections to Mh2
     const double dmh2g12g22 = discardNaN(
