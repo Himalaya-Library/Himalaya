@@ -28,11 +28,10 @@ public:
    /**
     * Constructor
     * @param p_ a HimalayaInterface struct
-    * @param msq2_ the averaged squark mass of the first two generations squared
     * @param verbose a bool enable the output of the parameter validation. Enabled by default
     * @param check a boolean which indicates if the threshold corrections should be tested
     */
-   ThresholdCalculator(const Parameters& p_, double msq2_ = std::numeric_limits<double>::quiet_NaN(), bool verbose = true, bool check = false);
+   ThresholdCalculator(const Parameters& p_, bool verbose = true, bool check = false);
    /**
     * Returns a specific threshold correction
     * @param couplingOrder coupling order of threshold correction
@@ -370,7 +369,7 @@ private:
    /// calculate Ytau
    double calcYtau() const;
    Parameters p{}; ///< Himalaya input parameters
-   double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< average squared squark mass of the first two generations
+   double msq2{};  ///< average squared squark mass of the first two generations
    int xtOrderLambdaAtAs2 = 6; ///< flag to truncate the Xt order of delta_lambda_at_as2 at a given power starting at 4
 };
 

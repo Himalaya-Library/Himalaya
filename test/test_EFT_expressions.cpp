@@ -12,13 +12,13 @@ namespace {
    template <typename T> T pow4(T x)  { return x*x*x*x; }
    template <typename T> T pow6(T x)  { return x*x*x*x*x*x; }
 
-void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
+void _test_EFT_expressions(const himalaya::Parameters& p)
 {
    using namespace himalaya;
    using namespace himalaya::mh2_eft;
 
    Mh2EFTCalculator mhc(p);
-   ThresholdCalculator tc(p, msq2, true);
+   ThresholdCalculator tc(p, true);
    const double eps = 1e-5;
    const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
 
@@ -53,7 +53,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 
       const double g3as = tc.getThresholdCorrection(ThresholdCouplingOrders::G3_AS,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(g3as, -0.1736769306, eps);
+      CHECK_CLOSE(g3as, -0.1731100882, eps);
 
       // general mass case
       tc.setLimit(Limits::GENERAL);
@@ -62,7 +62,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(ytas_lim_gen, -3.215927532, eps);
       const double ytas2_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(ytas2_lim_gen, -55.90563134, eps);
+      CHECK_CLOSE(ytas2_lim_gen, -55.89911582, eps);
       const double lamat_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamat_lim_gen, 14.31721183, eps);
@@ -71,9 +71,9 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(lamatas_lim_gen, -87.06409990, eps);
       const double lamatas2_lim_gen = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(lamatas2_lim_gen, 207.7740287, eps);
+      CHECK_CLOSE(lamatas2_lim_gen, 207.7550117585, eps);
       const double drToMsShift_gen = tc.getDRbarPrimeToMSbarShift(3, 1);
-      CHECK_CLOSE(drToMsShift_gen, -4573.690622, eps);
+      CHECK_CLOSE(drToMsShift_gen, -4573.1448163138, eps);
 
       // mQ3 = m3
       tc.setLimit(Limits::MQ3_EQ_M3);
@@ -82,15 +82,15 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(ytas_lim_mq3_m3, -2.975633850, eps);
       const double ytas2_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(ytas2_lim_mq3_m3, -54.39344951, eps);
+      CHECK_CLOSE(ytas2_lim_mq3_m3, -54.3868694883, eps);
       const double lamatas_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mq3_m3, -71.71873062, eps);
       const double lamatas2_lim_mq3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(lamatas2_lim_mq3_m3, 71.11240105, eps);
+      CHECK_CLOSE(lamatas2_lim_mq3_m3, 71.0964678625, eps);
       const double drToMsShift_mq3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
-      CHECK_CLOSE(drToMsShift_mq3_m3, -4475.7762695112, eps);
+      CHECK_CLOSE(drToMsShift_mq3_m3, -4475.2303977325, eps);
 
       // mQ3 = mU3
       tc.setLimit(Limits::MQ3_EQ_MU3);
@@ -99,7 +99,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(ytas_lim_mq3_mu3, -3.187793781, eps);
       const double ytas2_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(ytas2_lim_mq3_mu3, -55.53609836, eps);
+      CHECK_CLOSE(ytas2_lim_mq3_mu3, -55.529811961, eps);
       const double lamat_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamat_lim_mq3_mu3, 14.35556635, eps);
@@ -108,9 +108,9 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(lamatas_lim_mq3_mu3, -102.3684261, eps);
       const double lamatas2_lim_mq3_mu3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(lamatas2_lim_mq3_mu3, 231.4042763, eps);
+      CHECK_CLOSE(lamatas2_lim_mq3_mu3, 231.382248943, eps);
       const double drToMsShift_mq3_mu3 = tc.getDRbarPrimeToMSbarShift(3, 1);
-      CHECK_CLOSE(drToMsShift_mq3_mu3, -4044.8611888293, eps);
+      CHECK_CLOSE(drToMsShift_mq3_mu3, -4044.3655622086, eps);
 
       // mq3 = mu3 = m3
       tc.setLimit(Limits::MQ3_EQ_MU3_EQ_M3);
@@ -119,15 +119,15 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(ytas_lim_mq3_mu3_m3, -2.957820456, eps);
       const double ytas2_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(ytas2_lim_mq3_mu3_m3, -53.98859513, eps);
+      CHECK_CLOSE(ytas2_lim_mq3_mu3_m3, -53.982275575, eps);
       const double lamatas_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mq3_mu3_m3, -87.55800303, eps);
       const double lamatas2_lim_mq3_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(lamatas2_lim_mq3_mu3_m3, 102.8902455, eps);
+      CHECK_CLOSE(lamatas2_lim_mq3_mu3_m3, 102.8713758798, eps);
       const double drToMsShift_mq3_mu3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
-      CHECK_CLOSE(drToMsShift_mq3_mu3_m3, -3975.459527439, eps);
+      CHECK_CLOSE(drToMsShift_mq3_mu3_m3, -3974.9639012363, eps);
 
       // mU3 = m3
       tc.setLimit(Limits::MU3_EQ_M3);
@@ -136,15 +136,15 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
       CHECK_CLOSE(ytas_lim_mu3_m3, -2.747511273, eps);
       const double ytas2_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::YT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(ytas2_lim_mu3_m3, -52.71555755, eps);
+      CHECK_CLOSE(ytas2_lim_mu3_m3, -52.7089852536, eps);
       const double lamatas_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS,
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(lamatas_lim_mu3_m3, -61.18314361, eps);
       const double lamatas2_lim_mu3_m3 = tc.getThresholdCorrection(ThresholdCouplingOrders::LAMBDA_AT_AS2,
 	 RenSchemes::TEST, 1);
-      CHECK_CLOSE(lamatas2_lim_mu3_m3, -32.38839351, eps);
+      CHECK_CLOSE(lamatas2_lim_mu3_m3, -32.4017074174, eps);
       const double drToMsShift_mu3_m3 = tc.getDRbarPrimeToMSbarShift(3, 1);
-      CHECK_CLOSE(drToMsShift_mu3_m3, -4323.5912100943, eps);
+      CHECK_CLOSE(drToMsShift_mu3_m3, -4323.0510347014, eps);
 
       // degenerate mass case
       tc.setLimit(Limits::DEGENERATE);
@@ -152,7 +152,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
 	 RenSchemes::TEST, 1);
       CHECK_CLOSE(ytas2_lim_degen, -52.81677866, eps);
       const double drToMsShift_degen = tc.getDRbarPrimeToMSbarShift(3, 1);
-      CHECK_CLOSE(drToMsShift_degen, -3900.8233462395, eps);
+      CHECK_CLOSE(drToMsShift_degen, -3900.7300573389, eps);
    }
 }
 
@@ -210,6 +210,5 @@ himalaya::Parameters test_point(){
 TEST_CASE("test_EFT_expressions")
 {
    const himalaya::Parameters p = test_point();
-   const double msq = 533.204;
-    _test_EFT_expressions(p, msq * msq);
+    _test_EFT_expressions(p);
 }

@@ -136,18 +136,14 @@ using namespace threshold_loop_functions;
 /**
  * Constructor
  * @param p_ a HimalayaInterface struct
- * @param msq2_ the averaged squark mass of the first two generations squared
  * @param verbose a bool enable the output of the parameter validation. Enabled by default
  * @param check a boolean which indicates if the threshold corrections should be tested
  */
 ThresholdCalculator::ThresholdCalculator(
-   const Parameters& p_, double msq2_, bool verbose, bool check)
-   : p(p_), msq2(msq2_)
+   const Parameters& p_, bool verbose, bool check)
+   : p(p_), msq2(p.calculateMsq2())
 {
    p.validate(verbose);
-
-   if (!std::isfinite(msq2_))
-      msq2 = p.calculateMsq2();
 
    if (!check) {
       // Set mass limit for threshold corrections

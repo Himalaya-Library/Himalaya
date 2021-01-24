@@ -186,7 +186,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT0Loop() const
  */
 double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) const
 {
-    ThresholdCalculator thresholdCalculator(p, p.calculateMsq2());
+    ThresholdCalculator thresholdCalculator(p);
 
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
 
@@ -472,7 +472,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
  */
 double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) const
 {
-    ThresholdCalculator thresholdCalculator(p, p.calculateMsq2());
+    ThresholdCalculator thresholdCalculator(p);
 
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
     // couplings
@@ -741,7 +741,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
 double Mh2EFTCalculator::getDeltaMh2EFT3Loop(
     int omitSMLogs, int omitMSSMLogs, int omitDeltaLambda3L) const
 {
-    ThresholdCalculator thresholdCalculator(p, p.calculateMsq2());
+    ThresholdCalculator thresholdCalculator(p);
 
     const double catas2 = 248.1215180432007;
     const double lmMt = omitSMLogs * std::log(pow2(p.scale / p.Mt));
