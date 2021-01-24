@@ -10,8 +10,6 @@
 #include "himalaya/Himalaya_interface.hpp"
 #include "himalaya/mh2_eft/EFTFlags.hpp"
 
-#include <limits>
-
 /**
  * @file ThresholdCalculator.hpp
  *

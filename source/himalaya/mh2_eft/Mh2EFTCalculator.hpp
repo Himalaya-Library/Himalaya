@@ -12,7 +12,6 @@
 #include "himalaya/misc/CouplingOrders.hpp"
 
 #include <iosfwd>
-#include <limits>
 #include <array>
 
 /**
