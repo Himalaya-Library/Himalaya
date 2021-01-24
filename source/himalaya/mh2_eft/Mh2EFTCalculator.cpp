@@ -75,17 +75,13 @@ double fB(double s, double x, double q2)
 /**
  * Constructor
  * @param p_ a HimalayaInterface struct
- * @param msq2_ the averaged squark mass of the first two generations squared
  * @param verbose a bool enable the output of the parameter validation. Enabled by default
  */
 Mh2EFTCalculator::Mh2EFTCalculator(
-    const himalaya::Parameters& p_, double msq2_, bool verbose)
-    : p(p_), msq2(msq2_)
+    const himalaya::Parameters& p_, bool verbose)
+    : p(p_), msq2(p.calculateMsq2())
 {
     p.validate(verbose);
-
-    if (!std::isfinite(msq2_))
-        msq2 = p.calculateMsq2();
 
     // fill orders
     orders.fill(1);

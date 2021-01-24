@@ -17,7 +17,7 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
    using namespace himalaya;
    using namespace himalaya::mh2_eft;
 
-   Mh2EFTCalculator mhc(p, msq2);
+   Mh2EFTCalculator mhc(p);
    ThresholdCalculator tc(p, msq2, true);
    const double eps = 1e-5;
    const double yt = sqrt(2)*p.Mt/std::sqrt(pow2(p.vu) + pow2(p.vd));
@@ -44,9 +44,8 @@ void _test_EFT_expressions(const himalaya::Parameters& p, double msq2)
    {
       const double delta_mh_3l = mhc.getDeltaMh2EFT3Loop(1, 1);
       const double susy_logs_3l = mhc.getDeltaMh2EFT3Loop(0, 1);
-      const double pref = 1./pow6(4*Pi) * pow2(p.Mt * yt * pow2(p.g3));
-      CHECK_CLOSE(delta_mh_3l, pref*20632.69911, eps);
-      CHECK_CLOSE(susy_logs_3l, pref*1772.341613, eps);
+      CHECK_CLOSE(delta_mh_3l, 136.6811130551, eps);
+      CHECK_CLOSE(susy_logs_3l, 11.7401841057, eps);
    }
 
    // check threshold corrections
@@ -211,8 +210,6 @@ himalaya::Parameters test_point(){
 TEST_CASE("test_EFT_expressions")
 {
    const himalaya::Parameters p = test_point();
-
    const double msq = 533.204;
-
     _test_EFT_expressions(p, msq * msq);
 }

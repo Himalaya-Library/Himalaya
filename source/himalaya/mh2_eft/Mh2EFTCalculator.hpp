@@ -31,10 +31,9 @@ public:
    /**
     * Constructor
     * @param p_ a HimalayaInterface struct
-    * @param msq2_ the averaged squark mass of the first two generations squared
     * @param verbose a bool enable the output of the parameter validation. Enabled by default
     */
-   Mh2EFTCalculator(const Parameters& p_, double msq2_ = std::numeric_limits<double>::quiet_NaN(), bool verbose = true);
+   Mh2EFTCalculator(const Parameters& p_, bool verbose = true);
    /**
     * Returns the tree-level EFT contribution to the Higgs mass
     */
@@ -77,7 +76,7 @@ public:
    friend std::ostream& operator<<(std::ostream&, const Mh2EFTCalculator&);
 private:
    Parameters p{}; ///< The HimalayaInterface struct
-   double msq2{std::numeric_limits<double>::quiet_NaN()}; ///< the average squark mass of the first two generations squared
+   double msq2{};  ///< the average squark mass of the first two generations squared
    std::array<int, CouplingOrders::NUMBER_OF_COUPLING_ORDERS> orders{}; ///< holds all CouplingOrders to enable/disable certain corrections
 };
 
