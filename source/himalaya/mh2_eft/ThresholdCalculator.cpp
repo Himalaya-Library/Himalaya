@@ -1980,8 +1980,7 @@ double ThresholdCalculator::getDeltaLambdaYt6_SUSYHD(int omitLogs) const
    const double mst = std::sqrt(mst2);
    const double xt = Xt/mst;
    const double muhat = p.mu/mst;
-   const double tb = calcTanBeta();
-   const double beta = std::atan(tb);
+   const double beta = calcBeta();
    const double cb2 = pow2(calcCosBeta());
    const double sb2 = pow2(calcSinBeta());
    const double s2b = std::sin(2*beta);
