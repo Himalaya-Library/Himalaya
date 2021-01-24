@@ -120,10 +120,12 @@ double fB(const std::complex<double>& xp, const std::complex<double>& xm) noexce
 
 double a0(double m2, double q2) noexcept
 {
-   if (std::abs(m2) < 1e-8)
+   m2 = std::abs(m2);
+
+   if (m2 < 1e-8)
       return 0.;
 
-   return m2 * (1.0 - log_abs(m2 / q2));
+   return m2 * (1 - std::log(m2 / q2));
 }
 
 
