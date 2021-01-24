@@ -604,16 +604,14 @@ double ThresholdCalculator::getDeltaLambdaYb2G22(int omitLogs) const
 
 double ThresholdCalculator::getDeltaLambdaYb4(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double Xb2 = pow2(p.Ad(2,2) - p.mu*p.vu/p.vd);
    const double mQ32 = p.mq2(2,2);
    const double mD32 = p.md2(2,2);
    const double mQ3 = std::sqrt(mQ32);
    const double mD3 = std::sqrt(mD32);
-   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
-   const double lmD3MR = omitLogs*log(mD32 / MR2);
+   const double lmQ3MR = omitLogs*std::log(mQ32 / MR2);
+   const double lmD3MR = omitLogs*std::log(mD32 / MR2);
 
    return (12*mD3*mQ3*Xb2*F1(mQ3/mD3) - pow2(Xb2)*F2(mQ3/mD3))/(mD32*mQ32)
       + 6*(lmD3MR + lmQ3MR);
@@ -621,8 +619,6 @@ double ThresholdCalculator::getDeltaLambdaYb4(int omitLogs) const
 
 double ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
    const double mQ32 = p.mq2(2,2);
@@ -631,8 +627,8 @@ double ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs) const
    const double mU3 = std::sqrt(mU32);
    const double beta = std::atan(p.vu/p.vd);
    const double c2beta = std::cos(2*beta);
-   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
-   const double lmU3MR = omitLogs*log(mU32 / MR2);
+   const double lmQ3MR = omitLogs*std::log(mQ32 / MR2);
+   const double lmU3MR = omitLogs*std::log(mU32 / MR2);
 
    return (-3*c2beta*(-3*Xt2*F3(mQ3/mU3) + c2beta*Xt2*F5(mQ3/mU3)
       + 2*mQ3*mU3*(lmQ3MR - 4*lmU3MR)))/(10.*mQ3*mU3);
@@ -640,8 +636,6 @@ double ThresholdCalculator::getDeltaLambdaYt2G12(int omitLogs) const
 
 double ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
    const double mQ32 = p.mq2(2,2);
@@ -650,7 +644,7 @@ double ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs) const
    const double mU3 = std::sqrt(mU32);
    const double beta = std::atan(p.vu/p.vd);
    const double c2beta = std::cos(2*beta);
-   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   const double lmQ3MR = omitLogs*std::log(mQ32 / MR2);
 
    return -c2beta*Xt2*(-3*F4(mQ3/mU3) + c2beta*F5(mQ3/mU3))/(2.*mQ3*mU3) + 3*
    c2beta*lmQ3MR;
@@ -658,8 +652,6 @@ double ThresholdCalculator::getDeltaLambdaYt2G22(int omitLogs) const
 
 double ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
    const double mL32 = p.ml2(2,2);
@@ -668,8 +660,8 @@ double ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs) const
    const double mE3 = std::sqrt(mE32);
    const double beta = std::atan(p.vu/p.vd);
    const double c2beta = std::cos(2*beta);
-   const double lmE3MR = omitLogs*log(mE32 / MR2);
-   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   const double lmE3MR = omitLogs*std::log(mE32 / MR2);
+   const double lmL3MR = omitLogs*std::log(mL32 / MR2);
 
    return c2beta*((Xtau2*(-9*F3(mL3/mE3) + 3*F4(mL3/mE3) - 2*c2beta*F5(mL3/mE3))
    )/(mE3*mL3) + 12*(-2*lmE3MR + lmL3MR))/20.;
@@ -677,8 +669,6 @@ double ThresholdCalculator::getDeltaLambdaYtau2G12(int omitLogs) const
 
 double ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
    const double mL32 = p.ml2(2,2);
@@ -687,7 +677,7 @@ double ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs) const
    const double mE3 = std::sqrt(mE32);
    const double beta = std::atan(p.vu/p.vd);
    const double c2beta = std::cos(2*beta);
-   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   const double lmL3MR = omitLogs*std::log(mL32 / MR2);
 
    return -c2beta*Xtau2*(3*F4(mL3/mE3) + c2beta*F5(mL3/mE3))/(6.*mE3*mL3)
    - c2beta*lmL3MR;
@@ -695,16 +685,14 @@ double ThresholdCalculator::getDeltaLambdaYtau2G22(int omitLogs) const
 
 double ThresholdCalculator::getDeltaLambdaYtau4(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
    const double mL32 = p.ml2(2,2);
    const double mE32 = p.me2(2,2);
    const double mL3 = std::sqrt(mL32);
    const double mE3 = std::sqrt(mE32);
-   const double lmE3MR = omitLogs*log(mE32 / MR2);
-   const double lmL3MR = omitLogs*log(mL32 / MR2);
+   const double lmE3MR = omitLogs*std::log(mE32 / MR2);
+   const double lmL3MR = omitLogs*std::log(mL32 / MR2);
 
    return (12*mE3*mL3*Xtau2*F1(mL3/mE3) - pow2(Xtau2)*F2(mL3/mE3))/(3.*mE32*mL32)
    + 2*(lmE3MR + lmL3MR);
@@ -712,26 +700,24 @@ double ThresholdCalculator::getDeltaLambdaYtau4(int omitLogs) const
 
 double ThresholdCalculator::getDeltaG1G1(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
-   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
-   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
-   const double lmD1MR = omitLogs*log(p.md2(0,0) / MR2);
-   const double lmD2MR = omitLogs*log(p.md2(1,1) / MR2);
-   const double lmD3MR = omitLogs*log(p.md2(2,2) / MR2);
-   const double lmE1MR = omitLogs*log(p.me2(0,0) / MR2);
-   const double lmE2MR = omitLogs*log(p.me2(1,1) / MR2);
-   const double lmE3MR = omitLogs*log(p.me2(2,2) / MR2);
-   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
-   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
-   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
-   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
-   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
-   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
-   const double lmU1MR = omitLogs*log(p.mu2(0,0) / MR2);
-   const double lmU2MR = omitLogs*log(p.mu2(1,1) / MR2);
-   const double lmU3MR = omitLogs*log(p.mu2(2,2) / MR2);
+   const double lmAMR  = omitLogs*std::log(pow2(p.MA) / MR2);
+   const double lmUMR  = omitLogs*std::log(pow2(p.mu) / MR2);
+   const double lmD1MR = omitLogs*std::log(p.md2(0,0) / MR2);
+   const double lmD2MR = omitLogs*std::log(p.md2(1,1) / MR2);
+   const double lmD3MR = omitLogs*std::log(p.md2(2,2) / MR2);
+   const double lmE1MR = omitLogs*std::log(p.me2(0,0) / MR2);
+   const double lmE2MR = omitLogs*std::log(p.me2(1,1) / MR2);
+   const double lmE3MR = omitLogs*std::log(p.me2(2,2) / MR2);
+   const double lmL1MR = omitLogs*std::log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*std::log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*std::log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*std::log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*std::log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*std::log(p.mq2(2,2) / MR2);
+   const double lmU1MR = omitLogs*std::log(p.mu2(0,0) / MR2);
+   const double lmU2MR = omitLogs*std::log(p.mu2(1,1) / MR2);
+   const double lmU3MR = omitLogs*std::log(p.mu2(2,2) / MR2);
 
    return (-3*lmAMR - 2*(lmD1MR + lmD2MR + lmD3MR + 3*(lmE1MR + lmE2MR + lmE3MR)
       ) - 3*(lmL1MR + lmL2MR + lmL3MR) - lmQ1MR - lmQ2MR - lmQ3MR - 12*lmUMR - 8
@@ -740,18 +726,16 @@ double ThresholdCalculator::getDeltaG1G1(int omitLogs) const
 
 double ThresholdCalculator::getDeltaG2G2(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
-   const double lm2MR = omitLogs*log(pow2(p.M2) / MR2);
-   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
-   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
-   const double lmL1MR = omitLogs*log(p.ml2(0,0) / MR2);
-   const double lmL2MR = omitLogs*log(p.ml2(1,1) / MR2);
-   const double lmL3MR = omitLogs*log(p.ml2(2,2) / MR2);
-   const double lmQ1MR = omitLogs*log(p.mq2(0,0) / MR2);
-   const double lmQ2MR = omitLogs*log(p.mq2(1,1) / MR2);
-   const double lmQ3MR = omitLogs*log(p.mq2(2,2) / MR2);
+   const double lm2MR  = omitLogs*std::log(pow2(p.M2) / MR2);
+   const double lmAMR  = omitLogs*std::log(pow2(p.MA) / MR2);
+   const double lmUMR  = omitLogs*std::log(pow2(p.mu) / MR2);
+   const double lmL1MR = omitLogs*std::log(p.ml2(0,0) / MR2);
+   const double lmL2MR = omitLogs*std::log(p.ml2(1,1) / MR2);
+   const double lmL3MR = omitLogs*std::log(p.ml2(2,2) / MR2);
+   const double lmQ1MR = omitLogs*std::log(p.mq2(0,0) / MR2);
+   const double lmQ2MR = omitLogs*std::log(p.mq2(1,1) / MR2);
+   const double lmQ3MR = omitLogs*std::log(p.mq2(2,2) / MR2);
 
    return (4 - 8*lm2MR - lmAMR - lmL1MR - lmL2MR - lmL3MR - 3*(lmQ1MR + lmQ2MR
       + lmQ3MR) - 4*lmUMR)/12.;
@@ -759,8 +743,6 @@ double ThresholdCalculator::getDeltaG2G2(int omitLogs) const
 
 double ThresholdCalculator::getDeltaYtYt(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double beta = std::atan(p.vu/p.vd);
    const double cbeta = std::cos(beta);
@@ -768,8 +750,8 @@ double ThresholdCalculator::getDeltaYtYt(int omitLogs) const
    const double Xt2 = pow2(p.Au(2,2) - p.mu*p.vd/p.vu);
    const double mQ3 = std::sqrt(p.mq2(2,2));
    const double mU3 = std::sqrt(p.mu2(2,2));
-   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
-   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmAMR = omitLogs*std::log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*std::log(pow2(p.mu) / MR2);
 
    return (-2*pow2(sbeta)*Xt2*F5(mQ3/mU3)/(mQ3*mU3) + 8*F6(mQ3/p.mu) + 4
       *F6(mU3/p.mu) + pow2(cbeta)*(-3 + 6*lmAMR) + 6*lmUMR)/8.;
@@ -777,8 +759,6 @@ double ThresholdCalculator::getDeltaYtYt(int omitLogs) const
 
 double ThresholdCalculator::getDeltaYtauYtau(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double beta = std::atan(p.vu/p.vd);
    const double cbeta = std::cos(beta);
@@ -786,8 +766,8 @@ double ThresholdCalculator::getDeltaYtauYtau(int omitLogs) const
    const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
    const double mL3 = std::sqrt(p.ml2(2,2));
    const double mE3 = std::sqrt(p.me2(2,2));
-   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
-   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmAMR = omitLogs*std::log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*std::log(pow2(p.mu) / MR2);
 
    return - pow2(cbeta)*Xtau2*F5(mL3/mE3)/(12.*mE3*mL3) + (4*F6(mE3/p.mu) + 8
       *F6(mL3/p.mu) + pow2(sbeta)*(-3 + 6*lmAMR) + 6*lmUMR)/8.;
@@ -803,10 +783,10 @@ double ThresholdCalculator::getDeltaYbYb(int omitLogs) const
    const double mQ3 = std::sqrt(p.mq2(2,2));
    const double mD3 = std::sqrt(p.md2(2,2));
    const double Xb2 = pow2(p.Ad(2,2) - p.mu*p.vu/p.vd);
-   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmUMR = omitLogs*std::log(pow2(p.mu) / MR2);
 
    return (6*lmUMR + 4*F6(mD3/p.mu) + 8*F6(mQ3/p.mu) - (2*Xb2*F5(mQ3/mD3)*pow2(cbeta))/
-        (mD3*mQ3*pow2(sbeta)) + 3*(-1 + 2*omitLogs*log(mA2/MR2))*pow2(sbeta))/8.;
+        (mD3*mQ3*pow2(sbeta)) + 3*(-1 + 2*omitLogs*std::log(mA2/MR2))*pow2(sbeta))/8.;
 }
 
 double ThresholdCalculator::getDeltaYbYt(int omitLogs) const
@@ -822,12 +802,16 @@ double ThresholdCalculator::getDeltaYbYt(int omitLogs) const
    const double mD3 = std::sqrt(p.md2(2,2));
    const double Xb2 = pow2(p.Ad(2,2) - p.mu*p.vu/p.vd);
    const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
-   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmUMR = omitLogs*std::log(pow2(p.mu) / MR2);
+   const double lmAMR = omitLogs*std::log(mA2/MR2);
 
-   return (2*lmUMR + 4*F6(mU3/p.mu) + (4*tbe*Xt*F9(mQ3/p.mu,mU3/p.mu))/p.mu + (-1 + 2*omitLogs*log(
-        mA2/MR2))*pow2(cbeta) - (2*Xb2*F5(mQ3/mD3)*pow2(cbeta))/(mD3*mQ3*pow2(
-        sbeta)) - (4*pow2(Xt)*F5(mQ3/mU3)*pow2(sbeta))/(mQ3*mU3) + 8*(-1 + omitLogs*log(mA2/
-        MR2))*pow2(sbeta))/8.;
+   return (2 * lmUMR + 4 * F6(mU3 / p.mu) +
+           (4 * tbe * Xt * F9(mQ3 / p.mu, mU3 / p.mu)) / p.mu +
+           (-1 + 2 * lmAMR) * pow2(cbeta) -
+           (2 * Xb2 * F5(mQ3 / mD3) * pow2(cbeta)) / (mD3 * mQ3 * pow2(sbeta)) -
+           (4 * pow2(Xt) * F5(mQ3 / mU3) * pow2(sbeta)) / (mQ3 * mU3) +
+           8 * (-1 + lmAMR) * pow2(sbeta)) /
+          8.;
 }
 
 double ThresholdCalculator::getDeltaYbAs(int omitLogs) const
@@ -839,13 +823,11 @@ double ThresholdCalculator::getDeltaYbAs(int omitLogs) const
    const double m3 = p.MG;
 
    return (4*(1 + F6(mD3/m3) + F6(mQ3/m3) - (Xb*F9(mQ3/m3,mD3/m3))/m3 + omitLogs
-        *log(pow2(m3)/MR2)))/3.;
+        *std::log(pow2(m3)/MR2)))/3.;
 }
 
 double ThresholdCalculator::getDeltaYtYb(int omitLogs) const
 {
-   using std::log;
-
    const double MR2 = pow2(p.scale);
    const double beta = std::atan(p.vu/p.vd);
    const double cbeta = std::cos(beta);
@@ -855,8 +837,8 @@ double ThresholdCalculator::getDeltaYtYb(int omitLogs) const
    const double mU3 = std::sqrt(p.mu2(2,2));
    const double Xb = p.Ad(2,2) - p.mu*p.vu/p.vd;
    const double Xt = p.Au(2,2) - p.mu*p.vd/p.vu;
-   const double lmAMR = omitLogs*log(pow2(p.MA) / MR2);
-   const double lmUMR = omitLogs*log(pow2(p.mu) / MR2);
+   const double lmAMR = omitLogs*std::log(pow2(p.MA) / MR2);
+   const double lmUMR = omitLogs*std::log(pow2(p.mu) / MR2);
 
    return (-2*p.mu*mU3*pow2(Xb)*F5(mQ3/mD3)*pow2(cbeta)*(1 + pow2(sbeta)) + mD3*pow2(
         sbeta)*(-2*p.mu*pow2(Xt)*F5(mQ3/mU3)*pow2(sbeta) + mQ3*mU3*(4*p.mu*F6(mD3/p.mu) +
@@ -875,7 +857,7 @@ double ThresholdCalculator::getDeltaVevYt2(Limits limit) const
 
    switch (limit) {
       case Limits::GENERAL:
-         return (3*Xt2*(-2*mQ32*mU32*log(mQ32/mU32) + pow2(mQ32) - pow2(mU32)))/(4.*pow3(
+         return (3*Xt2*(-2*mQ32*mU32*std::log(mQ32/mU32) + pow2(mQ32) - pow2(mU32)))/(4.*pow3(
             mQ32 - mU32));
       default:
          return Xt2/(4.*mQ32);
@@ -889,7 +871,7 @@ double ThresholdCalculator::getDeltaVevYb2() const
    const double mD32 = p.md2(2,2);
    const double eps = mQ32*0.01;
 
-   const double exact = (3*Xb2*(2*mD32*mQ32*log(mQ32/mD32) + pow2(mD32)
+   const double exact = (3*Xb2*(2*mD32*mQ32*std::log(mQ32/mD32) + pow2(mD32)
       - pow2(mQ32)))/(4.*pow3(mD32 - mQ32));
 
    if (std::abs(mQ32 - mD32) < eps) {
@@ -898,7 +880,7 @@ double ThresholdCalculator::getDeltaVevYb2() const
       const double mD3 = std::sqrt(mD32);
       const double lim = Xb2/(4.*mQ32);
       const double mD32Shifted2 = pow2(mQ3 + std::abs(mD3 - mQ3)/2.);
-      const double shifted = (3*Xb2*(2*mD32Shifted2*mQ32*log(mQ32/mD32Shifted2)
+      const double shifted = (3*Xb2*(2*mD32Shifted2*mQ32*std::log(mQ32/mD32Shifted2)
         + pow2(mD32Shifted2) - pow2(mQ32)))/(4.*pow3(mD32Shifted2 - mQ32));
       std::cout << exact << " " << shifted << " " << lim << " party\n";
       if (!isGeneralStable(exact, shifted, lim)) return lim;*/
@@ -907,13 +889,14 @@ double ThresholdCalculator::getDeltaVevYb2() const
    return exact;
 }
 
-double ThresholdCalculator::getDeltaVevYtau2() const{
+double ThresholdCalculator::getDeltaVevYtau2() const
+{
    const double Xtau2 = pow2(p.Ae(2,2) - p.mu*p.vu/p.vd);
    const double mL32 = p.ml2(2,2);
    const double mE32 = p.me2(2,2);
    const double eps = mL32*0.01;
 
-   const double exact = (Xtau2*(2*log(mL32/mE32)*mE32*mL32 + pow2(mE32)
+   const double exact = (Xtau2*(2*std::log(mL32/mE32)*mE32*mL32 + pow2(mE32)
       - pow2(mL32)))/(4.*pow3(mE32 - mL32));
 
    if (std::abs(mL32 - mE32) < eps) {
@@ -922,7 +905,7 @@ double ThresholdCalculator::getDeltaVevYtau2() const{
       const double mE3 = std::sqrt(mE32);
       const double lim = Xtau2/(12.*mL32);
       const double mE32Shifted2 = pow2(mL3 + std::abs(mE3 - mL3)/2.);
-      const double shifted = (Xtau2*(2*log(mL32/mE32Shifted2)*mE32Shifted2*mL32
+      const double shifted = (Xtau2*(2*std::log(mL32/mE32Shifted2)*mE32Shifted2*mL32
 	 + pow2(mE32Shifted2) - pow2(mL32)))/(4.*pow3(mE32Shifted2 - mL32));
       if (!isGeneralStable(exact, shifted, lim)) return lim;*/
    }
@@ -936,11 +919,9 @@ double ThresholdCalculator::getDeltaVevYtau2() const{
  */
 double ThresholdCalculator::getDeltaVevG12(int omitLogs) const
 {
-   using std::acos;
    using std::log;
-   using std::tan;
 
-   const double sw = std::sin(acos(calc_cw(p.MW, p.MZ)));
+   const double sw = std::sin(std::acos(calc_cw(p.MW, p.MZ)));
    const double MR2 = pow2(p.scale);
    const double Mu = p.mu;
    const double Mu2 = pow2(p.mu);
@@ -968,11 +949,11 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const
    const double c2beta = std::cos(2*beta);
    const double c4beta = std::cos(4*beta);
    const double eps = M1*0.01;
-   const double lmUMR = omitLogs*log(pow2(Mu) / MR2);
-   const double lmD3MR = omitLogs*log(pow2(mD3) / MR2);
-   const double lmE3MR = omitLogs*log(pow2(mE3) / MR2);
-   const double lmL3MR = omitLogs*log(pow2(mL3) / MR2);
-   const double lmQ3MR = omitLogs*log(pow2(mQ3) / MR2);
+   const double lmUMR  = omitLogs*std::log(pow2(Mu) / MR2);
+   const double lmD3MR = omitLogs*std::log(pow2(mD3) / MR2);
+   const double lmE3MR = omitLogs*std::log(pow2(mE3) / MR2);
+   const double lmL3MR = omitLogs*std::log(pow2(mL3) / MR2);
+   const double lmQ3MR = omitLogs*std::log(pow2(mQ3) / MR2);
 
    WARNING_MSG("Corrections to delta_v of O(g1^2) are currently incorrect!");
 
@@ -1016,7 +997,7 @@ double ThresholdCalculator::getDeltaVevG12(int omitLogs) const
  */
 double ThresholdCalculator::getDeltaVevG22(int omitLogs) const
 {
-   using std::acos;
+   using std::cos;
    using std::log;
    using std::tan;
 
@@ -1026,7 +1007,7 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const
    const double Mu = p.mu;
    const double Mu2 = pow2(Mu);
    const double cw = calc_cw(p.MW, p.MZ);
-   const double sw = std::sin(acos(cw));
+   const double sw = std::sin(std::acos(cw));
    const double beta = std::atan(p.vu/p.vd);
    const double cbeta = std::cos(beta);
    const double c2beta = std::cos(2*beta);
@@ -1062,8 +1043,8 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const
    }
 
    if (std::abs(M1 - Mu) < eps) {
-      const double t2beta = tan(2*beta);
-      const double c2w = cos(2*acos(cw));
+      const double t2beta = std::tan(2*beta);
+      const double c2w = std::cos(2*std::acos(cw));
       const double lim =
         (512*lmL3MR*pow2(cw) + 1536*lmQ3MR*pow2(cw) + 2048*lmUMR*pow2(cw) + 512*
         log(pow2(p.MA)/MR2)*pow2(cw) + 4096*log(pow2(M2)/MR2)*pow2(cw) + 512*log(pow2(
@@ -1120,8 +1101,8 @@ double ThresholdCalculator::getDeltaVevG22(int omitLogs) const
 
    if (std::abs(M2 - Mu) < eps) {
       const double mA2 = pow2(p.MA);
-      const double t2beta = tan(2*beta);
-      const double w = acos(cw);
+      const double t2beta = std::tan(2*beta);
+      const double w = std::acos(cw);
       const double lim = (-67584/pow2(c2beta) + 4096*lmL3MR*pow2(cw) + 12288*lmQ3MR*pow2(cw) +
         16384*lmUMR*pow2(cw) + 4096*log(mA2/MR2)*pow2(cw) + 32768*log(pow2(M2)/
         MR2)*pow2(cw) + 4096*log(pow2(mL1)/MR2)*pow2(cw) + 4096*log(pow2(mL2)/
@@ -1737,7 +1718,6 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
    using std::log;
    using himalaya::dilog;
 
-
    const double MR2 = pow2(p.scale);
    const double mQ32 = p.mq2(2,2);
    const double mD32 = p.md2(2,2);
@@ -1998,8 +1978,6 @@ double ThresholdCalculator::getDeltaLambdaYb6(int omitLogs) const
  */
 double ThresholdCalculator::getDeltaLambdaYt6_SUSYHD(int omitLogs) const
 {
-   using std::log;
-
    const double mQ32 = p.mq2(2,2);
    const double mU32 = p.mu2(2,2);
    const double mQ3 = std::sqrt(mQ32);
@@ -2059,7 +2037,7 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    const double Xt4 = pow2(Xt2);
    const double Xt6 = pow3(Xt2);
    const double mA2 = pow2(mA);
-   const double lmQ3MR = omitLogs*log(mQ32 / MR2);
+   const double lmQ3MR = omitLogs*std::log(mQ32 / MR2);
 
    if (is_equal_rel(mQ32, mU32, 0.1) &&
        (is_equal_rel(mQ32, mA2, 0.1) || is_equal_rel(mU32, mA2, 0.1))) {
@@ -2072,7 +2050,7 @@ double ThresholdCalculator::getDeltaLambdaYt6(int omitLogs) const
    const double mU3 = std::sqrt(mU32);
    const double Mu = p.mu * std::sqrt(1.03);
    const double Mu2 = pow2(Mu);
-   const double lmUMR = omitLogs*log(Mu2 / MR2);
+   const double lmUMR = omitLogs*std::log(Mu2 / MR2);
 
    return (18*pow2(cbeta)*pow2(log(mA2/MR2)))/pow2(sbeta) - (288*Yt*pow2(cbeta)*
         pow3(Xt))/(pow2(mQ32 - mU32)*pow2(sbeta)) - (6*Xt6*(11*mQ32*mU32 + 2*
@@ -3774,7 +3752,6 @@ double ThresholdCalculator::getDeltaLambdaYtau2Yb4(int omitLogs) const
  */
 double ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
 {
-
    using std::log;
 
    const double Mst12 = pow2(p.MSt(0));
@@ -3798,7 +3775,6 @@ double ThresholdCalculator::getDeltaG3Alphas(int omitLogs) const
  */
 double ThresholdCalculator::getDeltaYtAlphas(Limits limit, int omitLogs) const
 {
-
    using std::log;
 
    const double Mst12 = pow2(p.MSt(0));
@@ -3812,7 +3788,8 @@ double ThresholdCalculator::getDeltaYtAlphas(Limits limit, int omitLogs) const
    const double Xt = p.Au(2,2) - p.mu * p.vd / p.vu;
    const double lmQ3MR = omitLogs * log(Mst12 / MR2) + log(mQ32 / Mst12);
 
-   if (limit == Limits::DEGENERATE) limit = Limits::MQ3_EQ_MU3_EQ_M3;
+   if (limit == Limits::DEGENERATE)
+      limit = Limits::MQ3_EQ_MU3_EQ_M3;
 
    switch (limit) {
       case Limits::GENERAL:{
