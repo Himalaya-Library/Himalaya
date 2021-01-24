@@ -110,7 +110,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    if (pTest > 1e-10) {
       const double s = p2 - m22 + m12;
       const std::complex<double> iEpsilon(0., EPSTOL * mMax2);
-      const std::complex<double> rt = sqrt(sqr(s) - 4.*p2*(m12 - iEpsilon));
+      const std::complex<double> rt = std::sqrt(sqr(s) - 4.*p2*(m12 - iEpsilon));
       const std::complex<double> xPlus = 0.5 * (s + rt) / p2;
       const std::complex<double> xMinus = 0.5 * (s - rt) / p2;
 
