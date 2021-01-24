@@ -67,16 +67,38 @@ T divide_finite(T a, T b) noexcept
 }
 
 
-double fB(const std::complex<double>& a) noexcept
+double fB(const std::complex<double>& x) noexcept
 {
-   const double re = std::real(a);
-   const double im = std::imag(a);
+   const double re = std::real(x);
+   const double im = std::imag(x);
 
    if ((std::abs(re) == 0.0 || std::abs(re) == 1.0) && im == 0.0) {
       return -1.0;
    }
 
-   return std::real(-1.0 + fast_log(1.0 - a) - a*fast_log(1.0 - 1.0/a));
+   return std::real(-1.0 + fast_log(1.0 - x) - x*fast_log(1.0 - 1.0/x));
+}
+
+
+/// fB(xp) + fB(xm)
+double fB(const std::complex<double>& xp, const std::complex<double>& xm) noexcept
+{
+   const double rep = std::real(xp);
+   const double imp = std::imag(xp);
+
+   if ((std::abs(rep) == 0.0 || std::abs(rep) == 1.0) && imp == 0.0) {
+      return -1.0 + fB(xm);
+   }
+
+   const double rem = std::real(xm);
+   const double imm = std::imag(xm);
+
+   if ((std::abs(rem) == 0.0 || std::abs(rem) == 1.0) && imm == 0.0) {
+      return -1.0 + fB(xp);
+   }
+
+   return std::real(-2.0 + fast_log((1.0 - xp)*(1.0 - xm))
+      - xp*fast_log(1.0 - 1.0/xp) - xm*fast_log(1.0 - 1.0/xm));
 }
 
 
@@ -114,7 +136,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       const std::complex<double> xPlus = 0.5 * (s + rt) / p2;
       const std::complex<double> xMinus = 0.5 * (s - rt) / p2;
 
-      ans = -log_abs(p2 / q2) - fB(xPlus) - fB(xMinus);
+      ans = -log_abs(p2 / q2) - fB(xPlus, xMinus);
    } else {
       if (is_close(m12, m22, EPSTOL)) {
          ans = -log_abs(m12 / q2);
