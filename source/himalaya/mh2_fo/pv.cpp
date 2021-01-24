@@ -32,6 +32,12 @@ constexpr double pow3(double a) noexcept { return a*a*a; }
 double log_abs(double a) noexcept { return std::log(std::abs(a)); }
 
 
+constexpr double sign(double x) noexcept
+{
+   return x >= 0.0 ? 1.0 : -1.0;
+}
+
+
 /// fast implementation of complex logarithm
 template <class T>
 std::complex<T> fast_log(const std::complex<T>& z) noexcept
@@ -40,6 +46,13 @@ std::complex<T> fast_log(const std::complex<T>& z) noexcept
    const T iz = std::imag(z);
 
    return std::complex<T>(0.5*std::log(rz*rz + iz*iz), std::atan2(iz, rz));
+}
+
+
+/// compares a number for being close to zero
+constexpr bool is_zero(double a, double prec) noexcept
+{
+   return dabs(a) <= prec;
 }
 
 
@@ -121,38 +134,40 @@ double a0(double m2, double q2) noexcept
 double b0(double p2, double m12, double m22, double q2) noexcept
 {
    // protect against infrared divergence
-   if (is_close(p2, 0., EPSTOL) && is_close(m12, 0., EPSTOL)
-       && is_close(m22, 0., EPSTOL))
+   if (is_zero(p2, EPSTOL) && is_zero(m12, EPSTOL) && is_zero(m22, EPSTOL)) {
       return 0.;
-
-   double ans = 0.;
-   const double mMax2 = std::max(std::abs(m12), std::abs(m22));
-   const double pTest = std::abs(divide_finite(p2, mMax2));
-
-   if (pTest > 1e-10) {
-      const double s = p2 - m22 + m12;
-      const std::complex<double> iEpsilon(0., EPSTOL * mMax2);
-      const std::complex<double> rt = std::sqrt(sqr(s) - 4.*p2*(m12 - iEpsilon));
-      const std::complex<double> xPlus = 0.5 * (s + rt) / p2;
-      const std::complex<double> xMinus = 0.5 * (s - rt) / p2;
-
-      ans = -log_abs(p2 / q2) - fB(xPlus, xMinus);
-   } else {
-      if (is_close(m12, m22, EPSTOL)) {
-         ans = -log_abs(m12 / q2);
-      } else {
-         const double mMin2 = std::min(std::abs(m12), std::abs(m22));
-
-         if (mMin2 < 1.e-30) {
-            ans = 1. - log_abs(mMax2 / q2);
-         } else {
-            ans = (m12*(1. - log_abs(m12/q2)) - m22*(1. - log_abs(m22/q2)))
-               / (m12 - m22);
-         }
-      }
    }
 
-   return ans;
+   p2  = std::abs(p2);
+   m12 = std::abs(m12);
+   m22 = std::abs(m22);
+   q2  = std::abs(q2);
+
+   if (m12 > m22) {
+      std::swap(m12, m22);
+   }
+
+   // p2 is no 0
+   if (p2 > 1e-10*m22) {
+      const double s = p2 - m22 + m12;
+      const std::complex<double> imin(m12, -EPSTOL);
+      const std::complex<double> x = std::sqrt(sqr(s) - 4.0 * p2 * imin);
+      const std::complex<double> xp = (s + sign(s)*x) / (2*p2);
+      const std::complex<double> xm = imin / (xp*p2);
+
+      return -std::log(p2 / q2) - fB(xp, xm);
+   }
+
+   if (is_close(m12, m22, EPSTOL)) {
+      return -std::log(m12 / q2);
+   }
+
+   if (m12 < 1e-30) {
+      return 1 - std::log(m22 / q2);
+   }
+
+   return 1.0 - std::log(m22/q2)
+        + m12 * std::log(m22/m12) / (m12 - m22);
 }
 
 
