@@ -5,7 +5,7 @@
 // version 3.
 // ====================================================================
 
-#include "himalaya/mh2_fo/pv.hpp"
+#include "himalaya/mh2_fo/PV.hpp"
 #include "himalaya/misc/Numerics.hpp"
 
 #include <algorithm>
@@ -14,7 +14,7 @@
 #include <limits>
 
 /**
- * @file pv.cpp
+ * @file PV.cpp
  *
  * @brief Implementation of real Passarino-Veltman loop functions with
  * squared arguments.

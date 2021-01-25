@@ -6,7 +6,7 @@
 // ====================================================================
 
 /**
- * @file pv.hpp
+ * @file PV.hpp
  *
  * @brief Declaration of real Passarino-Veltman loop functions with
  * squared arguments.

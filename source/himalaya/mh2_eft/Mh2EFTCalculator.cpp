@@ -8,7 +8,7 @@
 #include "himalaya/mh2_eft/Mh2EFTCalculator.hpp"
 #include "himalaya/mh2_eft/EFTFlags.hpp"
 #include "himalaya/mh2_eft/ThresholdCalculator.hpp"
-#include "himalaya/mh2_fo/pv.hpp"
+#include "himalaya/mh2_fo/PV.hpp"
 #include "himalaya/misc/Constants.hpp"
 #include "himalaya/misc/Logger.hpp"
 #include "himalaya/misc/Numerics.hpp"
