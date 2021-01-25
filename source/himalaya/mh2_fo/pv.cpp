@@ -68,17 +68,6 @@ constexpr bool is_close(double m1, double m2, double tol) noexcept
 }
 
 
-/// returns a/b if a/b is finite, otherwise returns numeric_limits::max()
-template <typename T>
-T divide_finite(T a, T b) noexcept
-{
-   T result = a / b;
-   if (!std::isfinite(result))
-      result = std::numeric_limits<T>::max();
-   return result;
-}
-
-
 double fB(const std::complex<double>& x) noexcept
 {
    const double re = std::real(x);
