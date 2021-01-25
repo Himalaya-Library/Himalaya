@@ -121,7 +121,7 @@ double b0xx(double p2, double m2, double q2) noexcept
    }
 
    if (is_equal(p2, m2, EPSTOL)) {
-      return 2.0 - 1.813799364234218 - std::log(m2 / q2);
+      return 0.18620063576578215 - std::log(m2 / q2); // 2 - Pi/Sqrt[3]
    }
 
    if (p2 <= 4.0 * m2) {
