@@ -163,41 +163,41 @@ ThresholdCalculator::ThresholdCalculator(
           std::abs(m3 - std::sqrt(msq2)) < eps) {
          const double lim = pref * getDeltaYtAlphas2(Limits::DEGENERATE, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         const RAII_tmp_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
-         const RAII_tmp_set<double> tmp_set_m3(p.MG, shifted_m3);
-         const RAII_tmp_set<double> tmp_set_msq2(msq2, shifted_msq2);
+         const Temporarily_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
+         const Temporarily_set<double> tmp_set_m3(p.MG, shifted_m3);
+         const Temporarily_set<double> tmp_set_msq2(msq2, shifted_msq2);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          if (!isGeneralStable(exact, exactShifted, lim))
             p.massLimit3LThreshold = static_cast<int>(Limits::DEGENERATE);
       } else if (std::abs(mQ3 - mU3) < eps && std::abs(mU3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         const RAII_tmp_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
-         const RAII_tmp_set<double> tmp_set_m3(p.MG, shifted_m3);
+         const Temporarily_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
+         const Temporarily_set<double> tmp_set_m3(p.MG, shifted_m3);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          if (!isGeneralStable(exact, exactShifted, lim))
             p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3_EQ_M3);
       } else if (std::abs(mQ3 - mU3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_MU3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         const RAII_tmp_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
-         const RAII_tmp_set<double> tmp_set_m3(p.MG, shifted_m3);
+         const Temporarily_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
+         const Temporarily_set<double> tmp_set_m3(p.MG, shifted_m3);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          if (!isGeneralStable(exact, exactShifted, lim))
             p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_MU3);
       } else if (std::abs(mQ3 - m3) < eps) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MQ3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         const RAII_tmp_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
-         const RAII_tmp_set<double> tmp_set_m3(p.MG, shifted_m3);
+         const Temporarily_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
+         const Temporarily_set<double> tmp_set_m3(p.MG, shifted_m3);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          if (!isGeneralStable(exact, exactShifted, lim))
             p.massLimit3LThreshold = static_cast<int>(Limits::MQ3_EQ_M3);
       } else if (std::abs(mU3 - m3) < eps2) {
          const double lim = pref*getDeltaYtAlphas2(Limits::MU3_EQ_M3, 1);
          const double exact = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
-         const RAII_tmp_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
-         const RAII_tmp_set<double> tmp_set_m3(p.MG, shifted_m3);
+         const Temporarily_set<double> tmp_set_mU32(p.mu2(2,2), shifted_mU32);
+         const Temporarily_set<double> tmp_set_m3(p.MG, shifted_m3);
          const double exactShifted = pref*getDeltaYtAlphas2(Limits::GENERAL, 1);
          if (!isGeneralStable(exact, exactShifted, lim))
             p.massLimit3LThreshold = static_cast<int>(Limits::MU3_EQ_M3);

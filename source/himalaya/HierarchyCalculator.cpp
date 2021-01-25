@@ -303,8 +303,8 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
    using namespace himalaya::hierarchies;
 
    // temporarily set flags to truncate the expansion
-   const RAII_tmp_set<int> setThreeLoop(expansionDepth.at(ExpansionDepth::threeLoop), 0);
-   const RAII_tmp_set<int> setMst(expansionDepth.at(ExpansionDepth::Mst), 0);
+   const Temporarily_set<int> setThreeLoop(expansionDepth.at(ExpansionDepth::threeLoop), 0);
+   const Temporarily_set<int> setMst(expansionDepth.at(ExpansionDepth::Mst), 0);
 
    double error = -1.;
    int suitableHierarchy = -1;
@@ -1446,13 +1446,13 @@ double HierarchyCalculator::getExpansionUncertainty(
    const auto recomputeMhWithLowerExpansion =
       [&](ExpansionDepth::ExpansionDepth flag) {
          // temporarily lower the expansion
-         RAII_tmp_set<int> setFlag(expansionDepth.at(flag), 0);
+         Temporarily_set<int> setFlag(expansionDepth.at(flag), 0);
          return recomputeMh();
       };
 
    // temporarily set expansion flags
-   RAII_tmp_set<int> setMst(expansionDepth.at(ExpansionDepth::Mst), 1);
-   RAII_tmp_set<int> setThreeLoop(expansionDepth.at(ExpansionDepth::threeLoop), 1);
+   Temporarily_set<int> setMst(expansionDepth.at(ExpansionDepth::Mst), 1);
+   Temporarily_set<int> setThreeLoop(expansionDepth.at(ExpansionDepth::threeLoop), 1);
 
    const double Mh = recomputeMh();
    double uncertainty{};
