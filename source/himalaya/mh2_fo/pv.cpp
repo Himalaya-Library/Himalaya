@@ -108,19 +108,19 @@ double a0(double m2, double q2) noexcept
  */
 double b0xx(double p2, double m2, double q2) noexcept
 {
-   if (is_zero(p2) && is_zero(m2)) {
+   if (is_zero(p2, EPSTOL) && is_zero(m2, EPSTOL)) {
       return 0.0;
    }
 
-   if (is_zero(p2)) {
+   if (is_zero(p2, EPSTOL)) {
       return -std::log(m2 / q2);
    }
 
-   if (is_zero(m2)) {
+   if (is_zero(m2, 1e-9)) {
       return 2.0 - std::log(p2 / q2);
    }
 
-   if (is_equal(p2, m2)) {
+   if (is_equal(p2, m2, EPSTOL)) {
       return 2.0 - 1.813799364234218 - std::log(m2 / q2);
    }
 
@@ -153,6 +153,10 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    m12 = std::abs(m12);
    m22 = std::abs(m22);
    q2  = std::abs(q2);
+
+   if (is_close(m12, m22, EPSTOL)) {
+      return b0xx(p2, m12, q2);
+   }
 
    if (m12 > m22) {
       std::swap(m12, m22);
