@@ -6,6 +6,7 @@
 // ====================================================================
 
 #include "himalaya/mh2_fo/pv.hpp"
+#include "himalaya/misc/Numerics.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -26,7 +27,6 @@ namespace {
 
 constexpr double EPSTOL = 1.0e-11; ///< underflow accuracy
 
-constexpr double dabs(double a) noexcept { return a >= 0. ? a : -a; }
 constexpr double sqr(double a) noexcept { return a*a; }
 constexpr double pow3(double a) noexcept { return a*a*a; }
 
@@ -45,26 +45,6 @@ std::complex<T> fast_log(const std::complex<T>& z) noexcept
    const T iz = std::imag(z);
 
    return std::complex<T>(0.5*std::log(rz*rz + iz*iz), std::atan2(iz, rz));
-}
-
-
-/// compares a number for being close to zero
-constexpr bool is_zero(double a, double prec) noexcept
-{
-   return dabs(a) <= prec;
-}
-
-
-constexpr bool is_close(double m1, double m2, double tol) noexcept
-{
-   const double mmax = std::max(dabs(m1), dabs(m2));
-   const double mmin = std::min(dabs(m1), dabs(m2));
-   const double max_tol = tol * mmax;
-
-   if (max_tol == 0.0 && mmax != 0.0 && tol != 0.0)
-      return mmax - mmin <= tol;
-
-   return mmax - mmin <= max_tol;
 }
 
 
@@ -114,6 +94,47 @@ double a0(double m2, double q2) noexcept
       return 0.;
 
    return m2 * (1 - std::log(m2 / q2));
+}
+
+
+/**
+ * Re(B0(s,x,x,q2)), Eq.(2.4) from [hep-ph/0701051]
+ *
+ * @param p2 squared momentum
+ * @param m2 squared mass
+ * @param q2 squared renormalization scale
+ *
+ * @return Re(B0(s,x,x,q2))
+ */
+double b0xx(double p2, double m2, double q2) noexcept
+{
+   if (is_zero(p2) && is_zero(m2)) {
+      return 0.0;
+   }
+
+   if (is_zero(p2)) {
+      return -std::log(m2 / q2);
+   }
+
+   if (is_zero(m2)) {
+      return 2.0 - std::log(p2 / q2);
+   }
+
+   if (is_equal(p2, m2)) {
+      return 2.0 - 1.813799364234218 - std::log(m2 / q2);
+   }
+
+   if (p2 <= 4.0 * m2) {
+      return 2.0 - std::log(m2 / q2) -
+         2.0 * std::sqrt(4.0 * m2 / p2 - 1.0) *
+         std::asin(std::sqrt(p2 / (4.0 * m2)));
+   }
+
+   const double sq = std::sqrt(1.0 - 4.0 * m2 / p2);
+
+   // s > 4*m2
+   return 2.0 - std::log(m2 / q2) +
+          sq * std::log(p2 * (1.0 - sq) / (2 * m2) - 1.0);
 }
 
 

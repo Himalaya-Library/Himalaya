@@ -21,6 +21,8 @@ namespace mh2_fo {
 double a0(double m2, double q2) noexcept;
 /// B0 Passarino-Veltman function
 double b0(double p2, double m12, double m22, double q2) noexcept;
+/// B0(s,x,x,q2) Passarino-Veltman function
+double b0xx(double p2, double m2, double q2) noexcept;
 /// derivative of B0 Passarino-Veltman function w.r.t. p^2, for p^2 = 0
 double d1_b0(double m12, double m22) noexcept;
 

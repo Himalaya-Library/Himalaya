@@ -8,6 +8,7 @@
 #include "himalaya/mh2_eft/Mh2EFTCalculator.hpp"
 #include "himalaya/mh2_eft/EFTFlags.hpp"
 #include "himalaya/mh2_eft/ThresholdCalculator.hpp"
+#include "himalaya/mh2_fo/pv.hpp"
 #include "himalaya/misc/Constants.hpp"
 #include "himalaya/misc/Logger.hpp"
 #include "himalaya/misc/Numerics.hpp"
@@ -39,35 +40,9 @@ double discardNaN(double var, const std::string& msg = "")
 }
 
 /// Re(B0(s,x,x,q2)), Eq.(2.4) from [hep-ph/0701051]
-double fB(double s, double x, double q2)
+double fB(double s, double x, double q2) noexcept
 {
-    if (is_zero(s) && is_zero(x)) {
-        return 0.0;
-    }
-
-    if (is_zero(s)) {
-        return -std::log(x / q2);
-    }
-
-    if (is_zero(x)) {
-        return 2.0 - std::log(s / q2);
-    }
-
-    if (is_equal(s, x)) {
-        return 2.0 - 1.813799364234218 - std::log(x / q2);
-    }
-
-    if (s <= 4.0 * x) {
-       return 2.0 - std::log(x / q2) -
-              2.0 * std::sqrt(4.0 * x / s - 1.0) *
-                 std::asin(std::sqrt(s / (4.0 * x)));
-    }
-
-    const double sq = std::sqrt(1.0 - 4.0 * x / s);
-
-    // s > 4*x
-    return 2.0 - std::log(x / q2) +
-           sq * std::log(s * (1.0 - sq) / (2 * x) - 1.0);
+   return mh2_fo::b0xx(s, x, q2);
 }
 
 } // anonymous namespace
