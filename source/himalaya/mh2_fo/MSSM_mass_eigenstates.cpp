@@ -882,7 +882,7 @@ std::tuple<double,double,double> MSSM_mass_eigenstates::calculate_Mh2() const
    // numeric diagonalization
    RM22 ZH;
    MSSM_spectrum::A2 M2hh_0L, M2hh_1L, M2hh_2L;
-   const RM22 MHH_0L = m0;
+   const RM22& MHH_0L = m0;
    const RM22 MHH_1L = m0 + m1;
    const RM22 MHH_2L = m0 + m1 + m2;
 
