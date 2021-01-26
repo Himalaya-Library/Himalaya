@@ -7,6 +7,7 @@
 
 #include "himalaya/mh2_fo/PV.hpp"
 #include "himalaya/misc/Numerics.hpp"
+#include "himalaya/misc/Powers.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -22,13 +23,9 @@
 
 namespace himalaya {
 namespace mh2_fo {
-
 namespace {
 
 constexpr double EPSTOL = 1.0e-11; ///< underflow accuracy
-
-constexpr double sqr(double a) noexcept { return a*a; }
-constexpr double pow3(double a) noexcept { return a*a*a; }
 
 
 constexpr double sign(double x) noexcept
@@ -166,7 +163,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    if (p2 > 1e-10*m22) {
       const double s = p2 - m22 + m12;
       const std::complex<double> imin(m12, -EPSTOL);
-      const std::complex<double> x = std::sqrt(sqr(s) - 4.0 * p2 * imin);
+      const std::complex<double> x = std::sqrt(pow2(s) - 4.0 * p2 * imin);
       const std::complex<double> xp = (s + sign(s)*x) / (2*p2);
       const std::complex<double> xm = imin / (xp*p2);
 
@@ -200,19 +197,17 @@ double d1_b0(double m12, double m22) noexcept
 {
    m12 = std::abs(m12);
    m22 = std::abs(m22);
-   const double m14 = m12 * m12;
-   const double m24 = m22 * m22;
 
    if ((m12 < 0.0001) != (m22 < 0.0001)) {
-      return (m14 - m24) / (2. * pow3(m12 - m22));
+      return (m12 - m22) * (m12 + m22) / (2 * pow3(m12 - m22));
    } else if (m12 < 0.0001 && m22 < 0.0001) {
       return 0.;
    } else if (std::abs(m22 - m12) < 0.001) {
-      return 1./(6. * m12) + (m12 - m22)/(12.* m14);
+      return 1. / (6 * m12) + (m12 - m22) / (12 * pow2(m12));
    }
 
-   return (m14 - m24 + 2 * m12 * m22 * std::log(m22/m12))
-      /(2 * pow3(m12 - m22));
+   return ((m12 - m22) * (m12 + m22) + 2 * m12 * m22 * std::log(m22 / m12)) /
+          (2 * pow3(m12 - m22));
 }
 
 } // namespace mh2_fo
