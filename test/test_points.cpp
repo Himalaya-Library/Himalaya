@@ -140,8 +140,8 @@ std::vector<std::pair<Point, Data>> read_points(const std::string& filename)
    std::string line;
 
    while (std::getline(istr, line)) {
-      Point point;
-      Data data;
+      Point point{};
+      Data data{};
 
       std::istringstream isstr(line);
       isstr >> point >> data;
