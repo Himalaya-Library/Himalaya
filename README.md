@@ -1,7 +1,6 @@
 # Himalaya
 
 ![](https://img.shields.io/github/v/release/Himalaya-Library/Himalaya)
-[![Build Status](https://travis-ci.org/Himalaya-Library/Himalaya.svg?branch=master)](https://travis-ci.org/Himalaya-Library/Himalaya)
 [![Build Status](https://github.com/Himalaya-Library/Himalaya/workflows/test/badge.svg)](https://github.com/Himalaya-Library/Himalaya/actions)
 
 Himalaya calculates three-loop corrections of order O((αt + αb)*αs^2)
