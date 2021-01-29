@@ -8,7 +8,7 @@
 #pragma once
 
 /**
- * @file sum.hpp
+ * @file Sum.hpp
  *
  * @brief Contains the definition of the \a SUM macro.
  *
