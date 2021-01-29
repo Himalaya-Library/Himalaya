@@ -61,7 +61,7 @@ set(HIM_LIBSOURCES
   # EFT calculation
   ${SOURCE_PATH}/mh2_eft/Mh2EFTCalculator.cpp
   ${SOURCE_PATH}/mh2_eft/ThresholdCalculator.cpp
-  ${SOURCE_PATH}/mh2_eft/threshold_loop_functions.cpp
+  ${SOURCE_PATH}/mh2_eft/ThresholdLoopFunctions.cpp
   # fixed-order calculation
   ${SOURCE_PATH}/mh2_fo/Linalg.cpp
   ${SOURCE_PATH}/mh2_fo/MSSM_mass_eigenstates.cpp

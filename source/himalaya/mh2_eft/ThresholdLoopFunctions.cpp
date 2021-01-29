@@ -16,7 +16,7 @@
 // <http://www.gnu.org/licenses/>.
 // ====================================================================
 
-#include "himalaya/mh2_eft/threshold_loop_functions.hpp"
+#include "himalaya/mh2_eft/ThresholdLoopFunctions.hpp"
 #include "himalaya/misc/Li2.hpp"
 #include "himalaya/misc/Numerics.hpp"
 
@@ -26,7 +26,7 @@
 #include <utility>
 
 /**
- * @file threshold_loop_functions.cpp
+ * @file ThresholdLoopFunctions.cpp
  * @brief Implementation of the loop functions from [arXiv:1407.4081]
  * @note The file has been taken from FlexibleSUSY.
  */

@@ -19,7 +19,7 @@
 #pragma once
 
 /**
- * @file threshold_loop_functions.hpp
+ * @file ThresholdLoopFunctions.hpp
  * @brief Declaration of the loop functions from [arXiv:1407.4081]
  * @note The file has been taken from FlexibleSUSY.
  */
