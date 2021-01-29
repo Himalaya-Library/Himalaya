@@ -95,10 +95,9 @@ int getMotherHierarchy(int hierarchy)
        hierarchy >= Hierarchies::Hierarchies::NUMBER_OF_HIERARCHIES) {
       if (hierarchy == -1) {
          throw std::runtime_error("No suitable hierarchy found!");
-      } else {
-         throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) +
-                                  " not included!");
       }
+      throw std::runtime_error("Hierarchy " + std::to_string(hierarchy) +
+                               " not included!");
    }
 
    // maps all hierarchies to their mother hierarchy
@@ -439,15 +438,16 @@ HierarchyCalculator::calcMsfMDRFlag(const HierarchyObject& ho, int loopOrder) co
 {
    if (loopOrder == 1) {
       return { shiftMst1ToMDR(ho, 0, 0), shiftMst2ToMDR(ho, 0, 0) };
-   } else if (loopOrder == 2) {
+   }
+   if (loopOrder == 2) {
       return { shiftMst1ToMDR(ho, ho.getMDRFlag(), 0),
                shiftMst2ToMDR(ho, ho.getMDRFlag(), 0) };
-   } else if (loopOrder == 3) {
+   }
+   if (loopOrder == 3) {
       return { shiftMst1ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()),
                shiftMst2ToMDR(ho, ho.getMDRFlag(), ho.getMDRFlag()) };
-   } else {
-      throw std::runtime_error("There are no tree-level hierarchies included!");
    }
+   throw std::runtime_error("There are no tree-level hierarchies included!");
 }
 
 

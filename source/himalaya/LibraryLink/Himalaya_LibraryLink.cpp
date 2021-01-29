@@ -60,7 +60,7 @@ void MLPut(MLINK link, const Eigen::Array<double,M,1>& a)
    double v[M];
    for (int i = 0; i < M; i++)
       v[i] = a(i);
-   MLPutRealList(link, v, M);
+   MLPutRealList(link, static_cast<double*>(v), M);
 }
 
 template <int M>
@@ -124,8 +124,8 @@ void MLPutRule(MLINK link, const std::string& name)
    MLPutUTF8Symbol(link, reinterpret_cast<const unsigned char*>(name.c_str()), name.size());
 }
 
-template <class T1, class T2>
-void MLPutRuleTo(MLINK link, T1 t, const T2& name)
+template <class T1>
+void MLPutRuleTo(MLINK link, T1 t, const std::string& name)
 {
    MLPutRule(link, name);
    MLPut(link, t);
@@ -146,17 +146,20 @@ void put_message(MLINK link,
 
 class Redirect_output {
 public:
-   explicit Redirect_output(MLINK link_)
+   explicit Redirect_output(MLINK link_) noexcept
       : link(link_)
       , old_cout(std::cout.rdbuf(buffer.rdbuf()))
       , old_cerr(std::cerr.rdbuf(buffer.rdbuf()))
       {}
-
+   Redirect_output(const Redirect_output&) = delete;
+   Redirect_output(Redirect_output&&) noexcept = delete;
    ~Redirect_output() {
       std::cout.rdbuf(old_cout);
       std::cerr.rdbuf(old_cerr);
       flush();
    }
+   Redirect_output& operator=(const Redirect_output&) = delete;
+   Redirect_output& operator=(Redirect_output&& other) noexcept = delete;
 
    void flush() {
       std::string line;
@@ -232,13 +235,6 @@ std::vector<double> read_list(MLINK link)
 /******************************************************************/
 
 struct Data {
-   Data(const himalaya::Parameters& pars_, bool bottom_, int loopOrder_, bool verbose_)
-      : pars(pars_)
-      , bottom(bottom_)
-      , loopOrder(loopOrder_)
-      , verbose(verbose_)
-      {}
-
    himalaya::Parameters pars{};
    bool bottom{false};
    int loopOrder{3};
@@ -357,7 +353,7 @@ Data make_data(const std::vector<double>& parsvec)
          " parameters have been read.");
    }
 
-   return Data(pars, bottom, loopOrder, verbose);
+   return Data{pars, bottom, loopOrder, verbose};
 }
 
 /******************************************************************/

@@ -370,7 +370,8 @@ double HierarchyObject::getDLambdaUncertainty(int loops) const
 {
    if (loops >= 0 && loops <= 2) {
       return 0.;
-   } else if (loops == 3) {
+   }
+   if (loops == 3) {
       return std::abs(dLambdaXtUncertainty) +
              std::abs(getDLambdaEFT() - getDLambdaH3m());
    }
