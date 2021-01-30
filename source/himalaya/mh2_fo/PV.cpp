@@ -129,7 +129,7 @@ double b0xx(double p2, double m2, double q2) noexcept
          + d * (-59./6 - 10 * logd))));
    }
 
-   if (is_equal(p2, m2, EPSTOL)) {
+   if (is_equal(p2, m2, 1e-12)) {
       return 0.18620063576578215 - std::log(m2 / q2); // 2 - Pi/Sqrt[3]
    }
 
