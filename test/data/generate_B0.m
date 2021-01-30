@@ -1,6 +1,8 @@
 EPS = 10^-11;
 digits = 20;
 
+$Assumptions = { p2 > 0, m2 > 0, q2 > 0 };
+
 fB[x_] := Re[-1 + Log[1 - x] - x Log[1 - 1/x]]
 
 B0[p2_, m12_, m22_, q2_] := B0[p2, m22, m12, q2] /; m22 > m12

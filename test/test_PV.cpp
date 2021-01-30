@@ -59,7 +59,7 @@ TEST_CASE("test_B0xx")
    const auto filename = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "data" +
                          PATH_SEPARATOR + "B0xx.dat";
    const auto data = read_b0(filename);
-   const double eps = 10*std::numeric_limits<double>::epsilon();
+   const double eps = 1e-13;
 
    for (auto d: data) {
       INFO(d);
