@@ -111,7 +111,7 @@ double b0xx(double p2, double m2, double q2) noexcept
    m2 = std::abs(m2);
    q2 = std::abs(q2);
 
-   if (is_zero(p2, EPSTOL)) {
+   if (p2 < 1e-15) {
       return -std::log(m2 / q2);
    }
 

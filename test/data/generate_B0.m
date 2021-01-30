@@ -31,6 +31,10 @@ B0xx[p2_, m2_, q2_] :=
    Format: p^2, m1^2, m2^2, q^2
  *)
 
-data = N[#,digits]& @ Table[{ 1, 10^n, 10^n, 1, B0xx[1, 10^n, 1] }, {n, -15, 15}]
+data = N[#,digits]& @
+   Join[
+       Table[{ 1, 10^n, 10^n, 1, B0xx[1, 10^n, 1] }, {n, -15, 15}],
+       Table[{ 10^n, 1, 1   , 1, B0xx[10^n, 1, 1] }, {n, -15, 15}]
+   ]
 
 Export["B0xx.dat", data]
