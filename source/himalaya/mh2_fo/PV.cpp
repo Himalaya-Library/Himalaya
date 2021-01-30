@@ -126,8 +126,7 @@ double b0xx(double p2, double m2, double q2) noexcept
          + d * (2 * (1 - logd)
          + d * (-1 - 2 * logd
          + d * (-10./3 - 4 * logd
-         + d * (-59./6 - 10 * logd))))
-         ;
+         + d * (-59./6 - 10 * logd))));
    }
 
    if (is_equal(p2, m2, EPSTOL)) {
