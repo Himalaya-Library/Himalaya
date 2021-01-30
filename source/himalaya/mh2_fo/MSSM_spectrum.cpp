@@ -10,6 +10,9 @@
 #include "himalaya/misc/Constants.hpp"
 #include "himalaya/misc/Numerics.hpp"
 #include "himalaya/misc/Powers.hpp"
+#include <cmath>
+#include <complex>
+#include <iostream>
 
 /**
  * @file MSSM_spectrum.cpp

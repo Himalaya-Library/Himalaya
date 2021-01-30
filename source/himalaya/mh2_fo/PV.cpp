@@ -9,10 +9,8 @@
 #include "himalaya/misc/Numerics.hpp"
 #include "himalaya/misc/Powers.hpp"
 
-#include <algorithm>
 #include <cmath>
 #include <complex>
-#include <limits>
 
 /**
  * @file PV.cpp

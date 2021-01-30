@@ -20,7 +20,6 @@
 #include "himalaya/misc/Li2.hpp"
 #include "himalaya/misc/Numerics.hpp"
 
-#include <algorithm>
 #include <cmath>
 #include <limits>
 #include <utility>

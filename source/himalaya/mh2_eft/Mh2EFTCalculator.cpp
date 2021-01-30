@@ -11,7 +11,6 @@
 #include "himalaya/mh2_fo/PV.hpp"
 #include "himalaya/misc/Constants.hpp"
 #include "himalaya/misc/Logger.hpp"
-#include "himalaya/misc/Numerics.hpp"
 #include "himalaya/misc/Powers.hpp"
 #include <cmath>
 #include <iostream>

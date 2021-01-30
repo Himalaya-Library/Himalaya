@@ -16,11 +16,8 @@
 #include "himalaya/misc/Numerics.hpp"
 #include "himalaya/misc/Powers.hpp"
 #include <cmath>
-#include <complex>
 #include <iostream>
-#include <limits>
 #include <tuple>
-#include <type_traits>
 
 /**
  * @file MSSM_mass_eigenstates.cpp
@@ -36,6 +33,51 @@ namespace {
 
 template <typename T>
 T constexpr sqr(T x) noexcept { return x*x; }
+
+/**
+ * Transform parameter point to be gaugeless, g1 = g2 = 0.
+ */
+Parameters make_gaugeless(const Parameters& pars)
+{
+   auto gl = pars;
+   gl.g1 = 0.;
+   gl.g2 = 0.;
+   return gl;
+}
+
+/// sets yb = ytau = 0
+Parameters make_3rd_gen(const Parameters& pars)
+{
+   const double eps = 1e-6;
+
+   auto gen3 = pars;
+
+   gen3.Mb = NaN;
+   gen3.Mtau = NaN;
+   gen3.MSb.setConstant(NaN);
+   gen3.MStau.setConstant(NaN);
+   gen3.s2b = NaN;
+   gen3.s2tau = NaN;
+   gen3.theta_b = NaN;
+   gen3.theta_tau = NaN;
+
+   for (int i = 0; i < 3; i++) {
+      for (int k = 0; k < 3; k++) {
+         if (i == 2 && k == 2) {
+            gen3.Yd(i,k) = eps;
+            gen3.Ye(i,k) = eps;
+         } else {
+            gen3.Yd(i,k) = 0.;
+            gen3.Ye(i,k) = 0.;
+            gen3.Yu(i,k) = 0.;
+         }
+      }
+   }
+
+   gen3.validate(false);
+
+   return gen3;
+}
 
 } // anonymous namespace
 
@@ -89,51 +131,6 @@ MSSM_mass_eigenstates::MSSM_mass_eigenstates(const Parameters& pars_, bool only_
    } else {
      orders.at(CouplingOrders::ONLY_AT_AS) = 0;
    }
-}
-
-/**
- * Transform parameter point to be gaugeless, g1 = g2 = 0.
- */
-Parameters MSSM_mass_eigenstates::make_gaugeless(const Parameters& pars)
-{
-   auto gl = pars;
-   gl.g1 = 0.;
-   gl.g2 = 0.;
-   return gl;
-}
-
-/// sets yb = ytau = 0
-Parameters MSSM_mass_eigenstates::make_3rd_gen(const Parameters& pars)
-{
-   const double eps = 1e-6;
-
-   auto gen3 = pars;
-
-   gen3.Mb = NaN;
-   gen3.Mtau = NaN;
-   gen3.MSb.setConstant(NaN);
-   gen3.MStau.setConstant(NaN);
-   gen3.s2b = NaN;
-   gen3.s2tau = NaN;
-   gen3.theta_b = NaN;
-   gen3.theta_tau = NaN;
-
-   for (int i = 0; i < 3; i++) {
-      for (int k = 0; k < 3; k++) {
-         if (i == 2 && k == 2) {
-            gen3.Yd(i,k) = eps;
-            gen3.Ye(i,k) = eps;
-         } else {
-            gen3.Yd(i,k) = 0.;
-            gen3.Ye(i,k) = 0.;
-            gen3.Yu(i,k) = 0.;
-         }
-      }
-   }
-
-   gen3.validate(false);
-
-   return gen3;
 }
 
 /**
