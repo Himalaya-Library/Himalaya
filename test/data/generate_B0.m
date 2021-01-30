@@ -1,4 +1,5 @@
-EPS = 10^-11
+EPS = 10^-11;
+digits = 20;
 
 fB[x_] := Re[-1 + Log[1 - x] - x Log[1 - 1/x]]
 
@@ -28,6 +29,6 @@ B0xx[p2_, m2_, q2_] :=
    Format: p^2, m1^2, m2^2, q^2
  *)
 
-data = N[#,20]& @ Table[{ 1, 10^n, 10^n, 1, B0xx[1, 10^n, 1] }, {n, -20, 20}]
+data = N[#,digits]& @ Table[{ 1, 10^n, 10^n, 1, B0xx[1, 10^n, 1] }, {n, -15, 15}]
 
 Export["B0xx.dat", data]

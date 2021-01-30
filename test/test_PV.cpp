@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "himalaya/mh2_fo/PV.hpp"
 #include <fstream>
+#include <limits>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -20,6 +21,15 @@ const char PATH_SEPARATOR =
 struct B0 {
    double p2, m12, m22, q2, b0;
 };
+
+
+std::ostream& operator<<(std::ostream& ostr, const B0& b0)
+{
+   ostr << std::setprecision(std::numeric_limits<double>::digits10)
+        << "B0(p2=" << b0.p2 << ", m12=" << b0.m12
+        << ", m22=" << b0.m22 << ", q2=" << b0.q2 << ") = " << b0.b0;
+   return ostr;
+}
 
 
 std::vector<B0> read_b0(const std::string& filename)
@@ -49,9 +59,10 @@ TEST_CASE("test_B0xx")
    const auto filename = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "data" +
                          PATH_SEPARATOR + "B0xx.dat";
    const auto data = read_b0(filename);
-   const double eps = 1e-11;
+   const double eps = 10*std::numeric_limits<double>::epsilon();
 
    for (auto d: data) {
+      INFO(d);
       CHECK_CLOSE(d.b0, himalaya::mh2_fo::b0xx(d.p2, d.m12, d.q2), eps);
    }
 }
