@@ -19,7 +19,7 @@ const char PATH_SEPARATOR =
 
 
 struct B0 {
-   double p2, m12, m22, q2, b0;
+   double p2{}, m12{}, m22{}, q2{}, b0{};
 };
 
 
@@ -32,6 +32,7 @@ std::ostream& operator<<(std::ostream& ostr, const B0& b0)
 }
 
 
+/// read B0 function data
 std::vector<B0> read_b0(const std::string& filename)
 {
    std::ifstream fstr(filename);
@@ -54,8 +55,6 @@ std::vector<B0> read_b0(const std::string& filename)
 /// test B0 for m1^2 == m2^2
 TEST_CASE("test_B0xx")
 {
-   using namespace himalaya;
-
    const auto filename = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "data" +
                          PATH_SEPARATOR + "B0xx.dat";
    const auto data = read_b0(filename);
