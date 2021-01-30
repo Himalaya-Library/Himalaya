@@ -31,11 +31,10 @@ namespace himalaya {
 namespace mh2_eft {
 namespace {
 
-double calc_cw(double mW, double mZ)
+double calc_cw(double mW, double mZ) noexcept
 {
-   return std::abs(mZ) > std::numeric_limits<double>::epsilon()
-      ? mW/mZ
-      : 1.0;
+   const double cw = mW/mZ;
+   return std::isfinite(cw) ? cw : 1.0;
 }
 
 /// threshold loop functions from [1504.05200] Eq.(14)
