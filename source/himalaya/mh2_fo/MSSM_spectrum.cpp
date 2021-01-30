@@ -5,17 +5,17 @@
 // version 3.
 // ====================================================================
 
-/**
- * @file MSSM_spectrum.cpp
- *
- * @brief Contains the implementation of the \a MSSM_spectrum.
- */
-
 #include "himalaya/mh2_fo/MSSM_spectrum.hpp"
 #include "himalaya/mh2_fo/Linalg.hpp"
 #include "himalaya/misc/Constants.hpp"
 #include "himalaya/misc/Numerics.hpp"
 #include "himalaya/misc/Powers.hpp"
+
+/**
+ * @file MSSM_spectrum.cpp
+ *
+ * @brief Contains the implementation of the \a MSSM_spectrum.
+ */
 
 namespace himalaya {
 namespace mh2_fo {
