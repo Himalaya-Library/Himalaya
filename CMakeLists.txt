@@ -65,6 +65,7 @@ set(HIM_LIBSOURCES
   # fixed-order calculation
   ${SOURCE_PATH}/mh2_fo/Linalg.cpp
   ${SOURCE_PATH}/mh2_fo/MSSM_mass_eigenstates.cpp
+  ${SOURCE_PATH}/mh2_fo/MSSM_spectrum.cpp
   ${SOURCE_PATH}/mh2_fo/PV.cpp
   # helpers
   ${SOURCE_PATH}/misc/Li2.cpp)
