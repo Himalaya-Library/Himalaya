@@ -155,7 +155,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
 {
    // protect against infrared divergence
    if (is_zero(p2, EPSTOL) && is_zero(m12, EPSTOL) && is_zero(m22, EPSTOL)) {
-      return 0.;
+      return 0;
    }
 
    p2  = std::abs(p2);
@@ -175,7 +175,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    if (p2 > 1e-10*m22) {
       const double s = p2 - m22 + m12;
       const std::complex<double> imin(m12, -EPSTOL);
-      const std::complex<double> x = std::sqrt(pow2(s) - 4.0 * p2 * imin);
+      const std::complex<double> x = std::sqrt(pow2(s) - 4 * p2 * imin);
       const std::complex<double> xp = (s + sign(s)*x) / (2*p2);
       const std::complex<double> xm = imin / (xp*p2);
 
@@ -190,7 +190,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       return 1 - std::log(m22 / q2);
    }
 
-   return 1.0 - std::log(m22/q2)
+   return 1 - std::log(m22/q2)
         + m12 * std::log(m22/m12) / (m12 - m22);
 }
 
@@ -213,9 +213,9 @@ double d1_b0(double m12, double m22) noexcept
    if ((m12 < 0.0001) != (m22 < 0.0001)) {
       return (m12 - m22) * (m12 + m22) / (2 * pow3(m12 - m22));
    } else if (m12 < 0.0001 && m22 < 0.0001) {
-      return 0.;
+      return 0;
    } else if (std::abs(m22 - m12) < 0.001) {
-      return 1. / (6 * m12) + (m12 - m22) / (12 * pow2(m12));
+      return 1 / (6 * m12) + (m12 - m22) / (12 * pow2(m12));
    }
 
    return ((m12 - m22) * (m12 + m22) + 2 * m12 * m22 * std::log(m22 / m12)) /
