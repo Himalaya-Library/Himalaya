@@ -86,7 +86,7 @@ double a0(double m2, double q2) noexcept
    m2 = std::abs(m2);
 
    if (m2 < 1e-8)
-      return 0.;
+      return 0;
 
    return m2 * (1 - std::log(m2 / q2));
 }
@@ -104,36 +104,46 @@ double a0(double m2, double q2) noexcept
 double b0xx(double p2, double m2, double q2) noexcept
 {
    if (is_zero(p2, EPSTOL) && is_zero(m2, EPSTOL)) {
-      return 0.0;
+      return 0;
    }
 
    p2 = std::abs(p2);
    m2 = std::abs(m2);
    q2 = std::abs(q2);
 
-   if (is_zero(p2, EPSTOL)) {
+   if (p2 < 1e-15) {
       return -std::log(m2 / q2);
    }
 
-   if (m2 < EPSTOL*p2 || m2 < EPSTOL*q2) {
-      return 2.0 - std::log(p2 / q2);
+   if (m2 < 1e-15*p2) {
+      return 2 - std::log(p2 / q2);
    }
 
-   if (is_equal(p2, m2, EPSTOL)) {
+   if (m2 < 1e-2*p2) {
+      const double d = m2 / p2;
+      const double logd = std::log(d);
+      return 2 - std::log(p2 / q2)
+         + d * (2 * (1 - logd)
+         + d * (-1 - 2 * logd
+         + d * (-10./3 - 4 * logd
+         + d * (-59./6 - 10 * logd))));
+   }
+
+   if (is_equal(p2, m2, 1e-12)) {
       return 0.18620063576578215 - std::log(m2 / q2); // 2 - Pi/Sqrt[3]
    }
 
-   if (p2 <= 4.0 * m2) {
-      return 2.0 - std::log(m2 / q2) -
-         2.0 * std::sqrt(4.0 * m2 / p2 - 1.0) *
-         std::asin(std::sqrt(p2 / (4.0 * m2)));
+   if (p2 <= 4 * m2) {
+      return 2 - std::log(m2 / q2) -
+             2 * std::sqrt(4 * m2 / p2 - 1) *
+                std::asin(std::sqrt(p2 / (4 * m2)));
    }
 
-   const double sq = std::sqrt(1.0 - 4.0 * m2 / p2);
+   const double sq = std::sqrt(1 - 4 * m2 / p2);
 
    // s > 4*m2
-   return 2.0 - std::log(m2 / q2) +
-          sq * std::log(p2 * (1.0 - sq) / (2 * m2) - 1.0);
+   return 2 - std::log(m2 / q2) +
+          sq * std::log(p2 * (1 - sq) / (2 * m2) - 1);
 }
 
 
@@ -145,7 +155,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
 {
    // protect against infrared divergence
    if (is_zero(p2, EPSTOL) && is_zero(m12, EPSTOL) && is_zero(m22, EPSTOL)) {
-      return 0.;
+      return 0;
    }
 
    p2  = std::abs(p2);
@@ -165,7 +175,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    if (p2 > 1e-10*m22) {
       const double s = p2 - m22 + m12;
       const std::complex<double> imin(m12, -EPSTOL);
-      const std::complex<double> x = std::sqrt(pow2(s) - 4.0 * p2 * imin);
+      const std::complex<double> x = std::sqrt(pow2(s) - 4 * p2 * imin);
       const std::complex<double> xp = (s + sign(s)*x) / (2*p2);
       const std::complex<double> xm = imin / (xp*p2);
 
@@ -180,7 +190,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       return 1 - std::log(m22 / q2);
    }
 
-   return 1.0 - std::log(m22/q2)
+   return 1 - std::log(m22/q2)
         + m12 * std::log(m22/m12) / (m12 - m22);
 }
 
@@ -203,9 +213,9 @@ double d1_b0(double m12, double m22) noexcept
    if ((m12 < 0.0001) != (m22 < 0.0001)) {
       return (m12 - m22) * (m12 + m22) / (2 * pow3(m12 - m22));
    } else if (m12 < 0.0001 && m22 < 0.0001) {
-      return 0.;
+      return 0;
    } else if (std::abs(m22 - m12) < 0.001) {
-      return 1. / (6 * m12) + (m12 - m22) / (12 * pow2(m12));
+      return 1 / (6 * m12) + (m12 - m22) / (12 * pow2(m12));
    }
 
    return ((m12 - m22) * (m12 + m22) + 2 * m12 * m22 * std::log(m22 / m12)) /
