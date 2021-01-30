@@ -86,7 +86,7 @@ double a0(double m2, double q2) noexcept
    m2 = std::abs(m2);
 
    if (m2 < 1e-8)
-      return 0.;
+      return 0;
 
    return m2 * (1 - std::log(m2 / q2));
 }
