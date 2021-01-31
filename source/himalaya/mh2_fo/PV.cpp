@@ -103,13 +103,13 @@ double a0(double m2, double q2) noexcept
  */
 double b0xx(double p2, double m2, double q2) noexcept
 {
-   if (is_zero(p2, EPSTOL) && is_zero(m2, EPSTOL)) {
-      return 0;
-   }
-
    p2 = std::abs(p2);
    m2 = std::abs(m2);
    q2 = std::abs(q2);
+
+   if (p2 < EPSTOL && m2 < EPSTOL) {
+      return 0;
+   }
 
    if (p2 < 1e-15) {
       return -std::log(m2 / q2);
