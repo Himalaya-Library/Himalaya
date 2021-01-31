@@ -23,7 +23,7 @@ namespace himalaya {
 namespace mh2_fo {
 namespace {
 
-constexpr double EPSTOL = 1.0e-11; ///< underflow accuracy
+constexpr double EPSTOL = 1.0e-15; ///< underflow accuracy
 
 
 constexpr double sign(double x) noexcept
