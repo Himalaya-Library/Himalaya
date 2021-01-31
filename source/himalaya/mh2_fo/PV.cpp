@@ -168,10 +168,6 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       return -std::log(p2 / q2) - fB(xp, xm);
    }
 
-   if (is_close(m12, m22, EPSTOL)) {
-      return -std::log(m12 / q2);
-   }
-
    if (m12 < 1e-30) {
       return 1 - std::log(m22 / q2);
    }
