@@ -52,29 +52,17 @@ double fB(const std::complex<double>& x) noexcept
       return -1.0;
    }
 
+   if (std::abs(re - 1.0) < 1e-3) {
+      const auto d = x - 1.0;
+      const auto logxm1 = std::log(d);
+      return std::real(-1.0 + d*(1.0 - logxm1) + 0.5*d*d - d*d*d/6.);
+   }
+
+   if (std::abs(re) > 1e4) {
+      return std::real(-0.5/x - 1.0/(6.0*x*x) + std::log(-x));
+   }
+
    return std::real(-1.0 + fast_log(1.0 - x) - x*fast_log(1.0 - 1.0/x));
-}
-
-
-/// fB(xp) + fB(xm)
-double fB(const std::complex<double>& xp, const std::complex<double>& xm) noexcept
-{
-   const double rep = std::real(xp);
-   const double imp = std::imag(xp);
-
-   if ((std::abs(rep) == 0.0 || std::abs(rep) == 1.0) && imp == 0.0) {
-      return -1.0 + fB(xm);
-   }
-
-   const double rem = std::real(xm);
-   const double imm = std::imag(xm);
-
-   if ((std::abs(rem) == 0.0 || std::abs(rem) == 1.0) && imm == 0.0) {
-      return -1.0 + fB(xp);
-   }
-
-   return std::real(-2.0 + fast_log((1.0 - xp)*(1.0 - xm))
-      - xp*fast_log(1.0 - 1.0/xp) - xm*fast_log(1.0 - 1.0/xm));
 }
 
 
@@ -158,14 +146,14 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    }
 
    // p2 is no 0
-   if (p2 > 1e-10*m22) {
+   if (p2 > 1e-11*m22) {
       const double s = p2 - m22 + m12;
       const std::complex<double> imin(m12, -EPSTOL);
       const std::complex<double> x = std::sqrt(pow2(s) - 4 * p2 * imin);
       const std::complex<double> xp = (s + sign(s)*x) / (2*p2);
       const std::complex<double> xm = imin / (xp*p2);
 
-      return -std::log(p2 / q2) - fB(xp, xm);
+      return -std::log(p2 / q2) - fB(xp) - fB(xm);
    }
 
    if (m12 < 1e-30) {
