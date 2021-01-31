@@ -147,9 +147,9 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    // p2 is no 0
    if (p2 > 1e-11*m12) {
       if (m12 < 1e-15*m22) {
-         const std::complex<double> ieps(0.0, EPSTOL*m22);
+         const std::complex<double> del(m22 - p2, -EPSTOL*m22);
          return 2 - std::log(m22 / q2) +
-                (m22 - p2) / p2 * std::real(fast_log((m22 - p2 - ieps) / p2));
+                (m22 - p2) / p2 * std::real(fast_log(del / p2));
       }
 
       const double s = p2 - m22 + m12;
