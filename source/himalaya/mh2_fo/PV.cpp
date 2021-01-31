@@ -54,8 +54,8 @@ double fB(const std::complex<double>& x) noexcept
 
    if (std::abs(re - 1.0) < 1e-3) {
       const auto d = x - 1.0;
-      const auto logxm1 = std::log(d);
-      return std::real(-1.0 + d*(1.0 - logxm1) + 0.5*d*d - d*d*d/6.);
+      const auto logd = std::log(d);
+      return std::real(-1.0 + d*(1.0 - logd + d*(0.5 - d/6.)));
    }
 
    if (std::abs(re) > 1e4) {
