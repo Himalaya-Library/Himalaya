@@ -156,7 +156,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       return -std::log(p2 / q2) - fB(xp) - fB(xm);
    }
 
-   if (m12 < 1e-30) {
+   if (m12 < 1e-15*m22) {
       return 1 - std::log(m22 / q2);
    }
 

@@ -68,6 +68,7 @@ data = N[#,digits]& @
        Table[MakePointB0[1 + 10^n, 1       , 1       , 1], {n, -15, -1}],
        Table[MakePointB0[1 - 10^n, 1       , 1       , 1], {n, -15, -1}],
        Table[MakePointB0[1       , 2*10^n  , 10^n    , 1], {n, -15, 15}],
+       Table[MakePointB0[10^-15  , 10^n    , 1       , 1], {n, -15, -1}],
        {
            MakePointB0[10^-15, 10^-15, 10^-15, 1     ], (* IR divergence *)
            MakePointB0[10^-15, 10^-15, 10^-15, 10^-15]  (* OK *)
