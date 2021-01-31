@@ -6,7 +6,6 @@
 // ====================================================================
 
 #include "himalaya/mh2_fo/PV.hpp"
-#include "himalaya/misc/Numerics.hpp"
 #include "himalaya/misc/Powers.hpp"
 
 #include <cmath>
@@ -137,12 +136,12 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       return 0;
    }
 
-   if (is_close(m12, m22, EPSTOL)) {
-      return b0xx(p2, m12, q2);
-   }
-
    if (m12 > m22) {
       std::swap(m12, m22);
+   }
+
+   if (m12*(1 + EPSTOL) > m22) {
+      return b0xx(p2, m12, q2);
    }
 
    // p2 is no 0

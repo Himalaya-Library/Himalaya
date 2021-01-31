@@ -62,6 +62,7 @@ MakePointB0[p2_, m12_, m22_, q2_] :=
 data = N[#,digits]& @
    Join[
        Table[MakePointB0[1       , 10^n    , 10^n    , 1], {n, -15, 15}],
+       Table[MakePointB0[1       , 10^n    , 2*10^n  , 1], {n, -15, 15}],
        Table[MakePointB0[1       , 1 + 10^n, 1 + 10^n, 1], {n, -15, -1}],
        Table[MakePointB0[1       , 1 - 10^n, 1 - 10^n, 1], {n, -15, -1}],
        Table[MakePointB0[10^n    , 1       , 1       , 1], {n, -15, 15}],
