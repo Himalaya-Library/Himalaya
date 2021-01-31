@@ -108,7 +108,7 @@ double b0xx(double p2, double m2, double q2) noexcept
    q2 = std::abs(q2);
 
    if (p2 < EPSTOL && m2 < EPSTOL) {
-      return 0;
+      return 0; // IR divergence
    } else if (p2 < 1e-15) {
       return -std::log(m2 / q2);
    } else if (is_equal(p2, m2, 1e-12)) {
