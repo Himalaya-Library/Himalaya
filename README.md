@@ -420,7 +420,10 @@ input and output.
 
 ## Code Documentation
 
-Doxygen can be used to generate code documentation.
+The Himalaya source code documentation can be found online at
+[https://himalaya-library.github.io](https://himalaya-library.github.io).
+
+The source code documentation can also be generated using Doxygen.
 To generate the documentation, run
 
 ```
