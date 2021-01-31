@@ -94,9 +94,9 @@ double b0xx(double p2, double m2, double q2) noexcept
    m2 = std::abs(m2);
    q2 = std::abs(q2);
 
-   if (p2 < 1e-15 * q2 && m2 < 1e-15 * q2) {
+   if (p2 < EPSTOL * q2 && m2 < EPSTOL * q2) {
       return 0; // IR divergence
-   } else if (p2 < 1e-15) {
+   } else if (p2 < EPSTOL) {
       return -std::log(m2 / q2);
    } else if (p2 <= 4 * m2) {
       return 2 - std::log(m2 / q2) -
@@ -106,7 +106,7 @@ double b0xx(double p2, double m2, double q2) noexcept
       const double sq = std::sqrt(1 - 4 * m2 / p2);
       return 2 - std::log(m2 / q2) +
          sq * std::log(p2 * (1 - sq) / (2 * m2) - 1);
-   } else if (p2 < 1e15 * m2) {
+   } else if (p2*EPSTOL < m2) {
       const double d = m2 / p2;
       const double logd = std::log(d);
       return 2 - std::log(p2 / q2)
@@ -132,7 +132,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    q2  = std::abs(q2);
 
    // protect against infrared divergence
-   if (p2 < 1e-15 * q2 && m12 < 1e-15 * q2 && m22 < 1e-15 * q2) {
+   if (p2 < EPSTOL * q2 && m12 < EPSTOL * q2 && m22 < EPSTOL * q2) {
       return 0;
    }
 
@@ -146,7 +146,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
 
    // p2 is no 0
    if (p2 > 1e-11*m12) {
-      if (m12 < 1e-15*m22) {
+      if (m12 < EPSTOL*m22) {
          const std::complex<double> del(m22 - p2, -EPSTOL*m22);
          return 2 - std::log(m22 / q2) +
                 (m22 - p2) / p2 * std::real(fast_log(del / p2));
@@ -161,7 +161,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       return -std::log(p2 / q2) - fB(xp) - fB(xm);
    }
 
-   if (m12 < 1e-15*m22) {
+   if (m12 < EPSTOL*m22) {
       return 1 - std::log(m22 / q2);
    }
 
