@@ -148,7 +148,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    // p2 is no 0
    if (p2 > 1e-11*m12) {
       const double s = p2 - m22 + m12;
-      const std::complex<double> imin(m12, -EPSTOL);
+      const std::complex<double> imin(m12, -EPSTOL*m12);
       const std::complex<double> x = std::sqrt(pow2(s) - 4 * p2 * imin);
       const std::complex<double> xp = (s + sign(s)*x) / (2*p2);
       const std::complex<double> xm = imin / (xp*p2);
