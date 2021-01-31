@@ -145,7 +145,7 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    q2  = std::abs(q2);
 
    // protect against infrared divergence
-   if (p2 < EPSTOL && m12 < EPSTOL && m22 < EPSTOL) {
+   if (p2 < 1e-15 * q2 && m12 < 1e-15 * q2 && m22 < 1e-15 * q2) {
       return 0;
    }
 
