@@ -139,15 +139,15 @@ double b0xx(double p2, double m2, double q2) noexcept
  */
 double b0(double p2, double m12, double m22, double q2) noexcept
 {
-   // protect against infrared divergence
-   if (is_zero(p2, EPSTOL) && is_zero(m12, EPSTOL) && is_zero(m22, EPSTOL)) {
-      return 0;
-   }
-
    p2  = std::abs(p2);
    m12 = std::abs(m12);
    m22 = std::abs(m22);
    q2  = std::abs(q2);
+
+   // protect against infrared divergence
+   if (p2 < EPSTOL && m12 < EPSTOL && m22 < EPSTOL) {
+      return 0;
+   }
 
    if (is_close(m12, m22, EPSTOL)) {
       return b0xx(p2, m12, q2);
