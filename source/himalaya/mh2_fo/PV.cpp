@@ -141,7 +141,7 @@ double b0xx(double p2, double m2, double q2) noexcept
 
    const double sq = std::sqrt(1 - 4 * m2 / p2);
 
-   // s > 4*m2
+   // p2 > 4*m2
    return 2 - std::log(m2 / q2) +
           sq * std::log(p2 * (1 - sq) / (2 * m2) - 1);
 }
