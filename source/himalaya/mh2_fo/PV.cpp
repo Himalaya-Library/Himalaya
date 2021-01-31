@@ -109,17 +109,19 @@ double b0xx(double p2, double m2, double q2) noexcept
 
    if (p2 < EPSTOL && m2 < EPSTOL) {
       return 0;
-   }
-
-   if (p2 < 1e-15) {
+   } else if (p2 < 1e-15) {
       return -std::log(m2 / q2);
-   }
-
-   if (m2 < 1e-15*p2) {
-      return 2 - std::log(p2 / q2);
-   }
-
-   if (m2 < 1e-2*p2) {
+   } else if (is_equal(p2, m2, 1e-12)) {
+      return 0.18620063576578215 - std::log(m2 / q2); // 2 - Pi/Sqrt[3]
+   } else if (p2 <= 4 * m2) {
+      return 2 - std::log(m2 / q2) -
+             2 * std::sqrt(4 * m2 / p2 - 1) *
+                std::asin(std::sqrt(p2 / (4 * m2)));
+   } else if (p2 <= 1e2 * m2) {
+      const double sq = std::sqrt(1 - 4 * m2 / p2);
+      return 2 - std::log(m2 / q2) +
+         sq * std::log(p2 * (1 - sq) / (2 * m2) - 1);
+   } else if (p2 < 1e15 * m2) {
       const double d = m2 / p2;
       const double logd = std::log(d);
       return 2 - std::log(p2 / q2)
@@ -127,23 +129,9 @@ double b0xx(double p2, double m2, double q2) noexcept
          + d * (-1 - 2 * logd
          + d * (-10./3 - 4 * logd
          + d * (-59./6 - 10 * logd))));
+   } else {
+      return 2 - std::log(p2 / q2);
    }
-
-   if (is_equal(p2, m2, 1e-12)) {
-      return 0.18620063576578215 - std::log(m2 / q2); // 2 - Pi/Sqrt[3]
-   }
-
-   if (p2 <= 4 * m2) {
-      return 2 - std::log(m2 / q2) -
-             2 * std::sqrt(4 * m2 / p2 - 1) *
-                std::asin(std::sqrt(p2 / (4 * m2)));
-   }
-
-   const double sq = std::sqrt(1 - 4 * m2 / p2);
-
-   // p2 > 4*m2
-   return 2 - std::log(m2 / q2) +
-          sq * std::log(p2 * (1 - sq) / (2 * m2) - 1);
 }
 
 
