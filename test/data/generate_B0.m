@@ -28,20 +28,23 @@ B0xx[p2_, m2_, q2_] :=
     ]
 
 (* B0xx
-   Format: p^2, m1^2, m2^2, q^2
+   Format: p^2, m1^2, m2^2, q^2, B0xx[p^2, m1^2, q^2]
  *)
+
+MakePointB0xx[p2_, m12_, m22_, q2_] :=
+    { p2, m12, m22, q2, B0xx[p2, m12, q2] } /; m22 === m12
 
 data = N[#,digits]& @
    Join[
-       Table[{ 1       , 10^n    , 10^n    , 1, B0xx[1       , 10^n    , 1] }, {n, -15, 15}],
-       Table[{ 1       , 1 + 10^n, 1 + 10^n, 1, B0xx[1       , 1 + 10^n, 1] }, {n, -15, -1}],
-       Table[{ 1       , 1 - 10^n, 1 - 10^n, 1, B0xx[1       , 1 - 10^n, 1] }, {n, -15, -1}],
-       Table[{ 10^n    , 1       , 1       , 1, B0xx[10^n    , 1       , 1] }, {n, -15, 15}],
-       Table[{ 1 + 10^n, 1       , 1       , 1, B0xx[1 + 10^n, 1       , 1] }, {n, -15, -1}],
-       Table[{ 1 - 10^n, 1       , 1       , 1, B0xx[1 - 10^n, 1       , 1] }, {n, -15, -1}],
+       Table[MakePointB0xx[1       , 10^n    , 10^n    , 1], {n, -15, 15}],
+       Table[MakePointB0xx[1       , 1 + 10^n, 1 + 10^n, 1], {n, -15, -1}],
+       Table[MakePointB0xx[1       , 1 - 10^n, 1 - 10^n, 1], {n, -15, -1}],
+       Table[MakePointB0xx[10^n    , 1       , 1       , 1], {n, -15, 15}],
+       Table[MakePointB0xx[1 + 10^n, 1       , 1       , 1], {n, -15, -1}],
+       Table[MakePointB0xx[1 - 10^n, 1       , 1       , 1], {n, -15, -1}],
        {
-           { 10^-15, 10^-15, 10^-15, 1     , B0xx[10^-15, 10^-15, 1] }, (* IR divergence *)
-           { 10^-15, 10^-15, 10^-15, 10^-15, B0xx[10^-15, 10^-15, 10^-15] }  (* OK *)
+           MakePointB0xx[10^-15, 10^-15, 10^-15, 1     ], (* IR divergence *)
+           MakePointB0xx[10^-15, 10^-15, 10^-15, 10^-15]  (* OK *)
        }
    ]
 
