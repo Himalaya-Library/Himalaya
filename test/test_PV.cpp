@@ -73,7 +73,7 @@ TEST_CASE("test_B0")
    const auto filename = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "data" +
                          PATH_SEPARATOR + "B0.dat";
    const auto data = read_b0(filename);
-   const double eps = 1e-13;
+   const double eps = 1e-12;
 
    for (auto d: data) {
       INFO(d);
