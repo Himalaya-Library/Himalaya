@@ -12,7 +12,7 @@ B0[0, 0, m22_, q2_, eps_:EPS] :=
     1 - Log[m22 / q2]
 
 B0[p2_, 0, m22_, q2_, eps_:EPS] :=
-    2 - Log[p2 / q2] + (m22 - p2)/p2 Log[(m22 - p22 - I eps)/m22]
+    2 - Log[p2 / q2] + (m22 - p2)/p2 Log[(m22 - p2 - I eps)/m22]
 
 B0[p2_, m12_, 0, q2_, eps_:EPS] :=
     B0[p2, 0, m12, q2, eps]
