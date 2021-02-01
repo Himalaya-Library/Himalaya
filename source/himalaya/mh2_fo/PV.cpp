@@ -145,8 +145,8 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    }
 
    // p2 is no 0
-   if (p2 > 1e-11*m12) {
-      if (m12 < EPSTOL*m22) {
+   if (p2 > 1e-12*m12) {
+      if (m12 == 0.0) {
          const std::complex<double> del(m22 - p2, -EPSTOL*m22);
          return 2 - std::log(m22 / q2) +
                 (m22 - p2) / p2 * std::real(fast_log(del / p2));
