@@ -57,7 +57,7 @@ double fB(const std::complex<double>& x) noexcept
       return std::real(-1.0 + d*(1.0 - logd + d*(0.5 - d/6.)));
    }
 
-   if (std::abs(re) > 1e4) {
+   if (std::abs(re) > 1e3) {
       return std::real(-0.5/x - 1.0/(6.0*x*x) + fast_log(-x));
    }
 
