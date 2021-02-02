@@ -57,21 +57,22 @@ B0xx[p2_, m2_, q2_] :=
 MakePointB0xx[p2_, m2_, q2_] :=
     { p2, m2, m2, q2, B0xx[p2, m2, q2] }
 
-data = N[#,digits]& @
+data = ParallelMap[N[MakePointB0xx @@ #, digits]&,
    Join[
-       Table[MakePointB0xx[1       , 10^n    , 1], {n, -15, 15}],
-       Table[MakePointB0xx[1       , 1 + 10^n, 1], {n, -15, -1}],
-       Table[MakePointB0xx[1       , 1 - 10^n, 1], {n, -15, -1}],
-       Table[MakePointB0xx[10^n    , 1       , 1], {n, -15, 15}],
-       Table[MakePointB0xx[1 + 10^n, 1       , 1], {n, -15, -1}],
-       Table[MakePointB0xx[1 - 10^n, 1       , 1], {n, -15, -1}],
+       Table[{1       , 10^n    , 1}, {n, -15, 15}],
+       Table[{1       , 1 + 10^n, 1}, {n, -15, -1}],
+       Table[{1       , 1 - 10^n, 1}, {n, -15, -1}],
+       Table[{10^n    , 1       , 1}, {n, -15, 15}],
+       Table[{1 + 10^n, 1       , 1}, {n, -15, -1}],
+       Table[{1 - 10^n, 1       , 1}, {n, -15, -1}],
        {
-           MakePointB0xx[10^-15, 10^-15, 1     ], (* IR divergence *)
-           MakePointB0xx[10^-15, 10^-15, 10^-15], (* OK *)
-           MakePointB0xx[1     ,      0, 1     ], (* OK *)
-           MakePointB0xx[0     ,      1, 1     ]  (* OK *)
+           {10^-15, 10^-15, 1     }, (* IR divergence *)
+           {10^-15, 10^-15, 10^-15}, (* OK *)
+           {1     ,      0, 1     }, (* OK *)
+           {0     ,      1, 1     }  (* OK *)
        }
    ]
+]
 
 Export["B0xx.dat", data]
 
@@ -94,7 +95,6 @@ data = ParallelMap[N[MakePointB0 @@ #, digits]&,
        Table[{1       , 2*10^n  , 10^n    , 1}, {n, -15, 15}],
        {
            {10^-15, 10^-15, 10^-15, 1     }, (* IR divergence *)
-           {10^-15, 10^-15, 10^-15, 10^-15}, (* OK *)
            {1     ,      0,      1, 1     }, (* OK *)
            {1     ,      1,      0, 1     }, (* OK *)
            {0     ,      0,      1, 1     }, (* OK *)
