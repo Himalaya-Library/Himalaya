@@ -113,7 +113,11 @@ double b0xx(double p2, double m2, double q2) noexcept
          + d * (2 * (1 - logd)
          + d * (-1 - 2 * logd
          + d * (-10./3 - 4 * logd
-         + d * (-59./6 - 10 * logd))));
+         + d * (-59./6 - 10 * logd
+         + d * (-449./15 - 28 * logd
+         + d * (-1417./15 - 84 * logd
+         + d * (-32254./105 - -264 * logd
+            )))))));
    } else {
       return 2 - std::log(p2 / q2);
    }
