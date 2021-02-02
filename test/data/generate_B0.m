@@ -83,7 +83,7 @@ Export["B0xx.dat", data]
 MakePointB0[p2_, m12_, m22_, q2_] :=
     { p2, m12, m22, q2, B0[p2, m12, m22, q2] }
 
-data = N[#,digits]& @ (MakePointB0 @@@
+data = ParallelMap[N[MakePointB0 @@ #, digits]&,
    Join[
        Flatten[#,2]& @ Table[{10^n, 10^k, 10^l, 1}, {n, -15, 15}, {k, -15, 15}, {l, -15, 15}],
        Table[{1       , 10^n    , 2*10^n  , 1}, {n, -15, 15}],
@@ -103,6 +103,6 @@ data = N[#,digits]& @ (MakePointB0 @@@
            {10^15 , 10^-14,     10, 1     }  (* OK *)
        }
    ]
-   )
+]
 
 Export["B0.dat", data]
