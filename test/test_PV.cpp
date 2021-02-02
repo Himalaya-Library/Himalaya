@@ -58,11 +58,13 @@ TEST_CASE("test_B0xx")
    const auto filename = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "data" +
                          PATH_SEPARATOR + "B0xx.dat";
    const auto data = read_b0(filename);
-   const double eps = 1e-13;
+   const double eps = 1e-12;
 
    for (auto d: data) {
-      INFO(d);
-      CHECK_CLOSE(d.b0, himalaya::mh2_fo::b0xx(d.p2, d.m12, d.q2), eps);
+      const auto b0 = himalaya::mh2_fo::b0xx(d.p2, d.m12, d.q2);
+      INFO("expected: " << d);
+      INFO("observed: " << b0);
+      CHECK_CLOSE(d.b0, b0, eps);
    }
 }
 
@@ -76,7 +78,9 @@ TEST_CASE("test_B0")
    const double eps = 1e-12;
 
    for (auto d: data) {
-      INFO(d);
-      CHECK_CLOSE(d.b0, himalaya::mh2_fo::b0(d.p2, d.m12, d.m22, d.q2), eps);
+      const auto b0 = himalaya::mh2_fo::b0(d.p2, d.m12, d.m22, d.q2);
+      INFO("expected: " << d);
+      INFO("observed: " << b0);
+      CHECK_CLOSE(d.b0, b0, eps);
    }
 }
