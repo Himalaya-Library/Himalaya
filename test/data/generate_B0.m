@@ -83,25 +83,26 @@ Export["B0xx.dat", data]
 MakePointB0[p2_, m12_, m22_, q2_] :=
     { p2, m12, m22, q2, B0[p2, m12, m22, q2] }
 
-data = N[#,digits]& @
+data = N[#,digits]& @ (MakePointB0 @@@
    Join[
-       MakePointB0 @@@ Flatten[#,2]& @ Table[{10^n, 10^k, 10^l, 1}, {n, -15, 15}, {k, -15, 15}, {l, -15, 15}],
-       Table[MakePointB0[1       , 10^n    , 2*10^n  , 1], {n, -15, 15}],
-       Table[MakePointB0[1       , 1 + 10^n, 1 + 10^n, 1], {n, -15, -1}],
-       Table[MakePointB0[1       , 1 - 10^n, 1 - 10^n, 1], {n, -15, -1}],
-       Table[MakePointB0[1 + 10^n, 1       , 1       , 1], {n, -15, -1}],
-       Table[MakePointB0[1 - 10^n, 1       , 1       , 1], {n, -15, -1}],
-       Table[MakePointB0[1       , 2*10^n  , 10^n    , 1], {n, -15, 15}],
+       Flatten[#,2]& @ Table[{10^n, 10^k, 10^l, 1}, {n, -15, 15}, {k, -15, 15}, {l, -15, 15}],
+       Table[{1       , 10^n    , 2*10^n  , 1}, {n, -15, 15}],
+       Table[{1       , 1 + 10^n, 1 + 10^n, 1}, {n, -15, -1}],
+       Table[{1       , 1 - 10^n, 1 - 10^n, 1}, {n, -15, -1}],
+       Table[{1 + 10^n, 1       , 1       , 1}, {n, -15, -1}],
+       Table[{1 - 10^n, 1       , 1       , 1}, {n, -15, -1}],
+       Table[{1       , 2*10^n  , 10^n    , 1}, {n, -15, 15}],
        {
-           MakePointB0[10^-15, 10^-15, 10^-15, 1     ], (* IR divergence *)
-           MakePointB0[10^-15, 10^-15, 10^-15, 10^-15], (* OK *)
-           MakePointB0[1     ,      0,      1, 1     ], (* OK *)
-           MakePointB0[1     ,      1,      0, 1     ], (* OK *)
-           MakePointB0[0     ,      0,      1, 1     ], (* OK *)
-           MakePointB0[0     ,      1,      0, 1     ], (* OK *)
-           MakePointB0[10^15 , 10^-14,      1, 1     ], (* OK *)
-           MakePointB0[10^15 , 10^-14,     10, 1     ]  (* OK *)
+           {10^-15, 10^-15, 10^-15, 1     }, (* IR divergence *)
+           {10^-15, 10^-15, 10^-15, 10^-15}, (* OK *)
+           {1     ,      0,      1, 1     }, (* OK *)
+           {1     ,      1,      0, 1     }, (* OK *)
+           {0     ,      0,      1, 1     }, (* OK *)
+           {0     ,      1,      0, 1     }, (* OK *)
+           {10^15 , 10^-14,      1, 1     }, (* OK *)
+           {10^15 , 10^-14,     10, 1     }  (* OK *)
        }
    ]
+   )
 
 Export["B0.dat", data]
