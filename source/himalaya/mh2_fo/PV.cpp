@@ -147,31 +147,28 @@ double b0(double p2, double m12, double m22, double q2) noexcept
       return b0xx(p2, m12, q2);
    }
 
-   // p2 is no 0
-   if (p2 > 1e-11*m12) {
-      if (m12 < EPSTOL*EPSTOL*m22) {
-         const std::complex<double> del(m22 - p2, -EPSTOL*m22);
-         return 2 - std::log(m22 / q2) +
-                (m22 - p2) / p2 * std::real(fast_log(del / p2));
+   if (p2 <= 1e-11 * m12) {
+      if (m12 < EPSTOL * m22) {
+         return 1 - std::log(m22 / q2);
       }
 
-      const double s = p2 - m22 + m12;
-      const std::complex<double> imin(m12, -EPSTOL*m12);
-      const std::complex<double> x = std::sqrt(pow2(s) - 4 * p2 * imin);
-      const std::complex<double> xp = (s + sign(s)*x) / (2*p2);
-      const std::complex<double> xm = imin / (xp*p2);
-
-      return -std::log(p2 / q2) - fB(xp) - fB(xm);
+      return 1 - std::log(m22 / q2) + m12 * std::log(m22 / m12) / (m12 - m22);
    }
 
-   if (m12 < EPSTOL*m22) {
-      return 1 - std::log(m22 / q2);
+   if (m12 < EPSTOL * EPSTOL * m22) {
+      const std::complex<double> del(m22 - p2, -EPSTOL * m22);
+      return 2 - std::log(m22 / q2) +
+             (m22 - p2) / p2 * std::real(fast_log(del / p2));
    }
 
-   return 1 - std::log(m22/q2)
-        + m12 * std::log(m22/m12) / (m12 - m22);
+   const double s = p2 - m22 + m12;
+   const std::complex<double> imin(m12, -EPSTOL * m12);
+   const std::complex<double> x = std::sqrt(pow2(s) - 4 * p2 * imin);
+   const std::complex<double> xp = (s + sign(s) * x) / (2 * p2);
+   const std::complex<double> xm = imin / (xp * p2);
+
+   return -std::log(p2 / q2) - fB(xp) - fB(xm);
 }
-
 
 /**
  * Derivative of B0(p^2, m1^2, m2^2, Q^2) w.r.t. p^2, for p^2 = 0.
