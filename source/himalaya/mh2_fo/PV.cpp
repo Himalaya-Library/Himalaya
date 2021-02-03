@@ -156,9 +156,9 @@ double b0(double p2, double m12, double m22, double q2) noexcept
    }
 
    if (m12 < EPSTOL * EPSTOL * m22) {
-      const std::complex<double> del(m22 - p2, -EPSTOL * m22);
+      const double del = std::sqrt(pow2(m22 - p2) + pow2(EPSTOL * m22));
       return 2 - std::log(m22 / q2) +
-             (m22 - p2) / p2 * std::real(fast_log(del / p2));
+             (m22 - p2) / p2 * std::log(del / p2);
    }
 
    const double s = p2 - m22 + m12;
