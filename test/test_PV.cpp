@@ -181,6 +181,6 @@ TEST_CASE("test_DB0")
       const auto db0 = himalaya::mh2_fo::d1_b0(d.m12, d.m22);
       INFO("expected: " << d);
       INFO("observed: " << db0);
-      // CHECK_CLOSE(d.db0, db0, eps);
+      CHECK_CLOSE(d.db0, db0, eps);
    }
 }

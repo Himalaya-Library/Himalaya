@@ -184,12 +184,17 @@ double d1_b0(double m12, double m22) noexcept
    m12 = std::abs(m12);
    m22 = std::abs(m22);
 
-   if ((m12 < 0.0001) != (m22 < 0.0001)) {
+   if ((m12 < 1e-14*m22) != (m22 < 1e-14*m12)) {
       return (m12 - m22) * (m12 + m22) / (2 * pow3(m12 - m22));
-   } else if (m12 < 0.0001 && m22 < 0.0001) {
+   } else if (m12 < EPSTOL && m22 < EPSTOL) {
       return 0;
-   } else if (std::abs(m22 - m12) < 0.001) {
-      return 1 / (6 * m12) + (m12 - m22) / (12 * pow2(m12));
+   } else if (std::abs(m22 - m12) < 5e-2*m12) {
+      return 1 / (6 * m12) + (m12 - m22) / (12 * pow2(m12)) +
+             pow2(m12 - m22) / (20 * pow3(m12)) +
+             pow3(m12 - m22) / (30 * pow4(m12)) +
+             pow4(m12 - m22) / (42 * pow5(m12)) +
+             pow5(m12 - m22) / (56 * pow6(m12))
+         ;
    }
 
    return ((m12 - m22) * (m12 + m22) + 2 * m12 * m22 * std::log(m22 / m12)) /
