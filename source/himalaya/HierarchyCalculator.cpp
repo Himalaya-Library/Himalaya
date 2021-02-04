@@ -1340,8 +1340,8 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
 
    // to obtain delta_lambda one has to divide the difference of the two calculations by v^2
    const double v2 = calcV2();
-   const double gt = sqrt2*p.Mt/std::sqrt(v2);
-   const double pref = threeLoop * pow2(p.Mt * gt * pow2(p.g3));
+   const double gt2 = 2 * pow2(p.Mt) / v2;
+   const double pref = threeLoop * gt2 * pow2(p.Mt * pow2(p.g3));
 
    // create a modified parameters struct and construct
    // Mh2EFTCalculator and ThresholdCalculator
