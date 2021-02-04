@@ -15,6 +15,9 @@ Changes
 
  * [commit 313d06d]: Require a C++-14 compatible compiler.
 
+ * The source code directory has been slightly restructured to match
+   the namespace hierarchy.
+
 Fixed bugs
 ----------
 
