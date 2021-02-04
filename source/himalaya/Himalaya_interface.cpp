@@ -58,11 +58,11 @@ double calc_cos2beta(double vu, double vd) noexcept
 }
 
 /// sorts two eigenvalues
-void sort_ew(V2& ew, double& theta) noexcept
+void sort_ev(V2& ev, double& theta) noexcept
 {
-   if (ew(0) > ew(1)) {
-      std::swap(ew(0), ew(1));
-      theta += M_PI/2.;
+   if (ev(0) > ev(1)) {
+      std::swap(ev(0), ev(1));
+      theta += 0.5*Pi;
    }
 }
 
@@ -94,7 +94,7 @@ std::tuple<V2,double,double> calculate_MSf_s2f(const RM22& M)
 
    theta = sign(M(0,1) / (M(0,0) - M(1,1))) * std::abs(theta);
 
-   sort_ew(ew, theta);
+   sort_ev(ew, theta);
 
    return std::make_tuple(ew, std::sin(2 * theta), theta);
 }
@@ -237,9 +237,9 @@ void Parameters::validate(bool verbose)
    }
 
    // sort stops/sbottoms/staus
-   sort_ew(MSt, s2t);
-   sort_ew(MSb, s2b);
-   sort_ew(MStau, s2tau);
+   sort_ev(MSt, s2t);
+   sort_ev(MSb, s2b);
+   sort_ev(MStau, s2tau);
 
    // check if the stop/sbottom masses are degenerated. If this is the
    // case one could get spurious poles in Pietro's code. To avoid
