@@ -78,11 +78,11 @@ std::vector<std::vector<T>> read_data(const std::string& filename)
 }
 
 
-/// read A0 function data
-template <class A, class E, class F>
-std::vector<A> transform_to(const std::vector<E>& in, F f)
+/// tranform vector of elements of type A -> B
+template <class B, class A, class F>
+std::vector<B> transform_to(const std::vector<A>& in, F f)
 {
-   std::vector<A> out;
+   std::vector<B> out;
    std::transform(in.cbegin(), in.cend(), std::back_inserter(out), f);
    return out;
 }
