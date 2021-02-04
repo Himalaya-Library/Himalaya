@@ -219,7 +219,7 @@ double HierarchyObject::getDMh2(int loops) const
  */
 void HierarchyObject::setDMhDRbarPrimeToMDRbarPrimeShift(const Eigen::Matrix2d& mdrShift)
 {
-   this -> mdrShift = mdrShift;
+   this->mdrShift = mdrShift;
 }
 
 /**
@@ -336,7 +336,8 @@ void HierarchyObject::setDLambdaEFT(double deltaLambda)
 /**
  * @return 3-loop delta_lambda with EFT logs
  */
-double HierarchyObject::getDLambdaEFT() const{
+double HierarchyObject::getDLambdaEFT() const
+{
    return dLambdaEFT;
 }
 
