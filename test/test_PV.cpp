@@ -80,7 +80,7 @@ std::vector<std::vector<T>> read_data(const std::string& filename)
 
 /// tranform vector of elements of type A -> B
 template <class B, class A, class F>
-std::vector<B> transform_to(const std::vector<A>& in, F f)
+std::vector<B> map(F f, const std::vector<A>& in)
 {
    std::vector<B> out;
    std::transform(in.cbegin(), in.cend(), std::back_inserter(out), f);
@@ -91,27 +91,33 @@ std::vector<B> transform_to(const std::vector<A>& in, F f)
 /// read A0 function data
 std::vector<A0> read_a0(const std::string& filename)
 {
-   return transform_to<A0>(read_data<double>(filename), [](const auto& d) {
-      return A0{d.at(0), d.at(1), d.at(2)};
-   });
+   return map<A0>(
+      [](const auto& d) {
+         return A0{d.at(0), d.at(1), d.at(2)};
+      },
+      read_data<double>(filename));
 }
 
 
 /// read B0 function data
 std::vector<B0> read_b0(const std::string& filename)
 {
-   return transform_to<B0>(read_data<double>(filename), [](const auto& d) {
-      return B0{d.at(0), d.at(1), d.at(2), d.at(3), d.at(4)};
-   });
+   return map<B0>(
+      [](const auto& d) {
+         return B0{d.at(0), d.at(1), d.at(2), d.at(3), d.at(4)};
+      },
+      read_data<double>(filename));
 }
 
 
 /// read DB0 function data
 std::vector<DB0> read_db0(const std::string& filename)
 {
-   return transform_to<DB0>(read_data<double>(filename), [](const auto& d) {
-      return DB0{d.at(0), d.at(1), d.at(2)};
-   });
+   return map<DB0>(
+      [](const auto& d) {
+         return DB0{d.at(0), d.at(1), d.at(2)};
+      },
+      read_data<double>(filename));
 }
 
 
