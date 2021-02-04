@@ -1,5 +1,6 @@
 #include "doctest.h"
 #include "himalaya/mh2_fo/PV.hpp"
+#include <algorithm>
 #include <fstream>
 #include <iterator>
 #include <limits>
@@ -78,41 +79,39 @@ std::vector<std::vector<T>> read_data(const std::string& filename)
 
 
 /// read A0 function data
+template <class A, class E, class F>
+std::vector<A> transform_to(const std::vector<E>& in, F f)
+{
+   std::vector<A> out;
+   std::transform(in.cbegin(), in.cend(), std::back_inserter(out), f);
+   return out;
+}
+
+
+/// read A0 function data
 std::vector<A0> read_a0(const std::string& filename)
 {
-   std::vector<A0> data;
-
-   for (const auto& d: read_data<double>(filename)) {
-      data.emplace_back(A0{d.at(0), d.at(1), d.at(2)});
-   }
-
-   return data;
+   return transform_to<A0>(read_data<double>(filename), [](const auto& d) {
+      return A0{d.at(0), d.at(1), d.at(2)};
+   });
 }
 
 
 /// read B0 function data
 std::vector<B0> read_b0(const std::string& filename)
 {
-   std::vector<B0> data;
-
-   for (const auto& d: read_data<double>(filename)) {
-      data.emplace_back(B0{d.at(0), d.at(1), d.at(2), d.at(3), d.at(4)});
-   }
-
-   return data;
+   return transform_to<B0>(read_data<double>(filename), [](const auto& d) {
+      return B0{d.at(0), d.at(1), d.at(2), d.at(3), d.at(4)};
+   });
 }
 
 
 /// read DB0 function data
 std::vector<DB0> read_db0(const std::string& filename)
 {
-   std::vector<DB0> data;
-
-   for (const auto& d: read_data<double>(filename)) {
-      data.emplace_back(DB0{d.at(0), d.at(1), d.at(2)});
-   }
-
-   return data;
+   return transform_to<DB0>(read_data<double>(filename), [](const auto& d) {
+      return DB0{d.at(0), d.at(1), d.at(2)};
+   });
 }
 
 
