@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "himalaya/mh2_fo/PV.hpp"
 #include <fstream>
+#include <iterator>
 #include <limits>
 #include <sstream>
 #include <string>
@@ -58,20 +59,31 @@ std::ostream& operator<<(std::ostream& ostr, const DB0& db0)
 }
 
 
-/// read A0 function data
-std::vector<A0> read_a0(const std::string& filename)
+/// read data line-wise from file
+template <class T>
+std::vector<std::vector<T>> read_data(const std::string& filename)
 {
    std::ifstream fstr(filename);
    std::string line;
-   std::vector<A0> data;
+   std::vector<std::vector<T>> data;
 
    while (std::getline(fstr, line)) {
-      double m2{}, q2{}, a0{};
-
       std::istringstream isstr(line);
-      isstr >> m2 >> q2 >> a0;
+      data.emplace_back((std::istream_iterator<T>(isstr)),
+                        std::istream_iterator<T>());
+   }
 
-      data.emplace_back(A0{m2, q2, a0});
+   return data;
+}
+
+
+/// read A0 function data
+std::vector<A0> read_a0(const std::string& filename)
+{
+   std::vector<A0> data;
+
+   for (const auto& d: read_data<double>(filename)) {
+      data.emplace_back(A0{d.at(0), d.at(1), d.at(2)});
    }
 
    return data;
@@ -81,17 +93,10 @@ std::vector<A0> read_a0(const std::string& filename)
 /// read B0 function data
 std::vector<B0> read_b0(const std::string& filename)
 {
-   std::ifstream fstr(filename);
-   std::string line;
    std::vector<B0> data;
 
-   while (std::getline(fstr, line)) {
-      double p2{}, m12{}, m22{}, q2{}, b0{};
-
-      std::istringstream isstr(line);
-      isstr >> p2 >> m12 >> m22 >> q2 >> b0;
-
-      data.emplace_back(B0{p2, m12, m22, q2, b0});
+   for (const auto& d: read_data<double>(filename)) {
+      data.emplace_back(B0{d.at(0), d.at(1), d.at(2), d.at(3), d.at(4)});
    }
 
    return data;
@@ -101,17 +106,10 @@ std::vector<B0> read_b0(const std::string& filename)
 /// read DB0 function data
 std::vector<DB0> read_db0(const std::string& filename)
 {
-   std::ifstream fstr(filename);
-   std::string line;
    std::vector<DB0> data;
 
-   while (std::getline(fstr, line)) {
-      double m12{}, m22{}, db0{};
-
-      std::istringstream isstr(line);
-      isstr >> m12 >> m22 >> db0;
-
-      data.emplace_back(DB0{m12, m22, db0});
+   for (const auto& d: read_data<double>(filename)) {
+      data.emplace_back(DB0{d.at(0), d.at(1), d.at(2)});
    }
 
    return data;
