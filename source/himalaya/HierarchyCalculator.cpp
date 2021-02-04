@@ -969,7 +969,7 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
 
    // check for degenerate squark masses
    if (std::abs(Mst1 - Mst2) < eps) {
-      const double Mst2shift = Mst1 + std::sqrt(std::abs(Dmst12))/2.;
+      const double Mst2shift = Mst1 + 0.5*std::sqrt(std::abs(Dmst12));
       const double lmMst2shift = std::log(scale2 / pow2(Mst2shift));
       // limit
       const double lim = (32*Xt2*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 +
@@ -1086,7 +1086,7 @@ double HierarchyCalculator::shiftH3mToDRbarPrimeMh2(
 
    // check for degenerate squark masses
    if (std::abs(Mst1 - Mst2) < eps) {
-      const double Mst2shift = Mst1 + std::sqrt(std::abs(Dmst12))/2.;
+      const double Mst2shift = Mst1 + 0.5*std::sqrt(std::abs(Dmst12));
       const double lmMst2shift = std::log(scale2 / pow2(Mst2shift));
       // limit
       const double lim = (32*(-3*(1 + lmMgl)*pow2(Mgl) + 5*(1 + lmMsq)*Msq2 + (1 + lmMst1)*
