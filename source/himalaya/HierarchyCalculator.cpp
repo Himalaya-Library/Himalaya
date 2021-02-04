@@ -1225,11 +1225,11 @@ HierarchyCalculator::getMt42L(const himalaya::HierarchyObject& ho,
    const double mu = - p.mu; // note the sign difference in mu
    const double tanb = calcTanBeta();
    const double v2 = calcV2();
-   const double gs = p.g3;
+   const double g3 = p.g3;
    const int include_heavy_higgs = 0;
 
    Eigen::Matrix2d Mt42L = mh2l::delta_mh2_2loop_at_as(
-      Mt2, MG, Mst12, Mst22, st, ct, scale2, mu, tanb, v2, gs,
+      Mt2, MG, Mst12, Mst22, st, ct, scale2, mu, tanb, v2, g3,
       include_heavy_higgs);
 
    return Mt42L;
