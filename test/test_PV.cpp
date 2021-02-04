@@ -28,6 +28,11 @@ struct B0 {
 };
 
 
+struct DB0 {
+   double m12{}, m22{}, db0{};
+};
+
+
 std::ostream& operator<<(std::ostream& ostr, const A0& a0)
 {
    ostr << std::setprecision(std::numeric_limits<double>::digits10)
@@ -41,6 +46,14 @@ std::ostream& operator<<(std::ostream& ostr, const B0& b0)
    ostr << std::setprecision(std::numeric_limits<double>::digits10)
         << "B0(p2=" << b0.p2 << ", m12=" << b0.m12
         << ", m22=" << b0.m22 << ", q2=" << b0.q2 << ") = " << b0.b0;
+   return ostr;
+}
+
+
+std::ostream& operator<<(std::ostream& ostr, const DB0& db0)
+{
+   ostr << std::setprecision(std::numeric_limits<double>::digits10)
+        << "DB0(m12=" << db0.m12 << ", m22=" << db0.m22 << ") = " << db0.db0;
    return ostr;
 }
 
@@ -79,6 +92,26 @@ std::vector<B0> read_b0(const std::string& filename)
       isstr >> p2 >> m12 >> m22 >> q2 >> b0;
 
       data.emplace_back(B0{p2, m12, m22, q2, b0});
+   }
+
+   return data;
+}
+
+
+/// read DB0 function data
+std::vector<DB0> read_db0(const std::string& filename)
+{
+   std::ifstream fstr(filename);
+   std::string line;
+   std::vector<DB0> data;
+
+   while (std::getline(fstr, line)) {
+      double m12{}, m22{}, db0{};
+
+      std::istringstream isstr(line);
+      isstr >> m12 >> m22 >> db0;
+
+      data.emplace_back(DB0{m12, m22, db0});
    }
 
    return data;
@@ -132,5 +165,22 @@ TEST_CASE("test_B0")
       INFO("expected: " << d);
       INFO("observed: " << b0);
       CHECK_CLOSE(d.b0, b0, eps);
+   }
+}
+
+
+/// test DB0
+TEST_CASE("test_DB0")
+{
+   const auto filename = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "data" +
+                         PATH_SEPARATOR + "DB0.dat";
+   const auto data = read_db0(filename);
+   const double eps = 1e-12;
+
+   for (auto d: data) {
+      const auto db0 = himalaya::mh2_fo::d1_b0(d.m12, d.m22);
+      INFO("expected: " << d);
+      INFO("observed: " << db0);
+      // CHECK_CLOSE(d.db0, db0, eps);
    }
 }
