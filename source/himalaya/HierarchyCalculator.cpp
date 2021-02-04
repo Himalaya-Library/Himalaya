@@ -325,7 +325,7 @@ int HierarchyCalculator::compareHierarchies(himalaya::HierarchyObject& ho)
       // first, check if the hierarchy is suitable to the mass spectrum
       ho.setSuitableHierarchy(hierarchy);
 
-      if(isHierarchySuitable(ho)){
+      if (isHierarchySuitable(ho)) {
          // calculate the exact 1-loop result (only alpha_t/b)
          const Eigen::Matrix2d Mt41L = getMt41L(ho, ho.getMDRFlag(), 0);
 
@@ -395,10 +395,10 @@ bool HierarchyCalculator::isHierarchySuitable(const himalaya::HierarchyObject& h
    const double Mgl = p.MG;
    const double Msq = calcMeanMsq();
 
-   if(Mst2 > delta*Msq) return false;
-   if(Mgl > delta*Msq) return false;
+   if (Mst2 > delta*Msq) return false;
+   if (Mgl > delta*Msq) return false;
 
-   switch (ho.getSuitableHierarchy()){
+   switch (ho.getSuitableHierarchy()) {
       case Hierarchies::h3:
          return Mgl > Mst2;
       case Hierarchies::h32q2g:
@@ -533,7 +533,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          // calculate self-energy contributions and Delta lambda terms
          // for suitable hierarchy
          switch (hierarchy) {
-         case Hierarchies::h3:{
+         case Hierarchies::h3: {
             const double Dmglst1 = p.MG - Msf1;
             const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
             const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
@@ -551,7 +551,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h3
          break;
 
-         case Hierarchies::h32q2g:{
+         case Hierarchies::h32q2g: {
             const double Dmglst1 = p.MG - Msf1;
             const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
             const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
@@ -569,7 +569,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h32q2g
          break;
 
-         case Hierarchies::h3q22g:{
+         case Hierarchies::h3q22g: {
             const double Dmglst1 = p.MG - Msf1;
             const double Dmsqst1 = pow2(Msq) - pow2(Msf1);
             const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
@@ -587,7 +587,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h3q22g
          break;
 
-         case Hierarchies::h4:{
+         case Hierarchies::h4: {
             const double Msusy = (Msf1 + Msf2 + p.MG) / 3.;
             const double lmMsusy = std::log(pow2(p.scale / Msusy));
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
@@ -605,7 +605,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h4
          break;
 
-         case Hierarchies::h5:{
+         case Hierarchies::h5: {
             const double Dmglst1 = p.MG - Msf1;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
             const double lmMsf2 = std::log(pow2(p.scale / Msf2));
@@ -623,7 +623,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h5
          break;
 
-         case Hierarchies::h5g1:{
+         case Hierarchies::h5g1: {
             const double Dmglst1 = p.MG - Msf1;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
             const double lmMsf2 = std::log(pow2(p.scale / Msf2));
@@ -641,7 +641,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h5g1
          break;
 
-         case Hierarchies::h6:{
+         case Hierarchies::h6: {
             const double Dmglst2 = p.MG - Msf2;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
             const double lmMsf2 = std::log(pow2(p.scale / Msf2));
@@ -659,7 +659,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h6
          break;
 
-         case Hierarchies::h6g2:{
+         case Hierarchies::h6g2: {
             const double Dmglst2 = p.MG - Msf2;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
             const double lmMsf2 = std::log(pow2(p.scale / Msf2));
@@ -677,7 +677,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h6g2
          break;
 
-         case Hierarchies::h6b:{
+         case Hierarchies::h6b: {
             const double Dmglst2 = p.MG - Msf2;
             const double Dmsqst2 = Msq - Msf2;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
@@ -695,7 +695,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h6b
          break;
 
-         case Hierarchies::h6b2qg2:{
+         case Hierarchies::h6b2qg2: {
             const double Dmglst2 = p.MG - Msf2;
             const double Dmsqst2 = Msq - Msf2;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
@@ -713,7 +713,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h6b2qg2
          break;
 
-         case Hierarchies::h6bq22g:{
+         case Hierarchies::h6bq22g: {
             const double Dmglst2 = p.MG - Msf2;
             const double Dmsqst2 = Msq - Msf2;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
@@ -731,7 +731,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h6bq22g
          break;
 
-         case Hierarchies::h6bq2g2:{
+         case Hierarchies::h6bq2g2: {
             const double Dmglst2 = p.MG - Msf2;
             const double Dmsqst2 = Msq - Msf2;
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
@@ -749,7 +749,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h6bq2g2
          break;
 
-         case Hierarchies::h9:{
+         case Hierarchies::h9: {
             const double lmMgl = std::log(pow2(p.scale / p.MG));
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
             const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
@@ -767,7 +767,7 @@ Eigen::Matrix2d HierarchyCalculator::calculateHierarchy(
          } // h9
          break;
 
-         case Hierarchies::h9q2:{
+         case Hierarchies::h9q2: {
             const double lmMgl = std::log(pow2(p.scale / p.MG));
             const double lmMsf1 = std::log(pow2(p.scale / Msf1));
             const double Dmsf12 = pow2(Msf1) - pow2(Msf2);
@@ -1364,7 +1364,7 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    const double subtractionTermH3m = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,1,0);
    const double subtractionTermEFT = mh2EFTCalculator.getDeltaMh2EFT3Loop(0,0,0);
 
-   if(omitXtOrders) tc.setXtOrderOfDeltaLambdaAtAs2(xtOrder);
+   if (omitXtOrders) tc.setXtOrderOfDeltaLambdaAtAs2(xtOrder);
 
    // calculate the EFT logs. In the first call we calculate the full reconstructed contribution to delta_lambda_3L
    // including all logarithmic contributions. In the second line we subtract all non-logarithmic contributions
@@ -1395,7 +1395,7 @@ void HierarchyCalculator::calcDeltaLambda3L(himalaya::HierarchyObject& ho, bool 
    // If orders of Xt are omitted, we subtract them from delta_lambda_EFT to be at the same order
    // as delta_lambda_H3m. This ensures that in the hierarchy selection process we don't compare
    // wrong orders of Xt.
-   if(omitXtOrders){
+   if (omitXtOrders) {
       ho.setDLambdaEFT(ho.getDLambdaEFT() + pref*(tc.getDRbarPrimeToMSbarShift(xtOrder,1,0)
          - tc.getDRbarPrimeToMSbarShift(xtOrder,1,1))/v2);
    }
