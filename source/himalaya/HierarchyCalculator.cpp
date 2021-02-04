@@ -937,11 +937,6 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
       || suitableHierarchy == himalaya::hierarchies::Hierarchies::h9q2)
      ? 0 : 1;
 
-   // pre-factor of shift -> checked normalization against H3m normalization and they coincide
-   const double yt = sqrt2 * p.Mt / p.vu;
-   const double prefac = threeLoop * pow4(p.g3) * pow2(p.Mt * yt);
-
-   // tan(beta)
    const double tb = calcTanBeta();
 
    // stop masses
@@ -1031,6 +1026,10 @@ Eigen::Matrix2d HierarchyCalculator::shiftH3mToDRbarPrime(
         tb)*pow2(Xt2)*(pow4(Mst1) - pow4(Mst2))))/(pow2(Mst1)*pow2(Mst2)*
         pow2(tb)*pow3(pow2(Mst1) - pow2(Mst2)));
    }
+
+   // pre-factor of shift -> checked normalization against H3m normalization and they coincide
+   const double yt = sqrt2 * p.Mt / p.vu;
+   const double prefac = threeLoop * pow2(pow2(p.g3) * p.Mt * yt);
 
    return prefac * shift;
 }
