@@ -96,13 +96,21 @@ double b0xx(double p2, double m2, double q2) noexcept
 
    if (p2 < EPSTOL * q2 && m2 < EPSTOL * q2) {
       return 0; // IR divergence
-   } else if (p2 < EPSTOL) {
-      return -std::log(m2 / q2);
+   } else if (p2 < 1e-3*m2) {
+      const double d = p2 / m2;
+      return -std::log(m2 / q2)
+         + d*(1./6
+         + d*(1./60
+         + d*(1./420
+         + d*(1./2520
+         + d*(1./13860
+         + d*(1./72072
+         + d/360360))))));
    } else if (p2 <= 4 * m2) {
       return 2 - std::log(m2 / q2) -
              2 * std::sqrt(4 * m2 / p2 - 1) *
                 std::asin(std::sqrt(p2 / (4 * m2)));
-   } else if (p2 <= 5e2 * m2) {
+   } else if (p2 < 1e2 * m2) {
       const double sq = std::sqrt(1 - 4 * m2 / p2);
       return 2 - std::log(m2 / q2) +
          sq * std::log(p2 * (1 - sq) / (2 * m2) - 1);
@@ -116,7 +124,8 @@ double b0xx(double p2, double m2, double q2) noexcept
          + d * (-59./6 - 10 * logd
          + d * (-449./15 - 28 * logd
          + d * (-1417./15 - 84 * logd
-         + d * (-32254./105 - 264 * logd)))))));
+         + d * (-32254./105 - 264 * logd
+         + d * (-429697./420 - 858 * logd))))))));
    } else {
       return 2 - std::log(p2 / q2);
    }
