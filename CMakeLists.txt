@@ -31,6 +31,8 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
   endif()
 endif()
 
+option(BUILD_EXAMPLES "Build Himalaya examples" ON)
+
 # set paths
 set(EXAMPLE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/examples)
 set(SOURCE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/source/himalaya)
@@ -129,8 +131,10 @@ add_library(Himalaya::Himalaya ALIAS Himalaya_static)
 add_library(Himalaya::DSZ ALIAS DSZ_static)
 
 # example executable
-add_executable(example ${EXAMPLE_PATH}/example.cpp)
-target_link_libraries(example Himalaya::Himalaya Himalaya::DSZ)
+if(BUILD_EXAMPLES)
+  add_executable(example ${EXAMPLE_PATH}/example.cpp)
+  target_link_libraries(example Himalaya::Himalaya Himalaya::DSZ)
+endif()
 
 # create LibrayLink
 if(Mathematica_WolframLibrary_FOUND)
