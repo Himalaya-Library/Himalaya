@@ -1,3 +1,15 @@
+Himalaya 4.1.1
+==============
+
+Fixed bugs
+----------
+
+ * [commit e9e102a]: Allow to disable the compilation of the example
+   program.
+
+ * [commit cb6c51f]: Adding series expansion in B0 function for p2 <<
+   m2 to improve the precision for small momenta.
+
 Himalaya 4.1.0
 ==============
 
