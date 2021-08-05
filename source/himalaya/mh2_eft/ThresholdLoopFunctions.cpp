@@ -1400,21 +1400,21 @@ namespace {
          return 2.343907238689459;
       }
 
-      const double Pi = 3.141592653589793;
+      const double pi23 = 3.2898681336964529; // Pi^2/3
       const auto lambda = std::sqrt(lambda_2(u,v));
 
       if (is_equal(u, v, eps)) {
          return (-(sqr(std::log(u)))
                  + 2*sqr(std::log((1 - lambda)/2.))
                  - 4*dilog((1 - lambda)/2.)
-                 + sqr(Pi)/3.)/lambda;
+                 + pi23)/lambda;
       }
 
       return (-(std::log(u)*std::log(v))
               + 2*std::log((1 - lambda + u - v)/2.)*std::log((1 - lambda - u + v)/2.)
               - 2*dilog((1 - lambda + u - v)/2.)
               - 2*dilog((1 - lambda - u + v)/2.)
-              + sqr(Pi)/3.)/lambda;
+              + pi23)/lambda;
    }
 
    /// lambda^2(u,v) < 0, u = 1
@@ -1448,9 +1448,12 @@ namespace {
                    + clausen_2(2*std::acos((-1 + 2*u)/(2.*std::abs(u)))))/lambda;
       }
 
-      return 2*(+ clausen_2(2*std::acos((1 + u - v)/(2.*std::sqrt(u))))
-                + clausen_2(2*std::acos((1 - u + v)/(2.*std::sqrt(v))))
-                + clausen_2(2*std::acos((-1 + u + v)/(2.*std::sqrt(u*v)))))/lambda;
+      const auto sqrtu = std::sqrt(u);
+      const auto sqrtv = std::sqrt(v);
+
+      return 2*(+ clausen_2(2*std::acos(0.5*(1 + u - v)/sqrtu))
+                + clausen_2(2*std::acos(0.5*(1 - u + v)/sqrtv))
+                + clausen_2(2*std::acos(0.5*(-1 + u + v)/(sqrtu*sqrtv))))/lambda;
    }
 
    /**
@@ -1463,7 +1466,7 @@ namespace {
    {
       const auto lambda = lambda_2(u,v);
 
-      if (is_zero(lambda, std::numeric_limits<double>::epsilon())) {
+      if (is_zero(lambda, 1e-11)) {
          // phi_uv is always multiplied by lambda.  So, in order to
          // avoid nans if lambda == 0, we simply return 0
          return 0.0;
