@@ -207,24 +207,8 @@ std::complex<double> dilog(const std::complex<double>& z_) noexcept
  */
 double clausen_2(double x) noexcept
 {
-   const double PI = 3.141592653589793;
-   const std::complex<double> i(0.0, 1.0);
-
-   while (x >= 2*PI) {
-      x -= 2*PI;
-   }
-
-   while (x < 0.0) {
-      x += 2*PI;
-   }
-
-   if (std::abs(x) < std::numeric_limits<double>::epsilon() ||
-       std::abs(x - PI) < std::numeric_limits<double>::epsilon() ||
-       std::abs(x - 2*PI) < std::numeric_limits<double>::epsilon()) {
-      return 0.0;
-   }
-
-   return std::imag(dilog(std::exp(i*x)));
+   const std::complex<double> ix(0.0, x);
+   return std::imag(dilog(std::exp(ix)));
 }
 
 } // namespace himalaya
