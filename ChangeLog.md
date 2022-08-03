@@ -1,3 +1,14 @@
+Himalaya 4.2.0
+==============
+
+Changes
+-------
+
+ * Performance improvements of various loop functions.
+
+ * [commit 232cadb]: Allow to disable Mathematica interface by setting
+   the CMake variable `ENABLE_MATHEMATICA` (enabled by default).
+
 Himalaya 4.1.1
 ==============
 
@@ -5,7 +16,8 @@ Fixed bugs
 ----------
 
  * [commit e9e102a]: Allow to disable the compilation of the example
-   program.
+   program by setting the CMake variable `BUILD_EXAMPLES` (enabled by
+   default).
 
  * [commit cb6c51f]: Adding series expansion in B0 function for p2 <<
    m2 to improve the precision for small momenta.
