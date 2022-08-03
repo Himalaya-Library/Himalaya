@@ -1,18 +1,20 @@
 cmake_minimum_required(VERSION 3.1)
 project(Himalaya LANGUAGES CXX Fortran)
 
+option(BUILD_EXAMPLES "Build Himalaya examples" ON)
+option(ENABLE_MATHEMATICA "Enable Mathematica interface" ON)
+
 include(GNUInstallDirs)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
 # require an Eigen installation
 find_package(Eigen3 3.0 REQUIRED)
-find_package(Mathematica 8.0)
 
-# if needed, set your Fortran and C++ compiler
-#set (CMAKE_Fortran_COMPILER gfortran)
-#set (CMAKE_CXX_COMPILER clang++)
-#set (CMAKE_CXX_COMPILER icpc)
+# search for Mathematica
+if(ENABLE_MATHEMATICA)
+  find_package(Mathematica 8.0 COMPONENTS MathLink WolframLibrary)
+endif()
 
 # set the build type to release. If one needs debugging symbols, compile
 # with "CMAKE_BUILD_TYPE Debug"
@@ -30,8 +32,6 @@ if(CMAKE_BUILD_TYPE STREQUAL Debug)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic")
   endif()
 endif()
-
-option(BUILD_EXAMPLES "Build Himalaya examples" ON)
 
 # set paths
 set(EXAMPLE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/examples)
