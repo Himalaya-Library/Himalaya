@@ -27,6 +27,7 @@ add_himalaya_test(test_Numerics)
 add_himalaya_test(test_li2)
 add_himalaya_test(test_delta_lambda)
 add_himalaya_test(test_points)
+add_himalaya_test(test_ThresholdLoopFunctions)
 add_himalaya_test(test_PV)
 
 if(Mathematica_WolframLibrary_FOUND)
