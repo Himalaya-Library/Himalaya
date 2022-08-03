@@ -63,9 +63,6 @@ double fth1(double) TCFATTR;
 double fth2(double) TCFATTR;
 double fth3(double) TCFATTR;
 
-/// \f$I_{abc}(a,b,c)\f$ (arguments are interpreted as unsquared)
-double Iabc(double, double, double) TCFATTR;
-
 /// \f$Delta_{xyz}(x,y,z)\f$ (arguments are interpreted as squared masses)
 double delta_xyz(double, double, double) TCFATTR;
 
