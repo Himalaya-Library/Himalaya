@@ -99,6 +99,17 @@ std::tuple<V2,double,double> calculate_MSf_s2f(const RM22& M)
    return std::make_tuple(ew, std::sin(2 * theta), theta);
 }
 
+/// Calculate theta from s2t, if s2t is given and theta is not.
+/// Otherwise, calculate s2t from theta, if theta is given and s2t is not.
+void calc_theta(double& theta, double& s2t)
+{
+   if (!std::isnan(theta) && std::isnan(s2t)) {
+      s2t = std::sin(2*theta);
+   } else if (std::isnan(theta) && !std::isnan(s2t)) {
+      theta = 0.5*std::asin(s2t);
+   }
+}
+
 RM33 h_svd(const RM33& M)
 {
    Eigen::JacobiSVD<RM33> svd(M);
@@ -180,6 +191,10 @@ void Parameters::validate(bool verbose)
    if (std::isnan(Mtau)) {
       Mtau = inv_sqrt2*Ye(2,2)*vd;
    }
+
+   calc_theta(theta_t, s2t);
+   calc_theta(theta_b, s2b);
+   calc_theta(theta_tau, s2tau);
 
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t) || std::isnan(theta_t)) {
