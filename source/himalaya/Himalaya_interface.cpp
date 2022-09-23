@@ -205,11 +205,6 @@ void Parameters::validate(bool verbose)
    calc_theta(theta_b, s2b);
    calc_theta(theta_tau, s2tau);
 
-   // sort masses
-   sort_ev(MSt, theta_t, s2t);
-   sort_ev(MSb, theta_b, s2b);
-   sort_ev(MStau, theta_tau, s2tau);
-
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t) || std::isnan(theta_t)) {
       const double tan_beta = vu / vd;
@@ -265,10 +260,10 @@ void Parameters::validate(bool verbose)
       }
    }
 
-   // sort stops/sbottoms/staus
-   sort_ev(MSt, s2t);
-   sort_ev(MSb, s2b);
-   sort_ev(MStau, s2tau);
+   // sort sfermion masses
+   sort_ev(MSt, theta_t, s2t);
+   sort_ev(MSb, theta_b, s2b);
+   sort_ev(MStau, theta_tau, s2tau);
 
    // check if the stop/sbottom masses are degenerated. If this is the
    // case one could get spurious poles in Pietro's code. To avoid
