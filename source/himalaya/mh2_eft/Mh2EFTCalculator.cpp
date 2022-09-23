@@ -332,8 +332,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     const double B00DR = fB(mhtree2, 0., q2);
 
     // corrections to Mh2
-    const double dmh2g12g22 = discardNaN(
-       orders.at(CouplingOrders::G12G22) *
+    const double dmh2g12g22 = CALC_IF(orders.at(CouplingOrders::G12G22), discardNaN(
           ((v2 *
             (24 + 40 * dlambdachig12g22 + 40 * dlambdag12g22 +
              40 * dlambdaregg12g22 - 36 * lmMt + 40 * dvg12 * pow2(c2beta) +
@@ -343,10 +342,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
              27 * bbhDR * pow4(c2beta) - 36 * lmMt * pow4(c2beta) -
              3 * bbzDR * (12 - 4 * pow2(c2beta) + pow4(c2beta)))) /
            80.),
-       "dmh2g12g22");
+       "dmh2g12g22"));
 
-    const double dmh2g14 = discardNaN(
-       orders.at(CouplingOrders::G14) *
+    const double dmh2g14 = CALC_IF(orders.at(CouplingOrders::G14), discardNaN(
           (-(v2 * (-4 * (18 + 100 * dlambdachig14 + 100 * dlambdag14 +
                          100 * dlambdaregg14 - 27 * lmMt) +
                    6 * (40 * dg1g1 - 40 * dvg12 + 3 * lmMt * (-3 + Xi)) *
@@ -354,10 +352,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
                    9 * (9 * bbhDR + 2 * (1 + bbwDR + 6 * lmMt)) * pow4(c2beta) +
                    9 * bbzDR * (12 - 4 * pow2(c2beta) + pow4(c2beta)))) /
            800.),
-       "dmh2g14");
+       "dmh2g14"));
 
-    const double dmh2g24 = discardNaN(
-       orders.at(CouplingOrders::G24) *
+    const double dmh2g24 = CALC_IF(orders.at(CouplingOrders::G24), discardNaN(
           (-(v2 * (-24 - 16 * dlambdachig24 - 16 * dlambdag24 -
                    16 * dlambdaregg24 + 36 * lmMt + 16 * dg2g2 * pow2(c2beta) -
                    16 * dvg22 * pow2(c2beta) - 18 * lmMt * pow2(c2beta) +
@@ -366,70 +363,65 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
                    2 * bbwDR * (12 - 4 * pow2(c2beta) + pow4(c2beta)) +
                    bbzDR * (12 - 4 * pow2(c2beta) + pow4(c2beta)))) /
            32.),
-       "dmh2g24");
+       "dmh2g24"));
 
     const double dmh2g12yb2 =
-       discardNaN(orders.at(CouplingOrders::G12YB2) *
+       CALC_IF(orders.at(CouplingOrders::G12YB2), discardNaN(
                      (((10 * dlambdayb2g12 -
                         3 * (3 * B00DR - 2 * dvyb2 + 3 * lmMt) * pow2(c2beta)) *
                        pow2(cbeta) * v2) /
                       20.),
-                  "dmh2g12yb2");
+                  "dmh2g12yb2"));
 
     const double dmh2g22yb2 =
-       discardNaN(orders.at(CouplingOrders::G22YB2) *
+       CALC_IF(orders.at(CouplingOrders::G22YB2), discardNaN(
                      (((2 * dlambdayb2g22 +
                         (-3 * B00DR + 2 * dvyb2 - 3 * lmMt) * pow2(c2beta)) *
                        pow2(cbeta) * v2) /
                       4.),
-                  "dmh2g22yb2");
+                  "dmh2g22yb2"));
 
-    const double dmh2yb4 = discardNaN(
-       orders.at(CouplingOrders::YB4) *
+    const double dmh2yb4 = CALC_IF(orders.at(CouplingOrders::YB4), discardNaN(
           (((12 * B00DR + dlambdayb4 + 12 * lmMt) * v2 * pow4(cbeta)) / 2.),
-       "dmh2yb4");
+       "dmh2yb4"));
 
-    const double dmh2g12yt2 = discardNaN(
-       orders.at(CouplingOrders::G12YT2) *
+    const double dmh2g12yt2 = CALC_IF(orders.at(CouplingOrders::G12YT2), discardNaN(
           (((10 * dlambdayt2g12 + (6 + 6 * dvyt2 - 9 * lmMt) * pow2(c2beta)) *
             pow2(sbeta) * v2) /
            20.),
-       "dmh2g12yt2");
+       "dmh2g12yt2"));
 
-    const double dmh2g22yt2 = discardNaN(
-       orders.at(CouplingOrders::G22YT2) *
+    const double dmh2g22yt2 = CALC_IF(orders.at(CouplingOrders::G22YT2), discardNaN(
           (((2 * dlambdayt2g22 + (2 + 2 * dvyt2 - 3 * lmMt) * pow2(c2beta)) *
             pow2(sbeta) * v2) /
            4.),
-       "dmh2g22yt2");
+       "dmh2g22yt2"));
 
-    const double dmh2yt4 = discardNaN(
-       orders.at(CouplingOrders::YT4) *
+    const double dmh2yt4 = CALC_IF(orders.at(CouplingOrders::YT4), discardNaN(
           (pref_at * (12 * lmMt + thresholdCalculator.getThresholdCorrection(
                                      ThresholdCouplingOrders::LAMBDA_AT,
                                      RenSchemes::DRBARPRIME, omitMSSMLogs))),
-       "dmh2yt4");
+       "dmh2yt4"));
 
     const double dmh2g12ytau2 =
-       discardNaN(orders.at(CouplingOrders::G12YTAU2) *
+       CALC_IF(orders.at(CouplingOrders::G12YTAU2), discardNaN(
                      (-((-10 * dlambdaytau2g12 + 3 * B00DR * pow2(c2beta) +
                          3 * (-2 * dvytau2 + lmMt) * pow2(c2beta)) *
                         pow2(cbeta) * v2) /
                       20.),
-                  "dmh2g12ytau2");
+                  "dmh2g12ytau2"));
 
     const double dmh2g22ytau2 =
-       discardNaN(orders.at(CouplingOrders::G22YTAU2) *
+       CALC_IF(orders.at(CouplingOrders::G22YTAU2), discardNaN(
                      (-((-2 * dlambdaytau2g22 + B00DR * pow2(c2beta) +
                          (-2 * dvytau2 + lmMt) * pow2(c2beta)) *
                         pow2(cbeta) * v2) /
                       4.),
-                  "dmh2g22ytau2");
+                  "dmh2g22ytau2"));
 
-    const double dmh2ytau4 = discardNaN(
-       orders.at(CouplingOrders::YTAU4) *
+    const double dmh2ytau4 = CALC_IF(orders.at(CouplingOrders::YTAU4), discardNaN(
           (((4 * B00DR + dlambdaytau4 + 4 * lmMt) * v2 * pow4(cbeta)) / 2.),
-       "dmh2ytau4");
+       "dmh2ytau4"));
 
     return dmh2yt4 + oneLoop * (
        pow2(p.g1 * p.g2) * dmh2g12g22 + pow4(p.g1) * dmh2g14 + pow4(p.g2) *
@@ -599,24 +591,21 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                                     RenSchemes::DRBARPRIME, omitMSSMLogs));
 
     // Corrections to Mh
-    const double dmh2yt4g32 = discardNaN(
-       orders.at(CouplingOrders::G32YT4) *
+    const double dmh2yt4g32 = CALC_IF(orders.at(CouplingOrders::G32YT4), discardNaN(
           (pref * (96 * pow2(lmMt) + (-32 + 48 * dytas) * lmMt - 24 * dytas +
                    thresholdCalculator.getThresholdCorrection(
                       ThresholdCouplingOrders::LAMBDA_AT_AS,
                       RenSchemes::DRBARPRIME, omitMSSMLogs))),
-       "dmh2yt4g32");
+       "dmh2yt4g32"));
 
-    const double dmh2yb4g32 = discardNaN(
-       orders.at(CouplingOrders::G32YB4) *
+    const double dmh2yb4g32 = CALC_IF(orders.at(CouplingOrders::G32YB4), discardNaN(
           ((dlambdayb4g32 + 16 * (3 * B00DR * (dybas + 16 * lmMt) +
                                   lmMt * (-2 + 3 * dybas + 24 * lmMt))) *
            v2 * pow4(cbeta)) /
           2.,
-       "dmh2yb4g32");
+       "dmh2yb4g32"));
 
-    const double dmh2yb6 = discardNaN(
-       orders.at(CouplingOrders::YB6) *
+    const double dmh2yb6 = CALC_IF(orders.at(CouplingOrders::YB6), discardNaN(
           (-((-144 * dybyb * (B00DR + lmMt) +
               pow2(cbeta) *
                  (-49 - 3 * dlambdayb6 + 72 * dvyb2 - 72 * B00DR * dvyb2 -
@@ -626,10 +615,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                   36 * pow2(lmbMt) + 648 * pow2(lmMt) - 6 * pow2(Pi))) *
              v2 * pow4(cbeta)) /
            6.),
-       "dmh2yb6");
+       "dmh2yb6"));
 
-    const double dmh2yt6 = discardNaN(
-       orders.at(CouplingOrders::YT6) *
+    const double dmh2yt6 = CALC_IF(orders.at(CouplingOrders::YT6), discardNaN(
           ((v2 *
             (4 * dytyt * (-6 + dlambdayt4 + 12 * lmMt) +
              (-12 + dlambdayt6 + dlambdayt4 * (2 + 2 * dvyt2 - 3 * lmMt) +
@@ -638,20 +626,18 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                 pow2(sbeta)) *
             pow4(sbeta)) /
            2.),
-       "dmh2yt6");
+       "dmh2yt6"));
 
-    const double dmh2yb4ytau2 = discardNaN(
-       orders.at(CouplingOrders::YTAU2YB4) *
+    const double dmh2yb4ytau2 = CALC_IF(orders.at(CouplingOrders::YTAU2YB4), discardNaN(
           (((dlambdayb4ytau2 - 96 * B00DR * lmMt -
              dlambdayb4 * (-1 + B00DR + lmMt) +
              2 * dvytau2 * (-12 + 12 * B00DR + dlambdayb4 + 12 * lmMt) -
              48 * pow2(lmMt)) *
             v2 * pow6(cbeta)) /
            2.),
-       "dmh2yb4ytau2");
+       "dmh2yb4ytau2"));
 
-    const double dmh2yb2ytau4 = discardNaN(
-       orders.at(CouplingOrders::YTAU4YB2) *
+    const double dmh2yb2ytau4 = CALC_IF(orders.at(CouplingOrders::YTAU4YB2), discardNaN(
           (((4 * dytauyb * (4 * B00DR + dlambdaytau4 + 4 * lmMt) +
              pow2(cbeta) *
                 (dlambdayb2ytau4 - 8 * dvyb2 + 8 * B00DR * dvyb2 +
@@ -660,10 +646,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                  12 * pow2(lmMt))) *
             v2 * pow4(cbeta)) /
            2.),
-       "dmh2yb2ytau4");
+       "dmh2yb2ytau4"));
 
-    const double dmh2ytau6 = discardNaN(
-       orders.at(CouplingOrders::YTAU6) *
+    const double dmh2ytau6 = CALC_IF(orders.at(CouplingOrders::YTAU6), discardNaN(
           (-((-12 * dytauytau * (4 * B00DR + dlambdaytau4 + 4 * lmMt) +
               pow2(cbeta) *
                  (-3 * dlambdaytau6 +
@@ -673,10 +658,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                        pow2(Pi)))) *
              v2 * pow4(cbeta)) /
            6.),
-       "dmh2ytau6");
+       "dmh2ytau6"));
 
-    const double dmh2yt2yb4 = discardNaN(
-       orders.at(CouplingOrders::YT2YB4) *
+    const double dmh2yt2yb4 = CALC_IF(orders.at(CouplingOrders::YT2YB4), discardNaN(
           (((48 * dybyt * lmMt +
              (dlambdayt2yb4 + dlambdayb4 * (2 + 2 * dvyt2 - 3 * lmMt) +
               3 * (-15 + 8 * lmbMt + 8 * dvyt2 * (-1 + lmMt) + 18 * lmMt -
@@ -685,10 +669,9 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
              12 * B00DR * (4 * dybyt + (2 * dvyt2 - 9 * lmMt) * pow2(sbeta))) *
             v2 * pow4(cbeta)) /
            2.),
-       "dmh2yt2yb4");
+       "dmh2yt2yb4"));
 
-    const double dmh2yt4yb2 = discardNaN(
-       orders.at(CouplingOrders::YB2YT4) *
+    const double dmh2yt4yb2 = CALC_IF(orders.at(CouplingOrders::YB2YT4), discardNaN(
           (((4 * dytyb * (-6 + dlambdayt4 + 12 * lmMt) +
              pow2(cbeta) *
                 (dlambdayt4yb2 +
@@ -697,7 +680,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT2Loop(int omitSMLogs, int omitMSSMLogs) c
                       3 * pow2(lmMt) - pow2(Pi)))) *
             v2 * pow4(sbeta)) /
            2.),
-       "dmh2yt4yb2");
+       "dmh2yt4yb2"));
 
     return twoLoop * (g32 * yb4 * dmh2yb4g32 + yb6 * dmh2yb6 + yt6 * dmh2yt6 + yb4 * ytau2
                    * dmh2yb4ytau2 + yb2 * ytau4 * dmh2yb2ytau4 + ytau6 * dmh2ytau6 + yt2 * yb4
