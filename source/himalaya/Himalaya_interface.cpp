@@ -58,12 +58,20 @@ double calc_cos2beta(double vu, double vd) noexcept
 }
 
 /// sorts two eigenvalues
-void sort_ev(V2& ev, double& theta) noexcept
+void sort_ev(V2& ev, double& theta, double& s2t) noexcept
 {
    if (ev(0) > ev(1)) {
       std::swap(ev(0), ev(1));
       theta += 0.5*Pi;
+      s2t *= -1;
    }
+}
+
+/// sorts two eigenvalues
+void sort_ev(V2& ev, double& theta) noexcept
+{
+   double s2t = 0.0;
+   sort_ev(ev, theta, s2t);
 }
 
 /// calculates mass eigenvalues (in GeV), sin(2*theta) and theta
@@ -192,9 +200,15 @@ void Parameters::validate(bool verbose)
       Mtau = inv_sqrt2*Ye(2,2)*vd;
    }
 
+   // calculate theta_f or s2f, if one is given
    calc_theta(theta_t, s2t);
    calc_theta(theta_b, s2b);
    calc_theta(theta_tau, s2tau);
+
+   // sort masses
+   sort_ev(MSt, theta_t, s2t);
+   sort_ev(MSb, theta_b, s2b);
+   sort_ev(MStau, theta_tau, s2tau);
 
    // check if stop/sbottom masses and/or mixing angles are nan. If so, calculate these quantities.
    if (std::isnan(MSt(0)) || std::isnan(MSt(1)) || std::isnan(s2t) || std::isnan(theta_t)) {
