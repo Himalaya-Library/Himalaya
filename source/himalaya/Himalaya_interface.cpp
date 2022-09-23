@@ -75,8 +75,8 @@ std::tuple<V2,double,double> calculate_MSf_s2f(const RM22& M)
 
    if (ew.minCoeff() < 0.) {
       throw std::runtime_error(
-         "DR sfermion masses are tachyonic: mst1^2 = " + std::to_string(ew(0))
-         + ", mst2^2 = " + std::to_string(ew(1)));
+         "DR sfermion masses are tachyonic: msf1^2 = " + std::to_string(ew(0))
+         + ", msf2^2 = " + std::to_string(ew(1)));
    }
 
    ew = ew.unaryExpr([](double x){ return std::sqrt(x); });
