@@ -1,3 +1,16 @@
+Himalaya 4.2.1
+==============
+
+Changes
+-------
+
+ * [commit 340236c]: Calculate non-provided sfermion mixing angle
+   `theta_t`, `theta_b` or `theta_tau`, if the equivalent value `s2t`,
+   `s2b` or `s2tau` is given.
+
+ * [commit 2b44497]: Avoid calculation of 1-loop corrections that are
+   not requested.
+
 Himalaya 4.2.0
 ==============
 
