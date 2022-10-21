@@ -172,9 +172,6 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
 {
    HierarchyObject ho (isAlphab);
 
-   if (isAlphab)
-      INFO_MSG("3-loop threshold correction Δλ not available for O(αb*αs^2)!");
-
    const int mdrFlag = 0;
 
    // set mdrFlag
@@ -233,12 +230,22 @@ himalaya::HierarchyObject HierarchyCalculator::calculateDMh3L(bool isAlphab)
       mh2_eft::ThresholdCouplingOrders::LAMBDA_AT, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
    ho.setDLambda(2, pref_2L*(tc.getThresholdCorrection(
       mh2_eft::ThresholdCouplingOrders::LAMBDA_AT_AS, mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
-   ho.setDLambda(3, ho.getDLambdaEFT());
    ho.setDLambdaDRbarPrimeToMSbarShift(0, 0.);
    ho.setDLambdaDRbarPrimeToMSbarShift(1, 0.);
-   ho.setDLambdaDRbarPrimeToMSbarShift(2, pref_2L*(-4*ho.getDLambda(1)
-      *tc.getThresholdCorrection(mh2_eft::ThresholdCouplingOrders::YT_AS,
+   if (!isAlphab) {
+      ho.setDLambda(3, ho.getDLambdaEFT());
+      ho.setDLambdaDRbarPrimeToMSbarShift(2, pref_2L*(-4*ho.getDLambda(1)
+         *tc.getThresholdCorrection(mh2_eft::ThresholdCouplingOrders::YT_AS,
                                  mh2_eft::RenSchemes::DRBARPRIME, 1))/v2);
+   } else {
+      // 3-loop threshold correction Δλ of O(ab*as^2) currently not supported
+      ho.setDLambdaH3m(0);
+      ho.setDLambdaEFT(0);
+      ho.setDLambdaNonLog(0);
+      ho.setDLambdaXtUncertainty(0);
+      ho.setDLambda(3, 0);
+      ho.setDLambdaDRbarPrimeToMSbarShift(3, 0);
+   }
 
    himalaya::mh2_fo::MSSM_mass_eigenstates mfo(p);
    const auto dmh_fo = mfo.calculate_Mh2();

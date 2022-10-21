@@ -342,3 +342,20 @@ TEST_CASE("test_lambda_degenerate")
    CHECK_CLOSE(dl3, dl3_analytic, eps);
    CHECK_CLOSE(dl3_shift, dl3_analytic_shift, eps);
 }
+
+/// ensure that unsupported 3-loop threshold correction Δλ of O(ab*as^2) are set to zero
+TEST_CASE("test_delta_lambda_ab_as^2")
+{
+   using namespace himalaya;
+
+   const auto pars = make_point();
+   auto hc = HierarchyCalculator(pars);
+   const auto ho = hc.calculateDMh3L(true);
+
+   CHECK(ho.getDLambdaH3m() == 0);
+   CHECK(ho.getDLambdaEFT() == 0);
+   CHECK(ho.getDLambdaNonLog() == 0);
+   CHECK(ho.getDLambdaUncertainty(3) == 0);
+   CHECK(ho.getDLambda(3) == 0);
+   CHECK(ho.getDLambdaDRbarPrimeToMSbarShift(3) == 0);
+}
