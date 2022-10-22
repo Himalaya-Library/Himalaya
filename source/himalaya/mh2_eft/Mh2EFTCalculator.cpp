@@ -294,6 +294,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
                   ThresholdCouplingOrders::LAMBDA_YTAU4, RenSchemes::DRBARPRIME,
                   omitMSSMLogs));
 
+    // set delta_v O(g1^2) to zero, because the expressions is unknown
     const double dvg12 = 0.;
     //     CALC_IF(orders.at(CouplingOrders::G12G22) ||
     //     orders.at(CouplingOrders::G14),
@@ -301,6 +302,7 @@ double Mh2EFTCalculator::getDeltaMh2EFT1Loop(int omitSMLogs, int omitMSSMLogs) c
     //    ThresholdCouplingOrders::VEV_G12, RenSchemes::DRBARPRIME,
     //    omitMSSMLogs));
 
+    // set delta_v O(g2^2) to zero, because the expressions is unknown
     const double dvg22 = 0.;
     // CALC_IF(orders.at(CouplingOrders::G12G22) ||
     // orders.at(CouplingOrders::G24),
