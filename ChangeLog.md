@@ -1,3 +1,19 @@
+Himalaya 4.2.2
+==============
+
+Changes
+-------
+
+ * [commit f69949e]: For safety, set 3-loop contributions to Δλ of
+   O(ab*as^2) explicitly to zero, as they are incomplete. The
+   corresponding warning message is removed in order to not slow-down
+   large parameter scans.
+
+ * [commit 8be4ed8]: Remove expression of unknown/incorrect 1-loop
+   threshold correction Δv of O(g1^2, g2^2) in order to speed-up
+   compile time and avoid accidental usage. The corresponding warning
+   message is removed in order to not slow-down large parameter scans.
+
 Himalaya 4.2.1
 ==============
 
