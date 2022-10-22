@@ -9,4 +9,4 @@
 
 #define Himalaya_VERSION_MAJOR 4
 #define Himalaya_VERSION_MINOR 2
-#define Himalaya_VERSION_RELEASE 1
+#define Himalaya_VERSION_RELEASE 2
