@@ -29,8 +29,8 @@ jobs:
     - name: cmake
       run: cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       env:
-        CXX: g++-10
-        FC: gfortran-10
+        CXX: g++-13
+        FC: gfortran-13
     - name: cmake build
       run: cmake --build . --config ${{ env.BUILD_TYPE }}
     - name: ctest
