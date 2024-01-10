@@ -11,6 +11,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, macOS-latest]
 
+    env:
+      BUILD_TYPE: Release
+
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python
@@ -22,15 +25,15 @@ jobs:
     - name: detect conan profile
       run: conan profile detect --force
     - name: install dependencies
-      run: conan install .
+      run: conan install . --build=missing -s build_type=${{ env.BUILD_TYPE }}
     - name: cmake
-      run: cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
+      run: cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
       env:
         CXX: g++-10
         FC: gfortran-10
     - name: cmake build
-      run: cmake --build .
+      run: cmake --build . --config ${{ env.BUILD_TYPE }}
     - name: ctest
-      run: ctest
+      run: ctest -C ${{ env.BUILD_TYPE }}
       env:
         CTEST_OUTPUT_ON_FAILURE: 1
