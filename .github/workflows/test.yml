@@ -24,7 +24,7 @@ jobs:
     - name: install dependencies
       run: conan install .
     - name: cmake
-      run: cmake . -DCMAKE_TOOLCHAIN_FILE=./conan_paths.cmake
+      run: cmake . -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake
       env:
         CXX: g++-10
         FC: gfortran-10
