@@ -21,7 +21,9 @@ jobs:
       with:
         python-version: '3.x'
     - name: install gcc [macOS]
-      run: brew reinstall gcc@13
+      run: |
+        brew uninstall gcc@13
+        brew install gcc@13
       if: ${{ runner.os == 'macOS' }}
     - name: install conan
       run: pip install conan
