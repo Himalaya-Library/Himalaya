@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.5)
 project(Himalaya LANGUAGES CXX Fortran)
 
 option(BUILD_EXAMPLES "Build Himalaya examples" ON)
@@ -9,7 +9,7 @@ include(GNUInstallDirs)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake)
 
 # require an Eigen installation
-find_package(Eigen3 3.0 REQUIRED)
+find_package(Eigen3 3.0 REQUIRED NO_MODULE)
 
 # search for Mathematica
 if(ENABLE_MATHEMATICA)
@@ -83,10 +83,12 @@ set(DSZ_LIBSOURCES
 add_library(DSZ_static STATIC ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_static PROPERTIES OUTPUT_NAME DSZ)
 target_include_directories(DSZ_static
-  PUBLIC
-    ${EIGEN3_INCLUDE_DIR}
   PRIVATE
     ${PRIVATE_HEADERS}
+)
+target_link_libraries(DSZ_static
+  PUBLIC
+    Eigen3::Eigen
 )
 add_library(Himalaya::DSZ::static ALIAS DSZ_static)
 
@@ -94,10 +96,12 @@ add_library(Himalaya::DSZ::static ALIAS DSZ_static)
 add_library(DSZ_shared SHARED ${DSZ_LIBSOURCES})
 set_target_properties(DSZ_shared PROPERTIES OUTPUT_NAME DSZ)
 target_include_directories(DSZ_shared
-  PUBLIC
-    ${EIGEN3_INCLUDE_DIR}
   PRIVATE
     ${PRIVATE_HEADERS}
+)
+target_link_libraries(DSZ_shared
+  PUBLIC
+    Eigen3::Eigen
 )
 add_library(Himalaya::DSZ::shared ALIAS DSZ_shared)
 
@@ -107,9 +111,12 @@ set_target_properties(Himalaya_static PROPERTIES OUTPUT_NAME Himalaya)
 target_include_directories(Himalaya_static
   PUBLIC
     ${PUBLIC_HEADERS}
-    ${EIGEN3_INCLUDE_DIR}
   PRIVATE
     ${PRIVATE_HEADERS}
+)
+target_link_libraries(Himalaya_static
+  PUBLIC
+    Eigen3::Eigen
 )
 add_library(Himalaya::Himalaya::static ALIAS Himalaya_static)
 
@@ -120,9 +127,12 @@ target_link_libraries(Himalaya_shared PUBLIC DSZ_shared)
 target_include_directories(Himalaya_shared
   PUBLIC
     ${PUBLIC_HEADERS}
-    ${EIGEN3_INCLUDE_DIR}
   PRIVATE
     ${PRIVATE_HEADERS}
+)
+target_link_libraries(Himalaya_shared
+  PUBLIC
+    Eigen3::Eigen
 )
 add_library(Himalaya::Himalaya::shared ALIAS Himalaya_shared)
 

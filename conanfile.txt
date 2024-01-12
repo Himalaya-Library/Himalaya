@@ -2,4 +2,5 @@
 eigen/[>=3.1]
 
 [generators]
-cmake_paths
+CMakeDeps
+CMakeToolchain
