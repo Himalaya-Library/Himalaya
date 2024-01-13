@@ -1,5 +1,7 @@
 #include "doctest.h"
 #include "himalaya/mh2_eft/ThresholdLoopFunctions.hpp"
+#include <algorithm>
+#include <cmath>
 #include <fstream>
 #include <iterator>
 #include <sstream>
@@ -16,6 +18,12 @@ const char PATH_SEPARATOR =
 #else
    '/';
 #endif
+
+
+double rel_diff(double x, double y)
+{
+   return (x - y)/std::max(std::fabs(x), std::fabs(y));
+}
 
 
 /// read data line-wise from file
@@ -51,7 +59,7 @@ void test_1(const std::string& function_name, Fn fn, double eps)
    for (auto d: data) {
       const auto ex = d.at(1);
       const auto f = fn(d.at(0));
-      INFO(function_name << "( " << d.at(0) << " ): expected: " << ex << ", observed: " << f);
+      INFO(function_name << "( " << d.at(0) << " ): expected: " << ex << ", observed: " << f << ", rel. dev.: " << rel_diff(ex, f));
       CHECK_CLOSE(ex, f, eps);
    }
 }
@@ -65,7 +73,7 @@ void test_2(const std::string& function_name, Fn fn, double eps)
    for (auto d: data) {
       const auto ex = d.at(2);
       const auto f = fn(d.at(0), d.at(1));
-      INFO(function_name << "( " << d.at(0) << ", " << d.at(1) << "): expected: " << ex << ", observed: " << f);
+      INFO(function_name << "( " << d.at(0) << ", " << d.at(1) << "): expected: " << ex << ", observed: " << f << ", rel. dev.: " << rel_diff(ex, f));
       CHECK_CLOSE(ex, f, eps);
    }
 }
@@ -79,7 +87,7 @@ void test_3(const std::string& function_name, Fn fn, double eps)
    for (auto d: data) {
       const auto ex = d.at(3);
       const auto f = fn(d.at(0), d.at(1), d.at(2));
-      INFO(function_name << "( " << d.at(0) << ", " << d.at(1) << ", " << d.at(2) << "): expected: " << ex << ", observed: " << f);
+      INFO(function_name << "( " << d.at(0) << ", " << d.at(1) << ", " << d.at(2) << "): expected: " << ex << ", observed: " << f << ", rel. dev.: " << rel_diff(ex, f));
       CHECK_CLOSE(ex, f, eps);
    }
 }
@@ -104,6 +112,11 @@ TEST_CASE("test_1")
 
 TEST_CASE("test_2")
 {
+   test_2("f5_", himalaya::mh2_eft::threshold_loop_functions::f5, 1e-8);
+   test_2("f6_", himalaya::mh2_eft::threshold_loop_functions::f6, 1e-10);
+   test_2("f7_", himalaya::mh2_eft::threshold_loop_functions::f7, 1e-7);
+   test_2("f8_", himalaya::mh2_eft::threshold_loop_functions::f8, 1e-9);
+
    test_2("F8", himalaya::mh2_eft::threshold_loop_functions::F8, 1e-8);
    test_2("F9", himalaya::mh2_eft::threshold_loop_functions::F9, 1e-11);
 }
