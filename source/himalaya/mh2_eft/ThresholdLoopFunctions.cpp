@@ -458,10 +458,14 @@ double g(double r) noexcept
 
 double f1(double r) noexcept
 {
+   if (r == 0.) {
+      return 0;
+   }
+
    const double r2 = sqr(r);
 
-   if (is_zero(r, 0.01)) {
-      return 18./7.*r2;
+   if (std::fabs(r) < 0.01) {
+      return r2*(18./7 + 6./7*r2*(7 + 5*std::log(r2)));
    }
 
    const double d = r2 - 1;
@@ -478,10 +482,14 @@ double f1(double r) noexcept
 
 double f2(double r) noexcept
 {
+   if (r == 0.) {
+      return 0;
+   }
+
    const double r2 = sqr(r);
 
-   if (is_zero(r, 0.01)) {
-      return 22./9.*r2;
+   if (std::fabs(r) < 0.01) {
+      return r2*(22./9 + 2./9*r2*(23 + 17*std::log(r2)));
    }
 
    const double d = r2 - 1;
@@ -498,11 +506,16 @@ double f2(double r) noexcept
 
 double f3(double r) noexcept
 {
-   if (is_zero(r, 1e-6)) {
-      return 4./3.;
+   if (r == 0.) {
+      return 4./3;
    }
 
    const double r2 = sqr(r);
+
+   if (is_zero(r, 1e-6)) {
+      return 4./3 + 2./3*r2*(13 + 6*std::log(r2));
+   }
+
    const double d = r2 - 1;
 
    if (is_equal(std::fabs(r), 1., 0.01)) {
@@ -518,11 +531,16 @@ double f3(double r) noexcept
 
 double f4(double r) noexcept
 {
-   if (is_zero(r, 1e-6)) {
+   if (r == 0.) {
       return 12./7.;
    }
 
    const double r2 = sqr(r);
+
+   if (is_zero(r, 1e-6)) {
+      return 12./7 + 2./7*r2*(37 + 18*std::log(r2));
+   }
+
    const double d = r2 - 1;
 
    if (is_equal(std::fabs(r), 1., 0.01)) {

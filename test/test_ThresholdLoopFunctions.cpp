@@ -87,6 +87,11 @@ void test_3(const std::string& function_name, Fn fn, double eps)
 
 TEST_CASE("test_1")
 {
+   test_1("f1_", himalaya::mh2_eft::threshold_loop_functions::f1, 1e-11);
+   test_1("f2_", himalaya::mh2_eft::threshold_loop_functions::f2, 1e-11);
+   test_1("f3_", himalaya::mh2_eft::threshold_loop_functions::f3, 1e-11);
+   test_1("f4_", himalaya::mh2_eft::threshold_loop_functions::f4, 1e-11);
+
    test_1("F1", himalaya::mh2_eft::threshold_loop_functions::F1, 1e-11);
    test_1("F2", himalaya::mh2_eft::threshold_loop_functions::F2, 1e-11);
    test_1("F3", himalaya::mh2_eft::threshold_loop_functions::F3, 1e-11);
