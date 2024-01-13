@@ -19,19 +19,6 @@ const char PATH_SEPARATOR =
 #endif
 
 
-struct Phi {
-   double x{}, y{}, z{}, phi{};
-};
-
-
-std::ostream& operator<<(std::ostream& ostr, const Phi& phi)
-{
-   ostr << std::setprecision(std::numeric_limits<double>::digits10)
-        << "Phi(x=" << phi.x << ", y=" << phi.y << ", z=" << phi.z << ") = " << phi.phi;
-   return ostr;
-}
-
-
 /// tranform vector of elements of type A -> B
 template <class B, class A, class F>
 std::vector<B> map(F f, const std::vector<A>& in)
@@ -60,29 +47,25 @@ std::vector<std::vector<T>> read_data(const std::string& filename)
 }
 
 
-/// read Phi(x,y,z) function data
-std::vector<Phi> read_phi(const std::string& filename)
-{
-   return map<Phi>(
-      [](const auto& d) {
-         return Phi{d.at(0), d.at(1), d.at(2), d.at(3)};
-      },
-      read_data<double>(filename));
-}
-
-
-/// test Phi(x,y,z)
-TEST_CASE("test_Phi")
+template <class Fn>
+void test_3(const std::string& function_name, Fn fn, double eps)
 {
    const auto filename = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "data" +
-                         PATH_SEPARATOR + "Phi.dat";
-   const auto data = read_phi(filename);
-   const double eps = 1e-13;
+                         PATH_SEPARATOR + function_name + ".dat";
+
+   struct Data { double x{}, y{}, z{}, f{}; };
+
+   const auto data = read_data<double>(filename);
 
    for (auto d: data) {
-      const auto phi = himalaya::mh2_eft::threshold_loop_functions::phi_xyz(d.x, d.y, d.z);
-      INFO("expected: " << d);
-      INFO("observed: " << phi);
-      CHECK_CLOSE(d.phi, phi, eps);
+      const double x = d.at(0), y = d.at(1), z = d.at(2), ex = d.at(3);
+      const auto f = fn(x, y, z);
+      INFO("expected: " << ex << ", observed: " << f);
+      CHECK_CLOSE(ex, f, eps);
    }
+}
+
+TEST_CASE("test_3")
+{
+   test_3("Phi", himalaya::mh2_eft::threshold_loop_functions::phi_xyz, 1e-13);
 }
