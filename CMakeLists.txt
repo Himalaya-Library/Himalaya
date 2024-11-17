@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(Himalaya LANGUAGES CXX Fortran)
 
 option(BUILD_EXAMPLES "Build Himalaya examples" ON)
