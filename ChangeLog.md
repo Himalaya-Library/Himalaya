@@ -1,3 +1,18 @@
+Himalaya 4.2.3
+==============
+
+Changes
+-------
+
+ * [commit 240cfb3]: Update `FindMathematica.cmake` to version 4.0.0.
+
+ * [commit 521f397]: Improve compatibility with conan 2.
+
+ * [commit 8e88fb6]: Adding coverage monitor.
+
+ * [commit 4d5bd5b]: Update `dilog` and `clausen_2` functions from the
+   [polylogarithm package 7.0.0](https://github.com/Expander/polylogarithm).
+
 Himalaya 4.2.2
 ==============
 
