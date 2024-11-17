@@ -16,7 +16,7 @@ jobs:
       FCFLAGS: --coverage
     steps:
     - name: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v4
     - name: install dependencies
       run: sudo apt-get install lcov libeigen3-dev
     - name: cmake
