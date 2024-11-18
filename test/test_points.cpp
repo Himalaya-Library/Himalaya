@@ -28,9 +28,9 @@ const int N_DIGITS = 6; // number of digits to test
 
 
 struct Point {
-   double MS{};
-   double xt{};
-   double tb{};
+   double MS;
+   double xt;
+   double tb;
 };
 
 
@@ -105,7 +105,7 @@ himalaya::Parameters make_point(const Point& point)
 
 Data calculate_all(const himalaya::Parameters& point)
 {
-   Data data{};
+   Data data;
 
    try {
       himalaya::HierarchyCalculator hc(point, VERBOSE);
@@ -126,13 +126,6 @@ Data calculate_all(const himalaya::Parameters& point)
                               + ho.getDLambda(3));
       data.Dlambda = ho.getDLambdaUncertainty(3);
    } catch (const std::exception& e) {
-      const double nan = std::numeric_limits<double>::quiet_NaN();
-      data.MhFO = nan;
-      data.DMhFO = nan;
-      data.MhEFT = nan;
-      data.lambda = nan;
-      data.Dlambda = nan;
-
       std::cerr << e.what() << '\n';
    }
 
@@ -172,15 +165,9 @@ TEST_CASE("test_points")
       const auto point = make_point(p.first);
       const auto data = calculate_all(point);
       INFO("point =\n" << point);
-      if (!std::isnan(data.MhFO)) {
-         CHECK_CLOSE(p.second.MhFO, data.MhFO, eps);
-      }
-      if (!std::isnan(data.MhEFT)) {
-         CHECK_CLOSE(p.second.MhEFT, data.MhEFT, eps);
-      }
-      if (!std::isnan(data.lambda)) {
-         CHECK_CLOSE(p.second.lambda, data.lambda, eps);
-      }
+      CHECK_CLOSE(p.second.MhFO  , data.MhFO  , eps);
+      CHECK_CLOSE(p.second.MhEFT , data.MhEFT , eps);
+      CHECK_CLOSE(p.second.lambda, data.lambda, eps);
    }
 }
 
