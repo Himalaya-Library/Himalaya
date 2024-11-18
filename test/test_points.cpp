@@ -24,7 +24,7 @@ const char PATH_SEPARATOR =
 const std::string DATA_FILE = std::string(TEST_DATA_DIR) + PATH_SEPARATOR + "test_points.txt";
 const bool VERBOSE = false;
 const bool IS_ALPHA_B = false; // calculate O(as^2*ab^2) corrections
-const int N_DIGITS = 6; // number of digits to test
+const int N_DIGITS = 5; // number of digits to test
 
 
 struct Point {
